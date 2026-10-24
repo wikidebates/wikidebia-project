@@ -1,0 +1,20 @@
+{
+  "schema": "wikidebia-fr-publication-request-1.2",
+  "request_id": "faut-il-debattre-cycle-20261024",
+  "language": "fr",
+  "site": "https://fr.wikidebates.org",
+  "authorization": "explicit_user_request",
+  "pages": [
+    {
+      "page_id": "argument-cycle-overton",
+      "old_title": "Seuls certains discours incitent directement à des actes, notamment les appels au meurtre",
+      "new_title": "Seuls certains discours incitent directement à des actes, notamment les appels au meurtre",
+      "source_revision_id": 243016,
+      "source_sha256": "2362c4b0605d8bab372adb9e5ccda0f77f0a3aaa14069a38174c4d6ee02ee907",
+      "target_sha256": "7376bd22dc34a32eb2d206452061acf50c13e3058331693c9b0e1506f2d24433",
+      "before_file": "before/page.wiki",
+      "after_file": "after/page.wiki"
+    }
+  ],
+  "request_sha256": "d19763d20adfd18c41e6268d39db0cfffac3ea8446518691cdf874fda3cb4b3f"
+}

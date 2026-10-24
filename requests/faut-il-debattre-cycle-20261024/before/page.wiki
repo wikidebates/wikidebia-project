@@ -1,0 +1,14 @@
+{{Argument
+|résumé=La plupart des discours ne dictent pas de façon claire des actes. Il s'agit de propos plus ou moins descriptifs ou de critiques, mais ils n'ont pas vocation à commander des actes. En revanche ''quelques discours'' sont des appels directs à la violence, ils ciblent des groupes ou des individus. Ces discours spécifiques - et seulement eux - doivent être interdits ; c'est d'ailleurs ce sur quoi tombent d'accord les partisans de la liberté d'expression, qui sanctionnent les appels au meurtre. En revanche commencer à voloir interdire des discours parce qu'ils "pourraient" inciter à la violence est une pente dangereuse : est-ce que les discours communistes n'inciteraient-ils pas à la violence contre les riches, les patrons voire l'Etat bourgeois ? Il faudrait les censurer. Mais les discours écologistes ne suggéreraient-ils pas de la violence envers les multinationales pollueuses, ou les lobbies industriels ; il faudrait les censurer. On ne s'arrêterait plus de censurer tout au nom des "risques" contenus dans nombre de discours. Où s'arrêterait-on dans la censure ?
+|objections={{Objection
+|page=Pour éviter un déplacement de la fenêtre d'Overton
+|titre-affiché=La banalisation de discours hostiles envers une population est un facteur connu de violences envers cette dernière
+}}{{Objection
+|page=Menacer quelqu'un de mort est en France passible de six mois de prison et de 7. 500 euros d'amende
+|titre-affiché=Menacer quelqu'un de mort est déjà passible en France de six mois de prison et de 7. 500 euros d'amende
+}}{{Objection
+|page=L'extrême droite considère les insulte, les crachats de haine et les menaces de mort qui arrangent son agenda comme de la liberté d'expression
+|titre-affiché=L'extrême droite considère les appels au meurtre de ses boucs émissaires comme de la liberté d'expression
+}}
+|date-création=2022-03-10
+}}
