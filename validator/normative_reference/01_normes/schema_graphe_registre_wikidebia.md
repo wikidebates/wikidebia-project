@@ -431,11 +431,12 @@ Une modification structurelle a été demandée après verrouillage. Aucun nouve
 
 # 9. Politique de profondeur
 
-La profondeur ne possède aucune limite normative, aucune cible normale et aucun seuil d’avertissement. Elle découle uniquement de la structure logique du graphe : chaque occurrence non principale doit viser le meilleur parent immédiat et sa relation doit être explicitement une justification ou une objection de ce parent.
+La profondeur ne possède aucune cible normale et aucun seuil d’avertissement. Elle découle de la structure logique du graphe : chaque occurrence non principale doit viser le meilleur parent immédiat et sa relation doit être explicitement une justification ou une objection de ce parent. Un corpus importé depuis une extraction explicitement bornée conserve toutefois cette limite technique et la frontière qui en résulte, afin de ne jamais confondre les pages coupées avec des feuilles réelles.
 
 ## 9.1 Règle générale
 
-- aucun niveau maximal n’est retenu ;
+- par défaut, aucun niveau maximal n’est retenu ;
+- une limite technique explicite peut être conservée avec `limit_policy: bounded` lorsqu’elle provient de l’extraction source ;
 - aucune profondeur n’exige à elle seule une justification d’exception ;
 - aucune alerte n’est produite parce qu’un seuil numérique serait franchi ;
 - la profondeur maximale observée reste calculée à titre descriptif et pour contrôler la cohérence des compteurs ;
@@ -454,7 +455,10 @@ La profondeur ne possède aucune limite normative, aucune cible normale et aucun
 
 Règles :
 
-- `limit_policy` vaut exactement `unbounded` ;
+- `limit_policy` vaut `unbounded` en l’absence de limite d’extraction ;
+- `limit_policy: bounded` exige `maximum_edge_depth`, `frontier_node_ids` et `relations_omitted_at_frontier` ;
+- les nœuds de frontière appartiennent au graphe et possèdent une occurrence au niveau `maximum_edge_depth + 1` ;
+- les relations omises restent présentes dans les pages sources historiques et ne doivent pas être supprimées lors d’un checkpoint ;
 - `maximum_observed` est recalculé automatiquement ;
 - `maximum_observed` est une mesure descriptive, non une limite ;
 - les anciens champs `normal_target`, `declared_maximum` et `exception_reason` restent lisibles lorsqu’ils sont rencontrés dans un artefact historique pour les besoins de compatibilité et de migration ; le générateur courant ne les émet jamais et leur présence n’active aucune règle éditoriale ancienne.

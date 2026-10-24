@@ -389,8 +389,67 @@ def validate_graph(ctx: PackageContext) -> None:
     observed = counts["maximum_depth"]
     if policy.get("maximum_observed") != observed:
         (ctx.report.error if strict else ctx.report.warning)("WDV-GRA-013", "maximum_observed incorrect", path=ctx.core_paths()["registry"], details={"declared": policy.get("maximum_observed"), "computed": observed})
-    if policy.get("limit_policy") != "unbounded":
-        ctx.report.error("WDV-GRA-009", "La politique de profondeur courante doit être non limitée", path=ctx.core_paths()["registry"], details={"limit_policy": policy.get("limit_policy")})
+    limit_policy = policy.get("limit_policy")
+    if limit_policy == "bounded":
+        maximum_edge_depth = policy.get("maximum_edge_depth")
+        frontier_node_ids = policy.get("frontier_node_ids")
+        omitted = policy.get("relations_omitted_at_frontier")
+        if not isinstance(maximum_edge_depth, int) or isinstance(maximum_edge_depth, bool):
+            ctx.report.error("WDV-GRA-009", "La profondeur maximale en arêtes est absente ou invalide", path=ctx.core_paths()["registry"])
+        elif observed > maximum_edge_depth + 1:
+            ctx.report.error(
+                "WDV-GRA-009",
+                "Une occurrence dépasse la limite de profondeur déclarée",
+                path=ctx.core_paths()["registry"],
+                details={"maximum_observed": observed, "maximum_edge_depth": maximum_edge_depth},
+            )
+        if not isinstance(frontier_node_ids, list) or not frontier_node_ids:
+            ctx.report.error("WDV-GRA-009", "Une politique bornée doit déclarer ses nœuds de frontière", path=ctx.core_paths()["registry"])
+        else:
+            unknown_frontiers = sorted(set(frontier_node_ids) - set(node_by_id))
+            if unknown_frontiers:
+                ctx.report.error(
+                    "WDV-GRA-009",
+                    "La frontière de profondeur référence des nœuds inexistants",
+                    path=ctx.core_paths()["registry"],
+                    details={"unknown_frontier_node_ids": unknown_frontiers},
+                )
+            if isinstance(maximum_edge_depth, int) and not isinstance(maximum_edge_depth, bool):
+                expected_depth = maximum_edge_depth + 1
+                wrong_depth = sorted(
+                    node_id
+                    for node_id in set(frontier_node_ids) & set(node_by_id)
+                    if not any(occ.get("depth") == expected_depth for occ in by_node.get(node_id, []))
+                )
+                if wrong_depth:
+                    ctx.report.error(
+                        "WDV-GRA-009",
+                        "Des nœuds de frontière ne se trouvent pas au niveau correspondant à la limite",
+                        path=ctx.core_paths()["registry"],
+                        details={"expected_depth": expected_depth, "frontier_node_ids": wrong_depth},
+                    )
+        if not isinstance(omitted, int) or isinstance(omitted, bool) or omitted < 1:
+            ctx.report.error(
+                "WDV-GRA-009",
+                "Une politique bornée doit comptabiliser les relations omises à la frontière",
+                path=ctx.core_paths()["registry"],
+                details={"relations_omitted_at_frontier": omitted},
+            )
+    elif limit_policy == "unbounded":
+        bounded_fields = [
+            key
+            for key in ("maximum_edge_depth", "frontier_node_ids", "relations_omitted_at_frontier")
+            if key in policy
+        ]
+        if bounded_fields:
+            ctx.report.error(
+                "WDV-GRA-009",
+                "Une politique non limitée ne peut pas déclarer de frontière de profondeur",
+                path=ctx.core_paths()["registry"],
+                details={"bounded_fields": bounded_fields},
+            )
+    else:
+        ctx.report.error("WDV-GRA-009", "Politique de profondeur inconnue", path=ctx.core_paths()["registry"], details={"limit_policy": limit_policy})
     legacy_fields = [key for key in ("normal_target", "declared_maximum", "exception_reason") if key in policy]
     if legacy_fields:
         ctx.report.error("WDV-GRA-009", "Les champs historiques de limitation de profondeur sont interdits par la politique courante", path=ctx.core_paths()["registry"], details={"legacy_fields": legacy_fields})
