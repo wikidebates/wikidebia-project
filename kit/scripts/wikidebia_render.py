@@ -641,6 +641,8 @@ def _render_debate(
         _append_editorial_parameter(params, debate, "mots-clés", ", ".join((metadata_lock.get("debate") or {}).get("keywords") or []))
         if include_interlanguage:
             _append_interlanguage_parameter(params, debate, "interlangue", _template("Lien interlangue", (("langue", "en"), ("page", target))))
+        else:
+            _append_interlanguage_parameter(params, debate, "interlangue", None)
         _append_lifecycle_parameter(params, debate, "date-création", creation_date)
         return _template("Débat", params) + "\n"
 
@@ -716,6 +718,8 @@ def _render_argument(
         _append_editorial_parameter(params, content, "mots-clés", ", ".join((node.get("fr") or {}).get("keywords") or []))
         if include_interlanguage:
             _append_interlanguage_parameter(params, content, "interlangue", _template("Lien interlangue", (("langue", "en"), ("page", target))))
+        else:
+            _append_interlanguage_parameter(params, content, "interlangue", None)
         _append_lifecycle_parameter(params, content, "date-création", creation_date)
     else:
         citations = render_sequence(content.get("citations") or [], content.get("citation_passages") or [], lambda row: _citation_template(row, lang="en"))

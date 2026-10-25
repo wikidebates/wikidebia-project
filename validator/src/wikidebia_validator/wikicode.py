@@ -235,6 +235,7 @@ TOP = {('fr', 'debate'): {'model': 'Débat',
                       'order': ['initialisation',
                                 'nom-consacré',
                                 'nom',
+                                'titre-affiché',
                                 'avertissements-titre',
                                 'avertissements-argument',
                                 'avertissements-résumé',
@@ -258,6 +259,7 @@ TOP = {('fr', 'debate'): {'model': 'Débat',
                       'forbidden_generated': ['initialisation',
                                               'nom-consacré',
                                               'nom',
+                                              'titre-affiché',
                                               'avertissements-titre',
                                               'avertissements-résumé',
                                               'citations',
@@ -360,6 +362,7 @@ ACTIVE_TOP = {('fr', 'debate'): {'model': 'Débat',
                       'order': ['initialisation',
                                 'nom-consacré',
                                 'nom',
+                                'titre-affiché',
                                 'avertissements-titre',
                                 'avertissements-argument',
                                 'avertissements-résumé',
@@ -383,6 +386,7 @@ ACTIVE_TOP = {('fr', 'debate'): {'model': 'Débat',
                       'forbidden_generated': ['initialisation',
                                               'nom-consacré',
                                               'nom',
+                                              'titre-affiché',
                                               'avertissements-titre',
                                               'avertissements-résumé',
                                               'citations',
@@ -500,7 +504,7 @@ SPLIT_ADJACENT_TEMPLATES_RE = re.compile('}}[ \\t\\r\\n]+\\{\\{')
 def split_adjacent_templates(text: str) -> list[re.Match[str]]:
     """Return forbidden whitespace-separated adjacent template boundaries."""
     return list(SPLIT_ADJACENT_TEMPLATES_RE.finditer(text))
-PROTECTED_PAGE_PARAMETERS = {('fr', 'debate'): ('avancement', 'avertissements-titre', 'avertissements-débat', 'avertissements-bibliographie', 'avertissements-sitographie', 'avertissements-vidéographie', 'débats-connexes', 'interlangue', 'date-création'), ('en', 'debate'): ('progress', 'title-warnings', 'debate-warnings', 'related-debates', 'creation-date'), ('fr', 'argument'): ('initialisation', 'nom-consacré', 'nom', 'avertissements-titre', 'avertissements-argument', 'avertissements-résumé', 'avertissements-références', 'avertissements-justifications', 'avertissements-objections', 'débat-dédié', 'interlangue', 'date-création'), ('en', 'argument'): ('initialization', 'established-name', 'name', 'title-warnings', 'argument-warnings', 'summary-warnings', 'reference-warnings', 'justification-warnings', 'objection-warnings', 'dedicated-debate', 'creation-date')}
+PROTECTED_PAGE_PARAMETERS = {('fr', 'debate'): ('avancement', 'avertissements-titre', 'avertissements-débat', 'avertissements-bibliographie', 'avertissements-sitographie', 'avertissements-vidéographie', 'débats-connexes', 'interlangue', 'date-création'), ('en', 'debate'): ('progress', 'title-warnings', 'debate-warnings', 'related-debates', 'creation-date'), ('fr', 'argument'): ('initialisation', 'nom-consacré', 'nom', 'titre-affiché', 'avertissements-titre', 'avertissements-argument', 'avertissements-résumé', 'avertissements-références', 'avertissements-justifications', 'avertissements-objections', 'débat-dédié', 'interlangue', 'date-création'), ('en', 'argument'): ('initialization', 'established-name', 'name', 'title-warnings', 'argument-warnings', 'summary-warnings', 'reference-warnings', 'justification-warnings', 'objection-warnings', 'dedicated-debate', 'creation-date')}
 
 def _protected_page_parameters(ctx: PackageContext, lang: str, page_type: str) -> tuple[str, ...]:
     return PROTECTED_PAGE_PARAMETERS[lang, page_type]
@@ -763,6 +767,11 @@ def _protected_page_parameters_for_manifest(ctx: PackageContext, lang: str, page
     preserved = page_manifest.get("preserved_parameters")
     if not isinstance(preserved, dict):
         return tuple(protected)
+    # Manifests sealed before top-level ``titre-affiché`` was inventoried do
+    # not carry this key.  They remain readable; newly built checkpoints add
+    # the explicit presence/value state before validation.
+    if lang == "fr" and "titre-affiché" not in preserved and "titre-affiché" in protected:
+        protected.remove("titre-affiché")
     current, legacy = _argument_established_name_parameters(lang)
     # Compatibility with pre-1.2.58 manifests that tracked only the legacy key,
     # and with a possible migrated manifest that tracks only the canonical key.
@@ -909,6 +918,14 @@ def validate_template_shape(ctx: PackageContext, tmpl: Template, lang: str, page
         page_key = (page_manifest.get('page_id'), lang)
         if page_key in _historically_absent_summary_keys(ctx) | _owner_removed_summary_keys(ctx) and summary_parameter in spec['required']:
             spec['required'].remove(summary_parameter)
+    if (
+        page_type == 'debate'
+        and isinstance(page_manifest, dict)
+        and page_manifest.get('page_origin') == 'preexisting'
+        and _historically_absent_introduction(ctx, lang)
+        and 'introduction' in spec['required']
+    ):
+        spec['required'].remove('introduction')
     _apply_page_lifecycle_contract(ctx, spec, tmpl, lang, page_type, rel, page_manifest)
     if tmpl.name != spec['model']:
         ctx.report.error('WDV-MWK-002', f"Modèle principal attendu {spec['model']}, trouvé {tmpl.name}", path=rel)
@@ -1137,6 +1154,24 @@ def _contextual_relation_labels(ctx: PackageContext, page_id: str, lang: str, pa
             return labels
     return []
 
+
+def _historically_absent_introduction(ctx: PackageContext, lang: str) -> bool:
+    """Return whether the source debate explicitly lacked an introduction."""
+    paths = ['data/fr_content_lock.json'] if lang == 'fr' else ['data/en_content_lock.json']
+    for path in paths:
+        if not ctx.exists(path):
+            continue
+        lock = ctx.load_json(path)
+        debate = (lock.get('debate') or {}) if isinstance(lock, dict) else {}
+        if debate.get('historical_introduction_present') is False:
+            return True
+        presence = (debate.get('source_parameter_presence') or {}).get(
+            'introduction'
+        )
+        if isinstance(presence, dict) and presence.get('present') is False:
+            return True
+    return False
+
 def relation_pairs(subs: list[Template], lang: str) -> list[tuple[str | None, str | None]]:
     display = 'titre-affiché' if lang == 'fr' else 'displayed-title'
     return [(s.one('page'), s.one(display)) for s in subs]
@@ -1321,11 +1356,24 @@ def _validate_argument_content(ctx: PackageContext, tmpl: Template, rel: str, la
     expected_obj = expected_relations(registry, page_id, lang, 'objection', contextual)
     expected_just.extend(_manual_external_relations(ctx, page_id, lang, 'justification'))
     expected_obj.extend(_manual_external_relations(ctx, page_id, lang, 'objection'))
+    depth_policy = registry.get('graph', {}).get('depth_policy') or {}
+    depth_frontier = bool(
+        lang == 'fr'
+        and depth_policy.get('limit_policy') == 'bounded'
+        and page_id in (depth_policy.get('frontier_node_ids') or [])
+    )
     detailed_state = _historical_detailed_debate_states(ctx).get((page_id, lang)) or {}
     relations_omitted = detailed_state.get('present') is True and detailed_state.get('relations_omitted') is True and (not actual_just) and (not actual_obj)
-    if not relations_omitted and actual_just != expected_just:
+    if depth_frontier:
+        missing_just = [row for row in expected_just if row not in actual_just]
+        missing_obj = [row for row in expected_obj if row not in actual_obj]
+        if missing_just:
+            ctx.report.error('WDV-MWK-008', 'Justifications du registre absentes de la frontière de profondeur', path=rel, details={'missing': missing_just, 'actual': actual_just})
+        if missing_obj:
+            ctx.report.error('WDV-MWK-008', 'Objections du registre absentes de la frontière de profondeur', path=rel, details={'missing': missing_obj, 'actual': actual_obj})
+    elif not relations_omitted and actual_just != expected_just:
         ctx.report.error('WDV-MWK-008', 'Justifications MediaWiki divergentes du registre', path=rel, details={'expected': expected_just, 'actual': actual_just})
-    if not relations_omitted and actual_obj != expected_obj:
+    if not depth_frontier and not relations_omitted and actual_obj != expected_obj:
         ctx.report.error('WDV-MWK-008', 'Objections MediaWiki divergentes du registre', path=rel, details={'expected': expected_obj, 'actual': actual_obj})
     section_param = 'rubriques' if lang == 'fr' else 'sections'
     expected_sections = (node.get(lang) or {}).get('rubriques' if lang == 'fr' else 'sections', [])
@@ -1693,6 +1741,35 @@ def validate_page(ctx: PackageContext, page_manifest: dict[str, Any], *, overrid
     _validate_interlanguage(ctx, tmpl, rel, lang, page_type, page_id, registry, staging)
     return tmpl
 
+
+def _validate_bounded_depth_frontier_relations(
+    ctx: PackageContext,
+    registry: dict[str, Any],
+    parsed_by_key: dict[tuple[str, str], Template],
+) -> None:
+    """Account for every preserved relation beyond a bounded extraction."""
+    policy = registry.get('graph', {}).get('depth_policy') or {}
+    if policy.get('limit_policy') != 'bounded':
+        return
+    frontier_ids = policy.get('frontier_node_ids') or []
+    if not isinstance(frontier_ids, list):
+        return
+    actual = 0
+    for page_id in frontier_ids:
+        tmpl = parsed_by_key.get((page_id, 'fr'))
+        if tmpl is None:
+            continue
+        actual += len(get_subs(tmpl, 'justifications'))
+        actual += len(get_subs(tmpl, 'objections'))
+    expected = policy.get('relations_omitted_at_frontier')
+    if not isinstance(expected, int) or expected < 0 or actual != expected:
+        ctx.report.error(
+            'WDV-MWK-008',
+            'Le nombre de relations préservées aux frontières de profondeur diverge de la politique bornée',
+            path='data/registre_debat.json',
+            details={'expected': expected, 'actual': actual, 'frontier_nodes': len(frontier_ids)},
+        )
+
 def _validate_legacy_content_preservation(ctx: PackageContext, parsed_by_key: dict[tuple[str, str], Template]) -> None:
     manifest = ctx.manifest() or {}
     controls = manifest.get('editorial_controls') or {}
@@ -1946,6 +2023,7 @@ def validate_wikicode(ctx: PackageContext) -> None:
             parsed_by_key[page.get('page_id'), page.get('language')] = tmpl
     _validate_legacy_content_preservation(ctx, parsed_by_key)
     _validate_fr_historical_text_preservation(ctx, parsed_by_key)
+    _validate_bounded_depth_frontier_relations(ctx, registry, parsed_by_key)
     patch = ctx.load_json('patches/interlanguage_fr.validated.json')
     validate_staging = state_at_least(manifest.get('global_status'), 'interlanguage_prepared') or (isinstance(patch, dict) and patch.get('status') in {'validated', 'partially_applied', 'applied'})
     for path in ctx.iter_files('output/*/arguments/*.wiki'):

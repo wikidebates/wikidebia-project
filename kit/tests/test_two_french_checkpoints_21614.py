@@ -140,6 +140,17 @@ def test_graph_checkpoint_preserves_out_of_scope_relations_on_depth_frontier(tmp
     assert "|interlangue={{Lien interlangue|langue=en|page=Historical argument}}" in content_output
     assert "|justifications=\n" not in content_output
     assert "|objections=\n" not in content_output
+    command = [
+        sys.executable, "-I", str(project / "validator/scripts/wikidebia_validate.py"),
+        "validate", str(content_cp),
+    ]
+    for scope in checkpoint.CONTENT_VALIDATION_SCOPES:
+        command.extend(["--scope", scope])
+    command.extend(["--format", "json"])
+    validation = subprocess.run(
+        command, cwd=project / "validator", text=True, capture_output=True, check=False,
+    )
+    assert validation.returncode == 0, validation.stdout + validation.stderr
 
 
 def test_review_packages_split_titles_from_classification_and_content(tmp_path: Path):

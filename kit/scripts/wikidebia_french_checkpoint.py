@@ -208,6 +208,21 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
     baseline_debate, baseline_arguments = _graph_checkpoint_baseline(
         project_root, source, debate_id, work_id,
     )
+    for node_id, argument in fr_args.items():
+        baseline = baseline_arguments.get(node_id)
+        if baseline is None:
+            raise FrenchCheckpointError(
+                f"Page Argument de référence absente pour le checkpoint de contenu : {node_id}"
+            )
+        template = _outer_template(baseline, {"argument"})
+        displayed_present = "titre-affiché" in template.params
+        argument.setdefault("preserved_parameters", {})["titre-affiché"] = {
+            "present": displayed_present,
+            "value": template.get("titre-affiché") if displayed_present else None,
+        }
+    # These occurrence labels and compatibility states are validation evidence,
+    # not transient render-only data.
+    write_json(target / "data/fr_content_lock.json", fr_content)
 
     timestamp = now_iso()
     fallback_date = str(fr_content.get("applied_at") or timestamp)[:10]
@@ -267,9 +282,7 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
         # labels and opaque historical interlanguage values exactly.
         text = _retain_baseline_parameters(
             text, baseline, page_type="argument",
-            parameters=(
-                "titre-affiché", "justifications", "objections", "interlangue",
-            ),
+            parameters=("justifications", "objections"),
         )
         path = target / rel
         path.parent.mkdir(parents=True, exist_ok=True)
