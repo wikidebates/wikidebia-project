@@ -46,6 +46,10 @@ demande empêchent une modification silencieuse du paquet. Ils ne constituent pa
 une signature d'identité : l'autorisation de transport repose sur les droits Git
 de la branche. Seules les personnes autorisées à publier doivent pouvoir y pousser.
 
+Lorsque Cloudflare protège l’API, l’adaptateur ajoute automatiquement l’en-tête
+`x-wikidebia-access` si la variable d’environnement `WIKIDEBIA_API_TOKEN` est
+présente. Sa valeur reste hors du dépôt et des journaux.
+
 Après l'autorisation explicite de l'utilisateur, envoyer le dossier préparé :
 
 ```bash

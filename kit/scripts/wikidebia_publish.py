@@ -429,6 +429,9 @@ class PywikibotAdapter:
     def open_language(self, language: str, expected_user: str) -> None:
         self._prepare_environment()
         import pywikibot
+        access_token = os.environ.get("WIKIDEBIA_API_TOKEN")
+        if access_token:
+            pywikibot.config.extra_headers["x-wikidebia-access"] = access_token
         self._register_family(pywikibot)
         self.site = pywikibot.Site(code=self.codes[language], fam=self.family)
         if self.site.user() is not None:
