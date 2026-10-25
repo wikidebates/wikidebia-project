@@ -179,6 +179,13 @@ alors la révision courante et sa révision parente avant de poursuivre.
 
 Après diagnostic et résolution d'un conflit, une reprise explicite est possible :
 
+Si la seule divergence de contenu est un unique saut de ligne final retiré lors
+de l'enregistrement MediaWiki, le relais actuel reconnaît la cible signée à la
+relecture. Les empreintes des fichiers de demande restent exactes ; les autres
+espaces, sauts de ligne et métadonnées ne sont pas normalisés. Déployer ce
+correctif avant de reprendre un ancien reçu bloqué pour ce motif. La reprise
+vérifie la révision déjà écrite et complète le journal sans répéter l'édition.
+
 ```bash
 ./wikidebia fr-publication-relay --execute --retry IDENTIFIANT
 ```

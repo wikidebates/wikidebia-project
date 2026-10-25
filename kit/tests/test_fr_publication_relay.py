@@ -516,6 +516,76 @@ def test_interrupted_edit_is_verified_and_journaled_without_duplicate_writes(tmp
                                      "revision_id": wiki.pages["Parent"][0], "recovered": True}
 
 
+def test_mediawiki_removing_terminal_lf_completes_without_repeated_edit(tmp_path):
+    directory = tmp_path / "request"
+    _, pages = request_fixture(directory)
+    wiki = FakeWiki(pages)
+    original_write = wiki.write_page
+
+    def save_without_terminal_lf(**kwargs):
+        revision = original_write(**{**kwargs, "text": kwargs["text"].removesuffix("\n")})
+        return revision
+
+    wiki.write_page = save_without_terminal_lf
+    receipt = publish(tmp_path, directory, wiki)
+    assert receipt["status"] == "completed"
+    assert not wiki.pages["Parent"][1].endswith("\n")
+    writes = list(wiki.writes)
+    assert publish(tmp_path, directory, wiki) == receipt
+    assert wiki.writes == writes
+
+
+@pytest.mark.parametrize("legacy", (False, True))
+def test_resume_terminal_lf_difference_verifies_existing_revision_without_writing(tmp_path, legacy):
+    directory, wiki, state_path = interrupt_after_edit(tmp_path, legacy=legacy)
+    revision, text = wiki.pages["Parent"]
+    wiki.pages["Parent"] = revision, text.removesuffix("\n")
+    wiki.revisions[revision]["text"] = text.removesuffix("\n")
+    writes = list(wiki.writes)
+    old_events = json.loads(state_path.read_text())["events"]
+    receipt = publish(tmp_path, directory, wiki)
+    assert receipt["status"] == "completed"
+    assert wiki.writes == writes
+    assert receipt["events"][:len(old_events)] == old_events
+    assert receipt["events"][-1] == {
+        "operation": "update", "title": "Parent", "revision_id": revision, "recovered": True,
+    }
+
+
+@pytest.mark.parametrize("field,value", [
+    ("user", "Other"), ("parent_id", 999), ("tags", []),
+    ("summary", "Autre commentaire"), ("revision_id", 999),
+])
+def test_terminal_lf_recovery_still_requires_exact_revision_metadata(tmp_path, field, value):
+    directory, wiki, _ = interrupt_after_edit(tmp_path, legacy=False)
+    revision, text = wiki.pages["Parent"]
+    wiki.pages["Parent"] = revision, text.removesuffix("\n")
+    wiki.revisions[revision].update(text=text.removesuffix("\n"))
+    wiki.revisions[revision][field] = value
+    writes = list(wiki.writes)
+    with pytest.raises(relay.Blocked, match="Relecture"):
+        publish(tmp_path, directory, wiki)
+    assert wiki.writes == writes
+
+
+@pytest.mark.parametrize("change", [
+    lambda text: text.replace("page=Renamed child", "page=Other"),
+    lambda text: text.replace("|", "\n|", 1),
+    lambda text: text.removesuffix("\n") + " ",
+    lambda text: text + "\n",
+])
+def test_terminal_lf_recovery_does_not_accept_other_content_changes(tmp_path, change):
+    directory, wiki, _ = interrupt_after_edit(tmp_path, legacy=False)
+    revision, text = wiki.pages["Parent"]
+    changed = change(text)
+    wiki.pages["Parent"] = revision, changed
+    wiki.revisions[revision]["text"] = changed
+    writes = list(wiki.writes)
+    with pytest.raises(relay.Blocked):
+        publish(tmp_path, directory, wiki)
+    assert wiki.writes == writes
+
+
 @pytest.mark.parametrize("legacy", (False, True))
 @pytest.mark.parametrize("field,value", [("user", "Other"), ("tags", []), ("parent_id", 999)])
 def test_resume_cannot_skip_unverified_edit_metadata(tmp_path, legacy, field, value):
