@@ -28,6 +28,21 @@ review_tool = load_module("wikidebia_editorial_review")
 workspace_tool = sys.modules.get("wikidebia_editorial_workspace") or load_module("wikidebia_editorial_workspace")
 common = sys.modules["wikidebia_corpus_build"]
 
+
+@pytest.mark.parametrize("tagged_pages", [0, 3])
+def test_historical_absent_keywords_do_not_count_as_a_dominant_navigation_set(tagged_pages):
+    items = [{"entity_type": "debate", "entity_id": "debate", "canonical_title": "Débat ?"}]
+    for index in range(15):
+        items.append({
+            "entity_type": "argument", "entity_id": f"A{index:04d}",
+            "page_origin": "preexisting", "canonical_title": f"Proposition {index}",
+            "displayed_title": f"Libellé {index}",
+            "keywords": [f"concept {index}"] if index < tagged_pages else [],
+        })
+    report = review_tool._validate_corpus_rules(items)
+    assert report["arguments"] == 15
+    assert report["dominant_keyword_set_ratio"] <= 0.25
+
 from test_wikidebia_editorial_workspace import make_promoted_project  # noqa: E402
 
 
