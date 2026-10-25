@@ -279,6 +279,7 @@ def _structured_action(entry: Mapping[str, Any]) -> dict[str, Any] | None:
     for key in (
         "target_node_id", "new_parent_occurrence_id", "new_relation", "new_branch",
         "page_disposition", "reason", "edit_summary_parent", "edit_summary_page",
+        "preserve_parent_relation",
     ):
         if raw.get(key) is not None:
             result[key] = raw.get(key)
@@ -482,7 +483,7 @@ def _remove_link(text: str, page_type: str, family: str, child_title: str) -> tu
     value = _parameter_value(text, page_type, parameter)
     a, b, raw = _find_link_model(value, template_name, child_title)
     new_value = value[:a] + value[b:]
-    new_text = _replace_parameter_value(text, page_type, parameter, new_value, create_if_missing=False)
+    new_text = _set_optional_parameter_value(text, page_type, parameter, new_value)
     return new_text, raw
 
 
@@ -493,6 +494,24 @@ def _rename_link_model(raw: str, page_type: str, family: str) -> str:
         raise GraphActionError("Sous-modèle de relation illisible")
     # Replace only the template name at the opening of this exact model.
     return re.sub(r"^\{\{\s*[^|}\n]+", "{{" + desired, raw, count=1)
+
+
+def _retarget_link_model(raw: str, target_title: str) -> str:
+    """Change only page=, retaining the historical label and formatting."""
+    inner = raw[2:-2]
+    matches = []
+    for index, (start, end) in enumerate(_segment_offsets(inner)):
+        segment = inner[start:end]
+        eq = _top_level_equals(segment)
+        if index and eq is not None and normalize_key(segment[:eq].strip()) == "page":
+            value = segment[eq + 1:]
+            leading = len(value) - len(value.lstrip())
+            trailing = len(value.rstrip())
+            matches.append((2 + start + eq + 1 + leading, 2 + start + eq + 1 + trailing))
+    if len(matches) != 1:
+        raise GraphActionError("Une fusion conservant la relation exige un unique paramètre page")
+    start, end = matches[0]
+    return raw[:start] + target_title + raw[end:]
 
 
 def _add_link(text: str, page_type: str, family: str, raw_model: str) -> str:
@@ -576,6 +595,8 @@ def _parent_remove_summary(child_title: str, action: Mapping[str, Any], target_t
             raise GraphActionError("Le résumé parent d'un doublon doit contenir la cible sous forme [[Titre]]")
         return explicit
     if action.get("action") == "merge_redirect" and target_title:
+        if action.get("preserve_parent_relation"):
+            return f"Remplacement du doublon [[{child_title}]] par [[{target_title}]] ; relation et titre affiché conservés"
         return f"Retrait de l'argument doublon [[{child_title}]] ; argument conservé : [[{target_title}]]"
     if action.get("action") == "remove":
         return f"Retrait de l'argument [[{child_title}]] du graphe du débat"
@@ -596,6 +617,7 @@ def _page_action_summary(child_title: str, action: Mapping[str, Any], target_tit
 def _normalize_actions(actions: Sequence[Mapping[str, Any]], registry: Mapping[str, Any]) -> list[dict[str, Any]]:
     graph = registry.get("graph") or {}
     nodes = [x for x in graph.get("nodes") or [] if x.get("status") == "active"]
+    edges = [x for x in graph.get("edges") or [] if x.get("status") == "active"]
     occurrences = list(graph.get("occurrences") or [])
     node_by_id = {str(x["id"]): x for x in nodes}
     occ_by_id = {str(x["id"]): x for x in occurrences}
@@ -620,6 +642,11 @@ def _normalize_actions(actions: Sequence[Mapping[str, Any]], registry: Mapping[s
         if oid in seen_occ:
             raise GraphActionError(f"Plusieurs actions visent la même occurrence : {oid}")
         seen_occ.add(oid)
+        preserve_relation = row.get("preserve_parent_relation", False)
+        if type(preserve_relation) is not bool:
+            raise GraphActionError("preserve_parent_relation doit être un booléen")
+        if preserve_relation and (action != "merge_redirect" or occ_by_id[oid].get("parent_occurrence_id") is None):
+            raise GraphActionError("La conservation de relation exige une fusion d'occurrence subordonnée")
         if action in {"remove", "merge_redirect"}:
             if len(occs_by_node[nid]) != 1:
                 raise GraphActionError(f"Retrait de page interdit pour {nid}: le nœud possède {len(occs_by_node[nid])} occurrences")
@@ -629,6 +656,11 @@ def _normalize_actions(actions: Sequence[Mapping[str, Any]], registry: Mapping[s
                 target = str(row.get("target_node_id") or "")
                 if target == nid or target not in node_by_id:
                     raise GraphActionError(f"Cible de fusion invalide pour {nid}: {target!r}")
+                if preserve_relation:
+                    parent = occ_by_id[str(occ_by_id[oid]["parent_occurrence_id"])]["node_id"]
+                    relation = (next((e for e in edges if e["id"] == occ_by_id[oid].get("edge_id")), {}) or {}).get("relation")
+                    if parent == target or any(e["parent_node_id"] == parent and e["child_node_id"] == target and e["relation"] == relation for e in edges):
+                        raise GraphActionError("La fusion créerait une relation réflexive ou déjà présente")
                 row["page_disposition"] = "redirect"
             else:
                 disposition = str(row.get("page_disposition") or "delete")
@@ -658,6 +690,33 @@ def _normalize_actions(actions: Sequence[Mapping[str, Any]], registry: Mapping[s
     return result
 
 
+def _refresh_terminal_frontiers(build: Path, registry: Mapping[str, Any], new_graph: Mapping[str, Any], policy: dict) -> None:
+    """Reclassify moved frontier pages only when the snapshot proves no children.
+
+    A moved frontier containing unexpanded relations still requires a fresh
+    extraction; it must never be silently declared complete.
+    """
+    if policy.get("limit_policy") != "bounded":
+        return
+    nodes = {n["id"]: n for n in new_graph["nodes"]}
+    _, arguments = _provenance_maps(build)
+    retained = []
+    for node_id in policy.get("frontier_node_ids") or []:
+        node = nodes.get(node_id)
+        if node is None:
+            continue
+        if node["derived"]["minimum_depth"] == policy["maximum_edge_depth"] + 1:
+            retained.append(node_id)
+            continue
+        row = arguments.get(node_id)
+        if row is None:
+            raise GraphActionError(f"Source de frontière absente : {node_id}")
+        text = (build / row["import_path"]).read_text(encoding="utf-8")
+        if any(_parameter_value(text, "argument", field).strip() for field in ("justifications", "objections")):
+            raise GraphActionError(f"Une nouvelle extraction est nécessaire pour la frontière déplacée {node_id}")
+    policy["frontier_node_ids"] = retained
+
+
 def _rebuild_graph(registry: dict[str, Any], actions: Sequence[Mapping[str, Any]]) -> tuple[dict[str, Any], dict[str, Any]]:
     graph = registry.get("graph") or {}
     nodes = [copy.deepcopy(x) for x in graph.get("nodes") or [] if x.get("status") == "active"]
@@ -673,7 +732,13 @@ def _rebuild_graph(registry: dict[str, Any], actions: Sequence[Mapping[str, Any]
     by_occ_changes: dict[str, dict[str, Any]] = {}
     for action in actions:
         oid, nid = str(action["occurrence_id"]), str(action["node_id"])
-        if action["action"] in {"remove", "merge_redirect"}:
+        if action["action"] == "merge_redirect" and action.get("preserve_parent_relation"):
+            removed_node.add(nid)
+            current = copy.deepcopy(occ_by_id[oid])
+            current["node_id"] = str(action["target_node_id"])
+            current["occurrence_role"] = "secondary"
+            by_occ_changes[oid] = current
+        elif action["action"] in {"remove", "merge_redirect"}:
             removed_occ.add(oid); removed_node.add(nid)
         else:
             current = copy.deepcopy(occ_by_id[oid])
@@ -817,11 +882,21 @@ def prepare_action_plan(build: Path, debate_id: str, actions: Sequence[Mapping[s
         old_page_type, old_owner = _page_owner_for_occurrence(occ, occ_by_id)
         old_family = _family_for_occurrence(occ, edge_by_id)[1]
         old_rel, old_text, _ = load_mutable(old_page_type, old_owner)
+        before_change = old_text
         old_text, raw_model = _remove_link(old_text, old_page_type, old_family, child_title)
         desired_by_path[old_rel] = old_text
         target_title = None
         if action["action"] == "merge_redirect":
             target_title = _node_title(node_by_id, str(action["target_node_id"]))
+            if action.get("preserve_parent_relation"):
+                parameter = _RELATION_PARAMETER[(old_page_type, old_family)]
+                before_removal = _parameter_value(before_change, old_page_type, parameter)
+                a, b, original_model = _find_link_model(before_removal, _RELATION_TEMPLATE[(old_page_type, old_family)], child_title)
+                desired_by_path[old_rel] = _replace_parameter_value(
+                    before_change, old_page_type, parameter,
+                    before_removal[:a] + _retarget_link_model(original_model, target_title) + before_removal[b:],
+                    create_if_missing=False,
+                )
         summary_parts[old_rel].append(_parent_remove_summary(child_title, action, target_title))
 
         if action["action"] in {"move", "relation_change"}:
@@ -1095,6 +1170,7 @@ def apply_local_result(build: Path, plan: Mapping[str, Any], desired_by_path: Ma
     depth_policy = copy.deepcopy((registry.get("graph") or {}).get("depth_policy") or {})
     depth_policy.setdefault("limit_policy", "unbounded")
     depth_policy["maximum_observed"] = new_graph["derived_counts"]["maximum_depth"]
+    _refresh_terminal_frontiers(build, registry, new_graph, depth_policy)
     registry["graph"] = {"lifecycle": lifecycle, "depth_policy": depth_policy, **new_graph}
     for key in ("lifecycle", "depth_policy", "nodes", "edges", "occurrences", "derived_counts"):
         projection[key] = copy.deepcopy(registry["graph"][key])
@@ -1132,6 +1208,14 @@ def apply_review_actions_locally(
     remote snapshot. The first French graph/title checkpoint later materializes
     relation/title changes and executes moves, redirects and deletions together.
     """
+    previous = None
+    previous_path = build / "reviews/graph_action_decisions.json"
+    if previous_path.is_file():
+        candidate = load_json(previous_path, "décisions structurelles précédentes")
+        if candidate.get("status") == "pending_remote_graph_checkpoint":
+            if candidate.get("debate_id") != debate_id or candidate.get("decision_sha256") != _sha_object(candidate, "decision_sha256"):
+                raise GraphActionError("Historique des décisions structurelles divergent")
+            previous = candidate
     actions = extract_actions_from_review(build)
     if not actions:
         raise GraphActionError("La revue rejetée ne contient aucune décision structurelle exécutable")
@@ -1153,6 +1237,7 @@ def apply_review_actions_locally(
     depth_policy = copy.deepcopy((registry.get("graph") or {}).get("depth_policy") or {})
     depth_policy.setdefault("limit_policy", "unbounded")
     depth_policy["maximum_observed"] = new_graph["derived_counts"]["maximum_depth"]
+    _refresh_terminal_frontiers(build, registry, new_graph, depth_policy)
     registry["graph"] = {"lifecycle": lifecycle, "depth_policy": depth_policy, **new_graph}
     for key in ("lifecycle", "depth_policy", "nodes", "edges", "occurrences", "derived_counts"):
         projection[key] = copy.deepcopy(registry["graph"][key])
@@ -1212,6 +1297,10 @@ def apply_review_actions_locally(
         "removed_nodes": copy.deepcopy(graph_result.get("removed_nodes") or []),
         "remote_writes_performed": False,
     }
+    if previous is not None:
+        for field in ("actions", "mutations", "removed_nodes"):
+            audit[field] = copy.deepcopy(previous.get(field) or []) + audit[field]
+        audit["previous_decision_sha256"] = previous["decision_sha256"]
     audit["decision_sha256"] = _sha_object(audit)
     write_json(build / "reviews/graph_action_decisions.json", audit)
     return {
