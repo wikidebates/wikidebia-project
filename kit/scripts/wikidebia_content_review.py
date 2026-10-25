@@ -96,7 +96,7 @@ PAGE_LIFECYCLE_PARAMETERS = {
         "date-création",
     ),
     "argument": (
-        "initialisation", "nom-consacré", "nom", "avertissements-titre",
+        "initialisation", "nom-consacré", "nom", "titre-affiché", "avertissements-titre",
         "avertissements-argument", "avertissements-résumé",
         "avertissements-références", "avertissements-justifications",
         "avertissements-objections", "débat-dédié", "interlangue",

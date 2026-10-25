@@ -99,7 +99,7 @@ def _workspace(project_root: Path, debate_id: str, work_id: str, stage: str) -> 
     if not expected or full_tree_sha256(source) != expected:
         raise FrenchCheckpointError(f"{source_name} a changé depuis son application")
     if stage == "graph" and meta.get("status") not in {
-        "fr_titles_applied", "fr_content_review_ready", "fr_content_review_finalized", "fr_content_applied",
+        "fr_titles_applied", "fr_metadata_applied", "fr_content_review_ready", "fr_content_review_finalized", "fr_content_applied",
         "en_translation_review_ready", "en_translation_review_finalized", "en_translation_applied", "bilingual_rendered"
     }:
         raise FrenchCheckpointError(f"Les titres français ne sont pas appliqués : {meta.get('status')}")
@@ -126,6 +126,55 @@ def _fr_validation_records(timestamp: str, input_sha: str) -> list[dict[str, Any
         }
         for index, scope in enumerate(("graph", "fr_debate", "fr_global"), start=1)
     ]
+
+
+def _graph_checkpoint_baseline(
+    project_root: Path, source: Path, debate_id: str, work_id: str,
+) -> tuple[Path, dict[str, Path]]:
+    """Resolve the exact French graph state that content publication must retain.
+
+    A normal two-checkpoint workflow has an immutable graph checkpoint.  The
+    import fallback keeps direct/local fixture builds usable, while production
+    always prefers the already rendered graph state (including bounded-depth
+    frontier relations and reviewed link labels).
+    """
+    graph_output = (
+        project_root / ".state" / "fr-publication" / debate_id / work_id
+        / "graph" / "checkpoint-corpus" / "output" / "fr"
+    )
+    debate_path = graph_output / "debate" / "debate.wiki"
+    argument_dir = graph_output / "arguments"
+    if debate_path.is_file() and argument_dir.is_dir():
+        return debate_path, {
+            path.stem: path for path in argument_dir.glob("*.wiki") if path.is_file()
+        }
+
+    debate_fallback: Path | None = None
+    arguments: dict[str, Path] = {}
+    for row in _import_rows(source):
+        path = source / str(row.get("import_path") or "")
+        if not path.is_file():
+            continue
+        if row.get("kind") == "debate":
+            debate_fallback = path
+        else:
+            page_id = str(row.get("page_id") or "")
+            if page_id:
+                arguments[page_id] = path
+    if debate_fallback is None:
+        raise FrenchCheckpointError("Page Débat de référence absente pour le checkpoint de contenu")
+    return debate_fallback, arguments
+
+
+def _retain_baseline_parameters(
+    rendered: str, baseline: Path, *, page_type: str, parameters: tuple[str, ...],
+) -> str:
+    template = _outer_template(baseline, {"debat" if page_type == "debate" else "argument"})
+    for parameter in parameters:
+        rendered = _set_optional_parameter_value(
+            rendered, page_type, parameter, template.get(parameter),
+        )
+    return rendered
 
 
 def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Path, debate_id: str, work_id: str) -> dict[str, Any]:
@@ -156,6 +205,9 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
                 row for row in contextual_labels if row["source_page_id"] == node_id
             ]
     source_by_id = {str(row.get("id")): row for row in source_registry.get("sources") or []}
+    baseline_debate, baseline_arguments = _graph_checkpoint_baseline(
+        project_root, source, debate_id, work_id,
+    )
 
     timestamp = now_iso()
     fallback_date = str(fr_content.get("applied_at") or timestamp)[:10]
@@ -189,6 +241,10 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
         sources=source_by_id, creation_date=dates[(debate_id_actual, "fr")],
         include_interlanguage=False,
     )
+    debate_text = _retain_baseline_parameters(
+        debate_text, baseline_debate, page_type="debate",
+        parameters=("arguments-pour", "arguments-contre", "interlangue"),
+    )
     debate_path = target / debate_rel
     debate_path.parent.mkdir(parents=True, exist_ok=True)
     debate_path.write_text(debate_text, encoding="utf-8", newline="\n")
@@ -200,6 +256,20 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
             lang="fr", node=node, content=fr_args[node_id], registry=registry,
             sources=source_by_id, creation_date=dates[(node_id, "fr")],
             include_interlanguage=False,
+        )
+        baseline = baseline_arguments.get(node_id)
+        if baseline is None:
+            raise FrenchCheckpointError(
+                f"Page Argument de référence absente pour le checkpoint de contenu : {node_id}"
+            )
+        # Checkpoint 2 may change reviewed prose, documentation and
+        # classification.  It must retain checkpoint 1's graph, displayed
+        # labels and opaque historical interlanguage values exactly.
+        text = _retain_baseline_parameters(
+            text, baseline, page_type="argument",
+            parameters=(
+                "titre-affiché", "justifications", "objections", "interlangue",
+            ),
         )
         path = target / rel
         path.parent.mkdir(parents=True, exist_ok=True)

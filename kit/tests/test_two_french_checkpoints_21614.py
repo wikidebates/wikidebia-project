@@ -14,6 +14,7 @@ import wikidebia_french_checkpoint as checkpoint
 import wikidebia_graph_actions as graph_actions
 import wikidebia_review_workflow as workflow
 from test_wikidebia_editorial_review import make_workspace, complete_review
+from test_wikidebia_content_review import complete_content_review, make_metadata_applied
 
 
 def _title_applied(tmp_path: Path):
@@ -69,9 +70,9 @@ def test_depth_frontier_identification_is_explicit_and_bounded():
 
 
 def test_graph_checkpoint_preserves_out_of_scope_relations_on_depth_frontier(tmp_path: Path):
-    project, workspace, work_id = _title_applied(tmp_path)
+    project, workspace, work_id = make_metadata_applied(tmp_path)
     source = workspace / "reviewed-copy"
-    import_path = source / "imports/fr/arguments/A0001.wiki"
+    import_path = source / "imports/fr/arguments/A0003.wiki"
     historical_relation = (
         "{{Justification|page=Hors périmètre|"
         "titre-affiché=Relation historique hors périmètre}}"
@@ -82,11 +83,22 @@ def test_graph_checkpoint_preserves_out_of_scope_relations_on_depth_frontier(tmp
         "justifications",
         historical_relation,
     )
+    text = graph_actions._set_optional_parameter_value(
+        text, "argument", "titre-affiché", "Libellé historique de la page",
+    )
+    text = graph_actions._set_optional_parameter_value(
+        text, "argument", "citations",
+        "{{Citation|citation=Texte historique.\u00a0|auteurs=Autrice}}",
+    )
+    text = graph_actions._set_optional_parameter_value(
+        text, "argument", "interlangue",
+        "{{Lien interlangue|langue=en|page=Historical argument}}",
+    )
     import_path.write_text(text, encoding="utf-8", newline="\n")
 
     provenance_path = source / "data/import_provenance.json"
     provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
-    row = next(entry for entry in provenance["pages"] if entry.get("page_id") == "A0001")
+    row = next(entry for entry in provenance["pages"] if entry.get("page_id") == "A0003")
     row["sha256"] = checkpoint.sha256_file(import_path)
     row["size_bytes"] = import_path.stat().st_size
     provenance_path.write_text(json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -99,7 +111,7 @@ def test_graph_checkpoint_preserves_out_of_scope_relations_on_depth_frontier(tmp
             "limit_policy": "bounded",
             "maximum_observed": 2,
             "maximum_edge_depth": 1,
-            "frontier_node_ids": ["A0001"],
+            "frontier_node_ids": ["A0003"],
             "relations_omitted_at_frontier": 1,
         }
         path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -112,8 +124,22 @@ def test_graph_checkpoint_preserves_out_of_scope_relations_on_depth_frontier(tmp
     workspace_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     cp = checkpoint.build_checkpoint(project, "debat_test", work_id, stage="graph")
-    output = (cp / "output/fr/arguments/A0001.wiki").read_text(encoding="utf-8")
+    output = (cp / "output/fr/arguments/A0003.wiki").read_text(encoding="utf-8")
     assert historical_relation in output
+
+    content.prepare_review(project, "debat_test", work_id)
+    complete_content_review(workspace)
+    finalized = content.finalize_review(project, "debat_test", work_id)
+    content.apply_review(project, "debat_test", work_id, finalized["review_sha256"])
+    content_cp = checkpoint.build_checkpoint(project, "debat_test", work_id, stage="content")
+    content_output = (content_cp / "output/fr/arguments/A0003.wiki").read_text(encoding="utf-8")
+    assert historical_relation in content_output
+    assert "|titre-affiché=Libellé historique de la page" in content_output
+    assert "|citation=Texte historique." in content_output
+    assert "|auteurs=Autrice" in content_output
+    assert "|interlangue={{Lien interlangue|langue=en|page=Historical argument}}" in content_output
+    assert "|justifications=\n" not in content_output
+    assert "|objections=\n" not in content_output
 
 
 def test_review_packages_split_titles_from_classification_and_content(tmp_path: Path):

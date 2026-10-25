@@ -692,7 +692,8 @@ def _render_argument(
         target = (node.get("en") or {}).get("canonical_title")
         params: list[tuple[str, Any]] = []
         for name, default in (
-            ("initialisation", None), ("nom-consacré", content.get("argument_name")), ("nom", None), ("avertissements-titre", None),
+            ("initialisation", None), ("nom-consacré", content.get("argument_name")), ("nom", None),
+            ("titre-affiché", None), ("avertissements-titre", None),
             ("avertissements-argument", "Argument généré par IA"), ("avertissements-résumé", None),
         ):
             _append_lifecycle_parameter(params, content, name, default)
