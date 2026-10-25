@@ -135,7 +135,7 @@ def test_graph_checkpoint_preserves_out_of_scope_relations_on_depth_frontier(tmp
     content_output = (content_cp / "output/fr/arguments/A0003.wiki").read_text(encoding="utf-8")
     assert historical_relation in content_output
     assert "|titre-affiché=Libellé historique de la page" in content_output
-    assert "|citation=Texte historique." in content_output
+    assert "|citation=Texte historique.\u00a0" in content_output
     assert "|auteurs=Autrice" in content_output
     assert "|interlangue={{Lien interlangue|langue=en|page=Historical argument}}" in content_output
     assert "|justifications=\n" not in content_output

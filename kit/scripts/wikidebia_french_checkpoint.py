@@ -282,7 +282,7 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
         # labels and opaque historical interlanguage values exactly.
         text = _retain_baseline_parameters(
             text, baseline, page_type="argument",
-            parameters=("justifications", "objections"),
+            parameters=("citations", "justifications", "objections"),
         )
         path = target / rel
         path.parent.mkdir(parents=True, exist_ok=True)
