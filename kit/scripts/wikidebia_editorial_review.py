@@ -627,8 +627,10 @@ def _validate_corpus_rules(final_items: Sequence[Mapping[str, Any]]) -> dict[str
         title_map[key] = title
     identical = sum(normalized_identity(item.get("canonical_title")) == normalized_identity(item.get("displayed_title")) for item in arguments)
     identity_ratio = identical / len(arguments)
-    sets = collections.Counter(tuple(item.get("keywords") or []) for item in arguments)
-    dominant_count = sets.most_common(1)[0][1]
+    # Absence on an imported page is not a shared navigation keyword set.
+    # New-page keyword minima remain enforced by _validate_item.
+    sets = collections.Counter(tuple(item["keywords"]) for item in arguments if item.get("keywords"))
+    dominant_count = max(sets.values(), default=0)
     dominant_ratio = dominant_count / len(arguments)
     if dominant_ratio > 0.25:
         raise EditorialReviewError(f"Un jeu exact de mots-clés domine le corpus : {dominant_ratio:.2%} > 25 %")
