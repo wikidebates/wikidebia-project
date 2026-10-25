@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-validator.zip",
   "version_source": "VERSIONS.json",
-  "declared_file_count": 513,
-  "declared_test_count": 508,
+  "declared_file_count": 514,
+  "declared_test_count": 519,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -38,8 +38,8 @@
     },
     {
       "path": "TEST_REPORT.txt",
-      "size_bytes": 793,
-      "sha256": "d4a99e1598c1b769a34376defee702eb65c3ec224d113ffc406876136a110efd"
+      "size_bytes": 980,
+      "sha256": "7f26dd03d5f5284ba8c43882a6a1ba1ffa30234cf65cb8aad5bf1268f6752fa2"
     },
     {
       "path": "VERSIONS.json",
@@ -788,13 +788,13 @@
     },
     {
       "path": "docs/SELF_AUDIT_REPORT.txt",
-      "size_bytes": 540,
-      "sha256": "bcb489e1b9a5f612f2f750b2b6e4d8801daa66efaa744e13b9b92c8869194f78"
+      "size_bytes": 727,
+      "sha256": "af6ba176b2dedda3e474579cccb7cd2306ba8bedf5693d4102026977146a8d27"
     },
     {
       "path": "docs/TEST_REPORT.txt",
-      "size_bytes": 1147,
-      "sha256": "77668580f990b45e258d0c30a3157dea40b0507df506464c86c44bc0804ea511"
+      "size_bytes": 1334,
+      "sha256": "f60856c9898afc0a7358ec58da665b1f7b58137893a4b5f22032a013a334bc81"
     },
     {
       "path": "docs/history/README.md",
@@ -2023,8 +2023,8 @@
     },
     {
       "path": "src/wikidebia_validator/wikicode.py",
-      "size_bytes": 158695,
-      "sha256": "a728b7f2643cb9ac4346bcea3383b773cd0452697709ca67ac353423c822d2f1"
+      "size_bytes": 161364,
+      "sha256": "161f7898278e144faea3db196dbd4318aaca978370d91a3ab810273e00544f77"
     },
     {
       "path": "src/wikidebia_validator/workflow.py",
@@ -2455,6 +2455,11 @@
       "path": "tests/test_portable_paths.py",
       "size_bytes": 930,
       "sha256": "8221b9ffb6fdafddda3f3651820919ba0c6ad086b3a9a4a37324021296e11298"
+    },
+    {
+      "path": "tests/test_preserved_citation_links.py",
+      "size_bytes": 3819,
+      "sha256": "082619d1ec7e371811f9202d361fe639910eb7a4c14263329cee8b8bf1a15c26"
     },
     {
       "path": "tests/test_quote_lexical_ratio_0498.py",
