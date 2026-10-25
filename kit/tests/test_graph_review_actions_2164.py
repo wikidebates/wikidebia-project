@@ -4,6 +4,8 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 TESTS = Path(__file__).resolve().parents[0]
 sys.path.insert(0, str(SCRIPTS))
@@ -74,6 +76,77 @@ def test_merge_redirect_removes_parent_link_and_requires_target_in_summary(tmp_p
     assert graph_result["removed_nodes"] == ["A0001"]
 
 
+def _prepare_relation_preserving_merge(build: Path) -> None:
+    registry = common.load_json(build / "data/registre_debat.json", "registre")
+    graph = registry["graph"]
+    graph["edges"] = [e for e in graph["edges"] if e["parent_node_id"] != "A0002"]
+    graph["occurrences"] = [o for o in graph["occurrences"] if o["id"] != "O00004"]
+    common.write_json(build / "data/registre_debat.json", registry)
+    target = build / "imports/fr/arguments/A0002.wiki"
+    text = target.read_text().replace("{{Justification|page=Argument C|titre-affiché=C soutient B}}", "")
+    target.write_text(text)
+    # The duplicate has exactly the retained page's content.
+    (build / "imports/fr/arguments/A0003.wiki").write_text(text)
+
+
+def test_merge_can_reuse_retained_page_at_same_relation_without_changing_label(tmp_path: Path) -> None:
+    _project, build = make_project(tmp_path)
+    _prepare_relation_preserving_merge(build)
+    parent = build / "imports/fr/arguments/A0001.wiki"
+    original = parent.read_text()
+    target = (build / "imports/fr/arguments/A0002.wiki").read_bytes()
+    action = {"action": "merge_redirect", "occurrence_id": "O00003", "node_id": "A0003",
+              "target_node_id": "A0002", "preserve_parent_relation": True}
+    plan, desired, result = ga.prepare_action_plan(build, "debat_test", [action])
+    assert desired["imports/fr/arguments/A0001.wiki"] == original.replace("page=Argument C", "page=Argument B")
+    assert desired["imports/fr/arguments/A0003.wiki"] == "#REDIRECTION [[Argument B]]\n"
+    assert "imports/fr/arguments/A0002.wiki" not in desired
+    assert (build / "imports/fr/arguments/A0002.wiki").read_bytes() == target
+    assert parent.read_text() == original  # Preparing the plan is local/read-only.
+    graph = result["new_graph"]
+    assert result["removed_nodes"] == ["A0003"]
+    assert result["removed_occurrences"] == []
+    occ = next(o for o in graph["occurrences"] if o["id"] == "O00003")
+    assert occ["node_id"] == "A0002" and occ["occurrence_role"] == "secondary"
+    edge = next(e for e in graph["edges"] if e["id"] == occ["edge_id"])
+    assert (edge["parent_node_id"], edge["child_node_id"], edge["relation"]) == ("A0001", "A0002", "justification")
+    assert len([o for o in graph["occurrences"] if o["node_id"] == "A0002"]) == 2
+    parent_mutation = next(m for m in plan["mutations"] if m.get("page_id") == "A0001")
+    assert "[[Argument B]]" in parent_mutation["edit_summary"]
+    registry = common.load_json(build / "data/registre_debat.json", "registre")
+    registry["graph"] = {**registry["graph"], **graph}
+    common.write_json(build / "data/registre_debat.json", registry)
+    provenance = common.load_json(build / "data/import_provenance.json", "provenance")
+    donor = next(r for r in provenance["pages"] if r.get("page_id") == "A0003")
+    donor.update(status="pending_redirect", pending_redirect_target_node_id="A0002")
+    common.write_json(build / "data/import_provenance.json", provenance)
+    from wikidebia_translation_source import relation_labels_from_source
+    labels = relation_labels_from_source(build)
+    label = next(r for r in labels if (r["source_page_id"], r["target_node_id"]) == ("A0001", "A0002"))
+    assert label["source_text"] == "C soutient A"
+
+
+@pytest.mark.parametrize("target,keep", [("A0001", True), ("A0002", "true")])
+def test_preserving_merge_refuses_self_relation_and_invalid_flag(tmp_path: Path, target, keep) -> None:
+    _project, build = make_project(tmp_path)
+    _prepare_relation_preserving_merge(build)
+    with pytest.raises(ga.GraphActionError):
+        ga.prepare_action_plan(build, "debat_test", [{
+            "action": "merge_redirect", "occurrence_id": "O00003", "node_id": "A0003",
+            "target_node_id": target, "preserve_parent_relation": keep,
+        }])
+
+
+def test_preserving_merge_refuses_root_occurrence(tmp_path: Path) -> None:
+    _project, build = make_project(tmp_path)
+    oid, nid, target = _prepare_single_occurrence_merge(build)
+    with pytest.raises(ga.GraphActionError, match="subordonnée"):
+        ga.prepare_action_plan(build, "debat_test", [{
+            "action": "merge_redirect", "occurrence_id": oid, "node_id": nid,
+            "target_node_id": target, "preserve_parent_relation": True,
+        }])
+
+
 def test_relation_change_moves_model_between_parameters_without_touching_child_page(tmp_path: Path) -> None:
     _project, build = make_project(tmp_path)
     plan, desired, graph_result = ga.prepare_action_plan(build, "debat_test", [{
@@ -83,10 +156,62 @@ def test_relation_change_moves_model_between_parameters_without_touching_child_p
     touched = [x for x in plan["mutations"] if x["operation"] == "update"]
     assert len(touched) == 1
     text = desired[touched[0]["source_path"]]
-    assert "|justifications=" in text
+    assert "|justifications=" not in text
     assert "{{Objection|page=Argument C|titre-affiché=C soutient A}}" in text
     edge = next(e for e in graph_result["new_graph"]["edges"] if e["parent_node_id"] == "A0001" and e["child_node_id"] == "A0003")
     assert edge["relation"] == "objection"
+    registry = common.load_json(build / "data/registre_debat.json", "registre")
+    registry["graph"].update(graph_result["new_graph"])
+    common.write_json(build / "data/registre_debat.json", registry)
+    from wikidebia_translation_source import relation_labels_from_source
+    labels = relation_labels_from_source(build)
+    label = next(r for r in labels if (r["source_page_id"], r["target_node_id"]) == ("A0001", "A0003"))
+    assert label["relation"] == "objection" and label["source_text"] == "C soutient A"
+
+
+@pytest.mark.parametrize("has_unexpanded_children", [False, True])
+def test_moved_frontier_requires_extraction_unless_source_is_terminal(tmp_path: Path, has_unexpanded_children) -> None:
+    _project, build = make_project(tmp_path)
+    graph = {"nodes": [{"id": "A0003", "derived": {"minimum_depth": 2}},
+                       {"id": "A0002", "derived": {"minimum_depth": 3}}]}
+    policy = {"limit_policy": "bounded", "maximum_edge_depth": 2,
+              "frontier_node_ids": ["A0003", "A0002"]}
+    if has_unexpanded_children:
+        p = build / "imports/fr/arguments/A0003.wiki"
+        p.write_text(p.read_text().replace("|objections=", "|objections={{Objection|page=Unexpanded}}"))
+        with pytest.raises(ga.GraphActionError, match="extraction"):
+            ga._refresh_terminal_frontiers(build, {}, graph, policy)
+        assert policy["frontier_node_ids"] == ["A0003", "A0002"]
+    else:
+        ga._refresh_terminal_frontiers(build, {}, graph, policy)
+        assert policy["frontier_node_ids"] == ["A0002"]
+
+
+def test_successive_local_corrections_retain_pending_redirect_for_checkpoint(tmp_path: Path) -> None:
+    project, build = make_project(tmp_path)
+    oid, nid, target = _prepare_single_occurrence_merge(build)
+    review.make_review_template(build, "debat_test", overwrite=True)
+    path = build / common.PLACEMENT_REVIEW
+    placement = common.load_json(path, "placements")
+    next(r for r in placement["entries"] if r["occurrence_id"] == oid)["correction"] = {
+        "action": "merge_redirect", "target_node_id": target,
+    }
+    common.write_json(path, placement)
+    ga.apply_review_actions_locally(project, build, "debat_test")
+    first = common.load_json(build / "reviews/graph_action_decisions.json", "décisions")
+    review.make_review_template(build, "debat_test", overwrite=True)
+    placement = common.load_json(path, "placements")
+    next(r for r in placement["entries"] if r["node_id"] == "A0003")["correction"] = {
+        "action": "relation_change", "new_relation": "objection",
+    }
+    common.write_json(path, placement)
+    ga.apply_review_actions_locally(project, build, "debat_test")
+    audit = common.load_json(build / "reviews/graph_action_decisions.json", "décisions")
+    assert [a["action"] for a in audit["actions"]] == ["merge_redirect", "relation_change"]
+    assert audit["previous_decision_sha256"] == first["decision_sha256"]
+    assert audit["decision_sha256"] == ga._sha_object(audit, "decision_sha256")
+    from wikidebia_french_checkpoint import _graph_migrations
+    assert _graph_migrations(build, "debat_test")[0]["old_page_id"] == nid
 
 
 class FakeRemote:

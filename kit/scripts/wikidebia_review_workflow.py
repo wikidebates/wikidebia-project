@@ -239,6 +239,7 @@ def _instructions(review_type: str, debate_id: str, work_id: str | None, editabl
             "Si la revue exige une modification structurelle, renseignez pour l'occurrence concernée l'objet `correction`.",
             "Actions prises en charge : `remove`, `merge_redirect`, `move` et `relation_change`.",
             "Pour `merge_redirect`, indiquez `target_node_id` : la page doublon deviendra `#REDIRECTION [[Titre de destination]]` et son lien sera retiré de la page mère.",
+            "Si le doublon intervient dans une autre branche qui doit conserver sa relation, ajoutez `preserve_parent_relation=true` : la cible du lien est remplacée, son titre affiché et sa position sont conservés, et le nœud retenu est réutilisé.",
             "Pour `remove`, indiquez `page_disposition=delete` : le lien sera retiré de la page mère avant suppression de la page.",
             "Les décisions structurelles sont d’abord appliquées localement au graphe puis soumises à une nouvelle revue complète. Aucune page distante n’est modifiée pendant cette boucle.",
             "Après réimport approuvé de ce même ZIP, toutes les mutations structurelles et de titres validées sont publiées immédiatement au premier checkpoint français, avec un résumé MediaWiki individualisé par page.",

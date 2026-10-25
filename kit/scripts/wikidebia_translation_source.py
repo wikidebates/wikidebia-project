@@ -58,14 +58,17 @@ def relation_labels_from_source(source: Path) -> list[dict[str,Any]]:
     from wikidebia_translation_review import TranslationReviewError
     registry,debate,arguments=_source_imports(source)
     provenance=load_json(source/'data/import_provenance.json','provenance française')
+    nodes={str(node.get('id')):node for node in (registry.get('graph') or {}).get('nodes') or [] if node.get('status')=='active'}
     title_to_id={}
     for row in provenance.get('pages') or []:
         if not isinstance(row,Mapping) or row.get('kind')!='argument' or not row.get('page_id'):
             continue
+        node_id=str(row['page_id'])
+        if row.get('status')=='pending_redirect' and row.get('pending_redirect_target_node_id') in nodes:
+            node_id=str(row['pending_redirect_target_node_id'])
         for key in ('canonical_title','requested_title','source_graph_title'):
             title=str(row.get(key) or '').strip()
-            if title:title_to_id[title]=str(row['page_id'])
-    nodes={str(node.get('id')):node for node in (registry.get('graph') or {}).get('nodes') or [] if node.get('status')=='active'}
+            if title:title_to_id[title]=node_id
     for node_id,node in nodes.items():
         title=str((node.get('fr') or {}).get('canonical_title') or '').strip()
         if title:title_to_id[title]=node_id
@@ -98,7 +101,10 @@ def relation_labels_from_source(source: Path) -> list[dict[str,Any]]:
     for edge in edges:
         parent_id=str(edge['parent_node_id']);child_id=str(edge['child_node_id']);relation=str(edge['relation'])
         fallback=str((nodes.get(child_id,{}).get('fr') or {}).get('displayed_title') or '')
-        source_text=historical_edges.get((parent_id,relation,child_id),fallback)
+        source_text=historical_edges.get((parent_id,relation,child_id))
+        if source_text is None:
+            previous_labels={label for (parent,_,child),label in historical_edges.items() if parent==parent_id and child==child_id}
+            source_text=next(iter(previous_labels)) if len(previous_labels)==1 else fallback
         if not source_text:raise TranslationReviewError('Titre affiché français relationnel absent : '+str(edge.get('id')))
         result.append(dict(id='edge:'+str(edge['id']),source_page_id=parent_id,target_node_id=child_id,relation=relation,source_text=source_text))
     return result
