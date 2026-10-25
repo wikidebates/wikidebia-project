@@ -2,7 +2,7 @@ Wikidéb’IA Validator 0.4.105 — auto-audit
 
 Statut : PASSED
 Norme active unique : 1.2.88
-Tests : 501 réussis
+Tests : 508 réussis
 Kit associé : 2.16.47
 
 Les contrôles historiques sont différentiels et bornés par les verrous autoritatifs.

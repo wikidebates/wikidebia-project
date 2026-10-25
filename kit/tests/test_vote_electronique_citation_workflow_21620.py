@@ -145,13 +145,17 @@ def test_vote_electronique_authorized_review_with_empty_optional_citation_parame
 
     # This is the path that previously raised "Paramètre de citation vide".
     cp = checkpoint.build_checkpoint(project, "debat_test", work_id, stage="content")
+    provenance = common.load_json(workspace / "reviewed-copy/data/import_provenance.json", "provenance")
+    imports = {row["page_id"]: row["import_path"] for row in provenance["pages"]}
     for page_id in ("A0001", "A0002"):
         wiki = (cp / f"output/fr/arguments/{page_id}.wiki").read_text(encoding="utf-8")
         outer = content.iter_templates(wiki)[0]
         citation_wiki = outer.get("citations") or ""
         assert "{{Citation" in citation_wiki
-        for name in ("ouvrage", "numéro", "localisation", "page", "édition", "lieu"):
-            assert f"|{name}=" not in citation_wiki
+        # The content checkpoint preserves the exact historical citation,
+        # including optional parameters already empty in the imported page.
+        imported = (workspace / "reviewed-copy" / imports[page_id]).read_text(encoding="utf-8")
+        assert citation_wiki == content.iter_templates(imported)[0].get("citations")
 
     # Continue mechanically to the next genuine editorial point: English review.
     prepared = translation.prepare_review(project, "debat_test", work_id)

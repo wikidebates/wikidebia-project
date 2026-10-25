@@ -32,6 +32,19 @@ def digest(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
 
+def target_content_matches(text: str, row: dict) -> bool:
+    """Match the signed target, allowing one terminal LF removed on save.
+
+    Request files retain their exact signed hashes. Only remote target reads
+    accept this observed MediaWiki normalization; source preconditions and all
+    revision metadata remain strict. Do not strip other whitespace or newlines.
+    """
+    expected = row["target_sha256"]
+    return digest(text.encode()) == expected or (
+        not text.endswith("\n") and digest((text + "\n").encode()) == expected
+    )
+
+
 def request_hash(request: dict) -> str:
     body = {k: v for k, v in request.items() if k != "request_sha256"}
     return digest(json.dumps(body, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode())
@@ -123,11 +136,11 @@ def inspect_page(adapter, row: dict) -> dict:
         if target_exists:
             if not exists or not redirect_to(text, new):
                 raise Blocked(f"Collision de titre : {new}")
-            if digest(target_text.encode()) not in {row["source_sha256"], row["target_sha256"]}:
+            if digest(target_text.encode()) != row["source_sha256"] and not target_content_matches(target_text, row):
                 raise Blocked(f"Cible modifiée : {new}")
             return {"title": new, "revision": target_revision, "text": target_text, "move": False}
     if not exists or revision != row["source_revision_id"] or digest(text.encode()) != row["source_sha256"]:
-        if old == new and exists and digest(text.encode()) == row["target_sha256"]:
+        if old == new and exists and target_content_matches(text, row):
             return {"title": old, "revision": revision, "text": text, "move": False}
         raise Blocked(f"Page modifiée depuis la préparation : {old}")
     return {"title": old, "revision": revision, "text": text, "move": old != new}
@@ -178,7 +191,7 @@ def verify_update(adapter, row: dict, revision: int, base_revision: int, expecte
                 "auteur": actual.get("user") == expected_user,
                 "résumé": actual.get("summary") == summary,
                 "balise chatgpt": "chatgpt" in (actual.get("tags") or []),
-                "contenu": digest(actual.get("text", "").encode()) == row["target_sha256"],
+                "contenu": target_content_matches(actual.get("text", ""), row),
             }
             mismatches = [name for name, matches in checks.items() if not matches]
         if not mismatches:
@@ -237,7 +250,7 @@ def publish_request(root: Path, request_dir: Path, adapter, expected_user: str, 
             current = inspect_page(adapter, row)
             interrupted = pending.get(row["new_title"])
             if interrupted:
-                at_target = digest(current["text"].encode()) == row["target_sha256"]
+                at_target = target_content_matches(current["text"], row)
                 if interrupted.get("revision_id") is not None and not at_target:
                     raise Blocked(f"Contenu modifié après une écriture interrompue : {row['new_title']}")
                 if at_target:
@@ -269,7 +282,7 @@ def publish_request(root: Path, request_dir: Path, adapter, expected_user: str, 
         for row in request["pages"]:
             current = inspect_page(adapter, row)
             desired = safe_file(request_dir, row["after_file"]).read_text(encoding="utf-8")
-            if digest(current["text"].encode()) == row["target_sha256"]:
+            if target_content_matches(current["text"], row):
                 continue
             summary = summaries[row["page_id"]]
             adapter.assert_identity(expected_user)
@@ -286,7 +299,7 @@ def publish_request(root: Path, request_dir: Path, adapter, expected_user: str, 
             time.sleep(delay)
         for row in request["pages"]:
             current = inspect_page(adapter, row)
-            if current["move"] or digest(current["text"].encode()) != row["target_sha256"]:
+            if current["move"] or not target_content_matches(current["text"], row):
                 raise Blocked("État final divergent")
         receipt.update(status="completed", completed_at=dt.datetime.now(dt.timezone.utc).isoformat())
         write_json(state_path, receipt)
