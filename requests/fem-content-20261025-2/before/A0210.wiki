@@ -1,0 +1,11 @@
+{{Argument
+|initialisation=Objection@5364
+|résumé=Prétendre qu'il existe des traits communs à absolument tous les hommes ou toutes les femmes, c'est nier la très forte diversité en la matière, dont notamment:
+
+* Les femmes sans utérus
+* Les hommes sans pénis
+* Les personnes intersexe
+* Les personnes non-binaires
+* Les personnes androgynes
+|date-création=2024-04-26
+}}

@@ -1,0 +1,121 @@
+{{Argument
+|initialisation=Argument pour@7298
+|résumé=Anti-wokisme et extrême droite se téléscopent de façon tellement récurrente qu'il est de plus en plus difficile de ne pas les considérer comme une seule et même idéologie.
+|citations={{Citation
+|citation=Le ripolinage n'aura pas tenu longtemps. Depuis qu'il a envoyé en juin 2022 le plus gros contingent d'élus gays à l'Assemblée nationale, le Rassemblement national (RN) redoublait d'ardeur pour faire croire aux homos qu'il était de leur côté. Déjà démenties par de nombreux faits, ces déclarations d'intention se heurtent ce mercredi 15 avril à un nouvel acte : une quarantaine de députés, sénateurs et eurodéputés du parti de Marine Le Pen annoncent la création d'une association contre "le poison du wokisme".
+|auteurs=Nicolas Scheffer
+|article=Contre "la propagande LGBT", le RN organise le lobby réac au Parlement
+|ouvrage=Têtu Mag
+|date=12/04/2023
+|lien=https://tetu.com/2023/04/12/rassemblement-national-association-contre-wokisme-propagande-lgbt-lobby-reac-organise-parlement/
+}}{{Citation
+|citation=Pour le député Ecolo Guillaume Defossé, "le MR défend le fascisme de Mussolini". "Après les republications de l'extrême droite française, le respect pour Zemmour, les discours délirants sur ce qu'il appelle le 'wokisme', ça fait longtemps que les lignes sont dépassées.”
+|article=Une vidéo du MR qui “relativise” le fascisme de Mussolini crée la polémique
+|ouvrage=7 SUR 7
+|date=29/10/2022
+|lien=https://www.7sur7.be/belgique/une-video-du-mr-qui-relativise-le-fascisme-de-mussolini-cree-la-polemique~ae8af9cf/
+}}{{Citation
+|citation=la liste est inter­mi­nable des choses qui se sont ins­tal­lées, qu’on aurait crues impos­sibles il y a encore cinq ans, et qu’une vue rétros­pec­tive nous fait regar­der avec sidé­ra­tion : police défi­ni­ti­ve­ment dégon­dée, deve­nue bloc de racisme, de vio­lence et de men­songe, chancre auto­nome n’obéissant plus qu’à lui-même ; empire crois­sant d’un énorme groupe mul­ti­mé­dias occu­pé à pro­mou­voir en pleine lumière un can­di­dat ouver­te­ment fas­ciste (avec la béné­dic­tion pas­sive du CSA) ; groupes néo­na­zis déci­dés à ter­ro­ri­ser la rue quand ça n’est pas à s’armer et à pré­pa­rer des atten­tats ; isla­mo­pho­bie déchaî­née jusqu’aux plus hauts niveaux de l’État ; mac­car­thysme dans l’université ; stu­pé­fiant triomphe des idéo­logues d’extrême droite à impo­ser leurs thé­ma­tiques déli­rantes (« ''woke'' », « isla­mo­gau­chisme », « can­cel culture »).
+|auteurs=Frédéric Lordon
+|article=La multitude mobilisée en masse est l'unique solution
+|ouvrage=Ballast
+|date=18 novembre 2021
+|lien=https://www.revue-ballast.fr/frederic-lordon-la-multitude-mobilisee-en-masse-est-lunique-solution/
+}}{{Citation
+|citation=Fervent partisan de Donald Trump et adepte des théories de Steve Bannon, l’influenceur mobilise son importante communauté pour faire pression sur de grandes marques comme Ford, Harley Davidson ou Jack Daniels, afin qu’elles abandonnent leurs politiques d’inclusion.
+|auteurs=Klara Durand
+|article=Robby Starbuck, l’activiste américain qui veut faire tomber les entreprises «woke»
+|ouvrage=Le Figaro
+|date=4 septembre 2024
+|lien=https://www.lefigaro.fr/secteur/high-tech/robby-starbuck-l-activiste-americain-qui-veut-faire-tomber-les-entreprises-woke-20240904
+}}{{Citation
+|citation='''Dans la Panique Woke, tu reviens sur le GamerGate en 2014. En quoi constitue-t-il un moment majeur dans la montée du néo-conservatisme qui aujourd’hui tient tant à se battre contre ce qu’il nomme le wokisme ?'''
+
+Le GamerGate, c’est une grande campagne de harcèlement envers des critiques féministes qui émane du milieu des jeux vidéos. Le but était de dire que des méchantes féministes hystériques, allaient leur voler leurs jeux vidéos, influencer leur culture, les mettre en danger. Et donc qu’il allait falloir se défendre contre elles par tous les moyens.
+
+Ce déferlement d’anti-féminisme et de sexisme sur Internet – auquel se sont accolées ensuite la transphobie, le racisme et tous le package –, a été perçu comme un laboratoire par des intellectuels conservateurs et néo-réactionnaires et notamment un journaliste britannique expatrié aux États-Unis qui s’appelle Milo Yiannopoulos, qui va mener cette campagne en mobilisant des jeunes hommes plutôt blancs, plutôt hétéros, plutôt pas trop diplômés, à qui il va apprendre ce militantisme culturel.
+
+Leur but était de faire enrager les féministes, les post-modernes, les social justice warriors, les wokes et s’en payer une bonne tranche sur leur dos. L’important, n’était pas tellement les positions prises. L’important, c’était de battre l’ennemi. On pouvait être incohérent, dire tout et son contraire, ça n’avait pas d’importance.
+|auteurs=Maëlle Le Corre
+|article=Alex Mahoudeau : « La majorité de la population française n'a pas grand chose à faire du wokisme » - Madmoizelle
+|ouvrage=Madmoizelle.com
+|date=24 juin 2022
+|lien=https://www.madmoizelle.com/alex-mahoudeau-la-majorite-de-la-population-francaise-na-pas-grand-chose-a-faire-du-wokisme-1398545
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Alex Mahoudeau
+|ouvrage=La Panique woke: anatomie d’une offensive réactionnaire
+|édition=Éditions Textuel
+|date=04/05/2022
+|lien=https://www.editionstextuel.com/livre/la_panique_woke
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.humanite.fr/politique/wokisme/alain-policar-les-conservateurs-nomment-wokisme-tout-ce-quils-naiment-pas
+|page=Alain Policar : « Les conservateurs nomment “wokisme” tout ce qu’ils n’aiment pas »
+|auteurs=Cyprien Caddeo
+|site=L'humanité
+|date=2 mai 2024
+}}{{Référence sitographique
+|lien=https://www.publicnotice.co/p/william-young-trump-dei-lgbtq
+|page=Judge rules that anti-woke is just racism
+|auteurs=Liz Dye
+|site=Public Notice
+|date=18 juin 2025
+}}
+|justifications={{Justification
+|page=Le qualificatif de "woke" sert à diaboliser les concepts progressistes sans avoir à argumenter
+|titre-affiché=Le qualificatif de "woke" sert à diaboliser les concepts progressistes sans avoir à argumenter
+}}{{Justification
+|page=Le terme a été dénaturé et a fait l'objet d'une réappropriation
+|titre-affiché=C'est l'extrême droite américaine qui a donné au terme "woke" sa signification actuelle
+}}{{Justification
+|page=La censure la plus à craindre ne provient pas du "wokisme"
+|titre-affiché=Le qualificatif "woke" sert à faire passer la pilule d'une censure de ce qui ne plaît pas à l'extrême droite
+}}{{Justification
+|page=La "menace woke" a des similitudes troublantes avec la "menace bolchevique" si chère aux nazis
+|titre-affiché=Le wokisme est aux néo-conservateurs ce que le judéo-bolchevisme était aux nazis
+}}{{Justification
+|page=Les fantasmes sur la menace woke ne sont que le reflet d'une peur irrationnelle de la nouveauté
+|titre-affiché=Les fantasmes sur la menace woke ne sont que le reflet d'une peur irrationnelle de la nouveauté
+}}{{Justification
+|page=L'extrême droite qualifie de "woke" les causes de gauche qu'elle est incapable d'instrumentaliser
+|titre-affiché=L'extrême droite qualifie de "woke" les causes de gauche qu'elle est incapable d'instrumentaliser
+}}{{Justification
+|page=Les critiques les plus vocales du "wokisme" sont réactionnaires
+|titre-affiché=Toutes les personnalités et médias se battant contre le wokisme ont des liens structurels avec l'extrême droite
+}}{{Justification
+|page=Le "wokisme" n'existe que dans les discours anti-progressistes : c'est un homme de paille créé artificiellement pour faire semblant d'avoir un adversaire oppresseur
+|titre-affiché=Le wokisme est un épouvantail brandi par l'extrême droite pour pouvoir se victimiser
+}}{{Justification
+|page=L'extrême droite attribue aux "woke" des motivations qui n'existent que dans ses propres délires paranoïaques
+|titre-affiché=L'extrême droite attribue aux "woke" des motivations qui n'existent que dans ses propres délires paranoïaques
+}}{{Justification
+|page=Toutes les personnalités et médias se battant contre le wokisme ont des liens structurels avec l'extrême droite
+|titre-affiché=Toutes les personnalités et médias se battant contre le wokisme ont des liens structurels avec des mouvements d'extrême droite
+}}{{Justification
+|page=Des oeuvres sont qualifiées de woke simplement pour avoir comme personnages principaux des cibles habituelles de l'extrême droite
+|titre-affiché=Des oeuvres sont qualifiées de woke simplement pour avoir comme personnages principaux des cibles habituelles de l'extrême droite
+}}
+|objections={{Objection
+|page=Le wokisme est dénoncé par un spectre politique qui dépasse très largement l'ultradroite
+|titre-affiché=Le wokisme est dénoncé par un spectre politique qui dépasse très largement l'ultradroite
+}}{{Objection
+|page=C'est pour sauver la gauche que plusieurs intellectuel(le)s luttent contre le wokisme
+|titre-affiché=C'est pour sauver la gauche que plusieurs intellectuel(le)s luttent contre le wokisme
+}}{{Objection
+|page=Certains activistes wokes utilisent des méthodes fascistes pour agresser ceux qui les contestent
+|titre-affiché=Certains activistes wokes utilisent des méthodes fascistes pour agressr ceux qui les contestent
+}}{{Objection
+|page=La lutte contre le wokisme est une lutte pour la culture et l'altérité
+|titre-affiché=La lutte contre le wokisme est une lutte pour la culture et l'altérité
+}}{{Objection
+|page=150 intellectuels de la gauche américaine ont signé une tribune contre l'intolérance woke
+|titre-affiché=150 intellectuels de la gauche américaine ont signé une tribune contre l'intolérance woke
+}}{{Objection
+|page=Parler d'extrême droite quand on critique le wokisme est une opération de diversion
+|titre-affiché=Parler d'extrême droite quand on critique le wokisme est une opération de diversion
+}}
+|rubriques=Droit, Politique, Société
+|mots-clés=wokisme, extrême droite
+|date-création=2023-07-08
+}}

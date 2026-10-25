@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@11192
+|rubriques=Société
+|mots-clés=masculinité toxique, féminisme
+|date-création=2022-08-31
+}}

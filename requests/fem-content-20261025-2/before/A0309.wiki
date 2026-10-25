@@ -1,0 +1,26 @@
+{{Argument
+|résumé=La pensée et les comportements wokes sont dénoncés par la frange politique qui va de la gauche républicaine à certains LREM jusqu'aux zemmouriens. Non seulement Finkielkraut et tous les intellectuels républicains (Jacques Julliard etc.), mais aussi certains intellectuel(le)s marxistes dénoncent le dévoiement de la gauche woke qui s'attaque aux Lumières (voir par exemple Stéphanie Roza, "La gauche contre les Lumières ?").
+|objections={{Objection
+|page=Il n'y a aucun exemple de concept de gauche qui n'aie pas été qualifié de "woke"
+|titre-affiché=Le terme "woke" ne fait pas la différence entre des dérives réelles et des revendications légitimes
+}}{{Objection
+|page=Les critiques les plus vocales du "wokisme" sont réactionnaires
+|titre-affiché=La majorité des médias et personnalités qui dénoncent le wokisme sont du côté de l'extrême droite
+}}{{Objection
+|page=Les militants de gauche peuvent parfois se fourvoyer, ça n'en fait pas pour autant les chantres d'une nouvelle idéologie
+|titre-affiché=Les dérives militantes existent, mais ne sont pas pour autant le reflet d'un courant de pensée structuré
+}}{{Objection
+|page=Le printemps républicain avait des relents réactionnaires dès ses débuts
+|titre-affiché=Les idées de la gauche républicaine se différencient bien peu des idées réactionnaires
+}}{{Objection
+|page=Quand un contenu culturel est qualifier de "woke", c'est toujours par l'extrême droite
+|titre-affiché=Quand un contenu culturel est qualifié de "woke", c'est toujours par l'extrême droite
+}}{{Objection
+|page=Ce n'est pas l'"intolérance woke" que la tribune dénonce, mais la cancel culture
+|titre-affiché=Les personnalités de gauche qui combattent prétendument le wokisme n'en combattent en réalité qu'une infime partie
+}}{{Objection
+|page=Le terme "woke" n'a aucune acception péjorative n'impliquant pas le rejet de tout ce que les conservateurs n'aiment pas
+|titre-affiché=Le terme "woke" n'a aucune acception péjorative n'impliquant pas le rejet de tout ce que les conservateurs n'aiment pas
+}}
+|date-création=2022-01-18
+}}

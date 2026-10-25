@@ -1,0 +1,5 @@
+{{Argument
+|rubriques=Culture, Droit, Société
+|mots-clés=sexisme, viol, médias, culture
+|date-création=2022-02-09
+}}

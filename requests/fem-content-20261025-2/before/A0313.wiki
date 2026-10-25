@@ -1,0 +1,15 @@
+{{Argument
+|initialisation=Justification@17219
+|résumé=Pour les nazis, les militants communistes (ou qu'il tenaient pour tels) constituaient le mal absolu, car ces derniers étant antinazis, il fallait à tout prix les éliminer. Commença alors une campagne de propagande calomnieuse destinée à les diaboliser et à les traiter comme des boucs émissaires, notamment de l'incendie du Reichstag commandité par les nazis eux-mêmes. L'histoire se répétant, on retrouve les mêmes mécanismes contre les "woke". Après-tout, l'"islamo-gauchisme" ne rappelle-t-il pas le "judéo-bolchevisme" que les nazis brandissaient alors ?
+|références-sitographiques={{Référence sitographique
+|lien=https://www.retronews.fr/politique/echo-de-presse/2017/11/01/le-mythe-de-lextreme-droite-des-annees-1920-le-judeo-bolchevisme
+|page=Le mythe de l'extrême droite des années 1920 : le « judéo-bolchevisme »
+|site=Retronews
+|date=01/11/2017
+}}
+|justifications={{Justification
+|page=De tous temps, l'extrême droite a eu besoin de s'inventer des ennemis ou d'exagérer leur pouvoir pour exister
+|titre-affiché=De tous temps, l'extrême droite a eu besoin de s'inventer des ennemis ou d'exagérer leur pouvoir pour exister
+}}
+|date-création=2023-08-31
+}}

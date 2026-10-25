@@ -1,0 +1,31 @@
+{{Argument
+|initialisation=Objection@11701
+|résumé=En occident, on est encore très loin du traitement égalitaire. Un simple coup d'oeil sur les statistiques fait voler en éclat le mythe d'un occident qui traiterait bien les femmes.
+|références-sitographiques={{Référence sitographique
+|lien=https://www.madmoizelle.com/8-mars-comment-repondre-a-ceux-qui-disent-quon-na-plus-besoin-du-feminisme-1122763
+|page=8 mars : comment répondre à ceux qui disent qu’on n’a plus besoin du féminisme
+|auteurs=Clémence Boyer
+|site=Madmoizelle.com
+|date=05 mar 2020
+}}
+|justifications={{Justification
+|page=En France, 219 000 femmes sont victimes de violences physiques ou sexuelles de la part de leur conjoint ou ancien conjoint chaque année
+|titre-affiché=En France, 219.000 femmes sont victimes de violences physiques et/ou sexuelles de la part de leur (ancien) conjoint chaque année
+}}{{Justification
+|page=En France, 93 000 femmes déclarent avoir été victimes de viol ou de tentative de viol
+|titre-affiché=En France, 93.000 femmes déclarent avoir été victimes de viol ou tentative de viol
+}}{{Justification
+|page=À poste et qualifications égales, les femmes sont rémunérées en moyenne 10 % de moins que les hommes
+|titre-affiché=À poste et qualifications égales, les femmes sont rémunérées en moyenne 10% de moins que les hommes
+}}{{Justification
+|page=72 % des tâches ménagères sont effectuées par les femmes
+|titre-affiché=72% des tâches ménagères sont effectuées par les femmes
+}}{{Justification
+|page=Huit Françaises sur dix se sont déjà fait harceler dans les transports
+|titre-affiché=Huit Françaises sur dix se sont déjà fait harceler dans les transports
+}}{{Justification
+|page=Les victoires féministes sont parcellaires et régressent à la moindre crise
+|titre-affiché=Les victoires féministes sont parcellaires et régressent à la moindre crise
+}}
+|date-création=2022-12-29
+}}

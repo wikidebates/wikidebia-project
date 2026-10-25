@@ -1,0 +1,13 @@
+{{Argument
+|objections={{Objection
+|page=Ceux-là mêmes qui accusent le féminisme de puritanisme n'ont aucun problème avec celui de l'extrême droite catholique
+|titre-affiché=Ceux-là mêmes qui accusent le féminisme de puritanisme n'ont aucun problème avec celui de l'extrême droite catholique
+}}{{Objection
+|page=Combattre l'usage du sexe à des fins de domination est tout le contraire du puritanisme
+|titre-affiché=Combattre l'usage du sexe à des fin de domination est tout le contraire du puritanisme
+}}{{Objection
+|page=Les agressions sexuelles et les viols ne sont pas du sexe, mais un moyen de domination
+|titre-affiché=Les agressions sexuelles et les viols ne sont pas du sexe, mais un moyen de domination
+}}
+|date-création=2021-12-09
+}}

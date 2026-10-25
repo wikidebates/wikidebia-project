@@ -1,0 +1,5 @@
+{{Argument
+|initialisation=Justification@24645
+|résumé=Si le taux de suicide est bien plus élevé chez les hommes que chez les femmes, c'est parce qu'ils sont encourager à garder pour eux leurs souffrances pour paraître forts, ce qui finit par devenir invivable.
+|date-création=2024-03-08
+}}

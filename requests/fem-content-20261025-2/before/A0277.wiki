@@ -1,0 +1,18 @@
+{{Argument
+|initialisation=Justification@16439
+|citations={{Citation
+|citation=L’histoire le montre, à chaque fois que l’heure de la révolution sonna, les femmes furent au rendez-vous, et même souvent aux avant-postes.
+|auteurs=Nathalie Arthaud
+|ouvrage=Communiste, révolutionnaire, internationaliste !
+|édition=Les bons caractères
+|date=2022
+|lien=https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste
+}}
+|justifications={{Justification
+|page=La révolution russe de 1917 a démarré le 8 mars par la grève des ouvrières de Saint-Pétersbourg lors de la journée internationale de lutte pour les droits des femmes
+|titre-affiché=La révolution russe de 1917 a démarré le 8 mars par la grève des ouvrières de Saint-Pétersbourg lors de la journée internationale de lutte pour les droits des femmes
+}}
+|rubriques=Histoire, Politique
+|mots-clés=femmes, rôle, révolution
+|date-création=2023-04-03
+}}

@@ -1,0 +1,20 @@
+{{Argument
+|initialisation=Justification@17219
+|résumé=*
+|justifications={{Justification
+|page=Les adversaires médiatiques les plus virulents du "wokisme" sont Valeurs Actuelles, Marianne et Figarovox, tous classés à l'extrême droite
+|titre-affiché=Les adversaires médiatiques les plus virulents du "wokisme" sont Valeurs Actuelles, Marianne et Figarovox, tous classés à l'extrême droite
+}}{{Justification
+|page=Tous les politiciens d'extrême droite veulent combattre le "wokisme"
+|titre-affiché=Tous les politiciens d'extrême droite veulent combattre le "wokisme"
+}}{{Justification
+|page=Fondapol est une institution très idéologisée proche des mouvements conservateurs, voire réactionnaires
+|titre-affiché=Fondapol, figure de proue de la lutte "antiwoke" était proche de l'UMP et s'est radicalisé en même temps que lui
+}}{{Justification
+|page=Toutees les personnalités médiatiques anti-woke vouent une haine assumée envers des concepts progressistes
+|titre-affiché=Toutes les personnalités médiatiques anti-woke vouent une haine assumée envers le progressisme
+}}
+|rubriques=Culture, Droit, Société
+|mots-clés=médias, wokisme, extrême droite
+|date-création=2024-03-05
+}}

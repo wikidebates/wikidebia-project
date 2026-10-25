@@ -1,0 +1,34 @@
+{{Argument
+|références-bibliographiques={{Référence bibliographique
+|auteurs=JANE J. LEE
+|article=Ces scientifiques qui n'ont pas eu de prix Nobel parce qu'elles étaient des femmes
+|ouvrage=National geographic
+|lien=https://www.nationalgeographic.fr/sciences/ces-scientifiques-qui-nont-pas-eu-de-prix-nobel-parce-quelles-etaient-des-femmes#:~:text=N%C3%A9e%20en%201920%20%C3%A0%20Londres,'acide%20d%C3%A9soxyribonucl%C3%A9ique%20(ADN).&text=La%20Photo%2051%20a%20permis,journal%20Nature%20en%20avril%201953.
+}}{{Référence bibliographique
+|auteurs=Pierre Ropert
+|article=Marthe Gautier, découvreuse de la Trisomie 21
+|ouvrage=France Culture
+|date=16/08/2018
+|lien=https://www.franceculture.fr/sciences/marthe-gautier-decouvreuse-de-la-trisomie-21#:~:text=En%20septembre%201953%2C%20apr%C3%A8s%20une,clinique%20%C3%A0%20l'h%C3%B4pital%20Trousseau.&text=Elle%20d%C3%A9couvre%20alors%20que%20les,lieu%20et%20place%20de%2046.
+}}{{Référence bibliographique
+|auteurs=Céline Hussonnois-Alaya
+|article=CES 6 DÉCOUVERTES SCIENTIFIQUES QUE DES FEMMES SE SONT FAIT VOLER PAR DES HOMMES
+|ouvrage=BFM TV
+|date=11/02/2018
+|lien=https://www.bfmtv.com/international/ces-6-decouvertes-scientifiques-que-des-femmes-se-sont-fait-voler-par-des-hommes_AN-201802110006.html
+}}{{Référence bibliographique
+|auteurs=Titiou Lecoq
+|article=Littérature: des autrices oubliées, parce qu'effacées
+|ouvrage=Slate
+|date=10/01/2018
+|lien=http://www.slate.fr/story/156146/litterature-auteures-oubliees-effacees
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://invisibilisees.tumblr.com/
+|page=Tumblr invisibilisées
+|auteurs=Collectig Georgette Sand
+|site=Tumblr Invisibilisées
+|date=2017
+}}
+|date-création=2021-03-16
+}}

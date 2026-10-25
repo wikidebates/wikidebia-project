@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Justification@16983
+|justifications={{Justification
+|page=Les fémonationalistes ne se sont guère offusqués des sorties misogynes de Donald Trump
+|titre-affiché=Donald Trump n'a provoqué aucune indignation chez les fémonationalistes avec ses nombreuses sorties violemment misogynes
+}}{{Justification
+|page=Bien des influenceurs adulés par l'extrême droite sont ouvertement misogynes
+|titre-affiché=Bien des influenceurs adulés par l'extrême droite sont ouvertement misogynes
+}}{{Justification
+|page=Quand Dépardieu a été accusé de viol, toute les personnalités de droite en ont fait un martyr
+|titre-affiché=Quand Dépardieu a été accusé de viol, toute les personnalités de droite en ont fait un martyr
+}}
+|date-création=2025-11-09
+}}

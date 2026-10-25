@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@6825
+|rubriques=Droit, Société
+|mots-clés=viol, agression sexuelle
+|date-création=2025-11-01
+}}

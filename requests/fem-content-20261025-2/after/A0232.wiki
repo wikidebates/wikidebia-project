@@ -1,0 +1,7 @@
+{{Argument
+|initialisation=Justification@13219
+|résumé=En prenant conscience que toutes les discriminations sont interconnectées, les groupes marginalisés évitent de céder aux sirènes de la haine envers d'autres groupes marginalisés. Ainsi, par exemple, une personne racisée peut être homophobe et voter pour un politicien qui l'est aussi en négligeant le fait qu'elle fait elle-même partie des cibles dudit politicien, et creuse donc sa propre tombe par son bulletin de vote.
+|rubriques=Société
+|mots-clés=intersectionnalité, féminisme
+|date-création=2026-02-20
+}}

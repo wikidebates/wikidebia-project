@@ -1,0 +1,8 @@
+{{Argument
+|initialisation=Objection@17074
+|objections={{Objection
+|page=Les féministes ne lutte pas contre le voile, mais contre toute forme de légifération concernant ce dernier
+|titre-affiché=Les féministes ne lutte pas contre le voile, mais contre toute forme de légifération concernant ce dernier
+}}
+|date-création=2025-03-03
+}}

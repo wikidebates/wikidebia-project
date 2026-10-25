@@ -1,0 +1,20 @@
+{{Argument
+|initialisation=Objection@11164
+|citations={{Citation
+|citation='''''Science & Vie'' : L’absence de femmes ingénieures a-t-elle un véritable impact sur notre quotidien ?'''
+
+'''Delphine Virte :''' Oui ! Cette incidence est considérable et sous-estimée depuis un bon moment. Il suffit de penser au secteur automobile, qui était au départ essentiellement masculin. La conception des habitacles a été longtemps pensée par des hommes et pour des hommes, en fonction de l’anatomie d’un Européen moyen de 75 kg. Résultat : pédales, volant et ceinture de sécurité n’ont pas été dimensionnés pour des individus de petite taille. Cela représente statistiquement beaucoup de femmes. Lors du développement des mannequins et des premiers crash tests, l’erreur s’est répétée. Les premiers modèles ne tenaient pas compte des différences de taille entre sexes et s’avéraient donc inappropriés, voire dangereux pour les plus frêles.
+
+'''''S&V'' : Dans quels autres secteurs ces incidences sont-elles flagrantes ?'''
+
+'''D.V. :''' Sur les chantiers, que je connais bien, [https://www.science-et-vie.com/questions-reponses/d-ou-vient-le-boutonnage-inverse-selon-le-sexe-7448 les tenues] de protection ne sont pas toujours adaptés à nos tailles, ce qui pose des problèmes de sécurité quand on doit manœuvrer des machines. Dans un tout autre domaine, pharmaceutique, les impacts sont d’un autre ordre mais aussi très préoccupants. Pendant des années, les essais ont été effectués sur des souris mâles pour « éviter l’influence des hormones femelles qui variaient beaucoup », disait-on. Du coup, un grand nombre de [https://www.science-et-vie.com/corps-et-sante/medicaments-ils-soignent-mieux-les-hommes-que-les-femmes-48851 médicaments] ont été conçus sans être adaptés aux particularités physiologiques féminines
+|auteurs=Rédaction S&V
+|article=Voici comment la faible proportion de femmes ingénieures impacte nos vies
+|ouvrage=Science & Vie
+|date=08 Mar 2022
+|lien=https://www.science-et-vie.com/article-magazine/voici-comment-la-faible-proportion-de-femmes-ingenieures-impacte-nos-vies
+}}
+|rubriques=Culture, Société
+|mots-clés=représentation, féminisme
+|date-création=2023-01-21
+}}

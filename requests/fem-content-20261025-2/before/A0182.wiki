@@ -1,0 +1,4 @@
+{{Argument
+|résumé=Que ce soit au niveau de l'école, des médias, du divertissement, toute la société contribue à inculquer une certaine idée de la masculinité, au point que nous ne conscientisons même pas sa toxicité en dépit des conséquences sociétales désastreuses, notamment sur la santé mentale des hommes ou leur manière de se comporter avec autrui.
+|date-création=2022-08-31
+}}

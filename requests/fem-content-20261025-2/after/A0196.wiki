@@ -1,0 +1,21 @@
+{{Argument
+|initialisation=Objection@16432
+|citations={{Citation
+|citation=Évidemment, toutes les violences faites aux femmes, les mariages forcés ou les préjugés misogynes, ne sont pas directement causés par l’exploitation, les inégalités et la misère. Mais qui peut nier que celles-ci amplifient tout et rendent encore plus difficile le combat des femmes des classes populaires pour se faire respecter ? En France, en 2021, tous les trois ou quatre jours, une femme meurt encore sous les coups de son conjoint ou ex-conjoint. Les violences conjugales, les viols, le harcèlement moral ou sexuel qui s’exerce sur tant de femmes, en particulier dans les entreprises, ne reculent pas. Les associations féministes ne cessent de dénoncer l’insuffisance criante de moyens, ne serait-ce que d’hébergements d’urgence, et plus encore des possibilités de réinsertion pour les femmes qui fuient un conjoint violent.
+|auteurs=Nathalie Arthaud
+|ouvrage=Communiste, révolutionnaire, internationaliste !
+|édition=Les bons caractères
+|date=2022
+|lien=https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste
+}}{{Citation
+|citation=Si le capitalisme n’a pas créé l’oppression des femmes, force est de constater qu’il la perpétue, car il utilise et renforce en permanence toutes les inégalités et toutes les oppressions.
+|auteurs=Nathalie Arthaud
+|ouvrage=Communiste, révolutionnaire, internationaliste !
+|édition=Les bons caractères
+|date=2022
+|lien=https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste
+}}
+|rubriques=Économie, Politique, Société
+|mots-clés=capitalisme, exploitation capitaliste, inégalités, misère, amplification, oppression, femmes
+|date-création=2023-04-03
+}}

@@ -1,0 +1,13 @@
+{{Argument
+|initialisation=Justification@17219
+|justifications={{Justification
+|page=L'anti-wokisme alimente des thèses complotistes que n'auraient pas renié les nazis originels
+|titre-affiché=L'anti-wokisme alimente des thèses complotistes que n'auraient pas renié les nazis originels
+}}{{Justification
+|page=Selon l'extrême droite, la finalité ultime du "wokisme" serait de faire culpabiliser les gens
+|titre-affiché=Selon l'extrême droite, la finalité ultime du "wokisme" serait de faire culpabiliser les gens
+}}
+|rubriques=Droit, Politique, Société
+|mots-clés=wokisme, extrême droite
+|date-création=2025-03-10
+}}

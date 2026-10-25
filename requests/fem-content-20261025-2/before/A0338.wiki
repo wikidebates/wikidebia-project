@@ -1,0 +1,29 @@
+{{Argument
+|citations={{Citation
+|citation=Tout le monde commente le sort des femmes enfermées vivantes derrière la burqa, mais personne ne se soucie pourtant des bonnes sœurs cisterciennes ou dominicaines, cloîtrées dans des couvents, interdites de parler ou de rire, voire de se laver… Et pourtant, il semble qu’elles soient encore bien plus nombreuses que les adeptes du niqab.
+|auteurs=Véronique Decker
+|article=Tribune : les vêtements des femmes
+|date=28 juillet 2010
+|lien=https://npa2009.org/content/tribune-les-v%C3%Aatements-des-femmes
+}}{{Citation
+|citation=J’ai un scoop pour tous les auto-proclamés combattants des « morales liberticides » : attention à la poutre qui déforme votre jugement. Sachez que la France '''n’a pas attendu l’Islam pour découvrir les injonctions religieuses moralisatrices liberticides''', on en a PLEIN dans notre belle culture de « tradition catholique », et en plus, c’est exactement les mêmes que dans l’Islam ! »
+|auteurs=Clémence Bodoc
+|article=Agression d’une femme en bikini à Reims : la paille, la poutre, l’hôpital et la charité
+|ouvrage=Madmoizelle.com
+|date=28 juillet 2015
+|lien=https://www.madmoizelle.com/agression-reims-maillot-bain-401839
+}}
+|justifications={{Justification
+|page=Les tradwives sont les idiotes utiles du sexisme
+|titre-affiché=Les tradwives font la promotion d'un catholicisme infériorisant les femmes
+}}{{Justification
+|page=La bible n'est pas en reste en matière de sexisme
+|titre-affiché=La bible n'est pas en reste en matière de sexisme
+}}{{Justification
+|page=Ceux qui tapent sur le soi-disant "islamo-gauchisme" ne combattent pas l'intégrisme, mais l'inversent
+|titre-affiché=La lutte contre le soi-disant "islamo-gauchisme" inverse l'intégrisme qu'il prétend combattre
+}}
+|rubriques=Politique, Religion et spiritualité, Société
+|mots-clés=Voile islamique, Soeurs catholiques
+|date-création=2019-11-23
+}}

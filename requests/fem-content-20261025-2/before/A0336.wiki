@@ -1,0 +1,26 @@
+{{Argument
+|initialisation=Justification@16983
+|citations={{Citation
+|citation=Arrêté puis placé en garde à vue mardi 21 mai, un homme âgé de 26 ans, inconnu des services de police, a reconnu son aversion pour les femmes et sa volonté de perpétrer une tuerie de masse. L’attentat devait avoir lieu jeudi dans la cité girondine.
+|auteurs=Matthieu Suc
+|article=Un masculiniste d’extrême droite planifiait une tuerie de masse à Bordeaux
+|ouvrage=Mediapart
+|date=23 mai 2024
+|lien=https://www.mediapart.fr/journal/france/230524/un-masculiniste-d-extreme-droite-planifiait-une-tuerie-de-masse-bordeaux
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.liberation.fr/politique/cetait-de-la-violence-pure-des-coups-lex-femme-du-candidat-rn-frederic-boccaletti-temoigne-de-violences-conjugales-20240704_W6CGIFBEGZGX5NPAVRQBTUBAJQ/
+|page=«C’était de la violence pure, des coups» : l’ex-femme du candidat RN Frédéric Boccaletti témoigne de violences conjugales
+|auteurs=Simon Fontvieille
+|site=Libération
+|date=4 juillet 2024
+}}
+|justifications={{Justification
+|page=Les plus vocaux sur le "sexisme de l'islam" ne sont pas les dernier à pratiquer le slutshaming sur les femmes trop peu habillées à leur goût
+|titre-affiché=Les plus vcoaux sur le "sexisme de l'islam" ne sont pas les dernier à pratiquer le slutshaming sur les femmes trop peu habillées à leur goût
+}}{{Justification
+|page=Zemmour est sexiste
+|titre-affiché=Eric Zemmour, grand maître à penser des fémonationalistes, est accusé d'agressions sexistes et a un long passif de propos misogynes
+}}
+|date-création=2024-05-29
+}}

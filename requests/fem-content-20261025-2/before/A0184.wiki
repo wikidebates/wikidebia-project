@@ -1,0 +1,11 @@
+{{Argument
+|résumé=La masculinité toxique a des conséquences désastreuses pour les hommes eux-mêmes. L'impossibilité pour eux de paraître "faibles" à cause du jugement social génère tellement de souffrance mentale que c'est chez eux que le taux de suicides est le plus élevé, sans parler des violences auxquelles ils se retrouveraient dès lors exposés.
+|justifications={{Justification
+|page=La masculinité toxique abîme la santé mentale des hommes
+|titre-affiché=La masculinité toxique abîme la santé mentale des hommes
+}}{{Justification
+|page=La masculinité toxique expose les hommes en dehors des canons de cette dernière à des violences
+|titre-affiché=La masculinité toxique expose les hommes en dehors des canons de cette dernière à des violences
+}}
+|date-création=2022-09-02
+}}

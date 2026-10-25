@@ -1,0 +1,5 @@
+{{Argument
+|initialisation=Justification@11307
+|résumé=La masculinité toxique dénie aux hommes le droit d'exprimer leurs émotions, ce qui génère de grandes souffrances, voire des troubles mentaux plus ou moins sévères. C'est une des raisons pour laquelle la majorité des suicidés sont des hommes.
+|date-création=2025-08-20
+}}

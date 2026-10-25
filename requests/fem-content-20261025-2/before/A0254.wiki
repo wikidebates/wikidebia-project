@@ -1,0 +1,5 @@
+{{Argument
+|initialisation=Objection@11166
+|résumé=Notamment en attribuant injustement à des hommes des découvertes faites par des femmes, appelé [[frwikipedia:Effet_Matilda|effet Matilda]].
+|date-création=2022-11-01
+}}

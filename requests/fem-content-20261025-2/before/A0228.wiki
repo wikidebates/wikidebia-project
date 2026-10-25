@@ -1,0 +1,27 @@
+{{Argument
+|résumé=L'extrême droite se fiche éperdument du sort de Milla et ne la défend que parce que ses agresseurs font partie de ses boucs émissaires favoris, il s'agit donc plus d'un opportunisme crasse qu'une réelle préoccupation envers une victime. Si les harceleurs avaient été blancs et/ou fait partie de leur camp, nul doute que l'extrême droite aurait fait pareil que pour tous les harcèlements qui servent ses intérêts: applaudir.
+|citations={{Citation
+|citation=L'extrême droite ne s'empare des questions de harcèlement ou de VSS que lorsque ça sert son agenda raciste. Sur les féminicides, les agressions dans le patinage artistique, on n'entend pas les fachos.
+|auteurs=Caroline de Haas
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://inrer.org/2020/05/retour-sur-l-affaire-mila/
+|page=Retour sur “l’affaire Mila” : un faux débat instrumenté par l’extrême droite
+|auteurs=Isabelle Kersimon, Jean-Yves Pranchère, Alain Policar, Jean-Yves Camus, Georges Salines
+|site=Institut de recherches et d'études sur la radicalité
+|date=4 mai 2020
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Usul. L’affaire Mila est un «révélateur»
+|auteurs=Mediapart
+|lien=https://www.youtube.com/watch?v=Z60Jl45EM4g
+}}
+|justifications={{Justification
+|page=L'extrême droite est étrangement silencieuse sur les affaires de harcèlement n'impliquant pas ses boucs émissaires préférés
+|titre-affiché=L'extrême droite est étrangement silencieuse sur les affaires de harcèlement n'impliquant pas ses boucs émissaires préférés
+}}{{Justification
+|page=L'extrême droite a prétendu défendre Mila, mais a contribué à sa mise en danger en la surexposant médiatiquement
+|titre-affiché=L'extrême droite a prétendu défendre Mila, mais a contribué à sa mise en danger en la surexposant médiatiquement
+}}
+|date-création=2022-10-21
+}}

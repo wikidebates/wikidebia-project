@@ -1,0 +1,11 @@
+{{Argument
+|initialisation=Justification@16983
+|justifications={{Justification
+|page=Les fémonationalistes n'ont aucun problème à soutenir des agresseurs sexuels notoires
+|titre-affiché=Les fémonationalistes n'ont aucun problème à soutenir des agresseurs sexuels notoires
+}}{{Justification
+|page=Sous couvert de dénoncer les viol du Hamas, les fémonationalistes applaudissent ceux commis par Israël
+|titre-affiché=Sous couvert de dénoncer les viol du Hamas, les fémonationalistes applaudissent ceux commis par Israël
+}}
+|date-création=2023-12-15
+}}

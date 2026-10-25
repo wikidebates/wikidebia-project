@@ -1,0 +1,31 @@
+{{Argument
+|résumé=Être une femme n'empêche aucunement de défendre activement le sexisme. Généralement, elles agissent dans ce sens dans le but d'obtenir des privilèges de la part des dominants, bien que ça ne les protège aucunement des violences sexistes.
+|citations={{Citation
+|citation=Ces youtubeuses prétendent sauver le monde en s’assurant que les hommes blancs restent bien au centre. Leur installation dans le paysage de YouTube témoigne de leur maîtrise des mécanismes du monde de l’influence mais, aussi, de la cristallisation croissante d’une part des femmes occidentales autour d’un projet de société fasciste : sans craindre de perdre ses clientes, Thérèse Curien a reçu Virginie Vota, révélant l’intrication très forte entre son commerce et la propagande suprématiste. Quant à Hanna, qui présente un personnage “apolitique”, elle s’est senti pousser des ailes : le 7 septembre 2021, elle poste une vidéo partageant son analyse complotiste et contestant l’existence d’une pandémie mondiale. Censurée par YouTube, elle a tenu à mettre sa vidéo en ligne via une autre plateforme. Quel rapport avec les robes et le respect des règles de l’étiquette ? La lutte pour un avenir qui ressemble plus à l’univers de [[frwikipedia:La_Servante_écarlate|''La Servante Écarlate'']] qu’à une société fondée sur la recherche de l’épanouissement de tous·tes. ''“Comment faire pour que mes proches aiment passer du temps avec moi ? Solution : je remplis mon devoir d’État de mère”'', résume Hanna dans sa newsletter #23.
+|auteurs=Sarah Benichou
+|article=Tradwives” : des influenceuses cathos tissent leur toile
+|ouvrage=axellemag.be
+|date=Janvier-Février 2022
+|lien=https://www.axellemag.be/tradwives-des-influenceuses-cathos-tissent-leur-toile/
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.crepegeorgette.com/2014/08/17/femmes-droite-dworkin/
+|page=Résumé de : Les femmes de droite d'Andrea Dworkin
+|auteurs=Crêpe Georgette
+|date=17 août 2014
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=TRAD WIVES ET EXTRÊME DROITE : MÊME COMBAT
+|auteurs=Le fou allié
+|lien=https://www.youtube.com/watch?v=EHLFbTzOF3k
+}}{{Référence vidéographique
+|titre=Les commandements d’une bonne Trad wife : la soumission et la disponibilité sexuelle
+|auteurs=Envoyé spécial
+|lien=https://www.youtube.com/watch?v=4m-1M66v47o
+}}
+|justifications={{Justification
+|page=De nombreuses ex-tradwives ont dénoncé le caractère aliénant de cette idéologie
+|titre-affiché=De nombreuses ex-tradwives ont dénoncé le caractère aliénant de cette idéologie
+}}
+|date-création=2022-04-17
+}}

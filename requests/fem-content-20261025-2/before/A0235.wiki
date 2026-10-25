@@ -1,0 +1,47 @@
+{{Argument
+|initialisation=Justification@7569
+|résumé=Le fémonationalisme applique un double standard face au sexisme, et ne s'en offusque que quand ça lui permet de taper sur les boucs émissaires de l'extrême droite. Sa réaction face aux agressions sexistes dépend donc de facto de la couleur de peau de l'agresseur.
+|références-sitographiques={{Référence sitographique
+|lien=https://www.elle.fr/Societe/Interviews/Anne-Cecile-Mailfert-L-extreme-droite-va-rogner-sur-nos-combats-en-se-faisant-passer-pour-feministe-4246085#xtor=CS5-88
+|page=Anne-Cécile Mailfert : « L’extrême droite va rogner sur nos combats en se faisant passer pour féministe »
+|auteurs=Léa Eppel
+|site=Elle
+|date=07 juillet 2024
+}}
+|justifications={{Justification
+|page=Les fémonationalistes ne proposent rien contre le sexisme qui sévit en occident
+|titre-affiché=Les fémonationalistes ne proposent rien contre le sexisme qui sévit en occident
+}}{{Justification
+|page=Quand une agression sexiste est du fait d'un blanc, les fémonationalistes lui trouvent des excuses, voire l'applaudissent
+|titre-affiché=Quand une agression sexiste est du fait d'un blanc, les fémonationalistes lui trouvent des excuses, voire l'applaudissent
+}}{{Justification
+|page=Les fémonationalistes prétendent défendre les femmes, mais crachent sur toutes les mesures de lutte contre le sexisme
+|titre-affiché=Les fémonationalistes prétendent défendre les femmes, mais crachent sur toutes les mesures de lutte contre le sexisme
+}}{{Justification
+|page=Les fémonationalistes ne sont pas les derniers à agresser les femmes
+|titre-affiché=Les fémonationalistes ne sont pas les derniers à agresser les femmes
+}}{{Justification
+|page=Il y avait moins d'immigration dans les années 70, mais les viols et agressions sexuelles n'étaient pas moins nombreux qu'aujourd'hui
+|titre-affiché=Il y avait moins d'immigration dans les années 70, les viols et agressions sexuelles n'en étaient pas pour autant moins nombreuses qu'aujourd'hui
+}}{{Justification
+|page=Contrairement aux femmes voilées, personne ne dénonce l'oppression des religieuses catholiques
+|titre-affiché=L'extrême droite catholique n'a aucun problème avec l'oppression vestimentaire pour motif religieux quand c'est sa propre religion qui s'en rend coupable
+}}{{Justification
+|page=Aux USA, la condition féminine régresse à une vitesse alarmante dans le silence assourdissant des fémonationalistes
+|titre-affiché=Aux USA, la condition féminine régresse à une vitsesse alarmante dans le silence assourdissant des fémonationalistes
+}}{{Justification
+|page=Les fémonationalistes soutiennent des personnalités ouvertement misogynes
+|titre-affiché=Les fémonationalistes soutiennent des personnalités ouvertement misogynes
+}}
+|objections={{Objection
+|page=Beaucoup de personnes qualifiées de "fémonationalistes" sont simplement des féministes universalistes qui critiquent aussi l'Occident
+|titre-affiché=Beaucoup de personnes qualifiées de "fémonationalistes" sont simplemnt des féministes universalistes qui critiquent aussi l'Occident
+}}{{Objection
+|page=Les "féministes" wokes ne sont pas de vraies féministes car elles ne critiquent presque jamais le patriarcat non occidental
+|titre-affiché=Les "féministes" wokes ne sont pas de vraies féministes car elles ne critiquent presque jamais le patriarcat non occidental
+}}{{Objection
+|page=Le concept de "fémonationalisme" désigne à la fois des "féministes" de droite et des féministes universalistes, ce qui n'est pas la même chose
+|titre-affiché=Le concept de "fémonationalisme" désigne à la fois des "féministes" de droite et des féministes universalistes, ce qui n'est pas la même chose
+}}
+|date-création=2023-06-03
+}}

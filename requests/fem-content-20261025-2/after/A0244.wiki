@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@11163
+|rubriques=Société
+|mots-clés=égalité de genre, féminisme
+|date-création=2022-11-01
+}}

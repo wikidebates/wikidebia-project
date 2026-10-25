@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@11196
+|rubriques=Culture, Société
+|mots-clés=sexisme, culture
+|date-création=2022-09-02
+}}

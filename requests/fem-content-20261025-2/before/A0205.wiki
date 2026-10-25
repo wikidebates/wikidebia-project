@@ -1,0 +1,40 @@
+{{Argument
+|résumé=Il est évident que la télévision comme les jeux vidéos ont des effets, qui ne sont pas anodins. On ne peut pas diffuser tout et n'importe quoi comme si la liberté d'expression dédouanait les créateurs de leurs responsabilités.
+|citations={{Citation
+|citation=Le pouvoir des récits, l'influence des fictions sur nos sociétés est un sujet central et passionnant dont on ne parle quasiment jamais. Nos vies, notre façon de percevoir le monde, notre imaginaire de l’avenir sont incroyablement influencés par les livres que nous lisons, les films que nous regardons, les publicités auxquelles nous sommes exposées.
+|auteurs=Paloma Moritz
+|article=L'imaginaire capitaliste est devenu ringard, il se fissure de partout
+|ouvrage=Blast
+|date=22.02.2023
+|lien=https://www.blast-info.fr/emissions/2023/limaginaire-capitaliste-est-devenu-ringard-il-se-fissure-de-partout-fcPelLZ2QOKDK3nbijhqpw
+}}
+|justifications={{Justification
+|page=Les films de propagande montrent que les contenus influencent les spectateurs
+|titre-affiché=Si les contenus culturels n'influençaient pas les spectateurs, les dictatures ne s'embêteraient pas à faire des films de propagande
+}}{{Justification
+|page=La sortie de Naissance d'une nation a conduit à une renaissance du KKK
+|titre-affiché=La sortie de Naissance d'une nation a conduit à une renaissance du KKK
+}}{{Justification
+|page=Les spectacles utilisant le blackface ont contribué à la naissance des lois ségrégationnistes aux USA
+|titre-affiché=Les spectacles utilisant le blackface ont contribué à la naissance des lois ségrégationnistes aux USA
+}}{{Justification
+|page=Les contenus sexistes alimentent la culture du viol
+|titre-affiché=Les contenus sexistes alimentent la culture du viol
+}}{{Justification
+|page=La sortie du film V pour Vendetta est à l'origine du mouvement Anonymous
+|titre-affiché=La sortie du film V pour Vendetta est à l'origine du mouvement Anonymous
+}}{{Justification
+|page=Les films mettant en scène des animaux provoquent des pics d'adoptions au moment de leur sortie
+|titre-affiché=Les films mettant en scène des animaux provoquent des pics d'adoptions au moment de leur sortie
+}}
+|objections={{Objection
+|page=On ignore l'influence des contenus sur les récepteurs, donc il est impossible d'interdire tel ou tel contenu
+|titre-affiché=On ignore l'influence des contenus sur les récepteurs, donc il est impossible d'interdire tel ou tel contenu
+}}{{Objection
+|page=Limiter la liberté d'expression, c'est refuser de faire confiance en la raison
+|titre-affiché=Pour cette raison, on limite les contenus choquants, mais en revanche on considère les adultes comme assez grands pour gérer eux-mêmes les contenus qu'ils reçoivent
+}}
+|rubriques=Droit, Philosophie, Politique, Société
+|mots-clés=Censure, Liberté d'expression, Limites, Création, Violence, Jeux vidéos, Influence
+|date-création=2018-10-31
+}}

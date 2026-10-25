@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Justification@11997
+|citations={{Citation
+|citation=On ne peut ici taire le risque que le débat public s’en trouve configuré par '''les agendas politiques de ceux qui ont le pouvoir de mobiliser les réseaux sociaux'''. C’est ainsi que la médiatisation de l’affaire Mila contraste singulièrement avec le silence qui entoure, depuis plus de deux ans, les harcèlements et menaces que subit la journaliste Julie Hainaut de la part de néonazis parce que, dans le cadre de sa profession, elle a retranscrit les propos racistes de deux tenanciers de bar.
+
+C’est ainsi encore que les harcèlements en meute lancés contre des femmes par le dessinateur Marsault, soutenu par les éditions Ring, et qui ont débouché sur un procès où il a été heureusement condamné, n’ont pas fait grand bruit dans la presse — qui n’a pourtant pas hésité à relayer '''la fausse information d’un vandalisme massif et violent du stand des éditions Ring à Bruxelles''', « information » lancée par un tweet qui en profitait pour diffamer scandaleusement des personnes dont le seul tort était de ne pas se laisser intimider par Marsault…
+|auteurs=Isabelle Kersimon, Jean-Yves Pranchère, Alain Policar, Jean-Yves Camus, Georges Salines
+|article=Retour sur “l’affaire Mila” : un faux débat instrumenté par l’extrême droite
+|ouvrage=Institut de recherches et d'études sur les radicalités
+|date=4 mai 2020
+|lien=https://inrer.org/2020/05/retour-sur-l-affaire-mila/
+}}
+|date-création=2025-12-07
+}}

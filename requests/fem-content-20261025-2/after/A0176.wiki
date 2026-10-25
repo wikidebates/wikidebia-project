@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Justification@16437
+|citations={{Citation
+|citation=Bien sûr, je manifeste avec d’autres pour des revendications légitimes, comme « À travail égal, salaire égal », tout en étant consciente des limites d’un tel slogan, dans la mesure où le patronat et le gouvernement sont parfaitement capables de faire l’égalité vers le bas. Je me souviens qu’en 2000 le gouvernement Jospin avait, au nom de l’égalité des sexes, levé l’interdiction du travail de nuit pour les femmes dans l’industrie, ce qui était évidemment un recul en faveur du grand patronat. La lutte des classes est partout, c’est pourquoi je pense qu’on ne peut pas être féministe conséquente sans avoir pour objectif la révolution sociale.
+|auteurs=Nathalie Arthaud
+|ouvrage=Communiste, révolutionnaire, internationaliste !
+|édition=Les bons caractères
+|date=2022
+|lien=https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste
+}}
+|rubriques=Politique, Société
+|mots-clés=féminisme, nivellement par le bas
+|date-création=2023-04-03
+}}

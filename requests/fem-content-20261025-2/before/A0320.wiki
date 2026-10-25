@@ -1,0 +1,38 @@
+{{Argument
+|résumé=Personne ne se dit être "woke". Ce mot, ce néologisme, est utilisé pour se créer une figure progressiste mais autoritaire et intolérante pour pouvoir critiquer ouvertement les idées progressistes. Ce mot n'est donc utilisé que par les adversaires politiques de ces idées, et n'est absolument pas revendiquée par des groupes existants.
+|citations={{Citation
+|citation="Pour le politologue [[frwikipedia:Clément_Viktorovitch|Clément Viktorovitch]], le terme « woke » est aujourd'hui davantage utilisé par les adversaires aux mouvements progressistes que par les militants eux-mêmes. D'après lui, ce mot est devenu un concept fourre-tout, « un outil purement rhétorique, une arme de disqualification massive utilisée contre le discours de gauche ». Il constate que les polémiques autour du ''wokisme'' ont progressivement remplacé celles autour de l'[[frwikipedia:Islamo-gauchisme|islamo-gauchisme]] mais qu'elles ont les mêmes finalités : « disqualifier les luttes antiracistes et féministes ». "
+|auteurs=Wikipédia, Clément Viktorovitch
+|date=19/10/2021
+|lien=https://fr.wikipedia.org/wiki/Woke#En_France
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://fr.wikipedia.org/wiki/Woke
+|page=Woke
+|auteurs=Wikipédia
+|site=Wikipédia
+|date=16/01/2022
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=On a retrouvé la définition du "wokisme" !
+|auteurs=Clément Viktorovitch
+|lien=https://www.youtube.com/watch?v=DcfTDQvmLiQ&t=1073
+}}
+|justifications={{Justification
+|page=L'ultradroite se sert de la lutte "anti-woke" pour diffuser des fake news
+|titre-affiché=L'extrême droite se sert de la lutte "anti-woke" pour diffuser des fake news contre leurs adversaires
+}}{{Justification
+|page=Le concept de wokisme a été inventé pour faire passer la pilule d'une idéologie raciste, sexiste et LGBTphobe
+|titre-affiché=Le concept de wokisme ne sert qu'à faire passer la pilule d'une idéologie de haine et d'exclusion
+}}{{Justification
+|page=L'anti-wokisme est co-responsable de la montée de la haine transphobe
+|titre-affiché=L'anti-wokisme est co-responsable de la montée de la haine transphobe
+}}{{Justification
+|page=Les délires autour du "wokisme" ne sont que des paniques morales
+|titre-affiché=Les délires autour du "wokisme" ne sont que des paniques morales
+}}{{Justification
+|page=La lutte contre le "wokisme" fait partie du plan de dédiabolisation de l'extrême droite
+|titre-affiché=La lutte contre le "wokisme" fait partie du plan de dédiabolisation de l'extrême droite
+}}
+|date-création=2022-01-17
+}}

@@ -1,0 +1,8 @@
+{{Argument
+|initialisation=Justification@11307
+|justifications={{Justification
+|page=La masculinité toxique est le terreau de l'homophobie
+|titre-affiché=La masculinité toxique est le terreau de l'homophobie
+}}
+|date-création=2025-08-20
+}}

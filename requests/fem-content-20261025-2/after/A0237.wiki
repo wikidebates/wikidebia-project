@@ -1,0 +1,19 @@
+{{Argument
+|initialisation=Objection@11291
+|résumé=L'interdiction ou la contrainte légale des femmes de porter un vêtement précis répondent en réalité à la même motivation: le contrôle de leur corps, donc leur domination.
+|citations={{Citation
+|citation=Dans le même esprit paternaliste, '''au nom des droits des femmes, du sauvetage des musulmanes, on nous assigne à nos foyers.''' Ni éducation, [https://www.madmoizelle.com/les-hijabeuses-joueuses-football-voile-1115835 ni sport], ni travail, ni loisirs – ainsi tu seras libre en Macronie.
+
+En réponse à ces mesures restrictives censées nous sauver, nous aimons à rappeler que nous portons le hijab par choix, qu’il s’agit avant tout de choix. Je pense que c’est un faux débat. La réalité n’est pas dans le fait de savoir si nous avons choisi de porter des foulards, il ne s’agit pas d’une discussion philosophique sur le libre arbitre, bien qu’il puisse y avoir beaucoup à dire.
+
+'''En vérité, c’est de notre émancipation en tant que femmes non blanches dont il s’agit.''' Assignées à des métiers précaires du ''care'', les femmes musulmanes issues de l’immigration postcoloniale (pour la majorité) doivent être utiles, doivent prendre soin des autres, éduquer leurs enfants dans la soumission et la discipline, ne pas sortir des cadres, être discrètes, souffrir en silence, être transparentes, invisibles, inexistantes. C’est cela le dessein qu’on veut nous imposer. C’est comme ça qu’on imagine une femme musulmane « libre ».
+|auteurs=Aïda Djoupa
+|article=« La France est coincée dans une boucle infernale où l’islamophobie qui vise les femmes cadence nos vies »
+|ouvrage=Madmoizelle.com
+|date=14 avril 2021
+|lien=https://www.madmoizelle.com/la-france-est-coincee-dans-une-boucle-infernale-ou-lislamophobie-qui-vise-les-femmes-cadence-nos-vies-1117775
+}}
+|rubriques=Religion et spiritualité, Société
+|mots-clés=voile islamique, féminisme
+|date-création=2023-06-03
+}}

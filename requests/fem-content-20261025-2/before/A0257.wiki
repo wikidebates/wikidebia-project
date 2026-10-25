@@ -1,0 +1,24 @@
+{{Argument
+|résumé=Le rôle de femme au foyer, même choisi, contribue à caresser le patriarcat dans le sens du poil. L'aspect "choix" est illusoire et n'est qu'une pirouette argumentative pour faire passer pour progressiste une idéologie très conservatrice.
+|citations={{Citation
+|citation=[La] marotte [de Zemmour] du moment sur les femmes, c’est de '''louer notre capacité de choix''', celle de faire ce qu’on veut, à être [https://www.madmoizelle.com/motsclefs/childfree des mères si on le décide], à [https://www.madmoizelle.com/motsclefs/charge-mentale accomplir les tâches ménagères si on le souhaite]… 
+
+La veille du 8 mars, il a tenu cette ligne dans l’émission ''Face aux Françaises'' sur LCI et ça ne manque pas de piquant.
+
+
+Ce petit malin d’ Eric Zemmour, qui met de la liberté de choix, un vocabulaire hautement féministe, là où ça l’arrange, par exemple, au hasard,  dans le foyer. « Dictature », hurle-t-il, en comparant donc la journaliste Ruth Elkrief à Staline, quand on lui parle, Ô scandale, '''de répartition équitable des tâches au sein du couple et de la cellule familiale'''. Bah oui, on n’est plus à une outrance près.
+|auteurs=Mathis Grosos
+|article=Misogyne, agresseur présumé MAIS défenseur des femmes… de qui se moque Éric Zemmour ?
+|ouvrage=Madmoizelle.com
+|date=11 mars 2022
+|lien=https://www.madmoizelle.com/podcasts/misogyne-agresseur-presume-mais-defenseur-des-femmes-de-qui-se-moque-eric-zemmour
+}}{{Citation
+|citation=Les années 2010 ont été marquées par de nouvelles stratégies de guerre sémantique, analyse Florence Rochefort. L’idée est de vider le féminisme, et plus globalement la gauche, de son potentiel de mobilisation, en reprenant ses symboles et ses mots. C’est une tactique inspirée par la droite américaine, qui vise à déstabiliser complètement les discours progressistes
+|auteurs=Lucie Ronfaut
+|article=Cinq ans après #metoo, l’antiféminisme prospère sur les réseaux sociaux
+|ouvrage=Le Monde
+|date=12 octobre 2022
+|lien=https://www.lemonde.fr/pixels/article/2022/10/12/cinq-ans-apres-metoo-l-antifeminisme-prospere-sur-les-reseaux-sociaux_6145406_4408996.html#xtor=AL-32280270-[mail]-[ios]
+}}
+|date-création=2022-03-11
+}}

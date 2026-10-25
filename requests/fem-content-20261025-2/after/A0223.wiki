@@ -1,0 +1,7 @@
+{{Argument
+|initialisation=Objection@5431
+|résumé=Le concept de diffamation est souvent confondu avec celui de calomnie, or toutes les juridictions ne les considèrent pas comme des synonymes. Pour celles qui ne le font pas, l'atteinte à la personne est une raison suffisante pour qualifier une diffamation, la véracité ou non des propos n'entre pas en ligne de compte. Ainsi, que quelqu'un ait gagné un porocès en diffamation ne signifie aucunement que les propos diffamatoire étaient mensongers.
+|rubriques=Droit, Société
+|mots-clés=justice, féminisme
+|date-création=2024-05-27
+}}

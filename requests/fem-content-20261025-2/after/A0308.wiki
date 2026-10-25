@@ -1,0 +1,97 @@
+{{Argument
+|initialisation=Justification@17219
+|résumé=La méthode est on ne peut plus simple.
+
+* woke = caca
+* n'importe quel concept progressiste = woke
+* N'importe quel concept progressiste = caca
+|citations={{Citation
+|citation=On remarquera que les points communs entre le climatoscepticisme, le masculinisme ou la lutte anti-woke sont la prédominance des discours d’extrême droite et la viralité sur les réseaux sociaux sans contre argumentaire.
+|auteurs=Amandine Richaud-Crambes
+|article=Climatoscepticisme extrême
+|ouvrage=Popol media
+|date=11 octobre 2024
+|lien=https://www.popol-media.com/auteurs/amandine-richaud-crambes/
+}}{{Citation
+|citation=Nouvelle étiquette à la mode après « bobo-gauchiste » et [https://mrmondialisation.org/bisounours-linsulte-qui-cherche-a-detruire-laltruisme-doxa/ « bisounours »] (désormais passé de mode), '''le woke est le nouveau coupable de tous les maux de la société.''' De quoi permettre aux néo-réac’ de pouvoir enfin assumer '''une posture anti-sociale, anti-minorité, anti-écologie, anti-tout-ce-qui-sort-de-la-norme sans grand effort intellectuel.'''
+|auteurs=Simon Verdière
+|article=« Wokisme » : le fantasme réac pour rester dans le déni
+|ouvrage=Mr Mondialisation
+|date=13 janvier 2024
+|lien=https://mrmondialisation.org/wokisme-le-nouveau-fantasme-des-reac-pour-rester-dans-le-deni/
+}}{{Citation
+|citation=D'une part, "''woke''" a perdu de sa force - comme à chaque fois qu'un "''mot est beaucoup utilisé''", souligne la linguiste -, et "''en est venu à désigner un engagement superficiel''". D'autre part, le dérivé "''wokisme''" a été créé et est "''surtout utilisé par celles et ceux qui veulent le combattre. C'est un terme assez flou''", utilisé "''pour s'attaquer aux personnes qui s'attaquent aux discriminations sur base du genre, du sexe, au mouvement décolonialiste...''", [selon la linguiste] Laurence Rosier.
+
+(...)
+
+L'utilisation du terme "''wokisme''" entre dans le cadre d'une "''sorte de culture de la panique, en associant le militantisme, la lutte contre les discriminations, à des mouvements puritains''", poursuit Laurence Rosier. "''Cela peut être dangereux. On est dans une culture de la peur, comme si on allait éradiquer l'Histoire en enlevant des statues, alors que les archives, les documents restent pour témoigner des atrocités que certains ont fait. Cette culture de la panique est utilisée pour bloquer des combats émancipateurs''", conclut-elle.
+|article=Journée de lutte pour les droits des femmes : "Woke", ce terme flou utilisé pour dévaloriser
+|ouvrage=rtbf.be
+|date=08 mars 2022
+|lien=https://www.rtbf.be/article/journee-de-lutte-pour-les-droits-des-femmes-woke-ce-terme-flou-utilise-pour-devaloriser-10950078
+}}{{Citation
+|citation=Le « wokisme » n’est pas le danger dans notre société. Ce discours alarmiste autour du terme « woke » est une stratégie consciente des courants réactionnaires pour affaiblir les mouvements sociaux et la lutte de classe.
+|auteurs=Petya Obolensky
+|article=La « lutte contre le wokisme », une arme de diversion massive
+|ouvrage=Solidaire, magazine du Parti du Travail de Belgique
+|date=29 Juin 2023
+|lien=https://www.solidaire.org/articles/la-lutte-contre-le-wokisme-une-arme-de-diversion-massive
+}}{{Citation
+|citation=[La] conférence [de Mathieu Bock-Côté] porte sur le « wokisme ». Ce concept, issu de la « pensée » d’extrême droite, est utilisé pour désigner et rejeter toutes les luttes progressistes qui déplaisent aux réactionnaires. Féminismes, anti-racismes, luttes LGBTQIA+, luttes climatiques... bref tout ce qui s’attaque à leur monde rance et inégalitaire est désigné sous le vocable péjoratif de « wokisme ».
+|article=l’Institut Libre Marie Haps accueille l’extrême droite dans ses locaux !
+|ouvrage=Réseau ADES
+|date=10/06/2022
+|lien=https://stuut.info/l-Institut-Libre-Marie-Haps-accueille-l-extreme-droite-dans-ses-locaux-397
+}}{{Citation
+|citation=Par ailleurs, alors que l’islamo-gauchisme semblait décrire une collusion suspecte entre ce que l’on appelle « une certaine gauche », [https://sysdiscours.hypotheses.org/352 notamment universitaire] et l’islamisme (même si l’utilisation du préfixe « islamo » laissait penser que l’islam dans son intégralité pouvait être visé), le « wokisme » dispose d’une forme de lâcheté polysémique particulièrement arrangeante : en d’autres termes, cette dernière a la particularité d’embrasser un ensemble très étendu de pratiques, de mouvements et de faits sociaux.
+
+En effet, tout mouvement qui lutte pour le progrès social peut être qualifié de « woke », ce qui est commode, notamment pour les think tanks conservateurs comme Fondapol par exemple, qui, à travers une note de recherche aux prétentions objectives mais à la grille de lecture [https://www.fondapol.org/etude/lideologie-woke-1-anatomie-du-wokisme particulièrement discutable] – comme le rappelle par ailleurs Réjane Sénac, [https://www.liberation.fr/idees-et-debats/tribunes/le-wokisme-nexiste-pas-mais-il-parle-20211028_B6E7QRI5LZFN7DYULYUXV7AO7Y/ directrice de recherche au CNRS], évoquant ainsi le fait que cette note de recherche participe à la construction d’une « croisade » contre un « ennemi de la République ».
+|auteurs=Albin Wagener
+|article=Le « wokisme » ou l’import des paniques morales
+|ouvrage=The Conversation
+|date=8 décembre 2021
+|lien=https://theconversation.com/le-wokisme-ou-limport-des-paniques-morales-172803
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.humanite.fr/politique/woke/diabolisation-de-la-gauche-user-du-mot-wokisme-sert-une-propagande-politique-726320
+|page=Diabolisation de la gauche. « User du mot “wokisme” sert une propagande politique »
+|auteurs=Florent Le Du
+|site=L'humanité
+|date=6 novembre 2021
+}}{{Référence sitographique
+|lien=https://www.madmoizelle.com/bride-dans-son-sexisme-philippe-candeloro-sestime-victime-de-discrimination-invisible-et-tape-sur-le-wokisme-1752037
+|page=Bridé dans son sexisme, Philippe Candeloro s’estime victime de « discrimination invisible » et tape sur le « wokisme »
+|auteurs=Elisa Covo
+|site=Madmoizelle.com
+|date=02 mai 2024
+}}
+|justifications={{Justification
+|page="woke" n'est qu'un des nombreux fourres-tout qu'affectionne l'extrême droite
+|titre-affiché="woke" n'est qu'un des nombreux fourres-tout qu'affectionne l'extrême droite
+}}{{Justification
+|page=Il n'y a aucun exemple de concept de gauche qui n'aie pas été qualifié de "woke"
+|titre-affiché=L'ensemble des concepts qualifiés de "woke" couvre l'entièreté du spectre progressiste
+}}{{Justification
+|page=De tous temps, l'extrême droite a eu besoin de fantasmer ses ennemis pour se présenter comme une sauveuse
+|titre-affiché=De tous temps, l'extrême droite a eu besoin de fantasmer ses ennemis pour se présenter comme une sauveuse
+}}{{Justification
+|page=Sous prétexte de "wokisme", on supprime des outils de lutte contre les discriminations
+|titre-affiché=Sous prétexte de "wokisme", on supprime des outils de lutte contre les discriminations
+}}{{Justification
+|page=L'anti-wokisme sert de paravent à la xénophobie primaire
+|titre-affiché=L'anti-wokisme sert de paravent à la xénophobie primaire
+}}{{Justification
+|page=Le seul réel point commun entre tous les concepts qualifiés de "woke" est de ne pas plaire à l'extrême droite
+|titre-affiché=Le seul réel point commun entre tous les concepts qualifiés de "woke" est de ne pas plaire à l'extrême droite
+}}
+|objections={{Objection
+|page=Il sufit de s'informer pour savoir que les anti-wokes passent leur temps à écrire des livres argumentés contre le wokisme
+|titre-affiché=Il sufit de s'informer pour savoir que les anti-wokes passent leur temps à écrire des livres argumentés contre le wokisme
+}}{{Objection
+|page=La gauche n'est pas réductible au "wokisme"
+|titre-affiché=La gauche n'est pas réductible au "wokisme"
+}}
+|rubriques=Politique, Société
+|mots-clés=wokisme, féminisme
+|date-création=2023-07-08
+}}

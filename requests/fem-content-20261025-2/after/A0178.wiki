@@ -1,0 +1,21 @@
+{{Argument
+|initialisation=Justification@16437
+|citations={{Citation
+|citation=Leurs dirigeantes [des Suffragettes] étaient pétries d’opinions bourgeoises. Politiquement, c’est sûr, nous serions devenues adversaires, car leurs têtes de file, Emmeline et Christabel Pankhurst, s’opposaient aux revendications des ouvrières socialistes, comme l’égalité des salaires et l’émancipation du travail. En 1914, elles appelèrent les hommes à s’enrôler dans l’armée britannique et les femmes à mettre de côté leurs revendications pour soutenir l’effort de guerre et l’Union sacrée.
+|auteurs=Nathalie Arthaud
+|ouvrage=Communiste, révolutionnaire, internationaliste !
+|édition=Les bons caractères
+|date=2022
+|lien=https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste
+}}
+|justifications={{Justification
+|page=Le féminisme bourgeois ne relie pas l'oppression des femmes à l'exploitation capitaliste
+|titre-affiché=Le féminisme bourgeois ne relie pas l'oppression des femmes à l'exploitation capitaliste
+}}{{Justification
+|page=Le féminisme bourgeois considère les femmes comme des victimes et pas comme des combattantes qui peuvent changer la société
+|titre-affiché=Le féminisme bourgeois considère les femmes comme des victimes et pas comme des combattantes qui peuvent changer la société
+}}
+|rubriques=Politique, Société
+|mots-clés=opposition, féminisme, bourgeoisie, émancipation, femmes, hommes
+|date-création=2023-04-03
+}}

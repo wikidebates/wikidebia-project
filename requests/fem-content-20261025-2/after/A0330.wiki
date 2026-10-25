@@ -1,0 +1,38 @@
+{{Argument
+|initialisation=Justification@16983
+|citations={{Citation
+|citation=[La perspective du collectif Némésis] est fémonationaliste : [il utilise] la cause des femmes pour faire avancer la cause nationaliste, identitaire et sécuritaire. D’ailleurs, elles ne disent rien concernant la santé reproductive ou les conditions de travail des femmes, leur objectif est de changer le contenu de ce que nous entendons pas « droits des femmes », pour y associer le droit à la sécurité, la défense d’une identité et une certaine vision de l’Occident.
+|auteurs=Caroline Pernes
+|article=Collectif d’extrême droite Némésis : “Elles utilisent la cause des femmes pour faire avancer la cause nationaliste, identitaire et sécuritaire”
+|ouvrage=Télérama
+|date=07 mars 2025
+|lien=https://www.telerama.fr/debats-reportages/collectif-d-extreme-droite-nemesis-elles-utilisent-la-cause-des-femmes-pour-faire-avancer-la-cause-nationaliste-identitaire-et-securitaire-7024655.php
+}}{{Citation
+|citation=[Le RN et Reconquête] ne proposent aucune mesure concrète pour lutter contre les violences sexuelles, et cette lutte est instrumentalisée en disant que les violences seraient perpétrées par des personnes étrangères, alors que tous les chiffres montrent que les auteurs de violences sont issus de tous les milieux sociaux. Éric Zemmour est par ailleurs accusé d’agressions sexuelles par huit femmes ; il n’est pas le seul, mais avoir un président mis en cause pour de tels faits serait un crachat aux visages des victimes
+|auteurs=La Rédaction
+|article=Le péril Le Pen : inventaire de ce qu’elle infligerait à la société
+|ouvrage=Mediapart
+|date=9 avril 2022
+|lien=https://www.mediapart.fr/journal/france/090422/le-peril-le-pen-inventaire-de-ce-qu-elle-infligerait-la-societe
+}}{{Citation
+|citation=[Dans le programme du RN], rien sur les inégalités femmes-hommes (qui ne sont évoquées qu’en lien avec l’islamisme ou la charia), ni sur les discriminations salariales.
+|auteurs=La Rédaction
+|article=Le péril Le Pen : inventaire de ce qu’elle infligerait à la société
+|ouvrage=Mediapart
+|date=9 avril 2022
+|lien=https://www.mediapart.fr/journal/france/090422/le-peril-le-pen-inventaire-de-ce-qu-elle-infligerait-la-societe
+}}
+|justifications={{Justification
+|page=La focalisation sur le "sexisme musulman" est une technique de diversion
+|titre-affiché=La focalisation sur le "sexisme musulman" est une technique de diversion
+}}{{Justification
+|page=Les fémonationalistes ne parlent jamais des femmes opprimées par des religions occidentales (catholicisme, évangélisme, mormonisme, etc...)
+|titre-affiché=Les fémonationalistes ne parlent jamais des femmes opprimées par des religions occidentales (catholicisme, évangélisme, mormonisme, etc...)
+}}{{Justification
+|page=Les fémonationalistes dévoient le féminisme à des fins identitaires, sécuritaires et xénophobes
+|titre-affiché=Les fémonationalistes ne traitent pas les victimes du sexisme musulman comme telles, mais comme de simple faire-valoirs à leur agenda haineux et totalitaire
+}}
+|rubriques=Société
+|mots-clés=sexisme, fémonationalisme
+|date-création=2025-04-19
+}}

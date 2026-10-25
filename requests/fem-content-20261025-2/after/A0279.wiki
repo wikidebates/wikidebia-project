@@ -1,0 +1,6 @@
+{{Argument
+|résumé=Dans tous les exemples donnés de mansplaining, il s'agit d'un homme contre-argumentant une femme dans un domaine ou elle est experte et lui non. Si le niveau d'expertise est inverse ou égal, ça n'est plus du mansplaining.
+|rubriques=Société
+|mots-clés=mansplaining, féminisme
+|date-création=2022-09-02
+}}

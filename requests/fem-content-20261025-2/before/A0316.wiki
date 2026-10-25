@@ -1,0 +1,17 @@
+{{Argument
+|initialisation=Objection@17219
+|références-sitographiques={{Référence sitographique
+|lien=https://www.lemonde.fr/idees/article/2020/07/08/mark-lilla-margaret-atwood-wynton-marsalis-notre-resistance-a-donald-trump-ne-doit-pas-conduire-au-dogmatisme-ou-a-la-coercition_6045547_3232.html
+|page=Mark Lilla, Margaret Atwood
+|site=Le Monde
+|date=8/07/20
+}}
+|objections={{Objection
+|page=Ce n'est pas l'"intolérance woke" que la tribune dénonce, mais la cancel culture
+|titre-affiché=Ce n'est pas l'"intolérance woke" que la tribune dénonce, mais la cancel culture
+}}{{Objection
+|page=Une tribune, également signée par de nombreux universitaire, appelle à disqualifier le concept de wokisme
+|titre-affiché=Une tribune, également signée par de nombreux universitaire, appelle à disqualifier le concept de wokisme
+}}
+|date-création=2024-10-18
+}}

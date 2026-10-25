@@ -1,0 +1,18 @@
+{{Argument
+|initialisation=Objection@5975
+|citations={{Citation
+|citation=La viralité des polémiques sur les réseaux sociaux opère et, sur Twitter, nombre de comptes que nous nommons néolaïques ou pseudo-laïques s’emparent très rapidement de l’affaire, en dénonçant un «  retour du blasphème », « les islamistes », ainsi que « la lâcheté » et « la soumission » de quiconque ne déclare pas immédiatement #JeSuisMila en proférant un soutien de circonstance : c’est ce que nous nommons « l’injonction à gueuler ». Soutien de circonstance car, en réalité, ces déclarations tonitruantes exposent la jeune fille de manière exponentielle et sa sécurité, déjà menacée, ne s’en trouve que plus fragilisée.
+|auteurs=Isabelle Kersimon, Jean-Yves Pranchère, Alain Policar, Jean-Yves Camus, Georges Salines
+|article=Retour sur “l’affaire Mila” : un faux débat instrumenté par l’extrême droite
+|ouvrage=Institut de recherches et d'études sur les radicalités
+|date=4 mai 2020
+|lien=https://inrer.org/2020/05/retour-sur-l-affaire-mila/
+}}
+|justifications={{Justification
+|page=L'extrême droite a imposé à Mila un rôle de martyr qu'elle n'a jamais vraiment désiré
+|titre-affiché=L'extrême droite a imposé à Mila un rôle de martyr qu'elle n'a jamais vraiment désiré
+}}
+|rubriques=Culture, Droit, Société
+|mots-clés=médias, extrême droite
+|date-création=2025-12-07
+}}

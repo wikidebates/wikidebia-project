@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Justification@25741
+|résumé=Il est désormais écrit noir sur blanc dans les règles de facebook que sont autorisées " les allegations de troubles mentaux ou d'anormalité basées sur le genre ou l'orientation sexuelle" (sic). Difficile dès lors de nier une orientation politique aussi cyniquement assumée.
+|références-sitographiques={{Référence sitographique
+|lien=https://www.platformer.news/meta-new-trans-guidelines-hate-speech/?ref=platformer-newsletter
+|page=Inside Meta’s dehumanizing new speech policies for trans people
+|auteurs=Casey Newton
+|site=Platformer.news
+|date=Jan 9, 2025
+}}
+|rubriques=Droit, Politique, Société
+|mots-clés=politique, réseaux sociaux, extrême droite
+|date-création=2025-01-10
+}}

@@ -1,0 +1,18 @@
+{{Argument
+|initialisation=Objection@16440
+|citations={{Citation
+|citation=Quand le mouvement ouvrier socialiste a connu son essor à la fin du 19e siècle, il a d’ailleurs pris le contre-pied idéologique des préjugés machistes et des idées religieuses, et ce n’est pas un hasard. Le combat pour l’émancipation des exploités, dans lequel les travailleuses ont naturellement pris leur part en luttant elles aussi, a conduit à remettre en question toutes les formes d’oppression et tout ce qui pouvait diviser les travailleurs.
+|auteurs=Nathalie Arthaud
+|ouvrage=Communiste, révolutionnaire, internationaliste !
+|édition=Les bons caractères
+|date=2022
+|lien=https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste
+}}
+|justifications={{Justification
+|page=Des dirigeants du mouvement ouvrier socialiste ont milité pour l'émancipation des femmes dès le 19e siècle
+|titre-affiché=Des dirigeants du mouvement ouvrier socialiste ont milité pour l'émancipation des femmes dès le 19e siècle
+}}
+|rubriques=Histoire, Politique
+|mots-clés=mouvement ouvrier, socialisme, lutte, oppression, femmes
+|date-création=2023-04-03
+}}

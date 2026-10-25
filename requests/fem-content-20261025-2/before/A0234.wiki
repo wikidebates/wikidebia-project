@@ -1,0 +1,11 @@
+{{Argument
+|initialisation=Justification@7569
+|justifications={{Justification
+|page=L'argument du respect de l'égalité de genre est hypocrite et opportuniste
+|titre-affiché=Les obsédés du voile se fichent éperdument des oppressions des musulmanes non liées à la religion
+}}{{Justification
+|page=Le fémonationalisme réduit les femmes à un statut de matraques vivantes
+|titre-affiché=Le fémonationalisme réduit les femmes à un statut de matraques vivantes
+}}
+|date-création=2023-06-03
+}}

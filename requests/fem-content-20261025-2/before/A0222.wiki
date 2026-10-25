@@ -1,0 +1,31 @@
+{{Argument
+|résumé=Le but d'une procédure bâillon n'est pas tant de gagner un éventuel procès que de réduire au silence les victimes qui, par peur de procédures judiciaires coûteuses et épuisantes, vont s'autocensurer.
+|citations={{Citation
+|citation=Pour Elli Tessier, les menaces [de plainte en diffamation] se muent également en action : lorsqu’il décide de dénoncer les violences subies, et de nommer son agresseur et ex-compagnon sur Twitter, c’est une plainte en diffamation qu’il reçoit en retour.
+
+''« C’est un mécanisme souvent utilisé par les auteurs de violences sexistes et sexuelles pour silencier leur victime »'', soutient Elodie M., qui déplore :<blockquote>« C’est efficace ; je le vois chez les patients et patientes qui, après avoir reçu ce genre de plaintes, ont de grosses difficultés à se confier, à poursuivre toute démarche nécessitant de parler. Ils et elles ont peur, constamment, et se tétanisent ». </blockquote>
+|auteurs=Val Leroy
+|article=Entre menace en l’air et risque réel, parlons de la plainte en diffamation envers les victimes de violences sexuelles
+|ouvrage=Madmoizelle.com
+|date=06 avr 2022
+|lien=https://www.madmoizelle.com/entre-menace-en-lair-et-risque-reel-parlons-de-la-plainte-en-diffamation-envers-les-victimes-de-violences-sexuelles-1270815
+}}{{Citation
+|citation=Acquitté sur toute la ligne ! La cour d’appel de Bruxelles a rendu son arrêt dans l’affaire plaidée le 30 novembre 2023. Elle opposait l’ancien président de la Ligue des droits humains et actuel vice-président de la Fédération internationale pour les droits humains Alexis Deswaef au commissaire de police Pierre Vandersmissen. La cour confirme la décision rendue en première instance en juillet 2021. Pour la LDH et la FIDH, cette affaire illustre le problème démocratique créé par les “procédures-bâillons”.
+|article=Alexis Deswaef acquitté dans le procès que lui a intenté le commissaire de police Vandersmissen
+|ouvrage=Ligue des droits humains
+|date=12/01/2024
+|lien=https://www.liguedh.be/alexis-deswaef-acquitte-dans-le-proces-que-lui-a-intente-le-commissaire-de-police-vandermissen/
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.madmoizelle.com/pourquoi-sobstinent-ils-a-porter-plainte-contre-nous-une-tribune-denonce-les-procedures-baillons-contre-les-denonciatrices-de-violences-sexuelles-1628905
+|page=« Pourquoi s’obstinent-ils à porter plainte contre nous ? » : une tribune dénonce les procédures-baillons contre les dénonciatrices de violences sexuelles
+|auteurs=Christelle Murhula
+|site=Madmoizelle.com
+|date=12 mars 2024
+}}
+|justifications={{Justification
+|page=Les procès pour diffamation servent à dispenser les agresseurs d'assumer leurs actes
+|titre-affiché=Les procès pour diffamation servent à dispenser les agresseur d'assumer leurs actes
+}}
+|date-création=2022-01-15
+}}

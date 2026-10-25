@@ -1,0 +1,13 @@
+{{Argument
+|citations={{Citation
+|citation=Avec 73 % de femmes dans le monde qui ont déjà souffert de cyberviolence, ce ne sont pas les témoignages qui manquent.
+|auteurs=Cédric Petit
+|article=«Sale pute», chronique de la misogynie ordinaire
+|ouvrage=Le soir
+|date=8/03/2021
+|lien=https://plus.lesoir.be/359544/article/2021-03-08/sale-pute-chronique-de-la-misogynie-ordinaire
+}}
+|rubriques=Droit, Société, Technologie
+|mots-clés=harcèlement, réseaux sociaux
+|date-création=2021-08-22
+}}

@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Objection@11466
+|résumé=Le traitement des femmes conservatrices par les hommes de leur propre camp fait voler en éclats le narratif voulant que le féminisme serait la cause du trumpisme. En effet, ils sont tout aussi violents envers elles qu'envers les féministes, ce qui ne serait pas le cas si les griefs qu'ils avaient étaient uniquement dirigés vers ces dernières. Ces dernières ont donc appris à la dure que faire des concessions à un groupe social potentiellement antagoniste ne conduit pas à un meilleur traitement par ces derniers, bien au contraire.
+|références-sitographiques={{Référence sitographique
+|lien=https://www.salon.com/2017/12/04/alt-right-women-are-upset-that-alt-right-men-are-treating-them-terribly/
+|page=“Alt-right” women are upset that “alt-right” men are treating them terribly
+|auteurs=Rachel Leah
+|site=Salon
+|date=4 décembre 2017
+}}
+|rubriques=Droit, Société
+|mots-clés=féminisme, violence, extrême droite
+|date-création=2026-04-20
+}}

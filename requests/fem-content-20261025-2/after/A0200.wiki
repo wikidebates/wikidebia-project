@@ -1,0 +1,27 @@
+{{Argument
+|résumé=Les immigrés et descendants d'immigrés encouragés à demander sans cesse des comptes à la France vivent mal, ne se concentrent pas toujours sur leurs études et rendent responsable les autres, le racisme, de leurs échecs. C'est une posture qui ne mène à rien et qu'il serait temps de changer.
+|citations={{Citation
+|citation=À une époque, moi-même je pensais que la plupart des personnes de mon université, Assas, étaient racistes. J’ai commencé à me plaindre auprès de mon père, qui était professeur à la faculté de Tours. Il m’a remis en place très sévèrement… Pour lui c’était inconcevable, non pas que le racisme existe, mais il me défendait toute victimisation. J’ai donc pris sur moi et je comprends aujourd’hui pourquoi il me disait qu’il fallait me concentrer sur mes études, plutôt que de perdre du temps. Les [https://www.lefigaro.fr/actualite-france/theorie-du-genre-decolonialisme-racialisme-ces-nouveaux-dogmes-qui-veulent-s-imposer-en-france-20210225 dogmes qui entrent à l’université] aujourd’hui troublent le rapport au travail, puisqu’ils obligent à ne parler que de soi-même en fonction de la «race» et du «sexe» et, dans le même mouvement, rendent illégitimes les enseignements sur l’histoire africaine d’un professeur blanc. À force, certains finissent par croire qu’il est nécessaire d’avoir une pensée décoloniale. C’est très problématique par rapport aux savoirs, à la connaissance et à notre héritage universaliste. Pour moi, ces idéologies sont une insulte aux grands hommes tels que Césaire, Manu Dibango, Édouard Glissant, avec lequel j’ai eu la chance de travailler, ou mon père, qui se sont affranchis de concepts revanchards pour tisser de nouveaux liens et conjuguer leur histoire avec celle de l’Europe.
+|auteurs=Rachel Khan
+|article=Rachel Khan: «Le discours victimaire des pseudo-antiracistes m’est insupportable»
+|ouvrage=Tous créoles
+|date=13/03/2021
+|lien=https://touscreoles.fr/rachel-khan-le-discours-victimaire-des-pseudo-antiracistes-mest-insupportable/
+}}{{Citation
+|citation='''Pourquoi estimez-vous que le fait de se considérer et de se positionner comme une victime n’est pas la bonne réaction face à ces micro-agressions ? Quelle serait pour vous la bonne attitude à adopter ?'''
+
+A titre personnel je n’aime pas être considérée comme victime. Ce serait pour moi une forme de concession. On peut répondre sans forcément s’abriter derrière le statut de victime ou chercher à culpabiliser l’autre, on peut simplement répondre et se confronter. C’est un point de vue très personnel, mais je trouve que la posture victimaire est une forme de paresse intellectuelle. 
+|auteurs=Sophia Aram
+|article=« Être considérée comme une victime, ce serait pour moi une forme de concession »
+|ouvrage=WomenToday
+|date=2022
+|lien=https://womentoday.fr/grand-entretien-avec-sophie-aram-etre-consideree-comme-une-victime-ce-serait-pour-moi-une-forme-de-concession/
+}}
+|objections={{Objection
+|page=Accuser les immigrés de "victimisation" est une aberration sociologique
+|titre-affiché=Accuser les immigrés de "victimisation" est une aberration sociologique
+}}
+|rubriques=Société
+|mots-clés=immigration, féminisme
+|date-création=2022-07-21
+}}

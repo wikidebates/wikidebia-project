@@ -1,0 +1,25 @@
+{{Argument
+|résumé=Les femmes peuvent certes être épanouies en tant que femmes au foyer, mais instrumentaliser cet argument pour balayer d'un revers de la main la charge mentale est un raisonnement fallacieux, et défendre le "droit" d'être une femme au foyer relève d'un féminisme au rabais qui enfonce des portes ouvertes.
+|citations={{Citation
+|citation=De nombreuses mères américaines, qui doivent gérer '''tout le quotidien pour leur famille''' (repas, lessives, devoirs, ménage…) ainsi que toutes les difficultés liées à la pandémie (tests, isolements, télétravail avec enfants…), se sentent '''au bord du gouffre'''.
+
+Elles ont besoin de lâcher la pression, de passer leurs nerfs. Et c’est parfois dans des stades qu’elles se réunissent ensemble et crient, '''lors de scènes de catharsis''' impressionnantes à voir – et à entendre !
+
+Ces femmes, qui doivent gérer '''les enfants, leur travail et la charge mentale''' de tout leur foyer, ont l’impression de devenir folles, tant elles sont sollicitées et n’ont aucun temps mort.
+|auteurs=Camille Abbey
+|article=Des daronnes au bout du roul’ se réunissent pour hurler dans des stades, et franchement on les comprend
+|ouvrage=Madmoizelle.com
+|date=31 jan 2022
+|lien=https://www.madmoizelle.com/des-daronnes-au-bout-du-roul-se-reunissent-pour-hurler-dans-des-stades-et-franchement-on-les-comprend-1236367
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.madmoizelle.com/sommeil-charge-mentale-stress-les-filles-ont-ete-durement-touchees-par-le-confinement-1127059
+|page=Sommeil, charge mentale, stress : les filles ont été durement touchées par le confinement
+|auteurs=Maëlle Le Corre
+|site=Madmoizelle.com
+|date=20 mai 2021
+}}
+|rubriques=Société
+|mots-clés=tâches ménagères, femme au foyer
+|date-création=2022-01-31
+}}

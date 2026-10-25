@@ -1,0 +1,36 @@
+{{Argument
+|citations={{Citation
+|citation=Alors que le terme est né comme un mot d'ordre dans les communautés noires pour « rester éveillé » contre la brutalité policière, il a depuis été détourné pour servir de fourre-tout pour toute politique, position, ou personne avec laquelle les conservateurs ne sont pas d'accord, souvent de manière caricaturale.
+
+
+''(While the term originated as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.)''
+|auteurs=Samuel C. Huneke
+|article=Critically Cringe: On Susan Neiman’s “Left Is Not Woke”
+|ouvrage=Los Angeles Review of Books
+|date=14/09/2023
+|lien=https://lareviewofbooks.org/article/critically-cringe-on-susan-neimans-left-is-not-woke/
+}}{{Citation
+|citation=Ce terme plutôt émancipateur et positif a été rendu négatif, alors que bien souvent c'est l'inverse qui se produit: les militantes détournent le sens de mots à la base utilisés comme une insulte - queer, gouine, sorcière par exemple - pour se les réapproprier, relève encore la linguiste.
+
+L'utilisation du terme "''wokisme''" entre dans le cadre d'une "''sorte de culture de la panique, en associant le militantisme, la lutte contre les discriminations, à des mouvements puritains''", poursuit Laurence Rosier. "''Cela peut être dangereux. On est dans une culture de la peur, comme si on allait éradiquer l'Histoire en enlevant des statues, alors que les archives, les documents restent pour témoigner des atrocités que certains ont fait. Cette culture de la panique est utilisée pour bloquer des combats émancipateurs''", conclut-elle.
+|auteurs=Belga
+|article=Journée de lutte pour les droits des femmes : "Woke", ce terme flou utilisé pour dévaloriser
+|ouvrage=RTBF
+|date=08 mars 2022
+|lien=https://www.rtbf.be/article/journee-de-lutte-pour-les-droits-des-femmes-woke-ce-terme-flou-utilise-pour-devaloriser-10950078
+}}{{Citation
+|citation=Si on prend la définition littérale, « woke » veut dire « être éveillé ». Il apparaît aux États-Unis d’abord pour définir les personnes sensibles et conscientes par rapport aux violences policières qui se multiplient, et celles qui luttent contre d’autres formes de discriminations (sexisme, racisme, homophobie, etc.). Mais le terme est progressivement détourné et vidé de son sens.
+|auteurs=Petya Obolensky
+|article=La « lutte contre le wokisme », une arme de diversion massive
+|ouvrage=Solidaire, magazine du Parti du Travail de Belgique
+|date=29 Juin 2023
+|lien=https://www.solidaire.org/articles/la-lutte-contre-le-wokisme-une-arme-de-diversion-massive
+}}
+|objections={{Objection
+|page=Le terme woke désigne de façon commode un mouvement complexe, c'est un peu comme parler des Lumières sans nuancer
+|titre-affiché=Le terme woke désigne de façon commode un mouvement complexe, c'est un peu comme parler des Lumières sans nuancer
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2022-08-01
+}}

@@ -1,0 +1,13 @@
+{{Argument
+|citations={{Citation
+|citation=Face à ces affaires, les institutions ne sont pas toujours d’une grande aide et l’assistance pour les victimes est quasi inexistante. La streameuse Manonolita explique avoir porté plainte trois fois et avoir passé beaucoup de temps à expliquer comment fonctionnent les plateformes sur lesquelles elle est harcelée. Au final, la police lui a conseillé de quitter Internet…
+|auteurs=Marine Langlois
+|article=Nadia Daam, Sara Lou, Alice Barbe… elles racontent leur cyberharcèlement dans #SalePute, sur Arte
+|ouvrage=Madmoizelle.com
+|date=23 juin 2021
+|lien=https://www.madmoizelle.com/nadia-daam-sara-lou-alice-barbe-elles-racontent-leur-cyberharcelement-dans-salepute-sur-arte-1137471
+}}
+|rubriques=Droit, Société, Technologie
+|mots-clés=harcèlement, réseaux sociaux
+|date-création=2021-08-22
+}}

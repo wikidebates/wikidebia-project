@@ -1,0 +1,17 @@
+{{Argument
+|citations={{Citation
+|citation=Pour que [l'équilibre de la charge des tâches ménagères dans la majorité des couples] change et obtenir un 50-50, on doit réunir plusieurs conditions :
+
+# un travail intellectuel et émotionnel de la part de la personne qui se trouve lésée : réfléchir, constater une insatisfaction, négocier ;
+# de l’écoute de la part des deux personnes. Or, on a un double problème avec cela : les hommes ne sont généralement pas éduqués à être dans l’écoute et la parole des femmes est décrédibilisée depuis des siècles ;
+# pour l’homme, un travail de déconstruction qui implique : primo, un minimum de volonté – il doit accepter de prendre conscience qu’il est privilégié, tout en vivant dans une société qui lui envoie des tonnes de messages qui normalisent ses privilèges – ; secundo, une remise en question de schémas de vie, qui ramène à sa propre histoire d’enfant, celle de ses parents.
+|auteurs=Amandine Hancewicz
+|article=Les femmes accomplissent 70 % en moyenne du travail familial et domestique
+|ouvrage=Le Monde
+|date=20 avril 2020
+|lien=https://www.lemonde.fr/m-perso/article/2020/04/20/nos-vies-confinees-les-femmes-accomplissent-70-en-moyenne-du-travail-familial-et-domestique_6037206_4497916.html#:~:text=Il%20s'agit%20d'un,moyenne%2C%20tr%C3%A8s%2C%20tr%C3%A8s%20lentement.
+}}
+|rubriques=Société
+|mots-clés=tâches ménagères, féminisme
+|date-création=2022-09-02
+}}

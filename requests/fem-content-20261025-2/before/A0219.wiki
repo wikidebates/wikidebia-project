@@ -1,0 +1,12 @@
+{{Argument
+|résumé=Les réalités que recouvrent ce terme varient énormément selon l'orientation politique des personnes qui utilisent. Au sein de la gauche, il sert à ranger des techniques de militantisme jugées moralement indéfendables telles que le harcèlement, les autodafés (réels ou symboliques) ainsi que la performativité, tandis que l'ultradroite s'en sert soit pour faire passer la pilule d'une idéologie x-phobe et x-iste tout en prétendant le contraire (notamment en mettant des luttes arbitrairement choisies dans le même panier que des modes d'action contestables), soit pour diaboliser l'intégralité des luttes sociales. De plus, il n'y a pas de consensus sur ce qui peut ou non être rangé sous cette appellation, des luttes légitimes étant souvent mises dans le même panier que des modes d'action contestables. D'ailleurs, il n'a plus la même signification qu'au moment de sa naissance, son acception péjorative étant relativement récente.
+|citations={{Citation
+|citation=Ce n'est d'ailleurs pas du tout un hasard que la définition de 'woke' soit difficile à poser : les conservateurs n'ont aucun intérêt à ce que l'on puisse définir le terme.
+|auteurs=Fabien Jannic-Cherbonnel
+|article=L'article à lire pour comprendre ce que signifie le mot "woke", qui s'installe dans le débat public
+|ouvrage=Franceinfo.fr
+|date=19/10/2021
+|lien=https://www.francetvinfo.fr/societe/l-article-a-lire-pour-comprendre-ce-que-signifie-le-mot-woke-qui-s-installe-dans-le-debat-public_4770865.html
+}}
+|date-création=2021-12-07
+}}
