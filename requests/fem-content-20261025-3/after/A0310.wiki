@@ -1,0 +1,51 @@
+{{Argument
+|initialisation=Objection@17219
+|citations={{Citation
+|citation='''Aujourd’hui, l’anti-wokisme n’est-il pas un marqueur de l’extrême droite ? Ron DeSantis et Donald Trump aux Etats-Unis, Eric Zemmour en France ou même [https://www.lexpress.fr/idees-et-debats/jean-francois-braunstein-en-russie-poutine-utilise-les-idees-woke-contre-l-occident_2180887.html Vladimir Poutine en Russie] ont tous anglé leur discours là-dessus…'''
+
+C’est pour ça, je pense, que mon livre a été traduit en douze langues. Il va même être publié en arabe. J’ai demandé à un confrère syrien comment ce livre pouvait intéresser un éditeur égyptien. "Ah, les gens à gauche en ont simplement assez des concepts du postcolonialisme, et sont ravis qu’on les questionne" m’a-t-il répondu. Mais c’est aussi ce pourquoi des amis m’ont déconseillé d’utiliser le mot "woke" en titre, car il a été considérablement instrumentalisé par la droite. Pourtant, dès la première page, je me définis comme une socialiste. Par ailleurs, on n’écartera pas l’extrême droite en faisant comme si la pensée woke était un non-problème ou un fantasme inventé par la droite pour faire taire toute demande de justice sociale. Au contraire, si les progressistes de gauche sont incapables de dénoncer les excès de la pensée woke, cela poussera des personnes dans les bras de la droite.
+|auteurs=Susan Neiman
+|article=Susan Neiman : "Dans le milieu universitaire, le wokisme est loin d’être fini"
+|ouvrage=L'Express
+|date=24/09/24
+|lien=https://www.lexpress.fr/idees-et-debats/susan-neiman-dans-le-milieu-universitaire-le-wokisme-est-loin-detre-fini-DHPGFWRWIJDGHASNU6W6QJSOLM/
+}}
+|justifications={{Justification
+|page=150 intellectuels de la gauche américaine ont signé une tribune contre l'intolérance woke
+|titre-affiché=Le wokisme a fait l'objet d'une tribune consignée par 150 intellectuels de gauche
+}}
+|objections={{Objection
+|page=Tous les partis d'extrême droite ont fait de l'anti-wokisme leur cheval de bataille
+|titre-affiché=Est-ce aussi pour "sauver la gauche" que l'extrême droite a fait de l'anti-wokisme son cheval de bataille ?
+}}{{Objection
+|page=Ce n'est pas l'"intolérance woke" que la tribune dénonce, mais la cancel culture
+|titre-affiché=Il ne faut pas confondre "wokisme" et "cancel culture"
+}}{{Objection
+|page=Le printemps républicain avait des relents réactionnaires dès ses débuts
+|titre-affiché=Le printemps républicain n'est pas le sauveur, mais le fossoyeur de la gauche
+}}{{Objection
+|page=Le concept de "woke" est rejeté par d'éminents scientifiques
+|titre-affiché=D'éminents politologues estiment que le wokisme n'est qu'un épouvantail de l'extrême droite
+}}{{Objection
+|page=Ce n'est pas l'"intolérance woke" que la tribune dénonce, mais la cancel culture
+|titre-affiché=Il est irresponsable d'utiliser un terme qui sert à disqualifier les ennemis de l'extrême droite pour désigner un fléau bien réel
+}}{{Objection
+|page=Le courant woke ne correspond à aucune réalité sociologique
+|titre-affiché=C'est absurde de combattre un courant qui n'existe pas
+}}{{Objection
+|page=Les "gauchistes anti-woke" sont diffusés dans des médias eux-mêmes qualifiés de woke, ce n'est donc pas cela qu'ils combattent
+|titre-affiché=Les "gauchistes anti-woke" sont diffusés dans des médias eux-mêmes qualifiés de woke, ce n'est donc pas cela qu'ils combattent
+}}{{Objection
+|page=Le livre de Susan Neiman sur le wokisme est indigne de la profession de son autrice
+|titre-affiché=Le livre de Susan Neiman sur le wokisme est indigne de la profession de son autrice
+}}{{Objection
+|page=L'extrême droite utilise les anti-woke de gauche comme caution à sa propagande
+|titre-affiché=L'extrême droite utilise les anti-woke de gauche comme caution à sa propagande
+}}{{Objection
+|page=Le terme "woke" n'a aucune acception péjorative n'impliquant pas le rejet de tout ce que les conservateurs n'aiment pas
+|titre-affiché=Le terme "woke" n'a aucune acception péjorative n'impliquant pas le rejet de tout ce que les conservateurs n'aiment pas
+}}
+|rubriques=Politique, Société
+|mots-clés=wokisme, gauche
+|date-création=2024-10-13
+}}

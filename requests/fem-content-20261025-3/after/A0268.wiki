@@ -1,0 +1,7 @@
+{{Argument
+|initialisation=Objection@29287
+|débat-dédié=La gauche a-t-elle une responsabilité dans la montée de l'extrême droite ?
+|rubriques=Droit, Politique, Société
+|mots-clés=gauche politique, extrême droite, gauche
+|date-création=2026-04-14
+}}

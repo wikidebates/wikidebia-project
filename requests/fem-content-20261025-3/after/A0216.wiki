@@ -1,0 +1,21 @@
+{{Argument
+|résumé=Quand on voit ce que la plupart des gens considèrent comme de la "cancel culture", on constate qu'en réalité, ce n'est qu'une peur de ne plus pouvoir abuser impunément de leur position dominante, donc ils se posent en victimes.
+|citations={{Citation
+|citation=Plutôt que des effets de la cancel culture, ne faudrait-il pas s’inquiéter de la culture de l’impunité, laquelle préfère la disqualification à la dispute argumentée ? Que les choses commencent à changer, nous ne pouvons que nous en réjouir et non redouter la ''« dictature des minorités »''. C’est, au contraire, des droits de ces dernières que nous devrions nous soucier si nous voulons combattre la dérive droitière à laquelle les organisateurs, en invitant Mathieu Bock-Côté à s’exprimer, sont coupablement inattentifs.
+|auteurs=Collectif
+|article=Université : « L’universalisme républicain ne se décrète pas, il se construit »
+|ouvrage=Le Monde
+|date=05 janvier 2022
+|lien=https://archive.is/20240506074406/https://www.lemonde.fr/idees/article/2022/01/05/universite-l-universalisme-republicain-ne-se-decrete-pas-il-se-construit_6108260_3232.html
+}}
+|justifications={{Justification
+|page=Le concept de "cancel culture" sert d'écran de fumée à des méfaits bien réels
+|titre-affiché=Le concept de "cancel culture" sert d'écran de fumée à des méfaits bien réels
+}}{{Justification
+|page=La cancel culture est un bon moyen de demander des comptes aux personnalités qui jusque-là agissaient impunément
+|titre-affiché=La cancel culture est positive quand elle touche d'authentiques délinquants
+}}
+|rubriques=Culture, Société
+|mots-clés=culture, cancel culture
+|date-création=2022-03-26
+}}

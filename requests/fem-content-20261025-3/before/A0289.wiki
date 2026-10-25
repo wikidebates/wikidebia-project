@@ -1,0 +1,8 @@
+{{Argument
+|initialisation=Objection@10833
+|objections={{Objection
+|page=Le courant woke ne correspond à aucune réalité sociologique
+|titre-affiché=Le courant woke ne correspond à aucune réalité sociologique
+}}
+|date-création=2024-11-21
+}}

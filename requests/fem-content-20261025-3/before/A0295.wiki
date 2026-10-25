@@ -1,0 +1,4 @@
+{{Argument
+|initialisation=Objection@6825
+|date-création=2025-11-01
+}}

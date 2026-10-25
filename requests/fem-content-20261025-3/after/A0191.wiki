@@ -1,0 +1,9 @@
+{{Argument
+|objections={{Objection
+|page=Le masculinisme existe grâce au sexisme, c'est donc bien un combat féministe
+|titre-affiché=Le maculinisme existe grâce au sexisme, c'est donc bien un combat féministe
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2022-09-05
+}}

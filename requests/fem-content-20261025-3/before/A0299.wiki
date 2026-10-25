@@ -1,0 +1,33 @@
+{{Argument
+|résumé=Soutenir la liberté d'expression, c'est considérer que les points de vue les plus raisonnables et souhaitables sortiront victorieux de la confrontation d'idées. Cela implique une vision optimiste de l'être humain, comme suffisamment raisonnable pour discerner l'opinion juste et fondée. Cet optimisme est la justification ultime des démocraties : c'est parce que je crois que les citoyens assemblés sont susceptibles de bons raisonnements, que je pense qu'ils peuvent exercer le pouvoir. Si ce n'est pas le cas, si les personnes sont manipulables, dominées par leurs intérêts et des passions irrationnelles, incapables de réflexion, alors la démocratie n'a pas de fondement. Il faut retirer le pouvoir au peuple et le confier à des dirigeants éclairés : monarques, philosophes-rois, juristes, etc.
+|citations={{Citation
+|citation=Si le citoyen n’est pas un être rationnel, capable de prendre part à la discussion et de faire la part des choses, en faisant des concessions si nécessaires quant à son propre intérêt, mais au contraire un simple spectateur suggestible et manipulable, prisonnier de bulles de filtres et irrémédiablement retenu en enfance par ses bas instincts, le débat ne peut être un moteur du progrès moral. Il convient dès lors de réguler le plus étroitement possible la discussion publique en établissant des règles de conduite, et notamment d’encadrer les réseaux sociaux qui matérialisent l’agora où se déroule le débat public.
+
+Cette tentative « réformiste » de préserver le cœur du débat (le « cercle de la raison ») contre des extrêmes irrationnels (vis-à-vis desquels le caractère universel que renferme la notion de tolérance souffre une exception notable au nom de l’axiome de Karl Popper qui veut que l’on ne tolère pas les intolérants) se défend parfaitement aux noms d’une conception humaniste et progressiste de l’histoire. Elle n’en constitue pas moins une faillite de la représentativité politique, d’autant que les décisions fondamentales apparaissent désormais échapper à la délibération collective. De la non-prise en compte du référendum du Traité constitutionnel européen de 2005 à la politique de modération systématique pratiquée par les réseaux sociaux : ces multiples mises en échec du débat participent d’autant à discréditer la prétention du débat public qu’à garantir les intérêts de chacun. Dans un contexte marqué, par ailleurs, par l’archipélisation des grandes démocraties (comment croire que la France soit la seule affectée par ce processus ?), la conception de la politique n’est plus un art de parvenir au consensus, mais consiste désormais à distinguer ses amis et ses ennemis.
+|auteurs=Damien Liccia, Jean-Baptiste Delhomme
+|article=La démocratie survivra-t-elle à la mort du débat public ?
+|ouvrage=Observatoire stratégique de l'information
+|date=2/10/2020
+|lien=https://observatoire-strategique-information.fr/2020/10/02/la-democratie-survivra-t-elle-a-la-mort-du-debat-public/
+}}
+|justifications={{Justification
+|page=Les humains sont capables de penser et agir par eux-mêmes
+|titre-affiché=Les humains sont capables de penser et agir par eux mêmes
+}}
+|objections={{Objection
+|page=Les gens suivent les discours démagogiques
+|titre-affiché=Le succès des démagogues suffit à prouver que les points de vue raisonnables sortent rarement gagnants
+}}{{Objection
+|page=Les êtres humains sont irrationnels
+|titre-affiché=Les humains sont irrationnels
+}}{{Objection
+|page=On peut faire croire n'importe quoi à n'importe qui quand certaines conditions sont réunies
+|titre-affiché=Les humains sont facilement manipulables
+}}{{Objection
+|page=Les biais cognitifs ruinent toute tentative de débat
+|titre-affiché=La raison est entravée par les biais cognitifs
+}}
+|rubriques=Droit, Philosophie, Politique, Société
+|mots-clés=Liberté d'expression, Limites, Rationalité
+|date-création=2022-08-12
+}}

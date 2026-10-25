@@ -1,0 +1,23 @@
+{{Argument
+|citations={{Citation
+|citation=Facebook : une modération déficiente et problématique
+
+On peut en effet, à l’instar de Jezebel, s’étonner d’une sorte de double standard concernant leurs produits « pour adultes » (enfin, ce qui est considéré comme tel, parfois à tort) et pour la santé sexuelle. Ne voit-on pas trôner fièrement sur les pages du réseau social des publicités pour préservatifs, on ne peut plus explicites, vantant plaisir et sensations ?
+
+C’est donc bien une modération asymétrique envers les hommes et les femmes qui est à l’œuvre quand il est possible d’afficher des pubs pour des pilules contre les troubles de l’érection et de bloquer celles qui proposent du matériel pour renforcer son périnée après la ménopause.
+
+C’est ici une mosaïque d’algorithmes très complexe qui est en cause — Facebook se défend bien sûr d’avoir blacklisté des mots qui proscrivent ces publicités, comme « ménopause » ou « vagin ».
+
+Mais on a ici affaire à un problème systémique. Le groupe Meta place les efforts de modération ailleurs, sur les armes à feu, le cannabis… Évidemment ce sont des sujets très importants, mais une fois de plus ce sont les femmes qui trinquent, avec leurs corps et leurs problématiques à nouveau invisibilisés.
+
+Les algorithmes seraient-ils sexistes comme l’avançait le livre L’intelligence artificielle, pas sans elles ?
+
+Une pondibonderie questionnable sur le corps des femmes est à l’œuvre, indiquant que leur anatomie et leurs problèmes doivent restés discrets. Cachez-moi ce corps post-partum que je ne saurais voir…
+|auteurs=Camille Abbey
+|article=Cachez ce post-partum que je ne saurais voir : Facebook bloque des pubs pour des culottes et du matos d’allaitement
+|ouvrage=Madmoizelle.com
+|date=14 jan 2022
+|lien=https://www.madmoizelle.com/cachez-ce-post-partum-que-je-ne-saurais-voir-facebook-bloque-des-pubs-pour-des-culottes-et-du-matos-dallaitement-1232135
+}}
+|date-création=2022-01-14
+}}

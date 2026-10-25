@@ -1,0 +1,23 @@
+{{Argument
+|initialisation=Objection@11964
+|résumé=Les critiques les plus importantes du wokisme se trouvent dans la gauche universaliste (par ex. Susan Neiman, Stéphanie Roza, ou Caroline Fourest...), les défenseurs de la science, et les défenseurs de l'universalisme. Certains aussi s'inquiètent de a réintroduction de la "race" au devant de la scène au nom du wokisme. Il n s'agit donc pas de critiques qu usent d'arguments qu l'on peut qualifier "'extrême droite" pour s'en débarrasser commodément.
+|objections={{Objection
+|page=Il n'y a aucun exemple de concept de gauche qui n'aie pas été qualifié de "woke"
+|titre-affiché=Le terme "woke" sert à diaboliser l'intégralité des adversaires de l'extrême droite
+}}{{Objection
+|page=Les anti-woke sont les idiots utiles de la soif de pouvoir et de profits de quelques oligarques
+|titre-affiché=C'est la panique woke qui sert de diversion et non l'inverse
+}}{{Objection
+|page=Ce n'est pas l'"intolérance woke" que la tribune dénonce, mais la cancel culture
+|titre-affiché=Il est irresponsable d'utiliser un terme qui ne sert qu'à dénigrer les ennemis de l'extrême droite pour désigner des dérives bien réelles
+}}{{Objection
+|page=Parler de l'extrême droite quand on critique le wokisme, c'est faire preuve d'objectivité
+|titre-affiché=Parler de l'extrême droite quand on critique le wokisme, c'est faire preuve d'objectivité
+}}{{Objection
+|page=Le terme "woke" n'a aucune acception péjorative n'impliquant pas le rejet de tout ce que les conservateurs n'aiment pas
+|titre-affiché=Le terme "woke" n'a aucune acception péjorative n'impliquant pas le rejet de tout ce que les conservateurs n'aiment pas
+}}
+|rubriques=Droit, Politique, Société
+|mots-clés=wokisme, extrême droite
+|date-création=2024-11-19
+}}

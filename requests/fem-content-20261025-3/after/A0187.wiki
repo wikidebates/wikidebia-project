@@ -1,0 +1,10 @@
+{{Argument
+|résumé=Les hommes ont tendance à plus couper la parole que les femmes, mais les femmes ont plus tendance à se laisser couper la parole que les hommes. La prise de parole, lorsqu'elle est en concurrence, est compliquée si elle n'est pas organisée. Les femmes en moyenne moins agressives, cherchent moins le conflit, sont plus discrètes que les hommes, et ont plus tendance à se laisser couper la parole dans ce genre de situation.
+|objections={{Objection
+|page=Si les femmes se comportent ainsi, c'est parce que le sexisme de notre culture les y encourage, voire les y force
+|titre-affiché=Si les femmes se comporte ainsi, c'est parce que le sexisme de notre culture les y encourage, voire les force
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2022-08-29
+}}

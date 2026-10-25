@@ -1,0 +1,28 @@
+{{Argument
+|initialisation=Objection@17219
+|citations={{Citation
+|citation=''« Elles (Marguerite Stern et Dora Moutot) désirent notre mort, et nous désirons la leur. […] Cela ne pourra se faire que par la force et la violence, et donc par l’éclatage des têtes en question. […] C’est en tant que trans que nous désirons cette violence. »'' Ces quelques phrases d’une violence extrême sont issues d’un texte publié ce lundi 14 octobre sur le site antifasciste Paris-luttes.info. Intitulé « Trans, ultraviolence », ce communiqué fait suite à l’interpellation de 63 membres de la mouvance d’extrême gauche le 5 octobre. Le message de ce manifeste politique est limpide : les personnes trans doivent se rebeller et éliminer leurs ennemis sans pitié.
+|article=«Terrorisme trans» : un manifeste d’extrême gauche appelle au meurtre de Marguerite Stern et Dora Moutot
+|ouvrage=Le JDD
+|date=16/10/24
+|lien=https://www.lejdd.fr/societe/terrorisme-trans-un-manifeste-dextreme-gauche-appelle-au-meurtre-de-marguerite-stern-et-dora-moutot-150679
+}}{{Citation
+|citation=Ces deux femmes, devenues célèbres pour leur combat contre les dérives de l’idéologie transgenre, sont régulièrement la cible de menaces de mort émanant d’activistes d’extrême gauche. Avec ce communiqué, un nouveau seuil de violence a été franchi. ''« C’est la plus grave menace de mort que j’aie jamais reçue'', déclare Marguerite Stern au JDD, ''c’est un communiqué terroriste. On assiste à l’apparition d’un terrorisme trans. »'' ''« Des gens sont prêts à nous tuer, nous avons peur de mourir »'', confie Marguerite Stern, qui a porté plainte avec Dora Moutot.
+|article=«Terrorisme trans» : un manifeste d’extrême gauche appelle au meurtre de Marguerite Stern et Dora Moutot
+|date=16/10/24
+|lien=https://www.lejdd.fr/societe/terrorisme-trans-un-manifeste-dextreme-gauche-appelle-au-meurtre-de-marguerite-stern-et-dora-moutot-150679
+}}
+|objections={{Objection
+|page=Les militants de gauche peuvent parfois se fourvoyer, ça n'en fait pas pour autant les chantres d'une nouvelle idéologie
+|titre-affiché=Les militants de gauche utilisent parfois des méthodes contestables, ça n'en fait pas des "woke"
+}}{{Objection
+|page=L'extrême droite instrumentalise le harcèlement de ses idéologues pour faire oublier ce qui leur est légitimement reproché
+|titre-affiché=L'extrême droite ne dénonce le harcèlement que quand ça lui permet de faire diversion
+}}{{Objection
+|page=L'extrême droite considère le harcèlement et les menaces qui arrangent son agenda comme de la liberté d'expression
+|titre-affiché=L'extrême droite pourra dénoncer le harcèlement quand elle cessera de le considérer comme de la liberté d'expression quand ça l'arrange
+}}
+|rubriques=Politique, Société
+|mots-clés=wokisme, féminisme
+|date-création=2024-10-18
+}}

@@ -1,0 +1,6 @@
+{{Argument
+|résumé=De tous temps, des revendications féministes ont été perçues comme extrémistes, y compris celles qu'aujourd'hui plus personne ne songerait à remettre en question.
+|rubriques=Politique, Société
+|mots-clés=wokisme, féminisme
+|date-création=2022-01-15
+}}

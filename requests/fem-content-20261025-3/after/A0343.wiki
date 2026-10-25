@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Justification@15348
+|rubriques=Droit, Société
+|mots-clés=violence, victimisation
+|date-création=2022-12-29
+}}

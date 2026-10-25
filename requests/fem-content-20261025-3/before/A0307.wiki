@@ -1,0 +1,4 @@
+{{Argument
+|résumé=Un exemple parlant: le chanteur R. Kelly a pendant très longtemps exploité sexuellement des jeunes filles en toute impunité, et ce n'est que grâce à l'indignation populaire que ses victimes ont enfin pu obtenir une condamnation.
+|date-création=2022-12-16
+}}

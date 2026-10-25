@@ -1,0 +1,6 @@
+{{Argument
+|résumé=Si le cinéma était aussi peu influent qu'on a tendance à le croire, aucun dirigeant ne se serait donné la peine de l'instrumentaliser afin de légitimer sa politique.
+|rubriques=Culture, Société
+|mots-clés=médias, féminisme
+|date-création=2022-02-09
+}}

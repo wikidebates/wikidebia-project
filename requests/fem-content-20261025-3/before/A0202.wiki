@@ -1,0 +1,13 @@
+{{Argument
+|initialisation=Objection@29094
+|résumé=Pierre Valentin retrace l'histoire du terme "woke" dans son ouvrage chez Gallimard "Comprendre la révoution woke" et montre que le teme "oke" a d'abord été utilisé par des militants antiracistes afro-américains.
+|justifications={{Justification
+|page=Le terme "woke" est en train de devenir plus neutre et s'impose, même si son usage a été un moment polémique
+|titre-affiché=Le terme "woke" est en train de devenir plus neutre, même si son usage a été un moment polémique
+}}
+|objections={{Objection
+|page=Le terme a été dénaturé et a fait l'objet d'une réappropriation
+|titre-affiché=C'est l'extrême droite américaine qui, en se réappropriant le terme "woke", lui a créé une signification péjorative
+}}
+|date-création=2024-11-21
+}}

@@ -1,0 +1,10 @@
+{{Argument
+|initialisation=Objection@16437
+|objections={{Objection
+|page=Bien des hommes ont fait la preuve de leur engagement pour le combat féministe
+|titre-affiché=Bien des hommes ont fait la preuve de leur engagement pour le combat féministe
+}}
+|rubriques=Politique, Société
+|mots-clés=féminisme, lutte des classes, privilège mâle
+|date-création=2023-04-03
+}}

@@ -1,0 +1,15 @@
+{{Argument
+|résumé=Les Incel (ou célibataires involontaires) ont surtout une racine sur Internet par le biais de blogs et de forums. Ces hommes "boudés par les femmes" ont organisé une entre-soi aussi aussi qualifié de "manosphère". Les femmes représentent l'ennemi, la source du rejet et sont la cause de tous leurs maux.
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Pénélope McQuade
+|article=Les dessous de la manosphère, cette communauté d'hommes intrigante
+|ouvrage=Radio-Canada
+|date=17/09/2019
+|lien=https://ici.radio-canada.ca/premiere/emissions/penelope/segments/entrevue/133347/manosphere-bitch-masculinistes-antifeministes-documentaire
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Télé-Québec - Bitch! Une incursion dans la manosphère (16/10/19)
+|lien=https://www.youtube.com/watch?v=xMZdBf4iBaM
+}}
+|date-création=2021-03-15
+}}

@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@11164
+|rubriques=Économie, Société
+|mots-clés=travail, féminisme
+|date-création=2022-09-02
+}}

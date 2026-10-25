@@ -1,0 +1,32 @@
+{{Argument
+|résumé=Ils pullulent ces dernières années "en réponse" à la surenchère féministe" (qui n'aurait pour but de castrer les hommes", les stages masculinistes entendent aider les hommes en mal de virilité. Déclin de la famille, déséquilibre du rapport amoureux, rejet du déterminisme biologique… sont autant d'arguments motivant ces rencontres testostéronnées.
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Thomas Messias
+|article=J'ai suivi un cours masculiniste à l'École Major de Julien Rochedy
+|ouvrage=Slate
+|date=22/06/2018
+|lien=http://www.slate.fr/story/163493/societe-ecole-major-formation-hommes-masculinite-julien-rochedy-front-national-masculinisme
+}}{{Référence bibliographique
+|auteurs=Claire Levenson
+|article=En Floride, une conférence masculiniste pour «féminiser» les femmes
+|ouvrage=Slate
+|date=10/01/2020
+|lien=http://www.slate.fr/story/186155/etats-unis-floride-conference-masculiniste-22-convention-femmes-make-women-great-again-anthony-johnson
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Reportage France 2 : C'est quoi un homme ?
+|auteurs=Petit papillon
+|lien=https://www.youtube.com/watch?v=IlEZmDyi7-Q
+}}{{Référence vidéographique
+|titre=Documentaire France 2 : La virilité
+|auteurs=Sébastien Garcin
+|lien=https://www.youtube.com/watch?v=Xvw4L_cswIA
+}}{{Référence vidéographique
+|titre=L'engouement des stages commando pour rebooster la masculinité
+|auteurs=RTL
+|lien=https://www.youtube.com/watch?v=MuC2LasKYHc
+}}
+|rubriques=Société
+|mots-clés=masculinisme, patriarcat
+|date-création=2021-03-07
+}}

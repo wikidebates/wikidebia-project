@@ -1,0 +1,1755 @@
+{
+  "schema": "wikidebia-fr-publication-request-1.2",
+  "request_id": "fem-content-20261025-3",
+  "language": "fr",
+  "site": "https://fr.wikidebates.org",
+  "authorization": "explicit_user_request",
+  "authorization_instruction": "Je t’autorise à faire tout ce dont tu as besoin. Travaille de façon autonome, sans me consulter",
+  "purpose": "Publier le checkpoint français de contenu validé avant la traduction anglaise.",
+  "debate_id": "le_feminisme_est_il_encore_necessaire",
+  "work_id": "EDIT-20261024-001",
+  "stage": "content",
+  "pages": [
+    {
+      "page_id": "A0175",
+      "old_title": "Les trumpistes ne sont pas moins violents envers les femmes conservatrices qu'envers les féministes",
+      "new_title": "Les trumpistes ne sont pas moins violents envers les femmes conservatrices qu'envers les féministes",
+      "source_revision_id": 246853,
+      "source_sha256": "6cd8eb6ad3c2cc8c9e2b006948d11e50e85b4ce2a41ea0efc252294e726674b3",
+      "target_sha256": "4d70b3b8b71e080d0e1bf6858dd8ba22526f699f4d6737a2afb590461c6ba0a7",
+      "before_file": "before/A0175.wiki",
+      "after_file": "after/A0175.wiki"
+    },
+    {
+      "page_id": "A0176",
+      "old_title": "Le féminisme peut très bien servir de justification au nivellement par le bas",
+      "new_title": "Le féminisme peut très bien servir de justification au nivellement par le bas",
+      "source_revision_id": 246854,
+      "source_sha256": "c02c0899c602ed7f7cbda043219313123cbad58fc1bf03038c9ca9934df3096c",
+      "target_sha256": "b14f12608417775b9917df7fc1c48c97a858dbc9a8983a8509dc88f44811cb14",
+      "before_file": "before/A0176.wiki",
+      "after_file": "after/A0176.wiki"
+    },
+    {
+      "page_id": "A0177",
+      "old_title": "Le mouvement ouvrier a déjà montré son incapacité à prendre en charge le combat féministe",
+      "new_title": "Le mouvement ouvrier a déjà montré son incapacité à prendre en charge le combat féministe",
+      "source_revision_id": 247143,
+      "source_sha256": "b8c24f7aad0205e3556d2e388dd25c7136fda4ffe9b5707ffe8786ac6778bb03",
+      "target_sha256": "f4b38f13669a2cf5983907ce3bdc4d2ecb4c26a572f3261650dbbbbd40a9f183",
+      "before_file": "before/A0177.wiki",
+      "after_file": "after/A0177.wiki"
+    },
+    {
+      "page_id": "A0178",
+      "old_title": "Le féminisme bourgeois peut avoir des positions contraires à l'émancipation des femmes et des hommes",
+      "new_title": "Le féminisme bourgeois peut avoir des positions contraires à l'émancipation des femmes et des hommes",
+      "source_revision_id": 246856,
+      "source_sha256": "1451da6932504497a6a4605071c951572268c324230f1ad9bbe124544c1a788b",
+      "target_sha256": "54cbd6ac36e0888ddaa3d33de926dbdfd0a2cb60f6e9adc166b739794447b337",
+      "before_file": "before/A0178.wiki",
+      "after_file": "after/A0178.wiki"
+    },
+    {
+      "page_id": "A0179",
+      "old_title": "Le féminisme lutte de classe néglige l'existence d'un privilège mâle",
+      "new_title": "Le féminisme lutte de classe néglige l'existence d'un privilège mâle",
+      "source_revision_id": 247144,
+      "source_sha256": "68dce405709aa0fbad4b47198aae1628e9e108b8adabb928f478815915d84558",
+      "target_sha256": "70c1a65d4fb5e6d508e7d59c1adc0307c259eb12fb01243461880c23ee281041",
+      "before_file": "before/A0179.wiki",
+      "after_file": "after/A0179.wiki"
+    },
+    {
+      "page_id": "A0180",
+      "old_title": "C'est dans les moments où l'organisation sociale est entièrement remise en cause que les rapports entre hommes et femmes peuvent être métamorphosés",
+      "new_title": "C'est dans les moments où l'organisation sociale est entièrement remise en cause que les rapports entre hommes et femmes peuvent être métamorphosés",
+      "source_revision_id": 246858,
+      "source_sha256": "9198e950e902e0da202425a2cae36dbec2523d9c1d0ec41073d47774412a8502",
+      "target_sha256": "97a458d0554c80782e084699d7ca4046f3e2422d0b501c7d333ff242f0e59ade",
+      "before_file": "before/A0180.wiki",
+      "after_file": "after/A0180.wiki"
+    },
+    {
+      "page_id": "A0181",
+      "old_title": "Le mansplaining est un concept qui permet de désigner de manière péjorative le simple fait de contre-argumenter",
+      "new_title": "Le mansplaining est un concept qui permet de désigner de manière péjorative le simple fait de contre-argumenter",
+      "source_revision_id": 247222,
+      "source_sha256": "8bff348857df90b2e1f9faea8c1cd0887e10535054f651c9145cb5a7c21bdf11",
+      "target_sha256": "e34ae28ea01dbd1040ace8a0888978e6bcaf031bffa2e0e36a6ae45cb13d949d",
+      "before_file": "before/A0181.wiki",
+      "after_file": "after/A0181.wiki"
+    },
+    {
+      "page_id": "A0182",
+      "old_title": "La plupart des hommes sont éduqués à la masculinité toxique",
+      "new_title": "La plupart des hommes sont éduqués à la masculinité toxique",
+      "source_revision_id": 246859,
+      "source_sha256": "2bdbb21afb835c40fcca59d8b0642071c007415cd62c785ed28264988b23e159",
+      "target_sha256": "2272b09126347df5957a991421be64f5b3f951b5eff00bc14025736b69c29b0d",
+      "before_file": "before/A0182.wiki",
+      "after_file": "after/A0182.wiki"
+    },
+    {
+      "page_id": "A0183",
+      "old_title": "Les traits de masculinité toxique sont tellement banalisés qu'ils ne sont pas perçus comme tels",
+      "new_title": "Les traits de masculinité toxique sont tellement banalisés qu'ils ne sont pas perçus comme tels",
+      "source_revision_id": 246860,
+      "source_sha256": "64c5f46d0358295cfe3c8eb70e247dbde9f744e4491151e6aa7824e45041ea85",
+      "target_sha256": "8da21ddb5fdf4abb33fea7c9ec6c0d1c4167fd9e916063af147d7a0ec94b0817",
+      "before_file": "before/A0183.wiki",
+      "after_file": "after/A0183.wiki"
+    },
+    {
+      "page_id": "A0184",
+      "old_title": "Les hommes souffrent eux-mêmes de la masculinité toxique",
+      "new_title": "Les hommes souffrent eux-mêmes de la masculinité toxique",
+      "source_revision_id": 246861,
+      "source_sha256": "841fe9181050b16cf53f9d9fc86d03f026bcbf2ea1e0d16d6ad66682fee27f63",
+      "target_sha256": "7dcef761174f10ecd5a5d428ded6857f27abb778f7a821df4c4a09255807ee82",
+      "before_file": "before/A0184.wiki",
+      "after_file": "after/A0184.wiki"
+    },
+    {
+      "page_id": "A0185",
+      "old_title": "La plupart des hommes ne sont pas conscients de leur toxicité",
+      "new_title": "La plupart des hommes ne sont pas conscients de leur toxicité",
+      "source_revision_id": 246862,
+      "source_sha256": "9a9e4fb33ebed44ea5e53aca41b9dabeb7d2ae914d1076c3a8ef15c73b417143",
+      "target_sha256": "260c092269e865fe703ce1408846234b9709dc811d1ee4aaa744a8614c1a1173",
+      "before_file": "before/A0185.wiki",
+      "after_file": "after/A0185.wiki"
+    },
+    {
+      "page_id": "A0186",
+      "old_title": "Des femmes coupent aussi la parole et des hommes se font également couper la parole",
+      "new_title": "Des femmes coupent aussi la parole et des hommes se font également couper la parole",
+      "source_revision_id": 247224,
+      "source_sha256": "eac7bb6c7aba95c668333cd74910be3e6fa690071d81468c812d189304123195",
+      "target_sha256": "507a5bd6ee5f6257ac4d2b83dd1145e76082b39f2169ec9e01cf318e7a644983",
+      "before_file": "before/A0186.wiki",
+      "after_file": "after/A0186.wiki"
+    },
+    {
+      "page_id": "A0187",
+      "old_title": "Les femmes ne sont pas dénuées de responsabilité",
+      "new_title": "Les femmes ne sont pas dénuées de responsabilité",
+      "source_revision_id": 247145,
+      "source_sha256": "6342060525c4c79f0001e1d461bd3d3927c68fba0ed0b57cc7026b233d171ee8",
+      "target_sha256": "633c0a9ffcd622605ba9bf4b431ad1e9d1fb71439a230c25874de958f2a8ca40",
+      "before_file": "before/A0187.wiki",
+      "after_file": "after/A0187.wiki"
+    },
+    {
+      "page_id": "A0188",
+      "old_title": "Les hommes ont des raisons physiologiques d'écarter les jambes",
+      "new_title": "Les hommes ont des raisons physiologiques d'écarter les jambes",
+      "source_revision_id": 247146,
+      "source_sha256": "d66b8199eb9e3582c7635ca2323b24b69da71fb00ad2d08b84445570539f9a7f",
+      "target_sha256": "b3470759a4b28b0e7222d97d49d522ebf698252db12c085cdd9efdc9f9f9abf5",
+      "before_file": "before/A0188.wiki",
+      "after_file": "after/A0188.wiki"
+    },
+    {
+      "page_id": "A0189",
+      "old_title": "Les hommes peuvent resserrer leurs jambes si on leur demande",
+      "new_title": "Les hommes peuvent resserrer leurs jambes si on leur demande",
+      "source_revision_id": 247228,
+      "source_sha256": "26aadf9c0bec5fc8f8fc3ab7263da166e5b4529ab79025fa3c38cd644aa89906",
+      "target_sha256": "48030320e74c92b05917367908e9b4cd3a4cfd027940ee625ad02be7f919f244",
+      "before_file": "before/A0189.wiki",
+      "after_file": "after/A0189.wiki"
+    },
+    {
+      "page_id": "A0190",
+      "old_title": "Les incels représentent un groupe sectaire masculiniste dangereux",
+      "new_title": "Les incels représentent un groupe sectaire masculiniste dangereux",
+      "source_revision_id": 247229,
+      "source_sha256": "d231f8bd58a7928bcaa0ee512196b02c9a86397b0e7ae9b1479c4227fb094ec6",
+      "target_sha256": "5636b004ce0ab462e5ae18bcee36105a0ac7cc8ce5480781db1c06deae3d6725",
+      "before_file": "before/A0190.wiki",
+      "after_file": "after/A0190.wiki"
+    },
+    {
+      "page_id": "A0191",
+      "old_title": "Il n'y a pas besoin d'être féministe pour lutter contre ces groupes",
+      "new_title": "Il n'y a pas besoin d'être féministe pour lutter contre ces groupes",
+      "source_revision_id": 247147,
+      "source_sha256": "e7224161cf9cd4c0efa59087a13e0062e565bc81153091251db9159a6926654f",
+      "target_sha256": "444b908ccb89ddb76bfed3e6de689b19ce3707913d2555a6861af09ba84f68a3",
+      "before_file": "before/A0191.wiki",
+      "after_file": "after/A0191.wiki"
+    },
+    {
+      "page_id": "A0192",
+      "old_title": "Les stages masculinistes stigmatisent le caractère patriarcal des hommes",
+      "new_title": "Les stages masculinistes stigmatisent le caractère patriarcal des hommes",
+      "source_revision_id": 247231,
+      "source_sha256": "b6f9df9fa466c5e8f27a3773036163bb5d94b5804c78bb5352bc866837a053d1",
+      "target_sha256": "818769e2211bd57a9202d793d3856778a543d9dd3e5fe7c32b41453b780091ed",
+      "before_file": "before/A0192.wiki",
+      "after_file": "after/A0192.wiki"
+    },
+    {
+      "page_id": "A0193",
+      "old_title": "La masculinité toxique pousse les hommes au suicide",
+      "new_title": "La masculinité toxique pousse les hommes au suicide",
+      "source_revision_id": 246866,
+      "source_sha256": "ea8705f3b4fe86f244bbe89bf69b5653e6ee1710a3b4c2fb043ca05cb5ad3d32",
+      "target_sha256": "9cfd8e1109b5ce93a3f9c095e53b0d043c5aac43595bccf8396b48bf03bae088",
+      "before_file": "before/A0193.wiki",
+      "after_file": "after/A0193.wiki"
+    },
+    {
+      "page_id": "A0194",
+      "old_title": "La masculinité toxique pousse les hommes à agresser d'autres hommes",
+      "new_title": "La masculinité toxique pousse les hommes à agresser d'autres hommes",
+      "source_revision_id": 246867,
+      "source_sha256": "535dddd737cb14dbfac573e9b6093eceef14d666703c8f444f1a0f3ed11a7291",
+      "target_sha256": "08dec8833de062a8d1978797afc1375083ffa586dadb4002915886785e1d03ea",
+      "before_file": "before/A0194.wiki",
+      "after_file": "after/A0194.wiki"
+    },
+    {
+      "page_id": "A0195",
+      "old_title": "La masculinité toxique pousse les hommes dans la criminalité",
+      "new_title": "La masculinité toxique pousse les hommes dans la criminalité",
+      "source_revision_id": 246868,
+      "source_sha256": "1ac88bb3974201fcb1a7ba8412336424ba3369756d2ee3fc37dbab8c267507ae",
+      "target_sha256": "c6766c195fd6fd25c71d7f4cb2fc7a73f07e547b14915c860c701efb3fcd018b",
+      "before_file": "before/A0195.wiki",
+      "after_file": "after/A0195.wiki"
+    },
+    {
+      "page_id": "A0196",
+      "old_title": "L'exploitation, les inégalités et la misère causées par le capitalisme amplifient l'oppression des femmes",
+      "new_title": "L'exploitation, les inégalités et la misère causées par le capitalisme amplifient l'oppression des femmes",
+      "source_revision_id": 246869,
+      "source_sha256": "63c8db350f5fba373de2983d1bb61949cc0cbda6289d31dd030a57130ce30174",
+      "target_sha256": "2e41ede701ee7c621c13f1a7f26196333006c44af7f34036aaef660daf02840e",
+      "before_file": "before/A0196.wiki",
+      "after_file": "after/A0196.wiki"
+    },
+    {
+      "page_id": "A0197",
+      "old_title": "L'idée que les hommes sont agresseurs par nature sert à excuser les agressions sexistes, les féministes n'ont donc aucun intérêt à la défendre",
+      "new_title": "L'idée que les hommes sont agresseurs par nature sert à excuser les agressions sexistes, les féministes n'ont donc aucun intérêt à la défendre",
+      "source_revision_id": 246870,
+      "source_sha256": "a6104f8d68202f629f2a843f4ccf3f847255d95621537a7b0511804c04c88fc9",
+      "target_sha256": "c9576d520d64e4f1b56e542bd53d4940a9821453c8bde4b31459b3c25de1a523",
+      "before_file": "before/A0197.wiki",
+      "after_file": "after/A0197.wiki"
+    },
+    {
+      "page_id": "A0198",
+      "old_title": "Il y a eu bien plus de morts à cause de la misogynie qu'à cause du féminisme",
+      "new_title": "Il y a eu bien plus de morts à cause de la misogynie qu'à cause du féminisme",
+      "source_revision_id": 246871,
+      "source_sha256": "4888cd5869452f650aadaa9c68d222ead861e606c089efc01d022e88f46504f7",
+      "target_sha256": "670317e47d4e392b292e76ba6d3394fd1c04fec5b0452ac555bcfad74744dc6c",
+      "before_file": "before/A0198.wiki",
+      "after_file": "after/A0198.wiki"
+    },
+    {
+      "page_id": "A0199",
+      "old_title": "On ne pourra jamais combattre le sexisme si on néglige son aspect systémique",
+      "new_title": "On ne pourra jamais combattre le sexisme si on néglige son aspect systémique",
+      "source_revision_id": 246872,
+      "source_sha256": "d46c6c0dd39dd3f9211f3c1bdb99ed70ee69f1654c382c3b5508572e546978fb",
+      "target_sha256": "6100af01d076d1815dfab3480b72e021b8ec8fc2478c3fe23b648f2468bc5be2",
+      "before_file": "before/A0199.wiki",
+      "after_file": "after/A0199.wiki"
+    },
+    {
+      "page_id": "A0200",
+      "old_title": "Les immigrés et descendants d'immigrés qui s'en sortent le mieux sont ceux qui n'adoptent pas une posture victimaire",
+      "new_title": "Les immigrés et descendants d'immigrés qui s'en sortent le mieux sont ceux qui n'adoptent pas une posture victimaire",
+      "source_revision_id": 246873,
+      "source_sha256": "81cf938117ba95c82a49471020e61207b4aa1a2283210997c4a51745f18f88fa",
+      "target_sha256": "48ea804dd28d0b7480c5833c90c0fa65f2829531b9d158f39d042f9b8a6ae25f",
+      "before_file": "before/A0200.wiki",
+      "after_file": "after/A0200.wiki"
+    },
+    {
+      "page_id": "A0201",
+      "old_title": "Le terme a été dénaturé et a fait l'objet d'une réappropriation",
+      "new_title": "Le terme a été dénaturé et a fait l'objet d'une réappropriation",
+      "source_revision_id": 246874,
+      "source_sha256": "0bab91ed8c7cfb3f60a2d96c5022dddbbfaa3270c3eabc44ec56a91f89938f5b",
+      "target_sha256": "85b75c0d6c498a7d90f56d92f6c2708b332438571455f5b0035e54c0ded52b5c",
+      "before_file": "before/A0201.wiki",
+      "after_file": "after/A0201.wiki"
+    },
+    {
+      "page_id": "A0202",
+      "old_title": "Le terme \"woke\" a été utilisé à ses débuts par la gauche américaine",
+      "new_title": "Le terme \"woke\" a été utilisé à ses débuts par la gauche américaine",
+      "source_revision_id": 247148,
+      "source_sha256": "cda6c07448be1775640ef8b0ce9b5e551e5e75926f067076db2f8dbcf39d4d0d",
+      "target_sha256": "173342f064d1575622168965f1369bbe1a32c4831ff8d2056bb07d28c2940b2b",
+      "before_file": "before/A0202.wiki",
+      "after_file": "after/A0202.wiki"
+    },
+    {
+      "page_id": "A0203",
+      "old_title": "La définition du sexisme est trop large pour permettre la création",
+      "new_title": "La définition du sexisme est trop large pour permettre la création",
+      "source_revision_id": 246876,
+      "source_sha256": "6683240296ceb287782bd0a4a8105baa93fe096552905d973c1f3a8306836296",
+      "target_sha256": "00e8870422615dfca114ed9c6553e7c397cc1bac2507d3c047c313681bfec1c0",
+      "before_file": "before/A0203.wiki",
+      "after_file": "after/A0203.wiki"
+    },
+    {
+      "page_id": "A0204",
+      "old_title": "La lutte contre le sexisme se confond avec un climat puritain qui compromet la création",
+      "new_title": "La lutte contre le sexisme se confond avec un climat puritain qui compromet la création",
+      "source_revision_id": 247149,
+      "source_sha256": "94c09163ff4ddd866f5b4db5ecf9a0d4caf0d7aa765862bf79b3b25d11e7b54a",
+      "target_sha256": "c28af4d25ae02e1fd4b4b2e84101839f05ceaddab5c3dc8be5f59822a572474d",
+      "before_file": "before/A0204.wiki",
+      "after_file": "after/A0204.wiki"
+    },
+    {
+      "page_id": "A0205",
+      "old_title": "Les contenus influencent les spectateurs",
+      "new_title": "Les contenus influencent les spectateurs",
+      "source_revision_id": 247150,
+      "source_sha256": "12607b1f02ae202a2bd41758001d0f0064be6c040393b18ae6f45cc595d4e540",
+      "target_sha256": "91479beea4b13466507036c3fed1bb511a8aae0336017fac8d3f4731c7f0bdad",
+      "before_file": "before/A0205.wiki",
+      "after_file": "after/A0205.wiki"
+    },
+    {
+      "page_id": "A0206",
+      "old_title": "Les oeuvres jugées trop féministes font l'objet d'appels au boycott",
+      "new_title": "Les oeuvres jugées trop féministes font l'objet d'appels au boycott",
+      "source_revision_id": 246879,
+      "source_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "target_sha256": "b746e25ae5e70662e1ec414a398a30cc4e187fc7be28131a8bfdc3989b2689ff",
+      "before_file": "before/A0206.wiki",
+      "after_file": "after/A0206.wiki"
+    },
+    {
+      "page_id": "A0207",
+      "old_title": "Les oeuvres jugées trop féministes subissent des vote-bombings",
+      "new_title": "Les oeuvres jugées trop féministes subissent des vote-bombings",
+      "source_revision_id": 246880,
+      "source_sha256": "86d5952ebf6e52f08dd3f3502d7a8c9bf472828c4979271614b0bd0358880b63",
+      "target_sha256": "ae1267ecd04e531693bfb87d48817c276b6c8337f9390d2a4506573c38c5ad78",
+      "before_file": "before/A0207.wiki",
+      "after_file": "after/A0207.wiki"
+    },
+    {
+      "page_id": "A0208",
+      "old_title": "Les actrices ou équipes de production d'oeuvres jugées trop féministes se font régulièrement harceler",
+      "new_title": "Les actrices ou équipes de production d'oeuvres jugées trop féministes se font régulièrement harceler",
+      "source_revision_id": 246881,
+      "source_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "target_sha256": "b746e25ae5e70662e1ec414a398a30cc4e187fc7be28131a8bfdc3989b2689ff",
+      "before_file": "before/A0208.wiki",
+      "after_file": "after/A0208.wiki"
+    },
+    {
+      "page_id": "A0209",
+      "old_title": "Les différences physiques entre hommes et femmes ne justifient pas les inégalités sociales",
+      "new_title": "Les différences physiques entre hommes et femmes ne justifient pas les inégalités sociales",
+      "source_revision_id": 246882,
+      "source_sha256": "fd607ac5ee852d8639c70addf449a0384883f44d562fb6b20a213ae0610a87ce",
+      "target_sha256": "b8ea4a80c792e72335b8d5c1970cc43ceb32cd12e31d0a73429b48d8f8e11408",
+      "before_file": "before/A0209.wiki",
+      "after_file": "after/A0209.wiki"
+    },
+    {
+      "page_id": "A0210",
+      "old_title": "La question des différences physiques entre hommes et femmes est bien plus complexe qu'on ne le croit",
+      "new_title": "La question des différences physiques entre hommes et femmes est bien plus complexe qu'on ne le croit",
+      "source_revision_id": 246883,
+      "source_sha256": "ded8b2ff794389909d0548f7a8cadfc5e6b481e60bc0f8f62ed181ca80d6072d",
+      "target_sha256": "2214f71f6a9131d6613ba07d3c417ab25ac7f2d286cf1c72b1739d405e8d6248",
+      "before_file": "before/A0210.wiki",
+      "after_file": "after/A0210.wiki"
+    },
+    {
+      "page_id": "A0211",
+      "old_title": "Le rôle des hormones sexuelles dans nos comportements est très exagéré",
+      "new_title": "Le rôle des hormones sexuelles dans nos comportements est très exagéré",
+      "source_revision_id": 246884,
+      "source_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "target_sha256": "cf805746b7c9c22b001fcbeefbad191c81c41e58112ea8c2dc871d082b001bc9",
+      "before_file": "before/A0211.wiki",
+      "after_file": "after/A0211.wiki"
+    },
+    {
+      "page_id": "A0212",
+      "old_title": "Le patriarcat crée des différences arbitraires et punit celles et ceux qui cherchent à s'en démarquer",
+      "new_title": "Le patriarcat crée des différences arbitraires et punit celles et ceux qui cherchent à s'en démarquer",
+      "source_revision_id": 246885,
+      "source_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "target_sha256": "5831df4df4d16a7a9dc319d70738677561d5fceb3339fbf8a1eafefb5e3a4876",
+      "before_file": "before/A0212.wiki",
+      "after_file": "after/A0212.wiki"
+    },
+    {
+      "page_id": "A0213",
+      "old_title": "L'humour oppressif est le terreau des idéologies d'exclusion",
+      "new_title": "L'humour oppressif est le terreau des idéologies d'exclusion",
+      "source_revision_id": 246886,
+      "source_sha256": "16836628cd1f00fc4434dab6f0381512f8a97a525faaa1fc28a4bea450f47f1c",
+      "target_sha256": "1d25fcead7e202dd2ef9f126d0e7b36894facac3e966a64d67afb83b912b023b",
+      "before_file": "before/A0213.wiki",
+      "after_file": "after/A0213.wiki"
+    },
+    {
+      "page_id": "A0214",
+      "old_title": "Les mises au ban imputables aux mouvements féministes sont très marginales",
+      "new_title": "Les mises au ban imputables aux mouvements féministes sont très marginales",
+      "source_revision_id": 246887,
+      "source_sha256": "dd50e015915a73fada4e8aa3d7a2417c0d221a06a3be9777acdce7c3578bb376",
+      "target_sha256": "e5037809d26ea4c3d7bd90143d0a6ba2d1c1be95c3c170cdbe0500de3f8416a6",
+      "before_file": "before/A0214.wiki",
+      "after_file": "after/A0214.wiki"
+    },
+    {
+      "page_id": "A0215",
+      "old_title": "Les gens qui dénoncent la cancel culture sont les idiots utiles de l'extrême droite",
+      "new_title": "Les gens qui dénoncent la cancel culture sont les idiots utiles de l'extrême droite",
+      "source_revision_id": 246888,
+      "source_sha256": "ff1005b34f693b15b0298bfb79868e85e63662e46492cbafee97268f838eb7f8",
+      "target_sha256": "3980fd35963e18bed37cf362977326cfc09e7378b2f3637d61fd8852ac0bc9e5",
+      "before_file": "before/A0215.wiki",
+      "after_file": "after/A0215.wiki"
+    },
+    {
+      "page_id": "A0216",
+      "old_title": "Dénoncer la cancel culture revient la plupart du temps à faire l'apologie de l'impunité",
+      "new_title": "Dénoncer la cancel culture revient la plupart du temps à faire l'apologie de l'impunité",
+      "source_revision_id": 246889,
+      "source_sha256": "b9f1a910e2969a914c40059c3fe19306893fdb7892743e9d475477c8930d56b1",
+      "target_sha256": "ec22e67ab9d01340b27a449784265f59e98f0759700bdabe762f397097efd25d",
+      "before_file": "before/A0216.wiki",
+      "after_file": "after/A0216.wiki"
+    },
+    {
+      "page_id": "A0217",
+      "old_title": "L'extrême droite prétend s'offusquer des harcèlements mais les applaudit quand ça l'arrange",
+      "new_title": "L'extrême droite prétend s'offusquer des harcèlements mais les applaudit quand ça l'arrange",
+      "source_revision_id": 246890,
+      "source_sha256": "cf88da6767ea0883fe1538bf09cb1c9285762a5b1aecc297245f137751078660",
+      "target_sha256": "4cf830979cf27fec0738b9d03c65f7f1774086edf1c2b4bb006c5f6e84ff153f",
+      "before_file": "before/A0217.wiki",
+      "after_file": "after/A0217.wiki"
+    },
+    {
+      "page_id": "A0218",
+      "old_title": "La lutte contre le \"wokisme\" est le paravent de l'extrême droite",
+      "new_title": "La lutte contre le \"wokisme\" est le paravent de l'extrême droite",
+      "source_revision_id": 247151,
+      "source_sha256": "d7d53afe1640efdeddcf228c40ac6ba1966962c95bcb37a809e4af378ce0ea08",
+      "target_sha256": "add4f79f168f9b8854bb154812d61ae0f11c8769c2a273613c5fc28aca3a6297",
+      "before_file": "before/A0218.wiki",
+      "after_file": "after/A0218.wiki"
+    },
+    {
+      "page_id": "A0219",
+      "old_title": "Le terme \"woke\" n'a pas de réelle signification",
+      "new_title": "Le terme \"woke\" n'a pas de réelle signification",
+      "source_revision_id": 246892,
+      "source_sha256": "5c68f419a715441d534bdf074830f4248e968f06504777e00bfc3ec69878d42a",
+      "target_sha256": "fe889857315158470d123b34885956d203afc67d5260429fc5fa92de8a497dbf",
+      "before_file": "before/A0219.wiki",
+      "after_file": "after/A0219.wiki"
+    },
+    {
+      "page_id": "A0220",
+      "old_title": "Le concept de wokisme existait bien avant de porter ce nom",
+      "new_title": "Le concept de wokisme existait bien avant de porter ce nom",
+      "source_revision_id": 246893,
+      "source_sha256": "29bc3684e10c3815fb30dee4571a294e9429c70399a10896883ac0db95dfbe4d",
+      "target_sha256": "e864766681ce74133c6f6044aac56b4d3c8c542a39c16e4dafbeece2bee60bd7",
+      "before_file": "before/A0220.wiki",
+      "after_file": "after/A0220.wiki"
+    },
+    {
+      "page_id": "A0221",
+      "old_title": "Accuser les \"woke\" de puritanisme, c'est l'hopital qui se fout de la charité",
+      "new_title": "Accuser les \"woke\" de puritanisme, c'est l'hopital qui se fout de la charité",
+      "source_revision_id": 246894,
+      "source_sha256": "dc0963c7302698d246a24ec411fa29d6e6807113a5bb9f146a124a1244aa79fc",
+      "target_sha256": "bad2a8b8085e9091c2e989b2a30e14f28bffcb1ea767dd1f09311a8c697b7c29",
+      "before_file": "before/A0221.wiki",
+      "after_file": "after/A0221.wiki"
+    },
+    {
+      "page_id": "A0222",
+      "old_title": "La plupart des procès pour diffamation ne sont que des procédures-bâillon",
+      "new_title": "La plupart des procès pour diffamation ne sont que des procédures-bâillon",
+      "source_revision_id": 247152,
+      "source_sha256": "0c653eaa8254194e0582d5a726b4c7890a73bdabf2b48476742caba64c660498",
+      "target_sha256": "47c24632eac96ffbdd915e56d26ac47da1d2ba7f6fc0a512b86e687b828b6006",
+      "before_file": "before/A0222.wiki",
+      "after_file": "after/A0222.wiki"
+    },
+    {
+      "page_id": "A0223",
+      "old_title": "La diffamation n'implique pas nécessairement le mensonge",
+      "new_title": "La diffamation n'implique pas nécessairement le mensonge",
+      "source_revision_id": 246896,
+      "source_sha256": "bb3950c8f01f4c327fc31de05472b5bca9b6d36a58ec629b548f1225741b899d",
+      "target_sha256": "f084c0178ae10aab91b40984d653aaffbaa165d201527b003b271d277ade724a",
+      "before_file": "before/A0223.wiki",
+      "after_file": "after/A0223.wiki"
+    },
+    {
+      "page_id": "A0224",
+      "old_title": "Les dénonciations, même légitimes, retombent davantage sur la personne qui dénonce que sur celle qui se fait dénoncer",
+      "new_title": "Les dénonciations, même légitimes, retombent davantage sur la personne qui dénonce que sur celle qui se fait dénoncer",
+      "source_revision_id": 246897,
+      "source_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "target_sha256": "cf805746b7c9c22b001fcbeefbad191c81c41e58112ea8c2dc871d082b001bc9",
+      "before_file": "before/A0224.wiki",
+      "after_file": "after/A0224.wiki"
+    },
+    {
+      "page_id": "A0225",
+      "old_title": "Dans l'affaire Eric Brion, l'accusatrice n'avait fait que rapporter les paroles de ce dernier",
+      "new_title": "Dans l'affaire Eric Brion, l'accusatrice n'avait fait que rapporter les paroles de ce dernier",
+      "source_revision_id": 246898,
+      "source_sha256": "4351a0a581929b76f017946bf295b70ea937a8d0d7b32c9284343e20060a1201",
+      "target_sha256": "28cf80ac5235c7cd9ef5e305f6124714b3f0cbaba08e03e0fd7604fb7c23c602",
+      "before_file": "before/A0225.wiki",
+      "after_file": "after/A0225.wiki"
+    },
+    {
+      "page_id": "A0226",
+      "old_title": "La plupart des plaintes pour diffamation sont retirées dès qu'elles ne font plus de bruit médiatique",
+      "new_title": "La plupart des plaintes pour diffamation sont retirées dès qu'elles ne font plus de bruit médiatique",
+      "source_revision_id": 246899,
+      "source_sha256": "d63931191255d6bacb3d76245d393ec98bead83f38f774395eb32984add0d506",
+      "target_sha256": "895714d56d8be013642212c85845fb1ebf5bf700e138ce58043610e5ce302485",
+      "before_file": "before/A0226.wiki",
+      "after_file": "after/A0226.wiki"
+    },
+    {
+      "page_id": "A0227",
+      "old_title": "L'usage du mot \"délation\" sert surtout à diaboliser les dénonciations légitimes sans avoir à argumenter",
+      "new_title": "L'usage du mot \"délation\" sert surtout à diaboliser les dénonciations légitimes sans avoir à argumenter",
+      "source_revision_id": 246900,
+      "source_sha256": "62a2d23c9b81d5807b42a15f90ab72633a013da19fa054b925652691278fabd8",
+      "target_sha256": "9c32476995b681c458e7efca10826828ab00417eb79231ae4a35bfd464c030b8",
+      "before_file": "before/A0227.wiki",
+      "after_file": "after/A0227.wiki"
+    },
+    {
+      "page_id": "A0228",
+      "old_title": "L'affaire Mila n'intéresse l'extrême droite que parce que les agresseurs sont musulmans",
+      "new_title": "L'affaire Mila n'intéresse l'extrême droite que parce que les agresseurs sont musulmans",
+      "source_revision_id": 247233,
+      "source_sha256": "70d541703319297f4e912ed8c7ea5b38b63c14127f6c0772e612fe810c1a3d32",
+      "target_sha256": "0fb51c9af6c269a9554ed6daf7fbf9f3faf4850a0f06c0e5fe8da2ba6c3b8f25",
+      "before_file": "before/A0228.wiki",
+      "after_file": "after/A0228.wiki"
+    },
+    {
+      "page_id": "A0229",
+      "old_title": "Il est faux de prétendre que les féministes n'ont pas parlé de l'affaire Mila",
+      "new_title": "Il est faux de prétendre que les féministes n'ont pas parlé de l'affaire Mila",
+      "source_revision_id": 247235,
+      "source_sha256": "1559445e14fad82ce99825b0ec116c64ed1687c517fccc653fc7a0e4235b842b",
+      "target_sha256": "bd92e0cbe8a14ade6c635aca36df196b519bdee9a3db35dcdd0c715251833957",
+      "before_file": "before/A0229.wiki",
+      "after_file": "after/A0229.wiki"
+    },
+    {
+      "page_id": "A0230",
+      "old_title": "Sans l'extrême droite, il n'y aurait pas eu d'\"affaire Mila\"",
+      "new_title": "Sans l'extrême droite, il n'y aurait pas eu d'\"affaire Mila\"",
+      "source_revision_id": 246901,
+      "source_sha256": "0f02db5649bd1d0ed0a1a824a23ee67ad9b1e9099ad1984f06a4bff8fa62df3a",
+      "target_sha256": "30b10b57a62cf21ec32e745f34207a24ea2346403343cf51e2f2237ef318e676",
+      "before_file": "before/A0230.wiki",
+      "after_file": "after/A0230.wiki"
+    },
+    {
+      "page_id": "A0231",
+      "old_title": "\"L'affaire Mila\" n'est qu'un des coups médiatiques manigancés par l'extrême droite pour piéger la gauche",
+      "new_title": "\"L'affaire Mila\" n'est qu'un des coups médiatiques manigancés par l'extrême droite pour piéger la gauche",
+      "source_revision_id": 246902,
+      "source_sha256": "adae05bc540aa97d48c636fe4f67d30604805254591436211aeb18ddc4408eea",
+      "target_sha256": "20bf17966eaa25e92e07814fc192ec474b664ae97672625e070d2c2f34e269b7",
+      "before_file": "before/A0231.wiki",
+      "after_file": "after/A0231.wiki"
+    },
+    {
+      "page_id": "A0232",
+      "old_title": "L'intersectionnalité empêche des personnes marginalisées de creuser leur propre tombe par haine envers d'autres personnes marginalisées",
+      "new_title": "L'intersectionnalité empêche des personnes marginalisées de creuser leur propre tombe par haine envers d'autres personnes marginalisées",
+      "source_revision_id": 246903,
+      "source_sha256": "55144ee763f2b1f2725652e5e50ea202027bd49a4803ce0f8465f684ce506435",
+      "target_sha256": "fa7698169e17fb39c5134afb3ec78ee69497e54f1c137894ceecfd1ca569844e",
+      "before_file": "before/A0232.wiki",
+      "after_file": "after/A0232.wiki"
+    },
+    {
+      "page_id": "A0233",
+      "old_title": "L'intersectionnalité existe depuis les années 80, soit bien avant la naissance du wokisme dans sa définition actuelle",
+      "new_title": "L'intersectionnalité existe depuis les années 80, soit bien avant la naissance du wokisme dans sa définition actuelle",
+      "source_revision_id": 247237,
+      "source_sha256": "65697cfa253c9ff809ec3012ff853334f13f30958f298655babea5b8948529e3",
+      "target_sha256": "3c031770170933ea2dfc884e54b6d416a19ea07f4726f9a89946f5e6e7f866fb",
+      "before_file": "before/A0233.wiki",
+      "after_file": "after/A0233.wiki"
+    },
+    {
+      "page_id": "A0234",
+      "old_title": "La plupart des fémonationalistes se désintéressent du sexisme quand le voile ne rentre plus dans l'équation",
+      "new_title": "La plupart des fémonationalistes se désintéressent du sexisme quand le voile ne rentre plus dans l'équation",
+      "source_revision_id": 246904,
+      "source_sha256": "19f68281fa18f297d05d35e694360c0d159770f57f2fd3a463b1bbfd5d991ab0",
+      "target_sha256": "3d4ebabfb45e1da4b37f0caac306d77911fee4334b689c0aa6e0b4fd0f90be95",
+      "before_file": "before/A0234.wiki",
+      "after_file": "after/A0234.wiki"
+    },
+    {
+      "page_id": "A0235",
+      "old_title": "Les fémonationalistes n'ont aucun problème avec le sexisme de l'occident",
+      "new_title": "Les fémonationalistes n'ont aucun problème avec le sexisme de l'occident",
+      "source_revision_id": 247153,
+      "source_sha256": "b8ad0e258dc5733134209bed51406020e35ab3286c0cccb6003f61e2c7020381",
+      "target_sha256": "b54b41e9e0b4fd476ba280c5951c8f3d9f8b389e14f8a91caaae1b6d440870a1",
+      "before_file": "before/A0235.wiki",
+      "after_file": "after/A0235.wiki"
+    },
+    {
+      "page_id": "A0236",
+      "old_title": "Le fémonationalisme utilise le sexisme comme écran de fumée au racisme",
+      "new_title": "Le fémonationalisme utilise le sexisme comme écran de fumée au racisme",
+      "source_revision_id": 246906,
+      "source_sha256": "979f6b7617cfbd80208035aacf9b0ee0dacd50e1b3586c93d029a8af30330e56",
+      "target_sha256": "d8678104551706c984918057a1d6974e77cf35e7763003db53a3221e3585a48e",
+      "before_file": "before/A0236.wiki",
+      "after_file": "after/A0236.wiki"
+    },
+    {
+      "page_id": "A0237",
+      "old_title": "L'interdiction de la burqa prétend libérer les femmes mais contribue à les emprisonner",
+      "new_title": "L'interdiction de la burqa prétend libérer les femmes mais contribue à les emprisonner",
+      "source_revision_id": 246907,
+      "source_sha256": "d291fb5b452b69f9b6553307516ff9603ecbb9ef13af90ccaf22927697cf8e7e",
+      "target_sha256": "204937c0ef0fb40e78263861b9af7c307a1d547625466e01bada34047ec88a7d",
+      "before_file": "before/A0237.wiki",
+      "after_file": "after/A0237.wiki"
+    },
+    {
+      "page_id": "A0238",
+      "old_title": "La majorité des viols et agressions sexuelles sont commis par des proches de la victime",
+      "new_title": "La majorité des viols et agressions sexuelles sont commis par des proches de la victime",
+      "source_revision_id": 246908,
+      "source_sha256": "29babefe216f5c112b05c66a0abe93fc42441cb07d2b370e8d637e69edd7331c",
+      "target_sha256": "eae267ef3c82f73fad13dac9bb1c209d4578a05c6afea7007bb2050f74cc7397",
+      "before_file": "before/A0238.wiki",
+      "after_file": "after/A0238.wiki"
+    },
+    {
+      "page_id": "A0239",
+      "old_title": "L'intérêt apparent des fémonationalistes pour le sort des femmes musulmanes est le faux nez d'un paternalisme néocolonial",
+      "new_title": "L'intérêt apparent des fémonationalistes pour le sort des femmes musulmanes est le faux nez d'un paternalisme néocolonial",
+      "source_revision_id": 217282,
+      "source_sha256": "156c3f8e6567f0969557962e7a2516949d7fd1197eea1e63b155540f415d7ee1",
+      "target_sha256": "99666c923afade62056faa12c5eaa7ac7d358d57c988e77d4f62f29a3f84b8f1",
+      "before_file": "before/A0239.wiki",
+      "after_file": "after/A0239.wiki"
+    },
+    {
+      "page_id": "A0240",
+      "old_title": "Le traitement des femmes en Occident est très loin d'être irréprochable",
+      "new_title": "Le traitement des femmes en Occident est très loin d'être irréprochable",
+      "source_revision_id": 247154,
+      "source_sha256": "402ce53c96928be88d76c4c248c10b745a5483973e07d50cae34cb9b70f222b2",
+      "target_sha256": "c583163e507688a72f416ba70a7ab1f071dda836f8f2ba0610ba462f93fbd521",
+      "before_file": "before/A0240.wiki",
+      "after_file": "after/A0240.wiki"
+    },
+    {
+      "page_id": "A0241",
+      "old_title": "L'extrême droite ne s'intéresse aux viols que quand ils sont commis par les immigrés alors que la plupart des violeurs sont blancs",
+      "new_title": "L'extrême droite ne s'intéresse aux viols que quand ils sont commis par les immigrés alors que la plupart des violeurs sont blancs",
+      "source_revision_id": 247239,
+      "source_sha256": "6933eb20a0f5c535a609ddbd35921d16ecbfe08658a83397c609092c4d4ec7bd",
+      "target_sha256": "7ba5bde62cad048a2719b9fb74f3f9c235ab7df9396b6ce444fcebdcb4247a51",
+      "before_file": "before/A0241.wiki",
+      "after_file": "after/A0241.wiki"
+    },
+    {
+      "page_id": "A0242",
+      "old_title": "L'extrême droite reconnaît elle-même à demi-mot qu'elle se fiche bien du sexisme",
+      "new_title": "L'extrême droite reconnaît elle-même à demi-mot qu'elle se fiche bien du sexisme",
+      "source_revision_id": 247241,
+      "source_sha256": "6f8fae5a1d1a1578c52a4d4564fc9e8fa00b7603fcd6f8ece07b5a66f533bfe4",
+      "target_sha256": "ca91af217b7192c22c5fb86335fde786313b37acfd5e67d17e90c46433358a18",
+      "before_file": "before/A0242.wiki",
+      "after_file": "after/A0242.wiki"
+    },
+    {
+      "page_id": "A0243",
+      "old_title": "Les inégalités économiques touchent majoritairement les femmes, il est donc tout à fait pertinent de mener le combat à ce niveau",
+      "new_title": "Les inégalités économiques touchent majoritairement les femmes, il est donc tout à fait pertinent de mener le combat à ce niveau",
+      "source_revision_id": 246910,
+      "source_sha256": "b123739e852a13d63f79dda25f8fd94e46c7f07cff00029869da6f6f1c0082be",
+      "target_sha256": "d488383c253cca2c1476dc4b6989b82c8a947ecbbbb3604cfb827bff9edf0b2b",
+      "before_file": "before/A0243.wiki",
+      "after_file": "after/A0243.wiki"
+    },
+    {
+      "page_id": "A0244",
+      "old_title": "La plupart des facteurs d'inégalité salariale touchent exclusivement les femmes",
+      "new_title": "La plupart des facteurs d'inégalité salariale touchent exclusivement les femmes",
+      "source_revision_id": 246911,
+      "source_sha256": "d66fa616a9d0c712564b2270fb05cee541d6401d48feacce380fca1614decc92",
+      "target_sha256": "18fb3ff7aae2b1b180a2a0861411ab68769b85a6af6e059af0df40e7ecbeb302",
+      "before_file": "before/A0244.wiki",
+      "after_file": "after/A0244.wiki"
+    },
+    {
+      "page_id": "A0245",
+      "old_title": "La sous-représentation des femmes dans les hauts postes normalise l'idée qu'elles ne sont bonnes que pour les postes subalternes",
+      "new_title": "La sous-représentation des femmes dans les hauts postes normalise l'idée qu'elles ne sont bonnes que pour les postes subalternes",
+      "source_revision_id": 246912,
+      "source_sha256": "c61666907b9fa1718ca3714638c3c6dcb0049933da6650fbe65c0dc6e69477db",
+      "target_sha256": "9db291fe6a62d8b2e831a902db62f282de9b345b156f25c13d36120a1df8c496",
+      "before_file": "before/A0245.wiki",
+      "after_file": "after/A0245.wiki"
+    },
+    {
+      "page_id": "A0246",
+      "old_title": "Certaines femmes subissent du harcèlement uniquement parce qu'elles font un travail jugé masculin",
+      "new_title": "Certaines femmes subissent du harcèlement uniquement parce qu'elles font un travail jugé masculin",
+      "source_revision_id": 246913,
+      "source_sha256": "c61666907b9fa1718ca3714638c3c6dcb0049933da6650fbe65c0dc6e69477db",
+      "target_sha256": "0a508b22a7020b4b570efc83b96ca22a2b252cde9c71ff4c7377079732d30541",
+      "before_file": "before/A0246.wiki",
+      "after_file": "after/A0246.wiki"
+    },
+    {
+      "page_id": "A0247",
+      "old_title": "À capacités et compétences égales, une femme sera jugée moins compétente si elle fait un travail \"masculin\"",
+      "new_title": "À capacités et compétences égales, une femme sera jugée moins compétente si elle fait un travail \"masculin\"",
+      "source_revision_id": 246914,
+      "source_sha256": "c61666907b9fa1718ca3714638c3c6dcb0049933da6650fbe65c0dc6e69477db",
+      "target_sha256": "43ca8317f7d0905b19174cfe1d292dd03f03f3b3db743359b91914311ab08f47",
+      "before_file": "before/A0247.wiki",
+      "after_file": "after/A0247.wiki"
+    },
+    {
+      "page_id": "A0248",
+      "old_title": "Les postes à responsabilités sont mieux payés et donnent plus de pouvoir, les hommes ont donc clairement intérêt à en conserver le monopole",
+      "new_title": "Les postes à responsabilités sont mieux payés et donnent plus de pouvoir, les hommes ont donc clairement intérêt à en conserver le monopole",
+      "source_revision_id": 246915,
+      "source_sha256": "3336f0528da37f22c7babc1760f118ff8f5440b7321e89c98fbde1f8b393ce73",
+      "target_sha256": "e1ea1f785271a5914531030885b326e97d4b88863c213db153376a44db0e70b6",
+      "before_file": "before/A0248.wiki",
+      "after_file": "after/A0248.wiki"
+    },
+    {
+      "page_id": "A0249",
+      "old_title": "Les hommes ont de tout temps cherché à cadenasser l'accès des femmes aux postes élevés, ils en tirent donc bel et bien un bénéfice",
+      "new_title": "Les hommes ont de tout temps cherché à cadenasser l'accès des femmes aux postes élevés, ils en tirent donc bel et bien un bénéfice",
+      "source_revision_id": 247243,
+      "source_sha256": "16023f1eeaae27d802abb6e8a4611d99160f4a2e7c134c566ea42ca610b56182",
+      "target_sha256": "d47d1fb9fbac7605682ef4df4201aea3c10c926fc0843952ead64049a7314d5a",
+      "before_file": "before/A0249.wiki",
+      "after_file": "after/A0249.wiki"
+    },
+    {
+      "page_id": "A0250",
+      "old_title": "La sous-représentation des ingénieures a des conséquences très concrètes",
+      "new_title": "La sous-représentation des ingénieures a des conséquences très concrètes",
+      "source_revision_id": 246916,
+      "source_sha256": "86d11870fbbcabe9190e68679488b25b4751d10d050922ce84d182d4fe6a9df3",
+      "target_sha256": "26fd588afb392cf9c72da9ff4207538d522356bb7478e2d39e933794400d41e0",
+      "before_file": "before/A0250.wiki",
+      "after_file": "after/A0250.wiki"
+    },
+    {
+      "page_id": "A0251",
+      "old_title": "La misogynie ambiante a empêché les femmes de marquer l'histoire",
+      "new_title": "La misogynie ambiante a empêché les femmes de marquer l'histoire",
+      "source_revision_id": 246917,
+      "source_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "target_sha256": "0c934f5aa73e257aaa1b936ce9396a1cd60ee296b0bd9c8620f547a7fb91e57d",
+      "before_file": "before/A0251.wiki",
+      "after_file": "after/A0251.wiki"
+    },
+    {
+      "page_id": "A0252",
+      "old_title": "L'impact historique des femmes a été important, mais a été volontairement passé sous silence",
+      "new_title": "L'impact historique des femmes a été important, mais a été volontairement passé sous silence",
+      "source_revision_id": 246918,
+      "source_sha256": "f59b11f6ccd0b007d6ae9b730205390cc5fdfa6e2b3d22f95aa584d637ed0c22",
+      "target_sha256": "c3faadd5fe18f5953490c43f7b02ec4eb6166a30045e7a5963a8aec0a6457ea8",
+      "before_file": "before/A0252.wiki",
+      "after_file": "after/A0252.wiki"
+    },
+    {
+      "page_id": "A0253",
+      "old_title": "Faux, l'idée que les femmes n'ont pas marqué l'histoire accrédite l'idée qu'elles valent moins bien que les hommes",
+      "new_title": "Faux, l'idée que les femmes n'ont pas marqué l'histoire accrédite l'idée qu'elles valent moins bien que les hommes",
+      "source_revision_id": 246919,
+      "source_sha256": "44d82b34b29d37a1b1fd71eb381aba1ad044454a3c064ed0a33e2ba2b2b1979a",
+      "target_sha256": "a1c3e5ffa771b0cad785a3b16876beb9ae3df7d4b692ac5a5e5096286881f0ac",
+      "before_file": "before/A0253.wiki",
+      "after_file": "after/A0253.wiki"
+    },
+    {
+      "page_id": "A0254",
+      "old_title": "Si les hommes ne tiraient pas profit de cette représentation, ils ne dépenseraient pas autant d'énergie à en verrouiller l'accès aux femmes",
+      "new_title": "Si les hommes ne tiraient pas profit de cette représentation, ils ne dépenseraient pas autant d'énergie à en verrouiller l'accès aux femmes",
+      "source_revision_id": 247245,
+      "source_sha256": "648e1aa9356c81ed0182c38a0d9e02bd78e6ec226af7577c40fc952d80312c4b",
+      "target_sha256": "9267d8305a4d31e75efc13c030f8352d90ea830f5594d7b9407d7b4c8fd40f62",
+      "before_file": "before/A0254.wiki",
+      "after_file": "after/A0254.wiki"
+    },
+    {
+      "page_id": "A0255",
+      "old_title": "Pour la majorité des femmes, être une femme au foyer est une contrainte la plupart du temps",
+      "new_title": "Pour la majorité des femmes, être une femme au foyer est une contrainte la plupart du temps",
+      "source_revision_id": 246920,
+      "source_sha256": "182ebe3853a1a327ae736b2e36266ad4146c34ba4ee4518709909104e2598cdb",
+      "target_sha256": "c51b4c414990ac5693a1360926f71805c89cd9f8176d60e4bdfbaff63555fbc4",
+      "before_file": "before/A0255.wiki",
+      "after_file": "after/A0255.wiki"
+    },
+    {
+      "page_id": "A0256",
+      "old_title": "Les tradwives sont les idiotes utiles du sexisme",
+      "new_title": "Les tradwives sont les idiotes utiles du sexisme",
+      "source_revision_id": 246921,
+      "source_sha256": "cf019a035dfeb86cf9a584dba014d7914052c1dc47e971acc48779a2b50ce9df",
+      "target_sha256": "2b96ac0b2be8a5bf556906237fc4ab4248a2f715be079d5fe869e204e45240f4",
+      "before_file": "before/A0256.wiki",
+      "after_file": "after/A0256.wiki"
+    },
+    {
+      "page_id": "A0257",
+      "old_title": "Défendre le choix d'être femme au foyer est le paravent d'une extrême droite se faisant passer pour féministe",
+      "new_title": "Défendre le choix d'être femme au foyer est le paravent d'une extrême droite se faisant passer pour féministe",
+      "source_revision_id": 246922,
+      "source_sha256": "1e54b988b525c24272089bd96b444653107d6a0d5ed3e7845138885209125cce",
+      "target_sha256": "6eca8c7e5da1207da67f7765e8e0eb9436ed18621d8d3b0d3d1c592225b37427",
+      "before_file": "before/A0257.wiki",
+      "after_file": "after/A0257.wiki"
+    },
+    {
+      "page_id": "A0258",
+      "old_title": "Bien plus que le fonctionnement individuel des couples, c'est le fonctionnement de la société qui fait que ce sont les femmes qui font la majorité des tâches ménagères",
+      "new_title": "Bien plus que le fonctionnement individuel des couples, c'est le fonctionnement de la société qui fait que ce sont les femmes qui font la majorité des tâches ménagères",
+      "source_revision_id": 246923,
+      "source_sha256": "f39ed77e019f6636195e51070886c232e71bbbdafe5737430653ac30bc062eea",
+      "target_sha256": "7e6f248034d98a2e53442faefa03293a65235346a71664f241ca357460c52ae0",
+      "before_file": "before/A0258.wiki",
+      "after_file": "after/A0258.wiki"
+    },
+    {
+      "page_id": "A0259",
+      "old_title": "Les cas de tâches ménagères équitablement partagées sont marginaux",
+      "new_title": "Les cas de tâches ménagères équitablement partagées sont marginaux",
+      "source_revision_id": 246924,
+      "source_sha256": "6b50b5e00a58d66522378c8b06dba4682a02060f8163c01c3cfd397e38f391c0",
+      "target_sha256": "f6b7bcba840619fff688292dfeb0e41438050b1950af588d2f7bca3429008aef",
+      "before_file": "before/A0259.wiki",
+      "after_file": "after/A0259.wiki"
+    },
+    {
+      "page_id": "A0260",
+      "old_title": "L'immense majorité des données en la matière sont altérées par des biais statistiques très importants",
+      "new_title": "L'immense majorité des données en la matière sont altérées par des biais statistiques très importants",
+      "source_revision_id": 247247,
+      "source_sha256": "80aa8b85aec1ed82539a7bcdc406b51a719696009148863977a8f5ac52d09b04",
+      "target_sha256": "6c821294cbe027056b6d0a2aa492baab4a499f174ede898ed322f8ebca4c2ebe",
+      "before_file": "before/A0260.wiki",
+      "after_file": "after/A0260.wiki"
+    },
+    {
+      "page_id": "A0261",
+      "old_title": "3 femmes sur 4 subissent du cyberharcèlement",
+      "new_title": "3 femmes sur 4 subissent du cyberharcèlement",
+      "source_revision_id": 246925,
+      "source_sha256": "18678da1b2af022185348ce89fb83bbd9e2f92aa2c6871c2ab049e0c72fcf58e",
+      "target_sha256": "ef9faa446cdab99d85ff18e1f634ea25a01514f676d23f5e83a2cd6eb92f786f",
+      "before_file": "before/A0261.wiki",
+      "after_file": "after/A0261.wiki"
+    },
+    {
+      "page_id": "A0262",
+      "old_title": "Le cyberharcèlement est très largement impuni",
+      "new_title": "Le cyberharcèlement est très largement impuni",
+      "source_revision_id": 246926,
+      "source_sha256": "2f66227dd4c7992b9ebe3d74c2bffbbd48a201ee33fe98edcf2e9cdaafe86933",
+      "target_sha256": "2e918c487a25e65bbc8f83de48393ded14486fe8809c6f84e7d9ea32d4d1fda6",
+      "before_file": "before/A0262.wiki",
+      "after_file": "after/A0262.wiki"
+    },
+    {
+      "page_id": "A0263",
+      "old_title": "Les créatrices de contenu font globalement moins d'audience que les créateurs",
+      "new_title": "Les créatrices de contenu font globalement moins d'audience que les créateurs",
+      "source_revision_id": 246927,
+      "source_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "target_sha256": "6b9e8b97a58549f11e77d5ec578f3c5c764a43601e1c9d58807f6d6b9b272974",
+      "before_file": "before/A0263.wiki",
+      "after_file": "after/A0263.wiki"
+    },
+    {
+      "page_id": "A0264",
+      "old_title": "Les contenus féministes sont régulièrement censurés",
+      "new_title": "Les contenus féministes sont régulièrement censurés",
+      "source_revision_id": 246928,
+      "source_sha256": "46f059cc2ef6eeb9f63e32e4ddb4506af157b371fd4b9de0e456e97c76dd9900",
+      "target_sha256": "18efc1a8caf0f90aac9276cfbad185850c08f8cc309df53e9d8f1155b8e8c2b2",
+      "before_file": "before/A0264.wiki",
+      "after_file": "after/A0264.wiki"
+    },
+    {
+      "page_id": "A0265",
+      "old_title": "La modération de Facebook est sexiste",
+      "new_title": "La modération de Facebook est sexiste",
+      "source_revision_id": 246929,
+      "source_sha256": "8c3d297ebdc91ed30626063eb0956b026aa3209c83ac1a1c89afa36c02501e9c",
+      "target_sha256": "999617aecb89f1e440700967e96abf871c07b557726baa9f8d5fb7ce99a94359",
+      "before_file": "before/A0265.wiki",
+      "after_file": "after/A0265.wiki"
+    },
+    {
+      "page_id": "A0266",
+      "old_title": "La nouvelle politique de modération de Facebook autorise désormais explicitement les discours de haine si chers à l'extrême droite",
+      "new_title": "La nouvelle politique de modération de Facebook autorise désormais explicitement les discours de haine si chers à l'extrême droite",
+      "source_revision_id": 247249,
+      "source_sha256": "0802f060f0923ff2037c69034e6ecd9dab582b7e97eb8487e305b8958d733bea",
+      "target_sha256": "a693792ca29955695feda75e7535075ac2c0e8ea25d0a1464099f64c43f9d3d3",
+      "before_file": "before/A0266.wiki",
+      "after_file": "after/A0266.wiki"
+    },
+    {
+      "page_id": "A0267",
+      "old_title": "Même les revendications de gauche modérées et/ou légitimes suffisent à radicaliser les conservateurs",
+      "new_title": "Même les revendications de gauche modérées et/ou légitimes suffisent à radicaliser les conservateurs",
+      "source_revision_id": 246930,
+      "source_sha256": "c13e4a0aa86a98fb3203f883cac77a01288c3b5abdf761495a8d67b81cd4d42d",
+      "target_sha256": "f827b38a2bff0185a96535a20cff2b1a567f35bdc2511c4f77c1fe5ae95b8d0c",
+      "before_file": "before/A0267.wiki",
+      "after_file": "after/A0267.wiki"
+    },
+    {
+      "page_id": "A0268",
+      "old_title": "La gauche a une responsabilité écrasante dans la montée de l'extrême droite",
+      "new_title": "La gauche a une responsabilité écrasante dans la montée de l'extrême droite",
+      "source_revision_id": 244486,
+      "source_sha256": "a6565cfff8cc7eff85d3a69a2a133e5895007ed53812e0e24a1f2f8e5122441e",
+      "target_sha256": "d2632a5f9b9c51c84555aff1687f0a13148f752ded4328eaf4ef61d330dd18eb",
+      "before_file": "before/A0268.wiki",
+      "after_file": "after/A0268.wiki"
+    },
+    {
+      "page_id": "A0269",
+      "old_title": "Il est indécent d'accuser la gauche de ne pas être assez gentille alors que l'extrême droite est infiniment plus violente qu'elle sans que ça ne gêne personne",
+      "new_title": "Il est indécent d'accuser la gauche de ne pas être assez gentille alors que l'extrême droite est infiniment plus violente qu'elle sans que ça ne gêne personne",
+      "source_revision_id": 246931,
+      "source_sha256": "75809f838c2d464c16ec2df4b0f5a3da82c564d391119f459dc62ad4a9f065c0",
+      "target_sha256": "73834c146f1d90a400196556b8d1371a3d4454992e49bfd502ee3a3772889806",
+      "before_file": "before/A0269.wiki",
+      "after_file": "after/A0269.wiki"
+    },
+    {
+      "page_id": "A0270",
+      "old_title": "Ce n'est pas de la faute de la gauche si les conservateurs ou les modérés ne sont pas capables de supporter leur propre dissonance cognitive",
+      "new_title": "Ce n'est pas de la faute de la gauche si les conservateurs ou les modérés ne sont pas capables de supporter leur propre dissonance cognitive",
+      "source_revision_id": 246932,
+      "source_sha256": "1ba80625b1dcdc1afc29f96f39dc2a673f292b3bb21775c4e6c29071f314a35a",
+      "target_sha256": "cb2990a8c68e9e40c42f3e5d963148ca7b4e5b1ae9abe9ccb58fb511107db0b7",
+      "before_file": "before/A0270.wiki",
+      "after_file": "after/A0270.wiki"
+    },
+    {
+      "page_id": "A0271",
+      "old_title": "Si les féministes n'avaient jamais été extrémistes selon les standards de leur époque, elles n'auraient jamais obtenu le droit de vote",
+      "new_title": "Si les féministes n'avaient jamais été extrémistes selon les standards de leur époque, elles n'auraient jamais obtenu le droit de vote",
+      "source_revision_id": 247251,
+      "source_sha256": "c0493813c195fe617d0859bb2e26ab909679f5b370ce19ad764c9e9f728233d3",
+      "target_sha256": "b5e9cf0bcfa0d96e201959048f816f26a9c0755fd4f60e63fb0e6e88a27f1415",
+      "before_file": "before/A0271.wiki",
+      "after_file": "after/A0271.wiki"
+    },
+    {
+      "page_id": "A0272",
+      "old_title": "Le stalinisme a abandonné la lutte contre l'oppression des femmes",
+      "new_title": "Le stalinisme a abandonné la lutte contre l'oppression des femmes",
+      "source_revision_id": 246933,
+      "source_sha256": "e486824eba67e5fe4030316dc93d415871ede720fafdb5419864816a080d79fe",
+      "target_sha256": "bf4765597dc0408cdfaf65e7922d038c645606f1015282935838e7120f61f39c",
+      "before_file": "before/A0272.wiki",
+      "after_file": "after/A0272.wiki"
+    },
+    {
+      "page_id": "A0273",
+      "old_title": "Le mouvement ouvrier socialiste a mené la lutte contre l'oppression des femmes dès le 19e siècle",
+      "new_title": "Le mouvement ouvrier socialiste a mené la lutte contre l'oppression des femmes dès le 19e siècle",
+      "source_revision_id": 246934,
+      "source_sha256": "650875686490ba2bf0a3228a87d8f65b4d843d79995fba16077081cfe5d513c9",
+      "target_sha256": "bd59c002474e72013e775e97f8047f6da59a8132d7f654c0a36ac7fcc2a655eb",
+      "before_file": "before/A0273.wiki",
+      "after_file": "after/A0273.wiki"
+    },
+    {
+      "page_id": "A0274",
+      "old_title": "Le féminisme bourgeois ne relie pas l'oppression des femmes à l'exploitation capitaliste",
+      "new_title": "Le féminisme bourgeois ne relie pas l'oppression des femmes à l'exploitation capitaliste",
+      "source_revision_id": 246935,
+      "source_sha256": "c5c7e22f993acecb9885c86b487f6038661c5b6707dafc89b1fb1918aaac8017",
+      "target_sha256": "689a5edd0ed60f6596325ca88acddc513aa08c9f2d58ec451e98e4d74b1a82ff",
+      "before_file": "before/A0274.wiki",
+      "after_file": "after/A0274.wiki"
+    },
+    {
+      "page_id": "A0275",
+      "old_title": "Le féminisme bourgeois considère les femmes comme des victimes et pas comme des combattantes qui peuvent changer la société",
+      "new_title": "Le féminisme bourgeois considère les femmes comme des victimes et pas comme des combattantes qui peuvent changer la société",
+      "source_revision_id": 246936,
+      "source_sha256": "59f9f8ca7a85a6e2a07e44e5cfb93d931453c47cf578787ae42739a69078118c",
+      "target_sha256": "5326427f923715be55834bb7f658fd0a09992a980cbe17420f7e573a167d5d89",
+      "before_file": "before/A0275.wiki",
+      "after_file": "after/A0275.wiki"
+    },
+    {
+      "page_id": "A0276",
+      "old_title": "Bien des hommes ont fait la preuve de leur engagement pour le combat féministe",
+      "new_title": "Bien des hommes ont fait la preuve de leur engagement pour le combat féministe",
+      "source_revision_id": 246937,
+      "source_sha256": "321986a04b7af39709deae70eed1e632931021fdd7edbbc2dfbf1e7113a441c9",
+      "target_sha256": "4a7cc4e220d5036e6d8f210dd89fc9bc46fee5e8fc5f75c4c9384fbe6bf8fe13",
+      "before_file": "before/A0276.wiki",
+      "after_file": "after/A0276.wiki"
+    },
+    {
+      "page_id": "A0277",
+      "old_title": "Les femmes ont joué un rôle moteur dans les révolutions passées",
+      "new_title": "Les femmes ont joué un rôle moteur dans les révolutions passées",
+      "source_revision_id": 246938,
+      "source_sha256": "7952ddd33a60e90c1bcd316512f8a9c94dd994dc407449ad3247fbec864dbfe8",
+      "target_sha256": "a30da7c279990717ceddb7541793c7a44586030186672bde14fd32f954111ba6",
+      "before_file": "before/A0277.wiki",
+      "after_file": "after/A0277.wiki"
+    },
+    {
+      "page_id": "A0278",
+      "old_title": "La révolution russe a porté au plus haut la lutte pour l'émancipation des femmes",
+      "new_title": "La révolution russe a porté au plus haut la lutte pour l'émancipation des femmes",
+      "source_revision_id": 246939,
+      "source_sha256": "689b977467e266f70aa8011bd1736e8bbc9b18c47445a40e5fdc1e23a0841aca",
+      "target_sha256": "21b1fa20468dea51d6c73e3ef0bcd5027b4ab1b3ed3c44880fce6ac2a7be3796",
+      "before_file": "before/A0278.wiki",
+      "after_file": "after/A0278.wiki"
+    },
+    {
+      "page_id": "A0279",
+      "old_title": "Le mansplaining n'est pas juste un contre-argument, c'est la tendance qu'ont les hommes à se croire plus compétents que les femmes dans des domaines où elles sont pourtant expertes",
+      "new_title": "Le mansplaining n'est pas juste un contre-argument, c'est la tendance qu'ont les hommes à se croire plus compétents que les femmes dans des domaines où elles sont pourtant expertes",
+      "source_revision_id": 246940,
+      "source_sha256": "4e44e713df886b226ad4c02d6875c7f28ccd6a733a4fafabd36897453df6ee01",
+      "target_sha256": "fa19943871fa0f481afcbb5db59165dbe39fcb2d88bc07c9e9509665f69492fa",
+      "before_file": "before/A0279.wiki",
+      "after_file": "after/A0279.wiki"
+    },
+    {
+      "page_id": "A0280",
+      "old_title": "La masculinité toxique abîme la santé mentale des hommes",
+      "new_title": "La masculinité toxique abîme la santé mentale des hommes",
+      "source_revision_id": 246941,
+      "source_sha256": "b67270fafc89ab86e07c76105e432ec6c5bfffcbd04c7562e7eafdd51cfea6e3",
+      "target_sha256": "a8ba56f3336f2b46420089b9cd695c473c44169b045b0d35f5a439781bda5997",
+      "before_file": "before/A0280.wiki",
+      "after_file": "after/A0280.wiki"
+    },
+    {
+      "page_id": "A0281",
+      "old_title": "La masculinité toxique expose les hommes en dehors des canons de cette dernière à des violences",
+      "new_title": "La masculinité toxique expose les hommes en dehors des canons de cette dernière à des violences",
+      "source_revision_id": 246942,
+      "source_sha256": "e3abaabb8b605a37506caad7e3568476f48bc15ba3a22d8352799f0c840091b7",
+      "target_sha256": "5c7f81edb75891c29e351d3c4f51d71fe0d2335f5149ed7640d544fc0b46cec8",
+      "before_file": "before/A0281.wiki",
+      "after_file": "after/A0281.wiki"
+    },
+    {
+      "page_id": "A0282",
+      "old_title": "Les hommes coupent plus souvent la parole aux femmes que l'inverse",
+      "new_title": "Les hommes coupent plus souvent la parole aux femmes que l'inverse",
+      "source_revision_id": 246943,
+      "source_sha256": "04d51d0a634864d4330d79b6d58f59283651b9cf49b57d08b97ac4d7fc52c55e",
+      "target_sha256": "08d203c002be17ffa7b4e354ea0aefc35fa4a41d75b8ee66c4b771793cce9061",
+      "before_file": "before/A0282.wiki",
+      "after_file": "after/A0282.wiki"
+    },
+    {
+      "page_id": "A0283",
+      "old_title": "Si les femmes se comportent ainsi, c'est parce que le sexisme de notre culture les y encourage, voire les y force",
+      "new_title": "Si les femmes se comportent ainsi, c'est parce que le sexisme de notre culture les y encourage, voire les y force",
+      "source_revision_id": 247253,
+      "source_sha256": "e8a69d71a101a01e4d3593f962c35c4e1b21e9d696817e9c97ace943e5122f1c",
+      "target_sha256": "f83549224cae15cda9b5bc220d892ceff1c6e72bc85c35a0e4cf49b073b7c959",
+      "before_file": "before/A0283.wiki",
+      "after_file": "after/A0283.wiki"
+    },
+    {
+      "page_id": "A0284",
+      "old_title": "Les hommes écartent les jambes parce qu'on leur a appris qu'ils avaient le droit de prendre tout l'espace public",
+      "new_title": "Les hommes écartent les jambes parce qu'on leur a appris qu'ils avaient le droit de prendre tout l'espace public",
+      "source_revision_id": 246944,
+      "source_sha256": "eb703850c677754ddeb1f0d01ccd645244638ab0302e4116d7b7b7523739665d",
+      "target_sha256": "114e105145b27bd5d1cbf00078d923bde973969ad7d21575d01d9ad075037db0",
+      "before_file": "before/A0284.wiki",
+      "after_file": "after/A0284.wiki"
+    },
+    {
+      "page_id": "A0285",
+      "old_title": "Les hommes sont physiologiquement capables de s'asseoir sans écarter les jambes",
+      "new_title": "Les hommes sont physiologiquement capables de s'asseoir sans écarter les jambes",
+      "source_revision_id": 246945,
+      "source_sha256": "93f136c17a806939704eeb9fb585be2399b54bf0361a7b7f63479398e4d576bc",
+      "target_sha256": "15b3d37675fdd25fffaba9228f241c227617664339daf9e3467dbdb342407200",
+      "before_file": "before/A0285.wiki",
+      "after_file": "after/A0285.wiki"
+    },
+    {
+      "page_id": "A0286",
+      "old_title": "On ne devrait même pas avoir à demander aux hommes de ne pas écarter les jambes",
+      "new_title": "On ne devrait même pas avoir à demander aux hommes de ne pas écarter les jambes",
+      "source_revision_id": 246946,
+      "source_sha256": "d8df6f1e2847657cc338e83999d0d95db06b69a3499e180e7566ed7e8471dc3a",
+      "target_sha256": "90eea64bde6a441215047c56100dd9c4a849af16aebe0acba28e0d629f238187",
+      "before_file": "before/A0286.wiki",
+      "after_file": "after/A0286.wiki"
+    },
+    {
+      "page_id": "A0287",
+      "old_title": "Le masculinisme existe grâce au sexisme, c'est donc bien un combat féministe",
+      "new_title": "Le masculinisme existe grâce au sexisme, c'est donc bien un combat féministe",
+      "source_revision_id": 247255,
+      "source_sha256": "0778a9adf04f87cf260d2c019da4986550162c9aa6104cddb660bfda30f74053",
+      "target_sha256": "08006d1df1caa1949c46afb2a30cc8d34e4e93f826ea473a5fde6d4382a99f6f",
+      "before_file": "before/A0287.wiki",
+      "after_file": "after/A0287.wiki"
+    },
+    {
+      "page_id": "A0288",
+      "old_title": "Accuser les immigrés de \"victimisation\" est une aberration sociologique",
+      "new_title": "Accuser les immigrés de \"victimisation\" est une aberration sociologique",
+      "source_revision_id": 246947,
+      "source_sha256": "4992aa858612aa97e2853b66339aba8e7322d3d4bc3e344851db5108af3cd1a1",
+      "target_sha256": "562b3289748c2f8869d3b1cfa98aac3dc76f5fadfe4a1a61a2f5021d62bdaeb6",
+      "before_file": "before/A0288.wiki",
+      "after_file": "after/A0288.wiki"
+    },
+    {
+      "page_id": "A0289",
+      "old_title": "Le terme woke désigne de façon commode un mouvement complexe, c'est un peu comme parler des Lumières sans nuancer",
+      "new_title": "Le terme woke désigne de façon commode un mouvement complexe, c'est un peu comme parler des Lumières sans nuancer",
+      "source_revision_id": 246948,
+      "source_sha256": "015e26534abbe396e12bf38a5fe9ae8676e4adb4b0590a7bd4387d5f620084c3",
+      "target_sha256": "45c1f877bb77b861b9a4fede04a1c7ec68a4b1af56bbe57f5584f8cfbefdf717",
+      "before_file": "before/A0289.wiki",
+      "after_file": "after/A0289.wiki"
+    },
+    {
+      "page_id": "A0290",
+      "old_title": "Le terme \"woke\" est en train de devenir plus neutre et s'impose, même si son usage a été un moment polémique",
+      "new_title": "Le terme \"woke\" est en train de devenir plus neutre et s'impose, même si son usage a été un moment polémique",
+      "source_revision_id": 246949,
+      "source_sha256": "37061e85e2bc82faab338e7acbdb377c47d6ce3a55c68de67b0d52d2e53e23ec",
+      "target_sha256": "830841d1dc317f380ca31ae42d095b6fae5eab597cbc4cc4b9daef087109aa2c",
+      "before_file": "before/A0290.wiki",
+      "after_file": "after/A0290.wiki"
+    },
+    {
+      "page_id": "A0291",
+      "old_title": "La lutte antisexiste n'a pas le pouvoir d'empêcher des sorties",
+      "new_title": "La lutte antisexiste n'a pas le pouvoir d'empêcher des sorties",
+      "source_revision_id": 246950,
+      "source_sha256": "798c0c8a28f54497a01fcdc6c3cf1a72aecf30da7a7cf1300421f428f1a904b7",
+      "target_sha256": "0781847a1402d4c2075ac4ad07f996fe12607942945438c5fb79a82b77e24357",
+      "before_file": "before/A0291.wiki",
+      "after_file": "after/A0291.wiki"
+    },
+    {
+      "page_id": "A0292",
+      "old_title": "Les oeuvres continuent d'être produites malgré la lutte antisexiste",
+      "new_title": "Les oeuvres continuent d'être produites malgré la lutte antisexiste",
+      "source_revision_id": 246951,
+      "source_sha256": "cfef801f9c35e3574674ef30e6bfbb3b810fdc42d4a9273f9a2297d58873a31b",
+      "target_sha256": "6a38635c320ea20002bca1da17ff34f10fb9539c81c5ed77576fe67f8858fb93",
+      "before_file": "before/A0292.wiki",
+      "after_file": "after/A0292.wiki"
+    },
+    {
+      "page_id": "A0293",
+      "old_title": "Ceux-là mêmes qui accusent le féminisme de puritanisme n'ont aucun problème avec celui de l'extrême droite catholique",
+      "new_title": "Ceux-là mêmes qui accusent le féminisme de puritanisme n'ont aucun problème avec celui de l'extrême droite catholique",
+      "source_revision_id": 246952,
+      "source_sha256": "ab994f90b0bc2fe041c0bebdfa32712b77b54433904a0d702f2bde5817e7ac2c",
+      "target_sha256": "42666925fa910e4f01be0975c9235fc18ba9e0a2a78ef1d928de5949a5e35f9b",
+      "before_file": "before/A0293.wiki",
+      "after_file": "after/A0293.wiki"
+    },
+    {
+      "page_id": "A0294",
+      "old_title": "Combattre l'usage du sexe à des fins de domination est tout le contraire du puritanisme",
+      "new_title": "Combattre l'usage du sexe à des fins de domination est tout le contraire du puritanisme",
+      "source_revision_id": 247257,
+      "source_sha256": "ab994f90b0bc2fe041c0bebdfa32712b77b54433904a0d702f2bde5817e7ac2c",
+      "target_sha256": "668794102e4e85eb7a2e76f42f7dd69ef248df012607a7bcdd83adaa4af4e76e",
+      "before_file": "before/A0294.wiki",
+      "after_file": "after/A0294.wiki"
+    },
+    {
+      "page_id": "A0295",
+      "old_title": "Les agressions sexuelles et les viols ne sont pas du sexe, mais un moyen de domination",
+      "new_title": "Les agressions sexuelles et les viols ne sont pas du sexe, mais un moyen de domination",
+      "source_revision_id": 246953,
+      "source_sha256": "5fccb999bc403706d42f15364ee43eb1de48db48da0ea673ef3b6e1a2abbabc5",
+      "target_sha256": "88d61b6df3033239a0eef6395ae6b4a9de9f9aa05bcd241231b1132df2b7f6bb",
+      "before_file": "before/A0295.wiki",
+      "after_file": "after/A0295.wiki"
+    },
+    {
+      "page_id": "A0296",
+      "old_title": "Les films de propagande montrent que les contenus influencent les spectateurs",
+      "new_title": "Les films de propagande montrent que les contenus influencent les spectateurs",
+      "source_revision_id": 247259,
+      "source_sha256": "937475aca250b9c30f2ad463959981725fb5c65774e8df5a1ad53d1d134731b2",
+      "target_sha256": "b8ea122cb0c1af477d92b9c6749363d65e00ce4e37537ad4010be2b070f8f9b1",
+      "before_file": "before/A0296.wiki",
+      "after_file": "after/A0296.wiki"
+    },
+    {
+      "page_id": "A0297",
+      "old_title": "On ignore l'influence des contenus sur les récepteurs, donc il est impossible d'interdire tel ou tel contenu",
+      "new_title": "On ignore l'influence des contenus sur les récepteurs, donc il est impossible d'interdire tel ou tel contenu",
+      "source_revision_id": 246954,
+      "source_sha256": "55ef472dc4260d40c7760d0171ca2a473abd69a057ab3552e5c5f5640472abd6",
+      "target_sha256": "6be98f1b49533a3566853e6b00510aff85706ff31c17c148474e33a252004c46",
+      "before_file": "before/A0297.wiki",
+      "after_file": "after/A0297.wiki"
+    },
+    {
+      "page_id": "A0298",
+      "old_title": "La sortie de Naissance d'une nation a conduit à une renaissance du KKK",
+      "new_title": "La sortie de Naissance d'une nation a conduit à une renaissance du KKK",
+      "source_revision_id": 246955,
+      "source_sha256": "bff214ac1931584288eef7388de8c28b9432edea3fd7025c98c628d36df3b720",
+      "target_sha256": "835f568f924e020450fabaa9ed306741f2d963a6142a10e6e87759f776463335",
+      "before_file": "before/A0298.wiki",
+      "after_file": "after/A0298.wiki"
+    },
+    {
+      "page_id": "A0299",
+      "old_title": "Limiter la liberté d'expression, c'est refuser de faire confiance en la raison",
+      "new_title": "Limiter la liberté d'expression, c'est refuser de faire confiance en la raison",
+      "source_revision_id": 247317,
+      "source_sha256": "3249a94a0b38a9f64c0a103f03687cb99eafbd1949975edf3173a3bbf8505f94",
+      "target_sha256": "769a7b75a5aa97a39f6d2ab54fe7b3e189afd4c576bc01fc5085fa2cfa3aa622",
+      "before_file": "before/A0299.wiki",
+      "after_file": "after/A0299.wiki"
+    },
+    {
+      "page_id": "A0300",
+      "old_title": "Les spectacles utilisant le blackface ont contribué à la naissance des lois ségrégationnistes aux USA",
+      "new_title": "Les spectacles utilisant le blackface ont contribué à la naissance des lois ségrégationnistes aux USA",
+      "source_revision_id": 246957,
+      "source_sha256": "bff214ac1931584288eef7388de8c28b9432edea3fd7025c98c628d36df3b720",
+      "target_sha256": "3323aa7cdd61f4c0d102128ee75b3dfe6303ec3d891c4883d06ef1beb6bc5287",
+      "before_file": "before/A0300.wiki",
+      "after_file": "after/A0300.wiki"
+    },
+    {
+      "page_id": "A0301",
+      "old_title": "Les contenus sexistes alimentent la culture du viol",
+      "new_title": "Les contenus sexistes alimentent la culture du viol",
+      "source_revision_id": 246958,
+      "source_sha256": "bff214ac1931584288eef7388de8c28b9432edea3fd7025c98c628d36df3b720",
+      "target_sha256": "ca8431a136426f91a47f6c69c2b5b359360fb6f3ee62db346a06eccd8ce84c83",
+      "before_file": "before/A0301.wiki",
+      "after_file": "after/A0301.wiki"
+    },
+    {
+      "page_id": "A0302",
+      "old_title": "La sortie du film V pour Vendetta est à l'origine du mouvement Anonymous",
+      "new_title": "La sortie du film V pour Vendetta est à l'origine du mouvement Anonymous",
+      "source_revision_id": 246959,
+      "source_sha256": "bff214ac1931584288eef7388de8c28b9432edea3fd7025c98c628d36df3b720",
+      "target_sha256": "7219f56867cdacea7b12f63c154be7be5b99ce6b0e2dfc2c7008c882d44c345f",
+      "before_file": "before/A0302.wiki",
+      "after_file": "after/A0302.wiki"
+    },
+    {
+      "page_id": "A0303",
+      "old_title": "Les films mettant en scène des animaux provoquent des pics d'adoptions au moment de leur sortie",
+      "new_title": "Les films mettant en scène des animaux provoquent des pics d'adoptions au moment de leur sortie",
+      "source_revision_id": 246960,
+      "source_sha256": "4b360e2a8f38951933843d77002bdc8288c4c42a7d5002bfe56fb0b5ea03292e",
+      "target_sha256": "65fbbdefd515025863280fd2884058e57a9c6904923f23ffe6d26afebecd30d9",
+      "before_file": "before/A0303.wiki",
+      "after_file": "after/A0303.wiki"
+    },
+    {
+      "page_id": "A0304",
+      "old_title": "L'humour à propos d'un groupe discriminé contribue à normaliser l'exclusion et les violences qu'il subit",
+      "new_title": "L'humour à propos d'un groupe discriminé contribue à normaliser l'exclusion et les violences qu'il subit",
+      "source_revision_id": 246961,
+      "source_sha256": "09d60490b3808e51808f7ebbf1a9caa96595b2f006c239f3efbf82258cda1699",
+      "target_sha256": "40590706be88e7ff8cebab17176c9947352aafa9d2705b63d9bbdde3cd4a4b4a",
+      "before_file": "before/A0304.wiki",
+      "after_file": "after/A0304.wiki"
+    },
+    {
+      "page_id": "A0305",
+      "old_title": "TPMP a peu à peu abandonné sa posture de prétention au second degré et assume désormais pleinement sa volonté propagandiste",
+      "new_title": "TPMP a peu à peu abandonné sa posture de prétention au second degré et assume désormais pleinement sa volonté propagandiste",
+      "source_revision_id": 246962,
+      "source_sha256": "422a7e094327adccd23abd7db161ced43220c4baf9ade93c07d1dbda89450e8d",
+      "target_sha256": "b0699d88633d3f1bcfa26ab34c594f4864d488617cb9e1c34848a703a880fbfc",
+      "before_file": "before/A0305.wiki",
+      "after_file": "after/A0305.wiki"
+    },
+    {
+      "page_id": "A0306",
+      "old_title": "Le concept de \"cancel culture\" sert d'écran de fumée à des méfaits bien réels",
+      "new_title": "Le concept de \"cancel culture\" sert d'écran de fumée à des méfaits bien réels",
+      "source_revision_id": 246963,
+      "source_sha256": "9c2bf5488f3d7546c168d084c4adaf0f78012a76f004b54586206b61760c1ca2",
+      "target_sha256": "d8045aadf419615e7574c4708f12733f0e4501966bda4d30d6f49a6391623904",
+      "before_file": "before/A0306.wiki",
+      "after_file": "after/A0306.wiki"
+    },
+    {
+      "page_id": "A0307",
+      "old_title": "La cancel culture est un bon moyen de demander des comptes aux personnalités qui jusque-là agissaient impunément",
+      "new_title": "La cancel culture est un bon moyen de demander des comptes aux personnalités qui jusque-là agissaient impunément",
+      "source_revision_id": 246964,
+      "source_sha256": "3fd2aae809086e8aef50c060da0e788db977ca8400a24f33d599216f86fa18c2",
+      "target_sha256": "6d940ea4defb7975573d81f0fc8beb4b7034c811c25551b1bc5d38023a7eaf79",
+      "before_file": "before/A0307.wiki",
+      "after_file": "after/A0307.wiki"
+    },
+    {
+      "page_id": "A0308",
+      "old_title": "Le qualificatif de \"woke\" sert à diaboliser les concepts progressistes sans avoir à argumenter",
+      "new_title": "Le qualificatif de \"woke\" sert à diaboliser les concepts progressistes sans avoir à argumenter",
+      "source_revision_id": 246965,
+      "source_sha256": "032a27d90095e4482b478ad4a378d13771b1c344a1b9720a0a6032ad8f48580b",
+      "target_sha256": "cc22afafef65eb121909b2431fc1498ab57b37ef04a2a7d7f3d60b25ba5cd257",
+      "before_file": "before/A0308.wiki",
+      "after_file": "after/A0308.wiki"
+    },
+    {
+      "page_id": "A0309",
+      "old_title": "Le wokisme est dénoncé par un spectre politique qui dépasse très largement l'ultradroite",
+      "new_title": "Le wokisme est dénoncé par un spectre politique qui dépasse très largement l'ultradroite",
+      "source_revision_id": 246966,
+      "source_sha256": "b6d4a1af1a58917f9cc1882f26762e824e657c560b7b4c79de19eb35cca3dc07",
+      "target_sha256": "d316b27546074fd7a839c68be04fee45ee421a7349dd0f9fcda3273afb3b2876",
+      "before_file": "before/A0309.wiki",
+      "after_file": "after/A0309.wiki"
+    },
+    {
+      "page_id": "A0310",
+      "old_title": "C'est pour sauver la gauche que plusieurs intellectuel(le)s luttent contre le wokisme",
+      "new_title": "C'est pour sauver la gauche que plusieurs intellectuel(le)s luttent contre le wokisme",
+      "source_revision_id": 246967,
+      "source_sha256": "f581240e78776a79ff5e5b313cba73ee96071ecf0c2f6fc5872ca51e519f9f3a",
+      "target_sha256": "0a29acb1a5385dd7897cc8b5f3761f8384ee1aa50380a21f69a0f307fa1bb26c",
+      "before_file": "before/A0310.wiki",
+      "after_file": "after/A0310.wiki"
+    },
+    {
+      "page_id": "A0311",
+      "old_title": "La censure la plus à craindre ne provient pas du \"wokisme\"",
+      "new_title": "La censure la plus à craindre ne provient pas du \"wokisme\"",
+      "source_revision_id": 246968,
+      "source_sha256": "072bb39507d334dedcf5838ea8f4911c2d1a9dcbeb9b67385f4ccef07f7768c4",
+      "target_sha256": "214b9713a02bcc892e1255e71fa395aba6111e8cde1d84fe4da9255346a9f480",
+      "before_file": "before/A0311.wiki",
+      "after_file": "after/A0311.wiki"
+    },
+    {
+      "page_id": "A0312",
+      "old_title": "Certains activistes wokes utilisent des méthodes fascistes pour agresser ceux qui les contestent",
+      "new_title": "Certains activistes wokes utilisent des méthodes fascistes pour agresser ceux qui les contestent",
+      "source_revision_id": 246969,
+      "source_sha256": "66860f10d84791c1dbdb6a7aee426cb8e7662afd837b6ddc8b7b9325b2aad6fb",
+      "target_sha256": "f9dedad4f84d7025f6d72a520f702d2e335791aef9a6ee9ca2e1e300ecda780a",
+      "before_file": "before/A0312.wiki",
+      "after_file": "after/A0312.wiki"
+    },
+    {
+      "page_id": "A0313",
+      "old_title": "La \"menace woke\" a des similitudes troublantes avec la \"menace bolchevique\" si chère aux nazis",
+      "new_title": "La \"menace woke\" a des similitudes troublantes avec la \"menace bolchevique\" si chère aux nazis",
+      "source_revision_id": 246970,
+      "source_sha256": "f809765e7bcb5ff9214c367ee8834cc0dcb35aca54790c0ac2c3bd460b8c3881",
+      "target_sha256": "e9596e9949862b0e630f2e79e84c1a1dd55e8fa0f61fa18dc5ab125c2a8ab101",
+      "before_file": "before/A0313.wiki",
+      "after_file": "after/A0313.wiki"
+    },
+    {
+      "page_id": "A0314",
+      "old_title": "La lutte contre le wokisme est une lutte pour la culture et l'altérité",
+      "new_title": "La lutte contre le wokisme est une lutte pour la culture et l'altérité",
+      "source_revision_id": 246971,
+      "source_sha256": "aba9e59af6592fafed81256cadff19d7e5de31fc9fa93a580fc28407edcd16b7",
+      "target_sha256": "a89fa8dfb418fef76076a53d0b83bf975cc9f92392745b0a7a7cecc24671068a",
+      "before_file": "before/A0314.wiki",
+      "after_file": "after/A0314.wiki"
+    },
+    {
+      "page_id": "A0315",
+      "old_title": "Les fantasmes sur la menace woke ne sont que le reflet d'une peur irrationnelle de la nouveauté",
+      "new_title": "Les fantasmes sur la menace woke ne sont que le reflet d'une peur irrationnelle de la nouveauté",
+      "source_revision_id": 246972,
+      "source_sha256": "b12d56bf3a070e189d61f34fe779d097d4edcb9ac29fabf5521aedb55c475b8b",
+      "target_sha256": "ffc291c12932c275f2fdfe369aa031de49e48a0611f6544910c930811f135bac",
+      "before_file": "before/A0315.wiki",
+      "after_file": "after/A0315.wiki"
+    },
+    {
+      "page_id": "A0316",
+      "old_title": "150 intellectuels de la gauche américaine ont signé une tribune contre l'intolérance woke",
+      "new_title": "150 intellectuels de la gauche américaine ont signé une tribune contre l'intolérance woke",
+      "source_revision_id": 246973,
+      "source_sha256": "12e6f339e13b8892c6df56c302d5b94e1cd3ae3f3f65f861871444080859261c",
+      "target_sha256": "48bcc1c9632788b964aaf9a8cef054fb7d5df2b7722cc2d6983c1925d66c1d0c",
+      "before_file": "before/A0316.wiki",
+      "after_file": "after/A0316.wiki"
+    },
+    {
+      "page_id": "A0317",
+      "old_title": "L'extrême droite qualifie de \"woke\" les causes de gauche qu'elle est incapable d'instrumentaliser",
+      "new_title": "L'extrême droite qualifie de \"woke\" les causes de gauche qu'elle est incapable d'instrumentaliser",
+      "source_revision_id": 246974,
+      "source_sha256": "b977929a3c11180ebabd004fa8a8e0d5bed78c6534c5724431e248e77e09cdf2",
+      "target_sha256": "520eba38c58b35bf51c5593167cf5a6a2930a44a5d53a9680216a8ddc4e5b7b4",
+      "before_file": "before/A0317.wiki",
+      "after_file": "after/A0317.wiki"
+    },
+    {
+      "page_id": "A0318",
+      "old_title": "Parler d'extrême droite quand on critique le wokisme est une opération de diversion",
+      "new_title": "Parler d'extrême droite quand on critique le wokisme est une opération de diversion",
+      "source_revision_id": 246975,
+      "source_sha256": "ba0de14481f93cf07cfa19c0dcaea052486d5bb5206e0fc0c44be3a6bc4e1691",
+      "target_sha256": "5e1cd530c7f1f57e70decd6edaaf0986c27b4d931fdd1b352c90ea361dff8c85",
+      "before_file": "before/A0318.wiki",
+      "after_file": "after/A0318.wiki"
+    },
+    {
+      "page_id": "A0319",
+      "old_title": "Les critiques les plus vocales du \"wokisme\" sont réactionnaires",
+      "new_title": "Les critiques les plus vocales du \"wokisme\" sont réactionnaires",
+      "source_revision_id": 246976,
+      "source_sha256": "848b25720769d4b23d880cc6a06544baf7a4cc4196228acdfc291c8b4b9f5535",
+      "target_sha256": "d04480f0cdc6f2aabef3d5f9f352a3d2329cd6a7a62a39201ea731f1a9ca21e9",
+      "before_file": "before/A0319.wiki",
+      "after_file": "after/A0319.wiki"
+    },
+    {
+      "page_id": "A0320",
+      "old_title": "Le \"wokisme\" n'existe que dans les discours anti-progressistes : c'est un homme de paille créé artificiellement pour faire semblant d'avoir un adversaire oppresseur",
+      "new_title": "Le \"wokisme\" n'existe que dans les discours anti-progressistes : c'est un homme de paille créé artificiellement pour faire semblant d'avoir un adversaire oppresseur",
+      "source_revision_id": 247261,
+      "source_sha256": "19fb955ba500690ead9f5f7d1c307dbafb1ef1410788bd0f6fd30bc9879ca5a4",
+      "target_sha256": "d677b32aa7d263bb337c06c2e8cfa0fbd09f69b4592831e9ff717ec7066e5ba5",
+      "before_file": "before/A0320.wiki",
+      "after_file": "after/A0320.wiki"
+    },
+    {
+      "page_id": "A0321",
+      "old_title": "L'extrême droite attribue aux \"woke\" des motivations qui n'existent que dans ses propres délires paranoïaques",
+      "new_title": "L'extrême droite attribue aux \"woke\" des motivations qui n'existent que dans ses propres délires paranoïaques",
+      "source_revision_id": 246977,
+      "source_sha256": "db73c0656fe6c2308782dabd7974178e8ae0bf756bd9d78f895e3604c1f5aec8",
+      "target_sha256": "75f3f91ccdc6fe991f708a4fc4cd16fefe97b5d32c828d3450693ed2adda1e5d",
+      "before_file": "before/A0321.wiki",
+      "after_file": "after/A0321.wiki"
+    },
+    {
+      "page_id": "A0322",
+      "old_title": "Toutes les personnalités et médias se battant contre le wokisme ont des liens structurels avec l'extrême droite",
+      "new_title": "Toutes les personnalités et médias se battant contre le wokisme ont des liens structurels avec l'extrême droite",
+      "source_revision_id": 246978,
+      "source_sha256": "40d0d204d6fa311e8534a22e75f653f736d9aa958942b91609c9a59f741bd69e",
+      "target_sha256": "fa25511515810da85bee44dcd08478253d3dbecb9949bde403d60e1578a2ad25",
+      "before_file": "before/A0322.wiki",
+      "after_file": "after/A0322.wiki"
+    },
+    {
+      "page_id": "A0323",
+      "old_title": "Des oeuvres sont qualifiées de woke simplement pour avoir comme personnages principaux des cibles habituelles de l'extrême droite",
+      "new_title": "Des oeuvres sont qualifiées de woke simplement pour avoir comme personnages principaux des cibles habituelles de l'extrême droite",
+      "source_revision_id": 246979,
+      "source_sha256": "6fae83a57447ca643de07cbcc66a238f77f4b41ddd801d09d6647e6271ffecb5",
+      "target_sha256": "49eb728c70deea412ab4e5bdfb94dc5620d328e17b55498ebd046bff2f5664d3",
+      "before_file": "before/A0323.wiki",
+      "after_file": "after/A0323.wiki"
+    },
+    {
+      "page_id": "A0324",
+      "old_title": "Les procès pour diffamation servent à dispenser les agresseurs d'assumer leurs actes",
+      "new_title": "Les procès pour diffamation servent à dispenser les agresseurs d'assumer leurs actes",
+      "source_revision_id": 247263,
+      "source_sha256": "fbd1eae517e91c2eb4a28ffc0c5e0d2e1ee43f3a97557e772a00c7cf329968df",
+      "target_sha256": "15ffbd1d8d4094a4fdb615b706699c3aadc18cace3f1c64dc64d54b0424a97ed",
+      "before_file": "before/A0324.wiki",
+      "after_file": "after/A0324.wiki"
+    },
+    {
+      "page_id": "A0325",
+      "old_title": "L'extrême droite est étrangement silencieuse sur les affaires de harcèlement n'impliquant pas ses boucs émissaires préférés",
+      "new_title": "L'extrême droite est étrangement silencieuse sur les affaires de harcèlement n'impliquant pas ses boucs émissaires préférés",
+      "source_revision_id": 246980,
+      "source_sha256": "86e77d419c4486847de0efe3f4cb0a192755f570046d0c89832def3f611b5b66",
+      "target_sha256": "09e6d3aee90537ae3c5cc50a664feb47ae59f6bdbdded15bad3ebbe14917526d",
+      "before_file": "before/A0325.wiki",
+      "after_file": "after/A0325.wiki"
+    },
+    {
+      "page_id": "A0326",
+      "old_title": "L'extrême droite a prétendu défendre Mila, mais a contribué à sa mise en danger en la surexposant médiatiquement",
+      "new_title": "L'extrême droite a prétendu défendre Mila, mais a contribué à sa mise en danger en la surexposant médiatiquement",
+      "source_revision_id": 246981,
+      "source_sha256": "8e8ad6178f4c6aa81b20a70f58c44090962575e67044e0452fa2efb3c1e82536",
+      "target_sha256": "a2d7cb48eecd0bcdf2d9d3c2a5c3b29ac60f13c5de97637c3896d01592412ced",
+      "before_file": "before/A0326.wiki",
+      "after_file": "after/A0326.wiki"
+    },
+    {
+      "page_id": "A0327",
+      "old_title": "Le collectif féministe NousToutes a explicitement soutenu Mila",
+      "new_title": "Le collectif féministe NousToutes a explicitement soutenu Mila",
+      "source_revision_id": 246982,
+      "source_sha256": "6c7111414ced57ca2f56e50300f3ee812e75d7160629b51a3c9cf2b0e7c16960",
+      "target_sha256": "04c3ff136ecf97f72f73b61d269166b64f4a5d5faf405e4a73db5ecb2795bf2d",
+      "before_file": "before/A0327.wiki",
+      "after_file": "after/A0327.wiki"
+    },
+    {
+      "page_id": "A0328",
+      "old_title": "L'argument du respect de l'égalité de genre est hypocrite et opportuniste",
+      "new_title": "L'argument du respect de l'égalité de genre est hypocrite et opportuniste",
+      "source_revision_id": 246983,
+      "source_sha256": "9e5512b3d7f86adf38d812a9dcc272e84c59c493694b31ab394325b384e2b04e",
+      "target_sha256": "27d2041120a89ec058e2a68849f09cdd157f48713f0776d8f15ae4848cf19c74",
+      "before_file": "before/A0328.wiki",
+      "after_file": "after/A0328.wiki"
+    },
+    {
+      "page_id": "A0329",
+      "old_title": "Le fémonationalisme réduit les femmes à un statut de matraques vivantes",
+      "new_title": "Le fémonationalisme réduit les femmes à un statut de matraques vivantes",
+      "source_revision_id": 246984,
+      "source_sha256": "6cd57cd333c1a6da1bd88a0be001155c5475038d3fcba6efc365f1044e6e1b05",
+      "target_sha256": "f888fb1ad9094701e959820b6c3d50b11f097d0a77cbb30a3d78dd1cb5307aae",
+      "before_file": "before/A0329.wiki",
+      "after_file": "after/A0329.wiki"
+    },
+    {
+      "page_id": "A0330",
+      "old_title": "Les fémonationalistes ne proposent rien contre le sexisme qui sévit en occident",
+      "new_title": "Les fémonationalistes ne proposent rien contre le sexisme qui sévit en occident",
+      "source_revision_id": 246985,
+      "source_sha256": "68b8a2c476a1d8576c1f7961ca1b2a6d115b7221d165f4beb6aa41c4c247e90e",
+      "target_sha256": "8059f67148eaffbb352e2c255ace183c7ca203a0e082e3d1442b83f29f79374e",
+      "before_file": "before/A0330.wiki",
+      "after_file": "after/A0330.wiki"
+    },
+    {
+      "page_id": "A0331",
+      "old_title": "Beaucoup de personnes qualifiées de \"fémonationalistes\" sont simplement des féministes universalistes qui critiquent aussi l'Occident",
+      "new_title": "Beaucoup de personnes qualifiées de \"fémonationalistes\" sont simplement des féministes universalistes qui critiquent aussi l'Occident",
+      "source_revision_id": 247265,
+      "source_sha256": "5eb455cf0f7020b62e841a0b362f28972e83539650e8ea18548e6c6c4b298e1e",
+      "target_sha256": "e5c950e84fe84ac9b33db37b56040bf05067aaf30f2b57badba15555a87888c0",
+      "before_file": "before/A0331.wiki",
+      "after_file": "after/A0331.wiki"
+    },
+    {
+      "page_id": "A0332",
+      "old_title": "Quand une agression sexiste est du fait d'un blanc, les fémonationalistes lui trouvent des excuses, voire l'applaudissent",
+      "new_title": "Quand une agression sexiste est du fait d'un blanc, les fémonationalistes lui trouvent des excuses, voire l'applaudissent",
+      "source_revision_id": 246986,
+      "source_sha256": "baba60a5effea1dce13225e6b4c4af3a369bf4fb78c1dd7272da3d995a3f2c30",
+      "target_sha256": "8e498d01ccbfbde92f29b7029125d8cb37be8885f0245ccd8c7a9af6a2ea2e4f",
+      "before_file": "before/A0332.wiki",
+      "after_file": "after/A0332.wiki"
+    },
+    {
+      "page_id": "A0333",
+      "old_title": "Les \"féministes\" wokes ne sont pas de vraies féministes car elles ne critiquent presque jamais le patriarcat non occidental",
+      "new_title": "Les \"féministes\" wokes ne sont pas de vraies féministes car elles ne critiquent presque jamais le patriarcat non occidental",
+      "source_revision_id": 246987,
+      "source_sha256": "7eb714174876a93201572d17c3701e33cb56bf3b967f713b2ee53df864691fbf",
+      "target_sha256": "d9646a9789b663ee2f7c662aa4796b32f8c5d345d5d3e83a951403d001be91e7",
+      "before_file": "before/A0333.wiki",
+      "after_file": "after/A0333.wiki"
+    },
+    {
+      "page_id": "A0334",
+      "old_title": "Les fémonationalistes prétendent défendre les femmes, mais crachent sur toutes les mesures de lutte contre le sexisme",
+      "new_title": "Les fémonationalistes prétendent défendre les femmes, mais crachent sur toutes les mesures de lutte contre le sexisme",
+      "source_revision_id": 246988,
+      "source_sha256": "ed48182373ebe7d6f38a4406acd5ec6aaa1c98f227530aaeb627307df42f3a8a",
+      "target_sha256": "a1c7c9c4462d5383cf29571e5a55ec371a2d26ae32c7016b4d766605769404ba",
+      "before_file": "before/A0334.wiki",
+      "after_file": "after/A0334.wiki"
+    },
+    {
+      "page_id": "A0335",
+      "old_title": "Le concept de \"fémonationalisme\" désigne à la fois des \"féministes\" de droite et des féministes universalistes, ce qui n'est pas la même chose",
+      "new_title": "Le concept de \"fémonationalisme\" désigne à la fois des \"féministes\" de droite et des féministes universalistes, ce qui n'est pas la même chose",
+      "source_revision_id": 246989,
+      "source_sha256": "6f325d4a577568be5451ec1ee75aff3fb58258d63e4546acb7bbfbea2b4d842f",
+      "target_sha256": "39a6ba145ed8c7a9a6494837a30a2e22f39ddd48ab7b7bf17b327a08d1771ed8",
+      "before_file": "before/A0335.wiki",
+      "after_file": "after/A0335.wiki"
+    },
+    {
+      "page_id": "A0336",
+      "old_title": "Les fémonationalistes ne sont pas les derniers à agresser les femmes",
+      "new_title": "Les fémonationalistes ne sont pas les derniers à agresser les femmes",
+      "source_revision_id": 246990,
+      "source_sha256": "32bbe6459283ef9a66e93772c328000ee93e0bd58cde5591f0dc75e42e913dd1",
+      "target_sha256": "072b2e086d80b56df459a0d8c29e0f226f0e48316237be24d2e14a523f3592c6",
+      "before_file": "before/A0336.wiki",
+      "after_file": "after/A0336.wiki"
+    },
+    {
+      "page_id": "A0337",
+      "old_title": "Il y avait moins d'immigration dans les années 70, mais les viols et agressions sexuelles n'étaient pas moins nombreux qu'aujourd'hui",
+      "new_title": "Il y avait moins d'immigration dans les années 70, mais les viols et agressions sexuelles n'étaient pas moins nombreux qu'aujourd'hui",
+      "source_revision_id": 247267,
+      "source_sha256": "13a12855260df823ab311009308d0c6f795f66d380d7489c201a6a2e361e932d",
+      "target_sha256": "e189455cd07950908f704c18f59f9d011cdd1333434f069fc359d3c7230efdd9",
+      "before_file": "before/A0337.wiki",
+      "after_file": "after/A0337.wiki"
+    },
+    {
+      "page_id": "A0338",
+      "old_title": "Contrairement aux femmes voilées, personne ne dénonce l'oppression des religieuses catholiques",
+      "new_title": "Contrairement aux femmes voilées, personne ne dénonce l'oppression des religieuses catholiques",
+      "source_revision_id": 246991,
+      "source_sha256": "894be2675952e5fa35c94399a44f8e78390011d8ec421363e6fbe7f1828fbfb5",
+      "target_sha256": "ef5c84d8a5461b544b959269868ec9e456634da1f7f317cb4a976ebf49bcf16b",
+      "before_file": "before/A0338.wiki",
+      "after_file": "after/A0338.wiki"
+    },
+    {
+      "page_id": "A0339",
+      "old_title": "Aux USA, la condition féminine régresse à une vitesse alarmante dans le silence assourdissant des fémonationalistes",
+      "new_title": "Aux USA, la condition féminine régresse à une vitesse alarmante dans le silence assourdissant des fémonationalistes",
+      "source_revision_id": 246992,
+      "source_sha256": "55d5e283c432784c7105bac933940a149895216ffca6a5c96a2d5dddd18fb52b",
+      "target_sha256": "1cd3aaa3d571e7bab03b5a178cf0032d44515de8d4e97af145cb3b637a4ce312",
+      "before_file": "before/A0339.wiki",
+      "after_file": "after/A0339.wiki"
+    },
+    {
+      "page_id": "A0340",
+      "old_title": "Les fémonationalistes soutiennent des personnalités ouvertement misogynes",
+      "new_title": "Les fémonationalistes soutiennent des personnalités ouvertement misogynes",
+      "source_revision_id": 246993,
+      "source_sha256": "c8ff1930f7f97c701d6f7c00a7f972b160321577030f9399fa40720dc291e9ff",
+      "target_sha256": "538104a101452ac11be94a8d17607630a2acb5e5b89e9fba4fa737d6975b6ed1",
+      "before_file": "before/A0340.wiki",
+      "after_file": "after/A0340.wiki"
+    },
+    {
+      "page_id": "A0341",
+      "old_title": "Déjà à l'époque coloniale, l'inquiétude apparente sur le sort des femmes du Maghreb servait de justification à la colonisation",
+      "new_title": "Déjà à l'époque coloniale, l'inquiétude apparente sur le sort des femmes du Maghreb servait de justification à la colonisation",
+      "source_revision_id": 246994,
+      "source_sha256": "13c2cd734b7f9033e6224207fdbfcec159e536182a80afa7f0367fb41b9c92e8",
+      "target_sha256": "51ee7da0ce2216c5c1b2afab5da98f224f659be12081714ca80fe6a119159c8e",
+      "before_file": "before/A0341.wiki",
+      "after_file": "after/A0341.wiki"
+    },
+    {
+      "page_id": "A0342",
+      "old_title": "Aujourd'hui en Orient, la lutte contre le voile est le fait de féministes",
+      "new_title": "Aujourd'hui en Orient, la lutte contre le voile est le fait de féministes",
+      "source_revision_id": 246995,
+      "source_sha256": "3f0103ca34ab0ac1b1df5caa4584dde28bed4b4c9162882c0f1be9d57f844d46",
+      "target_sha256": "6319207cd58152ff7f4f32f146bd865a3f95ca13ccb933001cc085bba6d329f4",
+      "before_file": "before/A0342.wiki",
+      "after_file": "after/A0342.wiki"
+    },
+    {
+      "page_id": "A0343",
+      "old_title": "En France, 219 000 femmes sont victimes de violences physiques ou sexuelles de la part de leur conjoint ou ancien conjoint chaque année",
+      "new_title": "En France, 219 000 femmes sont victimes de violences physiques ou sexuelles de la part de leur conjoint ou ancien conjoint chaque année",
+      "source_revision_id": 247269,
+      "source_sha256": "f75e90d6fb61e6c847b428afd2b494c424411352ebdbf043dbecad109b08ff63",
+      "target_sha256": "8ea818ad88f6b3dd3883140caf797e0b8d86f9bf9374b3d60dced7d2cec6a6a0",
+      "before_file": "before/A0343.wiki",
+      "after_file": "after/A0343.wiki"
+    },
+    {
+      "page_id": "A0344",
+      "old_title": "En France, 93 000 femmes déclarent avoir été victimes de viol ou de tentative de viol",
+      "new_title": "En France, 93 000 femmes déclarent avoir été victimes de viol ou de tentative de viol",
+      "source_revision_id": 247271,
+      "source_sha256": "f75e90d6fb61e6c847b428afd2b494c424411352ebdbf043dbecad109b08ff63",
+      "target_sha256": "6863c30744bef6c8e9139eb7267575d1da428325269c90ed09026fbb2b025381",
+      "before_file": "before/A0344.wiki",
+      "after_file": "after/A0344.wiki"
+    },
+    {
+      "page_id": "A0345",
+      "old_title": "À poste et qualifications égales, les femmes sont rémunérées en moyenne 10 % de moins que les hommes",
+      "new_title": "À poste et qualifications égales, les femmes sont rémunérées en moyenne 10 % de moins que les hommes",
+      "source_revision_id": 247273,
+      "source_sha256": "f75e90d6fb61e6c847b428afd2b494c424411352ebdbf043dbecad109b08ff63",
+      "target_sha256": "1801eae8a6061261200b4f5ee72a6f85bb74d365c37e1d997ebeda3bdd6e1699",
+      "before_file": "before/A0345.wiki",
+      "after_file": "after/A0345.wiki"
+    },
+    {
+      "page_id": "A0346",
+      "old_title": "72 % des tâches ménagères sont effectuées par les femmes",
+      "new_title": "72 % des tâches ménagères sont effectuées par les femmes",
+      "source_revision_id": 246996,
+      "source_sha256": "f75e90d6fb61e6c847b428afd2b494c424411352ebdbf043dbecad109b08ff63",
+      "target_sha256": "3c7b958e6c222ec11f665a753229786a4d2ed60f3338a8424d33bbdf5ba5dc28",
+      "before_file": "before/A0346.wiki",
+      "after_file": "after/A0346.wiki"
+    },
+    {
+      "page_id": "A0347",
+      "old_title": "Huit Françaises sur dix se sont déjà fait harceler dans les transports",
+      "new_title": "Huit Françaises sur dix se sont déjà fait harceler dans les transports",
+      "source_revision_id": 246997,
+      "source_sha256": "f75e90d6fb61e6c847b428afd2b494c424411352ebdbf043dbecad109b08ff63",
+      "target_sha256": "08ed178a155088ea65c2dc81183d2a180c836fc54ca8ec66862b8c9f1f505877",
+      "before_file": "before/A0347.wiki",
+      "after_file": "after/A0347.wiki"
+    },
+    {
+      "page_id": "A0348",
+      "old_title": "Les victoires féministes sont parcellaires et régressent à la moindre crise",
+      "new_title": "Les victoires féministes sont parcellaires et régressent à la moindre crise",
+      "source_revision_id": 246998,
+      "source_sha256": "f75e90d6fb61e6c847b428afd2b494c424411352ebdbf043dbecad109b08ff63",
+      "target_sha256": "08ed178a155088ea65c2dc81183d2a180c836fc54ca8ec66862b8c9f1f505877",
+      "before_file": "before/A0348.wiki",
+      "after_file": "after/A0348.wiki"
+    }
+  ],
+  "request_sha256": "9973840e749344a04e2f26d7245cd6c12a1c85667e2e207cb3f28323319f2f45"
+}

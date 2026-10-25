@@ -1,0 +1,64 @@
+{{Argument
+|initialisation=Objection@28998
+|résumé=On trouve notamment Alain Finkielkraut, Jean-Michel Blanquer, Eric Zemmour, Vladimir Poutine, Marine Le Pen, Donald Trump, Ron De Santis, Bart de Wever, Georges-Louis Bouchez, autant de personnalités clairement pas connues pour être progressistes.
+
+Côté médias, on a bien évidemment toute la sphère de Bolloré, dont le positionnement politique du côté de la droite bien dure n'est plus à démontrer, qui s'est parfaitement illustrée dans cette obsession, ainsi que Valeurs Actuelles, Le Figaro et Marianne, trois journaux notoirement liés à la réactosphère. Et sans parler des influenceurs qui entre deux vagues de harcèlement de militants de gauche viennent se joindre à la fête.
+|citations={{Citation
+|citation=Le mot [woke] a déboulé dans notre débat public, au début des années 2020, et sa critique est désormais la principale grille d’analyse des conservateurs et réactionnaires de tout poil, [https://www.humanite.fr/politique/woke/diabolisation-de-la-gauche-user-du-mot-wokisme-sert-une-propagande-politique-726320 pour dézinguer la gauche]. « Le Figaro » a du mal à boucler un édito sans s’en alarmer, CNews y dédie son temps d’antenne.
+|auteurs=Cyprien Caddeo
+|article=Alain Policar : « Les conservateurs nomment “wokisme” tout ce qu’ils n’aiment pas »
+|ouvrage=L'Humanité
+|date=2 mai 2024
+|lien=https://www.humanite.fr/politique/wokisme/alain-policar-les-conservateurs-nomment-wokisme-tout-ce-quils-naiment-pas
+}}{{Citation
+|citation=Un choix de se rapprocher de l’extrême droite qui s’éclaire aussi à la lumière de l’enrolement de plusieurs militant·es du groupuscule fasciste, Chez Nous, au sein des listes électorales du parti il-libérale*. Le dernier en liste, après Noa Pozzi (finalement écarté pour cause d’une polémique grandissante) est Jason Galassi. Ces porosités entre le MR et ces partis néo-fascistes sont bien documentées par les collectifs antifascistes belges, comme le Front Antifasciste Liège 2.0.
+
+Depuis, c’est un véritable revirement que le MR souhaite opérer dans le monde politique belge francophone : GLB et ses comparses sont en campagne idéologique intensive contre ledit « wokisme » des féministes et des LGTBQ+, ledit « communautarisme » de l’Islam et des mulsuman·nes et ledit « communisme autoritaire » du PTB.
+|article=Une élue MR tweet des propos racistes
+|ouvrage=Bruxelles dévie
+|lien=https://bruxellesdevie.com/2024/11/19/une-elue-mr-tweet-des-propos-racistes/
+}}{{Citation
+|citation=Alors que le terme est né comme un mot d'ordre dans les communautés noires pour « rester éveillé » contre la brutalité policière, il a depuis été réapproprié comme un fourre-tout contre toute politique, position, ou personne avec laquelle les conservateurs ne sont pas d'accord, souvent de manière caricaturale.
+
+
+(''While the term [https://www.vox.com/culture/21437879/stay-woke-wokeness-history-origin-evolution-controversy originated] as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.'')
+|auteurs=Samuel C. Huneke
+|article=Critically Cringe: On Susan Neiman’s “Left Is Not Woke”
+|ouvrage=Los Angeles Review of Books
+|lien=https://lareviewofbooks.org/article/critically-cringe-on-susan-neimans-left-is-not-woke/
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Soyez pas woke
+|auteurs=Dominique De Witte, candidat à Reconquête
+|lien=https://www.youtube.com/watch?v=50OmdidDeNE
+}}
+|justifications={{Justification
+|page=Fondapol est une institution très idéologisée proche des mouvements conservateurs, voire réactionnaires
+|titre-affiché=Les principaux promoteurs de la panique woke sont des think tanks conservateurs
+}}{{Justification
+|page=Jean-Michel Blanquer, ministre de l'éducation sous Macron, a financé un colloque "anti-woke"
+|titre-affiché=Jean-Michel Blanquer, qui a financé un colloque "anti-woke", n'est pas particulièrement progressiste
+}}{{Justification
+|page=Tous les partis d'extrême droite ont fait de l'anti-wokisme leur cheval de bataille
+|titre-affiché=L'anti-wokisme est le cheval de bataille de tous les partis d'extrême droite
+}}{{Justification
+|page=Elon Musk, un idéologue néonazi, qualifie wikipédia de "woke"
+|titre-affiché=Elon Musk, qui a accusé wikipédia d'être woke, est un idéologue néonazi
+}}{{Justification
+|page="Parents vigilants", principal contempteur du "wokisme" à l'école, est une ramification du parti d'extrême droite Reconquête!
+|titre-affiché="Parents vigilants", principal contempteur du "wokisme" à l'école, est une ramification du parti d'extrême droite Reconquête!
+}}{{Justification
+|page=Trump et Poutine, deux dictateurs d'extrême droite, sont parmi les plus virulents contre le wokisme
+|titre-affiché=Trump et Poutine, deux dictateurs d'extrême droite, sont parmi les plus virulents contre le wokisme
+}}{{Justification
+|page=Santiago Muzio, qui voulait "arracher la maison de l'argentine aux griffes de l'extrême gauche et de l'idéologie woke" fut le dirigeant d'un institution fondée par l'extrême droite
+|titre-affiché=Santiago Muzio, qui voulait "arracher la maison de l'argentine aux griffes de l'extrême gauche et de l'idéologie woke" fut le dirigeant d'un institution fondée par l'extrême droite
+}}
+|objections={{Objection
+|page=Il faut répondre aux arguments anti-wokes les plus pertinents, pas se focaliser sur les plus vocaux
+|titre-affiché=Il faut répondre aux arguments anti-wokes les plus pertinents, pas se focaliser sur les plus vocaux
+}}
+|rubriques=Politique, Société
+|mots-clés=wokisme, extrême droite
+|date-création=2024-11-19
+}}

@@ -1,0 +1,13 @@
+{{Argument
+|citations={{Citation
+|citation=Quant aux « violeurs », [https://www.lemonde.fr/societe/article/2024/04/03/violences-sexuelles-86-de-classements-sans-suite_6225743_3224.html '''la majorité des affaires sont classées sans suite'''] ''': pas moins de 94 % dans les cas d’accusations de viols,''' selon une étude de l’Institut des politiques publiques portant sur la période de 2012 à 2021 ; et les acteurs concernés continuent leur vie faste.
+|auteurs=Mr Mondialisation
+|article=Emily in Paris : le « cancel » des classes populaires
+|ouvrage=Mr Mondialisation
+|date=13 septembre 2024
+|lien=https://mrmondialisation.org/emily-in-paris-le-cancel-des-classes-populaires/
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2022-12-19
+}}

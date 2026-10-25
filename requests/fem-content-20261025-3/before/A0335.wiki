@@ -1,0 +1,8 @@
+{{Argument
+|initialisation=Objection@16983
+|objections={{Objection
+|page=Les fémonationalistes sont des idéologues d'extrême droite déguisés en féministes
+|titre-affiché=Les fémonationalistes sont des personnes qui jugent que le patriarcat blanc est mieux que le patriarcat musulman
+}}
+|date-création=2025-04-16
+}}

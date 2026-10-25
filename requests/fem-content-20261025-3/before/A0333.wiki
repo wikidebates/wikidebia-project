@@ -1,0 +1,26 @@
+{{Argument
+|initialisation=Objection@16983
+|objections={{Objection
+|page=Les fémonationalistes ne proposent rien contre le sexisme qui sévit en occident
+|titre-affiché=Les fémonationalistes ne sont pas de vraies féministes car elles ne critiquent jamais le patriarcat de l'occident
+}}{{Objection
+|page=Les fémonationalistes ne combattent pas le sexisme, mais en font un privilège réservé aux blancs
+|titre-affiché=Les fémonationalistes ne combattent pas le sexisme, mais en font un privilège réservé aux blancs
+}}{{Objection
+|page=Contrairement aux femmes voilées, personne ne dénonce l'oppression des religieuses catholiques
+|titre-affiché=Si les fémonationalistes étaient réellement féministes, ils attaqueraient tous les diktats d'origine religieuse, et pas uniquement quand ça arrange leur xénophobie
+}}{{Objection
+|page=Les fémonationalistes lancent régulièrement des accusations calomnieuses à propos des féministes
+|titre-affiché=Les accusations de silence de la part des "féministes woke" sont des fake news propagées par l'extrême droite
+}}{{Objection
+|page=Les fémonationalistes dévoient le féminisme à des fins identitaires, sécuritaires et xénophobes
+|titre-affiché=Les fémonationalistes dévoient le féminisme à des fins identitaires, sécuritaires et xénophobes
+}}{{Objection
+|page=Le courant woke ne correspond à aucune réalité sociologique
+|titre-affiché=Il n'y a pas de "féminisme woke" ailleurs que dans l'imagination de l'extrême droite
+}}{{Objection
+|page=Les fémonationalistes soutiennent des personnalités ouvertement misogynes
+|titre-affiché=Les fémonationalistes n'ont aucun problème à soutenir des personnalités misogynes
+}}
+|date-création=2025-04-16
+}}

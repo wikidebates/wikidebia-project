@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Objection@10592
+|citations={{Citation
+|citation=Les anti-woke renvoient les progressistes à un prétendu discours victimaire dans lequel ils sont accusés de se complaire – cela revient surtout à nier les structures de domination. On cherche à disqualifier la gauche en retournant le stigmate.
+|auteurs=Cyprien Caddeo
+|article=Alain Policar : « Les conservateurs nomment “wokisme” tout ce qu’ils n’aiment pas »
+|ouvrage=L'Humanité
+|date=2 mai 2024
+|lien=https://www.humanite.fr/politique/wokisme/alain-policar-les-conservateurs-nomment-wokisme-tout-ce-quils-naiment-pas
+}}
+|rubriques=Société
+|mots-clés=immigration, victimisation
+|date-création=2024-09-18
+}}

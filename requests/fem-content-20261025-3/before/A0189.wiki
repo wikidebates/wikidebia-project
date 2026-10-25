@@ -1,0 +1,7 @@
+{{Argument
+|objections={{Objection
+|page=On ne devrait même pas avoir à demander aux hommes de ne pas écarter les jambes
+|titre-affiché=On ne devrait même pas avoir à le leur demander
+}}
+|date-création=2022-08-29
+}}

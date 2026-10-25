@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@16440
+|rubriques=Histoire, Politique, Société
+|mots-clés=stalinisme, féminisme
+|date-création=2023-04-03
+}}

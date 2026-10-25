@@ -1,0 +1,12 @@
+{{Argument
+|références-sitographiques={{Référence sitographique
+|lien=https://www.lemonde.fr/m-perso/article/2020/04/20/nos-vies-confinees-les-femmes-accomplissent-70-en-moyenne-du-travail-familial-et-domestique_6037206_4497916.html#:~:text=Il%20s'agit%20d'un,moyenne%2C%20tr%C3%A8s%2C%20tr%C3%A8s%20lentement.
+|page=Les femmes accomplissent 70 % en moyenne du travail familial et domestique
+|auteurs=Amandine Hancewicz
+|site=Le Monde
+|date=20 avril 2020
+}}
+|rubriques=Société
+|mots-clés=tâches ménagères, féminisme
+|date-création=2022-09-02
+}}

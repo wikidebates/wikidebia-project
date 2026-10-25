@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@5431
+|rubriques=Société
+|mots-clés=justice, féminisme
+|date-création=2024-04-15
+}}

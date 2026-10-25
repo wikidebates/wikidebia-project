@@ -1,0 +1,6 @@
+{{Argument
+|résumé=Une pratique qui s'observe sur les sites permettant de noter des oeuvres consiste à se réunir en meute afin de distribuer massivement des appréciations négatives à une oeuvre qu'on a généralement même pas vue pour des raisons purement idéologiques.
+|rubriques=Culture, Politique, Société
+|mots-clés=féminisme, politique, médias
+|date-création=2022-12-19
+}}

@@ -1,0 +1,16 @@
+{{Argument
+|citations={{Citation
+|citation=Devinez ce que ça donne quand tous les "mecs bien" s'octroient le droit de tracer [la] ligne [qui sépare les hommes bien des hommes mauvais]. ça donne le monde actuel. Un monde plein de mecs bien qui font de très mauvaises choses, tout en croyant du fond du coeur qu'ils sont bons puisqu'ils n'ont pas dépassé la ligne. Vu qu'ils l'ont redessinée à leur avantage.
+|auteurs=Hannah Gadsby
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://emmaclit.com/2022/10/06/la-ligne/
+|page=La ligne
+|auteurs=Emma
+|site=Emmaclit
+|date=6 octobre 2022
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2022-10-14
+}}

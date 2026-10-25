@@ -1,0 +1,13 @@
+{{Argument
+|initialisation=Justification@29132
+|objections={{Objection
+|page=Encore aujourd'hui, le but principal de l'anti-wokisme est de servir un agenda populiste
+|titre-affiché=Encore aujourd'hui, le but principal de l'anti-wokisme est de servir un agenda réactionnaire
+}}{{Objection
+|page=Pierre Valentin est un collaborateur régulier de journaux de droite dure
+|titre-affiché=Le terme "wokisme" restera idéologisé tant que des figures réactionnaires feront office de référence pour l'analyser
+}}
+|rubriques=Politique, Société
+|mots-clés=wokisme, féminisme
+|date-création=2024-11-21
+}}

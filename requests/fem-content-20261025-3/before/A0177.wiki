@@ -1,0 +1,13 @@
+{{Argument
+|initialisation=Objection@16437
+|objections={{Objection
+|page=Le stalinisme a abandonné la lutte contre l'oppression des femmes
+|titre-affiché=C'est le stalinisme qui a écarté les luttes féministes du mouvement ouvrier
+}}{{Objection
+|page=Le mouvement ouvrier socialiste a mené la lutte contre l'oppression des femmes dès le 19e siècle
+|titre-affiché=Dès le 19e siècle, le mouvement ouvrier socialiste a mené la lutte contre l'oppression des femmes
+}}
+|rubriques=Histoire, Politique
+|mots-clés=mouvement ouvrier, féminisme, incapacité
+|date-création=2023-04-03
+}}

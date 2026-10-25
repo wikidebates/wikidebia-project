@@ -1,0 +1,73 @@
+{{Argument
+|résumé=L'extrême droite parle de manière étrangement passionnée des censures pour la plupart imaginaires qui viendraient de la gauche tout en faisant preuve d'un silence assourdissant aux censures bien réelles dont son propre camp se rend coupable. On se retrouve dans une réalité orwélienne où le défenseur le plus vocal de la liberté d'expression s'avère être son principal fossoyeur.
+|citations={{Citation
+|citation=Le terme de woke est surtout un terme qui, aux USA, sert d'alibi à des campagnes de censure au nom de l'anti-wokisme et qui, en Europe, sert à importer (en l'absence de toute menace) les modes de pensée de l'extrême droite étasunienne.
+|auteurs=Alain Policar
+|ouvrage=Le wokisme n'existe pas: la fabrication d'un mythe
+|page=141
+|localisation=Postface de Jean-Yves Pranchère
+|édition=Le Bord de l'eau
+|date=2024
+}}{{Citation
+|citation=Les cyberviolences sont fréquemment utilisées pour cibler les groupes minorés et discriminés et discréditer leurs représentant·e·s afin de les pousser à cesser de s’exprimer. Internet et les technologies du numérique ne sont pas neutres. Les plateformes numériques et les réseaux sociaux sont conçus et développés par des individus appartenant à une catégorie sociale privilégiée. Il s’agit souvent d’hommes blancs, valides, cisgenres et très diplômés. Ces derniers ne sont pas ou peu confrontés aux discriminations liées au racisme, au sexisme, au handicap, à l’identité de genre et à l’orientation sexuelle notamment. Or, les espaces numériques où les cyberviolences s‘exercent sont des espaces politiques construits à leur image, au sein desquels la liberté d’expression, lorsqu’elle existe, demeure surtout celle des groupes sociaux dominants.
+
+Avec l’avènement des forums, des blogs, puis des réseaux sociaux, et l’investissement du numérique par les militant·e·s d’extrême droite, le cyberharcèlement s’est malheureusement imposé comme mode d’action politique. Le recours à la violence s’est normalisé et le fait de prendre à partie, voire de cyberharceler, une personne considérée comme un·e ennemi·e politique, est souvent considéré comme légitime. Le mode opératoire varie peu : une personne médiatique ou reconnue comme leader d’opinion lance une campagne de cyberharcèlement en mentionnant une personne ou une organisation cible, ce qui conduit invariablement ses nombreux et nombreuses abonné·e·s à la prendre à leur tour à partie. Sur les forums, les groupes Facebook et les fils de discussion privés, des individus peuvent aussi se concerter et coordonner leurs actions de cyberharcèlement, se livrant alors à de véritables raids numériques.
+|auteurs=Collectif
+|article=Introduction
+|ouvrage=Nos voix nos combats
+|lien=https://www.nosvoixnoscombats.com/introduction
+}}{{Citation
+|citation=Le cinéma municipal du Luc-en-Provence, une mairie varoise gérée par le Front national, avait prévu de diffuser le film "Chez nous" de Lucas Belvaux, qui décrit l'ascension de l'extrême droite dans le Nord… Avant de le retirer des écrans, a indiqué aujourd'hui le maire Pascal Verrelle. La ministre de la Culture Audrey Azoulay a dénoncé une "censure".
+|auteurs=France Télévisions
+|article=Une mairie FN du Var déprogramme le film "Chez nous" initialement prévu en salle
+|date=19/03/2017
+|lien=https://www.francetvinfo.fr/culture/cinema/une-mairie-fn-du-var-deprogramme-le-film-chez-nous-initialement-prevu-en-salle_3362945.html
+}}{{Citation
+|citation=Rappelons que si on adore parler de ''cancel culture'' quand il s’agit de la gauche, les conservateurs ne retiennent pas leurs coups quand il s’agit d’exprimer leur offense. Un humoriste a été renvoy de Canal+, ainsi que l’un de ses soutiens, pour avoir parodié la ligne éditoriale penchant droite dure de la chaîne CNews, du même propriétaire. La maison d’édition associative Monstrograph a fait les frais d’une irritation en haut lieu : en août 2020, ses fondateurs Martin Page et Coline Pierré reçoivent un mail d’un chargé de mission au secrétariat d’Etat à l’égalité femmes-hommes qui les somme, sous peine de poursuites pénales, de retirer du marché le livre ''Moi les hommes, je les déteste'', de Pauline Harmange. La Ligue des droits de l’homme et Mediapart s’en mêlent, et le livre profitera largement de cette tentative ratée de censure : l’autrice est aujourd’hui publiée aux éditions du Seuil et traduite en 17 langues.
+|auteurs=Pauline Grand d'Esnon
+|article=Libération de la parole, "cancel culture"… les émotions ont-elles pris le pouvoir ?
+|ouvrage=Neonmag.fr
+|lien=https://www.neonmag.fr/liberation-de-la-parole-cancel-culture-les-emotions-ont-elles-pris-le-pouvoir-556592.html
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.telerama.fr/television/youtube-blackliste-des-femmes-pour-cajoler-les-annonceurs-encoremercilalgorithme,n5670487.php
+|page=YouTube blackliste des femmes pour cajoler les annonceurs #encoremercilalgorithme
+|auteurs=Pauline Bock
+|site=Télérama
+|date=29/05/18
+}}{{Référence sitographique
+|lien=https://www.stophomophobie.com/un-lycee-prive-de-compiegne-accuse-de-censure-homophobe/
+|page=Un lycée privé de Compiègne accusé de censure homophobe
+|site=Stop Homophobie
+|date=2/04/2023
+}}
+|justifications={{Justification
+|page=Le soi-disant politiquement incorrect est une imposture
+|titre-affiché=L'extrême droite se prétend censurée alors qu'elle est omniprésente dans les médias
+}}{{Justification
+|page=Les propos récents d'élus RN trahissent son homophobie
+|titre-affiché=Les élus RN n'ont aucun problème à institutionnaliser de la censure idéologique
+}}{{Justification
+|page=Les médias d'extrême droite n'ont aucun problème à censurer ceux qui les critiquent
+|titre-affiché=Les médias d'extrême droite n'ont aucun problème à censurer ceux qui les critiquent
+}}{{Justification
+|page=Aux USA, l'extrême droite censure des livres lgbt au nom de la lutte contre le wokisme
+|titre-affiché=Aux USA, l'extrême droite censure des livres au nom de la lutte contre le wokisme
+}}{{Justification
+|page=Les militants d'extrême droite ont de trop grosses oeillères idéologiques pour voir les censures qui les arrangent bien
+|titre-affiché=Les militants d'extrême droite ont de trop grosses oeillères idéologiques pour voir les censures qui les arrangent bien
+}}{{Justification
+|page=Les médias d'extrême droite n'ont aucun problème pour intimider ceux qui les critiquent
+|titre-affiché=Les médias d'extrême droite n'ont aucun problème pour intimider ceux qui les critiquent
+}}{{Justification
+|page=L'administration Trulmp n'a aucun problème à censurer tant qu'elle le peut tout ce qui ne lui plaît pas
+|titre-affiché=L'administration Trump n'a aucun problème à censurer tant qu'elle le peut tout ce qui ne lui plaît pas
+}}{{Justification
+|page=Le gamergate, polémique initiée par l'extrême droite contre les studios jugés trop "woke", a fait couler de nombreuses carrières dans le jeu vidéo
+|titre-affiché=L'extrême droite fait couler des studios de jeu vidéo qu'elle juge trop "woke"
+}}{{Justification
+|page=De nombreuses personnes ont perdu leur emploi simplement pour avoir exprimé une opinion négative sur une personnalité d'extrême droite
+|titre-affiché=De nombreuses personnes ont perdu leur emploi simplement pour avoir exprimé une opinion négative sur une personnalité d'extrême droite
+}}
+|date-création=2022-01-20
+}}

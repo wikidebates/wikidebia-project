@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@11164
+|rubriques=Société
+|mots-clés=travail, salaire
+|date-création=2022-10-21
+}}

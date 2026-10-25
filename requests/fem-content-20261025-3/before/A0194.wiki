@@ -1,0 +1,5 @@
+{{Argument
+|initialisation=Justification@24645
+|résumé=La masculinité toxique est le principal vecteur d'homophobie, les hommes gays étant perçus comme "pas assez hommes", donc comme des personnes méprisables.
+|date-création=2024-03-08
+}}

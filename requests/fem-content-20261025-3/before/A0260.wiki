@@ -1,0 +1,5 @@
+{{Argument
+|initialisation=Objection@11230
+|avertissements-argument=Argument saugrenu
+|date-création=2023-09-13
+}}

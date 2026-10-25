@@ -1,0 +1,9 @@
+{{Argument
+|objections={{Objection
+|page=Les hommes coupent plus souvent la parole aux femmes que l'inverse
+|titre-affiché=Les hommes coupent plus souvent la parole aux femmes que l'inverse
+}}
+|rubriques=Société
+|mots-clés=manterrupting, féminisme
+|date-création=2022-08-29
+}}

@@ -1,0 +1,13 @@
+{{Argument
+|citations={{Citation
+|citation='''Dans 66% des dossiers la victime connaissait l’auteur ou les auteurs''' : pour 15% des victimes, l’auteur était un (ex-) partenaire ; dans 11% des cas, il s’agissait d’un membre de la famille ou du ménage comme un parent ou beau-parent ; pour 40% des victimes, il s’agissait d’une connaissance. Dans 34% des cas, l’auteur était inconnu.
+
+"''Ces chiffres montrent à quel point le profil des auteurs de violences sexuelles ne correspond pas à l’imaginaire collectif du violeur qui agresse sa victime dans l’espace public par surprise. La connaissance de cette complexité est nécessaire aussi en termes de prévention et sensibilisation''", souligne Sarah Schlitz.
+|auteurs=Les Grenades
+|article=Violences sexuelles : de plus en plus de victimes se rendent dans les CPVS
+|ouvrage=rtbf.be
+|date=12 juin 2022
+|lien=https://www.rtbf.be/article/violences-sexuelles-de-plus-en-plus-de-victimes-se-rendent-dans-les-cpvs-11010940
+}}
+|date-création=2022-04-28
+}}

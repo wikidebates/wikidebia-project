@@ -1,0 +1,15 @@
+{{Argument
+|initialisation=Justification@7569
+|résumé=Interdire aux femmes de porter le voile "pour leur bien", fut-ce contre leur gré et en prenant sa propre culture comme grille de lecture, c'est décréter que le sauveur blanc sait mieux que les principaux concernés ce qui est bon pour eux. Cette infantilisation paternaliste et raciste est née de l'idéologie coloniale et nourrit encore de nos jours le racisme contemporain.
+|justifications={{Justification
+|page=Déjà à l'époque coloniale, l'inquiétude apparente sur le sort des femmes du Maghreb servait de justification à la colonisation
+|titre-affiché=Déjà à l'époque coloniale, l'inquiétude apparente sur le sort des femmes du Maghreb servait de justification à la colonisation
+}}
+|objections={{Objection
+|page=Aujourd'hui en Orient, la lutte contre le voile est le fait de féministes
+|titre-affiché=Aujourd'hui en Orient, la lutte contre le voile est le fait de féministes
+}}
+|rubriques=Histoire, Religion et spiritualité, Société
+|mots-clés=histoire, fémonationalisme, religion
+|date-création=2023-06-10
+}}

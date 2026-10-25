@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@11164
+|rubriques=Culture, Société
+|mots-clés=travail, représentation
+|date-création=2022-09-02
+}}

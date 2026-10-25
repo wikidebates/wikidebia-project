@@ -1,0 +1,54 @@
+{{Argument
+|résumé=En donnant une acception beaucoup trop large au second degré, à l'humour "politiquement incorrect" et à l'humour noir, la gauche a ouvert une faille qui a permis à l'extrême droite -qui, elle, avait bien compris le pouvoir endoctrinant de l'humour- de diffuser ses idées sans tomber sous le coup de la loi ni éveiller les soupçons. ça a tellement bien marché que ça a incité des personnes "progressistes" à défendre ce type d'humour, devenant de fait les idiotes utiles de la destruction de leur propre idéologie.
+|citations={{Citation
+|citation=Une blague raciste envoie à l’endogroupe¹ un message comme quoi le racisme est acceptable. (Si vous ne le trouvez pas acceptable, vous êtes dans l’exogroupe²) La personne racontant la blague raciste peut dire « je plaisante » – mais en le disant, elle se '''défend''' vis-à-vis de l’exogroupe. Elle n’a pas besoin de dire ça à l’endogroupe. C’est pourquoi ce n’est jamais « une plaisanterie ». Pour l’endogroupe, défendre la blague n’est pas nécessaire. L’idée transmise est acceptée/acceptable.
+
+Ainsi, quand Trump plaisante à propos d’assassinat ou de révolte armée, il demande à l’endogroupe d’assimiler/d’accepter cette idée. C’est ce que font les blagues. Et quand il dit « je plaisante », c’est une défense face à l’exogroupe dont on n’attend jamais qu’il accepte/admette l’idée.
+
+Donc pour revenir au début, la blague '''elle-même''' est une façon de définir l’endogroupe et l’exogroupe, via l’intégration et l’exclusion. Si vous êtes prêt·es à accepter « je plaisante » en tant que défense, vous êtes prêt·es à rejoindre l’endogroupe où l’idée transmise par la blague est acceptable.
+
+En un mot, si « je plaisante » excuse les blagues racistes, alors l’endogroupe a accepté l’idée du racisme comme faisant partie de ce groupe.
+
+Il en va de même pour les « blagues » sur la révolte armée ou l’assassinat d’Hillary Clinton. Elles ne peuvent pas être acceptées comme « de la plaisanterie ».
+|article=Ce n’est pas « juste une blague »
+|ouvrage=repeindre.info
+|date=5 avril 2021
+|lien=https://repeindre.info/2021/04/05/ce-nest-pas-juste-une-blague/
+}}{{Citation
+|citation=Alors qu’on pense être en mesure d’exercer notre pensée critique à tout instant, il apparaît selon plusieurs études que rejeter ce qu’on entend demande plus d’effort et de concentration que l’accepter comme étant une vérité. Et lorsque l’humour auquel on est exposé ne présente pas de subtilité particulière, nous faisons logiquement l’économie de notre réflexion et cultivons alors des préjugés infondés. Autrement dit, l’humour facile nourrit les stéréotypes sur lesquels il se base. Les blagues ne sont pas que des blagues.
+
+C’est sans doute ce qui explique pourquoi à qualifications égales, les femmes blondes sont plus souvent refusées à un poste comparé aux femmes brunes comme le démontre un article de l'Observer à propos du racisme invisible.
+|auteurs=Rachid Zerrouki
+|article=Peut-on rire de tous ?
+|ouvrage=Slate.fr
+|date=18 janvier 2018
+|lien=https://www.slate.fr/story/156365/humour-inclusif
+}}{{Citation
+|citation=En alimentant les stéréotypes sur les femmes, présentées comme des objets dont on peut disposer à loisir, les blagues sexistes les exposeraient davantage aux violences sexuelles. Leur diffusion sur les grands médias n’arrangerait rien. Par ailleurs, si elles influent sur les comportements, c’est probablement aussi le cas d’autres types de blagues, par exemple racistes ou homophobes, qui accentueraient les discriminations. On se souvient de l’animateur Cyril Hanouna ridiculisant les homosexuels sous couvert d’humour dans son émission : « Touche pas à mon poste », et assurant prendre fait et cause pour les gays : non, ces « plaisanteries » ne font pas évoluer positivement les comportements, bien au contraire !
+|auteurs=Nicolas Guéguen
+|article=Le pouvoir des bonnes blagues
+|ouvrage=Cerveau & Psycho
+|date=22 août 2018
+|lien=https://www.pourlascience.fr/theme/inegalites-hommes-femmes/le-pouvoir-des-bonnes-blagues-13995.php
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://magalimilbergue.substack.com/p/54-les-insultes-oppressives
+|page=Les insultes oppressives
+|auteurs=Magali Milbergue
+|site=On daisy's moon
+|date=sept. 17, 2024
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Homophobie : non, les petites blagues ne sont pas inoffensives
+|auteurs=Welcome to the jungle
+|lien=https://youtu.be/8UJpVx-s6Ys
+}}
+|justifications={{Justification
+|page=L'humour à propos d'un groupe discriminé contribue à normaliser l'exclusion et les violences qu'il subit
+|titre-affiché=L'humour à propos d'un groupe discriminé contribue à normaliser l'exclusion et les violences qu'il subit
+}}{{Justification
+|page=TPMP a peu à peu abandonné sa posture de prétention au second degré et assume désormais pleinement sa volonté propagandiste
+|titre-affiché=TPMP a peu à peu abandonné sa posture de prétention au second degré et assume désormais pleinement sa volonté propagandiste
+}}
+|date-création=2021-11-26
+}}

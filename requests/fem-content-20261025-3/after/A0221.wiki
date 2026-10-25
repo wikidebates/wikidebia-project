@@ -1,0 +1,7 @@
+{{Argument
+|initialisation=Objection@5432
+|résumé=Sachant que parmi les anti-woke, il y a des courants religieux qui sont eux-mêmes puritains, et que beaucoup de censures au.nom de la lutte "anti"woke" relèvent en réalité d'un puritanisme mal assumé.
+|rubriques=Politique, Société
+|mots-clés=wokisme, féminisme
+|date-création=2023-12-27
+}}

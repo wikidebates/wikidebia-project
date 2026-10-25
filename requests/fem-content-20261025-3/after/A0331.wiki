@@ -1,0 +1,20 @@
+{{Argument
+|initialisation=Objection@16983
+|justifications={{Justification
+|page=Qualifier E. Badinter et son courant de "fémonationalisme" décrédibilise ce concept
+|titre-affiché=Qualifier E. Badinter et son courant de "fémonationalisme" décrédibilise ce concept
+}}
+|objections={{Objection
+|page=Ceux qui tapent sur le soi-disant "islamo-gauchisme" ne combattent pas l'intégrisme, mais l'inversent
+|titre-affiché=Les fémonationalistes ne combattent pas le patriarcat musulman, mais le remplacent par celui de l'occident
+}}{{Objection
+|page=Les fémonationalistes ne proposent rien contre le sexisme qui sévit en occident
+|titre-affiché=Le fémonationalisme implique par essence une complaisance envers le sexisme de l'occident
+}}{{Objection
+|page=Le fémonationaliste est une stratégie électorale pour s'attirer la sypathie de l'électorat féminin sans pour autant renier son agenda réactionnaire
+|titre-affiché=Le fémonationaliste est une stratégie électorale pour s'attirer la sypathie de l'électorat féminin sans pour autant renier son agenda réactionnaire
+}}
+|rubriques=Société
+|mots-clés=féminisme, fémonationalisme, universalisme
+|date-création=2025-04-16
+}}

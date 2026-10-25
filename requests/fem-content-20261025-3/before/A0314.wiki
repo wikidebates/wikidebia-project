@@ -1,0 +1,21 @@
+{{Argument
+|initialisation=Objection@17219
+|citations={{Citation
+|citation=Certains éditeurs français recourent déjà à des ''sensitivity readers'', chargés de passer les manuscrits au crible pour relever les passages qui risqueraient d'être perçus comme offensants ou désobligeants envers les minorités. Or, comme l'écrit Belinda Cannone, «''la bêtise s'améliore''»: de nouvelles susceptibilités éclosent continuellement, toujours plus chatouilleuses sur des sujets qui paraissaient hier anodins aux lecteurs les plus «conscients» et les plus «éveillés». Les livres qui répondent à un cahier des charges commercial et idéologique imposé par l'actualité sont donc ceux qui sont voués à sombrer le plus rapidement ou bien dans l'opprobre ou bien, si l'auteur est chanceux, dans l'oubli… Je cite dans mon livre le cas d'un auteur qui confesse, quelques années seulement après la publication d'un roman, que ce qu'il avait écrit est devenu choquant depuis le mouvement #MeToo. La date de péremption est atteinte ! La «révolution culturelle» permanente des réseaux sociaux invite à la création d'une littérature jetable, «annulable» au fur et à mesure des perfectionnements du conformisme.
+
+'''Vous abordez un point absolument essentiel: le respect de «''l'altérité culturelle des époques passées''''' '''». Comment éviter l'anachronisme et le jugement de temps disparus ?'''
+
+Le lecteur qui juge le passé à l'aune de ses propres critères moraux est aussi détestable que le touriste qui s'indigne, à l'étranger, de mœurs différentes des siennes ! Longtemps, la culture bourgeoise s'est considérée comme le terme d'une évolution à l'aune duquel il fallait interpréter le passé.
+
+La ''cancel culture'' perpétue la vieille illusion bourgeoise: elle se tient pour l'accomplissement du progrès et ne voit dans l'héritage culturel qu'une poubelle de l'histoire où s'accumulent les mêmes tares que celles qui restent à dénoncer aujourd'hui chez les ennemis du progrès… Au contraire, nous devons travailler à faire apparaître l'altérité, l'étrangeté des cultures anciennes, en partant de questions qui se posent à nous dans le présent sans faire du passé l'écran de projection de nos préoccupations morales contemporaines. Pour sortir de ce nouvel ethnocentrisme, il faut percevoir et faire sentir les différences dans l'ordre culturel, car ce sont elles qui mesurent le temps. La lecture des œuvres du passé peut être aussi bouleversante qu'une rencontre, mais il n'y a pas de rencontre authentique sans la reconnaissance d'une altérité, et cela représente une réelle prise de risque pour nos «identités» de plus en plus agressives et figées.
+|article=La «cancel culture» fabrique-t-elle une génération d'ignorants?
+|ouvrage=Le Figaro
+|date=31/08/22
+|lien=https://www.lefigaro.fr/vox/culture/la-cancel-culture-fabrique-t-elle-une-generation-d-ignorants-20220831
+}}
+|objections={{Objection
+|page=Les critiques les plus vocales du "wokisme" sont réactionnaires
+|titre-affiché=Les principaux adversaires du wokisme sont des idéologues d'extrême droite, ennemis notoire de la culture et de l'altérité
+}}
+|date-création=2024-10-18
+}}

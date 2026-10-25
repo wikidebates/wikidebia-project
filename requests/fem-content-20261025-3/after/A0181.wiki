@@ -1,0 +1,10 @@
+{{Argument
+|résumé=Expliquer son point de vue n'est pas forcément du sexisme. Le mépris n'est pas forcément du mépris en fonction du sexe. Le mépris ou la condescendance que certain affiche lorsqu'ils argumentent n'est pas forcément lier au sexe de l'interlocuteur.
+|objections={{Objection
+|page=Le mansplaining n'est pas juste un contre-argument, c'est la tendance qu'ont les hommes à se croire plus compétents que les femmes dans des domaines où elles sont pourtant expertes
+|titre-affiché=Le mansplaining n'est pas juste un contre-argument, c'est la tendance qu'ont les hommes à se croire plus compétents que les femmes dans des domaines où elles sont pourtant expertes
+}}
+|rubriques=Société
+|mots-clés=mansplaining, féminisme
+|date-création=2022-08-29
+}}

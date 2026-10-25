@@ -1,0 +1,21 @@
+{{Argument
+|initialisation=Justification@16437
+|citations={{Citation
+|citation=Si l’oppression des femmes est devenue permanente avec la naissance des classes sociales et l’apparition de la propriété privée, c’est bien dans les moments où cette base économique est remise en cause que les rapports entre humains, et donc entre hommes et femmes, peuvent changer. Et c’est précisément ce qui s’est produit en Russie en 1917. Alors, je le répète, pour moi, être communiste et féministe, c’est indissociable. Être une féministe conséquente, c’est se battre pour changer toute la société, à l’égal de n’importe quel homme.
+|auteurs=Nathalie Arthaud
+|ouvrage=Communiste, révolutionnaire, internationaliste !
+|édition=Les bons caractères
+|date=2022
+|lien=https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste
+}}
+|justifications={{Justification
+|page=Les femmes ont joué un rôle moteur dans les révolutions passées
+|titre-affiché=Les femmes ont joué un rôle moteur dans les révolutions passées
+}}{{Justification
+|page=La révolution russe a porté au plus haut la lutte pour l'émancipation des femmes
+|titre-affiché=La révolution russe a porté au plus haut la lutte pour l'émancipation des femmes
+}}
+|rubriques=Politique, Société
+|mots-clés=révolution sociale, remise en cause, organisation sociale, propice, changement social, féminisme
+|date-création=2023-04-03
+}}

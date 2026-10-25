@@ -1,0 +1,8 @@
+{{Argument
+|initialisation=Justification@17219
+|justifications={{Justification
+|page=L'extrême droite qualifie de "woke" les thématiques qu'elle ne peut pas attribuer à des boucs émissaires
+|titre-affiché=L'extrême droite qualifie de "woke" les thématiques qu'elle ne peut pas attribuer à ses boucs émissaires habituels
+}}
+|date-création=2024-01-09
+}}

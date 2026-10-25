@@ -1,0 +1,9 @@
+{{Argument
+|objections={{Objection
+|page=On ne devrait même pas avoir à demander aux hommes de ne pas écarter les jambes
+|titre-affiché=On ne devrait même pas avoir à le leur demander
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2022-08-29
+}}

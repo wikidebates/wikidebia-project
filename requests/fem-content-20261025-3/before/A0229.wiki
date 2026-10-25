@@ -1,0 +1,8 @@
+{{Argument
+|initialisation=Objection@5975
+|justifications={{Justification
+|page=Le collectif féministe NousToutes a explicitement soutenu Mila
+|titre-affiché=Le collectif féministe NousToutes a explicitement soutenu Mila
+}}
+|date-création=2025-12-07
+}}

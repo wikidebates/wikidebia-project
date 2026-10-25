@@ -1,0 +1,6 @@
+{{Argument
+|résumé=Des films qualifiés de sexistes continuent de sortir à l'heure actuelle et ne subissent comme sanction que des protestations fort peu impactantes.
+|rubriques=Société
+|mots-clés=sexisme, féminisme
+|date-création=2022-01-15
+}}

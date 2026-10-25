@@ -1,0 +1,5 @@
+{{Argument
+|rubriques=Société
+|mots-clés=féminisme, sexisme, masculinisme
+|date-création=2022-10-14
+}}

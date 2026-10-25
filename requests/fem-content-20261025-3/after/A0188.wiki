@@ -1,0 +1,13 @@
+{{Argument
+|résumé=C'est à cause des parties génitales.
+|objections={{Objection
+|page=Les hommes écartent les jambes parce qu'on leur a appris qu'ils avaient le droit de prendre tout l'espace public
+|titre-affiché=Les hommes écartent les jambes parce qu'on leur a appris qu'ils avaient le droit de prendre tout l'espace public
+}}{{Objection
+|page=Les hommes sont physiologiquement capables de s'asseoir sans écarter les jambes
+|titre-affiché=Les hommes sont physiologiquement capables de s'asseoir sans écarter les jambes
+}}
+|rubriques=Santé, Société
+|mots-clés=manspreading, psychologie
+|date-création=2022-08-29
+}}

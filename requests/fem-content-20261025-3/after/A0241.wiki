@@ -1,0 +1,11 @@
+{{Argument
+|initialisation=Justification@7569
+|références-vidéographiques={{Référence vidéographique
+|titre=Manipulations des chiffres des viols par l'extrême droite
+|auteurs=Le fou allié
+|lien=https://www.youtube.com/watch?v=-tCTrS-5eyg
+}}
+|rubriques=Droit, Politique, Société
+|mots-clés=viol, extrême droite, immigration
+|date-création=2024-05-29
+}}

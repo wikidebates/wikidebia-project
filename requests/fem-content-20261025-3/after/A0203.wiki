@@ -1,0 +1,13 @@
+{{Argument
+|résumé=La définition du sexisme est trop large pour permettre la création
+|objections={{Objection
+|page=La lutte antisexiste n'a pas le pouvoir d'empêcher des sorties
+|titre-affiché=La lutte antisexiste n'a pas le pouvoir d'empêcher des sorties
+}}{{Objection
+|page=Les oeuvres continuent d'être produites malgré la lutte antisexiste
+|titre-affiché=Les oeuvres continuent d'être produites malgré la lutte antisexiste
+}}
+|rubriques=Culture, Société
+|mots-clés=sexisme, culture
+|date-création=2022-01-15
+}}

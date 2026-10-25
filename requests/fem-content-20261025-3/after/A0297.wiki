@@ -1,0 +1,9 @@
+{{Argument
+|objections={{Objection
+|page=L'influence est avérée et connue depuis longtemps
+|titre-affiché=L'influence est avérée et connue depuis longtemps
+}}
+|rubriques=Société
+|mots-clés=médias, féminisme
+|date-création=2022-01-20
+}}

@@ -1,0 +1,15 @@
+{{Argument
+|initialisation=Objection@5975
+|résumé=L'extrême droite a été très prompte pour s'offusquer que la gauche n'ait pas eu la même indignation performative qu'elle, "oubliant" bien commodément que c'est entièrement de sa faute qu'elle a eu un tel retentissement. Des ados qui se font harceler suite à une publication malheureuse sur les réseaux sociaux, c'est tristement banal et ne fait jamais les gros titres, sauf quand elle permet une récupération politique comme c'est le cas ici, l'extrême droite s'est donc donc comportée en pompier pyromane.
+|citations={{Citation
+|citation=On constate que, quelque temps plus tard, Identitaires et pseudo-laïques se sont disputé la primeur du « combat pour Mila », revendiquant d’avoir été en première place pour « la défense » de l’adolescente… Mais les faits sont têtus : c’est bien la fachosphère qui a lancé l’affaire, et son hashtag a enregistré des scores de likes et de partages sans commune mesure avec ceux espérés par ses suiveurs, lesquels, en l’ayant adopté, lui ont assuré cette '''confortable résonance'''.
+|auteurs=Isabelle Kersimon, Jean-Yves Pranchère, Alain Policar, Jean-Yves Camus, Georges Salines
+|article=Retour sur “l’affaire Mila” : un faux débat instrumenté par l’extrême droite
+|ouvrage=Institut de recherches et d'études sur les radicalités
+|date=4 mai 2020
+|lien=https://inrer.org/2020/05/retour-sur-l-affaire-mila/
+}}
+|rubriques=Droit, Politique, Société
+|mots-clés=extrême droite, féminisme
+|date-création=2026-02-27
+}}

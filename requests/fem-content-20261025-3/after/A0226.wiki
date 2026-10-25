@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@5431
+|rubriques=Culture, Droit, Société
+|mots-clés=médias, justice
+|date-création=2022-05-12
+}}

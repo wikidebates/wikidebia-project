@@ -1,0 +1,11 @@
+{{Argument
+|citations={{Citation
+|citation=En première instance, le tribunal avait donné raison aux deux plaignants qui s'estimaient diffamés par leurs accusatrices, les condamnant à des dommages et intérêts. Mais la cour d'appel de Paris avait ensuite infirmé ces jugements, le 31 mars et le 14 avril 2021, estimant que les dénonciations relevaient de la liberté d'expression.
+|auteurs=France Télévisions
+|article=Violences sexistes et sexuelles : Pierre Joxe et Eric Brion définitivement déboutés des poursuites contre leurs accusatrices
+|ouvrage=Francetvinfo
+|date=11/05/2022
+|lien=https://www.francetvinfo.fr/societe/violences-faites-aux-femmes/violences-sexuelles-pierre-joxe-et-eric-brion-definitivement-deboutes-des-poursuites-contre-leurs-accusatrices_5132128.html
+}}
+|date-création=2022-04-15
+}}

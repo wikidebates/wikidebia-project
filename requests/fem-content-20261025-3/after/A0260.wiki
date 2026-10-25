@@ -1,0 +1,7 @@
+{{Argument
+|initialisation=Objection@11230
+|avertissements-argument=Argument saugrenu
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2023-09-13
+}}
