@@ -1,0 +1,34 @@
+{{Argument
+|initialisation=Objection@15779
+|citations={{Citation
+|citation=Si l’oppression des femmes est devenue permanente avec la naissance des classes sociales et l’apparition de la propriété privée, c’est bien dans les moments où cette base économique est remise en cause que les rapports entre humains, et donc entre hommes et femmes, peuvent changer. Et c’est précisément ce qui s’est produit en Russie en 1917. Alors, je le répète, pour moi, être communiste et féministe, c’est indissociable. Être une féministe conséquente, c’est se battre pour changer toute la société, à l’égal de n’importe quel homme.
+|auteurs=Nathalie Arthaud
+|ouvrage=Communiste, révolutionnaire, internationaliste !
+|édition=Les bons caractères
+|date=2022
+|lien=https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste
+}}
+|justifications={{Justification
+|page=Le féminisme peut très bien servir de justification au nivellement par le bas
+|titre-affiché=Le féminisme peut très bien servir de justification au nivellement par le bas
+}}{{Justification
+|page=Le féminisme bourgeois peut avoir des positions contraires à l'émancipation des femmes et des hommes
+|titre-affiché=Le féminisme bourgeois peut avoir des positions contraires à l'émancipation des femmes et des hommes
+}}{{Justification
+|page=Tant que le capitalisme existera, l'oppression des femmes se maintiendra
+|titre-affiché=Tant que le capitalisme existera, l'oppression des femmes se maintiendra
+}}{{Justification
+|page=C'est dans les moments où l'organisation sociale est entièrement remise en cause que les rapports entre hommes et femmes peuvent être métamorphosés
+|titre-affiché=C'est dans les moments où l'organisation sociale est entièrement remise en cause que les rapports entre hommes et femmes peuvent être métamorphosés
+}}
+|objections={{Objection
+|page=Le mouvement ouvrier a déjà montré son incapacité à prendre en charge le combat féministe
+|titre-affiché=Le mouvement ouvrier a déjà montré son incapacité à prendre en charge le combat féministe
+}}{{Objection
+|page=Le féminisme lutte de classe néglige l'existence d'un privilège mâle
+|titre-affiché=Le féminisme lutte de classe néglige l'existence d'un privilège mâle
+}}
+|rubriques=Économie, Politique, Société
+|mots-clés=féminisme, lutte des classes, révolution sociale, renversement, capitalisme
+|date-création=2023-04-03
+}}

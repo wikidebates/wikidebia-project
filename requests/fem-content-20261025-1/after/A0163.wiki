@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Objection@11213
+|citations={{Citation
+|citation=Cette année encore, le baromètre met une lumière un paradoxe qui nous fait soupirer bien fort : '''93 %, soit une immense majorité des Français et Françaises, estiment que les femmes et les hommes connaissent des différences de traitement''' dans au moins une des sphères de la société (travail, espace public, école, famille…), ce qui n’empêche pas '''une large part de la population d’adhérer à des stéréotypes sexistes'''. Par exemple, seulement '''49 % des femmes et 37 % des hommes estiment qu’il est problématique qu’une femme cuisine tous les jours pour toute la famille'''. '''40 % des hommes et 27 % des femmes déclarent aussi qu’il est normal pour une femme qu’elle s’arrête de travailler pour s’occuper de ses enfants''' (un chiffre en hausse de 6 points par rapport au baromètre publié l’an dernier). Côté couple et rapport de séduction, '''38 % des femmes et 52 % des hommes considèrent qu’il est normal que l’homme paye l’addition au premier rendez-vous'''. Un florilège du sexisme ordinaire, donc.
+|auteurs=Marie-Stéphanie Servos
+|article=Le sexisme a encore de beaux jours devant lui en France, selon le HCE
+|ouvrage=Madmoizelle.com
+|date=23 jan 2023
+|lien=https://www.madmoizelle.com/le-sexisme-a-encore-de-beaux-jours-devant-lui-en-france-selon-le-hce-1486931
+}}
+|rubriques=Société
+|mots-clés=féminisme, misogynie
+|date-création=2022-09-02
+}}

@@ -1,0 +1,28 @@
+{{Argument
+|justifications={{Justification
+|page=La Cancel culture est une arme du féminisme radical
+|titre-affiché=La Cancel culture est une arme du féminisme radical
+}}{{Justification
+|page=La culture woke est une alliée du féminisme radical
+|titre-affiché=La Woke culture est un allié du féminisme radical
+}}{{Justification
+|page=La diffamation est un dommage collatéral du féminisme radical
+|titre-affiché=La diffamation, dommage collatéral du féminisme radical
+}}
+|objections={{Objection
+|page=Le féminisme radical n'est qu'une branche du féminisme parmi tant d'autres
+|titre-affiché=Le féminisme radical n'est qu'une branche du féminisme parmi tant d'autres
+}}{{Objection
+|page=Les thèses du féminisme radical sont controversées au sein même du mouvement féministe
+|titre-affiché=Les thèses du féminisme radical sont controversées au sein même du mouvement féministe
+}}{{Objection
+|page=Le féminisme radical est une réponse à l'échec du féminisme "pacifiste"
+|titre-affiché=Le féminisme radical est une réponse à l'échec du féminisme "pacifiste"
+}}{{Objection
+|page=On ne peut pas juger l'intégralité d'un mouvement sur la seule base de ses dérives
+|titre-affiché=On ne peut pas juger l'intégralité d'un mouvement sur la seule base de ses dérives
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2021-03-13
+}}

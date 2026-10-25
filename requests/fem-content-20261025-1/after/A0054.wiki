@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Justification@6324
+|citations={{Citation
+|citation=Influencer brothers [https://apnews.com/article/romania-andrew-tristan-tate-travel-ban-lifted-3c8b56be5d99f9ed04045f4680e5f8c0 Andrew and Tristan Tate], whose social media empire promoting wealth, male dominance and misogyny has made them among the world's most polarizing internet personalities, were arrested Saturday in Miami as British authorities sought their extradition on rape and sex trafficking charges.
+|auteurs=ALANNA DURKIN RICHER
+|article=Social media influencers Andrew and Tristan Tate arrested in Miami, US Marshals Service tells AP
+|ouvrage=Yahoo actualités
+|date=19 juillet 2026
+|lien=https://www.yahoo.com/news/us/articles/social-media-influencers-andrew-tristian-232232971.html
+}}
+|rubriques=Société
+|mots-clés=misogynie, féminisme
+|date-création=2026-07-19
+}}

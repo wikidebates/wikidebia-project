@@ -1,0 +1,58 @@
+{{Argument
+|résumé=Au travers de nouvelles masculinités recontexualisées dans la modernité, l'homme cherche encore, parfois involontairement à assoir une certaine hégémonie. Occupation démesurée de l'espace, intervention intempestive dans une conversation en coupant la parole à une femme, discours moraliste inutile envers une femme, domination violente, mise en danger de soi-même ou d'autrui… Ce sont les nouvelles masculinités : concepts affublés d'un néologisme anglicisé qui se veulent percutants et compréhensibles à leur seule évocation.
+|citations={{Citation
+|citation=En France, les hommes représentent 84 % des auteurs d’accidents de la route mortels, 90 % des personnes condamnées par la justice, 86 % des mis en cause pour meurtre, 97 % des auteurs de violences sexuelles, etc.
+
+Cette liste a un coût : direct pour l’État, qui dépense chaque année des dizaines de milliards d’euros en services de police, judiciaires, médicaux et éducatifs pour y faire face ; indirect pour la société, qui doit répondre aux souffrances des victimes.
+
+Lucile Peytavin s’interroge sur les raisons de cette surreprésentation des hommes parmi les auteurs de violences et de comportements à risque, et tente d’estimer les conséquences financières de l’ensemble de ces préjudices. Quel est le coût des conséquences de la virilité érigée en idéologie dominante ? N’aurions-nous pas tous intérêt à nous comporter… comme les femmes ?!
+|auteurs=Lucile Peytavin
+|ouvrage=Le Coût de la virilité
+|localisation=Quatrième de couverture
+|édition=Anne Carriere Éditions
+|date=5/03/2021
+}}
+|références-sitographiques={{Référence sitographique
+|lien=http://www.slate.fr/podcast/mansplaining
+|page=Poscasts : "Mansplaining, la masculinité
+|auteurs=Thomas Messias
+|site=Slate.fr
+|date=Depuis 2028
+}}{{Référence sitographique
+|lien=https://www.binge.audio/podcast/les-couilles-sur-la-table
+|page=Podcasts : "Les couilles sur la table"
+|auteurs=Victoire Tuaillon
+|site=Binge Audio
+|date=Depuis 2017
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=C'est mon choix : je suis macho, et alors
+|lien=https://www.youtube.com/watch?v=WSvJ_bLtDXs
+}}
+|justifications={{Justification
+|page=L'homme cherche encore à donner des leçons de vie à la femme (Mansplaining)
+|titre-affiché=L'homme cherche encore à donner des leçons de vie à la femme (Mansplaining)
+}}{{Justification
+|page=L'homme coupe encore trop souvent la parole à la femme (Manterrupting)
+|titre-affiché=L'homme coupe encore trop souvent la parole à la femme (Manterrupting)
+}}{{Justification
+|page=L'homme prend encore trop de place dans l'espace public (Manspreading et Manslaming)
+|titre-affiché=L'homme prend encore trop de place dans l'espace public (Manspreading et Manslaming)
+}}{{Justification
+|page=Le masculinisme constitue une autre forme de dérive
+|titre-affiché=Les autres formes de dérives : apologie du masculisnisme
+}}{{Justification
+|page=La masculinité toxique est un piège pour les hommes eux-mêmes
+|titre-affiché=La masculinité toxique est un piège pour les hommes eux-mêmes
+}}
+|objections={{Objection
+|page=La plupart des hommes ne sont pas toxiques
+|titre-affiché=La plupart des hommes ne sont pas toxiques.
+}}{{Objection
+|page=Les féministes voient de la toxicité là où il n'y en a pas
+|titre-affiché=Les féministes voient de la toxicité là où il n'y en a pas
+}}
+|rubriques=Société
+|mots-clés=Féminisme
+|date-création=2021-02-23
+}}

@@ -1,0 +1,19 @@
+{{Argument
+|initialisation=Objection@28856
+|résumé=Les électeurs populistes sont supposés être adultes, donc entièrement responsables de la nature de leurs votes, ce n'est pas le rôle de la gauche que de les materner et assumer seule la charge de guider leurs choix politiques.
+|justifications={{Justification
+|page=Même les revendications de gauche modérées et/ou légitimes suffisent à radicaliser les conservateurs
+|titre-affiché=Même les revendications de gauche modérées et/ou légitimes suffisent à radicaliser les conservateurs
+}}{{Justification
+|page=Il est indécent d'accuser la gauche de ne pas être assez gentille alors que l'extrême droite est infiniment plus violente qu'elle sans que ça ne gêne personne
+|titre-affiché=Il est indécent d'accuser la gauche de ne pas être assez gentille alors que l'extrême droite est infiniment plus violente qu'elle sans que ça ne gêne personne
+}}{{Justification
+|page=Ce n'est pas de la faute de la gauche si les conservateurs ou les modérés ne sont pas capables de supporter leur propre dissonance cognitive
+|titre-affiché=Ce n'est pas de la faute de la gauche si les conservateurs ou les modérés ne sont pas capables de supporter leur propre dissonance cognitive
+}}
+|objections={{Objection
+|page=La gauche a une responsabilité écrasante dans la montée de l'extrême droite
+|titre-affiché=La gauche a une responsabilité écrasante dans la montée de l'extrême droite
+}}
+|date-création=2024-11-21
+}}

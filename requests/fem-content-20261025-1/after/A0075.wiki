@@ -1,0 +1,7 @@
+{{Argument
+|initialisation=Objection@16428
+|résumé=Le féminisme concerne tout le monde.
+|rubriques=Éducation, Éthique, Philosophie
+|mots-clés=féminisme, égalité de genre
+|date-création=2023-12-13
+}}

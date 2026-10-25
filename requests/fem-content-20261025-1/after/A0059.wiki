@@ -1,0 +1,5 @@
+{{Argument
+|rubriques=Santé, Société
+|mots-clés=médecine, féminisme
+|date-création=2022-12-19
+}}

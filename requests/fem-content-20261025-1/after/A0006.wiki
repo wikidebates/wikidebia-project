@@ -1,0 +1,33 @@
+{{Argument
+|résumé=Partout dans le monde, y compris chez nous, des idéologies de nature à freiner voire faire reculer l'égalité de genre connaissent une large expansion. Plusieurs pays ont d'ailleurs déjà pris des dispositions en la matière.
+|citations={{Citation
+|citation=151. [https://www.ouest-france.fr/monde/etats-unis/le-secretaire-americain-a-la-defense-a-partage-une-video-qui-soppose-au-droit-de-vote-des-femmes-d51ece66-76d7-11f0-9d15-80a5c5d7922a Le secrétaire à la Défense des États-Unis a relayé la vidéo de nationalistes chrétiens affirmant que les femmes ne devraient plus avoir le droit de vote]. La fenêtre d’Overton continue de s’élargir. Comme un air de « La servante écarlate » ?
+|auteurs=Simon Verdière
+|article=Le listing des atrocités de Donald Trump
+|ouvrage=Mr Mondialisation
+|date=4 février 2025
+|lien=https://mrmondialisation.org/9-atrocites-trump-mandat/
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.madmoizelle.com/droit-a-livg-les-etats-unis-sappretent-ils-a-un-retour-en-arriere-sans-precedent-1218943
+|page=Droit à l’IVG : les États-Unis s’apprêtent-ils à un retour en arrière sans précédent ?
+|auteurs=Maëlle Le Corre
+|site=Madmoizelle.com
+|date=02 déc 2021
+}}{{Référence sitographique
+|lien=https://www.neonmag.fr/deferlante-de-lois-anti-avortement-aux-etats-unis-558309.html
+|page=Déferlante de lois anti-avortement aux États-Unis
+|auteurs=Anaïs Bouitcha
+|site=Neonmag.fr
+}}
+|objections={{Objection
+|page=Il n'y a pas besoin d'être féministe pour défendre les droits des femmes
+|titre-affiché=Il n'y a pas besoin d'être féministe pour défendre les droits des femmes
+}}{{Objection
+|page=Le féminisme est en partie responsable du recul des droits des femmes aux USA
+|titre-affiché=Le féminisme est en partie responsable du recul des droits des femmes aux USA
+}}
+|rubriques=Droit, Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2022-02-22
+}}

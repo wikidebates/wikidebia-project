@@ -1,0 +1,60 @@
+{{Argument
+|résumé=Les femmes subissent encore et dans tous les domaines plus de discrimination sexiste : travail, sport, politique, famille, culture.
+|citations={{Citation
+|citation=Dans le domaine professionnel, 66 % des Français.es jugent insatisfaisant le niveau d’égalité entre les femmes et les hommes. De plus, les sondages révèlent que les femmes subissent de nombreuses violences sexistes  : harcèlement verbal ou visuel, harcèlement physique et harcèlement psychologique à visées sexuelles. Ainsi, 40 % des femmes ont fait l’objet de sifflements, de gestes ou de commentaires grossiers, ou encore de regards déplacés ; 33 % ont fait l’objet de remarques gênantes sur leur tenue ou  leur physique ; et 14 % se sont vues imposer des contacts sur une zone génitale ou érogène (mains sur les fesses, étreinte ou baiser forcé…) Toutes infractions pénales confondues, 87 % des victimes d’actes sexistes sont des femmes et 91 % des mis en cause sont des hommes.Par ailleurs, si le sexisme vécu par les françaises prend différentes formes (remarques, blagues, etc.), il est subi par la quasi-totalité d’entre elles : 99 % des femmes disent avoir été victimes d’un acte ou commentaire sexiste en 2019.
+|ouvrage=Rapport annuel sur l'état du sexisme en France en 2019
+|date=2019
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Haut Conseil à l'égalité entre les hommes et les femmes
+|ouvrage=Rapport annuel sur l'état des lieux du sexisme en France en 2019
+|date=02/03/2020
+|lien=https://www.haut-conseil-egalite.gouv.fr/IMG/pdf/rapport_etat_des_lieux_du_sexisme_2019-2.pdf
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.haut-conseil-egalite.gouv.fr/
+|site=Haut Conseil à l'égalité entre les femmes et les hommes
+}}{{Référence sitographique
+|lien=https://www.caminteresse.fr/societe/10-faits-et-chiffres-qui-montrent-que-legalite-hommes-femmes-ce-nest-pas-gagne-140624/
+|page=11 faits et chiffres qui montrent que l’égalité femmes-hommes, ce n’est pas gagné
+|auteurs=Juliette Serfati
+|site=ça m'intéresse
+|date=10/03/2022
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Le féminisme après #metoo, Le Monde
+|lien=https://www.youtube.com/playlist?list=PLFuK0VAIne9KYdJU6duXzY8cyQZ51WzIU
+}}
+|justifications={{Justification
+|page=Les femmes gagnent moins que les hommes
+|titre-affiché=Les femmes gagnent moins que les hommes
+}}{{Justification
+|page=Les femmes sont moins présentes dans les postes à hautes responsabilités et les filières "masculines"
+|titre-affiché=Les femmes sont moins présentes dans les postes à haute responsabilités et les filières "masculines"
+}}{{Justification
+|page=Les femmes sont encore sous-représentées dans les récits historiques profitant le plus souvent aux "grandes" figures masculines
+|titre-affiché=Les femmes sont encore sous représentées dans les récits historiques profitant le plus souvent aux "grandes" figures masculines
+}}{{Justification
+|page=Les femmes sont sous-représentées dans l'ensemble du monde audiovisuel et des médias
+|titre-affiché=Les femmes souffrent encore de sous représentation dans l'ensemble du monde audiovisuel/médias :
+}}{{Justification
+|page=Les femmes assurent en majorité les tâches domestiques au sein du foyer
+|titre-affiché=Les femmes assurent en majorité les tâches domestiques au sein du foyer
+}}{{Justification
+|page=La parité en politique n'est pas encore atteinte
+|titre-affiché=La parité en politique n'est pas encore atteinte
+}}
+|objections={{Objection
+|page=Les prétendues inégalités salariales causées par le sexisme reposent sur d'autres facteurs (temps de travail, productivité, investissement et congés)
+|titre-affiché=Les prétendues inégalités salariales causées par le sexisme se basent sur d'autres facteurs (temps de travail, productivité, investissement, congés …)
+}}{{Objection
+|page=Une inégalité n'est pas forcément injuste, inégalité n'est pas synonyme d'injustice
+|titre-affiché=Une inégalité n'est pas forcément injuste, inégalité n'est pas synonyme d'injustice.
+}}{{Objection
+|page=La parité homme-femme en politique est injuste
+|titre-affiché=La parité homme-femme en politique est injuste
+}}
+|rubriques=Politique, Société
+|mots-clés=féminisme, politique, sexisme, égalité de genre
+|date-création=2021-02-20
+}}

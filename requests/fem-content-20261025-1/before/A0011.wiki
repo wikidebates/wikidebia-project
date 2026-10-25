@@ -1,0 +1,11 @@
+{{Argument
+|initialisation=Argument pour@4876
+|citations={{Citation
+|citation=Le sexisme est bel et bien toujours (très) présent dans la société française, comme le démontre le dernier rapport du Haut Conseil à l’Égalité (HCE) paru ce lundi 22 janvier. Selon ce sixième rapport, les idées machistes ne cessent de grimper, notamment chez les jeunes de moins de 35 ans, hommes comme femmes.
+|auteurs=Christelle Murhula
+|article=Selon le HCE, les hommes se sentiraient menacés par le féminisme (rien que ça)
+|date=22 janvier 2024
+|lien=https://www.madmoizelle.com/selon-le-hce-les-hommes-se-sentiraient-menaces-par-le-feminisme-rien-que-ca-1615297
+}}
+|date-création=2024-01-23
+}}

@@ -1,0 +1,18 @@
+{{Argument
+|résumé=Simone Veil n'était pas féministe.
+|références-vidéographiques={{Référence vidéographique
+|titre=Simone Veil en 1974 : "Féministe, qu'est-ce qu'on entend par cela ?"
+|auteurs=France Culture
+|lien=https://www.youtube.com/watch?v=pE_vPJ3a_tI&ab_channel=FranceCulture
+}}
+|objections={{Objection
+|page=On devient de facto féministe quand on défend les droits des femmes
+|titre-affiché=On devient de facto féministe quand on défend les droits des femmes
+}}{{Objection
+|page=L'hostilité au féminisme va systématiquement de pair avec l'hostilité aux droits des femmes
+|titre-affiché=L'hostilité au féminisme va systématiquement de pair avec l'hostilité aux droits des femmes
+}}
+|rubriques=Droit, Société
+|mots-clés=féminisme, droits des femmes
+|date-création=2022-08-29
+}}

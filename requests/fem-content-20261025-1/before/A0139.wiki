@@ -1,0 +1,10 @@
+{{Argument
+|objections={{Objection
+|page=La misogynie ambiante a empêché les femmes de marquer l'histoire
+|titre-affiché=Elles en ont été empêchées par la misogynie ambiante
+}}{{Objection
+|page=L'impact historique des femmes a été important, mais a été volontairement passé sous silence
+|titre-affiché=Non, leur impact historique a été volontairement passé sous silence
+}}
+|date-création=2021-03-16
+}}

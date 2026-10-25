@@ -1,0 +1,32 @@
+{{Argument
+|citations={{Citation
+|citation=Une infériorité globale du nombre de femmes: la part des femmes à la télévision est toujours loin de la parité, avec 58 % d’hommes et 42 % de femmes.
+Des femmes moins présentes aux heures de forte audience  : les heures de forte audience sont sujettes à de fortes inégalités. La proportion de femmes est de 39 % entre 18h 
+et 20h, elle n’est plus que de 29 % entre 21h et 23h.
+Des différences en nombre suivant les métiers et les fonctions : le taux global de présentatrices et/ou animatrices à la télévision est le taux global le plus élevé : 47 %. Le 
+pourcentage de journalistes et/ou chroniqueuses à la télévision est de 38 %. Le pourcentage de femmes parmi les invité.es politiques à la télévision est de 27 %.
+L’absence de femmes sur certains plateaux : 83 % des expert.es sollicité.es sont des hommes ; ils représentent 70 % des sources d’information et 70 % des porte-paroles.
+Un temps de parole des femmes encore largement inégal : alors que les femmes représentent 42 % des personnes à la télévision, leur taux de parole est de 32,7 %.
+Une image en décalage avec la réalité : les femmes doivent, avant tout, être agréables à regarder. Elles sont davantage caractérisées par leur apparence physique, leur âge et 
+leur situation familiale que les hommes.
+Une absence de diversité : les femmes perçues comme non blanches sont très minoritaires et les femmes en situation de handicap sont absentes.
+|ouvrage=Rapport annuel sur l'état du sexisme en France
+|date=2019
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Aude Lorriaux
+|article=Les femmes sont toujours très minoritaires parmi les invités des matinales radio
+|ouvrage=20 minutes
+|date=09/11/2020
+|lien=https://www.20minutes.fr/arts-stars/medias/2904815-20201109-femmes-toujours-tres-minoritaires-parmi-invites-matinales-radio
+}}{{Référence bibliographique
+|auteurs=Anne Demoulin
+|article=Pourquoi les journalistes femmes n’accèdent-elles pas aux postes de direction?
+|ouvrage=20 minutes
+|date=17/01/2018
+|lien=https://www.20minutes.fr/medias/2203679-20180117-pourquoi-journalistes-femmes-accedent-elles-postes-direction
+}}
+|rubriques=Société
+|mots-clés=Féminisme
+|date-création=2021-02-22
+}}

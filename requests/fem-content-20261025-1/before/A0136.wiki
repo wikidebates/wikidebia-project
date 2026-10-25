@@ -1,0 +1,5 @@
+{{Argument
+|initialisation=Objection@18469
+|résumé=Ce n'est pas par choix ni par déterminisme que beaucoup de femmes prennent des temps partiels et des métiers moins bien payés, c'est notamment parce qu'elles sont conditionnées par notre culture et notre société à prendre en charge les tâches ménagères (donc moins de temps pour travailler).
+|date-création=2023-08-04
+}}

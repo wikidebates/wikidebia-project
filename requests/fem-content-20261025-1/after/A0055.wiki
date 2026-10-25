@@ -1,0 +1,13 @@
+{{Argument
+|citations={{Citation
+|citation=Non, ce n’est pas « normal » d’avoir mal pendant ses règles. Pourtant, cette lectrice a entendu ça tout au long de sa vie. Il lui a fallu des années de galères gynécologiques pour se faire diagnostiquer son endométriose.
+|auteurs=Aïda Djoupa
+|article=Il a fallu 5 ans et 5 gynécologues pour diagnostiquer mon endométriose
+|ouvrage=Madmoizelle.com
+|date=04 août 2021
+|lien=https://www.madmoizelle.com/il-a-fallu-5-ans-et-5-gynecologues-pour-diagnostiquer-mon-endometriose-1185770
+}}
+|rubriques=Société
+|mots-clés=médecine, féminisme
+|date-création=2021-11-07
+}}

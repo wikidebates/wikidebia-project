@@ -1,0 +1,7 @@
+{{Argument
+|initialisation=Objection@5215
+|résumé=La victimisation est un processus normal tant que les éléments qui lui sont associés sont factuellement justifiés et banalisés.
+|rubriques=Éducation, Éthique, Philosophie
+|mots-clés=Féminisme
+|date-création=2023-12-13
+}}

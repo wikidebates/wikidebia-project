@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@11213
+|rubriques=Société
+|mots-clés=féminisme, extrême droite
+|date-création=2022-09-02
+}}

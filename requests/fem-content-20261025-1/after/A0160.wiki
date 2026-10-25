@@ -1,0 +1,16 @@
+{{Argument
+|initialisation=Objection@6367
+|citations={{Citation
+|citation=Bien que le projet ait été au départ conçu par le très médiatisé Mark Zuckerberg, le vrai dirigeant derrière Facebook est le philosophe Peter Thiel, spécialiste du capital-risque et futurologue de la Silicon Valley, âgé de 40 ans. Il y a seulement trois membres du conseil de direction sur Facebook : Peter Thiel, Mark Zuckerberg et Jim Breyer, appartenant au groupe de capitalrisque Accel Partners.(..)
+
+Mais Thiel est plus qu’un capitaliste intelligent et avare. C’est un philosophe du futur et un activiste des néoconservateurs. Il est diplômé de philosophie à Stanford, en 1998 il coécrit un livre appelé « Le mythe de la diversité », qui est une attaque détaillée sur l’idéologie multiculturelle qui domine Stanford. Il estime que le multiculturalisme a conduit à une diminution des libertés individuelles. Alors qu’il était étudiant à Stanford, Thiel fondait un journal de droite, encore en service actuellement, appelé « Que la lumière soit ». Thiel est un membre de TheVanguard.Org, un groupe de pression néoconservateur sur Internet, qui a été créé pour attaquer MoveOn.org, un groupe de pression de gauche qui travaille sur le Web.
+|auteurs=Tom Hodgkinson
+|article=With friends like these ...
+|ouvrage=The Guardian
+|date=14 janvier 2008
+|lien=https://www.theguardian.com/technology/2008/jan/14/facebook
+}}
+|rubriques=Société, Technologie
+|mots-clés=réseaux sociaux, extrême droite
+|date-création=2024-10-31
+}}

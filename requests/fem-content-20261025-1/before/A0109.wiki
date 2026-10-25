@@ -1,0 +1,27 @@
+{{Argument
+|initialisation=Objection@28998
+|citations={{Citation
+|citation=Le terme de woke est surtout un terme qui, aux USA, sert d'alibi à des campagnes de censure au nom de l'anti-wokisme et qui, en Europe, sert à importer (en l'absence de toute menace) les modes de pensée de l'extrême droite étasunienne.
+|auteurs=Alain Policar
+|ouvrage=Le wokisme n'existe pas: la fabrication d'un mythe
+|page=141
+|édition=Le Bord de l'eau
+|date=2024
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://theconversation.com/le-wokisme-ou-limport-des-paniques-morales-172803
+|page=Le « wokisme » ou l’import des paniques morales
+|auteurs=Albin Wagener
+|site=The Conversation
+|date=8 décembre 2021
+}}
+|justifications={{Justification
+|page=Le terme a été dénaturé et a fait l'objet d'une réappropriation
+|titre-affiché=Le terme "woke" a cessé d'être mélioratif quand l'extrême droite se l'est réapproprié
+}}
+|objections={{Objection
+|page=Le terme "woke" a été utilisé à ses débuts par la gauche américaine
+|titre-affiché=Le terme "woke" a été utilisé à ses débuts par la gauche américaine
+}}
+|date-création=2024-11-19
+}}

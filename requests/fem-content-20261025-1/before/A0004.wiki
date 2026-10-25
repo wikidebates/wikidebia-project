@@ -1,0 +1,28 @@
+{{Argument
+|citations={{Citation
+|citation=Le sexisme est bel et bien toujours (très) présent dans la société française, comme le démontre le dernier rapport du Haut Conseil à l’Égalité (HCE) paru ce lundi 22 janvier. Selon ce sixième rapport, les idées machistes ne cessent de grimper, notamment chez les jeunes de moins de 35 ans, hommes comme femmes.
+|auteurs=Chistelle Murhula
+|article=Selon le HCE, les hommes se sentiraient menacés par le féminisme (rien que ça)
+|ouvrage=Madmoizelle.com
+|date=22 janvier 2024
+|lien=https://www.madmoizelle.com/selon-le-hce-les-hommes-se-sentiraient-menaces-par-le-feminisme-rien-que-ca-1615297
+}}
+|justifications={{Justification
+|page=La culture du viol témoigne de l'hostilité persistante envers les femmes
+|titre-affiché=Culture du viol
+}}{{Justification
+|page=Les médias véhiculent des représentations stéréotypées, voire objectifiantes, des femmes
+|titre-affiché=Représentation médiatiques stéréotypées, voire objectifiantes
+}}{{Justification
+|page=Propos sexistes omniprésents dans l'espace médiatique
+|titre-affiché=Propos sexistes omniprésents dans l'espace médiatique
+}}{{Justification
+|page=Des influenceurs font de la misogynie leur principal fonds de commerce
+|titre-affiché=Des influenceurs font de la misogynie leur principal fond de commerce
+}}
+|objections={{Objection
+|page=Le féminisme est une idéologie dont l'ensemble de l'échiquier politique se revendique
+|titre-affiché=Le féminisme est une idéologie dont l'ensemble de l'échiquier politique se revendique
+}}
+|date-création=2021-08-04
+}}

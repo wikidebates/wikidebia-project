@@ -1,0 +1,13 @@
+{{Argument
+|résumé=Le choix des personnes pour candidater à une élection ne doit pas se faire selon le sexe de la personne. Seule les compétences, les idées et les projets défendues doivent compter.
+|objections={{Objection
+|page=La parité ne fait que corriger une situation qui, elle, est injuste
+|titre-affiché=La parité ne fait que corriger une situation qui, elle, est injuste
+}}{{Objection
+|page=La peur que la parité incite à engager des femmes incompétentes juste pour les quotas est un fantasme
+|titre-affiché=La peur que la parité incite à engager des femmes incompétentes juste pour les quotas est un fantasme
+}}
+|rubriques=Politique, Société
+|mots-clés=égalité de genre, politique
+|date-création=2022-08-29
+}}

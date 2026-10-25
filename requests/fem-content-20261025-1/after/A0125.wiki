@@ -1,0 +1,41 @@
+{{Argument
+|résumé=Débarquée comme tant d'autres mouvements des USA, la [https://fr.wikipedia.org/wiki/Woke Woke] culture impose sa loi aussi en France. Pas de jaloux. De l'anglais "awake" ou éveillé, elle synthétise tous les moyens mis en oeuvre dans le cas d'une forme de veille morale de tout type de discrimination. Un éveil permanent face à l'injustice contre les minorités et en particulier les femmes. Elle modélise un militantisme parfois radical et tendant à purifier les sphères sociales, où certaines minorités ont trop longtemps été opprimées. Aujourd'hui on assiste surtout à une hypersensibilité de communautés "woke" (éveillées) anti sexistes (et autres intersectionnalités : anti-racistes, écolos…) prêtes à dégainer l'argument numérique indigné et accusateur. ne courret-on pas vers une société épurée et aseptisée ?
+Dans un article de Figaro paru le 26 janvier 2021, Benjamin Sire détaille :  "La principale fonction de Twitter est désormais la confession publique. Elle donne un rôle majeur de caisse de résonance aux aspirations néo-puritaines qui se font jour dans un monde occidental de plus en plus frustré et déçu de lui-même, à la recherche d’une régénération morale dont le retour sur la scène publique est parfois déconcertant, d’autant qu’il n’y a pour l’heure pas de Contre-Reforme, ni de concile de Trente, à lui opposer…
+Dépassant le cadre du militantisme pour certains, le phénomène est aussi apparenté à une inquisition 2.0, frisant avec la Cancel culture et amenant à un autre concept : le révisionnisme des oeuvres culturelles et historiques (considérée "ne plus cadrer avec les idéaux actuels).
+|citations={{Citation
+|citation=Il y a des gens qui pensent que pour changer les choses, il suffit de constamment juger et critiquer les autres […] Si je fais un tweet ou un hashtag sur ce que tu as fait de mal, ou sur le fait que tu as utilisé le mauvais mot ou le mauvais verbe, alors après je peux me détendre et être fier de moi, parce que je suis super “woke” parce que je t'ai montré du doigt. Mais ce n'est pas vraiment de l'activisme. Ce n'est pas comme ça qu'on fait changer les choses […] le monde [était] compliqué et plein d'ambiguïtés
+|auteurs=Barack Obama
+|article=Discours
+|ouvrage=Sommet de la fondation Obama, Chicago
+|date=2019
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Simon Blin
+|article=L’autocensure a-t-elle gagné le «New York Times» et la gauche américaine ?
+|ouvrage=Libération
+|date=26/07/2020
+|lien=https://www.liberation.fr/debats/2020/07/26/l-autocensure-a-t-elle-gagne-le-new-york-times-et-la-gauche-americaine_1795266/
+}}{{Référence bibliographique
+|auteurs=Claire
+|article=La woke culture ou l’activisme de salon
+|ouvrage=Vraies Meufs
+|date=01/05/2020
+|lien=https://www.vraiesmeufs.com/blog/la-woke-culture-ou-lactivisme-de-salon
+}}
+|objections={{Objection
+|page=La lutte contre le "wokisme" est le paravent de l'extrême droite
+|titre-affiché=Le terme "woke" n'est qu'un fourre-tout pour ranger tous les ennemis idéologiques de l'extrême droite
+}}{{Objection
+|page=Le terme "woke" n'a pas de réelle signification
+|titre-affiché=Le terme "woke" n'a pas de réelle signification
+}}{{Objection
+|page=Le concept de wokisme existait bien avant de porter ce nom
+|titre-affiché=Le concept de wokisme existait bien avant de porter ce nom
+}}{{Objection
+|page=Accuser les "woke" de puritanisme, c'est l'hopital qui se fout de la charité
+|titre-affiché=Accuser les "woke" de puritanisme, c'est l'hopital qui se fout de la charité
+}}
+|rubriques=Culture, Politique, Société
+|mots-clés=féminisme, culture, wokisme
+|date-création=2021-03-14
+}}

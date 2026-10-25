@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Justification@5058
+|justifications={{Justification
+|page=La masculinité toxique pousse les hommes au suicide
+|titre-affiché=La masculinité toxique pousse les hommes au suicide
+}}{{Justification
+|page=La masculinité toxique pousse les hommes à agresser d'autres hommes
+|titre-affiché=La masculinité toxique pousse les hommes à agresser d'autres hommes
+}}{{Justification
+|page=La masculinité toxique pousse les hommes dans la criminalité
+|titre-affiché=La masculinité toxique pousse les hommes dans la criminalité
+}}
+|date-création=2024-03-08
+}}

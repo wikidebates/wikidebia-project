@@ -1,0 +1,21 @@
+{{Argument
+|justifications={{Justification
+|page=3 femmes sur 4 subissent du cyberharcèlement
+|titre-affiché=3 femmes sur 4 subissent du cyberharcèlement
+}}{{Justification
+|page=Le cyberharcèlement est très largement impuni
+|titre-affiché=Le cyberharcèlement est très largement impuni
+}}{{Justification
+|page=Les créatrices de contenu font globalement moins d'audience que les créateurs
+|titre-affiché=Les créatrices de contenu font globalement moins d'audience que les créateurs
+}}{{Justification
+|page=Les contenus féministes sont régulièrement censurés
+|titre-affiché=Les contenus féministes sont régulièrement censurés
+}}{{Justification
+|page=La modération de Facebook est sexiste
+|titre-affiché=La modération de Facebook est sexiste
+}}
+|rubriques=Société, Technologie
+|mots-clés=réseaux sociaux, féminisme
+|date-création=2021-08-22
+}}

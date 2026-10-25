@@ -1,0 +1,43 @@
+{{Argument
+|résumé=Comme tout type de délation, la cousine germaine diffamation n'est jamais loin. En témoigne le récent procès en appel pour diffamation intenté par Eric Brion. Sur le banc des accusés, Sandra Muller, à l'origine du #balancetonporc. Jugée imprudente et en dehors du cadre de harcèlement sexuel, la prévenue s'expose à des dommages et intérêts (15 000 € en première instance) pour son tweet :  "#balancetonporc !! Toi aussi raconte en donnant le nom et les détails un harcèlent (sic) sexuel que tu as connu dans ton boulot. Je vous attends ». Quelques minutes plus tard, elle postait un second message : « Tu as des gros seins. Tu es mon type de femme. Je vais te faire jouir toute la nuit. Eric Brion ex-patron d'Equidia #balancetonporc". Dérive ? De nombreux théoriciens voient en twitter notamment une plateforme propice à la diffamation et à la mythomanie.
+|citations={{Citation
+|citation=Ma vie a été réduite en miettes après la publication de ces tweets. Ça a été une déflagration dans ma vie […] J’ai perdu les quelques missions que j’avais dans une société de conseil, j’ai perdu ma compagne, j’ai perdu ma réputation, je suis tombé dans une profonde dépression
+|auteurs=Eric Brion
+|ouvrage=Balance Ton Père
+|édition=JC Lattès
+|date=2020
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Laure Daussy
+|article=« #Balance ton porc, ça a été une déflagration dans ma vie »
+|ouvrage=Charlie Hebdo
+|date=28/01/2021
+|lien=https://charliehebdo.fr/2021/01/justice/balance-ton-porc-ca-a-ete-une-deflagration-dans-ma-vie/
+}}{{Référence bibliographique
+|auteurs=Violaine Des Courières
+|article=#Balancetonporc : L’écrivain Ariane Fornia et la journaliste Sandra Muller jugées ce mercredi en appel pour diffamation
+|ouvrage=Marianne
+|date=20/01/2021
+|lien=https://www.marianne.net/societe/police-et-justice/balancetonporc-lecrivain-ariane-fornia-et-la-journaliste-sandra-muller-jugees-ce-mercredi-en-appel-pour-diffamation
+}}
+|objections={{Objection
+|page=La plupart des procès pour diffamation ne sont que des procédures-bâillon
+|titre-affiché=La plupart des procès pour diffamation ne servent qu'à censurer la parole des victimes
+}}{{Objection
+|page=La diffamation n'implique pas nécessairement le mensonge
+|titre-affiché=La diffamation n'implique pas nécessairement le mensonge
+}}{{Objection
+|page=Les dénonciations, même légitimes, retombent davantage sur la personne qui dénonce que sur celle qui se fait dénoncer
+|titre-affiché=Les dénonciations, même légitimes, retombent davantage sur la personne qui dénonce que sur celle qui se fait dénoncer
+}}{{Objection
+|page=Dans l'affaire Eric Brion, l'accusatrice n'avait fait que rapporter les paroles de ce dernier
+|titre-affiché=Dans l'affaire Eric Brion, l'accusatrice n'avait fait que rapporter les paroles de ce dernier
+}}{{Objection
+|page=La plupart des plaintes pour diffamation sont retirées dès qu'elles ne font plus de bruit médiatique
+|titre-affiché=La plupart des plaintes pour diffamation sont retirées dès qu'elles ne font plus de bruit médiatique
+}}{{Objection
+|page=L'usage du mot "délation" sert surtout à diaboliser les dénonciations légitimes sans avoir à argumenter
+|titre-affiché=L'usage du mot "délation" sert surtout à diaboliser les dénonciations légitimes et éviter de discuter du fond
+}}
+|date-création=2021-03-14
+}}

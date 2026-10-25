@@ -1,0 +1,69 @@
+{{Argument
+|résumé=Le 19 Août 2020, le pamphlet "Moi les hommes, je les déteste" faisait sa sortie de manière discrète édité à 450 exemplaires. Son autrice, Pauline Harmantage, 25 ans, mariée et relativement inconnue tient un blog et s'annonce féministe. L'ouvrage bénéficie d'une couverture médiatique inespérée suite à la menace d'interdiction par Ralph Zumély, chargé de mission pour l'égalité hommes/femmes. Un engouement à la portée de son titre provocateur. Pour répondre à la demande, l'essai ressort chez les éditions Seuil en septembre 2020 et se vend comme des petits pains. L'autrice assume, elle est misandre est entend dénoncer les hommes comme groupe social faisant du mal aux femmes.
+Il n'est pas sans rappeler des écrits ouvertement misandres du XXème siècle oubliés dont le fameux SCUM Manifesto de Valérie Solanas en 1967 (qui a tiré sur Andy Warhol), mais encore des essayistes comme Natalie Clifford Barney ou Mireille Havet. 
+
+'''#menaretrash'''
+N'oublions pas le champ du numérique ! Vaste terrain de détestations. En 2016 est né le hashtag #menaretrash (traduisez par : "les hommes sont des déchets", ambiance…) en Afrique du Sud. Suite à une série de féminicides, il a connu un regain d'intérêt en 2017 pour ensuite se généraliser sur les réseaux sociaux au niveau mondial. Accompagné pour la plupart des tweets et autres posts par des dénonciations, d'aucun de lui conférer une valeur généraliste et stigmatisante sinon haineuse. Les plus réfractaires relancent le débat de la cancel culture et accusent le-dit hashtag de servir d'outil pour un tribunal populaire médiatique indépendamment des procédures juridiques et au risque même de la cannibaliser.
+
+La question se pose sur la médiatisation et l'inquiétude de certains face à cette misandrie affichée : Vengeance ? Communautarisme ? Féminisme radical ? Le sujet n'a pas fini d'enflammer les foules des deux sexes.
+|citations={{Citation
+|citation=Je vois dans la misandrie une porte de sortie. Une manière d'exister en dehors du passage clouté, une manière de dire non à chaque respiration. Détester les hommes, en tant que groupe social et souvent en tant qu'individus aussi, m'apporte beaucoup de joie – et pas seulement parce que je suis une vieille sorcière folle à chats.
+Si on devenait toutes misandres, on pourrait former une grande et belle sarabande. On se rendrait compte (et ce serait peut-être un peu douloureux au début) qu'on n'a vraiment pas besoin des hommes. On pourrait, je crois, libérer un pouvoir insoupçonné : celui, en planant très loin au-dessus du regard des hommes et des exigences masculines, de nous révéler à nous-mêmes
+|auteurs=Pauline Harmange
+|ouvrage=Moi les hommes, je les déteste
+|édition=Le Seuil
+|date=19/09/2020
+}}{{Citation
+|citation=Ce livre est de toute évidence, tant au regard du résumé qui en est fait sur votre site qu’à la lecture de son titre, une ode à la misandrie (= haine des hommes). Or, je me permets de vous rappeler que la provocation à la haine à raison du sexe est un délit pénal ! En conséquence, je vous demande d’immédiatement retirer ce livre de votre catalogue sous peine de poursuites pénales.
+|auteurs=Ralph Zurmély
+|article=A propos de l'essai "Moi les hommes, je les déteste" de Pauline Harmange
+|date=19/08/2020
+}}{{Citation
+|citation=Vivre dans cette société, c’est au mieux y mourir d’ennui. Rien dans cette société ne concerne les femmes. Alors, à toutes celles qui ont un brin de civisme, le sens des responsabilités et celui de la rigolade, il ne reste qu’à renverser le gouvernement, en finir avec l’argent, instaurer l’automation à tous les niveaux et supprimer le sexe masculin.
+Le mâle est un accident biologique ; le gène Y (mâle) n’est qu’un gène X (femelle) incomplet, une série incomplète de chromosomes. En d’autres termes, l’homme est une femme manquée, une fausse couche ambulante, un avorton congénital.
+Les hommes sont des Midas d’un genre spécial : tout ce qu’ils touchent se change en merde.
+Ce qui met l’homme en joie – dans la mesure où cette créature sinistre et constipée est capable d’éprouver de la joie – c’est de dénoncer les autres.
+|auteurs=Valérie Solanas
+|ouvrage=SCUM Manifesto
+|date=1967
+}}{{Citation
+|citation=Il est temps que les Amazones ne se fassent plus féconder par l’“ennemi” — et l’ennemi n’est-il pas celui qui prendra à la femme son enfant, pour l’élever ou le tuer à sa guise ?
+|auteurs=Natalie Clifford Barney
+|ouvrage=Pensées d'une Amazone
+|date=1920
+}}{{Citation
+|citation=(…) J’ai en moi la haine de l’homme (…). Tout en eux me semble grossier et ridicule, j’ai la haine de leur corps, de leur chair, de leur sexe, de leur désir. Ils sont pour moi d’infâmes faiseurs d’enfants, blesseurs de rêve, ennemis et bourreaux de nos tendresse et de nos féminités. J’ai la haine de l’homme ! (…) Les hommes, quelle cochonnerie.
+|auteurs=Mireille Havet
+|ouvrage=Journal intime
+|date=1919
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Le Point : Marlène Schiappa accuse Alice Coffin de développer "une forme d'apartheid"
+|lien=https://www.youtube.com/watch?v=iJLBSW0_C_A
+}}
+|objections={{Objection
+|page=La misandrie est une réponse à la misogynie et se veut majoritairement non violente
+|titre-affiché=La misandrie est une réponse à la misogynie et se veut majoritairement non violente
+}}{{Objection
+|page=Le féminisme est qualifié de misandre depuis le début de son existence
+|titre-affiché=Le féminisme est qualifié de misandre depuis le début de son existence
+}}{{Objection
+|page=Les "attaques misandres" restent bien gentillettes comparées aux attaques misogynes
+|titre-affiché=Les "attaques misandres" restent bien gentillettes comparées aux attaques misogynes
+}}{{Objection
+|page=La négation des discriminations systémiques est au mieux le reflet d'une incompréhension, au pire une stratégie politique
+|titre-affiché=Le féminisme antoagoniste est un fantasme
+}}{{Objection
+|page=Le masculinisme est bien plus misandre que le féminisme
+|titre-affiché=Le masculinisme est bien plus misandre que le féminisme
+}}{{Objection
+|page=Les féministes considèrent certaines femmes comme leurs ennemies, il ne peut donc pas être misandre
+|titre-affiché=Les féministes considèrent certaines femmes comme leurs ennemies et certains hommes comme leurs alliés, il ne peut donc pas être misandre
+}}{{Objection
+|page=La misandrie n'est pas l'équivalent de la misogynie
+|titre-affiché=La misandrie n’est pas l’équivalent de la misogynie
+}}
+|rubriques=Société
+|mots-clés=Féminisme
+|date-création=2021-02-21
+}}

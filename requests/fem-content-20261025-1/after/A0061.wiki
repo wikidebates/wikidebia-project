@@ -1,0 +1,34 @@
+{{Argument
+|résumé=Aussi paradoxal que cela puisse paraître, la féminisme est en parti responsable du recul du droit des femmes au USA. Le féminisme n'a jamais eu autant d'influence au sein de la gauche américaine ces dernières années ; les luttes lgbt antiraciste et féministe ont constitué l'identité même du parti démocrate. Le problème est que le féminisme est une idéologie communautariste, qui analyse la société à travers le prisme de l'oppression du groupe "homme" sur le groupe "femme", et qui n'accepte aucune nuance. Soit vous êtes à 100% en adhésion avec le dogme féministe, soit vous êtes un ennemi des femmes. C'est ainsi que les idées machistes, construites en opposition au féminisme, se sont développées. De plus, ce communautarisme, cet hooliganisme idéologique s'est exacerbé ces derniers années, les deux camps se sont radicalisées, ce qui aboutit avec l'élection de Donald Trump et la décision de la Cour suprême de ne plus garantir le droit à l'avortement à l'échelle fédérale.
+|objections={{Objection
+|page=Prendre la gauche pour responsable du vote populiste, c'est infantiliser les citoyens, qui sont assez grands pour prendre l'entière responsabilité de leur vote
+|titre-affiché=On peut considérer que les électeurs républicains sont assez grands pour être entièrement responsables de leurs opinions politiques
+}}{{Objection
+|page=Les hommes qui accusent les féministes de les avoir poussés dans les bras de Trump n'étaient pas des alliés à la base
+|titre-affiché=Les hommes qui accusent les féministes de les avoir poussés dans les bras de Trump n'étaient pas des alliés à la base
+}}{{Objection
+|page=Prétendre que "le groupe social masculin est oppresseur" et "tous les hommes sont méchants" sont synonymes est au mieux un malentendu, au pire une manipulation grossière
+|titre-affiché=Prétendre que "le groupe social masculin est oppresseur" et "tous les hommes sont méchants" sont synonymes est au mieux un malentendu, au pire une manipulation grossière
+}}{{Objection
+|page=Être antiféministe, c'est cautionner les violences structurelles subies par les femmes, donc assez logiquement être leur ennemi
+|titre-affiché=Être antiféministe, c'est cautionner les violences structurelles subies par les femmes, donc assez logiquement être leur ennemi
+}}{{Objection
+|page=Même les causes féministes qu'aujourd'hui plus personne ne conteste ont en leur temps nourri les tentations réactionnaires
+|titre-affiché=Même les causes féministes qu'aujourd'hui plus personne ne conteste ont en leur temps nourri les tentations réactionnaires
+}}{{Objection
+|page=Même si les griefs envers les féministes étaient légitimes, cela ne justifierait pas davantage une punition collective
+|titre-affiché=Même si les griefs envers les féministes étaient légitimes, cela ne justifierait pas davantage une punition collective
+}}{{Objection
+|page=Le féminisme est traversé de controverses, critiquer "le féminisme" comme si c'était une masse monolithique est donc fallacieux
+|titre-affiché=Le féminisme est traversé de controverses, critiquer "le féminisme" comme si c'était une masse monolithique est donc fallacieux
+}}{{Objection
+|page=Un soutien à l'égalité de genre qu'on conditionne à des critères arbitraires qu'on a soi-même définis n'est pas un vrai soutien
+|titre-affiché=Un soutien à l'égalité de genre qu'on conditionne à des critères arbitraires qu'on a soi-même définis, ça n'est pas un vrai soutient
+}}{{Objection
+|page=Les trumpistes ne sont pas moins violents envers les femmes conservatrices qu'envers les féministes
+|titre-affiché=Les trumpistes ne sont pas moins violents envers les femmes conservatrices qu'envers les féministes
+}}
+|rubriques=Droit, Société
+|mots-clés=féminisme, droits des femmes
+|date-création=2022-09-07
+}}

@@ -1,0 +1,31 @@
+{{Argument
+|initialisation=Argument pour@4876
+|citations={{Citation
+|citation=«À la base, ce n'était pas mon terrain de mobilisation. Je me suis mobilisée sur les questions de féminisme et de violences sexuelles. Par une forme de contagion, tu te rends compte que les systèmes sont liés». Pour elle, le système capitaliste est incompatible avec le féminisme qu'elle porte.
+|auteurs=Bleuenn Robert
+|article=L'actrice Adèle Haenel espère «la fin du système capitaliste»
+|ouvrage=Le Figaro
+|date=6/05/2022
+|lien=https://www.lefigaro.fr/cinema/l-actrice-adele-haenel-espere-la-fin-du-systeme-capitaliste-20220506
+}}
+|justifications={{Justification
+|page=Le capitalisme est structurellement sexiste
+|titre-affiché=Le capitalisme est structurellement sexiste
+}}{{Justification
+|page=L'oppression des femmes est apparue avec le développement de sociétés divisées en classes sociales
+|titre-affiché=L'oppression des femmes est apparue avec le développement de sociétés divisées en classes sociales
+}}{{Justification
+|page=Les capitalistes utilisent la division entre hommes et femmes pour mieux régner
+|titre-affiché=Les capitalistes utilisent la division entre hommes et femmes pour mieux régner
+}}{{Justification
+|page=L'égalité complète entre hommes et femmes est illusoire dans une société qui repose sur l'exploitation
+|titre-affiché=L'égalité complète entre hommes et femmes est illusoire dans une société qui repose sur l'exploitation
+}}
+|objections={{Objection
+|page=L'oppression des femmes est bien antérieure au capitalisme
+|titre-affiché=L'oppression des femmes est bien antérieure au capitalisme
+}}
+|rubriques=Économie, Politique, Société
+|mots-clés=capitalisme, oppression, femmes, économie
+|date-création=2023-04-03
+}}

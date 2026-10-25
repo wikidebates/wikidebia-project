@@ -1,0 +1,22 @@
+{{Argument
+|initialisation=Objection@11466
+|citations={{Citation
+|citation=1/ Le '''poseur'''. ''« C’est le féministe de façade. Celui qui va en faire des caisses parfois. En gros, il a lu Mona Chollet et Valérie Rey-Robert, donc il connaît déjà tout ».'' 
+
+2/ '''L’initié'''. ''« Lui, il est engagé dans la lutte féministe, donc il se sent supérieur aux autres hommes. Ce sont eux – et jamais lui – qui sont coupables de misogynie et responsables du patriarcat ».'' Un profil très présent dans les luttes militantes, et qui gagne souvent la confiance et la sympathie des femmes, du simple fait qu’il se dit « féministe ».
+
+3/ '''L’humaniste''', admet qu’il profite du patriarcat, mais il dit souffrir de ce système injuste au même titre que les femmes, car l’injustice et l’inégalité le révulsent par principe. ''« On va retrouver le pro-fem humaniste dans des stages de communication non-violente (CNV) par exemple, mais il se sert de ce qu’il apprend pour garder le contrôle. Ainsi, si une meuf lui reproche des choses, il aura des discours du type : « Quand tu es en colère, ça me rend triste. J’ai peur de ta colère, elle me met mal à l’aise ». Mais il ne se remettra jamais en question. Il ne répondra jamais sur le fond'' ''»''. Il s’agit ni plus ni moins que '''de tone-policing ici, mais déguisé en empathie et pseudo-vulnérabilité'''. Autrement dit, '''de la manipulation émotionnelle sous couvert de bienveillance'''.
+
+4/ '''L’auto-flagellateur.''' ''« Pour lui, le féminisme est un chemin de croix. Il se met une pression énorme, on est presque sur un sentiment de persécution. C’est très narcissique en fait ».'' L’auto-flagellateur attend du féminisme qu’il lui apporte la rédemption.
+
+Dans tous ces cas de figures, '''ces hommes se disant féministes ne s’y engagent qu’à travers les bénéfices qu’ils peuvent en retirer pour eux-mêmes'''.
+|auteurs=Sarah Andres
+|article=Violences sexistes et sexuelles : quand le patriarcat ronge les milieux militants
+|ouvrage=Lisbeth Media
+|date=21 janvier 2026
+|lien=https://lisbethmedia.com/violences-sexistes-et-sexuelles-quand-le-patriarcat-ronge-les-milieux-militants/
+}}
+|rubriques=Société
+|mots-clés=égalité de genre, féminisme
+|date-création=2025-10-04
+}}

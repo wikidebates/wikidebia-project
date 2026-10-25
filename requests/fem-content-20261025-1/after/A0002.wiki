@@ -1,0 +1,49 @@
+{{Argument
+|justifications={{Justification
+|page=Les femmes sont victimes de viols
+|titre-affiché=Viols
+}}{{Justification
+|page=Les féminicides constituent une forme extrême de violence faite aux femmes
+|titre-affiché=Féminicides
+}}{{Justification
+|page=Les femmes subissent du slut-shaming
+|titre-affiché=Slutshaming
+}}{{Justification
+|page=Les réseaux sociaux font du profit sur la haine et le harcèlement
+|titre-affiché=Cyberharcèlement
+}}{{Justification
+|page=Les femmes subissent des agressions
+|titre-affiché=Agressions
+}}{{Justification
+|page=Les femmes subissent du body shaming
+|titre-affiché=Body shaming
+}}{{Justification
+|page=Les femmes subissent du harcèlement de rue
+|titre-affiché=Harcèlement de rue
+}}{{Justification
+|page=Les femmes subissent des violences conjugales
+|titre-affiché=Violences de couples
+}}{{Justification
+|page=Les femmes subissent des agressions sexuelles
+|titre-affiché=Agressions sexuelles
+}}{{Justification
+|page=Les femmes subissent des violences verbales
+|titre-affiché=Violences verbales
+}}{{Justification
+|page=Les femmes subissent des violences économiques
+|titre-affiché=Violences économiques
+}}{{Justification
+|page=Les femmes subissent des comportements irrespectueux (offense, présomption, rabaissement, minimisation et humiliation)
+|titre-affiché=Comportements irrespectueux (Offense, présomption, rabaissement, minimisation, humiliation...)
+}}
+|objections={{Objection
+|page=Tout le monde peut subir des violences quel que soit son sexe
+|titre-affiché=Tout le monde peut subir des violences quelque soit son sexe.
+}}{{Objection
+|page=Les victimes doivent être traitées avec respect, quel que soit leur sexe
+|titre-affiché=Les victimes doivent être traités avec respect, quelque soit leur sexe
+}}
+|rubriques=Droit, Société
+|mots-clés=violence, féminisme
+|date-création=2021-03-16
+}}

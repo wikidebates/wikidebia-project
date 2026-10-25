@@ -1,0 +1,69 @@
+{{Argument
+|résumé=Arme des rangs féministes radicaux autant que conséquence des appels militants, la Cancel culture, toute droite venue des Etats-Unis est un mouvement consistant à museler une personne, un groupe ou une "oeuvre" considérée comme offensante. Le principe est simple : dénonciation sur les réseaux sociaux (à la simple valeur d'un ou quelques témoignages de "victimes"), appel à la démission, au lynchage médiatique et au bannissement d'une personnalité. Le concept entend assainir la société en boycottant ou censurant la source, jugée discriminante, des cercles sociaux et culturels. 
+La Cancel culture liée au féminisme le plus radical a vu Tex se faire viré par France 2 des Z'Amours pour une blague sexiste et plus récemment le dessin animé Pépé le Putois supprimé de la plateforme Warner pour son supposé soutient à la culture du viol. La suppression devient parfois institutionnelle : chaines de télévision, plateformes de streaming, studios de cinéma… grincent des dents face au désormais "infréquentable" et cèdent souvent sous la pression médiatique (parfois sans attendre d'éventuelles suite juridiques) par peur d'être associés à la polémique, plus que par souci éthique. Les excommuniés n'ont pas le loisir de s'expliquer sur des propos ou actes parfois prescris parce qu'on bien ici de procès de moralité et non politico-juridique et c'est bien là le problème.
+|citations={{Citation
+|citation=Ce mortel ennui devant ce qui était l’arme des révolutionnaires – l’indignation – devenue la monnaie courante de tous les frustrés de la terre, des médiocres, de ceux qui veulent exister mais n’ont d’autres moyens que de vomir des insultes, de confondre les plans, l’opinion, la justice, la rumeur, les faits, d’invoquer un nouvel ordre moral au lieu de faire de la politique.
+Et que deviendra l’art, dans tout ça ? Des livrets de vertu qu’on distribuera au seuil des nouvelles églises ? Des éditoriaux pleins de bons sentiments mâtinés de haine rance de vieilles filles ? Des imprécations béni-oui-oui de néoromantiques exaltés par les combats sur Facebook ? Des œuvres théâtrales où l’on dira le catéchisme, le mal contre le bien, dont on voit vite les incarnations ? Des tableaux respectant la parité, homme, femme, Noir, Blanc, vieux, jeunes, handicapés, dans des champs de blé bio et des plants de tomates en permaculture ?
+Mortel ennui. Et où mettra-t-on donc les déviants ? Car ils risquent de devenir très nombreux
+|auteurs=Mazarine Pingeot
+|article=Mazarine Pingeot au sujet des nouveaux combats féministes : « Ce mortel ennui qui me vient… »
+|ouvrage=Le Monde
+|date=28/07/2020
+|lien=https://www.lemonde.fr/idees/article/2020/07/28/mazarine-pingeot-ce-mortel-ennui-qui-me-vient_6047461_3232.html
+}}{{Citation
+|citation=[…] il faut faire une différence entre #MeToo, qui a permis de montrer l’ampleur des violences faites aux femmes, et #BalanceTonPorc, qui a livré des noms à la vindicte populaire […] Il faut donc pouvoir critiquer #BalanceTonPorc, au nom d’un féminisme plus juste
+|auteurs=Laure Daussy
+|ouvrage=Charlie Hebdo
+|date=09/11/2020
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=A.H
+|article=Viré des Z'Amours pour une blague sexiste, Tex a entamé une procédure aux prud'hommes
+|ouvrage=Europe 1
+|date=10/04/2018
+|lien=https://www.europe1.fr/medias-tele/vire-des-zamours-pour-une-blague-tex-a-entame-une-procedure-aux-prudhommes-3622796
+}}{{Référence bibliographique
+|auteurs=Fiona
+|article=La cancel culture nuit au féminisme (et au militantisme en général)
+|ouvrage=#TGIFiona
+|date=2020
+|lien=https://www.fiona-schmidt.fr/portfolio-items/cancel-culture-feminisme/
+}}{{Référence bibliographique
+|auteurs=Lou Fritel
+|article=Banni car il normaliserait «la culture du viol», Pépé le Putois, nouvelle victime de la «cancel culture»
+|ouvrage=Le Figaro
+|date=11/03/2021
+|lien=https://www.lefigaro.fr/culture/banni-car-il-normaliserait-la-culture-du-viol-pepe-le-putois-nouvelle-victime-de-la-cancel-culture-20210311
+}}{{Référence bibliographique
+|auteurs=Marie Peltier
+|article=La cancel culture : quand le harceleur devient victime
+|ouvrage=RTBF
+|date=14/08/2020
+|lien=https://www.rtbf.be/article/la-cancel-culture-quand-le-harceleur-devient-victime-10561604?id=10561604
+}}{{Référence bibliographique
+|auteurs=Laure Daussy
+|article=Féminisme : les ravages de la « cancel culture »
+|ouvrage=Charlie Hebdo
+|date=09/11/2020
+|lien=https://charliehebdo.fr/2020/11/societe/ravages-cancel-culture/
+}}
+|objections={{Objection
+|page=L'humour oppressif est le terreau des idéologies d'exclusion
+|titre-affiché=Le sexisme comme ressort humoristique est un outil très efficace de propagande misogyne
+}}{{Objection
+|page=Les mises au ban imputables aux mouvements féministes sont très marginales
+|titre-affiché=Les mises au ban imputables aux mouvements féministes sont très marginales
+}}{{Objection
+|page=Les gens qui dénoncent la cancel culture sont les idiots utiles de l'extrême droite
+|titre-affiché=Les gens qui dénoncent la cancel culture sont les idiots utiles de l'extrême droite
+}}{{Objection
+|page=Dénoncer la cancel culture revient la plupart du temps à faire l'apologie de l'impunité
+|titre-affiché=La dénonciation de la cancel culture n'est qu'une apologie de l'impunité qui ne dit pas son nom
+}}{{Objection
+|page=L'extrême droite prétend s'offusquer des harcèlements mais les applaudit quand ça l'arrange
+|titre-affiché=L'extrême droite prétend s'offusquer des harcèlements mais les applaudit quand ça l'arrange
+}}
+|rubriques=Culture, Société
+|mots-clés=féminisme, culture, cancel culture
+|date-création=2021-03-13
+}}

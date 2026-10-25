@@ -1,0 +1,4 @@
+{{Argument
+|titre-affiché=La reconnaissance en tant que victime est nécessaire pour se reconstruire
+|date-création=2022-07-18
+}}

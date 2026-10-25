@@ -1,0 +1,11 @@
+{{Argument
+|résumé=Même si il décidait de s'intéresser aux violences faites aux hommes, on continuerait de lui reprocher de ne pas s'occuper de telle ou telle cause. C'est sans fin et ça ne fait pas avancer les choses.
+|citations={{Citation
+|citation=Le '''''<span lang="en">whataboutism</span>''''', également trouvé sous la forme '''''<span lang="en">whataboutery</span>''''' et parfois francisé en '''whataboutisme''', est un [https://wiki.froth.zone/wiki/Sophisme?lang=fr sophisme] visant à dévier une critique par des références à d'autres griefs réels ou présumés. L'''<span lang="en">[https://wiki.froth.zone/wiki/Oxford_English_Dictionary?lang=fr Oxford English Dictionary]</span>'' définit ce terme comme une « technique ou pratique consistant à répondre à une accusation ou question difficile en faisant une contre-accusation ou en évoquant un problème différent.
+|auteurs=Wikipédia
+|article=Whataboutism
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2022-08-31
+}}

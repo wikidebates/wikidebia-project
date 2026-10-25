@@ -1,0 +1,10 @@
+{{Argument
+|références-sitographiques={{Référence sitographique
+|lien=https://www.madmoizelle.com/pour-changer-les-femmes-sont-ignorees-par-les-recherches-sur-lasthme-et-les-consequences-sont-mortelles-1283843
+|page=Pour changer, les femmes sont ignorées par les recherches sur l’asthme et les conséquences sont mortelles
+|auteurs=Marie Chéreau
+|site=Madmoizelle.com
+|date=28 avr 2022
+}}
+|date-création=2022-04-29
+}}

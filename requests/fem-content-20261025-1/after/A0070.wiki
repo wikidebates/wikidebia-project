@@ -1,0 +1,10 @@
+{{Argument
+|résumé=Les féministes - dans une optique de confirmation de leur vision du monde et de leur narratif - développent des concepts se voulant mettre en exergue des comportant prétendument toxique qui n'en sont pas.
+|objections={{Objection
+|page=Les traits de masculinité toxique sont tellement banalisés qu'ils ne sont pas perçus comme tels
+|titre-affiché=Les traits de masculinité toxiques sont tellement banalisés qu'ils ne sont pas perçus comme tels
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2022-09-05
+}}

@@ -1,0 +1,48 @@
+{{Argument
+|résumé=La création est a-morale, voire anti-morale. Or, en moralisant le langage et les relations hommes/femmes, le féminisme risque souvent d'aboutir à l'autocensure des artistes.
+|citations={{Citation
+|citation=J’imaginais l’homme ronchon et réac, je me trompais. J’ai rencontré un petit garçon de 84 ans la tête dans les étoiles et les lèvres toujours prêtes à sourire. Un homme doux et sincère, un peu dépassé par le nouveau monde qu’il a du mal à comprendre tant il lui paraît absurde et qui l’inquiète tant il efface à grande vitesse tout ce qu’il a chéri, à commencer par la liberté et l’insouciance qui sont la grammaire de ses films.
+Causeur. Pensez-vous qu’aujourd’hui vous pourriez tourner Les Galettes de Pont-Aven ou Comme la lune ?
+Joël Séria. Oh non… ce serait impossible. Avec « Balance ton porc » et « Metoo », ce serait un scandale. Je trouve ahurissant tout ce qui se passe. Je ne comprends pas trop… On dirait que les féministes d’aujourd’hui détestent la drague. Des femmes font des scandales parce qu’on leur a touché le bras. Dans ces conditions, il n’y a plus rien de possible entre les hommes et les femmes, c’est tout. Vous imaginez si elles voyaient mes films ? Marielle leur touche un peu plus que le bras ! À la réflexion, plus personne n’oserait faire une comédie avec du cul. Or, il faut avouer que je suis très porté là-dessus. On me tomberait dessus.
+
+Vous avez raison. Pour autant, il faut regarder la réalité dans son entièreté. Aujourd’hui, pour beaucoup de jeunes, Les Galettes de Pont-Aven est un film culte qui leur donne la nostalgie de cette époque de liberté qu’ils n’ont pas connue. En effet, malgré le politiquement correct totalitaire, les vraies gens continuent de parler entre eux de manière politiquement incorrecte. Les garçons parlent des filles comme vos personnages. Or le cinéma dit « populaire » d’aujourd’hui, soumis à la bien-pensance et à la morale, est déconnecté de la vraie vie, des vrais désirs sexuels, des vrais sentiments humains.
+
+Et le pire, c’est l’autocensure ! Les réalisateurs ne se battent pas contre des censeurs, ils se soumettent à l’air du temps. Je crois qu’aujourd’hui, je n’essaierais même pas de faire des films. C’est décourageant.
+|auteurs=Joël Séria, Yannis Ezziadi
+|article=Joël Séria: « Aujourd’hui, ce serait impossible de tourner Les Galettes de Pont-Aven! »
+|ouvrage=Causeur
+|date=25/02/2021
+|lien=https://www.causeur.fr/joel-seria-aujourdhui-ce-serait-impossible-de-tourner-les-galettes-de-pont-aven-191938
+}}{{Citation
+|citation=Si l’artiste n’est pas au-dessus des lois, car il est un citoyen comme tout un chacun et qu’il est comptable de ses actes quand il s’exprime dans une œuvre, il doit pouvoir représenter le racisme, le machisme, la domination masculine ou la colonisation sans qu’on le lui reproche […] Or, on voit se constituer ici et là des tribunaux populaires, pétitionnaires, qui se donnent le droit de prononcer des «sentences» relayées par les réseaux sociaux contre tel spectacle, telle scène de pièce de théâtre, telle rétrospective, telle chanson. Ces mises en cause publiques des œuvres ne se contentent pas - ce qu’elles seraient parfaitement libres de faire -, de critiquer, mais elles ne cherchent pas le débat. Elles assènent des lectures uniques, dogmatiques, et appellent à l’interdiction, hors de tout dispositif légal ou judiciaire. Ces attaques répétées risquent, au-delà des œuvres qu’elles visent, de conduire à la pire des censures
+|auteurs=L’Observatoire de la liberté de création
+|ouvrage=Libération
+|date=03/01/2018
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=L'Observatoire de la liberté de création
+|article=Liberté de création : ne nous trompons pas de combat !
+|ouvrage=Libération
+|date=03/01/2018
+|lien=https://www.liberation.fr/debats/2018/01/03/liberte-de-creation-ne-nous-trompons-pas-de-combat_1620172/
+}}
+|objections={{Objection
+|page=Même sans sexisme, la créativité reste large
+|titre-affiché=Non, car même sans sexisme la créativité reste large
+}}{{Objection
+|page=Les créateurs ne peuvent ignorer l'impact de leurs oeuvres sur la société
+|titre-affiché=Les créateurs ne peuvent ignorer l'impact de leurs oeuvres sur la société
+}}{{Objection
+|page=Les oeuvres culturelles évoluent avec leur temps
+|titre-affiché=Les oeuvres culturelles évoluent avec leur temps
+}}{{Objection
+|page=Les antiféministes brident aussi la liberté de création
+|titre-affiché=Les antiféministes brident aussi la liberté de création
+}}{{Objection
+|page=Que des oeuvres soient décriées par les féministes ne les empêche pas d'exister ni même d'avoir du succès
+|titre-affiché=Que des oeuvres soient décriées par les féministes ne les empêche pas d'exister ni même d'avoir du succès
+}}
+|rubriques=Société
+|mots-clés=Féminisme, liberté de création
+|date-création=2021-02-26
+}}

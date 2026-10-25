@@ -1,0 +1,42 @@
+{{Argument
+|résumé=Toutes l'ont expérimenté dans l'espace public ou les transports, cette propension qu'ont certains hommes à "s'étaler", à s'asseoir jambes écartées dans le métro, à s'avachir sans se soucier des voisins et particulièrement des femmes, occupantes des sièges limitrophes. Cette attitude à un nom : le Manspreading.
+Expression d'une attitude machiste qui fait l'objet depuis 2013 de campagnes de pub dans les transports en commun des grandes villes du monde entier. Il pose question et fait les choux gras des pamphlets féministes.
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Juan Carlos Villarejo
+|article=Comment le « manspreading » est devenu un objet de lutte féministe
+|ouvrage=Le Monde
+|date=31/07/2017
+|lien=https://www.lemonde.fr/big-browser/article/2017/07/06/comment-le-manspreading-est-devenu-un-objet-de-lutte-feministe_5156949_4832693.html
+}}{{Référence bibliographique
+|auteurs=Marie-Adélaïde Scigacz
+|article=Que cache le "manspreading", cette façon de s'asseoir qui fout les boules à la Terre entière ?
+|ouvrage=France Info
+|date=17/06/2017
+|lien=https://www.francetvinfo.fr/economie/transports/que-cache-le-manspreading-cette-facon-de-s-asseoir-qui-fout-les-boules-a-la-terre-entiere_2237129.html
+}}{{Référence bibliographique
+|auteurs=Patric Jean
+|article=Les réactions des hommes à la dénonciation du "manspreading" sont pleines d'enseignements
+|ouvrage=Huffington Post
+|date=17/06/2017
+|lien=https://www.huffingtonpost.fr/patric-jean/manspreading-reactions-hommes-denonciation-enseignements_a_22417863/
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Brut : C'est quoi le manspreading ?
+|auteurs=Brut
+|lien=https://www.youtube.com/watch?v=_qTo3N-Q_KU
+}}{{Référence vidéographique
+|titre=Europe 1 : Le manspreading, une lutte qui ne devrait pas être réduite aux seuls hommes
+|auteurs=Europe 1
+|lien=https://www.youtube.com/watch?v=W3soVlZ3FZ8
+}}
+|objections={{Objection
+|page=Les hommes ont des raisons physiologiques d'écarter les jambes
+|titre-affiché=Les hommes ont des raisons physiologiques d'écarter les jambes.
+}}{{Objection
+|page=Les hommes peuvent resserrer leurs jambes si on leur demande
+|titre-affiché=Les hommes peuvent resserrer leurs jambe si on leur demande
+}}
+|rubriques=Société
+|mots-clés=féminisme, manspreading
+|date-création=2021-02-23
+}}

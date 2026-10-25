@@ -1,0 +1,16 @@
+{{Argument
+|initialisation=Objection@11466
+|résumé=Le concept de discrimination systémique fait l'objet de nombreux malentendus et désinformations, volontaires ou non. Contrairement à ce qu'on dit souvent, il ne s'agit nullement d'affirmer que 100% des hommes sont mauvais et 100% des femmes sont de bonnes personnes, mais de faire le constat selon leque la société est structurée pour offrir des privilèges aux personnes appartenant au groupe social masculin: plus d'opportunités, moins d'exposition à la violence, moins d'exclusions injustes, etc. imputable au fait que depuis des millénaires, les hommes avaient le monopole du pouvoir et avaient donc tout intérêt à maintenir les privilèges qui leur avaient permis d'y accéder, ainsi que diaboliser les groupes cherchant à les abolir. Cela implique plusieurs choses:
+
+* Les hommes ne sont pas responsables de leurs privilèges de naissance.
+* Les hommes peuvent être en mesure de lutter contre leurs privilèges, mais en payeront un lourd prix le cas échéant.
+* Certaines femmes tirent un -certes relatif- profit à être activement complices de leur oppression (cf. "Les Femmes de Droite" d'Andrea Dworkin).
+|justifications={{Justification
+|page=On ne pourra jamais combattre le sexisme si on néglige son aspect systémique
+|titre-affiché=On ne pourra jamais combattre le sexisme si on néglige son aspect systémique
+}}{{Justification
+|page=L'extrême droite instrumentalise le féminisme à des fins racistes
+|titre-affiché=Les personnes qui disent combattre le sexisme mais nient leur aspect systémique sont des opportunistes qui attribuent le monopole du sexisme à leurs boucs émissaires favoris
+}}
+|date-création=2022-10-14
+}}

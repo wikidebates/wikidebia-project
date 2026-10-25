@@ -1,0 +1,20 @@
+{{Argument
+|citations={{Citation
+|citation=Marlène Schiappa […] en réponse à la question narquoise de Sonia Mabrouk sur Europe 1 le jeudi 6 février, ne trouve rien de mieux pour montrer que les féministes n'ont pas été absentes du débat, que de citer… Rokhaya Diallo, qui même si elle a pu dire chez Pujadas que la défense de Mila était l'affaire de toutes les féministes, est une adversaire de l'universalisme des droits prôné par les féministes d'antan (donc nous les signataires), et chantre et relais de l'intersectionnalité, de la défense des personnes "racisées" et autres victimes de la volonté de suprématie des blancs au détriment des "colorés", théories venant tout droit des "études de genre" anglo-saxonnes et… blanches.
+|auteurs=Linda Weil-Curiel, Annie Sugier
+|article=Affaire Mila : "Non Marlène Schiappa, les féministes n'ont pas fait preuve de lâcheté"
+|ouvrage=Marianne
+|date=7/02/2020
+|lien=https://www.marianne.net/agora/tribunes-libres/affaire-mila-non-marlene-schiappa-les-feministes-n-ont-pas-fait-preuve-de-lachete
+}}
+|objections={{Objection
+|page=L'universalisme laisse sur le bas-côté de nombreux types d'oppression
+|titre-affiché=Le féminisme universaliste ignore certaines discriminations
+}}{{Objection
+|page=L'intersectionnalité existe depuis les années 80, soit bien avant la naissance du wokisme dans sa définition actuelle
+|titre-affiché=L'intersectionalité existe depuis les années 80, soit bien avant la naissance du wokisme dans sa définition actuelle
+}}
+|rubriques=Politique, Société
+|mots-clés=féminisme, wokisme, intersectionnalité, universalisme
+|date-création=2021-06-23
+}}

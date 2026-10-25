@@ -1,0 +1,37 @@
+{{Argument
+|initialisation=Justification@6319
+|résumé=Une victimisation secondaire décrit une situation où la personne plaignante fait face à des formes de violences de la part de l'institution judiciaires qui, en plus de ne présenter aucun intérêt dans la recherche de la vérité, ajoutent un traumatisme supplémentaire à la victime. Ces violences peuvent être soit verbales soit institutionnelles et sont systémiques dans les cas de plaintes pour viols, mais pratiquement absentes de tous les autres types d'affaires judiciaires.
+|citations={{Citation
+|citation=En plaidoierie, [L'avocat de Dépardieu] est revenu sur le traumatisme: "votre trauma, quand bien même l'agression aurait bien eu lieu, il est relatif! C'est pas Guy Georges" s'est-il mis à crier. ""Pendant qu'il me violait, il me cassait les dents", je veux bien qu'il y aie des flashs, mais pas là".
+
+Et la misogynie est revenue , jusqu'à asséner qu'Amélie, qui n'a pas voulu assister à sa plaidoierie, chercherait surtout à se mettre en scène devant les caméras. "On le voit tous les soirs à la télévision, elle aime plaire", a-t-il lancé, lui reprochant même d'avoir parlé "tout sourire" sur TF1 en produisant des photos d'elle que son entourage a prises en l'espionnant pendant le procès. "Les parties civiles passent leur vie devant la télé, sont très souriantes, très heureuses d'avoir ce mur de caméras devant elles. C'est juste ridicule". Alors qu'il est le premier à courir les caméras à chaque pause.
+
+Et à son paroxysme sexiste: "Je veux bien qu'Amélie ne lise pas ''Le Monde'' parce que c'est trop compliquée pour elle, mais ''Closer''", a-t-il encore osé lors de sa plaidoierie. Affublant encore les féministes, venues manifester sur le parvis du tribunal, de "demi-décérébrées".
+
+Il ne s'agit bien évidemment pas de contester les droits de la défense, qui est libre de sa stratégie (le silence, le déni, ...), mais là, il ne s'agit pas de stratégie mais de méthode. Défendre n'est pas détruire, "massacrer" la victime.
+
+Ces argumentaires qui n'en sont pas ont pullulé dans l'humiliation dans les cris, dans le stress pendant quatre jours, sans aucun intérêt pour la manifestation de la vérité. Rien ne justifie une pluie de hurlements (hystériques?) et d'injures. C'est violent, ultra-violent; on est diffamé, notre parole est moquée ou coupée.
+
+Amélie a déclaré après ce procès qu'il avait été presque plus traumatisant que l'agression elle-même. C'est bel et bien le but.
+
+La justice n'en ressort pas grandie et l'image de la profession d'avocat.e s'écorne un peu plus.
+|auteurs=Carine Durrieu Diebolt
+|ouvrage=Violences sexuelles: quand la justice maltraite
+|édition=Syllepse
+|date=2024
+}}{{Citation
+|citation=<u>La victimisation secondaire</u> : (concept qui, en résumé, renvoie au fait que la procédure judiciaire vient ajouter au traumatisme de l’agression) est une création désormais établie de la Cour européenne des droits de l’homme (CEDH). La France vient d’être condamnée notamment pour cela par la CEDH le 24 avril 2025 (elle le sera probablement encore dans les semaines à venir) ; la Cour de cassation avait déjà (23 mars 2022) opéré un bougé sur ce point en condamnant civilement l’accusé pour « l’aggravation du préjudice moral » que ses dénégations répétées (son système de défense) avaient causée à la victime. Certes, à ce jour, la jurisprudence de la CEDH vise davantage la responsabilité de l’État que celle du prévenu ou de son avocat, mais compte tenu notamment des dispositions de la Convention d’Istanbul, elle n’est pas figée et les États membres restent libres de la faire évoluer en interne.
+|auteurs=Élodie Tuaillon-Hibon
+|article=Affaire « Depardieu » : la complexité de la justice des violences sexuelles n’est pas soluble dans l’indignation
+|ouvrage=actu-juridique.fr
+|date=20/05/2025
+|lien=https://www.actu-juridique.fr/droit-penal/violences-sexuelles/affaire-depardieu-la-complexite-de-la-justice-des-violences-sexuelles-nest-pas-soluble-dans-lindignation/
+}}{{Citation
+|citation=C'est en 2015 que la notion de "victimisation secondaire" apparaît officiellement dans un arrêt de la Cour européenne des droits de l'homme. En 2021, la CEDH condamne pour la première fois un État pour victimisation secondaire : dans une décision de justice rendue en Italie, l'exposé des motifs contient des stéréotypes sexistes. Dès lors, la CEDH détaille, dans un arrêt, l'obligation d'assurer une "prise en charge adéquate de la victime durant la procédure pénale". Si la notion de "victimisation secondaire" n'est pas inscrite dans le droit français, elle est de plus en plus saisie par la justice.
+|article=Victimisation secondaire : que signifie ce nouveau concept juridique ?
+|ouvrage=France Culture
+|date=15 mai 2025
+|lien=https://www.radiofrance.fr/franceculture/podcasts/la-question-du-jour/victimisation-secondaire-que-signifie-ce-nouveau-concept-juridique-9032625
+}}
+|date-création=2025-08-10
+}}

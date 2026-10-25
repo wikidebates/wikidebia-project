@@ -1,0 +1,5 @@
+{{Argument
+|initialisation=Objection@4924
+|résumé=S'impliquer dans une cause, c'est une tâche ingrate, et les retombées immédiates sont loin d'être à la hauteur des efforts engrangés. Pourtant, de tous temps, des personnes se sont battues pour des bonnes causes dans des situations qui semblaient désespérées et n'ont pour la plupart même pas vécu assez longtemps pour que les impacts se soient produits de leur vivant, il n'en demeure pas moins qu'elles n'ont pas été vaines, et que les générations qui les ont succédé ont elle-mêmes pu en bénéficier, que les victoires soient parcellaires et/ou réversibles n'y change rien.
+|date-création=2024-04-26
+}}

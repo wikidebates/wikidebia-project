@@ -1,0 +1,28 @@
+{{Argument
+|résumé=Les femmes sont encore moins présentes dans les postes à haute responsabilités ou dans les filières dites "masculines". La cause d'un plafond de verre découlant sur les bases d'une société patriarcale dont les préceptes tardent à à s'estomper.
+|citations={{Citation
+|citation=En France
+En 2018, il y a 42,5% de femmes administratrices dans les entreprises du CAC40. (38% en 2016, 30% en 2014). Source : CAC40, Baromètre IFA – Ethics & Boards de la Composition des conseils, juin 2018
+En 2016, il y a 38,4% d’administratrices dans les entreprises du SBF120. (33,7% en 2015, 30,5% en 2014 et 27,3% en 2013) Source : SBF120, Palmarès IFA Ethics & Boards de la composition des conseils, février 2017. 
+En 2016, au sein des hautes instances décisionnelles des sociétés cotées sur Euronext Paris, les femmes représentent des 4,1% président.e.s, PDG, DG et DG délégué.e.s des entreprises du compartiment A (Big Cap), 7,9% de celles du compartiment B (Mid Cap) et 7,6% de celles du compartiment C (Small Cap). Source : HCE, Vers un égal accès des femmes et des hommes aux responsabilités professionnelles : la part des femmes dans les conseils d’administration et de surveillance, 10 février 2016.
+En 2014, les femmes représentent 38% des créateur.rice.s d’entreprise (32% en 2010) et représentent 40% des auto-entrepreneur.se.s (29% en 2006). Source : Ministère du redressement productif, 2013, Ministère des affaires sociales, de la santé et des droits des femmes, Vers l’égalité réelle entre les femmes et les hommes, Chiffres clés 2016.
+En mars 2019, il y a 1 femme pour 13 hommes dans le bureau et 2 femmes pour 31 hommes dans le Conseil d’Administration de l’Assemblée Plénière des Chambres d’Agriculture (APCA). Source : https://chambres-agriculture.fr/chambres-dagriculture/nous-connaitre/le-reseau-des-chambres-dagriculture/chambres-dagriculture-france/
+|auteurs=Haut Conseil à l'égalité entre les hommes et les femmes
+|article=Accès aux responsabilités économiques
+|lien=https://www.haut-conseil-egalite.gouv.fr/parite/reperes-statistiques/
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=AFP
+|article=Une étude souligne la discrimination des femmes pour l'accès à des emplois "masculins"
+|ouvrage=Le Point
+|date=05/11/2018
+|lien=https://www.lepoint.fr/societe/une-etude-souligne-la-discrimination-des-femmes-pour-acceder-a-des-emplois-masculins-05-11-2018-2268538_23.php#xtmc=etude-femmes&xtnp=1&xtcr=7
+}}
+|objections={{Objection
+|page=Les femmes de manière générale ne pâtissent en rien de cette sous-représentation
+|titre-affiché=Les femmes de manière générale ne pâtissent en rien de cette sous représentation.
+}}
+|rubriques=Société
+|mots-clés=féminisme, travail
+|date-création=2021-02-26
+}}

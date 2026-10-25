@@ -1,0 +1,13 @@
+{{Argument
+|initialisation=Objection@5056
+|résumé=C'est systématique, la phrase "pas tous les hommes" ressort systématiquement à toute évocation de VSS, même quand il n'a pas été évoqué -ni même sous-entendu- que c'était le contraire. Il s'agit d'un moyen très commode de mettre hors-jeu toute discussion tout en se faisant passer pour le camp raisonnable.
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Giulia Fois
+|ouvrage=Pas tous les hommes, quand même
+|lieu=Editions La Meute
+|date=2024
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2026-09-02
+}}

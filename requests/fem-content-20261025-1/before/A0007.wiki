@@ -1,0 +1,21 @@
+{{Argument
+|initialisation=Argument pour@4876
+|justifications={{Justification
+|page=Le féminisme permet de lutter contre la pollution
+|titre-affiché=Le féminisme permet de lutter contre la pollution
+}}{{Justification
+|page=Le féminisme peut libérer des carcans sociétaux oppressants
+|titre-affiché=Le féminisme peut libérer des carcans sociétaux oppressants
+}}{{Justification
+|page=Le féminisme est le meilleur allié de la démocratie
+|titre-affiché=Le féminisme est le meilleur allié de la démocratie
+}}{{Justification
+|page=Le féminisme peut nous libérer des coûts financiers de la masculinité toxique
+|titre-affiché=Le féminisme peut nous libérer des coûts financiers de la masculinité toxique
+}}
+|objections={{Objection
+|page=Le féminisme ne peut être conséquent s'il n'a pas pour moyen la lutte des classes et pour objectif le renversement du capitalisme
+|titre-affiché=Le féminisme ne peut être conséquent s'il n'a pas pour moyen la lutte des classes et pour objectif le renversement du capitalisme
+}}
+|date-création=2023-01-22
+}}

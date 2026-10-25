@@ -1,0 +1,10 @@
+{{Argument
+|références-sitographiques={{Référence sitographique
+|lien=https://positivr.fr/le-mot-victime-nest-pas-une-insulte-en-dessins-un-rappel-necessaire-fort-et-precieux/
+|page=Le mot “victime” n’est pas une insulte. En dessins, un rappel nécessaire, fort et précieux
+|auteurs=Axel Leclercq
+|site=Positivr
+|date=30 septembre 2022
+}}
+|date-création=2022-07-18
+}}

@@ -1,0 +1,60 @@
+{{Argument
+|citations={{Citation
+|citation="En 2017, les femmes gagnent 24% de moins que les hommes (salaire annuel moyen).
+Source : Insee, Femmes et hommes, l’égalité en question, Édition 2017
+En 2011, les femmes cadres gagnent :
+- 21,8% de moins que les hommes cadres dans le secteur privé et semi public.
+- 14,1% de moins dans la fonction publique étatique.
+- 15,7% de moins dans la fonction publique territoriale.
+- 21,6% de moins dans la fonction publique hospitalière.
+En 2011, les femmes employées ou ouvrières gagnent :
+- 10,7% de moins que les hommes employés ou ouvriers dans le secteur privé ou semi-public.
+- 16,4% de moins que les hommes dans la fonction publique étatique.
+- 11,4% de moins dans la fonction publique territoriale.
+- 3% de moins dans la fonction publique hospitalière.
+Source : DADS, SIASP, INSEE. Traitement Insee, Drees, DGCL, département des études et des statistiques locales et DGAFP, département des études et des statistiques
+|auteurs=DADS, SIASP, INSEE
+|ouvrage=Chiffres clés 2014
+|page=2
+|localisation=Thème 3
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Anaïs Bouitcha
+|article=Equal Pay Day : ce jour où les femmes rattrapent (enfin) ce que les hommes ont gagné en 2021
+|ouvrage=Neonmag.fr
+|date=21.03.2022
+|lien=https://www.neonmag.fr/lequal-pay-day-ce-jour-ou-les-femmes-rattrapent-enfin-les-hommes-558242.html
+}}{{Référence bibliographique
+|auteurs=Simon Georges-Kot
+|article=Écarts de rémunération femmes-hommes : surtout l’effet du temps de travail et de l’emploi occupé
+|ouvrage=INSEE
+|date=18/06/2020
+|lien=https://www.insee.fr/fr/statistiques/4514861
+}}{{Référence bibliographique
+|auteurs=J.-L.D. avec AFP Twitter
+|article=Egalité hommes-femmes : Près de 17.000 entreprises n’ont pas rempli l’index
+|ouvrage=20 minutes
+|date=04/10/2020
+|lien=https://www.20minutes.fr/societe/2876879-20201004-egalite-hommesfemmes-pres-17000-entreprises-rempli-index
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Pourquoi payer les femmes autant que les hommes ne suffit pas
+|auteurs=Le Monde
+|lien=https://www.youtube.com/watch?v=_srYXUOKg3w&list=PLFuK0VAIne9KYdJU6duXzY8cyQZ51WzIU&index=3
+}}{{Référence vidéographique
+|titre=À partir du 6 novembre à 15:35, les femmes travaillent gratuitement
+|auteurs=Brut
+|lien=https://www.youtube.com/watch?v=s1ar0qlSAQc
+}}{{Référence vidéographique
+|titre=Le MYTHE de l'Écart Salarial !!!! (non)
+|auteurs=Les Bonnes Questions
+|lien=https://www.youtube.com/watch?v=e_MrJbg9urg
+}}
+|objections={{Objection
+|page=Le féminisme ne permet pas d'améliorer le niveau de vie des femmes
+|titre-affiché=Le féminisme ne permet pas d'améliorer le niveau de vie des femmes
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2021-02-22
+}}

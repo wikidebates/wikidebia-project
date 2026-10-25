@@ -1,0 +1,5 @@
+{{Argument
+|rubriques=Santé, Société
+|mots-clés=médecine, psychologie
+|date-création=2022-12-19
+}}

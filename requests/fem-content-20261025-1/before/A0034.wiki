@@ -1,0 +1,37 @@
+{{Argument
+|résumé=74% des victimes d'homicides sont des hommes, la moitié des victimes d'agression physique sont des hommes, la moitié des personnes victimes de viol sont des hommes.
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Sharon G. Smith, Xinjian Zhang, Kathleen C. Basile, Melissa T. Merrick, Jing Wang, Marcie-jo Kresnow, Jieru Chen
+|article=National Intimate Partner and Sexual Violence Survey: 2015 Data Brief – Updated Release
+|ouvrage=National Center for Injury Prevention and Control Centers for Disease Control and Prevention
+|date=11/2018
+|lien=https://www.cdc.gov/violenceprevention/pdf/2015data-brief508.pdf
+}}{{Référence bibliographique
+|auteurs=INSEE
+|article=Homicides commis en France entre 2016 et 2020
+|ouvrage=INSEE
+|date=09/12/2021
+|lien=https://www.insee.fr/fr/statistiques/5763555?sommaire=5763633
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://fr.statista.com/statistiques/1257140/victimes-agression-vol-france/
+|page=Nombre de personnes victimes d'agression ou de vol hors ménage en France en 2019 selon le sexe
+|auteurs=Maxime Gautie
+|site=statista
+|date=03/2022
+}}
+|objections={{Objection
+|page=Les femmes subissent bien plus de violences que les hommes
+|titre-affiché=Les femmes subissent bien plus de violences que les hommes
+}}{{Objection
+|page=L'immense majorité des victimes de viols sont des femmes
+|titre-affiché=L'immense majorité des victimes de viols sont des femmes
+}}{{Objection
+|page=Certains violences visent plus spécifiquement les femmes
+|titre-affiché=Certains violences visent plus spécifiquement les femmes
+}}{{Objection
+|page=Les violences sexistes sont systémiques, contrairement à celles contre les hommes
+|titre-affiché=Cet argument ne tient pas compte du caractère systémique des violences sexistes
+}}
+|date-création=2022-08-29
+}}

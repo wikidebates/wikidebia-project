@@ -1,0 +1,41 @@
+{{Argument
+|résumé=Le débat actuel majoritairement centré sur les débats féministes met sous silence une réalité alternative : le désarroi des hommes face à leurs propres peurs et obligations morales ou physiques. Si la société tend à décharger les hommes de certaines responsabilités petit à petit, il n'en a pas moins hérité de sa propre charge mentale. L'attente est immense et parait pour certains bien insurmontable. Il est aujourd'hui sommé de satisfaire sexuellement les femmes mais se rajoute aujourd'hui la complexité de devoir se familiariser avec l'éventail des désirs féminins, décomplexé par la libération de la parole. On nous matraque de tutos et autres ouvrages censés explorer tous les fantasmes féminins et les ramifications de leurs désirs. Ce sujet, malgré l'abondance des outils proposés n'a jamais semblé si nébuleux. Les hommes doivent avancer sur ce chemin miné, écrasés par des affirmations insurmontables telles que : l'orgasme féminin est bien plus puissant que l'orgasme masculin, la majorité des femmes simulent, l'orgasme féminin est très dur à atteindre… L'humoriste Blanche Gardin décrit ce phénomène dans son sketch "être une femme, être un homme" : "le premier défi qui se pose à l'homme dans sa vie, c'est de devoir bander[…] c'est une servitude monstrueuse".
+
+Sur la plan sociétal, il est impensable de ne pas travailler, de ne pas subvenir aux besoins du foyer… 
+Sur le plan sentimental, draguer est une entreprise risquée. Beaucoup, sur le modèle des allemands et scandinaves ont un peu démissionné et laissent la main aux femmes, consentement assuré. Plusieurs avouent faire très attention à leur paroles "pour ne pas être accusés de mauvaise foi" ou de complaisance avec la culture du viol. D'autres vont même jusqu'à avoir changé de comportement.
+
+Dans le milieu professionnel, faire des blagues sexistes est devenu compliqué.  L'obligation de la parité a fait naitre un épuisement mental du fait de la constante attention requise. Apparu aux états-unis en 2009, ce phénomène est appelé la "[https://www.eveprogramme.com/33358/gender-fatigue-concept/#:~:text=Du%20%C2%AB%20dilemme%20id%C3%A9ologique%20%C2%BB%20%C3%A0%20la,diversit%C3%A9%20et%20du%20management%20interg%C3%A9n%C3%A9rationnel. gender fatigue]".<br>
+D'après une étude réalisée pour Le Parisien par Opinion Way (en Juin 2018 sur un échantillon de 1055 hommes), le jugement sur le retentissement de l'affaire Weinstein est perçu comme :
+"fatigant" 47%
+"excessif" 45%
+"agaçant" 42%
+et enfin 38% des hommes actifs expliquent avoir du changer leur comportement et/ou se poser des questions.
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Maria Kouloglou
+|article=La vie d'un homme vaut-elle moins que celle d'une femme ?
+|date=20/07/2019
+|lien=https://www.lepoint.fr/debats/la-vie-d-un-homme-vaut-elle-moins-que-celle-d-une-femme-20-07-2019-2325708_2.php
+}}{{Référence bibliographique
+|auteurs=Sébastien Thibault
+|article=Sondage : le monde professionnel a-t-il évolué après l'affaire Weinstein
+|ouvrage=Le Parisien
+|date=22/06/2018
+|lien=https://www.leparisien.fr/societe/sondage-le-monde-professionnel-a-t-il-evolue-depuis-l-affaire-weinstein-22-06-2018-7785363.php
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Blanche Gardin "Etre un homme"
+|auteurs=montyube
+|lien=https://www.youtube.com/watch?v=dUdmWxtSEpQ
+}}{{Référence vidéographique
+|titre=Maxime Gaget : battu et torturé par son ex-compagne - Ça commence aujourd'hui
+|auteurs=Ça commence aujourd'hui - France Télévisions
+|lien=https://www.youtube.com/watch?v=2pdd7zbuYkM&t=158s
+}}
+|objections={{Objection
+|page=Accuser le féminisme d'ignorer la souffrance des hommes est tout aussi absurde qu'accuser les organismes de lutte contre la pauvreté d'ignorer la souffrance des riches
+|titre-affiché=Accuser le féminisme d'ignorer la souffrance des hommes est tout aussi absurde qu'accuser les organismes de lutte contre la pauvreté d'ignorer la souffrance des riches
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2021-02-20
+}}

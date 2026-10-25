@@ -1,0 +1,5 @@
+{{Argument
+|initialisation=Objection@4880
+|résumé=Il est logique qu'un mouvement destiné à un groupe particulier se concentre exclusivement sur ce dernier, puisque c'est sa raison d'exister. Reprocher aux féministes d'ignorer la souffrance des hommes n'a donc pas plus de sens que reprocher aux organismes de lutte contre la pauvreté d'ignorer la souffrance des riches, aux groupes queer d'ignorer la souffrance des cishet, aux groupes antiracistes d'ignorer la souffrance des blancs et ainsi de suite.
+|date-création=2025-08-10
+}}

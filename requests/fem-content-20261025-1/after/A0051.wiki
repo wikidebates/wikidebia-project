@@ -1,0 +1,28 @@
+{{Argument
+|résumé=Depuis plusieurs dizaines d'année, les gouvernements successifs et l'ensemble des médias se revendiquent féministes. 65% des français se revendique féministes et 58% dans l'ensemble du monde.
+|références-sitographiques={{Référence sitographique
+|lien=https://fr.statista.com/infographie/13166/et-vous-etes-vous-feministe/
+|page=Et vous êtes vous féministes ?
+|auteurs=Pascaline Boittiaux
+|site=statista
+|date=8/03/2018
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre="Je ne suis pas féministe" déclare Eric Zemmour dans "Face A Baba"
+|auteurs=Touche pas à mon poste !
+|lien=https://www.youtube.com/watch?v=T4-EydG1FTQ&ab_channel=Touchepas%C3%A0monposte%21
+}}
+|objections={{Objection
+|page=Certains pseudo-féminismes ne sont que des idéologies réactionnaires qui ne disent pas leur nom
+|titre-affiché=Certains pseudo-féminismes ne sont que des idéologies réactionnaires qui ne disent pas leur nom
+}}{{Objection
+|page=Des gens fortement misogynes se revendiquent féministes, donc ça ne veut rien dire
+|titre-affiché=Des gens fortement misogynes se revendiquent féministes, donc ça ne veut rien dire
+}}{{Objection
+|page=Certains groupes politiques revendiquent leur hostilité envers le féminisme
+|titre-affiché=Certains groupes politiques revendiquent leur hostilité envers le féminisme
+}}
+|rubriques=Politique, Société
+|mots-clés=féminisme, politique
+|date-création=2022-08-29
+}}

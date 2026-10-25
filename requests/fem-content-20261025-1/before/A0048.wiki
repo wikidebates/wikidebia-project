@@ -1,0 +1,7 @@
+{{Argument
+|objections={{Objection
+|page=Les plaintes pour viols constituent l'écrasante majorité des plaintes refusées illégitimement
+|titre-affiché=Les plaintes pour viols constituent l'écrasante majorité des plaintes refusées illégitimement
+}}
+|date-création=2022-08-29
+}}

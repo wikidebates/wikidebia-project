@@ -1,0 +1,9 @@
+{{Argument
+|objections={{Objection
+|page=Le patriarcat crée des différences arbitraires et punit celles et ceux qui cherchent à s'en démarquer
+|titre-affiché=Le patriarcat crée des différences arbitraires et punit celles et ceux qui cherchent à s'en démarquer
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2021-03-07
+}}

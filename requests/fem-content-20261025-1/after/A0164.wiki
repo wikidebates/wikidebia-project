@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@11213
+|rubriques=Politique, Société
+|mots-clés=féminisme, politique
+|date-création=2022-10-14
+}}

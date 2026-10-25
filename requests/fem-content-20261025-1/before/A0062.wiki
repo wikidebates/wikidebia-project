@@ -1,0 +1,12 @@
+{{Argument
+|initialisation=Justification@15779
+|résumé=Pollution et sexisme se rejoignent sur certains points, notamment que la plupart des gestes écolos sont posés par des femmes et que les hommes les plus violemment sexistes sont très souvent les plus violemment hostiles à l'écologie.
+|références-sitographiques={{Référence sitographique
+|lien=https://www.madmoizelle.com/oui-la-consommation-de-viande-est-genree-et-son-impact-sur-lenvironnement-aussi-1434049
+|page=Oui, la consommation de viande est genrée, et son impact sur l’environnement aussi
+|auteurs=Anthony Vincent
+|site=Madmoizelle.com
+|date=30 août 2022
+}}
+|date-création=2023-01-22
+}}

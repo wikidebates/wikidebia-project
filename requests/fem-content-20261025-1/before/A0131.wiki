@@ -1,0 +1,47 @@
+{{Argument
+|résumé=Si on prend l'exemple des violences faites aux femmes, l'universalisme part du principe que toutes les femmes subissent exactement les mêmes oppressions. C'est faire le déni que les oppressions sont cumulables et prennent des formes très diverses selon l'ethnie, l(es) éventuel(s) handicap(s), la transidentité ou la classe sociale, pour ne citer que quelques exemples. Le sexisme subi par une femme noire valide ne sera pas le même que celui subi par une femme blanche handicapée, et ainsi de suite. Ignorer cet aspect ne conduit pas seulement à oublier certaines victimes, mais est également la source d'oppressions internes pouvant s'ancrer au sein même des groupes de lutte.
+|citations={{Citation
+|citation=Comment expliquer le manque d’engagement politique contre le racisme ? Pour Nadhéra Beletreche, la réponse est forcément multifactorielle. La militante y voit déjà un lien avec cet universalisme à la française, une ''« histoire qui a écrasé les particularismes mais qui se croit vraiment universaliste »''.
+|auteurs=Maëlle Le Corre
+|article=Pour lutter contre les discriminations raciales, des militantes lancent l’Observatoire contre le racisme en politique
+|ouvrage=Madmoizelle.com
+|date=20 jan 2023
+|lien=https://www.madmoizelle.com/pour-lutter-contre-les-discriminations-raciales-des-militantes-lancent-lobservatoire-contre-le-racisme-en-politique-1484519
+}}{{Citation
+|citation=[Les notions d'universalisme et d'intersectionalité] crispent une partie de la population d’une part parce que la notion d’universalisme et sa définition a été accaparée par une élite blanche, [https://www.madmoizelle.com/questions-heterosexuels-170007 hétéro], [https://www.madmoizelle.com/kelsi-phung-artiste-non-binaire-zone-interdite-presente-la-non-binarite-comme-un-phenomene-de-mode-1073041 cisgenre], [https://www.madmoizelle.com/il-faut-que-les-valides-sachent-remettre-en-question-leurs-privileges-1077539 valide] qui définit ce qu’est l’universalisme au regard de son vécu privilégié et tente d’en faire une norme, une généralité. Cela crée des crispations de toutes parts car '''comment parler d’universalisme quand sa définition même exclue une grande partie de notre population ?'''
+|auteurs=Anthony Vincent
+|article=Comment militer sans s’épuiser ? Ce livre décrypte les nouvelles formes d’engagement
+|ouvrage=Madmoizelle.com
+|date=23 août 2023
+|lien=https://www.madmoizelle.com/comment-militer-sans-sepuiser-ce-livre-decrypte-les-nouvelles-formes-dengagement-1317699
+}}{{Citation
+|citation=Dans ce sens, l’intersectionnalité ne peut pas être un frein ni une menace pour le féminisme, au contraire, c’est une approche inévitable et utile qui donne des outils pour comprendre une situation complexe et d’y faire face. C’est une approche intéressante pour toutes les femmes car [https://doi.org/10.3917/nqf.251.0012 elle permet de comprendre l’égalité des genres dans une approche dynamique (Nader, 2006)] en lien avec les relations intergroupes et leur conséquence sur les droits des femmes.
+|auteurs=Noura Amer
+|article="L’intersectionnalité n’est pas un frein, ni une menace pour le féminisme"
+|ouvrage=RTBF
+|date=21/02/2023
+|lien=https://www.rtbf.be/article/lintersectionnalite-nest-pas-un-frein-ni-une-menace-pour-le-feminisme-11156289
+}}{{Citation
+|citation=La cour d’appel de Paris vient de reconnaître la discrimination « en raison de l’origine et du sexe » dont a été victime une ancienne salariée de la banque. Fait rare, cette décision évoque la notion de « discrimination intersectionnelle ».
+|auteurs=Cécile Hautefeuille
+|article=Discriminée parce que femme et noire : une ex-salariée fait condamner la Société générale
+|ouvrage=Mediapart
+|date=24 octobre 2025
+|lien=https://www.mediapart.fr/journal/economie-et-social/241025/discriminee-parce-que-femme-et-noire-une-ex-salariee-fait-condamner-la-societe-generale?utm_source=quotidienne-20251024-171329&fbclid=IwY2xjawN8hYFleHRuA2FlbQIxMQBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEe-6tMV4qpwwD_Wwx4YLPfBWx_q3BA0QsWzuBvlnqb7juWk8a30j-r_NureU4_aem_pQCxfUYROo0pmoVip_9dBA
+}}{{Citation
+|citation=« Le féminisme n’a aucune valeur sans intersectionnalité ni inclusion », disait la féministe américaine Kimberlé Williams Crenshaw, qui a introduit le terme d’intersectionnalité à la fin des années quatre-vingt afin de montrer que les expériences vécues par une personne noire et par une femme ne peuvent pas être comprises et analysées comme deux données séparées ou indépendantes. Plus généralement, l’intersectionnalité vise à montrer que la domination est plurielle et tente de mesurer l’impact d’oppressions multiples : LGBTQIAphobies, sexisme, validisme, racisme, grossophobie, putophobie, classisme… « Admettons que même dans nos luttes, on a des personnes plus privilégiées que d’autres. Il faut normaliser la parole des concernées », résume Peter.
+|article=Nous sommes non-binaires, pas imaginaires
+|ouvrage=Castor Magazine
+|lien=https://web.archive.org/web/20240819002307/https://www.lecastormagazine.com/nous-sommes-non-binaires
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=BIENVENUE CHEZ LES WOKES
+|auteurs=Blast, le souffle de l’info
+|lien=https://video.blast-info.fr/w/e6YNnBNqYTcj7hBkp6wi4m
+}}
+|justifications={{Justification
+|page=L'intersectionnalité empêche des personnes marginalisées de creuser leur propre tombe par haine envers d'autres personnes marginalisées
+|titre-affiché=L'intersectionnalité empêche des personnes marginalisées de creuser leur propre tombe par haine envers d'autres personnes marginalisées
+}}
+|date-création=2022-12-19
+}}

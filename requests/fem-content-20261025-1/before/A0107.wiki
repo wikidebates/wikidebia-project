@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Objection@5215
+|citations={{Citation
+|citation=C’était important pour moi de montrer que les victimes sont plurielles et d’ailleurs, ce sont les personnes victimes, je me suis déjà fait reprendre là-dessus, et depuis je fais attention à ça. J’essaie d’écrire ''« personnes victimes »'' ou de dire ''« personnes victimes »'', autant que possible, car ce n’est pas un groupe uniforme, ce sont des personnes avec des histoires différentes. 
+
+Certaines revendiquent le statut de victimes, d’autres ne veulent pas que ce mot leur soit accolé, certaines veulent que l’agresseur fasse de la prison, d’autres non, certaines veulent un procès public, certaines veulent qu’il soit justement entendu dans le bureau des policiers, d’autres attendent une reconnaissance des faits avant tout.
+|auteurs=Maëlle Le Corre
+|article=Biais sexistes, manques de moyens : Marine Turchi éclaire les dysfonctionnements de la justice face aux violences sexuelles
+|ouvrage=Madmoizelle.com
+|date=21 décembre 2021
+|lien=https://www.madmoizelle.com/biais-sexistes-manques-de-moyens-marine-turchi-eclaire-les-dysfonctionnements-de-la-justice-face-aux-violences-sexuelles-1223463
+}}
+|date-création=2023-03-08
+}}

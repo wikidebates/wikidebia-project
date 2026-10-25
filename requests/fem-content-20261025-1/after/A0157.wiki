@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Objection@6370
+|résumé=Trump n'a jamais fait mystère du caractère très droitard de son idéologie, et pourtant, il a pu la diffuser dans une impunité totale pendant de nombreuses années. Si il s'est fait finalement bannir, c'est parce que les réseaux sociaux craignaient d'être associés à l'assaut du capitole qu'il a commandité. Sans ce dernier, il est probable qu'il n'aurait jamais été exclu.
+|citations={{Citation
+|citation=Si Twitter a attendu si longtemps pour s'attaquer aux tweets de Trump, c'est parce que son objectif principal est de générer des profits, pas de promouvoir la liberté d'expression.
+|auteurs=Sonali Kolhatkar
+|article=L'oiseau bleu court après les billets verts, pas la liberté d'expression
+|ouvrage=Solidaire, magazine du Parti du Travail de Belgique
+|date=janvier-février 2023
+}}
+|rubriques=Société
+|mots-clés=extrême droite, féminisme
+|date-création=2023-06-15
+}}

@@ -1,0 +1,12 @@
+{{Argument
+|références-sitographiques={{Référence sitographique
+|lien=https://www.haut-conseil-egalite.gouv.fr/violences-faites-aux-femmes/reperes-statistiques/
+|page=Repères statistiques
+|auteurs=Haut conseil à l'égalité entre les femmes et les hommes
+}}
+|objections={{Objection
+|page=L'immense majorité des données en la matière sont altérées par des biais statistiques très importants
+|titre-affiché=L'immense majorité des données en la matière sont altérés par des biais statistiques très importants
+}}
+|date-création=2022-08-31
+}}

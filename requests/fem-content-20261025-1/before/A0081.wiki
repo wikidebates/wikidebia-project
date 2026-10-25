@@ -1,0 +1,22 @@
+{{Argument
+|résumé=Les actions menées par les associations et sympathisants féministes obligent le gouvernement à réviser constamment les lois. La chronologie des droits des femmes indique que les dernières lois adoptées dans le cadre de la protection des femmes datent de 2020 :
+
+Mars 2020
+Début de la crise sanitaire liée au Covid-19 qui a eu un effet révélateur sur les violences conjugales, en forte hausse durant les confinements.
+
+25 août 2020
+Un décret étend la gratuité de la contraception aux filles de moins de 15 ans.
+
+23 septembre 2020
+Un décret met en place un dispositif électronique mobile anti-rapprochement destiné à assurer le contrôle à distance des conjoints ou ex-conjoints violents.
+
+Cette constatation incite à affirmer que le combat pour l'égalité hommes/femmes n'est pas terminé.
+|références-sitographiques={{Référence sitographique
+|lien=https://www.vie-publique.fr/eclairage/19590-chronologie-des-droits-des-femmes
+|page=chronologie des droits des femmes
+|site=Vie Publique
+}}
+|rubriques=Société
+|mots-clés=Féminisme
+|date-création=2021-02-20
+}}

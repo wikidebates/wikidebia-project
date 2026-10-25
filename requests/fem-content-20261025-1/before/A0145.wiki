@@ -1,0 +1,8 @@
+{{Argument
+|résumé=Certains couples décident que c'est l'homme qui fera la majorité des tâches ménagères. L'analyse systémique n'est pas pertinente, chaque couple est libre de son mode de fonctionnement.
+|objections={{Objection
+|page=Les cas de tâches ménagères équitablement partagées sont marginaux
+|titre-affiché=Ces cas sont encore très marginaux
+}}
+|date-création=2022-08-29
+}}

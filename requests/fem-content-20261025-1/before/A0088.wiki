@@ -1,0 +1,12 @@
+{{Argument
+|résumé=Déjà dans les années 50, on estimait que le féminisme avait déjà tout conquis, alors que de nos jours, cette époque est un archétype de conservatisme.
+|citations={{Citation
+|citation=«Un des pièges du patriarcat est d’annoncer périodiquement sa propre fin. “Les femmes ont gagné”, proclamait-on déjà dans les années 1900, puis en 1945, lorsqu’elles votent pour la première fois, puis dans les années 1970, quand [https://www.neonmag.fr/societe-politique/merci-simone-lhommage-simone-veil-subit-des-degradations-509396 la loi Veil] [qui légalise l’IVG, ndlr] est adoptée… Il faut bien sûr reconnaître l’importance de ces victoires, tout en ayant conscience que le patriarcat les a bien digérées et préserve à tous les niveaux le pouvoir masculin.
+|auteurs=Christine Bard
+|article=Sommes-nous en train de vivre la fin du patriarcat ?
+|ouvrage=Neonmag.fr
+|date=23.12.2019
+|lien=https://www.neonmag.fr/societe-politique/sommes-nous-en-train-de-vivre-la-fin-du-patriarcat-541301
+}}
+|date-création=2022-02-11
+}}

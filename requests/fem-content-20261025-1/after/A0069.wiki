@@ -1,0 +1,58 @@
+{{Argument
+|résumé=Un autre mot "valise" est arrivé sur le marché médiatique féministe en 2015: le manterrupting ("man" pour homme et "-terrupting" tiré de l'anglais "interrupting",interrompre) ou comment les hommes interrompent les femmes, leur coupe la parole, la plupart du temps pour les corriger, les contrer et monopoliser le discours. Jessica Benett l'emploie dans son essai "Feminist Fight Club: An Office Survival Manual for a Sexist Workplace" (Le fight Club féministe ouLe Manuel de Survie du bureau dans un lieu de travail sexiste). L'autrice le définit comme "l'interruption non nécessaire d'une femme par un homme". 
+Certains politiciens comme Donald Trump sont passés maitres en la matière, coupant la parole à Hillary Clinton 51 fois en 2016 lors du débat présidentielcontre 17. Les relents d'une culture patriarcale ? L'arrivée des femmes en politique comme aux postes de pouvoir étant plus récente, elles peuvent donc avoir plus de difficulté à se légitimer.
+Pour la politiste Frédérique Matonti, la réponse tient en un mot : la socialisation. 
+''Les études sur l’éducation montrent que les parents, sans en avoir conscience, encouragent les filles au retrait plutôt qu’à la mise en avant, explique-t-elle. Les garçons ont souvent le droit de faire du bruit alors que les filles doivent rester discrètes et baisser la voix. Petit à petit, les enfants ­intériorisent ces valeurs masculines et féminines : les garçons apprennent à prendre la parole, à dire qu’ils n’ont pas peur et à faire face, les filles à écouter et à faire attention aux autres.''
+|citations={{Citation
+|citation=En 1975 déjà, une étude des sociologues Don Zimmerman et Candace West révélait que, lors de 42 conversations entre hommes et femmes, la femme était toujours interrompue. En 2014, une autre étude analysait 900 minutes de conversation homme/femme au sein d’une entreprise. Il s’est avéré que les hommes interrompaient deux fois plus les femmes qu’elles ne le faisaient. En 2015, une autre étude menée sur 12 ans montrait que les femmes travaillant dans le domaine de la justice ne représentaient que 4% des interruptions de parole.
+|auteurs=Aurore Esclauze
+|article=Manterrupting : couper la parole aux femmes est une habitude très ancrée, et pas près de disparaître
+|ouvrage=Neon Magazine
+|date=20/07/2018
+}}{{Citation
+|citation=Les hommes affirment de manière asymétrique un droit de contrôle sur les sujets de conversation et ils le font avec des conséquences évidentes, écrivent-ils. Il faut en conclure que, au moins dans ces transcriptions, les hommes ­contestent aux femmes le statut de partenaires égaux dans la conversation
+|auteurs=Don Zimmerman, Candace West
+|article="Sex roles, interruptions and silences in conversation", étude menée sur le campus de l’université de Santa Barbara (Californie)
+|date=1975
+}}{{Citation
+|citation=Le genre constitue un handicap, toutes choses égales par ailleurs, écrivent-elles. En séances plénières, quel que soit en effet le type d’intervention (dépôt d’amendement, rappel au règlement, questions orales, ­explications de vote), les hommes interviennent toujours plus que les femmes : sur huit séances entre avril 2004 et mars 2005, les hommes sont intervenus 142 fois et les femmes 80
+|auteurs=Frédérique Matonti et Delphine Dulong
+|ouvrage=Sociétés & Représentations
+|date=2007
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Marc Taubère
+|article=À Boulogne, une élue coupée en conseil municipal alors qu'elle évoque les comportements sexistes
+|ouvrage=France Info
+|date=22/02/2021
+|lien=https://france3-regions.francetvinfo.fr/paris-ile-de-france/hauts-de-seine/a-boulogne-une-elue-coupee-en-conseil-municipal-alors-qu-elle-evoque-les-comportements-sexistes-1967746.html?fbclid=IwAR1kEak-Oe4i_KJLmriKKxIPIqTK8TaFSXf1wUzEKFw4blHWarnJxZ8Ktok
+}}{{Référence bibliographique
+|auteurs=Don Zimmerman, Candace West
+|ouvrage=Sex roles, interruptions and silences in conversation
+|date=1975
+|lien=http://www.linguisticsnetwork.com/wp-content/uploads/Sex-Roles-Interruptions-and-Silences-in-Conversation.compressed.pdf
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Rokhaya Diallo : Qu'est-ce que le Manterrupting ?
+|auteurs=Rokhaya Diallo
+|lien=https://www.youtube.com/watch?v=NIEAR8-LGYY
+}}{{Référence vidéographique
+|titre=Brut : La sénatrice Penny Wong en a eu marre d'être interrompue
+|auteurs=Brut
+|lien=https://www.youtube.com/watch?v=gHNjU8G4OT8&t=2s
+}}{{Référence vidéographique
+|titre=Le monde de Lisa : Ces hommes qui interrompent les femmes
+|auteurs=Le monde de Lisa
+|lien=https://www.youtube.com/watch?v=S_jfzrOcEY0
+}}
+|objections={{Objection
+|page=Des femmes coupent aussi la parole et des hommes se font également couper la parole
+|titre-affiché=Il arrive aussi à des femmes de couper la parole. Il arrive à des hommes de se faire couper la parole.
+}}{{Objection
+|page=Les femmes ne sont pas dénuées de responsabilité
+|titre-affiché=Les femmes ne sont pas dénuées de responsabilité
+}}
+|rubriques=Société
+|mots-clés=féminisme, manterrupting
+|date-création=2021-02-23
+}}

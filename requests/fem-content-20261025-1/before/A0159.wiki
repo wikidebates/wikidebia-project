@@ -1,0 +1,25 @@
+{{Argument
+|initialisation=Objection@6367
+|références-sitographiques={{Référence sitographique
+|lien=https://tetu.com/2022/10/18/meta-facebook-instagram-publicite-anti-lgbt/
+|page=Meta (Facebook, Instagram) pris la main dans des pub anti-LGBT
+|auteurs=Tessa Laney
+|site=Têtu
+|date=18/08/2022
+}}{{Référence sitographique
+|lien=https://www.hacking-social.com/2022/02/21/viraliser-lextreme-droite-le-plan-de-bannon/
+|page=Viraliser l’extrême droite : le plan de Bannon,
+|site=Hacking Social
+|date=21 février 2022
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Trump, maître des réseaux sociaux
+|auteurs=Arte
+|lien=https://www.arte.tv/fr/videos/116687-000-A/trump-maitre-des-reseaux-sociaux/
+}}
+|justifications={{Justification
+|page=La nouvelle politique de modération de Facebook autorise désormais explicitement les discours de haine si chers à l'extrême droite
+|titre-affiché=La nouvelle politique de modération de facebook autorise désormais explicitement les discours de haine si chers à l'extrême droite
+}}
+|date-création=2024-06-10
+}}

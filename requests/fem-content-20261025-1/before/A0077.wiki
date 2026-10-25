@@ -1,0 +1,10 @@
+{{Argument
+|initialisation=Objection@16430
+|objections={{Objection
+|page=L'exploitation, les inégalités et la misère causées par le capitalisme amplifient l'oppression des femmes
+|titre-affiché=Si le capitalisme n'a pas créé le sexisme, il n'en demeure pas moins le principal facteur de son maintien et de son renforcement
+}}
+|rubriques=Histoire, Politique, Société
+|mots-clés=oppression, femmes, capitalisme, antériorité
+|date-création=2023-04-03
+}}

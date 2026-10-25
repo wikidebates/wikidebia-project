@@ -1,0 +1,12 @@
+{{Argument
+|citations={{Citation
+|citation=Imagine qu’à la place des femmes qui sont tuées par les hommes, il s’agisse d’employés tués par leurs patrons. L’opinion publique se raidirait davantage. Tous les deux jours, la nouvelle d’un patron qui aurait tué son employé. On dirait, ça va trop loin. On doit pouvoir aller pointer sans risquer d’être étranglé ou criblé de coups ou abattu par balles. Si tous les deux jours, un employé tuait son patron, ce serait un scandale national. Pense à la gueule des gros titres : le patron avait déposé trois plaintes et obtenu un ordre d’éloignement mais l’employé l’a attendu devant chez lui et l’a abattu à bout portant. C’est quand tu le transposes que tu réalises à quel point le féminicide est bien toléré. Les hommes peuvent te tuer. Ça flotte au-dessus de nos têtes. On le sait.
+|auteurs=Virginie Despentes
+|ouvrage=Cher Connard
+|édition=Grasset
+|date=17 août 2022
+}}
+|rubriques=Droit, Société
+|mots-clés=violence, féminisme
+|date-création=2022-08-31
+}}

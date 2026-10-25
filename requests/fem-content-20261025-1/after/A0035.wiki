@@ -1,0 +1,19 @@
+{{Argument
+|résumé=Tous les 3 jours, une femme meurt du fait de violences conjugales.
+|références-sitographiques={{Référence sitographique
+|lien=https://www.lemonde.fr/societe/article/2023/12/26/elle-etait-deja-morte-a-l-interieur-les-suicides-forces-la-face-cachee-des-feminicides_6207738_3224.html
+|page=« Elle était déjà morte à l’intérieur » : les suicides forcés, la face cachée des féminicides
+|auteurs=Minh Dréan
+|site=Le Monde
+|date=26 décembre 2023
+}}{{Référence sitographique
+|lien=https://www.politis.fr/articles/2024/11/enquete-vss-des-soirees-feminines-en-non-mixite-visees-par-des-attentats-masculinistes/
+|page=Des soirées féminines en non-mixité visées par des attentats masculinistes
+|auteurs=Pauline Ferrari
+|site=Politis
+|date=8 novembre 2024
+}}
+|rubriques=Droit, Société
+|mots-clés=violence, féminicide
+|date-création=2022-02-11
+}}

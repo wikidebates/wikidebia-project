@@ -1,0 +1,50 @@
+{{Argument
+|initialisation=Justification@9677
+|résumé=La marche vers le progrès n'est pas linéaire et est tributaire du climat socio-économique ambiant qui, pour peu qu'il se dégrade suffisamment, peut suffire à enclencher une dynamique de recul.
+|citations={{Citation
+|citation=N’oubliez jamais qu’il suffira d’une crise politique, économique ou religieuse pour que les droits des femmes soient remis en question. Ces droits ne sont jamais acquis. Vous devrez rester vigilantes votre vie durant.
+|auteurs=Simone de Beauvoir
+|ouvrage=Le deuxième sexe
+|édition=Gallimard
+|date=1949
+}}{{Citation
+|citation=Oxfam lance aussi un avertissement : les inégalités empoisonnent la politique. En effet, on assiste à un recul des droits démocratiques dans le monde entier. L'écart entre riches et pauvres nourrit les tendances autoritaires. Au lieu de chercher à combler ce fossé, certains dirigeants préfèrent stigmatiser les migrants, les autres groupes ethniques, les autres pays, les femmes ou les personnes en situation de précarité.
+|article=Rapport Oxfam : les riches doivent payer leur juste part d'impôts
+|ouvrage=Parti du Travail de Belgique
+|date=23 janvier 2019
+|lien=https://www.ptb.be/actualites/rapport-oxfam-les-riches-doivent-payer-leur-juste-part-dimpots
+}}{{Citation
+|citation=Puisque leurs arguments sont fondés sur les sentiments des gens (et notamment la peur et la haine) à l’inverse de leur rationalité, ils ne peuvent fonctionner qu’en période de grave crise économique ou sociale. Et c’est d’ailleurs toujours en réponse à ce type d’évènement que l’extrême droite a réussi à accéder au pouvoir : la première guerre mondiale pour Mussolini, la crise de 1929 pour Hitler ou encore la crise de 2008 pour Trump ou Bolsonaro.
+|article=5 causes de la montée de l’extrême droite dans le monde
+|ouvrage=Mr Mondialisation
+|date=23 août 2023
+|lien=https://mrmondialisation.org/5-causes-de-la-montee-de-lextreme-droite-dans-le-monde/
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.madmoizelle.com/etats-unis-lacces-a-la-fiv-et-le-droit-a-la-contraception-desormais-menaces-1462063
+|page=États-Unis : l’accès à la FIV et le droit à la contraception désormais menacés ?
+|auteurs=Camille Lamblaut
+|site=Madmoizelle.com
+|date=17 novembre 2022
+}}{{Référence sitographique
+|lien=https://www.madmoizelle.com/droit-avortement-europe-docu-895691
+|page=Informez-vous sur le droit à l’IVG, toujours menacé en Europe, dans ce docu glaçant
+|auteurs=JulietteGee
+|site=Madmoizelle.com
+|date=07 mars 2018
+}}{{Référence sitographique
+|lien=https://www.madmoizelle.com/droits-femmes-recul-863419
+|page=IVG, contraception : les droits sexuels et reproductifs des femmes reculent en Europe
+|auteurs=Esther Meunier
+|site=Madmoizelle.com
+|date=06 décembre 2017
+}}{{Référence sitographique
+|lien=https://www.amnesty.be/infos/actualites/rapport-annuel-2022-resume
+|page=Rapport annuel : hypocrisie des États, recul des droits
+|site=Amnesty Belgique
+|date=28 mars 2023
+}}
+|rubriques=Société
+|mots-clés=économie, extrême droite
+|date-création=2023-06-08
+}}

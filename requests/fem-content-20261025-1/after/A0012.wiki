@@ -1,0 +1,30 @@
+{{Argument
+|objections={{Objection
+|page=Les droits des femmes s'étoffent chaque année grâce au combat féministe
+|titre-affiché=Les droits des femmes s'étoffent chaque année grâce au combat féministe
+}}{{Objection
+|page=Il y a un combat à mener à l'international pour le droit des femmes
+|titre-affiché=Il y a un combat à mener à l'international pour le droit des femmes
+}}{{Objection
+|page=On constate du sexisme dans les quartiers populaires
+|titre-affiché=On constate du sexisme dans les quartiers populaires
+}}{{Objection
+|page=L'égalité de fait est loin d'être totalement effective
+|titre-affiché=L'égalité de fait est loin d'être totalement effective
+}}{{Objection
+|page=Les lois garantissant l'égalité de droits ne sont pas toujours respectées
+|titre-affiché=Les lois garantissant l'égalité de droits ne sont pas toujours respectées
+}}{{Objection
+|page=L'égalité de droits est imparfaite
+|titre-affiché=L'égalité de droits est imparfaite
+}}{{Objection
+|page=Les crises économiques s'accompagnent systématiquement d'une montée des idéologies réactionnaires
+|titre-affiché=L'égalité de droits est menacée
+}}{{Objection
+|page=Le mythe d'une "victoire féministe totale" n'est pas nouveau
+|titre-affiché=Le mythe d'une "victoire féministe totale" n'est pas nouveau
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2021-02-20
+}}

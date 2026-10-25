@@ -1,0 +1,13 @@
+{{Argument
+|résumé=On ne peut clairement pas mettre au même niveau des violences qui relèvent du fait divers et des violences qui sont le produit de notre éducation et des médias.
+|références-sitographiques={{Référence sitographique
+|lien=https://www.madmoizelle.com/culture-du-viol-explications-123377
+|page=Je veux comprendre…la culture du viol
+|auteurs=Clémence Bodoc
+|site=Madmoizelle.com
+|date=13 sep 2012
+}}
+|rubriques=Droit, Société
+|mots-clés=sexisme, violence
+|date-création=2022-08-31
+}}

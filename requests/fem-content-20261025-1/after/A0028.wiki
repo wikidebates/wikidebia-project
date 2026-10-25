@@ -1,0 +1,13 @@
+{{Argument
+|résumé=Selon une étude conduite par le Centre Francillien hubertine Auclert en 2011 reprise par l'Observatoire des inégalités, parmi 35OO personnages historiques répertoriés dans les manuels scolaires toutes disciplines confondues, la part des femmes représente un sur cinq.
+|objections={{Objection
+|page=Les femmes ont tout simplement moins marqué l'histoire
+|titre-affiché=Les femmes ont tout simplement moins marqué l'histoire
+}}{{Objection
+|page=Le sexe des grandes figures historiques n'est pas important
+|titre-affiché=Le sexe des grandes figures historiques n'est pas important.
+}}
+|rubriques=Culture, Histoire, Société
+|mots-clés=féminisme, histoire, représentation
+|date-création=2021-02-22
+}}

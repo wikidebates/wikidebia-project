@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Justification@16430
+|citations={{Citation
+|citation=Dans une société qui repose sur l’exploitation, l’égalité complète entre hommes et femmes est illusoire.
+|auteurs=Nathalie Arthaud
+|ouvrage=Communiste, révolutionnaire, internationaliste !
+|édition=Les bons caractères
+|date=2022
+|lien=https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste
+}}
+|rubriques=Économie, Politique, Société
+|mots-clés=égalité, hommes, femmes, illusion, société de classes
+|date-création=2023-04-03
+}}

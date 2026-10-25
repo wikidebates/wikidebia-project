@@ -1,0 +1,5 @@
+{{Argument
+|initialisation=Justification@15779
+|résumé=Hommes comme femmes sont soumis à des injonctions étouffantes imposées arbitrarement par la société, telles que la douceur et l'abnégation pour les femmes ou la violence et l'insensibilité pour les hommes. Ces injonctions ont des impacts désastreux sur les deux genres: taux de suicide plus élevés chez les hommes, femmes victimes de violences masculines pouvant aller jusqu'au meurtre, déclassement social pour les hommes et femmes qui s'écartent des stéréotypes, violences LGBTphobes, etc. Un des fers de lance du féminisme est de combattre ces injonctions, ce qui bénéficierait à toute la société.
+|date-création=2023-01-22
+}}

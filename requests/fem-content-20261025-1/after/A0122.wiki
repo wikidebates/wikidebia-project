@@ -1,0 +1,18 @@
+{{Argument
+|initialisation=Objection@5338
+|citations={{Citation
+|citation=Pour certaines personnes, si on montrait qu’il existe des différences naturelles entre humains, on devrait ensuite renoncer à se battre contre ces différences, selon le raisonnement que « ce qui est naturel est bon ». Mais penser que « le naturel est bon » c’est pas un raisonnement, c’est une erreur de raisonnement. On l’appelle couramment le sophisme naturaliste, ou le sophisme de l’appel à la nature, ou encore le paralogisme naturaliste.
+
+C’est une erreur de raisonnement qui fait peur parce que c’est celle qu’a commise le darwinisme social du XIXe siècle, qui concluait qu’il est normal de laisser les faibles et les pauvres mourir simplement parce que c’est ce qui se passe dans la nature.
+
+Mais c’est aussi une erreur de raisonnement qu’on retrouve en dehors des contextes politiques, comme par exemple dans les milieux écolos où on préfère se soigner avec des produits « naturels » plutôt que « chimiques », comme si la nature n’était pas elle-même qu’un vaste ensemble de réactions chimiques capable de créer des poisons plus dangereux que n’importe quelle molécule synthétisée en laboratoire.
+|auteurs=Stéphane Debove
+|article=Peut-on être de gauche et aimer la biologie du comportement humain ? psycho évo #8
+|ouvrage=Homo Fabulus
+|date=25 Octobre 2022
+|lien=https://homofabulus.com/peut-on-etre-de-gauche-et-aimer-la-biologie-du-comportement-humain-psycho-evo-8/
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2023-01-17
+}}

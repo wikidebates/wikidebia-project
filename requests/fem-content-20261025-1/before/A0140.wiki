@@ -1,0 +1,11 @@
+{{Argument
+|résumé=Les femmes d'aujourd'hui ne pâtissent d'aucune manière de la sous représentation de femme parmi les grandes figures historiques mises en avant. Les hommes d'aujourd'hui ne bénéficient d'aucune manière de la surreprésentation d'homme parmi les grandes figures historiques mises en avant.
+|objections={{Objection
+|page=Faux, l'idée que les femmes n'ont pas marqué l'histoire accrédite l'idée qu'elles valent moins bien que les hommes
+|titre-affiché=Faux, l'idée que les femmes n'ont pas marqué l'histoire accrédite l'idée qu'elles valent moins bien que les hommes
+}}{{Objection
+|page=Si les hommes ne tiraient pas profit de cette représentation, ils ne dépenseraient pas autant d'énergie à en verrouiller l'accès aux femmes
+|titre-affiché=Si les hommes ne tiraient pas profit de cette représentation, ils ne dépenseraient pas autant d'énergie à en verrouiller l'acces aux femmes
+}}
+|date-création=2022-08-29
+}}

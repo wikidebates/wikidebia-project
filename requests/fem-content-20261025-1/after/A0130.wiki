@@ -1,0 +1,28 @@
+{{Argument
+|citations={{Citation
+|citation=Et puis il y a Mila. Une jeune femme harcelée avec la plus impensable des violences pour avoir critiqué l’islam lorsqu’un dragueur très lourd sur Internet lui a promis le bûcher de l’enfer parce qu’elle lui avait répondu qu’elle était lesbienne et qu’il ferait mieux de lui foutre la paix. […]
+Or, bien qu’elle soit femme, lesbienne et clairement victime du patriarcat, les premiers sont fabuleusement silencieux face au sort de la seconde. Incompréhensible paradoxe et révoltante monstruosité […]
+Est-ce parce que le harceleur n’est pas un homme blanc (quoiqu’il soit pourtant très très « cis » !), encravaté et d’origine européenne – car c’est bien cela qui importe aux nouveaux antiracistes et féministes essentialistes, les origines ! – qu’on n’entend pas les associations LGBT ? Et qu'on ne voit pas, à de rares exceptions, les associations féministes se mettre toutes vent debout pour faire devant elle le barrage médiatique, politique et humain auquel on devrait s’attendre, et auquel assurément on assisterait si de la même manière elle avait été harcelée pour avoir raillé le catholicisme ou une secte évangéliste quelconque ?
+|auteurs=Delphine Girard
+|article="Ce silence des associations LGBT et de tant de féministes sur l'affaire Mila est absurde"
+|ouvrage=Marianne
+|date=18/06/2021
+|lien=https://www.marianne.net/agora/tribunes-libres/ce-silence-des-associations-lgbt-et-de-tant-de-feministes-sur-laffaire-mila-est-absurde
+}}
+|objections={{Objection
+|page=L'affaire Mila n'intéresse l'extrême droite que parce que les agresseurs sont musulmans
+|titre-affiché=L'extrême droite se fiche éperdument de Mila en tant que personne et ne voit en elle qu'une matraque vivante au service de son agenda raciste
+}}{{Objection
+|page=Il est faux de prétendre que les féministes n'ont pas parlé de l'affaire Mila
+|titre-affiché=Il est faux de prétendre que les féministes n'ont pas parlé de l'affaire Milla
+}}{{Objection
+|page=Sans l'extrême droite, il n'y aurait pas eu d'"affaire Mila"
+|titre-affiché=Sans l'extrême droite, il n'y aurait pas eu d'"affaire Mila"
+}}{{Objection
+|page="L'affaire Mila" n'est qu'un des coups médiatiques manigancés par l'extrême droite pour piéger la gauche
+|titre-affiché="L'affaire Mila" n'est qu'un des coups médiatiques manigancés par l'extrême droite pour piéger la gauche
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2021-06-23
+}}

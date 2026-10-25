@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@11208
+|rubriques=Droit, Société
+|mots-clés=viol, justice
+|date-création=2022-08-31
+}}

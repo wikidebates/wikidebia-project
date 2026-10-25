@@ -1,0 +1,64 @@
+{{Argument
+|citations={{Citation
+|citation=En 1985-1986, les femmes vivant en couple assumaient 81 % des tâches les plus contraignantes du quotidien (ménage, cuisine, vaisselle, linge, etc.). Avec le temps, la part du travail réalisé par les femmes est en légère diminution, passant de 77 % en 1998 à 72 % en 2010. En 2010, les femmes vivant en couple et ayant au moins un enfant consacrent 34 heures hebdomadaires de travail domestique contre 18 heures pour les hommes dans même situation. Source : Insee et Ministère des familles, de l’enfance et des droits des femmes, Chiffres clés édition 2016
+|auteurs=Haut conseil à l'égalité entre les femmes et les hommes
+|ouvrage=Chiffres clés
+|date=2016
+}}{{Citation
+|citation=Si les femmes faisaient le révolution sur ce plan là, sur la plan ménager, si elles le refusaient, si elles obligeaient les hommes à le faire avec elles….En plus c'est un travail clandestin auquel elles sont condamnées. Parce que je trouve que mener cette vie à longueur d'année, de vie, sans rien de productif, c'est vraiment une condamnation. Et bien si ceci était changé, toute la société serait bouleversée;
+|auteurs=Simone de Beauvoir
+|ouvrage=TF1
+|date=1975
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Stéphanie O'Brien
+|article=Comment le travail domestique maintient les femmes dans la précarité
+|ouvrage=Madame Figaro
+|date=21/01/2020
+|lien=https://madame.lefigaro.fr/societe/inegalites-travail-invisible-comment-les-taches-domestiques-maintiennent-les-femmes-dans-precarite-010419-164432
+}}{{Référence bibliographique
+|auteurs=AFP
+|article=Parité : les femmes continuent d'assumer les tâches ménagères
+|ouvrage=Les Echos
+|date=13/05/2015
+|lien=https://www.lesechos.fr/2015/05/parite-les-femmes-continuent-dassumer-les-taches-menageres-264680
+}}{{Référence bibliographique
+|auteurs=Collectif
+|article=L’inégale répartition des tâches domestiques entre les femmes et les hommes
+|ouvrage=Observatoire des inégalités
+|date=29/04/2016
+|lien=https://www.inegalites.fr/L-inegale-repartition-des-taches-domestiques-entre-les-femmes-et-les-hommes#:~:text=En%20moyenne%2C%20les%20femmes%20consacrent,deux%20heures%20pour%20les%20hommes.&text=En%20moyenne%2C%20les%20femmes%20consacrent%203h26%20par%20jour%20aux%20t%C3%A2ches,1%5D%20(donn%C3%A9es%202010).
+}}{{Référence bibliographique
+|auteurs=Chloé Leprince
+|article=Travail domestique : le jour où on s'est mis à regarder ces chiffres qui font mal
+|ouvrage=France Culture
+|date=13/05/2020
+|lien=https://www.franceculture.fr/societe/travail-domestique-soudain-regarder-ces-chiffres-qui-font-mal-et-passer-laspirateur
+}}{{Référence bibliographique
+|auteurs=Amandine Hancewicz
+|article=Nos vies confinées : « Les femmes accomplissent 70 %, en moyenne, du travail familial et domestique »
+|ouvrage=Le Monde
+|date=20/04/2020
+|lien=https://www.lemonde.fr/m-perso/article/2020/04/20/nos-vies-confinees-les-femmes-accomplissent-70-en-moyenne-du-travail-familial-et-domestique_6037206_4497916.html
+}}
+|justifications={{Justification
+|page=Le déséquilibre dans la gestion des tâches domestiques entrave le travail des chercheuses
+|titre-affiché=Le déséquilibre dans la gestion des tâches domestiques entrave le travail des chercheuses
+}}{{Justification
+|page=Les tâches domestiques sont dévalorisées
+|titre-affiché=Les tâches domestiques sont dévalorisées
+}}
+|objections={{Objection
+|page=Une femme au foyer peut être parfaitement épanouie
+|titre-affiché=Une femme au foyer peut être parfaitement épanouie
+}}{{Objection
+|page=Les femmes ne sont pas forcées à faire les tâches ménagères
+|titre-affiché=Les femmes ne sont pas forcées à faire les tâches ménagères
+}}{{Objection
+|page=Certains hommes font la majorité des tâches ménagères au sein de leur couple
+|titre-affiché=Certains hommes font la majorité des tâches ménagères au sein de leur couple.
+}}
+|rubriques=Société
+|mots-clés=féminisme, tâches ménagères, parité
+|date-création=2021-02-22
+}}

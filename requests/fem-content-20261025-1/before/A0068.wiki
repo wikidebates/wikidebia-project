@@ -1,0 +1,17 @@
+{{Argument
+|résumé=Le féminisme a un forte tendance à la généralisation et à l'amalgame misandre. Cela rejoint la rhétorique du racisme ou de l'homophobie.
+|objections={{Objection
+|page=La plupart des hommes sont éduqués à la masculinité toxique
+|titre-affiché=La plupart des hommes sont éduqués à la masculinité toxique
+}}{{Objection
+|page=Les traits de masculinité toxique sont tellement banalisés qu'ils ne sont pas perçus comme tels
+|titre-affiché=Les traits de masculinité toxique sont tellement banalisés qu'ils ne sont pas perçus comme tels
+}}{{Objection
+|page=Les hommes souffrent eux-mêmes de la masculinité toxique
+|titre-affiché=Les hommes souffrent eux-mêmes de la masculinité toxique
+}}{{Objection
+|page=La plupart des hommes ne sont pas conscients de leur toxicité
+|titre-affiché=La plupart des hommes ne sont pas conscients de leur toxicité
+}}
+|date-création=2022-08-29
+}}

@@ -1,0 +1,16 @@
+{{Argument
+|justifications={{Justification
+|page=Les incels représentent un groupe sectaire masculiniste dangereux
+|titre-affiché=Les Incel représentent un groupe sectaire masculiniste dangereux
+}}{{Justification
+|page=Les stages masculinistes stigmatisent le caractère patriarcal des hommes
+|titre-affiché=Les stages masculinistes stigmatisent la caractère patriarcal des hommes
+}}
+|objections={{Objection
+|page=Il n'y a pas besoin d'être féministe pour lutter contre ces groupes
+|titre-affiché=Il n'y a pas besoin d'être féministe pour lutter contre ces groupes
+}}
+|rubriques=Société
+|mots-clés=masculinisme, féminisme
+|date-création=2021-03-07
+}}

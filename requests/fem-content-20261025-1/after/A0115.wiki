@@ -1,0 +1,12 @@
+{{Argument
+|objections={{Objection
+|page=Les différences physiques entre hommes et femmes ne justifient pas les inégalités sociales
+|titre-affiché=Les différences physiques entre hommes et femmes ne justifient pas les inégalités sociales
+}}{{Objection
+|page=La question des différences physiques entre hommes et femmes est bien plus complexe qu'on ne le croit
+|titre-affiché=La question des différences physiques entre hommes et femmes est bien plus complexe qu'on ne le croit
+}}
+|rubriques=Santé, Société
+|mots-clés=psychologie, féminisme
+|date-création=2021-03-07
+}}

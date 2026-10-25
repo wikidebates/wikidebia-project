@@ -1,0 +1,59 @@
+{{Argument
+|citations={{Citation
+|citation=Tout a commencé il y a une semaine, avec le témoignage d’une victime de viol qui a choisi de porter plainte le 9 septembre.
+
+Après avoir raconté ce récit d’agression en story, Anna Toumazoff explique que cette victime a été questionnée par la personne en charge de recueillir sa plainte. Cette dernière aurait nié l’absence de consentement en raison de la consommation d’alcool et lui a demandé si elle avait ressenti du plaisir.
+
+Sans grande surprise, après un tel accueil déplorable, la plainte a finalement été classée sans suite.
+
+Un incident isolé ? Au contraire.
+
+Après ce témoignage, d’autres ont commencé à pleuvoir, relatant des expériences très similaires, avec des questions intrusives de la part des officiers, mais aussi des refus de plaintes.
+
+En les relayant, Anna Toumazoff s’est fait la caisse de résonance de ces prises de paroles qui montrent un problème global dans la façon dont les victimes de violences sexistes et sexuelles sont reçues par la police.
+|auteurs=Maëlle Le Corre
+|article=#DoublePeine : quand des victimes de viols dénoncent la mauvaise prise en charge dans un commissariat
+|ouvrage=Madmoizelle.com
+|date=29 sep 2021
+|lien=https://www.madmoizelle.com/doublepeine-quand-des-victimes-de-viols-denoncent-la-mauvaise-prise-en-charge-dans-un-commissariat-1199887
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.noustoutes.org/ressources/resultats_enquete_prendsmaplainte.pdf
+|page=#PrendsMaPlainte: Les résultats de l’enquête #NousToutes
+|auteurs=#NousToutes
+|site=noustoutes.org
+|date=mars 2021
+}}{{Référence sitographique
+|lien=https://www.mediapart.fr/journal/france/150222/grosse-pute-l-insulte-d-un-policier-propos-d-une-plaignante-pour-agression-sexuelle
+|page=« Grosse pute » : l’insulte d’un policier à propos d’une plaignante pour agression sexuelle
+|auteurs=Lénaïg Bredoux
+|site=Mediapart
+|date=15 février 2022
+}}{{Référence sitographique
+|lien=https://www.mediapart.fr/journal/france/220222/nice-l-audition-cauchemardesque-d-une-jeune-plaignante-pour-viol#at_medium=custom7&at_campaign=1047
+|page=À Nice, l’audition cauchemardesque d’une jeune plaignante pour viol
+|auteurs=Élodie Hervé
+|site=Mediapart
+|date=22 février 2022
+}}{{Référence sitographique
+|lien=https://www.actu-juridique.fr/professions/avocats/les-plaignantes-ne-peuvent-avoir-quune-confiance-tres-relative-dans-linstitution-judiciaire/
+|page=« Les plaignantes ne peuvent avoir qu’une confiance très relative dans l’institution judiciaire »
+|auteurs=Élodie Tuaillon-Hibon, Sophie Tardy-Joubert
+|site=actu-juridique.fr
+|date=16/04/2025
+}}
+|justifications={{Justification
+|page=Les victimes d'agressions sexistes subissent une victimisation secondaire
+|titre-affiché=Victimisation secondaire
+}}{{Justification
+|page=Un nombre excessivement élevé de plaintes sont classées sans suite
+|titre-affiché=Nombre excessivement élevé de classement sans suite
+}}
+|objections={{Objection
+|page=Les hommes aussi peuvent se voir refuser leur plainte
+|titre-affiché=Les hommes aussi peuvent se voir refuser leur plainte
+}}
+|rubriques=Droit, Société
+|mots-clés=sexisme, justice, police
+|date-création=2021-08-04
+}}

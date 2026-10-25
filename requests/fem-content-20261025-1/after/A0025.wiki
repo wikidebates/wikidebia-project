@@ -1,0 +1,9 @@
+{{Argument
+|objections={{Objection
+|page=Les raisons pour lesquelles les femmes occupent des types de postes moins bien payés sont elles-mêmes imputables au sexisme
+|titre-affiché=Les raisons pour lesquelles les femmes occupent des types de postes moins bien payés sont elles-mêmes imputables au sexisme
+}}
+|rubriques=Économie, Société
+|mots-clés=égalité de genre, sexisme, travail
+|date-création=2023-08-04
+}}

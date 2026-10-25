@@ -1,0 +1,10 @@
+{{Argument
+|résumé=Les oeuvres culturelles ont un puissant pouvoir d'endoctrinement, une représentation largement valorisée dans ces dernières finit par être normalisé au sein de la société, les créateurs ont donc une responsabilité énorme.
+|justifications={{Justification
+|page=Les contenus influencent les spectateurs
+|titre-affiché=Les contenus influencent les spectateurs
+}}
+|rubriques=Culture, Société
+|mots-clés=médias, féminisme
+|date-création=2021-12-09
+}}

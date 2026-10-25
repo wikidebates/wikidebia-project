@@ -1,0 +1,5 @@
+{{Argument
+|initialisation=Justification@15779
+|résumé=Un trait commun aux populistes et aux dictateurs est qu'ils prônent ouvertement une infériorisation de la femme et que leur politique est l'archétype même de la violence masculine traditionnelle. Le féminisme peut donc aider à combattre ces dérives.
+|date-création=2023-01-22
+}}

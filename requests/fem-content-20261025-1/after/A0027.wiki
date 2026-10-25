@@ -1,0 +1,22 @@
+{{Argument
+|résumé=Une inégalité peut être justifiée, le fait que les femmes sont en moyenne moins fortes physiquement que les hommes est une inégalité mais ce n'est pas injuste. Le fait que les personnes qui travaillent à temps partiel gagnent moins d'argent est inégal mais pas injuste. Le fait qu'il y a beaucoup plus de femme qui travaillent à temps partiel que d'hommes est inégal mais pas injuste. Le fait que les personnes qui travaillent la nuit soit mieux payés est inégal mais pas injuste. Le fait que la plupart des personnes travaillant de nuit soit des hommes est inégal mais pas injuste.  Le fait que la plupart des ouvriers qualifiés du bâtiment sont des hommes ou que la plupart des aides à domiciles sont des femmes est inégal mais n'est pas injuste. Le fait que les femmes aient en moyenne les cheveux plus long que ceux des hommes est inégal mais pas injuste. Le fait que les femmes mettent en moyenne plus de chaussure à talon ou de maquillage que les hommes et inégal mais pas injuste.
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Chloé Mahier
+|article=Le travail de nuit concerne 4 millions de personnes
+|ouvrage=Les Echos
+|date=13/08/2010
+|lien=https://www.lesechos.fr/2010/08/le-travail-de-nuit-concerne-4-millions-de-personnes-429585
+}}{{Référence bibliographique
+|auteurs=Dares
+|article=La répartition des hommes et des femmes par métiers
+|date=11/2013
+|lien=https://dares.travail-emploi.gouv.fr/sites/default/files/pdf/2013-079.pdf
+}}
+|objections={{Objection
+|page=Le féminisme n'a jamais prétendu lutter contre les inégalités autres que celles de nature sociétale, prétendre le contraire est un homme de paille
+|titre-affiché=Le féminisme n'a jamais prétendu lutter contre les inégalités autres que celles de nature sociétale, prétendre le contraire est un homme de paille
+}}
+|rubriques=Droit, Société
+|mots-clés=égalité de genre, justice
+|date-création=2022-08-29
+}}

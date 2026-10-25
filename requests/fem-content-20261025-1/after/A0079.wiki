@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Justification@16430
+|citations={{Citation
+|citation=Cette oppression révoltante concerne la moitié de l’humanité. Et le capitalisme, dont les avancées scientifiques et techniques ont conquis toute la planète, s’en accommode fort bien. Parce que l’oppression des femmes est inhérente aux sociétés de classes. Divisez pour mieux régner, dit-on souvent. Ainsi, les hommes les plus exploités ont-ils toujours quelqu’un de plus opprimé, de moins bien payé, de plus exploité qu’eux-mêmes : leur propre femme, la ''« prolétaire du prolétaire »,'' comme disait la militante socialiste Flora Tristan (1803-1844). Les capitalistes y ont trouvé leur compte, comme toutes les classes dominantes avant eux, tous les États, toutes les Églises.
+|auteurs=Nathalie Arthaud
+|ouvrage=Communiste, révolutionnaire, internationaliste !
+|édition=Les bons caractères
+|date=2022
+|lien=https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste
+}}
+|rubriques=Économie, Politique, Société
+|mots-clés=capitalistes, instrumentalisation, division, hommes, femmes, diviser pour mieux régner
+|date-création=2023-04-03
+}}

@@ -1,0 +1,171 @@
+{{Débat
+|sujet=Féminisme
+|sujet-développé=le féminisme
+|avancement=Débat en construction
+|avertissements-débat=Plan à améliorer
+|articles-Wikipédia={{Article Wikipédia
+|page=Féminisme
+}}
+|arguments-pour={{Argument pour
+|page=Les féministes doivent continuer le combat car de nombreuses inégalités subsistent
+|titre-affiché=Les discriminations sexistes persistent
+}}{{Argument pour
+|page=Les femmes subissent un grand nombre de violences
+|titre-affiché=Les violences sexistes sont encore très nombreuses
+}}{{Argument pour
+|page=Les cas d'agressions sexistes sont mal traités par les instances policières et judiciaires
+|titre-affiché=Les institutions sont encore largement sexistes
+}}{{Argument pour
+|page=Notre culture est encore très largement hostile aux femmes
+|titre-affiché=Notre culture est encore très largement hostile aux femmes
+}}{{Argument pour
+|page=La médecine a de nombreux biais genrés
+|titre-affiché=La médecine a de nombreux biais genrés
+}}{{Argument pour
+|page=Les droits et acquis sont gravement menacés
+|titre-affiché=Les droits et acquis féministes sont gravement menacés
+}}{{Argument pour
+|page=Le féminisme peut sauver la société
+|titre-affiché=Le féminisme peut sauver la société
+}}{{Argument pour
+|page=Le féminisme permet de dénoncer la masculinité toxique moderne
+|titre-affiché=Il faut lutter contre la masculinité toxique
+}}{{Argument pour
+|page=Les femmes devront se battre pour obtenir leur émancipation
+|titre-affiché=Les femmes devront se battre pour obtenir leur émancipation
+}}{{Argument pour
+|page=Tant que le capitalisme existera, l'oppression des femmes se maintiendra
+|titre-affiché=Tant que le capitalisme existera, l'oppression des femmes se maintiendra
+}}{{Argument pour
+|page=Les idées sexistes se portent bien
+|titre-affiché=Les idées sexistes se portent bien
+}}
+|arguments-contre={{Argument contre
+|page=Les féministes ont fini le combat et ont obtenu l'égalité depuis longtemps
+|titre-affiché=Une égalité en place depuis longtemps
+}}{{Argument contre
+|page=Le militantisme féministe doit se limiter car il occulte la souffrance des hommes
+|titre-affiché=Une occultation de la souffrance des hommes
+}}{{Argument contre
+|page=Le féminisme moderne considère tous les hommes comme de potentiels agresseurs
+|titre-affiché=Le féminisme moderne considère tous les hommes comme de potentiels agresseurs
+}}{{Argument contre
+|page=L'engagement féministe est une tâche trop grande et mène au burn-out militant
+|titre-affiché=Une tâche trop grande
+}}{{Argument contre
+|page=Le féminisme moderne flirte avec la misandrie (haine des hommes)
+|titre-affiché=Un féminisme misandre aujourd'hui
+}}{{Argument contre
+|page=Le discours féministe soutient la victimisation des femmes
+|titre-affiché=Une victimisation des femmes
+}}{{Argument contre
+|page=Le féminisme risque d'importer en France des dérives du féminisme américain
+|titre-affiché=Un risque d'importation des dérives du féminisme américain
+}}{{Argument contre
+|page=Le féminisme bride la liberté de création
+|titre-affiché=Le féminisme bride la liberté de création
+}}{{Argument contre
+|page=Le féminisme veut détruire les différences naturelles entre hommes et femmes et rendre ainsi les femmes malheureuses
+|titre-affiché=Le féminisme veut détruire les différences naturelles entre hommes et femmes et rendre ainsi les femmes malheureuses
+}}{{Argument contre
+|page=Le féminisme radical conduit à des dérives
+|titre-affiché=Le féminisme radical conduit à des dérives
+}}{{Argument contre
+|page=Le féminisme intersectionnel refuse de voir et de soutenir de nombreuses victimes du patriarcat
+|titre-affiché=Le féminisme intersectionnel refuse de voir et de soutenir de nombreuses victimes du patriarcat
+}}{{Argument contre
+|page=Les féministes méprisent les hommes
+|titre-affiché=Les féministes méprisent les hommes
+}}
+|bibliographie-pour={{Référence bibliographique pour
+|auteurs=Raphaëlle Corbeil
+|article=Pourquoi le féminisme a encore toute sa place dans la société
+|ouvrage=Le Devoir
+|date=09/03/2019
+|lien=https://www.ledevoir.com/societe/549282/pourquoi-le-feminisme-a-encore-toute-sa-place-dans-la-societe
+}}
+|bibliographie-contre={{Référence bibliographique contre
+|auteurs=Julie Malaure, Laura Kipnis
+|article=Le féminisme est un paternalisme
+|ouvrage=Le Point
+|date=09/03/2020
+|lien=https://www.lepoint.fr/debats/laura-kipnis-le-feminisme-est-un-paternalisme-09-03-2020-2366404_2.php
+}}
+|bibliographie-ni-pour-ni-contre={{Référence bibliographique
+|auteurs=Arièle Bonte
+|article=Féminisme : pourquoi ce mot fait-il tant peur ?
+|ouvrage=RTL
+|date=04/03/2019
+|lien=https://www.rtl.fr/actu/debats-societe/feminisme-pourquoi-ce-mot-fait-il-tant-peur-7797025331
+}}
+|sitographie-pour={{Référence sitographique pour
+|lien=https://www.rockiemag.com/feminisme-arguments-8-mars-9539
+|page=8 mars : comment répondre à ceux qui disent qu’on n’a plus besoin du féminisme ?
+|auteurs=Clémence Boyer
+|site=Rockie Mag
+}}{{Référence sitographique pour
+|lien=https://www.madmoizelle.com/le-sexisme-a-encore-de-beaux-jours-devant-lui-en-france-selon-le-hce-1486931
+|page=Le sexisme a encore de beaux jours devant lui en France, selon le HCE
+|auteurs=Marie-Stéphanie Servos
+|site=Madmoizelle.com
+|date=23 jan 2023
+}}{{Référence sitographique pour
+|lien=https://www.lemonde.fr/les-decodeurs/article/2023/03/08/joyeuse-fete-de-la-femme-huit-idees-recues-sur-la-journee-internationale-des-droits-des-femmes_6072287_4355771.html
+|page=« Joyeuse fête de la femme ! » : huit idées reçues sur la Journée internationale des droits des femmes
+|auteurs=Marie Slavicek
+|site=Le Monde
+}}{{Référence sitographique pour
+|lien=https://www.lepoint.fr/societe/bienvenue-dans-un-monde-fait-pour-et-par-les-hommes-26-02-2019-2296284_23.php
+|page=Bienvenue dans un monde fait pour (et par) les hommes
+|auteurs=Marie-Sandrine Sgherri
+|site=Le Point
+|date=26/02/2019
+}}{{Référence sitographique pour
+|lien=https://mrmondialisation.org/nous-nageons-en-plein-sexisme-la-preuve-par-deux-films/
+|page=Nous nageons en plein sexisme : la preuve par deux films
+|auteurs=Sharon Houri
+|site=Mr Mondialisation
+|date=6 octobre 2023
+}}{{Référence sitographique pour
+|lien=https://mrmondialisation.org/tribune-femme-tu-auras-toujours-tort/
+|page=Tribune : Femme, tu auras toujours tort
+|auteurs=S. Barret
+|site=Mr Mondialisation
+|date=8 mars 2024
+}}
+|vidéographie-pour={{Référence vidéographique pour
+|titre=Pourquoi le féminisme est-il encore nécessaire ?
+|auteurs=Esther Taillifet
+|lien=https://www.youtube.com/watch?v=smV0CCInaNQ
+}}{{Référence vidéographique pour
+|titre=A-t-on encore besoin du féminisme ?
+|auteurs=Fakto
+|lien=https://www.youtube.com/watch?v=J47gGIXpeE4
+}}
+|vidéographie-contre={{Référence vidéographique contre
+|titre=Le féminisme contemporain c'est le refus du féminin
+|auteurs=Europe 1
+|lien=https://www.youtube.com/watch?v=g5i6QsphU4g
+}}
+|vidéographie-ni-pour-ni-contre={{Référence vidéographique
+|titre=Les féministes vont-elles trop loin ?
+|auteurs=L’instant détox
+|lien=https://www.youtube.com/watch?v=_--GBSQTSmQ
+}}
+|débats-connexes={{Débat connexe
+|page=Les hommes doivent-ils rejoindre le combat féministe ?
+}}{{Débat connexe
+|page=Faut-il interdire la prostitution ?
+}}{{Débat connexe
+|page=La gauche doit-elle défendre le port du voile islamique ?
+}}{{Débat connexe
+|page=Faut-il interdire l'IVG ?
+}}{{Débat connexe
+|page=Pour ou contre le wokisme ?
+}}{{Débat connexe
+|page=Pour ou contre la cancel culture ?
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2021-02-20
+}}

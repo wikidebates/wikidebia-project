@@ -1,0 +1,10 @@
+{{Argument
+|références-sitographiques={{Référence sitographique
+|lien=https://www.lemonde.fr/sciences/article/2020/05/04/confinement-l-inegale-repartition-des-taches-domestiques-nuit-au-travail-des-chercheuses_6038625_1650684.html
+|page=Confinement : l’inégale répartition des tâches domestiques nuit au travail des chercheuses
+|auteurs=Nathaniel Herzberg
+|site=Le Monde
+|date=04 mai 2020
+}}
+|date-création=2022-01-31
+}}

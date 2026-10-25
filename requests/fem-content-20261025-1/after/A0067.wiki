@@ -1,0 +1,58 @@
+{{Argument
+|résumé=Le mansplaining (de l'anglais « man », homme, et « explaining », explication) est un concept féministe né dans les années 2010 qui désigne une situation où un homme explique à une femme quelque chose qu'elle sait déjà, voire dont elle est experte, sur un ton potentiellement paternaliste ou condescendant.
+Le terme est apparu en 2008 aux États-Unis dans un article de Rebecca Solnit paru sur le site TomDispatch. L’article, intitulé Ces hommes qui m’expliquent ma vie, raconte comment un homme a voulu lui expliquer le sens d'un livre qu'elle avait elle-même écrit, sans l'écouter quand elle disait en être l'autrice. Elle voit dans ce phénomène une combinaison d'excès de confiance et d'ignorance de la part de l'interlocuteur.
+|citations={{Citation
+|citation=La différence entre un vis et un clou … dans mon propre magasin de bricolage
+|auteurs=Sailor Anxiety
+|ouvrage=Twitter
+|date=2017
+}}{{Citation
+|citation=Un homme m’a récemment « mecspliqué » la grossesse ainsi qu’à trois autres femmes, dont l’une a eu 4 enfants. Miraculeusement, il est encore en vie
+|auteurs=Lauren Abramo
+|ouvrage=Twitter
+|date=2017
+}}{{Citation
+|citation=Comment mettre correctement un tampon. Non cette personne n’était pas médecin
+|auteurs=Charleyy Hodson
+|ouvrage=Twitter
+|date=2017
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Mylène Bertaux
+|article=Mansplaining ou quand les hommes nous expliquent la vie
+|ouvrage=Madame Figaro
+|date=23/03/2017
+|lien=https://madame.lefigaro.fr/societe/quand-les-hommes-nous-expliquent-la-vie-mansplaining-230317-130636
+}}{{Référence bibliographique
+|auteurs=Gregory Escouflaire
+|article=Le mansplaining expliqué par un homme
+|ouvrage=Elle
+|date=15/11/2019
+|lien=https://www.elle.be/fr/285919-le-mansplaining-explique-par-un-homme.html
+}}{{Référence bibliographique
+|auteurs=Aude Lorriaux
+|article=Elle explique le « mansplaining » et le sexisme avec des tableaux du XVIIe siècle
+|date=18/08/2020
+|lien=https://www.20minutes.fr/arts-stars/culture/2841883-20200818-explique-mansplaining-sexisme-tableaux-xviie-siecle
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Brut : Le Mansplaining
+|auteurs=Brut
+|lien=https://www.youtube.com/watch?v=pXeXkRpU28A
+}}{{Référence vidéographique
+|titre=Lucie Rondelet : Qu'est-ce que le mansplaining
+|auteurs=Lucie Rondelet
+|lien=https://www.youtube.com/watch?v=wd6F7aG4mig
+}}{{Référence vidéographique
+|titre=La chronique de Nora Hamzawi : Le mansplaining et le men-talisme
+|auteurs=France Inter
+|lien=https://www.youtube.com/watch?v=iKw8t-_SNuw
+}}
+|justifications={{Justification
+|page=Le mansplaining est un concept qui permet de désigner de manière péjorative le simple fait de contre-argumenter
+|titre-affiché=Le mansplaning est un concept qui permet de désigner de manière péjorative le simple fait de contre-argumenter.
+}}
+|rubriques=Société
+|mots-clés=féminisme, mansplaining
+|date-création=2021-02-23
+}}

@@ -1,0 +1,9 @@
+{{Argument
+|objections={{Objection
+|page=Les immigrés et descendants d'immigrés qui s'en sortent le mieux sont ceux qui n'adoptent pas une posture victimaire
+|titre-affiché=Les immigrés et descendants d'immigrés qui s'en sortent le mieux sont ceux qui ne se complaisent pas dans une posture victimaire
+}}
+|rubriques=Droit, Société
+|mots-clés=victimisation, féminisme
+|date-création=2022-07-18
+}}

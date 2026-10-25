@@ -1,0 +1,4 @@
+{{Argument
+|résumé=De tous temps, les oeuvres culturelles ont dû se brider par rapport à ce qui était jugé acceptable ou pas par la société, et il n'y avait pas forcément moins de censure avant, certains films qu'on trouve tout à fait acceptables aujourd'hui n'auraient jamais pu sortir il y a quelques décennies.
+|date-création=2021-12-09
+}}

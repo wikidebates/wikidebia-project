@@ -1,0 +1,16 @@
+{{Argument
+|initialisation=Justification@15779
+|citations={{Citation
+|citation=En France, les hommes sont responsables de l’écrasante majorité des comportements asociaux : ils représentent 84 % des auteurs d’accidents de la route mortels, 92 % des élèves sanctionnés pour des actes relevant d’atteinte aux biens et aux personnes au collège, 90 % des personnes condamnées par la justice, 86 % des mis en cause pour meurtre, 97 % des auteurs de violences sexuelles, etc.
+
+La liste semble inépuisable. Elle a surtout un coût. Un coût direct pour l’État, qui dépense chaque année des milliards d’eu­ros en services de police, judiciaires, médicaux et éducatifs pour y faire face. Et un coût indirect pour la société, qui doit répondre aux souffrances physiques et psychologiques des victimes, et subit des pertes de productivité et des destructions de biens. Pourtant, cette réalité est presque toujours passée sous silence.
+
+Lucile Peytavin s’interroge sur les raisons de cette surrepré­sentation des hommes comme principaux auteurs des violences et des comportements à risque, et tente d’estimer les conséquences financières de l’ensemble de ces préjudices pour l’État et donc pour chaque citoyenne et citoyen. Quel est le coût, en France, en 2020, des conséquences de la virilité érigée en idéologie culturelle dominante ?
+|auteurs=Lucile Peytavin
+|ouvrage=Le Coût de la virilité
+|localisation=Résumé
+|édition=Anne Carriere Éditions
+|date=2021
+}}
+|date-création=2026-03-28
+}}

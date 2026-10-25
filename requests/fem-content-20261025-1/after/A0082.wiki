@@ -1,0 +1,6 @@
+{{Argument
+|résumé=L'égalité de genre est inexistante dans de nombreux pays.
+|rubriques=Droit, Société
+|mots-clés=droits des femmes, féminisme
+|date-création=2021-07-22
+}}

@@ -1,0 +1,4 @@
+{{Argument
+|résumé=Du genre de celle qu'à compétences égales, on prendra moins souvent une femme qu'un homme.
+|date-création=2022-09-02
+}}

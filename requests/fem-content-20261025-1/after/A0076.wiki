@@ -1,0 +1,55 @@
+{{Argument
+|citations={{Citation
+|citation=Contrairement à une idée reçue, le progrès économique n’aurait pas favorisé le statut de la femme. L’universitaire et militante féministe Silvia Federici démontre dans son recueil d’articles intitulé ''Marxisme et Patriarcat,'' que l’exploitation des femmes jusqu’au foyer domestique est une part fondamentale du système d’exploitation.
+
+Le fordisme a fortement contribué à définir une répartition des rôles préjudiciable aux femmes. ''« Dans les discours de l’époque, émerge l’idée que la femme doit non seulement faire à manger et éduquer les enfants, mais aussi satisfaire sexuellement son mari ouvrier et s’occuper de ses émotions. La femme est donc au centre de cette nouvelle forme de travail de reproduction ; elle devient même l’administratrice du salaire masculin et assure la bonne gestion du foyer. Sexe, émotion, administration, procréation : voilà ce qui va désormais définir la femme au foyer, cœur de la nouvelle famille nucléaire »'', explique Silvia Federici à ''l’Obs''.
+|auteurs=La Rédaction
+|article=De la sorcière à la ménagère: comment le capitalisme a domestiqué les femmes
+|ouvrage=Mediapart
+|date=3 novembre 2019
+|lien=https://www.mediapart.fr/journal/culture-idees/031119/de-la-sorciere-la-menagere-comment-le-capitalisme-domestique-les-femmes
+}}{{Citation
+|citation='''Lutter contre toutes les violences masculines. Se réapproprier nos corps, pour se réapproprier nos sexualités et notre fécondité. Se réapproprier notre travail, pour interroger le système capitaliste qui prospère grâce au travail gratuit des femmes.''' 
+
+L’autrice dessine alors des mesures et pistes d’action concrètes pour construire une politique radicalement féministe. Analysant les imbrications du capitalisme et du patriarcat et les systèmes de prédation qu’ils alimentent, elle définit '''les conditions d’une véritable émancipation sexuelle, reproductive, domestique et économique des femmes.'''
+|article=Déviriliser le Monde : sortie en librairies le 17 février 2022
+|ouvrage=Osez le féminisme !
+|date=3 février 2022
+|lien=https://osezlefeminisme.fr/deviriliser-le-monde-sortie-en-librairies-le-17-fevrier-2022/
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.politis.fr/articles/2019/05/silvia-federici-le-capitalisme-est-structurellement-sexiste-40458/
+|page=Silvia Federici : « Le capitalisme est structurellement sexiste »
+|auteurs=Olivier Doubre
+|site=Politis.fr
+|date=29/05/2019
+}}{{Référence sitographique
+|lien=https://www.lefigaro.fr/cinema/l-actrice-adele-haenel-espere-la-fin-du-systeme-capitaliste-20220506?origine=VWT16001
+|page=L'actrice Adèle Haenel espère «la fin du système capitaliste»
+|auteurs=Bleuenn Robert
+|site=Le Figaro
+|date=06/05/2022
+}}{{Référence sitographique
+|lien=https://collagesfeministeslyon.fr/le-virus-dont-il-faut-prononcer-le-nom-capitalisme-patriarcal/
+|page=Le Virus dont il faut prononcer le nom: le capitalisme patriarcal
+|site=Collages féministes Lyon
+|date=10 mai 2020
+}}{{Référence sitographique
+|lien=https://www.liberation.fr/debats/2019/07/28/capitalisme-patriarcat-meme-crise-meme-combat_1742557/
+|page=Capitalisme, patriarcat : même crise, même combat
+|auteurs=Léa Mormin-Chauvac
+|site=Libération
+|date=28 juillet 2019
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Silvia Federici : Le capitalisme patriarcal
+|lien=https://video.antopie.org/w/a70a9813-5f73-4a55-b106-cac5c43c7ae9
+}}{{Référence vidéographique
+|titre=How Capitalism Destroys Feminism
+|auteurs=Second Thought
+|lien=https://www.youtube.com/watch?v=JmURE1me20Q
+}}
+|rubriques=Économie, Politique, Société
+|mots-clés=sexisme, économie, capitalisme
+|date-création=2022-05-12
+}}

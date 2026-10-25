@@ -1,0 +1,29 @@
+{{Argument
+|justifications={{Justification
+|page=Il existe des différences physiques entre femmes et hommes qui impliquent des différences psychologiques
+|titre-affiché=Il existe des différences physiques entre femmes et hommes qui impliquent des différences psychologiques
+}}{{Justification
+|page=Il existe des différences hormonales entre femmes et hommes qui impliquent des différences psychologiques
+|titre-affiché=Il existe des différences hormonales entre femmes et hommes qui impliquent des différences psychologiques
+}}{{Justification
+|page=Le féminisme gomme les différences et empêche chacun et chacune de se réaliser
+|titre-affiché=Le féminisme gomme les différences et empêche chacun et chacune de se réaliser
+}}
+|objections={{Objection
+|page=Les différences entre femmes et hommes ne justifient pas des inégalités sociales
+|titre-affiché=Les différences entre femmes et hommes ne justifient pas des inégalités sociales
+}}{{Objection
+|page=Le rôle de femme au foyer ne vient pas des différences entre femmes et hommes mais du patriarcat
+|titre-affiché=Le rôle de femme au foyer ne vient pas des différences entre femmes et hommes mais du patriarcat
+}}{{Objection
+|page=Il n'y a pas d'assignation naturelle mais chaque individu se construit et diffère de tous les autres
+|titre-affiché=Il n'y a pas d'assignation naturelle mais chaque individu se construit et diffère de tous les autres
+}}{{Objection
+|page=La société punit les personnes qui se démarquent des rôles genrés traditionnels
+|titre-affiché=La société punit les personnes qui se démarquent des rôles genrés traditionnels
+}}{{Objection
+|page=L'argument "différences naturelles" est un sophisme
+|titre-affiché=L'argument "différences naturelles" est un sophisme
+}}
+|date-création=2021-03-07
+}}

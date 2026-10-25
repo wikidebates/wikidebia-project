@@ -1,0 +1,5 @@
+{{Argument
+|initialisation=Objection@4925
+|résumé=Toutes les femmes ne sont pas féministes, loin s'en faut, certaines y sont même ouvertement hostiles au point de le combattre. à l'inverse, il existe même des hommes prêts à se battre contre la misogynie de la société, et que les féministes sont contentes d'avoir dans leurs rangs. Réduire leur combat à de la misandrie n'a donc aucun sens et ne sert qu'à une disqualification bien commode pour ne pas avoir à discuter du fond.
+|date-création=2023-08-04
+}}

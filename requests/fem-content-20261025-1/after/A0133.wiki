@@ -1,0 +1,71 @@
+{{Argument
+|résumé=Fémonationalisme :Intérêt pour l'égalité des genres dans le seul but de légitimer nos préjugés racistes, qui disparaît aussitôt que ces derniers ne rentrent plus dans l'équation. Conduit à surévaluer les agressions sexistes commises par des personnes perçues comme d'origine étrangères et à minimiser -voire nier- celles commises par des personnes blanches.
+|citations={{Citation
+|citation=Cette soi-disant défense des femmes musulmanes contre la "pression" qu'elles pourraient ressentir à se voiler et ainsi les "libérer" sert en fait de prétexte à stigmatiser et violenter toute une partie de la population française.
+|auteurs=Catherine Rochon
+|article=Non, Marine Le Pen n'est pas "féministe" : 6 piqûres de rappel nécessaires
+|ouvrage=Terrafemina
+|lien=https://www.terrafemina.com/article/marine-le-pen-6-rappels-necessaires-qui-prouvent-qu-elle-n-est-pas-feministe_a363570/1
+}}{{Citation
+|citation=Je me permets de citer [https://www.madmoizelle.com/agression-reims-maillot-bain-401839 cet article] de Clémence Bodoc sur une affaire qui avait secoué la France en juillet 2015.
+
+À l’époque, une jeune femme en bikini avait été agressée dans un parc à Reims par une bande de filles. De nombreux médias avaient relayés l’affaire en la justifiant par un motif religieux, les agresseuses étant de confession musulmane. Sauf que non, la religion n’avait rien à voir dedans.
+
+Cet article rappelait au passage le concept très simple de '''la paille dans l’œil de son voisin sans voir la poutre dans le sien'''…
+|auteurs=Anouk Perry
+|article=Que se passe-t-il quand une publicité féministe est diffusée au Super Bowl 2017 ?
+|ouvrage=Madmoizelle.com
+|date=06 février 2017
+|lien=https://www.madmoizelle.com/pub-feministe-super-bowl-2017-audi-718117
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.slate.fr/story/104792/feminisme-cache-sexe-islamophobie-droite
+|page=Agression d'une femme en maillot: le féminisme, cache-sexe de l’islamophobie à droite
+|auteurs=Aude Lorriaux
+|site=Slate
+|date=26 juillet 2015
+}}{{Référence sitographique
+|lien=https://www.rtbf.be/article/au-nom-des-femmes-comprendre-les-instrumentalisations-racistes-du-feminisme-10898589
+|page="Au nom des femmes" : comprendre les instrumentalisations racistes du féminisme
+|auteurs=Irène Kaufer
+|site=rtbf.be
+|date=15 déc. 2021
+}}{{Référence sitographique
+|lien=https://blogs.mediapart.fr/leane-alestra/blog/090324/8-mars-le-relativisme-face-au-femonationalisme-nous-mises-en-danger#at_medium=custom7&at_campaign=1047
+|page=8 mars : Le relativisme face au fémonationalisme nous a mises en danger
+|auteurs=Léane Alestra
+|site=Blogs Mediapart
+|date=9 mars 2024
+}}
+|justifications={{Justification
+|page=La plupart des fémonationalistes se désintéressent du sexisme quand le voile ne rentre plus dans l'équation
+|titre-affiché=La plupart des fémonationalistes se désintéressent du sexisme quand le voile ne rentre plus dans l'équation
+}}{{Justification
+|page=Les fémonationalistes n'ont aucun problème avec le sexisme de l'occident
+|titre-affiché=Les fémonationalistes n'ont aucun problème avec le sexisme de l'occident
+}}{{Justification
+|page=Le fémonationalisme utilise le sexisme comme écran de fumée au racisme
+|titre-affiché=Le fémonationalisme utilise le sexisme comme écran de fumée au racisme
+}}{{Justification
+|page=L'interdiction de la burqa prétend libérer les femmes mais contribue à les emprisonner
+|titre-affiché=L'interdiction de la burqa prétend libérer les femmes, mais contribue à les emprisoonner
+}}{{Justification
+|page=La majorité des viols et agressions sexuelles sont commis par des proches de la victime
+|titre-affiché=La majorité des agressions sexistes ne sont pas du fait des migrants mais des proches de la victime
+}}{{Justification
+|page=L'intérêt apparent des fémonationalistes pour le sort des femmes musulmanes est le faux nez d'un paternalisme néocolonial
+|titre-affiché=L'intérêt apparent des fémonationalistes pour le sort des femmes musulmanes est le faux nez d'un paternalisme néocolonial
+}}{{Justification
+|page=Le traitement des femmes en Occident est très loin d'être irréprochable
+|titre-affiché=L'occident n'a aucune leçon à donner en matière de sexisme
+}}{{Justification
+|page=L'extrême droite ne s'intéresse aux viols que quand ils sont commis par les immigrés alors que la plupart des violeurs sont blancs
+|titre-affiché=L'exctrême-droite ne s'intéresse aux viols que quand ils sont commis par les immigrés alors que la plupart des violeurs sont blancs
+}}{{Justification
+|page=L'extrême droite reconnaît elle-même à demi-mot qu'elle se fiche bien du sexisme
+|titre-affiché=L'extrême droite reconnaît elle-même à demi mots qu'elle se fiche bien du sexisme
+}}
+|rubriques=Droit, Politique, Société
+|mots-clés=féminisme, extrême droite, racisme
+|date-création=2022-01-29
+}}

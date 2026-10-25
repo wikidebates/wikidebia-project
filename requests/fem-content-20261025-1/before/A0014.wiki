@@ -1,0 +1,46 @@
+{{Argument
+|résumé=Janvier 2021, comme pour fêter la nouvelle année, un nouveau hashtag fait son entrée dans la place twitter : #commentfairepourqueleshommescessentdevioler
+Twitter censure en invoquant une "infraction à nos règles relatives aux conduites haineuses". Car oui ce n'est pas "comment fait-on pour que certains hommes"… mais bien "comment fait-on pour que les hommes"… Le quiproquo n'est pas permis, tous les hommes sont concernés. 
+On se souvient alors les propos de Caroline de Haas dans l'Obs qui se pose la question de un ou deux hommes sur trois étant agresseurs. Même si les chiffres tendent en faveur d'une majorité d'hommes incriminée, une petite partie des agresseurs sont des agresseuses. 149 000 hommes ont été victimes de violences au sein de leur couple en 2012 et 2013, et 25 en sont morts selon l’Observatoire national de la délinquance et des réponses pénales. Sujet tabou et peu relayé mais non pas moins existant. Il laisse les victimes démunies car peu de structures encadrent ce phénomène.
+|citations={{Citation
+|citation=Aujourd'hui, il est admis qu'une femme sur deux a été victime de viol, d'agression ou de harcèlement. En revanche, ce qui n'imprime pas, c'est la conclusion qu'il faut en tirer. A savoir qu'un homme sur deux ou sur trois est un agresseur
+|auteurs=Caroline de Haas
+|article=Un homme sur deux ou trois est un agresseur
+|ouvrage=L'Obs
+|date=14/02/2018
+}}{{Citation
+|citation=Impossible pour un homme de lire Brownmiller - pourtant, par rapport à certaines de ses consoeurs féministes plus jeunes, plutôt "modérée" - sans avoir le sentiment d'appartenir à un genre haï, foncièrement condamnable, en somme d'être totalement exclu, de par sa condition mâle, de tout groupe civilisé. C'est le même sentiment que doivent éprouver les enseignants universitaires à la lecture du "Professeur libidineux", car ce livre est fondé sur la même croyance implicite […] : tout enseignant mâle, au contact d'étudiantes plus jeunes, plus "faibles", facilement impressionnées, rêvera de les posséder sexuellement et de les dominer intellectuellement, parce que c'est sa nature, parce qu'il est foncièrement libidineux. 
+Pour Brownmiller, il en est de même pour l'homme, qu'il soit enseignant, homme politique, laveur de carreaux - sa condition mâle est prédéterminante.
+|auteurs=Edward Behr
+|ouvrage=Une Amérique qui fait peur (La liberté est-elle devenue l'instrument d'une nouvelle tyrannie ?)
+|page=254-255
+|édition=Pocket
+|date=1996
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Marine Le Breton
+|article=Comment faire pour que les hommes cessent de violer, la question qui dérange
+|ouvrage=Huffington Post
+|lien=https://www.huffingtonpost.fr/entry/comment-faire-pour-que-les-hommes-cessent-de-violer-elles-revendiquent-le-droit-de-poser-cette-question_fr_600ec516c5b6a0d83a1d21d9
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=bérénice Levet craint un féminisme de criminilisation
+|lien=https://www.dailymotion.com/video/x65gvzb
+}}{{Référence vidéographique
+|titre=Marguerite Yourcenar, féminisme et criminilisation
+|lien=https://www.youtube.com/watch?v=HE0PTIeXgC8
+}}
+|objections={{Objection
+|page=Les féministes veulent démonter la croyance selon laquelle l'homme est un agresseur par nature
+|titre-affiché=Au contraire, il veut démonter la croyance selon laquelle l'homme est un agresseur par nature
+}}{{Objection
+|page=Les hommes sont culturellement encouragés à se comporter comme des agresseurs sexuels
+|titre-affiché=Les hommes sont culturellement encouragés à se comporter comme des agresseurs sexuels
+}}{{Objection
+|page=Prétendre que les féministes accusent tous les hommes d'être des agresseurs est une opération de diversion
+|titre-affiché=Prétendre que les féministes accusent tous les hommes d'être des agresseurs est une opération de diversion
+}}
+|rubriques=Société
+|mots-clés=Féminisme
+|date-création=2021-02-22
+}}

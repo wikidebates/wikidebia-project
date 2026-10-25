@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Objection@11214
+|rubriques=Droit, Société
+|mots-clés=féminisme, droits des femmes
+|date-création=2022-09-02
+}}

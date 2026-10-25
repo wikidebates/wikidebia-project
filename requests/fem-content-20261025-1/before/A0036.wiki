@@ -1,0 +1,17 @@
+{{Argument
+|résumé=Même si les hommes constituaient 0.1% des victimes, rien ne justifierait de les mépriser, qu'ils ne sont pas grand choses voir rien du tout, qu'ils n'ont pas vraiment été victime puisqu'ils sont des hommes. Une victime, quelque soit son sexe, est une victime.
+|objections={{Objection
+|page=Les violences faites aux femmes sont déjà une tâche bien trop lourde pour y ajouter les autres types de violences
+|titre-affiché=Les violences faites aux femmes sont déjà une tâche bien trop lourde pour y ajouter les autres types de violences
+}}{{Objection
+|page=L'opinion publique se fiche éperdument des violences faites aux hommes quand ça ne lui permet plus de taper sur le féminisme
+|titre-affiché=L'opinion publique se fiche éperdument des violences faites aux hommes quand ça ne lui permet plus de taper sur le féminisme
+}}{{Objection
+|page=Les violences faites aux femmes sont nettement plus banalisées que celles faites aux hommes
+|titre-affiché=Les violences faites aux femmes sont nettement plus banalisées que celles faites aux hommes
+}}{{Objection
+|page=Le whataboutisme ne fait avancer aucune cause
+|titre-affiché=Le whataboutisme ne fait avancer aucune cause
+}}
+|date-création=2022-08-29
+}}

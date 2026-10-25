@@ -1,0 +1,14 @@
+{{Argument
+|initialisation=Argument contre@4876
+|justifications={{Justification
+|page=L'une des principales mesures en faveur des femmes devrait être d'augmenter les salaires et éradiquer le chômage
+|titre-affiché=L'une des principales mesures en faveur des femmes devrait être d'augmenter les salaires et éradiquer le chômage
+}}
+|objections={{Objection
+|page=Il est du devoir de tous, dans le combat comme dans la défense, de faire face aux autorités injustes et inégalitaires, à la servitude et aux préjugés
+|titre-affiché=Il est du devoir de tous, et pour tous, autant dans le combat que dans la défense, de faire face aux autorités injustes et inégalitaires, à la servitude et aux préjugés.
+}}
+|rubriques=Politique, Société
+|mots-clés=lutte, femmes, féminisme, émancipation
+|date-création=2023-04-03
+}}

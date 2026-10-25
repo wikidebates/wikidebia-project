@@ -1,0 +1,21 @@
+{{Argument
+|justifications={{Justification
+|page=De nombreuses maladies dites féminines souffrent d'errance médicale
+|titre-affiché=De nombreuses maladies dites féminines souffrent d'errance médicale
+}}{{Justification
+|page=Les douleurs dites féminines sont peu prises au sérieux, voire normalisées par la médecine
+|titre-affiché=Les douleurs dites féminines sont peu prises au sérieux, voire normalisées par la médecine
+}}{{Justification
+|page=De nombreux gynécologues sont maltraitants
+|titre-affiché=De nombreux gynécologues sont maltraitants
+}}{{Justification
+|page=Les femmes sont très souvent exclues des essais cliniques
+|titre-affiché=Les femmes sont très souvent exclues des essais cliniques
+}}{{Justification
+|page=Des médecins diffusent des fake news liées à la santé féminine
+|titre-affiché=Des médecins diffusent des fake news liées à la santé féminine
+}}
+|rubriques=Santé, Société
+|mots-clés=médecine, féminisme
+|date-création=2021-09-15
+}}

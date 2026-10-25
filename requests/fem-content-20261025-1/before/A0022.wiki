@@ -1,0 +1,31 @@
+{{Argument
+|citations={{Citation
+|citation=Pendant que des activistes du féminisme intersectionnel battent le pavé, de vraies victimes se taisent et subissent en silence pressions et violences. Leur liste ne cesse de s’allonger. Elle va de Sadia Sheikh, jeune Belge d’origine pakistanaise mariée religieusement par Internet et assassinée, jusqu’à Mila, cyberharcelée, menacée et contrainte à une existence recluse. […]
+Mais derrière Sadia, derrière Mila, derrière cette étudiante, ils et (surtout) elles sont sans doute des milliers d’anonymes victimes de traditions étouffantes : mariages forcés, violences intrafamiliales, crimes d’honneur, attentats et agressions visant à pénétrer notre subconscient du relativisme culturel et du délit de blasphème, … Pourtant, ces victimes ont le droit pour elles. Notre arsenal législatif garantit la liberté de conscience, la liberté d’expression, le droit à l’intégrité physique, la protection de l’État contre les mariages forcés.
+
+Comment se fait-il, alors, que leur parole soit moins audible, leur défense moins ardente, leur protection moins assurée que celle de ces victimes en carton-pâte qui se lancent aujourd’hui dans une indécente concurrence victimaire ?
+|auteurs=Nadia Geerts
+|article=De Sadia Sheikh à Mila, en passant par toi, mon ancienne étudiante aujourd'hui mariée de force
+|ouvrage=Marianne
+|date=21/06/2021
+|lien=https://www.marianne.net/agora/humeurs/de-sadia-sheikh-a-mila-en-passant-par-toi-mon-ancienne-etudiante-aujourdhui-mariee-de-force
+}}
+|justifications={{Justification
+|page=Un exemple criant : "l'affaire Mila"
+|titre-affiché=Un exemple criant : "l'affaire Mila"
+}}{{Justification
+|page=Il faut revenir à un féminisme universaliste, qui ne soit pas dominé par les idées intersectionnelles et "wokes"
+|titre-affiché=Il faut revenir à un féminisme universaliste, qui ne soit pas dominé par les idées interrsectionnelles et "wokes"
+}}
+|objections={{Objection
+|page=L'universalisme laisse sur le bas-côté de nombreux types d'oppression
+|titre-affiché=L'universalisme laisse sur le bas-côté de nombreux types d'oppression
+}}{{Objection
+|page=L'extrême droite instrumentalise le féminisme à des fins racistes
+|titre-affiché=L'extrême droite instrumentalise le féminisme à des fins racistes
+}}{{Objection
+|page=Les soi-disant silences médiatiques de la gauche sont des fake news propagées par les médias d'extrême droite
+|titre-affiché=Les soi-disant silences médiatiques de la gauche sont des fake news propagées par les médias d'extrême droite
+}}
+|date-création=2021-06-23
+}}

@@ -1,0 +1,11 @@
+{{Argument
+|citations={{Citation
+|citation=Le vivant, c’est de la variation, et l’humain n’y fait pas exception. Vous devant votre écran êtes différent de moi, que ce soit au niveau génétique, physiologique, neurologique ou comportemental. Votre frère ou votre soeur est aussi différent de vous. Et en fait, vous-même êtes différent de vous-même. Au niveau cognitif, vous n’êtes pas le même humain que vous étiez il y a 1 minute, et encore moins que celui que vous serez dans 30 ans, parce que vos circuits neuronaux se transforment en permanence. Ce qui fait que si on voulait vraiment baser l’attribution de droits sur l’égalité cognitive, on devrait donner des droits différents à votre vous d’aujourd’hui et votre vous de demain.
+|auteurs=Stéphane Debove
+|article=Peut-on être de gauche et aimer la biologie du comportement humain ? psycho évo #8
+|ouvrage=Evosapiens
+|date=25/10/2022
+|lien=https://evosapiens.net/peut-on-etre-de-gauche-et-aimer-la-biologie-du-comportement-humain-psycho-evo-8/#h1_2
+}}
+|date-création=2022-12-19
+}}

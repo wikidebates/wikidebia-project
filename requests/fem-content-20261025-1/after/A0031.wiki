@@ -1,0 +1,89 @@
+{{Argument
+|résumé=Les femmes encore sous représentées en politique ont su envers et contre tout s'imposer. Le promotion 2019 de sciences po affiche 60 % de diplômées confirme une tendance. La politique reste un milieu aux fondements patriarcaux et est donc dotée d'un plafond de verre solide doublée d'un sexisme latent. Les femmes plus récentes en politique travaillent encore à assumer leur légitimité afin d'imposer leur voix et leurs idées.
+
+Un constat confirmé par le rapport du Haut Conseil à l'égalité des femmes est des hommes. Parmi les raisons invoquées :
+
+* le sexisme latent dans la sphère politique
+* des institutions avec un fondement patriarcal
+* un manque de légitimité rhétorique des femmes du fait de leur arrivée plus récente en politique (rappel : droit de vote des femmes obtenu en 1944 en France) et dans la fonction publique
+|citations={{Citation
+|citation=En France
+- Lors des premières élections législatives suivant l’ordonnance du 21 avril 1944, 33 femmes ont été élues députées lors des élections d’octobre 1945, sur 586 député.e.s. Elles représentaient alors 5,6 % des élu-e-s.
+- Lors des élections législatives de 2017, l’Assemblée nationale comprend 38,7% de députées (224 sur 577), pour 26,9% (155 sur 577) en 2012.
+- En octobre 2017, suite aux élections sénatoriales, le Sénat est composé de 31,6% de sénatrices (110 sur 348), contre 25% en 2014 (87 sur 348) et 22,1% en 2011 (77 sur 348).
+Sources : HCE, Parité en politique : entre progrès et stagnations, 2015, et HCE, Les chiffres clés de la parité aux élections sénatoriales, 2018
+|auteurs=Haut conseil à l'égalité entre les femmes et les hommes
+|article=Rapport
+|lien=https://www.haut-conseil-egalite.gouv.fr/parite/reperes-statistiques/
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=AFP
+|article=Assemblée nationale : Le député LREM Pierre Henriet sanctionné pour « insulte sexiste »
+|ouvrage=20 minutes
+|date=09/02/2021
+|lien=https://www.20minutes.fr/societe/2972939-20210209-assemblee-nationale-depute-lrem-pierre-henriet-sanctionne-insulte-sexiste
+}}{{Référence bibliographique
+|auteurs=AFP
+|article=Coronavirus : Des élues de gauche dénoncent le « machisme » en période de « coronaviril »
+|ouvrage=20 minutes
+|date=07/05/2020
+|lien=https://www.20minutes.fr/societe/2774575-20200507-coronavirus-elus-gauche-denoncent-machisme-periode-coronaviril
+}}{{Référence bibliographique
+|auteurs=Manon Aublanc
+|article=Sexisme à l’Assemblée nationale : Yaël Braun-Pivet dénonce le comportement de certains députés
+|ouvrage=20 minutes
+|date=05/11/2019
+|lien=https://www.20minutes.fr/politique/2644359-20191105-sexisme-assemblee-nationale-yael-braun-pivet-denonce-comportement-certains-deputes
+}}{{Référence bibliographique
+|auteurs=AFP
+|article=Le harcèlement sexiste et sexuel à l'Assemblée doit «cesser», exigent des députés
+|ouvrage=20 minutes
+|date=02/04/2019
+|lien=https://www.20minutes.fr/politique/2487587-20190402-harcelement-sexiste-sexuel-assemblee-doit-cesser-exigent-deputes
+}}{{Référence bibliographique
+|auteurs=Bérénice Dubuc
+|article=VIDEO. Assemblée nationale: Une députée «choquée» par des «remarques genrées» de Jean Lassalle
+|ouvrage=20 minutes
+|date=20/03/2019
+|lien=https://www.20minutes.fr/politique/2477087-20190320-video-assemblee-nationale-deputee-choquee-remarques-genrees-jean-lassalle
+}}{{Référence bibliographique
+|auteurs=Ségolène Forgar
+|article=Valérie Pécresse étrille le sexisme en politique : "Tout est fait pour que nous culpabilisions"
+|ouvrage=Madame Figaro
+|date=09/03/2020
+|lien=https://madame.lefigaro.fr/societe/valerie-pecresse-etrille-le-sexisme-en-politique-tout-est-fait-pour-que-nous-culpabilisions-090320-180260
+}}{{Référence bibliographique
+|auteurs=Laure Cometti
+|article=Sexisme ordinaire à l'Assemblée: «Les femmes politiques sont souvent invisibilisées»
+|ouvrage=20 minutes
+|lien=https://www.20minutes.fr/politique/2208791-20180125-sexisme-ordinaire-assemblee-femmes-politiques-souvent-invisibilisees
+}}{{Référence bibliographique
+|auteurs=AFP
+|article=Les députés votent un dispositif de lutte contre le harcèlement sexiste et sexuel à l'Assemblée nationale
+|ouvrage=20 minutes
+|date=16/05/2019
+|lien=https://www.20minutes.fr/societe/2519579-20190516-deputes-votent-dispositif-lutte-contre-harcelement-sexiste-sexuel-assemblee-nationale
+}}{{Référence bibliographique
+|auteurs=AFP
+|article=Blagues, insultes, gestes déplacés… A l'Assemblée, le harcèlement sexiste et sexuel est encore très répandu
+|ouvrage=20 minutes
+|date=21/03/2019
+|lien=https://www.20minutes.fr/societe/2478023-20190321-blagues-insultes-gestes-deplaces-assemblee-harcelement-sexiste-sexuel-encore-tres-repandu
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Le pire du sexisme en politique
+|auteurs=Brut
+|lien=https://www.youtube.com/watch?v=Q0L9bv_EdAo
+}}{{Référence vidéographique
+|titre=5 femmes politiques qui répondent à des propose sexistes
+|auteurs=Brut
+|lien=https://www.youtube.com/watch?v=sDNW0f3deyE
+}}{{Référence vidéographique
+|titre=La députée Mathilde Panot victime d'insultes sexistes à l'Assemblée
+|auteurs=Brut
+|lien=https://www.youtube.com/watch?v=nq0BAVTQox8
+}}
+|rubriques=Politique, Société
+|mots-clés=féminisme, politique, égalité de genre
+|date-création=2021-02-27
+}}

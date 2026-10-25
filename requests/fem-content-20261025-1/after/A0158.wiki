@@ -1,0 +1,15 @@
+{{Argument
+|initialisation=Justification@5468
+|résumé=Le cyberharcèlement ne se limite plus à l'espace virtuel et débouche de plus en plus souvent sur des agressions physiques qui vont parfois jusqu'au meurtre.
+|citations={{Citation
+|citation=On les fait chanter, on les attend devant chez elles, sur leur lieu de travail ; elles reçoivent des appels la nuit. Parfois, elles doivent déménager, arrêter de travailler.
+|auteurs=Magali Cartigny
+|article=« Je me lève et je vois une vidéo de moi nue sur Snapchat »
+|ouvrage=Le Monde
+|date=07 janvier 2023
+|lien=https://www.lemonde.fr/m-perso/article/2023/01/07/cyberharcelement-je-me-leve-et-je-vois-une-video-de-moi-nue-sur-snapchat_6156958_4497916.html
+}}
+|rubriques=Société, Technologie
+|mots-clés=réseaux sociaux, féminisme
+|date-création=2023-01-10
+}}

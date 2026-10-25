@@ -1,0 +1,25 @@
+{{Argument
+|résumé=Cette sous représentation n'a aucune conséquence négative sur la vie des femmes de manière générale. Les hommes de manière générale ne tire aucun avantage de la surreprésentation des hommes dans ses postes et ses filières.
+|objections={{Objection
+|page=La sous-représentation des femmes dans les hauts postes normalise l'idée qu'elles ne sont bonnes que pour les postes subalternes
+|titre-affiché=Si, parce que ça normalise l'idée qu'elles ne sont bonnes que pour les postes subalternes
+}}{{Objection
+|page=Certaines femmes subissent du harcèlement uniquement parce qu'elles font un travail jugé masculin
+|titre-affiché=Certaines femmes subissent du harcèlement uniquement parce qu'elles font un travail jugé masculin
+}}{{Objection
+|page=À capacités et compétences égales, une femme sera jugée moins compétente si elle fait un travail "masculin"
+|titre-affiché=À capacités et compétences égales, une femme sera jugée moins compétente si elle fait un travail "masculin"
+}}{{Objection
+|page=Les postes à responsabilités sont mieux payés et donnent plus de pouvoir, les hommes ont donc clairement intérêt à en conserver le monopole
+|titre-affiché=Les postes à responsabilités sont mieux payés et donnent plus de pouvoir, les hommes ont donc clairement intérêt à en conserver le monopole
+}}{{Objection
+|page=Les hommes ont de tout temps cherché à cadenasser l'accès des femmes aux postes élevés, ils en tirent donc bel et bien un bénéfice
+|titre-affiché=Les hommes ont de tous temps cherché à cadenasser l'accès des femmes aux postes élevés, ils en tirent donc bel et bien un bénéfice
+}}{{Objection
+|page=La sous-représentation des ingénieures a des conséquences très concrètes
+|titre-affiché=La sous-représentation des ingénieures a des conséquences très concrètes
+}}
+|rubriques=Culture, Société
+|mots-clés=représentation, féminisme
+|date-création=2022-08-29
+}}

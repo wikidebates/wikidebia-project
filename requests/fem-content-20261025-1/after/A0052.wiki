@@ -1,0 +1,11 @@
+{{Argument
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Jade Debeugny
+|ouvrage=Le Poil féminin à l'écran
+|édition=Kiwi
+|date=2 novembre 2022
+}}
+|rubriques=Culture, Société
+|mots-clés=médias, représentation
+|date-création=2022-12-19
+}}

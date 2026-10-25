@@ -1,0 +1,6 @@
+{{Argument
+|initialisation=Justification@5474
+|rubriques=Éducation, Éthique, Philosophie
+|mots-clés=Féminisme
+|date-création=2023-12-13
+}}

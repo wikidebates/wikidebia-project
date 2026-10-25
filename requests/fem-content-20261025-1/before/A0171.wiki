@@ -1,0 +1,8 @@
+{{Argument
+|initialisation=Objection@11466
+|justifications={{Justification
+|page=Si les féministes n'avaient jamais été extrémistes selon les standards de leur époque, elles n'auraient jamais obtenu le droit de vote
+|titre-affiché=Si les féministes n'avais jamais été extrémistes selon les standards de leur époque, elles n'auraient jamais obtenu le droit de vote
+}}
+|date-création=2025-09-12
+}}

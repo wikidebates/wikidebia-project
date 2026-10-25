@@ -1,0 +1,6 @@
+{{Argument
+|résumé=Si les groupes féministes ne s'occupent pas du sujet, ce n'est pas tant par désintérêt que parce que les violences faites aux femmes sont plus diverses et plus fréquentes et constituent déjà une tâche très lourde. Donc au lieu de le leur reprocher, il serait plus intelligent de créer des groupes spécifiquement dédiés.
+|rubriques=Droit, Société
+|mots-clés=violence, féminisme
+|date-création=2022-08-31
+}}

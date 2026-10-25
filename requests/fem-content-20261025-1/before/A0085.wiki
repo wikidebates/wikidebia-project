@@ -1,0 +1,4 @@
+{{Argument
+|résumé=Les lois sur l'égalité salariale et le viol sont très rarement respectées.
+|date-création=2021-06-27
+}}

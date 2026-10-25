@@ -1,0 +1,11 @@
+{{Argument
+|citations={{Citation
+|citation=Lorsque les hommes évoquent la «Terreur féministe», ils la rattachent au combat pour la PMA pour tou·tes ou à l'écriture inclusive. Même dans leurs articles délirants et leurs fantasmes de matriarcat, ces messieurs sont incapables d'imaginer, une seule seconde, des femmes s'organisant en groupe pour tuer les violeurs que la justice a laissés en liberté.
+|auteurs=Irene
+|article=Le féminisme n'a-t-il vraiment jamais tué personne?
+|ouvrage=Slate
+|date=13 février 2021
+|lien=http://www.slate.fr/story/201090/irene-terreur-feministe-bonnes-feuilles-violence-femmes-patriarcat-feminicides-viols-agressions
+}}
+|date-création=2021-12-19
+}}

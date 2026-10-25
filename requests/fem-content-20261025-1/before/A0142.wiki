@@ -1,0 +1,40 @@
+{{Argument
+|résumé=Un mouvement inspiré des années 50 et baptisé  le #tradwife (ou femme au foyer traditionnelle) prône une féminité qui s'épanouit dans le travail domestique et le soin du mari comme de la famille. Une extension d'un autre mouvement similaire appelé le "fascinating womanhood"et théorisé par Helen Andelin en 1967. Antiféministe, ce courant veut mettre en avant des valeurs traditionnelles reposant sur un échange mutuel : le devoir de mère, les tâches ménagères et le soutien moral attribués à la femme contre la sécurité du foyer et le support financier attribués à l'homme. Il apparait alors inutile voir dangereux pour la femme au foyer de s'aventurer à l'extérieur pour travailler, source de dispersion et de stress alors que tout ce dont elle a besoin est à la maison. Il prétend ré-instaurer un équilibre sain entre hommes et femmes, en accord avec leurs attributions biologiques.
+|citations={{Citation
+|citation=C'est reconnaître l'homme comme étant le chef de la famille et donc user de ses talents et capacités pour le servir, de la même manière que l'homme est au service de sa femme en allant travailler, en subvenant à tous les besoins matériels du foyer. Et même par la reconnaissance et la fierté qu'il éprouve envers sa femme
+|auteurs=Virginie Vota
+|article=#tradwife : éloge de la féminité
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Wassila Djellouli
+|article=Nous avons rencontré des "tradwives", fières d'être femmes au foyer et dévouées à leur conjoint
+|ouvrage=Yahoo
+|date=13/08/2020
+|lien=https://fr.style.yahoo.com/nous-avons-rencontre-des-tradwives-fieres-detre-femmes-au-foyer-et-devouees-a-leur-conjoint-132302002.html
+}}{{Référence bibliographique
+|auteurs=Helen Andelin
+|ouvrage=Womanhood
+|date=1963
+}}{{Référence bibliographique
+|auteurs=Simon Blin
+|article=La #tradwife, bobonne épouse
+|ouvrage=Libération
+|date=11/09/2020
+|lien=https://www.liberation.fr/debats/2020/09/11/la-tradwife-bobonne-epouse_1799096/
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=‘Submitting to my husband like it's 1959': Why I became a TradWife ¦ BBC Stories
+|lien=https://www.youtube.com/watch?v=ZwT-zYo4-OM&t=0s
+}}
+|objections={{Objection
+|page=Pour la majorité des femmes, être une femme au foyer est une contrainte la plupart du temps
+|titre-affiché=Être une femme au foyer est une contrainte oppressante pour la majorité des femmes
+}}{{Objection
+|page=Les tradwives sont les idiotes utiles du sexisme
+|titre-affiché=Les tradwives ne sont pas des "femmes au foyer épanouies", mais les idiotes utiles du torpillage de leurs propres droits
+}}{{Objection
+|page=Défendre le choix d'être femme au foyer est le paravent d'une extrême droite se faisant passer pour féministe
+|titre-affiché=Défendre le choix d'être femme au foyer est le paravent d'une extrême droite se faisant passer pour féministe
+}}
+|date-création=2021-03-01
+}}

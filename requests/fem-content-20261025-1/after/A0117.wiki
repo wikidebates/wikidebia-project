@@ -1,0 +1,17 @@
+{{Argument
+|citations={{Citation
+|citation=L’ocytocine est un octopeptide synthétisé dans l’hypothalamus qui permet de stimuler l’émission de lait ainsi que les contractions utérines. […]
+L’ocytocine, en plus de son action sur l’allaitement et les contractions utérines, apparaît comme l’hormone de l’attachement, qui établit les liens protecteurs de la mère avec ses petits. Du point de vue phylogénétique, ces liens, en garantissant la sécurité des petits, favorisent la survie de l’espèce. En outre, l’ocytocine joue un rôle dans les liens sociaux et atténue la phobie sociale. Elle interviendrait dans le sentiment d’appartenance à un groupe et dans la confiance entre les éléments du groupe. Hormone de la confiance, elle augmente l’empathie et la générosité. Du point de vue clinique, les études actuelles sont de durée trop brève pour pouvoir proposer l’ocytocine comme traitement adjuvant dans la phobie sociale ou dans l’autisme, et des études prolongées sont encore nécessaires avant d’envisager son utilisation comme psychotrope.
+|article=L’ocytocine : hormone de l’amour, de la confiance et du lien conjugal et social
+|ouvrage=Revue médicale suisse
+|date=2012
+|lien=https://www.revmed.ch/RMS/2012/RMS-333/L-ocytocine-hormone-de-l-amour-de-la-confiance-et-du-lien-conjugal-et-social
+}}
+|objections={{Objection
+|page=Le rôle des hormones sexuelles dans nos comportements est très exagéré
+|titre-affiché=Le rôle des hormones sexuelles dans nos comportements est très exagéré
+}}
+|rubriques=Santé, Société
+|mots-clés=psychologie, féminisme
+|date-création=2021-03-07
+}}

@@ -1,0 +1,43 @@
+{{Argument
+|résumé=Elles sont plusieurs à témoigner de cet engagement qui a mis leur vie entre parenthèses. Le combat d'une existence, chronophage et usant. On parle de burn out militant. L'ampleur du phénomène a même crée l'émulation du hashtag #PayeTonBurnOutMilitant. Les victimes militantes parlent d'épuisement et certaines de stress post traumatique (ou traumatisme vicariant) chez certains travailleurs sociaux et professionnels de l'aide. Devant l'afflux des témoignages, elles vivent par procuration le désarroi des victimes. Considérant parfois "faire le travail de l'état" en étant sur toute la chaine d'accompagnement : prise en charge, consolation, suivi dans la procédure judiciaire… Certaines jettent l'éponge, pour retourner à une existence plus calme et classique, considérant le combat perdu d'avance et démesuré.
+|citations={{Citation
+|citation=Je n’ai pas ou plus les épaules, je suis épuisée et, honnêtement, terrorisée […] Je n’arrive plus à lire vos témoignages et à les digérer en plus des violences que je vis dès que je mets le pied dehors. La colère que j’ai accumulée en presque 7 ans me bouffe et me pousse à réagir quasi systématiquement, et la plupart du temps, ça ne fait qu’envenimer la situation
+|auteurs=Anais Bourdet
+|ouvrage=Créatrice du Tumblr "Paye ta Shnek"
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Marie Le Breton
+|article=Qu'est-ce que le "burn-out militant" ?
+|ouvrage=Huffington Post
+|date=17/07/2019
+|lien=https://www.huffingtonpost.fr/entry/burn-out-militant-touche-feministes_fr_5d2c88b8e4b0bd7d1e2034c9
+}}{{Référence bibliographique
+|auteurs=Valentine Leroy
+|article=Le burn-out des militantes féministes
+|ouvrage=Slate
+|date=01/09/2019
+|lien=http://www.slate.fr/story/180207/burn-out-militant-feministes-paye-ta-schneck-nous-toutes-traumatisme-vicariant
+}}{{Référence bibliographique
+|auteurs=Marion Lecas
+|article=Marie Laguerre, féministe à bout de souffle
+|ouvrage=La Croix
+|date=07/08/2020
+|lien=https://www.la-croix.com/France/Marie-Laguerre-feministe-bout-souffle-2020-08-07-1201108183?fbclid=IwAR3Cle0OtnmemdurujVLHBOyLZdxUID6Hy07MmC3ZlMGOcKs7IUsiv26jJU
+}}
+|objections={{Objection
+|page=Le burn-out militant vient avant tout d'une négligence de sa propre santé mentale
+|titre-affiché=Le burn-out militant vient avant tout d'une négligence de sa propre santé mentale
+}}{{Objection
+|page=Pour obtenir des petites victoires, il faut viser de grands idéaux
+|titre-affiché=Pour obtenir des petites victoires, il faut viser de grands idéaux
+}}{{Objection
+|page=Toutes les causes peuvent apparaître comme des tâches trop grandes, le combat n'en vaut pas moins la peine
+|titre-affiché=Toutes les causes peuvent apparaître comme des tâches trop grandes, le combat n'en vaut pas moins la peine
+}}{{Objection
+|page=Si une cause peut permettre d'aider ne serait-ce qu'une seule victime, cela suffit à démontrer son utilité
+|titre-affiché=Si une cause peut permettre d'aider ne serait-ce qu'une seule victime, cela suffit à démontrer son utilité
+}}
+|rubriques=Société
+|mots-clés=Féminisme
+|date-création=2021-02-21
+}}

@@ -1,0 +1,49 @@
+{{Argument
+|citations={{Citation
+|citation=Sincèrement, je trouve que les relations entre hommes et femmes sont plus agréables en France qu'aux États-Unis. Metoo va sans doute aggraver la défiance qui existe déjà ici entre les deux sexes. D'ailleurs, MeToo n'a pas été initié par les féministes radicales. C'est le prolongement d'un mouvement amorcé depuis longtemps sur les campus américains et connu sous le nom de Title IX, nom d'une mesure adoptée en 1972 pour obliger les universités à financer à parts égales les équipes de sport féminines et masculines. Au fil des ans, son application s'est étendue à la lutte contre le harcèlement sexuel et les discriminations. Title IX a fait beaucoup pour l'égalité entre les sexes mais les meilleures intentions sont souvent perverties. La question du consentement, largement reprise par MeToo, l'illustre: est-il raisonnable, par exemple, qu'une femme puisse retirer son consentement après l'acte sexuel parce que, le lendemain, elle apprend que son partenaire lui a menti sur sa situation matrimoniale? […] Vous n'imaginez pas cependant à quel point les féministes sont divisées. Les plus radicales ne cherchent pas à en finir avec le patriarcat mais à prendre leur revanche en instaurant le matriarcat. L'homme blanc de plus de 50 ans est la cible préférée de ces féministes, mais elles s'en prennent aussi aux femmes blanches, accusées de ne pas être suffisamment conscientes des privilèges «associés» à leur couleur de peau. Alors pour répondre à votre question: non, ce genre de féminisme, si l'on peut dire, n'est pas une alternative au trumpisme puisqu'il est lui aussi, une manifestation de la «fracturation identitaire» qui mine les États-Unis.
+|auteurs=Géraldine Smith
+|article=Géraldine Smith : « Aux États-Unis, chacun vit dans sa cave identitaire »
+|ouvrage=Figaro Vox
+|date=9/11/2018
+|lien=https://www.lefigaro.fr/vox/monde/2018/11/09/31002-20181109ARTFIG00277-geraldine-smith-aux-etats-unis-chacun-vit-dans-sa-cave-identitaire.php
+}}{{Citation
+|citation=[…] à l'université de Maryland, des participantes à un cours intitulé "Issues contemporaines dans l'art féministe", crurent bon de distribuer des centaines d'affiches à travers le campus où figuraient les noms, choisis au hasard, de cinquante étudiants avec la légende suivante : "Attention : ces hommes sont des violeurs potentiels." Egalement dans le cadre de ce festival d'art féministe, sur tout un pan de mur de l'université, étaient inscrits les noms de 15 000 étudiants, avec la légende suivante : "Beaucoup de ces hommes ont des vélléités de viol." Le professeur responsable du cours jugea ces manifestations "follement couronnées de succès".
+|auteurs=Edward Behr
+|ouvrage=Une Amérique qui fait peur (La liberté est-elle devenue l'instrument d'une nouvelle tyrannie ?)
+|page=249-250
+|édition=Pocket
+}}{{Citation
+|citation=Dans un livre récent, The Morning After, Katie Roiphe, une étudiante à Princeton, note que nombre d'étudiantes en droit se plaignent qu'elles n'ont pas le même contact avec leur professeur que les étudiants mâles. La raison est fort simple : dans leur hantise d'éviter une accusation de harcèlement sexuel, nombre d'enseignants esquivent tout simplement tout dialogue avec elles.
+Ce type de comportement paraît, à première vue, si excessif et si lâche qu'il prête à rire. On ne peut le comprendre que si on prend la peine de réfléchir à la définition du harcèlement sexuel proposé par les manuels universitaires les plus respectables, ou par les publications d'organisations féministes […]  Un poster, affiché dans une des cafétérias les plus fréquentés de Princeton, qualifie de harcèlement sexuel "tout comportement, toute activité intimidante, hostile ou blessante - ou considérée comme telle - par la personne qui estime en être la victime  […] "; "le harcèlement sexuel peut résulter d'une action consciente ou inconsciente", et peut être "flagrant ou subtil". Selon Harvard, il "peut être aussi brutal que le viol et aussi trouble qu'un regard […] cette définition n'implique pas un comportement ouvertement sexuel." Les étudiants coupables de harcèlement sexuel sont obligés de suivre des cours au département d'études féminines. En général, leur crime est d'avoir regardé, avec un peu trop d'insistance, des personnes de sexe féminin dans une bibliothèque de l'université, sans du reste leur adresser la parole.
+|auteurs=Edward Behr
+|ouvrage=Une Amérique qui fait peur (La liberté efd1111daeb59d3ddd10f2b5d0a5f8f85
+|page=38-39
+|édition=Pocket
+}}{{Citation
+|citation=Quel est le point commun entre ces idéologies haineuses qui détournent ces luttes pourtant légitimes que sont le féminisme, l’écologie, la lutte contre les inégalités sociales, l’antiracisme, le combat contre l’homophobie ? L’affirmation que l’être humain doit devenir un être sain, exempt de toutes turpitudes, qu’il faut nettoyer de toutes traces du Mal, libérer de la cupidité, du pouvoir, de l’impureté afin d’en faire un être propre et sans souillures. Cette tentation totalitaire qui revient, une fois de plus, sur le devant de la scène prétend rétablir le règne du Bien, et donc inévitablement se propose d’éliminer le Mal et ses adeptes : Le juif, l’apostat, le pollueur, le capitaliste, le financier apatride, le pécheur, le fornicateur, le mâle blanc, le colonisateur (blanc)…
+La pureté n'existe pas. Nous sommes des êtres faillibles, très imparfaits et c'est la raison pour laquelle nous avons besoin des autres, pour nous contredire, pour démolir nos arguments et nos certitudes.
+|auteurs=Charles Rojzman
+|article=Un rêve de pureté qui tourne mal
+|ouvrage=FrontPopulaire
+|date=27/02/2021
+|lien=https://frontpopulaire.fr/o/Content/co414018/un-reve-de-purete-qui-tourne-mal
+}}
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Edward Behr
+|ouvrage=Une Amérique qui fait peur (La liberté est-elle l'instrument d'une nouvelle tyrannie ?)
+|édition=Pocket
+|date=1996
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre="Le féminisme américain donne le la", Éric Zemmour, RTL 16/01/2018
+|auteurs=RTL
+|lien=https://www.youtube.com/watch?v=BCfsv6Qi0gQ
+}}
+|objections={{Objection
+|page=L'acception contemporaine du terme "woke" est du fait de l'extrême droite américaine
+|titre-affiché=Ce n'est pas "un certain féminisme" qu'on a importé des USA, mais les paniques morales de l'extrême droite américaine
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2021-02-22
+}}

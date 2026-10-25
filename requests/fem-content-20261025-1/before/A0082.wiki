@@ -1,0 +1,4 @@
+{{Argument
+|résumé=L'égalité de genre est inexistante dans de nombreux pays.
+|date-création=2021-07-22
+}}

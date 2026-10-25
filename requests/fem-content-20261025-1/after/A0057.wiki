@@ -1,0 +1,21 @@
+{{Argument
+|citations={{Citation
+|citation=On parle ici de violences psychologiques et physiques, qui surviennent lors de simples consultations de suivi gynécologique, ou lors du suivi de grossesse, des accouchements et du post-partum.
+
+Il s’agit de violences qui touchent un grand nombre de femmes, et ce n’est pas anecdotique ! Elles portent atteinte à l’intégrité psychologique et physique des patientes, de façon ponctuelle ou répétée, et elles sont toujours néfastes.
+
+Au mois de février 2018, lorsque mon amie Luna et moi avons commencé à travailler sur notre projet de documentaire étudiant, le sujet de la maltraitance en gynécologie nous est venu naturellement.
+
+Dans nos familles ou notre cercle d’amies, nous avions toutes une histoire à raconter. Une anecdote d’apparence banale, une gêne que nous avons intégrée, parce que, c’est normal… Aller chez le gynécologue, c’est désagréable, c’est intimidant, ça fait peur, ça fait mal.
+
+Et « c’est comme ça ».
+|auteurs=Océane Viala
+|article=Des femmes témoignent des violences gynécologiques et obstétricales
+|ouvrage=Madmoizelle.com
+|date=11 déc 2018
+|lien=https://www.madmoizelle.com/documentaire-violences-gynecologiques-et-obstetricales-corps-medical-939701
+}}
+|rubriques=Santé, Société
+|mots-clés=médecine, féminisme
+|date-création=2021-11-07
+}}

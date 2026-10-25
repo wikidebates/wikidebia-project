@@ -1,0 +1,8 @@
+{{Argument
+|résumé=Les couples décident du fonctionnement de leur relation, et peuvent se séparés si cela ne leur convient pas.
+|objections={{Objection
+|page=Bien plus que le fonctionnement individuel des couples, c'est le fonctionnement de la société qui fait que ce sont les femmes qui font la majorité des tâches ménagères
+|titre-affiché=Bien plus que le fonctionnement individuel des couples, c'est le fonctionnement de la société qui fait que ce sont les femmes qui font la majorité des tâches ménagères
+}}
+|date-création=2022-08-29
+}}

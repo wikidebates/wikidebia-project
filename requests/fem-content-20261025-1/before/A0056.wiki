@@ -1,0 +1,13 @@
+{{Argument
+|citations={{Citation
+|citation=Toutes les témoins le disent à leur manière, leur douleur a souvent été niée, et surtout banalisée, comme si elle était normale. Comme l’endométriose, et sa longue invisibilisation, les pathologies vulvaires sont elles aussi des douleurs de l’intime, qui semblent perçues par le corps médical comme faisant partie du package quand on est dotée d’un vagin et d’une vulve.
+
+Il faudrait prendre sur soi, faire avec, et éventuellement se forcer à avoir des relations sexuelles, car il ne faudrait pas priver son partenaire. Pas étonnant qu’à l’arrivée, les personnes atteintes ne souffrent plus seulement de douleurs, mais soient aussi hautement fragilisées par la négation de tout ce qu’elles ont ressenti.
+|auteurs=Maëlle Le Corre
+|article=Vulvodynie, névralgie pudendale, vaginisme… pourquoi les maladies de la vulve intéressent si peu la médecine
+|ouvrage=Madmoizelle.com
+|date=28 juin 2021
+|lien=https://www.madmoizelle.com/maladies-vulve-1140289
+}}
+|date-création=2022-01-06
+}}

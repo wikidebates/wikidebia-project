@@ -1,0 +1,14 @@
+{{Argument
+|résumé=Un certain nombre d'oeuvres culturelles ont dû payer très cher leur progressisme.
+|justifications={{Justification
+|page=Les oeuvres jugées trop féministes font l'objet d'appels au boycott
+|titre-affiché=Appels au boycott
+}}{{Justification
+|page=Les oeuvres jugées trop féministes subissent des vote-bombings
+|titre-affiché=Vote-bombing
+}}{{Justification
+|page=Les actrices ou équipes de production d'oeuvres jugées trop féministes se font régulièrement harceler
+|titre-affiché=Harcèlement de personnes impliquées dans l'oeuvre concernée
+}}
+|date-création=2021-12-09
+}}

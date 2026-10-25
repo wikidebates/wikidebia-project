@@ -1,0 +1,10 @@
+{{Argument
+|objections={{Objection
+|page=La définition du sexisme est trop large pour permettre la création
+|titre-affiché=La définition du sexisme est trop large pour permettre la création
+}}{{Objection
+|page=La lutte contre le sexisme se confond avec un climat puritain qui compromet la création
+|titre-affiché=La lutte contre le sexisme se confond avec un climat puritain qui compromet la création
+}}
+|date-création=2021-03-01
+}}

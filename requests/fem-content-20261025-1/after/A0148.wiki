@@ -1,0 +1,11 @@
+{{Argument
+|références-sitographiques={{Référence sitographique
+|lien=https://www.haut-conseil-egalite.gouv.fr/violences-faites-aux-femmes/reperes-statistiques/
+|page=Repères statistiques
+|auteurs=Haut conseil à l'égalité entre les femmes et les hommes
+|site=Haut Conseil à l’égalité entre les femmes et les hommes
+}}
+|rubriques=Droit, Société
+|mots-clés=violence, féminisme
+|date-création=2022-08-31
+}}

@@ -1,0 +1,8 @@
+{{Argument
+|résumé=Dans une culture où on éduque et encourage les garçons à avoir des comportements d'agresseurs sexuels (pas d'éducation au consentement, absence d'empathie envers les femmes, validation sociale du comportement d'agression, impunité quasiment garantie), il n'est guère étonnant qu'une part significative d'entre eux passent à l'acte. Et comme chat échaudé craint l'eau froide, il est normal qu'à la suite d'une agression, on se mette à craindre les hommes même propres sur eux, surtout que ce n'est pas marqué sur leur front. Ces derniers devraient mettre leur égo de côté et faire preuve d'empathie, ils comprendraient que la peur qu'ils suscitent, fut-ce malgré eux, ne vient pas de nulle-part.
+
+<span class="oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-buttonElement oo-ui-buttonElement-framed oo-ui-iconElement oo-ui-labelElement oo-ui-flaggedElement-progressive oo-ui-buttonInputWidget" aria-disabled="false"></span>
+|rubriques=Culture, Société
+|mots-clés=culture, féminisme
+|date-création=2022-05-13
+}}

@@ -1,0 +1,15 @@
+{{Argument
+|résumé=Les inégalités de richesse entre les hommes et les femmes ne sont pas lié au sexisme, le féminisme n'offre aucune solution efficace pour réduire les inégalités de richesse entre les hommes et les femmes.
+
+Les inégalités de richesse entre les hommes et les femmes s'expliquent par des inégalités de richesse de manière générale. Donc pour baisser les inégalités de richesse entre les hommes et les femmes, il faut baisser les inégalités de richesse entre les gens de manière générale.
+|objections={{Objection
+|page=Les inégalités économiques touchent majoritairement les femmes, il est donc tout à fait pertinent de mener le combat à ce niveau
+|titre-affiché=Les inégalités économiques touchent majoritairement les femmes, il est donc tout à fait pertinent de mener le combat à ce niveau
+}}{{Objection
+|page=La plupart des facteurs d'inégalité salariale touchent exclusivement les femmes
+|titre-affiché=La plupart des facteurs d'inégalité salariale touchent exclusivement les femmes
+}}
+|rubriques=Société
+|mots-clés=féminisme, égalité de genre
+|date-création=2022-08-29
+}}

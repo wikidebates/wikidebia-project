@@ -1,0 +1,72 @@
+{{Argument
+|citations={{Citation
+|citation=Pour Anna-Lena Von Hodenberg, présidente d’une association d’aide aux victimes allemande, les réseaux sociaux gagnent de l’argent grâce à ces contenus haineux qui fonctionnent mieux : «'' La haine fait partie de leur business model.'' »
+|auteurs=Marine Langlois
+|article=Nadia Daam, Sara Lou, Alice Barbe… elles racontent leur cyberharcèlement dans (Nadia Daam, Sara Lou, Alice Barbe… elles racontent leur cyberharcèlement dans #SalePute, sur Arte)
+|ouvrage=Madmoizelle.com
+|date=23 juin 2021
+|lien=https://www.madmoizelle.com/nadia-daam-sara-lou-alice-barbe-elles-racontent-leur-cyberharcelement-dans-salepute-sur-arte-1137471
+}}{{Citation
+|citation=Le rapport visant à « [https://www.gouvernement.fr/partage/10528-rapport-visant-a-renforcer-la-lutte-contre-le-racisme-et-l-antisemitisme-sur-Internet renforcer la lutte contre le racisme et l’antisémitisme sur Internet] », commandé par le Premier ministre français et publié en septembre 2018, l’explique très bien. Il dénonce « un lien pervers entre propos haineux et impact publicitaire : les personnes tenant des propos choquants ou extrémistes sont celles qui « rapportent » le plus, car l’une d’entre elles peut en provoquer cinquante ou cent autres. Sous cet angle, l’intérêt des réseaux sociaux est d’en héberger le plus possible ». Plus généralement, le rapport regrette la « règle selon laquelle un propos choquant fera davantage de « buzz » qu’un propos consensuel, alimentant de façon plus sûre le modèle économique des plateformes ».
+|auteurs=La Quadrature du Net
+|article=Faut-il réguler Internet ? (1/2)
+|date=1 novembre 2020
+|lien=https://www.laquadrature.net/2020/11/01/faut-il-reguler-Internet-1/
+}}{{Citation
+|citation=On a constaté une nette augmentation du nombre d’attentats commis par des militants d’extrême droite, des nationalistes blancs ou des islamophobes en Europe occidentale et en Amérique du Nord au cours des vingt dernières années. Dans ces deux régions, on dénombrait trois cas en 2002 contre 59 en 2017, les médias sociaux ayant joué un rôle crucial  dans la diffusion de discours xénophobes et dans l’incitation à la violence.
+|article=Conflit et violence : une ère nouvelle
+|ouvrage=Organisation des Nations Unies
+|lien=https://www.un.org/fr/un75/new-era-conflict-and-violence
+}}{{Citation
+|citation=Pour plusieurs chercheurs ou chercheuses, comme la sociologue américaine Jen Schradie, [le] système [d'algorithme de recommandations] privilégie la diffusion des idées conservatrices parce que celles-ci provoquent des débats en ligne, donc de la viralité. Fin 2021, Twitter a ainsi admis, à l’occasion d’une rare étude, que les partis et médias de droite sont davantage mis en avant par ses algorithmes de recommandation que ceux de la gauche.
+|auteurs=Lucie Ronfaut
+|article=Cinq ans après (Cinq ans après #metoo, l’antiféminisme prospère sur les réseaux sociaux)
+|ouvrage=Le Monde
+|date=12 octobre 2022
+|lien=https://www.vscyberh.org/post/698456664028987392/cinq-ans-apr%C3%A8s-metoo-lantif%C3%A9minisme-prosp%C3%A8re
+}}{{Citation
+|citation=Unia est un acteur incontournable dans le paysage des droits humains belge et européen. Notre institution travaille au quotidien pour une société plus égalitaire. L’évolution du réseau social X au cours de cette dernière année va à l’encontre des valeurs défendues par notre institution. La diffusion de discours haineux et la désinformation y sont omniprésentes. Le retrait de X du code européen des bonnes pratiques contre la désinformation en mai 2023 n’a fait qu’amplifier le phénomène.
+
+En tant qu’institution publique indépendante qui lutte contre la discrimination et défend l’égalité en Belgique, Unia a donc décidé de quitter X.
+|article=Pourquoi Unia a quitté X (anciennement Twitter) ?
+|ouvrage=Unia
+|date=12 Octobre 2023
+|lien=https://www.unia.be/fr/articles/depart-de-x
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://www.debunkersdehoax.org/facebook-et-twitter-aiment-bien-lextreme-droite-qui-rapporte/
+|page=Facebook et Twitter aiment bien l’extrême droite qui rapporte
+|auteurs=Sutter Cane
+|site=Debunkers de hoax
+|date=31 août 2019
+}}{{Référence sitographique
+|lien=https://positivr.fr/vous-etes-incapables-didentifier-des-injures-racistes-elle-denonce-linaction-de-facebook/
+|page=« Vous êtes incapables d’identifier des injures racistes » : elle dénonce l’inaction de Facebook
+|auteurs=Mégane Bouron
+|site=Positivr.fr
+|date=4 juin 2019
+}}{{Référence sitographique
+|lien=https://www.madmoizelle.com/ok-le-sexisme-est-en-roue-libre-sur-youtube-france-du-coup-on-fait-quoi-1191242
+|page=OK, le sexisme est en roue libre sur YouTube France. Du coup, on fait quoi ?
+|auteurs=Pauline Ferrari
+|site=Madmoizelle.com
+|date=31 août 2021
+}}
+|justifications={{Justification
+|page=Internet est globalement hostile aux femmes
+|titre-affiché=Internet est globalement hostile aux femmes
+}}{{Justification
+|page=Si Trump avait été réellement évincé pour des raisons idéologiques, son exclusion serait survenue beaucoup plus tôt
+|titre-affiché=Quand les leaders d'opinion de droite se font exclure, ce n'est jamais pour des raisons idéologiques
+}}{{Justification
+|page=S'exprimer sur les réseaux sociaux peut suffire à nous mettre en danger de mort
+|titre-affiché=S'exprimer sur les réseaux sociaux peut suffire à nous mettre en danger de mort
+}}{{Justification
+|page=Les réseaux sociaux ont été le principal instrument de l'emprise de l'extrême droite sur le monde
+|titre-affiché=Les réseaux sociaux ont été le principal instrument de l'emprise de l'extrême droite sur le monde
+}}{{Justification
+|page=Le co-fondateur et actuel co-dirigeant de Facebook est un idéologue conservateur
+|titre-affiché=Un des fondateurs et actuels dirigeants de facebook est un idéologue libertarien
+}}
+|date-création=2022-02-28
+}}

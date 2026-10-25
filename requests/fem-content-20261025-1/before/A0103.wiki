@@ -1,0 +1,21 @@
+{{Argument
+|initialisation=Objection@4925
+|citations={{Citation
+|citation=De fait, '''l’accusation de misandrie sert souvent à détourner l’attention des inégalités réelles et à invalider les revendications féministes.''' Comme le souligne l’écrivaine féministe Pauline Harmange, [https://www.radiofrance.fr/franceinter/podcasts/zoom-zoom-zen/zoom-zoom-zen-du-vendredi-08-mars-2024-6542220 '''la critique des comportements masculins oppressifs est trop souvent assimilée à une haine des hommes en tant que groupe, ce qui permet d’inverser les rôles et de présenter les hommes comme des victimes d’une oppression inexistante'''].
+
+[https://mrmondialisation.org/misogynie-en-ligne-terrain-dune-culture-du-viol-2-0/ '''Mais contrairement à la misogynie, la misandrie ne s’appuie sur aucune structure systémique de pouvoir''']. '''Elle ne se traduit pas par des violences institutionnalisées, des discriminations légales ou des inégalités socio-économiques.''' Là où la misogynie engendre des violences physiques, sexuelles et psychologiques massives envers les femmes, la misandrie se manifeste souvent par un évitement ou une méfiance envers les hommes, en réaction à des expériences traumatiques individuelles.
+|auteurs=Elena Meilune
+|article=Non, la misandrie n’est pas l’équivalent de la misogynie
+|ouvrage=Mr Mondialisation
+|date=17 avril 2025
+|lien=https://mrmondialisation.org/misandrie-misogynie/
+}}
+|références-sitographiques={{Référence sitographique
+|lien=https://mrmondialisation.org/misandrie-misogynie/
+|page=Non, la misandrie n’est pas l’équivalent de la misogynie
+|auteurs=Elena Meilune
+|site=Mr Mondialisation
+|date=17 avril 2025
+}}
+|date-création=2025-09-22
+}}
