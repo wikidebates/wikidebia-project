@@ -23,6 +23,20 @@ def _fold(value: Any) -> str:
     return re.sub(r"[^\w]+", " ", text, flags=re.UNICODE).strip()
 
 
+def _labels_are_compatible_variants(values: list[str]) -> bool:
+    """Accept a substantial short title embedded in a fuller headline."""
+    unique = sorted({value for value in values if value})
+    if len(unique) <= 1:
+        return True
+    longest = max(unique, key=lambda value: (len(value.split()), len(value), value))
+    padded_longest = f" {longest} "
+    return all(
+        value == longest
+        or (len(value.split()) >= 5 and f" {value} " in padded_longest)
+        for value in unique
+    )
+
+
 def normalize_doi(value: Any) -> str | None:
     raw = _text(value)
     if not raw:
@@ -79,15 +93,20 @@ def build_resource_registry(sources_doc: dict[str, Any], source_registry_sha256:
             sid=str(source.get("id")); lang=str(source.get("language") or ""); label=_label(source); meta=source.get("metadata") or {}
             if label: labels.append({"language":lang,"label":label}); by_lang[lang][_fold(label)].append(sid)
             variants.append({"source_id":sid,"language":lang,"type":str(source.get("type") or ""),"label":label,"authors":list(meta.get("authors") or []),"date":_text(meta.get("date")),"publisher_or_site":_text(meta.get("publisher") or meta.get("site"))})
-        conflicts=[]
+        conflicts=[]; preferred_by_lang={}
         for lang,values in sorted(by_lang.items()):
             keys=[k for k in values if k]
-            if len(keys)>1:
+            if len(keys)>1 and not _labels_are_compatible_variants(keys):
                 source_ids=sorted({sid for k in keys for sid in values[k]}); label_values=sorted({next(v["label"] for v in variants if v["source_id"]==sid) for sid in source_ids})
                 conflicts.append({"kind":"same_identity_incompatible_label","language":lang,"source_ids":source_ids,"labels":label_values})
+            elif keys:
+                preferred_by_lang[lang] = max(keys, key=lambda value: (len(value.split()), len(value), value))
         seen=set(); clean=[]
         for row in labels:
             sig=(row["language"],_fold(row["label"]))
+            preferred = preferred_by_lang.get(row["language"])
+            if preferred and sig[1] != preferred:
+                continue
             if sig not in seen: seen.add(sig); clean.append(row)
         rid="R"+hashlib.sha256(key.encode()).hexdigest()[:12].upper()
         resources.append({"id":rid,"identity_type":itype,"identity_key":key,"canonical_url":url,"doi":doi,"source_ids":sorted(str(s.get("id")) for s in rows),"languages":sorted({str(s.get("language")) for s in rows if s.get("language")}),"labels":clean,"metadata_variants":variants,"conflicts":conflicts})

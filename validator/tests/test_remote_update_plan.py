@@ -22,6 +22,20 @@ def test_valid_remote_update_plan(tmp_path: Path):
     assert validate_remote_plan(path).errors == 0
 
 
+def test_first_english_publication_accepts_workflow_release_baseline(tmp_path: Path):
+    plan = valid_plan()
+    plan["state_source"] = {
+        "kind": "workflow_release_baseline",
+        "work_id": "EDIT-20261026-001",
+        "baseline_sha256": "3" * 64,
+        "empty_baseline": True,
+    }
+    plan["plan_sha256"] = sha_object({k: v for k, v in plan.items() if k != "plan_sha256"})
+    path = tmp_path / "plan.json"
+    path.write_text(json.dumps(plan), encoding="utf-8")
+    assert validate_remote_plan(path).errors == 0
+
+
 def test_plan_hash_tampering_is_blocked(tmp_path: Path):
     plan=valid_plan(); plan['debate_id']='other'
     path=tmp_path/'plan.json'; path.write_text(json.dumps(plan),encoding='utf-8')

@@ -22,6 +22,20 @@ def _fold(value: Any) -> str:
     return re.sub(r"[^\w]+", " ", text, flags=re.UNICODE).strip()
 
 
+def _labels_are_compatible_variants(values: list[str]) -> bool:
+    """Accept a substantial short title embedded in a fuller headline."""
+    unique = sorted({value for value in values if value})
+    if len(unique) <= 1:
+        return True
+    longest = max(unique, key=lambda value: (len(value.split()), len(value), value))
+    padded_longest = f" {longest} "
+    return all(
+        value == longest
+        or (len(value.split()) >= 5 and f" {value} " in padded_longest)
+        for value in unique
+    )
+
+
 def normalize_doi(value: Any) -> str | None:
     raw = _text(value)
     if not raw:
@@ -123,20 +137,29 @@ def build_resource_registry(sources_doc: dict[str, Any], source_registry_sha256:
                 "date": _text(meta.get("date")),
                 "publisher_or_site": _text(meta.get("publisher") or meta.get("site")),
             })
+        preferred_by_lang: dict[str, str] = {}
         for lang, values in sorted(by_lang.items()):
             nonempty = [k for k in values if k]
-            if len(nonempty) > 1:
+            if len(nonempty) > 1 and not _labels_are_compatible_variants(nonempty):
                 conflicts.append({
                     "kind": "same_identity_incompatible_label",
                     "language": lang,
                     "source_ids": sorted({sid for key2 in nonempty for sid in values[key2]}),
                     "labels": sorted({next(v["label"] for v in variants if v["source_id"] == sid) for key2 in nonempty for sid in values[key2]}),
                 })
+            elif nonempty:
+                preferred_by_lang[lang] = max(
+                    nonempty,
+                    key=lambda value: (len(value.split()), len(value), value),
+                )
         # Deduplicate identical language/label rows while preserving exact presentation.
         seen_label: set[tuple[str, str]] = set()
         clean_labels = []
         for row in labels:
             sig = (row["language"], _fold(row["label"]))
+            preferred = preferred_by_lang.get(row["language"])
+            if preferred and sig[1] != preferred:
+                continue
             if sig not in seen_label:
                 seen_label.add(sig)
                 clean_labels.append(row)

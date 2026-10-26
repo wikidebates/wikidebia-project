@@ -13,7 +13,7 @@ import wikidebia_corpus_build as corpus
 import wikidebia_editorial_workspace as workspace_mod
 import wikidebia_remote_execute as execution
 import wikidebia_work_close as closure
-from test_wikidebia_remote_execute import make_approved_fixture
+from test_wikidebia_remote_execute import argument, make_approved_fixture
 
 
 def passing_validator(project_root, package_root, *, scopes, json_output, text_output):
@@ -115,6 +115,101 @@ def test_close_refuses_pending_delete(tmp_path: Path):
         assert "suppression" in str(exc) and "différée" in str(exc)
     else:
         raise AssertionError("Un état pending_delete a été clôturé")
+
+
+def test_published_state_accepts_signed_effective_content_for_adopted_page(tmp_path: Path):
+    project, debate_id, work_id, comparison_id, execution_receipt, _ = make_executed(tmp_path)
+    release = project / ".state/editorial-workspaces" / debate_id / work_id / "release-copy"
+    plan_path = project / ".state/remote-comparisons" / debate_id / work_id / comparison_id / "update-plan.json"
+    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    row = plan["operations"]["create"].pop()
+    plan["operations"]["update"].append(row)
+    release_sha = closure.sha_text((release / row["source_path"].split("release-copy/", 1)[-1]).read_text(encoding="utf-8"))
+    effective_text = argument("Texte final").replace("|rubriques=Société", "|rubriques=Société\n|date-création=2026-08-03")
+    effective_path = project / ".state/update-effective" / debate_id / "fr/A0001-effective.wiki"
+    effective_path.parent.mkdir(parents=True)
+    effective_path.write_text(effective_text, encoding="utf-8")
+    row.update({
+        "source_path": effective_path.relative_to(project).as_posix(),
+        "new_sha256": closure.sha_text(effective_text),
+        "original_source_path": (release / "output/fr/arguments/A0001.wiki").relative_to(project).as_posix(),
+        "original_new_sha256": release_sha,
+        "remote_adoption": {"observed_revision_id": 10},
+        "lifecycle_preservation": {"effective_source_path": effective_path.relative_to(project).as_posix()},
+    })
+    plan["counts"]["create"] = 0
+    plan["counts"]["update"] = 1
+    unsigned_plan = dict(plan)
+    unsigned_plan.pop("plan_sha256", None)
+    plan["plan_sha256"] = closure.sha_object(unsigned_plan)
+    plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    state_path = project / ".state/published" / debate_id / "fr/latest.json"
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    state["pages"][0]["content_sha256"] = closure.sha_text(effective_text)
+    state["plan_sha256"] = plan["plan_sha256"]
+    unsigned_state = dict(state)
+    unsigned_state.pop("state_sha256", None)
+    state["state_sha256"] = closure.sha_object(unsigned_state)
+    state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    execution_data = {
+        "release_copy": release,
+        "execution_receipt": {
+            "debate_id": debate_id,
+            "work_id": work_id,
+            "comparison_id": comparison_id,
+            "plan_sha256": plan["plan_sha256"],
+            "underlying_receipt_sha256": state["receipt_sha256"],
+            "published_states": {"fr": {"state_sha256": state["state_sha256"]}},
+        },
+    }
+    verified = closure._verify_published_states(project, debate_id, execution_data)
+    assert verified["fr"]["page_count"] == 1
+
+
+def test_published_state_accepts_earlier_signed_language_checkpoint(tmp_path: Path):
+    project, debate_id, work_id, comparison_id, execution_receipt, _ = make_executed(tmp_path)
+    release = project / ".state/editorial-workspaces" / debate_id / work_id / "release-copy"
+    en_path = release / "output/en/arguments/A0002.wiki"
+    en_path.parent.mkdir(parents=True)
+    en_text = argument("Earlier English checkpoint")
+    en_path.write_text(en_text, encoding="utf-8")
+    manifest_path = release / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["pages"].append({
+        "language": "en",
+        "page_id": "A0002",
+        "page_type": "argument",
+        "canonical_title": "Earlier argument",
+        "file_path": "output/en/arguments/A0002.wiki",
+        "sha256": closure.sha_text(en_text),
+    })
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    en_state = {
+        "debate_id": debate_id,
+        "language": "en",
+        "plan_sha256": "1" * 64,
+        "receipt_sha256": "2" * 64,
+        "pages": [{
+            "page_id": "A0002",
+            "canonical_title": "Earlier argument",
+            "content_sha256": closure.sha_text(en_text),
+            "revision_id": 9,
+            "status": "published",
+        }],
+    }
+    en_state["state_sha256"] = closure.sha_object(en_state)
+    en_state_path = project / ".state/published" / debate_id / "en/latest.json"
+    en_state_path.parent.mkdir(parents=True)
+    en_state_path.write_text(json.dumps(en_state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    execution_data = {
+        "release_copy": release,
+        "execution_receipt": execution_receipt,
+    }
+    verified = closure._verify_published_states(project, debate_id, execution_data)
+    assert set(verified) == {"en", "fr"}
+    assert verified["en"]["page_count"] == 1
 
 
 def test_no_changes_execution_can_close(tmp_path: Path):

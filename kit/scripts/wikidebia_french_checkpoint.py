@@ -100,11 +100,13 @@ def _workspace(project_root: Path, debate_id: str, work_id: str, stage: str) -> 
         raise FrenchCheckpointError(f"{source_name} a changé depuis son application")
     if stage == "graph" and meta.get("status") not in {
         "fr_titles_applied", "fr_metadata_applied", "fr_content_review_ready", "fr_content_review_finalized", "fr_content_applied",
-        "en_translation_review_ready", "en_translation_review_finalized", "en_translation_applied", "bilingual_rendered"
+        "en_translation_review_ready", "en_translation_review_finalized", "en_translation_applied", "bilingual_rendered",
+        "release_ready",
     }:
         raise FrenchCheckpointError(f"Les titres français ne sont pas appliqués : {meta.get('status')}")
     if stage == "content" and meta.get("status") not in {
-        "fr_content_applied", "en_translation_review_ready", "en_translation_review_finalized", "en_translation_applied", "bilingual_rendered"
+        "fr_content_applied", "en_translation_review_ready", "en_translation_review_finalized", "en_translation_applied", "bilingual_rendered",
+        "release_ready",
     }:
         raise FrenchCheckpointError(f"Le contenu français n'est pas appliqué : {meta.get('status')}")
     assert_no_symlinks(source)

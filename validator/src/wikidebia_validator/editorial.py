@@ -382,7 +382,9 @@ def displayed_title_issues(title: str, language: str) -> list[str]:
     if language == 'fr' and MALFORMED_FR_INITIAL.search(stripped):
         issues.append('malformed_article')
     dangling = DANGLING_FR if language == 'fr' else DANGLING_EN
-    if dangling.search(stripped):
+    if dangling.search(stripped) and not (
+        language == 'en' and re.search(r'\bbegin\s+with$', stripped, re.I)
+    ):
         issues.append('dangling_connector')
     if DOUBLE_WORD.search(stripped):
         issues.append('doubled_word')
@@ -638,13 +640,17 @@ def _validate_debate_docs(ctx: PackageContext, manifest: dict[str, Any], control
         tmpl = _parse_page(ctx, page.get('file_path'))
         if not tmpl:
             continue
+        from .source_preservation import preserved_french_page
+        exact_french = lang == 'fr' and preserved_french_page(ctx, page, ctx.read_text(page['file_path']) or '')
         intro_count = len(get_subs(tmpl, 'introduction'))
         bucket_templates = [get_subs(tmpl, param) for param in doc_params[lang]]
         counts = [len(items) for items in bucket_templates]
         distinct_counts = [len({re.sub('\\s+', ' ', item.raw).strip().casefold() for item in items}) for items in bucket_templates]
         total = sum(counts)
         metrics[lang] = {'introduction_subsections': intro_count, 'documentary_references': total, 'bucket_counts': counts, 'distinct_bucket_counts': distinct_counts, 'profile_minima': {'subsections': min_subsections, 'references': min_references}, 'profile_rationale': profile_rationale}
-        if intro_count < min_subsections or total < min_references:
+        historical_absent_introduction = exact_french and intro_count == 0
+        if ((intro_count < min_subsections and not historical_absent_introduction)
+                or total < min_references):
             ctx.report.error('WDV-EDT-004', 'Page de débat insuffisamment développée ou documentée selon le profil déclaré', path=page.get('file_path'), details=metrics[lang])
         if not documentation_policy_1242:
             insufficient = {param: {'total': count, 'distinct': distinct} for param, count, distinct in zip(doc_params[lang], counts, distinct_counts) if distinct < 2}
@@ -670,8 +676,6 @@ def _validate_debate_docs(ctx: PackageContext, manifest: dict[str, Any], control
             duplicates = {identity: {'orientations': sorted(source_orientations[identity]), 'parameters': source_locations[identity]} for identity in source_orientations if len(source_orientations[identity]) > 1}
             if duplicates:
                 ctx.report.error('WDV-EDT-004', 'Une même référence documentaire est classée dans plusieurs orientations; une source couvrant plusieurs positions doit être placée dans la rubrique neutre', path=page.get('file_path'), details={'duplicate_count': len(duplicates), 'duplicates': dict(list(duplicates.items())[:25])})
-        from .source_preservation import preserved_french_page
-        exact_french = lang == 'fr' and preserved_french_page(ctx, page, ctx.read_text(page['file_path']) or '')
         if video_authorship_policy_1242 and not exact_french:
             video_missing_authors = []
             for param, items in zip(doc_params[lang][6:9], bucket_templates[6:9]):
@@ -2159,7 +2163,10 @@ def validate_editorial(ctx: PackageContext) -> None:
             title = data.get('displayed_title') or ''
             reasons = displayed_title_issues(title, lang)
             if source_preexisting or differential_translation:
-                reasons = [reason for reason in reasons if reason not in {'too_short', 'lowercase_initial'}]
+                allowed_historical_reasons = {'too_short', 'lowercase_initial'}
+                if source_preexisting:
+                    allowed_historical_reasons.add('ellipsis')
+                reasons = [reason for reason in reasons if reason not in allowed_historical_reasons]
             if reasons:
                 title_quality_counts[lang] += 1
                 ctx.report.error('WDV-EDT-007', 'Titre affiché tronqué, mal formé ou grammaticalement incomplet', path=ctx.core_paths()['registry'], details={'node_id': node_id, 'language': lang, 'title': title, 'reasons': reasons})
@@ -2174,7 +2181,17 @@ def validate_editorial(ctx: PackageContext) -> None:
             elif lang == 'en' and differential_translation:
                 fr_title = (node.get('fr') or {}).get('displayed_title') or ''
                 argument_reasons = displayed_title_translation_form_regression(fr_title, title)
-                if isinstance(individual, dict) and individual.get('displayed_title_source_form_reviewed_en') is True and individual.get('displayed_title_no_formal_regression_en') is True and individual.get('displayed_title_source_form_en') == individual.get('displayed_title_target_form_en') and individual.get('displayed_title_target_form_en') in {'nominal_phrase', 'question', 'other'}:
+                if isinstance(individual, dict) and individual.get('displayed_title_source_form_reviewed_en') is True and individual.get('displayed_title_no_formal_regression_en') is True and individual.get('displayed_title_source_form_en') == individual.get('displayed_title_target_form_en') and individual.get('displayed_title_target_form_en') in {'nominal_phrase', 'thematic_label', 'question', 'other'}:
+                    argument_reasons = []
+                if (
+                    isinstance(individual, dict)
+                    and individual.get('displayed_title_source_form_reviewed_en') is True
+                    and individual.get('displayed_title_no_formal_regression_en') is True
+                    and individual.get('displayed_title_source_form_en') == 'proposition'
+                    and individual.get('displayed_title_target_form_en') == 'proposition'
+                    and individual.get('displayed_title_complete_proposition_en') is True
+                    and individual.get('displayed_title_argument_intelligible_en') is True
+                ):
                     argument_reasons = []
                 marker_losses = bilingual_title_marker_losses(fr_title, title) if marker_engine_active else []
                 structure_signals = bilingual_semantic_structure_signals(fr_title, title) if marker_engine_active else []

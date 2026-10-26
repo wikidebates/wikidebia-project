@@ -22,6 +22,12 @@ def test_displayed_title_rejects_dangling_connector():
     assert "dangling_connector" in displayed_title_issues("An explanation based on", "en")
 
 
+def test_displayed_title_accepts_phrasal_verb_ending_in_with():
+    assert "dangling_connector" not in displayed_title_issues(
+        "Men who make that accusation were not allies to begin with", "en"
+    )
+
+
 def test_displayed_title_accepts_complete_french_sentence():
     assert displayed_title_issues(
         "L'enregistrement préalable d'une méta-analyse réduit la flexibilité analytique",

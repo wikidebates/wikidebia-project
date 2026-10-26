@@ -740,7 +740,16 @@ def _render_argument(
             ("webliography", _sequence(_source_template(sources[source_id], lang="en") for source_id in selected.get("webliography") or [])),
             ("videography", _sequence(_source_template(sources[source_id], lang="en") for source_id in selected.get("videography") or [])),
         ])
-        detailed_present, detailed_value = _optional_preserved_parameter(content, "dedicated-debate")
+        source_detailed_present = False
+        if source_content is not None:
+            source_detailed_present, _ = _optional_preserved_parameter(source_content, "débat-dédié")
+        if source_detailed_present:
+            detailed_present = True
+            detailed_value = str(content.get("dedicated_debate") or "").strip()
+            if not detailed_value:
+                raise RenderError(f"Traduction du débat-dédié absente : {node_id}")
+        else:
+            detailed_present, detailed_value = _optional_preserved_parameter(content, "dedicated-debate")
         _append_lifecycle_parameter(params, content, "justification-warnings", None)
         params.append(("justifications", None if detailed_present else _relations(registry, node_id, "justification", "en", content.get("relation_labels") or [])))
         _append_lifecycle_parameter(params, content, "objection-warnings", None)
@@ -1344,8 +1353,97 @@ def _build_rendered_copy(
     en_content = load_json(target / "data/en_content_lock.json", "verrou anglais du contenu")
     en_translation = load_json(target / "data/en_translation_lock.json", "verrou de traduction")
     from wikidebia_translation_source import POLICY, verify_frozen_source
-    preserve_french = fr_content.get("source_preservation_policy") == POLICY
-    if preserve_french:
+    fr_content_by_id = {
+        str(row.get("id")): row for row in fr_content.get("arguments") or []
+    }
+    checkpoint_dir = (
+        project_root / ".state/fr-publication" / debate_id / work_id / "content"
+    )
+    checkpoint_receipt_path = checkpoint_dir / "checkpoint.json"
+    if checkpoint_receipt_path.is_file():
+        checkpoint_receipt = load_json(checkpoint_receipt_path, "checkpoint français publié")
+        checkpoint_corpus = checkpoint_dir / "checkpoint-corpus"
+        if (
+            checkpoint_receipt.get("status") != "ready_for_remote_plan"
+            or checkpoint_receipt.get("stage") != "content"
+            or checkpoint_receipt.get("debate_id") != debate_id
+            or checkpoint_receipt.get("work_id") != work_id
+            or checkpoint_receipt.get("source_content_review_sha256") != fr_content.get("review_sha256")
+            or full_tree_sha256(checkpoint_corpus) != checkpoint_receipt.get("checkpoint_tree_sha256")
+        ):
+            raise RenderError("Checkpoint de publication française divergent")
+        checkpoint_manifest = load_json(checkpoint_corpus / "manifest.json", "manifest du checkpoint français")
+        preserved_rows = []
+        for page in checkpoint_manifest.get("pages") or []:
+            if page.get("language") != "fr":
+                continue
+            page_type = str(page.get("page_type") or "")
+            page_id = str(page.get("page_id") or "")
+            source_path = checkpoint_corpus / str(page.get("file_path") or "")
+            expected_sha = str(page.get("sha256") or "")
+            if not source_path.is_file() or sha256_file(source_path) != expected_sha:
+                raise RenderError(f"Page du checkpoint français divergente : {page_id}")
+            if page_type == "debate":
+                locked_page = fr_content.get("debate") or {}
+                relative = Path("provenance/fr-publication-checkpoint/debate/debate.wiki")
+                provenance_id = None
+            else:
+                locked_page = fr_content_by_id.get(page_id)
+                relative = Path(f"provenance/fr-publication-checkpoint/arguments/{page_id}.wiki")
+                provenance_id = page_id
+            if not isinstance(locked_page, dict):
+                raise RenderError(f"Page française verrouillée absente du checkpoint : {page_id}")
+            destination = target / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source_path, destination)
+            locked_page["import_path"] = relative.as_posix()
+            locked_page["import_sha256"] = expected_sha
+            preserved_rows.append({
+                "page_id": provenance_id,
+                "kind": page_type,
+                "import_path": relative.as_posix(),
+                "sha256": expected_sha,
+            })
+        if len(preserved_rows) != 1 + len(fr_content_by_id):
+            raise RenderError("Couverture incomplète du checkpoint de publication française")
+        write_json(target / "data/fr_render_source_provenance.json", {
+            "schema": "wikidebia-fr-render-source-provenance-1.0",
+            "debate_id": debate_id,
+            "work_id": work_id,
+            "source_checkpoint_receipt_sha256": checkpoint_receipt.get("receipt_sha256"),
+            "source_checkpoint_tree_sha256": checkpoint_receipt.get("checkpoint_tree_sha256"),
+            "pages": preserved_rows,
+        })
+    # Full editorial review locks intentionally omit import paths.  Recover the
+    # immutable page receipts from import_provenance so historical French pages
+    # can still be rendered byte-for-byte instead of being reconstructed.
+    provenance = load_json(target / "data/import_provenance.json", "provenance française")
+    for imported in provenance.get("pages") or []:
+        if imported.get("kind") == "debate":
+            locked_page = fr_content.get("debate") or {}
+        else:
+            locked_page = fr_content_by_id.get(str(imported.get("page_id")))
+        if not isinstance(locked_page, dict):
+            continue
+        locked_page.setdefault("import_path", imported.get("import_path"))
+        locked_page.setdefault("import_sha256", imported.get("sha256"))
+    french_pages = [fr_content.get("debate") or {}, *{
+        str(row.get("id")): row for row in fr_content.get("arguments") or []
+    }.values()]
+    all_french_pages_preexisting = bool(french_pages) and all(
+        page.get("page_origin") == "preexisting" for page in french_pages
+    )
+    all_historical_imports_available = all_french_pages_preexisting and all(
+        bool(page.get("import_path"))
+        and (target / str(page.get("import_path"))).is_file()
+        and sha256_file(target / str(page.get("import_path"))) == page.get("import_sha256")
+        for page in french_pages
+    )
+    preserve_french = (
+        fr_content.get("source_preservation_policy") == POLICY
+        or all_historical_imports_available
+    )
+    if fr_content.get("source_preservation_policy") == POLICY:
         verify_frozen_source(target, fr_meta, fr_content)
     source_registry = load_json(target / "data/sources.json", "registre documentaire")
     if en_translation.get("review_sha256") != translation_review_sha256:
@@ -1356,7 +1454,7 @@ def _build_rendered_copy(
     source_by_id = {str(row.get("id")): row for row in source_registry.get("sources") or []}
     nodes = [node for node in (registry.get("graph") or {}).get("nodes") or [] if node.get("status") == "active"]
     nodes.sort(key=lambda node: str(node.get("id")))
-    fr_args = {str(row.get("id")): row for row in fr_content.get("arguments") or []}
+    fr_args = fr_content_by_id
     en_args = {str(row.get("id")): row for row in en_content.get("arguments") or []}
     french_pages = [fr_content.get("debate") or {}, *fr_args.values()]
     if french_pages and all(page.get("page_origin") == "preexisting" for page in french_pages):

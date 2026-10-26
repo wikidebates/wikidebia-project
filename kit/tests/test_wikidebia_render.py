@@ -226,6 +226,37 @@ def test_render_preserves_detailed_debate_and_omits_local_relations():
     assert '|objections=' not in text
 
 
+def test_render_translates_dedicated_debate_and_omits_english_local_relations():
+    child = {'id': 'A0002', 'en': {'canonical_title': 'Child argument', 'displayed_title': 'Child argument'}}
+    node = {
+        'id': 'A0001',
+        'fr': {'rubriques': ['Société'], 'keywords': ['sujet']},
+        'en': {'canonical_title': 'Argument topic', 'sections': ['Society'], 'keywords': ['topic']},
+    }
+    registry = {'graph': {'edges': [{'id': 'E00001', 'parent_node_id': 'A0001', 'child_node_id': 'A0002', 'relation': 'justification', 'order': 1, 'status': 'active'}], 'occurrences': [], 'nodes': [node, child]}}
+    content = {
+        'summary': 'The argument points to a dedicated debate for its full development.',
+        'citations': [], 'citation_passages': [], 'sources': {}, 'page_origin': 'new',
+        'preserved_parameters': {},
+        'dedicated_debate': 'Does the left bear responsibility for the rise of the far right?',
+    }
+    source_content = {
+        'page_origin': 'preexisting',
+        'preserved_parameters': {
+            'débat-dédié': {'present': True, 'value': "La gauche a-t-elle une responsabilité dans la montée de l'extrême droite ?"},
+        },
+    }
+
+    text = render._render_argument(
+        lang='en', node=node, content=content, registry=registry, sources={},
+        creation_date='2026-08-05', source_content=source_content,
+    )
+
+    assert '|dedicated-debate=Does the left bear responsibility for the rise of the far right?' in text
+    assert '|justifications=' not in text
+    assert '|objections=' not in text
+
+
 def test_render_preserves_historical_argument_name():
     node={'id':'A0001','fr':{'rubriques':['Philosophie'],'keywords':['Dieu']},'en':{'canonical_title':'Argument topic'}}
     registry={'graph':{'edges':[],'occurrences':[],'nodes':[node]}}
