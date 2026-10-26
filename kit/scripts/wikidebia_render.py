@@ -1416,6 +1416,16 @@ def _build_rendered_copy(
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", en_default_date):
         en_default_date = dt.date.today().isoformat()
     dates = _page_creation_dates(source, registry, en_default_date)
+    for page_id, page in [(str(registry["debate"]["id"]), en_content.get("debate") or {}), *en_args.items()]:
+        if _page_origin(page) != "preexisting":
+            continue
+        present, value = _optional_preserved_parameter(page, "creation-date")
+        if present:
+            try:
+                dt.date.fromisoformat(str(value))
+            except ValueError as exc:
+                raise RenderError(f"Date de création anglaise historique invalide : {page_id}") from exc
+            dates[(page_id, "en")] = str(value)
 
     # Lock graph and titles before rendering.  This does not alter structural identity.
     lifecycle = (registry.get("graph") or {}).setdefault("lifecycle", {})
@@ -1524,6 +1534,14 @@ def _build_rendered_copy(
             page_origin=str((page_content or {}).get("page_origin") or "new"),
             preserved_parameters=(page_content or {}).get("preserved_parameters") or {},
         ))
+        adoption = (page_content or {}).get("existing_english_update") if lang == "en" else None
+        if adoption:
+            authorization = {"decision": "explicit_user_request", "action": "edit", "instruction": adoption["instruction"]}
+            page_manifests[-1].update(
+                summary_change_authorization=copy.deepcopy(authorization),
+                citation_change_authorization=copy.deepcopy(authorization),
+                existing_english_update=copy.deepcopy(adoption),
+            )
     page_manifests.sort(key=lambda row: (0 if row["language"] == "fr" else 1, 0 if row["page_type"] == "debate" else 1, row["page_id"]))
 
     manifest["global_status"] = "bilingual_validated"
@@ -1531,6 +1549,13 @@ def _build_rendered_copy(
     manifest["normative_versions"].update({"consolidated_norm": NORM_VERSION, "validator": VALIDATOR_VERSION})
     manifest.setdefault("translation_status", {})["en"] = "ready"
     manifest["pages"] = page_manifests
+    existing_updates = [row["existing_english_update"] for row in page_manifests if row.get("existing_english_update")]
+    if existing_updates:
+        rel = "data/english_remote_adoptions.json"
+        keys = {"language", "page_id", "title", "reason", "allow_proposed_change", "observed_revision_id", "observed_sha256", "allowed_lifecycle_parameter_changes"}
+        entries = [{key: value for key, value in row.items() if key in keys} for row in existing_updates]
+        write_json(target / rel, {"version": "wikidebia-manual-remote-adoptions-1.0", "debate_id": debate_id, "decision": existing_updates[0]["instruction"], "entries": entries})
+        manifest.setdefault("editorial_controls", {})["manual_remote_adoption_path"] = rel
     manifest["batches"] = copy.deepcopy(batches)
     input_sha = structural_sha256(registry)
     manifest["validations"] = _validation_records(timestamp, input_sha)
