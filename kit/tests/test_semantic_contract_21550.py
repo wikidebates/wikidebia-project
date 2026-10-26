@@ -79,6 +79,11 @@ def test_debate_field_semantic_proof_is_bound_to_source_and_target(tmp_path: Pat
     debate["debate_field_semantic_risk_reviewed"] = True
     debate["debate_field_semantic_risk_note"] = "The missing frequency marker was reviewed directly against the French topic field."
     debate["debate_field_semantic_risk_evidence"] = []
-    common.write_json(path, review)
+    # Exercise field-level evidence validation directly. Finalization now
+    # rejects a forged embedded French field even before this semantic guard.
+    _, sources = translation._validate_sources(
+        json.loads((workspace / "data/sources_en_working.json").read_text()), "debat_test", set()
+    )
+    keywords = {row["fr"]: row["en"] for row in review["vocabulary"]}
     with pytest.raises(translation.TranslationReviewError, match="Chaque risque sémantique de Debate"):
-        translation.finalize_review(project, "debat_test", work_id)
+        translation._validate_debate(debate, keywords, sources, "debat_test")

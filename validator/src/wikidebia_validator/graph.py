@@ -48,7 +48,7 @@ def contextual_title_issues(title: str, language: str, revision: str | None = No
                 value, re.I,
             )
             or re.match(
-                r"^It\s+(?:(?:is|was|will\s+be|would\s+be|can\s+be|could\s+be|should\s+be|must\s+be)\s+(?:(?:entirely|perfectly|quite|fully)\s+)?(?:necessary|important|essential|possible|impossible|fair|unfair|right|wrong|reasonable|unreasonable|better|worse)\s+(?:to|that)\b)",
+                r"^It\s+(?:(?:is|was|will\s+be|would\s+be|can\s+be|could\s+be|should\s+be|must\s+be)\s+(?:(?:entirely|perfectly|quite|fully|very)\s+)?(?:necessary|important|essential|possible|impossible|fair|unfair|right|wrong|reasonable|unreasonable|rational|false|uncomfortable|better|worse)\s+(?:to|that)\b)",
                 value, re.I,
             )
         )

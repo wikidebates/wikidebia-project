@@ -32,15 +32,50 @@ def historical_numbers_preserved(french: str, english: str) -> bool:
     def plain(s: str) -> str:
         s=re.sub(r'<ref\b[^>]*>.*?</ref\s*>',' ',s,flags=re.S|re.I)
         return re.sub(r'\[https?://\S+\s+([^\]]*)\]',r'\1',s)
-    def digits(s: str, lang: str) -> list[Decimal]:
-        values=[]
-        for raw in re.findall(r'(?<!\w)[+−-]?\d+(?:[ \u00a0\u202f]\d{3})*(?:[,.]\d+)?',plain(s)):
-            value=re.sub(r'[ \u00a0\u202f]','',raw)
-            value=value.replace('−','-')
-            value=value.replace(',','') if lang=='en' else value.replace(',','.')
-            values.append(Decimal(value))
+    def digits(s: str, lang: str) -> list[Decimal] | None:
+        text = plain(s)
+        # Grouping conventions belong to the language, not the claim. In
+        # particular, 5 M. 100.000 and 5,100,000 denote the same source value.
+        numeric = (r'[+−-]?\d+(?:[, \u00a0\u202f]\d{3})*(?:\.\d+)?' if lang == 'en'
+                   else r'[+−-]?\d+(?:[. \u00a0\u202f]\d{3})*(?:,\d+)?(?:\.\d+)?')
+        def decimal(raw: str) -> Decimal:
+            value = re.sub(r'[ \u00a0\u202f]', '', raw).replace('−', '-')
+            if lang == 'en':
+                value = value.replace(',', '')
+            else:
+                # A grouped French integer uses periods; other periods remain
+                # decimal marks (e.g. a historical mathematical notation).
+                if re.fullmatch(r'[+-]?\d{1,3}(?:\.\d{3})+(?:,\d+)?', value):
+                    value = value.replace('.', '')
+                value = value.replace(',', '.')
+            return Decimal(value)
+        # Only the explicit French abbreviation permits a compound remainder.
+        # A year after "million" is not silently folded into the quantity.
+        scale = r'(?:millions?|(?P<abbr>M\.))' if lang == 'fr' else r'millions?'
+        remainder_pattern = r'(?(abbr)(?:\s+(' + numeric + r'))?)' if lang == 'fr' else ''
+        pattern = re.compile(r'(?<!\w)(' + numeric + r')(?:\s*(' + scale + r')(?=\W|$)' + remainder_pattern + r')?', re.I)
+        values = []
+        for match in pattern.finditer(text):
+            try:
+                value = decimal(match[1])
+            except ArithmeticError:
+                return None
+            if match[2]:
+                value *= 1_000_000
+                if lang == 'fr' and match[4]:
+                    try:
+                        remainder = decimal(match[4])
+                    except ArithmeticError:
+                        return None
+                    if not 0 <= remainder < 1_000_000:
+                        return None
+                    value += -remainder if value.is_signed() else remainder
+            values.append(value)
         return values
-    source=collections.Counter(digits(french,'fr'));target=collections.Counter(digits(english,'en'))
+    source_values, target_values = digits(french, 'fr'), digits(english, 'en')
+    if source_values is None or target_values is None:
+        return False
+    source=collections.Counter(source_values);target=collections.Counter(target_values)
     # No invented digit value, and no lost repeated digit occurrence.
     if target-source:return False
     missing=source-target
