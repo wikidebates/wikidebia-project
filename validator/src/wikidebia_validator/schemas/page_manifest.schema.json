@@ -120,6 +120,129 @@
           "value"
         ]
       }
+    },
+    "summary_change_authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision",
+        "action",
+        "instruction"
+      ],
+      "properties": {
+        "decision": {
+          "const": "explicit_user_request"
+        },
+        "action": {
+          "enum": [
+            "edit",
+            "restore"
+          ]
+        },
+        "instruction": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "citation_change_authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision",
+        "action",
+        "instruction"
+      ],
+      "properties": {
+        "decision": {
+          "const": "explicit_user_request"
+        },
+        "action": {
+          "enum": [
+            "edit",
+            "restore"
+          ]
+        },
+        "instruction": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "existing_english_update": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "const": "en"
+        },
+        "page_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner_approved": {
+          "const": true
+        },
+        "decision": {
+          "const": "explicit_user_request"
+        },
+        "instruction": {
+          "type": "string",
+          "minLength": 24
+        },
+        "authorization_receipt_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 24
+        },
+        "allow_proposed_change": {
+          "const": true
+        },
+        "observed_revision_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "observed_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "allowed_lifecycle_parameter_changes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "allowed_parameter_deletions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "language",
+        "page_id",
+        "title",
+        "owner_approved",
+        "decision",
+        "instruction",
+        "authorization_receipt_sha256",
+        "reason",
+        "allow_proposed_change",
+        "observed_revision_id",
+        "observed_sha256"
+      ]
     }
   },
   "required": [

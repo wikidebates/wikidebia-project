@@ -2065,7 +2065,22 @@ def _validate_argument(item: Mapping[str, Any], mapping: Mapping[str, str], sour
     lifecycle = _validate_page_lifecycle(row, "argument", node_id)
     argument_name, name_discovery = _validate_argument_name_discovery(row, node_id, lifecycle["page_origin"])
     dedicated_debate = _validate_dedicated_debate(row, node_id)
+    existing_update = row.get("existing_english_update")
+    if existing_update is not None:
+        if (lifecycle["page_origin"] != "preexisting" or not isinstance(existing_update, dict)
+                or existing_update.get("owner_approved") is not True
+                or existing_update.get("decision") != "explicit_user_request"
+                or existing_update.get("title") != canonical
+                or existing_update.get("page_id") != node_id
+                or existing_update.get("language") != "en"
+                or not isinstance(existing_update.get("observed_revision_id"), int)
+                or existing_update["observed_revision_id"] <= 0
+                or not re.fullmatch(r"[a-f0-9]{64}", str(existing_update.get("observed_sha256") or ""))):
+            raise TranslationReviewError(f"Autorisation de reprise anglaise invalide : {node_id}")
+        _text(existing_update.get("instruction"), f"instruction propriétaire anglaise {node_id}", 24)
+        _text(existing_update.get("reason"), f"motif de reprise anglaise {node_id}", 24)
     return {
+        **({"existing_english_update": copy.deepcopy(existing_update)} if existing_update is not None else {}),
         **dedicated_debate,
         "id": node_id, "canonical_title": canonical, "displayed_title": displayed,
         "sections": sections, "keywords": keywords, "summary": summary, "citations": citations, "citation_passages": passages, "sources": final_sources,

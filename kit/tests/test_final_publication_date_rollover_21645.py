@@ -129,7 +129,7 @@ def test_rollover_reseals_plan_preflight_authorization_and_archives_previous_sta
     monkeypatch.setattr(final, "build_adapter", lambda config, root: object())
     monkeypatch.setattr(final, "GenericPublisher", lambda config, adapter, path: Builder(release))
     monkeypatch.setattr(final, "_reorder_english_plan", lambda plan: plan)
-    monkeypatch.setattr(final, "_assert_safe_english_plan", lambda plan: None)
+    monkeypatch.setattr(final, "_assert_safe_english_plan", lambda plan, approved_updates=None: None)
     monkeypatch.setattr(final, "_preflight", lambda root, state, plans: {"preflight_sha256": "newpre"})
     monkeypatch.setattr(final, "_authorization", lambda state, baseline, preflight: {"authorization_sha256": "newauth"})
 
