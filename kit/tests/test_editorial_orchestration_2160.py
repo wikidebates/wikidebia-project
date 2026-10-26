@@ -928,6 +928,39 @@ def test_legacy_pending_english_review_publishes_french_checkpoint_before_resume
     assert saved["french_publication"]["receipt_sha256"] == "c" * 64
 
 
+def test_workflow_resume_records_french_checkpoint_network_failure(tmp_path: Path, monkeypatch):
+    project = tmp_path / "project"
+    project.mkdir()
+    base = make_base(project)
+    state = make_state(project, base)
+    state.update({
+        "phase": "graph_publication_resume",
+        "status": "running",
+        "work_id": "EDIT-20261022-001",
+        "remote_publication_stage": "graph",
+    })
+    wf._save_workflow(project, state)
+
+    def fail_remote(_project, _state):
+        raise wf.FrenchCheckpointError("Cloudflare 403", remote_execution_started=False)
+
+    monkeypatch.setattr(wf, "_mechanical_advance", fail_remote)
+    with pytest.raises(wf.FrenchCheckpointError, match="Cloudflare 403"):
+        wf.start_workflow(project, "Débat test ?", debate_id="debat_test")
+
+    saved = wf._load_workflow(project, "debat_test")
+    assert saved["phase"] == "graph_publication_resume"
+    assert saved["status"] == "blocked_remote_publication"
+    assert saved["last_remote_publication_error"] == "Cloudflare 403"
+    assert saved["last_remote_publication_execution_started"] is False
+
+    monkeypatch.setattr(wf, "_mechanical_advance", lambda _project, current: current)
+    resumed = wf.start_workflow(project, "Débat test ?", debate_id="debat_test")
+    assert resumed["status"] == "running"
+    assert "last_remote_publication_error" not in resumed
+    assert "last_remote_publication_execution_started" not in resumed
+
+
 def test_failure_after_successful_french_publication_does_not_rollback_sealed_review(tmp_path: Path, monkeypatch):
     project = tmp_path / "project"
     project.mkdir()

@@ -10,6 +10,66 @@ Pour lancer ou reprendre la préparation bilingue d'un débat existant :
 
 La commande réutilise un snapshot `graph-extract` compatible déjà présent lorsque c'est possible ; sinon elle effectue l'extraction en lecture seule. Elle initialise le corpus, lance les validations mécaniques et s'arrête au premier point où une décision éditoriale externe est requise.
 
+## Continuité obligatoire sur GitHub
+
+Une production longue doit rester reprenable depuis un autre compte ou une autre
+session sans dépendre du contexte de conversation. Les règles suivantes font
+partie de la méthode de travail :
+
+1. Tout défaut reproductible rencontré dans le workflow est corrigé dans le code
+   générique, avec un test de régression ciblé. Il ne doit pas être contourné en
+   falsifiant un artefact du corpus ou en affaiblissant un contrôle de sécurité.
+2. Le correctif cohérent est validé, commité et poussé sur la branche GitHub de
+   travail dès qu'il est prêt. Les correctifs ne sont pas accumulés jusqu'à la
+   fin de la traduction.
+3. Après chaque phase ou checkpoint, une sauvegarde assainie est mise à jour sous
+   `continuity/<debate_id>/latest/`, puis commitée et poussée. L'historique Git
+   conserve les états antérieurs. Cette sauvegarde contient au minimum le corpus
+   de travail complet nécessaire à la reprise, l'état d'orchestration, les ZIP de
+   revue utiles, un handoff lisible et les pages wikicode créées ou modifiées sur
+   le wiki pendant la phase.
+   Après toute écriture distante, elle contient aussi obligatoirement les états
+   signés `.state/published/<debate_id>/<langue>/latest.json`, tous les états
+   historiques horodatés nécessaires pour relier le dernier checkpoint à cet
+   état courant, les reçus `.state/receipts/<debate_id>/` et les plans/reçus du
+   checkpoint et des corrections ultérieures. Un reçu de checkpoint sans toute
+   sa succession d’états publiés signés n’est pas un point de reprise complet.
+4. Le handoff indique le commit source, la phase atteinte, la prochaine commande,
+   les validations exécutées, les écritures MediaWiki déjà attestées et les
+   éventuels blocages. Un manifeste SHA-256 couvre tous les fichiers sauvegardés.
+5. `private/`, les jetons, mots de passe, cookies, configurations Pywikibot,
+   environnements virtuels, caches et autres secrets ne sont jamais copiés dans
+   `continuity/`. Avant chaque commit, contrôler la liste des fichiers suivis et
+   rechercher les chemins ou données privés accidentels.
+6. Une projection de continuité conserve octet pour octet tout fichier déjà
+   couvert par une empreinte de workflow ou de revue. Une amélioration de
+   portabilité (par exemple remplacer un ancien chemin absolu par un chemin
+   relatif) s'applique à la génération des nouveaux artefacts, jamais par
+   réécriture rétroactive d'une preuve scellée. Si un artefact contient une
+   donnée réellement sensible, la sauvegarde est bloquée et la reprise exige
+   une migration explicite et attestée ; le fichier n'est pas normalisé en
+   silence.
+
+Les répertoires d'exécution (`.state/`, `corpus/`, `incoming/`, `outgoing/`) restent
+ignorés et ne sont pas ajoutés de force. Seule leur projection assainie et
+explicitement contrôlée sous `continuity/` est versionnée. Chaque reprise commence
+par la lecture du handoff et la vérification de son manifeste avant de restaurer
+les données dans les zones locales ignorées.
+
+Après avoir actualisé les autres fichiers et le handoff d'un snapshot, projeter
+la succession française signée et régénérer son manifeste avec :
+
+```bash
+./wikidebia continuity-sync <debate_id>
+./wikidebia continuity-sync <debate_id> --check
+```
+
+La première commande copie octet pour octet les états horodatés, l'état courant
+et les reçus du même Work, puis régénère `SHA256SUMS`. La seconde est sans écriture
+et bloque si une pièce manque, si une révision régresse ou si un reçu sort du
+Work. Les tests du dépôt vérifient aussi chaque snapshot `latest` commité afin
+qu'une sauvegarde incomplète ne passe pas la validation GitHub.
+
 Exemple :
 
 ```text

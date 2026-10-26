@@ -1373,6 +1373,12 @@ def _validate_debate(
         raise ContentReviewError("La revue de la page Débat n’est pas approuvée")
     subject = _text(_select(review, "subject_decision", source.get("subject"), "proposed_subject"), "sujet", 2)
     complete = _text(_select(review, "complete_topic_decision", source.get("complete_topic"), "proposed_complete_topic"), "sujet-développé", 2)
+    for label, historical, final_value in (
+        ("sujet", str(source.get("subject") or ""), subject),
+        ("sujet-développé", str(source.get("complete_topic") or ""), complete),
+    ):
+        if final_value.casefold().count("œ") > historical.casefold().count("œ"):
+            raise ContentReviewError(f"{label} introduit la ligature œ à la place de oe")
     if QUESTION_TOPIC.search(complete):
         raise ContentReviewError("sujet-développé ne doit pas être une question")
     first_alpha = next((char for char in complete if char.isalpha()), "")
@@ -1412,6 +1418,8 @@ def _validate_debate(
             raise ContentReviewError("Décision invalide pour l’introduction historique : keep ou change attendu")
     else:
         introduction = _text(_select(review, "introduction_decision", source.get("introduction"), "proposed_introduction"), "introduction", 30)
+    if str(introduction or "").casefold().count("œ") > historical_intro.casefold().count("œ"):
+        raise ContentReviewError("L’introduction introduit la ligature œ à la place de oe")
     subsection_values = _subsections(introduction)
     if (not historical_intro_protected or historical_intro_authorized) and not subsection_values:
         raise ContentReviewError("L’introduction doit contenir au moins une Sous-partie")
@@ -1671,6 +1679,8 @@ def _validate_argument(
         if numbers:
             if review.get("quantitative_claims_verified") is not True or len(str(review.get("quantitative_claims_note") or "").strip()) < 12:
                 raise ContentReviewError(f"Donnée chiffrée non documentée dans {node_id}")
+    if str(summary or "").casefold().count("œ") > historical_summary.casefold().count("œ"):
+        raise ContentReviewError(f"Le résumé de {node_id} introduit la ligature œ à la place de oe")
     decisions = review.get("documentation_decisions")
     proposed = review.get("proposed_sources")
     if not isinstance(decisions, dict) or not isinstance(proposed, dict):
@@ -2004,6 +2014,24 @@ def _summary_style_review(arguments: Sequence[Mapping[str, Any]], debate_id: str
 def _build_content_copy(project_root: Path, source: Path, target: Path, review: Mapping[str, Any], debate_id: str, work_id: str) -> dict[str, Any]:
     shutil.copytree(source, target, symlinks=False, copy_function=shutil.copy2)
     final = copy.deepcopy(review["final_values"])
+
+    # Existing wiki pages may use a different displayed title for each
+    # occurrence of the same child argument.  A node-level displayed_title is
+    # therefore insufficient: preserve every imported relation label in the
+    # French content lock so later checkpoints and the bilingual renderer do
+    # not silently replace it with the node-wide label.
+    french_pages = [final.get("debate") or {}, *(final.get("arguments") or [])]
+    if french_pages and all(page.get("page_origin") == "preexisting" for page in french_pages):
+        from wikidebia_translation_source import relation_labels_from_source
+        contextual_labels = relation_labels_from_source(source)
+        final["debate"]["relation_labels"] = [
+            copy.deepcopy(row) for row in contextual_labels if row["source_page_id"] == "debate"
+        ]
+        for argument in final["arguments"]:
+            argument["relation_labels"] = [
+                copy.deepcopy(row) for row in contextual_labels
+                if row["source_page_id"] == argument["id"]
+            ]
 
     # A review finalized before 2.16.22 may not carry the historical top-level
     # parameter-presence inventory in final_values.  Re-derive that evidence

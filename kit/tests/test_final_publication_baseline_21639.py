@@ -104,6 +104,90 @@ def test_work_scoped_baseline_attests_first_english_publication(tmp_path: Path):
     assert value["baseline_sha256"] == baseline._canonical(value, "baseline_sha256")
 
 
+def _add_signed_french_correction_chain(
+    project: Path,
+    debate_id: str,
+    work_id: str,
+    *,
+    receipt_outside_work: bool = False,
+    corrected_revision: int = 11,
+) -> None:
+    state_dir = project / ".state/published" / debate_id / "fr"
+    latest_path = state_dir / "latest.json"
+    anchor = json.loads(latest_path.read_text(encoding="utf-8"))
+    anchor.pop("state_sha256", None)
+    anchor.update({
+        "publication_date": "2026-08-20T20:00:00Z",
+        "source_manifest_sha256": "5" * 64,
+        "corpus_version": "manifest-test",
+        "receipt_sha256": "6" * 64,
+        "pages": [{
+            "page_id": "A0001", "page_type": "argument", "canonical_title": "Titre source",
+            "content_sha256": "7" * 64, "revision_id": 10, "status": "published",
+        }],
+    })
+    anchor = _signed(anchor, "state_sha256")
+    _write_json(state_dir / "20260820T200000Z.json", anchor)
+
+    correction = _signed({
+        "schema": "wikidebia-french-correction-receipt-1.0",
+        "debate_id": debate_id,
+        "work_id": work_id,
+        "language": "fr",
+        "plan_sha256": "4" * 64,
+    }, "receipt_sha256")
+    if receipt_outside_work:
+        receipt_path = project / ".state/other/correction-receipt.json"
+    else:
+        receipt_path = project / ".state/fr-publication" / debate_id / work_id / "content/correction-receipt.json"
+    _write_json(receipt_path, correction)
+
+    corrected = dict(anchor)
+    corrected.pop("state_sha256", None)
+    corrected.update({
+        "publication_date": "2026-08-20T21:00:00Z",
+        "plan_sha256": correction["plan_sha256"],
+        "receipt_path": receipt_path.relative_to(project).as_posix(),
+        "receipt_sha256": correction["receipt_sha256"],
+        "pages": [{
+            "page_id": "A0001", "page_type": "argument", "canonical_title": "Titre rétabli",
+            "content_sha256": "8" * 64, "revision_id": corrected_revision, "status": "published",
+        }],
+    })
+    corrected = _signed(corrected, "state_sha256")
+    _write_json(state_dir / "20260820T210000Z.json", corrected)
+    _write_json(latest_path, corrected)
+
+
+def test_work_scoped_baseline_attests_signed_post_checkpoint_french_corrections(tmp_path: Path):
+    project, debate_id, work_id, release_copy = make_release_boundary(tmp_path)
+    _add_signed_french_correction_chain(project, debate_id, work_id)
+
+    value = baseline.resolve_workflow_release_baseline(project, debate_id, release_copy, expected_work_id=work_id)
+
+    assert value["fr"]["mode"] == "published_checkpoint_with_signed_corrections"
+    succession = value["fr"]["post_checkpoint_succession"]
+    assert succession["checkpoint_state_path"].endswith("20260820T200000Z.json")
+    assert len(succession["corrections"]) == 1
+    assert succession["corrections"][0]["receipt_sha256"]
+
+
+def test_work_scoped_baseline_refuses_post_checkpoint_receipt_outside_work(tmp_path: Path):
+    project, debate_id, work_id, release_copy = make_release_boundary(tmp_path)
+    _add_signed_french_correction_chain(project, debate_id, work_id, receipt_outside_work=True)
+
+    with pytest.raises(baseline.WorkflowBaselineError, match="extérieur au Work"):
+        baseline.resolve_workflow_release_baseline(project, debate_id, release_copy, expected_work_id=work_id)
+
+
+def test_work_scoped_baseline_refuses_post_checkpoint_revision_rollback(tmp_path: Path):
+    project, debate_id, work_id, release_copy = make_release_boundary(tmp_path)
+    _add_signed_french_correction_chain(project, debate_id, work_id, corrected_revision=9)
+
+    with pytest.raises(baseline.WorkflowBaselineError, match="régresser une révision"):
+        baseline.resolve_workflow_release_baseline(project, debate_id, release_copy, expected_work_id=work_id)
+
+
 def test_work_scoped_empty_english_baseline_expires_after_signed_en_state(tmp_path: Path):
     project, debate_id, work_id, release_copy = make_release_boundary(tmp_path)
     en_state = _signed({

@@ -374,6 +374,7 @@ class PageAction:
 
 class Adapter(Protocol):
     def open_language(self, language: str, expected_user: str) -> None: ...
+    def open_language_read_only(self, language: str) -> None: ...
     def close_language(self) -> None: ...
     def assert_identity(self, expected_user: str) -> None: ...
     def available_change_tags(self) -> set[str]: ...
@@ -426,18 +427,109 @@ class PywikibotAdapter:
                 raise PublicationError(f"Fichier de famille introuvable : {self.family_file}")
             family_files[self.family] = str(self.family_file)
 
+    def _configure_access_header(self, pywikibot: Any) -> None:
+        """Forward the managed Wikidebates access secret to Cloudflare.
+
+        Managed environment secrets exposed as variables are not converted to
+        HTTP headers automatically.  Keep this opt-in limited to the custom
+        Wikidebates family and never log the value.
+        """
+        if self.family != "wikidebates":
+            return
+        access_token = os.environ.get("WIKIDEBIA_API_TOKEN")
+        if not access_token:
+            return
+        config = getattr(pywikibot, "config", None)
+        if config is None:
+            raise PublicationError("Configuration Pywikibot indisponible")
+        headers = dict(getattr(config, "extra_headers", {}) or {})
+        headers["X-Wikidebia-Access"] = access_token
+        config.extra_headers = headers
+
+    def _configure_managed_username(self, pywikibot: Any, language: str, expected_user: str) -> None:
+        """Load a managed BotPassword login name without weakening identity checks."""
+        variable = f"WIKIDEBIA_{language.upper()}_BOT_USERNAME"
+        login_name = os.environ.get(variable)
+        if not login_name:
+            return
+        main_username = login_name.partition("@")[0]
+        if not main_username or main_username != expected_user:
+            raise IdentityError(
+                f"Le compte principal de {variable} ne correspond pas à l’identité attendue {expected_user!r}"
+            )
+        config = getattr(pywikibot, "config", None)
+        usernames = getattr(config, "usernames", None)
+        if usernames is None:
+            raise PublicationError("Configuration des identités Pywikibot indisponible")
+        usernames.setdefault(self.family, {})[self.codes[language]] = main_username
+
+    def _login(self, pywikibot: Any, language: str, expected_user: str) -> None:
+        """Authenticate with a managed BotPassword without persisting its value."""
+        username_variable = f"WIKIDEBIA_{language.upper()}_BOT_USERNAME"
+        password_variable = f"WIKIDEBIA_{language.upper()}_BOT_PASSWORD"
+        login_name = os.environ.get(username_variable)
+        password = os.environ.get(password_variable)
+        if not login_name and not password:
+            config = getattr(pywikibot, "config", None)
+            usernames = getattr(config, "usernames", {}) if config is not None else {}
+            family_users = usernames.get(self.family, {}) if isinstance(usernames, dict) else {}
+            configured = family_users.get(self.codes[language]) or family_users.get("*")
+            if not configured:
+                raise PublicationError(
+                    "Identité d’écriture absente : configurez "
+                    f"{username_variable} et {password_variable}, ou une identité Pywikibot "
+                    f"pour {self.family}:{self.codes[language]}"
+                )
+            self.site.login()
+            return
+        if not login_name or not password:
+            missing = username_variable if not login_name else password_variable
+            raise PublicationError(f"Secret d’authentification incomplet : {missing} absent")
+        main_username = login_name.partition("@")[0]
+        if not main_username or main_username != expected_user:
+            raise IdentityError(
+                f"Le compte principal de {username_variable} ne correspond pas à l’identité attendue {expected_user!r}"
+            )
+
+        original_manager = pywikibot.login.ClientLoginManager
+
+        class ManagedClientLoginManager(original_manager):
+            def __init__(self, *args: Any, **kwargs: Any) -> None:
+                kwargs["password"] = password
+                super().__init__(*args, **kwargs)
+                self.login_name = login_name
+
+        pywikibot.login.ClientLoginManager = ManagedClientLoginManager
+        try:
+            self.site.login()
+        finally:
+            pywikibot.login.ClientLoginManager = original_manager
+
     def open_language(self, language: str, expected_user: str) -> None:
         self._prepare_environment()
         import pywikibot
-        access_token = os.environ.get("WIKIDEBIA_API_TOKEN")
-        if access_token:
-            pywikibot.config.extra_headers["x-wikidebia-access"] = access_token
+        self._configure_access_header(pywikibot)
         self._register_family(pywikibot)
+        self._configure_managed_username(pywikibot, language, expected_user)
         self.site = pywikibot.Site(code=self.codes[language], fam=self.family)
         if self.site.user() is not None:
             self.site.logout()
-        self.site.login()
+        self._login(pywikibot, language, expected_user)
         self.assert_identity(expected_user)
+
+    def open_language_read_only(self, language: str) -> None:
+        """Open a public wiki without requiring publication credentials.
+
+        Audits and recovery checks must be able to compare immutable evidence
+        with the live wiki even when BotPassword credentials are intentionally
+        unavailable.  The managed access header remains configured, but this
+        path never logs in and therefore cannot accidentally authorize writes.
+        """
+        self._prepare_environment()
+        import pywikibot
+        self._configure_access_header(pywikibot)
+        self._register_family(pywikibot)
+        self.site = pywikibot.Site(code=self.codes[language], fam=self.family)
 
     def close_language(self) -> None:
         try:

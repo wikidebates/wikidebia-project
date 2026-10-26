@@ -6,6 +6,7 @@ import json
 import sys
 import zipfile
 from pathlib import Path
+from types import SimpleNamespace
 
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 sys.path.insert(0, str(SCRIPTS))
@@ -15,6 +16,30 @@ mod = importlib.util.module_from_spec(spec)
 assert spec and spec.loader
 sys.modules[spec.name] = mod
 spec.loader.exec_module(mod)
+
+
+def test_initial_validator_execution_uses_portable_report_paths(tmp_path, monkeypatch):
+    project = tmp_path / "project"
+    package = project / ".state/corpus-builds/debat_test"
+    (project / "validator/src").mkdir(parents=True)
+    script = project / "validator/scripts/wikidebia_validate.py"
+    script.parent.mkdir(parents=True)
+    script.write_text("# fixture\n", encoding="utf-8")
+    (package / "reports").mkdir(parents=True)
+
+    def fake_run(command, **kwargs):
+        json_output = Path(command[command.index("--json-output") + 1])
+        text_output = Path(command[command.index("--text-output") + 1])
+        json_output.write_text('{"result":"passed"}\n', encoding="utf-8")
+        text_output.write_text("passed\n", encoding="utf-8")
+        return SimpleNamespace(returncode=0, stdout="ok", stderr="")
+
+    monkeypatch.setattr(mod.subprocess, "run", fake_run)
+    result = mod.run_validator(project, package)
+    assert result["report_json"] == "reports/initial_validation.json"
+    assert result["report_text"] == "reports/initial_validation.txt"
+    execution = (package / "reports/initial_validation_execution.json").read_text(encoding="utf-8")
+    assert str(tmp_path) not in execution
 
 
 def _row(root: Path, title: str, rel: str, revision: int) -> dict:

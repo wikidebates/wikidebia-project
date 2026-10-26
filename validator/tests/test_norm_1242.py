@@ -10,8 +10,9 @@ from wikidebia_validator.report import Report
 
 
 class FakeContext:
-    def __init__(self, text: str):
+    def __init__(self, text: str, *, historical_intro_absent: bool = False):
         self.text = text
+        self.historical_intro_absent = historical_intro_absent
         self.report = Report("0.4.46", "test-fixture-1242", ["editorial"])
 
     def manifest(self):
@@ -21,10 +22,22 @@ class FakeContext:
         }
 
     def exists(self, rel):
-        return rel == "output/fr/debate.wiki"
+        return rel == "output/fr/debate.wiki" or (self.historical_intro_absent and rel == "data/fr_content_lock.json")
 
     def read_text(self, rel):
         return self.text
+
+    def load_json(self, rel):
+        assert rel == "data/fr_content_lock.json" and self.historical_intro_absent
+        return {
+            "historical_text_decisions": {
+                "debate": {
+                    "page_origin": "preexisting",
+                    "historical_status": "historical_absent",
+                    "decision": "preserved",
+                }
+            }
+        }
 
 
 def _debate(pro_link="https://example.org/pro", con_link="https://example.org/con", video_author=True):
@@ -90,6 +103,14 @@ def test_1242_allows_empty_or_single_documentary_buckets():
     ctx = FakeContext(_debate())
     _validate_debate_docs(ctx, ctx.manifest(), _controls(), norm="1.2.30")
     assert not any(f.code == "WDV-EDT-004" for f in ctx.report.findings)
+
+
+def test_1242_allows_no_subsection_for_verified_historical_absence():
+    text = _debate().replace("|introduction={{Sous-partie\n|titre=Définition\n|contenu=Une définition utile.\n}}\n", "")
+    ctx = FakeContext(text, historical_intro_absent=True)
+    metrics = _validate_debate_docs(ctx, ctx.manifest(), _controls(), norm="1.2.30")
+    assert metrics["fr"]["profile_minima"]["subsections"] == 0
+    assert not any(f.code == "WDV-EDT-004" and "insuffisamment" in f.message for f in ctx.report.findings)
 
 
 def test_1242_rejects_same_reference_in_pro_and_con():

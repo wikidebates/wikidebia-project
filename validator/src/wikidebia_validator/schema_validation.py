@@ -137,7 +137,14 @@ def _valid_translation_source_preservation(ctx: PackageContext) -> bool:
 def _title_checkpoint_preserves_empty_classification(
     ctx: PackageContext, node_id: str, field: str, value: Any
 ) -> bool:
-    """Accept a proven historical empty field during the title-only checkpoint."""
+    """Accept a proven historical empty field during the title-only checkpoint.
+
+    The first French checkpoint deliberately locks graph structure and titles
+    before rubrics and keywords are reviewed.  An imported page whose source
+    truly omitted one of those fields must therefore remain representable until
+    the content/classification review fills it.  The exception is tied to the
+    signed local review/lock pair and to the exact imported wikicode.
+    """
     if field not in {"rubriques", "keywords"} or value != []:
         return False
     lock_rel = "data/fr_page_metadata_lock.json"
@@ -155,7 +162,22 @@ def _title_checkpoint_preserves_empty_classification(
     if not isinstance(provenance, dict) or provenance.get("schema") != "wikidebia-import-provenance-1.0":
         return False
     review_sha = review.get("review_sha256")
-    if not isinstance(review_sha, str) or lock.get("review_sha256") != review_sha:
+    review_body = dict(review)
+    review_body.pop("review_sha256", None)
+    computed_review_sha = hashlib.sha256(
+        json.dumps(
+            review_body,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+            allow_nan=False,
+        ).encode("utf-8")
+    ).hexdigest()
+    if (
+        not isinstance(review_sha, str)
+        or review_sha != computed_review_sha
+        or lock.get("review_sha256") != review_sha
+    ):
         return False
     locked = next(
         (row for row in lock.get("arguments") or [] if isinstance(row, dict) and row.get("entity_id") == node_id),
@@ -188,8 +210,9 @@ def _title_checkpoint_preserves_empty_classification(
         return False
     from .wikicode import parse_template
     try:
-        # The import hash was verified immediately above. Read historical wiki
-        # evidence without imposing the newline policy for generated files.
+        # The import hash was verified immediately above.  Read it without the
+        # generated-file newline policy: historical wiki revisions are immutable
+        # evidence and may legitimately lack a trailing newline.
         template = parse_template((ctx.root / path).read_text(encoding="utf-8"))
     except (OSError, UnicodeError, ValueError):
         return False

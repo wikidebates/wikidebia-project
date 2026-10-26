@@ -931,8 +931,8 @@ def run_validator(project_root: Path, package: Path) -> dict[str, Any]:
         "returncode": completed.returncode,
         "stdout": completed.stdout[-4000:],
         "stderr": completed.stderr[-4000:],
-        "report_json": str(report_json),
-        "report_text": str(report_txt),
+        "report_json": report_json.relative_to(package).as_posix(),
+        "report_text": report_txt.relative_to(package).as_posix(),
     }
     write_json(package / "reports/initial_validation_execution.json", result)
     return result

@@ -3,6 +3,8 @@ import json
 import subprocess
 import sys
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
@@ -151,6 +153,21 @@ def test_graph_checkpoint_preserves_out_of_scope_relations_on_depth_frontier(tmp
         command, cwd=project / "validator", text=True, capture_output=True, check=False,
     )
     assert validation.returncode == 0, validation.stdout + validation.stderr
+def test_checkpoint_wraps_remote_plan_connectivity_failure(tmp_path: Path, monkeypatch):
+    project, _workspace, work_id = _title_applied(tmp_path)
+
+    class FailingPlanner:
+        def __init__(self, *_args, **_kwargs):
+            pass
+
+        def build_plan(self, *, mode):
+            assert mode == "all"
+            raise RuntimeError("Cloudflare 403")
+
+    monkeypatch.setattr(checkpoint, "RemoteUpdatePlanner", FailingPlanner)
+    with pytest.raises(checkpoint.FrenchCheckpointError, match="Cloudflare 403") as caught:
+        checkpoint.publish_checkpoint(project, "debat_test", work_id, stage="graph", adapter=object())
+    assert caught.value.remote_execution_started is False
 
 
 def test_review_packages_split_titles_from_classification_and_content(tmp_path: Path):
@@ -257,3 +274,25 @@ def test_graph_checkpoint_uses_differential_validation_until_content_is_complete
     assert content_result.returncode != 0
     report = json.loads(content_result.stdout)
     assert report["summary"]["errors"] > 0
+def test_checkpoint_published_state_evidence_is_signed_and_portable(tmp_path: Path):
+    project = tmp_path / "project"
+    state_path = project / ".state/published/debat_test/fr/latest.json"
+    state_path.parent.mkdir(parents=True)
+    state = {
+        "state_version": "wikidebia-published-state-1.0",
+        "debate_id": "debat_test",
+        "language": "fr",
+        "pages": [{"page_id": "A0001"}],
+    }
+    state["state_sha256"] = checkpoint.sha_object(state)
+    state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    evidence = checkpoint._published_state_evidence(project, "debat_test")
+    assert evidence["path"] == ".state/published/debat_test/fr/latest.json"
+    assert evidence["state_sha256"] == state["state_sha256"]
+    assert evidence["pages"] == 1
+
+    state["language"] = "en"
+    state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    with pytest.raises(checkpoint.FrenchCheckpointError, match="Empreinte"):
+        checkpoint._published_state_evidence(project, "debat_test")

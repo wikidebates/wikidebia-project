@@ -165,6 +165,36 @@ def test_english_debate_rejects_french_subsection_model(tmp_path: Path):
     assert any(item.code == "WDV-MWK-022" for item in ctx.report.findings)
 
 
+def test_english_debate_allows_verified_historically_absent_french_introduction(tmp_path: Path):
+    (tmp_path / "data").mkdir(parents=True)
+    lock = {
+        "historical_text_decisions": {
+            "debate": {
+                "page_origin": "preexisting",
+                "historical_status": "historical_absent",
+                "decision": "preserved",
+            }
+        }
+    }
+    manifest = {
+        "normative_versions": {"consolidated_norm": "1.2.30"},
+        "pages": [{
+            "page_id": "example", "page_type": "debate", "language": "en",
+            "page_origin": "new", "file_path": "output/en/debate/debate.wiki",
+        }],
+    }
+    (tmp_path / "data/fr_content_lock.json").write_text(json.dumps(lock) + "\n", encoding="utf-8")
+    (tmp_path / "manifest.json").write_text(json.dumps(manifest) + "\n", encoding="utf-8")
+    ctx = PackageContext(
+        root=tmp_path,
+        report=Report("0.4.39", tmp_path.name, ["wikicode"]),
+        cache={"manifest.json": manifest},
+    )
+    raw = _debate("Placeholder").replace("|introduction=Placeholder\n", "")
+    validate_template_shape(ctx, parse_template(raw), "en", "debate", "output/en/debate/debate.wiki")
+    assert not any(item.code == "WDV-MWK-004" and "introduction" in item.message for item in ctx.report.findings)
+
+
 def test_english_argument_rejects_french_relation_parameters(tmp_path: Path):
     raw = _argument("{{Quote|quote=Translated text.|authors=Auteur inchangé|date=25 June 2012|warnings=AI-translated quote}}")
     raw = raw.replace(

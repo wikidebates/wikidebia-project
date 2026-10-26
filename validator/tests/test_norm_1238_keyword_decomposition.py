@@ -32,6 +32,24 @@ def test_english_domain_intersection_is_rejected():
     assert "compositional_intersection" in issues
 
 
+def test_lexicalized_history_keyword_accepts_explicit_atomic_exception():
+    for keyword, language, rationale in (
+        ("histoire du féminisme", "fr", "Cette locution désigne un concept lexicalisé unique et utile comme entrée de navigation."),
+        ("history of feminism", "en", "English lexicalized navigation concept: this phrase names one atomic category rather than a compositional intersection."),
+    ):
+        assert keyword_atomicity_issues(
+            keyword,
+            {
+                "atomic_concept": True,
+                "compositional_intersection": False,
+                "multiword_exception": True,
+                "multiword_exception_rationale": rationale,
+            },
+            language,
+            require_composition_attestation=True,
+        ) == []
+
+
 def test_lowercase_unique_god_is_rejected():
     assert lowercase_god_issues("Le dieu unique expliquerait le monde.") == ["lowercase_proper_name"]
     assert lowercase_god_issues("Un dieu local pourrait être imaginé.") == []

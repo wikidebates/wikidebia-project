@@ -28,6 +28,7 @@ from wikidebia_corpus_build import (
     CorpusBuildError,
     assert_graph_draft_without_final_pages,
     build_payload_sha256,
+    compatible_legacy_build_payload_sha256s,
     exclusive_lock,
     full_tree_sha256,
     load_json,
@@ -150,7 +151,9 @@ def finalize_review(project_root: Path, build: Path, debate_id: str) -> dict[str
     review = load_json(envelope_path, "revue globale")
     placement = load_json(placement_path, "revue de placement")
 
-    envelope_errors = verify_review_envelope(review, debate_id=debate_id, source_sha256=source_sha)
+    reviewed_source_sha = str(review.get("source_build_sha256") or "")
+    accepted_source_sha = reviewed_source_sha if reviewed_source_sha in compatible_legacy_build_payload_sha256s(build) else source_sha
+    envelope_errors = verify_review_envelope(review, debate_id=debate_id, source_sha256=accepted_source_sha)
     placement_errors = placement_review_issues(placement, registry)
     if envelope_errors or (review.get("decision") == "approved" and placement_errors):
         details = {

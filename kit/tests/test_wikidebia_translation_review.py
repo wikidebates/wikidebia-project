@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -70,6 +71,37 @@ def make_french_locked(tmp_path: Path) -> tuple[Path, Path, str]:
     complete_content_review(workspace)
     sealed = content.finalize_review(project, "debat_test", work_id)
     content.apply_review(project, "debat_test", work_id, sealed["review_sha256"])
+    # The general translation fixture exercises translation of an existing
+    # historical introduction. Tests for verified historical absence override
+    # this source state explicitly.
+    lock_path = workspace / "content-reviewed-copy/data/fr_content_lock.json"
+    lock = json.loads(lock_path.read_text(encoding="utf-8"))
+    introduction = "{{Sous-partie|titre=Définition|contenu=Le débat test définit précisément la proposition examinée.}}"
+    introduction_sha = hashlib.sha256(introduction.encode("utf-8")).hexdigest()
+    lock["debate"].update({
+        "introduction": introduction,
+        "subsections": [{"title": "Définition", "content": "Le débat test définit précisément la proposition examinée."}],
+        "introduction_provenance": "historical_existing",
+        "historical_introduction_present": True,
+        "historical_introduction_sha256": introduction_sha,
+        "historical_final_introduction_sha256": introduction_sha,
+        "historical_text_decision": "preserved",
+        "historical_content_preserved": True,
+    })
+    lock["historical_text_decisions"]["debate"].update({
+        "historical_status": "historical_existing",
+        "historical_present": True,
+        "historical_sha256": introduction_sha,
+        "final_present": True,
+        "final_sha256": introduction_sha,
+    })
+    common.write_json(lock_path, lock)
+    meta_path = workspace / "workspace.json"
+    meta = json.loads(meta_path.read_text(encoding="utf-8"))
+    meta["content_reviewed_copy"]["tree_sha256"] = common.full_tree_sha256(workspace / "content-reviewed-copy")
+    meta["workspace_sha256"] = None
+    meta["workspace_sha256"] = sys.modules["wikidebia_editorial_workspace"].workspace_receipt_hash(meta)
+    common.write_json(meta_path, meta)
     return project, workspace, work_id
 
 
@@ -406,6 +438,51 @@ def test_finalize_translation_seals_complete_bilingual_review(tmp_path: Path):
     assert common.full_tree_sha256(workspace / "content-reviewed-copy") == before
     sealed = json.loads((workspace / "reviews/en/translation_review.json").read_text(encoding="utf-8"))
     assert sealed["review_sha256"] == translation.translation_review_sha256(sealed)
+
+
+def test_finalize_preserves_historically_absent_debate_introduction(tmp_path: Path):
+    project, workspace, work_id = make_french_locked(tmp_path)
+    lock_path = workspace / "content-reviewed-copy/data/fr_content_lock.json"
+    lock = json.loads(lock_path.read_text(encoding="utf-8"))
+    lock["debate"].update({
+        "introduction": "",
+        "subsections": [],
+        "introduction_provenance": "historical_absent",
+        "historical_introduction_present": False,
+        "historical_text_decision": "preserved",
+        "historical_content_preserved": True,
+    })
+    lock["historical_text_decisions"]["debate"].update({
+        "historical_status": "historical_absent",
+        "historical_present": False,
+        "historical_sha256": hashlib.sha256(b"").hexdigest(),
+        "final_present": False,
+        "final_sha256": hashlib.sha256(b"").hexdigest(),
+    })
+    common.write_json(lock_path, lock)
+    meta_path = workspace / "workspace.json"
+    meta = json.loads(meta_path.read_text(encoding="utf-8"))
+    meta["content_reviewed_copy"]["tree_sha256"] = common.full_tree_sha256(workspace / "content-reviewed-copy")
+    meta["workspace_sha256"] = None
+    meta["workspace_sha256"] = sys.modules["wikidebia_editorial_workspace"].workspace_receipt_hash(meta)
+    common.write_json(meta_path, meta)
+
+    translation.prepare_review(project, "debat_test", work_id)
+    complete_translation_review(workspace)
+    review_path = workspace / "reviews/en/translation_review.json"
+    review = json.loads(review_path.read_text(encoding="utf-8"))
+    review["debate"].update({
+        "introduction": "",
+        "subsections": [],
+        "introduction_adaptation_rationale": "The locked French debate historically contains no introduction, so the English projection preserves that verified absence.",
+    })
+    common.write_json(review_path, review)
+
+    result = translation.finalize_review(project, "debat_test", work_id)
+    assert result["status"] == "en_translation_review_finalized"
+    finalized = json.loads(review_path.read_text(encoding="utf-8"))
+    assert finalized["final_values"]["debate"]["introduction"] == ""
+    assert finalized["final_values"]["debate"]["subsections"] == []
 
 
 def test_finalize_rejects_missing_vocabulary_equivalence(tmp_path: Path):

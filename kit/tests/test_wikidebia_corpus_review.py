@@ -139,6 +139,40 @@ def test_finalize_rejects_incomplete_occurrence_review(tmp_path: Path):
     assert json.loads((build / "manifest.json").read_text())["global_status"] == "graph_draft"
 
 
+def test_graph_review_fingerprint_is_portable_across_sanitized_execution_paths(tmp_path: Path):
+    project, build = make_project(tmp_path)
+    execution_path = build / "reports/initial_validation_execution.json"
+    common.write_json(execution_path, {
+        "status": "passed",
+        "returncode": 0,
+        "stdout": "ok",
+        "stderr": "",
+        "report_json": str((build / "reports/initial_validation.json").resolve()),
+        "report_text": str((build / "reports/initial_validation.txt").resolve()),
+    })
+    portable_before = common.build_payload_sha256(build)
+    legacy_sha = next(
+        value for value in common.compatible_legacy_build_payload_sha256s(build)
+        if value != portable_before
+    )
+
+    review.make_review_template(build, "debat_test", overwrite=False)
+    complete_reviews(build)
+    envelope_path = build / common.REVIEW_ENVELOPE
+    envelope = json.loads(envelope_path.read_text(encoding="utf-8"))
+    envelope["source_build_sha256"] = legacy_sha
+    common.write_json(envelope_path, envelope)
+
+    execution = json.loads(execution_path.read_text(encoding="utf-8"))
+    execution["report_json"] = "reports/initial_validation.json"
+    execution["report_text"] = "reports/initial_validation.txt"
+    common.write_json(execution_path, execution)
+    assert common.build_payload_sha256(build) == portable_before
+
+    result = review.finalize_review(project, build, "debat_test")
+    assert result["status"] == "approved"
+
+
 def test_finalize_rejects_graph_changed_after_prepare(tmp_path: Path):
     project, build = make_project(tmp_path)
     review.make_review_template(build, "debat_test", overwrite=False)

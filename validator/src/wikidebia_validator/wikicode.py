@@ -974,9 +974,14 @@ def validate_template_shape(ctx: PackageContext, tmpl: Template, lang: str, page
             spec['required'].remove(summary_parameter)
     if (
         page_type == 'debate'
-        and isinstance(page_manifest, dict)
-        and page_manifest.get('page_origin') == 'preexisting'
-        and _historically_absent_introduction(ctx, lang)
+        and (
+            _historically_absent_french_introduction(ctx)
+            or (
+                isinstance(page_manifest, dict)
+                and page_manifest.get('page_origin') == 'preexisting'
+                and _historically_absent_introduction(ctx, lang)
+            )
+        )
         and 'introduction' in spec['required']
     ):
         spec['required'].remove('introduction')
@@ -1210,7 +1215,6 @@ def _contextual_relation_labels(ctx: PackageContext, page_id: str, lang: str, pa
         if isinstance(labels, list) and labels:
             return labels
     return []
-
 
 def _historically_absent_introduction(ctx: PackageContext, lang: str) -> bool:
     """Return whether the source debate explicitly lacked an introduction."""
@@ -1631,6 +1635,27 @@ def _protected_historical_summary_keys(ctx: PackageContext) -> set[tuple[str, st
 
 def _historically_absent_summary_keys(ctx: PackageContext) -> set[tuple[str, str]]:
     return _shared_historically_absent_summary_keys(ctx)
+
+
+def _historically_absent_french_introduction(ctx: PackageContext) -> bool:
+    """Return whether a pre-existing French debate had no introduction to preserve."""
+    cached = getattr(ctx, '_historically_absent_french_introduction_cache', None)
+    if isinstance(cached, bool):
+        return cached
+    result = False
+    exists = getattr(ctx, 'exists', None)
+    if callable(exists) and exists('data/fr_content_lock.json'):
+        lock = ctx.load_json('data/fr_content_lock.json')
+        decisions = lock.get('historical_text_decisions') if isinstance(lock, dict) else None
+        row = decisions.get('debate') if isinstance(decisions, dict) else None
+        result = bool(
+            isinstance(row, dict)
+            and row.get('page_origin') == 'preexisting'
+            and row.get('historical_status') == 'historical_absent'
+            and row.get('decision') == 'preserved'
+        )
+    setattr(ctx, '_historically_absent_french_introduction_cache', result)
+    return result
 
 def _preserved_historical_french_introduction(ctx: PackageContext) -> bool:
     cached = getattr(ctx, '_preserved_historical_french_introduction_cache', None)

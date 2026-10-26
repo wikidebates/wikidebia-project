@@ -74,6 +74,134 @@ def _load_signed_published_state(project_root: Path, debate_id: str, language: s
     return path, data
 
 
+def _page_map(state: Mapping[str, Any], label: str) -> dict[tuple[str, str], dict[str, Any]]:
+    result: dict[tuple[str, str], dict[str, Any]] = {}
+    for raw in state.get("pages") or []:
+        if not isinstance(raw, dict):
+            raise WorkflowBaselineError(f"Page invalide dans {label}")
+        key = (str(raw.get("page_type") or ""), str(raw.get("page_id") or ""))
+        if not all(key) or key in result:
+            raise WorkflowBaselineError(f"Identité de page invalide ou dupliquée dans {label}")
+        result[key] = dict(raw)
+    return result
+
+
+def _verify_french_correction_receipt(
+    project_root: Path,
+    debate_id: str,
+    work_id: str,
+    state: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Verify that a post-checkpoint FR state was produced inside the same Work."""
+    relative = str(state.get("receipt_path") or "").strip()
+    if not relative:
+        raise WorkflowBaselineError("État français corrigé sans reçu de correction")
+    candidate = Path(relative)
+    receipt_path = candidate.resolve() if candidate.is_absolute() else (project_root / candidate).resolve()
+    work_root = (project_root / ".state/fr-publication" / debate_id / work_id).resolve()
+    try:
+        receipt_path.relative_to(work_root)
+    except ValueError as exc:
+        raise WorkflowBaselineError("Reçu de correction française extérieur au Work courant") from exc
+    if not receipt_path.is_file() or receipt_path.is_symlink():
+        raise WorkflowBaselineError("Reçu de correction française absent ou non régulier")
+    receipt = load_json(receipt_path, "reçu de correction française")
+    receipt_sha = _verify_sha_object(receipt, "receipt_sha256", "du reçu de correction française")
+    if receipt.get("debate_id") != debate_id or receipt.get("work_id") != work_id:
+        raise WorkflowBaselineError("Reçu de correction française rattaché à un autre débat ou Work")
+    if receipt.get("language") not in {None, "fr"}:
+        raise WorkflowBaselineError("Reçu de correction française rattaché à une autre langue")
+    if str(receipt.get("plan_sha256") or "") != str(state.get("plan_sha256") or ""):
+        raise WorkflowBaselineError("Le reçu de correction française diverge du plan de l'état publié")
+    if receipt_sha != str(state.get("receipt_sha256") or ""):
+        raise WorkflowBaselineError("Le reçu de correction française diverge de l'état publié")
+    return {
+        "path": _relative(receipt_path, project_root),
+        "schema": receipt.get("schema"),
+        "plan_sha256": state.get("plan_sha256"),
+        "receipt_sha256": receipt_sha,
+    }
+
+
+def _verify_french_state_succession(
+    project_root: Path,
+    debate_id: str,
+    work_id: str,
+    content_receipt: Mapping[str, Any],
+    current_state: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Attest same-Work FR corrections made after the final content checkpoint.
+
+    The historical checkpoint state remains the anchor. Every later state must
+    preserve its complete page set and advance revisions monotonically, while
+    each new plan is bound to a signed correction receipt stored under the same
+    Work. The final remote planner still compares all pages before any write.
+    """
+    directory = project_root / ".state/published" / debate_id / "fr"
+    history: list[tuple[Path, dict[str, Any]]] = []
+    for path in sorted(directory.glob("*.json")):
+        if path.name == "latest.json" or path.is_symlink():
+            continue
+        try:
+            state = json.loads(path.read_text(encoding="utf-8"))
+            _verify_sha_object(state, "state_sha256", f"de l'historique français {path.name}")
+        except (OSError, json.JSONDecodeError) as exc:
+            raise WorkflowBaselineError(f"Historique français illisible : {path.name}") from exc
+        if state.get("debate_id") != debate_id or state.get("language") != "fr":
+            raise WorkflowBaselineError(f"Historique français invalide : {path.name}")
+        history.append((path, state))
+
+    checkpoint_plan = str(content_receipt.get("plan_sha256") or "")
+    checkpoint_remote_receipt = str(content_receipt.get("remote_receipt_sha256") or "")
+    anchor_index = next((
+        index for index, (_path, state) in enumerate(history)
+        if str(state.get("plan_sha256") or "") == checkpoint_plan
+        and (not checkpoint_remote_receipt or str(state.get("receipt_sha256") or "") == checkpoint_remote_receipt)
+    ), None)
+    if anchor_index is None:
+        raise WorkflowBaselineError("État historique du dernier checkpoint français introuvable")
+
+    current_sha = str(current_state.get("state_sha256") or "")
+    current_index = next((
+        index for index, (_path, state) in enumerate(history)
+        if str(state.get("state_sha256") or "") == current_sha
+    ), None)
+    if current_index is None or current_index <= anchor_index:
+        raise WorkflowBaselineError("État français courant absent de la succession signée du Work")
+
+    chain = history[anchor_index:current_index + 1]
+    anchor_path, anchor = chain[0]
+    previous_pages = _page_map(anchor, f"l'état checkpoint {anchor_path.name}")
+    corrections: list[dict[str, Any]] = []
+    for path, state in chain[1:]:
+        if state.get("source_manifest_sha256") != anchor.get("source_manifest_sha256"):
+            raise WorkflowBaselineError("Une correction française change le manifeste source du checkpoint")
+        if state.get("corpus_version") != anchor.get("corpus_version"):
+            raise WorkflowBaselineError("Une correction française change la version de corpus du checkpoint")
+        pages = _page_map(state, f"l'état corrigé {path.name}")
+        if set(pages) != set(previous_pages):
+            raise WorkflowBaselineError("Une correction française change l'ensemble des pages du checkpoint")
+        for key, before in previous_pages.items():
+            after = pages[key]
+            before_revision = int(before.get("revision_id") or 0)
+            after_revision = int(after.get("revision_id") or 0)
+            if before_revision <= 0 or after_revision < before_revision:
+                raise WorkflowBaselineError("Une correction française fait régresser une révision publiée")
+            if after_revision == before_revision and after != before:
+                raise WorkflowBaselineError("Une correction française change une page sans nouvelle révision")
+        correction = _verify_french_correction_receipt(project_root, debate_id, work_id, state)
+        correction.update({"state_path": _relative(path, project_root), "state_sha256": state.get("state_sha256")})
+        corrections.append(correction)
+        previous_pages = pages
+
+    return {
+        "mode": "published_checkpoint_with_signed_corrections",
+        "checkpoint_state_path": _relative(anchor_path, project_root),
+        "checkpoint_state_sha256": anchor.get("state_sha256"),
+        "corrections": corrections,
+    }
+
+
 def resolve_workflow_release_baseline(
     project_root: Path,
     debate_id: str,
@@ -182,8 +310,11 @@ def resolve_workflow_release_baseline(
     if fr_state_entry is None:
         raise WorkflowBaselineError("État publié français signé absent après le checkpoint final")
     fr_state_path, fr_state = fr_state_entry
+    fr_succession: dict[str, Any] | None = None
     if str(fr_state.get("plan_sha256") or "") != str(content_receipt.get("plan_sha256") or ""):
-        raise WorkflowBaselineError("L'état français courant ne correspond pas au dernier checkpoint du Work")
+        fr_succession = _verify_french_state_succession(
+            project_root, debate_id, work_id, content_receipt, fr_state
+        )
 
     installed_manifest_path = project_root / "corpus" / debate_id / "manifest.json"
     if not installed_manifest_path.is_file():
@@ -221,12 +352,13 @@ def resolve_workflow_release_baseline(
             "release_receipt_sha256": str(release_receipt.get("receipt_sha256") or ""),
         },
         "fr": {
-            "mode": "published_checkpoint_state",
+            "mode": (fr_succession or {}).get("mode", "published_checkpoint_state"),
             "checkpoint_receipt_path": _relative(content_receipt_path, project_root),
             "checkpoint_receipt_sha256": str(content_receipt.get("receipt_sha256") or ""),
             "published_state_path": _relative(fr_state_path, project_root),
             "published_state_sha256": str(fr_state.get("state_sha256") or ""),
             "plan_sha256": str(fr_state.get("plan_sha256") or ""),
+            **({"post_checkpoint_succession": fr_succession} if fr_succession else {}),
         },
         "en": {
             "mode": "never_published_by_this_work",

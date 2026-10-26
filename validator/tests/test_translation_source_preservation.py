@@ -115,6 +115,15 @@ def test_common_english_verbs_are_predicates_without_accepting_nominal_headings(
     from wikidebia_validator.editorial import displayed_title_argument_issues
     assert not displayed_title_argument_issues('Prohibition harms society','en')
     assert not displayed_title_argument_issues('Users have suffered the consequences','en')
+    for title in (
+        'Women need men to end sexism',
+        'Men benefit from discrimination against women',
+        'Women face economic discrimination',
+        'Socialization aims to curb selfishness',
+        'Most men dominate their partners',
+        'Feminism loses credibility among its opponents',
+    ):
+        assert not displayed_title_argument_issues(title, 'en')
     assert displayed_title_argument_issues('An economy built on dependence','en')
 
 def test_only_proven_historical_absence_can_have_no_rubric(tmp_path):

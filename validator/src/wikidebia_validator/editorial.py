@@ -157,7 +157,7 @@ def _has_likely_finite_verb_fr(value: str) -> bool:
             if len(token) >= 5:
                 return True
     return False
-DISPLAYED_TITLE_PREDICATES_EN = re.compile(r"\b(?:has|have|had|harms?|lacks?|works?|suffers?|leads?|fuels?|wastes?|subsidises?|infringes?|focuses?|understands?|amplifies?|imposes?|conflicts?|creates?|opens?|deters?|encourages?|lets?|worsens?|differs?|poses?|advocates?|legalised|regulates?|is|are|was|were|will|would|can|could|may|might|must|should|does|do|did|indicates?|shows?|proves?|supports?|contradicts?|suggests?|presupposes?|implies?|explains?|reveals?|confirms?|weakens?|strengthens?|depends?|exists?|resists?|allows?|prevents?|makes?|constitutes?|justifies?|challenges?|denies?|establishes?|signals?|favou?rs?|reduces?|increases?|limits?|produces?|causes?|guarantees?|suffices?|fails?|remains?|becomes?|emerges?|preexists?|survives?|persists?|varies?|distinguishes?|shapes?|happens?|arises?|undercuts?|requires?|entails?|means?|follows?|points?|rules?|excludes?|refutes?|demonstrates?)\b", re.I)
+DISPLAYED_TITLE_PREDICATES_EN = re.compile(r"\b(?:has|have|had|harms?|lacks?|works?|suffers?|leads?|fuels?|wastes?|subsidises?|infringes?|focuses?|understands?|amplifies?|imposes?|conflicts?|creates?|opens?|deters?|encourages?|lets?|worsens?|differs?|poses?|advocates?|legalised|regulates?|needs?|benefits?|plays?|owes?|holds?|held|faces?|performs?|aims?|prefers?|uses?|dominates?|cares?|reinforces?|loses?|lost|is|are|was|were|will|would|can|could|may|might|must|should|does|do|did|indicates?|shows?|proves?|supports?|contradicts?|suggests?|presupposes?|implies?|explains?|reveals?|confirms?|weakens?|strengthens?|depends?|exists?|resists?|allows?|prevents?|makes?|constitutes?|justifies?|challenges?|denies?|establishes?|signals?|favou?rs?|reduces?|increases?|limits?|produces?|causes?|guarantees?|suffices?|fails?|remains?|becomes?|emerges?|preexists?|survives?|persists?|varies?|distinguishes?|shapes?|happens?|arises?|undercuts?|requires?|entails?|means?|follows?|points?|rules?|excludes?|refutes?|demonstrates?)\b", re.I)
 EN_RELATIVE_MARKER = re.compile(r"\b(?:that|who|which|whose)\b", re.I)
 EN_AUXILIARY_OR_MODAL = {"has", "have", "had", "is", "are", "was", "were", "will", "would", "can", "cannot", "could", "may", "might", "must", "should", "does", "do", "did"}
 ORDINARY_PREDICATES_EN = re.compile(
@@ -456,7 +456,19 @@ def keyword_atomicity_issues(keyword: str, entry: dict[str, Any] | None, languag
     compositional = COMPOSITIONAL_KEYWORD_EN if lang == 'en' else COMPOSITIONAL_KEYWORD_FR
     if data.get('atomic_concept') is not True:
         issues.append('atomic_concept_not_attested')
-    if productive.search(value):
+    rationale = str(data.get('multiword_exception_rationale') or '').strip()
+    semantic_markers = (
+        'locution', 'catégorie', 'concept', 'nom propre', "type d'argument", 'type d’argument',
+        'lexicalized', 'lexicalised', 'atomic category', 'proper name', 'argument type',
+    )
+    justified_productive_exception = bool(
+        data.get('atomic_concept') is True
+        and data.get('compositional_intersection') is False
+        and data.get('multiword_exception') is True
+        and len(rationale) >= 20
+        and any(marker in rationale.casefold() for marker in semantic_markers)
+    )
+    if productive.search(value) and not justified_productive_exception:
         issues.append('productive_thematic_phrase')
     if compositional.search(value):
         issues.append('compositional_intersection')
@@ -466,10 +478,9 @@ def keyword_atomicity_issues(keyword: str, entry: dict[str, Any] | None, languag
     if requires_exception:
         if data.get('multiword_exception') is not True:
             issues.append('multiword_exception_missing')
-        rationale = str(data.get('multiword_exception_rationale') or '').strip()
         if len(rationale) < 20:
             issues.append('multiword_exception_rationale')
-        elif require_composition_attestation and (not any((marker in rationale.casefold() for marker in ('locution', 'catégorie', 'concept', 'nom propre', "type d'argument", 'type d’argument')))):
+        elif require_composition_attestation and not any(marker in rationale.casefold() for marker in semantic_markers):
             issues.append('multiword_exception_rationale_not_semantic')
     elif data.get('multiword_exception') is True:
         issues.append('unnecessary_multiword_exception')
@@ -632,6 +643,20 @@ def _validate_documentary_registry(ctx: PackageContext) -> tuple[int, int]:
             ctx.report.error('WDV-DOC-009', 'Une même URL/DOI est décrite avec des métadonnées d’identité incompatibles dans la même langue', path=ctx.core_paths()['sources'], details={'language': language, 'locator': locator, 'source_ids': [str(r.get('id') or '') for r in rows], 'conflicts': conflicts})
     return (pagination_errors, date_errors)
 
+def _historically_absent_debate_introduction(ctx: PackageContext) -> bool:
+    if not ctx.exists('data/fr_content_lock.json'):
+        return False
+    lock = ctx.load_json('data/fr_content_lock.json')
+    decisions = lock.get('historical_text_decisions') if isinstance(lock, dict) else None
+    row = decisions.get('debate') if isinstance(decisions, dict) else None
+    return bool(
+        isinstance(row, dict)
+        and row.get('page_origin') == 'preexisting'
+        and row.get('historical_status') == 'historical_absent'
+        and row.get('decision') == 'preserved'
+    )
+
+
 def _validate_debate_docs(ctx: PackageContext, manifest: dict[str, Any], controls: dict[str, Any], norm: str | None=None) -> dict[str, Any]:
     metrics: dict[str, Any] = {}
     cfg = controls.get('debate_documentation') or {}
@@ -658,9 +683,13 @@ def _validate_debate_docs(ctx: PackageContext, manifest: dict[str, Any], control
         distinct_counts = [len({re.sub('\\s+', ' ', item.raw).strip().casefold() for item in items}) for items in bucket_templates]
         total = sum(counts)
         metrics[lang] = {'introduction_subsections': intro_count, 'documentary_references': total, 'bucket_counts': counts, 'distinct_bucket_counts': distinct_counts, 'profile_minima': {'subsections': min_subsections, 'references': min_references}, 'profile_rationale': profile_rationale}
-        historical_absent_introduction = exact_french and intro_count == 0
-        if ((intro_count < min_subsections and not historical_absent_introduction)
-                or total < min_references):
+        historical_absent_introduction = (
+            _historically_absent_debate_introduction(ctx)
+            or (exact_french and intro_count == 0)
+        )
+        effective_min_subsections = 0 if historical_absent_introduction else min_subsections
+        metrics[lang]['profile_minima']['subsections'] = effective_min_subsections
+        if intro_count < effective_min_subsections or total < min_references:
             ctx.report.error('WDV-EDT-004', 'Page de débat insuffisamment développée ou documentée selon le profil déclaré', path=page.get('file_path'), details=metrics[lang])
         if not documentation_policy_1242:
             insufficient = {param: {'total': count, 'distinct': distinct} for param, count, distinct in zip(doc_params[lang], counts, distinct_counts) if distinct < 2}

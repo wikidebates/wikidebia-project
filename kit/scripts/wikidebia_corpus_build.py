@@ -39,6 +39,14 @@ REVIEW_MUTABLE_PATHS = {
     PROMOTION_READY,
 }
 
+# This execution trace contains no corpus data and older kit releases stored
+# absolute workspace paths in its two report fields.  Keeping it outside the
+# graph payload fingerprint makes review packages portable across machines and
+# sanitized continuity snapshots.
+PORTABILITY_MUTABLE_PATHS = {
+    "reports/initial_validation_execution.json",
+}
+
 REQUIRED_ATTESTATIONS = (
     "scope_and_proposition_reviewed",
     "graph_completeness_reviewed",
@@ -135,7 +143,41 @@ def inventory_sha256(rows: list[dict[str, Any]]) -> str:
 
 
 def build_payload_sha256(root: Path) -> str:
-    return inventory_sha256(inventory(root, excluded=REVIEW_MUTABLE_PATHS))
+    return inventory_sha256(inventory(root, excluded=REVIEW_MUTABLE_PATHS | PORTABILITY_MUTABLE_PATHS))
+
+
+def compatible_legacy_build_payload_sha256s(root: Path) -> set[str]:
+    """Return tightly bounded pre-portability fingerprints for old reviews.
+
+    Before the execution trace was excluded, its ``report_json`` and
+    ``report_text`` fields contained absolute paths.  A continuity snapshot may
+    sanitize those two fields.  Reconstruct only that historical representation
+    in memory; every other byte remains covered by the legacy fingerprint.
+    """
+    rows = inventory(root, excluded=REVIEW_MUTABLE_PATHS)
+    candidates = {inventory_sha256(rows)}
+    rel = "reports/initial_validation_execution.json"
+    path = root / rel
+    if not path.is_file() or path.is_symlink():
+        return candidates
+    try:
+        execution = load_json(path, "trace d’exécution de la validation initiale")
+    except CorpusBuildError:
+        return candidates
+    if not isinstance(execution.get("report_json"), str) or not isinstance(execution.get("report_text"), str):
+        return candidates
+    legacy = dict(execution)
+    legacy["report_json"] = str((root / "reports/initial_validation.json").resolve())
+    legacy["report_text"] = str((root / "reports/initial_validation.txt").resolve())
+    payload = json.dumps(legacy, ensure_ascii=False, indent=2).encode("utf-8") + b"\n"
+    virtual_rows = [dict(row) for row in rows]
+    row = next((item for item in virtual_rows if item.get("path") == rel), None)
+    if row is None:
+        return candidates
+    row["size_bytes"] = len(payload)
+    row["sha256"] = sha256_bytes(payload)
+    candidates.add(inventory_sha256(virtual_rows))
+    return candidates
 
 
 def full_tree_sha256(root: Path) -> str:

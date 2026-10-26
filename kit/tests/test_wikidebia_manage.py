@@ -378,6 +378,14 @@ def test_parser_exposes_github_sync_command():
     assert args.command == "github-sync"
 
 
+def test_parser_exposes_continuity_sync_check_command():
+    parser = module.build_parser()
+    args = parser.parse_args(["continuity-sync", "debat_test", "--check"])
+    assert args.command == "continuity-sync"
+    assert args.debate_id == "debat_test"
+    assert args.check is True
+
+
 def test_git_push_disables_terminal_password_prompt(monkeypatch, tmp_path: Path):
     _init_git_repo(tmp_path)
     module.run(["git", "remote", "add", "origin", "https://github.com/example/example.git"], cwd=tmp_path)

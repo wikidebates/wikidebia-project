@@ -124,6 +124,43 @@ def test_new_content_still_blocks_references_subsection_warning_unknown_hover_pa
     assert any(f.level == "ERROR" and f.code == "WDV-MWK-004" and "résumé" in f.message for f in report.findings), report.to_text()
 
 
+def test_verified_historical_absence_allows_omitted_french_debate_introduction(tmp_path: Path):
+    create_fr_package(tmp_path)
+    manifest_path = tmp_path / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    debate_page = next(page for page in manifest["pages"] if page["page_type"] == "debate")
+    debate_page["page_origin"] = "preexisting"
+    dump(manifest_path, manifest)
+
+    debate_path = tmp_path / debate_page["file_path"]
+    text = debate_path.read_text(encoding="utf-8")
+    text = text.replace(
+        "|introduction={{Sous-partie\n|titre=Définition\n|contenu=La mesure X est une mesure pilote.\n}}\n",
+        "",
+    )
+    debate_path.write_text(text, encoding="utf-8")
+    dump(tmp_path / "data/fr_content_lock.json", {
+        "schema": "wikidebia-fr-content-lock-1.0",
+        "schema_version": "1.1",
+        "debate_id": manifest["debate_id"],
+        "historical_text_decisions": {
+            "debate": {
+                "page_origin": "preexisting",
+                "historical_status": "historical_absent",
+                "decision": "preserved",
+            }
+        },
+    })
+
+    report = validate_package(tmp_path, scopes=["wikicode"])
+    assert not any(
+        finding.code == "WDV-MWK-004"
+        and finding.path == debate_page["file_path"]
+        and "introduction" in finding.message
+        for finding in report.findings
+    ), report.to_text()
+
+
 def test_historical_summary_parenthetical_dash_is_not_retroactively_rewritten(tmp_path: Path):
     _, arg1_path, _ = _legacy_preexisting_fixture(tmp_path)
     text = arg1_path.read_text(encoding="utf-8")

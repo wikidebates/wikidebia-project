@@ -2439,6 +2439,21 @@ def build_parser() -> argparse.ArgumentParser:
         help="Empreinte exacte du reçu d’exécution distante",
     )
 
+    continuity_parser = sub.add_parser(
+        "continuity-sync",
+        help="Projeter et vérifier la succession française signée dans la sauvegarde de continuité",
+    )
+    continuity_parser.add_argument("debate_id", help="Identifiant interne du débat")
+    continuity_parser.add_argument("--work-id", help="Work attendu; par défaut, celui du workflow courant")
+    continuity_parser.add_argument(
+        "--snapshot-root", type=Path,
+        help="Racine de la projection; défaut : continuity/<debate_id>/latest",
+    )
+    continuity_parser.add_argument(
+        "--check", action="store_true",
+        help="Vérifier la projection existante sans la modifier",
+    )
+
     github = sub.add_parser("github-init", help="Initialiser le dépôt et pousser vers GitHub")
     github.add_argument("remote", help="URL Git du dépôt, par exemple git@github.com:COMPTE/wikidebia.git")
     github.add_argument("--private", action="store_true", help="Documentation uniquement; la visibilité se règle sur GitHub")
@@ -2613,6 +2628,21 @@ def main(argv: list[str] | None = None) -> int:
             root, args.debate_id, work_id=args.work_id, comparison_id=args.comparison_id,
             confirm_execution_sha256=args.confirm_execution_sha256,
         )
+
+    if args.command == "continuity-sync":
+        from wikidebia_continuity import ContinuityError, sync_signed_french_history
+        try:
+            result = sync_signed_french_history(
+                root,
+                args.debate_id,
+                work_id=args.work_id,
+                snapshot_root=args.snapshot_root,
+                check_only=args.check,
+            )
+        except ContinuityError as exc:
+            raise ManagementError(f"Continuité bloquée : {exc}") from exc
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return 0
 
     if args.command == "github-init":
         github_init(root, args.remote, args.private)

@@ -1752,8 +1752,20 @@ def _validate_debate(row: Mapping[str, Any], mapping: Mapping[str, str], sources
         raise TranslationReviewError("Une Debate issue d’une source française nouvelle doit comporter cinq à huit keywords")
     if row.get("keywords_order_preserved_by_relevance") is not True:
         raise TranslationReviewError("L’ordre de pertinence des keywords de Debate n’est pas attesté")
-    introduction = _text(row.get("introduction"), "introduction anglaise", 40)
-    _assert_english_wikicode_localized(introduction, "l’introduction anglaise")
+    historical_intro_absent = bool(
+        source_page_origin == "preexisting"
+        and not fr_introduction
+        and fr_content.get("historical_introduction_present") is False
+        and str(fr_content.get("introduction_provenance") or "") == "historical_absent"
+        and str(fr_content.get("historical_text_decision") or "") == "preserved"
+    )
+    if historical_intro_absent:
+        if row.get("introduction") not in (None, ""):
+            raise TranslationReviewError("Une introduction anglaise ne peut pas être inventée lorsque l’introduction française est historiquement absente")
+        introduction = ""
+    else:
+        introduction = _text(row.get("introduction"), "introduction anglaise", 40)
+        _assert_english_wikicode_localized(introduction, "l’introduction anglaise")
     debate_risk_by_field["introduction"] = _semantic_risk_signals(fr_introduction, introduction)
     debate_semantic_risks = sorted({f"{field}:{risk}" for field, risks in debate_risk_by_field.items() for risk in risks})
     debate_risk_note = str(row.get("debate_field_semantic_risk_note") or "").strip()
@@ -1784,8 +1796,10 @@ def _validate_debate(row: Mapping[str, Any], mapping: Mapping[str, str], sources
     historical_intro_profile = {field: bool(row.get(field)) for field in HISTORICAL_INTRO_TRANSLATION_TRUE_FIELDS}
     introduction_adaptation_rationale = str(row.get("introduction_adaptation_rationale") or "").strip()
     subsections = row.get("subsections")
-    if not isinstance(subsections, list) or not subsections:
+    if not isinstance(subsections, list) or (not historical_intro_absent and not subsections):
         raise TranslationReviewError("L’introduction anglaise doit comporter des sous-parties")
+    if historical_intro_absent and subsections:
+        raise TranslationReviewError("Aucune sous-partie anglaise ne peut être inventée lorsque l’introduction française est historiquement absente")
     stakes_rows = []
     for subsection_index, sub in enumerate(subsections):
         if not isinstance(sub, dict):
@@ -1812,6 +1826,13 @@ def _validate_debate(row: Mapping[str, Any], mapping: Mapping[str, str], sources
         stake_content = stake_content_match.group(1).strip() if stake_content_match else ""
         if len(re.findall(r"\b[\w'-]+\b", stake_content)) < 45 or len(re.findall(r"[.!?](?:\s|$)", stake_content)) < 3:
             raise TranslationReviewError("The Stakes of the debate subsection is too brief or merely symbolic")
+    elif historical_intro_absent:
+        introduction_adaptation_rationale = _text(
+            row.get("introduction_adaptation_rationale"),
+            "justification de l’absence historique de l’introduction",
+            30,
+        )
+        historical_intro_profile = {field: True for field in HISTORICAL_INTRO_TRANSLATION_TRUE_FIELDS}
     else:
         profile_fields_present = any(field in row for field in HISTORICAL_INTRO_TRANSLATION_TRUE_FIELDS) or "introduction_adaptation_rationale" in row
         if profile_fields_present:
