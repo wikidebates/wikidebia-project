@@ -624,6 +624,17 @@ class TranslationReviewError(EditorialReviewError):
     pass
 
 
+def _reuses_existing_english_page(node: Mapping[str, Any]) -> bool:
+    wiki = ((((node.get("pages") or {}).get("en") or {}).get("wiki") or {}))
+    en = node.get("en") or {}
+    return (
+        wiki.get("check_status") == "equivalent_existing"
+        and wiki.get("decision") == "reuse_existing"
+        and bool(en.get("canonical_title"))
+        and en.get("title_status") == "locked"
+    )
+
+
 def translation_review_sha256(review: Mapping[str, Any]) -> str:
     body = copy.deepcopy(dict(review))
     body.pop("review_sha256", None)
@@ -961,7 +972,13 @@ def prepare_review(project_root: Path, debate_id: str, work_id: str, *, overwrit
     registry, metadata_lock, content_lock, vocabulary = _source_snapshot(source)
     fr_meta_by_id = {str(row.get("entity_id")): row for row in metadata_lock.get("arguments") or []}
     fr_content_by_id = {str(row.get("id")): row for row in content_lock.get("arguments") or []}
-    active_ids = [str(node.get("id")) for node in ((registry.get("graph") or {}).get("nodes") or []) if node.get("status") == "active"]
+    active_nodes = [node for node in ((registry.get("graph") or {}).get("nodes") or []) if node.get("status") == "active"]
+    active_ids = [str(node.get("id")) for node in active_nodes]
+    translation_ids = [
+        str(node.get("id"))
+        for node in active_nodes
+        if not _reuses_existing_english_page(node)
+    ]
     if set(active_ids) != set(fr_meta_by_id) or set(active_ids) != set(fr_content_by_id):
         raise TranslationReviewError("Les verrous français ne couvrent pas exactement les arguments actifs")
     now = now_iso()
@@ -1005,11 +1022,17 @@ def prepare_review(project_root: Path, debate_id: str, work_id: str, *, overwrit
     }
     review["arguments"] = [
         {"id": node_id, "review_risk": _translation_risk_profile(fr_meta_by_id[node_id], fr_content_by_id[node_id]), "translation": _blank_argument(fr_meta_by_id[node_id], fr_content_by_id[node_id])}
-        for node_id in active_ids
+        for node_id in translation_ids
     ]
     if _historical_relation_labels_required(content_lock):
         from wikidebia_translation_source import relation_labels_from_source
-        review["relation_labels"] = [{**r, "translated_text": "", "equivalent_to_french": False, "review_note": ""} for r in relation_labels_from_source(source)]
+        reused_ids = set(active_ids) - set(translation_ids)
+        review["relation_labels"] = [
+            {**r, "translated_text": "", "equivalent_to_french": False, "review_note": ""}
+            for r in relation_labels_from_source(
+                source, exclude_target_node_ids=reused_ids
+            )
+        ]
     review["review_units"] = _build_translation_review_units(review["arguments"])
     unit_by_page = {page_id: unit["id"] for unit in review["review_units"] for page_id in unit["page_ids"]}
     for item in review["arguments"]:
@@ -1027,14 +1050,16 @@ def prepare_review(project_root: Path, debate_id: str, work_id: str, *, overwrit
     write_json(workspace / "audits/en_translation_inventory.json", {
         "schema": "wikidebia-en-translation-inventory-1.0",
         "debate_id": debate_id, "work_id": work_id, "generated_at": now,
-        "arguments": len(active_ids), "vocabulary_entries": len(review["vocabulary"]),
+        "arguments": len(translation_ids),
+        "reused_existing_arguments": len(active_ids) - len(translation_ids),
+        "vocabulary_entries": len(review["vocabulary"]),
         "review_units": len(review["review_units"]),
         "risk_levels": dict(collections.Counter(item["review_risk"]["level"] for item in review["arguments"])),
         "french_sources": len((load_json(source / "data/sources.json", "sources françaises").get("sources") or [])),
         "boundaries": {"automatic_translation": False, "final_pages_generated": False, "remote_access": False},
     })
     (workspace / "audits/en_translation_inventory.md").write_text(
-        "\n".join(["# English translation inventory", "", f"- Debate: `{debate_id}`", f"- Arguments: {len(active_ids)}", f"- Controlled terms: {len(review['vocabulary'])}", "", "No automatic translation or final page generation was performed.", ""]),
+        "\n".join(["# English translation inventory", "", f"- Debate: `{debate_id}`", f"- Arguments to translate: {len(translation_ids)}", f"- Existing English arguments reused: {len(active_ids) - len(translation_ids)}", f"- Controlled terms: {len(review['vocabulary'])}", "", "No automatic translation or final page generation was performed.", ""]),
         encoding="utf-8", newline="\n",
     )
     meta = copy.deepcopy(meta)
@@ -1051,9 +1076,15 @@ def prepare_review(project_root: Path, debate_id: str, work_id: str, *, overwrit
     write_json(workspace / "workspace.json", meta)
     readiness["status"] = "translation_review_in_progress"
     for item in readiness.get("items") or []:
-        item["translation_status"] = "translation_review_in_progress"
+        item["translation_status"] = (
+            "reuse_existing_english_page"
+            if item.get("entity_type") == "argument"
+            and str(item.get("entity_id") or item.get("id") or item.get("page_id") or "")
+            not in set(translation_ids)
+            else "translation_review_in_progress"
+        )
     write_json(workspace / "reviews/en/translation_readiness.json", readiness)
-    return {"status": "en_translation_review_ready", "debate_id": debate_id, "work_id": work_id, "review_path": relative_to_project(review_path, project_root), "sources_path": relative_to_project(sources_path, project_root), "arguments": len(active_ids), "automatic_translation": False, "final_pages_generated": False}
+    return {"status": "en_translation_review_ready", "debate_id": debate_id, "work_id": work_id, "review_path": relative_to_project(review_path, project_root), "sources_path": relative_to_project(sources_path, project_root), "arguments": len(translation_ids), "reused_existing_arguments": len(active_ids) - len(translation_ids), "automatic_translation": False, "final_pages_generated": False}
 
 
 LEGACY_SOURCE_VERIFICATION_KEYS = {"checked_at", "method", "note"}
@@ -2155,9 +2186,14 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
     items = review.get("arguments")
     if not isinstance(items, list):
         raise TranslationReviewError("Liste des arguments anglais absente")
-    active_ids = {str(node.get("id")) for node in ((registry.get("graph") or {}).get("nodes") or []) if node.get("status") == "active"}
-    if {str(item.get("id")) for item in items if isinstance(item, dict)} != active_ids:
-        raise TranslationReviewError("La revue anglaise ne couvre pas exactement les arguments actifs")
+    active_nodes = [node for node in ((registry.get("graph") or {}).get("nodes") or []) if node.get("status") == "active"]
+    translation_ids = {
+        str(node.get("id"))
+        for node in active_nodes
+        if not _reuses_existing_english_page(node)
+    }
+    if {str(item.get("id")) for item in items if isinstance(item, dict)} != translation_ids:
+        raise TranslationReviewError("La revue anglaise ne couvre pas exactement les arguments restant à traduire")
     fr_meta_by_id = {str(row.get("entity_id") or row.get("id")): row for row in (metadata_lock.get("arguments") or []) if isinstance(row, dict)}
     fr_content_by_id = {str(row.get("id")): row for row in (content_lock.get("arguments") or []) if isinstance(row, dict)}
     final_arguments = []
@@ -2169,12 +2205,27 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
         final_arguments.append(_validate_argument(item, keyword_map, by_source, authoritative_source_page_origin=authoritative_origin, authoritative_source_preservation_policy=source_policy))
     if _historical_relation_labels_required(content_lock):
         from wikidebia_translation_source import validate_relation_labels
-        contextual_labels = validate_relation_labels(review.get("relation_labels"), source)
+        reused_ids = {
+            str(node.get("id"))
+            for node in active_nodes
+            if _reuses_existing_english_page(node)
+        }
+        contextual_labels = validate_relation_labels(
+            review.get("relation_labels"),
+            source,
+            exclude_target_node_ids=reused_ids,
+        )
         final_debate["relation_labels"] = [r for r in contextual_labels if r["source_page_id"] == "debate"]
         for argument in final_arguments:
             argument["relation_labels"] = [r for r in contextual_labels if r["source_page_id"] == argument["id"]]
     canonical_titles = [row["canonical_title"].casefold() for row in final_arguments]
-    if len(set(canonical_titles)) != len(canonical_titles) or final_debate["canonical_title"].casefold() in canonical_titles:
+    reused_titles = [
+        str((node.get("en") or {}).get("canonical_title") or "").casefold()
+        for node in active_nodes
+        if _reuses_existing_english_page(node)
+    ]
+    all_argument_titles = [*canonical_titles, *reused_titles]
+    if len(set(all_argument_titles)) != len(all_argument_titles) or final_debate["canonical_title"].casefold() in all_argument_titles:
         raise TranslationReviewError("Collision de titres canoniques anglais")
     exact = sum(row["canonical_title"].casefold() == row["displayed_title"].casefold() for row in final_arguments)
     generated_arguments = [row for row in final_arguments if row.get("source_page_origin") == "new"]
@@ -2182,7 +2233,7 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
     if generated_arguments and max(keyword_sets.values(), default=0) / len(generated_arguments) > 0.25:
         raise TranslationReviewError("Un même jeu exact de keywords domine plus de 25 % des arguments issus d’une création")
     review_units = review.get("review_units")
-    if not isinstance(review_units, list) or not review_units:
+    if not isinstance(review_units, list) or (items and not review_units):
         raise TranslationReviewError("Plan d’unités de revue anglaise absent")
     covered: list[str] = []
     for unit in review_units:
@@ -2331,6 +2382,12 @@ def _build_translated_copy(project_root: Path, source: Path, target: Path, revie
     operations: list[dict[str, Any]] = []
     for node in ((registry.get("graph") or {}).get("nodes") or []):
         if node.get("status") != "active": continue
+        if _reuses_existing_english_page(node):
+            existing_title = str((node.get("en") or {}).get("canonical_title") or "")
+            node.setdefault("pages", {}).setdefault("fr", {}).setdefault(
+                "interlanguage", {}
+            ).update({"target_title": existing_title, "status": "ready"})
+            continue
         row = by_id[str(node.get("id"))]
         en = node.setdefault("en", {})
         before = copy.deepcopy(en)
@@ -2536,8 +2593,11 @@ def apply_review(project_root: Path, debate_id: str, work_id: str, confirm_revie
     readiness["english_translation_review_sha256"] = review["review_sha256"]
     readiness["english_translation_locked_at"] = applied_at
     for item in readiness.get("items") or []:
-        item["translation_status"] = "translated_and_locked"
-        item["equivalence_review_status"] = "approved"
+        if item.get("translation_status") == "reuse_existing_english_page":
+            item["equivalence_review_status"] = "not_applicable_existing_page"
+        else:
+            item["translation_status"] = "translated_and_locked"
+            item["equivalence_review_status"] = "approved"
     write_json(workspace / "reviews/en/translation_readiness.json", readiness)
     meta = copy.deepcopy(meta)
     meta["kit_version"] = KIT_VERSION

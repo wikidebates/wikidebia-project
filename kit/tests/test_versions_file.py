@@ -45,7 +45,7 @@ def test_graph_extractor_versions_match_kit():
     versions = json.loads((ROOT / "VERSIONS.json").read_text(encoding="utf-8"))
     script = (ROOT / "scripts/wikidebia_graph_extract.py").read_text(encoding="utf-8")
     assert "from wikidebia_release_info import KIT_VERSION" in script
-    assert re.search(r'^GRAPH_EXTRACT_VERSION\s*=\s*"1\.0\.2"', script, re.M)
+    assert re.search(r'^GRAPH_EXTRACT_VERSION\s*=\s*"1\.2\.0"', script, re.M)
 
 
 def test_editorial_workspace_versions_match_kit():

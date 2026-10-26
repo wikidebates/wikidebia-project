@@ -5,7 +5,7 @@ from typing import Any
 
 from .graph import STATE_ORDER, state_at_least
 from .package import PackageContext
-from .translation import english_translation_deferred, english_translation_status
+from .translation import english_translation_deferred, english_translation_status, reuses_existing_english_page
 
 
 VALIDATION_FOR_STATE = {
@@ -101,7 +101,12 @@ def validate_workflow(ctx: PackageContext, previous_status: str | None = None) -
     for lang, content_state, validated_state in (("fr", "fr_content_complete", "fr_validated"), ("en", "en_content_complete", "en_validated")):
         if lang == "en" and english_deferred:
             continue
-        expected_ids = {(registry.get("debate") or {}).get("id")} | {n.get("id") for n in nodes}
+        language_nodes = (
+            [n for n in nodes if not reuses_existing_english_page(n)]
+            if lang == "en"
+            else nodes
+        )
+        expected_ids = {(registry.get("debate") or {}).get("id")} | {n.get("id") for n in language_nodes}
         lang_pages = {p.get("page_id"): p for p in pages if p.get("language") == lang}
         if state_at_least(status, content_state):
             missing = sorted(expected_ids - set(lang_pages))

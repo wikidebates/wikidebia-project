@@ -5,7 +5,7 @@ from typing import Any
 
 from .graph import state_at_least, structural_sha256
 from .package import PackageContext
-from .translation import english_translation_deferred
+from .translation import english_translation_deferred, reuses_existing_english_page
 
 
 def collect_batches(ctx: PackageContext) -> dict[str, dict[str, Any]]:
@@ -94,7 +94,11 @@ def validate_batches(ctx: PackageContext) -> None:
                 ctx.report.error("WDV-BAT-002", f"Le nœud {nid} appartient à plusieurs lots {lang}", details={"batches": owners})
         stage = "fr_arguments_in_progress" if lang == "fr" else "en_arguments_in_progress"
         if state_at_least(manifest.get("global_status"), stage):
-            missing = sorted(set(nodes) - set(ownership[lang]))
+            expected_nodes = {
+                nid for nid, node in nodes.items()
+                if lang != "en" or not reuses_existing_english_page(node)
+            }
+            missing = sorted(expected_nodes - set(ownership[lang]))
             if missing:
                 ctx.report.error("WDV-BAT-003", f"Nœuds actifs non couverts par les lots {lang}", details={"node_ids": missing})
 

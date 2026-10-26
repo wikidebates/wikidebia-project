@@ -12,6 +12,17 @@ Elle suit uniquement :
 
 Une page portant un paramètre `débat détaillé` reste dans le graphe, mais constitue par défaut une frontière. Le débat sous-jacent n'est jamais ouvert automatiquement.
 
+Avant le parcours, la page Débat elle-même est contrôlée. Si sa cible anglaise
+déclarée existe, l'extraction s'arrête immédiatement et produit la preuve
+`traduction_du_débat_requise=false` ; le workflow éditorial termine alors sans
+créer de corpus ni retraduire le débat.
+
+De même, toute page Argument française qui déclare une cible anglaise au moyen de
+`interlangue={{Lien interlangue|langue=en|page=…}}` est considérée comme déjà
+traduite. L'arête entrante et le titre anglais sont conservés, mais les
+justifications et objections de ce nœud ne sont plus parcourues : cette branche
+est déjà prise en charge par la page anglaise existante.
+
 ## Commande minimale
 
 ```bash
@@ -82,6 +93,13 @@ L'option suivante suit les relations locales d'une page frontière, sans ouvrir 
 --follow-local-relations-at-dedicated-debate
 ```
 
+Le contrôle des traductions existantes est actif par défaut. L'option suivante
+est réservée au diagnostic et force le parcours sous ces frontières :
+
+```text
+--follow-local-relations-at-existing-english-translation
+```
+
 ## Authentification
 
 La lecture d'un wiki public peut fonctionner sans fichier d'identification. `--login` exige en revanche `private/pywikibot/user-config.py` et la configuration privée habituelle.
@@ -92,7 +110,7 @@ Les fichiers sont des données d'extraction et de provenance, non un corpus `rel
 
 ## Niveaux, profondeurs et occurrences
 
-L’extracteur 1.0.2 distingue explicitement :
+L’extracteur 1.2.0 distingue explicitement :
 
 - le **niveau**, numéroté à partir de 1 pour un argument principal ;
 - la **profondeur en nombre d’arêtes**, égale au niveau moins un ;
@@ -115,6 +133,10 @@ Le rapport Markdown contient une table « Nombre d’arguments par niveau ».
 `arguments_par_niveau` compte les pages Argument uniques selon leur niveau minimal ;
 les occurrences réutilisées par plusieurs chemins restent présentées séparément.
 
+Chaque nœud expose aussi `traduction_anglaise_requise`. Le compteur
+`pages_arguments_a_traduire` exclut les frontières dont la cible anglaise a été
+vérifiée ; ces nœuds sont conservés uniquement pour maintenir le lien entrant.
+
 Une ligne de niveau contenant des occurrences mais aucune page unique est normale lorsque toutes ces occurrences réutilisent des pages déjà rencontrées à un niveau inférieur.
 
 ## Feuilles et frontières
@@ -124,6 +146,8 @@ Le rapport distingue :
 - `pages_sans_sortie_dans_graphe_extrait` : toutes les pages sans relation conservée ;
 - `pages_terminales_reelles` : les feuilles ordinaires ;
 - les frontières `débat détaillé`, dont les relations locales sont volontairement non suivies.
+- les frontières `traduction anglaise existante`, dont la cible anglaise est
+  conservée et dont les relations locales sont volontairement non suivies.
 
 Les relations ignorées aux frontières sont des informations de périmètre, non des avertissements. Les vrais avertissements restent réservés aux fallbacks, pages manquantes autorisées ou structures inhabituelles.
 
@@ -133,10 +157,15 @@ Après une mise à niveau du kit, relancer la commande initiale sans `--force-re
 
 ## Compatibilité des champs historiques
 
-L’extracteur 1.0.2 conserve les champs historiques avec leur valeur 1.0.0 afin de ne pas casser les scripts existants. Ces champs sont dépréciés parce que leur nom employait « profondeur » pour un niveau commençant à 1. Les nouveaux développements doivent utiliser uniquement les champs explicites `niveau_*` et `*_en_aretes`.
+L’extracteur 1.2.0 conserve les champs historiques avec leur valeur 1.0.0 afin de ne pas casser les scripts existants. Ces champs sont dépréciés parce que leur nom employait « profondeur » pour un niveau commençant à 1. Les nouveaux développements doivent utiliser uniquement les champs explicites `niveau_*` et `*_en_aretes`.
 
 
 ## Orchestration éditoriale de haut niveau
+
+La commande `workflow` exige un graphe portant la preuve de ce contrôle. Un
+cache plus ancien est réextrait automatiquement ; un snapshot fourni
+explicitement mais antérieur à l'extracteur 1.2.0 est refusé, afin qu'une
+traduction ne puisse pas démarrer sans ce préflight.
 
 Pour l'usage normal d'un débat qui doit être préparé puis traduit, préférer :
 

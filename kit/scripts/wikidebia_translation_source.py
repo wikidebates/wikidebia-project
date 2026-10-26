@@ -89,7 +89,11 @@ def _sha_text(text: str) -> str:
 def _csv(value: str) -> list[str]:
     return [v.strip() for v in value.split(',') if v.strip()]
 
-def relation_labels_from_source(source: Path) -> list[dict[str,Any]]:
+def relation_labels_from_source(
+    source: Path,
+    *,
+    exclude_target_node_ids: set[str] | None = None,
+) -> list[dict[str,Any]]:
     from wikidebia_translation_review import TranslationReviewError
     registry,debate,arguments=_source_imports(source)
     provenance=load_json(source/'data/import_provenance.json','provenance française')
@@ -142,11 +146,17 @@ def relation_labels_from_source(source: Path) -> list[dict[str,Any]]:
             source_text=next(iter(previous_labels)) if len(previous_labels)==1 else fallback
         if not source_text:raise TranslationReviewError('Titre affiché français relationnel absent : '+str(edge.get('id')))
         result.append(dict(id='edge:'+str(edge['id']),source_page_id=parent_id,target_node_id=child_id,relation=relation,source_text=source_text))
-    return result
+    excluded = exclude_target_node_ids or set()
+    return [row for row in result if str(row.get('target_node_id') or '') not in excluded]
 
-def validate_relation_labels(rows: Any, source: Path) -> list[dict[str,Any]]:
+def validate_relation_labels(
+    rows: Any,
+    source: Path,
+    *,
+    exclude_target_node_ids: set[str] | None = None,
+) -> list[dict[str,Any]]:
     from wikidebia_translation_review import TranslationReviewError
-    expected=relation_labels_from_source(source)
+    expected=relation_labels_from_source(source, exclude_target_node_ids=exclude_target_node_ids)
     if not isinstance(rows,list) or len(rows)!=len(expected):raise TranslationReviewError('Couverture des libellés contextuels incomplète')
     by_id={r.get('id'):r for r in rows if isinstance(r,dict)}
     if len(by_id)!=len(expected):raise TranslationReviewError('Libellés contextuels dupliqués')

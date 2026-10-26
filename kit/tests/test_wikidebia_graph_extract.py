@@ -43,6 +43,16 @@ class ParserTests(unittest.TestCase):
         self.assertEqual([x.page for x in parsed.con], ["C"])
         self.assertEqual(parsed.pro[0].displayed_title, "A prouve P")
 
+    def test_debate_existing_english_translation_is_detected(self):
+        parsed = mod.parse_debate_wikitext(
+            """{{Débat
+|arguments-pour={{Argument pour|page=A}}
+|arguments-contre=
+|interlangue={{Lien interlangue|langue=en|page=Existing English debate}}
+}}"""
+        )
+        self.assertEqual(parsed.existing_english_title, "Existing English debate")
+
     def test_frontier_discards_relations(self):
         text = """{{Argument
 |débat-dédié=[[Débat sous-jacent]]
@@ -56,8 +66,123 @@ class ParserTests(unittest.TestCase):
         self.assertEqual(parsed.ignored_relations_at_frontier, 2)
         self.assertFalse(parsed.warnings)
 
+    def test_existing_english_translation_discards_relations(self):
+        text = """{{Argument
+|justifications={{Justification|page=X}}
+|objections={{Objection|page=Y}}
+|interlangue={{Lien interlangue|langue=en|page=Existing English argument}}
+}}"""
+        parsed = mod.parse_argument_wikitext(text)
+        self.assertEqual(parsed.existing_english_title, "Existing English argument")
+        self.assertEqual(parsed.justifications, [])
+        self.assertEqual(parsed.objections, [])
+        self.assertEqual(parsed.ignored_relations_at_existing_english_translation, 2)
+
+    def test_non_english_interlanguage_link_is_not_a_translation_frontier(self):
+        text = """{{Argument
+|justifications={{Justification|page=X}}
+|interlangue={{Lien interlangue|langue=de|page=Deutsches Argument}}
+}}"""
+        parsed = mod.parse_argument_wikitext(text)
+        self.assertEqual(parsed.existing_english_title, "")
+        self.assertEqual([entry.page for entry in parsed.justifications], ["X"])
+
 
 class CrawlTests(unittest.TestCase):
+    def test_existing_english_debate_stops_before_argument_crawl(self):
+        pages = {
+            "Débat test": """{{Débat
+|arguments-pour={{Argument pour|page=A}}
+|arguments-contre=
+|interlangue={{Lien interlangue|langue=en|page=Existing debate}}
+}}""",
+        }
+        result = mod.crawl_graph(
+            FakeClient(pages),
+            debate_title="Débat test",
+            english_client=FakeClient({"Canonical debate": "{{Debate}}"}, aliases={"Existing debate": "Canonical debate"}),
+            progress_every=0,
+        )
+        graph = mod.analyze_graph(result)
+        self.assertEqual(result.existing_english_debate_title, "Canonical debate")
+        self.assertEqual(result.parsed_arguments, {})
+        self.assertEqual(graph["metadata"]["traduction_du_débat_requise"], False)
+        self.assertEqual(graph["metadata"]["pages_arguments_a_traduire"], 0)
+        self.assertTrue(all(check["ok"] for check in mod.audit_graph(graph)))
+
+    def test_existing_english_translation_keeps_incoming_link_and_stops_subtree(self):
+        pages = {
+            "Débat test": "{{Débat|arguments-pour={{Argument pour|page=A}}|arguments-contre=}}",
+            "A": "{{Argument|justifications={{Justification|page=B}}|objections=}}",
+            "B": """{{Argument
+|justifications={{Justification|page=C}}
+|objections=
+|interlangue={{Lien interlangue|langue=en|page=Existing B}}
+}}""",
+        }
+        result = mod.crawl_graph(
+            FakeClient(pages),
+            debate_title="Débat test",
+            english_client=FakeClient({"Existing B": "{{Argument}}"}),
+            progress_every=0,
+        )
+        graph = mod.analyze_graph(result)
+        self.assertEqual(set(result.parsed_arguments), {"A", "B"})
+        self.assertEqual([(edge.source, edge.target) for edge in result.relations], [("A", "B")])
+        self.assertEqual(result.existing_english_translation_frontiers, {"B": "Existing B"})
+        b = next(row for row in graph["noeuds"] if row["titre"] == "B")
+        self.assertEqual(b["statut"], "frontière_traduction_anglaise_existante")
+        self.assertEqual(b["traduction_anglaise_existante"], "Existing B")
+        self.assertFalse(b["traduction_anglaise_requise"])
+        self.assertEqual(b["relations_locales_ignorees_traduction_anglaise"], 1)
+        self.assertEqual(
+            graph["metadata"]["frontières_traduction_anglaise_existante"],
+            {"B": "Existing B"},
+        )
+        self.assertEqual(
+            graph["metadata"]["relations_locales_ignorees_traductions_anglaises_existantes"],
+            1,
+        )
+        self.assertEqual(graph["metadata"]["pages_arguments_a_traduire"], 1)
+        self.assertTrue(all(check["ok"] for check in mod.audit_graph(graph)))
+
+    def test_missing_english_target_does_not_stop_french_subtree(self):
+        pages = {
+            "Débat test": "{{Débat|arguments-pour={{Argument pour|page=A}}|arguments-contre=}}",
+            "A": """{{Argument
+|justifications={{Justification|page=B}}
+|interlangue={{Lien interlangue|langue=en|page=Missing English page}}
+}}""",
+            "B": "{{Argument|justifications=|objections=}}",
+        }
+        result = mod.crawl_graph(
+            FakeClient(pages),
+            debate_title="Débat test",
+            english_client=FakeClient({}),
+            progress_every=0,
+        )
+        self.assertEqual(set(result.parsed_arguments), {"A", "B"})
+        self.assertEqual(result.existing_english_translation_frontiers, {})
+        self.assertTrue(any("cible anglaise inexistante" in warning for warning in result.warnings))
+
+    def test_existing_english_translation_frontier_can_be_disabled_for_diagnostics(self):
+        pages = {
+            "Débat test": "{{Débat|arguments-pour={{Argument pour|page=A}}|arguments-contre=}}",
+            "A": """{{Argument
+|justifications={{Justification|page=B}}
+|interlangue={{Lien interlangue|langue=en|page=Existing A}}
+}}""",
+            "B": "{{Argument|justifications=|objections=}}",
+        }
+        result = mod.crawl_graph(
+            FakeClient(pages),
+            debate_title="Débat test",
+            stop_on_existing_english_translation=False,
+            progress_every=0,
+        )
+        self.assertEqual(set(result.parsed_arguments), {"A", "B"})
+        self.assertEqual([(edge.source, edge.target) for edge in result.relations], [("A", "B")])
+
     def test_max_depth_limits_traversal_and_counts_arguments_by_level(self):
         pages = {
             "Débat test": "{{Débat|arguments-pour={{Argument pour|page=A}}|arguments-contre=}}",
@@ -298,6 +423,16 @@ class DedicatedDebateCliRegressionTests(unittest.TestCase):
         args = mod.build_parser().parse_args(["--debate", "Débat test", "--max-depth", "4"])
         self.assertEqual(args.max_depth, 4)
 
+    def test_parser_can_follow_existing_english_translation_for_diagnostics(self):
+        args = mod.build_parser().parse_args(
+            [
+                "--debate",
+                "Débat test",
+                "--follow-local-relations-at-existing-english-translation",
+            ]
+        )
+        self.assertTrue(args.follow_local_relations_at_existing_english_translation)
+
 if __name__ == "__main__":
     unittest.main()
 
@@ -320,3 +455,8 @@ class SafetyTests(unittest.TestCase):
                 login=False,
             )
             self.assertFalse(client.login)
+
+    def test_cloudflare_access_header_is_supported_without_logging_its_value(self):
+        source = MODULE_PATH.read_text(encoding="utf-8")
+        self.assertIn('os.environ.get("WIKIDEBIA_API_TOKEN")', source)
+        self.assertIn('extra_headers["x-wikidebia-access"]', source)

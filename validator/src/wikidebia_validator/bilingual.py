@@ -4,7 +4,7 @@ from typing import Any
 
 from .graph import state_at_least
 from .package import PackageContext
-from .translation import english_translation_deferred, english_translation_status
+from .translation import english_translation_deferred, english_translation_status, reuses_existing_english_page
 from .wikicode import alphabetically_sorted
 
 
@@ -36,10 +36,11 @@ def validate_bilingual(ctx: PackageContext) -> None:
         nid = node.get("id")
         fr = node.get("fr") or {}
         en = node.get("en") or {}
+        reused_existing = reuses_existing_english_page(node)
         if strict:
             if en.get("title_status") != "locked" or not en.get("canonical_title"):
                 ctx.report.error("WDV-BIL-001", f"Titre anglais non verrouillé pour {nid}", path=ctx.core_paths()["registry"])
-            if (nid, "fr") not in pages or (nid, "en") not in pages:
+            if (nid, "fr") not in pages or ((nid, "en") not in pages and not reused_existing):
                 ctx.report.error("WDV-BIL-001", f"Paire de pages bilingues incomplète pour {nid}", path="manifest.json")
         if english_deferred:
             continue
@@ -53,7 +54,7 @@ def validate_bilingual(ctx: PackageContext) -> None:
         if strict:
             fr_rec = ((node.get("pages") or {}).get("fr") or {})
             en_rec = ((node.get("pages") or {}).get("en") or {})
-            if (fr_rec.get("generation") or {}).get("status") != "validated" or (en_rec.get("generation") or {}).get("status") != "validated":
+            if (fr_rec.get("generation") or {}).get("status") != "validated" or (not reused_existing and (en_rec.get("generation") or {}).get("status") != "validated"):
                 ctx.report.error("WDV-BIL-001", f"Pages bilingues non validées dans le registre pour {nid}")
             if not fr_primary:
                 ctx.report.error("WDV-BIL-003", f"Occurrence primaire dérivée absente pour {nid}")

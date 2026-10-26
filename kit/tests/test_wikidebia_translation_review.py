@@ -47,6 +47,32 @@ def make_french_locked(tmp_path: Path) -> tuple[Path, Path, str]:
     return project, workspace, work_id
 
 
+def mark_existing_english_argument(workspace: Path, node_id: str = "A0004") -> None:
+    source = workspace / "content-reviewed-copy"
+    registry_path = source / "data/registre_debat.json"
+    registry = common.load_json(registry_path, "registre")
+    node = next(row for row in registry["graph"]["nodes"] if row["id"] == node_id)
+    node["en"].update({
+        "canonical_title": "Existing English argument",
+        "displayed_title": "Existing English argument",
+        "title_status": "locked",
+    })
+    node["pages"]["en"]["wiki"].update({
+        "check_status": "equivalent_existing",
+        "decision": "reuse_existing",
+        "remote_title": "Existing English argument",
+        "remote_revision_id": 42,
+    })
+    node["pages"]["en"]["generation"]["status"] = "obsolete"
+    common.write_json(registry_path, registry)
+    meta_path = workspace / "workspace.json"
+    meta = common.load_json(meta_path, "workspace")
+    meta["content_reviewed_copy"]["tree_sha256"] = common.full_tree_sha256(source)
+    meta["workspace_sha256"] = None
+    meta["workspace_sha256"] = translation.workspace_receipt_hash(meta)
+    common.write_json(meta_path, meta)
+
+
 def complete_semantic_convergence(project: Path, work_id: str) -> None:
     first = convergence.record_pass(
         project, "debat_test", work_id,
@@ -318,6 +344,22 @@ def test_prepare_translation_is_read_only_for_french_copy(tmp_path: Path):
     meta = json.loads((workspace / "workspace.json").read_text(encoding="utf-8"))
     assert meta["boundaries"]["english_translation_started"] is True
     assert meta["boundaries"]["final_pages_generated"] is False
+
+
+def test_prepare_translation_reuses_verified_existing_english_argument(tmp_path: Path):
+    project, workspace, work_id = make_french_locked(tmp_path)
+    mark_existing_english_argument(workspace)
+
+    result = translation.prepare_review(project, "debat_test", work_id)
+    review = common.load_json(workspace / "reviews/en/translation_review.json", "review")
+    readiness = common.load_json(workspace / "reviews/en/translation_readiness.json", "readiness")
+
+    assert result["arguments"] == 3
+    assert result["reused_existing_arguments"] == 1
+    assert "A0004" not in {row["id"] for row in review["arguments"]}
+    assert "A0004" not in {row["target_node_id"] for row in review["relation_labels"]}
+    reused = next(row for row in readiness["items"] if row.get("entity_id") == "A0004")
+    assert reused["translation_status"] == "reuse_existing_english_page"
 
 
 def test_finalize_translation_seals_complete_bilingual_review(tmp_path: Path):

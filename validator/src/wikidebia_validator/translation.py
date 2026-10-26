@@ -3,6 +3,19 @@ from __future__ import annotations
 from typing import Any
 
 
+def reuses_existing_english_page(node: dict[str, Any] | None) -> bool:
+    if not isinstance(node, dict):
+        return False
+    wiki = ((((node.get("pages") or {}).get("en") or {}).get("wiki") or {}))
+    en = node.get("en") or {}
+    return (
+        wiki.get("check_status") == "equivalent_existing"
+        and wiki.get("decision") == "reuse_existing"
+        and bool(en.get("canonical_title"))
+        and en.get("title_status") == "locked"
+    )
+
+
 def english_translation_status(manifest: dict[str, Any] | None) -> str:
     """Return the explicit English translation state.
 

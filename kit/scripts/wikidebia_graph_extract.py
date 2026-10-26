@@ -5,8 +5,9 @@ The script is strictly read-only. It follows:
 - Debate -> pro/con arguments
 - Argument -> justifications/objections
 
-A page containing a "débat dédié" parameter is treated as a frontier by
- default: the linked debate is recorded but is not traversed.
+A page containing a "débat dédié" parameter or an English interlanguage link
+is treated as a frontier by default. The linked target is recorded but local
+argument relations are not traversed.
 
 Designed for Pywikibot 11.x and the Wikidéb'IA ``wikidebates`` family file.
 """
@@ -33,7 +34,7 @@ from pathlib import Path
 from typing import Any, Iterable, Mapping, Protocol, Sequence
 
 
-GRAPH_EXTRACT_VERSION = "1.0.2"
+GRAPH_EXTRACT_VERSION = "1.2.0"
 
 
 # ---------------------------------------------------------------------------
@@ -233,6 +234,7 @@ CON_LINK_KEYS = {"argument contre", "con argument"}
 JUSTIFICATION_KEYS = {"justification"}
 OBJECTION_KEYS = {"objection"}
 DETAILED_DEBATE_TEMPLATE_KEYS = {"debat detaille", "detailed debate"}
+INTERLANGUAGE_TEMPLATE_KEYS = {"lien interlangue", "interlangue"}
 
 
 @dataclasses.dataclass(frozen=True)
@@ -246,6 +248,7 @@ class ParsedDebate:
     pro: list[LinkEntry]
     con: list[LinkEntry]
     warnings: list[str]
+    existing_english_title: str = ""
 
 
 @dataclasses.dataclass
@@ -255,6 +258,9 @@ class ParsedArgument:
     detailed_debate: str
     warnings: list[str]
     ignored_relations_at_frontier: int = 0
+    existing_english_title: str = ""
+    existing_english_translation_verified: bool = False
+    ignored_relations_at_existing_english_translation: int = 0
 
 
 def _find_outer(calls: Sequence[TemplateCall], names: set[str]) -> TemplateCall | None:
@@ -281,7 +287,11 @@ def parse_debate_wikitext(text: str) -> ParsedDebate:
     outer = _find_outer(calls, DEBATE_TEMPLATE_KEYS)
     pro: list[LinkEntry] = []
     con: list[LinkEntry] = []
+    existing_english_title = ""
     if outer:
+        existing_english_title = _english_translation_from_value(
+            outer.get("interlangue", "interlanguage")
+        )
         pro_value = outer.get("arguments-pour", "arguments pour", "pro-arguments", "pro arguments")
         con_value = outer.get("arguments-contre", "arguments contre", "con-arguments", "con arguments")
         if pro_value:
@@ -302,7 +312,12 @@ def parse_debate_wikitext(text: str) -> ParsedDebate:
             for call in calls
             if normalize_key(call.name) in CON_LINK_KEYS and title_from_template(call)
         ]
-    return ParsedDebate(pro=pro, con=con, warnings=warnings)
+    return ParsedDebate(
+        pro=pro,
+        con=con,
+        warnings=warnings,
+        existing_english_title=existing_english_title,
+    )
 
 
 def _detailed_debate_from_value(value: str) -> str:
@@ -316,13 +331,35 @@ def _detailed_debate_from_value(value: str) -> str:
     return _strip_markup(value)
 
 
-def parse_argument_wikitext(text: str, *, stop_on_detailed_debate: bool = True) -> ParsedArgument:
+def _english_translation_from_value(value: str) -> str:
+    """Return the declared English target of a standard interlanguage link."""
+    if not value.strip():
+        return ""
+    for call in iter_templates(value):
+        if normalize_key(call.name) not in INTERLANGUAGE_TEMPLATE_KEYS:
+            continue
+        language = normalize_key(call.get("langue", "language", "lang"))
+        if language != "en":
+            continue
+        page = title_from_template(call)
+        if page:
+            return page
+    return ""
+
+
+def parse_argument_wikitext(
+    text: str,
+    *,
+    stop_on_detailed_debate: bool = True,
+    stop_on_existing_english_translation: bool = True,
+) -> ParsedArgument:
     calls = iter_templates(text)
     warnings: list[str] = []
     outer = _find_outer(calls, ARGUMENT_TEMPLATE_KEYS)
     justifications: list[LinkEntry] = []
     objections: list[LinkEntry] = []
     detailed = ""
+    existing_english_title = ""
     if outer:
         detailed = _detailed_debate_from_value(
             outer.get(
@@ -337,6 +374,9 @@ def parse_argument_wikitext(text: str, *, stop_on_detailed_debate: bool = True) 
                 "dedicated debate",
                 "detailed debate",
             )
+        )
+        existing_english_title = _english_translation_from_value(
+            outer.get("interlangue", "interlanguage")
         )
         just_value = outer.get("justifications")
         obj_value = outer.get("objections")
@@ -368,7 +408,12 @@ def parse_argument_wikitext(text: str, *, stop_on_detailed_debate: bool = True) 
             objections = global_obj
 
     ignored = 0
-    if detailed and stop_on_detailed_debate:
+    ignored_existing_translation = 0
+    if existing_english_title and stop_on_existing_english_translation:
+        ignored_existing_translation = len(justifications) + len(objections)
+        justifications = []
+        objections = []
+    elif detailed and stop_on_detailed_debate:
         ignored = len(justifications) + len(objections)
         # Une frontière est une décision normale de périmètre, pas un avertissement.
         # Le nombre de relations locales écartées est exporté séparément afin de
@@ -382,6 +427,8 @@ def parse_argument_wikitext(text: str, *, stop_on_detailed_debate: bool = True) 
         detailed_debate=detailed,
         warnings=warnings,
         ignored_relations_at_frontier=ignored,
+        existing_english_title=existing_english_title,
+        ignored_relations_at_existing_english_translation=ignored_existing_translation,
     )
 
 
@@ -484,6 +531,9 @@ class PywikibotPageClient:
             raise RuntimeError(
                 "Pywikibot est absent. Installez-le avec: pip install 'pywikibot>=11.5,<12'"
             ) from exc
+        access_token = os.environ.get("WIKIDEBIA_API_TOKEN")
+        if access_token:
+            pywikibot.config.extra_headers["x-wikidebia-access"] = access_token
         if self.family_file:
             family_files = getattr(pywikibot.config, "family_files", None)
             if family_files is None:
@@ -585,6 +635,9 @@ class CrawlResult:
     aliases: dict[str, str]
     warnings: list[str]
     frontier_information: list[str]
+    existing_english_debate_title: str
+    existing_english_translation_frontiers: dict[str, str]
+    existing_english_page_records: dict[str, PageRecord]
     depth_frontiers: dict[str, int]
     missing_pages: list[str]
     crawl_options: dict[str, Any]
@@ -610,7 +663,9 @@ def crawl_graph(
     client: PageClient,
     *,
     debate_title: str,
+    english_client: PageClient | None = None,
     stop_on_detailed_debate: bool = True,
+    stop_on_existing_english_translation: bool = True,
     max_depth: int | None = None,
     max_pages: int = 5000,
     allow_missing: bool = False,
@@ -622,8 +677,34 @@ def crawl_graph(
     parsed_debate = parse_debate_wikitext(debate_record.text)
     warnings = [f"Débat: {warning}" for warning in parsed_debate.warnings]
     frontier_information: list[str] = []
+    existing_english_debate_title = ""
+    existing_english_translation_frontiers: dict[str, str] = {}
+    existing_english_page_records: dict[str, PageRecord] = {}
     depth_frontiers: dict[str, int] = {}
-    if not parsed_debate.pro and not parsed_debate.con:
+    if parsed_debate.existing_english_title and stop_on_existing_english_translation:
+        if english_client is None:
+            raise RuntimeError(
+                "La cible interlangue anglaise du débat doit être vérifiée avec un client anglais"
+            )
+        try:
+            english_debate_record = english_client.fetch(parsed_debate.existing_english_title)
+        except PageMissingError:
+            warnings.append(
+                "Débat: cible anglaise inexistante; traduction française poursuivie: "
+                + parsed_debate.existing_english_title
+            )
+        else:
+            existing_english_debate_title = english_debate_record.canonical_title
+            existing_english_page_records[debate_record.canonical_title] = english_debate_record
+            frontier_information.append(
+                f"{debate_record.canonical_title}: débat déjà traduit en anglais: "
+                f"{existing_english_debate_title}; graphe argumentatif non parcouru"
+            )
+    if (
+        not existing_english_debate_title
+        and not parsed_debate.pro
+        and not parsed_debate.con
+    ):
         raise RuntimeError("Aucun argument principal n'a été trouvé dans la page Débat")
 
     page_records: dict[str, PageRecord] = {}
@@ -654,14 +735,15 @@ def crawl_graph(
             queue.append((canonical, depth))
         return canonical
 
-    for entry in parsed_debate.pro:
-        canonical = resolve(entry, context="argument pour", depth=0)
-        if canonical and canonical not in roots_pro:
-            roots_pro.append(canonical)
-    for entry in parsed_debate.con:
-        canonical = resolve(entry, context="argument contre", depth=0)
-        if canonical and canonical not in roots_con:
-            roots_con.append(canonical)
+    if not existing_english_debate_title:
+        for entry in parsed_debate.pro:
+            canonical = resolve(entry, context="argument pour", depth=0)
+            if canonical and canonical not in roots_pro:
+                roots_pro.append(canonical)
+        for entry in parsed_debate.con:
+            canonical = resolve(entry, context="argument contre", depth=0)
+            if canonical and canonical not in roots_con:
+                roots_con.append(canonical)
 
     processed = 0
     while queue:
@@ -675,9 +757,43 @@ def crawl_graph(
         parsed = parse_argument_wikitext(
             record.text,
             stop_on_detailed_debate=stop_on_detailed_debate,
+            stop_on_existing_english_translation=stop_on_existing_english_translation,
         )
+        if parsed.existing_english_title and stop_on_existing_english_translation:
+            if english_client is None:
+                raise RuntimeError(
+                    "Une cible interlangue anglaise doit être vérifiée avec un client anglais"
+                )
+            declared_english_title = parsed.existing_english_title
+            try:
+                english_record = english_client.fetch(declared_english_title)
+            except PageMissingError:
+                warnings.append(
+                    f"{record.canonical_title}: cible anglaise inexistante; "
+                    f"parcours français poursuivi: {declared_english_title}"
+                )
+                parsed = parse_argument_wikitext(
+                    record.text,
+                    stop_on_detailed_debate=stop_on_detailed_debate,
+                    stop_on_existing_english_translation=False,
+                )
+            else:
+                parsed.existing_english_title = english_record.canonical_title
+                parsed.existing_english_translation_verified = True
+                existing_english_page_records[record.canonical_title] = english_record
         parsed_arguments[record.canonical_title] = parsed
         warnings.extend(f"{record.canonical_title}: {warning}" for warning in parsed.warnings)
+        if parsed.existing_english_translation_verified:
+            existing_english_translation_frontiers[record.canonical_title] = (
+                parsed.existing_english_title
+            )
+            if stop_on_existing_english_translation:
+                frontier_information.append(
+                    f"{record.canonical_title}: traduction anglaise existante "
+                    f"{parsed.existing_english_title}; "
+                    f"{parsed.ignored_relations_at_existing_english_translation} "
+                    "relation(s) locale(s) non suivie(s)"
+                )
         if parsed.detailed_debate and parsed.ignored_relations_at_frontier:
             frontier_information.append(
                 f"{record.canonical_title}: frontière vers {parsed.detailed_debate}; "
@@ -752,10 +868,19 @@ def crawl_graph(
         aliases=dict(sorted(client.aliases.items())),
         warnings=warnings,
         frontier_information=frontier_information,
+        existing_english_debate_title=existing_english_debate_title,
+        existing_english_translation_frontiers=dict(
+            sorted(
+                existing_english_translation_frontiers.items(),
+                key=lambda item: item[0].casefold(),
+            )
+        ),
+        existing_english_page_records=existing_english_page_records,
         depth_frontiers=dict(sorted(depth_frontiers.items(), key=lambda item: item[0].casefold())),
         missing_pages=sorted(set(missing)),
         crawl_options={
             "stop_on_detailed_debate": stop_on_detailed_debate,
+            "stop_on_existing_english_translation": stop_on_existing_english_translation,
             "max_depth": max_depth,
             "max_pages": max_pages,
             "allow_missing": allow_missing,
@@ -837,9 +962,21 @@ def analyze_graph(result: CrawlResult) -> dict[str, Any]:
         parsed = result.parsed_arguments.get(title)
         detailed = parsed.detailed_debate if parsed else ""
         ignored_at_frontier = parsed.ignored_relations_at_frontier if parsed else 0
+        existing_english_title = parsed.existing_english_title if parsed else ""
+        existing_english_translation_verified = (
+            parsed.existing_english_translation_verified if parsed else False
+        )
+        existing_english_record = result.existing_english_page_records.get(title)
+        ignored_at_existing_translation = (
+            parsed.ignored_relations_at_existing_english_translation if parsed else 0
+        )
         out_count = len({target for target, _ in adjacency[title]})
         if title in result.depth_frontiers:
             status = "frontière_profondeur"
+        elif existing_english_translation_verified and result.crawl_options.get(
+            "stop_on_existing_english_translation"
+        ):
+            status = "frontière_traduction_anglaise_existante"
         elif detailed:
             status = "frontière_débat_détaillé"
         elif out_count:
@@ -872,8 +1009,28 @@ def analyze_graph(result: CrawlResult) -> dict[str, Any]:
                 "nombre_parents": len({parent for parent, _ in reverse[title]}),
                 "nombre_enfants": out_count,
                 "relations_locales_ignorees_frontiere": ignored_at_frontier,
+                "relations_locales_ignorees_traduction_anglaise": (
+                    ignored_at_existing_translation
+                ),
                 "statut": status,
                 "débat_détaillé": detailed,
+                "traduction_anglaise_existante": existing_english_title,
+                "traduction_anglaise_existante_vérifiée": (
+                    existing_english_translation_verified
+                ),
+                "traduction_anglaise_requise": not (
+                    existing_english_translation_verified
+                    and result.crawl_options.get("stop_on_existing_english_translation")
+                ),
+                "url_traduction_anglaise_existante": (
+                    existing_english_record.url if existing_english_record else ""
+                ),
+                "revision_traduction_anglaise_existante": (
+                    existing_english_record.revision_id if existing_english_record else None
+                ),
+                "vérification_traduction_anglaise_effectuée_le": (
+                    existing_english_record.fetched_at if existing_english_record else ""
+                ),
                 "titres_affichés_observés": sorted(displayed_by_node[title], key=str.casefold),
                 "url": result.page_records.get(title).url if title in result.page_records else "",
                 "revision_id": (
@@ -986,19 +1143,49 @@ def analyze_graph(result: CrawlResult) -> dict[str, Any]:
     ignored_frontier_relations = sum(
         row["relations_locales_ignorees_frontiere"] for row in node_rows
     )
+    existing_english_translations = {
+        row["titre"]: row["traduction_anglaise_existante"]
+        for row in node_rows
+        if row["traduction_anglaise_existante_vérifiée"]
+    }
+    ignored_existing_translation_relations = sum(
+        row["relations_locales_ignorees_traduction_anglaise"] for row in node_rows
+    )
     reused = sum((row["occurrences_totales"] or 0) > 1 for row in node_rows)
     pages_without_outgoing = sum(row["nombre_enfants"] == 0 for row in node_rows)
     actual_terminals = sum(row["statut"] == "terminal" for row in node_rows)
     unfolded_occurrences = sum(occurrences_by_level.values()) if not cycle_nodes else None
+    existing_english_debate_record = result.existing_english_page_records.get(
+        result.debate_title
+    )
     metadata = {
         "kit_version": KIT_VERSION,
         "extracteur_version": GRAPH_EXTRACT_VERSION,
         "débat": result.debate_title,
         "url_débat": result.debate_url,
+        "traduction_anglaise_débat_existante": result.existing_english_debate_title,
+        "traduction_anglaise_débat_vérifiée": bool(result.existing_english_debate_title),
+        "traduction_du_débat_requise": not bool(result.existing_english_debate_title),
+        "url_traduction_anglaise_débat": (
+            existing_english_debate_record.url if existing_english_debate_record else ""
+        ),
+        "revision_traduction_anglaise_débat": (
+            existing_english_debate_record.revision_id
+            if existing_english_debate_record
+            else None
+        ),
+        "vérification_traduction_anglaise_débat_effectuée_le": (
+            existing_english_debate_record.fetched_at
+            if existing_english_debate_record
+            else ""
+        ),
         "arguments_niveau_1_pour": len(result.roots_pro),
         "arguments_niveau_1_contre": len(result.roots_con),
         "arguments_niveau_1_total": len(roots),
         "pages_arguments_uniques": len(nodes),
+        "pages_arguments_a_traduire": sum(
+            row["traduction_anglaise_requise"] for row in node_rows
+        ),
         "occurrences_argumentatives_depliees_par_chemins": unfolded_occurrences,
         "occurrences_argumentatives": unfolded_occurrences,
         "relations_uniques": len(result.relations),
@@ -1022,6 +1209,13 @@ def analyze_graph(result: CrawlResult) -> dict[str, Any]:
         "frontières_débat_détaillé": boundaries,
         "nombre_frontières_débat_détaillé": len(boundaries),
         "relations_locales_ignorees_aux_frontières": ignored_frontier_relations,
+        "frontières_traduction_anglaise_existante": existing_english_translations,
+        "nombre_frontières_traduction_anglaise_existante": len(
+            existing_english_translations
+        ),
+        "relations_locales_ignorees_traductions_anglaises_existantes": (
+            ignored_existing_translation_relations
+        ),
         "limite_profondeur": result.crawl_options.get("max_depth"),
         "relations_ignorees_limite_profondeur": sum(result.depth_frontiers.values()),
         "graphe_sans_cycle": not cycle_nodes,
@@ -1043,6 +1237,9 @@ def analyze_graph(result: CrawlResult) -> dict[str, Any]:
         "relations": relation_rows,
         "branches_niveau_1": branch_rows,
         "informations_frontières": result.frontier_information,
+        "frontières_traduction_anglaise_existante": (
+            result.existing_english_translation_frontiers
+        ),
         "frontières_profondeur": result.depth_frontiers,
         "warnings": result.warnings,
     }
@@ -1077,6 +1274,12 @@ def audit_graph(graph: Mapping[str, Any]) -> list[dict[str, Any]]:
 
     edge_keys = {(r["source"], r["relation"], r["cible"]) for r in relations}
     check("racines uniques", len(roots) == len(set(roots)), len(roots))
+    check(
+        "débat déjà traduit sans parcours argumentatif",
+        not metadata.get("traduction_anglaise_débat_vérifiée")
+        or (not roots and not nodes and not relations),
+        metadata.get("traduction_anglaise_débat_existante"),
+    )
     check("racines présentes", all(root in nodes for root in roots))
     check("nœuds uniques", len(nodes) == len(graph["noeuds"]), len(nodes))
     check("relations uniques", len(edge_keys) == len(relations), len(edge_keys))
@@ -1103,6 +1306,17 @@ def audit_graph(graph: Mapping[str, Any]) -> list[dict[str, Any]]:
         if row["statut"] == "frontière_profondeur" and row["nombre_enfants"] != 0
     ]
     check("frontières de profondeur sans sorties", not depth_boundary_bad, depth_boundary_bad)
+    existing_translation_boundary_bad = [
+        row["titre"]
+        for row in graph["noeuds"]
+        if row["statut"] == "frontière_traduction_anglaise_existante"
+        and row["nombre_enfants"] != 0
+    ]
+    check(
+        "frontières de traduction anglaise sans sorties",
+        not existing_translation_boundary_bad,
+        existing_translation_boundary_bad,
+    )
     check(
         "compteur nœuds",
         metadata["pages_arguments_uniques"] == len(nodes),
@@ -1167,6 +1381,31 @@ def audit_graph(graph: Mapping[str, Any]) -> list[dict[str, Any]]:
         metadata["relations_locales_ignorees_aux_frontières"]
         == sum(row["relations_locales_ignorees_frontiere"] for row in graph["noeuds"]),
         metadata["relations_locales_ignorees_aux_frontières"],
+    )
+    check(
+        "traductions anglaises existantes",
+        metadata["frontières_traduction_anglaise_existante"]
+        == {
+            row["titre"]: row["traduction_anglaise_existante"]
+            for row in graph["noeuds"]
+            if row["traduction_anglaise_existante_vérifiée"]
+        },
+        metadata["frontières_traduction_anglaise_existante"],
+    )
+    check(
+        "compteur des arguments à traduire",
+        metadata["pages_arguments_a_traduire"]
+        == sum(row["traduction_anglaise_requise"] for row in graph["noeuds"]),
+        metadata["pages_arguments_a_traduire"],
+    )
+    check(
+        "relations ignorées aux traductions anglaises existantes",
+        metadata["relations_locales_ignorees_traductions_anglaises_existantes"]
+        == sum(
+            row["relations_locales_ignorees_traduction_anglaise"]
+            for row in graph["noeuds"]
+        ),
+        metadata["relations_locales_ignorees_traductions_anglaises_existantes"],
     )
     check(
         "relations ignorées à la limite de profondeur",
@@ -1314,6 +1553,16 @@ def write_outputs(
         f"Date d’extraction : {extraction_date}",
         f"Extracteur : {GRAPH_EXTRACT_VERSION} (kit {KIT_VERSION})",
         "",
+        "## Vérification préalable de la page Débat",
+        "",
+        (
+            "La page Débat est déjà traduite : "
+            f"**{m['traduction_anglaise_débat_existante']}**. "
+            "Aucun argument n'a été programmé pour traduction."
+            if m["traduction_anglaise_débat_vérifiée"]
+            else "Aucune traduction anglaise existante de la page Débat n'a été vérifiée."
+        ),
+        "",
         "## Statistiques",
         "",
         "### Nombre d’arguments par niveau",
@@ -1333,6 +1582,7 @@ def write_outputs(
         [
             "",
             f"- Pages uniques : **{m['pages_arguments_uniques']}**",
+            f"- Pages Argument restant à traduire : **{m['pages_arguments_a_traduire']}**",
             (
                 "- Occurrences dépliées par chemins : "
                 f"**{m['occurrences_argumentatives_depliees_par_chemins']}**"
@@ -1355,6 +1605,10 @@ def write_outputs(
             ),
             f"- Feuilles réelles : **{m['pages_terminales_reelles']}**",
             f"- Pages réutilisées : **{m['pages_réutilisées_plusieurs_fois']}**",
+            (
+                "- Frontières avec traduction anglaise existante : "
+                f"**{m['nombre_frontières_traduction_anglaise_existante']}**"
+            ),
             f"- Graphe sans cycle : **{'oui' if m['graphe_sans_cycle'] else 'non'}**",
             "",
             (
@@ -1408,6 +1662,33 @@ def write_outputs(
             "",
             f"Le wikicode de la page Débat et des {m['pages_arguments_uniques']} pages Argument est conservé dans `snapshot/pages/`.",
             "Le fichier `snapshot/snapshot_manifest.json` associe chaque titre à sa révision, son URL, son empreinte SHA-256 et son fichier local.",
+            "",
+            "## Frontières « traduction anglaise existante »",
+            "",
+        ]
+    )
+    if m["frontières_traduction_anglaise_existante"]:
+        for page, english_title in m["frontières_traduction_anglaise_existante"].items():
+            ignored = next(
+                row["relations_locales_ignorees_traduction_anglaise"]
+                for row in graph["noeuds"]
+                if row["titre"] == page
+            )
+            detail = f" — {ignored} relation(s) locale(s) non suivie(s)" if ignored else ""
+            report_lines.append(f"- **{page}** → {english_title}{detail}")
+        report_lines.extend(
+            [
+                "",
+                (
+                    "Total des relations locales non suivies à ces frontières : "
+                    f"**{m['relations_locales_ignorees_traductions_anglaises_existantes']}**."
+                ),
+            ]
+        )
+    else:
+        report_lines.append("Aucune.")
+    report_lines.extend(
+        [
             "",
             "## Frontières « débat détaillé »",
             "",
@@ -1568,6 +1849,14 @@ def build_parser() -> argparse.ArgumentParser:
             "Le débat sous-jacent n'est toutefois jamais ouvert automatiquement."
         ),
     )
+    parser.add_argument(
+        "--follow-local-relations-at-existing-english-translation",
+        action="store_true",
+        help=(
+            "Mode de diagnostic : suit les relations locales même lorsqu'une page "
+            "déclare déjà une traduction anglaise."
+        ),
+    )
     return parser
 
 
@@ -1586,10 +1875,24 @@ def main(argv: Sequence[str] | None = None) -> int:
         retries=args.retries,
         retry_delay=args.retry_delay,
     )
+    english_client = PywikibotPageClient(
+        family=args.family,
+        lang="en",
+        family_file=args.family_file,
+        pywikibot_dir=args.pywikibot_dir,
+        cache=JsonPageCache(cache_dir / "_english", force_refresh=args.force_refresh),
+        login=args.login,
+        retries=args.retries,
+        retry_delay=args.retry_delay,
+    )
     result = crawl_graph(
         client,
         debate_title=args.debate,
+        english_client=english_client,
         stop_on_detailed_debate=not args.follow_local_relations_at_dedicated_debate,
+        stop_on_existing_english_translation=(
+            not args.follow_local_relations_at_existing_english_translation
+        ),
         max_depth=args.max_depth,
         max_pages=args.max_pages,
         allow_missing=args.allow_missing,

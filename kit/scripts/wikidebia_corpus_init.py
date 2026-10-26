@@ -420,6 +420,14 @@ def build_graph_objects(graph: Mapping[str, Any], page_metadata: Mapping[str, di
         if changes:
             normalizations.append({"source_title": title, "registry_title": canonical, "changes": changes})
         row = rows_by_title.get(title, {})
+        existing_english_title = str(
+            row.get("traduction_anglaise_existante") or ""
+        ).strip()
+        reuse_existing_english = bool(
+            row.get("traduction_anglaise_existante_vérifiée")
+            and existing_english_title
+            and row.get("traduction_anglaise_requise") is False
+        )
         displayed = choose_displayed_title(row, canonical)
         meta = page_metadata.get(title, {})
         rubriques = list(meta.get("rubriques") or [])
@@ -434,6 +442,31 @@ def build_graph_objects(graph: Mapping[str, Any], page_metadata: Mapping[str, di
             keyword = debate_keywords[0] if debate_keywords else slugify(graph["metadata"]["débat"]).replace("_", " ")
             keywords = [keyword]
             fallbacks.append(f"mot-clé:{keyword}")
+        fr_page = make_empty_page_record(
+            f"output/fr/arguments/{title_to_id[title]}.wiki", interlanguage=True
+        )
+        en_page = make_empty_page_record(
+            f"output/en/arguments/{title_to_id[title]}.wiki", interlanguage=False
+        )
+        if reuse_existing_english:
+            checked_at = str(
+                row.get("vérification_traduction_anglaise_effectuée_le") or now_iso()
+            )
+            fr_page["interlanguage"].update(
+                {"status": "ready", "target_title": existing_english_title}
+            )
+            en_page["generation"]["status"] = "obsolete"
+            en_page["wiki"].update(
+                {
+                    "check_status": "equivalent_existing",
+                    "decision": "reuse_existing",
+                    "remote_revision_id": row.get(
+                        "revision_traduction_anglaise_existante"
+                    ),
+                    "remote_title": existing_english_title,
+                    "checked_at": checked_at,
+                }
+            )
         node = {
             "id": title_to_id[title],
             "status": "active",
@@ -448,15 +481,15 @@ def build_graph_objects(graph: Mapping[str, Any], page_metadata: Mapping[str, di
                 "keywords": list(dict.fromkeys(keywords)),
             },
             "en": {
-                "canonical_title": None,
-                "displayed_title": None,
-                "title_status": "unassigned",
+                "canonical_title": existing_english_title if reuse_existing_english else None,
+                "displayed_title": existing_english_title if reuse_existing_english else None,
+                "title_status": "locked" if reuse_existing_english else "unassigned",
                 "sections": [],
                 "keywords": [],
             },
             "pages": {
-                "fr": make_empty_page_record(f"output/fr/arguments/{title_to_id[title]}.wiki", interlanguage=True),
-                "en": make_empty_page_record(f"output/en/arguments/{title_to_id[title]}.wiki", interlanguage=False),
+                "fr": fr_page,
+                "en": en_page,
             },
             "sources": {
                 "fr": {"bibliography": [], "webliography": [], "videography": []},

@@ -66,7 +66,13 @@ def make_extraction(root: Path) -> Path:
     }
     (snapshot / "snapshot_manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     graph = {
-        "metadata": {"débat": "Débat test", "occurrences_argumentatives": 5, "frontières_débat_détaillé": {}},
+        "metadata": {
+            "débat": "Débat test",
+            "occurrences_argumentatives": 5,
+            "frontières_débat_détaillé": {},
+            "traduction_du_débat_requise": True,
+            "traduction_anglaise_débat_vérifiée": False,
+        },
         "arguments_pour_niveau_1": ["Argument A"],
         "arguments_contre_niveau_1": ["Argument B"],
         "noeuds": [
@@ -124,6 +130,41 @@ def test_builds_graph_draft_and_preserves_imports(tmp_path: Path):
     assert registry["graph"]["derived_counts"]["total_occurrences"] == 4
     secondary = [o for o in registry["graph"]["occurrences"] if o["occurrence_role"] == "secondary"]
     assert len(secondary) == 1 and secondary[0]["render_children"] is False
+
+
+def test_existing_english_argument_is_registered_for_remote_reuse(tmp_path: Path):
+    source = make_extraction(tmp_path / "source")
+    graph_path = source / "test_graphe_recursif_2026-08-03.json"
+    graph = json.loads(graph_path.read_text(encoding="utf-8"))
+    row = next(item for item in graph["noeuds"] if item["titre"] == "Argument C")
+    row.update(
+        {
+            "traduction_anglaise_existante": "Existing argument C",
+            "traduction_anglaise_existante_vérifiée": True,
+            "traduction_anglaise_requise": False,
+            "revision_traduction_anglaise_existante": 42,
+            "vérification_traduction_anglaise_effectuée_le": "2026-08-03T12:00:00+00:00",
+        }
+    )
+    graph_path.write_text(json.dumps(graph, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    manifest_path = source / "test_manifest_sha256_2026-08-03.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    graph_rel = graph_path.relative_to(source).as_posix()
+    for item in manifest["files"]:
+        if item["path"] == graph_rel:
+            payload = graph_path.read_bytes()
+            item.update(sha256=hashlib.sha256(payload).hexdigest(), size_bytes=len(payload))
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    output = tmp_path / "build"
+    mod.build_corpus(source, output, debate_id="debat_test", short_code="TEST", scope_summary=None, overwrite=False)
+    registry = json.loads((output / "data/registre_debat.json").read_text(encoding="utf-8"))
+    node = next(item for item in registry["graph"]["nodes"] if item["fr"]["canonical_title"] == "Argument C")
+    assert node["en"]["canonical_title"] == "Existing argument C"
+    assert node["en"]["title_status"] == "locked"
+    assert node["pages"]["en"]["wiki"]["check_status"] == "equivalent_existing"
+    assert node["pages"]["en"]["wiki"]["decision"] == "reuse_existing"
+    assert node["pages"]["en"]["generation"]["status"] == "obsolete"
 
 
 def test_identifiers_are_deterministic(tmp_path: Path):

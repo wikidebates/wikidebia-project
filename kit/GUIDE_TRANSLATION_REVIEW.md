@@ -27,7 +27,26 @@ Ces tailles sont des bornes de qualité de travail, non des quotas de contenu. U
 
 ## 0.1 Règle source-authoritative et métadonnées FR→EN
 
-Pour la rédaction de la traduction, **faire comme si la page anglaise cible n'existait pas**. Une éventuelle page anglaise déjà publiée ne sert pas de source pour le texte, les titres, le plan, `progress`, les avertissements, les références ou les relations. Le corpus français validé est la source éditoriale. Les contrôles techniques distants nécessaires à une future publication restent séparés de cette règle.
+Avant de constituer le corpus à traduire, `graph-extract` contrôle d'abord le
+paramètre `interlangue` de la page Débat française. Si la page anglaise existe,
+le workflow s'arrête avant la création du corpus. Il contrôle ensuite chaque
+page Argument française. Une cible déclarée avec
+`{{Lien interlangue|langue=en|page=…}}` devient une frontière : le lien est
+conservé et le travail s'arrête à ce nœud, sans retraduire la page ni parcourir
+ses relations locales. Le rapport d'extraction inventorie ces frontières et
+leurs titres anglais.
+
+Ces décisions sont consommées automatiquement par toute la chaîne : les
+arguments marqués `reuse_existing` sont absents de la revue de traduction, du
+verrou de contenu anglais, du rendu anglais et des lots de publication. Leur
+page française conserve cependant son lien interlangue vers le titre anglais
+canonique vérifié.
+
+Pour les pages qui restent réellement à traduire, le corpus français validé est
+la source éditoriale. Une autre page anglaise éventuellement trouvée pendant la
+recherche ne sert pas de source pour le texte, les titres, le plan, `progress`,
+les avertissements, les références ou les relations. Les contrôles techniques
+distants nécessaires à une future publication restent séparés de cette règle.
 
 Lorsqu’un résumé français est marqué `historical_existing` avec décision `preserved`, sa forme historique préservée reste autoritative même si elle ne satisfait pas les règles de rédaction d’un nouveau résumé. Avec `authorized_change`, la valeur française finale autorisée dans `fr_content_lock.json` devient au contraire la source autoritative de la traduction, sans que cette autorisation ne requalifie les autres textes historiques. La traduction anglaise doit rester fidèle à ce texte et les exigences de création ne doivent pas être utilisées pour l’allonger ou le réécrire silencieusement. Lorsqu’il est `historical_absent`, `summary=` reste absent en anglais.
 

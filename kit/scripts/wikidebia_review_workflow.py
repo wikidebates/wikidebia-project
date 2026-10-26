@@ -40,7 +40,8 @@ from wikidebia_corpus_build import (
     write_json,
 )
 from wikidebia_corpus_init import (
-    build_corpus, canonical_debate_id, derive_short_code, validate_short_code,
+    build_corpus, canonical_debate_id, derive_short_code, resolve_extraction_input,
+    validate_short_code,
     run_validator as run_initial_validator,
 )
 from wikidebia_corpus_review import make_review_template, finalize_review as finalize_graph_review
@@ -1073,6 +1074,8 @@ def _mechanical_advance(project_root: Path, state: dict[str, Any]) -> dict[str, 
                     state["updated_at"] = now_iso(); _save_workflow(project_root, state)
         if state.get("pending_review"):
             return state
+        if phase == "already_translated":
+            return state
         if phase == "initialize_graph":
             _initialize_graph_stage(project_root, state)
             continue
@@ -1273,7 +1276,12 @@ def _run_graph_extract(project_root: Path, title: str, *, force_refresh: bool = 
     slug = slugify(title)
     output = project_root / ".state" / "graph-extract" / slug
     if not force_refresh and (output / "snapshot" / "snapshot_manifest.json").is_file():
-        return output
+        try:
+            metadata = _graph_translation_preflight(output)
+        except WorkflowError:
+            metadata = None
+        if metadata is not None and "traduction_du_débat_requise" in metadata:
+            return output
     script = project_root / "kit" / "scripts" / "wikidebia_graph_extract.py"
     if not script.is_file():
         raise WorkflowError("Extracteur de graphe absent")
@@ -1294,6 +1302,53 @@ def _run_graph_extract(project_root: Path, title: str, *, force_refresh: bool = 
     if not (output / "snapshot" / "snapshot_manifest.json").is_file():
         raise WorkflowError("graph-extract n'a pas produit le snapshot attendu")
     return output
+
+
+def _graph_translation_preflight(source: Path) -> dict[str, Any]:
+    """Read the graph metadata that proves the English-page preflight ran."""
+    try:
+        resolved = resolve_extraction_input(source)
+    except Exception as exc:
+        raise WorkflowError(f"Impossible de lire le graphe d'extraction : {exc}") from exc
+    try:
+        try:
+            graph = json.loads(resolved.graph_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise WorkflowError(f"Graphe d'extraction illisible : {exc}") from exc
+        metadata = graph.get("metadata")
+        if not isinstance(metadata, dict):
+            raise WorkflowError("Le graphe d'extraction ne contient pas de métadonnées valides")
+        return dict(metadata)
+    finally:
+        if resolved.cleanup is not None:
+            shutil.rmtree(resolved.cleanup, ignore_errors=True)
+
+
+def _stop_for_existing_english_debate(
+    project_root: Path,
+    state: dict[str, Any],
+    metadata: Mapping[str, Any],
+) -> bool:
+    if metadata.get("traduction_du_débat_requise") is not False:
+        return False
+    title = str(metadata.get("traduction_anglaise_débat_existante") or "").strip()
+    if not title or metadata.get("traduction_anglaise_débat_vérifiée") is not True:
+        raise WorkflowError(
+            "Le graphe annonce un débat déjà traduit sans cible anglaise vérifiée"
+        )
+    state["phase"] = "already_translated"
+    state["status"] = "completed_existing_translation"
+    state["existing_english_debate"] = {
+        "title": title,
+        "url": str(metadata.get("url_traduction_anglaise_débat") or ""),
+        "revision_id": metadata.get("revision_traduction_anglaise_débat"),
+        "verified_at": str(
+            metadata.get("vérification_traduction_anglaise_débat_effectuée_le") or ""
+        ),
+    }
+    state["updated_at"] = now_iso()
+    _save_workflow(project_root, state)
+    return True
 
 
 
@@ -1344,6 +1399,14 @@ def _initialize_graph_stage(project_root: Path, state: dict[str, Any]) -> None:
         state["snapshot_path"] = _relative(source, project_root)
         state["updated_at"] = now_iso()
         _save_workflow(project_root, state)
+    graph_metadata = _graph_translation_preflight(source)
+    if "traduction_du_débat_requise" not in graph_metadata:
+        raise WorkflowError(
+            "Ce snapshot est antérieur à la vérification automatique des traductions "
+            "anglaises; relancez l'extraction du graphe"
+        )
+    if _stop_for_existing_english_debate(project_root, state, graph_metadata):
+        return
     result = build_corpus(
         source, build_dir, debate_id=debate_id, short_code=state.get("short_code"),
         scope_summary=None, overwrite=False,

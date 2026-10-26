@@ -30,11 +30,13 @@ def fake_validator(*args, **kwargs):
 
 render._run_validator = fake_validator
 translation._run_validator = fake_validator
-from test_wikidebia_translation_review import make_french_locked, complete_translation_review, complete_semantic_convergence  # noqa: E402
+from test_wikidebia_translation_review import make_french_locked, complete_translation_review, complete_semantic_convergence, mark_existing_english_argument  # noqa: E402
 
 
-def make_translated(tmp_path: Path) -> tuple[Path, Path, str, str]:
+def make_translated(tmp_path: Path, *, reuse_existing_argument: bool = False) -> tuple[Path, Path, str, str]:
     project, workspace, work_id = make_french_locked(tmp_path)
+    if reuse_existing_argument:
+        mark_existing_english_argument(workspace)
     norm_path = project / "norms/normative_reference/01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.70.md"
     norm_path.parent.mkdir(parents=True, exist_ok=True)
     norm_path.write_text("# Norme de test 1.2.27\n", encoding="utf-8")
@@ -117,6 +119,29 @@ def test_render_creates_distinct_bilingual_pages_and_direct_interlanguage_links(
     for path in (target / "output/en").rglob("*.wiki"):
         assert "Lien interlangue" not in path.read_text(encoding="utf-8")
         assert "|interlangue=" not in path.read_text(encoding="utf-8")
+
+
+def test_render_links_to_reused_english_argument_without_generating_it(tmp_path: Path):
+    project, workspace, work_id, review_sha = make_translated(
+        tmp_path, reuse_existing_argument=True
+    )
+    result = render.render_workspace(project, "debat_test", work_id, review_sha)
+    target = workspace / "rendered-copy"
+    registry = common.load_json(target / "data/registre_debat.json", "registre")
+    reused = next(node for node in registry["graph"]["nodes"] if node["id"] == "A0004")
+
+    assert result["pages"] == 9
+    assert not (target / "output/en/arguments/A0004.wiki").exists()
+    fr = (target / "output/fr/arguments/A0004.wiki").read_text(encoding="utf-8")
+    assert "|page=Existing English argument" in fr
+    assert reused["pages"]["en"]["wiki"]["decision"] == "reuse_existing"
+    assert reused["pages"]["en"]["generation"]["status"] == "obsolete"
+    en_pages = {
+        page["page_id"]
+        for page in common.load_json(target / "manifest.json", "manifest")["pages"]
+        if page["language"] == "en"
+    }
+    assert "A0004" not in en_pages
 
 
 def test_render_emits_translated_citations_without_mutating_source_metadata(tmp_path: Path):

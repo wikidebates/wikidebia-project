@@ -405,6 +405,17 @@ def _page_origin(content: Mapping[str, Any]) -> str:
     return origin
 
 
+def _reuses_existing_english_page(node: Mapping[str, Any]) -> bool:
+    wiki = ((((node.get("pages") or {}).get("en") or {}).get("wiki") or {}))
+    en = node.get("en") or {}
+    return (
+        wiki.get("check_status") == "equivalent_existing"
+        and wiki.get("decision") == "reuse_existing"
+        and bool(en.get("canonical_title"))
+        and en.get("title_status") == "locked"
+    )
+
+
 def _preserved_parameter(content: Mapping[str, Any], name: str) -> tuple[bool, str | None]:
     state = (content.get("preserved_parameters") or {}).get(name)
     if not isinstance(state, dict) or not isinstance(state.get("present"), bool):
@@ -906,6 +917,14 @@ def _finalize_individual_review(
         node_id = str(node.get("id"))
         fr = fr_by_id.get(node_id)
         en = en_by_id.get(node_id)
+        if en is None and _reuses_existing_english_page(node):
+            en = {
+                "canonical_title": (node.get("en") or {}).get("canonical_title"),
+                "displayed_title": (node.get("en") or {}).get("displayed_title"),
+                "source_page_origin": "preexisting",
+                "sections": [],
+                "keywords": [],
+            }
         if not fr or not en:
             raise RenderError(f"Verrou de métadonnées incomplet pour {node_id}")
         fr_rationales = fr.get("rationales") or {}
@@ -1020,10 +1039,17 @@ def _finalize_summary_review(target: Path, debate_id: str) -> None:
     }
     fr_lock = load_json(target / "data/fr_content_lock.json", "verrou français du contenu")
     en_lock = load_json(target / "data/en_content_lock.json", "verrou anglais du contenu")
+    registry_path = target / "data/registre_debat.json"
+    registry = load_json(registry_path, "registre du débat") if registry_path.is_file() else {}
+    reused_ids = {
+        str(node.get("id"))
+        for node in (registry.get("graph") or {}).get("nodes") or []
+        if node.get("status") == "active" and _reuses_existing_english_page(node)
+    }
     fr_rows = {str(row.get("id")): row for row in fr_lock.get("arguments") or [] if isinstance(row, dict) and row.get("id")}
     en_rows = {str(row.get("id")): row for row in en_lock.get("arguments") or [] if isinstance(row, dict) and row.get("id")}
-    if set(fr_rows) != set(en_rows):
-        raise RenderError("Les verrous FR/EN ne couvrent pas les mêmes résumés")
+    if set(en_rows) != set(fr_rows) - reused_ids:
+        raise RenderError("Le verrou anglais ne couvre pas exactement les résumés restant à traduire")
 
     for node_id in sorted(fr_rows):
         entry = by_id.setdefault(node_id, {"id": node_id, "languages": {}})
@@ -1031,9 +1057,7 @@ def _finalize_summary_review(target: Path, debate_id: str) -> None:
         if not isinstance(languages, dict):
             raise RenderError(f"Revue du résumé {node_id} : languages invalide")
         fr = fr_rows[node_id]
-        en = en_rows[node_id]
         fr_provenance = str(fr.get("summary_provenance") or fr.get("status") or "")
-        en_provenance = str(en.get("summary_provenance") or en.get("status") or "")
 
         if fr_provenance == "historical_absent" or fr.get("summary") is None:
             languages["fr"] = {
@@ -1061,6 +1085,13 @@ def _finalize_summary_review(target: Path, debate_id: str) -> None:
             decision = languages.get("fr")
             if isinstance(decision, dict) and decision.get("status") == "translated_and_reviewed":
                 decision["status"] = "approved"
+
+        if node_id in reused_ids:
+            languages.pop("en", None)
+            continue
+
+        en = en_rows[node_id]
+        en_provenance = str(en.get("summary_provenance") or en.get("status") or "")
 
         if en_provenance == "historical_absent" or en.get("summary") is None:
             languages["en"] = {
@@ -1389,6 +1420,7 @@ def _build_rendered_copy(
     source_by_id = {str(row.get("id")): row for row in source_registry.get("sources") or []}
     nodes = [node for node in (registry.get("graph") or {}).get("nodes") or [] if node.get("status") == "active"]
     nodes.sort(key=lambda node: str(node.get("id")))
+    translated_nodes = [node for node in nodes if not _reuses_existing_english_page(node)]
     fr_args = {str(row.get("id")): row for row in fr_content.get("arguments") or []}
     en_args = {str(row.get("id")): row for row in en_content.get("arguments") or []}
     french_pages = [fr_content.get("debate") or {}, *fr_args.values()]
@@ -1408,8 +1440,10 @@ def _build_rendered_copy(
             actual = frozen_meta[node["id"]]
             node["fr"]["rubriques"] = list(actual["rubriques"])
             node["fr"]["keywords"] = list(actual["keywords"])
-    if set(fr_args) != {str(node.get("id")) for node in nodes} or set(en_args) != set(fr_args):
-        raise RenderError("Les verrous de contenu ne couvrent pas exactement les nœuds actifs")
+    if set(fr_args) != {str(node.get("id")) for node in nodes}:
+        raise RenderError("Le verrou français ne couvre pas exactement les nœuds actifs")
+    if set(en_args) != {str(node.get("id")) for node in translated_nodes}:
+        raise RenderError("Le verrou anglais ne couvre pas exactement les nœuds restant à traduire")
 
     timestamp = now_iso()
     en_default_date = str(en_content.get("applied_at") or en_translation.get("applied_at") or timestamp)[:10]
@@ -1444,7 +1478,8 @@ def _build_rendered_copy(
         debate_path.parent.mkdir(parents=True, exist_ok=True)
         debate_path.write_text(debate_text, encoding="utf-8", newline="\n")
         output_paths.append((debate_id_actual, lang, "debate", debate_rel, sha256_file(debate_path)))
-        for node in nodes:
+        language_nodes = nodes if lang == "fr" else translated_nodes
+        for node in language_nodes:
             node_id = str(node.get("id"))
             rel = f"output/{lang}/arguments/{node_id}.wiki"
             text = _render_argument(
@@ -1465,14 +1500,17 @@ def _build_rendered_copy(
     structural = structural_sha256(registry)
     batches: list[dict[str, Any]] = []
     for lang in ("fr", "en"):
-        aggregate_path, aggregate_sha = _write_aggregate(target, lang, nodes)
+        language_nodes = nodes if lang == "fr" else translated_nodes
+        aggregate_path, aggregate_sha = _write_aggregate(target, lang, language_nodes)
         batch = _batch(
-            debate_id=debate_id, lang=lang, nodes=nodes, registry_sha=registry_sha_before_outputs,
+            debate_id=debate_id, lang=lang, nodes=language_nodes, registry_sha=registry_sha_before_outputs,
             structural_sha=structural, aggregate_path=aggregate_path, aggregate_sha=aggregate_sha,
             timestamp=timestamp, work_id=work_id,
         )
+        language_node_ids = {str(node.get("id")) for node in language_nodes}
         batch["root_node_ids"] = sorted({
-            str(occ.get("node_id")) for occ in (registry.get("graph") or {}).get("occurrences") or [] if occ.get("depth") == 1
+            str(occ.get("node_id")) for occ in (registry.get("graph") or {}).get("occurrences") or []
+            if occ.get("depth") == 1 and str(occ.get("node_id")) in language_node_ids
         })
         batches.append(batch)
         write_json(target / f"data/lots_{lang}.json", {"batch_collection_version": "1.0", "debate_id": debate_id, "language": lang, "batches": [batch]})
@@ -1489,7 +1527,8 @@ def _build_rendered_copy(
             rec["interlanguage"].update({"status": "inserted", "inserted_at": timestamp, "verified_at": None})
     for node in nodes:
         node_id = str(node.get("id"))
-        for lang in ("fr", "en"):
+        languages = ("fr",) if _reuses_existing_english_page(node) else ("fr", "en")
+        for lang in languages:
             rec = node["pages"][lang]
             rec["file"].update({"sha256": page_hash_by_key[(node_id, lang)], "status": "validated"})
             rec["generation"].update({"status": "validated", "assigned_batch_id": batch_by_lang[lang], "creation_date": dates[(node_id, lang)], "generated_at": timestamp, "validated_at": timestamp})
@@ -1553,6 +1592,7 @@ def _build_rendered_copy(
         "source_translated_copy_sha256": full_tree_sha256(source),
         "structural_sha256": input_sha, "page_count": len(page_manifests),
         "french_interlanguage_links": 1 + len(nodes), "english_interlanguage_links": 0,
+        "reused_existing_english_pages": len(nodes) - len(translated_nodes),
         "citation_policy": copy.deepcopy(en_translation.get("citation_translation_policy")),
         "remote_access": False, "publication_started": False,
     }
@@ -1560,7 +1600,8 @@ def _build_rendered_copy(
         "schema": RENDER_CHANGESET_SCHEMA, "schema_version": "1.0", "debate_id": debate_id,
         "work_id": work_id, "status": "applied", "rendered_at": timestamp,
         "translation_review_sha256": translation_review_sha256,
-        "pages_generated": len(page_manifests), "french_pages": 1 + len(nodes), "english_pages": 1 + len(nodes),
+        "pages_generated": len(page_manifests), "french_pages": 1 + len(nodes), "english_pages": 1 + len(translated_nodes),
+        "reused_existing_english_pages": len(nodes) - len(translated_nodes),
         "interlanguage_links_added_to_french_pages": 1 + len(nodes),
         "interlanguage_links_added_to_english_pages": 0,
         "relations_mutated": False, "occurrences_mutated": False,

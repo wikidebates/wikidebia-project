@@ -196,6 +196,73 @@ def test_semantic_response_requires_real_method_family():
     }
 
 
+def test_workflow_stops_before_corpus_when_debate_already_exists_in_english(tmp_path: Path):
+    from test_wikidebia_corpus_init import make_extraction
+
+    project = tmp_path / "project"
+    project.mkdir()
+    source = make_extraction(tmp_path / "source")
+    graph_path = next(source.glob("*_graphe_recursif_*.json"))
+    graph = json.loads(graph_path.read_text(encoding="utf-8"))
+    graph["metadata"].update({
+        "traduction_du_débat_requise": False,
+        "traduction_anglaise_débat_vérifiée": True,
+        "traduction_anglaise_débat_existante": "Existing English debate",
+        "url_traduction_anglaise_débat": "https://en.wikidebates.org/wiki/Existing_English_debate",
+        "revision_traduction_anglaise_débat": 987,
+        "vérification_traduction_anglaise_débat_effectuée_le": "2026-10-26T12:00:00+00:00",
+    })
+    common.write_json(graph_path, graph)
+
+    state = wf.start_workflow(
+        project,
+        "Débat test ?",
+        debate_id="debat_test",
+        short_code="TEST",
+        snapshot=source,
+    )
+
+    assert state["phase"] == "already_translated"
+    assert state["status"] == "completed_existing_translation"
+    assert state["existing_english_debate"] == {
+        "title": "Existing English debate",
+        "url": "https://en.wikidebates.org/wiki/Existing_English_debate",
+        "revision_id": 987,
+        "verified_at": "2026-10-26T12:00:00+00:00",
+    }
+    assert not (project / ".state/corpus-builds/debat_test").exists()
+    assert wf._mechanical_advance(project, state)["phase"] == "already_translated"
+
+
+def test_graph_extract_does_not_reuse_cache_without_translation_preflight(tmp_path: Path, monkeypatch):
+    from test_wikidebia_corpus_init import make_extraction
+
+    project = tmp_path / "project"
+    output = project / ".state/graph-extract/debat_test"
+    shutil.copytree(make_extraction(tmp_path / "source"), output)
+    graph_path = next(output.glob("*_graphe_recursif_*.json"))
+    graph = json.loads(graph_path.read_text(encoding="utf-8"))
+    graph["metadata"].pop("traduction_du_débat_requise", None)
+    common.write_json(graph_path, graph)
+    script = project / "kit/scripts/wikidebia_graph_extract.py"
+    script.parent.mkdir(parents=True)
+    script.write_text("# test stub\n", encoding="utf-8")
+    calls = []
+
+    def fake_run(command, **kwargs):
+        calls.append(command)
+        updated = json.loads(graph_path.read_text(encoding="utf-8"))
+        updated["metadata"]["traduction_du_débat_requise"] = True
+        common.write_json(graph_path, updated)
+        return wf.subprocess.CompletedProcess(command, 0, stdout="{}", stderr="")
+
+    monkeypatch.setattr(wf.subprocess, "run", fake_run)
+    selected = wf._run_graph_extract(project, "Débat test")
+
+    assert selected == output
+    assert len(calls) == 1
+
+
 def test_end_to_end_graph_handoff_resumes_to_metadata_handoff(tmp_path: Path, monkeypatch):
     from test_wikidebia_corpus_init import make_extraction
 

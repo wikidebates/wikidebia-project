@@ -1608,6 +1608,7 @@ def graph_extract_debate(
     retry_delay: float,
     progress_every: int,
     follow_local_relations_at_dedicated_debate: bool,
+    follow_local_relations_at_existing_english_translation: bool = False,
 ) -> int:
     script = root / "kit" / "scripts" / "wikidebia_graph_extract.py"
     family_file = root / "kit" / "families" / "wikidebates_family.py"
@@ -1669,6 +1670,8 @@ def graph_extract_debate(
         command.append("--allow-missing")
     if follow_local_relations_at_dedicated_debate:
         command.append("--follow-local-relations-at-dedicated-debate")
+    if follow_local_relations_at_existing_english_translation:
+        command.append("--follow-local-relations-at-existing-english-translation")
 
     result = run(command, cwd=root, check=False)
     return result.returncode
@@ -2272,6 +2275,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Suivre les relations locales d’une page frontière sans ouvrir le débat sous-jacent",
     )
+    graph.add_argument(
+        "--follow-local-relations-at-existing-english-translation",
+        action="store_true",
+        help="Mode de diagnostic : poursuivre sous les arguments déjà traduits en anglais",
+    )
 
     corpus_init = sub.add_parser(
         "corpus-init-from-snapshot",
@@ -2511,6 +2519,9 @@ def main(argv: list[str] | None = None) -> int:
             retry_delay=args.retry_delay,
             progress_every=args.progress_every,
             follow_local_relations_at_dedicated_debate=args.follow_local_relations_at_dedicated_debate,
+            follow_local_relations_at_existing_english_translation=(
+                args.follow_local_relations_at_existing_english_translation
+            ),
         )
     if args.command == "corpus-init-from-snapshot":
         return corpus_init_from_snapshot(

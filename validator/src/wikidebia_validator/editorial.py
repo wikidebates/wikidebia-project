@@ -14,7 +14,7 @@ from .historical_summary import (
     historically_absent_summary_keys as _shared_historically_absent_summary_keys,
     owner_removed_summary_keys as _shared_owner_removed_summary_keys,
 )
-from .translation import english_translation_deferred, english_translation_status
+from .translation import english_translation_deferred, english_translation_status, reuses_existing_english_page
 from .wikicode import WikiParseError, get_subs, parse_template, _preserved_historical_french_introduction
 AUTO_OBJECTION_FR = re.compile("^(?:cependant|toutefois|néanmoins|pourtant|mais|en revanche|inversement|une limite|cette limite|cet argument|l'argument)\\b", re.I)
 AUTO_OBJECTION_EN = re.compile('^(?:however|nevertheless|yet|but|by contrast|conversely|one limitation|this limitation|this argument|the argument)\\b', re.I)
@@ -1450,9 +1450,10 @@ def validate_individual_review_data(review: Any, nodes: list[dict[str, Any]], no
             continue
         fr = node.get('fr') or {}
         en = node.get('en') or {}
+        node_english_deferred = english_deferred or reuses_existing_english_page(node)
         if entry.get('title_decision') not in {'reformulated', 'retained_after_review'}:
             issues.append({'reason': 'title_decision', 'node_id': node_id})
-        if entry.get('canonical_referents_explicit_fr') is not True or (not english_deferred and entry.get('canonical_referents_explicit_en') is not True):
+        if entry.get('canonical_referents_explicit_fr') is not True or (not node_english_deferred and entry.get('canonical_referents_explicit_en') is not True):
             issues.append({'reason': 'canonical_referents_explicit', 'node_id': node_id})
         current_differential = translation_validation_mode == 'differential'
         preexisting_fr = preexisting_node_ids is not None and str(node_id) in preexisting_node_ids
@@ -1460,20 +1461,22 @@ def validate_individual_review_data(review: Any, nodes: list[dict[str, Any]], no
         # rendering context.  Do not force a false explicit-referent attestation
         # merely because an English target page is technically new.
         if not preexisting_fr and not current_differential:
-            if entry.get('displayed_referents_explicit_fr') is not True or (not english_deferred and entry.get('displayed_referents_explicit_en') is not True):
+            if entry.get('displayed_referents_explicit_fr') is not True or (not node_english_deferred and entry.get('displayed_referents_explicit_en') is not True):
                 issues.append({'reason': 'displayed_referents_explicit', 'node_id': node_id})
         if current_differential:
             # The French source is authoritative in translation mode: attest its
             # reviewed source form, but do not retroactively impose creation-form
             # rules on historical content.
-            required_title_attestations = ['displayed_title_argument_intelligible_fr', 'displayed_title_source_form_reviewed_fr']
+            required_title_attestations = ['displayed_title_argument_intelligible_fr']
+            if not node_english_deferred:
+                required_title_attestations.append('displayed_title_source_form_reviewed_fr')
         elif preexisting_fr:
             # A pre-existing wiki displayed title is historical source content.
             # Complete-proposition form is a creation rule, not a retroactive rewrite rule.
             required_title_attestations = ['displayed_title_argument_intelligible_fr']
         else:
             required_title_attestations = ['displayed_title_complete_proposition_fr', 'displayed_title_argument_intelligible_fr']
-        if not english_deferred:
+        if not node_english_deferred:
             if current_differential:
                 required_title_attestations += [
                     'displayed_title_argument_intelligible_en',
@@ -1488,7 +1491,7 @@ def validate_individual_review_data(review: Any, nodes: list[dict[str, Any]], no
         for field in required_title_attestations:
             if entry.get(field) is not True:
                 issues.append({'reason': field, 'node_id': node_id})
-        if current_differential and not english_deferred:
+        if current_differential and not node_english_deferred:
             allowed_forms = {'proposition', 'question', 'imperative', 'thematic_label', 'nominal_phrase', 'doctrinal_label', 'other'}
             source_form_fr = str(entry.get('displayed_title_source_form_fr') or '')
             source_form_en = str(entry.get('displayed_title_source_form_en') or '')
@@ -1521,12 +1524,12 @@ def validate_individual_review_data(review: Any, nodes: list[dict[str, Any]], no
             if len(str(entry.get('displayed_title_semantic_inventory_note_en') or '').strip()) < 20:
                 issues.append({'reason': 'displayed_title_semantic_inventory_note_en', 'node_id': node_id})
         concision_fields = ['displayed_title_concision_reviewed_fr']
-        if not english_deferred:
+        if not node_english_deferred:
             concision_fields.append('displayed_title_concision_reviewed_en')
         for field in concision_fields:
             if entry.get(field) is not True:
                 issues.append({'reason': field, 'node_id': node_id})
-        reviewed_languages = (('fr', fr),) if english_deferred else (('fr', fr), ('en', en))
+        reviewed_languages = (('fr', fr),) if node_english_deferred else (('fr', fr), ('en', en))
         for lang, data in reviewed_languages:
             canonical = (data.get('canonical_title') or '').strip().casefold()
             displayed = (data.get('displayed_title') or '').strip().casefold()
@@ -1545,16 +1548,16 @@ def validate_individual_review_data(review: Any, nodes: list[dict[str, Any]], no
         selected = fr.get('rubriques') or []
         if entry.get('new_rubriques') != selected:
             issues.append({'reason': 'rubriques', 'node_id': node_id})
-        if not english_deferred:
+        if not node_english_deferred:
             if entry.get('new_displayed_title_en') != en.get('displayed_title'):
                 issues.append({'reason': 'displayed_title_en', 'node_id': node_id})
             if entry.get('new_sections_en') != (en.get('sections') or []):
                 issues.append({'reason': 'sections_en', 'node_id': node_id})
         if entry.get('new_keywords_fr') != (fr.get('keywords') or []):
             issues.append({'reason': 'keywords_fr', 'node_id': node_id})
-        if not english_deferred and entry.get('new_keywords_en') != (en.get('keywords') or []):
+        if not node_english_deferred and entry.get('new_keywords_en') != (en.get('keywords') or []):
             issues.append({'reason': 'keywords_en', 'node_id': node_id})
-        for lang in ('fr',) if english_deferred else ('fr', 'en'):
+        for lang in ('fr',) if node_english_deferred else ('fr', 'en'):
             if entry.get(f'keywords_ordered_by_relevance_{lang}') is not True:
                 issues.append({'reason': f'keywords_ordered_by_relevance_{lang}', 'node_id': node_id})
             rationale = str(entry.get(f'keyword_order_rationale_{lang}') or '').strip()
@@ -2117,21 +2120,25 @@ def validate_editorial(ctx: PackageContext) -> None:
     identity_exception_cfg = editorial_controls.get('displayed_title_identity_exception') or {}
     editorial_languages = ('fr',) if english_deferred else ('fr', 'en')
     for lang in editorial_languages:
-        ratio = title_copy_ratio(nodes, lang)
-        exact_ids = {str(node.get('id')) for node in nodes if ((node.get(lang) or {}).get('canonical_title') or '').strip() and ((node.get(lang) or {}).get('canonical_title') or '').strip().casefold() == ((node.get(lang) or {}).get('displayed_title') or '').strip().casefold()}
+        assessed_nodes = [
+            node for node in nodes
+            if lang != 'en' or not reuses_existing_english_page(node)
+        ]
+        ratio = title_copy_ratio(assessed_nodes, lang)
+        exact_ids = {str(node.get('id')) for node in assessed_nodes if ((node.get(lang) or {}).get('canonical_title') or '').strip() and ((node.get(lang) or {}).get('canonical_title') or '').strip().casefold() == ((node.get(lang) or {}).get('displayed_title') or '').strip().casefold()}
         exempt = identity_exception_ids if identity_exception_cfg.get('language') == lang else set()
         effective_exact = exact_ids - exempt
-        effective_ratio = len(effective_exact) / len(nodes) if nodes else 1.0
+        effective_ratio = len(effective_exact) / len(assessed_nodes) if assessed_nodes else 1.0
         title_metrics[lang] = ratio
         title_metrics[f'{lang}_effective_after_owner_exception'] = effective_ratio
         title_metrics[f'{lang}_owner_exception_count'] = len(exact_ids & exempt)
-        cratio = dominant_classification_ratio(nodes, lang)
+        cratio = dominant_classification_ratio(assessed_nodes, lang)
         classification_metrics[lang] = cratio
-        keyword_sets = [tuple((node.get(lang) or {}).get('keywords') or []) for node in nodes]
+        keyword_sets = [tuple((node.get(lang) or {}).get('keywords') or []) for node in assessed_nodes]
         dominant_keyword_set_ratio = Counter(keyword_sets).most_common(1)[0][1] / len(keyword_sets) if keyword_sets else 1.0
         generated_keyword_sets = [
             tuple((node.get(lang) or {}).get('keywords') or [])
-            for node in nodes if not source_page_preexisting(node.get('id'), lang)
+            for node in assessed_nodes if not source_page_preexisting(node.get('id'), lang)
         ]
         generated_dominant_keyword_set_ratio = (
             Counter(generated_keyword_sets).most_common(1)[0][1] / len(generated_keyword_sets)
@@ -2143,7 +2150,7 @@ def validate_editorial(ctx: PackageContext) -> None:
         elif dominant_keyword_set_ratio > threshold:
             ctx.report.info('WDV-EDT-008', 'Un même jeu historique de mots-clés dépasse 25 % du corpus ; signal de revue non bloquant', path=ctx.core_paths()['registry'], details={'language': lang, 'ratio': dominant_keyword_set_ratio, 'threshold': threshold, 'source_profile': 'historical'})
         bad_summary = 0
-        for node in nodes:
+        for node in assessed_nodes:
             node_id = node.get('id')
             data = node.get(lang) or {}
             page = page_map.get((node_id, lang))
@@ -2260,7 +2267,7 @@ def validate_editorial(ctx: PackageContext) -> None:
                         if atomicity_reasons:
                             keyword_quality_counts[lang] += 1
                             ctx.report.error('WDV-EDT-025', 'Mot-clé non atomique ou exception multi-mots insuffisamment justifiée', path=editorial_controls.get('keyword_vocabulary_path'), details={'node_id': node_id, 'language': lang, 'keyword': keyword, 'reasons': atomicity_reasons})
-                if lang == 'fr' and (not english_deferred):
+                if lang == 'fr' and (not english_deferred) and not reuses_existing_english_page(node):
                     en_keywords = (node.get('en') or {}).get('keywords') or []
                     if len(keywords) == len(en_keywords):
                         for fr_keyword, en_keyword in zip(keywords, en_keywords):
