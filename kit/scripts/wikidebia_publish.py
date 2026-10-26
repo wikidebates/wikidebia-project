@@ -1030,7 +1030,13 @@ class GenericPublisher:
                 raise PublicationError(
                     f"|{wikipedia_parameter}= doit contenir au moins un sous-modèle {wikipedia_model} avec un titre vérifié : {language}/{page_id}"
                 )
-            if related_parameter in names:
+            old_related = (row.get("preserved_parameters") or {}).get(related_parameter) or {}
+            historical_french_related = (
+                language == "fr" and row.get("page_origin") == "preexisting"
+                and old_related.get("present") is True
+                and old_related.get("value") == extract_parameter(text, related_parameter)
+            )
+            if related_parameter in names and not historical_french_related:
                 raise PublicationError(
                     f"Le paramètre |{related_parameter}= ne doit pas être publié : {language}/{page_id}"
                 )

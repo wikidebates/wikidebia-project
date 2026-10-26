@@ -1116,3 +1116,18 @@ def test_non_english_creation_is_not_invalidated_by_publication_day_change(tmp_p
     publisher._current_publication_date = lambda: "2099-12-31"
     result = publisher.publish(plan=plan, confirmation=plan["plan_sha256"])
     assert result == {"created": 1, "updated": 0, "skipped": 0}
+
+def test_direct_profile_preserves_only_attested_french_related_debates(tmp_path):
+    import pytest
+    config,path,_,_=write_fixture(tmp_path,'full_page')
+    corpus,manifest_path=make_direct_profile(config,path,tmp_path)
+    text=(corpus/'output/fr/debate.wiki').read_text()
+    value='{{Débat connexe\n|page=Autre débat\n}}'
+    text=text.replace('|interlangue=','|débats-connexes='+value+'\n|interlangue=')
+    publisher=module.GenericPublisher(config,FakeAdapter(),path)
+    row={'page_id':'DEBATE','page_type':'debate','language':'fr','page_origin':'preexisting',
+         'preserved_parameters':{'débats-connexes':{'present':True,'value':value}}}
+    publisher._validate_norm_120_page(row,text)
+    with pytest.raises(module.PublicationError):publisher._validate_norm_120_page(row,text.replace('Autre débat','Un ajout'))
+    row['page_origin']='new'
+    with pytest.raises(module.PublicationError):publisher._validate_norm_120_page(row,text)

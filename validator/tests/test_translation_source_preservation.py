@@ -54,6 +54,20 @@ def test_impersonal_it_with_intensifier_is_not_a_contextual_referent():
     assert not contextual_title_issues('It is entirely possible to decriminalise all drugs','en')
     assert 'initial_contextual_referent' in contextual_title_issues('It is entirely harmful','en')
 
+def test_impersonal_judgments_supply_their_subject_in_the_following_clause():
+    titles = [
+        'It is entirely rational to regard threatening people as enemies',
+        'It is false to claim that the far right wins every debate',
+        "It is very uncomfortable to acknowledge, but there is a connection between Heidegger's thought and Nazism",
+        'It would be rational to examine opposing arguments',
+        'It is false that every debate is harmless',
+    ]
+    for title in titles:
+        assert not contextual_title_issues(title, 'en'), title
+    for title in ['It is entirely rational', 'It is false', 'It is very uncomfortable',
+                  'It is harmful to democracy', 'It changes public opinion']:
+        assert 'initial_contextual_referent' in contextual_title_issues(title, 'en'), title
+
 def test_missing_final_newline_is_preserved_only_for_the_exact_import(tmp_path):
     fixture(tmp_path);ctx=context(tmp_path)
     rel='imports/fr/arguments/A0001.wiki'
@@ -110,3 +124,22 @@ def test_only_proven_historical_absence_can_have_no_rubric(tmp_path):
     assert _preserved_empty_rubrics(context(tmp_path),'argument_registry.schema.json',registry,err)
     (tmp_path/'imports/fr/arguments/A0001.wiki').write_text('{{Argument|rubriques=Santé}}')
     assert not _preserved_empty_rubrics(context(tmp_path),'argument_registry.schema.json',registry,err)
+
+def test_ordinary_english_predicates_remain_propositions_without_accepting_fragments():
+    from wikidebia_validator.editorial import displayed_title_argument_issues, displayed_title_issues
+    for title in ['Debating the enemy gets us nowhere', 'Some debates humiliate the people they target',
+                  'Stigmatizing enemies only entrenches them', 'We cannot debate enemies',
+                  'Many philosophers debated Heidegger', 'Some debates provide cover for violence',
+                  'The list of opinions risks growing forever', 'Consider the writer who expressed anti-Zionism',
+                  'People consciously or unconsciously defend harmful ideologies',
+                  'We go to great lengths to label opponents',
+                  'False opinions that appeal to emotion survive debunking intact',
+                  'Antisemitism no longer needs dog whistles']:
+        assert not displayed_title_argument_issues(title, 'en'), title
+    for title in ['An opportunity to humiliate people', 'Evidence that entrenches existing views',
+                  'An economy built on dependence', 'Ideas about political enemies',
+                  'Opinions that appeal to emotion']:
+        assert displayed_title_argument_issues(title, 'en'), title
+    good='Protest votes often bring to power politicians far worse than those the public wanted to get rid of'
+    assert 'dangling_connector' not in displayed_title_issues(good, 'en')
+    assert 'dangling_connector' in displayed_title_issues('Protest votes often bring politicians to', 'en')

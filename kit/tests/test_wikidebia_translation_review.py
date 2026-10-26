@@ -1179,3 +1179,15 @@ def test_opaque_numeric_bibliographic_date_is_preserved_without_guessing(tmp_pat
     row['translated_date'] = '2 February 2007'
     with pytest.raises(translation.TranslationReviewError, match='Format de date source'):
         translation._validate_citations([row], [row['source']], 'A-DATE')
+
+def test_dedicated_debate_is_reviewed_source_metadata_not_new_page_lifecycle():
+    from wikidebia_translation_review import _validate_dedicated_debate, TranslationReviewError
+    row={'french':{'content':{'preserved_parameters':{'débat-dédié':{'present':True,'value':'La censure est-elle juste ?'}}}}}
+    with pytest.raises(TranslationReviewError):_validate_dedicated_debate(row,'A1')
+    row.update(dedicated_debate='Is censorship fair?',dedicated_debate_equivalence_reviewed=True,
+               dedicated_debate_review_note='The same evaluative question about censorship is preserved without inventing another debate.')
+    assert _validate_dedicated_debate(row,'A1')['dedicated_debate']=='Is censorship fair?'
+    row['french']['content']['preserved_parameters']={}
+    with pytest.raises(TranslationReviewError):_validate_dedicated_debate(row,'A1')
+    row['dedicated_debate']=None
+    assert _validate_dedicated_debate(row,'A1')['dedicated_debate'] is None

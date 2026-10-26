@@ -641,3 +641,25 @@ def test_relation_renderer_prefers_occurrence_level_displayed_title():
     )
     assert "titre-affiché=Libellé historique contextuel" in rendered
     assert "titre-affiché=Titre global" not in rendered
+
+def test_published_content_checkpoint_requires_matching_receipts_and_review(tmp_path: Path):
+    import hashlib
+    import pytest
+    from wikidebia_render import _published_content_checkpoint, _add_french_interlanguage, RenderError
+    from wikidebia_corpus_build import full_tree_sha256
+    root=tmp_path;state=root/'.state/fr-publication/test-debate/EDIT-001/content';checkpoint=state/'checkpoint-corpus'
+    page=checkpoint/'output/fr/debate/debate.wiki';page.parent.mkdir(parents=True)
+    original='{{Débat\n|introduction=Texte historique.\n|débats-connexes={{Débat connexe|page=Source}}\n|date-création=2020-01-01\n}}\n'
+    page.write_text(original)
+    def signed(value):
+        value['receipt_sha256']=hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest();return value
+    identity=dict(debate_id='test-debate',work_id='EDIT-001',stage='content',checkpoint_tree_sha256=full_tree_sha256(checkpoint))
+    (state/'checkpoint.json').write_text(json.dumps(signed(dict(identity,source_content_review_sha256='review-fr'))))
+    (state/'publication-receipt.json').write_text(json.dumps(signed(dict(identity,status='published'))))
+    assert _published_content_checkpoint(root,'test-debate','EDIT-001',{'review_sha256':'review-fr'})==checkpoint/'output/fr'
+    rendered=_add_french_interlanguage(original,'English debate')
+    assert '|débats-connexes={{Débat connexe|page=Source}}' in rendered
+    assert '|interlangue={{Lien interlangue\n|langue=en\n|page=English debate\n}}' in rendered
+    with pytest.raises(RenderError):_published_content_checkpoint(root,'test-debate','EDIT-001',{'review_sha256':'wrong-review'})
+    page.write_text(original.replace('historique','changé'))
+    with pytest.raises(RenderError):_published_content_checkpoint(root,'test-debate','EDIT-001',{'review_sha256':'review-fr'})

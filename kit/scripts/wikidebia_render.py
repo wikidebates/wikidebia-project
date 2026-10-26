@@ -64,6 +64,11 @@ def _render_preserved_french(source: Path, content: Mapping[str, Any], target_ti
     if not path.is_file() or sha256_file(path) != content.get("import_sha256"):
         raise RenderError("Import français historique absent ou modifié")
     text = path.read_text(encoding="utf-8")
+    return _add_french_interlanguage(text, target_title)
+
+
+def _add_french_interlanguage(text: str, target_title: str) -> str:
+    from wikidebia_graph_extract import _template_spans, _split_top_level, normalize_key, parse_template
     # Preserve offsets and comments, unlike the extraction parser's comment removal.
     masked = re.sub(r"<!--.*?-->", lambda m: " " * len(m.group()), text, flags=re.S)
     candidates = []
@@ -92,6 +97,31 @@ def _render_preserved_french(source: Path, content: Mapping[str, Any], target_ti
         segments.insert(insertion, "interlangue=" + link + "\n")
     rendered = text[:start] + "{{" + "|".join(segments) + "}}" + text[end:]
     return rendered.rstrip("\n") + "\n"
+
+
+def _published_content_checkpoint(
+    project_root: Path, debate_id: str, work_id: str, fr_content: Mapping[str, Any],
+) -> Path | None:
+    """Use the already published FR checkpoint, including opaque frontier links."""
+    state = project_root / ".state/fr-publication" / debate_id / work_id / "content"
+    if not state.exists():
+        return None  # Direct/local builds without a remote checkpoint remain supported.
+    checkpoint = state / "checkpoint-corpus"
+    record = load_json(state / "checkpoint.json", "checkpoint français de contenu")
+    receipt = load_json(state / "publication-receipt.json", "reçu du checkpoint français de contenu")
+    for value in (record, receipt):
+        payload = {k: v for k, v in value.items() if k != "receipt_sha256"}
+        digest = hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+        if digest != value.get("receipt_sha256") or value.get("debate_id") != debate_id or value.get("work_id") != work_id or value.get("stage") != "content":
+            raise RenderError("Identité ou empreinte du checkpoint français publié invalide")
+    assert_no_symlinks(checkpoint)
+    tree_sha = full_tree_sha256(checkpoint)
+    if (receipt.get("status") not in {"published", "verified_no_changes"}
+            or record.get("checkpoint_tree_sha256") != tree_sha
+            or receipt.get("checkpoint_tree_sha256") != tree_sha
+            or record.get("source_content_review_sha256") != fr_content.get("review_sha256")):
+        raise RenderError("Le checkpoint français publié ne correspond pas au contenu français verrouillé")
+    return checkpoint / "output/fr"
 
 
 def _workspace_path(project_root: Path, debate_id: str, work_id: str) -> Path:
@@ -741,6 +771,8 @@ def _render_argument(
             ("videography", _sequence(_source_template(sources[source_id], lang="en") for source_id in selected.get("videography") or [])),
         ])
         detailed_present, detailed_value = _optional_preserved_parameter(content, "dedicated-debate")
+        if content.get("dedicated_debate"):
+            detailed_present, detailed_value = True, content["dedicated_debate"]
         _append_lifecycle_parameter(params, content, "justification-warnings", None)
         params.append(("justifications", None if detailed_present else _relations(registry, node_id, "justification", "en", content.get("relation_labels") or [])))
         _append_lifecycle_parameter(params, content, "objection-warnings", None)
@@ -1345,6 +1377,7 @@ def _build_rendered_copy(
     en_translation = load_json(target / "data/en_translation_lock.json", "verrou de traduction")
     from wikidebia_translation_source import POLICY, verify_frozen_source
     preserve_french = fr_content.get("source_preservation_policy") == POLICY
+    published_french = _published_content_checkpoint(project_root, debate_id, work_id, fr_content)
     if preserve_french:
         verify_frozen_source(target, fr_meta, fr_content)
     source_registry = load_json(target / "data/sources.json", "registre documentaire")
@@ -1403,7 +1436,9 @@ def _build_rendered_copy(
             sources=source_by_id, creation_date=dates[(debate_id_actual, lang)],
             source_content=(fr_content.get("debate") or {}) if lang == "en" else None,
         )
-        if lang == "fr" and preserve_french:
+        if lang == "fr" and published_french is not None:
+            debate_text = _add_french_interlanguage((published_french / "debate/debate.wiki").read_text(encoding="utf-8"), debate_pages["en"]["canonical_title"])
+        elif lang == "fr" and preserve_french:
             debate_text = _render_preserved_french(target, fr_content["debate"], debate_pages["en"]["canonical_title"])
         debate_path = target / debate_rel
         debate_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1417,7 +1452,9 @@ def _build_rendered_copy(
                 registry=registry, sources=source_by_id, creation_date=dates[(node_id, lang)],
                 source_content=fr_args[node_id] if lang == "en" else None,
             )
-            if lang == "fr" and preserve_french:
+            if lang == "fr" and published_french is not None:
+                text = _add_french_interlanguage((published_french / f"arguments/{node_id}.wiki").read_text(encoding="utf-8"), node["en"]["canonical_title"])
+            elif lang == "fr" and preserve_french:
                 text = _render_preserved_french(target, fr_args[node_id], node["en"]["canonical_title"])
             path = target / rel
             path.parent.mkdir(parents=True, exist_ok=True)

@@ -241,6 +241,8 @@ def semantic_content_payload(review: Mapping[str, Any]) -> dict[str, Any]:
             item["en_citations"] = copy.deepcopy(arg.get("citations") or [])
         if arg.get("relation_labels"):
             item["relation_labels"] = copy.deepcopy(arg["relation_labels"])
+        if arg.get("dedicated_debate"):
+            item["en_dedicated_debate"] = arg["dedicated_debate"]
     if debate_final.get("relation_labels"):
         payload["debate"]["relation_labels"] = copy.deepcopy(debate_final["relation_labels"])
     return payload
@@ -775,6 +777,9 @@ def _blank_argument(fr_meta: Mapping[str, Any], fr_content: Mapping[str, Any]) -
         "summary": "",
         "citations": [_blank_citation(row) for row in (fr_content.get("citations") or [])],
         "citation_passages": blank_translations(fr_content.get("citation_passages") or []),
+        "dedicated_debate": None,
+        "dedicated_debate_equivalence_reviewed": False,
+        "dedicated_debate_review_note": "",
         "sources": {bucket: [] for bucket in ARGUMENT_BUCKETS},
         "argument_name_search_queries": [],
         "argument_name_search_scope_note": "",
@@ -1842,6 +1847,22 @@ def _validate_argument_name_discovery(row: Mapping[str, Any], node_id: str, page
     }
 
 
+def _validate_dedicated_debate(row: Mapping[str, Any], node_id: str) -> dict[str, Any]:
+    french = ((row.get("french") or {}).get("content") or {})
+    preserved = french.get("preserved_parameters") or {}
+    state = preserved.get("débat-dédié") or preserved.get("débat-détaillé") or {}
+    value = row.get("dedicated_debate")
+    if not state.get("present"):
+        if value not in (None, ""):
+            raise TranslationReviewError(f"Débat dédié anglais ajouté sans source française : {node_id}")
+        return {"dedicated_debate": None, "dedicated_debate_equivalence_reviewed": False, "dedicated_debate_review_note": ""}
+    title = _validate_title(value, f"titre du débat dédié anglais de {node_id}")
+    if row.get("dedicated_debate_equivalence_reviewed") is not True:
+        raise TranslationReviewError(f"Traduction du débat dédié non revue : {node_id}")
+    note = _text(row.get("dedicated_debate_review_note"), f"revue du débat dédié de {node_id}", 24)
+    return {"dedicated_debate": title, "dedicated_debate_equivalence_reviewed": True, "dedicated_debate_review_note": note}
+
+
 def _validate_argument(item: Mapping[str, Any], mapping: Mapping[str, str], sources: Mapping[str, Mapping[str, Any]], *, authoritative_source_page_origin: str | None = None, authoritative_source_preservation_policy: str | None = None) -> dict[str, Any]:
     node_id = _text(item.get("id"), "identifiant d’argument")
     row = item.get("translation") or {}
@@ -2043,7 +2064,9 @@ def _validate_argument(item: Mapping[str, Any], mapping: Mapping[str, str], sour
     _text(row.get("note"), f"note de revue anglaise de {node_id}", 12)
     lifecycle = _validate_page_lifecycle(row, "argument", node_id)
     argument_name, name_discovery = _validate_argument_name_discovery(row, node_id, lifecycle["page_origin"])
+    dedicated_debate = _validate_dedicated_debate(row, node_id)
     return {
+        **dedicated_debate,
         "id": node_id, "canonical_title": canonical, "displayed_title": displayed,
         "sections": sections, "keywords": keywords, "summary": summary, "citations": citations, "citation_passages": passages, "sources": final_sources,
         "summary_provenance": summary_provenance or ("historical_absent" if summary_absent else "translated_source"),
@@ -2339,6 +2362,7 @@ def _build_translated_copy(project_root: Path, source: Path, target: Path, revie
         )},
         "arguments": [{k: copy.deepcopy(row[k]) for k in (
             "id", "canonical_title", "displayed_title", "sections", "keywords", "source_page_origin",
+            "dedicated_debate", "dedicated_debate_equivalence_reviewed", "dedicated_debate_review_note",
             "canonical_title_semantic_inventory_reviewed", "canonical_title_semantic_inventory_note",
             "canonical_title_equivalent_to_french", "canonical_title_subject_preserved", "canonical_title_predicate_preserved",
             "canonical_title_scope_preserved", "canonical_title_modality_preserved", "displayed_title_source_form", "displayed_title_target_form",
@@ -2348,7 +2372,7 @@ def _build_translated_copy(project_root: Path, source: Path, target: Path, revie
             "displayed_title_form_change_reviewed", "displayed_title_speech_act_preserved", "displayed_title_form_change_note",
             "summary_subject_predicate_scope_modality_reviewed", "displayed_title_is_complete_proposition", "semantic_risks", "semantic_risk_reviewed",
             "semantic_risk_note", "semantic_risk_evidence", "field_sha256", "reviewer", "reviewed_at", "note"
-        )} for row in final["arguments"]],
+        ) if k in row or k not in {"dedicated_debate", "dedicated_debate_equivalence_reviewed", "dedicated_debate_review_note"}} for row in final["arguments"]],
     }
     content_lock = {
         "schema": EN_CONTENT_LOCK_SCHEMA, "schema_version": "1.0", "normative_revision": NORM_VERSION,
