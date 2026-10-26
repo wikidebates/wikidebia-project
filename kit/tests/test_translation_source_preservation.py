@@ -147,3 +147,24 @@ def test_reopening_an_applied_review_archives_the_complete_previous_tree(tmp_pat
     assert not (workspace/'translated-copy').exists()
     assert json.loads((workspace/'reviews/en/translation_review.json').read_text())['status']=='draft'
     assert (workspace/'content-reviewed-copy').is_dir()
+
+@pytest.mark.parametrize('fr,en,expected', [
+    ('5 M. 100.000 et non 6 Millions', '5,100,000 rather than 6 million', True),
+    ('5 M. 100.000', '5,000,100', False),
+    ('2,5 millions', '2.5 million', True),
+    ('1.234.567', '1,234,567', True),
+    ('100.000', '100', False),
+    ('0,5', '0.5', True),
+    ('5 M. 100.000 et 5 M. 100.000', '5,100,000', False),
+])
+def test_historical_grouping_and_million_notation(fr, en, expected):
+    assert preservation.historical_numbers_preserved(fr, en) is expected
+
+@pytest.mark.parametrize('fr,en,expected', [
+    ('-5 M. 100.000', '-5,100,000', True),
+    ('-5 M. 100.000', '5,100,000', False),
+    ('6 millions 2018', '6 million 2018', True),
+    ('1.234.56', '1,234.56', False),
+])
+def test_historical_number_parser_is_signed_and_fails_closed(fr, en, expected):
+    assert preservation.historical_numbers_preserved(fr, en) is expected

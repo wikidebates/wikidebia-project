@@ -96,7 +96,7 @@ def _english_keyword_form_metadata(term: str, source_entry: Mapping[str, Any]) -
     """
     value = str(term or "").strip()
     tokens = _KEYWORD_WORD_RE.findall(value)
-    source_kind = str(source_entry.get("kind") or "")
+    source_kind = str(source_entry.get("en_kind") or source_entry.get("kind") or "")
     if source_kind in {"proper_name", "acronym"}:
         kind = source_kind
     else:
@@ -822,6 +822,8 @@ def _blank_argument(fr_meta: Mapping[str, Any], fr_content: Mapping[str, Any]) -
         "forceful_expression": "",
         "quantitative_claims_verified": False,
         "quantitative_claims_note": "",
+        "historical_quantitative_transfer_reviewed": False,
+        "historical_quantitative_transfer_note": "",
         "documentation_rationale": "",
         "reviewer": "",
         "reviewed_at": None,
@@ -984,7 +986,7 @@ def prepare_review(project_root: Path, debate_id: str, work_id: str, *, overwrit
         {"id": node_id, "review_risk": _translation_risk_profile(fr_meta_by_id[node_id], fr_content_by_id[node_id]), "translation": _blank_argument(fr_meta_by_id[node_id], fr_content_by_id[node_id])}
         for node_id in active_ids
     ]
-    if content_lock.get("source_preservation_policy"):
+    if _historical_relation_labels_required(content_lock):
         from wikidebia_translation_source import relation_labels_from_source
         review["relation_labels"] = [{**r, "translated_text": "", "equivalent_to_french": False, "review_note": ""} for r in relation_labels_from_source(source)]
     review["review_units"] = _build_translation_review_units(review["arguments"])
@@ -1484,6 +1486,14 @@ def _english_capitalization_issues(value: str, kind: str) -> list[str]:
     return []
 
 
+def _historical_relation_labels_required(content_lock: Mapping[str, Any]) -> bool:
+    """Ordinary reviewed imports retain contextual labels just like frozen imports."""
+    pages = [content_lock.get("debate") or {}, *(content_lock.get("arguments") or [])]
+    return bool(content_lock.get("source_preservation_policy")) or bool(pages) and all(
+        page.get("page_origin") == "preexisting" for page in pages
+    )
+
+
 def _validate_vocabulary(rows: Any, french_entries: Sequence[Mapping[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, str]]:
     if not isinstance(rows, list) or len(rows) != len(french_entries):
         raise TranslationReviewError("Le vocabulaire anglais ne couvre pas exactement le vocabulaire français")
@@ -1508,14 +1518,20 @@ def _validate_vocabulary(rows: Any, french_entries: Sequence[Mapping[str, Any]])
         kind = str(expected[fr].get("kind") or "")
         if row.get("kind") != kind or row.get("capitalization_policy") != expected[fr].get("capitalization_policy"):
             raise TranslationReviewError(f"Nature ou politique de capitalisation divergente : {fr}")
-        capitalization_issues = _english_capitalization_issues(en, kind)
+        english_kind = str(row.get("en_kind") or kind)
+        policies = {"noun": "lowercase_common", "noun_phrase": "lowercase_common", "proper_name": "canonical_proper_name", "acronym": "canonical_acronym"}
+        if english_kind not in policies or (row.get("en_capitalization_policy") is not None and row["en_capitalization_policy"] != policies[english_kind]):
+            raise TranslationReviewError(f"Nature ou politique de forme anglaise invalide : {fr}")
+        if english_kind != kind and len(str(row.get("capitalization_rationale_en") or "").strip()) < 12:
+            raise TranslationReviewError(f"Changement de forme lexicale anglaise non justifié : {fr}")
+        capitalization_issues = _english_capitalization_issues(en, english_kind)
         if capitalization_issues:
             raise TranslationReviewError(f"Capitalisation anglaise non canonique pour {fr} : {capitalization_issues}")
         if row.get("capitalization_verified") is not True:
             raise TranslationReviewError(f"Capitalisation anglaise non attestée : {fr}")
-        if kind in {"proper_name", "acronym"} and len(str(row.get("capitalization_rationale_en") or "").strip()) < 12:
+        if english_kind in {"proper_name", "acronym"} and len(str(row.get("capitalization_rationale_en") or "").strip()) < 12:
             raise TranslationReviewError(f"Justification de capitalisation anglaise insuffisante : {fr}")
-        if kind in {"noun", "noun_phrase"} and str(row.get("capitalization_rationale_en") or "").strip():
+        if english_kind == kind and kind in {"noun", "noun_phrase"} and str(row.get("capitalization_rationale_en") or "").strip():
             raise TranslationReviewError(f"Justification de majuscule anglaise inattendue pour le nom commun : {fr}")
         if row.get("status") != "approved" or row.get("idiomatic_equivalent") is not True or row.get("same_concept") is not True:
             raise TranslationReviewError(f"Équivalence lexicale non approuvée : {fr}")
@@ -1979,7 +1995,10 @@ def _validate_argument(item: Mapping[str, Any], mapping: Mapping[str, str], sour
         numbers = NUMBER.findall(_plain(summary))
         if numbers and (row.get("quantitative_claims_verified") is not True or len(str(row.get("quantitative_claims_note") or "").strip()) < 12):
             from wikidebia_translation_source import POLICY, historical_numbers_preserved
-            preserved = historical_summary and authoritative_source_preservation_policy == POLICY and fr_content.get("source_preservation_policy") == POLICY
+            preserved = historical_summary and source_page_origin == "preexisting" and (
+                authoritative_source_page_origin == "preexisting"
+                or authoritative_source_preservation_policy == POLICY and fr_content.get("source_preservation_policy") == POLICY
+            )
             if not (preserved and row.get("historical_quantitative_transfer_reviewed") is True
                     and len(str(row.get("historical_quantitative_transfer_note") or "").strip()) >= 24
                     and historical_numbers_preserved(fr_summary, summary)):
@@ -2087,8 +2106,8 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
     vocabulary, keyword_map = _validate_vocabulary(review.get("vocabulary"), vocabulary_fr.get("entries") or [])
     authoritative_debate_origin = _french_source_page_origin(metadata_lock.get("debate") or {}, content_lock.get("debate") or {})
     source_policy = content_lock.get("source_preservation_policy")
-    if source_policy and (review.get("debate") or {}).get("french") != {"metadata": metadata_lock.get("debate"), "content": content_lock.get("debate")}:
-        raise TranslationReviewError("La source française intégrée de Debate diffère du snapshot gelé")
+    if (review.get("debate") or {}).get("french") != {"metadata": metadata_lock.get("debate"), "content": content_lock.get("debate")}:
+        raise TranslationReviewError("La source française intégrée de Debate diffère du snapshot autoritatif")
     final_debate = _validate_debate(
         review.get("debate") or {}, keyword_map, by_source, debate_id,
         authoritative_source_page_origin=authoritative_debate_origin,
@@ -2100,16 +2119,16 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
     active_ids = {str(node.get("id")) for node in ((registry.get("graph") or {}).get("nodes") or []) if node.get("status") == "active"}
     if {str(item.get("id")) for item in items if isinstance(item, dict)} != active_ids:
         raise TranslationReviewError("La revue anglaise ne couvre pas exactement les arguments actifs")
-    fr_meta_by_id = {str(row.get("id")): row for row in (metadata_lock.get("arguments") or []) if isinstance(row, dict)}
+    fr_meta_by_id = {str(row.get("entity_id") or row.get("id")): row for row in (metadata_lock.get("arguments") or []) if isinstance(row, dict)}
     fr_content_by_id = {str(row.get("id")): row for row in (content_lock.get("arguments") or []) if isinstance(row, dict)}
     final_arguments = []
     for item in items:
         node_id = str(item.get("id") or "")
         authoritative_origin = _french_source_page_origin(fr_meta_by_id.get(node_id) or {}, fr_content_by_id.get(node_id) or {})
-        if source_policy and (item.get("translation") or {}).get("french") != {"metadata": fr_meta_by_id.get(node_id), "content": fr_content_by_id.get(node_id)}:
-            raise TranslationReviewError("Source française intégrée divergente du snapshot gelé : " + node_id)
+        if (item.get("translation") or {}).get("french") != {"metadata": fr_meta_by_id.get(node_id), "content": fr_content_by_id.get(node_id)}:
+            raise TranslationReviewError("Source française intégrée divergente du snapshot autoritatif : " + node_id)
         final_arguments.append(_validate_argument(item, keyword_map, by_source, authoritative_source_page_origin=authoritative_origin, authoritative_source_preservation_policy=source_policy))
-    if source_policy:
+    if _historical_relation_labels_required(content_lock):
         from wikidebia_translation_source import validate_relation_labels
         contextual_labels = validate_relation_labels(review.get("relation_labels"), source)
         final_debate["relation_labels"] = [r for r in contextual_labels if r["source_page_id"] == "debate"]
@@ -2361,7 +2380,7 @@ def _build_translated_copy(project_root: Path, source: Path, target: Path, revie
         merged = copy.deepcopy(row)
         translated = by_fr[str(row.get("fr"))]
         merged.update({"concept_id": translated.get("concept_id") or merged.get("concept_id"), "en": translated["en"], "definition_en": translated["definition_en"], "capitalization_rationale_en": translated.get("capitalization_rationale_en", ""), "status": "approved_bilingual", "english_review": {"reviewer": translated["reviewer"], "reviewed_at": translated["reviewed_at"], "note": translated["note"]}})
-        merged.update(_english_keyword_form_metadata(translated["en"], row))
+        merged.update(_english_keyword_form_metadata(translated["en"], {**row, **translated}))
         bilingual_entries.append(merged)
     changeset = {
         "schema": TRANSLATION_CHANGESET_SCHEMA, "schema_version": "1.0", "debate_id": debate_id,

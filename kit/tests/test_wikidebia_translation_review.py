@@ -275,6 +275,10 @@ def complete_translation_review(workspace: Path) -> None:
             })
         for field in translation.SUMMARY_TRUE_FIELDS:
             row[field] = True
+    translated_by_id = {item["id"]: item["translation"] for item in review["arguments"]}
+    for label in review.get("relation_labels") or []:
+        label.update(translated_text=translated_by_id[label["target_node_id"]]["displayed_title"],
+                     equivalent_to_french=True, review_note="The exact source occurrence was independently translated and reviewed.")
     for unit in review.get("review_units") or []:
         unit.update({
             "status": "approved", "reviewer": "Unit reviewer",
@@ -1062,3 +1066,87 @@ def test_apply_translation_emits_english_localized_keyword_quality_metadata(tmp_
         assert "en_multiword_exception_rationale" in row
         assert row["en_kind"] in {"noun", "noun_phrase", "proper_name", "acronym"}
         assert row["en_capitalization_policy"] in {"lowercase_common", "canonical_proper_name", "canonical_acronym"}
+
+@pytest.mark.parametrize('mutation', ['missing', 'source_text', 'target_node_id'])
+def test_ordinary_historical_review_requires_exact_contextual_label_inventory(tmp_path, mutation):
+    project, workspace, work_id = make_french_locked(tmp_path)
+    translation.prepare_review(project, 'debat_test', work_id)
+    complete_translation_review(workspace)
+    path = workspace / 'reviews/en/translation_review.json'
+    review = json.loads(path.read_text())
+    assert review['relation_labels']
+    if mutation == 'missing':
+        review['relation_labels'].pop()
+    else:
+        review['relation_labels'][0][mutation] = 'Forged source scope'
+    common.write_json(path, review)
+    with pytest.raises(translation.TranslationReviewError, match='libellé|Source'):
+        translation.finalize_review(project, 'debat_test', work_id)
+
+
+@pytest.mark.parametrize('entity', ['debate', 'argument'])
+def test_ordinary_review_cannot_forge_embedded_french_source(tmp_path, entity):
+    project, workspace, work_id = make_french_locked(tmp_path)
+    translation.prepare_review(project, 'debat_test', work_id)
+    complete_translation_review(workspace)
+    path = workspace / 'reviews/en/translation_review.json'
+    review = json.loads(path.read_text())
+    row = review['debate'] if entity == 'debate' else review['arguments'][0]['translation']
+    row['french']['content']['page_origin'] = 'new'
+    common.write_json(path, review)
+    with pytest.raises(translation.TranslationReviewError, match='snapshot autoritatif'):
+        translation.finalize_review(project, 'debat_test', work_id)
+
+
+@pytest.mark.parametrize('fr,en,en_kind,policy', [
+    ('nazisme', 'Nazism', 'proper_name', 'canonical_proper_name'),
+    ('procédure-bâillon', 'SLAPP', 'acronym', 'canonical_acronym'),
+])
+def test_english_lexical_form_is_reviewed_without_changing_french_kind(fr, en, en_kind, policy):
+    source = {'fr': fr, 'kind': 'noun', 'capitalization_policy': 'lowercase_common', 'atomic_concept': True}
+    row = {**source, 'en': en, 'en_kind': en_kind, 'en_capitalization_policy': policy,
+        'definition_en': 'The same controlled concept expressed idiomatically in English.',
+        'capitalization_verified': True, 'capitalization_rationale_en': 'Established English spelling and lexical form, independently reviewed.',
+        'status': 'approved', 'idiomatic_equivalent': True, 'same_concept': True,
+        'reviewer': 'Test reviewer', 'reviewed_at': '2026-10-25T22:00:00Z', 'note': 'English lexical form checked against the source concept.'}
+    result, _ = translation._validate_vocabulary([row], [source])
+    assert result[0]['kind'] == 'noun'
+    assert translation._english_keyword_form_metadata(en, result[0])['en_kind'] == en_kind
+    row['capitalization_rationale_en'] = ''
+    with pytest.raises(translation.TranslationReviewError, match='non justifié'):
+        translation._validate_vocabulary([row], [source])
+
+
+def test_ordinary_historical_labels_survive_projection(tmp_path):
+    project, workspace, work_id = make_french_locked(tmp_path)
+    translation.prepare_review(project, 'debat_test', work_id)
+    complete_translation_review(workspace)
+    sealed = translation.finalize_review(project, 'debat_test', work_id)
+    review = json.loads((workspace / 'reviews/en/translation_review.json').read_text())
+    labels = review['final_values']['debate']['relation_labels']
+    assert labels and labels[0]['equivalent_to_french']
+    complete_semantic_convergence(project, work_id)
+    translation.apply_review(project, 'debat_test', work_id, sealed['review_sha256'])
+    lock = json.loads((workspace / 'translated-copy/data/en_content_lock.json').read_text())
+    assert lock['debate']['relation_labels'] == labels
+
+
+def test_ordinary_historical_number_transfer_does_not_certify_truth():
+    row, mapping = nominal_argument_translation()
+    row['french']['content'].update(summary='260 000 emplois en 2018.', summary_provenance='historical_existing')
+    row.update(summary='260,000 jobs in 2018.', summary_ratio_reviewed=True,
+        summary_subject_predicate_scope_modality_reviewed=True, summary_opening_proposition_preserved=True,
+        summary_closing_proposition_preserved=True, summary_conditions_exclusivities_preserved=True,
+        summary_decisive_premises_preserved=True, summary_semantic_evidence_note='The historical numerical assertion has the same value, date and scope in both languages.',
+        historical_quantitative_transfer_reviewed=True, historical_quantitative_transfer_note='260 000 -> 260,000, year 2018 unchanged; claim truth has not been newly certified.',
+        quantitative_claims_verified=False, quantitative_claims_note='')
+    result = translation._validate_argument({'id': 'A-HIST', 'translation': row}, mapping, {}, authoritative_source_page_origin='preexisting')
+    assert result['historical_quantitative_transfer_reviewed'] is True
+    assert result['quantitative_claims_verified'] is False
+    row['summary'] = '26,000 jobs in 2018.'
+    with pytest.raises(translation.TranslationReviewError, match='chiffrée'):
+        translation._validate_argument({'id': 'A-HIST', 'translation': row}, mapping, {}, authoritative_source_page_origin='preexisting')
+    row['summary'] = '260,000 jobs in 2018.'
+    row['historical_quantitative_transfer_reviewed'] = False
+    with pytest.raises(translation.TranslationReviewError, match='chiffrée'):
+        translation._validate_argument({'id': 'A-HIST', 'translation': row}, mapping, {}, authoritative_source_page_origin='preexisting')
