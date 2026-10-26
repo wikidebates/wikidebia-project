@@ -864,6 +864,60 @@ def _apply_page_lifecycle_contract(ctx: PackageContext, spec: dict[str, Any], tm
     if page_type == 'argument' and name_assignment is not None and (tmpl.one(name_parameter) != name_assignment.get('name')):
         ctx.report.error('WDV-EDT-031', 'Le nom d’argument rendu diverge de l’attribution éditoriale approuvée', path=rel, details={'expected': name_assignment.get('name'), 'actual': tmpl.one(name_parameter)})
 
+def _preserved_schemeless_citation_link(
+    ctx: PackageContext, sub: Template, lang: str, page_type: str,
+    page_manifest: dict[str, Any] | None, value: str,
+) -> bool:
+    """Recognize only unchanged www links in a hash-verified French import.
+
+    A new source still needs HTTP(S). Copying historical citation metadata,
+    including into Quote, must not silently rewrite that metadata to make a
+    creation-only URL rule pass.
+    """
+    if page_type != 'argument' or not isinstance(page_manifest, dict):
+        return False
+    if not re.fullmatch(r'www\.[A-Za-z0-9][A-Za-z0-9.-]*\.[A-Za-z]{2,}(?:[/?#][^\s<>]*)?', value):
+        return False
+    if (lang, sub.name) not in {('fr', 'Citation'), ('en', 'Quote')}:
+        return False
+    if lang == 'fr' and page_manifest.get('page_origin') != 'preexisting':
+        return False
+    provenance = ctx.load_json('data/import_provenance.json') or {}
+    if not isinstance(provenance, dict):
+        return False
+    page_id = page_manifest.get('page_id')
+    rows = [r for r in provenance.get('pages') or [] if isinstance(r, dict)
+            and r.get('kind') == 'argument' and r.get('page_id') == page_id]
+    if len(rows) != 1:
+        return False
+    row = rows[0]
+    import_path = row.get('import_path')
+    if not isinstance(import_path, str) or not import_path.startswith('imports/fr/arguments/'):
+        return False
+    raw = ctx.read_bytes(import_path)
+    if raw is None or hashlib.sha256(raw).hexdigest() != row.get('sha256'):
+        return False
+    try:
+        original = parse_template(raw.decode('utf-8'))
+        citations = get_subs(original, 'citations')
+    except (UnicodeDecodeError, WikiParseError):
+        return False
+    if original.name != 'Argument':
+        return False
+    if lang == 'fr':
+        return any(c.name == 'Citation' and c.params == sub.params for c in citations)
+    # Only quote text, date and translation warnings may differ in English.
+    actual = [(k, v) for k, v in sub.params if k not in {'quote', 'date', 'warnings'}]
+    for citation in citations:
+        if citation.name != 'Citation' or citation.one('lien') != value:
+            continue
+        source = [(_quote_parameter_name(k), v) for k, v in citation.params
+                  if k not in {'citation', 'date', 'avertissements-citation'}]
+        if source == actual:
+            return True
+    return False
+
+
 def validate_template_shape(ctx: PackageContext, tmpl: Template, lang: str, page_type: str, rel: str, page_manifest: dict[str, Any] | None=None) -> None:
     base_spec = _top_spec_for_context(ctx, lang, page_type)
     if not _current_template_parameter_contract(ctx):
@@ -1071,7 +1125,10 @@ def validate_template_shape(ctx: PackageContext, tmpl: Template, lang: str, page
                 if skey in {'numéro', 'issue'} and (not sval.isdigit()):
                     ctx.report.error('WDV-MWK-012', f'{sub.name}.{skey} doit contenir uniquement des chiffres', path=rel)
                 if skey in {'lien', 'link'} and (not re.match('^https?://', sval)):
-                    ctx.report.error('WDV-MWK-012', f'URL HTTP/HTTPS attendue dans {sub.name}.{skey}', path=rel)
+                    if _preserved_schemeless_citation_link(ctx, sub, lang, page_type, page_manifest, sval):
+                        ctx.report.info('WDV-MWK-012', f'Lien historique sans schéma conservé exactement dans {sub.name}.{skey}', path=rel)
+                    else:
+                        ctx.report.error('WDV-MWK-012', f'URL HTTP/HTTPS attendue dans {sub.name}.{skey}', path=rel)
                 if skey == 'page' and ('bibliographique' in sub.name.lower() or 'bibliographical' in sub.name.lower()):
                     if not re.fullmatch('[0-9]+(?:-[0-9]+)?', sval):
                         ctx.report.error('WDV-DOC-002', f'Pagination bibliographique non normalisée dans {sub.name}.page', path=rel, details={'value': sval})

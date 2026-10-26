@@ -1,6 +1,6 @@
 Wikidéb’IA Validator 0.4.105 — rapport de tests
 
-Tests pytest : 508 réussis
+Tests pytest : 525 réussis
 Norme active : 1.2.88
 Kit recommandé : 2.16.47
 
@@ -14,3 +14,5 @@ Historical rubric schemas : PASSED ; classifications importées préservées et 
 Displayed-title translation scope : PASSED ; titres courts et nominaux conservés, critères de génération séparés et régressions sémantiques de traduction toujours bloquantes.
 
 Traduction d’un import publié : PASSED ; champs historiques conservés exactement, règles de création inchangées, citations et passages intercalaires contrôlés.
+
+Liens sans schéma dans les citations historiques : PASSED ; conservation exacte depuis un import vérifié par SHA-256, contrôle HTTP(S) maintenu pour les liens nouveaux ou modifiés.

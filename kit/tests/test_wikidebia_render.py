@@ -672,3 +672,38 @@ def test_relation_renderer_prefers_occurrence_level_displayed_title():
     )
     assert "titre-affiché=Libellé historique contextuel" in rendered
     assert "titre-affiché=Titre global" not in rendered
+
+def test_published_content_checkpoint_requires_matching_receipts_and_review(tmp_path: Path):
+    import hashlib
+    import pytest
+    from wikidebia_render import _published_content_checkpoint, _add_french_interlanguage, RenderError
+    from wikidebia_corpus_build import full_tree_sha256
+    root=tmp_path;state=root/'.state/fr-publication/test-debate/EDIT-001/content';checkpoint=state/'checkpoint-corpus'
+    page=checkpoint/'output/fr/debate/debate.wiki';page.parent.mkdir(parents=True)
+    original='{{Débat\n|introduction=Texte historique.\n|débats-connexes={{Débat connexe|page=Source}}\n|date-création=2020-01-01\n}}\n'
+    page.write_text(original)
+    def signed(value):
+        value['receipt_sha256']=hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest();return value
+    identity=dict(debate_id='test-debate',work_id='EDIT-001',stage='content',checkpoint_tree_sha256=full_tree_sha256(checkpoint))
+    (state/'checkpoint.json').write_text(json.dumps(signed(dict(identity,source_content_review_sha256='review-fr'))))
+    (state/'publication-receipt.json').write_text(json.dumps(signed(dict(identity,status='published'))))
+    assert _published_content_checkpoint(root,'test-debate','EDIT-001',{'review_sha256':'review-fr'})==checkpoint/'output/fr'
+    rendered=_add_french_interlanguage(original,'English debate')
+    assert '|débats-connexes={{Débat connexe|page=Source}}' in rendered
+    assert '|interlangue={{Lien interlangue\n|langue=en\n|page=English debate\n}}' in rendered
+    with pytest.raises(RenderError):_published_content_checkpoint(root,'test-debate','EDIT-001',{'review_sha256':'wrong-review'})
+    page.write_text(original.replace('historique','changé'))
+    with pytest.raises(RenderError):_published_content_checkpoint(root,'test-debate','EDIT-001',{'review_sha256':'review-fr'})
+
+def test_existing_english_creation_date_is_consistent_in_page_manifest_and_registry(tmp_path: Path):
+    project,workspace,work_id,review_sha=make_translated(tmp_path)
+    source=workspace/'translated-copy';path=source/'data/en_content_lock.json';content=json.loads(path.read_text());arg=content['arguments'][0];pid=arg['id']
+    arg['page_origin']='preexisting';arg['preserved_parameters']={key:{'present':False,'value':None} for key in translation.EN_PAGE_LIFECYCLE_PARAMETERS['argument']}
+    arg['preserved_parameters']['creation-date']={'present':True,'value':'2022-08-14'};path.write_text(json.dumps(content))
+    target=workspace/'test-render-existing'
+    render._build_rendered_copy(project,source,target,debate_id='debat_test',work_id=work_id,translation_review_sha256=review_sha)
+    manifest=json.loads((target/'manifest.json').read_text());page=next(x for x in manifest['pages'] if x['language']=='en' and x['page_id']==pid)
+    assert page['creation_date']=='2022-08-14'
+    assert '|creation-date=2022-08-14' in (target/page['file_path']).read_text()
+    registry=json.loads((target/'data/registre_debat.json').read_text());node=next(n for n in registry['graph']['nodes'] if n['id']==pid)
+    assert node['pages']['en']['generation']['creation_date']=='2022-08-14'

@@ -159,7 +159,10 @@ def _has_likely_finite_verb_fr(value: str) -> bool:
     return False
 DISPLAYED_TITLE_PREDICATES_EN = re.compile(r"\b(?:has|have|had|harms?|lacks?|works?|suffers?|leads?|fuels?|wastes?|subsidises?|infringes?|focuses?|understands?|amplifies?|imposes?|conflicts?|creates?|opens?|deters?|encourages?|lets?|worsens?|differs?|poses?|advocates?|legalised|regulates?|is|are|was|were|will|would|can|could|may|might|must|should|does|do|did|indicates?|shows?|proves?|supports?|contradicts?|suggests?|presupposes?|implies?|explains?|reveals?|confirms?|weakens?|strengthens?|depends?|exists?|resists?|allows?|prevents?|makes?|constitutes?|justifies?|challenges?|denies?|establishes?|signals?|favou?rs?|reduces?|increases?|limits?|produces?|causes?|guarantees?|suffices?|fails?|remains?|becomes?|emerges?|preexists?|survives?|persists?|varies?|distinguishes?|shapes?|happens?|arises?|undercuts?|requires?|entails?|means?|follows?|points?|rules?|excludes?|refutes?|demonstrates?)\b", re.I)
 EN_RELATIVE_MARKER = re.compile(r"\b(?:that|who|which|whose)\b", re.I)
-EN_AUXILIARY_OR_MODAL = {"has", "have", "had", "is", "are", "was", "were", "will", "would", "can", "could", "may", "might", "must", "should", "does", "do", "did"}
+EN_AUXILIARY_OR_MODAL = {"has", "have", "had", "is", "are", "was", "were", "will", "would", "can", "cannot", "could", "may", "might", "must", "should", "does", "do", "did"}
+ORDINARY_PREDICATES_EN = re.compile(
+    r"\b(?:cannot|gets?|got|humiliates?|dehumanizes?|entrenches?|debated|provides?|serves?|gives?|gave|ruins?|paves?|inspires?|risks?|amounts?|draws?|enables?|deny|stems?|incites?|condemned|expressed|takes?|labels?|treats?|spreads?|manages?|benefits?|lowers?|votes?|fears?|seeks?|exploits?|comes?|caused|defends?|finds?|brings?|go|goes|went|needs?|appeals?|consider)\b", re.I,
+)
 
 
 def _has_main_clause_predicate_en(value: str) -> bool:
@@ -171,7 +174,12 @@ def _has_main_clause_predicate_en(value: str) -> bool:
     main-clause constructions such as ``Evidence that challenges the theory is
     weak`` and ``Those who believe the claim are mistaken``.
     """
-    matches = list(DISPLAYED_TITLE_PREDICATES_EN.finditer(value or ""))
+    matches = sorted(
+        [*DISPLAYED_TITLE_PREDICATES_EN.finditer(value or ""), *ORDINARY_PREDICATES_EN.finditer(value or "")],
+        key=lambda match: match.start(),
+    )
+    # An infinitive within a nominal heading is not its main predicate.
+    matches = [match for match in matches if not re.search(r"\bto\s+$", (value or "")[:match.start()], re.I)]
     if not matches:
         return False
     relatives = list(EN_RELATIVE_MARKER.finditer(value or ""))
@@ -382,9 +390,11 @@ def displayed_title_issues(title: str, language: str) -> list[str]:
     if language == 'fr' and MALFORMED_FR_INITIAL.search(stripped):
         issues.append('malformed_article')
     dangling = DANGLING_FR if language == 'fr' else DANGLING_EN
-    if dangling.search(stripped) and not (
-        language == 'en' and re.search(r'\bbegin\s+with$', stripped, re.I)
-    ):
+    stranded_relative = language == 'en' and re.search(
+        r"\b(?:those|people|politicians|persons)\s+(?:whom\s+)?(?:the\s+public|we|they|voters)\s+(?:wanted?|wants?)\s+to\s+get\s+rid\s+of$", stripped, re.I,
+    )
+    begin_with = language == 'en' and re.search(r'\bbegin\s+with$', stripped, re.I)
+    if dangling.search(stripped) and not (stranded_relative or begin_with):
         issues.append('dangling_connector')
     if DOUBLE_WORD.search(stripped):
         issues.append('doubled_word')

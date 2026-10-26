@@ -1,6 +1,6 @@
 Wikidéb’IA Validator 0.4.105 — rapport de tests
 
-Tests pytest : 508 réussis
+Tests pytest : 525 réussis
 Norme active : 1.2.88
 Kit recommandé : 2.16.47
 
@@ -10,3 +10,5 @@ Historical introduction ledger : PASSED ; le verrou sélectionné prévaut sur u
 Detailed documentation family notes : PASSED ; formes 3 familles et 9 orientations contrôlées.
 Final publication order : PASSED ; alignement normatif Debate avant Argument.
 Historical rubric schemas : PASSED ; classifications importées préservées et contraintes des pages nouvelles maintenues.
+
+Liens sans schéma dans les citations historiques : PASSED ; conservation exacte depuis un import vérifié par SHA-256, contrôle HTTP(S) maintenu pour les liens nouveaux ou modifiés.
