@@ -95,6 +95,16 @@
               ]
             }
           },
+          "allowed_parameter_deletions": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "justifications",
+                "objections"
+              ]
+            }
+          },
           "external_relations": {
             "type": "array",
             "uniqueItems": true,

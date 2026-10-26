@@ -82,7 +82,7 @@ def test_order_migration_reseals_and_archives_old_authorization(tmp_path: Path, 
     monkeypatch.setattr(final, "build_adapter", lambda config, root: object())
     monkeypatch.setattr(final, "GenericPublisher", lambda config, adapter, path: Builder())
     monkeypatch.setattr(final, "_reorder_english_plan", lambda plan: plan)
-    monkeypatch.setattr(final, "_assert_safe_english_plan", lambda plan: None)
+    monkeypatch.setattr(final, "_assert_safe_english_plan", lambda plan, approved_updates=None: None)
     monkeypatch.setattr(final, "_preflight", lambda root, state_dir, plans: {"preflight_sha256": "newpre"})
     monkeypatch.setattr(final, "_authorization", lambda state_dir, baseline, preflight: {"authorization_sha256": "newauth"})
 

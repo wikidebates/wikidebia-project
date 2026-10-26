@@ -781,9 +781,18 @@ def _render_argument(
             ("webliography", _sequence(_source_template(sources[source_id], lang="en") for source_id in selected.get("webliography") or [])),
             ("videography", _sequence(_source_template(sources[source_id], lang="en") for source_id in selected.get("videography") or [])),
         ])
-        detailed_present, detailed_value = _optional_preserved_parameter(content, "dedicated-debate")
-        if content.get("dedicated_debate"):
-            detailed_present, detailed_value = True, content["dedicated_debate"]
+        source_detailed_present = False
+        if source_content is not None:
+            source_detailed_present, _ = _optional_preserved_parameter(source_content, "débat-dédié")
+        if source_detailed_present:
+            detailed_present = True
+            detailed_value = str(content.get("dedicated_debate") or "").strip()
+            if not detailed_value:
+                raise RenderError(f"Traduction du débat-dédié absente : {node_id}")
+        else:
+            detailed_present, detailed_value = _optional_preserved_parameter(content, "dedicated-debate")
+            if content.get("dedicated_debate"):
+                detailed_present, detailed_value = True, content["dedicated_debate"]
         _append_lifecycle_parameter(params, content, "justification-warnings", None)
         params.append(("justifications", None if detailed_present else _relations(registry, node_id, "justification", "en", content.get("relation_labels") or [])))
         _append_lifecycle_parameter(params, content, "objection-warnings", None)
@@ -1407,9 +1416,95 @@ def _build_rendered_copy(
     en_content = load_json(target / "data/en_content_lock.json", "verrou anglais du contenu")
     en_translation = load_json(target / "data/en_translation_lock.json", "verrou de traduction")
     from wikidebia_translation_source import POLICY, verify_frozen_source
-    preserve_french = fr_content.get("source_preservation_policy") == POLICY
-    published_french = _published_content_checkpoint(project_root, debate_id, work_id, fr_content)
-    if preserve_french:
+    fr_content_by_id = {
+        str(row.get("id")): row for row in fr_content.get("arguments") or []
+    }
+    published_french = _published_content_checkpoint(
+        project_root, debate_id, work_id, fr_content,
+    )
+    if published_french is not None:
+        checkpoint_dir = (
+            project_root / ".state/fr-publication" / debate_id / work_id / "content"
+        )
+        checkpoint_record = load_json(
+            checkpoint_dir / "checkpoint.json", "checkpoint français publié",
+        )
+        checkpoint_receipt = load_json(
+            checkpoint_dir / "publication-receipt.json",
+            "reçu du checkpoint français publié",
+        )
+        preserved_rows = []
+        checkpoint_pages = [
+            (None, "debate", fr_content.get("debate") or {}, published_french / "debate/debate.wiki"),
+            *[
+                (page_id, "argument", locked_page, published_french / f"arguments/{page_id}.wiki")
+                for page_id, locked_page in sorted(fr_content_by_id.items())
+            ],
+        ]
+        for page_id, page_type, locked_page, source_path in checkpoint_pages:
+            if not isinstance(locked_page, dict):
+                raise RenderError(f"Page française verrouillée absente du checkpoint : {page_id}")
+            if not source_path.is_file() or source_path.is_symlink():
+                raise RenderError(f"Page du checkpoint français absente ou non sûre : {page_id}")
+            relative = (
+                Path("provenance/fr-publication-checkpoint/debate/debate.wiki")
+                if page_type == "debate"
+                else Path(f"provenance/fr-publication-checkpoint/arguments/{page_id}.wiki")
+            )
+            expected_sha = sha256_file(source_path)
+            destination = target / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source_path, destination)
+            locked_page["import_path"] = relative.as_posix()
+            locked_page["import_sha256"] = expected_sha
+            preserved_rows.append({
+                "page_id": page_id,
+                "kind": page_type,
+                "import_path": relative.as_posix(),
+                "sha256": expected_sha,
+            })
+        if len(preserved_rows) != 1 + len(fr_content_by_id):
+            raise RenderError("Couverture incomplète du checkpoint de publication française")
+        write_json(target / "data/fr_render_source_provenance.json", {
+            "schema": "wikidebia-fr-render-source-provenance-1.0",
+            "debate_id": debate_id,
+            "work_id": work_id,
+            "source_checkpoint_record_sha256": checkpoint_record.get("receipt_sha256"),
+            "source_checkpoint_receipt_sha256": checkpoint_receipt.get("receipt_sha256"),
+            "source_checkpoint_tree_sha256": checkpoint_record.get("checkpoint_tree_sha256"),
+            "pages": preserved_rows,
+        })
+    # Full editorial review locks intentionally omit import paths.  Recover the
+    # immutable page receipts from import_provenance so historical French pages
+    # can still be rendered byte-for-byte instead of being reconstructed.
+    provenance = load_json(target / "data/import_provenance.json", "provenance française")
+    for imported in provenance.get("pages") or []:
+        if imported.get("kind") == "debate":
+            locked_page = fr_content.get("debate") or {}
+        else:
+            locked_page = fr_content_by_id.get(str(imported.get("page_id")))
+        if not isinstance(locked_page, dict):
+            continue
+        locked_page.setdefault("import_path", imported.get("import_path"))
+        locked_page.setdefault("import_sha256", imported.get("sha256"))
+    french_pages = [fr_content.get("debate") or {}, *{
+        str(row.get("id")): row for row in fr_content.get("arguments") or []
+    }.values()]
+    all_french_pages_preexisting = bool(french_pages) and all(
+        page.get("page_origin") == "preexisting" for page in french_pages
+    )
+    all_historical_imports_available = all_french_pages_preexisting and all(
+        bool(page.get("import_path"))
+        and (target / str(page.get("import_path"))).is_file()
+        and sha256_file(target / str(page.get("import_path"))) == page.get("import_sha256")
+        for page in french_pages
+    )
+    preserve_french = (
+        fr_content.get("source_preservation_policy") == POLICY
+        or published_french is not None
+        or all_historical_imports_available
+    )
+    if fr_content.get("source_preservation_policy") == POLICY:
         verify_frozen_source(target, fr_meta, fr_content)
     source_registry = load_json(target / "data/sources.json", "registre documentaire")
     if en_translation.get("review_sha256") != translation_review_sha256:
@@ -1421,7 +1516,7 @@ def _build_rendered_copy(
     nodes = [node for node in (registry.get("graph") or {}).get("nodes") or [] if node.get("status") == "active"]
     nodes.sort(key=lambda node: str(node.get("id")))
     translated_nodes = [node for node in nodes if not _reuses_existing_english_page(node)]
-    fr_args = {str(row.get("id")): row for row in fr_content.get("arguments") or []}
+    fr_args = fr_content_by_id
     en_args = {str(row.get("id")): row for row in en_content.get("arguments") or []}
     french_pages = [fr_content.get("debate") or {}, *fr_args.values()]
     if french_pages and all(page.get("page_origin") == "preexisting" for page in french_pages):
@@ -1450,6 +1545,16 @@ def _build_rendered_copy(
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", en_default_date):
         en_default_date = dt.date.today().isoformat()
     dates = _page_creation_dates(source, registry, en_default_date)
+    for page_id, page in [(str(registry["debate"]["id"]), en_content.get("debate") or {}), *en_args.items()]:
+        if _page_origin(page) != "preexisting":
+            continue
+        present, value = _optional_preserved_parameter(page, "creation-date")
+        if present:
+            try:
+                dt.date.fromisoformat(str(value))
+            except ValueError as exc:
+                raise RenderError(f"Date de création anglaise historique invalide : {page_id}") from exc
+            dates[(page_id, "en")] = str(value)
 
     # Lock graph and titles before rendering.  This does not alter structural identity.
     lifecycle = (registry.get("graph") or {}).setdefault("lifecycle", {})
@@ -1563,6 +1668,14 @@ def _build_rendered_copy(
             page_origin=str((page_content or {}).get("page_origin") or "new"),
             preserved_parameters=(page_content or {}).get("preserved_parameters") or {},
         ))
+        adoption = (page_content or {}).get("existing_english_update") if lang == "en" else None
+        if adoption:
+            authorization = {"decision": "explicit_user_request", "action": "edit", "instruction": adoption["instruction"]}
+            page_manifests[-1].update(
+                summary_change_authorization=copy.deepcopy(authorization),
+                citation_change_authorization=copy.deepcopy(authorization),
+                existing_english_update=copy.deepcopy(adoption),
+            )
     page_manifests.sort(key=lambda row: (0 if row["language"] == "fr" else 1, 0 if row["page_type"] == "debate" else 1, row["page_id"]))
 
     manifest["global_status"] = "bilingual_validated"
@@ -1570,6 +1683,13 @@ def _build_rendered_copy(
     manifest["normative_versions"].update({"consolidated_norm": NORM_VERSION, "validator": VALIDATOR_VERSION})
     manifest.setdefault("translation_status", {})["en"] = "ready"
     manifest["pages"] = page_manifests
+    existing_updates = [row["existing_english_update"] for row in page_manifests if row.get("existing_english_update")]
+    if existing_updates:
+        rel = "data/english_remote_adoptions.json"
+        keys = {"language", "page_id", "title", "reason", "allow_proposed_change", "observed_revision_id", "observed_sha256", "allowed_lifecycle_parameter_changes"}
+        entries = [{key: value for key, value in row.items() if key in keys} for row in existing_updates]
+        write_json(target / rel, {"version": "wikidebia-manual-remote-adoptions-1.0", "debate_id": debate_id, "decision": existing_updates[0]["instruction"], "entries": entries})
+        manifest.setdefault("editorial_controls", {})["manual_remote_adoption_path"] = rel
     manifest["batches"] = copy.deepcopy(batches)
     input_sha = structural_sha256(registry)
     manifest["validations"] = _validation_records(timestamp, input_sha)

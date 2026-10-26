@@ -81,7 +81,7 @@ PARAMETER_RENAMES = {
     ("fr", "debate"): {"sujet-complet": "sujet-développé"},
     ("en", "debate"): {"complete-topic": "expanded-topic"},
     ("fr", "argument"): {"débat-détaillé": "débat-dédié", "nom": "nom-consacré"},
-    ("en", "argument"): {"detailed-debate": "dedicated-debate", "name": "established-name"},
+    ("en", "argument"): {"detailed-debate": "dedicated-debate", "name": "established-name", "citations": "quotes"},
 }
 
 # Optional editorial parameters are canonically omitted when their validated

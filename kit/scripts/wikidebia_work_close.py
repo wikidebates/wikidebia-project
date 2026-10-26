@@ -185,9 +185,90 @@ def _release_pages(release_copy: Path) -> dict[str, dict[str, dict[str, Any]]]:
     return pages
 
 
-def _verify_published_states(project_root: Path, debate_id: str, execution: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
-    expected = _release_pages(execution["release_copy"])
+def _effective_remote_pages(
+    project_root: Path,
+    execution: Mapping[str, Any],
+    release_pages: Mapping[str, Mapping[str, Mapping[str, Any]]],
+) -> dict[str, dict[str, dict[str, Any]]]:
+    """Return the exact page identities attested by the executed update plan.
+
+    Most plan operations publish the release file byte for byte.  An adopted
+    pre-existing page can instead use a signed effective file to retain remote
+    lifecycle metadata (for example its original creation date).  The release
+    remains the editorial artifact, while the effective file is the content
+    that the execution receipt proves was actually published.
+    """
     receipt = execution["execution_receipt"]
+    plan_path = (
+        project_root
+        / ".state"
+        / "remote-comparisons"
+        / str(receipt["debate_id"])
+        / str(receipt["work_id"])
+        / str(receipt["comparison_id"])
+        / "update-plan.json"
+    )
+    if not plan_path.is_file() or plan_path.is_symlink():
+        raise WorkClosureError("Plan d’exécution final absent ou non sûr")
+    plan = load_json(plan_path, "plan d’exécution final")
+    unsigned = dict(plan)
+    claimed = unsigned.pop("plan_sha256", None)
+    if claimed != sha_object(unsigned) or claimed != receipt.get("plan_sha256"):
+        raise WorkClosureError("Plan d’exécution final invalide ou divergent")
+
+    expected = copy.deepcopy(release_pages)
+    for category, rows in (plan.get("operations") or {}).items():
+        if not isinstance(rows, list):
+            raise WorkClosureError(f"Opérations invalides dans le plan final : {category}")
+        for row in rows:
+            if not isinstance(row, dict):
+                raise WorkClosureError(f"Opération invalide dans le plan final : {category}")
+            language = str(row.get("language") or row.get("wiki") or "")
+            page_id = str(row.get("page_id") or "")
+            page = expected.get(language, {}).get(page_id)
+            if page is None:
+                continue
+            if str(row.get("title") or "") != page["canonical_title"]:
+                raise WorkClosureError(f"Titre effectif divergent dans le plan final : {language}/{page_id}")
+            effective_sha = str(row.get("new_sha256") or "")
+            if not effective_sha or effective_sha == page["content_sha256"]:
+                continue
+
+            # A differing effective page is accepted only when the signed plan
+            # explicitly ties it back to this exact release page and to an
+            # adopted remote revision.  This prevents an unrelated plan file
+            # from weakening the release-copy comparison during closure.
+            if category != "update" or not isinstance(row.get("remote_adoption"), dict):
+                raise WorkClosureError(f"Contenu effectif non autorisé dans le plan final : {language}/{page_id}")
+            if str(row.get("original_new_sha256") or "") != page["content_sha256"]:
+                raise WorkClosureError(f"Origine du contenu effectif divergente : {language}/{page_id}")
+            original_path = project_root / str(row.get("original_source_path") or "")
+            release_path = execution["release_copy"] / page["file_path"]
+            if original_path.resolve() != release_path.resolve():
+                raise WorkClosureError(f"Source originale effective divergente : {language}/{page_id}")
+            effective_path = project_root / str(row.get("source_path") or "")
+            effective_root = project_root / ".state" / "update-effective"
+            try:
+                effective_path.resolve().relative_to(effective_root.resolve())
+            except ValueError as exc:
+                raise WorkClosureError(f"Source effective hors périmètre : {language}/{page_id}") from exc
+            if not effective_path.is_file() or effective_path.is_symlink():
+                raise WorkClosureError(f"Source effective absente ou non sûre : {language}/{page_id}")
+            if sha_text(effective_path.read_text(encoding="utf-8")) != effective_sha:
+                raise WorkClosureError(f"Empreinte du contenu effectif divergente : {language}/{page_id}")
+            lifecycle = row.get("lifecycle_preservation") or {}
+            if str(lifecycle.get("effective_source_path") or "") != str(row.get("source_path") or ""):
+                raise WorkClosureError(f"Preuve de préservation effective absente : {language}/{page_id}")
+            page["content_sha256"] = effective_sha
+            page["effective_source_path"] = str(row.get("source_path"))
+    return expected
+
+
+def _verify_published_states(project_root: Path, debate_id: str, execution: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
+    release_pages = _release_pages(execution["release_copy"])
+    expected = _effective_remote_pages(project_root, execution, release_pages)
+    receipt = execution["execution_receipt"]
+    receipt_states = receipt.get("published_states") or {}
     states: dict[str, dict[str, Any]] = {}
     for language, expected_pages in sorted(expected.items()):
         path = project_root / ".state" / "published" / debate_id / language / "latest.json"
@@ -200,10 +281,14 @@ def _verify_published_states(project_root: Path, debate_id: str, execution: Mapp
             raise WorkClosureError(f"État publié final non signé : {language}")
         if state.get("debate_id") != debate_id or state.get("language") != language:
             raise WorkClosureError(f"État publié rattaché au mauvais corpus : {language}")
-        if state.get("plan_sha256") != receipt.get("plan_sha256"):
-            raise WorkClosureError(f"État publié lié à un autre plan : {language}")
-        if state.get("receipt_sha256") != receipt.get("underlying_receipt_sha256"):
-            raise WorkClosureError(f"État publié lié à un autre reçu : {language}")
+        # A bilingual release can be published in ordered checkpoints.  Only
+        # languages covered by this final execution must link to its plan and
+        # receipt; earlier languages retain their own signed publication state.
+        if language in receipt_states:
+            if state.get("plan_sha256") != receipt.get("plan_sha256"):
+                raise WorkClosureError(f"État publié lié à un autre plan : {language}")
+            if state.get("receipt_sha256") != receipt.get("underlying_receipt_sha256"):
+                raise WorkClosureError(f"État publié lié à un autre reçu : {language}")
         actual_pages = {str(row.get("page_id")): row for row in state.get("pages") or []}
         pending = [row for row in actual_pages.values() if row.get("status") == "pending_delete"]
         if pending:
@@ -225,11 +310,11 @@ def _verify_published_states(project_root: Path, debate_id: str, execution: Mapp
             "state_sha256": claimed,
             "page_count": len(actual_pages),
         }
-    receipt_states = receipt.get("published_states") or {}
-    if set(receipt_states) != set(states):
-        raise WorkClosureError("Le reçu d’exécution ne couvre pas toutes les langues publiées")
-    for language, value in states.items():
-        if receipt_states[language].get("state_sha256") != value["state_sha256"]:
+    if not receipt_states or not set(receipt_states).issubset(states):
+        raise WorkClosureError("Le reçu d’exécution ne couvre aucune langue finale valide")
+    for language, attested in receipt_states.items():
+        value = states[language]
+        if attested.get("state_sha256") != value["state_sha256"]:
             raise WorkClosureError(f"Le reçu d’exécution ne vise pas l’état publié actuel : {language}")
     return states
 

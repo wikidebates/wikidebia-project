@@ -213,6 +213,26 @@ def test_content_checkpoint_uses_published_graph_state_not_import_inventory(tmp_
     assert "wikicode" in c["validator"]["scopes"]
 
 
+def test_sealed_release_can_resume_an_unattested_french_checkpoint(tmp_path: Path):
+    project, workspace, work_id = make_metadata_applied(tmp_path)
+    content.prepare_review(project, "debat_test", work_id)
+    complete_content_review(workspace)
+    finalized = content.finalize_review(project, "debat_test", work_id)
+    content.apply_review(project, "debat_test", work_id, finalized["review_sha256"])
+
+    metadata_path = workspace / "workspace.json"
+    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    metadata["status"] = "release_ready"
+    metadata["workspace_sha256"] = None
+    metadata["workspace_sha256"] = editorial.workspace_receipt_hash(metadata)
+    metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    _, graph_meta, _ = checkpoint._workspace(project, "debat_test", work_id, "graph")
+    _, content_meta, _ = checkpoint._workspace(project, "debat_test", work_id, "content")
+    assert graph_meta["status"] == "release_ready"
+    assert content_meta["status"] == "release_ready"
+
+
 def test_graph_checkpoint_uses_differential_validation_until_content_is_complete(tmp_path: Path):
     project, _workspace, work_id = _title_applied(tmp_path)
     cp = checkpoint.build_checkpoint(project, "debat_test", work_id, stage="graph")

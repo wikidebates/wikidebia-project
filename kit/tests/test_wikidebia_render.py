@@ -251,6 +251,37 @@ def test_render_preserves_detailed_debate_and_omits_local_relations():
     assert '|objections=' not in text
 
 
+def test_render_translates_dedicated_debate_and_omits_english_local_relations():
+    child = {'id': 'A0002', 'en': {'canonical_title': 'Child argument', 'displayed_title': 'Child argument'}}
+    node = {
+        'id': 'A0001',
+        'fr': {'rubriques': ['Société'], 'keywords': ['sujet']},
+        'en': {'canonical_title': 'Argument topic', 'sections': ['Society'], 'keywords': ['topic']},
+    }
+    registry = {'graph': {'edges': [{'id': 'E00001', 'parent_node_id': 'A0001', 'child_node_id': 'A0002', 'relation': 'justification', 'order': 1, 'status': 'active'}], 'occurrences': [], 'nodes': [node, child]}}
+    content = {
+        'summary': 'The argument points to a dedicated debate for its full development.',
+        'citations': [], 'citation_passages': [], 'sources': {}, 'page_origin': 'new',
+        'preserved_parameters': {},
+        'dedicated_debate': 'Does the left bear responsibility for the rise of the far right?',
+    }
+    source_content = {
+        'page_origin': 'preexisting',
+        'preserved_parameters': {
+            'débat-dédié': {'present': True, 'value': "La gauche a-t-elle une responsabilité dans la montée de l'extrême droite ?"},
+        },
+    }
+
+    text = render._render_argument(
+        lang='en', node=node, content=content, registry=registry, sources={},
+        creation_date='2026-08-05', source_content=source_content,
+    )
+
+    assert '|dedicated-debate=Does the left bear responsibility for the rise of the far right?' in text
+    assert '|justifications=' not in text
+    assert '|objections=' not in text
+
+
 def test_render_preserves_historical_argument_name():
     node={'id':'A0001','fr':{'rubriques':['Philosophie'],'keywords':['Dieu']},'en':{'canonical_title':'Argument topic'}}
     registry={'graph':{'edges':[],'occurrences':[],'nodes':[node]}}
@@ -688,3 +719,16 @@ def test_published_content_checkpoint_requires_matching_receipts_and_review(tmp_
     with pytest.raises(RenderError):_published_content_checkpoint(root,'test-debate','EDIT-001',{'review_sha256':'wrong-review'})
     page.write_text(original.replace('historique','changé'))
     with pytest.raises(RenderError):_published_content_checkpoint(root,'test-debate','EDIT-001',{'review_sha256':'review-fr'})
+
+def test_existing_english_creation_date_is_consistent_in_page_manifest_and_registry(tmp_path: Path):
+    project,workspace,work_id,review_sha=make_translated(tmp_path)
+    source=workspace/'translated-copy';path=source/'data/en_content_lock.json';content=json.loads(path.read_text());arg=content['arguments'][0];pid=arg['id']
+    arg['page_origin']='preexisting';arg['preserved_parameters']={key:{'present':False,'value':None} for key in translation.EN_PAGE_LIFECYCLE_PARAMETERS['argument']}
+    arg['preserved_parameters']['creation-date']={'present':True,'value':'2022-08-14'};path.write_text(json.dumps(content))
+    target=workspace/'test-render-existing'
+    render._build_rendered_copy(project,source,target,debate_id='debat_test',work_id=work_id,translation_review_sha256=review_sha)
+    manifest=json.loads((target/'manifest.json').read_text());page=next(x for x in manifest['pages'] if x['language']=='en' and x['page_id']==pid)
+    assert page['creation_date']=='2022-08-14'
+    assert '|creation-date=2022-08-14' in (target/page['file_path']).read_text()
+    registry=json.loads((target/'data/registre_debat.json').read_text());node=next(n for n in registry['graph']['nodes'] if n['id']==pid)
+    assert node['pages']['en']['generation']['creation_date']=='2022-08-14'

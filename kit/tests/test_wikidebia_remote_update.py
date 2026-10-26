@@ -583,6 +583,26 @@ def test_authorized_existing_unowned_page_can_be_adopted_and_updated(tmp_path):
     assert p["counts"]["blocked"] == 0
 
 
+def test_adoption_can_authorize_removing_out_of_scope_relations(tmp_path):
+    remote = "{{Argument|justifications={{Justification|page=Outside}}|sections=Politics}}"
+    proposed = "{{Argument|sections=Politics}}"
+    adoption = [{
+        "language": "en", "page_id": "A1", "title": "Title",
+        "observed_revision_id": 21, "observed_sha256": module.sha_text(remote),
+        "allow_proposed_change": True,
+        "reason": "The relation lies outside the explicitly bounded graph.",
+        "allowed_lifecycle_parameter_changes": [],
+        "allowed_parameter_deletions": ["justifications"],
+    }]
+    p, *_ = plan(
+        tmp_path, languages=("en",), old_pages=[],
+        new_pages=[("en", "A1", "Title", proposed)],
+        remote_pages={("en", "Title"): (21, remote)}, remote_adoptions=adoption,
+    )
+    assert p["counts"]["update"] == 1
+    assert p["counts"]["blocked"] == 0
+
+
 def test_remote_adoption_rejects_changed_revision(tmp_path):
     old, human, proposed = argument("Ancien"), argument("Modification humaine"), argument("Nouveau")
     adoption = [{

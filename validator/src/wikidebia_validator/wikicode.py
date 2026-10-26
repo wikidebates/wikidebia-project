@@ -1318,6 +1318,14 @@ def _validate_citations_against_locks(ctx: PackageContext, tmpl: Template, rel: 
                         unmapped.append(source_name)
                         continue
                     if mapped_name not in {'quote', 'date', 'warnings'}:
+                        override = next((
+                            row for row in expected.get('documentary_parameter_overrides') or []
+                            if row.get('source_name') == source_name
+                            and row.get('output_name') == mapped_name
+                            and row.get('source_value') == source_value
+                        ), None)
+                        if override is not None:
+                            source_value = str(override.get('translated_value') or '')
                         mapped_source.append((mapped_name, source_value))
                 if unmapped:
                     ctx.report.error('WDV-MWK-021', 'Un paramètre français de Citation ne possède pas d’équivalent anglais déclaré', path=rel, pointer=f'{parameter}/{index}', details={'unmapped': unmapped})

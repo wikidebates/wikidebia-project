@@ -1,6 +1,6 @@
 Wikidéb’IA Validator 0.4.105 — rapport de tests
 
-Tests pytest : 519 réussis
+Tests pytest : 525 réussis
 Norme active : 1.2.88
 Kit recommandé : 2.16.47
 

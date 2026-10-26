@@ -38,6 +38,30 @@ def test_resource_registry_normalizes_url_and_detects_same_identity_conflict():
     assert resource["conflicts"][0]["kind"] == "same_identity_incompatible_label"
 
 
+def test_resource_registry_accepts_short_title_inside_full_headline():
+    full = _source(
+        "S00001",
+        "Nos vies confinées : Les femmes accomplissent 70 % en moyenne du travail familial et domestique",
+        "https://example.org/article",
+        language="fr",
+    )
+    short = _source(
+        "S00002",
+        "Les femmes accomplissent 70 % en moyenne du travail familial et domestique",
+        "https://example.org/article#fragment",
+        language="fr",
+    )
+
+    resource = build_resource_registry(
+        {"source_registry_version": "1.0", "debate_id": "exemple", "sources": [full, short]},
+        "0" * 64,
+    )["resources"][0]
+
+    assert resource["conflicts"] == []
+    assert resource["labels"] == [{"language": "fr", "label": full["metadata"]["work"]}]
+    assert len(resource["metadata_variants"]) == 2
+
+
 def test_resource_registry_prefers_doi_identity():
     a = _source("S00001", "A Work", "https://doi.org/10.1234/ABC.5")
     b = _source("S00002", "A Work", "https://doi.org/10.1234/abc.5?utm_source=x")

@@ -430,12 +430,26 @@ def _date_signature(value: Any, language: str) -> tuple[int, int | None, int | N
     if re.fullmatch(r"\d{4}", text) and int(text) > 0:
         return (int(text), None, None)
     months = dict(FR_MONTHS if language == "fr" else EN_MONTHS)
+    months.update({
+        "jan": 1, "janv": 1, "feb": 2, "febr": 2, "févr": 2, "fevr": 2,
+        "mar": 3, "apr": 4, "avr": 4, "jun": 6, "june": 6, "juin": 6,
+        "jul": 7, "juil": 7, "aug": 8, "sep": 9, "sept": 9,
+        "oct": 10, "nov": 11, "dec": 12, "déc": 12,
+    })
+    month_range = re.fullmatch(
+        r"([A-Za-zÀ-ÿ]+)\s*[-–]\s*([A-Za-zÀ-ÿ]+)\s+(\d{4})", text, re.I
+    )
+    if month_range and all(month.casefold() in months for month in month_range.group(1, 2)):
+        # A negative third component distinguishes a month range from a day.
+        return (int(month_range.group(3)), months[month_range.group(1).casefold()], -months[month_range.group(2).casefold()])
     if language == "fr":
         text = re.sub(r"^1er(?=[/.\s])", "1", text, flags=re.I)
         # Historical French imports also use day/month/year and month/year.
-        numeric = re.fullmatch(r"(\d{1,2})([/.])(\d{1,2})\2(\d{4})", text)
+        numeric = re.fullmatch(r"(\d{1,2})([/.])(\d{1,2})\2(\d{2}|\d{4})", text)
         if numeric:
             day, month, year = int(numeric[1]), int(numeric[3]), int(numeric[4])
+            if year < 100:
+                year += 2000 if year < 70 else 1900
             try:
                 calendar_date(year, month, day)
             except ValueError:
@@ -447,8 +461,6 @@ def _date_signature(value: Any, language: str) -> tuple[int, int | None, int | N
             if 1 <= month <= 12 and year > 0:
                 return (year, month, None)
             return None
-        months.update({"janv": 1, "févr": 2, "fevr": 2, "avr": 4,
-                       "juil": 7, "sept": 9, "oct": 10, "nov": 11, "déc": 12, "dec": 12})
         text = re.sub(r"([A-Za-zÀ-ÿ]+)\.(?=\s)", r"\1", text)
     else:
         months.update({name[:3]: number for name, number in EN_MONTHS.items()})
@@ -501,6 +513,7 @@ def _blank_citation(source: Mapping[str, Any]) -> dict[str, Any]:
         "citation_translated": False,
         "date_translated_or_language_neutral": False,
         "preserved_parameters_unchanged": False,
+        "documentary_parameter_overrides": [],
         "translation_warning_appended": False,
         "quote_completeness_reviewed": False,
         "quote_completeness_note": "",
@@ -510,6 +523,42 @@ def _blank_citation(source: Mapping[str, Any]) -> dict[str, Any]:
         "reviewed_at": None,
         "note": "",
     }
+
+
+def _citation_documentary_overrides(
+    row: Mapping[str, Any], source: Mapping[str, Any], citation_id: str,
+) -> dict[str, dict[str, str]]:
+    """Validate a target-wiki-safe replacement of an archive.is wrapper."""
+    raw = row.get("documentary_parameter_overrides") or []
+    if not isinstance(raw, list):
+        raise TranslationReviewError(f"Surcharges documentaires invalides pour {citation_id}")
+    source_values = {
+        re.sub(r"[ _-]+", " ", str(item.get("name") or "").strip().casefold()): str(item.get("value") or "")
+        for item in source.get("source_parameters") or [] if isinstance(item, Mapping)
+    }
+    result: dict[str, dict[str, str]] = {}
+    for item in raw:
+        if not isinstance(item, Mapping):
+            raise TranslationReviewError(f"Surcharge documentaire invalide pour {citation_id}")
+        source_name = re.sub(r"[ _-]+", " ", str(item.get("source_name") or "").strip().casefold())
+        output_name = str(item.get("output_name") or "").strip()
+        source_value = str(item.get("source_value") or "").strip()
+        translated_value = str(item.get("translated_value") or "").strip()
+        reason = str(item.get("reason") or "").strip()
+        if source_name != "lien" or output_name != "link" or source_name in result:
+            raise TranslationReviewError(f"Seul un remplacement lien→link unique est autorisé pour {citation_id}")
+        if source_values.get(source_name) != source_value or len(reason) < 20:
+            raise TranslationReviewError(f"Provenance ou justification de surcharge invalide pour {citation_id}")
+        match = re.fullmatch(r"https?://archive\.is/[^/]+/(https?://.+)", source_value, re.I)
+        if not match or translated_value != match.group(1):
+            raise TranslationReviewError(
+                f"La surcharge de {citation_id} doit reprendre exactement l’URL originale incluse dans archive.is"
+            )
+        result[source_name] = {
+            "source_name": "lien", "output_name": "link", "source_value": source_value,
+            "translated_value": translated_value, "reason": reason,
+        }
+    return result
 
 
 def _validate_citations(rows: Any, french_rows: Sequence[Mapping[str, Any]], node_id: str) -> list[dict[str, Any]]:
@@ -535,7 +584,14 @@ def _validate_citations(rows: Any, french_rows: Sequence[Mapping[str, Any]], nod
             if not translated_date:
                 raise TranslationReviewError(f"Date anglaise absente pour la citation {citation_id}")
             fr_sig = _date_signature(source_date, "fr") or _date_signature(source_date, "en")
-            preserved_numeric_date = translated_date == source_date and re.fullmatch(r"[0-9\s()/.,–—-]+", source_date) is not None
+            numeric_expression = re.fullmatch(r"[0-9\s()/.,–—-]+", source_date) is not None
+            short_year_date = re.fullmatch(r"\d{1,2}[/.]\d{1,2}[/.]\d{2}", source_date) is not None
+            opaque_numeric_date = numeric_expression and (fr_sig is None or short_year_date)
+            preserved_numeric_date = translated_date == source_date and numeric_expression
+            if opaque_numeric_date and translated_date != source_date:
+                raise TranslationReviewError(
+                    f"Format de date source non reconnu pour {citation_id}; conservation exacte requise : {source_date}"
+                )
             if fr_sig is None and not preserved_numeric_date:
                 raise TranslationReviewError(f"Format de date source non reconnu pour {citation_id}; revue nécessaire : {source_date}")
             en_sig = _date_signature(translated_date, "en")
@@ -563,6 +619,7 @@ def _validate_citations(rows: Any, french_rows: Sequence[Mapping[str, Any]], nod
         _text(row.get("reviewed_at"), f"date de revue de citation {citation_id}", 10)
         _text(row.get("note"), f"note de revue de citation {citation_id}", 8)
         warning = _citation_warning(source.get("avertissements-citation"))
+        documentary_overrides = _citation_documentary_overrides(row, source, citation_id)
         output_parameters: list[dict[str, str]] = []
         warning_inserted = False
         for parameter in source.get("source_parameters") or []:
@@ -583,7 +640,8 @@ def _validate_citations(rows: Any, french_rows: Sequence[Mapping[str, Any]], nod
                 output_value = warning
                 warning_inserted = True
             else:
-                output_value = str(parameter.get("value") or "")
+                override = documentary_overrides.get(normalized)
+                output_value = override["translated_value"] if override else str(parameter.get("value") or "")
             output_parameters.append({
                 "name": output_name,
                 "value": output_value,
@@ -604,6 +662,7 @@ def _validate_citations(rows: Any, french_rows: Sequence[Mapping[str, Any]], nod
             "warnings": warning,
             "parameter_name_mapping": copy.deepcopy(CITATION_PARAMETER_MAP),
             "preserved_parameters": copy.deepcopy(source.get("preserved_parameters") or []),
+            "documentary_parameter_overrides": list(documentary_overrides.values()),
             "parameters": output_parameters,
             "source": copy.deepcopy(source),
             "source_word_count": source_words,
@@ -711,6 +770,36 @@ def _french_source_page_origin(fr_meta: Mapping[str, Any], fr_content: Mapping[s
     return "new"
 
 
+def _requires_relation_label_review(
+    metadata_lock: Mapping[str, Any], content_lock: Mapping[str, Any],
+) -> bool:
+    """Require occurrence labels whenever the complete French graph is historical."""
+    if content_lock.get("source_preservation_policy"):
+        return True
+    meta_arguments = {
+        str(row.get("entity_id") or row.get("id")): row
+        for row in metadata_lock.get("arguments") or []
+        if isinstance(row, Mapping)
+    }
+    content_arguments = {
+        str(row.get("id")): row
+        for row in content_lock.get("arguments") or []
+        if isinstance(row, Mapping)
+    }
+    if not content_arguments or set(meta_arguments) != set(content_arguments):
+        return False
+    origins = [
+        _french_source_page_origin(
+            metadata_lock.get("debate") or {}, content_lock.get("debate") or {},
+        )
+    ]
+    origins.extend(
+        _french_source_page_origin(meta_arguments[node_id], content_arguments[node_id])
+        for node_id in sorted(content_arguments)
+    )
+    return all(origin == "preexisting" for origin in origins)
+
+
 def _source_snapshot(source: Path) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
     registry = load_json(source / "data/registre_debat.json", "registre du débat")
     metadata = load_json(source / "data/fr_page_metadata_lock.json", "verrou des métadonnées françaises")
@@ -781,6 +870,9 @@ def _blank_argument(fr_meta: Mapping[str, Any], fr_content: Mapping[str, Any]) -
         "page_origin": "new",
         "source_page_origin": _french_source_page_origin(fr_meta, fr_content),
         "preserved_parameters": {},
+        "dedicated_debate": None,
+        "dedicated_debate_equivalent_to_french": False,
+        "dedicated_debate_review_note": "",
         "canonical_title": "",
         "displayed_title": "",
         "sections": [],
@@ -1024,7 +1116,10 @@ def prepare_review(project_root: Path, debate_id: str, work_id: str, *, overwrit
         {"id": node_id, "review_risk": _translation_risk_profile(fr_meta_by_id[node_id], fr_content_by_id[node_id]), "translation": _blank_argument(fr_meta_by_id[node_id], fr_content_by_id[node_id])}
         for node_id in translation_ids
     ]
-    if _historical_relation_labels_required(content_lock):
+    if (
+        _requires_relation_label_review(metadata_lock, content_lock)
+        or _historical_relation_labels_required(content_lock)
+    ):
         from wikidebia_translation_source import relation_labels_from_source
         reused_ids = set(active_ids) - set(translation_ids)
         review["relation_labels"] = [
@@ -2094,9 +2189,43 @@ def _validate_argument(item: Mapping[str, Any], mapping: Mapping[str, str], sour
     _text(row.get("reviewed_at"), f"date de revue anglaise de {node_id}", 10)
     _text(row.get("note"), f"note de revue anglaise de {node_id}", 12)
     lifecycle = _validate_page_lifecycle(row, "argument", node_id)
+    fr_preserved = fr_content.get("preserved_parameters") or {}
+    fr_dedicated_state = fr_preserved.get("débat-dédié") or fr_preserved.get("débat-détaillé") or {}
+    if fr_dedicated_state.get("present") is True:
+        dedicated_debate = _text(
+            row.get("dedicated_debate"), f"dedicated-debate anglais de {node_id}", 8,
+        )
+        if row.get("dedicated_debate_equivalent_to_french") is not True:
+            raise TranslationReviewError(
+                f"Le dedicated-debate anglais doit traduire le débat-dédié français : {node_id}"
+            )
+        dedicated_debate_review_note = _text(
+            row.get("dedicated_debate_review_note"),
+            f"note de traduction du dedicated-debate de {node_id}", 12,
+        )
+    else:
+        if row.get("dedicated_debate") not in (None, ""):
+            raise TranslationReviewError(f"dedicated-debate anglais inventé sans source française : {node_id}")
+        dedicated_debate = None
+        dedicated_debate_review_note = ""
     argument_name, name_discovery = _validate_argument_name_discovery(row, node_id, lifecycle["page_origin"])
     dedicated_debate = _validate_dedicated_debate(row, node_id)
+    existing_update = row.get("existing_english_update")
+    if existing_update is not None:
+        if (lifecycle["page_origin"] != "preexisting" or not isinstance(existing_update, dict)
+                or existing_update.get("owner_approved") is not True
+                or existing_update.get("decision") != "explicit_user_request"
+                or existing_update.get("title") != canonical
+                or existing_update.get("page_id") != node_id
+                or existing_update.get("language") != "en"
+                or not isinstance(existing_update.get("observed_revision_id"), int)
+                or existing_update["observed_revision_id"] <= 0
+                or not re.fullmatch(r"[a-f0-9]{64}", str(existing_update.get("observed_sha256") or ""))):
+            raise TranslationReviewError(f"Autorisation de reprise anglaise invalide : {node_id}")
+        _text(existing_update.get("instruction"), f"instruction propriétaire anglaise {node_id}", 24)
+        _text(existing_update.get("reason"), f"motif de reprise anglaise {node_id}", 24)
     return {
+        **({"existing_english_update": copy.deepcopy(existing_update)} if existing_update is not None else {}),
         **dedicated_debate,
         "id": node_id, "canonical_title": canonical, "displayed_title": displayed,
         "sections": sections, "keywords": keywords, "summary": summary, "citations": citations, "citation_passages": passages, "sources": final_sources,
@@ -2105,6 +2234,9 @@ def _validate_argument(item: Mapping[str, Any], mapping: Mapping[str, str], sour
         "summary_ratio_reviewed": bool(row.get("summary_ratio_reviewed")) if ratio is not None else True,
         "summary_ratio_exception_rationale": str(row.get("summary_ratio_exception_rationale") or "").strip(),
         "source_page_origin": source_page_origin, "forceful_expression": expression,
+        "dedicated_debate": dedicated_debate,
+        "dedicated_debate_equivalent_to_french": dedicated_debate is not None,
+        "dedicated_debate_review_note": dedicated_debate_review_note,
         "quantitative_claims": numbers, "quantitative_claims_verified": bool(row.get("quantitative_claims_verified")),
         "quantitative_claims_note": row.get("quantitative_claims_note"),
         "historical_quantitative_transfer_reviewed": bool(row.get("historical_quantitative_transfer_reviewed")),
@@ -2203,7 +2335,10 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
         if (item.get("translation") or {}).get("french") != {"metadata": fr_meta_by_id.get(node_id), "content": fr_content_by_id.get(node_id)}:
             raise TranslationReviewError("Source française intégrée divergente du snapshot autoritatif : " + node_id)
         final_arguments.append(_validate_argument(item, keyword_map, by_source, authoritative_source_page_origin=authoritative_origin, authoritative_source_preservation_policy=source_policy))
-    if _historical_relation_labels_required(content_lock):
+    if (
+        _requires_relation_label_review(metadata_lock, content_lock)
+        or _historical_relation_labels_required(content_lock)
+    ):
         from wikidebia_translation_source import validate_relation_labels
         reused_ids = {
             str(node.get("id"))

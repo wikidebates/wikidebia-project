@@ -38,6 +38,32 @@ translation._run_validator = fake_validator
 from test_wikidebia_content_review import make_metadata_applied, complete_content_review, source_row  # noqa: E402
 
 
+def test_preexisting_reviewed_pages_require_contextual_relation_labels():
+    metadata_lock = {
+        "debate": {"page_origin": "preexisting"},
+        "arguments": [{"entity_id": "A0001", "page_origin": "preexisting"}],
+    }
+    content_lock = {
+        "debate": {"page_origin": "preexisting"},
+        "arguments": [{"id": "A0001", "page_origin": "preexisting"}],
+    }
+
+    assert translation._requires_relation_label_review(metadata_lock, content_lock) is True
+
+
+def test_new_pages_do_not_require_contextual_relation_labels():
+    metadata_lock = {
+        "debate": {"page_origin": "new"},
+        "arguments": [{"entity_id": "A0001", "page_origin": "new"}],
+    }
+    content_lock = {
+        "debate": {"page_origin": "new"},
+        "arguments": [{"id": "A0001", "page_origin": "new"}],
+    }
+
+    assert translation._requires_relation_label_review(metadata_lock, content_lock) is False
+
+
 def make_french_locked(tmp_path: Path) -> tuple[Path, Path, str]:
     project, workspace, work_id = make_metadata_applied(tmp_path)
     content.prepare_review(project, "debat_test", work_id)
@@ -311,6 +337,12 @@ def complete_translation_review(workspace: Path) -> None:
             "reviewed_at": "2026-08-03T21:59:00+02:00",
             "note": "This review unit was closed independently at the density recommended from the French source.",
         })
+    for relation_label in review.get("relation_labels") or []:
+        relation_label.update({
+            "translated_text": f"Translated contextual label {relation_label['id']}",
+            "equivalent_to_french": True,
+            "review_note": "The contextual source label and its English translation were compared directly.",
+        })
     review["global_review"] = {
         "reviewer": "English reviewer", "reviewed_at": "2026-08-03T22:00:00+02:00",
         "all_entities_translated": True, "all_equivalences_reviewed": True,
@@ -553,6 +585,17 @@ def test_finalize_translation_rejects_wrong_citation_date(tmp_path: Path):
         assert "même date" in str(exc)
     else:
         raise AssertionError("Date de citation divergente acceptée")
+
+
+@pytest.mark.parametrize(("source", "target"), [
+    ("29 sep 2021", "29 September 2021"),
+    ("23 jan 2023", "23 January 2023"),
+    ("08 Mar 2022", "8 March 2022"),
+    ("29/05/18", "29 May 2018"),
+    ("janvier-février 2023", "January–February 2023"),
+])
+def test_historical_citation_date_formats_match_english_translation(source: str, target: str):
+    assert translation._date_signature(source, "fr") == translation._date_signature(target, "en")
 
 
 def test_finalize_translation_rejects_mutated_citation_source_parameters(tmp_path: Path):
@@ -1108,6 +1151,33 @@ def test_apply_translation_emits_english_localized_keyword_quality_metadata(tmp_
         assert "en_multiword_exception_rationale" in row
         assert row["en_kind"] in {"noun", "noun_phrase", "proper_name", "acronym"}
         assert row["en_capitalization_policy"] in {"lowercase_common", "canonical_proper_name", "canonical_acronym"}
+
+def test_archive_wrapper_can_be_replaced_by_its_exact_original_url():
+    archived = "https://archive.is/20240506074406/https://example.org/article"
+    source = {"source_parameters": [{"name": "lien", "value": archived}]}
+    row = {"documentary_parameter_overrides": [{
+        "source_name": "lien", "output_name": "link", "source_value": archived,
+        "translated_value": "https://example.org/article",
+        "reason": "The target wiki spam filter rejects the archive wrapper domain.",
+    }]}
+    assert translation._citation_documentary_overrides(row, source, "A1-C1")["lien"]["translated_value"] == "https://example.org/article"
+
+
+def test_archive_wrapper_override_rejects_a_different_destination():
+    archived = "https://archive.is/20240506074406/https://example.org/article"
+    source = {"source_parameters": [{"name": "lien", "value": archived}]}
+    row = {"documentary_parameter_overrides": [{
+        "source_name": "lien", "output_name": "link", "source_value": archived,
+        "translated_value": "https://other.example/article",
+        "reason": "The target wiki spam filter rejects the archive wrapper domain.",
+    }]}
+    try:
+        translation._citation_documentary_overrides(row, source, "A1-C1")
+    except translation.TranslationReviewError as exc:
+        assert "exactement" in str(exc)
+    else:
+        raise AssertionError("A documentary override to a different URL was accepted")
+
 
 @pytest.mark.parametrize('mutation', ['missing', 'source_text', 'target_node_id'])
 def test_ordinary_historical_review_requires_exact_contextual_label_inventory(tmp_path, mutation):

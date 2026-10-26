@@ -67,6 +67,7 @@
         "kind": {
           "enum": [
             "published_state_receipt",
+            "workflow_release_baseline",
             "previous_installed_manifest",
             "remote_inventory"
           ]
