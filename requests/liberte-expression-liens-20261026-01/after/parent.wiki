@@ -1,0 +1,35 @@
+{{Argument
+|initialisation=Argument contre@598
+|résumé=Les gens sont habitués dès l'enfance à obéir et à se référer à des autorités extérieures : adultes, maîtres d'écoles, parents, etc. Cette tendance est ancrée au plus profond depuis l'enfance, donc très difficile à déraciner, et ne disparaît pas mais se déplace avec l'âge : après l'autorité des parents vient celle de l'Etat, de l'Eglise ou du Parti. Toujours ce besoin de soumission volontaire, qui seul rassure les toujours-enfants que nous sommes. La liberté d'expression réveille l'angoisse de se trouver devant une foule invraisemblable d'opinions, d'informations, de choix de vie, qui foisonnent et renvoient chacun à son incertitude et à sa fragilité existentielle. Cela suscite la peur et on cherche à créer de bien-nommés "garde-fous", pour se garder de cette folie d'opinions contradictoires. On invente alors toutes sortes de raisons d'empêcher l'expression de tel ou tel courant d'idée, d'opinions, etc., par peur inconsciente que cette opinion ne déplaise à des autorités inconscientes parentales, et ne suscite leur colère. On veut exclure es opinions qui vont ou pourraient déplaire aux figures parentale telles que Dieu, l'Etat, la Science etc., sous des prétextes divers et seulement parce qu'au fond, on hait la liberté.
+|références-bibliographiques={{Référence bibliographique
+|auteurs=Erich Fromm
+|ouvrage=La peur de la liberté
+|édition=Les Belles Lettres
+}}{{Référence bibliographique
+|auteurs=Jean-Paul Sartre
+|ouvrage=L'existentialisme est un humanisme
+|édition=Gallimard
+}}{{Référence bibliographique
+|auteurs=Emmanuel Kant
+|ouvrage=Qu'est-ce que les Lumières ?
+|édition=Flammarion
+}}
+|justifications={{Justification
+|page=Il n'y aurait aucun inconvénient à une liberté d'expression totale pour des êtres sûrs de leurs idées
+|titre-affiché=Il n'y aurait aucun inconvénient à une liberté d'expression totale pour des êtres sûrs de leurs idées
+}}{{Justification
+|page=On préfère caricaturer ses contradicteurs qu'écouter leurs arguments
+|titre-affiché=On préfère caricaturer ses contradicteurs qu'écouter leurs arguments
+}}{{Justification
+|page=Les gouvernements et les puissants croient qu'en faisant taire les contestations, les problèmes disparaissent
+|titre-affiché=Les gouvernements et les puissants croient qu'en faisant taire les contestations, les problèmes disparaissent
+}}{{Justification
+|page=Dès qu'il accède à du pouvoir, un camp trouve tout à coup des vertus à la censure
+|titre-affiché=Le pouvoir craint toujours la liberté d'expression
+}}
+|objections={{Objection
+|page=La peur des excès de liberté est rationnelle et corroborée par les faits
+|titre-affiché=La peur des excès de liberté est rationnelle et corroborée par les faits
+}}
+|date-création=2024-07-29
+}}

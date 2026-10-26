@@ -1,0 +1,30 @@
+{
+  "schema": "wikidebia-fr-publication-request-1.2",
+  "request_id": "liberte-expression-liens-20261026-01",
+  "language": "fr",
+  "site": "https://fr.wikidebates.org",
+  "authorization": "explicit_user_request",
+  "pages": [
+    {
+      "page_id": "parent-crochet-censure",
+      "old_title": "La peur de la liberté d'expression est une variété de la peur plus commune de la liberté, peur fondamentale de l'être humain",
+      "new_title": "La peur de la liberté d'expression est une variété de la peur plus commune de la liberté, peur fondamentale de l'être humain",
+      "source_revision_id": 221508,
+      "source_sha256": "527e02329d918408aa791232b316a89dcbd1b71a619ff816194c3b0ecb52c1a9",
+      "target_sha256": "9ad4262aa2fdeaa455493e544fdab2b17db9a4c78ca8014ed4b68f3d52d38cd0",
+      "before_file": "before/parent.wiki",
+      "after_file": "after/parent.wiki"
+    },
+    {
+      "page_id": "rene-dumont-beaucoup",
+      "old_title": "Comme beaucup de gens à gauche et à l'extrème gauche jusqu'à l'année 1976 comprise René Dumont défendait le mode de développement sino-maoiste",
+      "new_title": "Comme beaucoup de gens à gauche et à l'extrème gauche jusqu'à l'année 1976 comprise René Dumont défendait le mode de développement sino-maoiste",
+      "source_revision_id": 226537,
+      "source_sha256": "c9263d25180cb194e8f386484d9421c3370729e213928c3460aba1ae0a5da8f0",
+      "target_sha256": "c9263d25180cb194e8f386484d9421c3370729e213928c3460aba1ae0a5da8f0",
+      "before_file": "before/rename.wiki",
+      "after_file": "after/rename.wiki"
+    }
+  ],
+  "request_sha256": "5c91f73a7a6fe9b79cb33d7ce55d1dbaf71932806e46950dd335f12afc89541a"
+}
