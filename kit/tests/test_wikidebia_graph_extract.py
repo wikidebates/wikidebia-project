@@ -2,9 +2,11 @@ import importlib.util
 import json
 import sys
 import tempfile
+import types
 import unittest
 import zipfile
 from pathlib import Path
+from unittest import mock
 
 MODULE_PATH = Path(__file__).resolve().parents[1] / "scripts" / "wikidebia_graph_extract.py"
 spec = importlib.util.spec_from_file_location("graphmod", MODULE_PATH)
@@ -320,3 +322,27 @@ class SafetyTests(unittest.TestCase):
                 login=False,
             )
             self.assertFalse(client.login)
+
+    def test_cloudflare_access_header_is_configured_before_site_creation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            config = types.SimpleNamespace(extra_headers={}, family_files={})
+            fake = types.SimpleNamespace(
+                config=config,
+                Site=lambda **_kwargs: types.SimpleNamespace(),
+            )
+            cache = mod.JsonPageCache(Path(directory) / "cache")
+            client = mod.PywikibotPageClient(
+                family="wikidebates",
+                lang="fr",
+                family_file=None,
+                pywikibot_dir=None,
+                cache=cache,
+                login=False,
+            )
+            with mock.patch.dict(sys.modules, {"pywikibot": fake}), mock.patch.dict(
+                "os.environ", {"WIKIDEBIA_API_TOKEN": "test-access-token"}, clear=False,
+            ):
+                client._open()
+            self.assertEqual(
+                config.extra_headers["x-wikidebia-access"], "test-access-token",
+            )

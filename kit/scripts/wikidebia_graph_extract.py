@@ -484,6 +484,12 @@ class PywikibotPageClient:
             raise RuntimeError(
                 "Pywikibot est absent. Installez-le avec: pip install 'pywikibot>=11.5,<12'"
             ) from exc
+        access_token = os.environ.get("WIKIDEBIA_API_TOKEN")
+        if access_token:
+            extra_headers = getattr(pywikibot.config, "extra_headers", None)
+            if extra_headers is None:
+                raise RuntimeError("pywikibot.config.extra_headers est indisponible")
+            extra_headers["x-wikidebia-access"] = access_token
         if self.family_file:
             family_files = getattr(pywikibot.config, "family_files", None)
             if family_files is None:
