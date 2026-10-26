@@ -429,6 +429,7 @@ def _date_signature(value: Any, language: str) -> tuple[int, int | None, int | N
         return (int(text), None, None)
     months = dict(FR_MONTHS if language == "fr" else EN_MONTHS)
     if language == "fr":
+        text = re.sub(r"^1er(?=[/.\s])", "1", text, flags=re.I)
         # Historical French imports also use day/month/year and month/year.
         numeric = re.fullmatch(r"(\d{1,2})([/.])(\d{1,2})\2(\d{4})", text)
         if numeric:
@@ -447,6 +448,18 @@ def _date_signature(value: Any, language: str) -> tuple[int, int | None, int | N
         months.update({"janv": 1, "févr": 2, "fevr": 2, "avr": 4,
                        "juil": 7, "sept": 9, "oct": 10, "nov": 11, "déc": 12, "dec": 12})
         text = re.sub(r"([A-Za-zÀ-ÿ]+)\.(?=\s)", r"\1", text)
+    else:
+        months.update({name[:3]: number for name, number in EN_MONTHS.items()})
+        months["sept"] = 9
+        text = re.sub(r"([A-Za-z]+)\.(?=\s)", r"\1", text)
+        # Published English quotations may already have an English date.
+        match = re.fullmatch(r"([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})", text, re.I)
+        if match and match[1].casefold() in months:
+            try:
+                day = calendar_date(int(match[3]), months[match[1].casefold()], int(match[2]))
+            except ValueError:
+                return None
+            return (day.year, day.month, day.day)
     match = re.fullmatch(r"(\d{1,2})\s+([A-Za-zÀ-ÿ]+)\s+(\d{4})", text, re.I)
     if match and match.group(2).casefold() in months:
         year, month, day = int(match.group(3)), months[match.group(2).casefold()], int(match.group(1))
@@ -520,11 +533,14 @@ def _validate_citations(rows: Any, french_rows: Sequence[Mapping[str, Any]], nod
             if not translated_date:
                 raise TranslationReviewError(f"Date anglaise absente pour la citation {citation_id}")
             fr_sig = _date_signature(source_date, "fr") or _date_signature(source_date, "en")
-            if fr_sig is None:
+            preserved_numeric_date = translated_date == source_date and re.fullmatch(r"[0-9\s()/.,–—-]+", source_date) is not None
+            if fr_sig is None and not preserved_numeric_date:
                 raise TranslationReviewError(f"Format de date source non reconnu pour {citation_id}; revue nécessaire : {source_date}")
             en_sig = _date_signature(translated_date, "en")
-            if translated_date == source_date and not re.search(r"[A-Za-zÀ-ÿ]", source_date):
-                en_sig = fr_sig  # Preserve an identical historical numeric date.
+            if preserved_numeric_date:
+                # Preserve bibliographic expressions (year/issue, two edition
+                # years, short years) without guessing a calendar date.
+                en_sig = fr_sig
             if en_sig != fr_sig:
                 raise TranslationReviewError(f"La date traduite ne désigne pas la même date pour {citation_id}")
         for field in ("citation_translated", "date_translated_or_language_neutral", "preserved_parameters_unchanged", "translation_warning_appended", "quote_completeness_reviewed"):

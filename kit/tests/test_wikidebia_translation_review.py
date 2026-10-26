@@ -1150,3 +1150,32 @@ def test_ordinary_historical_number_transfer_does_not_certify_truth():
     row['historical_quantitative_transfer_reviewed'] = False
     with pytest.raises(translation.TranslationReviewError, match='chiffrée'):
         translation._validate_argument({'id': 'A-HIST', 'translation': row}, mapping, {}, authoritative_source_page_origin='preexisting')
+
+@pytest.mark.parametrize('value,language,expected', [
+    ('Mar 9, 2021', 'en', (2021, 3, 9)),
+    ('Nov 14, 2016', 'en', (2016, 11, 14)),
+    ('1er/10/2024', 'fr', (2024, 10, 1)),
+    ('1er juin 2023', 'fr', (2023, 6, 1)),
+    ('Feb 31, 2024', 'en', None),
+])
+def test_source_date_localization_retains_actual_calendar_value(value, language, expected):
+    assert translation._date_signature(value, language) == expected
+
+
+@pytest.mark.parametrize('date', ['1981 (1979)', '2007 / 2', '24/05/21'])
+def test_opaque_numeric_bibliographic_date_is_preserved_without_guessing(tmp_path, date):
+    project, workspace, work_id = make_french_locked(tmp_path)
+    translation.prepare_review(project, 'debat_test', work_id)
+    complete_translation_review(workspace)
+    review = json.loads((workspace / 'reviews/en/translation_review.json').read_text())
+    row = next(q for i in review['arguments'] for q in i['translation']['citations'])
+    row['source']['date'] = date
+    for parameter in row['source']['source_parameters']:
+        if parameter['name'] == 'date':
+            parameter['value'] = date
+    row['translated_date'] = date
+    result = translation._validate_citations([row], [row['source']], 'A-DATE')
+    assert result[0]['date'] == date
+    row['translated_date'] = '2 February 2007'
+    with pytest.raises(translation.TranslationReviewError, match='Format de date source'):
+        translation._validate_citations([row], [row['source']], 'A-DATE')
