@@ -74,6 +74,17 @@ PROTECTED_LIFECYCLE_PARAMETERS = {
     ),
 }
 
+# These editorial classifications may be enriched independently by wiki
+# maintenance jobs between two corpus publications.  They are not lifecycle
+# parameters, but a graph/title-only update must not erase them when their
+# exact prior revision proves that no other remote field changed.
+CONCURRENTLY_PRESERVABLE_METADATA = {
+    ("fr", "debate"): ("rubriques", "mots-clés"),
+    ("fr", "argument"): ("rubriques", "mots-clés"),
+    ("en", "debate"): ("sections", "keywords"),
+    ("en", "argument"): ("sections", "keywords"),
+}
+
 
 
 
@@ -213,6 +224,100 @@ def changed_top_level_parameters(old_text: str, new_text: str, language: str, pa
     if normalize_key(old_model) != normalize_key(new_model) or old_positional != new_positional:
         changed.append("__structure__")
     return changed
+
+
+def remote_diff_is_only_preservable_metadata(
+    prior_text: str,
+    remote_text: str,
+    language: str,
+    page_type: str,
+) -> tuple[bool, list[str]]:
+    """Prove that remote drift is confined to metadata preserved on update.
+
+    Top-level protected parameters are compared semantically, including their
+    historical aliases. Text outside the main template must remain equivalent;
+    this prevents metadata-only adoption from hiding categories, interwiki
+    links, or any other out-of-template human change.
+    """
+    changed = changed_top_level_parameters(prior_text, remote_text, language, page_type)
+    preservable = set(PROTECTED_LIFECYCLE_PARAMETERS[(language, page_type)])
+    preservable.update(CONCURRENTLY_PRESERVABLE_METADATA[(language, page_type)])
+    if not set(changed).issubset(preservable):
+        return False, changed
+
+    expected = {
+        ("fr", "debate"): "debat", ("en", "debate"): "debate",
+        ("fr", "argument"): "argument", ("en", "argument"): "argument",
+    }[(language, page_type)]
+
+    def outside_main_template(text: str) -> str:
+        calls = [call for call in iter_templates(text or "") if normalize_key(call.name) == expected]
+        if not calls:
+            raise UpdateError(f"Modèle principal introuvable ({language}/{page_type})")
+        call = max(calls, key=lambda item: len(item.raw))
+        return normalize_wikicode(text.replace(call.raw, "{{WIKIDEBIA_MAIN_TEMPLATE}}", 1))
+
+    return outside_main_template(prior_text) == outside_main_template(remote_text), changed
+
+
+def preserve_remote_top_level_parameters(
+    remote_text: str,
+    proposed_text: str,
+    language: str,
+    page_type: str,
+    names: Iterable[str],
+) -> tuple[str, dict[str, Any]]:
+    """Overlay an explicit, narrowly scoped set of remote template parameters."""
+    wanted = tuple(dict.fromkeys(str(name) for name in names))
+    if not wanted:
+        return proposed_text, {}
+    _, _, remote_params = _canonical_top_level_parameters(remote_text, language, page_type)
+    expected = {
+        ("fr", "debate"): "debat", ("en", "debate"): "debate",
+        ("fr", "argument"): "argument", ("en", "argument"): "argument",
+    }[(language, page_type)]
+    calls = [call for call in iter_templates(proposed_text or "") if normalize_key(call.name) == expected]
+    if not calls:
+        raise UpdateError(f"Modèle principal introuvable ({language}/{page_type})")
+    call = max(calls, key=lambda item: len(item.raw))
+    parsed = parse_template(call.raw)
+    if parsed is None:
+        raise UpdateError(f"Modèle principal illisible ({language}/{page_type})")
+
+    normalized_wanted = {normalize_key(name): name for name in wanted}
+    rows = [f"{{{{{parsed.name}"]
+    rows.extend(f"|{value}" for value in parsed.positional)
+    seen: set[str] = set()
+    for raw_name, value in parsed.params.items():
+        canonical = _canonical_parameter_name(language, page_type, raw_name)
+        selected = normalized_wanted.get(normalize_key(canonical))
+        if selected is None:
+            rows.append(f"|{raw_name}={value}")
+            continue
+        seen.add(selected)
+        if selected in remote_params:
+            rows.append(f"|{selected}={remote_params[selected]}")
+    for name in wanted:
+        if name not in seen and name in remote_params:
+            rows.append(f"|{name}={remote_params[name]}")
+    rows.append("}}")
+    effective = proposed_text.replace(call.raw, "\n".join(rows), 1)
+    _, _, effective_params = _canonical_top_level_parameters(effective, language, page_type)
+    audit = {
+        name: {
+            "remote": remote_params.get(name),
+            "effective": effective_params.get(name),
+            "present": name in remote_params,
+        }
+        for name in wanted
+    }
+    if any(
+        (name in effective_params) != (name in remote_params)
+        or effective_params.get(name) != remote_params.get(name)
+        for name in wanted
+    ):
+        raise UpdateError(f"Échec de préservation des métadonnées distantes ({language}/{page_type})")
+    return effective, audit
 
 
 def _join_summary_items(items: list[str], language: str) -> str:
@@ -1708,6 +1813,8 @@ class RemoteUpdatePlanner:
         prior: StatePage,
         proposed: dict[str, Any],
         remote_text: str,
+        *,
+        additional_remote_parameters: Iterable[str] = (),
     ) -> tuple[dict[str, Any], dict[str, Any] | None]:
         restoration = (((self.manifest.get("editorial_controls") or {}).get("legacy_content_preservation") or {}).get("historical_parameter_restoration") is True)
         assignment = self._argument_name_assignment_for(prior.language, prior.page_id, proposed["title"]) if prior.page_type == "argument" else None
@@ -1726,6 +1833,16 @@ class RemoteUpdatePlanner:
             allow_historical_restoration=restoration and proposed.get("page_origin") == "preexisting",
             explicit_parameter_assignments=explicit_assignments,
         )
+        additional = tuple(additional_remote_parameters)
+        if additional:
+            effective_text, metadata_preservation = preserve_remote_top_level_parameters(
+                remote_text,
+                effective_text,
+                prior.language,
+                prior.page_type,
+                additional,
+            )
+            preservation["concurrent_metadata"] = metadata_preservation
         if effective_text == proposed["content"]:
             return proposed, None
         digest = sha_text(effective_text)
@@ -1940,8 +2057,30 @@ class RemoteUpdatePlanner:
                     continue
             effective = proposed
             lifecycle_preservation = None
-            if exists and prior is not None and self._remote_matches_prior(prior, revision_id, remote_text):
-                effective, lifecycle_preservation = self._effective_proposed(prior, proposed, remote_text)
+            remote_matches_prior = bool(
+                exists and prior is not None and self._remote_matches_prior(prior, revision_id, remote_text)
+            )
+            preservable_only_drift = False
+            drift_parameters: list[str] = []
+            if exists and prior is not None and not remote_matches_prior:
+                prior_content = self._attested_prior_content(prior)
+                if prior_content is not None:
+                    preservable_only_drift, drift_parameters = remote_diff_is_only_preservable_metadata(
+                        prior_content, remote_text, prior.language, prior.page_type
+                    )
+            if exists and prior is not None and (remote_matches_prior or preservable_only_drift):
+                additional_remote_parameters = (
+                    set(drift_parameters)
+                    & set(CONCURRENTLY_PRESERVABLE_METADATA[(prior.language, prior.page_type)])
+                    if preservable_only_drift
+                    else set()
+                )
+                effective, lifecycle_preservation = self._effective_proposed(
+                    prior,
+                    proposed,
+                    remote_text,
+                    additional_remote_parameters=sorted(additional_remote_parameters),
+                )
             op = self._base_operation(
                 language=language,
                 page_id=effective["page_id"],
@@ -2030,19 +2169,32 @@ class RemoteUpdatePlanner:
                 op["phase"] = 0
                 op["remote_excerpt"] = remote_text[:500]
                 buckets["blocked"].append(op)
-            elif self._remote_matches_prior(prior, revision_id, remote_text):
+            elif remote_matches_prior or preservable_only_drift:
                 op.update({
-                    "old_sha256": prior.content_sha256,
+                    "old_sha256": sha_text(remote_text) if preservable_only_drift else prior.content_sha256,
                     "expected_revision_id": revision_id,
                     "justification": (
-                        "Page inchangée depuis la dernière publication; remplacement contrôlé autorisé "
+                        "La révision distante diffère uniquement par des métadonnées explicitement préservables, "
+                        "qui sont conservées dans le remplacement contrôlé"
+                        if preservable_only_drift
+                        else "Page inchangée depuis la dernière publication; remplacement contrôlé autorisé "
                         "avec préservation des paramètres historiques"
                         if lifecycle_preservation is not None
                         else "Page inchangée depuis la dernière publication automatisée; remplacement contrôlé autorisé"
                     ),
-                    "preconditions": ["same_debate_id", "remote_matches_published_state", "remote_lifecycle_parameters_preserved", "baserevid_unchanged"],
+                    "preconditions": (
+                        ["same_debate_id", "remote_diff_is_only_preservable_metadata", "remote_lifecycle_parameters_preserved", "remote_concurrent_metadata_preserved", "baserevid_unchanged"]
+                        if preservable_only_drift
+                        else ["same_debate_id", "remote_matches_published_state", "remote_lifecycle_parameters_preserved", "baserevid_unchanged"]
+                    ),
                     "phase": 1 if effective["page_type"] == "debate" else 3,
                 })
+                if preservable_only_drift:
+                    op["preserved_remote_metadata_drift"] = {
+                        "parameters": drift_parameters,
+                        "observed_revision_id": revision_id,
+                        "observed_sha256": sha_text(remote_text),
+                    }
                 self._apply_update_summary_policy(op, remote_text, effective["content"])
                 buckets["update"].append(op)
             else:
@@ -2074,6 +2226,31 @@ class RemoteUpdatePlanner:
         digest_matches = sha_text(remote_text) == prior.content_sha256
         revision_matches = prior.revision_id is not None and revision_id == prior.revision_id
         return digest_matches or revision_matches
+
+    def _attested_prior_content(self, prior: StatePage) -> str | None:
+        """Resolve exact prior text without weakening the published-state proof.
+
+        Published-state receipts intentionally retain only a digest and revision
+        identifier.  When the text is not available locally, reread that exact
+        immutable MediaWiki revision and accept it only if both its identifier and
+        digest match the signed receipt.
+        """
+        if isinstance(prior.content, str):
+            return prior.content if sha_text(prior.content) == prior.content_sha256 else None
+        if prior.revision_id is None:
+            return None
+        reader = getattr(self.adapter, "read_revision", None)
+        if not callable(reader):
+            return None
+        observed = reader(prior.title, prior.revision_id)
+        if not isinstance(observed, dict):
+            return None
+        if int(observed.get("revision_id") or 0) != prior.revision_id:
+            return None
+        text = observed.get("text")
+        if not isinstance(text, str) or sha_text(text) != prior.content_sha256:
+            return None
+        return text
 
     def _comparison(self, prior: StatePage, remote_text: str, proposed_text: str | None) -> dict[str, Any]:
         payload = {

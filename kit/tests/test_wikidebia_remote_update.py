@@ -163,9 +163,10 @@ def make_fixture(tmp_path: Path, *, languages=("fr",), old_pages=None, new_pages
     return config, config_path
 
 
-def plan(tmp_path, *, remote_pages=None, rights=None, **fixture):
+def plan(tmp_path, *, remote_pages=None, remote_revisions=None, rights=None, **fixture):
     config, path = make_fixture(tmp_path, **fixture)
     adapter = FakeAdapter(remote_pages, rights)
+    adapter.revisions.update(remote_revisions or {})
     planner = module.RemoteUpdatePlanner(config, adapter, path)
     return planner.build_plan(), config, path, adapter
 
@@ -509,6 +510,52 @@ def test_update_preserves_remote_creation_date_instead_of_current_corpus_date(tm
     text = (tmp_path / operation['source_path']).read_text(encoding='utf-8')
     assert '|date-création=2017-04-09' in text
     assert '|date-création=2026-08-05' not in text
+
+
+def test_update_adopts_only_remote_preservable_metadata_drift(tmp_path):
+    old = argument("Ancien")
+    remote = old.replace(
+        "|rubriques=Société",
+        "|rubriques=Société, Politique\n|mots-clés=liberté d'expression, censure",
+    )
+    proposed = argument("Nouveau")
+    p, *_ = plan(
+        tmp_path,
+        old_pages=[("fr", "A1", "Titre", old)],
+        new_pages=[("fr", "A1", "Titre", proposed)],
+        remote_pages={("fr", "Titre"): (11, remote)},
+        remote_revisions={("fr", "Titre", 10): {
+            "revision_id": 10, "text": old, "summary": "", "tags": [],
+        }},
+    )
+    assert p["counts"]["update"] == 1
+    assert p["counts"]["blocked"] == 0
+    assert p["counts"]["manual_review"] == 0
+    operation = p["operations"]["update"][0]
+    assert operation["preserved_remote_metadata_drift"]["parameters"] == [
+        "mots-clés", "rubriques",
+    ]
+    effective = (tmp_path / operation["source_path"]).read_text(encoding="utf-8")
+    assert "|résumé=Nouveau" in effective
+    assert "|rubriques=Société, Politique" in effective
+    assert "|mots-clés=liberté d'expression, censure" in effective
+
+
+def test_metadata_drift_adoption_rejects_outside_template_change(tmp_path):
+    old = argument("Ancien")
+    remote = old.replace("|rubriques=Société", "|rubriques=Politique") + "[[Catégorie:Ajout humain]]\n"
+    proposed = argument("Nouveau")
+    p, *_ = plan(
+        tmp_path,
+        old_pages=[("fr", "A1", "Titre", old)],
+        new_pages=[("fr", "A1", "Titre", proposed)],
+        remote_pages={("fr", "Titre"): (11, remote)},
+        remote_revisions={("fr", "Titre", 10): {
+            "revision_id": 10, "text": old, "summary": "", "tags": [],
+        }},
+    )
+    assert p["counts"]["update"] == 0
+    assert p["counts"]["manual_review"] == 1
 
 
 def test_explicit_retirement_can_delete_attested_historical_page_without_ai_marker(tmp_path):
