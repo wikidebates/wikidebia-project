@@ -1,0 +1,20 @@
+{
+  "schema": "wikidebia-fr-publication-request-1.2",
+  "request_id": "liberte-expression-duplicate-link-20261027-01",
+  "language": "fr",
+  "site": "https://fr.wikidebates.org",
+  "authorization": "explicit_user_request",
+  "pages": [
+    {
+      "page_id": "limiter-necessaire-duplicate-link",
+      "old_title": "Limiter la liberté d'expression est nécessaire",
+      "new_title": "Limiter la liberté d'expression est nécessaire",
+      "source_revision_id": 205839,
+      "source_sha256": "0fce04fe2cbc0f7a37895d481ad9b83a410b69062721f03c51cdb86b5161e8be",
+      "target_sha256": "a441d6ac789668c519fb9bf3fae380cea4bd7b846db569312fe3ff5bc7091861",
+      "before_file": "before/page.wiki",
+      "after_file": "after/page.wiki"
+    }
+  ],
+  "request_sha256": "0fa28c963d690dbfa43e20cbc7b5753cdbcac570bdb6d9b57732025a80ad164c"
+}

@@ -1,0 +1,25 @@
+{{Argument
+|justifications={{Justification
+|page=Il faut limiter la liberté d'expression pour ne pas faire de tort aux personnes
+|titre-affiché=Pour ne pas faire de tort aux personnes
+}}{{Justification
+|page=Il faut limiter la liberté d'expression pour lutter contre les contenus choquants
+|titre-affiché=Pour lutter contre les contenus choquants
+}}{{Justification
+|page=Il faut limiter la liberté d'expression pour lutter contre les idées dangereuses
+|titre-affiché=Pour lutter contre les idées dangereuses
+}}{{Justification
+|page=Il faut limiter la liberté d'expression pour protéger l'État et les entreprises
+|titre-affiché=Pour protéger l'État et les entreprises
+}}{{Justification
+|page=Il faut limiter la liberté d'expression pour éviter les troubles à l'ordre public
+|titre-affiché=Pour éviter les troubles à l'ordre public
+}}
+|objections={{Objection
+|page=Limiter la liberté d'expression est inefficace
+|titre-affiché=Limiter la liberté d’expression est inefficace
+}}
+|rubriques=Droit, Philosophie, Politique, Société
+|mots-clés=Liberté d'expression, Limites
+|date-création=2018-12-05
+}}
