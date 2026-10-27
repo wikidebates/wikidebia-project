@@ -139,6 +139,29 @@ def test_finalize_rejects_incomplete_occurrence_review(tmp_path: Path):
     assert json.loads((build / "manifest.json").read_text())["global_status"] == "graph_draft"
 
 
+def test_finalize_rejects_approved_review_with_unapplied_graph_action(tmp_path: Path):
+    project, build = make_project(tmp_path)
+    review.make_review_template(build, "debat_test", overwrite=False)
+    complete_reviews(build)
+    placement_path = build / common.PLACEMENT_REVIEW
+    placement = json.loads(placement_path.read_text(encoding="utf-8"))
+    placement["entries"][0]["correction"] = {
+        "action": "merge_redirect",
+        "target_node_id": placement["entries"][1]["node_id"],
+        "reason": "Ce doublon doit être fusionné avant que le graphe puisse être approuvé.",
+    }
+    common.write_json(placement_path, placement)
+
+    try:
+        review.finalize_review(project, build, "debat_test")
+    except common.CorpusBuildError as exc:
+        assert "Revue incomplète" in str(exc)
+    else:
+        raise AssertionError("action structurelle non appliquée acceptée dans une revue approuvée")
+    report = json.loads((build / common.REVIEW_REPORT_JSON).read_text(encoding="utf-8"))
+    assert any(row["reason"] == "unapplied_graph_action" for row in report["placement_issues"])
+
+
 def test_graph_review_fingerprint_is_portable_across_sanitized_execution_paths(tmp_path: Path):
     project, build = make_project(tmp_path)
     execution_path = build / "reports/initial_validation_execution.json"

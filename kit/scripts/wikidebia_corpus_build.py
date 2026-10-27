@@ -436,6 +436,15 @@ def placement_review_issues(review: Any, registry: Mapping[str, Any]) -> list[di
             issues.append({"reason": "declared_depth", "occurrence_id": oid})
         if entry.get("placement_status") not in {"approved", "moved_after_review"}:
             issues.append({"reason": "placement_status", "occurrence_id": oid})
+        correction = entry.get("correction") or entry.get("graph_action")
+        if isinstance(correction, Mapping):
+            action = str(correction.get("action") or "none").strip()
+            if action not in {"", "none", "keep"}:
+                issues.append({
+                    "reason": "unapplied_graph_action",
+                    "occurrence_id": oid,
+                    "action": action,
+                })
         if entry.get("direct_fit") is not True:
             issues.append({"reason": "direct_fit", "occurrence_id": oid})
         if not isinstance(entry.get("rationale"), str) or len(entry["rationale"].strip()) < 24:
