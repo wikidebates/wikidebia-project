@@ -67,6 +67,31 @@ class FrenchCheckpointError(RuntimeError):
         self.remote_execution_started = remote_execution_started
 
 
+def _defer_unresolved_interlanguage(record: dict[str, Any]) -> None:
+    """Defer French links without discarding a verified reusable English page.
+
+    Corpus initialisation marks an already translated frontier as ``ready`` and
+    records its English title before the ordinary translation stage.  The graph
+    checkpoint must keep that evidence schema-valid while deferring only links
+    whose English target is still unresolved.
+    """
+    target_title = record.get("target_title")
+    reusable_target = (
+        record.get("status") == "ready"
+        and isinstance(target_title, str)
+        and bool(target_title.strip())
+    )
+    if reusable_target:
+        record.update({"inserted_at": None, "verified_at": None})
+        return
+    record.update({
+        "status": "deferred",
+        "target_title": None,
+        "inserted_at": None,
+        "verified_at": None,
+    })
+
+
 def _depth_frontier_node_ids(registry: Mapping[str, Any]) -> set[str]:
     policy = (registry.get("graph") or {}).get("depth_policy") or {}
     if policy.get("limit_policy") != "bounded":
@@ -564,10 +589,11 @@ def _build_graph_checkpoint_copy(project_root: Path, source: Path, target: Path,
     debate_pages = (registry.get("debate") or {}).get("pages") or {}
     if isinstance(debate_pages.get("fr"), dict):
         debate_pages["fr"]["title_status"] = "locked"
-        debate_pages["fr"].setdefault("interlanguage", {}).update({"status":"deferred","inserted_at":None,"verified_at":None})
+        _defer_unresolved_interlanguage(debate_pages["fr"].setdefault("interlanguage", {}))
     for node in active_nodes:
         node.setdefault("fr", {})["title_status"] = "locked"
-        node.setdefault("pages", {}).setdefault("fr", {}).setdefault("interlanguage", {}).update({"status":"deferred","inserted_at":None,"verified_at":None})
+        interlanguage = node.setdefault("pages", {}).setdefault("fr", {}).setdefault("interlanguage", {})
+        _defer_unresolved_interlanguage(interlanguage)
 
     output_rows: list[tuple[str,str,str,str,dict[str,Any]]] = []
     debate_import = target / str(debate_row.get("import_path") or "")

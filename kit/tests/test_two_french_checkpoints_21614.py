@@ -27,6 +27,35 @@ def _title_applied(tmp_path: Path):
     return project, workspace, work_id
 
 
+def test_graph_checkpoint_defers_only_unresolved_english_links():
+    unresolved = {
+        "status": "pending",
+        "target_language": "en",
+        "target_title": None,
+        "inserted_at": None,
+        "verified_at": None,
+    }
+    checkpoint._defer_unresolved_interlanguage(unresolved)
+    assert unresolved == {
+        "status": "deferred",
+        "target_language": "en",
+        "target_title": None,
+        "inserted_at": None,
+        "verified_at": None,
+    }
+
+    reusable = {
+        "status": "ready",
+        "target_language": "en",
+        "target_title": "Existing English argument",
+        "inserted_at": None,
+        "verified_at": None,
+    }
+    checkpoint._defer_unresolved_interlanguage(reusable)
+    assert reusable["status"] == "ready"
+    assert reusable["target_title"] == "Existing English argument"
+
+
 def test_title_checkpoint_does_not_publish_classification_changes(tmp_path: Path):
     project, workspace, work_id = _title_applied(tmp_path)
     cp = checkpoint.build_checkpoint(project, "debat_test", work_id, stage="graph")
