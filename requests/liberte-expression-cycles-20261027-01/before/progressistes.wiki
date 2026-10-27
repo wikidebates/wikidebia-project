@@ -1,0 +1,8 @@
+{{Argument
+|initialisation=Objection@30645
+|objections={{Objection
+|page=Il faut limiter la liberté d'expression pour l'empêcher de s'autodétruire
+|titre-affiché=Les progressistes n'instrumentalisent pas la censure, mais protègent la liberté d'expression de ses propres contradictions
+}}
+|date-création=2025-02-21
+}}

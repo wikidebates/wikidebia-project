@@ -1,0 +1,24 @@
+{{Argument
+|initialisation=Argument pour@598
+|résumé=Ce n'est pas sans raisons que les progressistes ont toujours défendu une liberté d'expression n'incluant pas les discours de haine, c'est parce qu'il existe une asymétrie fondamentale entre la parole du dominant et celle du dominé, les exceptions à la liberté d'expression ne sont donc là que pour apporter un rééquilibrage indispensable à ce que l'un comme l'autre aient un niveau de liberté équivalent. C'est pour cela qu'une liberté d'expression absolue ne dure jamais bien longtemps, car donner une liberté d'expression absolue au dominant, c'est lui donner l'opportunité de censurer le dominé. C'est un phénomène qui s'observe de façon récurrente aux endroits non modérés: par crainte de se prendre des messages de haine, les minorités finissent par s'autocensurer.
+|justifications={{Justification
+|page=La liberté des uns s'arrête là où commence celle des autres
+|titre-affiché=La liberté des uns commence là où s'arrête celle des autres
+}}{{Justification
+|page=Pour pouvoir réellement s'exercer, la liberté d'expression doit être distribuée équitablement
+|titre-affiché=Pour pouvoir réellement s'exercer, la liberté d'expression doit être distribuée équitablement
+}}{{Justification
+|page=Toutes les tentatives de rendre absolue la liberté d'expression débouchent sur une censure des voix minoritaires
+|titre-affiché=Toutes les tentatives de rendre absolue la liberté d'expression ont débouché sur une censure des voix minoritaires
+}}{{Justification
+|page=Prétendre que la censure et l'absolutime de liberté d'expression sont les deux seuls choix possibles, c'est commettre un faux dilemme
+|titre-affiché=Prétendre que la censure et l'absolutime de liberté d'expression sont les deux seuls choix possibles, c'est commettre un faux dilemme
+}}
+|objections={{Objection
+|page=La liberté d'expression est un simple moyen pour que tous les arguments puissent s'exprimer
+|titre-affiché=La liberté d'expression est un simple moyen pour que tous les arguments puissent s'exprimer
+}}
+|rubriques=Société
+|mots-clés=logique
+|date-création=2023-05-20
+}}
