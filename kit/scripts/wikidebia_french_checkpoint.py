@@ -130,7 +130,7 @@ def _workspace(project_root: Path, debate_id: str, work_id: str, stage: str) -> 
     }:
         raise FrenchCheckpointError(f"Les titres français ne sont pas appliqués : {meta.get('status')}")
     if stage == "content" and meta.get("status") not in {
-        "fr_content_applied", "en_translation_review_ready", "en_translation_review_finalized", "en_translation_applied", "bilingual_rendered",
+        "fr_content_applied", "fr_source_preserved", "en_translation_review_ready", "en_translation_review_finalized", "en_translation_applied", "bilingual_rendered",
         "release_ready",
     }:
         raise FrenchCheckpointError(f"Le contenu français n'est pas appliqué : {meta.get('status')}")
@@ -429,6 +429,28 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
     }
     write_json(target / "data/fr_publication_checkpoint.json", checkpoint)
     return {"checkpoint": checkpoint, "pages": len(pages), "timestamp": timestamp}
+
+
+def _build_preserved_content_checkpoint_copy(
+    project_root: Path, source: Path, target: Path, debate_id: str, work_id: str,
+) -> dict[str, Any]:
+    """Attest checkpoint 2 without rerendering a frozen historical source."""
+    result = _build_graph_checkpoint_copy(project_root, source, target, debate_id, work_id)
+    content_lock = load_json(target / "data/fr_content_lock.json", "verrou français préservé")
+    policy = str(content_lock.get("source_preservation_policy") or "")
+    if not policy:
+        raise FrenchCheckpointError("Politique de préservation française absente")
+    checkpoint = dict(result["checkpoint"])
+    checkpoint.update({
+        "stage": "content",
+        "source_content_review_sha256": str(content_lock.get("review_sha256") or ""),
+        "source_content_reviewed_copy_sha256": full_tree_sha256(source),
+        "source_preservation_policy": policy,
+        "validation_profile": GRAPH_VALIDATION_PROFILE,
+    })
+    checkpoint.pop("source_reviewed_copy_sha256", None)
+    write_json(target / "data/fr_publication_checkpoint.json", checkpoint)
+    return {**result, "checkpoint": checkpoint}
 
 
 def _import_rows(source: Path) -> list[dict[str, Any]]:
@@ -732,7 +754,13 @@ def build_checkpoint(project_root: Path, debate_id: str, work_id: str, *, stage:
     temp = Path(tempfile.mkdtemp(prefix=".checkpoint.tmp-", dir=state_dir))
     try:
         shutil.rmtree(temp)
-        result = (_build_graph_checkpoint_copy if stage == "graph" else _build_content_checkpoint_copy)(project_root, source, temp, debate_id, work_id)
+        if stage == "graph":
+            builder = _build_graph_checkpoint_copy
+        elif (source / "data/source_preservation_receipt.json").is_file():
+            builder = _build_preserved_content_checkpoint_copy
+        else:
+            builder = _build_content_checkpoint_copy
+        result = builder(project_root, source, temp, debate_id, work_id)
         tree_sha = full_tree_sha256(temp)
         os.replace(temp, target)
     except Exception:
@@ -801,6 +829,13 @@ def _config(project_root: Path, debate_id: str, work_id: str, checkpoint: Path, 
     users = settings.get("expected_users") or {"fr": "ChatGPT"}
     family_file = project_root / "kit/families/wikidebates_family.py"
     validator_script = project_root / "validator/scripts/wikidebia_validate.py"
+    checkpoint_record_path = checkpoint / "data/fr_publication_checkpoint.json"
+    checkpoint_record = (
+        load_json(checkpoint_record_path, "checkpoint français")
+        if checkpoint_record_path.is_file()
+        else {}
+    )
+    preservation_mode = stage == "content" and bool(checkpoint_record.get("source_preservation_policy"))
     config = {
         "kit_version": KIT_VERSION,
         "project_root": str(project_root),
@@ -817,8 +852,8 @@ def _config(project_root: Path, debate_id: str, work_id: str, checkpoint: Path, 
         "validator": {
             "command": [sys.executable, str(validator_script), "validate"],
             "required_version": VALIDATOR_VERSION,
-            "profile": GRAPH_VALIDATION_PROFILE if stage == "graph" else CONTENT_VALIDATION_PROFILE,
-            "scopes": list(GRAPH_VALIDATION_SCOPES if stage == "graph" else CONTENT_VALIDATION_SCOPES),
+            "profile": GRAPH_VALIDATION_PROFILE if stage == "graph" or preservation_mode else CONTENT_VALIDATION_PROFILE,
+            "scopes": list(GRAPH_VALIDATION_SCOPES if stage == "graph" or preservation_mode else CONTENT_VALIDATION_SCOPES),
         },
     }
     if inventory_root is not None:

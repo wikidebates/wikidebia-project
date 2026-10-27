@@ -1069,6 +1069,28 @@ def _mechanical_advance(project_root: Path, state: dict[str, Any]) -> dict[str, 
             state["updated_at"] = now_iso(); _save_workflow(project_root, state)
         if isinstance(pending, dict):
             pending_type = str(pending.get("review_type") or "")
+            if pending_type == "fr_content_review" and state.get("work_id"):
+                workspace, workspace_meta = _current_workspace_meta(project_root, state)
+                if workspace_meta.get("status") == "fr_source_preserved":
+                    receipt = load_json(
+                        workspace / "content-reviewed-copy/data/source_preservation_receipt.json",
+                        "reçu de préservation de la source française",
+                    )
+                    preservation = workspace_meta.get("source_preservation") or {}
+                    if receipt.get("receipt_sha256") != preservation.get("receipt_sha256"):
+                        raise WorkflowError("Le reçu de préservation française diverge du workspace")
+                    state.setdefault("superseded_reviews", []).append({
+                        "reason": "published_french_source_frozen_for_translation",
+                        "pending_review": copy.deepcopy(pending),
+                        "recorded_at": now_iso(),
+                    })
+                    state["french_source_preservation"] = copy.deepcopy(preservation)
+                    state["pending_review"] = None
+                    state["phase"] = "en_translation_review"
+                    state["status"] = "running"
+                    state["updated_at"] = now_iso()
+                    _save_workflow(project_root, state)
+                    continue
             if pending_type in {"en_translation_review", "en_translation_correction", "en_documentation_correction", "semantic_convergence_1", "semantic_convergence_2"} and state.get("work_id"):
                 if not state.get("french_graph_publication"):
                     publication = publish_checkpoint(project_root, debate_id, str(state["work_id"]), stage="graph")

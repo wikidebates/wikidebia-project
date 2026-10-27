@@ -10,6 +10,7 @@ from test_wikidebia_editorial_workspace import make_promoted_project
 from test_wikidebia_editorial_review import complete_review, review_tool, workspace_tool
 import wikidebia_translation_review as translation
 import wikidebia_translation_source as preservation
+import wikidebia_french_checkpoint as french_checkpoint
 from wikidebia_editorial_workspace import capitalization_policy_for_kind
 
 def prepared(tmp_path):
@@ -51,6 +52,27 @@ def test_source_freeze_is_not_a_documentary_approval_and_cannot_overwrite(tmp_pa
     assert all(r['quantitative_claims_verified'] is False for r in locked['arguments'])
     assert translation.prepare_review(project,'debat_test',work_id)['status']=='en_translation_review_ready'
     with pytest.raises(translation.TranslationReviewError):freeze(project,work_id)
+
+
+def test_preserved_source_content_checkpoint_reuses_graph_output_exactly(tmp_path):
+    project, workspace, work_id = prepared(tmp_path)
+    graph = french_checkpoint.build_checkpoint(project, 'debat_test', work_id, stage='graph')
+    freeze(project, work_id)
+    content = french_checkpoint.build_checkpoint(project, 'debat_test', work_id, stage='content')
+    graph_pages = {
+        path.relative_to(graph / 'output/fr').as_posix(): path.read_bytes()
+        for path in (graph / 'output/fr').rglob('*.wiki')
+    }
+    content_pages = {
+        path.relative_to(content / 'output/fr').as_posix(): path.read_bytes()
+        for path in (content / 'output/fr').rglob('*.wiki')
+    }
+    assert content_pages == graph_pages
+    record = json.loads((content / 'data/fr_publication_checkpoint.json').read_text())
+    lock = json.loads((content / 'data/fr_content_lock.json').read_text())
+    assert record['stage'] == 'content'
+    assert record['source_preservation_policy'] == preservation.POLICY
+    assert record['source_content_review_sha256'] == lock['review_sha256']
 
 def test_modified_reviewed_copy_is_rejected_before_freeze(tmp_path):
     project,workspace,work_id=prepared(tmp_path)
