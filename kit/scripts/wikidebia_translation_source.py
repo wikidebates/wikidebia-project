@@ -240,8 +240,18 @@ def freeze_imported_source(project_root: Path, debate_id: str, work_id: str, *, 
         form=lexical_by_fr.get(term,{})
         if form.get('kind') not in {'noun','noun_phrase','proper_name','acronym'} or not form.get('capitalization_policy') or form.get('lexical_form_reviewed') is not True:
             raise TranslationReviewError('Forme lexicale source à revoir avant gel : '+term)
+        tokens = re.findall(r"[A-Za-zÀ-ÿ0-9]+(?:[’'-][A-Za-zÀ-ÿ0-9]+)*", term)
+        multiword_exception = len(tokens) > 2 or bool(re.search(r"\b(?:de|du|des|la|le|et)\b|\bd[’']", term, re.I))
         entries.append(dict(concept_id='KWD-'+_sha_text(term)[:12].upper(),fr=term,en=None,
             kind=form['kind'],capitalization_policy=form['capitalization_policy'],
+            atomic_concept=True,compositional_intersection=False,
+            multiword_exception=multiword_exception,
+            **({'multiword_exception_rationale': (
+                f'Locution conceptuelle historique « {term} » conservée comme catégorie de navigation atomique.'
+            )} if multiword_exception else {}),
+            scope='site_navigation',cross_debate_reusable=True,
+            local_frequency_is_validity_criterion=False,
+            usage_count_in_debate=sum(1 for usage in term_usages if usage.get('page_type')=='argument'),
             usages=term_usages,status='source_preserved'))
     temporary=Path(tempfile.mkdtemp(prefix='.translation-source-',dir=workspace))
     shutil.copytree(source,temporary,dirs_exist_ok=True)

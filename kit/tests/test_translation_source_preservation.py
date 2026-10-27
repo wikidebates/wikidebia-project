@@ -50,6 +50,17 @@ def test_source_freeze_is_not_a_documentary_approval_and_cannot_overwrite(tmp_pa
     for rel,b in original.items():assert (workspace/'content-reviewed-copy'/rel).read_bytes()==b
     locked=json.loads((workspace/'content-reviewed-copy/data/fr_content_lock.json').read_text())
     assert all(r['quantitative_claims_verified'] is False for r in locked['arguments'])
+    vocabulary = json.loads((workspace/'content-reviewed-copy/data/keyword_vocabulary.json').read_text())
+    assert vocabulary['entries']
+    for entry in vocabulary['entries']:
+        assert entry['atomic_concept'] is True
+        assert entry['compositional_intersection'] is False
+        assert entry['scope'] == 'site_navigation'
+        assert entry['cross_debate_reusable'] is True
+        assert entry['local_frequency_is_validity_criterion'] is False
+        assert entry['usage_count_in_debate'] == sum(
+            usage['page_type'] == 'argument' for usage in entry['usages']
+        )
     assert translation.prepare_review(project,'debat_test',work_id)['status']=='en_translation_review_ready'
     with pytest.raises(translation.TranslationReviewError):freeze(project,work_id)
 
