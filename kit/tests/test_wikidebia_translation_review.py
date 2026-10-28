@@ -667,6 +667,7 @@ def test_finalize_translation_rejects_wrong_citation_date(tmp_path: Path):
 @pytest.mark.parametrize(("source", "target"), [
     ("29 sep 2021", "29 September 2021"),
     ("23 jan 2023", "23 January 2023"),
+    ("09 fév 2022", "9 February 2022"),
     ("08 Mar 2022", "8 March 2022"),
     ("29/05/18", "29 May 2018"),
     ("janvier-février 2023", "January–February 2023"),

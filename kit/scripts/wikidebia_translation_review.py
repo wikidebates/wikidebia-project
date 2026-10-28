@@ -431,7 +431,7 @@ def _date_signature(value: Any, language: str) -> tuple[int, int | None, int | N
         return (int(text), None, None)
     months = dict(FR_MONTHS if language == "fr" else EN_MONTHS)
     months.update({
-        "jan": 1, "janv": 1, "feb": 2, "febr": 2, "févr": 2, "fevr": 2,
+        "jan": 1, "janv": 1, "feb": 2, "febr": 2, "fév": 2, "fev": 2, "févr": 2, "fevr": 2,
         "mar": 3, "apr": 4, "avr": 4, "jun": 6, "june": 6, "juin": 6,
         "jul": 7, "juil": 7, "aug": 8, "sep": 9, "sept": 9,
         "oct": 10, "nov": 11, "dec": 12, "déc": 12,
