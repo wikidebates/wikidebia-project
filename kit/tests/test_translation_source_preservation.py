@@ -202,6 +202,62 @@ def test_relation_label_source_coverage_is_mandatory(tmp_path):
     changed=copy.deepcopy(rows);changed[0]['source_text']='Different source'
     with pytest.raises(translation.TranslationReviewError,match='Source'):preservation.validate_relation_labels(changed,root)
 
+
+def test_duplicate_relations_to_same_target_keep_each_contextual_label(tmp_path, monkeypatch):
+    source = tmp_path / 'source'
+    source.mkdir()
+    (source / 'debate.wiki').write_text('{{Débat}}\n', encoding='utf-8')
+    (source / 'argument.wiki').write_text(
+        '{{Argument\n'
+        '|objections={{Objection|page=Cible|titre-affiché=Premier contexte}}'
+        '{{Objection|page=Cible|titre-affiché=Second contexte}}\n'
+        '}}\n',
+        encoding='utf-8',
+    )
+    registry = {
+        'graph': {
+            'nodes': [
+                {'id': 'A0001', 'status': 'active', 'fr': {'canonical_title': 'Parent'}},
+                {
+                    'id': 'A0002', 'status': 'active',
+                    'fr': {'canonical_title': 'Cible', 'displayed_title': 'Titre global'},
+                },
+            ],
+            'occurrences': [],
+            'edges': [
+                {
+                    'id': 'E00001', 'status': 'active', 'parent_node_id': 'A0001',
+                    'child_node_id': 'A0002', 'relation': 'objection', 'order': 1,
+                },
+                {
+                    'id': 'E00002', 'status': 'active', 'parent_node_id': 'A0001',
+                    'child_node_id': 'A0002', 'relation': 'objection', 'order': 2,
+                },
+            ],
+        },
+    }
+    provenance = {
+        'pages': [
+            {'kind': 'argument', 'page_id': 'A0001', 'canonical_title': 'Parent'},
+            {'kind': 'argument', 'page_id': 'A0002', 'canonical_title': 'Cible'},
+        ],
+    }
+    monkeypatch.setattr(
+        preservation,
+        '_source_imports',
+        lambda unused: (
+            registry,
+            {'import_path': 'debate.wiki'},
+            [{'id': 'A0001', 'import_path': 'argument.wiki'}],
+        ),
+    )
+    monkeypatch.setattr(preservation, 'load_json', lambda *args, **kwargs: provenance)
+
+    rows = preservation.relation_labels_from_source(source)
+
+    assert [row['source_text'] for row in rows] == ['Premier contexte', 'Second contexte']
+    assert [row['id'] for row in rows] == ['edge:E00001', 'edge:E00002']
+
 def test_historical_numbers_do_not_acquire_a_false_verification(tmp_path):
     project,workspace,work_id=prepared(tmp_path);complete_content_review(workspace)
     review=json.loads((workspace/'reviews/fr/content_review.json').read_text());item=review['arguments'][0]

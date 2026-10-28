@@ -762,6 +762,56 @@ def test_relation_renderer_prefers_occurrence_level_displayed_title():
     assert "titre-affiché=Libellé historique contextuel" in rendered
     assert "titre-affiché=Titre global" not in rendered
 
+
+def test_existing_french_relation_cannot_fall_back_to_global_displayed_title():
+    import pytest
+
+    registry = {
+        "graph": {
+            "nodes": [{
+                "id": "A0002", "status": "active",
+                "fr": {"canonical_title": "Titre cible", "displayed_title": "Titre global"},
+            }],
+            "edges": [{
+                "id": "E00001", "status": "active", "parent_node_id": "A0001",
+                "child_node_id": "A0002", "relation": "objection", "order": 1,
+            }],
+        }
+    }
+
+    with pytest.raises(render.RenderError, match="Libellé contextuel historique absent"):
+        render._relations(
+            registry, "A0001", "objection", "fr", [],
+            require_contextual_labels=True,
+        )
+
+
+def test_existing_french_relation_rejects_duplicate_contextual_labels():
+    import pytest
+
+    registry = {
+        "graph": {
+            "nodes": [{
+                "id": "A0002", "status": "active",
+                "fr": {"canonical_title": "Titre cible", "displayed_title": "Titre global"},
+            }],
+            "edges": [{
+                "id": "E00001", "status": "active", "parent_node_id": "A0001",
+                "child_node_id": "A0002", "relation": "objection", "order": 1,
+            }],
+        }
+    }
+    labels = [
+        {"id": "edge:E00001", "source_text": "Premier libellé"},
+        {"id": "edge:E00001", "source_text": "Second libellé"},
+    ]
+
+    with pytest.raises(render.RenderError, match="Libellé contextuel dupliqué"):
+        render._relations(
+            registry, "A0001", "objection", "fr", labels,
+            require_contextual_labels=True,
+        )
+
 def test_published_content_checkpoint_requires_matching_receipts_and_review(tmp_path: Path):
     import hashlib
     import pytest

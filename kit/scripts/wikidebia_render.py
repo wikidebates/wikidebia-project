@@ -168,11 +168,17 @@ def _render_graph_aligned_french_source(
     if page_type == "debate":
         text = _set_optional_parameter_value(
             text, "debate", "arguments-pour",
-            _main_arguments(registry, "pro", "fr", contextual_labels),
+            _main_arguments(
+                registry, "pro", "fr", contextual_labels,
+                require_contextual_labels=True,
+            ),
         )
         text = _set_optional_parameter_value(
             text, "debate", "arguments-contre",
-            _main_arguments(registry, "con", "fr", contextual_labels),
+            _main_arguments(
+                registry, "con", "fr", contextual_labels,
+                require_contextual_labels=True,
+            ),
         )
         return text.rstrip("\n") + "\n"
     if page_type != "argument" or not page_id:
@@ -186,11 +192,17 @@ def _render_graph_aligned_french_source(
     if page_id not in frontier_ids and not dedicated_present:
         text = _set_optional_parameter_value(
             text, "argument", "justifications",
-            _relations(registry, page_id, "justification", "fr", contextual_labels),
+            _relations(
+                registry, page_id, "justification", "fr", contextual_labels,
+                require_contextual_labels=True,
+            ),
         )
         text = _set_optional_parameter_value(
             text, "argument", "objections",
-            _relations(registry, page_id, "objection", "fr", contextual_labels),
+            _relations(
+                registry, page_id, "objection", "fr", contextual_labels,
+                require_contextual_labels=True,
+            ),
         )
     text = _normalize_legacy_french_quote_warnings(text)
     return text.rstrip("\n") + "\n"
@@ -420,7 +432,34 @@ def _citation_template(citation: Mapping[str, Any], *, lang: str) -> str:
     return _template("Citation" if lang == "fr" else "Quote", rows)
 
 
-def _relations(registry: Mapping[str, Any], node_id: str, relation: str, lang: str, contextual_labels: Sequence[Mapping[str, Any]] = ()) -> str:
+def _contextual_label(
+    contextual_labels: Sequence[Mapping[str, Any]],
+    label_id: str,
+    *,
+    lang: str,
+    fallback: Any,
+    required: bool,
+) -> Any:
+    matches = [row for row in contextual_labels if row.get("id") == label_id]
+    field = "translated_text" if lang == "en" else "source_text"
+    if len(matches) == 1 and str(matches[0].get(field) or "").strip():
+        return matches[0][field]
+    if required:
+        if len(matches) > 1:
+            raise RenderError(f"Libellé contextuel dupliqué : {label_id}")
+        raise RenderError(f"Libellé contextuel historique absent : {label_id}")
+    return fallback
+
+
+def _relations(
+    registry: Mapping[str, Any],
+    node_id: str,
+    relation: str,
+    lang: str,
+    contextual_labels: Sequence[Mapping[str, Any]] = (),
+    *,
+    require_contextual_labels: bool = False,
+) -> str:
     nodes = {str(node.get("id")): node for node in (registry.get("graph") or {}).get("nodes") or [] if node.get("status") == "active"}
     edges = [
         edge for edge in (registry.get("graph") or {}).get("edges") or []
@@ -434,12 +473,25 @@ def _relations(registry: Mapping[str, Any], node_id: str, relation: str, lang: s
             raise RenderError(f"Nœud enfant absent : {edge.get('child_node_id')}")
         data = child.get(lang) or {}
         display_param = "titre-affiché" if lang == "fr" else "displayed-title"
-        label = next((r.get("translated_text") if lang == "en" else r.get("source_text") for r in contextual_labels if r.get("id") == "edge:" + str(edge.get("id"))), data.get("displayed_title"))
+        label = _contextual_label(
+            contextual_labels,
+            "edge:" + str(edge.get("id")),
+            lang=lang,
+            fallback=data.get("displayed_title"),
+            required=require_contextual_labels,
+        )
         rendered.append(_template(relation.title(), (("page", data.get("canonical_title")), (display_param, label))))
     return _sequence(rendered)
 
 
-def _main_arguments(registry: Mapping[str, Any], branch: str, lang: str, contextual_labels: Sequence[Mapping[str, Any]] = ()) -> str:
+def _main_arguments(
+    registry: Mapping[str, Any],
+    branch: str,
+    lang: str,
+    contextual_labels: Sequence[Mapping[str, Any]] = (),
+    *,
+    require_contextual_labels: bool = False,
+) -> str:
     nodes = {str(node.get("id")): node for node in (registry.get("graph") or {}).get("nodes") or [] if node.get("status") == "active"}
     occurrences = [
         occurrence for occurrence in (registry.get("graph") or {}).get("occurrences") or []
@@ -459,7 +511,13 @@ def _main_arguments(registry: Mapping[str, Any], branch: str, lang: str, context
         if node is None:
             raise RenderError(f"Nœud principal absent : {occurrence.get('node_id')}")
         data = node.get(lang) or {}
-        label = next((r.get("translated_text") if lang == "en" else r.get("source_text") for r in contextual_labels if r.get("id") == "root:" + str(occurrence.get("id"))), data.get("displayed_title"))
+        label = _contextual_label(
+            contextual_labels,
+            "root:" + str(occurrence.get("id")),
+            lang=lang,
+            fallback=data.get("displayed_title"),
+            required=require_contextual_labels,
+        )
         rows.append(_template(names[(lang, branch)], (("page", data.get("canonical_title")), (display_param, label))))
     return _sequence(rows)
 
@@ -763,8 +821,21 @@ def _render_debate(
         _append_lifecycle_parameter(params, debate, "avertissements-débat", "Débat généré par IA")
         _append_editorial_parameter(params, debate, "introduction", _normalize_sequence(str(debate.get("introduction") or "")))
         _append_editorial_parameter(params, debate, "articles-Wikipédia", _sequence(_template("Article Wikipédia", (("page", title),)) for title in debate.get("wikipedia_articles") or []))
-        _append_editorial_parameter(params, debate, "arguments-pour", _main_arguments(registry, "pro", "fr", debate.get("relation_labels") or []))
-        _append_editorial_parameter(params, debate, "arguments-contre", _main_arguments(registry, "con", "fr", debate.get("relation_labels") or []))
+        strict_labels = _page_origin(debate) == "preexisting"
+        _append_editorial_parameter(
+            params, debate, "arguments-pour",
+            _main_arguments(
+                registry, "pro", "fr", debate.get("relation_labels") or [],
+                require_contextual_labels=strict_labels,
+            ),
+        )
+        _append_editorial_parameter(
+            params, debate, "arguments-contre",
+            _main_arguments(
+                registry, "con", "fr", debate.get("relation_labels") or [],
+                require_contextual_labels=strict_labels,
+            ),
+        )
         _append_lifecycle_parameter(params, debate, "avertissements-bibliographie", None)
         for bucket in ("bibliographie-pour", "bibliographie-contre", "bibliographie-ni-pour-ni-contre"):
             _append_editorial_parameter(params, debate, bucket, rendered[bucket])
@@ -844,12 +915,25 @@ def _render_argument(
         _append_editorial_parameter(params, content, "références-sitographiques", _sequence(_source_template(sources[source_id], lang="fr") for source_id in selected.get("webliography") or []))
         _append_editorial_parameter(params, content, "références-vidéographiques", _sequence(_source_template(sources[source_id], lang="fr") for source_id in selected.get("videography") or []))
         detailed_present, detailed_value = _optional_preserved_parameter(content, "débat-dédié")
+        strict_labels = _page_origin(content) == "preexisting"
         _append_lifecycle_parameter(params, content, "avertissements-justifications", None)
         if not detailed_present:
-            _append_editorial_parameter(params, content, "justifications", _relations(registry, node_id, "justification", "fr", content.get("relation_labels") or []))
+            _append_editorial_parameter(
+                params, content, "justifications",
+                _relations(
+                    registry, node_id, "justification", "fr", content.get("relation_labels") or [],
+                    require_contextual_labels=strict_labels,
+                ),
+            )
         _append_lifecycle_parameter(params, content, "avertissements-objections", None)
         if not detailed_present:
-            _append_editorial_parameter(params, content, "objections", _relations(registry, node_id, "objection", "fr", content.get("relation_labels") or []))
+            _append_editorial_parameter(
+                params, content, "objections",
+                _relations(
+                    registry, node_id, "objection", "fr", content.get("relation_labels") or [],
+                    require_contextual_labels=strict_labels,
+                ),
+            )
         if detailed_present:
             params.append(("débat-dédié", detailed_value))
         _append_editorial_parameter(params, content, "rubriques", ", ".join((node.get("fr") or {}).get("rubriques") or []))

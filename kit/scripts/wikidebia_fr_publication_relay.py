@@ -148,7 +148,8 @@ def inspect_page(adapter, row: dict) -> dict:
 
 def request_editorial_checks(request: dict, request_dir: Path) -> dict[str, str]:
     from wikidebia_update import (
-        UpdateError, assert_summary_change_authorized, assert_citation_change_authorized, changed_top_level_parameters,
+        UpdateError, assert_summary_change_authorized, assert_citation_change_authorized,
+        assert_relation_rendering_safe, changed_top_level_parameters,
         content_diff_edit_summary,
     )
     summaries = {}
@@ -157,6 +158,7 @@ def request_editorial_checks(request: dict, request_dir: Path) -> dict[str, str]
         after = safe_file(request_dir, row["after_file"]).read_text(encoding="utf-8")
         page_type = "debate" if re.match(r"\s*\{\{Débat\s*(?:\||\}\})", before) else "argument"
         try:
+            assert_relation_rendering_safe(before, after, "fr", page_type)
             assert_summary_change_authorized(
                 before, after, "fr", page_type, row.get("summary_change_authorization"),
             )

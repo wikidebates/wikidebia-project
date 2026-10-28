@@ -11,7 +11,18 @@
 - `./wikidebia upgrade` : mise à niveau des composants depuis un ZIP complet unique de préférence ;
 - `./wikidebia doctor` : diagnostic local.
 
-Les secrets Pywikibot résident dans `private/pywikibot/`. Les corpus, plans, reçus, états, journaux et archives ne sont pas versionnés.
+Sur le serveur Debian, les secrets Pywikibot résident dans `private/pywikibot/`.
+Dans un environnement Codex géré, ils sont injectés sous forme de variables
+`WIKIDEBIA_FR_BOT_USERNAME`, `WIKIDEBIA_FR_BOT_PASSWORD`,
+`WIKIDEBIA_EN_BOT_USERNAME` et `WIKIDEBIA_EN_BOT_PASSWORD` ; les outils les
+lisent directement en mémoire et il ne faut pas se connecter au serveur pour les
+retrouver. L’accès aux API protégées par Cloudflare utilise
+`WIKIDEBIA_API_TOKEN`, automatiquement transmis sous l’en-tête
+`x-wikidebia-access`. Seuls les noms des variables sont documentés : leurs
+valeurs ne doivent jamais entrer dans le dépôt ou les journaux. Voir aussi
+[`AGENTS.md`](AGENTS.md).
+
+Les corpus, plans, reçus, états, journaux et archives ne sont pas versionnés.
 
 Pour mettre à jour automatiquement une installation Debian après fusion sur GitHub,
 voir [le déploiement depuis Codex Web](deploy/README.md).

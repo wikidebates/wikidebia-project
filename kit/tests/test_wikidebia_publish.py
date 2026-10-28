@@ -176,6 +176,40 @@ def test_pywikibot_adapter_read_only_open_does_not_require_credentials(monkeypat
     assert isinstance(adapter.site, FakeSite)
 
 
+def test_managed_environment_does_not_require_server_user_config(monkeypatch, tmp_path):
+    monkeypatch.setenv("WIKIDEBIA_FR_BOT_USERNAME", "ChatGPT@Codex-FR")
+    monkeypatch.setenv("WIKIDEBIA_FR_BOT_PASSWORD", "managed-placeholder")
+    adapter = module.PywikibotAdapter("wikidebates", {"fr": "fr"}, tmp_path)
+
+    adapter._prepare_environment("fr")
+
+    assert "PYWIKIBOT_DIR" not in __import__("os").environ
+    assert __import__("os").environ["PYWIKIBOT_NO_USER_CONFIG"] == "2"
+
+
+def test_managed_read_only_environment_needs_no_server_config_or_credentials(monkeypatch, tmp_path):
+    monkeypatch.delenv("WIKIDEBIA_FR_BOT_USERNAME", raising=False)
+    monkeypatch.delenv("WIKIDEBIA_FR_BOT_PASSWORD", raising=False)
+    adapter = module.PywikibotAdapter("wikidebates", {"fr": "fr"}, tmp_path)
+
+    adapter._prepare_environment("fr", read_only=True)
+
+    assert __import__("os").environ["PYWIKIBOT_NO_USER_CONFIG"] == "2"
+
+
+def test_write_without_server_config_or_managed_credentials_is_rejected(monkeypatch, tmp_path):
+    monkeypatch.delenv("WIKIDEBIA_FR_BOT_USERNAME", raising=False)
+    monkeypatch.delenv("WIKIDEBIA_FR_BOT_PASSWORD", raising=False)
+    adapter = module.PywikibotAdapter("wikidebates", {"fr": "fr"}, tmp_path)
+
+    try:
+        adapter._prepare_environment("fr")
+    except module.PublicationError as exc:
+        assert "WIKIDEBIA_FR_BOT_USERNAME/PASSWORD" in str(exc)
+    else:
+        raise AssertionError("configuration d'écriture absente acceptée")
+
+
 def write_fixture(tmp_path: Path, kind: str):
     corpus = tmp_path / "corpus" / "demo"
     (corpus / "output" / "fr").mkdir(parents=True)

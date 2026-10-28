@@ -50,6 +50,13 @@ Lorsque Cloudflare protège l’API, l’adaptateur ajoute automatiquement l’e
 `x-wikidebia-access` si la variable d’environnement `WIKIDEBIA_API_TOKEN` est
 présente. Sa valeur reste hors du dépôt et des journaux.
 
+Dans l’environnement Codex géré, Pywikibot lit directement les identifiants
+`WIKIDEBIA_FR_BOT_USERNAME` et `WIKIDEBIA_FR_BOT_PASSWORD` (et leurs équivalents
+`WIKIDEBIA_EN_BOT_USERNAME` et `WIKIDEBIA_EN_BOT_PASSWORD` pour le wiki anglais).
+Il faut vérifier la présence de ces variables sans afficher leur valeur. Il ne
+faut ni ouvrir une connexion au serveur Debian pour rechercher les identifiants,
+ni recopier son fichier privé `user-config.py` dans Codex.
+
 Après l'autorisation explicite de l'utilisateur, envoyer le dossier préparé :
 
 ```bash

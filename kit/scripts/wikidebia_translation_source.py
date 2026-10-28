@@ -236,15 +236,21 @@ def relation_labels_from_source(
     for node_id,node in nodes.items():
         title=str((node.get('fr') or {}).get('canonical_title') or '').strip()
         if title:title_to_id[title]=node_id
-    historical_roots={}
+    # Keep one value per occurrence.  A dict keyed only by target used to
+    # overwrite the first label when the same page appeared twice with two
+    # contextual labels; the later render then rewrote both occurrences with
+    # the last value.  Ordered queues preserve every imported occurrence.
+    historical_roots: dict[tuple[str, str], collections.deque[str]] = {}
     debate_template=_outer_template(source/debate['import_path'],{'debat'})
     for branch,param,name in [('pro','arguments-pour','argument pour'),('con','arguments-contre','argument contre')]:
         calls=[c for c in iter_templates(debate_template.get(param)) if normalize_key(c.name)==name]
         for call in calls:
             page=call.get('page').strip();node_id=title_to_id.get(page)
             if node_id:
-                historical_roots[(branch,node_id)]=call.get('titre-affiché').strip() or page
-    historical_edges={}
+                historical_roots.setdefault((branch,node_id),collections.deque()).append(
+                    call.get('titre-affiché').strip() or page
+                )
+    historical_edges: dict[tuple[str, str, str], collections.deque[str]] = {}
     for arg in arguments:
         template=_outer_template(source/arg['import_path'],{'argument'})
         for relation,param in [('justification','justifications'),('objection','objections')]:
@@ -252,23 +258,44 @@ def relation_labels_from_source(
             for call in calls:
                 page=call.get('page').strip();child_id=title_to_id.get(page)
                 if child_id:
-                    historical_edges[(arg['id'],relation,child_id)]=call.get('titre-affiché').strip() or page
+                    historical_edges.setdefault(
+                        (arg['id'],relation,child_id),collections.deque()
+                    ).append(call.get('titre-affiché').strip() or page)
     result=[]
     for branch in ('pro','con'):
         occs=sorted([o for o in registry['graph']['occurrences'] if o.get('depth')==1 and o.get('branch')==branch],key=lambda o:(int(o.get('order') or 0),str(o.get('id') or '')))
         for occ in occs:
-            node_id=str(occ['node_id']);fallback=str((nodes.get(node_id,{}).get('fr') or {}).get('displayed_title') or '')
-            source_text=historical_roots.get((branch,node_id),fallback)
+            node_id=str(occ['node_id'])
+            labels=historical_roots.get((branch,node_id))
+            if labels:
+                source_text=labels.popleft()
+            else:
+                # A reviewed graph edit may introduce a genuinely new
+                # occurrence that has no imported historical counterpart.
+                # Its reviewed node label is the source label for that new
+                # occurrence.  Publication compares existing remote labels
+                # independently and blocks this fallback for retained rows.
+                source_text=str((nodes.get(node_id,{}).get('fr') or {}).get('displayed_title') or '')
             if not source_text:raise TranslationReviewError('Titre affiché français principal absent : '+node_id)
             result.append(dict(id='root:'+occ['id'],source_page_id='debate',target_node_id=node_id,relation=branch,source_text=source_text))
     edges=sorted([e for e in registry['graph']['edges'] if e.get('status')=='active'],key=lambda e:(str(e.get('parent_node_id') or ''),str(e.get('relation') or ''),int(e.get('order') or 0),str(e.get('id') or '')))
     for edge in edges:
         parent_id=str(edge['parent_node_id']);child_id=str(edge['child_node_id']);relation=str(edge['relation'])
-        fallback=str((nodes.get(child_id,{}).get('fr') or {}).get('displayed_title') or '')
-        source_text=historical_edges.get((parent_id,relation,child_id))
-        if source_text is None:
-            previous_labels={label for (parent,_,child),label in historical_edges.items() if parent==parent_id and child==child_id}
-            source_text=next(iter(previous_labels)) if len(previous_labels)==1 else fallback
+        labels=historical_edges.get((parent_id,relation,child_id))
+        if labels:
+            source_text=labels.popleft()
+        else:
+            previous_labels={
+                label
+                for (parent,_,child),values in historical_edges.items()
+                if parent==parent_id and child==child_id
+                for label in values
+            }
+            source_text=(
+                next(iter(previous_labels))
+                if len(previous_labels)==1
+                else str((nodes.get(child_id,{}).get('fr') or {}).get('displayed_title') or '')
+            )
         if not source_text:raise TranslationReviewError('Titre affiché français relationnel absent : '+str(edge.get('id')))
         result.append(dict(id='edge:'+str(edge['id']),source_page_id=parent_id,target_node_id=child_id,relation=relation,source_text=source_text))
     excluded = exclude_target_node_ids or set()

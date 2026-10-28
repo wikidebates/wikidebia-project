@@ -411,12 +411,34 @@ class PywikibotAdapter:
         )
         self.site: Any | None = None
 
-    def _prepare_environment(self) -> None:
+    def _prepare_environment(self, language: str | None = None, *, read_only: bool = False) -> None:
+        config_path = self.pywikibot_dir / "user-config.py"
+        if self.pywikibot_dir.is_dir() and config_path.is_file():
+            os.environ["PYWIKIBOT_DIR"] = str(self.pywikibot_dir)
+            os.environ.pop("PYWIKIBOT_NO_USER_CONFIG", None)
+            return
+
+        # Codex managed environments inject BotPassword credentials as
+        # variables.  Pywikibot can then be configured entirely in memory by
+        # _register_family/_configure_managed_username/_login; requiring the
+        # Debian server's private user-config.py would wrongly force an SSH
+        # dependency and encourage copying credentials out of the environment.
+        managed_variables = () if language is None else (
+            f"WIKIDEBIA_{language.upper()}_BOT_USERNAME",
+            f"WIKIDEBIA_{language.upper()}_BOT_PASSWORD",
+        )
+        if read_only or any(os.environ.get(name) for name in managed_variables):
+            os.environ.pop("PYWIKIBOT_DIR", None)
+            os.environ["PYWIKIBOT_NO_USER_CONFIG"] = "2"
+            return
+
         if not self.pywikibot_dir.is_dir():
             raise PublicationError(f"Dossier Pywikibot introuvable : {self.pywikibot_dir}")
-        if not (self.pywikibot_dir / "user-config.py").is_file():
-            raise PublicationError(f"user-config.py absent dans : {self.pywikibot_dir}")
-        os.environ["PYWIKIBOT_DIR"] = str(self.pywikibot_dir)
+        raise PublicationError(
+            f"user-config.py absent dans : {self.pywikibot_dir}; "
+            "dans un environnement géré, utilisez les variables "
+            f"WIKIDEBIA_{str(language or 'FR').upper()}_BOT_USERNAME/PASSWORD"
+        )
 
     def _register_family(self, pywikibot: Any) -> None:
         family_files = getattr(getattr(pywikibot, "config", None), "family_files", None)
@@ -506,7 +528,7 @@ class PywikibotAdapter:
             pywikibot.login.ClientLoginManager = original_manager
 
     def open_language(self, language: str, expected_user: str) -> None:
-        self._prepare_environment()
+        self._prepare_environment(language)
         import pywikibot
         self._configure_access_header(pywikibot)
         self._register_family(pywikibot)
@@ -525,7 +547,7 @@ class PywikibotAdapter:
         unavailable.  The managed access header remains configured, but this
         path never logs in and therefore cannot accidentally authorize writes.
         """
-        self._prepare_environment()
+        self._prepare_environment(language, read_only=True)
         import pywikibot
         self._configure_access_header(pywikibot)
         self._register_family(pywikibot)
