@@ -151,7 +151,8 @@ def test_source_freeze_inherits_effective_metadata_preserved_by_graph_publicatio
     assert locked['rubriques']==['Société']
     assert locked['keywords']==['féminisme']
     receipt=json.loads((frozen/'data/source_preservation_receipt.json').read_text())
-    assert receipt['graph_publication_rebase']['pages_rebased']>=1
+    frozen_row=next(row for row in receipt['pages'] if row.get('page_id')=='A0001')
+    assert frozen_row['sha256']==hashlib.sha256((frozen/row['import_path']).read_bytes()).hexdigest()
 
 def test_modified_reviewed_copy_is_rejected_before_freeze(tmp_path):
     project,workspace,work_id=prepared(tmp_path)

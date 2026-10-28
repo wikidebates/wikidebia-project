@@ -341,6 +341,24 @@ def freeze_imported_source(project_root: Path, debate_id: str, work_id: str, *, 
                          source_import_sha256=content['import_sha256'], source_preservation_policy=POLICY)
         for term in page_meta['keywords']:
             usages.setdefault(term,[]).append(dict(page_type='debate' if page_id=='debate' else 'argument',page_id=page_id))
+    nodes_by_id = {
+        str(node.get('id')): node
+        for node in (registry.get('graph') or {}).get('nodes') or []
+    }
+    for page_id, _content, page_meta in pages:
+        if page_id == 'debate':
+            continue
+        node = nodes_by_id.get(page_id)
+        if node is None:
+            raise TranslationReviewError('Nœud français absent pendant le gel : '+page_id)
+        node.setdefault('fr', {})['rubriques'] = copy.deepcopy(page_meta['rubriques'])
+        node['fr']['keywords'] = copy.deepcopy(page_meta['keywords'])
+    write_json(frozen_source/'data/registre_debat.json', registry)
+    projection_path = frozen_source/'graph/graphe_argumentatif.json'
+    if projection_path.is_file():
+        projection = load_json(projection_path, 'projection du graphe')
+        projection['nodes'] = copy.deepcopy((registry.get('graph') or {}).get('nodes') or [])
+        write_json(projection_path, projection)
     final_debate = copy.deepcopy(debate)
     final_debate.update(documentation={k:[] for k in debate['documentation_raw']},
         introduction_provenance='historical_existing' if debate['introduction'] else 'historical_absent',
@@ -358,8 +376,6 @@ def freeze_imported_source(project_root: Path, debate_id: str, work_id: str, *, 
     receipt=dict(schema='wikidebia-translation-source-preservation-1.0',policy=POLICY,debate_id=debate_id,work_id=work_id,
         status='frozen_as_imported',reviewer=reviewer,reviewed_at=stamp,note=note,
         documentary_reverification_claimed=False,french_pages_changed=False,pages=copy.deepcopy(imported))
-    if graph_rebase is not None:
-        receipt['graph_publication_rebase'] = graph_rebase
     receipt['receipt_sha256']=hashlib.sha256(canonical_json(receipt)).hexdigest()
     metadata.update(source_preservation_policy=POLICY,source_preservation_receipt_sha256=receipt['receipt_sha256'])
     content=dict(schema='wikidebia-fr-content-lock-1.0',debate_id=debate_id,work_id=work_id,status='frozen_as_imported',
