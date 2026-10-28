@@ -1346,6 +1346,8 @@ def test_ordinary_historical_number_transfer_does_not_certify_truth():
     ('Nov 14, 2016', 'en', (2016, 11, 14)),
     ('1er/10/2024', 'fr', (2024, 10, 1)),
     ('1er juin 2023', 'fr', (2023, 6, 1)),
+    ('24 fév 2022', 'fr', (2022, 2, 24)),
+    ('avril 3, 2026', 'fr', (2026, 4, 3)),
     ('Feb 31, 2024', 'en', None),
 ])
 def test_source_date_localization_retains_actual_calendar_value(value, language, expected):

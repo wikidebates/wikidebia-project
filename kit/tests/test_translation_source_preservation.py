@@ -236,6 +236,55 @@ def test_french_render_never_replaces_existing_interlanguage(tmp_path):
     locked={'import_path':'page.wiki','import_sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
     with pytest.raises(RenderError,match='existe déjà'):_render_preserved_french(tmp_path,locked,'Different')
 
+
+def test_preserved_french_graph_baseline_updates_page_target_only(tmp_path):
+    from wikidebia_render import _render_graph_aligned_french_source
+    from wikidebia_graph_extract import parse_template
+
+    raw = (
+        "{{Argument\n"
+        "|justifications={{Justification|page=Ancien titre|titre-affiché=Libellé historique}}\n"
+        "|objections=\n"
+        "|rubriques=Société\n"
+        "}}\n"
+    )
+    path = tmp_path / "imports/fr/arguments/A0001.wiki"
+    path.parent.mkdir(parents=True)
+    path.write_text(raw, encoding="utf-8")
+    locked = {
+        "import_path": path.relative_to(tmp_path).as_posix(),
+        "import_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        "preserved_parameters": {"débat-dédié": {"present": False, "value": None}},
+    }
+    registry = {"graph": {
+        "depth_policy": {"limit_policy": "unbounded", "frontier_node_ids": []},
+        "nodes": [
+            {"id": "A0001", "status": "active", "fr": {"canonical_title": "Parent", "displayed_title": "Parent"}},
+            {"id": "A0002", "status": "active", "fr": {"canonical_title": "Nouveau titre", "displayed_title": "Libellé global"}},
+        ],
+        "edges": [
+            {"id": "E00001", "status": "active", "parent_node_id": "A0001", "child_node_id": "A0002", "relation": "justification", "order": 1},
+        ],
+    }}
+    rendered = _render_graph_aligned_french_source(
+        tmp_path,
+        locked,
+        registry,
+        page_id="A0001",
+        page_type="argument",
+        contextual_labels=[{
+            "id": "edge:E00001",
+            "source_page_id": "A0001",
+            "source_text": "Libellé historique",
+        }],
+    )
+    parsed = parse_template(rendered.strip())
+    relation = parse_template(parsed.get("justifications"))
+    assert relation.get("page") == "Nouveau titre"
+    assert relation.get("titre-affiché") == "Libellé historique"
+    assert "|objections=" not in rendered
+    assert "|rubriques=Société" in rendered
+
 def test_reopening_an_applied_review_archives_the_complete_previous_tree(tmp_path):
     from test_wikidebia_translation_review import make_french_locked, complete_translation_review, complete_semantic_convergence, translation as tool
     project,workspace,work_id=make_french_locked(tmp_path)

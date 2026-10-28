@@ -33,8 +33,19 @@ def preserved_french_page(ctx: PackageContext, page: dict[str, Any], text: str) 
         original = original_bytes.decode('utf-8')
         source = parse_template(original)
         target = parse_template(text)
-        if source.name != target.name or source.values('interlangue'):
+        if source.name != target.name:
             return False
+        source_links = source.values('interlangue')
+        if source_links:
+            # A prior bilingual publication may already have inserted the
+            # reviewed link.  Preservation then means byte-for-byte identity;
+            # the renderer is not allowed to replace or duplicate it.
+            return (
+                len(source_links) == 1
+                and target.values('interlangue') == source_links
+                and target.raw == source.raw
+                and text.strip() == target.raw
+            )
         parts = _split_top_level(target.raw[2:-2])
         links = [p for p in parts[1:] if p.split('=', 1)[0].strip() == 'interlangue']
         without = '{{' + '|'.join(p for p in parts if p not in links) + '}}'

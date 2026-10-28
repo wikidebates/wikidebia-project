@@ -142,6 +142,38 @@ def test_english_quote_preserves_documentary_values_after_parameter_mapping(tmp_
     assert any(item.code == "WDV-MWK-021" and "valeur" in item.message for item in ctx.report.findings)
 
 
+def test_french_quote_lock_accepts_the_retired_warning_alias(tmp_path: Path):
+    (tmp_path / "data").mkdir(parents=True)
+    source_parameters = [
+        {"name": "citation", "value": "Texte source."},
+        {"name": "auteurs", "value": "Autrice"},
+        {"name": "avertissements", "value": "Citation trop courte"},
+    ]
+    (tmp_path / "data/fr_content_lock.json").write_text(
+        json.dumps({"arguments": [{"id": "A0001", "citations": [{
+            "id": "A0001-C001", "source_parameters": source_parameters,
+        }]}]}, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "manifest.json").write_text(
+        json.dumps({"normative_versions": {"consolidated_norm": "1.2.88"}}) + "\n",
+        encoding="utf-8",
+    )
+    ctx = PackageContext(
+        root=tmp_path,
+        report=Report("0.4.105", tmp_path.name, ["wikicode"]),
+        cache={"manifest.json": {"normative_versions": {"consolidated_norm": "1.2.88"}}},
+    )
+    raw = """{{Argument
+|citations={{Citation|citation=Texte source.|auteurs=Autrice|avertissements-citation=Citation trop courte}}
+|date-création=2026-08-04
+}}"""
+    _validate_citations_against_locks(
+        ctx, parse_template(raw), "output/fr/arguments/A0001.wiki", "fr", "A0001",
+    )
+    assert not any(item.code == "WDV-MWK-021" for item in ctx.report.findings)
+
+
 def _debate(introduction: str) -> str:
     return f"""{{{{Debate
 |topic=Test debate

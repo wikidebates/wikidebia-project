@@ -461,6 +461,28 @@ def test_20_no_delete_preserves_pending_pages_for_later_only_delete(tmp_path):
     assert [row["page_id"] for row in final_state["pages"]] == ["A2"]
 
 
+def test_no_delete_plan_omits_retired_pages_even_when_the_remote_page_changed(tmp_path):
+    retired = argument("Retiré")
+    kept = argument("Conservé")
+    config, path = make_fixture(
+        tmp_path,
+        old_pages=[("fr", "A1", "Retiré", retired), ("fr", "A2", "Conservé", kept)],
+        new_pages=[("fr", "A2", "Conservé", kept)],
+    )
+    adapter = FakeAdapter({
+        ("fr", "Retiré"): (11, argument("Retiré modifié")),
+        ("fr", "Conservé"): (20, kept),
+    })
+    planned = module.RemoteUpdatePlanner(config, adapter, path).build_plan(mode="no_delete")
+    retired_rows = [
+        row
+        for rows in planned["operations"].values()
+        for row in rows
+        if row.get("page_id") == "A1"
+    ]
+    assert retired_rows == []
+
+
 def test_move_preserves_protected_warning_instead_of_blocking(tmp_path):
     old = argument('Ancien')
     new = argument('Nouveau').replace(MARKER, '')
@@ -874,6 +896,17 @@ def test_duplicate_or_unlocated_quote_is_not_a_deletion_permission():
     with pytest.raises(module.UpdateError,match="citation existante"):
         module.assert_citation_change_authorized(quote,"",{"decision":"explicit_user_request"})
     module.assert_citation_change_authorized(quote,quote+"{{Citation|citation=Nouvelle source}}")
+
+
+def test_retired_french_quote_warning_alias_is_not_a_citation_rewrite():
+    old = "{{Argument|citations={{Citation|citation=Texte historique|avertissements=Citation trop courte}}}}"
+    new = "{{Argument|citations={{Citation|citation=Texte historique|avertissements-citation=Citation trop courte}}}}"
+    module.assert_citation_change_authorized(old, new)
+    with pytest.raises(module.UpdateError, match="citation existante"):
+        module.assert_citation_change_authorized(
+            old,
+            new.replace("Citation trop courte", "Texte abrégé"),
+        )
 
 
 def test_quote_protection_covers_quotes_inside_debate_introduction():

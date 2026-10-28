@@ -165,6 +165,28 @@ def test_render_emits_translated_citations_without_mutating_source_metadata(tmp_
     assert "|citations={{Citation" in fr
 
 
+def test_legacy_french_quote_warning_alias_is_normalized_losslessly():
+    source = (
+        "{{Argument\n"
+        "|citations={{Citation\n"
+        "|citation=Texte historique.\n"
+        "|avertissements=Citation trop courte\n"
+        "}}\n"
+        "|date-création=2022-02-25\n"
+        "}}\n"
+    )
+    expected = source.replace(
+        "|avertissements=Citation trop courte",
+        "|avertissements-citation=Citation trop courte",
+    )
+    assert render._normalize_legacy_french_quote_warnings(source) == expected
+
+
+def test_canonical_french_quote_warning_is_unchanged():
+    source = "{{Argument|citations={{Citation|citation=Texte|avertissements-citation=Texte abrégé}}}}\n"
+    assert render._normalize_legacy_french_quote_warnings(source) == source
+
+
 def test_render_requires_exact_translation_hash(tmp_path: Path):
     project, workspace, work_id, _ = make_translated(tmp_path)
     try:
@@ -280,6 +302,48 @@ def test_render_translates_dedicated_debate_and_omits_english_local_relations():
     assert '|dedicated-debate=Does the left bear responsibility for the rise of the far right?' in text
     assert '|justifications=' not in text
     assert '|objections=' not in text
+
+
+def test_render_reads_reviewed_dedicated_debate_record_and_ignores_absent_source():
+    node = {
+        'id': 'A0001',
+        'fr': {'rubriques': ['Société'], 'keywords': ['sujet']},
+        'en': {'canonical_title': 'Argument topic', 'sections': ['Society'], 'keywords': ['topic']},
+    }
+    registry = {'graph': {'edges': [], 'occurrences': [], 'nodes': [node]}}
+    content = {
+        'summary': None, 'citations': [], 'citation_passages': [], 'sources': {},
+        'page_origin': 'new', 'preserved_parameters': {},
+        'dedicated_debate': {
+            'dedicated_debate': None,
+            'dedicated_debate_equivalence_reviewed': False,
+            'dedicated_debate_review_note': '',
+        },
+    }
+    source_content = {
+        'page_origin': 'preexisting',
+        'preserved_parameters': {'débat-dédié': {'present': False, 'value': None}},
+    }
+    text = render._render_argument(
+        lang='en', node=node, content=content, registry=registry, sources={},
+        creation_date='2026-08-05', source_content=source_content,
+    )
+    assert '|dedicated-debate=' not in text
+
+    source_content['preserved_parameters']['débat-dédié'] = {
+        'present': True,
+        'value': 'Débat sous-jacent',
+    }
+    content['dedicated_debate'] = {
+        'dedicated_debate': 'Underlying debate',
+        'dedicated_debate_equivalence_reviewed': True,
+        'dedicated_debate_review_note': 'The same underlying debate is translated.',
+    }
+    text = render._render_argument(
+        lang='en', node=node, content=content, registry=registry, sources={},
+        creation_date='2026-08-05', source_content=source_content,
+    )
+    assert '|dedicated-debate=Underlying debate' in text
 
 
 def test_render_preserves_historical_argument_name():

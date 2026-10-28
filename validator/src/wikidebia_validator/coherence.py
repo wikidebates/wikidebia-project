@@ -184,7 +184,19 @@ def validate_argument_name_discovery(ctx: PackageContext, manifest: dict[str, An
     new_arguments = {
         (str(page.get("language") or ""), str(page.get("page_id") or "")): page
         for page in manifest.get("pages") or []
-        if page.get("page_type") == "argument" and page.get("page_origin") == "new"
+        if page.get("page_type") == "argument"
+        and (
+            page.get("page_origin") == "new"
+            # A page may have been researched and translated as new in this
+            # Work, then found remotely because an earlier partial publication
+            # created it.  The exact revision-bound adoption changes only its
+            # publication origin; it must not invalidate the completed name
+            # discovery review.
+            or (
+                page.get("page_origin") == "preexisting"
+                and isinstance(page.get("existing_english_update"), dict)
+            )
+        )
     }
     # Before deterministic MediaWiki rendering, manifest.pages may still be empty.
     # Translation/content locks are authoritative for page origin and canonical title
@@ -195,7 +207,13 @@ def validate_argument_name_discovery(ctx: PackageContext, manifest: dict[str, An
         if not isinstance(lock, dict):
             continue
         for argument in lock.get("arguments") or []:
-            if not isinstance(argument, dict) or argument.get("page_origin") != "new":
+            if not isinstance(argument, dict) or not (
+                argument.get("page_origin") == "new"
+                or (
+                    argument.get("page_origin") == "preexisting"
+                    and isinstance(argument.get("existing_english_update"), dict)
+                )
+            ):
                 continue
             page_id = str(argument.get("id") or "")
             if not page_id:

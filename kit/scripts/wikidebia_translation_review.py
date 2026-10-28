@@ -444,6 +444,19 @@ def _date_signature(value: Any, language: str) -> tuple[int, int | None, int | N
         return (int(month_range.group(3)), months[month_range.group(1).casefold()], -months[month_range.group(2).casefold()])
     if language == "fr":
         text = re.sub(r"^1er(?=[/.\s])", "1", text, flags=re.I)
+        # A few historical imports use an English-style order with a French
+        # month name (for example ``avril 3, 2026``).  The value remains
+        # unambiguous, so normalize its calendar signature without rewriting
+        # the preserved source parameter.
+        month_first = re.fullmatch(r"([A-Za-zÀ-ÿ]+)\s+(\d{1,2}),?\s+(\d{4})", text, re.I)
+        if month_first and month_first[1].casefold() in months:
+            try:
+                day = calendar_date(
+                    int(month_first[3]), months[month_first[1].casefold()], int(month_first[2])
+                )
+            except ValueError:
+                return None
+            return (day.year, day.month, day.day)
         # Historical French imports also use day/month/year and month/year.
         numeric = re.fullmatch(r"(\d{1,2})([/.])(\d{1,2})\2(\d{2}|\d{4})", text)
         if numeric:

@@ -6,6 +6,7 @@ import importlib.util
 import json
 import shutil
 import sys
+from contextlib import contextmanager
 from pathlib import Path
 
 import pytest
@@ -27,6 +28,40 @@ def load_module(name: str):
 review_tool = load_module("wikidebia_editorial_review")
 workspace_tool = sys.modules.get("wikidebia_editorial_workspace") or load_module("wikidebia_editorial_workspace")
 common = sys.modules["wikidebia_corpus_build"]
+
+
+def test_main_routes_public_command_to_title_checkpoint(monkeypatch, tmp_path, capsys):
+    calls = []
+
+    @contextmanager
+    def unlocked(*_args, **_kwargs):
+        yield
+
+    def finalize(project_root, debate_id, work_id):
+        calls.append(("finalize", project_root, debate_id, work_id))
+        return {"status": "fr_title_review_finalized"}
+
+    def apply(project_root, debate_id, work_id, review_sha256):
+        calls.append(("apply", project_root, debate_id, work_id, review_sha256))
+        return {"status": "fr_titles_applied"}
+
+    monkeypatch.setattr(review_tool, "exclusive_lock", unlocked)
+    monkeypatch.setattr(review_tool, "finalize_title_review", finalize)
+    monkeypatch.setattr(review_tool, "apply_title_review", apply)
+
+    assert review_tool.main([
+        "debat_test", "--work-id", "EDIT-TEST-001", "--project-root", str(tmp_path),
+        "--finalize", "--machine-readable",
+    ]) == 0
+    assert calls == [("finalize", tmp_path.resolve(), "debat_test", "EDIT-TEST-001")]
+
+    calls.clear()
+    assert review_tool.main([
+        "debat_test", "--work-id", "EDIT-TEST-001", "--project-root", str(tmp_path),
+        "--apply", "--confirm-review-sha256", "a" * 64, "--machine-readable",
+    ]) == 0
+    assert calls == [("apply", tmp_path.resolve(), "debat_test", "EDIT-TEST-001", "a" * 64)]
+    capsys.readouterr()
 
 
 @pytest.mark.parametrize("tagged_pages", [0, 3])
