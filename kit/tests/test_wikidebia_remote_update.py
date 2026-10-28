@@ -22,6 +22,50 @@ TEST_VALIDATOR_PYTHON = "/usr/bin/python3" if Path("/usr/bin/python3").is_file()
 MARKER = "|avertissements-argument=Argument généré par IA\n"
 
 
+def test_relation_rendering_guard_rejects_empty_parameters():
+    with pytest.raises(module.UpdateError, match="Paramètre relationnel vide interdit"):
+        module.assert_relation_rendering_safe(
+            None,
+            "{{Argument\n|résumé=Texte.\n|justifications=\n}}\n",
+            "fr",
+            "argument",
+        )
+
+
+def test_relation_rendering_guard_allows_removing_legacy_empty_parameter():
+    module.assert_relation_rendering_safe(
+        "{{Argument\n|résumé=Texte.\n|objections=\n}}\n",
+        "{{Argument\n|résumé=Texte.\n}}\n",
+        "fr",
+        "argument",
+    )
+
+
+def test_relation_rendering_guard_rejects_silent_displayed_title_rewrite():
+    old = (
+        "{{Argument\n|objections={{Objection|page=Ancienne cible"
+        "|titre-affiché=Libellé historique}}\n}}\n"
+    )
+    rewritten = (
+        "{{Argument\n|objections={{Objection|page=Nouvelle cible"
+        "|titre-affiché=Titre global}}\n}}\n"
+    )
+    with pytest.raises(module.UpdateError, match="Modification silencieuse de titre-affiché"):
+        module.assert_relation_rendering_safe(old, rewritten, "fr", "argument")
+
+
+def test_relation_rendering_guard_allows_target_change_with_preserved_label():
+    old = (
+        "{{Argument\n|objections={{Objection|page=Ancienne cible"
+        "|titre-affiché=Libellé historique}}\n}}\n"
+    )
+    moved = (
+        "{{Argument\n|objections={{Objection|page=Nouvelle cible"
+        "|titre-affiché=Libellé historique}}\n}}\n"
+    )
+    module.assert_relation_rendering_safe(old, moved, "fr", "argument")
+
+
 class FakeAdapter:
     def __init__(self, pages=None, rights=None):
         self.pages = dict(pages or {})
@@ -705,7 +749,7 @@ def test_dieu_manual_sync_plan_has_no_blocked_or_manual_review(tmp_path):
         1,
     )
     debate_remote = "{{Débat\n|arguments-contre={{Argument contre\n|page=Argument retiré\n|titre-affiché=Argument retiré\n}}\n|date-création=2017-01-29\n}}\n"
-    debate_proposed = "{{Débat\n|arguments-contre=\n|date-création=2017-01-29\n}}\n"
+    debate_proposed = "{{Débat\n|date-création=2017-01-29\n}}\n"
     new_pages = [
         ("fr", "dieu", "Dieu existe-t-il ?", debate_proposed, "debate"),
         ("fr", "A0016", "Les religions se contredisent", proposed_religions),
@@ -720,7 +764,7 @@ def test_dieu_manual_sync_plan_has_no_blocked_or_manual_review(tmp_path):
         ("fr", "A0752", "L'aséité divine est menacée", aseity_old, "argument", 3),
     ]
     adoptions = [
-        {"language":"fr","page_id":"dieu","title":"Dieu existe-t-il ?","observed_revision_id":11,"observed_sha256":module.sha_text(debate_remote),"reason":"Révision manuelle adoptée.","allow_proposed_change":True,"allowed_lifecycle_parameter_changes":[]},
+        {"language":"fr","page_id":"dieu","title":"Dieu existe-t-il ?","observed_revision_id":11,"observed_sha256":module.sha_text(debate_remote),"reason":"Révision manuelle adoptée.","allow_proposed_change":True,"allowed_lifecycle_parameter_changes":[],"allowed_parameter_deletions":["arguments-contre"]},
         {"language":"fr","page_id":"A0016","title":"Les religions se contredisent","observed_revision_id":12,"observed_sha256":module.sha_text(old_religions),"reason":"Révision manuelle adoptée.","allow_proposed_change":True,"allowed_lifecycle_parameter_changes":[]},
         {"language":"fr","page_id":"A0755","title":"Dieu n'existe pas car les religions se contredisent","observed_revision_id":13,"observed_sha256":module.sha_text(new_parent_remote),"reason":"Révision manuelle adoptée.","allow_proposed_change":True,"allowed_lifecycle_parameter_changes":["date-création"]},
         {"language":"fr","page_id":"A0756","title":"La réincarnation n'existe pas","observed_revision_id":14,"observed_sha256":module.sha_text(reinc_remote),"reason":"Révision manuelle adoptée.","allow_proposed_change":True,"allowed_lifecycle_parameter_changes":[]},

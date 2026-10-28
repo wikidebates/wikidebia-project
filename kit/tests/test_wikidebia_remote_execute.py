@@ -81,7 +81,7 @@ class FakeAdapter:
 
 
 def argument(summary: str) -> str:
-    return "{{Argument\n" + MARKER + f"|résumé={summary}\n|rubriques=Société\n}}\n"
+    return "{{Argument\n" + MARKER + f"|résumé={summary}\n|rubriques=Société\n" + "}}\n"
 
 
 def _fill_review(path: Path):

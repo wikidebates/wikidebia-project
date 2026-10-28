@@ -186,6 +186,94 @@ def top_level_parameter_map(text: str, language: str, page_type: str) -> tuple[s
     return parsed.name, list(parsed.positional), dict(parsed.params)
 
 
+RELATION_PARAMETER_LAYOUT = {
+    ("fr", "debate"): (
+        ("arguments-pour", "argument pour", "titre-affiché"),
+        ("arguments-contre", "argument contre", "titre-affiché"),
+    ),
+    ("fr", "argument"): (
+        ("justifications", "justification", "titre-affiché"),
+        ("objections", "objection", "titre-affiché"),
+    ),
+    ("en", "debate"): (
+        ("pro-arguments", "pro argument", "displayed-title"),
+        ("con-arguments", "con argument", "displayed-title"),
+    ),
+    ("en", "argument"): (
+        ("justifications", "justification", "displayed-title"),
+        ("objections", "objection", "displayed-title"),
+    ),
+}
+
+
+def _relation_displayed_titles(
+    text: str, language: str, page_type: str, *, reject_empty: bool = True,
+) -> dict[str, list[tuple[bool, str]]]:
+    """Return occurrence-level displayed titles from the main template."""
+    _, _, params = top_level_parameter_map(text, language, page_type)
+    normalized_params = {normalize_key(name): value for name, value in params.items()}
+    result: dict[str, list[tuple[bool, str]]] = {}
+    for parameter, template_name, displayed_parameter in RELATION_PARAMETER_LAYOUT[(language, page_type)]:
+        value = normalized_params.get(normalize_key(parameter))
+        if value is None:
+            result[parameter] = []
+            continue
+        if not value.strip():
+            if not reject_empty:
+                result[parameter] = []
+                continue
+            raise UpdateError(
+                f"Paramètre relationnel vide interdit : {parameter}; le paramètre doit être omis"
+            )
+        rows: list[tuple[bool, str]] = []
+        for call in iter_templates(value):
+            if normalize_key(call.name) != normalize_key(template_name):
+                continue
+            present = any(
+                normalize_key(name) == normalize_key(displayed_parameter)
+                for name in call.params
+            )
+            rows.append((present, call.get(displayed_parameter) if present else ""))
+        result[parameter] = rows
+    return result
+
+
+def assert_relation_rendering_safe(
+    old_text: str | None,
+    new_text: str,
+    language: str,
+    page_type: str,
+) -> None:
+    """Block empty relation parameters and silent French label rewrites.
+
+    Structural graph edits may add or remove occurrences.  Every displayed
+    title belonging to a retained occurrence must nevertheless survive: with
+    equal counts the multisets must be identical; a pure addition must retain
+    all old labels; and a pure removal may only remove old labels.
+    """
+    new = _relation_displayed_titles(new_text, language, page_type)
+    if old_text is None or language != "fr":
+        return
+    # A historical page may itself contain the legacy empty parameter that
+    # this update removes.  Reject it only in the proposed text.
+    old = _relation_displayed_titles(old_text, language, page_type, reject_empty=False)
+    for parameter in old:
+        before = Counter(old[parameter])
+        after = Counter(new[parameter])
+        before_count = sum(before.values())
+        after_count = sum(after.values())
+        if before_count == after_count:
+            preserved = before == after
+        elif after_count > before_count:
+            preserved = not (before - after)
+        else:
+            preserved = not (after - before)
+        if not preserved:
+            raise UpdateError(
+                f"Modification silencieuse de titre-affiché interdite dans {parameter}"
+            )
+
+
 
 EDIT_SUMMARY_CONTRACT = "page_specific_v1"
 EDIT_SUMMARY_POLICIES = {
@@ -2132,6 +2220,17 @@ class RemoteUpdatePlanner:
                 "summary_change_authorization": effective.get("summary_change_authorization"),
                 "citation_change_authorization": effective.get("citation_change_authorization"),
             })
+            try:
+                assert_relation_rendering_safe(
+                    remote_text if exists else None,
+                    effective["content"],
+                    language,
+                    effective["page_type"],
+                )
+            except UpdateError as exc:
+                op.update(justification=str(exc), phase=0)
+                buckets["blocked"].append(op)
+                continue
             if exists:
                 try:
                     assert_summary_change_authorized(
@@ -2376,6 +2475,9 @@ class RemoteUpdatePlanner:
             buckets["manual_review"].append(op)
             return
         try:
+            assert_relation_rendering_safe(
+                source_text, effective["content"], prior.language, prior.page_type,
+            )
             assert_summary_change_authorized(
                 source_text, effective["content"], prior.language, prior.page_type,
                 effective.get("summary_change_authorization"),
@@ -2872,6 +2974,9 @@ class PlanExecutor:
         result = {"operation": operation, "language": row["language"], "page_id": row["page_id"], "title": title, "status": None}
         if operation == "create":
             desired = self._source_text(row)
+            assert_relation_rendering_safe(
+                None, desired, row["language"], row["page_type"],
+            )
             if exists:
                 if sha_text(remote_text) == row["new_sha256"]:
                     result.update(status="already_done", revision_id=revision_id)
@@ -2891,6 +2996,9 @@ class PlanExecutor:
                 return result
             if revision_id != row.get("expected_revision_id") or sha_text(remote_text) != row.get("old_sha256"):
                 raise PlanConflict(f"Modification distante intervenue depuis le plan : {title}")
+            assert_relation_rendering_safe(
+                remote_text, desired, row["language"], row["page_type"],
+            )
             self._assert_summary_scope(row, remote_text, desired)
             self._assert_citation_scope(row, remote_text, desired)
             summary = self._expected_row_summary(row, operation, plan, remote_text)
@@ -2914,6 +3022,9 @@ class PlanExecutor:
                 if target_exists and sha_text(target_text) == row.get("old_sha256") and target_rev is not None:
                     # Interrupted after the move itself but before the content
                     # replacement. Finish the exact signed target update.
+                    assert_relation_rendering_safe(
+                        target_text, desired, row["language"], row["page_type"],
+                    )
                     self._assert_summary_scope(row, target_text, desired)
                     self._assert_citation_scope(row, target_text, desired)
                     summary = self._expected_row_summary(row, operation, plan, target_text)
@@ -2929,6 +3040,9 @@ class PlanExecutor:
                 raise PlanConflict(f"Cible du déplacement apparue : {new_title}")
             if source_rev != row.get("expected_revision_id") or sha_text(source_text) != row.get("old_sha256"):
                 raise PlanConflict(f"Source du déplacement modifiée : {old_title}")
+            assert_relation_rendering_safe(
+                source_text, desired, row["language"], row["page_type"],
+            )
             self._assert_summary_scope(row, source_text, desired)
             self._assert_citation_scope(row, source_text, desired)
             summary = self._expected_row_summary(row, operation, plan, source_text)

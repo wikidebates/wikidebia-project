@@ -518,8 +518,20 @@ def _verify_graph_checkpoint_delta(target: Path, registry: dict[str, Any], rows:
         text = imported.read_text(encoding="utf-8")
         if kind == "debate":
             rel = "output/fr/debate/debate.wiki"
-            text = _set_optional_parameter_value(text, "debate", "arguments-pour", _main_arguments(registry, "pro", "fr", debate_relation_labels))
-            text = _set_optional_parameter_value(text, "debate", "arguments-contre", _main_arguments(registry, "con", "fr", debate_relation_labels))
+            text = _set_optional_parameter_value(
+                text, "debate", "arguments-pour",
+                _main_arguments(
+                    registry, "pro", "fr", debate_relation_labels,
+                    require_contextual_labels=True,
+                ),
+            )
+            text = _set_optional_parameter_value(
+                text, "debate", "arguments-contre",
+                _main_arguments(
+                    registry, "con", "fr", debate_relation_labels,
+                    require_contextual_labels=True,
+                ),
+            )
             allowed = ["arguments-pour", "arguments-contre"]
             proof_id = str((registry.get("debate") or {}).get("id") or debate_id)
         else:
@@ -530,8 +542,20 @@ def _verify_graph_checkpoint_delta(target: Path, registry: dict[str, Any], rows:
             allowed = []
             if page_id not in depth_frontiers and not bool(template.get("débat-dédié", "débat-détaillé").strip()):
                 labels = argument_relation_labels.get(page_id, [])
-                text = _set_optional_parameter_value(text, "argument", "justifications", _relations(registry, page_id, "justification", "fr", labels))
-                text = _set_optional_parameter_value(text, "argument", "objections", _relations(registry, page_id, "objection", "fr", labels))
+                text = _set_optional_parameter_value(
+                    text, "argument", "justifications",
+                    _relations(
+                        registry, page_id, "justification", "fr", labels,
+                        require_contextual_labels=True,
+                    ),
+                )
+                text = _set_optional_parameter_value(
+                    text, "argument", "objections",
+                    _relations(
+                        registry, page_id, "objection", "fr", labels,
+                        require_contextual_labels=True,
+                    ),
+                )
                 allowed = ["justifications", "objections"]
             proof_id = page_id
         if rel in expected:
@@ -624,8 +648,20 @@ def _build_graph_checkpoint_copy(project_root: Path, source: Path, target: Path,
     if not debate_import.is_file():
         raise FrenchCheckpointError("Import de la page Débat absent")
     debate_text = debate_import.read_text(encoding="utf-8")
-    debate_text = _set_optional_parameter_value(debate_text, "debate", "arguments-pour", _main_arguments(registry, "pro", "fr", debate_relation_labels))
-    debate_text = _set_optional_parameter_value(debate_text, "debate", "arguments-contre", _main_arguments(registry, "con", "fr", debate_relation_labels))
+    debate_text = _set_optional_parameter_value(
+        debate_text, "debate", "arguments-pour",
+        _main_arguments(
+            registry, "pro", "fr", debate_relation_labels,
+            require_contextual_labels=True,
+        ),
+    )
+    debate_text = _set_optional_parameter_value(
+        debate_text, "debate", "arguments-contre",
+        _main_arguments(
+            registry, "con", "fr", debate_relation_labels,
+            require_contextual_labels=True,
+        ),
+    )
     debate_id_actual = str((registry.get("debate") or {}).get("id") or debate_id)
     debate_rel = "output/fr/debate/debate.wiki"
     debate_out = target / debate_rel; debate_out.parent.mkdir(parents=True, exist_ok=True); debate_out.write_text(debate_text, encoding="utf-8", newline="\n")
@@ -642,8 +678,20 @@ def _build_graph_checkpoint_copy(project_root: Path, source: Path, target: Path,
         dedicated = bool(template.get("débat-dédié", "débat-détaillé").strip())
         if node_id not in depth_frontiers and not dedicated:
             labels = argument_relation_labels.get(node_id, [])
-            text = _set_optional_parameter_value(text, "argument", "justifications", _relations(registry, node_id, "justification", "fr", labels))
-            text = _set_optional_parameter_value(text, "argument", "objections", _relations(registry, node_id, "objection", "fr", labels))
+            text = _set_optional_parameter_value(
+                text, "argument", "justifications",
+                _relations(
+                    registry, node_id, "justification", "fr", labels,
+                    require_contextual_labels=True,
+                ),
+            )
+            text = _set_optional_parameter_value(
+                text, "argument", "objections",
+                _relations(
+                    registry, node_id, "objection", "fr", labels,
+                    require_contextual_labels=True,
+                ),
+            )
         rel = f"output/fr/arguments/{node_id}.wiki"
         out = target / rel; out.parent.mkdir(parents=True, exist_ok=True); out.write_text(text, encoding="utf-8", newline="\n")
         output_rows.append((node_id, "argument", rel, sha256_file(out), {"page_origin":"preexisting", "preserved_parameters":_page_lifecycle_snapshot(template,"argument")}))
