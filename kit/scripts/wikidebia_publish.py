@@ -427,7 +427,13 @@ class PywikibotAdapter:
             f"WIKIDEBIA_{language.upper()}_BOT_USERNAME",
             f"WIKIDEBIA_{language.upper()}_BOT_PASSWORD",
         )
-        if read_only or any(os.environ.get(name) for name in managed_variables):
+        managed_values = [bool(os.environ.get(name)) for name in managed_variables]
+        if any(managed_values) and not all(managed_values):
+            missing = [name for name in managed_variables if not os.environ.get(name)]
+            raise PublicationError(
+                "Identifiants Pywikibot gérés incomplets : " + ", ".join(missing)
+            )
+        if read_only or (managed_values and all(managed_values)):
             os.environ.pop("PYWIKIBOT_DIR", None)
             os.environ["PYWIKIBOT_NO_USER_CONFIG"] = "2"
             return

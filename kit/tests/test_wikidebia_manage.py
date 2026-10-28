@@ -319,6 +319,47 @@ def test_doctor_reports_missing_runtime_environment(tmp_path: Path):
     assert any(".venv/bin/python" in issue for issue in report["issues"])
 
 
+def test_doctor_accepts_managed_pywikibot_credentials_without_server_config(tmp_path: Path, monkeypatch):
+    monkeypatch.setenv("WIKIDEBIA_FR_BOT_USERNAME", "ChatGPT@Codex-FR")
+    monkeypatch.setenv("WIKIDEBIA_FR_BOT_PASSWORD", "managed-placeholder")
+    monkeypatch.setenv("WIKIDEBIA_API_TOKEN", "access-placeholder")
+    monkeypatch.delenv("WIKIDEBIA_EN_BOT_USERNAME", raising=False)
+    monkeypatch.delenv("WIKIDEBIA_EN_BOT_PASSWORD", raising=False)
+    monkeypatch.setattr(module, "runtime_environment_report", lambda root: {
+        "requirements_sha256": "x", "python_available": True,
+        "missing_modules": [], "probe_error": None,
+    })
+    monkeypatch.setattr(module, "assert_portable_sources", lambda root: None)
+    monkeypatch.setattr(module, "git_security_issues", lambda root: [])
+
+    report = module.doctor(tmp_path)
+
+    assert not any("Accès Pywikibot absent" in issue for issue in report["issues"])
+    assert report["access_configuration"] == {
+        "local_pywikibot_config": False,
+        "managed_credentials": {"fr": "complete", "en": "absent"},
+        "api_access_header_configured": True,
+    }
+
+
+def test_doctor_reports_partial_managed_credentials_without_values(tmp_path: Path, monkeypatch):
+    monkeypatch.setenv("WIKIDEBIA_FR_BOT_USERNAME", "ChatGPT@Codex-FR")
+    monkeypatch.delenv("WIKIDEBIA_FR_BOT_PASSWORD", raising=False)
+    monkeypatch.delenv("WIKIDEBIA_EN_BOT_USERNAME", raising=False)
+    monkeypatch.delenv("WIKIDEBIA_EN_BOT_PASSWORD", raising=False)
+    monkeypatch.setattr(module, "runtime_environment_report", lambda root: {
+        "requirements_sha256": "x", "python_available": True,
+        "missing_modules": [], "probe_error": None,
+    })
+    monkeypatch.setattr(module, "assert_portable_sources", lambda root: None)
+    monkeypatch.setattr(module, "git_security_issues", lambda root: [])
+
+    report = module.doctor(tmp_path)
+
+    assert any("WIKIDEBIA_FR_BOT_PASSWORD" in issue for issue in report["issues"])
+    assert "ChatGPT@Codex-FR" not in json.dumps(report)
+
+
 def _init_git_repo(root: Path) -> None:
     module.run(["git", "init", "-b", "main"], cwd=root)
     module.run(["git", "config", "user.name", "Test"], cwd=root)

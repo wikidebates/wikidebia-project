@@ -519,11 +519,27 @@ class PywikibotPageClient:
     def _open(self) -> None:
         if self._site is not None:
             return
-        if self.pywikibot_dir and (self.pywikibot_dir / "user-config.py").is_file():
+        local_config = bool(
+            self.pywikibot_dir and (self.pywikibot_dir / "user-config.py").is_file()
+        )
+        username_variable = f"WIKIDEBIA_{self.lang.upper()}_BOT_USERNAME"
+        password_variable = f"WIKIDEBIA_{self.lang.upper()}_BOT_PASSWORD"
+        managed_username = os.environ.get(username_variable)
+        managed_password = os.environ.get(password_variable)
+        if self.login and bool(managed_username) != bool(managed_password):
+            missing = username_variable if not managed_username else password_variable
+            raise RuntimeError(f"Identifiants Pywikibot gérés incomplets : {missing} absent")
+        managed_login = bool(managed_username and managed_password)
+        if local_config:
             os.environ["PYWIKIBOT_DIR"] = str(self.pywikibot_dir.resolve())
+            os.environ.pop("PYWIKIBOT_NO_USER_CONFIG", None)
         else:
-            if self.login:
-                raise RuntimeError("--login exige private/pywikibot/user-config.py")
+            if self.login and not managed_login:
+                raise RuntimeError(
+                    "--login exige private/pywikibot/user-config.py ou les variables "
+                    f"{username_variable}/{password_variable}"
+                )
+            os.environ.pop("PYWIKIBOT_DIR", None)
             os.environ.setdefault("PYWIKIBOT_NO_USER_CONFIG", "2")
         try:
             import pywikibot  # type: ignore
@@ -542,10 +558,36 @@ class PywikibotPageClient:
             if family_files is None:
                 raise RuntimeError("pywikibot.config.family_files est indisponible")
             family_files[self.family] = str(self.family_file.resolve())
+        if self.login and managed_login:
+            usernames = getattr(pywikibot.config, "usernames", None)
+            if usernames is None:
+                raise RuntimeError("pywikibot.config.usernames est indisponible")
+            main_username = str(managed_username).partition("@")[0]
+            if not main_username:
+                raise RuntimeError(f"{username_variable} ne contient pas d’identité principale")
+            usernames.setdefault(self.family, {})[self.lang] = main_username
         self._pywikibot = pywikibot
         self._site = pywikibot.Site(code=self.lang, fam=self.family)
         if self.login:
-            self._site.login()
+            if not managed_login:
+                self._site.login()
+                return
+            login_module = getattr(pywikibot, "login", None)
+            original_manager = getattr(login_module, "ClientLoginManager", None)
+            if original_manager is None:
+                raise RuntimeError("pywikibot.login.ClientLoginManager est indisponible")
+
+            class ManagedClientLoginManager(original_manager):
+                def __init__(self, *args: Any, **kwargs: Any) -> None:
+                    kwargs["password"] = managed_password
+                    super().__init__(*args, **kwargs)
+                    self.login_name = managed_username
+
+            login_module.ClientLoginManager = ManagedClientLoginManager
+            try:
+                self._site.login()
+            finally:
+                login_module.ClientLoginManager = original_manager
 
     def fetch(self, title: str) -> PageRecord:
         title = _strip_markup(title)
