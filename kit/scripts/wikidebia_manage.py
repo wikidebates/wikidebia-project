@@ -2140,8 +2140,25 @@ def doctor(root: Path) -> dict[str, Any]:
         issues.append("VERSIONS.json introuvable")
     if (root / "user-config.py").exists() or (root / "user-password.cfg").exists():
         issues.append("Secrets Pywikibot encore présents à la racine")
-    if not (root / "private" / "pywikibot" / "user-config.py").is_file():
-        issues.append("private/pywikibot/user-config.py absent")
+    local_pywikibot_config = (root / "private" / "pywikibot" / "user-config.py").is_file()
+    managed_credentials: dict[str, str] = {}
+    for language in ("fr", "en"):
+        prefix = f"WIKIDEBIA_{language.upper()}_BOT_"
+        username_present = bool(os.environ.get(prefix + "USERNAME"))
+        password_present = bool(os.environ.get(prefix + "PASSWORD"))
+        if username_present and password_present:
+            managed_credentials[language] = "complete"
+        elif username_present or password_present:
+            managed_credentials[language] = "partial"
+            missing = prefix + ("PASSWORD" if username_present else "USERNAME")
+            issues.append(f"Identifiants Pywikibot gérés incomplets : {missing} absent")
+        else:
+            managed_credentials[language] = "absent"
+    if not local_pywikibot_config and "complete" not in managed_credentials.values():
+        issues.append(
+            "Accès Pywikibot absent : configurez private/pywikibot/user-config.py "
+            "ou les variables WIKIDEBIA_<LANG>_BOT_USERNAME/PASSWORD"
+        )
     required_scripts = (
         "wikidebia_publish.py", "wikidebia_update.py",
         "wikidebia_graph_extract.py", "wikidebia_corpus_init.py",
@@ -2176,6 +2193,11 @@ def doctor(root: Path) -> dict[str, Any]:
     update_count = len(list(updates.iterdir())) if updates.is_dir() else 0
     return {
         "versions": versions,
+        "access_configuration": {
+            "local_pywikibot_config": local_pywikibot_config,
+            "managed_credentials": managed_credentials,
+            "api_access_header_configured": bool(os.environ.get("WIKIDEBIA_API_TOKEN")),
+        },
         "runtime_environment": runtime,
         "git_repository": git_is_repo(root),
         "git_origin": git_has_origin(root),

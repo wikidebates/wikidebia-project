@@ -481,3 +481,46 @@ class SafetyTests(unittest.TestCase):
             self.assertEqual(
                 config.extra_headers["x-wikidebia-access"], "test-access-token",
             )
+
+    def test_managed_login_does_not_require_server_user_config(self):
+        captured = {}
+
+        class FakeLoginManager:
+            def __init__(self, *args, **kwargs):
+                captured["password"] = kwargs.get("password")
+                self.login_name = None
+
+        class FakeSite:
+            def login(self):
+                manager = fake.login.ClientLoginManager()
+                captured["login_name"] = manager.login_name
+
+        config = types.SimpleNamespace(
+            extra_headers={}, family_files={}, usernames={"wikidebates": {}},
+        )
+        fake = types.SimpleNamespace(
+            config=config,
+            login=types.SimpleNamespace(ClientLoginManager=FakeLoginManager),
+            Site=lambda **_kwargs: FakeSite(),
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            client = mod.PywikibotPageClient(
+                family="wikidebates", lang="fr", family_file=None,
+                pywikibot_dir=Path(directory) / "private",
+                cache=mod.JsonPageCache(Path(directory) / "cache"), login=True,
+            )
+            with mock.patch.dict(sys.modules, {"pywikibot": fake}), mock.patch.dict(
+                "os.environ",
+                {
+                    "WIKIDEBIA_FR_BOT_USERNAME": "ChatGPT@Codex-FR",
+                    "WIKIDEBIA_FR_BOT_PASSWORD": "managed-password",
+                },
+                clear=False,
+            ):
+                client._open()
+
+        self.assertEqual(config.usernames["wikidebates"]["fr"], "ChatGPT")
+        self.assertEqual(captured, {
+            "password": "managed-password", "login_name": "ChatGPT@Codex-FR",
+        })
+        self.assertIs(fake.login.ClientLoginManager, FakeLoginManager)

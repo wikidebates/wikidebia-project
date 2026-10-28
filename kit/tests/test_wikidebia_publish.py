@@ -210,6 +210,19 @@ def test_write_without_server_config_or_managed_credentials_is_rejected(monkeypa
         raise AssertionError("configuration d'écriture absente acceptée")
 
 
+def test_partial_managed_credentials_are_rejected_before_pywikibot_import(monkeypatch, tmp_path):
+    monkeypatch.setenv("WIKIDEBIA_FR_BOT_USERNAME", "ChatGPT@Codex-FR")
+    monkeypatch.delenv("WIKIDEBIA_FR_BOT_PASSWORD", raising=False)
+    adapter = module.PywikibotAdapter("wikidebates", {"fr": "fr"}, tmp_path)
+
+    try:
+        adapter._prepare_environment("fr")
+    except module.PublicationError as exc:
+        assert "WIKIDEBIA_FR_BOT_PASSWORD" in str(exc)
+    else:
+        raise AssertionError("identifiants gérés partiels acceptés")
+
+
 def write_fixture(tmp_path: Path, kind: str):
     corpus = tmp_path / "corpus" / "demo"
     (corpus / "output" / "fr").mkdir(parents=True)
