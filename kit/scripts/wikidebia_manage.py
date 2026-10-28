@@ -13,6 +13,9 @@ import stat
 import subprocess
 import sys
 import tempfile
+import urllib.error
+import urllib.parse
+import urllib.request
 import zipfile
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
@@ -2133,7 +2136,36 @@ def github_sync(root: Path) -> None:
     git_push_current_branch(root, strict=True)
 
 
-def doctor(root: Path) -> dict[str, Any]:
+def check_wikidebates_apis(access_token: str, *, timeout: float = 15.0) -> dict[str, Any]:
+    """Probe both Wikidebates APIs without exposing the access token."""
+    results: dict[str, Any] = {}
+    query = urllib.parse.urlencode({"action": "query", "meta": "siteinfo", "format": "json"})
+    for language in ("fr", "en"):
+        url = f"https://{language}.wikidebates.org/w/api.php?{query}"
+        request = urllib.request.Request(
+            url,
+            headers={
+                "User-Agent": f"Wikidebia/{KIT_VERSION} doctor",
+                "x-wikidebia-access": access_token,
+            },
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                status = int(response.status)
+            results[language] = {
+                "status": "passed" if status == 200 else "failed",
+                "http_status": status,
+            }
+        except urllib.error.HTTPError as exc:
+            results[language] = {"status": "failed", "http_status": int(exc.code)}
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            results[language] = {
+                "status": "failed", "error_type": type(exc).__name__,
+            }
+    return results
+
+
+def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
     issues: list[str] = []
     versions = current_versions(root)
     if not versions:
@@ -2159,6 +2191,19 @@ def doctor(root: Path) -> dict[str, Any]:
             "Accès Pywikibot absent : configurez private/pywikibot/user-config.py "
             "ou les variables WIKIDEBIA_<LANG>_BOT_USERNAME/PASSWORD"
         )
+    api_access_token = os.environ.get("WIKIDEBIA_API_TOKEN")
+    api_connectivity: dict[str, Any] = {"requested": check_api}
+    if check_api:
+        if not api_access_token:
+            issues.append("Test API impossible : WIKIDEBIA_API_TOKEN absent")
+            api_connectivity["status"] = "not_configured"
+        else:
+            api_results = check_wikidebates_apis(api_access_token)
+            api_connectivity.update({"status": "completed", "languages": api_results})
+            for language, result in api_results.items():
+                if result.get("status") != "passed":
+                    detail = result.get("http_status") or result.get("error_type") or "erreur inconnue"
+                    issues.append(f"API Wikidebates {language} inaccessible : {detail}")
     required_scripts = (
         "wikidebia_publish.py", "wikidebia_update.py",
         "wikidebia_graph_extract.py", "wikidebia_corpus_init.py",
@@ -2196,7 +2241,8 @@ def doctor(root: Path) -> dict[str, Any]:
         "access_configuration": {
             "local_pywikibot_config": local_pywikibot_config,
             "managed_credentials": managed_credentials,
-            "api_access_header_configured": bool(os.environ.get("WIKIDEBIA_API_TOKEN")),
+            "api_access_header_configured": bool(api_access_token),
+            "api_connectivity": api_connectivity,
         },
         "runtime_environment": runtime,
         "git_repository": git_is_repo(root),
@@ -2481,7 +2527,11 @@ def build_parser() -> argparse.ArgumentParser:
     github.add_argument("--private", action="store_true", help="Documentation uniquement; la visibilité se règle sur GitHub")
     sub.add_parser("github-sync", help="Pousser les commits locaux vers origin après authentification")
 
-    sub.add_parser("doctor", help="Contrôler l'installation portable")
+    doctor_parser = sub.add_parser("doctor", help="Contrôler l'installation portable")
+    doctor_parser.add_argument(
+        "--check-api", action="store_true",
+        help="Tester les API fr/en avec x-wikidebia-access sans afficher le jeton",
+    )
     return parser
 
 
@@ -2674,7 +2724,7 @@ def main(argv: list[str] | None = None) -> int:
         github_sync(root)
         print("Dépôt GitHub synchronisé.")
         return 0
-    report = doctor(root)
+    report = doctor(root, check_api=args.check_api)
     print(json.dumps(report, ensure_ascii=False, indent=2))
     return 0 if report["status"] == "passed" else 2
 
