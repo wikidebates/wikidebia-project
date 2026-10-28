@@ -11,6 +11,7 @@ from test_wikidebia_editorial_review import complete_review, review_tool, worksp
 import wikidebia_translation_review as translation
 import wikidebia_translation_source as preservation
 import wikidebia_french_checkpoint as french_checkpoint
+import wikidebia_graph_actions as graph_actions
 from wikidebia_editorial_workspace import capitalization_policy_for_kind
 
 def prepared(tmp_path):
@@ -84,6 +85,73 @@ def test_preserved_source_content_checkpoint_reuses_graph_output_exactly(tmp_pat
     assert record['stage'] == 'content'
     assert record['source_preservation_policy'] == preservation.POLICY
     assert record['source_content_review_sha256'] == lock['review_sha256']
+
+
+def test_source_freeze_inherits_effective_metadata_preserved_by_graph_publication(tmp_path):
+    project, workspace, work_id = prepared(tmp_path)
+    graph = french_checkpoint.build_checkpoint(project, 'debat_test', work_id, stage='graph')
+    manifest = json.loads((graph / 'manifest.json').read_text())
+    effective_root = project / '.state/update-effective/debat_test/fr'
+    effective_root.mkdir(parents=True)
+    operations = {name: [] for name in (
+        'create','update','move','redirect','delete','skip','manual_review','blocked',
+    )}
+    state_pages = []
+    for page in manifest['pages']:
+        source = graph / page['file_path']
+        operation_name = 'skip'
+        if page['page_id'] == 'A0001':
+            payload = source.read_text(encoding='utf-8')
+            payload = graph_actions._set_optional_parameter_value(payload, 'argument', 'rubriques', 'Société')
+            payload = graph_actions._set_optional_parameter_value(payload, 'argument', 'mots-clés', 'féminisme')
+            source = effective_root / 'A0001-effective.wiki'
+            source.write_text(payload, encoding='utf-8', newline='\n')
+            operation_name = 'update'
+        digest = hashlib.sha256(source.read_bytes()).hexdigest()
+        operations[operation_name].append({
+            'language':'fr', 'page_id':page['page_id'], 'page_type':page['page_type'],
+            'title':page['canonical_title'], 'phase':3 if operation_name == 'update' else 0,
+            'new_sha256':digest, 'local_file_sha256':digest,
+            'source_path':source.relative_to(project).as_posix(),
+        })
+        state_pages.append({
+            'page_id':page['page_id'], 'page_type':page['page_type'],
+            'canonical_title':page['canonical_title'], 'content_sha256':digest,
+            'revision_id':1000 + len(state_pages), 'status':'published',
+        })
+    plan={'debate_id':'debat_test','operations':operations}
+    plan['plan_sha256']=french_checkpoint.sha_object(plan)
+    graph_state=project/'.state/fr-publication/debat_test'/work_id/'graph'
+    french_checkpoint.write_json(graph_state/'update-plan.json',plan)
+    published={
+        'state_version':'wikidebia-published-state-1.0','debate_id':'debat_test',
+        'language':'fr','pages':state_pages,
+    }
+    published['state_sha256']=french_checkpoint.sha_object(published)
+    french_checkpoint.write_json(project/'.state/published/debat_test/fr/latest.json',published)
+    receipt={
+        'schema':french_checkpoint.RECEIPT_SCHEMA,'schema_version':'1.0','debate_id':'debat_test',
+        'work_id':work_id,'stage':'graph','status':'published',
+        'plan_path':(graph_state/'update-plan.json').relative_to(project).as_posix(),
+        'plan_sha256':plan['plan_sha256'],'published_state':{'state_sha256':published['state_sha256']},
+    }
+    receipt['receipt_sha256']=french_checkpoint.sha_object(receipt)
+    french_checkpoint.write_json(graph_state/'publication-receipt.json',receipt)
+
+    result=freeze(project,work_id)
+    assert result['french_pages_changed'] is False
+    frozen=workspace/'content-reviewed-copy'
+    provenance=json.loads((frozen/'data/import_provenance.json').read_text())
+    row=next(row for row in provenance['pages'] if row.get('page_id')=='A0001')
+    text=(frozen/row['import_path']).read_text(encoding='utf-8')
+    assert '|rubriques=Société' in text
+    assert '|mots-clés=féminisme' in text
+    metadata=json.loads((frozen/'data/fr_page_metadata_lock.json').read_text())
+    locked=next(row for row in metadata['arguments'] if row['id']=='A0001')
+    assert locked['rubriques']==['Société']
+    assert locked['keywords']==['féminisme']
+    receipt=json.loads((frozen/'data/source_preservation_receipt.json').read_text())
+    assert receipt['graph_publication_rebase']['pages_rebased']>=1
 
 def test_modified_reviewed_copy_is_rejected_before_freeze(tmp_path):
     project,workspace,work_id=prepared(tmp_path)

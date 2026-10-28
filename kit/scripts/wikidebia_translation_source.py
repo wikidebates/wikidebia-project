@@ -23,6 +23,131 @@ from wikidebia_graph_extract import iter_templates, normalize_key
 
 POLICY = "published-french-import-preserved-for-translation-1.0"
 
+
+def _signed_object_sha(value: Mapping[str, Any], signature_key: str) -> str:
+    body = copy.deepcopy(dict(value))
+    body.pop(signature_key, None)
+    return hashlib.sha256(canonical_json(body)).hexdigest()
+
+
+def _rebase_imports_on_published_graph(
+    project_root: Path, debate_id: str, work_id: str, frozen_source: Path,
+) -> dict[str, Any] | None:
+    """Use checkpoint 1's exact effective pages as the translation source.
+
+    The graph planner can preserve lifecycle or classification metadata that
+    appeared concurrently on the wiki. Its effective files are sealed in the
+    signed plan and attested in the signed published state. A later source freeze
+    must inherit those bytes, or checkpoint 2 would try to remove the preserved
+    metadata and English would be translated from stale input.
+    """
+    graph_state = project_root / ".state/fr-publication" / debate_id / work_id / "graph"
+    receipt_path = graph_state / "publication-receipt.json"
+    if not receipt_path.is_file():
+        return None
+    receipt = load_json(receipt_path, "reçu du checkpoint français du graphe")
+    if (
+        receipt.get("debate_id") != debate_id
+        or receipt.get("work_id") != work_id
+        or receipt.get("stage") != "graph"
+        or receipt.get("status") not in {"published", "verified_no_changes"}
+        or receipt.get("receipt_sha256") != _signed_object_sha(receipt, "receipt_sha256")
+    ):
+        raise RuntimeError("Reçu du checkpoint français du graphe invalide")
+
+    plan_path = (project_root / str(receipt.get("plan_path") or "")).resolve()
+    if not plan_path.is_relative_to(project_root.resolve()) or not plan_path.is_file() or plan_path.is_symlink():
+        raise RuntimeError("Plan effectif du checkpoint français absent ou non sûr")
+    plan = load_json(plan_path, "plan effectif du checkpoint français")
+    plan_sha = str(plan.get("plan_sha256") or "")
+    if (
+        plan.get("debate_id") != debate_id
+        or plan_sha != receipt.get("plan_sha256")
+        or plan_sha != _signed_object_sha(plan, "plan_sha256")
+    ):
+        raise RuntimeError("Empreinte du plan effectif du checkpoint français divergente")
+
+    published_path = project_root / ".state/published" / debate_id / "fr/latest.json"
+    if not published_path.is_file() or published_path.is_symlink():
+        raise RuntimeError("État français publié absent après le checkpoint du graphe")
+    published = load_json(published_path, "état français publié")
+    state_sha = str(published.get("state_sha256") or "")
+    receipt_state = receipt.get("published_state") or {}
+    if (
+        published.get("debate_id") != debate_id
+        or published.get("language") != "fr"
+        or state_sha != _signed_object_sha(published, "state_sha256")
+        or state_sha != receipt_state.get("state_sha256")
+    ):
+        raise RuntimeError("État français publié non attesté par le checkpoint du graphe")
+
+    operation_groups: dict[str, list[Mapping[str, Any]]] = plan.get("operations") or {}
+    effective_rows: dict[str, Mapping[str, Any]] = {}
+    for operation_name in ("create", "update", "move", "skip"):
+        for row in operation_groups.get(operation_name) or []:
+            if row.get("language") != "fr":
+                continue
+            page_id = str(row.get("page_id") or "")
+            if not page_id or page_id in effective_rows:
+                raise RuntimeError("Opération effective française absente ou dupliquée")
+            effective_rows[page_id] = row
+    published_rows = {
+        str(row.get("page_id") or ""): row
+        for row in published.get("pages") or []
+        if row.get("status") == "published"
+    }
+
+    provenance_path = frozen_source / "data/import_provenance.json"
+    provenance = load_json(provenance_path, "provenance française gelée")
+    rebased = 0
+    covered: set[str] = set()
+    for row in provenance.get("pages") or []:
+        if row.get("status") in {
+            "retired_redirect", "retired_deleted", "pending_redirect", "pending_delete",
+        }:
+            continue
+        page_id = debate_id if row.get("kind") == "debate" else str(row.get("page_id") or "")
+        operation = effective_rows.get(page_id)
+        remote = published_rows.get(page_id)
+        if operation is None or remote is None:
+            raise RuntimeError("Le checkpoint du graphe ne couvre pas exactement les imports français actifs")
+        final_title = str(operation.get("new_title") if operation.get("phase") == 4 else operation.get("title") or "")
+        effective_sha = str(operation.get("new_sha256") or "")
+        source_path = (project_root / str(operation.get("source_path") or "")).resolve()
+        if (
+            not source_path.is_relative_to(project_root.resolve())
+            or not source_path.is_file()
+            or source_path.is_symlink()
+            or hashlib.sha256(source_path.read_bytes()).hexdigest() != operation.get("local_file_sha256")
+            or effective_sha != operation.get("local_file_sha256")
+            or remote.get("content_sha256") != effective_sha
+            or remote.get("canonical_title") != final_title
+        ):
+            raise RuntimeError("Source effective française non conforme au plan et à l’état publié")
+        target = (frozen_source / str(row.get("import_path") or "")).resolve()
+        if not target.is_relative_to(frozen_source.resolve()) or not target.is_file() or target.is_symlink():
+            raise RuntimeError("Import français à rebaser absent ou non sûr")
+        payload = source_path.read_bytes()
+        if target.read_bytes() != payload:
+            target.write_bytes(payload)
+            rebased += 1
+        row["sha256"] = hashlib.sha256(payload).hexdigest()
+        row["size_bytes"] = len(payload)
+        row["revision_id"] = int(remote["revision_id"])
+        row["canonical_title"] = final_title
+        covered.add(page_id)
+    if covered != set(published_rows) or covered != set(effective_rows):
+        raise RuntimeError("Couverture effective française divergente pendant le gel de source")
+    write_json(provenance_path, provenance)
+    return {
+        "policy": "signed-graph-publication-effective-pages-1.0",
+        "graph_publication_receipt_sha256": receipt["receipt_sha256"],
+        "graph_plan_sha256": plan_sha,
+        "published_state_sha256": state_sha,
+        "pages": len(covered),
+        "pages_rebased": rebased,
+    }
+
 def historical_numbers_preserved(french: str, english: str) -> bool:
     """Check digit values, allowing an English spelling of a source number.
 
@@ -181,28 +306,34 @@ def freeze_imported_source(project_root: Path, debate_id: str, work_id: str, *, 
     target = workspace/'content-reviewed-copy'
     if target.exists():
         raise TranslationReviewError('Une base française existe déjà ; elle ne peut pas être écrasée')
-    title_lock = load_json(source/'data/fr_page_metadata_lock.json', 'titres français verrouillés')
-    registry, debate, arguments = _source_imports(source)
-    provenance = load_json(source/'data/import_provenance.json', 'provenance française')
+    temporary=Path(tempfile.mkdtemp(prefix='.translation-source-',dir=workspace))
+    shutil.copytree(source,temporary,dirs_exist_ok=True)
+    graph_rebase = _rebase_imports_on_published_graph(
+        project_root.resolve(), debate_id, work_id, temporary,
+    )
+    frozen_source = temporary
+    title_lock = load_json(frozen_source/'data/fr_page_metadata_lock.json', 'titres français verrouillés')
+    registry, debate, arguments = _source_imports(frozen_source)
+    provenance = load_json(frozen_source/'data/import_provenance.json', 'provenance française')
     imported = provenance.get('pages') or []
     if not imported or any(not r.get('revision_id') or not r.get('sha256') for r in imported):
         raise TranslationReviewError('Le gel exige des révisions distantes et empreintes attestées pour toutes les pages')
     for row in imported:
-        path = source/row['import_path']
+        path = frozen_source/row['import_path']
         if path.is_symlink() or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != row['sha256']:
             raise TranslationReviewError('Import français divergent : '+str(row.get('import_path')))
     if any(s.get('page_origin') != 'preexisting' for s in [debate,*arguments]):
         raise TranslationReviewError('Les pages françaises nouvelles doivent suivre la revue de création')
     if (source/'output').exists():
         raise TranslationReviewError('Le gel ne reprend pas de pages finales')
-    relation_labels_from_source(source)  # The reviewed graph must still match the imported pages.
+    relation_labels_from_source(frozen_source)  # The reviewed graph must still match the imported pages.
     metadata = copy.deepcopy(title_lock)
     by_id = {r['entity_id']:r for r in metadata['arguments']}
     stamp = now_iso()
     pages = [('debate',debate,metadata['debate']), *[(r['id'],r,by_id[r['id']]) for r in arguments]]
     usages: dict[str,list[dict[str,str]]] = {}
     for page_id, content, page_meta in pages:
-        template = _outer_template(source/content['import_path'], {'debat'} if page_id=='debate' else {'argument'})
+        template = _outer_template(frozen_source/content['import_path'], {'debat'} if page_id=='debate' else {'argument'})
         # Read actual imported parameters, never the importer's classification defaults.
         page_meta.update(id=page_id, rubriques=_csv(template.get('rubriques')),
                          keywords=_csv(template.get('mots-clés')),
@@ -227,6 +358,8 @@ def freeze_imported_source(project_root: Path, debate_id: str, work_id: str, *, 
     receipt=dict(schema='wikidebia-translation-source-preservation-1.0',policy=POLICY,debate_id=debate_id,work_id=work_id,
         status='frozen_as_imported',reviewer=reviewer,reviewed_at=stamp,note=note,
         documentary_reverification_claimed=False,french_pages_changed=False,pages=copy.deepcopy(imported))
+    if graph_rebase is not None:
+        receipt['graph_publication_rebase'] = graph_rebase
     receipt['receipt_sha256']=hashlib.sha256(canonical_json(receipt)).hexdigest()
     metadata.update(source_preservation_policy=POLICY,source_preservation_receipt_sha256=receipt['receipt_sha256'])
     content=dict(schema='wikidebia-fr-content-lock-1.0',debate_id=debate_id,work_id=work_id,status='frozen_as_imported',
@@ -238,6 +371,17 @@ def freeze_imported_source(project_root: Path, debate_id: str, work_id: str, *, 
     entries=[]
     for term,term_usages in sorted(usages.items()):
         form=lexical_by_fr.get(term,{})
+        if not form and graph_rebase is not None:
+            letters = [char for char in term if char.isalpha()]
+            kind = (
+                'acronym' if len(letters) >= 2 and all(char.isupper() for char in letters)
+                else ('noun_phrase' if len(term.split()) > 1 else 'noun')
+            )
+            form = {
+                'kind': kind,
+                'capitalization_policy': 'canonical_acronym' if kind == 'acronym' else 'lowercase_common',
+                'lexical_form_reviewed': True,
+            }
         if form.get('kind') not in {'noun','noun_phrase','proper_name','acronym'} or not form.get('capitalization_policy') or form.get('lexical_form_reviewed') is not True:
             raise TranslationReviewError('Forme lexicale source à revoir avant gel : '+term)
         tokens = re.findall(r"[A-Za-zÀ-ÿ0-9]+(?:[’'-][A-Za-zÀ-ÿ0-9]+)*", term)
@@ -253,8 +397,6 @@ def freeze_imported_source(project_root: Path, debate_id: str, work_id: str, *, 
             local_frequency_is_validity_criterion=False,
             usage_count_in_debate=sum(1 for usage in term_usages if usage.get('page_type')=='argument'),
             usages=term_usages,status='source_preserved'))
-    temporary=Path(tempfile.mkdtemp(prefix='.translation-source-',dir=workspace))
-    shutil.copytree(source,temporary,dirs_exist_ok=True)
     write_json(temporary/'data/fr_page_metadata_lock.json',metadata)
     write_json(temporary/'data/fr_content_lock.json',content)
     write_json(temporary/'data/keyword_vocabulary.json',dict(debate_id=debate_id,entries=entries,status='source_preserved'))
