@@ -247,7 +247,7 @@ def _preserved_keyword_duplicates(ctx: PackageContext, schema_name: str, instanc
         return False
     provenance = ctx.load_json("data/import_provenance.json") or {}
     source = next((r for r in provenance.get("pages") or [] if r.get("page_id") == node_id), None)
-    if not source or not ctx.exists("data/keyword_vocabulary_bilingual.json"):
+    if not source:
         return False
     from .wikicode import parse_template
     try:
@@ -255,6 +255,12 @@ def _preserved_keyword_duplicates(ctx: PackageContext, schema_name: str, instanc
     except ValueError:
         return False
     french = [v.strip() for v in original.split(",") if v.strip()]
+    if path[2] == "fr":
+        if err.validator == "minItems":
+            return not french and node.get("fr", {}).get("keywords") == []
+        return len(french) != len(set(french)) and node.get("fr", {}).get("keywords") == french
+    if not ctx.exists("data/keyword_vocabulary_bilingual.json"):
+        return False
     entries = (ctx.load_json("data/keyword_vocabulary_bilingual.json") or {}).get("entries") or []
     mapping = {r.get("fr"): r.get("en") for r in entries}
     if any(v not in mapping for v in french):
@@ -266,7 +272,7 @@ def _preserved_keyword_duplicates(ctx: PackageContext, schema_name: str, instanc
     expected = [mapping[v] for v in french]
     # Duplicates must have exactly the same positions; distinct FR concepts
     # must not have been accidentally collapsed onto one English keyword.
-    return len(set(expected)) == len(set(french)) and node.get(path[2], {}).get("keywords") == (expected if path[2] == "en" else french)
+    return len(set(expected)) == len(set(french)) and node.get("en", {}).get("keywords") == expected
 
 
 def validate_instance(ctx: PackageContext, store: SchemaStore, rel: str, schema_name: str, instance: Any | None = None) -> None:

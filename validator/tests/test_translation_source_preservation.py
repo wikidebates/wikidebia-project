@@ -29,12 +29,16 @@ def fixture(root):
 def context(root):
     return PackageContext(root,Report('test',str(root),['schema']))
 
-def error():
-    return SimpleNamespace(validator='uniqueItems',absolute_path=['graph','nodes',0,'en','keywords'])
+def error(language='en'):
+    return SimpleNamespace(validator='uniqueItems',absolute_path=['graph','nodes',0,language,'keywords'])
 
 def test_only_exact_source_duplicates_are_exempt(tmp_path):
     registry=fixture(tmp_path);ctx=context(tmp_path)
     assert _valid_translation_source_preservation(ctx)
+    (tmp_path/'data/keyword_vocabulary_bilingual.json').unlink()
+    registry['graph']['nodes'][0]['fr']={'keywords':['cannabis','liberté','cannabis']}
+    assert _preserved_keyword_duplicates(ctx,'argument_registry.schema.json',registry,error('fr'))
+    dump(tmp_path/'data/keyword_vocabulary_bilingual.json',{'entries':[{'fr':'cannabis','en':'cannabis'},{'fr':'liberté','en':'liberty'}]})
     assert _preserved_keyword_duplicates(ctx,'argument_registry.schema.json',registry,error())
     registry['graph']['nodes'][0]['en']['keywords'].append('liberty')
     assert not _preserved_keyword_duplicates(ctx,'argument_registry.schema.json',registry,error())
