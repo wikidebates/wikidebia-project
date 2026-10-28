@@ -10,6 +10,21 @@ Le validateur 0.4.105 s’aligne sur la norme 1.2.88 et le kit 2.16.47. Il conse
 
 Norme active : 1.2.88. Kit associé : 2.16.47.
 
+## Régénération des métadonnées du paquet
+
+Après une modification du validateur et une exécution réussie de sa suite de
+tests, régénérer les rapports, le manifeste et le reçu avec le nombre exact de
+tests :
+
+```bash
+python validator/scripts/refresh_package_metadata.py --test-count N
+python validator/scripts/self_audit.py
+```
+
+Le générateur exclut ses propres manifeste et reçu du calcul, met à jour les
+deux rapports avant de calculer les empreintes et produit un résultat identique
+pour des sources, une date et un nombre de tests identiques.
+
 Il accepte en outre les deux formes légitimes de `documentation_family_notes` (trois familles agrégées ou neuf familles orientées), et la limite formelle de longueur d’un mot-clé ne s’applique plus lorsqu’une exception multi-mots valide du vocabulaire contrôlé atteste déjà le concept lexicalisé. Les contrôles restent stricts sur les contenus nouveaux, les introductions autorisées modifiées et les mots-clés sans attestation atomique.
 
 

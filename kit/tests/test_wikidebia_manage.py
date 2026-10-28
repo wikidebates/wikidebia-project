@@ -339,6 +339,7 @@ def test_doctor_accepts_managed_pywikibot_credentials_without_server_config(tmp_
         "local_pywikibot_config": False,
         "managed_credentials": {"fr": "complete", "en": "absent"},
         "api_access_header_configured": True,
+        "api_connectivity": {"requested": False},
     }
 
 
@@ -358,6 +359,58 @@ def test_doctor_reports_partial_managed_credentials_without_values(tmp_path: Pat
 
     assert any("WIKIDEBIA_FR_BOT_PASSWORD" in issue for issue in report["issues"])
     assert "ChatGPT@Codex-FR" not in json.dumps(report)
+
+
+def test_doctor_api_check_reports_both_languages_without_exposing_token(tmp_path: Path, monkeypatch):
+    token = "secret-access-placeholder"
+    monkeypatch.setenv("WIKIDEBIA_API_TOKEN", token)
+    monkeypatch.setenv("WIKIDEBIA_FR_BOT_USERNAME", "ChatGPT@Codex-FR")
+    monkeypatch.setenv("WIKIDEBIA_FR_BOT_PASSWORD", "managed-placeholder")
+    monkeypatch.setattr(module, "check_wikidebates_apis", lambda value: {
+        "fr": {"status": "passed", "http_status": 200},
+        "en": {"status": "passed", "http_status": 200},
+    })
+    monkeypatch.setattr(module, "runtime_environment_report", lambda root: {
+        "requirements_sha256": "x", "python_available": True,
+        "missing_modules": [], "probe_error": None,
+    })
+    monkeypatch.setattr(module, "assert_portable_sources", lambda root: None)
+    monkeypatch.setattr(module, "git_security_issues", lambda root: [])
+
+    report = module.doctor(tmp_path, check_api=True)
+
+    assert report["access_configuration"]["api_connectivity"]["languages"] == {
+        "fr": {"status": "passed", "http_status": 200},
+        "en": {"status": "passed", "http_status": 200},
+    }
+    assert token not in json.dumps(report)
+
+
+def test_api_probe_sends_header_only_to_expected_hosts(monkeypatch):
+    requests = []
+
+    class Response:
+        status = 200
+        def __enter__(self): return self
+        def __exit__(self, *args): return False
+
+    def fake_urlopen(request, timeout):
+        requests.append(request)
+        return Response()
+
+    monkeypatch.setattr(module.urllib.request, "urlopen", fake_urlopen)
+
+    result = module.check_wikidebates_apis("secret-placeholder")
+
+    assert result == {
+        "fr": {"status": "passed", "http_status": 200},
+        "en": {"status": "passed", "http_status": 200},
+    }
+    assert [request.host for request in requests] == [
+        "fr.wikidebates.org", "en.wikidebates.org",
+    ]
+    assert all(request.get_header("X-wikidebia-access") == "secret-placeholder" for request in requests)
+    assert all("doctor" in request.get_header("User-agent") for request in requests)
 
 
 def _init_git_repo(root: Path) -> None:
@@ -417,6 +470,12 @@ def test_parser_exposes_github_sync_command():
     parser = module.build_parser()
     args = parser.parse_args(["github-sync"])
     assert args.command == "github-sync"
+
+
+def test_parser_exposes_optional_api_diagnostic():
+    args = module.build_parser().parse_args(["doctor", "--check-api"])
+    assert args.command == "doctor"
+    assert args.check_api is True
 
 
 def test_parser_exposes_continuity_sync_check_command():
