@@ -1561,9 +1561,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         raise EditorialReviewError("--confirm-review-sha256 est obligatoire avec --apply")
     with exclusive_lock(project_root, debate_id, "editorial_metadata_review"):
         if args.finalize:
-            result = finalize_review(project_root, debate_id, work_id)
+            result = finalize_title_review(project_root, debate_id, work_id)
         else:
-            result = apply_review(project_root, debate_id, work_id, str(args.confirm_review_sha256))
+            result = apply_title_review(project_root, debate_id, work_id, str(args.confirm_review_sha256))
     print(json.dumps(result, ensure_ascii=False, sort_keys=True) if args.machine_readable else json.dumps(result, ensure_ascii=False, indent=2))
     return 0
 

@@ -109,6 +109,22 @@ def test_source_page_preservation_allows_only_the_added_link(tmp_path):
     assert not preserved_french_page(ctx,page,good.replace('liberté','contrôle'))
     assert not preserved_french_page(ctx,page,good.replace('}}\n}}','}}\n|résumé=Nouveau texte}}'))
 
+
+def test_source_page_preservation_accepts_an_identical_existing_link(tmp_path):
+    from wikidebia_validator.source_preservation import preserved_french_page
+    fixture(tmp_path)
+    path = tmp_path / 'imports/fr/arguments/A0001.wiki'
+    source = path.read_text()
+    source = source[:-2] + '|interlangue={{Lien interlangue|langue=en|page=Existing title}}\n}}\n'
+    path.write_text(source)
+    provenance = json.loads((tmp_path / 'data/import_provenance.json').read_text())
+    provenance['pages'][0]['sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
+    dump(tmp_path / 'data/import_provenance.json', provenance)
+    ctx = context(tmp_path)
+    page = {'page_id': 'A0001', 'language': 'fr', 'page_type': 'argument', 'page_origin': 'preexisting'}
+    assert preserved_french_page(ctx, page, source)
+    assert not preserved_french_page(ctx, page, source.replace('Existing title', 'Different title'))
+
 def test_mixed_quote_passages_keep_positions_and_full_text():
     from wikidebia_validator.wikicode import _mixed_citations
     quotes,gaps=_mixed_citations('{{Quote|quote=First}}A complete passage.{{Quote|quote=Second}}End.')

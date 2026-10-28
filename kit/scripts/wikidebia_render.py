@@ -99,6 +99,103 @@ def _add_french_interlanguage(text: str, target_title: str) -> str:
     return rendered.rstrip("\n") + "\n"
 
 
+def _normalize_legacy_french_quote_warnings(text: str) -> str:
+    """Rename the historical ``Citation.avertissements`` alias losslessly.
+
+    Current French quote templates require ``avertissements-citation``.  Old
+    wiki pages may still carry the former generic name.  Keep the value and all
+    surrounding wikicode byte-for-byte, changing only that parameter name so a
+    preserved page remains publishable under the current template contract.
+    """
+    from wikidebia_graph_extract import _template_spans, _split_top_level, normalize_key, parse_template
+
+    masked = re.sub(r"<!--.*?-->", lambda match: " " * len(match.group()), text, flags=re.S)
+    replacements: list[tuple[int, int, str]] = []
+    for start, end in _template_spans(masked):
+        call = parse_template(masked[start:end])
+        if call is None or normalize_key(call.name) != "citation":
+            continue
+        raw = text[start:end]
+        segments = _split_top_level(raw[2:-2], "|")
+        keys: list[tuple[int, str]] = []
+        for index, segment in enumerate(segments[1:], start=1):
+            pieces = _split_top_level(segment, "=", maxsplit=1)
+            if len(pieces) == 2:
+                keys.append((index, normalize_key(pieces[0])))
+        legacy = [index for index, key in keys if key == "avertissements"]
+        canonical = [index for index, key in keys if key == "avertissements citation"]
+        if len(legacy) > 1 or len(canonical) > 1 or legacy and canonical:
+            raise RenderError("Paramètres d'avertissement de Citation ambigus")
+        if not legacy:
+            continue
+        index = legacy[0]
+        pieces = _split_top_level(segments[index], "=", maxsplit=1)
+        match = re.fullmatch(r"(\s*)avertissements(\s*)", pieces[0], flags=re.I)
+        if match is None:
+            raise RenderError("Nom historique du paramètre d'avertissement de Citation ambigu")
+        segments[index] = (
+            f"{match.group(1)}avertissements-citation{match.group(2)}={pieces[1]}"
+        )
+        replacements.append((start, end, "{{" + "|".join(segments) + "}}"))
+    for start, end, replacement in sorted(replacements, reverse=True):
+        text = text[:start] + replacement + text[end:]
+    return text
+
+
+def _render_graph_aligned_french_source(
+    source: Path,
+    content: Mapping[str, Any],
+    registry: Mapping[str, Any],
+    *,
+    page_id: str | None,
+    page_type: str,
+    contextual_labels: Sequence[Mapping[str, Any]] = (),
+) -> str:
+    """Project reviewed graph links into an otherwise preserved French page.
+
+    A title checkpoint may rename a child page while retaining the exact
+    historical ``titre-affiché`` attached to each occurrence.  The final
+    bilingual renderer must therefore update ``page=`` targets before it adds
+    the interlanguage link.  Every other byte remains sourced from the locked
+    import, and empty relation parameters are removed rather than materialized.
+    """
+    from wikidebia_graph_actions import _set_optional_parameter_value
+
+    path = source / str(content.get("import_path") or "")
+    if not path.is_file() or sha256_file(path) != content.get("import_sha256"):
+        raise RenderError("Import français historique absent ou modifié")
+    text = path.read_text(encoding="utf-8")
+    if page_type == "debate":
+        text = _set_optional_parameter_value(
+            text, "debate", "arguments-pour",
+            _main_arguments(registry, "pro", "fr", contextual_labels),
+        )
+        text = _set_optional_parameter_value(
+            text, "debate", "arguments-contre",
+            _main_arguments(registry, "con", "fr", contextual_labels),
+        )
+        return text.rstrip("\n") + "\n"
+    if page_type != "argument" or not page_id:
+        raise RenderError("Type de page française préservée invalide")
+
+    depth_policy = (registry.get("graph") or {}).get("depth_policy") or {}
+    frontier_ids = {
+        str(value) for value in depth_policy.get("frontier_node_ids") or []
+    } if depth_policy.get("limit_policy") == "bounded" else set()
+    dedicated_present, _ = _optional_preserved_parameter(content, "débat-dédié")
+    if page_id not in frontier_ids and not dedicated_present:
+        text = _set_optional_parameter_value(
+            text, "argument", "justifications",
+            _relations(registry, page_id, "justification", "fr", contextual_labels),
+        )
+        text = _set_optional_parameter_value(
+            text, "argument", "objections",
+            _relations(registry, page_id, "objection", "fr", contextual_labels),
+        )
+    text = _normalize_legacy_french_quote_warnings(text)
+    return text.rstrip("\n") + "\n"
+
+
 def _published_content_checkpoint(
     project_root: Path, debate_id: str, work_id: str, fr_content: Mapping[str, Any],
 ) -> Path | None:
@@ -786,13 +883,18 @@ def _render_argument(
             source_detailed_present, _ = _optional_preserved_parameter(source_content, "débat-dédié")
         if source_detailed_present:
             detailed_present = True
-            detailed_value = str(content.get("dedicated_debate") or "").strip()
+            reviewed_dedicated = content.get("dedicated_debate")
+            if isinstance(reviewed_dedicated, Mapping):
+                reviewed_dedicated = reviewed_dedicated.get("dedicated_debate")
+            detailed_value = str(reviewed_dedicated or "").strip()
             if not detailed_value:
                 raise RenderError(f"Traduction du débat-dédié absente : {node_id}")
         else:
             detailed_present, detailed_value = _optional_preserved_parameter(content, "dedicated-debate")
-            if content.get("dedicated_debate"):
-                detailed_present, detailed_value = True, content["dedicated_debate"]
+            if source_content is None:
+                reviewed_dedicated = content.get("dedicated_debate")
+                if isinstance(reviewed_dedicated, str) and reviewed_dedicated.strip():
+                    detailed_present, detailed_value = True, reviewed_dedicated.strip()
         _append_lifecycle_parameter(params, content, "justification-warnings", None)
         params.append(("justifications", None if detailed_present else _relations(registry, node_id, "justification", "en", content.get("relation_labels") or [])))
         _append_lifecycle_parameter(params, content, "objection-warnings", None)
@@ -1134,6 +1236,14 @@ def _finalize_summary_review(target: Path, debate_id: str) -> None:
 _KEYWORD_WORD_TOKEN = re.compile(r"[A-Za-zÀ-ÿ]+(?:[-’'][A-Za-zÀ-ÿ]+)?")
 _KEYWORD_CONNECTOR_FR = re.compile(r"\b(?:de|du|des|la|le|et)\b|\bd[’']", re.I)
 _KEYWORD_CONNECTOR_EN = re.compile(r"\b(?:of|and|the)\b", re.I)
+_PRODUCTIVE_KEYWORD_FR = re.compile(
+    r"^(?:limites?|histoire|construction|fiabilité|origine|sens|définition|concept|existence|preuves?|psychologie|sociologie|géographie|généalogie)\s+(?:de|du|des|de la|de l['’])\b",
+    re.I,
+)
+_PRODUCTIVE_KEYWORD_EN = re.compile(
+    r"^(?:limits?|history|construction|reliability|origin|meaning|definition|concept|existence|evidence|psychology|sociology|geography|genealogy)\s+(?:of|of the)\b",
+    re.I,
+)
 
 
 def _keyword_requires_multiword_exception(value: str, language: str) -> bool:
@@ -1209,6 +1319,13 @@ def _finalize_keyword_vocabulary(target: Path) -> None:
                 entry["multiword_exception"] = False
                 entry.pop("multiword_exception_rationale", None)
                 changed = True
+            if _PRODUCTIVE_KEYWORD_FR.search(fr_value):
+                entry["productive_phrase_exception"] = True
+                entry["productive_phrase_exception_rationale"] = (
+                    f'Locution conceptuelle historique « {fr_value} » conservée comme catégorie '
+                    "lexicalisée du vocabulaire de navigation ; elle est attestée par les pages sources."
+                )
+                changed = True
 
         en_value = str(entry.get("en") or "").strip()
         if (
@@ -1227,6 +1344,13 @@ def _finalize_keyword_vocabulary(target: Path) -> None:
             elif not needs and entry.get("en_multiword_exception") is True:
                 entry["en_multiword_exception"] = False
                 entry["en_multiword_exception_rationale"] = ""
+                changed = True
+            if _PRODUCTIVE_KEYWORD_EN.search(en_value):
+                entry["en_productive_phrase_exception"] = True
+                entry["en_productive_phrase_exception_rationale"] = (
+                    f'Historical lexicalized navigation concept "{en_value}" retained as one '
+                    "controlled category because it directly translates the attested source term."
+                )
                 changed = True
 
     if changed:
@@ -1529,6 +1653,77 @@ def _build_rendered_copy(
             argument["relation_labels"] = [
                 row for row in contextual_labels if row["source_page_id"] == node_id
             ]
+    if preserve_french and published_french is None:
+        # Build an immutable baseline that differs from the attested imports
+        # only by reviewed graph-bearing parameters.  The public French output
+        # is then this baseline plus its interlanguage link, allowing the
+        # validator to prove both historical preservation and canonical target
+        # alignment after title corrections.
+        baseline_rows: list[dict[str, Any]] = []
+        debate_locked = fr_content.get("debate") or {}
+        debate_original_path = str(debate_locked.get("import_path") or "")
+        debate_original_sha = str(debate_locked.get("import_sha256") or "")
+        debate_baseline = _render_graph_aligned_french_source(
+            target,
+            debate_locked,
+            registry,
+            page_id=debate_id,
+            page_type="debate",
+            contextual_labels=debate_locked.get("relation_labels") or [],
+        )
+        baseline_pages = [
+            (
+                debate_id,
+                "debate",
+                debate_locked,
+                debate_baseline,
+                Path("provenance/fr-render-graph-checkpoint/debate/debate.wiki"),
+                debate_original_path,
+                debate_original_sha,
+            )
+        ]
+        for node_id, locked_page in sorted(fr_args.items()):
+            original_path = str(locked_page.get("import_path") or "")
+            original_sha = str(locked_page.get("import_sha256") or "")
+            baseline_pages.append((
+                node_id,
+                "argument",
+                locked_page,
+                _render_graph_aligned_french_source(
+                    target,
+                    locked_page,
+                    registry,
+                    page_id=node_id,
+                    page_type="argument",
+                    contextual_labels=locked_page.get("relation_labels") or [],
+                ),
+                Path(f"provenance/fr-render-graph-checkpoint/arguments/{node_id}.wiki"),
+                original_path,
+                original_sha,
+            ))
+        for page_id, page_type, locked_page, baseline_text, relative, original_path, original_sha in baseline_pages:
+            destination = target / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_text(baseline_text, encoding="utf-8", newline="\n")
+            baseline_sha = sha256_file(destination)
+            locked_page["import_path"] = relative.as_posix()
+            locked_page["import_sha256"] = baseline_sha
+            baseline_rows.append({
+                "page_id": page_id,
+                "kind": page_type,
+                "import_path": relative.as_posix(),
+                "sha256": baseline_sha,
+                "source_import_path": original_path,
+                "source_import_sha256": original_sha,
+                "allowed_delta": "reviewed_graph_parameters_only",
+            })
+        write_json(target / "data/fr_render_source_provenance.json", {
+            "schema": "wikidebia-fr-render-source-provenance-1.0",
+            "debate_id": debate_id,
+            "work_id": work_id,
+            "derivation": "reviewed_graph_parameters_only",
+            "pages": baseline_rows,
+        })
     if preserve_french:
         frozen_meta = {r.get("entity_id", r.get("id")): r for r in fr_meta["arguments"]}
         for node in nodes:
@@ -1661,14 +1856,20 @@ def _build_rendered_copy(
             title = str((node.get(lang) or {}).get("canonical_title"))
             batch_id = batch_by_lang[lang]
         page_content = (fr_content if lang == "fr" else en_content).get("debate") if page_type == "debate" else (fr_args if lang == "fr" else en_args)[page_id]
+        adoption = (page_content or {}).get("existing_english_update") if lang == "en" else None
         page_manifests.append(_page_manifest(
             debate_id=debate_id, page_id=page_id, page_type=page_type, lang=lang, title=title,
             file_path=rel, sha256=sha, creation_date=dates[(page_id, lang)], batch_id=batch_id,
             timestamp=timestamp, report_path="reports/final_validation.json",
-            page_origin=str((page_content or {}).get("page_origin") or "new"),
+            # Editorial origin and remote-publication origin answer different
+            # questions.  A page translated as new in this Work may already
+            # exist remotely because an earlier partial publication created it.
+            # Keep the semantic review lifecycle unchanged, while declaring the
+            # exact revision-bound adoption as preexisting in the publishable
+            # page manifest consumed by the update engine.
+            page_origin="preexisting" if adoption else str((page_content or {}).get("page_origin") or "new"),
             preserved_parameters=(page_content or {}).get("preserved_parameters") or {},
         ))
-        adoption = (page_content or {}).get("existing_english_update") if lang == "en" else None
         if adoption:
             authorization = {"decision": "explicit_user_request", "action": "edit", "instruction": adoption["instruction"]}
             page_manifests[-1].update(

@@ -39,6 +39,7 @@ from wikidebia_render import (
     _page_manifest,
     _render_argument,
     _render_debate,
+    _normalize_legacy_french_quote_warnings,
     _write_aggregate,
     _copy_active_norm,
 )
@@ -311,6 +312,7 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
             text, baseline, page_type="argument",
             parameters=("citations", "justifications", "objections"),
         )
+        text = _normalize_legacy_french_quote_warnings(text)
         path = target / rel
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text, encoding="utf-8", newline="\n")

@@ -18,6 +18,35 @@ def test_productive_thematic_keyword_is_rejected_even_with_generic_attestation()
     assert "productive_thematic_phrase" in issues
 
 
+def test_productive_historical_keyword_requires_explicit_semantic_exception():
+    assert keyword_atomicity_issues(
+        "histoire du féminisme",
+        {
+            "atomic_concept": True,
+            "compositional_intersection": False,
+            "multiword_exception": True,
+            "multiword_exception_rationale": "Locution historique conservée comme concept de navigation atomique.",
+        },
+        "fr",
+        require_composition_attestation=True,
+    ) == []
+
+
+def test_productive_exception_without_semantic_rationale_is_rejected():
+    issues = keyword_atomicity_issues(
+        "history of feminism",
+        {
+            "atomic_concept": True,
+            "compositional_intersection": False,
+            "multiword_exception": True,
+            "multiword_exception_rationale": "Keep this old value.",
+        },
+        "en",
+        require_composition_attestation=True,
+    )
+    assert "productive_thematic_phrase" in issues
+
+
 def test_lexicalized_multiword_keyword_is_accepted_with_specific_exception():
     assert keyword_atomicity_issues(
         "lois de la nature",

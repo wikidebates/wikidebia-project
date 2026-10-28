@@ -62,3 +62,32 @@ def test_global_preflight_rejects_changed_owner_approved_revision():
         def read_page(self,title):return True,13,'current text'
     row=dict(language='en',page_id='A0007',title='Existing title',operation='update',remote_revision_id=12,remote_sha256=final.sha_text('current text'))
     with pytest.raises(final.FinalPublicationError):final._remote_snapshot_for_english(Adapter(),{'actions':[row]},'ChatGPT')
+
+
+def test_final_publication_plans_never_delete_pages_retired_from_the_work(monkeypatch, tmp_path: Path):
+    modes=[]
+    class Planner:
+        def __init__(self,*args):pass
+        def build_plan(self,*,mode):
+            modes.append(mode)
+            return {'operations':{},'plan_sha256':f'plan-{len(modes)}'}
+    class Publisher:
+        def __init__(self,*args):pass
+        def build_plan(self):return {'actions':[],'plan_sha256':'en-plan'}
+    counter=iter(('safety-update-config.json','french-update-config.json'))
+    def update_config(project_root,debate_id,release_copy,state_dir,languages,name):
+        path=state_dir/next(counter);path.write_text('{}')
+        return path,{}
+    def english_config(project_root,debate_id,release_copy,state_dir):
+        path=state_dir/'english-publication-config.json';path.write_text('{}')
+        return path,{}
+    monkeypatch.setattr(final,'RemoteUpdatePlanner',Planner)
+    monkeypatch.setattr(final,'GenericPublisher',Publisher)
+    monkeypatch.setattr(final,'build_adapter',lambda *args:object())
+    monkeypatch.setattr(final,'_update_config',update_config)
+    monkeypatch.setattr(final,'_english_config',english_config)
+    monkeypatch.setattr(final,'_approved_english_updates',lambda *args:{})
+    monkeypatch.setattr(final,'_assert_safe_update_plan',lambda *args,**kwargs:None)
+    monkeypatch.setattr(final,'_assert_safe_english_plan',lambda *args,**kwargs:None)
+    final._load_or_build_plans(tmp_path,'debate','work',tmp_path/'release',tmp_path)
+    assert modes==['no_delete','no_delete']

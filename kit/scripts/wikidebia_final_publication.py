@@ -360,10 +360,17 @@ def _load_or_build_plans(
         project_root, debate_id, release_copy, state_dir, ["fr", "en"], "safety-update-config.json"
     )
     safety_adapter = build_adapter(safety_config, project_root)
-    safety_plan = RemoteUpdatePlanner(safety_config, safety_adapter, safety_config_path).build_plan(mode="all")
+    # Pages that belonged to an earlier, broader graph remain valid wiki pages
+    # even when the current Work no longer references them.  Final publication
+    # must therefore leave them untouched instead of planning remote deletions.
+    safety_plan = RemoteUpdatePlanner(safety_config, safety_adapter, safety_config_path).build_plan(mode="no_delete")
     approved_updates = _approved_english_updates(release_copy)
-    _assert_safe_update_plan(safety_plan, full=True, approved_updates=approved_updates)
     write_json(state_dir / "safety-update-plan.json", safety_plan)
+    # Preserve the signed read-only diagnostic even when the automatic gate
+    # rejects it.  Authorization has not been created at this point, so saving
+    # the plan cannot start a remote write and exposes the exact blocker for a
+    # deterministic repair/resume.
+    _assert_safe_update_plan(safety_plan, full=True, approved_updates=approved_updates)
 
     # Exact FR execution plan, rebuilt separately so its signed state contains only
     # the interlanguage updates and cannot accidentally execute EN create rows.
@@ -371,7 +378,7 @@ def _load_or_build_plans(
         project_root, debate_id, release_copy, state_dir, ["fr"], "french-update-config.json"
     )
     fr_adapter = build_adapter(fr_config, project_root)
-    fr_plan = RemoteUpdatePlanner(fr_config, fr_adapter, fr_config_path).build_plan(mode="all")
+    fr_plan = RemoteUpdatePlanner(fr_config, fr_adapter, fr_config_path).build_plan(mode="no_delete")
     _assert_safe_update_plan(fr_plan, full=False)
     write_json(state_dir / "french-update-plan.json", fr_plan)
 

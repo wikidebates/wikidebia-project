@@ -1272,6 +1272,15 @@ def _parameter_pairs(rows: Any) -> list[tuple[str, str]]:
         out.append((name, value))
     return out
 
+def _canonical_french_quote_warning_alias(
+    rows: list[tuple[str, str]],
+) -> list[tuple[str, str]]:
+    """Treat the one retired French Citation warning name as its successor."""
+    return [
+        ('avertissements-citation' if name == 'avertissements' else name, value)
+        for name, value in rows
+    ]
+
 def _validate_citations_against_locks(ctx: PackageContext, tmpl: Template, rel: str, lang: str, page_id: str) -> None:
     lock_path = 'data/fr_content_lock.json' if lang == 'fr' else 'data/en_content_lock.json'
     lock = ctx.load_json(lock_path, required=True)
@@ -1302,7 +1311,9 @@ def _validate_citations_against_locks(ctx: PackageContext, tmpl: Template, rel: 
             continue
         expected_params = _parameter_pairs(expected.get('source_parameters') if lang == 'fr' else expected.get('parameters'))
         actual_params = [(str(name).strip(), str(value).strip()) for name, value in actual.params]
-        if actual_params != expected_params:
+        comparable_expected = _canonical_french_quote_warning_alias(expected_params) if lang == 'fr' else expected_params
+        comparable_actual = _canonical_french_quote_warning_alias(actual_params) if lang == 'fr' else actual_params
+        if comparable_actual != comparable_expected:
             ctx.report.error('WDV-MWK-021', 'Les paramètres de la citation divergent du verrou bilingue ; les noms doivent être anglais et seules les valeurs de quote et date peuvent être traduites', path=rel, pointer=f'{parameter}/{index}', details={'expected': expected_params, 'actual': actual_params, 'citation_id': expected.get('id')})
         if lang == 'en':
             current_contract = True

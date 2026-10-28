@@ -1890,7 +1890,7 @@ def _summary_review_decision(ctx: PackageContext, node_id: str, language: str) -
 def _localized_keyword_entry(entry: dict[str, Any] | None, language: str) -> dict[str, Any]:
     data=dict(entry or {})
     if language == 'en':
-        for base in ('kind','capitalization_policy','multiword_exception','multiword_exception_rationale','compositional_intersection','atomic_concept'):
+        for base in ('kind','capitalization_policy','multiword_exception','multiword_exception_rationale','compositional_intersection','atomic_concept','productive_phrase_exception','productive_phrase_exception_rationale'):
             key='en_'+base
             if key in data:
                 data[base]=data[key]

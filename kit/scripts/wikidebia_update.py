@@ -17,7 +17,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
 
-from wikidebia_graph_extract import iter_templates, normalize_key, parse_template
+from wikidebia_graph_extract import _split_top_level, iter_templates, normalize_key, parse_template
 from wikidebia_workflow_baseline import WorkflowBaselineError, resolve_workflow_release_baseline
 from wikidebia_title_structure import canonical_title_structure_issues
 
@@ -473,8 +473,30 @@ def assert_citation_change_authorized(
     Count occurrences so removing a duplicate is also an editorial deletion.
     Inspect the whole page, including quotes outside the usual citation field.
     """
+    def authorization_identity(call: Any) -> str:
+        """Ignore only the retired French warning parameter spelling.
+
+        Renaming ``Citation.avertissements`` to
+        ``Citation.avertissements-citation`` changes no quotation, attribution
+        or source value and is required by the current template contract.  All
+        other bytes remain part of the protected citation identity.
+        """
+        if normalize_key(call.name) != "citation":
+            return call.raw
+        segments = _split_top_level(call.raw[2:-2], "|")
+        for index, segment in enumerate(segments[1:], start=1):
+            pieces = _split_top_level(segment, "=", maxsplit=1)
+            if len(pieces) != 2 or normalize_key(pieces[0]) != "avertissements":
+                continue
+            match = re.fullmatch(r"(\s*)avertissements(\s*)", pieces[0], flags=re.I)
+            if match is not None:
+                segments[index] = (
+                    f"{match.group(1)}avertissements-citation{match.group(2)}={pieces[1]}"
+                )
+        return "{{" + "|".join(segments) + "}}"
+
     def citations(text: str) -> Counter:
-        return Counter(call.raw for call in iter_templates(text)
+        return Counter(authorization_identity(call) for call in iter_templates(text)
                        if normalize_key(call.name) in {"citation", "quote"})
     if not citations(old_text) - citations(new_text):
         return
@@ -1953,7 +1975,12 @@ class RemoteUpdatePlanner:
             self.adapter.open_language(language, user)
             try:
                 self.adapter.assert_identity(user)
-                self._plan_language(language, buckets, comparisons)
+                self._plan_language(
+                    language,
+                    buckets,
+                    comparisons,
+                    include_retirements=mode != "no_delete",
+                )
             finally:
                 self.adapter.close_language()
         for name in OPERATIONS:
@@ -2001,7 +2028,14 @@ class RemoteUpdatePlanner:
             "phase": 99,
         }
 
-    def _plan_language(self, language: str, buckets: dict[str, list[dict[str, Any]]], comparisons: list[dict[str, Any]]) -> None:
+    def _plan_language(
+        self,
+        language: str,
+        buckets: dict[str, list[dict[str, Any]]],
+        comparisons: list[dict[str, Any]],
+        *,
+        include_retirements: bool = True,
+    ) -> None:
         old = {key: value for key, value in self.state.items() if key[0] == language}
         new = {key: value for key, value in self.new_pages.items() if key[0] == language}
         handled_old: set[tuple[str, str]] = set()
@@ -2209,7 +2243,7 @@ class RemoteUpdatePlanner:
                 op["comparison_id"] = comparison["comparison_id"]
                 buckets["manual_review"].append(op)
 
-        if self.interlanguage_only:
+        if self.interlanguage_only or not include_retirements:
             return
 
         # Retired pages: explicit merge policy or safe deletion; never infer ownership from absence alone.
