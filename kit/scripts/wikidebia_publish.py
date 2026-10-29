@@ -378,6 +378,7 @@ class Adapter(Protocol):
     def close_language(self) -> None: ...
     def assert_identity(self, expected_user: str) -> None: ...
     def available_change_tags(self) -> set[str]: ...
+    def spam_blacklist_matches(self, urls: list[str]) -> set[str]: ...
     def read_page(self, title: str) -> tuple[bool, int | None, str]: ...
     def read_revision(self, title: str, revision_id: int) -> dict[str, Any] | None: ...
     def write_page(
@@ -591,6 +592,18 @@ class PywikibotAdapter:
                 break
             continuation = data["continue"]
         return tags
+
+    def spam_blacklist_matches(self, urls: list[str]) -> set[str]:
+        """Return MediaWiki SpamBlacklist matches for the proposed URLs."""
+        if self.site is None:
+            raise PublicationError("Site non ouvert")
+        matches: set[str] = set()
+        for index in range(0, len(urls), 50):
+            data = self.site.simple_request(
+                action="spamblacklist", url=urls[index:index + 50],
+            ).submit()
+            matches.update(str(value) for value in ((data.get("spamblacklist") or {}).get("matches") or []))
+        return matches
 
     def read_page(self, title: str) -> tuple[bool, int | None, str]:
         if self.site is None:
@@ -1332,6 +1345,30 @@ class GenericPublisher:
             "counts": counts,
         }
 
+    def _spam_blacklist_gate(self, rows: list[dict[str, Any]]) -> None:
+        checker = getattr(self.adapter, "spam_blacklist_matches", None)
+        if not callable(checker):
+            return
+        by_url: dict[str, set[str]] = {}
+        for row in rows:
+            text = self._source_path(row).read_text(encoding="utf-8")
+            for url in re.findall(r"https?://[^\s<>\[\]{}|\"']+", text):
+                by_url.setdefault(url, set()).add(str(row.get("page_id") or "?"))
+        if not by_url:
+            return
+        matches = checker(sorted(by_url))
+        if matches:
+            affected = sorted({
+                page_id for url, page_ids in by_url.items()
+                if any(match in url for match in matches)
+                for page_id in page_ids
+            })
+            raise PublicationError(
+                "URL refusée par la liste anti-spam MediaWiki avant publication : "
+                + ", ".join(sorted(matches))
+                + (" (pages : " + ", ".join(affected) + ")" if affected else "")
+            )
+
     def build_plan(self) -> dict[str, Any]:
         report = self._validate_local()
         actions: list[dict[str, Any]] = []
@@ -1346,6 +1383,7 @@ class GenericPublisher:
             try:
                 self.adapter.assert_identity(user)
                 self._change_tag_gate(language)
+                self._spam_blacklist_gate(rows)
                 for row in rows:
                     action = self._plan_row(row)
                     action_dict = asdict(action)
