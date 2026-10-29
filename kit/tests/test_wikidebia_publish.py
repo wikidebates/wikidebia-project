@@ -328,6 +328,41 @@ def test_full_page_creation_is_dynamic(tmp_path):
     assert result == {"created":2,"updated":0,"skipped":0}
     assert adapter.pages[("fr","Titre FR")][1] == fr
     assert adapter.pages[("en","Title EN")][1] == en
+    checkpoint = json.loads((tmp_path / "logs/test-progress.json").read_text(encoding="utf-8"))
+    assert checkpoint["status"] == "completed"
+    assert checkpoint["checkpoint_sha256"] == module.sha_object({k: v for k, v in checkpoint.items() if k != "checkpoint_sha256"})
+
+
+def test_publication_progress_checkpoint_survives_failure_and_resume(tmp_path):
+    config, path, _fr, _en = write_fixture(tmp_path, "full_page")
+    adapter = FakeAdapter()
+    publisher = module.GenericPublisher(config, adapter, path)
+    plan = publisher.build_plan()
+    original_write = adapter.write_page
+
+    def interrupted_write(**kwargs):
+        if adapter.language == "en":
+            raise RuntimeError("simulated interruption")
+        return original_write(**kwargs)
+
+    adapter.write_page = interrupted_write
+    try:
+        publisher.publish(plan=plan, confirmation=plan["plan_sha256"])
+    except RuntimeError:
+        pass
+    else:
+        raise AssertionError("interruption simulée non propagée")
+    progress_path = tmp_path / "logs/test-progress.json"
+    failed = json.loads(progress_path.read_text(encoding="utf-8"))
+    assert failed["status"] == "failed"
+    assert failed["failed_action"]["language"] == "en"
+    assert failed["completed"] == [{"language": "fr", "page_id": "A1", "result": "created"}]
+
+    adapter.write_page = original_write
+    publisher.publish(plan=plan, confirmation=plan["plan_sha256"])
+    completed = json.loads(progress_path.read_text(encoding="utf-8"))
+    assert completed["status"] == "completed"
+    assert {row["language"]: row["result"] for row in completed["completed"]} == {"fr": "created", "en": "created"}
 
 
 def test_plan_blocks_spam_blacklist_before_any_remote_write(tmp_path):
