@@ -23,11 +23,13 @@ class FakeAdapter:
         self.revisions = {}
         self.next_revision = 100
         self.language = None
+        self.spam_matches = set()
 
     def open_language(self, language, expected_user): self.language = language
     def close_language(self): self.language = None
     def assert_identity(self, expected_user): return None
     def available_change_tags(self): return {"chatgpt", "translated-fr"}
+    def spam_blacklist_matches(self, urls): return set(self.spam_matches)
     def read_page(self, title):
         row = self.pages.get((self.language, title))
         return (False, None, "") if row is None else (True, row[0], row[1])
@@ -326,6 +328,27 @@ def test_full_page_creation_is_dynamic(tmp_path):
     assert result == {"created":2,"updated":0,"skipped":0}
     assert adapter.pages[("fr","Titre FR")][1] == fr
     assert adapter.pages[("en","Title EN")][1] == en
+
+
+def test_plan_blocks_spam_blacklist_before_any_remote_write(tmp_path):
+    config, path, _fr, _en = write_fixture(tmp_path, "full_page")
+    source = tmp_path / "corpus/demo/output/en/A1.wiki"
+    source.write_text(source.read_text(encoding="utf-8") + "https://archive.is/example\n", encoding="utf-8")
+    manifest_path = tmp_path / "corpus/demo/manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    next(row for row in manifest["pages"] if row["language"] == "en" and row["page_id"] == "A1")["sha256"] = module.sha_file(source)
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    adapter = FakeAdapter()
+    adapter.spam_matches = {"archive.is"}
+
+    try:
+        module.GenericPublisher(config, adapter, path).build_plan()
+    except module.PublicationError as exc:
+        assert "archive.is" in str(exc)
+        assert "A1" in str(exc)
+    else:
+        raise AssertionError("URL anti-spam acceptée dans le plan")
+    assert adapter.pages == {}
 
 
 def test_parameter_update_preserves_other_content(tmp_path):
