@@ -123,8 +123,22 @@ def _approved_english_updates(corpus_root: Path) -> dict[str, dict[str, Any]]:
                 or decision.get("title") != row.get("canonical_title")
                 or len(str(decision.get("instruction") or "").strip()) < 24):
             raise FinalPublicationError("Décision propriétaire anglaise absente ou divergente")
+        normalized = copy.deepcopy(decision)
+        successor = normalized.get("successor_revision")
+        if successor is not None:
+            if (not isinstance(successor, dict) or successor.get("owner_approved") is not True
+                    or successor.get("predecessor_revision_id") != normalized.get("observed_revision_id")
+                    or successor.get("predecessor_sha256") != normalized.get("observed_sha256")
+                    or not isinstance(successor.get("observed_revision_id"), int)
+                    or successor["observed_revision_id"] <= int(normalized.get("observed_revision_id") or 0)
+                    or successor.get("delta_policy") != "whitespace_only"
+                    or len(str(successor.get("verification_receipt_sha256") or "")) != 64
+                    or len(str(successor.get("instruction") or "").strip()) < 24):
+                raise FinalPublicationError("Révision successeure anglaise absente ou divergente")
+            normalized["observed_revision_id"] = successor["observed_revision_id"]
+            normalized["observed_sha256"] = successor["observed_sha256"]
         source = corpus_root / row["file_path"]
-        approved[str(row["page_id"])] = {**copy.deepcopy(decision), "proposed_sha256": sha_text(source.read_text(encoding="utf-8"))}
+        approved[str(row["page_id"])] = {**normalized, "proposed_sha256": sha_text(source.read_text(encoding="utf-8"))}
     return approved
 
 

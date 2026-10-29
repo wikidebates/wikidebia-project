@@ -366,6 +366,21 @@ def _validate_existing_english_update(
         raise TranslationReviewError(f"Autorisation de reprise anglaise invalide : {page_id}")
     _text(existing.get("instruction"), f"instruction propriétaire anglaise {page_id}", 24)
     _text(existing.get("reason"), f"motif de reprise anglaise {page_id}", 24)
+    successor = existing.get("successor_revision")
+    if successor is not None:
+        if (
+            not isinstance(successor, dict)
+            or successor.get("owner_approved") is not True
+            or successor.get("predecessor_revision_id") != existing["observed_revision_id"]
+            or successor.get("predecessor_sha256") != existing["observed_sha256"]
+            or not isinstance(successor.get("observed_revision_id"), int)
+            or successor["observed_revision_id"] <= existing["observed_revision_id"]
+            or not re.fullmatch(r"[a-f0-9]{64}", str(successor.get("observed_sha256") or ""))
+            or successor.get("delta_policy") not in {"whitespace_only"}
+            or not re.fullmatch(r"[a-f0-9]{64}", str(successor.get("verification_receipt_sha256") or ""))
+        ):
+            raise TranslationReviewError(f"Révision successeure anglaise invalide : {page_id}")
+        _text(successor.get("instruction"), f"instruction de révision successeure {page_id}", 24)
     return copy.deepcopy(existing)
 
 SECTION_MAP = {
