@@ -56,6 +56,47 @@ def make_base(project: Path) -> Path:
     return base
 
 
+def test_workflow_reconcile_restores_release_boundary_from_signed_evidence(tmp_path, monkeypatch):
+    debate_id, work_id = "debat_test", "EDIT-20261029-001"
+    state = {
+        "schema": wf.WORKFLOW_SCHEMA, "schema_version": "1.0", "debate_id": debate_id,
+        "debate_title": "Débat test ?", "phase": "fr_content_review", "status": "awaiting_review",
+        "work_id": work_id, "pending_review": {"review_type": "fr_content_review"},
+        "created_at": "2026-10-29T10:00:00+01:00", "updated_at": "2026-10-29T10:00:00+01:00",
+    }
+    wf._save_workflow(tmp_path, state)
+    workspace = tmp_path / ".state/editorial-workspaces" / debate_id / work_id
+    release_copy = workspace / "release-copy"; release_copy.mkdir(parents=True)
+    (release_copy / "manifest.json").write_text("{}\n", encoding="utf-8")
+    tree = common.full_tree_sha256(release_copy)
+    meta = {
+        "schema": "wikidebia-editorial-workspace-1.0", "debate_id": debate_id, "work_id": work_id,
+        "status": "release_ready", "release_copy": {"tree_sha256": tree},
+        "local_release": {"archive": "release.zip"},
+    }
+    meta["workspace_sha256"] = wf.workspace_receipt_hash(meta)
+    common.write_json(workspace / "workspace.json", meta)
+
+    def signed(value):
+        value = dict(value)
+        value["receipt_sha256"] = wf._sha256_bytes(wf._canonical_json(value))
+        return value
+
+    release_receipt = signed({"debate_id": debate_id, "work_id": work_id, "release_copy_tree_sha256": tree})
+    common.write_json(tmp_path / ".state/corpus-releases" / debate_id / work_id / "release-receipt.json", release_receipt)
+    content_receipt = signed({"debate_id": debate_id, "work_id": work_id, "status": "published", "plan_sha256": "a" * 64})
+    common.write_json(tmp_path / ".state/fr-publication" / debate_id / work_id / "content/publication-receipt.json", content_receipt)
+    monkeypatch.setattr(wf, "resolve_workflow_release_baseline", lambda *a, **k: {"baseline_sha256": "b" * 64})
+
+    result = wf.reconcile_workflow(tmp_path, debate_id)
+
+    assert result["phase"] == result["status"] == "release_ready"
+    assert "pending_review" not in result
+    assert result["french_content_publication"]["receipt_sha256"] == content_receipt["receipt_sha256"]
+    assert result["workflow_reconciliation"]["baseline_sha256"] == "b" * 64
+    assert (tmp_path / ".state/workflows" / debate_id / "reconciliation.json").is_file()
+
+
 def rewrite_zip(source: Path, target: Path, edit):
     temp = target.parent / "unzipped"
     shutil.rmtree(temp, ignore_errors=True)
