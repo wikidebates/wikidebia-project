@@ -1660,7 +1660,7 @@ def _validate_vocabulary(rows: Any, french_entries: Sequence[Mapping[str, Any]])
     expected = {str(row.get("fr")): row for row in french_entries}
     result: list[dict[str, Any]] = []
     mapping: dict[str, str] = {}
-    english_seen: set[str] = set()
+    english_seen: dict[str, str] = {}
     for row in rows:
         if not isinstance(row, dict) or str(row.get("fr")) not in expected:
             raise TranslationReviewError("Entrée de vocabulaire anglaise inconnue")
@@ -1672,9 +1672,14 @@ def _validate_vocabulary(rows: Any, french_entries: Sequence[Mapping[str, Any]])
         if actual_concept_id and not re.fullmatch(r"KWD-[A-F0-9]{12,64}", actual_concept_id):
             raise TranslationReviewError(f"concept_id anglais invalide pour {fr}")
         en = _text(row.get("en"), f"équivalent anglais de {fr}", 2)
-        if en.casefold() in english_seen:
+        english_key = en.casefold()
+        previous_french = english_seen.get(english_key)
+        if previous_french is not None and previous_french.casefold() != fr.casefold():
             raise TranslationReviewError(f"Équivalent anglais dupliqué : {en}")
-        english_seen.add(en.casefold())
+        # Source-preservation mode may expose historical keyword spellings that
+        # differ only by case (for example ``Féminisme`` and ``féminisme``).
+        # They denote one concept and must retain one English equivalent.
+        english_seen.setdefault(english_key, fr)
         kind = str(expected[fr].get("kind") or "")
         if row.get("kind") != kind or row.get("capitalization_policy") != expected[fr].get("capitalization_policy"):
             raise TranslationReviewError(f"Nature ou politique de capitalisation divergente : {fr}")

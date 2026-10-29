@@ -398,6 +398,29 @@ def complete_translation_review(workspace: Path) -> None:
     common.write_json(workspace / "data/sources_en_working.json", {"schema": translation.EN_SOURCES_WORKING_SCHEMA, "source_registry_version": "1.0", "debate_id": "debat_test", "work_id": review["work_id"], "status": "draft", "prepared_at": review["prepared_at"], "sources": sources})
 
 
+def test_vocabulary_allows_same_english_term_for_french_case_variants_only():
+    french = [
+        {"concept_id": "KWD-AAAAAAAAAAAA", "fr": "Féminisme", "kind": "noun", "capitalization_policy": "lowercase_common"},
+        {"concept_id": "KWD-BBBBBBBBBBBB", "fr": "féminisme", "kind": "noun", "capitalization_policy": "lowercase_common"},
+    ]
+    rows = []
+    for source in french:
+        rows.append({
+            **source, "en": "feminism", "definition_en": "The political and social concept of feminism.",
+            "capitalization_verified": True, "capitalization_rationale_en": "",
+            "status": "approved", "idiomatic_equivalent": True, "same_concept": True,
+            "reviewer": "English reviewer", "reviewed_at": "2026-10-28T23:30:00+00:00",
+            "note": "The historical source spelling and its English concept were reviewed.",
+        })
+    validated, mapping = translation._validate_vocabulary(rows, french)
+    assert len(validated) == 2
+    assert mapping == {"Féminisme": "feminism", "féminisme": "feminism"}
+
+    rows[1]["fr"] = french[1]["fr"] = "Politique"
+    with pytest.raises(translation.TranslationReviewError, match="Équivalent anglais dupliqué"):
+        translation._validate_vocabulary(rows, french)
+
+
 def test_prepare_translation_is_read_only_for_french_copy(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
     before = common.full_tree_sha256(workspace / "content-reviewed-copy")

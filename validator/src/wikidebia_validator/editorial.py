@@ -649,11 +649,20 @@ def _historically_absent_debate_introduction(ctx: PackageContext) -> bool:
     lock = ctx.load_json('data/fr_content_lock.json')
     decisions = lock.get('historical_text_decisions') if isinstance(lock, dict) else None
     row = decisions.get('debate') if isinstance(decisions, dict) else None
-    return bool(
+    legacy_absence = bool(
         isinstance(row, dict)
         and row.get('page_origin') == 'preexisting'
         and row.get('historical_status') == 'historical_absent'
         and row.get('decision') == 'preserved'
+    )
+    if legacy_absence:
+        return True
+    debate = lock.get('debate') if isinstance(lock, dict) else None
+    return bool(
+        isinstance(debate, dict)
+        and debate.get('page_origin') == 'preexisting'
+        and debate.get('historical_introduction_present') is False
+        and debate.get('historical_text_decision') == 'preserved'
     )
 
 
@@ -2123,7 +2132,12 @@ def validate_editorial(ctx: PackageContext) -> None:
         folded: dict[str, str] = {}
         for term, entry in vocabulary.items():
             previous = folded.get(term.casefold())
-            if previous is not None and previous != term:
+            preserved_case_variant = bool(
+                language == 'fr'
+                and previous in preserved_keywords
+                and term in preserved_keywords
+            )
+            if previous is not None and previous != term and not preserved_case_variant:
                 ctx.report.error('WDV-EDT-023', 'Entrées de vocabulaire ne différant que par la casse', path=editorial_controls.get('keyword_vocabulary_path'), details={'language': language, 'first': previous, 'second': term})
             folded[term.casefold()] = term
             localized = _localized_keyword_entry(entry, language)
