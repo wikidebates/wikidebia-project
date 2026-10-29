@@ -59,6 +59,16 @@ def test_manifest_approval_uses_exact_audited_successor_revision(tmp_path: Path)
     assert approved['observed_sha256'] == 'b' * 64
 
 
+def test_final_publication_loads_url_replacements_from_corpus_control(tmp_path: Path):
+    (tmp_path / 'data').mkdir()
+    entry = {'language': 'en', 'page_id': 'A1', 'old_url': 'https://archive.is/x', 'new_url': 'https://example.org/x'}
+    (tmp_path / 'data/url-replacements.json').write_text(json.dumps({'debate_id': 'demo', 'entries': [entry]}))
+    (tmp_path / 'manifest.json').write_text(json.dumps({
+        'debate_id': 'demo', 'editorial_controls': {'publication_url_replacements_path': 'data/url-replacements.json'}
+    }))
+    assert final._publication_url_replacements(tmp_path) == [entry]
+
+
 def test_existing_quote_parameter_rename_is_not_a_citation_deletion():
     from wikidebia_update import top_level_parameter_deletions,assert_citation_change_authorized,UpdateError
     quote='{{Quote|quote=The same complete quotation|article=Original article|link=https://example.org}}'

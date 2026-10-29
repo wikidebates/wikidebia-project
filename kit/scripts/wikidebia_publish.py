@@ -700,6 +700,7 @@ class GenericPublisher:
         except ZoneInfoNotFoundError as exc:
             raise PublicationError(f"Fuseau horaire de publication inconnu : {self.publication_timezone}") from exc
         self.publication_date = self._current_publication_date()
+        self.publication_url_replacements = list(config.get("publication_url_replacements") or [])
         logs_dir = self._resolve(config["logs_dir"])
         operation_id = str(self.operation.get("id") or self.operation.get("kind") or "publication")
         self.log_path = logs_dir / f"{operation_id}.jsonl"
@@ -796,6 +797,16 @@ class GenericPublisher:
             raise PublicationError("La balise obligatoire doit être exactement : chatgpt")
         if not self.languages:
             raise PublicationError("Aucune langue sélectionnée")
+        for entry in self.publication_url_replacements:
+            if (not isinstance(entry, dict) or entry.get("owner_approved") is not True
+                    or str(entry.get("language") or "") not in self.languages
+                    or not str(entry.get("page_id") or "").strip()
+                    or not str(entry.get("old_url") or "").startswith(("http://", "https://"))
+                    or not str(entry.get("new_url") or "").startswith(("http://", "https://"))
+                    or entry.get("old_url") == entry.get("new_url")
+                    or len(str(entry.get("reason") or "").strip()) < 24
+                    or not re.fullmatch(r"[a-f0-9]{64}", str(entry.get("authorization_receipt_sha256") or ""))):
+                raise PublicationError("Substitution d’URL de publication invalide")
         if self._english_translation_deferred() and "en" in self.languages:
             raise PublicationError("La portée anglaise est interdite tant que translation_status.en vaut deferred")
         sites = self.config.get("sites") or {}
@@ -1403,7 +1414,7 @@ class GenericPublisher:
             return
         by_url: dict[str, set[str]] = {}
         for row in rows:
-            text = self._source_path(row).read_text(encoding="utf-8")
+            text = self._publication_text(row, self._source_path(row).read_text(encoding="utf-8"))
             for url in re.findall(r"https?://[^\s<>\[\]{}|\"']+", text):
                 by_url.setdefault(url, set()).add(str(row.get("page_id") or "?"))
         if not by_url:
@@ -1420,6 +1431,20 @@ class GenericPublisher:
                 + ", ".join(sorted(matches))
                 + (" (pages : " + ", ".join(affected) + ")" if affected else "")
             )
+
+    def _publication_text(self, row: Mapping[str, Any], text: str) -> str:
+        value = text
+        for entry in self.publication_url_replacements:
+            if (entry.get("language") != row.get("language")
+                    or str(entry.get("page_id")) != str(row.get("page_id"))):
+                continue
+            old_url, new_url = str(entry["old_url"]), str(entry["new_url"])
+            if value.count(old_url) != 1:
+                raise PublicationError(
+                    f"URL source absente ou dupliquée pour {row.get('language')}/{row.get('page_id')}"
+                )
+            value = value.replace(old_url, new_url, 1)
+        return value
 
     def build_plan(self) -> dict[str, Any]:
         report = self._validate_local()
@@ -1490,7 +1515,7 @@ class GenericPublisher:
         page_id = str(row["page_id"])
         page_type = str(row.get("page_type") or "unknown")
         source_path = self._source_path(row)
-        local_text = source_path.read_text(encoding="utf-8")
+        local_text = self._publication_text(row, source_path.read_text(encoding="utf-8"))
         parameter = self._parameter(language)
         local_target = local_text if parameter is None else extract_parameter(local_text, parameter)
         title = self._remote_title(row)
@@ -1693,15 +1718,15 @@ class GenericPublisher:
         source_path = self.root / action["source_path"]
         if sha_file(source_path) != action["local_file_sha256"]:
             raise PublicationError(f"Fichier local modifié depuis le plan : {action['source_path']}")
-        local_text = source_path.read_text(encoding="utf-8")
+        row = self._manifest_page(str(action["language"]), str(action["page_id"]))
+        if row is None:
+            raise PublicationError(f"Page absente du manifeste : {action['page_id']}")
+        local_text = self._publication_text(row, source_path.read_text(encoding="utf-8"))
         parameter = action.get("parameter")
         local_target = local_text if not parameter else extract_parameter(local_text, str(parameter))
         if sha_text(local_target) != action["local_target_sha256"]:
             raise PublicationError(f"Cible locale modifiée depuis le plan : {action['page_id']}")
         if not parameter and action.get("publication_creation_date"):
-            row = self._manifest_page(str(action["language"]), str(action["page_id"]))
-            if row is None:
-                raise PublicationError(f"Page absente du manifeste : {action['page_id']}")
             local_text = self._english_translation_creation_text(
                 row, local_text, str(action["publication_creation_date"])
             )
@@ -2153,10 +2178,10 @@ class GenericPublisher:
             source_path = self.root / action["source_path"]
             if sha_file(source_path) != action["local_file_sha256"]:
                 raise PublicationError(f"Fichier local modifié : {action['source_path']}")
-            desired_text = source_path.read_text(encoding="utf-8")
             row = self._manifest_page(str(action.get("language") or ""), str(action.get("page_id") or ""))
             if row is None:
                 raise PublicationError(f"Page absente du manifeste : {action.get('language')}/{action.get('page_id')}")
+            desired_text = self._publication_text(row, source_path.read_text(encoding="utf-8"))
             publication_creation_date = action.get("publication_creation_date")
             if publication_creation_date:
                 current_publication_date = self._current_publication_date()

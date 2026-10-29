@@ -142,6 +142,22 @@ def _approved_english_updates(corpus_root: Path) -> dict[str, dict[str, Any]]:
     return approved
 
 
+def _publication_url_replacements(corpus_root: Path) -> list[dict[str, Any]]:
+    manifest = load_json(corpus_root / "manifest.json", "manifest")
+    relative = str((manifest.get("editorial_controls") or {}).get("publication_url_replacements_path") or "")
+    if not relative:
+        return []
+    path = (corpus_root / relative).resolve()
+    try:
+        path.relative_to(corpus_root.resolve())
+    except ValueError as exc:
+        raise FinalPublicationError("Registre de substitution d’URL extérieur au corpus") from exc
+    data = load_json(path, "registre de substitution d’URL")
+    if data.get("debate_id") != manifest.get("debate_id") or not isinstance(data.get("entries"), list):
+        raise FinalPublicationError("Registre de substitution d’URL invalide")
+    return copy.deepcopy(data["entries"])
+
+
 def _assert_approved_english_update(row: Mapping[str, Any], approved: Mapping[str, Any], *, publisher: bool = False) -> None:
     decision = approved.get(str(row.get("page_id"))) or {}
     observed_revision = row.get("remote_revision_id") if publisher else row.get("expected_revision_id")
@@ -166,6 +182,7 @@ def _english_config(project_root: Path, debate_id: str, corpus_root: Path, run_d
         "translation_change_tag": "translated-fr",
         "publication_timezone": str(settings.get("publication_timezone") or "Europe/Paris"),
         "publication_profile": "norm_1_2_direct_interlanguage",
+        "publication_url_replacements": _publication_url_replacements(corpus_root),
         "manifest_requirements": {},
         "operation": {
             "id": "workflow_final_publish_en",
