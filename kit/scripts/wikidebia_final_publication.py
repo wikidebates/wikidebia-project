@@ -111,7 +111,20 @@ def _update_config(project_root: Path, debate_id: str, corpus_root: Path, run_di
 
 def _approved_english_updates(corpus_root: Path) -> dict[str, dict[str, Any]]:
     approved: dict[str, dict[str, Any]] = {}
-    for row in load_json(corpus_root / "manifest.json", "manifest").get("pages") or []:
+    manifest = load_json(corpus_root / "manifest.json", "manifest")
+    successors: dict[str, dict[str, Any]] = {}
+    successor_path = str((manifest.get("editorial_controls") or {}).get("english_successor_revisions_path") or "")
+    if successor_path:
+        registry = load_json(corpus_root / successor_path, "registre des révisions anglaises successives")
+        if registry.get("debate_id") != manifest.get("debate_id"):
+            raise FinalPublicationError("Registre des révisions successives rattaché à un autre débat")
+        for entry in registry.get("entries") or []:
+            page_id = str(entry.get("page_id") or "")
+            successor = entry.get("successor_revision")
+            if not page_id or page_id in successors or not isinstance(successor, dict):
+                raise FinalPublicationError("Registre des révisions successives invalide")
+            successors[page_id] = copy.deepcopy(successor)
+    for row in manifest.get("pages") or []:
         decision = row.get("existing_english_update")
         if not decision:
             continue
@@ -124,6 +137,8 @@ def _approved_english_updates(corpus_root: Path) -> dict[str, dict[str, Any]]:
                 or len(str(decision.get("instruction") or "").strip()) < 24):
             raise FinalPublicationError("Décision propriétaire anglaise absente ou divergente")
         normalized = copy.deepcopy(decision)
+        if str(row.get("page_id")) in successors:
+            normalized["successor_revision"] = successors.pop(str(row.get("page_id")))
         successor = normalized.get("successor_revision")
         if successor is not None:
             if (not isinstance(successor, dict) or successor.get("owner_approved") is not True
@@ -139,6 +154,8 @@ def _approved_english_updates(corpus_root: Path) -> dict[str, dict[str, Any]]:
             normalized["observed_sha256"] = successor["observed_sha256"]
         source = corpus_root / row["file_path"]
         approved[str(row["page_id"])] = {**normalized, "proposed_sha256": sha_text(source.read_text(encoding="utf-8"))}
+    if successors:
+        raise FinalPublicationError("Révision successeure sans page anglaise adoptée")
     return approved
 
 
