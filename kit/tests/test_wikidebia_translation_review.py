@@ -463,6 +463,27 @@ def test_existing_english_update_contract_applies_to_debate_and_argument_targets
                 lifecycle=lifecycle,
             )
 
+    successor = {
+        "owner_approved": True,
+        "predecessor_revision_id": 42,
+        "predecessor_sha256": "b" * 64,
+        "observed_revision_id": 43,
+        "observed_sha256": "c" * 64,
+        "delta_policy": "whitespace_only",
+        "verification_receipt_sha256": "d" * 64,
+        "instruction": "Accept the audited whitespace-only successor revision for final publication.",
+    }
+    with_successor = {**decision, "successor_revision": successor}
+    assert translation._validate_existing_english_update(
+        {"existing_english_update": with_successor},
+        page_id="debate_test", canonical_title="Is this a test?", lifecycle=lifecycle,
+    )["successor_revision"] == successor
+    with pytest.raises(translation.TranslationReviewError, match="Révision successeure anglaise invalide"):
+        translation._validate_existing_english_update(
+            {"existing_english_update": {**decision, "successor_revision": {**successor, "predecessor_revision_id": 41}}},
+            page_id="debate_test", canonical_title="Is this a test?", lifecycle=lifecycle,
+        )
+
 
 def test_prepare_translation_is_read_only_for_french_copy(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)

@@ -43,6 +43,22 @@ def test_manifest_approval_does_not_allow_a_new_page_to_overwrite_an_existing_on
     with pytest.raises(final.FinalPublicationError):final._approved_english_updates(tmp_path)
 
 
+def test_manifest_approval_uses_exact_audited_successor_revision(tmp_path: Path):
+    (tmp_path/'page.wiki').write_text('{{Argument|summary=Reviewed text}}')
+    d = decision()
+    d.update(observed_sha256='a' * 64, successor_revision={
+        'owner_approved': True, 'predecessor_revision_id': 12, 'predecessor_sha256': 'a' * 64,
+        'observed_revision_id': 13, 'observed_sha256': 'b' * 64, 'delta_policy': 'whitespace_only',
+        'verification_receipt_sha256': 'c' * 64,
+        'instruction': 'Accept the audited whitespace-only successor revision for final publication.',
+    })
+    row=dict(language='en',page_id='A0007',canonical_title='Existing title',page_origin='preexisting',file_path='page.wiki',existing_english_update=d)
+    (tmp_path/'manifest.json').write_text(json.dumps({'pages':[row]}))
+    approved = final._approved_english_updates(tmp_path)['A0007']
+    assert approved['observed_revision_id'] == 13
+    assert approved['observed_sha256'] == 'b' * 64
+
+
 def test_existing_quote_parameter_rename_is_not_a_citation_deletion():
     from wikidebia_update import top_level_parameter_deletions,assert_citation_change_authorized,UpdateError
     quote='{{Quote|quote=The same complete quotation|article=Original article|link=https://example.org}}'
