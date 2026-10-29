@@ -1078,6 +1078,30 @@ def test_59_interlanguage_only_executor_rechecks_pure_overlay(tmp_path):
     assert "|page=English title" in final
 
 
+def test_59b_interlanguage_only_explicitly_retargets_superseded_title(tmp_path):
+    remote = argument("Texte humain").replace(
+        "|rubriques=Société",
+        "|interlangue={{Lien interlangue\n|langue=en\n|page=Old English title\n}}\n|rubriques=Société",
+    )
+    proposed = argument("Version corpus")
+    config, path = make_fixture(tmp_path, languages=("fr",), old_pages=[], new_pages=[("fr", "A1", "Titre", proposed)])
+    corpus = tmp_path / "corpus" / "demo"; en_dir = corpus / "output" / "en"; en_dir.mkdir(parents=True, exist_ok=True)
+    en_file = en_dir / "A1.wiki"; en_file.write_text("{{Argument\n|summary=x\n}}\n", encoding="utf-8")
+    manifest = json.loads((corpus / "manifest.json").read_text()); manifest["translation_status"] = {"en": "ready"}; manifest["pages"].append({"language":"en","page_id":"A1","page_type":"argument","canonical_title":"Final English title","file_path":"output/en/A1.wiki","sha256":module.sha_file(en_file)}); (corpus / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    config["interlanguage_only"] = True
+    config["interlanguage_retargets"] = {"A1": "Old English title"}
+    path.write_text(json.dumps(config), encoding="utf-8")
+    adapter = FakeAdapter({("fr", "Titre"): (11, remote)})
+    plan = module.RemoteUpdatePlanner(config, adapter, path).build_plan()
+    assert plan["counts"]["update"] == 1 and plan["counts"]["blocked"] == 0
+    row = plan["operations"]["update"][0]
+    assert row["previous_interlanguage_title"] == "Old English title"
+    receipt = module.PlanExecutor(config, adapter, path).execute(plan, plan["plan_sha256"])
+    assert receipt["counts"]["updated"] == 1
+    final = adapter.pages[("fr", "Titre")][1]
+    assert "Texte humain" in final and "|page=Final English title" in final
+
+
 def test_60_postwrite_verification_retries_until_chatgpt_tag_is_visible(tmp_path):
     old = argument("Ancien")
     new = argument("Nouveau")
