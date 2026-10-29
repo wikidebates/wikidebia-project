@@ -421,6 +421,49 @@ def test_vocabulary_allows_same_english_term_for_french_case_variants_only():
         translation._validate_vocabulary(rows, french)
 
 
+def test_existing_english_update_contract_applies_to_debate_and_argument_targets():
+    lifecycle = {"page_origin": "preexisting", "preserved_parameters": {}}
+    decision = {
+        "language": "en",
+        "page_id": "debate_test",
+        "title": "Is this a test?",
+        "owner_approved": True,
+        "decision": "explicit_user_request",
+        "instruction": "Finish the reviewed translation and replace the interrupted earlier publication.",
+        "authorization_receipt_sha256": "a" * 64,
+        "reason": "The current remote page predates the final reviewed translation.",
+        "allow_proposed_change": True,
+        "observed_revision_id": 42,
+        "observed_sha256": "b" * 64,
+    }
+    row = {"existing_english_update": decision}
+    assert translation._validate_existing_english_update(
+        row, page_id="debate_test", canonical_title="Is this a test?", lifecycle=lifecycle,
+    ) == decision
+
+    argument = {**decision, "page_id": "A0001", "title": "A translated argument"}
+    assert translation._validate_existing_english_update(
+        {"existing_english_update": argument},
+        page_id="A0001",
+        canonical_title="A translated argument",
+        lifecycle=lifecycle,
+    ) == argument
+
+    for field, value in (
+        ("authorization_receipt_sha256", None),
+        ("allow_proposed_change", False),
+        ("observed_revision_id", 0),
+    ):
+        invalid = {**decision, field: value}
+        with pytest.raises(translation.TranslationReviewError, match="Autorisation de reprise anglaise invalide"):
+            translation._validate_existing_english_update(
+                {"existing_english_update": invalid},
+                page_id="debate_test",
+                canonical_title="Is this a test?",
+                lifecycle=lifecycle,
+            )
+
+
 def test_prepare_translation_is_read_only_for_french_copy(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
     before = common.full_tree_sha256(workspace / "content-reviewed-copy")

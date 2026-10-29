@@ -330,6 +330,44 @@ def _validate_page_lifecycle(row: Mapping[str, Any], page_type: str, label: str)
             clean[name] = {"present": False, "value": None}
     return {"page_origin": "preexisting", "preserved_parameters": clean}
 
+
+def _validate_existing_english_update(
+    row: Mapping[str, Any],
+    *,
+    page_id: str,
+    canonical_title: str,
+    lifecycle: Mapping[str, Any],
+) -> dict[str, Any] | None:
+    """Validate an owner-approved replacement of an existing English target.
+
+    Interrupted publication can leave either an Argument or the Debate page on
+    the English wiki before the final reviewed translation is sealed. Both page
+    types use the same revision-bound authorization contract; keeping the check
+    here prevents the Debate page from silently losing that evidence during
+    finalization.
+    """
+    existing = row.get("existing_english_update")
+    if existing is None:
+        return None
+    if (
+        lifecycle.get("page_origin") != "preexisting"
+        or not isinstance(existing, dict)
+        or existing.get("owner_approved") is not True
+        or existing.get("decision") != "explicit_user_request"
+        or existing.get("allow_proposed_change") is not True
+        or existing.get("title") != canonical_title
+        or existing.get("page_id") != page_id
+        or existing.get("language") != "en"
+        or not isinstance(existing.get("observed_revision_id"), int)
+        or existing["observed_revision_id"] <= 0
+        or not re.fullmatch(r"[a-f0-9]{64}", str(existing.get("observed_sha256") or ""))
+        or not re.fullmatch(r"[a-f0-9]{64}", str(existing.get("authorization_receipt_sha256") or ""))
+    ):
+        raise TranslationReviewError(f"Autorisation de reprise anglaise invalide : {page_id}")
+    _text(existing.get("instruction"), f"instruction propriétaire anglaise {page_id}", 24)
+    _text(existing.get("reason"), f"motif de reprise anglaise {page_id}", 24)
+    return copy.deepcopy(existing)
+
 SECTION_MAP = {
     "Aménagement": "Planning", "Culture": "Culture", "Droit": "Law", "Écologie": "Ecology",
     "Économie": "Economy", "Éducation": "Education", "Éthique": "Ethics", "Géopolitique": "Geopolitics",
@@ -1907,7 +1945,15 @@ def _validate_debate(row: Mapping[str, Any], mapping: Mapping[str, str], sources
     _text(row.get("reviewer"), "relecteur de Debate", 3)
     _text(row.get("reviewed_at"), "date de revue de Debate", 10)
     _text(row.get("note"), "note de revue de Debate", 12)
+    lifecycle = _validate_page_lifecycle(row, "debate", "Debate")
+    existing_update = _validate_existing_english_update(
+        row,
+        page_id=debate_id,
+        canonical_title=title,
+        lifecycle=lifecycle,
+    )
     return {
+        **({"existing_english_update": existing_update} if existing_update is not None else {}),
         "canonical_title": title, "topic": topic, "complete_topic": complete,
         "sections": sections, "keywords": keywords, "introduction": introduction,
         "subsections": copy.deepcopy(subsections), "wikipedia_articles": wikipedia,
@@ -1937,7 +1983,7 @@ def _validate_debate(row: Mapping[str, Any], mapping: Mapping[str, str], sources
         **historical_intro_profile,
         **({field: True for field in HISTORICAL_INTRO_UNIVERSAL_TRUE_FIELDS} if source_page_origin == "preexisting" else {}),
         "french_subject": fr_content.get("subject"), "french_complete_topic": fr_content.get("complete_topic"),
-        **_validate_page_lifecycle(row, "debate", "Debate"),
+        **lifecycle,
     }
 
 
@@ -2247,22 +2293,19 @@ def _validate_argument(item: Mapping[str, Any], mapping: Mapping[str, str], sour
             raise TranslationReviewError(f"dedicated-debate anglais inventé sans source française : {node_id}")
         dedicated_debate = None
         dedicated_debate_review_note = ""
-    argument_name, name_discovery = _validate_argument_name_discovery(row, node_id, lifecycle["page_origin"])
+    existing_update = _validate_existing_english_update(
+        row,
+        page_id=node_id,
+        canonical_title=canonical,
+        lifecycle=lifecycle,
+    )
+    # A target created by an interrupted earlier publication is preexisting for
+    # remote lifecycle guards, but it remains a newly translated argument for
+    # editorial name-discovery requirements. Preserve the completed review when
+    # adopting that exact remote revision.
+    discovery_origin = "new" if existing_update is not None else lifecycle["page_origin"]
+    argument_name, name_discovery = _validate_argument_name_discovery(row, node_id, discovery_origin)
     dedicated_debate = _validate_dedicated_debate(row, node_id)
-    existing_update = row.get("existing_english_update")
-    if existing_update is not None:
-        if (lifecycle["page_origin"] != "preexisting" or not isinstance(existing_update, dict)
-                or existing_update.get("owner_approved") is not True
-                or existing_update.get("decision") != "explicit_user_request"
-                or existing_update.get("title") != canonical
-                or existing_update.get("page_id") != node_id
-                or existing_update.get("language") != "en"
-                or not isinstance(existing_update.get("observed_revision_id"), int)
-                or existing_update["observed_revision_id"] <= 0
-                or not re.fullmatch(r"[a-f0-9]{64}", str(existing_update.get("observed_sha256") or ""))):
-            raise TranslationReviewError(f"Autorisation de reprise anglaise invalide : {node_id}")
-        _text(existing_update.get("instruction"), f"instruction propriétaire anglaise {node_id}", 24)
-        _text(existing_update.get("reason"), f"motif de reprise anglaise {node_id}", 24)
     return {
         **({"existing_english_update": copy.deepcopy(existing_update)} if existing_update is not None else {}),
         **dedicated_debate,
@@ -2677,7 +2720,7 @@ def _build_translated_copy(project_root: Path, source: Path, target: Path, revie
     }
     name_entries = [row for row in (existing_name_review.get("entries") or []) if row.get("language") != "en"]
     for arg in final["arguments"]:
-        if arg.get("page_origin") != "new":
+        if arg.get("page_origin") != "new" and not isinstance(arg.get("existing_english_update"), dict):
             continue
         discovery = copy.deepcopy(arg.get("argument_name_discovery") or {})
         name_entries.append({
