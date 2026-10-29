@@ -87,7 +87,8 @@ def test_preserved_source_content_checkpoint_reuses_graph_output_exactly(tmp_pat
     assert record['source_content_review_sha256'] == lock['review_sha256']
 
 
-def test_source_freeze_inherits_effective_metadata_preserved_by_graph_publication(tmp_path):
+@pytest.mark.parametrize('legacy_receipt', [False, True])
+def test_source_freeze_inherits_effective_metadata_preserved_by_graph_publication(tmp_path, legacy_receipt):
     project, workspace, work_id = prepared(tmp_path)
     graph = french_checkpoint.build_checkpoint(project, 'debat_test', work_id, stage='graph')
     manifest = json.loads((graph / 'manifest.json').read_text())
@@ -125,7 +126,7 @@ def test_source_freeze_inherits_effective_metadata_preserved_by_graph_publicatio
     french_checkpoint.write_json(graph_state/'update-plan.json',plan)
     published={
         'state_version':'wikidebia-published-state-1.0','debate_id':'debat_test',
-        'language':'fr','pages':state_pages,
+        'language':'fr','pages':state_pages,'plan_sha256':plan['plan_sha256'],
     }
     published['state_sha256']=french_checkpoint.sha_object(published)
     french_checkpoint.write_json(project/'.state/published/debat_test/fr/latest.json',published)
@@ -133,8 +134,10 @@ def test_source_freeze_inherits_effective_metadata_preserved_by_graph_publicatio
         'schema':french_checkpoint.RECEIPT_SCHEMA,'schema_version':'1.0','debate_id':'debat_test',
         'work_id':work_id,'stage':'graph','status':'published',
         'plan_path':(graph_state/'update-plan.json').relative_to(project).as_posix(),
-        'plan_sha256':plan['plan_sha256'],'published_state':{'state_sha256':published['state_sha256']},
+        'plan_sha256':plan['plan_sha256'],
     }
+    if not legacy_receipt:
+        receipt['published_state']={'state_sha256':published['state_sha256']}
     receipt['receipt_sha256']=french_checkpoint.sha_object(receipt)
     french_checkpoint.write_json(graph_state/'publication-receipt.json',receipt)
 

@@ -73,11 +73,21 @@ def _rebase_imports_on_published_graph(
     published = load_json(published_path, "état français publié")
     state_sha = str(published.get("state_sha256") or "")
     receipt_state = receipt.get("published_state") or {}
+    receipt_state_sha = str(receipt_state.get("state_sha256") or "")
+    # Graph receipts produced before 2.16.47 did not embed the published-state
+    # digest.  Their signed published state still provides an unambiguous link
+    # when it names the exact same signed plan.  Do not weaken the current
+    # format: when the receipt carries a state digest, it must match exactly.
+    legacy_plan_link = (
+        not receipt_state_sha
+        and str(published.get("plan_sha256") or "") == plan_sha
+    )
     if (
         published.get("debate_id") != debate_id
         or published.get("language") != "fr"
         or state_sha != _signed_object_sha(published, "state_sha256")
-        or state_sha != receipt_state.get("state_sha256")
+        or (receipt_state_sha and state_sha != receipt_state_sha)
+        or (not receipt_state_sha and not legacy_plan_link)
     ):
         raise RuntimeError("État français publié non attesté par le checkpoint du graphe")
 

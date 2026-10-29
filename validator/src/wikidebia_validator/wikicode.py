@@ -1665,6 +1665,16 @@ def _historically_absent_french_introduction(ctx: PackageContext) -> bool:
             and row.get('historical_status') == 'historical_absent'
             and row.get('decision') == 'preserved'
         )
+        if not result:
+            # Current source-preservation locks record the same evidence on the
+            # selected Debate value instead of the legacy decisions ledger.
+            debate = lock.get('debate') if isinstance(lock, dict) else None
+            result = bool(
+                isinstance(debate, dict)
+                and debate.get('page_origin') == 'preexisting'
+                and debate.get('historical_introduction_present') is False
+                and debate.get('historical_text_decision') == 'preserved'
+            )
     setattr(ctx, '_historically_absent_french_introduction_cache', result)
     return result
 
