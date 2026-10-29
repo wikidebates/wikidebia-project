@@ -859,6 +859,58 @@ class GenericPublisher:
         with self.log_path.open("a", encoding="utf-8", newline="\n") as stream:
             stream.write(json.dumps(event, ensure_ascii=False, sort_keys=True) + "\n")
 
+    def _progress_path(self) -> Path:
+        return self.log_path.with_name(self.log_path.stem + "-progress.json")
+
+    def _load_progress(self, plan: dict[str, Any]) -> dict[tuple[str, str], str]:
+        path = self._progress_path()
+        if not path.is_file():
+            return {}
+        try:
+            value = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            return {}
+        unsigned = dict(value)
+        claimed = unsigned.pop("checkpoint_sha256", None)
+        if claimed != sha_object(unsigned) or value.get("plan_sha256") != plan.get("plan_sha256"):
+            return {}
+        return {
+            (str(row["language"]), str(row["page_id"])): str(row["result"])
+            for row in value.get("completed") or []
+        }
+
+    def _write_progress(
+        self, plan: dict[str, Any], progress: dict[tuple[str, str], str], status: str,
+        *, failed_action: dict[str, Any] | None = None, error: Exception | None = None,
+    ) -> None:
+        value: dict[str, Any] = {
+            "schema": "wikidebia-publication-progress-1.0",
+            "schema_version": "1.0",
+            "debate_id": self.config["debate_id"],
+            "operation_id": self.operation["id"],
+            "plan_sha256": plan["plan_sha256"],
+            "status": status,
+            "updated_at": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
+            "completed": [
+                {"language": language, "page_id": page_id, "result": result}
+                for (language, page_id), result in sorted(progress.items())
+            ],
+        }
+        if failed_action is not None:
+            value["failed_action"] = {
+                "language": failed_action.get("language"), "page_id": failed_action.get("page_id"),
+                "title": failed_action.get("title"),
+            }
+        if error is not None:
+            value["error_type"] = type(error).__name__
+            value["error"] = str(error)
+        value["checkpoint_sha256"] = sha_object(value)
+        path = self._progress_path()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = path.with_suffix(path.suffix + ".tmp")
+        temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+        os.replace(temporary, path)
+
     def _site(self, language: str) -> tuple[str, str]:
         site = self.config["sites"][language]
         return str(site["code"]), str(site["expected_user"])
@@ -1975,6 +2027,10 @@ class GenericPublisher:
             actions = [item for item in actions if item["page_type"] == page_type]
         if not actions:
             raise PublicationError("Aucune action ne correspond aux filtres")
+        progress = self._load_progress(plan)
+        if _progress is not None:
+            progress.update(_progress)
+        self._write_progress(plan, progress, "running")
         counts = {"created": 0, "updated": 0, "skipped": 0}
         for current_language in self.languages:
             language_actions = [item for item in actions if item["language"] == current_language]
@@ -1987,11 +2043,17 @@ class GenericPublisher:
                 self._change_tag_gate(current_language)
                 for action in language_actions:
                     summary = self._summary_for_action(action)
-                    result = self._execute_action(action, user, summary)
+                    try:
+                        result = self._execute_action(action, user, summary)
+                    except Exception as exc:
+                        self._write_progress(plan, progress, "failed", failed_action=action, error=exc)
+                        raise
+                    key = (str(action["language"]), str(action["page_id"]))
+                    if key not in progress or result != "skipped":
+                        progress[key] = result
                     if _progress is not None:
-                        key = (str(action["language"]), str(action["page_id"]))
-                        if key not in _progress or result != "skipped":
-                            _progress[key] = result
+                        _progress.update(progress)
+                    self._write_progress(plan, progress, "running")
                     counts[result] += 1
                     delay = max(0.0, float(self.config.get("write_delay_seconds", 0.5)))
                     if result in {"created", "updated"} and delay:
@@ -1999,6 +2061,7 @@ class GenericPublisher:
                 self._save_published_state(current_language, language_actions, plan)
             finally:
                 self.adapter.close_language()
+        self._write_progress(plan, progress, "completed")
         return counts
 
     def publish_with_date_refresh(
