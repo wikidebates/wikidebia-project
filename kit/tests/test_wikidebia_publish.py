@@ -29,7 +29,8 @@ class FakeAdapter:
     def close_language(self): self.language = None
     def assert_identity(self, expected_user): return None
     def available_change_tags(self): return {"chatgpt", "translated-fr"}
-    def spam_blacklist_matches(self, urls): return set(self.spam_matches)
+    def spam_blacklist_matches(self, urls):
+        return {match for match in self.spam_matches if any(match in url for url in urls)}
     def read_page(self, title):
         row = self.pages.get((self.language, title))
         return (False, None, "") if row is None else (True, row[0], row[1])
@@ -384,6 +385,31 @@ def test_plan_blocks_spam_blacklist_before_any_remote_write(tmp_path):
     else:
         raise AssertionError("URL anti-spam acceptée dans le plan")
     assert adapter.pages == {}
+
+
+def test_signed_publication_url_replacement_runs_before_spam_gate(tmp_path):
+    config, path, _fr, _en = write_fixture(tmp_path, "full_page")
+    source = tmp_path / "corpus/demo/output/en/A1.wiki"
+    old = "https://archive.is/example"
+    new = "https://example.org/original"
+    source.write_text(source.read_text(encoding="utf-8") + old + "\n", encoding="utf-8")
+    manifest_path = tmp_path / "corpus/demo/manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    next(row for row in manifest["pages"] if row["language"] == "en" and row["page_id"] == "A1")["sha256"] = module.sha_file(source)
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    config["publication_url_replacements"] = [{
+        "language": "en", "page_id": "A1", "old_url": old, "new_url": new,
+        "owner_approved": True,
+        "reason": "MediaWiki rejects the archive host; retain the exact original cited article.",
+        "authorization_receipt_sha256": "a" * 64,
+    }]
+    path.write_text(json.dumps(config), encoding="utf-8")
+    adapter = FakeAdapter(); adapter.spam_matches = {"archive.is"}
+    publisher = module.GenericPublisher(config, adapter, path)
+    plan = publisher.build_plan()
+    publisher.publish(plan=plan, confirmation=plan["plan_sha256"])
+    assert old not in adapter.pages[("en", "Title EN")][1]
+    assert new in adapter.pages[("en", "Title EN")][1]
 
 
 def test_parameter_update_preserves_other_content(tmp_path):
