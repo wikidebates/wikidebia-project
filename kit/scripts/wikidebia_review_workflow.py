@@ -85,6 +85,7 @@ from wikidebia_render import render_workspace
 from wikidebia_release import release_workspace
 from wikidebia_final_publication import publish_final_release, FinalPublicationError
 from wikidebia_french_checkpoint import publish_checkpoint, FrenchCheckpointError
+from wikidebia_workflow_baseline import resolve_workflow_release_baseline, WorkflowBaselineError
 
 # Compatibility aliases: the historical CLI/tests used the metadata names.
 # Their semantics are now title-only; classification moved to the content review.
@@ -176,6 +177,80 @@ def _save_workflow(project_root: Path, state: Mapping[str, Any]) -> None:
     path = _workflow_path(project_root, str(state["debate_id"]))
     path.parent.mkdir(parents=True, exist_ok=True)
     write_json(path, dict(state))
+
+
+def reconcile_workflow(project_root: Path, debate_id: str) -> dict[str, Any]:
+    """Restore a stale workflow to release_ready from signed Work evidence only."""
+    state = _load_workflow(project_root, debate_id)
+    work_id = str(state.get("work_id") or "")
+    if not work_id:
+        raise WorkflowError("Workflow sans work_id à réconcilier")
+    workspace = _workspace_path(project_root, debate_id, work_id)
+    meta = load_json(workspace / "workspace.json", "workspace")
+    if meta.get("workspace_sha256") != workspace_receipt_hash(meta):
+        raise WorkflowError("Empreinte du workspace invalide")
+    release_copy = workspace / "release-copy"
+    expected_tree = str((meta.get("release_copy") or {}).get("tree_sha256") or "")
+    if meta.get("status") != "release_ready" or not release_copy.is_dir() or full_tree_sha256(release_copy) != expected_tree:
+        raise WorkflowError("Workspace non scellé à la frontière release_ready")
+
+    def signed(path: Path, label: str) -> dict[str, Any]:
+        value = load_json(path, label)
+        unsigned = dict(value)
+        claimed = unsigned.pop("receipt_sha256", None)
+        if claimed != _sha256_bytes(_canonical_json(unsigned)):
+            raise WorkflowError(f"Empreinte invalide : {label}")
+        return value
+
+    release_receipt = signed(
+        project_root / ".state/corpus-releases" / debate_id / work_id / "release-receipt.json",
+        "reçu de release",
+    )
+    if release_receipt.get("release_copy_tree_sha256") != expected_tree:
+        raise WorkflowError("Le reçu de release diverge du release-copy")
+    content_path = project_root / ".state/fr-publication" / debate_id / work_id / "content/publication-receipt.json"
+    if not content_path.is_file():
+        content_path = project_root / ".state/fr-publication" / debate_id / work_id / "publication-receipt.json"
+    content_receipt = signed(content_path, "reçu du checkpoint français final")
+    if (content_receipt.get("debate_id") != debate_id or content_receipt.get("work_id") != work_id
+            or content_receipt.get("status") not in {"published", "verified_no_changes"}):
+        raise WorkflowError("Checkpoint français final invalide ou rattaché à un autre Work")
+
+    before = copy.deepcopy(state)
+    candidate = copy.deepcopy(state)
+    candidate.update({
+        "phase": "release_ready", "status": "release_ready",
+        "french_content_publication": copy.deepcopy(content_receipt),
+        "french_publication": copy.deepcopy(content_receipt),
+        "release": copy.deepcopy(meta.get("local_release") or {}),
+        "updated_at": now_iso(),
+    })
+    candidate.pop("pending_review", None)
+    _save_workflow(project_root, candidate)
+    try:
+        baseline = resolve_workflow_release_baseline(
+            project_root, debate_id, release_copy, expected_work_id=work_id,
+        )
+        if baseline is None:
+            raise WorkflowError("La release réconciliée ne produit aucune baseline finale")
+    except (WorkflowBaselineError, WorkflowError):
+        _save_workflow(project_root, before)
+        raise
+    audit = {
+        "schema": "wikidebia-workflow-reconciliation-1.0", "schema_version": "1.0",
+        "debate_id": debate_id, "work_id": work_id, "reconciled_at": now_iso(),
+        "previous_phase": before.get("phase"), "previous_status": before.get("status"),
+        "new_phase": "release_ready", "new_status": "release_ready",
+        "release_copy_tree_sha256": expected_tree,
+        "content_receipt_sha256": content_receipt.get("receipt_sha256"),
+        "baseline_sha256": baseline.get("baseline_sha256"),
+    }
+    audit["reconciliation_sha256"] = _sha256_bytes(_canonical_json(audit))
+    audit_path = _workflow_root(project_root, debate_id) / "reconciliation.json"
+    write_json(audit_path, audit)
+    candidate["workflow_reconciliation"] = copy.deepcopy(audit)
+    _save_workflow(project_root, candidate)
+    return candidate
 
 
 def _relative(path: Path, root: Path) -> str:
@@ -1983,6 +2058,8 @@ def build_parser() -> argparse.ArgumentParser:
     imp.add_argument("--authorize-historical-changes", action="store_true", help="Enregistrer le consentement propriétaire pour les seuls deltas historiques explicitement déclarés dans ce ZIP")
     status = sub.add_parser("workflow-status")
     status.add_argument("debate_id")
+    reconcile = sub.add_parser("workflow-reconcile")
+    reconcile.add_argument("debate_id")
     return parser
 
 
@@ -2001,6 +2078,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 root, args.debate_id, archive.resolve(), execute_graph_actions=args.execute_graph_actions,
                 authorize_historical_changes=args.authorize_historical_changes,
             )
+        elif args.command == "workflow-reconcile":
+            state = reconcile_workflow(root, args.debate_id)
         else:
             state = status_summary(root, args.debate_id)
     except Exception as exc:

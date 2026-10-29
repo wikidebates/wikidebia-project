@@ -1984,6 +1984,17 @@ def workflow_status(root: Path, debate_id: str) -> int:
     ]
     return run(command, cwd=root, check=False).returncode
 
+
+def workflow_reconcile(root: Path, debate_id: str) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_review_workflow.py"
+    if not script.is_file():
+        raise ManagementError("Orchestrateur éditorial absent du kit")
+    command = [
+        python_command(root), str(script), "--project-root", str(root),
+        "--machine-readable", "workflow-reconcile", debate_id,
+    ]
+    return run(command, cwd=root, check=False).returncode
+
 def corpus_workspace_render(
     root: Path, debate_id: str, *, work_id: str, confirm_translation_sha256: str,
 ) -> int:
@@ -2313,6 +2324,10 @@ def build_parser() -> argparse.ArgumentParser:
         "workflow-status", help="Afficher l'état de l'orchestration éditoriale"
     )
     workflow_status_parser.add_argument("debate_id")
+    workflow_reconcile_parser = sub.add_parser(
+        "workflow-reconcile", help="Réconcilier un workflow en retard depuis ses preuves signées"
+    )
+    workflow_reconcile_parser.add_argument("debate_id")
 
     graph = sub.add_parser(
         "graph-extract",
@@ -2587,6 +2602,8 @@ def main(argv: list[str] | None = None) -> int:
         )
     if args.command == "workflow-status":
         return workflow_status(root, args.debate_id)
+    if args.command == "workflow-reconcile":
+        return workflow_reconcile(root, args.debate_id)
     if args.command == "graph-extract":
         return graph_extract_debate(
             root,
