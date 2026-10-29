@@ -34,6 +34,7 @@ normalize_wikicode = _publish.normalize_wikicode
 sha_text = _publish.sha_text
 sha_file = _publish.sha_file
 sha_object = _publish.sha_object
+replace_parameter = _publish.replace_parameter
 
 PLAN_VERSION = "wikidebia-remote-update-plan-1.0"
 STATE_VERSION = "wikidebia-published-state-1.0"
@@ -705,6 +706,7 @@ def add_french_interlanguage_to_remote(
     remote_text: str,
     page_type: str,
     expected_english_title: str,
+    previous_english_title: str | None = None,
 ) -> tuple[str, str]:
     """Return current remote text plus only the requested FR→EN interlanguage link.
 
@@ -724,8 +726,16 @@ def add_french_interlanguage_to_remote(
             links = [item for item in iter_templates(value) if normalize_key(item.name) == "lien interlangue"]
             if len(links) != 1 or set(links[0].params) != {"langue", "page"}:
                 raise UpdateError("Paramètre interlangue distant illisible ou non canonique")
-            if links[0].get("langue") != "en" or links[0].get("page") != expected_english_title:
+            current_title = links[0].get("page")
+            if links[0].get("langue") != "en":
                 raise UpdateError("Paramètre interlangue distant divergent de la cible anglaise attendue")
+            if current_title != expected_english_title:
+                if not previous_english_title or current_title != previous_english_title:
+                    raise UpdateError("Paramètre interlangue distant divergent de la cible anglaise attendue")
+                new_raw = replace_parameter(
+                    call.raw, "interlangue", french_interlanguage_value(expected_english_title),
+                )
+                return remote_text.replace(call.raw, new_raw, 1), "template_retargeted"
             return remote_text, "template_existing"
 
         addition = f"|interlangue={french_interlanguage_value(expected_english_title)}\n"
@@ -759,6 +769,7 @@ def only_french_interlanguage_overlay(
     desired_text: str,
     page_type: str,
     expected_english_title: str,
+    previous_english_title: str | None = None,
 ) -> bool:
     try:
         if only_french_interlanguage_addition(remote_text, desired_text, page_type, expected_english_title):
@@ -766,7 +777,9 @@ def only_french_interlanguage_overlay(
     except UpdateError:
         pass
     try:
-        expected, _ = add_french_interlanguage_to_remote(remote_text, page_type, expected_english_title)
+        expected, _ = add_french_interlanguage_to_remote(
+            remote_text, page_type, expected_english_title, previous_english_title,
+        )
     except UpdateError:
         return False
     return normalize_wikicode(expected) == normalize_wikicode(desired_text)
@@ -1435,6 +1448,11 @@ class RemoteUpdatePlanner:
         self.debate_id = str(config["debate_id"])
         self.languages = tuple(config.get("languages") or ("fr", "en"))
         self.interlanguage_only = config.get("interlanguage_only") is True
+        self.interlanguage_retargets = {
+            str(page_id): str(title)
+            for page_id, title in (config.get("interlanguage_retargets") or {}).items()
+            if str(page_id).strip() and str(title).strip()
+        }
         self.adapter = adapter if hasattr(adapter, "user_rights") else UpdateAdapter(adapter)
         self.extra_markers = tuple(config.get("generated_markers") or ())
         self.migrations = self._load_migrations()
@@ -1874,8 +1892,9 @@ class RemoteUpdatePlanner:
             return
         expected_title = self._english_title_for(str(proposed["page_id"]), str(proposed["page_type"]))
         try:
+            previous_title = self.interlanguage_retargets.get(str(proposed["page_id"]))
             desired_text, representation = add_french_interlanguage_to_remote(
-                remote_text, str(proposed["page_type"]), expected_title
+                remote_text, str(proposed["page_type"]), expected_title, previous_title,
             )
         except UpdateError as exc:
             op.update({
@@ -1902,6 +1921,8 @@ class RemoteUpdatePlanner:
             "original_local_file_sha256": effective["original_file_sha256"],
             "original_new_sha256": effective["original_content_sha256"],
         })
+        if representation == "template_retargeted":
+            op["previous_interlanguage_title"] = previous_title
         if sha_text(remote_text) == effective["content_sha256"]:
             op["justification"] = "Lien interlangue distant déjà conforme; contenu distant conservé tel quel"
             op["phase"] = 0
@@ -3004,7 +3025,10 @@ class PlanExecutor:
             summary = self._expected_row_summary(row, operation, plan, remote_text)
             if row.get("edit_summary_policy") == "french_interlanguage_addition":
                 expected_title = self._english_title_for(str(row.get("page_id") or ""), str(row.get("page_type") or ""))
-                if not only_french_interlanguage_overlay(remote_text, desired, str(row.get("page_type") or ""), expected_title):
+                if not only_french_interlanguage_overlay(
+                    remote_text, desired, str(row.get("page_type") or ""), expected_title,
+                    row.get("previous_interlanguage_title"),
+                ):
                     raise PlanConflict(f"La modification n'est plus un ajout interlangue pur : {row.get('page_id')}")
             new_rev = self.adapter.write_page(title=title, text=desired, summary=summary, tags=["chatgpt"], expected_user=user, create_only=False, base_revision_id=revision_id)
             self._verify_written_revision(title, new_rev, desired, summary)
