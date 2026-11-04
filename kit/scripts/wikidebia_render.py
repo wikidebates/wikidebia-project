@@ -253,6 +253,12 @@ def _published_frontier_relation_count(published_french: Path, registry: Mapping
     return total
 
 
+def _synchronize_graph_projection(projection: dict[str, Any], registry: Mapping[str, Any]) -> None:
+    graph = registry.get("graph") or {}
+    for key in ("lifecycle", "depth_policy", "nodes", "edges", "occurrences", "derived_counts"):
+        projection[key] = copy.deepcopy(graph.get(key))
+
+
 def _workspace_path(project_root: Path, debate_id: str, work_id: str) -> Path:
     debate_id = validate_debate_id(debate_id)
     work_id = validate_work_id(work_id)
@@ -1954,10 +1960,7 @@ def _build_rendered_copy(
     registry["validations"] = []
     write_json(target / "data/registre_debat.json", registry)
     projection = load_json(target / "graph/graphe_argumentatif.json", "projection du graphe")
-    projection["nodes"] = copy.deepcopy((registry.get("graph") or {}).get("nodes") or [])
-    projection["edges"] = copy.deepcopy((registry.get("graph") or {}).get("edges") or [])
-    projection["occurrences"] = copy.deepcopy((registry.get("graph") or {}).get("occurrences") or [])
-    projection["lifecycle"] = copy.deepcopy(lifecycle)
+    _synchronize_graph_projection(projection, registry)
     write_json(target / "graph/graphe_argumentatif.json", projection)
 
     page_manifests = []
