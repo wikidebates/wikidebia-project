@@ -667,6 +667,14 @@
         "semantic_convergence_review_path": {
           "$ref": "common.schema.json#/$defs/relativePath"
         },
+        "publication_url_replacements_path": {
+          "$ref": "common.schema.json#/$defs/relativePath",
+          "description": "Registre propriétaire des substitutions d’URL appliquées uniquement au texte de publication, sans modifier la source éditoriale verrouillée."
+        },
+        "english_successor_revisions_path": {
+          "$ref": "common.schema.json#/$defs/relativePath",
+          "description": "Registre propriétaire des révisions anglaises successives auditées après le verrouillage sémantique."
+        },
         "semantic_convergence_review_schema_version": {
           "type": "string",
           "enum": [

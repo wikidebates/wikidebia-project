@@ -97,6 +97,20 @@ def test_norm_124_schema_accepts_declared_introduction_review_and_rationale(tmp_
     assert not any(f.code == "WDV-SCH-003" for f in report.findings)
 
 
+def test_schema_accepts_final_publication_control_registry_paths(tmp_path: Path):
+    create_graph_package(tmp_path)
+    manifest = json.loads((tmp_path / "manifest.json").read_text())
+    controls = _editorial_controls_124()
+    controls["publication_url_replacements_path"] = "data/publication_url_replacements.json"
+    controls["english_successor_revisions_path"] = "data/english_successor_revisions.json"
+    manifest["editorial_controls"] = controls
+    dump(tmp_path / "manifest.json", manifest)
+
+    report = validate_package(tmp_path, scopes=["schema"])
+
+    assert not any(f.code == "WDV-SCH-003" for f in report.findings)
+
+
 
 def test_old_1220_metadata_does_not_schema_gate_graph_placement_review_path(tmp_path: Path):
     create_graph_package(tmp_path)
