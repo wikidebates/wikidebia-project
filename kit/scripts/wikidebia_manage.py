@@ -2066,6 +2066,17 @@ def corpus_workspace_finalize(
         command.extend(["--comparison-id", comparison_id])
     return run(command, cwd=root, check=False).returncode
 
+
+def corpus_workspace_status(root: Path, debate_id: str, *, work_id: str) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_workspace_status.py"
+    if not script.is_file():
+        raise ManagementError("Outil de résumé compact du workspace absent du kit")
+    command = [
+        python_command(root), str(script), debate_id,
+        "--work-id", work_id, "--project-root", str(root), "--machine-readable",
+    ]
+    return run(command, cwd=root, check=False).returncode
+
 def corpus_workspace_remote_plan_review(
     root: Path, debate_id: str, *, work_id: str, comparison_id: str,
     prepare: bool, finalize: bool, overwrite_review: bool,
@@ -2242,6 +2253,7 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
         "wikidebia_content_review.py", "wikidebia_translation_review.py",
         "wikidebia_render.py", "wikidebia_release.py",
         "wikidebia_remote_compare.py", "wikidebia_workspace_finalize.py",
+        "wikidebia_workspace_status.py",
         "wikidebia_remote_plan_review.py",
         "wikidebia_remote_execute.py", "wikidebia_work_close.py",
         "wikidebia_workflow_baseline.py", "wikidebia_final_publication.py",
@@ -2519,6 +2531,13 @@ def build_parser() -> argparse.ArgumentParser:
         "--comparison-id", help="Identifiant de la nouvelle comparaison (avec --refresh-remote)",
     )
 
+    corpus_status_parser = sub.add_parser(
+        "corpus-workspace-status",
+        help="Afficher un état compact vérifié et la prochaine commande exacte",
+    )
+    corpus_status_parser.add_argument("debate_id", help="Identifiant du corpus sous corpus/")
+    corpus_status_parser.add_argument("--work-id", required=True, help="Identifiant du workspace éditorial")
+
     corpus_remote_plan_review_parser = sub.add_parser(
         "corpus-workspace-plan-review",
         help="Préparer ou finaliser la revue formelle d’un plan distant signé",
@@ -2738,6 +2757,9 @@ def main(argv: list[str] | None = None) -> int:
             root, args.debate_id, work_id=args.work_id, scope=args.scope,
             refresh_remote=args.refresh_remote, comparison_id=args.comparison_id,
         )
+
+    if args.command == "corpus-workspace-status":
+        return corpus_workspace_status(root, args.debate_id, work_id=args.work_id)
 
     if args.command == "corpus-workspace-plan-review":
         return corpus_workspace_remote_plan_review(
