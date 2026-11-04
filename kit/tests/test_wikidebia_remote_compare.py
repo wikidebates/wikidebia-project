@@ -233,3 +233,72 @@ def test_remote_comparison_prefers_signed_published_state(tmp_path: Path, monkey
     run = project / ".state/remote-comparisons/debat_test" / work_id / "REMOTE-20260803-004"
     fr_baseline = json.loads((run / "baseline/fr.json").read_text(encoding="utf-8"))
     assert fr_baseline["source"]["kind"] == "published_state_receipt"
+
+
+def test_remote_comparison_applies_signed_publication_url_replacement(tmp_path: Path, monkeypatch):
+    _stub_corpus_validation(monkeypatch)
+    project, workspace, work_id, _release_sha, pages = make_release(tmp_path)
+    release = workspace / "release-copy"
+    source = release / "output/en/arguments/A0001.wiki"
+    old_url = "https://archive.is/example"
+    new_url = "https://example.org/original"
+    source.write_text(source.read_text(encoding="utf-8") + old_url + "\n", encoding="utf-8")
+
+    manifest_path = release / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["editorial_controls"] = {
+        "manual_remote_adoption_path": "data/manual_remote_adoptions.json",
+        "publication_url_replacements_path": "data/publication_url_replacements.json",
+    }
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    replacement = {
+        "version": "1.0", "debate_id": "debat_test", "entries": [{
+            "language": "en", "page_id": "A0001", "old_url": old_url, "new_url": new_url,
+            "owner_approved": True,
+            "reason": "MediaWiki rejects the archive host; retain the exact original cited article.",
+            "authorization_receipt_sha256": "a" * 64,
+        }],
+    }
+    (release / "data/publication_url_replacements.json").write_text(
+        json.dumps(replacement, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    adoption = {
+        "version": "1.0", "debate_id": "debat_test", "decision": "Décision explicite du propriétaire",
+        "entries": [{
+            "language": "en", "page_id": "A0001", "title": "Improved argument",
+            "reason": "Earlier remote revision explicitly adopted before URL sanitization.",
+            "allow_proposed_change": True, "observed_revision_id": 50,
+            "observed_sha256": "b" * 64, "allowed_lifecycle_parameter_changes": [],
+        }],
+    }
+    (release / "data/manual_remote_adoptions.json").write_text(
+        json.dumps(adoption, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+
+    release_sha = remote.full_tree_sha256(release)
+    meta_path = workspace / "workspace.json"
+    meta = json.loads(meta_path.read_text(encoding="utf-8"))
+    meta["release_copy"]["tree_sha256"] = release_sha
+    meta["workspace_sha256"] = remote.workspace_receipt_hash(meta)
+    meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    receipt_path = project / ".state/corpus-releases/debat_test" / work_id / "release-receipt.json"
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    receipt["release_copy_tree_sha256"] = release_sha
+    receipt["receipt_sha256"] = remote._canonical_sha(receipt, "receipt_sha256")
+    receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    remote_text = source.read_text(encoding="utf-8").replace(old_url, new_url)
+    pages[("en", "Improved argument")] = (99, remote_text)
+    result = remote.compare_workspace(
+        project, "debat_test", work_id, release_sha, scope="en",
+        comparison_id="REMOTE-20260803-005", adapter=FakeReadAdapter(pages), validate_plan_fn=fake_validate_plan,
+    )
+    assert result["status"] == "plan_ready"
+    assert result["counts"]["skip"] == 1
+    assert result["counts"]["blocked"] == 0
+    plan = json.loads((project / ".state/remote-comparisons/debat_test" / work_id / "REMOTE-20260803-005/update-plan.json").read_text(encoding="utf-8"))
+    skipped = next(row for row in plan["operations"]["skip"] if row["page_id"] == "A0001")
+    effective = project / skipped["source_path"]
+    assert skipped["new_sha256"] == update.sha_text(remote_text)
+    assert new_url in effective.read_text(encoding="utf-8")
+    assert old_url not in effective.read_text(encoding="utf-8")

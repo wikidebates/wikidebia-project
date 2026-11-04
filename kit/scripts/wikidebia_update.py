@@ -1457,6 +1457,7 @@ class RemoteUpdatePlanner:
         self.extra_markers = tuple(config.get("generated_markers") or ())
         self.migrations = self._load_migrations()
         self.remote_adoptions = self._load_remote_adoptions()
+        self.publication_url_replacements = self._load_publication_url_replacements()
         self.argument_name_assignments = self._load_argument_name_assignments()
         self._validate_config()
         inventory_root = self.config.get("state_inventory_root")
@@ -1525,6 +1526,39 @@ class RemoteUpdatePlanner:
                 raise UpdateError(f"Adoption distante incomplète : {key}")
             if row.get("observed_revision_id") is None and not row.get("observed_sha256"):
                 raise UpdateError(f"Adoption distante sans révision ni empreinte : {key}")
+            result.append(row)
+        return result
+
+    def _load_publication_url_replacements(self) -> list[dict[str, Any]]:
+        controls = self.manifest.get("editorial_controls") or {}
+        rel = controls.get("publication_url_replacements_path")
+        if not rel:
+            return []
+        path = (self.corpus_root / str(rel)).resolve()
+        try:
+            path.relative_to(self.corpus_root.resolve())
+        except ValueError as exc:
+            raise UpdateError("Registre de substitution d’URL extérieur au corpus") from exc
+        data = load_json(path)
+        if data.get("debate_id") != self.debate_id or not isinstance(data.get("entries"), list):
+            raise UpdateError("Registre de substitution d’URL invalide")
+        result: list[dict[str, Any]] = []
+        seen: set[tuple[str, str, str]] = set()
+        for raw in data["entries"]:
+            row = dict(raw) if isinstance(raw, dict) else {}
+            key = (
+                str(row.get("language") or ""),
+                str(row.get("page_id") or ""),
+                str(row.get("old_url") or ""),
+            )
+            if (not all(key) or key in seen or row.get("owner_approved") is not True
+                    or not key[2].startswith(("http://", "https://"))
+                    or not str(row.get("new_url") or "").startswith(("http://", "https://"))
+                    or row.get("old_url") == row.get("new_url")
+                    or len(str(row.get("reason") or "").strip()) < 24
+                    or not re.fullmatch(r"[a-f0-9]{64}", str(row.get("authorization_receipt_sha256") or ""))):
+                raise UpdateError("Substitution d’URL de publication invalide")
+            seen.add(key)
             result.append(row)
         return result
 
@@ -1617,7 +1651,7 @@ class RemoteUpdatePlanner:
             if not source.is_file():
                 raise UpdateError(f"Fichier de page absent : {source}")
             text = source.read_text(encoding="utf-8")
-            result[key] = {
+            proposed = {
                 "language": language,
                 "page_id": pid,
                 "page_type": str(row.get("page_type") or "unknown"),
@@ -1631,6 +1665,27 @@ class RemoteUpdatePlanner:
                 "summary_change_authorization": row.get("summary_change_authorization"),
                 "citation_change_authorization": row.get("citation_change_authorization"),
             }
+            effective_text = text
+            for replacement in self.publication_url_replacements:
+                if (replacement.get("language") != language
+                        or str(replacement.get("page_id")) != pid):
+                    continue
+                old_url = str(replacement["old_url"])
+                if effective_text.count(old_url) != 1:
+                    raise UpdateError(f"URL source absente ou dupliquée pour {language}/{pid}")
+                effective_text = effective_text.replace(old_url, str(replacement["new_url"]), 1)
+            result[key] = (
+                self._materialize_remote_overlay(proposed, effective_text)
+                if effective_text != text else proposed
+            )
+        selected = {(row["language"], str(row["page_id"])) for row in result.values()}
+        missing = sorted({
+            (str(row["language"]), str(row["page_id"]))
+            for row in self.publication_url_replacements
+            if str(row["language"]) in self.languages
+        } - selected)
+        if missing:
+            raise UpdateError("Substitution d’URL sans page sélectionnée : " + ", ".join(f"{lang}/{pid}" for lang, pid in missing))
         if not result:
             raise UpdateError("Le nouveau manifeste ne contient aucune page sélectionnée")
         return result
@@ -1781,7 +1836,7 @@ class RemoteUpdatePlanner:
     def _materialize_remote_overlay(self, proposed: dict[str, Any], text: str) -> dict[str, Any]:
         digest = sha_text(text)
         target = (
-            self.project_root / ".state" / "update-effective" / self.debate_id / "fr"
+            self.project_root / ".state" / "update-effective" / self.debate_id / str(proposed["language"])
             / f"{proposed['page_id']}-{digest[:16]}.wiki"
         )
         target.parent.mkdir(parents=True, exist_ok=True)
