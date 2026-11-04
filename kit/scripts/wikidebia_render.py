@@ -233,6 +233,26 @@ def _published_content_checkpoint(
     return checkpoint / "output/fr"
 
 
+def _published_frontier_relation_count(published_french: Path, registry: Mapping[str, Any]) -> int | None:
+    """Count opaque relations retained by a signed bounded-depth checkpoint."""
+    policy = (registry.get("graph") or {}).get("depth_policy") or {}
+    if policy.get("limit_policy") != "bounded":
+        return None
+    from wikidebia_graph_extract import parse_argument_wikitext
+    total = 0
+    for page_id in policy.get("frontier_node_ids") or []:
+        path = published_french / f"arguments/{page_id}.wiki"
+        if not path.is_file() or path.is_symlink():
+            raise RenderError(f"Page frontière absente du checkpoint français : {page_id}")
+        parsed = parse_argument_wikitext(
+            path.read_text(encoding="utf-8"),
+            stop_on_detailed_debate=False,
+            stop_on_existing_english_translation=False,
+        )
+        total += len(parsed.justifications) + len(parsed.objections)
+    return total
+
+
 def _workspace_path(project_root: Path, debate_id: str, work_id: str) -> Path:
     debate_id = validate_debate_id(debate_id)
     work_id = validate_work_id(work_id)
@@ -1678,7 +1698,7 @@ def _build_rendered_copy(
             })
         if len(preserved_rows) != 1 + len(fr_content_by_id):
             raise RenderError("Couverture incomplète du checkpoint de publication française")
-        write_json(target / "data/fr_render_source_provenance.json", {
+        source_provenance = {
             "schema": "wikidebia-fr-render-source-provenance-1.0",
             "debate_id": debate_id,
             "work_id": work_id,
@@ -1686,7 +1706,14 @@ def _build_rendered_copy(
             "source_checkpoint_receipt_sha256": checkpoint_receipt.get("receipt_sha256"),
             "source_checkpoint_tree_sha256": checkpoint_record.get("checkpoint_tree_sha256"),
             "pages": preserved_rows,
-        })
+        }
+        frontier_count = _published_frontier_relation_count(published_french, registry)
+        if frontier_count is not None:
+            policy = (registry.get("graph") or {}).get("depth_policy") or {}
+            source_provenance["frontier_relation_count_before_checkpoint"] = policy.get("relations_omitted_at_frontier")
+            source_provenance["frontier_relation_count_from_checkpoint"] = frontier_count
+            policy["relations_omitted_at_frontier"] = frontier_count
+        write_json(target / "data/fr_render_source_provenance.json", source_provenance)
     # Full editorial review locks intentionally omit import paths.  Recover the
     # immutable page receipts from import_provenance so historical French pages
     # can still be rendered byte-for-byte instead of being reconstructed.

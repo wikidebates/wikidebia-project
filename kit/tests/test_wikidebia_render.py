@@ -835,6 +835,26 @@ def test_published_content_checkpoint_requires_matching_receipts_and_review(tmp_
     with pytest.raises(RenderError):_published_content_checkpoint(root,'test-debate','EDIT-001',{'review_sha256':'review-fr'})
 
 
+def test_published_checkpoint_recounts_bounded_frontier_relations(tmp_path: Path):
+    checkpoint = tmp_path / "output/fr"
+    argument = checkpoint / "arguments/A0001.wiki"
+    argument.parent.mkdir(parents=True)
+    argument.write_text(
+        "{{Argument\n"
+        "|justifications={{Justification|page=A0002}}\n"
+        "|objections={{Objection|page=A0003}}{{Objection|page=A0004}}\n"
+        "}}\n",
+        encoding="utf-8",
+    )
+    registry = {"graph": {"depth_policy": {
+        "limit_policy": "bounded",
+        "frontier_node_ids": ["A0001"],
+        "relations_omitted_at_frontier": 99,
+    }}}
+
+    assert render._published_frontier_relation_count(checkpoint, registry) == 3
+
+
 def test_frozen_source_is_verified_before_published_checkpoint_overlay(tmp_path: Path, monkeypatch):
     project, workspace, work_id, review_sha = make_translated(tmp_path)
     source = workspace / "translated-copy"

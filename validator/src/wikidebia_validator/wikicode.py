@@ -547,7 +547,23 @@ def _translated_english_source_template(ctx: PackageContext, page_manifest: dict
     source = next((p for p in manifest.get('pages', []) if p.get('language') == 'fr' and p.get('page_id') == page_id and p.get('page_type') == page_type), None)
     if not isinstance(source, dict) or not isinstance(source.get('file_path'), str):
         return None
-    text = ctx.read_text(source['file_path'])
+    source_path = source['file_path']
+    # A signed French publication checkpoint may postdate the translation
+    # review.  In preservation mode, semantic validation must keep using the
+    # exact imported page that was frozen for translation, rather than treating
+    # later French publication metadata as untranslated source content.
+    from .schema_validation import _valid_translation_source_preservation
+    if _valid_translation_source_preservation(ctx):
+        receipt = ctx.load_json('data/source_preservation_receipt.json') or {}
+        preserved = next((
+            row for row in receipt.get('pages') or []
+            if row.get('kind') == page_type
+            and (page_type == 'debate' or row.get('page_id') == page_id)
+        ), None)
+        if not isinstance(preserved, dict) or not isinstance(preserved.get('import_path'), str):
+            return None
+        source_path = preserved['import_path']
+    text = ctx.read_text(source_path)
     if not isinstance(text, str):
         return None
     try:
