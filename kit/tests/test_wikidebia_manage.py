@@ -1097,6 +1097,18 @@ def test_translation_worklist_command_is_exposed_by_manager():
     assert args.work_id == "EDIT-TEST-001"
 
 
+def test_external_deletion_accept_command_is_exposed_by_manager():
+    args = module.build_parser().parse_args([
+        "corpus-external-deletion-accept", "debat_test",
+        "--work-id", "EDIT-TEST-001", "--comparison-id", "REMOTE-20261104-001",
+        "--language", "fr", "--page-id", "A1", "--reason", "Doublon supprimé",
+        "--accepted-by", "owner", "--confirm-plan-sha256", "a" * 64,
+    ])
+    assert args.command == "corpus-external-deletion-accept"
+    assert args.page_id == "A1"
+    assert args.confirm_plan_sha256 == "a" * 64
+
+
 def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
     (tmp_path / "private/pywikibot").mkdir(parents=True)
     (tmp_path / "private/pywikibot/user-config.py").write_text("# test\n", encoding="utf-8")
@@ -1106,7 +1118,8 @@ def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
         "wikidebia_corpus_init.py", "wikidebia_corpus_review.py", "wikidebia_corpus_promote.py",
         "wikidebia_editorial_workspace.py", "wikidebia_editorial_review.py",
         "wikidebia_content_review.py", "wikidebia_translation_review.py",
-        "wikidebia_translation_worklist.py", "refresh_package_metadata.py",
+        "wikidebia_translation_worklist.py", "wikidebia_external_deletions.py",
+        "refresh_package_metadata.py",
         "wikidebia_render.py",
         "wikidebia_release.py", "wikidebia_remote_compare.py", "wikidebia_workspace_finalize.py",
         "wikidebia_workspace_status.py",

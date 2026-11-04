@@ -33,6 +33,7 @@ from wikidebia_corpus_build import (
     write_json,
 )
 from wikidebia_editorial_workspace import WorkspaceError, validate_work_id, workspace_receipt_hash
+from wikidebia_external_deletions import apply_external_deletions
 from wikidebia_render import _load_workspace
 from wikidebia_update import (
     KIT_VERSION,
@@ -624,6 +625,9 @@ def compare_workspace(
         inventory = recorder.inventory(debate_id, comparison_id)
         inventory_path = run_dir / "remote-inventory.json"
         write_json(inventory_path, inventory)
+        external_deletions = apply_external_deletions(
+            project_root, debate_id, plan, inventory,
+        )
         plan.setdefault("preconditions", []).extend(["read_only_comparison_completed", "plan_not_executed"])
         plan.pop("plan_sha256", None)
         plan["plan_sha256"] = sha_object(plan)
@@ -653,6 +657,7 @@ def compare_workspace(
             "release_copy_tree_sha256": confirm_release_sha256,
             "release_receipt_sha256": str(release["receipt"].get("receipt_sha256") or ""),
             "baseline_summary": baseline_summary,
+            "external_deletions": external_deletions,
             "plan_path": relative_to_project(plan_path, project_root),
             "plan_sha256": plan["plan_sha256"],
             "remote_inventory_path": relative_to_project(inventory_path, project_root),
@@ -704,6 +709,7 @@ def compare_workspace(
             "network_pages_read": recorder.network_pages_read,
             "validation_cache_status": planner.validation_cache_status,
             "validation_cache_key": planner.validation_cache_key,
+            "external_deletions": external_deletions,
             "remote_write_performed": False,
         }
     except Exception as exc:
