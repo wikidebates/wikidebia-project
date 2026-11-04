@@ -855,6 +855,22 @@ def test_published_checkpoint_recounts_bounded_frontier_relations(tmp_path: Path
     assert render._published_frontier_relation_count(checkpoint, registry) == 3
 
 
+def test_graph_projection_sync_includes_recounted_depth_policy():
+    registry = {"graph": {
+        "lifecycle": {"status": "locked"},
+        "depth_policy": {"limit_policy": "bounded", "relations_omitted_at_frontier": 106},
+        "nodes": [{"id": "A0001"}], "edges": [], "occurrences": [],
+        "derived_counts": {"nodes": 1},
+    }}
+    projection = {"depth_policy": {"relations_omitted_at_frontier": 113}, "unrelated": "kept"}
+
+    render._synchronize_graph_projection(projection, registry)
+
+    assert projection["depth_policy"]["relations_omitted_at_frontier"] == 106
+    assert projection["lifecycle"] == {"status": "locked"}
+    assert projection["unrelated"] == "kept"
+
+
 def test_frozen_source_is_verified_before_published_checkpoint_overlay(tmp_path: Path, monkeypatch):
     project, workspace, work_id, review_sha = make_translated(tmp_path)
     source = workspace / "translated-copy"
