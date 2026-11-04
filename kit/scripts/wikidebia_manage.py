@@ -2263,6 +2263,7 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
         "wikidebia_editorial_workspace.py", "wikidebia_editorial_review.py",
         "wikidebia_content_review.py", "wikidebia_translation_review.py",
         "wikidebia_translation_worklist.py",
+        "refresh_package_metadata.py",
         "wikidebia_render.py", "wikidebia_release.py",
         "wikidebia_remote_compare.py", "wikidebia_workspace_finalize.py",
         "wikidebia_workspace_status.py",
