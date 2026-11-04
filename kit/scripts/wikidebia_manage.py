@@ -2077,6 +2077,17 @@ def corpus_workspace_status(root: Path, debate_id: str, *, work_id: str) -> int:
     ]
     return run(command, cwd=root, check=False).returncode
 
+
+def corpus_workspace_translation_worklist(root: Path, debate_id: str, *, work_id: str) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_translation_worklist.py"
+    if not script.is_file():
+        raise ManagementError("Outil de liste différentielle de traduction absent du kit")
+    command = [
+        python_command(root), str(script), debate_id,
+        "--work-id", work_id, "--project-root", str(root), "--machine-readable",
+    ]
+    return run(command, cwd=root, check=False).returncode
+
 def corpus_workspace_remote_plan_review(
     root: Path, debate_id: str, *, work_id: str, comparison_id: str,
     prepare: bool, finalize: bool, overwrite_review: bool,
@@ -2251,6 +2262,7 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
         "wikidebia_corpus_review.py", "wikidebia_corpus_promote.py",
         "wikidebia_editorial_workspace.py", "wikidebia_editorial_review.py",
         "wikidebia_content_review.py", "wikidebia_translation_review.py",
+        "wikidebia_translation_worklist.py",
         "wikidebia_render.py", "wikidebia_release.py",
         "wikidebia_remote_compare.py", "wikidebia_workspace_finalize.py",
         "wikidebia_workspace_status.py",
@@ -2538,6 +2550,13 @@ def build_parser() -> argparse.ArgumentParser:
     corpus_status_parser.add_argument("debate_id", help="Identifiant du corpus sous corpus/")
     corpus_status_parser.add_argument("--work-id", required=True, help="Identifiant du workspace éditorial")
 
+    corpus_worklist_parser = sub.add_parser(
+        "corpus-workspace-translation-worklist",
+        help="Produire la liste différentielle des seules unités anglaises à reprendre",
+    )
+    corpus_worklist_parser.add_argument("debate_id", help="Identifiant du corpus sous corpus/")
+    corpus_worklist_parser.add_argument("--work-id", required=True, help="Identifiant du workspace éditorial")
+
     corpus_remote_plan_review_parser = sub.add_parser(
         "corpus-workspace-plan-review",
         help="Préparer ou finaliser la revue formelle d’un plan distant signé",
@@ -2760,6 +2779,11 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "corpus-workspace-status":
         return corpus_workspace_status(root, args.debate_id, work_id=args.work_id)
+
+    if args.command == "corpus-workspace-translation-worklist":
+        return corpus_workspace_translation_worklist(
+            root, args.debate_id, work_id=args.work_id,
+        )
 
     if args.command == "corpus-workspace-plan-review":
         return corpus_workspace_remote_plan_review(
