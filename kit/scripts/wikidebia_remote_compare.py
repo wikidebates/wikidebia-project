@@ -14,6 +14,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import subprocess
 import contextlib
 from pathlib import Path
@@ -46,6 +47,7 @@ from wikidebia_update import (
 COMPARISON_SCHEMA = "wikidebia-read-only-remote-comparison-1.0"
 RECEIPT_SCHEMA = "wikidebia-read-only-remote-comparison-receipt-1.0"
 INVENTORY_SCHEMA = "wikidebia-remote-inventory-1.0"
+READ_CHECKPOINT_SCHEMA = "wikidebia-remote-read-checkpoint-1.0"
 COMPARISON_ID_RE = re.compile(r"REMOTE-\d{8}-\d{3}")
 
 
@@ -229,17 +231,159 @@ def _build_baseline(project_root: Path, release_copy: Path, run_dir: Path, debat
     return summary
 
 
+class RemoteReadCheckpoint:
+    """Atomically seal each completed read batch for an exact comparison."""
+
+    def __init__(self, path: Path, identity: Mapping[str, Any]) -> None:
+        self.path = path
+        self.identity = dict(identity)
+        self.value: dict[str, Any]
+        self._pages: dict[tuple[str, str], tuple[bool, int | None, str]] = {}
+        if path.is_file() and not path.is_symlink():
+            self.value = load_corpus_json(path, "checkpoint de lecture distante")
+            self._verify()
+        elif path.exists() or path.is_symlink():
+            raise RemoteComparisonError("Chemin de checkpoint distant non sûr")
+        else:
+            timestamp = now_iso()
+            self.value = {
+                "schema": READ_CHECKPOINT_SCHEMA,
+                **self.identity,
+                "created_at": timestamp,
+                "updated_at": timestamp,
+                "title_sets": {},
+                "pages": [],
+                "page_count": 0,
+                "completed_batches": 0,
+                "remote_write_performed": False,
+            }
+            self._write()
+
+    def _verify(self) -> None:
+        value = self.value
+        if value.get("schema") != READ_CHECKPOINT_SCHEMA:
+            raise RemoteComparisonError("Schéma du checkpoint de lecture inconnu")
+        if value.get("checkpoint_sha256") != _canonical_sha(value, "checkpoint_sha256"):
+            raise RemoteComparisonError("Empreinte du checkpoint de lecture invalide")
+        for field, expected in self.identity.items():
+            if value.get(field) != expected:
+                raise RemoteComparisonError(f"Checkpoint de lecture rattaché à une autre identité : {field}")
+        if value.get("remote_write_performed") is not False:
+            raise RemoteComparisonError("Le checkpoint de lecture indique une écriture distante")
+        rows = value.get("pages")
+        if not isinstance(rows, list) or type(value.get("page_count")) is not int or value["page_count"] != len(rows):
+            raise RemoteComparisonError("Compteur de pages du checkpoint divergent")
+        if type(value.get("completed_batches")) is not int or value["completed_batches"] < 0:
+            raise RemoteComparisonError("Compteur de lots du checkpoint divergent")
+        if not isinstance(value.get("title_sets"), dict):
+            raise RemoteComparisonError("Jeux de titres du checkpoint invalides")
+        for row in rows:
+            if not isinstance(row, dict):
+                raise RemoteComparisonError("Page invalide dans le checkpoint de lecture")
+            language = str(row.get("language") or "")
+            title = str(row.get("canonical_title") or "")
+            key = (language, title)
+            if not language or not title or key in self._pages:
+                raise RemoteComparisonError("Identité de page invalide ou dupliquée dans le checkpoint")
+            exists = row.get("exists") is True
+            revision = row.get("revision_id")
+            text = str(row.get("content") or "")
+            if exists:
+                if type(revision) is not int or revision <= 0 or row.get("content_sha256") != sha_text(text):
+                    raise RemoteComparisonError("Contenu de page invalide dans le checkpoint")
+            elif revision is not None or text or row.get("content_sha256") is not None:
+                raise RemoteComparisonError("Page absente incohérente dans le checkpoint")
+            self._pages[key] = (exists, revision if exists else None, text)
+
+    def _write(self) -> None:
+        self.value["page_count"] = len(self.value.get("pages") or [])
+        self.value["updated_at"] = now_iso()
+        self.value.pop("checkpoint_sha256", None)
+        self.value["checkpoint_sha256"] = _canonical_sha(self.value, "checkpoint_sha256")
+        write_json(self.path, self.value)
+
+    def begin_language(self, language: str, titles: list[str]) -> None:
+        digest = sha_object({"language": language, "titles": titles})
+        sets = self.value.setdefault("title_sets", {})
+        existing = sets.get(language)
+        expected = {"title_count": len(titles), "titles_sha256": digest}
+        if existing is not None and existing != expected:
+            raise RemoteComparisonError(
+                f"Le jeu de titres {language} a changé depuis le checkpoint"
+            )
+        if existing is None:
+            sets[language] = expected
+            self._write()
+
+    def cached(self, language: str, title: str) -> tuple[bool, int | None, str] | None:
+        return self._pages.get((language, title))
+
+    def record_batch(
+        self,
+        language: str,
+        titles: list[str],
+        observed: Mapping[str, tuple[bool, int | None, str]],
+    ) -> None:
+        missing = sorted(set(titles) - set(observed))
+        unexpected = sorted(set(observed) - set(titles))
+        if missing or unexpected:
+            raise RemoteComparisonError(
+                "Lecture MediaWiki groupée incohérente : "
+                + ", ".join(missing + unexpected)
+            )
+        rows = self.value.setdefault("pages", [])
+        observed_at = now_iso()
+        for title in titles:
+            key = (language, title)
+            if key in self._pages:
+                raise RemoteComparisonError("Page déjà scellée dans le checkpoint : " + title)
+            exists, revision_id, text = observed[title]
+            exists = bool(exists)
+            normalized_revision = int(revision_id) if revision_id is not None else None
+            normalized_text = str(text or "")
+            if exists and (normalized_revision is None or normalized_revision <= 0):
+                raise RemoteComparisonError("Révision distante absente pour " + title)
+            if not exists:
+                normalized_revision = None
+                normalized_text = ""
+            row = {
+                "language": language,
+                "canonical_title": title,
+                "exists": exists,
+                "revision_id": normalized_revision,
+                "content": normalized_text,
+                "content_sha256": sha_text(normalized_text) if exists else None,
+                "observed_at": observed_at,
+            }
+            rows.append(row)
+            self._pages[key] = (exists, normalized_revision, normalized_text)
+        rows.sort(key=lambda row: (str(row["language"]), str(row["canonical_title"])))
+        self.value["completed_batches"] = int(self.value.get("completed_batches", 0)) + 1
+        self._write()
+
+    @property
+    def checkpoint_sha256(self) -> str:
+        return str(self.value.get("checkpoint_sha256") or "")
+
+    @property
+    def page_count(self) -> int:
+        return len(self._pages)
+
+
 class ReadOnlyRecordingAdapter:
     """Allow only the methods used by the planner and record every remote read."""
 
-    def __init__(self, base: Any) -> None:
+    def __init__(self, base: Any, checkpoint: RemoteReadCheckpoint | None = None) -> None:
         self.base = base
+        self.checkpoint = checkpoint
         self.current_language: str | None = None
         self.events: list[dict[str, Any]] = []
         self.pages: dict[tuple[str, str], dict[str, Any]] = {}
         self.backlink_rows: list[dict[str, Any]] = []
         self.write_attempts = 0
-        self.prefetched_pages: dict[str, tuple[bool, int | None, str]] = {}
+        self.prefetched_pages: dict[tuple[str, str], tuple[bool, int | None, str]] = {}
+        self.checkpoint_pages_reused = 0
+        self.network_pages_read = 0
 
     def open_language(self, language: str, expected_user: str) -> None:
         self.base.open_language(language, expected_user)
@@ -258,11 +402,22 @@ class ReadOnlyRecordingAdapter:
             self.current_language = None
 
     def read_page(self, title: str):
-        if title in self.prefetched_pages:
-            exists, revision_id, text = self.prefetched_pages[title]
-        else:
-            exists, revision_id, text = self.base.read_page(title)
         language = str(self.current_language or "")
+        key = (language, title)
+        if key in self.prefetched_pages:
+            exists, revision_id, text = self.prefetched_pages[key]
+        else:
+            cached = self.checkpoint.cached(language, title) if self.checkpoint else None
+            if cached is not None:
+                exists, revision_id, text = cached
+                self.checkpoint_pages_reused += 1
+            else:
+                exists, revision_id, text = self.base.read_page(title)
+                self.network_pages_read += 1
+                if self.checkpoint is not None:
+                    self.checkpoint.record_batch(
+                        language, [title], {title: (exists, revision_id, text)}
+                    )
         row = {
             "language": language,
             "canonical_title": title,
@@ -280,18 +435,38 @@ class ReadOnlyRecordingAdapter:
         if not callable(reader):
             return
         requested = list(dict.fromkeys(str(title) for title in titles if str(title)))
-        observed = reader(requested)
-        missing = sorted(set(requested) - set(observed))
-        if missing:
-            raise RemoteComparisonError(
-                "Lecture MediaWiki groupée incomplète : " + ", ".join(missing)
-            )
-        self.prefetched_pages.update(observed)
+        language = str(self.current_language or "")
+        if self.checkpoint is not None:
+            self.checkpoint.begin_language(language, requested)
+        cached: dict[str, tuple[bool, int | None, str]] = {}
+        for title in requested:
+            value = self.checkpoint.cached(language, title) if self.checkpoint else None
+            if value is not None:
+                cached[title] = value
+        pending = [title for title in requested if title not in cached]
+        network_batches = 0
+        for index in range(0, len(pending), 50):
+            batch = pending[index:index + 50]
+            observed = reader(batch)
+            missing = sorted(set(batch) - set(observed))
+            if missing:
+                raise RemoteComparisonError(
+                    "Lecture MediaWiki groupée incomplète : " + ", ".join(missing)
+                )
+            if self.checkpoint is not None:
+                self.checkpoint.record_batch(language, batch, observed)
+            cached.update(observed)
+            network_batches += 1
+        self.prefetched_pages.update({(language, title): value for title, value in cached.items()})
+        self.checkpoint_pages_reused += len(requested) - len(pending)
+        self.network_pages_read += len(pending)
         self.events.append({
             "event": "prefetch_pages",
-            "language": self.current_language,
+            "language": language,
             "page_count": len(requested),
-            "batch_count": (len(requested) + 49) // 50,
+            "network_page_count": len(pending),
+            "checkpoint_page_count": len(requested) - len(pending),
+            "batch_count": network_batches,
             "observed_at": now_iso(),
         })
 
@@ -406,16 +581,41 @@ def compare_workspace(
     parent = _comparison_parent(project_root, debate_id, work_id)
     comparison_id = _validate_comparison_id(comparison_id) if comparison_id else _next_comparison_id(parent)
     run_dir = parent / comparison_id
-    if run_dir.exists() or run_dir.is_symlink():
-        raise RemoteComparisonError("L’identifiant de comparaison existe déjà")
-    run_dir.mkdir(parents=False)
+    checkpoint_identity = {
+        "debate_id": debate_id,
+        "work_id": work_id,
+        "comparison_id": comparison_id,
+        "scope": scope,
+        "release_copy_tree_sha256": confirm_release_sha256,
+    }
+    checkpoint_path = run_dir / "read-checkpoint.json"
+    resumed = False
+    if run_dir.is_symlink():
+        raise RemoteComparisonError("Dossier de comparaison non sûr")
+    if run_dir.is_dir():
+        if (run_dir / "comparison-receipt.json").exists():
+            raise RemoteComparisonError("L’identifiant de comparaison est déjà finalisé")
+        checkpoint = RemoteReadCheckpoint(checkpoint_path, checkpoint_identity)
+        resumed = True
+        for item in list(run_dir.iterdir()):
+            if item == checkpoint_path:
+                continue
+            if item.is_dir() and not item.is_symlink():
+                shutil.rmtree(item)
+            else:
+                item.unlink()
+    elif run_dir.exists():
+        raise RemoteComparisonError("Chemin de comparaison déjà occupé")
+    else:
+        run_dir.mkdir(parents=False)
+        checkpoint = RemoteReadCheckpoint(checkpoint_path, checkpoint_identity)
     try:
         baseline_summary = _build_baseline(project_root, release_copy, run_dir, debate_id, languages)
         config = _config(project_root, release_copy, run_dir, debate_id, languages)
         config_path = run_dir / "config.json"
         write_json(config_path, config)
         base_adapter = adapter if adapter is not None else build_adapter(config, project_root)
-        recorder = ReadOnlyRecordingAdapter(base_adapter)
+        recorder = ReadOnlyRecordingAdapter(base_adapter, checkpoint)
         with _working_directory(project_root):
             planner = RemoteUpdatePlanner(config, recorder, config_path)
             plan = planner.build_plan(mode="all")
@@ -457,6 +657,12 @@ def compare_workspace(
             "remote_inventory_sha256": inventory["inventory_sha256"],
             "plan_validation_path": relative_to_project(validation_json, project_root),
             "plan_validation_sha256": sha256_file(validation_json),
+            "read_checkpoint_path": relative_to_project(checkpoint_path, project_root),
+            "read_checkpoint_sha256": checkpoint.checkpoint_sha256,
+            "read_checkpoint_page_count": checkpoint.page_count,
+            "checkpoint_pages_reused": recorder.checkpoint_pages_reused,
+            "network_pages_read": recorder.network_pages_read,
+            "comparison_resumed": resumed,
             "counts": counts,
             "remote_access_performed": True,
             "remote_write_performed": False,
@@ -489,14 +695,24 @@ def compare_workspace(
             "plan": receipt["plan_path"],
             "plan_sha256": plan["plan_sha256"],
             "counts": counts,
+            "comparison_resumed": resumed,
+            "checkpoint_pages_reused": recorder.checkpoint_pages_reused,
+            "network_pages_read": recorder.network_pages_read,
             "remote_write_performed": False,
         }
-    except Exception:
+    except Exception as exc:
         # Keep failed evidence only when a plan or remote inventory exists; otherwise
-        # remove the empty/partial run so a corrected invocation can reuse the id.
-        if not (run_dir / "remote-inventory.json").exists() and not (run_dir / "update-plan.json").exists():
-            import shutil
+        # retain a signed read checkpoint so the exact comparison ID can resume.
+        if not checkpoint_path.is_file() and not (run_dir / "remote-inventory.json").exists() and not (run_dir / "update-plan.json").exists():
             shutil.rmtree(run_dir, ignore_errors=True)
+        if checkpoint_path.is_file():
+            resume = (
+                f"./wikidebia corpus-workspace-finalize {debate_id} --work-id {work_id} "
+                f"--scope {scope} --refresh-remote --comparison-id {comparison_id}"
+            )
+            raise RemoteComparisonError(
+                f"{exc}\nReprise exacte : {resume}"
+            ) from exc
         raise
 
 

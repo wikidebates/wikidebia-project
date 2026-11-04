@@ -223,3 +223,46 @@ def test_finalization_detects_changed_comparison_evidence(tmp_path: Path):
         assert "reçu et le plan divergent" in str(exc) or "modifiée" in str(exc)
     else:
         raise AssertionError("Une preuve de comparaison altérée a été acceptée")
+
+
+def test_plan_review_verifies_signed_read_checkpoint(tmp_path: Path):
+    project, debate_id, work_id, comparison_id, run = make_comparison(tmp_path)
+    checkpoint = {
+        "schema": remote.READ_CHECKPOINT_SCHEMA,
+        "debate_id": debate_id,
+        "work_id": work_id,
+        "comparison_id": comparison_id,
+        "scope": "fr",
+        "release_copy_tree_sha256": "6" * 64,
+        "created_at": "2026-08-03T00:00:00+00:00",
+        "updated_at": "2026-08-03T00:00:00+00:00",
+        "title_sets": {},
+        "pages": [],
+        "page_count": 0,
+        "completed_batches": 0,
+        "remote_write_performed": False,
+    }
+    checkpoint["checkpoint_sha256"] = remote._canonical_sha(checkpoint, "checkpoint_sha256")
+    checkpoint_path = run / "read-checkpoint.json"
+    checkpoint_path.write_text(json.dumps(checkpoint, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    receipt_path = run / "comparison-receipt.json"
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    receipt.update({
+        "read_checkpoint_path": checkpoint_path.relative_to(project).as_posix(),
+        "read_checkpoint_sha256": checkpoint["checkpoint_sha256"],
+        "read_checkpoint_page_count": 0,
+    })
+    receipt["receipt_sha256"] = remote._canonical_sha(receipt, "receipt_sha256")
+    receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    loaded = reviewer._load_comparison(project, debate_id, work_id, comparison_id)
+    assert "read_checkpoint" in loaded["evidence"]
+
+    checkpoint["updated_at"] = "2026-08-04T00:00:00+00:00"
+    checkpoint_path.write_text(json.dumps(checkpoint, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    try:
+        reviewer._load_comparison(project, debate_id, work_id, comparison_id)
+    except reviewer.RemotePlanReviewError as exc:
+        assert "checkpoint" in str(exc)
+    else:
+        raise AssertionError("Checkpoint de lecture falsifié accepté")

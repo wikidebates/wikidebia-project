@@ -20,6 +20,7 @@ Pour chaque langue, l’état publié signé est prioritaire. À défaut, le fra
 Les fichiers sont écrits sous `.state/remote-comparisons/<debate_id>/<work_id>/<comparison_id>/` :
 
 - `baseline/fr.json` et `baseline/en.json` ;
+- `read-checkpoint.json`, checkpoint signé après chaque lot de 50 lectures ;
 - `remote-inventory.json` ;
 - `read-only-events.jsonl` ;
 - `update-plan.json` ;
@@ -27,6 +28,18 @@ Les fichiers sont écrits sous `.state/remote-comparisons/<debate_id>/<work_id>/
 - `comparison-receipt.json`.
 
 Un plan contenant `manual_review` ou `blocked` reste un résultat de comparaison valable mais n’est pas exécutable.
+
+## Reprise après une coupure
+
+Chaque lot MediaWiki terminé est enregistré atomiquement avec les contenus,
+révisions, titres, langue, portée et empreinte exacte de `release-copy`. En cas
+de coupure, le message d’erreur donne une commande `corpus-workspace-finalize`
+exacte contenant le même `comparison_id`. Cette commande vérifie le checkpoint,
+réutilise les pages déjà scellées et ne relit que les lots manquants.
+
+Un checkpoint modifié, associé à une autre release, à une autre portée ou à un
+autre jeu de titres est refusé. Le reçu final lie l’empreinte du checkpoint et
+indique séparément `checkpoint_pages_reused` et `network_pages_read`.
 
 ## Portée française différée
 
