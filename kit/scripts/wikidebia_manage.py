@@ -2088,6 +2088,26 @@ def corpus_workspace_translation_worklist(root: Path, debate_id: str, *, work_id
     ]
     return run(command, cwd=root, check=False).returncode
 
+
+def corpus_external_deletion_accept(
+    root: Path, debate_id: str, *, work_id: str, comparison_id: str,
+    language: str, page_id: str, reason: str, accepted_by: str,
+    confirm_plan_sha256: str,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_external_deletions.py"
+    if not script.is_file():
+        raise ManagementError("Registre de suppressions externes absent du kit")
+    command = [
+        python_command(root), str(script), debate_id,
+        "--work-id", work_id, "--comparison-id", comparison_id,
+        "--language", language, "--page-id", page_id,
+        "--reason", reason, "--accepted-by", accepted_by,
+        "--confirm-plan-sha256", confirm_plan_sha256,
+        "--project-root", str(root), "--machine-readable",
+    ]
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_remote_plan_review(
     root: Path, debate_id: str, *, work_id: str, comparison_id: str,
     prepare: bool, finalize: bool, overwrite_review: bool,
@@ -2263,6 +2283,7 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
         "wikidebia_editorial_workspace.py", "wikidebia_editorial_review.py",
         "wikidebia_content_review.py", "wikidebia_translation_review.py",
         "wikidebia_translation_worklist.py",
+        "wikidebia_external_deletions.py",
         "refresh_package_metadata.py",
         "wikidebia_render.py", "wikidebia_release.py",
         "wikidebia_remote_compare.py", "wikidebia_workspace_finalize.py",
@@ -2558,6 +2579,19 @@ def build_parser() -> argparse.ArgumentParser:
     corpus_worklist_parser.add_argument("debate_id", help="Identifiant du corpus sous corpus/")
     corpus_worklist_parser.add_argument("--work-id", required=True, help="Identifiant du workspace éditorial")
 
+    external_deletion_parser = sub.add_parser(
+        "corpus-external-deletion-accept",
+        help="Accepter dans un registre signé une suppression constatée sur le wiki",
+    )
+    external_deletion_parser.add_argument("debate_id", help="Identifiant du corpus sous corpus/")
+    external_deletion_parser.add_argument("--work-id", required=True)
+    external_deletion_parser.add_argument("--comparison-id", required=True)
+    external_deletion_parser.add_argument("--language", choices=("fr", "en"), required=True)
+    external_deletion_parser.add_argument("--page-id", required=True)
+    external_deletion_parser.add_argument("--reason", required=True)
+    external_deletion_parser.add_argument("--accepted-by", required=True)
+    external_deletion_parser.add_argument("--confirm-plan-sha256", required=True)
+
     corpus_remote_plan_review_parser = sub.add_parser(
         "corpus-workspace-plan-review",
         help="Préparer ou finaliser la revue formelle d’un plan distant signé",
@@ -2784,6 +2818,14 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "corpus-workspace-translation-worklist":
         return corpus_workspace_translation_worklist(
             root, args.debate_id, work_id=args.work_id,
+        )
+
+    if args.command == "corpus-external-deletion-accept":
+        return corpus_external_deletion_accept(
+            root, args.debate_id, work_id=args.work_id,
+            comparison_id=args.comparison_id, language=args.language,
+            page_id=args.page_id, reason=args.reason, accepted_by=args.accepted_by,
+            confirm_plan_sha256=args.confirm_plan_sha256,
         )
 
     if args.command == "corpus-workspace-plan-review":
