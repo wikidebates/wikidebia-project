@@ -179,6 +179,47 @@ def test_pywikibot_adapter_read_only_open_does_not_require_credentials(monkeypat
     assert isinstance(adapter.site, FakeSite)
 
 
+def test_pywikibot_adapter_reads_pages_in_batches_of_fifty(tmp_path):
+    requests = []
+
+    class Request:
+        def __init__(self, params):
+            self.params = params
+
+        def submit(self):
+            titles = self.params["titles"].split("|")
+            return {
+                "query": {
+                    "pages": {
+                        str(index): {
+                            "pageid": index,
+                            "title": title,
+                            "revisions": [{
+                                "revid": 1000 + index,
+                                "slots": {"main": {"content": f"content:{title}"}},
+                            }],
+                        }
+                        for index, title in enumerate(titles, 1)
+                    }
+                }
+            }
+
+    class Site:
+        def simple_request(self, **params):
+            requests.append(params)
+            return Request(params)
+
+    adapter = module.PywikibotAdapter("wikidebates", {"fr": "fr"}, tmp_path)
+    adapter.site = Site()
+    titles = [f"Titre {index}" for index in range(101)]
+
+    pages = adapter.read_pages(titles)
+
+    assert [len(row["titles"].split("|")) for row in requests] == [50, 50, 1]
+    assert pages["Titre 0"] == (True, 1001, "content:Titre 0")
+    assert pages["Titre 100"] == (True, 1001, "content:Titre 100")
+
+
 def test_managed_environment_does_not_require_server_user_config(monkeypatch, tmp_path):
     monkeypatch.setenv("WIKIDEBIA_FR_BOT_USERNAME", "ChatGPT@Codex-FR")
     monkeypatch.setenv("WIKIDEBIA_FR_BOT_PASSWORD", "managed-placeholder")
