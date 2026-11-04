@@ -48,6 +48,28 @@ def test_modified_source_or_receipt_cannot_exempt_duplicates(tmp_path):
     (tmp_path/'imports/fr/arguments/A0001.wiki').write_text('{{Argument|mots-clés=cannabis, liberté}}')
     assert not _preserved_keyword_duplicates(context(tmp_path),'argument_registry.schema.json',registry,error())
 
+
+def test_english_translation_keeps_frozen_source_after_french_checkpoint(tmp_path):
+    from wikidebia_validator.wikicode import _translated_english_source_template
+    fixture(tmp_path)
+    manifest = {
+        'translation_status': {'en': 'ready'},
+        'pages': [
+            {'page_id': 'A0001', 'page_type': 'argument', 'language': 'fr', 'file_path': 'output/fr/arguments/A0001.wiki'},
+            {'page_id': 'A0001', 'page_type': 'argument', 'language': 'en', 'file_path': 'output/en/arguments/A0001.wiki'},
+        ],
+    }
+    dump(tmp_path / 'manifest.json', manifest)
+    published = tmp_path / 'output/fr/arguments/A0001.wiki'
+    published.parent.mkdir(parents=True)
+    published.write_text('{{Argument|rubriques=Société|mots-clés=checkpoint}}', encoding='utf-8')
+
+    template = _translated_english_source_template(context(tmp_path), manifest['pages'][1])
+
+    assert template is not None
+    assert template.one('rubriques') is None
+    assert template.one('mots-clés') == 'cannabis, liberté, cannabis'
+
 def test_new_english_keyword_collision_is_not_an_existing_duplicate(tmp_path):
     registry=fixture(tmp_path)
     dump(tmp_path/'data/keyword_vocabulary_bilingual.json',{'entries':[{'fr':'cannabis','en':'same'},{'fr':'liberté','en':'same'}]})
