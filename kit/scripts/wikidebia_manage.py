@@ -2089,6 +2089,20 @@ def corpus_workspace_translation_worklist(root: Path, debate_id: str, *, work_id
     return run(command, cwd=root, check=False).returncode
 
 
+def corpus_workspace_translation_packet(
+    root: Path, debate_id: str, *, work_id: str, unit_id: str,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_translation_packet.py"
+    if not script.is_file():
+        raise ManagementError("Outil de paquet d’unité de traduction absent du kit")
+    command = [
+        python_command(root), str(script), debate_id,
+        "--work-id", work_id, "--unit-id", unit_id,
+        "--project-root", str(root), "--machine-readable",
+    ]
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_external_deletion_accept(
     root: Path, debate_id: str, *, work_id: str, comparison_id: str,
     language: str, page_id: str, reason: str, accepted_by: str,
@@ -2283,6 +2297,7 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
         "wikidebia_editorial_workspace.py", "wikidebia_editorial_review.py",
         "wikidebia_content_review.py", "wikidebia_translation_review.py",
         "wikidebia_translation_worklist.py",
+        "wikidebia_translation_packet.py",
         "wikidebia_external_deletions.py",
         "refresh_package_metadata.py",
         "wikidebia_render.py", "wikidebia_release.py",
@@ -2579,6 +2594,14 @@ def build_parser() -> argparse.ArgumentParser:
     corpus_worklist_parser.add_argument("debate_id", help="Identifiant du corpus sous corpus/")
     corpus_worklist_parser.add_argument("--work-id", required=True, help="Identifiant du workspace éditorial")
 
+    translation_packet_parser = sub.add_parser(
+        "corpus-workspace-translation-packet",
+        help="Extraire un paquet compact signé pour une unité de traduction",
+    )
+    translation_packet_parser.add_argument("debate_id", help="Identifiant du corpus sous corpus/")
+    translation_packet_parser.add_argument("--work-id", required=True)
+    translation_packet_parser.add_argument("--unit-id", required=True)
+
     external_deletion_parser = sub.add_parser(
         "corpus-external-deletion-accept",
         help="Accepter dans un registre signé une suppression constatée sur le wiki",
@@ -2818,6 +2841,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "corpus-workspace-translation-worklist":
         return corpus_workspace_translation_worklist(
             root, args.debate_id, work_id=args.work_id,
+        )
+
+    if args.command == "corpus-workspace-translation-packet":
+        return corpus_workspace_translation_packet(
+            root, args.debate_id, work_id=args.work_id, unit_id=args.unit_id,
         )
 
     if args.command == "corpus-external-deletion-accept":
