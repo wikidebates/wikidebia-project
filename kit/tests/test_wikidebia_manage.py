@@ -1067,6 +1067,17 @@ def test_editorial_workspace_command_is_exposed_by_manager():
     assert args.work_id == "EDIT-TEST-001"
 
 
+def test_workspace_finalize_command_is_exposed_by_manager():
+    args = module.build_parser().parse_args([
+        "corpus-workspace-finalize", "debat_test", "--work-id", "EDIT-TEST-001",
+        "--scope", "en", "--refresh-remote", "--comparison-id", "REMOTE-20261104-009",
+    ])
+    assert args.command == "corpus-workspace-finalize"
+    assert args.scope == "en"
+    assert args.refresh_remote is True
+    assert args.comparison_id == "REMOTE-20261104-009"
+
+
 def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
     (tmp_path / "private/pywikibot").mkdir(parents=True)
     (tmp_path / "private/pywikibot/user-config.py").write_text("# test\n", encoding="utf-8")
@@ -1076,7 +1087,8 @@ def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
         "wikidebia_corpus_init.py", "wikidebia_corpus_review.py", "wikidebia_corpus_promote.py",
         "wikidebia_editorial_workspace.py", "wikidebia_editorial_review.py",
         "wikidebia_content_review.py", "wikidebia_translation_review.py", "wikidebia_render.py",
-        "wikidebia_release.py", "wikidebia_remote_compare.py", "wikidebia_remote_plan_review.py",
+        "wikidebia_release.py", "wikidebia_remote_compare.py", "wikidebia_workspace_finalize.py",
+        "wikidebia_remote_plan_review.py",
         "wikidebia_remote_execute.py", "wikidebia_work_close.py",
         "wikidebia_workflow_baseline.py", "wikidebia_final_publication.py",
         "wikidebia_retro_tag.py",
