@@ -2203,6 +2203,13 @@ class RemoteUpdatePlanner:
         old = {key: value for key, value in self.state.items() if key[0] == language}
         new = {key: value for key, value in self.new_pages.items() if key[0] == language}
         handled_old: set[tuple[str, str]] = set()
+        prefetch = getattr(self.adapter, "prefetch_pages", None)
+        if callable(prefetch):
+            prefetch(sorted({
+                page.title for page in old.values()
+            } | {
+                str(page["title"]) for page in new.values()
+            }))
 
         # Current corpus pages: create, skip, controlled update, move, or review.
         for key, proposed in new.items():

@@ -239,6 +239,7 @@ class ReadOnlyRecordingAdapter:
         self.pages: dict[tuple[str, str], dict[str, Any]] = {}
         self.backlink_rows: list[dict[str, Any]] = []
         self.write_attempts = 0
+        self.prefetched_pages: dict[str, tuple[bool, int | None, str]] = {}
 
     def open_language(self, language: str, expected_user: str) -> None:
         self.base.open_language(language, expected_user)
@@ -257,7 +258,10 @@ class ReadOnlyRecordingAdapter:
             self.current_language = None
 
     def read_page(self, title: str):
-        exists, revision_id, text = self.base.read_page(title)
+        if title in self.prefetched_pages:
+            exists, revision_id, text = self.prefetched_pages[title]
+        else:
+            exists, revision_id, text = self.base.read_page(title)
         language = str(self.current_language or "")
         row = {
             "language": language,
@@ -270,6 +274,26 @@ class ReadOnlyRecordingAdapter:
         self.pages[(language, title)] = row
         self.events.append({"event": "read_page", **row})
         return exists, revision_id, text
+
+    def prefetch_pages(self, titles: list[str]) -> None:
+        reader = getattr(self.base, "read_pages", None)
+        if not callable(reader):
+            return
+        requested = list(dict.fromkeys(str(title) for title in titles if str(title)))
+        observed = reader(requested)
+        missing = sorted(set(requested) - set(observed))
+        if missing:
+            raise RemoteComparisonError(
+                "Lecture MediaWiki groupée incomplète : " + ", ".join(missing)
+            )
+        self.prefetched_pages.update(observed)
+        self.events.append({
+            "event": "prefetch_pages",
+            "language": self.current_language,
+            "page_count": len(requested),
+            "batch_count": (len(requested) + 49) // 50,
+            "observed_at": now_iso(),
+        })
 
     def backlinks(self, title: str) -> list[str]:
         rows = list(self.base.backlinks(title))

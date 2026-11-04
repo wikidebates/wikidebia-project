@@ -379,6 +379,7 @@ class Adapter(Protocol):
     def assert_identity(self, expected_user: str) -> None: ...
     def available_change_tags(self) -> set[str]: ...
     def spam_blacklist_matches(self, urls: list[str]) -> set[str]: ...
+    def read_pages(self, titles: list[str]) -> dict[str, tuple[bool, int | None, str]]: ...
     def read_page(self, title: str) -> tuple[bool, int | None, str]: ...
     def read_revision(self, title: str, revision_id: int) -> dict[str, Any] | None: ...
     def write_page(
@@ -613,6 +614,45 @@ class PywikibotAdapter:
         if not page.exists():
             return False, None, ""
         return True, int(page.latest_revision_id), page.text
+
+    def read_pages(self, titles: list[str]) -> dict[str, tuple[bool, int | None, str]]:
+        """Read a stable planning snapshot with at most one request per 50 titles."""
+        if self.site is None:
+            raise PublicationError("Site non ouvert")
+        requested = list(dict.fromkeys(str(title) for title in titles if str(title)))
+        result: dict[str, tuple[bool, int | None, str]] = {}
+        for index in range(0, len(requested), 50):
+            batch = requested[index:index + 50]
+            data = self.site.simple_request(
+                action="query",
+                prop="revisions",
+                titles="|".join(batch),
+                rvprop="ids|content",
+                rvslots="main",
+            ).submit()
+            query = data.get("query") or {}
+            normalized = {
+                str(row.get("from")): str(row.get("to"))
+                for row in (query.get("normalized") or [])
+                if row.get("from") and row.get("to")
+            }
+            raw_pages = query.get("pages") or {}
+            pages = raw_pages.values() if isinstance(raw_pages, dict) else raw_pages
+            by_title = {str(row.get("title") or ""): row for row in pages}
+            for title in batch:
+                row = by_title.get(normalized.get(title, title))
+                if not row or "missing" in row or int(row.get("pageid", 0) or 0) < 0:
+                    result[title] = (False, None, "")
+                    continue
+                revisions = row.get("revisions") or []
+                if not revisions:
+                    result[title] = (False, None, "")
+                    continue
+                revision = revisions[0]
+                slot = (revision.get("slots") or {}).get("main") or {}
+                text = slot.get("content", slot.get("*", revision.get("*", "")))
+                result[title] = (True, int(revision["revid"]), str(text or ""))
+        return result
 
     def read_revision(self, title: str, revision_id: int) -> dict[str, Any] | None:
         if self.site is None:

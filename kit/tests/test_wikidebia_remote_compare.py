@@ -60,6 +60,28 @@ class FakeReadAdapter:
         raise AssertionError("delete_page ne doit jamais être appelé")
 
 
+class BatchFakeReadAdapter(FakeReadAdapter):
+    def __init__(self, pages):
+        super().__init__(pages)
+        self.batch_calls = []
+        self.direct_reads = 0
+
+    def read_pages(self, titles):
+        self.batch_calls.append((self.language, list(titles)))
+        return {
+            title: ((False, None, "") if (self.language, title) not in self.pages else (
+                True,
+                self.pages[(self.language, title)][0],
+                self.pages[(self.language, title)][1],
+            ))
+            for title in titles
+        }
+
+    def read_page(self, title):
+        self.direct_reads += 1
+        return super().read_page(title)
+
+
 def fake_validate_plan(project_root, plan_path, json_path, text_path):
     plan = json.loads(plan_path.read_text(encoding="utf-8"))
     unsigned = dict(plan)
@@ -176,6 +198,26 @@ def test_remote_comparison_builds_signed_read_only_plan(tmp_path: Path, monkeypa
     assert en_baseline["pages"] == []
     meta = json.loads((workspace / "workspace.json").read_text(encoding="utf-8"))
     assert meta["status"] == "remote_plan_ready"
+
+
+def test_remote_comparison_prefetches_each_language_snapshot(tmp_path: Path, monkeypatch):
+    _stub_corpus_validation(monkeypatch)
+    project, _workspace, work_id, release_sha, pages = make_release(tmp_path)
+    adapter = BatchFakeReadAdapter(pages)
+
+    result = remote.compare_workspace(
+        project, "debat_test", work_id, release_sha,
+        comparison_id="REMOTE-20260803-006", adapter=adapter,
+        validate_plan_fn=fake_validate_plan,
+    )
+
+    assert result["status"] == "plan_ready"
+    assert [language for language, _titles in adapter.batch_calls] == ["fr", "en"]
+    assert adapter.direct_reads == 0
+    run = project / ".state/remote-comparisons/debat_test" / work_id / "REMOTE-20260803-006"
+    events = [json.loads(line) for line in (run / "read-only-events.jsonl").read_text().splitlines()]
+    prefetched = [row for row in events if row["event"] == "prefetch_pages"]
+    assert [(row["language"], row["batch_count"]) for row in prefetched] == [("fr", 1), ("en", 1)]
 
 
 def test_remote_comparison_classifies_human_change_for_manual_review(tmp_path: Path, monkeypatch):
