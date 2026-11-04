@@ -82,6 +82,30 @@ class BatchFakeReadAdapter(FakeReadAdapter):
         return super().read_page(title)
 
 
+class FailOnLanguageBatchAdapter(BatchFakeReadAdapter):
+    def __init__(self, pages, language):
+        super().__init__(pages)
+        self.fail_language = language
+
+    def read_pages(self, titles):
+        if self.language == self.fail_language:
+            self.batch_calls.append((self.language, list(titles)))
+            raise RuntimeError("coupure réseau simulée")
+        return super().read_pages(titles)
+
+
+class FailSecondBatchAdapter:
+    def __init__(self, fail=True):
+        self.calls = []
+        self.fail = fail
+
+    def read_pages(self, titles):
+        self.calls.append(list(titles))
+        if self.fail and len(self.calls) == 2:
+            raise RuntimeError("coupure au deuxième lot")
+        return {title: (True, index + 1, f"texte {title}") for index, title in enumerate(titles)}
+
+
 def fake_validate_plan(project_root, plan_path, json_path, text_path):
     plan = json.loads(plan_path.read_text(encoding="utf-8"))
     unsigned = dict(plan)
@@ -218,6 +242,111 @@ def test_remote_comparison_prefetches_each_language_snapshot(tmp_path: Path, mon
     events = [json.loads(line) for line in (run / "read-only-events.jsonl").read_text().splitlines()]
     prefetched = [row for row in events if row["event"] == "prefetch_pages"]
     assert [(row["language"], row["batch_count"]) for row in prefetched] == [("fr", 1), ("en", 1)]
+
+
+def test_read_checkpoint_resumes_after_the_last_complete_batch(tmp_path: Path):
+    identity = {
+        "debate_id": "debat_test",
+        "work_id": "EDIT-REMOTE-001",
+        "comparison_id": "REMOTE-20260803-007",
+        "scope": "fr",
+        "release_copy_tree_sha256": "a" * 64,
+    }
+    path = tmp_path / "read-checkpoint.json"
+    first_checkpoint = remote.RemoteReadCheckpoint(path, identity)
+    first_base = FailSecondBatchAdapter()
+    first = remote.ReadOnlyRecordingAdapter(first_base, first_checkpoint)
+    first.current_language = "fr"
+    titles = [f"Argument {index:03d}" for index in range(120)]
+
+    try:
+        first.prefetch_pages(titles)
+    except RuntimeError as exc:
+        assert "deuxième lot" in str(exc)
+    else:
+        raise AssertionError("la coupure simulée n’a pas interrompu la lecture")
+
+    sealed = json.loads(path.read_text(encoding="utf-8"))
+    assert sealed["page_count"] == 50
+    assert sealed["completed_batches"] == 1
+    assert sealed["checkpoint_sha256"] == remote._canonical_sha(sealed, "checkpoint_sha256")
+
+    resumed_checkpoint = remote.RemoteReadCheckpoint(path, identity)
+    resumed_base = FailSecondBatchAdapter(fail=False)
+    resumed = remote.ReadOnlyRecordingAdapter(resumed_base, resumed_checkpoint)
+    resumed.current_language = "fr"
+    resumed.prefetch_pages(titles)
+
+    assert [len(batch) for batch in resumed_base.calls] == [50, 20]
+    assert resumed.checkpoint_pages_reused == 50
+    assert resumed.network_pages_read == 70
+    assert json.loads(path.read_text(encoding="utf-8"))["page_count"] == 120
+
+
+def test_remote_comparison_resumes_same_id_without_rereading_completed_language(tmp_path: Path, monkeypatch):
+    _stub_corpus_validation(monkeypatch)
+    project, _workspace, work_id, release_sha, pages = make_release(tmp_path)
+    comparison_id = "REMOTE-20260803-008"
+    interrupted = FailOnLanguageBatchAdapter(pages, "en")
+
+    try:
+        remote.compare_workspace(
+            project, "debat_test", work_id, release_sha,
+            comparison_id=comparison_id, adapter=interrupted,
+            validate_plan_fn=fake_validate_plan,
+        )
+    except remote.RemoteComparisonError as exc:
+        assert "Reprise exacte" in str(exc)
+        assert f"--comparison-id {comparison_id}" in str(exc)
+    else:
+        raise AssertionError("la comparaison interrompue a réussi")
+
+    run = project / ".state/remote-comparisons/debat_test" / work_id / comparison_id
+    checkpoint = json.loads((run / "read-checkpoint.json").read_text(encoding="utf-8"))
+    assert {row["language"] for row in checkpoint["pages"]} == {"fr"}
+    french_checkpoint_count = checkpoint["page_count"]
+
+    resumed_adapter = BatchFakeReadAdapter(pages)
+    result = remote.compare_workspace(
+        project, "debat_test", work_id, release_sha,
+        comparison_id=comparison_id, adapter=resumed_adapter,
+        validate_plan_fn=fake_validate_plan,
+    )
+
+    assert result["status"] == "plan_ready"
+    assert result["comparison_resumed"] is True
+    assert result["checkpoint_pages_reused"] == french_checkpoint_count
+    assert result["network_pages_read"] == 2
+    assert [language for language, _titles in resumed_adapter.batch_calls] == ["en"]
+    receipt = json.loads((run / "comparison-receipt.json").read_text(encoding="utf-8"))
+    assert receipt["read_checkpoint_page_count"] == french_checkpoint_count + 2
+    assert receipt["read_checkpoint_sha256"] == json.loads(
+        (run / "read-checkpoint.json").read_text(encoding="utf-8")
+    )["checkpoint_sha256"]
+
+
+def test_tampered_read_checkpoint_is_rejected(tmp_path: Path):
+    identity = {
+        "debate_id": "debat_test",
+        "work_id": "EDIT-REMOTE-001",
+        "comparison_id": "REMOTE-20260803-009",
+        "scope": "fr",
+        "release_copy_tree_sha256": "a" * 64,
+    }
+    path = tmp_path / "read-checkpoint.json"
+    checkpoint = remote.RemoteReadCheckpoint(path, identity)
+    checkpoint.begin_language("fr", ["Argument"])
+    checkpoint.record_batch("fr", ["Argument"], {"Argument": (True, 1, "texte")})
+    value = json.loads(path.read_text(encoding="utf-8"))
+    value["pages"][0]["content"] = "texte falsifié"
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    try:
+        remote.RemoteReadCheckpoint(path, identity)
+    except remote.RemoteComparisonError as exc:
+        assert "Empreinte" in str(exc)
+    else:
+        raise AssertionError("checkpoint falsifié accepté")
 
 
 def test_remote_comparison_classifies_human_change_for_manual_review(tmp_path: Path, monkeypatch):

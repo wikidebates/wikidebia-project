@@ -5,7 +5,7 @@
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
   "declared_file_count": 421,
-  "declared_test_count": 914,
+  "declared_test_count": 918,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -283,8 +283,8 @@
     },
     {
       "path": "GUIDE_REMOTE_COMPARISON.md",
-      "size_bytes": 1506,
-      "sha256": "5ab4cda32a59db639447d720c910d0794bc31b38532418ff43541900ee1eeb0e"
+      "size_bytes": 2255,
+      "sha256": "ad83ee75deaa78916d17b45849389527ef26078f4ca16a147b79f5b342dbe8ae"
     },
     {
       "path": "GUIDE_REMOTE_EXECUTION.md",
@@ -1668,8 +1668,8 @@
     },
     {
       "path": "scripts/wikidebia_remote_compare.py",
-      "size_bytes": 24803,
-      "sha256": "b81be934b51a02f43cca02c4fdd9cf7eba95df333f6f93163bf74b9b96867851"
+      "size_bytes": 35316,
+      "sha256": "2da71021f122695564321cff8b2c2d5f2030c0f17f633026295fac9d86d93b49"
     },
     {
       "path": "scripts/wikidebia_remote_execute.py",
@@ -1678,8 +1678,8 @@
     },
     {
       "path": "scripts/wikidebia_remote_plan_review.py",
-      "size_bytes": 24918,
-      "sha256": "26b618314e9822cfad329e0f8cf14d814e4c270d13039d64088fc102ab9739d8"
+      "size_bytes": 27039,
+      "sha256": "6896921ec6102335eddcb2bd48e1cd86a98f53b19dc0228a8e4de4a69f8d56b6"
     },
     {
       "path": "scripts/wikidebia_render.py",
@@ -2068,8 +2068,8 @@
     },
     {
       "path": "tests/test_wikidebia_remote_compare.py",
-      "size_bytes": 17720,
-      "sha256": "3bcc41b40fdf7fad0b1628a76fe36084c1e83fbec24a681e178b7d490eba2d3c"
+      "size_bytes": 23018,
+      "sha256": "afdc0489994682f5dfad04781fefc7dc2f947035de317a23f35441c0e476aedb"
     },
     {
       "path": "tests/test_wikidebia_remote_execute.py",
@@ -2078,8 +2078,8 @@
     },
     {
       "path": "tests/test_wikidebia_remote_plan_review.py",
-      "size_bytes": 10653,
-      "sha256": "e28e6921d98e9534c11b9675b9f42301fe17cb19aa54b6d73d41805566b4f254"
+      "size_bytes": 12634,
+      "sha256": "df40195c43cd675fd559a989cbec812892e2423decd263823d5dd670667cf3b9"
     },
     {
       "path": "tests/test_wikidebia_remote_update.py",

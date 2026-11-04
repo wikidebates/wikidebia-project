@@ -29,7 +29,7 @@ from wikidebia_corpus_build import (
 )
 from wikidebia_editorial_workspace import WorkspaceError, validate_work_id, workspace_receipt_hash
 from wikidebia_render import _load_workspace
-from wikidebia_remote_compare import _canonical_sha, _validate_comparison_id
+from wikidebia_remote_compare import READ_CHECKPOINT_SCHEMA, _canonical_sha, _validate_comparison_id
 from wikidebia_update import KIT_VERSION, REQUIRED_VALIDATOR_VERSION, OPERATIONS, sha_object
 
 REVIEW_SCHEMA = "wikidebia-remote-plan-review-1.0"
@@ -101,6 +101,37 @@ def _load_comparison(
     receipt = load_json(required["comparison_receipt"], "reçu de comparaison")
     if receipt.get("receipt_sha256") != _canonical_sha(receipt, "receipt_sha256"):
         raise RemotePlanReviewError("Empreinte du reçu de comparaison invalide")
+    checkpoint_rel = str(receipt.get("read_checkpoint_path") or "")
+    if checkpoint_rel:
+        checkpoint_path = (project_root / checkpoint_rel).resolve()
+        expected_checkpoint = (run_dir / "read-checkpoint.json").resolve()
+        if checkpoint_path != expected_checkpoint or not checkpoint_path.is_file() or checkpoint_path.is_symlink():
+            raise RemotePlanReviewError("Checkpoint de lecture distant absent ou extérieur à la comparaison")
+        checkpoint = load_json(checkpoint_path, "checkpoint de lecture distant")
+        if checkpoint.get("schema") != READ_CHECKPOINT_SCHEMA:
+            raise RemotePlanReviewError("Schéma du checkpoint de lecture distant invalide")
+        if checkpoint.get("checkpoint_sha256") != _canonical_sha(checkpoint, "checkpoint_sha256"):
+            raise RemotePlanReviewError("Empreinte du checkpoint de lecture distant invalide")
+        if checkpoint.get("checkpoint_sha256") != receipt.get("read_checkpoint_sha256"):
+            raise RemotePlanReviewError("Le reçu et le checkpoint de lecture distant divergent")
+        if (
+            type(checkpoint.get("page_count")) is not int
+            or type(receipt.get("read_checkpoint_page_count")) is not int
+            or checkpoint["page_count"] != receipt["read_checkpoint_page_count"]
+        ):
+            raise RemotePlanReviewError("Compteur du checkpoint de lecture distant divergent")
+        checkpoint_identity = {
+            "debate_id": debate_id,
+            "work_id": work_id,
+            "comparison_id": comparison_id,
+            "scope": receipt.get("scope"),
+            "release_copy_tree_sha256": receipt.get("release_copy_tree_sha256"),
+        }
+        if any(checkpoint.get(field) != expected for field, expected in checkpoint_identity.items()):
+            raise RemotePlanReviewError("Identité du checkpoint de lecture distant divergente")
+        if checkpoint.get("remote_write_performed") is not False:
+            raise RemotePlanReviewError("Le checkpoint indique une écriture distante")
+        required["read_checkpoint"] = checkpoint_path
     inventory = load_json(required["remote_inventory"], "inventaire distant")
     _verify_sha_object(inventory, "inventory_sha256", "de l’inventaire distant")
     validation = load_json(required["plan_validation"], "validation du plan")
