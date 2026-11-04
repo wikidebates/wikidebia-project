@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
-  "declared_file_count": 414,
-  "declared_test_count": 898,
+  "declared_file_count": 415,
+  "declared_test_count": 899,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -1034,7 +1034,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2312,
-      "sha256": "a4149ca3877c5ad3774091dc9b22e94f0d1af5f26cc0ae7517316a4e6c897607"
+      "sha256": "c7e5fbbe0ac8d6f8807af22bfed75e6adb85d7894d7ad3089baf9bb2dadf40d2"
     },
     {
       "path": "VERSIONS.json",
@@ -1865,6 +1865,11 @@
       "path": "tests/test_parameter_renames_21553.py",
       "size_bytes": 6038,
       "sha256": "a00eabd1cd06503586f2ce333fa27fcd1748bcb1fa8c10c06f631968c5d378ed"
+    },
+    {
+      "path": "tests/test_publication_recovery_integration.py",
+      "size_bytes": 10875,
+      "sha256": "a200caf179fed9e5c1b9e3a08fba22edfd6017028eb91f43bf2ccfc02a7b467f"
     },
     {
       "path": "tests/test_publish_automatic_date_rollover.py",
