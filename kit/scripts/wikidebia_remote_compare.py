@@ -538,6 +538,8 @@ def _config(project_root: Path, release_copy: Path, run_dir: Path, debate_id: st
             "command": [".venv/bin/python", "validator/scripts/wikidebia_validate.py", "validate"],
             "required_version": REQUIRED_VALIDATOR_VERSION,
             "scopes": ["schema", "coherence", "graph", "files", "batches", "sources", "wikicode", "bilingual", "editorial", "workflow"],
+            "fingerprint_path": "validator",
+            "cache_dir": ".state/validation-cache/remote-update",
         },
         "comparison_mode": "read_only",
         "remote_write_authorized": False,
@@ -663,6 +665,8 @@ def compare_workspace(
             "checkpoint_pages_reused": recorder.checkpoint_pages_reused,
             "network_pages_read": recorder.network_pages_read,
             "comparison_resumed": resumed,
+            "validation_cache_status": planner.validation_cache_status,
+            "validation_cache_key": planner.validation_cache_key,
             "counts": counts,
             "remote_access_performed": True,
             "remote_write_performed": False,
@@ -698,6 +702,8 @@ def compare_workspace(
             "comparison_resumed": resumed,
             "checkpoint_pages_reused": recorder.checkpoint_pages_reused,
             "network_pages_read": recorder.network_pages_read,
+            "validation_cache_status": planner.validation_cache_status,
+            "validation_cache_key": planner.validation_cache_key,
             "remote_write_performed": False,
         }
     except Exception as exc:

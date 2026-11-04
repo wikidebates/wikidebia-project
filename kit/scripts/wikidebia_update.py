@@ -969,6 +969,30 @@ def write_json(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
+def deterministic_tree_sha(path: Path) -> str:
+    """Hash source inputs while excluding runtime caches and bytecode."""
+    if path.is_symlink():
+        raise UpdateError(f"Lien symbolique interdit dans l’entrée à empreinter : {path}")
+    path = path.resolve()
+    if path.is_file():
+        return sha_file(path)
+    if not path.is_dir():
+        raise UpdateError(f"Chemin à empreinter introuvable : {path}")
+    ignored_dirs = {"__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache"}
+    digest = hashlib.sha256()
+    for item in sorted(candidate for candidate in path.rglob("*") if candidate.is_file()):
+        relative_path = item.relative_to(path)
+        if any(part in ignored_dirs for part in relative_path.parts) or item.suffix in {".pyc", ".pyo"}:
+            continue
+        if item.is_symlink():
+            raise UpdateError(f"Lien symbolique interdit dans l’entrée à empreinter : {relative_path}")
+        relative = relative_path.as_posix().encode("utf-8")
+        digest.update(len(relative).to_bytes(8, "big"))
+        digest.update(relative)
+        digest.update(bytes.fromhex(sha_file(item)))
+    return digest.hexdigest()
+
+
 def portable(path: Path, root: Path) -> str:
     try:
         return path.resolve().relative_to(root.resolve()).as_posix()
@@ -1454,6 +1478,9 @@ class RemoteUpdatePlanner:
             if str(page_id).strip() and str(title).strip()
         }
         self.adapter = adapter if hasattr(adapter, "user_rights") else UpdateAdapter(adapter)
+        self.validation_cache_status = "disabled"
+        self.validation_cache_key: str | None = None
+        self.validation_cache_path: Path | None = None
         self.extra_markers = tuple(config.get("generated_markers") or ())
         self.migrations = self._load_migrations()
         self.remote_adoptions = self._load_remote_adoptions()
@@ -2062,6 +2089,19 @@ class RemoteUpdatePlanner:
         command = [str(item) for item in validator.get("command") or []]
         if not command:
             raise UpdateError("Commande du validateur absente")
+        cache = self._validation_cache_context(validator, command)
+        if cache is not None:
+            cache_path, cache_key, cache_inputs = cache
+            self.validation_cache_key = cache_key
+            self.validation_cache_path = cache_path
+            if cache_path.is_symlink():
+                raise UpdateError("Un lien symbolique est interdit pour un reçu de cache")
+            if cache_path.is_file():
+                self.validation_cache_status = "hit"
+                return self._load_validation_cache(cache_path, cache_key, cache_inputs)
+            if cache_path.exists():
+                raise UpdateError("Le chemin du reçu de cache n’est pas un fichier")
+            self.validation_cache_status = "miss"
         if "validate" in command:
             idx = command.index("validate")
             command = command[: idx + 1] + [str(self.corpus_root)] + command[idx + 1 :]
@@ -2100,7 +2140,90 @@ class RemoteUpdatePlanner:
                 return None
             actual = str(find(report) or "")
         require_validator_report(report, UpdateError)
+        if cache is not None:
+            self._write_validation_cache(cache_path, cache_key, cache_inputs, report)
         return report
+
+    def _validation_cache_context(
+        self, validator: dict[str, Any], command: list[str]
+    ) -> tuple[Path, str, dict[str, Any]] | None:
+        cache_value = validator.get("cache_dir")
+        fingerprint_value = validator.get("fingerprint_path")
+        if not cache_value or not fingerprint_value:
+            return None
+        state_root = self.project_root / ".state"
+        if state_root.is_symlink():
+            raise UpdateError("Le répertoire .state du cache ne peut pas être un lien symbolique")
+        state_root.mkdir(parents=True, exist_ok=True)
+        cache_dir = self._resolve(str(cache_value))
+        try:
+            relative = cache_dir.relative_to(state_root.resolve())
+        except ValueError as exc:
+            raise UpdateError("Le cache de validation doit rester sous .state/") from exc
+        current = state_root.resolve()
+        for part in relative.parts:
+            current = current / part
+            if current.is_symlink():
+                raise UpdateError("Un lien symbolique est interdit dans le cache de validation")
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        validator_path = self._resolve(str(fingerprint_value))
+        inputs = {
+            "schema": "wikidebia-validation-cache-input-1.0",
+            "corpus_tree_sha256": deterministic_tree_sha(self.corpus_root),
+            "validator_fingerprint": deterministic_tree_sha(validator_path),
+            "validator_command": command,
+            "required_validator_version": validator.get("required_version"),
+            "scopes": list(validator.get("scopes") or []),
+            "update_planner_sha256": sha_file(Path(__file__).resolve()),
+        }
+        key = sha_object(inputs)
+        return cache_dir / f"{key}.json", key, inputs
+
+    def _load_validation_cache(
+        self, path: Path, key: str, inputs: dict[str, Any]
+    ) -> dict[str, Any]:
+        value = load_json(path)
+        body = dict(value)
+        claimed = body.pop("cache_receipt_sha256", None)
+        if claimed != sha_object(body):
+            raise UpdateError("Empreinte du cache de validation invalide")
+        if (
+            value.get("schema") != "wikidebia-validation-cache-receipt-1.0"
+            or value.get("cache_key") != key
+            or value.get("inputs") != inputs
+        ):
+            raise UpdateError("Identité du cache de validation divergente")
+        report = value.get("report")
+        if not isinstance(report, dict) or value.get("report_sha256") != sha_object(report):
+            raise UpdateError("Rapport du cache de validation invalide")
+        require_validator_report(report, UpdateError)
+        errors = (report.get("summary") or {}).get("errors", 0)
+        if type(errors) is not int or report.get("result") not in {"passed", "passed_with_warnings"} or errors:
+            raise UpdateError("Le cache ne contient pas une validation positive")
+        return report
+
+    def _write_validation_cache(
+        self, path: Path, key: str, inputs: dict[str, Any], report: dict[str, Any]
+    ) -> None:
+        value = {
+            "schema": "wikidebia-validation-cache-receipt-1.0",
+            "cache_key": key,
+            "created_at": utc_now(),
+            "inputs": inputs,
+            "report": report,
+            "report_sha256": sha_object(report),
+        }
+        value["cache_receipt_sha256"] = sha_object(value)
+        temporary = path.with_name(f".{path.name}.tmp-{os.getpid()}")
+        if temporary.exists() or temporary.is_symlink():
+            raise UpdateError("Chemin temporaire du cache déjà occupé")
+        try:
+            with temporary.open("x", encoding="utf-8", newline="\n") as stream:
+                stream.write(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
+            os.replace(temporary, path)
+        except Exception:
+            temporary.unlink(missing_ok=True)
+            raise
 
     def _known_other_owner(self, language: str, title: str) -> str | None:
         base = self.project_root / ".state" / "published"

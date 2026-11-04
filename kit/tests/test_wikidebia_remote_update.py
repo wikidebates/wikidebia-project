@@ -1278,6 +1278,110 @@ def test_signed_plan_still_blocks_manifest_divergence_across_versions(tmp_path):
         raise AssertionError("un plan signé pour un autre manifeste a été accepté")
 
 
+def _enable_validation_cache(tmp_path, config, config_path):
+    counter = tmp_path / "validator-count.txt"
+    validator = tmp_path / "validator.py"
+    validator.write_text(
+        "from pathlib import Path\n"
+        f"p=Path({str(counter)!r})\n"
+        "p.write_text(str(int(p.read_text())+1) if p.exists() else '1')\n"
+        "import json\n"
+        "print(json.dumps({'validator_version':'0.4.73','result':'passed','summary':{'errors':0,'warnings':0}}))\n",
+        encoding="utf-8",
+    )
+    config["validator"].update({
+        "command": [TEST_VALIDATOR_PYTHON, str(validator), "validate"],
+        "fingerprint_path": str(validator),
+        "cache_dir": ".state/validation-cache/remote-update",
+    })
+    config_path.write_text(json.dumps(config), encoding="utf-8")
+    return counter
+
+
+def test_validation_cache_reuses_exact_corpus_and_validator(tmp_path):
+    text = argument("Même")
+    config, config_path = make_fixture(
+        tmp_path,
+        old_pages=[("fr", "A1", "Titre", text)],
+        new_pages=[("fr", "A1", "Titre", text)],
+    )
+    counter = _enable_validation_cache(tmp_path, config, config_path)
+    remote_pages = {("fr", "Titre"): (10, text)}
+
+    first = module.RemoteUpdatePlanner(config, FakeAdapter(remote_pages), config_path)
+    first_plan = first.build_plan()
+    second = module.RemoteUpdatePlanner(config, FakeAdapter(remote_pages), config_path)
+    second_plan = second.build_plan()
+
+    assert first.validation_cache_status == "miss"
+    assert second.validation_cache_status == "hit"
+    assert first.validation_cache_key == second.validation_cache_key
+    assert counter.read_text() == "1"
+    assert first_plan["validator_report_sha256"] == second_plan["validator_report_sha256"]
+
+
+def test_validation_cache_key_changes_with_corpus_content(tmp_path):
+    text = argument("Même")
+    config, config_path = make_fixture(
+        tmp_path,
+        old_pages=[("fr", "A1", "Titre", text)],
+        new_pages=[("fr", "A1", "Titre", text)],
+    )
+    counter = _enable_validation_cache(tmp_path, config, config_path)
+    remote_pages = {("fr", "Titre"): (10, text)}
+    first = module.RemoteUpdatePlanner(config, FakeAdapter(remote_pages), config_path)
+    first.build_plan()
+    changed = tmp_path / "corpus/demo/data/cache-key-change.txt"
+    changed.parent.mkdir()
+    changed.write_text("changed\n", encoding="utf-8")
+    second = module.RemoteUpdatePlanner(config, FakeAdapter(remote_pages), config_path)
+    second.build_plan()
+
+    assert second.validation_cache_status == "miss"
+    assert first.validation_cache_key != second.validation_cache_key
+    assert counter.read_text() == "2"
+
+
+def test_tampered_validation_cache_is_rejected_without_execution(tmp_path):
+    text = argument("Même")
+    config, config_path = make_fixture(
+        tmp_path,
+        old_pages=[("fr", "A1", "Titre", text)],
+        new_pages=[("fr", "A1", "Titre", text)],
+    )
+    counter = _enable_validation_cache(tmp_path, config, config_path)
+    remote_pages = {("fr", "Titre"): (10, text)}
+    first = module.RemoteUpdatePlanner(config, FakeAdapter(remote_pages), config_path)
+    first.build_plan()
+    cache_path = first.validation_cache_path
+    assert cache_path is not None
+    cached = json.loads(cache_path.read_text(encoding="utf-8"))
+    cached["report"]["summary"]["warnings"] = 99
+    cache_path.write_text(json.dumps(cached), encoding="utf-8")
+
+    second = module.RemoteUpdatePlanner(config, FakeAdapter(remote_pages), config_path)
+    try:
+        second.build_plan()
+    except module.UpdateError as exc:
+        assert "cache de validation" in str(exc)
+    else:
+        raise AssertionError("cache de validation falsifié accepté")
+    assert counter.read_text() == "1"
+
+
+def test_deterministic_tree_hash_ignores_runtime_bytecode(tmp_path):
+    source = tmp_path / "source"
+    source.mkdir()
+    (source / "module.py").write_text("VALUE = 1\n", encoding="utf-8")
+    before = module.deterministic_tree_sha(source)
+    (source / "__pycache__").mkdir()
+    (source / "__pycache__/module.pyc").write_bytes(b"runtime")
+    (source / ".pytest_cache").mkdir()
+    (source / ".pytest_cache/state").write_text("runtime", encoding="utf-8")
+
+    assert module.deterministic_tree_sha(source) == before
+
+
 def test_signed_plan_still_blocks_config_divergence_across_versions(tmp_path):
     text = argument("Même")
     p, config, path, adapter = plan(

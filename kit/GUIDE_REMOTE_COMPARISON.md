@@ -41,6 +41,18 @@ Un checkpoint modifié, associé à une autre release, à une autre portée ou �
 autre jeu de titres est refusé. Le reçu final lie l’empreinte du checkpoint et
 indique séparément `checkpoint_pages_reused` et `network_pages_read`.
 
+## Cache de validation locale
+
+La validation complète de `release-copy` est mise en cache sous
+`.state/validation-cache/remote-update/`. La clé couvre l’arbre exact du corpus,
+l’empreinte des sources du validateur, sa commande, sa version, ses portées et
+le code du planificateur. Une comparaison suivante sur les mêmes entrées
+réutilise le rapport signé ; toute modification invalide naturellement la clé.
+
+Le reçu de comparaison indique `validation_cache_status` (`miss` ou `hit`) et
+`validation_cache_key`. Un fichier de cache altéré bloque la comparaison au lieu
+d’être accepté ou remplacé silencieusement.
+
 ## Portée française différée
 
 La comparaison distante ignore les pages anglaises absentes lorsqu’un manifeste 1.2.x pris en charge déclare explicitement `translation_status.en=deferred`. Elle ne doit ni créer d'opération anglaise ni interpréter l'absence de lien français comme un retrait.
