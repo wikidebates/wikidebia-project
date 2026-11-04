@@ -69,6 +69,22 @@ def test_final_publication_loads_url_replacements_from_corpus_control(tmp_path: 
     assert final._publication_url_replacements(tmp_path) == [entry]
 
 
+def test_manifest_approval_loads_successor_from_separate_publication_registry(tmp_path: Path):
+    (tmp_path / 'data').mkdir(); (tmp_path / 'page.wiki').write_text('{{Argument|summary=Reviewed text}}')
+    d = decision(); d['observed_sha256'] = 'a' * 64
+    successor = {
+        'owner_approved': True, 'predecessor_revision_id': 12, 'predecessor_sha256': 'a' * 64,
+        'observed_revision_id': 13, 'observed_sha256': 'b' * 64, 'delta_policy': 'whitespace_only',
+        'verification_receipt_sha256': 'c' * 64,
+        'instruction': 'Accept the audited whitespace-only successor revision for final publication.',
+    }
+    (tmp_path / 'data/successors.json').write_text(json.dumps({'debate_id': 'demo', 'entries': [{'page_id': 'A0007', 'successor_revision': successor}]}))
+    row = dict(language='en', page_id='A0007', canonical_title='Existing title', page_origin='preexisting', file_path='page.wiki', existing_english_update=d)
+    (tmp_path / 'manifest.json').write_text(json.dumps({'debate_id': 'demo', 'editorial_controls': {'english_successor_revisions_path': 'data/successors.json'}, 'pages': [row]}))
+    approved = final._approved_english_updates(tmp_path)['A0007']
+    assert approved['observed_revision_id'] == 13 and approved['observed_sha256'] == 'b' * 64
+
+
 def test_existing_quote_parameter_rename_is_not_a_citation_deletion():
     from wikidebia_update import top_level_parameter_deletions,assert_citation_change_authorized,UpdateError
     quote='{{Quote|quote=The same complete quotation|article=Original article|link=https://example.org}}'
