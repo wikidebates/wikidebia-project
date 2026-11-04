@@ -834,6 +834,53 @@ def test_published_content_checkpoint_requires_matching_receipts_and_review(tmp_
     page.write_text(original.replace('historique','changé'))
     with pytest.raises(RenderError):_published_content_checkpoint(root,'test-debate','EDIT-001',{'review_sha256':'review-fr'})
 
+
+def test_frozen_source_is_verified_before_published_checkpoint_overlay(tmp_path: Path, monkeypatch):
+    project, workspace, work_id, review_sha = make_translated(tmp_path)
+    source = workspace / "translated-copy"
+    lock_path = source / "data/fr_content_lock.json"
+    lock = json.loads(lock_path.read_text(encoding="utf-8"))
+    preservation = sys.modules["wikidebia_translation_source"]
+    lock["source_preservation_policy"] = preservation.POLICY
+    provenance = json.loads((source / "data/import_provenance.json").read_text(encoding="utf-8"))
+    by_id = {str(row.get("page_id")): row for row in provenance["pages"] if row.get("kind") == "argument"}
+    debate_import = next(row for row in provenance["pages"] if row.get("kind") == "debate")
+    lock["debate"].update(import_path=debate_import["import_path"], import_sha256=debate_import["sha256"])
+    for row in lock["arguments"]:
+        imported = by_id[str(row["id"])]
+        row.update(import_path=imported["import_path"], import_sha256=imported["sha256"])
+    lock_path.write_text(json.dumps(lock, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    checkpoint_state = project / ".state/fr-publication/debat_test" / work_id / "content"
+    checkpoint_output = checkpoint_state / "checkpoint-corpus/output/fr"
+    checkpoint_output.mkdir(parents=True)
+    (checkpoint_state / "checkpoint.json").write_text(json.dumps({"receipt_sha256": "record"}), encoding="utf-8")
+    (checkpoint_state / "publication-receipt.json").write_text(json.dumps({"receipt_sha256": "receipt"}), encoding="utf-8")
+    pages = [(None, "debate", lock["debate"]), *[(row["id"], "argument", row) for row in lock["arguments"]]]
+    for page_id, page_type, row in pages:
+        destination = checkpoint_output / ("debate/debate.wiki" if page_type == "debate" else f"arguments/{page_id}.wiki")
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes((source / row["import_path"]).read_bytes())
+
+    observed = {}
+    def verify_before_overlay(root, metadata_lock, content_lock):
+        observed["paths"] = [content_lock["debate"]["import_path"], *[row["import_path"] for row in content_lock["arguments"]]]
+        assert all("fr-publication-checkpoint" not in path for path in observed["paths"])
+
+    monkeypatch.setattr(preservation, "verify_frozen_source", verify_before_overlay)
+    monkeypatch.setattr(render, "_published_content_checkpoint", lambda *args, **kwargs: checkpoint_output)
+    target = workspace / "rendered-checkpoint-order"
+
+    render._build_rendered_copy(
+        project, source, target, debate_id="debat_test", work_id=work_id,
+        translation_review_sha256=review_sha,
+    )
+
+    assert observed["paths"]
+    provenance = json.loads((target / "data/fr_render_source_provenance.json").read_text(encoding="utf-8"))
+    assert provenance["source_checkpoint_record_sha256"] == "record"
+    assert provenance["source_checkpoint_receipt_sha256"] == "receipt"
+
 def test_existing_english_creation_date_is_consistent_in_page_manifest_and_registry(tmp_path: Path):
     project,workspace,work_id,review_sha=make_translated(tmp_path)
     source=workspace/'translated-copy';path=source/'data/en_content_lock.json';content=json.loads(path.read_text());arg=content['arguments'][0];pid=arg['id']

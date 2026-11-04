@@ -1624,6 +1624,11 @@ def _build_rendered_copy(
     en_content = load_json(target / "data/en_content_lock.json", "verrou anglais du contenu")
     en_translation = load_json(target / "data/en_translation_lock.json", "verrou de traduction")
     from wikidebia_translation_source import POLICY, verify_frozen_source
+    # The preservation receipt authenticates the original imported source.
+    # Verify it before a published checkpoint is overlaid as the render input;
+    # the checkpoint intentionally has different paths and hashes.
+    if fr_content.get("source_preservation_policy") == POLICY:
+        verify_frozen_source(target, fr_meta, fr_content)
     fr_content_by_id = {
         str(row.get("id")): row for row in fr_content.get("arguments") or []
     }
@@ -1712,8 +1717,6 @@ def _build_rendered_copy(
         or published_french is not None
         or all_historical_imports_available
     )
-    if fr_content.get("source_preservation_policy") == POLICY:
-        verify_frozen_source(target, fr_meta, fr_content)
     source_registry = load_json(target / "data/sources.json", "registre documentaire")
     if en_translation.get("review_sha256") != translation_review_sha256:
         raise RenderError("Le verrou anglais ne correspond pas à l’empreinte confirmée")
