@@ -151,3 +151,31 @@ def test_changed_release_source_is_never_silently_skipped(tmp_path: Path):
         {"language": "fr", "page_id": "A1", "reason": "release_source_changed"}
     ]
     assert unsigned["counts"]["create"] == 1
+
+
+def test_registry_export_import_and_revocation_are_signed_and_monotonic(tmp_path: Path):
+    _run, _receipt, plan, _inventory = _evidence(tmp_path)
+    deletions.accept_external_deletion(
+        tmp_path, DEBATE, WORK, COMPARISON, language="fr", page_id="A1",
+        reason="Doublon supprimé volontairement", accepted_by="owner",
+        confirm_plan_sha256=plan["plan_sha256"],
+    )
+    exported = tmp_path / "portable/registry.json"
+    result = deletions.export_registry(tmp_path, DEBATE, exported)
+    assert result["status"] == "exported"
+    local = deletions.registry_path(tmp_path, DEBATE)
+    local.unlink()
+    imported = deletions.import_registry(tmp_path, DEBATE, exported)
+    assert imported["status"] == "imported"
+
+    revoked = deletions.revoke_external_deletion(
+        tmp_path, DEBATE, language="fr", page_id="A1",
+        reason="La suppression doit être réexaminée", revoked_by="owner",
+    )
+    assert revoked["status"] == "revoked"
+    registry = json.loads(local.read_text())
+    unsigned = dict(registry)
+    assert unsigned.pop("registry_sha256") == sha_object(unsigned)
+    assert registry["entries"][0]["status"] == "revoked"
+    with pytest.raises(deletions.ExternalDeletionError, match="régresser"):
+        deletions.import_registry(tmp_path, DEBATE, exported)

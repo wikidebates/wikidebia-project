@@ -269,7 +269,28 @@ def test_sync_copies_complete_signed_french_succession(tmp_path: Path):
         "history_state_count": 2,
         "post_checkpoint_correction_count": 1,
         "current_state_sha256": result["current_state_sha256"],
+        "external_deletion_registry_sha256": None,
     }
+
+
+def test_sync_carries_signed_external_deletion_registry(tmp_path: Path):
+    debate_id, _work_id, snapshot = _fixture(tmp_path)
+    registry = {
+        "schema": "wikidebia-accepted-external-deletions-1.0",
+        "debate_id": debate_id, "created_at": "2026-11-05T00:00:00+00:00",
+        "updated_at": "2026-11-05T00:00:00+00:00", "entries": [],
+    }
+    registry = _signed(registry, "registry_sha256")
+    path = tmp_path / ".state/external-deletions" / f"{debate_id}.json"
+    path.parent.mkdir(parents=True)
+    path.write_text(json.dumps(registry), encoding="utf-8")
+
+    result = continuity.sync_signed_french_history(tmp_path, debate_id)
+
+    carried = snapshot / "runtime/external-deletions/registry.json"
+    assert carried.read_bytes() == path.read_bytes()
+    assert result["external_deletion_registry_sha256"] == registry["registry_sha256"]
+    assert continuity.verify_committed_snapshot(snapshot)["external_deletion_registry_sha256"] == registry["registry_sha256"]
 
 
 def test_check_refuses_incomplete_projection(tmp_path: Path):

@@ -25,3 +25,23 @@ Les comparaisons suivantes transforment la recréation correspondante en
 correspondent encore exactement à la décision. Si la source a changé, la
 création reste visible et demande une nouvelle décision. Le chemin et
 l’empreinte du registre sont inscrits dans le plan et le reçu de comparaison.
+
+Le registre peut être transporté entre installations sans accès au wiki :
+
+```text
+./wikidebia corpus-external-deletion-export <debate_id> --output <registre.json>
+./wikidebia corpus-external-deletion-import <debate_id> --source <registre.json>
+```
+
+Un import ne peut ni retirer une décision existante ni remplacer son contenu.
+Il peut seulement ajouter une identité ou transporter sa révocation signée.
+Pour réactiver la création d’une page :
+
+```text
+./wikidebia corpus-external-deletion-revoke <debate_id> \
+  --language fr --page-id <page_id> --revoked-by <identité> \
+  --reason "raison explicite de la révocation"
+```
+
+`continuity-sync` copie automatiquement le registre local signé dans la
+projection et `--check` vérifie sa présence et son empreinte.

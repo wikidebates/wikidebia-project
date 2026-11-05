@@ -1558,7 +1558,7 @@ def tag_translated_fr(root: Path, debate_id: str, *, dry_run: bool) -> dict[str,
     run_dir.mkdir(parents=True, exist_ok=True)
     plan_path = run_dir / "translated-fr-tag-plan.json"
     command = [
-        python_command(root), str(script), debate_id,
+        python_command(root), str(script), debate_id, "--accept",
         "--project-root", str(root),
         "--family", family,
         "--code", "en",
@@ -1884,6 +1884,19 @@ def editorial_workflow(
         command.extend(["--snapshot", str(selected.resolve())])
     if force_refresh:
         command.append("--force-refresh")
+    return run(command, cwd=root, check=False).returncode
+
+
+def corpus_external_deletion_registry(
+    root: Path, debate_id: str, *, action: str, language: str | None = None,
+    page_id: str | None = None, reason: str | None = None,
+    revoked_by: str | None = None, source: Path | None = None,
+    output: Path | None = None,
+) -> int:
+    script = root / "kit/scripts/wikidebia_external_deletions.py"
+    command = [python_command(root), str(script), debate_id, f"--{action}", "--project-root", str(root), "--machine-readable"]
+    for option, value in (("--language", language), ("--page-id", page_id), ("--reason", reason), ("--revoked-by", revoked_by), ("--source", source), ("--output", output)):
+        if value is not None: command.extend([option, str(value)])
     return run(command, cwd=root, check=False).returncode
 
 
@@ -2653,6 +2666,19 @@ def build_parser() -> argparse.ArgumentParser:
     external_deletion_parser.add_argument("--accepted-by", required=True)
     external_deletion_parser.add_argument("--confirm-plan-sha256", required=True)
 
+    external_revoke_parser = sub.add_parser("corpus-external-deletion-revoke", help="Révoquer une décision signée de suppression externe")
+    external_revoke_parser.add_argument("debate_id")
+    external_revoke_parser.add_argument("--language", choices=("fr", "en"), required=True)
+    external_revoke_parser.add_argument("--page-id", required=True)
+    external_revoke_parser.add_argument("--reason", required=True)
+    external_revoke_parser.add_argument("--revoked-by", required=True)
+    external_export_parser = sub.add_parser("corpus-external-deletion-export", help="Exporter un registre signé")
+    external_export_parser.add_argument("debate_id")
+    external_export_parser.add_argument("--output", type=Path, required=True)
+    external_import_parser = sub.add_parser("corpus-external-deletion-import", help="Importer un registre signé sans régression")
+    external_import_parser.add_argument("debate_id")
+    external_import_parser.add_argument("--source", type=Path, required=True)
+
     corpus_remote_plan_review_parser = sub.add_parser(
         "corpus-workspace-plan-review",
         help="Préparer ou finaliser la revue formelle d’un plan distant signé",
@@ -2902,6 +2928,13 @@ def main(argv: list[str] | None = None) -> int:
             page_id=args.page_id, reason=args.reason, accepted_by=args.accepted_by,
             confirm_plan_sha256=args.confirm_plan_sha256,
         )
+
+    if args.command == "corpus-external-deletion-revoke":
+        return corpus_external_deletion_registry(root, args.debate_id, action="revoke", language=args.language, page_id=args.page_id, reason=args.reason, revoked_by=args.revoked_by)
+    if args.command == "corpus-external-deletion-export":
+        return corpus_external_deletion_registry(root, args.debate_id, action="export", output=args.output)
+    if args.command == "corpus-external-deletion-import":
+        return corpus_external_deletion_registry(root, args.debate_id, action="import", source=args.source)
 
     if args.command == "corpus-workspace-plan-review":
         return corpus_workspace_remote_plan_review(
