@@ -2119,6 +2119,23 @@ def corpus_workspace_translation_packet(
     return run(command, cwd=root, check=False).returncode
 
 
+def corpus_workspace_translation_next(
+    root: Path, debate_id: str, *, work_id: str,
+    memory_root: Path, no_memory: bool,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_translation_next.py"
+    if not script.is_file():
+        raise ManagementError("Orchestrateur de prochaine unité de traduction absent du kit")
+    command = [
+        python_command(root), str(script), debate_id,
+        "--work-id", work_id, "--memory-root", str(memory_root),
+        "--project-root", str(root), "--machine-readable",
+    ]
+    if no_memory:
+        command.append("--no-memory")
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_translation_patch(
     root: Path, debate_id: str, *, work_id: str, unit_id: str,
     prepare: bool, seal: bool, apply: bool, overwrite: bool,
@@ -2353,6 +2370,7 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
         "wikidebia_content_review.py", "wikidebia_translation_review.py",
         "wikidebia_translation_worklist.py",
         "wikidebia_translation_packet.py",
+        "wikidebia_translation_next.py",
         "wikidebia_translation_patch.py",
         "wikidebia_translation_memory.py",
         "wikidebia_external_deletions.py",
@@ -2666,6 +2684,15 @@ def build_parser() -> argparse.ArgumentParser:
         "--memory-root", type=Path, default=Path("translation-memory"),
     )
 
+    translation_next_parser = sub.add_parser(
+        "corpus-workspace-translation-next",
+        help="Préparer la prochaine unité, son paquet et son correctif",
+    )
+    translation_next_parser.add_argument("debate_id")
+    translation_next_parser.add_argument("--work-id", required=True)
+    translation_next_parser.add_argument("--memory-root", type=Path, default=Path("translation-memory"))
+    translation_next_parser.add_argument("--no-memory", action="store_true")
+
     translation_patch_parser = sub.add_parser(
         "corpus-workspace-translation-patch",
         help="Préparer, sceller ou appliquer un correctif limité à une unité",
@@ -2950,6 +2977,12 @@ def main(argv: list[str] | None = None) -> int:
         return corpus_workspace_translation_packet(
             root, args.debate_id, work_id=args.work_id, unit_id=args.unit_id,
             reuse_memory=args.reuse_memory, memory_root=args.memory_root,
+        )
+
+    if args.command == "corpus-workspace-translation-next":
+        return corpus_workspace_translation_next(
+            root, args.debate_id, work_id=args.work_id,
+            memory_root=args.memory_root, no_memory=args.no_memory,
         )
 
     if args.command == "corpus-workspace-translation-patch":
