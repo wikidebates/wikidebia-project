@@ -1,0 +1,254 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "5fadf7152ca561779fb59f1e5a3e64fd2ea6aea95565fec53031ceee4d7f8cb1",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme bourgeois ne relie pas l'oppression des femmes à l'exploitation capitaliste",
+    "identity_sha256": "9997436a1c3fbe7e9c92aaf334895dd91559f3e8f1c457d5cc9cdce138a0ff83"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "c5c7e22f993acecb9885c86b487f6038661c5b6707dafc89b1fb1918aaac8017"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Bourgeois feminism does not connect the oppression of women to capitalist exploitation",
+    "displayed_title": "Bourgeois feminism does not connect the oppression of women to capitalist exploitation",
+    "sections": [
+      "Politics",
+      "Society"
+    ],
+    "keywords": [
+      "feminism",
+      "bourgeoisie",
+      "connection",
+      "capitalist exploitation"
+    ],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0274-C001",
+        "source": {
+          "id": "A0274-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Au cours de la primaire écologiste, où elle a connu un certain succès, Sandrine Rousseau s’est par exemple revendiquée d’un écoféminisme radical. Pour elle, ''« le cœur de notre système économique et social est la prédation »''. Qu’il s’agisse du corps des femmes, des ressources de la nature ou de la vie des plus précaires, ''« on prend, on utilise, on jette »'', a-t-elle martelé. [...] Cette vision empêche de comprendre les mécanismes bien plus complexes de l’exploitation capitaliste et des oppressions qu’elle perpétue"
+            },
+            {
+              "name": "auteurs",
+              "value": "Nathalie Arthaud"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Communiste, révolutionnaire, internationaliste !"
+            },
+            {
+              "name": "édition",
+              "value": "Les bons caractères"
+            },
+            {
+              "name": "date",
+              "value": "2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste"
+            }
+          ],
+          "citation": "Au cours de la primaire écologiste, où elle a connu un certain succès, Sandrine Rousseau s’est par exemple revendiquée d’un écoféminisme radical. Pour elle, ''« le cœur de notre système économique et social est la prédation »''. Qu’il s’agisse du corps des femmes, des ressources de la nature ou de la vie des plus précaires, ''« on prend, on utilise, on jette »'', a-t-elle martelé. [...] Cette vision empêche de comprendre les mécanismes bien plus complexes de l’exploitation capitaliste et des oppressions qu’elle perpétue",
+          "date": "2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Nathalie Arthaud"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Communiste, révolutionnaire, internationaliste !"
+            },
+            {
+              "name": "édition",
+              "value": "Les bons caractères"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "During the Green primary, in which she enjoyed some success, Sandrine Rousseau described herself, for example, as a radical ecofeminist. For her, ''“predation lies at the heart of our economic and social system.”'' Whether it concerns women’s bodies, natural resources, or the lives of the most vulnerable, ''“we take, use, and discard,”'' she insisted. [...] This view prevents an understanding of the far more complex mechanisms of capitalist exploitation and the forms of oppression it perpetuates.",
+        "translated_date": "2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:24:41.278973+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Bourgeois feminism does not connect the oppression of women to capitalist exploitation\" argument",
+      "Bourgeois feminism does not connect the oppression of women to capitalist exploitation conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "nominal_phrase",
+    "displayed_title_target_form": "nominal_phrase",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": false,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "c83d585bef80be37d878c8e1b9d71de53521a8e9dc00cd3d4b19f479cf98ff8a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0274",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "063b2dcd665b66b52bef8aa6410c23b994653876359031aa41b3d0be8f5a9e6a"
+}

@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "5ba45ca59c0010da4a401f400633d309beb2eb786aebe0a8601a826cc6bd6841",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le concept de \"cancel culture\" sert d'écran de fumée à des méfaits bien réels",
+    "identity_sha256": "f2847f2f35f4b2975cba84dcd67b386c178a3fdce1ccb5f988b338e22cc870ab"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "9c2bf5488f3d7546c168d084c4adaf0f78012a76f004b54586206b61760c1ca2"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "The concept of \"cancel culture\" serves as a smokescreen for very real wrongdoing",
+    "displayed_title": "The concept of \"cancel culture\" serves as a smokescreen for very real wrongdoing",
+    "sections": [],
+    "keywords": [],
+    "summary": "People are outraged by demands that Polanski pay for raping a minor; they are outraged that transgender people are unhappy that J. K. Rowling gratuitously spewed her bile in their faces; they are outraged that Bastien Vivès, an author of child pornography (and probably himself a child sex offender), should not be honored with an exhibition; and they are also outraged that the rapes committed by Depardieu should not go unpunished. Through these examples, it becomes obvious that playing the “cancel culture” card is merely a crude but effective way to portray our idols as innocent victims.",
+    "citations": [
+      {
+        "id": "A0306-C001",
+        "source": {
+          "id": "A0306-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Alors arrêtons de faire comme si nous étions atteints de cécité sélective. Personne ne demande de « Cancel » Depardieu. '''C’est une tentative de victimisation d’un agresseur sexuel qui assume à de nombreuses reprises et publiquement ses comportements.''' Depardieu fête ses 75 ans. Il sait à peine marcher. Il a fait une longue carrière dans le cinéma. Soyons honnêtes un instant. Arrêtons de faire croire qu’il reste quoi que ce soit à Cancel de lui !"
+            },
+            {
+              "name": "auteurs",
+              "value": "Mr Mondialisation"
+            },
+            {
+              "name": "article",
+              "value": "Tribune : 50 « stars » pleurnichent dans le Figaro pour défendre Depardieu"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mr Mondialisation"
+            },
+            {
+              "name": "date",
+              "value": "29 décembre 2023"
+            },
+            {
+              "name": "lien",
+              "value": "https://mrmondialisation.org/tribune-50-stars-pleurnichent-dans-le-figaro-pour-defendre-depardieu/"
+            }
+          ],
+          "citation": "Alors arrêtons de faire comme si nous étions atteints de cécité sélective. Personne ne demande de « Cancel » Depardieu. '''C’est une tentative de victimisation d’un agresseur sexuel qui assume à de nombreuses reprises et publiquement ses comportements.''' Depardieu fête ses 75 ans. Il sait à peine marcher. Il a fait une longue carrière dans le cinéma. Soyons honnêtes un instant. Arrêtons de faire croire qu’il reste quoi que ce soit à Cancel de lui !",
+          "date": "29 décembre 2023",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Mr Mondialisation"
+            },
+            {
+              "name": "article",
+              "value": "Tribune : 50 « stars » pleurnichent dans le Figaro pour défendre Depardieu"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mr Mondialisation"
+            },
+            {
+              "name": "lien",
+              "value": "https://mrmondialisation.org/tribune-50-stars-pleurnichent-dans-le-figaro-pour-defendre-depardieu/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "So let us stop pretending that we suffer from selective blindness. No one is asking to “cancel” Depardieu. '''This is an attempt to portray a sexual aggressor as a victim even though he has repeatedly and publicly owned his behavior.''' Depardieu is celebrating his seventy-fifth birthday. He can barely walk. He has had a long film career. Let us be honest for a moment. Let us stop pretending that there is anything left of him to cancel!",
+        "translated_date": "29 December 2023",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:23.774208+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"The concept of “cancel culture” serves as a smokescreen for very real wrongdoing\" argument",
+      "The concept of “cancel culture” serves as a smokescreen for very real wrongdoing conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "nominal_phrase",
+    "displayed_title_target_form": "nominal_phrase",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": false,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "93257b9bdae16fef74ccf709810d102b81f103c8aa991889a80b44e9dd62b8db",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0306",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8175087b50b85d5667422529be5b403eb03a3e7613f537a7c0a6d38c54a29075"
+}

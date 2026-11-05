@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "c6a0f6ba1b4eb079749985b84c9bfe238d750155179c913862e909ef355e09ff",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite est étrangement silencieuse sur les affaires de harcèlement n'impliquant pas ses boucs émissaires préférés",
+    "identity_sha256": "b4654d8655edcf4feb7dffd910b26357a633a7f5188119067c071ae5c775aa54"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "86e77d419c4486847de0efe3f4cb0a192755f570046d0c89832def3f611b5b66"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "The far right is strangely silent about harassment cases that do not involve its favorite scapegoats",
+    "displayed_title": "The far right is strangely silent about harassment cases that do not involve its favorite scapegoats",
+    "sections": [],
+    "keywords": [],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0325-C001",
+        "source": {
+          "id": "A0325-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "On ne peut ici taire le risque que le débat public s’en trouve configuré par '''les agendas politiques de ceux qui ont le pouvoir de mobiliser les réseaux sociaux'''. C’est ainsi que la médiatisation de l’affaire Mila contraste singulièrement avec le silence qui entoure, depuis plus de deux ans, les harcèlements et menaces que subit la journaliste Julie Hainaut de la part de néonazis parce que, dans le cadre de sa profession, elle a retranscrit les propos racistes de deux tenanciers de bar.\n\nC’est ainsi encore que les harcèlements en meute lancés contre des femmes par le dessinateur Marsault, soutenu par les éditions Ring, et qui ont débouché sur un procès où il a été heureusement condamné, n’ont pas fait grand bruit dans la presse — qui n’a pourtant pas hésité à relayer '''la fausse information d’un vandalisme massif et violent du stand des éditions Ring à Bruxelles''', « information » lancée par un tweet qui en profitait pour diffamer scandaleusement des personnes dont le seul tort était de ne pas se laisser intimider par Marsault…"
+            },
+            {
+              "name": "auteurs",
+              "value": "Isabelle Kersimon, Jean-Yves Pranchère, Alain Policar, Jean-Yves Camus, Georges Salines"
+            },
+            {
+              "name": "article",
+              "value": "Retour sur “l’affaire Mila” : un faux débat instrumenté par l’extrême droite"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Institut de recherches et d'études sur les radicalités"
+            },
+            {
+              "name": "date",
+              "value": "4 mai 2020"
+            },
+            {
+              "name": "lien",
+              "value": "https://inrer.org/2020/05/retour-sur-l-affaire-mila/"
+            }
+          ],
+          "citation": "On ne peut ici taire le risque que le débat public s’en trouve configuré par '''les agendas politiques de ceux qui ont le pouvoir de mobiliser les réseaux sociaux'''. C’est ainsi que la médiatisation de l’affaire Mila contraste singulièrement avec le silence qui entoure, depuis plus de deux ans, les harcèlements et menaces que subit la journaliste Julie Hainaut de la part de néonazis parce que, dans le cadre de sa profession, elle a retranscrit les propos racistes de deux tenanciers de bar.\n\nC’est ainsi encore que les harcèlements en meute lancés contre des femmes par le dessinateur Marsault, soutenu par les éditions Ring, et qui ont débouché sur un procès où il a été heureusement condamné, n’ont pas fait grand bruit dans la presse — qui n’a pourtant pas hésité à relayer '''la fausse information d’un vandalisme massif et violent du stand des éditions Ring à Bruxelles''', « information » lancée par un tweet qui en profitait pour diffamer scandaleusement des personnes dont le seul tort était de ne pas se laisser intimider par Marsault…",
+          "date": "4 mai 2020",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Isabelle Kersimon, Jean-Yves Pranchère, Alain Policar, Jean-Yves Camus, Georges Salines"
+            },
+            {
+              "name": "article",
+              "value": "Retour sur “l’affaire Mila” : un faux débat instrumenté par l’extrême droite"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Institut de recherches et d'études sur les radicalités"
+            },
+            {
+              "name": "lien",
+              "value": "https://inrer.org/2020/05/retour-sur-l-affaire-mila/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "We cannot overlook here the risk that public debate may be configured by '''the political agendas of those with the power to mobilize social networks'''. Thus, media coverage of the Mila affair contrasts strikingly with the silence that for more than two years has surrounded the harassment and threats suffered by journalist Julie Hainaut from neo-Nazis because, in the course of her work, she transcribed racist remarks made by two bar owners.\n\nLikewise, the coordinated harassment launched against women by cartoonist Marsault, supported by Ring publishing, which led to a trial in which he was fortunately convicted, made little noise in the press—even though the press did not hesitate to repeat '''the false claim that the Ring publishing stand in Brussels had been subjected to massive and violent vandalism''', “information” launched by a tweet that also scandalously defamed people whose only fault was refusing to be intimidated by Marsault...",
+        "translated_date": "4 May 2020",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:50.570647+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"The far right is strangely silent about harassment cases that do not involve its favorite scapegoats\" argument",
+      "The far right is strangely silent about harassment cases that do not involve its favorite scapegoats conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "e2334ceea3bb9d3a2d4f20f18f6c31d9ce8da420bd44c4700dc63ab3af7d4afb",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0325",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "04e8e3d120a8628bf5bb952e778bad7dad7ece56b579b3f829108466174cfec6"
+}

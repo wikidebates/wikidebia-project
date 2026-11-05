@@ -1,0 +1,373 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "b139d147d8180324ad7b8ae1f6f916813060b3214011384d6b87e63f1e071cab",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les critiques les plus vocales du \"wokisme\" sont réactionnaires",
+    "identity_sha256": "d6cf36960278feb08f78305b8a1b0587103e3c178824598e02e4836d8b79c358"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "848b25720769d4b23d880cc6a06544baf7a4cc4196228acdfc291c8b4b9f5535"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "The most vocal critics of \"wokeism\" are reactionaries",
+    "displayed_title": "The most vocal critics of \"wokeism\" are reactionaries",
+    "sections": [],
+    "keywords": [],
+    "summary": "They include Alain Finkielkraut, Jean-Michel Blanquer, Éric Zemmour, Vladimir Putin, Marine Le Pen, Donald Trump, Ron DeSantis, Bart De Wever, and Georges-Louis Bouchez—all figures clearly not known for being progressive.\n\nIn the media, there is of course the entire Bolloré sphere, whose hard-right political positioning no longer needs to be demonstrated and which has distinguished itself perfectly in this obsession, along with Valeurs Actuelles, Le Figaro, and Marianne, three newspapers notoriously connected to the reactionary sphere. This is without even mentioning the influencers who join the festivities between two waves of harassment against left-wing activists.",
+    "citations": [
+      {
+        "id": "A0319-C001",
+        "source": {
+          "id": "A0319-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Le mot [woke] a déboulé dans notre débat public, au début des années 2020, et sa critique est désormais la principale grille d’analyse des conservateurs et réactionnaires de tout poil, [https://www.humanite.fr/politique/woke/diabolisation-de-la-gauche-user-du-mot-wokisme-sert-une-propagande-politique-726320 pour dézinguer la gauche]. « Le Figaro » a du mal à boucler un édito sans s’en alarmer, CNews y dédie son temps d’antenne."
+            },
+            {
+              "name": "auteurs",
+              "value": "Cyprien Caddeo"
+            },
+            {
+              "name": "article",
+              "value": "Alain Policar : « Les conservateurs nomment “wokisme” tout ce qu’ils n’aiment pas »"
+            },
+            {
+              "name": "ouvrage",
+              "value": "L'Humanité"
+            },
+            {
+              "name": "date",
+              "value": "2 mai 2024"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.humanite.fr/politique/wokisme/alain-policar-les-conservateurs-nomment-wokisme-tout-ce-quils-naiment-pas"
+            }
+          ],
+          "citation": "Le mot [woke] a déboulé dans notre débat public, au début des années 2020, et sa critique est désormais la principale grille d’analyse des conservateurs et réactionnaires de tout poil, [https://www.humanite.fr/politique/woke/diabolisation-de-la-gauche-user-du-mot-wokisme-sert-une-propagande-politique-726320 pour dézinguer la gauche]. « Le Figaro » a du mal à boucler un édito sans s’en alarmer, CNews y dédie son temps d’antenne.",
+          "date": "2 mai 2024",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Cyprien Caddeo"
+            },
+            {
+              "name": "article",
+              "value": "Alain Policar : « Les conservateurs nomment “wokisme” tout ce qu’ils n’aiment pas »"
+            },
+            {
+              "name": "ouvrage",
+              "value": "L'Humanité"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.humanite.fr/politique/wokisme/alain-policar-les-conservateurs-nomment-wokisme-tout-ce-quils-naiment-pas"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "The word [woke] burst into our public debate in the early 2020s, and criticizing it is now the principal analytical framework used by conservatives and reactionaries of every stripe [https://www.humanite.fr/politique/woke/diabolisation-de-la-gauche-user-du-mot-wokisme-sert-une-propagande-politique-726320 to attack the left]. Le Figaro struggles to complete an editorial without sounding the alarm about it, and CNews devotes its airtime to it.",
+        "translated_date": "2 May 2024",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:50.570647+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0319-C002",
+        "source": {
+          "id": "A0319-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Un choix de se rapprocher de l’extrême droite qui s’éclaire aussi à la lumière de l’enrolement de plusieurs militant·es du groupuscule fasciste, Chez Nous, au sein des listes électorales du parti il-libérale*. Le dernier en liste, après Noa Pozzi (finalement écarté pour cause d’une polémique grandissante) est Jason Galassi. Ces porosités entre le MR et ces partis néo-fascistes sont bien documentées par les collectifs antifascistes belges, comme le Front Antifasciste Liège 2.0.\n\nDepuis, c’est un véritable revirement que le MR souhaite opérer dans le monde politique belge francophone : GLB et ses comparses sont en campagne idéologique intensive contre ledit « wokisme » des féministes et des LGTBQ+, ledit « communautarisme » de l’Islam et des mulsuman·nes et ledit « communisme autoritaire » du PTB."
+            },
+            {
+              "name": "article",
+              "value": "Une élue MR tweet des propos racistes"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Bruxelles dévie"
+            },
+            {
+              "name": "lien",
+              "value": "https://bruxellesdevie.com/2024/11/19/une-elue-mr-tweet-des-propos-racistes/"
+            }
+          ],
+          "citation": "Un choix de se rapprocher de l’extrême droite qui s’éclaire aussi à la lumière de l’enrolement de plusieurs militant·es du groupuscule fasciste, Chez Nous, au sein des listes électorales du parti il-libérale*. Le dernier en liste, après Noa Pozzi (finalement écarté pour cause d’une polémique grandissante) est Jason Galassi. Ces porosités entre le MR et ces partis néo-fascistes sont bien documentées par les collectifs antifascistes belges, comme le Front Antifasciste Liège 2.0.\n\nDepuis, c’est un véritable revirement que le MR souhaite opérer dans le monde politique belge francophone : GLB et ses comparses sont en campagne idéologique intensive contre ledit « wokisme » des féministes et des LGTBQ+, ledit « communautarisme » de l’Islam et des mulsuman·nes et ledit « communisme autoritaire » du PTB.",
+          "date": "",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "article",
+              "value": "Une élue MR tweet des propos racistes"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Bruxelles dévie"
+            },
+            {
+              "name": "lien",
+              "value": "https://bruxellesdevie.com/2024/11/19/une-elue-mr-tweet-des-propos-racistes/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "This choice to move closer to the far right is also illuminated by the recruitment of several activists from the fascist group Chez Nous onto the electoral lists of the illiberal* party. The latest, after Noa Pozzi (eventually excluded as the controversy grew), is Jason Galassi. These porous boundaries between the MR and neo-fascist parties are well documented by Belgian antifascist collectives such as Front Antifasciste Liège 2.0.\n\nSince then, the MR has sought to bring about a genuine reversal in French-speaking Belgian politics: GLB and his associates are waging an intensive ideological campaign against the alleged “wokeism” of feminists and LGBTQ+ people, the alleged “communalism” of Islam and Muslims, and the alleged “authoritarian communism” of the PTB.",
+        "translated_date": "",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:50.570647+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0319-C003",
+        "source": {
+          "id": "A0319-C003",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Alors que le terme est né comme un mot d'ordre dans les communautés noires pour « rester éveillé » contre la brutalité policière, il a depuis été réapproprié comme un fourre-tout contre toute politique, position, ou personne avec laquelle les conservateurs ne sont pas d'accord, souvent de manière caricaturale.\n\n\n(''While the term [https://www.vox.com/culture/21437879/stay-woke-wokeness-history-origin-evolution-controversy originated] as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.'')"
+            },
+            {
+              "name": "auteurs",
+              "value": "Samuel C. Huneke"
+            },
+            {
+              "name": "article",
+              "value": "Critically Cringe: On Susan Neiman’s “Left Is Not Woke”"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Los Angeles Review of Books"
+            },
+            {
+              "name": "lien",
+              "value": "https://lareviewofbooks.org/article/critically-cringe-on-susan-neimans-left-is-not-woke/"
+            }
+          ],
+          "citation": "Alors que le terme est né comme un mot d'ordre dans les communautés noires pour « rester éveillé » contre la brutalité policière, il a depuis été réapproprié comme un fourre-tout contre toute politique, position, ou personne avec laquelle les conservateurs ne sont pas d'accord, souvent de manière caricaturale.\n\n\n(''While the term [https://www.vox.com/culture/21437879/stay-woke-wokeness-history-origin-evolution-controversy originated] as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.'')",
+          "date": "",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Samuel C. Huneke"
+            },
+            {
+              "name": "article",
+              "value": "Critically Cringe: On Susan Neiman’s “Left Is Not Woke”"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Los Angeles Review of Books"
+            },
+            {
+              "name": "lien",
+              "value": "https://lareviewofbooks.org/article/critically-cringe-on-susan-neimans-left-is-not-woke/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Although the term originated as a watchword in Black communities to “stay woke” against police brutality, it has since been repurposed as a catch-all against any policy, position, or person with which conservatives disagree, often in cartoonish ways.\n\n\n(''While the term [https://www.vox.com/culture/21437879/stay-woke-wokeness-history-origin-evolution-controversy originated] as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.'')",
+        "translated_date": "",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:50.570647+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"The most vocal critics of “wokeism” are reactionaries\" argument",
+      "The most vocal critics of “wokeism” are reactionaries conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": true,
+    "semantic_risk_note": "Every detected polarity, modality, quantity, attribution or scope signal was checked directly against the French source.",
+    "semantic_risk_evidence": [
+      {
+        "risk": "marker_loss:comparison",
+        "source_excerpt": "Les critiques les plus vocales du \"wokisme\" sont réactionnaires",
+        "target_excerpt": "The most vocal critics of \"wokeism\" are reactionaries",
+        "note": "The complete source and target fields were compared directly for this semantic-risk signal."
+      }
+    ],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "3aaf7562a7590faa361a3c1de30a9992539d4e26d46396d437edb553275976ec",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0319",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d60ee770220330fc5ddf153c77bdbeb812a2c3db40978acdf3ff22b714792600"
+}

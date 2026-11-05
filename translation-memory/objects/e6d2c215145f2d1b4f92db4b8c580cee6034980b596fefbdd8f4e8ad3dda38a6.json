@@ -1,0 +1,238 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "5a58ffc11bbdb8fa84f3093fe18c91fcf46391df57f1769ab42c8ad3b22df98f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La diffamation est un dommage collatéral du féminisme radical",
+    "identity_sha256": "db29808d72f06f8868aa75314f75e2911897d35e7a9e605e3f69733be6432b70"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "1421aea4a6f83ccea1f162698c860af593ee7f2ad42574e9250808101fd2f487"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Defamation is collateral damage of radical feminism",
+    "displayed_title": "Defamation is collateral damage of radical feminism",
+    "sections": [],
+    "keywords": [],
+    "summary": "As with any form of denunciation, its close cousin, defamation, is never far away. The recent appeal trial for defamation brought by Éric Brion bears witness to this. In the dock was Sandra Muller, who originated #balancetonporc. Deemed reckless and outside the scope of sexual harassment, the defendant faced damages (€15 000 at first instance) for her tweet: “#balancetonporc! You too, tell your story, giving the name and details of sexual harassmnt (sic) that you experienced at work. I’m waiting for you.” After a few more minutes, she posted a second message: “You have big breasts. You are my type of woman. I’m going to make you come all night. Eric Brion, former head of Equidia #balancetonporc.” An excess? Many theorists see Twitter in particular as a platform conducive to defamation and mythomania.",
+    "citations": [
+      {
+        "id": "A0127-C001",
+        "source": {
+          "id": "A0127-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Ma vie a été réduite en miettes après la publication de ces tweets. Ça a été une déflagration dans ma vie […] J’ai perdu les quelques missions que j’avais dans une société de conseil, j’ai perdu ma compagne, j’ai perdu ma réputation, je suis tombé dans une profonde dépression"
+            },
+            {
+              "name": "auteurs",
+              "value": "Eric Brion"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Balance Ton Père"
+            },
+            {
+              "name": "édition",
+              "value": "JC Lattès"
+            },
+            {
+              "name": "date",
+              "value": "2020"
+            }
+          ],
+          "citation": "Ma vie a été réduite en miettes après la publication de ces tweets. Ça a été une déflagration dans ma vie […] J’ai perdu les quelques missions que j’avais dans une société de conseil, j’ai perdu ma compagne, j’ai perdu ma réputation, je suis tombé dans une profonde dépression",
+          "date": "2020",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Eric Brion"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Balance Ton Père"
+            },
+            {
+              "name": "édition",
+              "value": "JC Lattès"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "My life was shattered after those tweets were published. It was an explosion in my life. [...] I lost the few assignments I had with a consulting firm, I lost my partner, I lost my reputation, and I fell into a deep depression.",
+        "translated_date": "2020",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every claim and qualification is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:41:50.825952+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Defamation is collateral damage of radical feminism\" argument",
+      "Defamation is collateral damage of radical feminism conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": true,
+    "historical_quantitative_transfer_note": "All numerical expressions were transferred exactly from the protected historical French summary and checked field by field."
+  },
+  "translation_sha256": "b7a8b509f359c4be7cf5375a781954b2164fe3bd72825ad9da4768464eadc6c4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0127",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e6d2c215145f2d1b4f92db4b8c580cee6034980b596fefbdd8f4e8ad3dda38a6"
+}

@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "5459fd259f5bb146d4e698387ff383671071777f7be69b10f8a955f3a3ef5fb7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les droits et acquis sont gravement menacés",
+    "identity_sha256": "9db869205006048bdea0c91b1678a083f7d015f0f314eadabfa6206e8bceb9c8"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "13ac0f2dfd94e1d4cb5ef339d7e869551f2745021053527383f17d7a51b8c29a"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Rights and hard-won gains are under serious threat",
+    "displayed_title": "Rights and hard-won gains are under serious threat",
+    "sections": [],
+    "keywords": [],
+    "summary": "Across the world, including in France, ideologies liable to slow or even reverse progress toward gender equality are expanding rapidly. Several countries have already taken measures to that effect.",
+    "citations": [
+      {
+        "id": "A0006-C001",
+        "source": {
+          "id": "A0006-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "151. [https://www.ouest-france.fr/monde/etats-unis/le-secretaire-americain-a-la-defense-a-partage-une-video-qui-soppose-au-droit-de-vote-des-femmes-d51ece66-76d7-11f0-9d15-80a5c5d7922a Le secrétaire à la Défense des États-Unis a relayé la vidéo de nationalistes chrétiens affirmant que les femmes ne devraient plus avoir le droit de vote]. La fenêtre d’Overton continue de s’élargir. Comme un air de « La servante écarlate » ?"
+            },
+            {
+              "name": "auteurs",
+              "value": "Simon Verdière"
+            },
+            {
+              "name": "article",
+              "value": "Le listing des atrocités de Donald Trump"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mr Mondialisation"
+            },
+            {
+              "name": "date",
+              "value": "4 février 2025"
+            },
+            {
+              "name": "lien",
+              "value": "https://mrmondialisation.org/9-atrocites-trump-mandat/"
+            }
+          ],
+          "citation": "151. [https://www.ouest-france.fr/monde/etats-unis/le-secretaire-americain-a-la-defense-a-partage-une-video-qui-soppose-au-droit-de-vote-des-femmes-d51ece66-76d7-11f0-9d15-80a5c5d7922a Le secrétaire à la Défense des États-Unis a relayé la vidéo de nationalistes chrétiens affirmant que les femmes ne devraient plus avoir le droit de vote]. La fenêtre d’Overton continue de s’élargir. Comme un air de « La servante écarlate » ?",
+          "date": "4 février 2025",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Simon Verdière"
+            },
+            {
+              "name": "article",
+              "value": "Le listing des atrocités de Donald Trump"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mr Mondialisation"
+            },
+            {
+              "name": "lien",
+              "value": "https://mrmondialisation.org/9-atrocites-trump-mandat/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "151. [https://www.ouest-france.fr/monde/etats-unis/le-secretaire-americain-a-la-defense-a-partage-une-video-qui-soppose-au-droit-de-vote-des-femmes-d51ece66-76d7-11f0-9d15-80a5c5d7922a The United States Secretary of Defense shared a video by Christian nationalists claiming that women should no longer have the right to vote]. The Overton window continues to widen. Shades of The Handmaid's Tale?",
+        "translated_date": "4 February 2025",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T07:46:55.635915+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Rights and hard-won gains are under serious threat\" argument",
+      "Rights and hard-won gains are under serious threat conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "9c1db24fa8468d9140697652d1ed8b490e593f0fca3f2f531ddae7cc42bc57b1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0006",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f5a6cc803eea00b6f350eae4c658f8fa3773038249b1a35686d8e1c824d369cd"
+}

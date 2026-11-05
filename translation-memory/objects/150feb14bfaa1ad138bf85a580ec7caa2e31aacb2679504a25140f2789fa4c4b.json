@@ -1,0 +1,358 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "088601a9049c331187c34edee1d6169cecc078be4e014c4b0e902fcc85318532",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les crises économiques s'accompagnent systématiquement d'une montée des idéologies réactionnaires",
+    "identity_sha256": "151aa111d74633a5864506ac95ffd9b988a455780b88ad63354e1c4f2ee57391"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "b611558b0a2964a8a4418be7efab0ee8a0f27b4f37dab9393993505c61012fb2"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Economic crises are systematically accompanied by a rise in reactionary ideologies",
+    "displayed_title": "Economic crises are systematically accompanied by a rise in reactionary ideologies",
+    "sections": [],
+    "keywords": [],
+    "summary": "The march toward progress is not linear and depends on the prevailing socioeconomic climate, which, if it deteriorates sufficiently, can be enough to trigger a regressive dynamic.",
+    "citations": [
+      {
+        "id": "A0087-C001",
+        "source": {
+          "id": "A0087-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "N’oubliez jamais qu’il suffira d’une crise politique, économique ou religieuse pour que les droits des femmes soient remis en question. Ces droits ne sont jamais acquis. Vous devrez rester vigilantes votre vie durant."
+            },
+            {
+              "name": "auteurs",
+              "value": "Simone de Beauvoir"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Le deuxième sexe"
+            },
+            {
+              "name": "édition",
+              "value": "Gallimard"
+            },
+            {
+              "name": "date",
+              "value": "1949"
+            }
+          ],
+          "citation": "N’oubliez jamais qu’il suffira d’une crise politique, économique ou religieuse pour que les droits des femmes soient remis en question. Ces droits ne sont jamais acquis. Vous devrez rester vigilantes votre vie durant.",
+          "date": "1949",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Simone de Beauvoir"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Le deuxième sexe"
+            },
+            {
+              "name": "édition",
+              "value": "Gallimard"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Never forget that a political, economic or religious crisis will be enough for women’s rights to be called into question. These rights are never permanently secured. You will have to remain vigilant throughout your lives.",
+        "translated_date": "1949",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every logical relation, number, qualification and link is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:34:07.670482+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0087-C002",
+        "source": {
+          "id": "A0087-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Oxfam lance aussi un avertissement : les inégalités empoisonnent la politique. En effet, on assiste à un recul des droits démocratiques dans le monde entier. L'écart entre riches et pauvres nourrit les tendances autoritaires. Au lieu de chercher à combler ce fossé, certains dirigeants préfèrent stigmatiser les migrants, les autres groupes ethniques, les autres pays, les femmes ou les personnes en situation de précarité."
+            },
+            {
+              "name": "article",
+              "value": "Rapport Oxfam : les riches doivent payer leur juste part d'impôts"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Parti du Travail de Belgique"
+            },
+            {
+              "name": "date",
+              "value": "23 janvier 2019"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.ptb.be/actualites/rapport-oxfam-les-riches-doivent-payer-leur-juste-part-dimpots"
+            }
+          ],
+          "citation": "Oxfam lance aussi un avertissement : les inégalités empoisonnent la politique. En effet, on assiste à un recul des droits démocratiques dans le monde entier. L'écart entre riches et pauvres nourrit les tendances autoritaires. Au lieu de chercher à combler ce fossé, certains dirigeants préfèrent stigmatiser les migrants, les autres groupes ethniques, les autres pays, les femmes ou les personnes en situation de précarité.",
+          "date": "23 janvier 2019",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "article",
+              "value": "Rapport Oxfam : les riches doivent payer leur juste part d'impôts"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Parti du Travail de Belgique"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.ptb.be/actualites/rapport-oxfam-les-riches-doivent-payer-leur-juste-part-dimpots"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Oxfam also issues a warning: inequality poisons politics. Indeed, democratic rights are retreating around the world. The gap between rich and poor fuels authoritarian tendencies. Instead of seeking to close this gap, some leaders prefer to stigmatize migrants, other ethnic groups, other countries, women or people in precarious situations.",
+        "translated_date": "23 January 2019",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every logical relation, number, qualification and link is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:34:07.670482+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0087-C003",
+        "source": {
+          "id": "A0087-C003",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Puisque leurs arguments sont fondés sur les sentiments des gens (et notamment la peur et la haine) à l’inverse de leur rationalité, ils ne peuvent fonctionner qu’en période de grave crise économique ou sociale. Et c’est d’ailleurs toujours en réponse à ce type d’évènement que l’extrême droite a réussi à accéder au pouvoir : la première guerre mondiale pour Mussolini, la crise de 1929 pour Hitler ou encore la crise de 2008 pour Trump ou Bolsonaro."
+            },
+            {
+              "name": "article",
+              "value": "5 causes de la montée de l’extrême droite dans le monde"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mr Mondialisation"
+            },
+            {
+              "name": "date",
+              "value": "23 août 2023"
+            },
+            {
+              "name": "lien",
+              "value": "https://mrmondialisation.org/5-causes-de-la-montee-de-lextreme-droite-dans-le-monde/"
+            }
+          ],
+          "citation": "Puisque leurs arguments sont fondés sur les sentiments des gens (et notamment la peur et la haine) à l’inverse de leur rationalité, ils ne peuvent fonctionner qu’en période de grave crise économique ou sociale. Et c’est d’ailleurs toujours en réponse à ce type d’évènement que l’extrême droite a réussi à accéder au pouvoir : la première guerre mondiale pour Mussolini, la crise de 1929 pour Hitler ou encore la crise de 2008 pour Trump ou Bolsonaro.",
+          "date": "23 août 2023",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "article",
+              "value": "5 causes de la montée de l’extrême droite dans le monde"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mr Mondialisation"
+            },
+            {
+              "name": "lien",
+              "value": "https://mrmondialisation.org/5-causes-de-la-montee-de-lextreme-droite-dans-le-monde/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Because their arguments are based on people’s feelings, particularly fear and hatred, rather than on their rationality, they can work only during a serious economic or social crisis. And it is always in response to this type of event that the far right has managed to come to power: the First World War for Mussolini, the 1929 crisis for Hitler, and the 2008 crisis for Trump or Bolsonaro.",
+        "translated_date": "23 August 2023",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every logical relation, number, qualification and link is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:34:07.670482+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Economic crises are systematically accompanied by a rise in reactionary ideologies\" argument",
+      "Economic crises are systematically accompanied by a rise in reactionary ideologies conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "nominal_phrase",
+    "displayed_title_target_form": "nominal_phrase",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": false,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "ce1a0aa5cab0b0ed0eab7bdc4e20eef5bbfa428c86f267df9e40d04fa7dafd99",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0087",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "150feb14bfaa1ad138bf85a580ec7caa2e31aacb2679504a25140f2789fa4c4b"
+}

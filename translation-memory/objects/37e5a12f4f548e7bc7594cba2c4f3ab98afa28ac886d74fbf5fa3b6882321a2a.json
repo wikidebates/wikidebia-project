@@ -1,0 +1,229 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "201c21e822bc2eac92bf7d7a7aac08ad9e59eea003d19316d466f4211f717aec",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les féministes doivent continuer le combat car de nombreuses inégalités subsistent",
+    "identity_sha256": "fb7c422bf9fe4e5c3c4906c40a9c5e10bd6f963615f6f2ba9225cc1bbf400b57"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "cb267589114ec8a2903022d8d73c848b50f8c83c78363d632a803461d575c863"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Feminists must continue the fight because many inequalities remain",
+    "displayed_title": "Feminists must continue the fight because many inequalities remain",
+    "sections": [
+      "Politics",
+      "Society"
+    ],
+    "keywords": [
+      "feminism",
+      "politics",
+      "sexism"
+    ],
+    "summary": "Women still face greater gender discrimination in every sphere: work, sport, politics, family life and culture.",
+    "citations": [
+      {
+        "id": "A0001-C001",
+        "source": {
+          "id": "A0001-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Dans le domaine professionnel, 66 % des Français.es jugent insatisfaisant le niveau d’égalité entre les femmes et les hommes. De plus, les sondages révèlent que les femmes subissent de nombreuses violences sexistes  : harcèlement verbal ou visuel, harcèlement physique et harcèlement psychologique à visées sexuelles. Ainsi, 40 % des femmes ont fait l’objet de sifflements, de gestes ou de commentaires grossiers, ou encore de regards déplacés ; 33 % ont fait l’objet de remarques gênantes sur leur tenue ou  leur physique ; et 14 % se sont vues imposer des contacts sur une zone génitale ou érogène (mains sur les fesses, étreinte ou baiser forcé…) Toutes infractions pénales confondues, 87 % des victimes d’actes sexistes sont des femmes et 91 % des mis en cause sont des hommes.Par ailleurs, si le sexisme vécu par les françaises prend différentes formes (remarques, blagues, etc.), il est subi par la quasi-totalité d’entre elles : 99 % des femmes disent avoir été victimes d’un acte ou commentaire sexiste en 2019."
+            },
+            {
+              "name": "ouvrage",
+              "value": "Rapport annuel sur l'état du sexisme en France en 2019"
+            },
+            {
+              "name": "date",
+              "value": "2019"
+            }
+          ],
+          "citation": "Dans le domaine professionnel, 66 % des Français.es jugent insatisfaisant le niveau d’égalité entre les femmes et les hommes. De plus, les sondages révèlent que les femmes subissent de nombreuses violences sexistes  : harcèlement verbal ou visuel, harcèlement physique et harcèlement psychologique à visées sexuelles. Ainsi, 40 % des femmes ont fait l’objet de sifflements, de gestes ou de commentaires grossiers, ou encore de regards déplacés ; 33 % ont fait l’objet de remarques gênantes sur leur tenue ou  leur physique ; et 14 % se sont vues imposer des contacts sur une zone génitale ou érogène (mains sur les fesses, étreinte ou baiser forcé…) Toutes infractions pénales confondues, 87 % des victimes d’actes sexistes sont des femmes et 91 % des mis en cause sont des hommes.Par ailleurs, si le sexisme vécu par les françaises prend différentes formes (remarques, blagues, etc.), il est subi par la quasi-totalité d’entre elles : 99 % des femmes disent avoir été victimes d’un acte ou commentaire sexiste en 2019.",
+          "date": "2019",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "ouvrage",
+              "value": "Rapport annuel sur l'état du sexisme en France en 2019"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "In the workplace, 66% of people in France consider the level of equality between women and men unsatisfactory. Surveys also show that women experience many forms of sexist violence: verbal or visual harassment, physical harassment, and psychological harassment of a sexual nature. Thus, 40% of women have been subjected to whistling, crude gestures or comments, or inappropriate stares; 33% have received embarrassing remarks about their clothing or appearance; and 14% have been subjected to contact with a genital or erogenous area (hands on the buttocks, a forced embrace or kiss, etc.). Across all criminal offences, 87% of the victims of sexist acts are women and 91% of those accused are men. Moreover, although the sexism experienced by women in France takes different forms (remarks, jokes, etc.), almost all of them experience it: 99% of women say they were victims of a sexist act or comment in 2019.",
+        "translated_date": "2019",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T07:46:55.635915+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Feminists must continue the fight because many inequalities remain\" argument",
+      "Feminists must continue the fight because many inequalities remain conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "92ec2f59fd745613903d53f93489c309388b14e43b4afa37c3aa56e66a784128",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "37e5a12f4f548e7bc7594cba2c4f3ab98afa28ac886d74fbf5fa3b6882321a2a"
+}

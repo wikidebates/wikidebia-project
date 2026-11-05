@@ -1,0 +1,256 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "a89d160f9dd7fcfd87d1274db48fb53c12b4f8721ab61952953644368510b537",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les capitalistes utilisent la division entre hommes et femmes pour mieux régner",
+    "identity_sha256": "52a2aa4447ae8a168674a96d3901af8e5fad09f5baefb63abc8573dc83f26f33"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "a5ae6c2fa57886f63bb9f153c57c140f088cbb5359cdb68a03d6404244828412"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Capitalists use the division between men and women to divide and rule more effectively",
+    "displayed_title": "Capitalists use the division between men and women to divide and rule more effectively",
+    "sections": [
+      "Politics",
+      "Society"
+    ],
+    "keywords": [
+      "capitalists",
+      "instrumentalization",
+      "division",
+      "men",
+      "women",
+      "divide and rule"
+    ],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0079-C001",
+        "source": {
+          "id": "A0079-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Cette oppression révoltante concerne la moitié de l’humanité. Et le capitalisme, dont les avancées scientifiques et techniques ont conquis toute la planète, s’en accommode fort bien. Parce que l’oppression des femmes est inhérente aux sociétés de classes. Divisez pour mieux régner, dit-on souvent. Ainsi, les hommes les plus exploités ont-ils toujours quelqu’un de plus opprimé, de moins bien payé, de plus exploité qu’eux-mêmes : leur propre femme, la ''« prolétaire du prolétaire »,'' comme disait la militante socialiste Flora Tristan (1803-1844). Les capitalistes y ont trouvé leur compte, comme toutes les classes dominantes avant eux, tous les États, toutes les Églises."
+            },
+            {
+              "name": "auteurs",
+              "value": "Nathalie Arthaud"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Communiste, révolutionnaire, internationaliste !"
+            },
+            {
+              "name": "édition",
+              "value": "Les bons caractères"
+            },
+            {
+              "name": "date",
+              "value": "2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste"
+            }
+          ],
+          "citation": "Cette oppression révoltante concerne la moitié de l’humanité. Et le capitalisme, dont les avancées scientifiques et techniques ont conquis toute la planète, s’en accommode fort bien. Parce que l’oppression des femmes est inhérente aux sociétés de classes. Divisez pour mieux régner, dit-on souvent. Ainsi, les hommes les plus exploités ont-ils toujours quelqu’un de plus opprimé, de moins bien payé, de plus exploité qu’eux-mêmes : leur propre femme, la ''« prolétaire du prolétaire »,'' comme disait la militante socialiste Flora Tristan (1803-1844). Les capitalistes y ont trouvé leur compte, comme toutes les classes dominantes avant eux, tous les États, toutes les Églises.",
+          "date": "2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Nathalie Arthaud"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Communiste, révolutionnaire, internationaliste !"
+            },
+            {
+              "name": "édition",
+              "value": "Les bons caractères"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "This appalling oppression affects half of humanity. And capitalism, whose scientific and technical advances have conquered the entire planet, accommodates it very well. This is because the oppression of women is inherent in class societies. Divide and rule, as is often said. Thus, the most exploited men always have someone more oppressed, less well paid and more exploited than themselves: their own wife, the ''‘proletarian of the proletarian,’'' as socialist activist Flora Tristan (1803–1844) put it. Capitalists have benefited from it, as have all ruling classes before them, all states and all churches.",
+        "translated_date": "2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every scope marker, comparison, date and attribution is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:33:16.379641+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Capitalists use the division between men and women to divide and rule more effectively\" argument",
+      "Capitalists use the division between men and women to divide and rule more effectively conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "a4e1bae9f3fcce6cd53b9b5ae1ecf98d2385436633c44058933e7e043adf448f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0079",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0a4b41d5c4e30707af6bc9b2c4cd9a7852c05b013437a592f7742497a45cc89a"
+}

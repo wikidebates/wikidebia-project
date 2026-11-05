@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "fbe837aeb78b004a060d6a9192bcc7c8c8dd645093f9b8cdd312fa9656beb80d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les contenus féministes sont régulièrement censurés",
+    "identity_sha256": "d90d1f0d65308fee59bf1852e9d420f9ea485f8c8909793290a8bd77d56628c3"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "46f059cc2ef6eeb9f63e32e4ddb4506af157b371fd4b9de0e456e97c76dd9900"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Feminist content is regularly censored",
+    "displayed_title": "Feminist content is regularly censored",
+    "sections": [],
+    "keywords": [],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0264-C001",
+        "source": {
+          "id": "A0264-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "La vidéo de Norman sur la masturbation, verbalement explicite, demeure monétisée – tout comme les nombreux épisodes de la série Bref, dans lesquels le héros regarde du porno tout en se masturbant.\n\nL’algorithme de YouTube serait-il donc sexiste ? Pour Amélie Coispel, c’est évident : alors même que la chaîne YouTube des Internettes suit exclusivement des femmes, toutes les vidéos recommandées sont créées par des hommes. Certaines youtubeuses, comme Clemity Jane, voient leurs vidéos démonétisées immédiatement après leur mise en ligne. « Je m’étonne plus, je prends même plus la peine de demander la vérification », a-t-elle tweeté.\n\nMarine Périn, alias Marinette, dont la chaîne publie vidéos et documentaires sur le féminisme, a vu son portrait de « militantes badass » russes démonétisé sans même qu’il aborde réellement les droits des femmes ou la sexualité. Elle ne sait pas pourquoi : « Autant celles sur l’IVG, les violences sexuelles, j’avais l’habitude. Mais là, ce n’est pas lié au sexe ou à des violences. Peut-être que c’est politique, pour le coup », s’interroge-t-elle."
+            },
+            {
+              "name": "auteurs",
+              "value": "Pauline Bock"
+            },
+            {
+              "name": "article",
+              "value": "YouTube blackliste des femmes pour cajoler les annonceurs #encoremercilalgorithme"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Telerama"
+            },
+            {
+              "name": "date",
+              "value": "29/05/18"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.telerama.fr/television/youtube-blackliste-des-femmes-pour-cajoler-les-annonceurs-encoremercilalgorithme,n5670487.php"
+            }
+          ],
+          "citation": "La vidéo de Norman sur la masturbation, verbalement explicite, demeure monétisée – tout comme les nombreux épisodes de la série Bref, dans lesquels le héros regarde du porno tout en se masturbant.\n\nL’algorithme de YouTube serait-il donc sexiste ? Pour Amélie Coispel, c’est évident : alors même que la chaîne YouTube des Internettes suit exclusivement des femmes, toutes les vidéos recommandées sont créées par des hommes. Certaines youtubeuses, comme Clemity Jane, voient leurs vidéos démonétisées immédiatement après leur mise en ligne. « Je m’étonne plus, je prends même plus la peine de demander la vérification », a-t-elle tweeté.\n\nMarine Périn, alias Marinette, dont la chaîne publie vidéos et documentaires sur le féminisme, a vu son portrait de « militantes badass » russes démonétisé sans même qu’il aborde réellement les droits des femmes ou la sexualité. Elle ne sait pas pourquoi : « Autant celles sur l’IVG, les violences sexuelles, j’avais l’habitude. Mais là, ce n’est pas lié au sexe ou à des violences. Peut-être que c’est politique, pour le coup », s’interroge-t-elle.",
+          "date": "29/05/18",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Pauline Bock"
+            },
+            {
+              "name": "article",
+              "value": "YouTube blackliste des femmes pour cajoler les annonceurs #encoremercilalgorithme"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Telerama"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.telerama.fr/television/youtube-blackliste-des-femmes-pour-cajoler-les-annonceurs-encoremercilalgorithme,n5670487.php"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Norman’s verbally explicit video about masturbation remains monetized—as do the many episodes of the series Bref in which the protagonist watches pornography while masturbating.\n\nCould YouTube’s algorithm therefore be sexist? For Amélie Coispel, it is obvious: even though the Les Internettes YouTube channel follows women exclusively, every recommended video is created by a man. Some women YouTubers, such as Clemity Jane, see their videos demonetized immediately after upload. “I’m not even surprised anymore; I don’t even bother asking for a review,” she tweeted.\n\nMarine Périn, also known as Marinette, whose channel publishes videos and documentaries about feminism, saw her profile of Russian “badass activists” demonetized even though it did not actually address women’s rights or sexuality. She does not know why: “I was used to it for videos about abortion and sexual violence. But here, it isn’t related to sex or violence. Maybe this time it’s political,” she wonders.",
+        "translated_date": "29/05/18",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:24:28.764474+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Feminist content is regularly censored\" argument",
+      "Feminist content is regularly censored conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "d88b1c02dba5cd88c6f6af87fe8625ef8d30296c508652206075cc6ffb9b963e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0264",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6ced81947049ea243b2fbdedc41efcf771f16899f3da60a989f90d20f4a60bf7"
+}

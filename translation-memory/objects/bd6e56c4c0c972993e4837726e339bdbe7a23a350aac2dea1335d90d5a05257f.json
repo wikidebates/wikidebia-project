@@ -1,0 +1,577 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "7dbe90e00a3f4e7378ac1cc85801aee3bb22b706d54924cdd9ec46d3d2cc6b9b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le qualificatif de \"woke\" sert à diaboliser les concepts progressistes sans avoir à argumenter",
+    "identity_sha256": "bae338143751b08f1633eac8ae029ce32538f9630a79aa0fa38957a98fb90788"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "032a27d90095e4482b478ad4a378d13771b1c344a1b9720a0a6032ad8f48580b"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "The label \"woke\" is used to demonize progressive concepts without having to argue",
+    "displayed_title": "The label \"woke\" is used to demonize progressive concepts without having to argue",
+    "sections": [],
+    "keywords": [],
+    "summary": "The method could not be simpler.\n\n* woke = crap\n* any progressive concept = woke\n* Any progressive concept = crap",
+    "citations": [
+      {
+        "id": "A0308-C001",
+        "source": {
+          "id": "A0308-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "On remarquera que les points communs entre le climatoscepticisme, le masculinisme ou la lutte anti-woke sont la prédominance des discours d’extrême droite et la viralité sur les réseaux sociaux sans contre argumentaire."
+            },
+            {
+              "name": "auteurs",
+              "value": "Amandine Richaud-Crambes"
+            },
+            {
+              "name": "article",
+              "value": "Climatoscepticisme extrême"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Popol media"
+            },
+            {
+              "name": "date",
+              "value": "11 octobre 2024"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.popol-media.com/auteurs/amandine-richaud-crambes/"
+            }
+          ],
+          "citation": "On remarquera que les points communs entre le climatoscepticisme, le masculinisme ou la lutte anti-woke sont la prédominance des discours d’extrême droite et la viralité sur les réseaux sociaux sans contre argumentaire.",
+          "date": "11 octobre 2024",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Amandine Richaud-Crambes"
+            },
+            {
+              "name": "article",
+              "value": "Climatoscepticisme extrême"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Popol media"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.popol-media.com/auteurs/amandine-richaud-crambes/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "It is worth noting that climate-change denial, masculinism, and the anti-woke struggle share the predominance of far-right discourse and virality on social media without counterargument.",
+        "translated_date": "11 October 2024",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:23.774208+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0308-C002",
+        "source": {
+          "id": "A0308-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Nouvelle étiquette à la mode après « bobo-gauchiste » et [https://mrmondialisation.org/bisounours-linsulte-qui-cherche-a-detruire-laltruisme-doxa/ « bisounours »] (désormais passé de mode), '''le woke est le nouveau coupable de tous les maux de la société.''' De quoi permettre aux néo-réac’ de pouvoir enfin assumer '''une posture anti-sociale, anti-minorité, anti-écologie, anti-tout-ce-qui-sort-de-la-norme sans grand effort intellectuel.'''"
+            },
+            {
+              "name": "auteurs",
+              "value": "Simon Verdière"
+            },
+            {
+              "name": "article",
+              "value": "« Wokisme » : le fantasme réac pour rester dans le déni"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mr Mondialisation"
+            },
+            {
+              "name": "date",
+              "value": "13 janvier 2024"
+            },
+            {
+              "name": "lien",
+              "value": "https://mrmondialisation.org/wokisme-le-nouveau-fantasme-des-reac-pour-rester-dans-le-deni/"
+            }
+          ],
+          "citation": "Nouvelle étiquette à la mode après « bobo-gauchiste » et [https://mrmondialisation.org/bisounours-linsulte-qui-cherche-a-detruire-laltruisme-doxa/ « bisounours »] (désormais passé de mode), '''le woke est le nouveau coupable de tous les maux de la société.''' De quoi permettre aux néo-réac’ de pouvoir enfin assumer '''une posture anti-sociale, anti-minorité, anti-écologie, anti-tout-ce-qui-sort-de-la-norme sans grand effort intellectuel.'''",
+          "date": "13 janvier 2024",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Simon Verdière"
+            },
+            {
+              "name": "article",
+              "value": "« Wokisme » : le fantasme réac pour rester dans le déni"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mr Mondialisation"
+            },
+            {
+              "name": "lien",
+              "value": "https://mrmondialisation.org/wokisme-le-nouveau-fantasme-des-reac-pour-rester-dans-le-deni/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "A fashionable new label after “bourgeois leftist” and [https://mrmondialisation.org/bisounours-linsulte-qui-cherche-a-detruire-laltruisme-doxa/ “Care Bear”] (now out of fashion), '''the woke person is the new culprit behind all society’s ills.''' It finally enables neo-reactionaries to embrace '''an antisocial, antiminority, antienvironmental, anti-everything-outside-the-norm stance without much intellectual effort.'''\n",
+        "translated_date": "13 January 2024",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:23.774208+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0308-C003",
+        "source": {
+          "id": "A0308-C003",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "D'une part, \"''woke''\" a perdu de sa force - comme à chaque fois qu'un \"''mot est beaucoup utilisé''\", souligne la linguiste -, et \"''en est venu à désigner un engagement superficiel''\". D'autre part, le dérivé \"''wokisme''\" a été créé et est \"''surtout utilisé par celles et ceux qui veulent le combattre. C'est un terme assez flou''\", utilisé \"''pour s'attaquer aux personnes qui s'attaquent aux discriminations sur base du genre, du sexe, au mouvement décolonialiste...''\", [selon la linguiste] Laurence Rosier.\n\n(...)\n\nL'utilisation du terme \"''wokisme''\" entre dans le cadre d'une \"''sorte de culture de la panique, en associant le militantisme, la lutte contre les discriminations, à des mouvements puritains''\", poursuit Laurence Rosier. \"''Cela peut être dangereux. On est dans une culture de la peur, comme si on allait éradiquer l'Histoire en enlevant des statues, alors que les archives, les documents restent pour témoigner des atrocités que certains ont fait. Cette culture de la panique est utilisée pour bloquer des combats émancipateurs''\", conclut-elle."
+            },
+            {
+              "name": "article",
+              "value": "Journée de lutte pour les droits des femmes : \"Woke\", ce terme flou utilisé pour dévaloriser"
+            },
+            {
+              "name": "ouvrage",
+              "value": "rtbf.be"
+            },
+            {
+              "name": "date",
+              "value": "08 mars 2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.rtbf.be/article/journee-de-lutte-pour-les-droits-des-femmes-woke-ce-terme-flou-utilise-pour-devaloriser-10950078"
+            }
+          ],
+          "citation": "D'une part, \"''woke''\" a perdu de sa force - comme à chaque fois qu'un \"''mot est beaucoup utilisé''\", souligne la linguiste -, et \"''en est venu à désigner un engagement superficiel''\". D'autre part, le dérivé \"''wokisme''\" a été créé et est \"''surtout utilisé par celles et ceux qui veulent le combattre. C'est un terme assez flou''\", utilisé \"''pour s'attaquer aux personnes qui s'attaquent aux discriminations sur base du genre, du sexe, au mouvement décolonialiste...''\", [selon la linguiste] Laurence Rosier.\n\n(...)\n\nL'utilisation du terme \"''wokisme''\" entre dans le cadre d'une \"''sorte de culture de la panique, en associant le militantisme, la lutte contre les discriminations, à des mouvements puritains''\", poursuit Laurence Rosier. \"''Cela peut être dangereux. On est dans une culture de la peur, comme si on allait éradiquer l'Histoire en enlevant des statues, alors que les archives, les documents restent pour témoigner des atrocités que certains ont fait. Cette culture de la panique est utilisée pour bloquer des combats émancipateurs''\", conclut-elle.",
+          "date": "08 mars 2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "article",
+              "value": "Journée de lutte pour les droits des femmes : \"Woke\", ce terme flou utilisé pour dévaloriser"
+            },
+            {
+              "name": "ouvrage",
+              "value": "rtbf.be"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.rtbf.be/article/journee-de-lutte-pour-les-droits-des-femmes-woke-ce-terme-flou-utilise-pour-devaloriser-10950078"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "On the one hand, “''woke''” has lost some of its force—as happens whenever a “''word is used a great deal,''” the linguist emphasizes—and “''has come to designate superficial commitment.''” On the other hand, the derivative “''wokeism''” was created and is “''used mainly by those who want to fight it. It is a fairly vague term,''” used “''to attack people who challenge discrimination based on gender or sex, the decolonial movement...''”, [according to linguist] Laurence Rosier.\n\n(...)\n\nThe use of the term “''wokeism''” belongs to a “''kind of panic culture that associates activism and the struggle against discrimination with puritanical movements,''” Laurence Rosier continues. “''This can be dangerous. We are in a culture of fear, as though removing statues would eradicate History, even though archives and documents remain to bear witness to the atrocities some people committed. This panic culture is used to block emancipatory struggles,''” she concludes.",
+        "translated_date": "8 March 2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:23.774208+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0308-C004",
+        "source": {
+          "id": "A0308-C004",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Le « wokisme » n’est pas le danger dans notre société. Ce discours alarmiste autour du terme « woke » est une stratégie consciente des courants réactionnaires pour affaiblir les mouvements sociaux et la lutte de classe."
+            },
+            {
+              "name": "auteurs",
+              "value": "Petya Obolensky"
+            },
+            {
+              "name": "article",
+              "value": "La « lutte contre le wokisme », une arme de diversion massive"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Solidaire, magazine du Parti du Travail de Belgique"
+            },
+            {
+              "name": "date",
+              "value": "29 Juin 2023"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.solidaire.org/articles/la-lutte-contre-le-wokisme-une-arme-de-diversion-massive"
+            }
+          ],
+          "citation": "Le « wokisme » n’est pas le danger dans notre société. Ce discours alarmiste autour du terme « woke » est une stratégie consciente des courants réactionnaires pour affaiblir les mouvements sociaux et la lutte de classe.",
+          "date": "29 Juin 2023",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Petya Obolensky"
+            },
+            {
+              "name": "article",
+              "value": "La « lutte contre le wokisme », une arme de diversion massive"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Solidaire, magazine du Parti du Travail de Belgique"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.solidaire.org/articles/la-lutte-contre-le-wokisme-une-arme-de-diversion-massive"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "“Wokeism” is not the danger in our society. The alarmist discourse surrounding the term “woke” is a deliberate strategy by reactionary currents to weaken social movements and class struggle.",
+        "translated_date": "29 June 2023",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:23.774208+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0308-C005",
+        "source": {
+          "id": "A0308-C005",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "[La] conférence [de Mathieu Bock-Côté] porte sur le « wokisme ». Ce concept, issu de la « pensée » d’extrême droite, est utilisé pour désigner et rejeter toutes les luttes progressistes qui déplaisent aux réactionnaires. Féminismes, anti-racismes, luttes LGBTQIA+, luttes climatiques... bref tout ce qui s’attaque à leur monde rance et inégalitaire est désigné sous le vocable péjoratif de « wokisme »."
+            },
+            {
+              "name": "article",
+              "value": "l’Institut Libre Marie Haps accueille l’extrême droite dans ses locaux !"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Réseau ADES"
+            },
+            {
+              "name": "date",
+              "value": "10/06/2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://stuut.info/l-Institut-Libre-Marie-Haps-accueille-l-extreme-droite-dans-ses-locaux-397"
+            }
+          ],
+          "citation": "[La] conférence [de Mathieu Bock-Côté] porte sur le « wokisme ». Ce concept, issu de la « pensée » d’extrême droite, est utilisé pour désigner et rejeter toutes les luttes progressistes qui déplaisent aux réactionnaires. Féminismes, anti-racismes, luttes LGBTQIA+, luttes climatiques... bref tout ce qui s’attaque à leur monde rance et inégalitaire est désigné sous le vocable péjoratif de « wokisme ».",
+          "date": "10/06/2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "article",
+              "value": "l’Institut Libre Marie Haps accueille l’extrême droite dans ses locaux !"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Réseau ADES"
+            },
+            {
+              "name": "lien",
+              "value": "https://stuut.info/l-Institut-Libre-Marie-Haps-accueille-l-extreme-droite-dans-ses-locaux-397"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "[Mathieu Bock-Côté’s] lecture concerns “wokeism.” This concept, born of far-right “thought,” is used to designate and reject every progressive struggle that reactionaries dislike. Feminisms, antiracisms, LGBTQIA+ struggles, climate struggles... in short, everything that attacks their stale and unequal world is designated by the pejorative term “wokeism.”",
+        "translated_date": "10/06/2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:23.774208+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0308-C006",
+        "source": {
+          "id": "A0308-C006",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Par ailleurs, alors que l’islamo-gauchisme semblait décrire une collusion suspecte entre ce que l’on appelle « une certaine gauche », [https://sysdiscours.hypotheses.org/352 notamment universitaire] et l’islamisme (même si l’utilisation du préfixe « islamo » laissait penser que l’islam dans son intégralité pouvait être visé), le « wokisme » dispose d’une forme de lâcheté polysémique particulièrement arrangeante : en d’autres termes, cette dernière a la particularité d’embrasser un ensemble très étendu de pratiques, de mouvements et de faits sociaux.\n\nEn effet, tout mouvement qui lutte pour le progrès social peut être qualifié de « woke », ce qui est commode, notamment pour les think tanks conservateurs comme Fondapol par exemple, qui, à travers une note de recherche aux prétentions objectives mais à la grille de lecture [https://www.fondapol.org/etude/lideologie-woke-1-anatomie-du-wokisme particulièrement discutable] – comme le rappelle par ailleurs Réjane Sénac, [https://www.liberation.fr/idees-et-debats/tribunes/le-wokisme-nexiste-pas-mais-il-parle-20211028_B6E7QRI5LZFN7DYULYUXV7AO7Y/ directrice de recherche au CNRS], évoquant ainsi le fait que cette note de recherche participe à la construction d’une « croisade » contre un « ennemi de la République »."
+            },
+            {
+              "name": "auteurs",
+              "value": "Albin Wagener"
+            },
+            {
+              "name": "article",
+              "value": "Le « wokisme » ou l’import des paniques morales"
+            },
+            {
+              "name": "ouvrage",
+              "value": "The Conversation"
+            },
+            {
+              "name": "date",
+              "value": "8 décembre 2021"
+            },
+            {
+              "name": "lien",
+              "value": "https://theconversation.com/le-wokisme-ou-limport-des-paniques-morales-172803"
+            }
+          ],
+          "citation": "Par ailleurs, alors que l’islamo-gauchisme semblait décrire une collusion suspecte entre ce que l’on appelle « une certaine gauche », [https://sysdiscours.hypotheses.org/352 notamment universitaire] et l’islamisme (même si l’utilisation du préfixe « islamo » laissait penser que l’islam dans son intégralité pouvait être visé), le « wokisme » dispose d’une forme de lâcheté polysémique particulièrement arrangeante : en d’autres termes, cette dernière a la particularité d’embrasser un ensemble très étendu de pratiques, de mouvements et de faits sociaux.\n\nEn effet, tout mouvement qui lutte pour le progrès social peut être qualifié de « woke », ce qui est commode, notamment pour les think tanks conservateurs comme Fondapol par exemple, qui, à travers une note de recherche aux prétentions objectives mais à la grille de lecture [https://www.fondapol.org/etude/lideologie-woke-1-anatomie-du-wokisme particulièrement discutable] – comme le rappelle par ailleurs Réjane Sénac, [https://www.liberation.fr/idees-et-debats/tribunes/le-wokisme-nexiste-pas-mais-il-parle-20211028_B6E7QRI5LZFN7DYULYUXV7AO7Y/ directrice de recherche au CNRS], évoquant ainsi le fait que cette note de recherche participe à la construction d’une « croisade » contre un « ennemi de la République ».",
+          "date": "8 décembre 2021",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Albin Wagener"
+            },
+            {
+              "name": "article",
+              "value": "Le « wokisme » ou l’import des paniques morales"
+            },
+            {
+              "name": "ouvrage",
+              "value": "The Conversation"
+            },
+            {
+              "name": "lien",
+              "value": "https://theconversation.com/le-wokisme-ou-limport-des-paniques-morales-172803"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Moreover, whereas Islamo-leftism appeared to describe a suspicious collusion between what is called “a certain left,” [https://sysdiscours.hypotheses.org/352 particularly in academia], and Islamism (even though the use of the prefix “Islamo-” suggested that Islam as a whole might be targeted), “wokeism” possesses a particularly convenient form of polysemous cowardice: in other words, it has the distinctive feature of encompassing a very broad set of practices, movements, and social facts.\n\nIndeed, any movement fighting for social progress can be described as “woke,” which is convenient, particularly for conservative think tanks such as Fondapol, whose research note makes claims to objectivity but uses a [https://www.fondapol.org/etude/lideologie-woke-1-anatomie-du-wokisme particularly questionable] interpretive framework—as Réjane Sénac, [https://www.liberation.fr/idees-et-debats/tribunes/le-wokisme-nexiste-pas-mais-il-parle-20211028_B6E7QRI5LZFN7DYULYUXV7AO7Y/ a CNRS research director], also points out, saying that this research note helps construct a “crusade” against an “enemy of the Republic.”",
+        "translated_date": "8 December 2021",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:23.774208+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"The label “woke” is used to demonize progressive concepts without having to argue\" argument",
+      "The label “woke” is used to demonize progressive concepts without having to argue conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "nominal_phrase",
+    "displayed_title_target_form": "nominal_phrase",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": false,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": true,
+    "semantic_risk_note": "Every detected polarity, modality, quantity, attribution or scope signal was checked directly against the French source.",
+    "semantic_risk_evidence": [
+      {
+        "risk": "marker_loss:comparison",
+        "source_excerpt": "La méthode est on ne peut plus simple.\n\n* woke = caca\n* n'importe quel concept progressiste = woke\n* N'importe quel concept progressiste = caca",
+        "target_excerpt": "The method could not be simpler.\n\n* woke = crap\n* any progressive concept = woke\n* Any progressive concept = crap",
+        "note": "The complete source and target fields were compared directly for this semantic-risk signal."
+      }
+    ],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "8c7ad228b9d84f1f7e70647a821b790846a933a05b4788f81c067c551583809b",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0308",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "bd6e56c4c0c972993e4837726e339bdbe7a23a350aac2dea1335d90d5a05257f"
+}

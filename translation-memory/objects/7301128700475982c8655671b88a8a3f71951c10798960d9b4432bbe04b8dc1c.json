@@ -1,0 +1,325 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "f653289949fc7895da89edc0cd01ee7c0ca6e199825f3c9b96f7108723e9ff32",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'exploitation, les inégalités et la misère causées par le capitalisme amplifient l'oppression des femmes",
+    "identity_sha256": "68dbfa520f2e73dcabd82ed505a14725a0b2dd38e32ef12161f1e085f5bcb322"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "63c8db350f5fba373de2983d1bb61949cc0cbda6289d31dd030a57130ce30174"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "The exploitation, inequality and poverty caused by capitalism amplify the oppression of women",
+    "displayed_title": "The exploitation, inequality and poverty caused by capitalism amplify the oppression of women",
+    "sections": [
+      "Economy",
+      "Politics"
+    ],
+    "keywords": [
+      "capitalism",
+      "capitalist exploitation",
+      "inequalities",
+      "destitution",
+      "amplification",
+      "oppression",
+      "women"
+    ],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0196-C001",
+        "source": {
+          "id": "A0196-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Évidemment, toutes les violences faites aux femmes, les mariages forcés ou les préjugés misogynes, ne sont pas directement causés par l’exploitation, les inégalités et la misère. Mais qui peut nier que celles-ci amplifient tout et rendent encore plus difficile le combat des femmes des classes populaires pour se faire respecter ? En France, en 2021, tous les trois ou quatre jours, une femme meurt encore sous les coups de son conjoint ou ex-conjoint. Les violences conjugales, les viols, le harcèlement moral ou sexuel qui s’exerce sur tant de femmes, en particulier dans les entreprises, ne reculent pas. Les associations féministes ne cessent de dénoncer l’insuffisance criante de moyens, ne serait-ce que d’hébergements d’urgence, et plus encore des possibilités de réinsertion pour les femmes qui fuient un conjoint violent."
+            },
+            {
+              "name": "auteurs",
+              "value": "Nathalie Arthaud"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Communiste, révolutionnaire, internationaliste !"
+            },
+            {
+              "name": "édition",
+              "value": "Les bons caractères"
+            },
+            {
+              "name": "date",
+              "value": "2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste"
+            }
+          ],
+          "citation": "Évidemment, toutes les violences faites aux femmes, les mariages forcés ou les préjugés misogynes, ne sont pas directement causés par l’exploitation, les inégalités et la misère. Mais qui peut nier que celles-ci amplifient tout et rendent encore plus difficile le combat des femmes des classes populaires pour se faire respecter ? En France, en 2021, tous les trois ou quatre jours, une femme meurt encore sous les coups de son conjoint ou ex-conjoint. Les violences conjugales, les viols, le harcèlement moral ou sexuel qui s’exerce sur tant de femmes, en particulier dans les entreprises, ne reculent pas. Les associations féministes ne cessent de dénoncer l’insuffisance criante de moyens, ne serait-ce que d’hébergements d’urgence, et plus encore des possibilités de réinsertion pour les femmes qui fuient un conjoint violent.",
+          "date": "2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Nathalie Arthaud"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Communiste, révolutionnaire, internationaliste !"
+            },
+            {
+              "name": "édition",
+              "value": "Les bons caractères"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Of course, not all violence against women, forced marriages, or misogynistic prejudice are directly caused by exploitation, inequality, and poverty. But who can deny that these amplify everything and make it even harder for working-class women to fight for respect? In France in 2021, a woman was still dying from blows inflicted by her current or former partner every three or four days. Domestic violence, rape, and psychological or sexual harassment affecting so many women, particularly in the workplace, are not declining. Feminist organizations continually denounce the glaring lack of resources, including emergency accommodation alone, and even more so the lack of opportunities for women fleeing a violent partner to rebuild their lives.",
+        "translated_date": "2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:23:19.513408+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0196-C002",
+        "source": {
+          "id": "A0196-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Si le capitalisme n’a pas créé l’oppression des femmes, force est de constater qu’il la perpétue, car il utilise et renforce en permanence toutes les inégalités et toutes les oppressions."
+            },
+            {
+              "name": "auteurs",
+              "value": "Nathalie Arthaud"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Communiste, révolutionnaire, internationaliste !"
+            },
+            {
+              "name": "édition",
+              "value": "Les bons caractères"
+            },
+            {
+              "name": "date",
+              "value": "2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste"
+            }
+          ],
+          "citation": "Si le capitalisme n’a pas créé l’oppression des femmes, force est de constater qu’il la perpétue, car il utilise et renforce en permanence toutes les inégalités et toutes les oppressions.",
+          "date": "2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Nathalie Arthaud"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Communiste, révolutionnaire, internationaliste !"
+            },
+            {
+              "name": "édition",
+              "value": "Les bons caractères"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Although capitalism did not create the oppression of women, it must be acknowledged that it perpetuates it, because it continually uses and reinforces every inequality and every form of oppression.",
+        "translated_date": "2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:23:19.513408+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"The exploitation, inequality and poverty caused by capitalism amplify the oppression of women\" argument",
+      "The exploitation, inequality and poverty caused by capitalism amplify the oppression of women conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "f41b52e23cee755db350b73f597cdae097917b7d53ddba054344c95077e56eb8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0196",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7301128700475982c8655671b88a8a3f71951c10798960d9b4432bbe04b8dc1c"
+}

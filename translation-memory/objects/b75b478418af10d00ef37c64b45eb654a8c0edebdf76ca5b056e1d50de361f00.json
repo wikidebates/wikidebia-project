@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "9dccf40cfec9cfbbd32a0c916119fd1fae73cc41b00084c09e94ebad72b18086",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme intersectionnel refuse de voir et de soutenir de nombreuses victimes du patriarcat",
+    "identity_sha256": "7f3d0bb8c353227686c1df7e25bfabd1af4df355a5a101d15bacf0991f8b48fc"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "0771b70f264a93d8d8da87b1fde15780679501feb58a447d76564813a2f4c5c4"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Intersectional feminism refuses to recognize and support many victims of patriarchy",
+    "displayed_title": "Intersectional feminism refuses to recognize and support many victims of patriarchy",
+    "sections": [],
+    "keywords": [],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0022-C001",
+        "source": {
+          "id": "A0022-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Pendant que des activistes du féminisme intersectionnel battent le pavé, de vraies victimes se taisent et subissent en silence pressions et violences. Leur liste ne cesse de s’allonger. Elle va de Sadia Sheikh, jeune Belge d’origine pakistanaise mariée religieusement par Internet et assassinée, jusqu’à Mila, cyberharcelée, menacée et contrainte à une existence recluse. […]\nMais derrière Sadia, derrière Mila, derrière cette étudiante, ils et (surtout) elles sont sans doute des milliers d’anonymes victimes de traditions étouffantes : mariages forcés, violences intrafamiliales, crimes d’honneur, attentats et agressions visant à pénétrer notre subconscient du relativisme culturel et du délit de blasphème, … Pourtant, ces victimes ont le droit pour elles. Notre arsenal législatif garantit la liberté de conscience, la liberté d’expression, le droit à l’intégrité physique, la protection de l’État contre les mariages forcés.\n\nComment se fait-il, alors, que leur parole soit moins audible, leur défense moins ardente, leur protection moins assurée que celle de ces victimes en carton-pâte qui se lancent aujourd’hui dans une indécente concurrence victimaire ?"
+            },
+            {
+              "name": "auteurs",
+              "value": "Nadia Geerts"
+            },
+            {
+              "name": "article",
+              "value": "De Sadia Sheikh à Mila, en passant par toi, mon ancienne étudiante aujourd'hui mariée de force"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Marianne"
+            },
+            {
+              "name": "date",
+              "value": "21/06/2021"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.marianne.net/agora/humeurs/de-sadia-sheikh-a-mila-en-passant-par-toi-mon-ancienne-etudiante-aujourdhui-mariee-de-force"
+            }
+          ],
+          "citation": "Pendant que des activistes du féminisme intersectionnel battent le pavé, de vraies victimes se taisent et subissent en silence pressions et violences. Leur liste ne cesse de s’allonger. Elle va de Sadia Sheikh, jeune Belge d’origine pakistanaise mariée religieusement par Internet et assassinée, jusqu’à Mila, cyberharcelée, menacée et contrainte à une existence recluse. […]\nMais derrière Sadia, derrière Mila, derrière cette étudiante, ils et (surtout) elles sont sans doute des milliers d’anonymes victimes de traditions étouffantes : mariages forcés, violences intrafamiliales, crimes d’honneur, attentats et agressions visant à pénétrer notre subconscient du relativisme culturel et du délit de blasphème, … Pourtant, ces victimes ont le droit pour elles. Notre arsenal législatif garantit la liberté de conscience, la liberté d’expression, le droit à l’intégrité physique, la protection de l’État contre les mariages forcés.\n\nComment se fait-il, alors, que leur parole soit moins audible, leur défense moins ardente, leur protection moins assurée que celle de ces victimes en carton-pâte qui se lancent aujourd’hui dans une indécente concurrence victimaire ?",
+          "date": "21/06/2021",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Nadia Geerts"
+            },
+            {
+              "name": "article",
+              "value": "De Sadia Sheikh à Mila, en passant par toi, mon ancienne étudiante aujourd'hui mariée de force"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Marianne"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.marianne.net/agora/humeurs/de-sadia-sheikh-a-mila-en-passant-par-toi-mon-ancienne-etudiante-aujourdhui-mariee-de-force"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "While intersectional feminist activists take to the streets, real victims remain silent and quietly endure pressure and violence. Their number continues to grow. They range from Sadia Sheikh, a young Belgian woman of Pakistani origin who was married in a religious ceremony over the internet and murdered, to Mila, who was subjected to online harassment, threatened and forced into a secluded existence. [...]\nBut behind Sadia, behind Mila, behind this student, there are probably thousands of anonymous men and, above all, women who are victims of stifling traditions: forced marriages, domestic violence, honor crimes, attacks and assaults intended to instill cultural relativism and the offense of blasphemy in our subconscious... Yet these victims have the law on their side. Our legal framework guarantees freedom of conscience, freedom of expression, the right to physical integrity, and state protection against forced marriages.\n\nWhy, then, are their voices less audible, their defense less vigorous and their protection less assured than those of these sham victims who are now engaging in an indecent competition for victim status?",
+        "translated_date": "21/06/2021",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T08:12:44.490754+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Intersectional feminism refuses to recognize and support many victims of patriarchy\" argument",
+      "Intersectional feminism refuses to recognize and support many victims of patriarchy conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "6d3048595988de0113c74f62cc7c29f3dc04317bd5ae2d9f1c4a349fa6c9b184",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0022",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b75b478418af10d00ef37c64b45eb654a8c0edebdf76ca5b056e1d50de361f00"
+}

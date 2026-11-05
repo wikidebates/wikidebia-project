@@ -1,0 +1,288 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "be1d931748e63ece9571c233c5fe916ae7b64070b8c9f9fa650e87249a54651e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes assurent en majorité les tâches domestiques au sein du foyer",
+    "identity_sha256": "f968c4d41dc234b57f94a960b61d6e73fa7e94cdb6f72e798ecb470f8cc5597e"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "220aaa79c8345b290f7c2732e0281e52c3971a9911a7450d9938398500c61f98"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Women perform most household tasks within the home",
+    "displayed_title": "Women perform most household tasks within the home",
+    "sections": [
+      "Society"
+    ],
+    "keywords": [
+      "feminism",
+      "housework",
+      "gender parity"
+    ],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0030-C001",
+        "source": {
+          "id": "A0030-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "En 1985-1986, les femmes vivant en couple assumaient 81 % des tâches les plus contraignantes du quotidien (ménage, cuisine, vaisselle, linge, etc.). Avec le temps, la part du travail réalisé par les femmes est en légère diminution, passant de 77 % en 1998 à 72 % en 2010. En 2010, les femmes vivant en couple et ayant au moins un enfant consacrent 34 heures hebdomadaires de travail domestique contre 18 heures pour les hommes dans même situation. Source : Insee et Ministère des familles, de l’enfance et des droits des femmes, Chiffres clés édition 2016"
+            },
+            {
+              "name": "auteurs",
+              "value": "Haut conseil à l'égalité entre les femmes et les hommes"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Chiffres clés"
+            },
+            {
+              "name": "date",
+              "value": "2016"
+            }
+          ],
+          "citation": "En 1985-1986, les femmes vivant en couple assumaient 81 % des tâches les plus contraignantes du quotidien (ménage, cuisine, vaisselle, linge, etc.). Avec le temps, la part du travail réalisé par les femmes est en légère diminution, passant de 77 % en 1998 à 72 % en 2010. En 2010, les femmes vivant en couple et ayant au moins un enfant consacrent 34 heures hebdomadaires de travail domestique contre 18 heures pour les hommes dans même situation. Source : Insee et Ministère des familles, de l’enfance et des droits des femmes, Chiffres clés édition 2016",
+          "date": "2016",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Haut conseil à l'égalité entre les femmes et les hommes"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Chiffres clés"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "In 1985–1986, women living with a partner performed 81% of the most demanding daily tasks (cleaning, cooking, washing dishes, laundry, etc.). Over time, the share of work performed by women declined slightly, from 77% in 1998 to 72% in 2010. In 2010, women living with a partner and having at least one child spent 34 hours per week on domestic work, compared with 18 hours for men in the same situation. Source: Insee and the Ministry of Families, Children and Women’s Rights, Chiffres clés, 2016 edition",
+        "translated_date": "2016",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every statistic, qualification and source line is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T13:55:50.224813+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0030-C002",
+        "source": {
+          "id": "A0030-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Si les femmes faisaient le révolution sur ce plan là, sur la plan ménager, si elles le refusaient, si elles obligeaient les hommes à le faire avec elles….En plus c'est un travail clandestin auquel elles sont condamnées. Parce que je trouve que mener cette vie à longueur d'année, de vie, sans rien de productif, c'est vraiment une condamnation. Et bien si ceci était changé, toute la société serait bouleversée;"
+            },
+            {
+              "name": "auteurs",
+              "value": "Simone de Beauvoir"
+            },
+            {
+              "name": "ouvrage",
+              "value": "TF1"
+            },
+            {
+              "name": "date",
+              "value": "1975"
+            }
+          ],
+          "citation": "Si les femmes faisaient le révolution sur ce plan là, sur la plan ménager, si elles le refusaient, si elles obligeaient les hommes à le faire avec elles….En plus c'est un travail clandestin auquel elles sont condamnées. Parce que je trouve que mener cette vie à longueur d'année, de vie, sans rien de productif, c'est vraiment une condamnation. Et bien si ceci était changé, toute la société serait bouleversée;",
+          "date": "1975",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Simone de Beauvoir"
+            },
+            {
+              "name": "ouvrage",
+              "value": "TF1"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "If women staged a revolution in this area, in the domestic sphere, if they refused it, if they forced men to do it with them... Moreover, it is clandestine work to which they are condemned. Because I find that living this life year after year, for a lifetime, without anything productive, really is a sentence. Well, if this changed, the whole of society would be transformed;",
+        "translated_date": "1975",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every statistic, qualification and source line is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T13:55:50.224813+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Women perform most household tasks within the home\" argument",
+      "Women perform most household tasks within the home conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "nominal_phrase",
+    "displayed_title_target_form": "nominal_phrase",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": false,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "bbabe0c221e6fe8c31db9dd065473aae4d99f3dc7f0d48dba25017d9bb6d1157",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0030",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c9a4e26de71c6bf272f13337ac632c72fb14cf655b18b64e712f0abd2d3c050c"
+}

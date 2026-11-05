@@ -1,0 +1,310 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "fde546a299299c82386a709cdf95618456d2b86fd19afc29430e763ab2071792",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite instrumentalise le féminisme à des fins racistes",
+    "identity_sha256": "b63ec2ed6534176417f49ba5a8bde2df9745111d1612ffc1015a5cdacf64266b"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "5c0f61ea66f108d8fe0e554f123eccb3b8c72270c75f01fe49aa9759e122cf4b"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "The far right instrumentalizes feminism for racist purposes",
+    "displayed_title": "The far right instrumentalizes feminism for racist purposes",
+    "sections": [],
+    "keywords": [],
+    "summary": "Femonationalism: an interest in gender equality for the sole purpose of legitimizing our racist prejudices, which disappears immediately when those prejudices are no more part of the equation. It leads to overestimating sexist assaults committed by people perceived as being of foreign origin and minimizing—or even denying—those committed by white people.",
+    "citations": [
+      {
+        "id": "A0133-C001",
+        "source": {
+          "id": "A0133-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Cette soi-disant défense des femmes musulmanes contre la \"pression\" qu'elles pourraient ressentir à se voiler et ainsi les \"libérer\" sert en fait de prétexte à stigmatiser et violenter toute une partie de la population française."
+            },
+            {
+              "name": "auteurs",
+              "value": "Catherine Rochon"
+            },
+            {
+              "name": "article",
+              "value": "Non, Marine Le Pen n'est pas \"féministe\" : 6 piqûres de rappel nécessaires"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Terrafemina"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.terrafemina.com/article/marine-le-pen-6-rappels-necessaires-qui-prouvent-qu-elle-n-est-pas-feministe_a363570/1"
+            }
+          ],
+          "citation": "Cette soi-disant défense des femmes musulmanes contre la \"pression\" qu'elles pourraient ressentir à se voiler et ainsi les \"libérer\" sert en fait de prétexte à stigmatiser et violenter toute une partie de la population française.",
+          "date": "",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Catherine Rochon"
+            },
+            {
+              "name": "article",
+              "value": "Non, Marine Le Pen n'est pas \"féministe\" : 6 piqûres de rappel nécessaires"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Terrafemina"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.terrafemina.com/article/marine-le-pen-6-rappels-necessaires-qui-prouvent-qu-elle-n-est-pas-feministe_a363570/1"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "This so-called defense of Muslim women against the “pressure” they might feel to wear the veil, thereby supposedly “liberating” them, in fact serves as a pretext for stigmatizing and inflicting violence on an entire part of the French population.",
+        "translated_date": "",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every claim, qualification, number and link is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:49:02.228898+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0133-C002",
+        "source": {
+          "id": "A0133-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Je me permets de citer [https://www.madmoizelle.com/agression-reims-maillot-bain-401839 cet article] de Clémence Bodoc sur une affaire qui avait secoué la France en juillet 2015.\n\nÀ l’époque, une jeune femme en bikini avait été agressée dans un parc à Reims par une bande de filles. De nombreux médias avaient relayés l’affaire en la justifiant par un motif religieux, les agresseuses étant de confession musulmane. Sauf que non, la religion n’avait rien à voir dedans.\n\nCet article rappelait au passage le concept très simple de '''la paille dans l’œil de son voisin sans voir la poutre dans le sien'''…"
+            },
+            {
+              "name": "auteurs",
+              "value": "Anouk Perry"
+            },
+            {
+              "name": "article",
+              "value": "Que se passe-t-il quand une publicité féministe est diffusée au Super Bowl 2017 ?"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "date",
+              "value": "06 février 2017"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/pub-feministe-super-bowl-2017-audi-718117"
+            }
+          ],
+          "citation": "Je me permets de citer [https://www.madmoizelle.com/agression-reims-maillot-bain-401839 cet article] de Clémence Bodoc sur une affaire qui avait secoué la France en juillet 2015.\n\nÀ l’époque, une jeune femme en bikini avait été agressée dans un parc à Reims par une bande de filles. De nombreux médias avaient relayés l’affaire en la justifiant par un motif religieux, les agresseuses étant de confession musulmane. Sauf que non, la religion n’avait rien à voir dedans.\n\nCet article rappelait au passage le concept très simple de '''la paille dans l’œil de son voisin sans voir la poutre dans le sien'''…",
+          "date": "06 février 2017",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Anouk Perry"
+            },
+            {
+              "name": "article",
+              "value": "Que se passe-t-il quand une publicité féministe est diffusée au Super Bowl 2017 ?"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/pub-feministe-super-bowl-2017-audi-718117"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "I would like to cite [https://www.madmoizelle.com/agression-reims-maillot-bain-401839 this article] by Clémence Bodoc about a case that shook France in July 2015.\n\nAt the time, a young woman in a bikini was assaulted in a park in Reims by a group of girls. Many media outlets reported the case and explained it in religious terms because the assailants were Muslim. Except that they were wrong: religion had nothing to do with it.\n\nThe article also recalled the very simple concept of '''the speck in one’s neighbor’s eye while failing to see the beam in one’s own'''...",
+        "translated_date": "6 February 2017",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every claim, qualification, number and link is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:49:02.228898+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"The far right instrumentalizes feminism for racist purposes\" argument",
+      "The far right instrumentalizes feminism for racist purposes conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "nominal_phrase",
+    "displayed_title_target_form": "nominal_phrase",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": false,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "247bf8c1cdd8927904520b072051e1c39e2ecca399544624c26c93e782253ea0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0133",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9cea39c5c47a7eed0be196abda21a5bdeeb317c1937e2ef5f424757f74013b48"
+}

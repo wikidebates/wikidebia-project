@@ -1,0 +1,238 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "2e12644790222fe5841e108613c3b7615bbc535fea19149bda0525eb3fa8ef77",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La culture woke est une alliée du féminisme radical",
+    "identity_sha256": "b6541c9d534997a88bd08a7914398d7f4ed98828a3a6b42da268d40a3fc963ea"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "3674d5d0275cb9f2b1739b797d4ebff55d59f5b5aaf5049f63b9e850b142a5b7"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Woke culture is an ally of radical feminism",
+    "displayed_title": "Woke culture is an ally of radical feminism",
+    "sections": [],
+    "keywords": [],
+    "summary": "Arriving from the United States like so many other movements, [https://fr.wikipedia.org/wiki/Woke woke] culture also imposes its law in France. No one is spared. From the English word “awake,” it brings together all the methods used in a form of moral vigilance against every type of discrimination: permanent alertness to injustice against minorities and women in particular. It models an activism that is sometimes radical and tends to purify social spheres in which some minorities have been oppressed for too long. Today, what we mainly see is the hypersensitivity of “woke” communities—antisexist and representing other intersections such as antiracism and environmentalism—ready to draw the indignant and accusatory digital argument. Are we not heading toward a purified and sanitized society?\nIn a Figaro article published on 26 January 2021, Benjamin Sire explains: “Twitter’s primary function is now public confession. It gives a major sounding-board role to the neo-Puritan aspirations emerging in a Western world that is more and more frustrated and disappointed with itself, seeking a moral regeneration whose return to the public stage is sometimes disconcerting, especially since, for now, there is no Counter-Reformation or Council of Trent to oppose it...”\nFor some, the phenomenon goes beyond activism and is also likened to an Inquisition 2.0, bordering on cancel culture and leading to another concept: revisionism of cultural and historical works regarded as “no longer consistent with current ideals.”",
+    "citations": [
+      {
+        "id": "A0125-C001",
+        "source": {
+          "id": "A0125-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Il y a des gens qui pensent que pour changer les choses, il suffit de constamment juger et critiquer les autres […] Si je fais un tweet ou un hashtag sur ce que tu as fait de mal, ou sur le fait que tu as utilisé le mauvais mot ou le mauvais verbe, alors après je peux me détendre et être fier de moi, parce que je suis super “woke” parce que je t'ai montré du doigt. Mais ce n'est pas vraiment de l'activisme. Ce n'est pas comme ça qu'on fait changer les choses […] le monde [était] compliqué et plein d'ambiguïtés"
+            },
+            {
+              "name": "auteurs",
+              "value": "Barack Obama"
+            },
+            {
+              "name": "article",
+              "value": "Discours"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Sommet de la fondation Obama, Chicago"
+            },
+            {
+              "name": "date",
+              "value": "2019"
+            }
+          ],
+          "citation": "Il y a des gens qui pensent que pour changer les choses, il suffit de constamment juger et critiquer les autres […] Si je fais un tweet ou un hashtag sur ce que tu as fait de mal, ou sur le fait que tu as utilisé le mauvais mot ou le mauvais verbe, alors après je peux me détendre et être fier de moi, parce que je suis super “woke” parce que je t'ai montré du doigt. Mais ce n'est pas vraiment de l'activisme. Ce n'est pas comme ça qu'on fait changer les choses […] le monde [était] compliqué et plein d'ambiguïtés",
+          "date": "2019",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Barack Obama"
+            },
+            {
+              "name": "article",
+              "value": "Discours"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Sommet de la fondation Obama, Chicago"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "There are people who think that to change things, it is enough to judge and criticize others constantly. [...] If I post a tweet or a hashtag about what you did wrong, or about the fact that you used the wrong word or verb, then afterward I can relax and be proud of myself because I am super “woke,” because I pointed the finger at you. But that is not really activism. That is not how change is brought about. [...] the world [was] complicated and full of ambiguities.",
+        "translated_date": "2019",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every claim and qualification is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:41:50.825952+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Woke culture is an ally of radical feminism\" argument",
+      "Woke culture is an ally of radical feminism conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": true,
+    "historical_quantitative_transfer_note": "All numerical expressions were transferred exactly from the protected historical French summary and checked field by field."
+  },
+  "translation_sha256": "1bfcd778f67a8f4f9fd871b5a2f846a46aa07b87a5464be7dc186c75541b5661",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0125",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9044c23ce2e52bdbc4ce93856522769ea97aa7fb0294cb4ab16a79100bf19cfe"
+}

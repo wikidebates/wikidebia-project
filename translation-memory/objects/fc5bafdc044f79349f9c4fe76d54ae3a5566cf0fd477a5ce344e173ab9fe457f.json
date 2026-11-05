@@ -1,0 +1,450 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "c368a4ea3c6ef648f49d363485b745d8049e41fd31bd93ff898171df9ca5d8e6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme moderne flirte avec la misandrie (haine des hommes)",
+    "identity_sha256": "20b068c2a737544861b5710cd49aa806a8c7642a0d408126ddad1a64424326fe"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "95e8f25b37f82a4fa55cdc8e73577a7ca6950901e458961e181752d862fead65"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Modern feminism flirts with misandry (hatred of men)",
+    "displayed_title": "Modern feminism flirts with misandry (hatred of men)",
+    "sections": [
+      "Society"
+    ],
+    "keywords": [
+      "feminism"
+    ],
+    "summary": "On August 19, 2020, the pamphlet \"I Hate Men\" was quietly released in a print run of 450 copies. Its author, Pauline Harmange, 25, married and relatively unknown, ran a blog and described herself as a feminist. The book received unexpected media coverage after Ralph Zumély, an adviser on gender equality, threatened to have it banned. The enthusiasm matched the reach of its provocative title. To meet demand, the essay was republished by Seuil in September 2020 and sold like hotcakes. The author openly identifies as a misandrist and intends to denounce men as a social group that harms women.\nIt recalls openly misandrist writings from the twentieth century that have since been forgotten, including Valerie Solanas's famous 1967 SCUM Manifesto (Solanas shot Andy Warhol), as well as essayists such as Natalie Clifford Barney and Mireille Havet.\n\n'''#menaretrash'''\nNor should the digital sphere be forgotten: it offers vast territory for hatred. The hashtag #menaretrash (\"men are trash\") emerged in South Africa in 2016. After a series of femicides, it gained renewed attention in 2017 and then spread across social media worldwide. Although most tweets and other posts using it denounced abuse, some saw the hashtag as sweeping and stigmatizing, if not hateful. Those more hostile to it revived the debate over cancel culture and accused the hashtag of serving as a tool for trial by social media, independently of legal procedures and at the risk of overriding them.\n\nThe media attention and some people's concern about this overt misandry raise questions: revenge? Communitarianism? Radical feminism? The subject will continue to inflame people of both sexes.",
+    "citations": [
+      {
+        "id": "A0016-C001",
+        "source": {
+          "id": "A0016-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Je vois dans la misandrie une porte de sortie. Une manière d'exister en dehors du passage clouté, une manière de dire non à chaque respiration. Détester les hommes, en tant que groupe social et souvent en tant qu'individus aussi, m'apporte beaucoup de joie – et pas seulement parce que je suis une vieille sorcière folle à chats.\nSi on devenait toutes misandres, on pourrait former une grande et belle sarabande. On se rendrait compte (et ce serait peut-être un peu douloureux au début) qu'on n'a vraiment pas besoin des hommes. On pourrait, je crois, libérer un pouvoir insoupçonné : celui, en planant très loin au-dessus du regard des hommes et des exigences masculines, de nous révéler à nous-mêmes"
+            },
+            {
+              "name": "auteurs",
+              "value": "Pauline Harmange"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Moi les hommes, je les déteste"
+            },
+            {
+              "name": "édition",
+              "value": "Le Seuil"
+            },
+            {
+              "name": "date",
+              "value": "19/09/2020"
+            }
+          ],
+          "citation": "Je vois dans la misandrie une porte de sortie. Une manière d'exister en dehors du passage clouté, une manière de dire non à chaque respiration. Détester les hommes, en tant que groupe social et souvent en tant qu'individus aussi, m'apporte beaucoup de joie – et pas seulement parce que je suis une vieille sorcière folle à chats.\nSi on devenait toutes misandres, on pourrait former une grande et belle sarabande. On se rendrait compte (et ce serait peut-être un peu douloureux au début) qu'on n'a vraiment pas besoin des hommes. On pourrait, je crois, libérer un pouvoir insoupçonné : celui, en planant très loin au-dessus du regard des hommes et des exigences masculines, de nous révéler à nous-mêmes",
+          "date": "19/09/2020",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Pauline Harmange"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Moi les hommes, je les déteste"
+            },
+            {
+              "name": "édition",
+              "value": "Le Seuil"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "I see misandry as a way out. A way to exist outside the marked crossing, a way to say no with every breath. Hating men, as a social group and often as individuals too, brings me a great deal of joy—and not only because I am a crazy old cat lady.\nIf we all became misandrists, we could form one great, beautiful saraband. We would realize (and it might hurt a little at first) that we truly do not need men. I believe we could unleash an unsuspected power: that of revealing ourselves to ourselves by soaring far above men's gaze and male demands.",
+        "translated_date": "19/09/2020",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T08:11:11.390897+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0016-C002",
+        "source": {
+          "id": "A0016-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Ce livre est de toute évidence, tant au regard du résumé qui en est fait sur votre site qu’à la lecture de son titre, une ode à la misandrie (= haine des hommes). Or, je me permets de vous rappeler que la provocation à la haine à raison du sexe est un délit pénal ! En conséquence, je vous demande d’immédiatement retirer ce livre de votre catalogue sous peine de poursuites pénales."
+            },
+            {
+              "name": "auteurs",
+              "value": "Ralph Zurmély"
+            },
+            {
+              "name": "article",
+              "value": "A propos de l'essai \"Moi les hommes, je les déteste\" de Pauline Harmange"
+            },
+            {
+              "name": "date",
+              "value": "19/08/2020"
+            }
+          ],
+          "citation": "Ce livre est de toute évidence, tant au regard du résumé qui en est fait sur votre site qu’à la lecture de son titre, une ode à la misandrie (= haine des hommes). Or, je me permets de vous rappeler que la provocation à la haine à raison du sexe est un délit pénal ! En conséquence, je vous demande d’immédiatement retirer ce livre de votre catalogue sous peine de poursuites pénales.",
+          "date": "19/08/2020",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Ralph Zurmély"
+            },
+            {
+              "name": "article",
+              "value": "A propos de l'essai \"Moi les hommes, je les déteste\" de Pauline Harmange"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "This book is quite obviously, both from the summary given on your website and from its title, an ode to misandry (= hatred of men). Let me remind you that incitement to hatred on grounds of sex is a criminal offense! I therefore ask you to remove this book from your catalogue immediately, failing which legal proceedings will be brought.",
+        "translated_date": "19/08/2020",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T08:11:11.390897+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0016-C003",
+        "source": {
+          "id": "A0016-C003",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Vivre dans cette société, c’est au mieux y mourir d’ennui. Rien dans cette société ne concerne les femmes. Alors, à toutes celles qui ont un brin de civisme, le sens des responsabilités et celui de la rigolade, il ne reste qu’à renverser le gouvernement, en finir avec l’argent, instaurer l’automation à tous les niveaux et supprimer le sexe masculin.\nLe mâle est un accident biologique ; le gène Y (mâle) n’est qu’un gène X (femelle) incomplet, une série incomplète de chromosomes. En d’autres termes, l’homme est une femme manquée, une fausse couche ambulante, un avorton congénital.\nLes hommes sont des Midas d’un genre spécial : tout ce qu’ils touchent se change en merde.\nCe qui met l’homme en joie – dans la mesure où cette créature sinistre et constipée est capable d’éprouver de la joie – c’est de dénoncer les autres."
+            },
+            {
+              "name": "auteurs",
+              "value": "Valérie Solanas"
+            },
+            {
+              "name": "ouvrage",
+              "value": "SCUM Manifesto"
+            },
+            {
+              "name": "date",
+              "value": "1967"
+            }
+          ],
+          "citation": "Vivre dans cette société, c’est au mieux y mourir d’ennui. Rien dans cette société ne concerne les femmes. Alors, à toutes celles qui ont un brin de civisme, le sens des responsabilités et celui de la rigolade, il ne reste qu’à renverser le gouvernement, en finir avec l’argent, instaurer l’automation à tous les niveaux et supprimer le sexe masculin.\nLe mâle est un accident biologique ; le gène Y (mâle) n’est qu’un gène X (femelle) incomplet, une série incomplète de chromosomes. En d’autres termes, l’homme est une femme manquée, une fausse couche ambulante, un avorton congénital.\nLes hommes sont des Midas d’un genre spécial : tout ce qu’ils touchent se change en merde.\nCe qui met l’homme en joie – dans la mesure où cette créature sinistre et constipée est capable d’éprouver de la joie – c’est de dénoncer les autres.",
+          "date": "1967",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Valérie Solanas"
+            },
+            {
+              "name": "ouvrage",
+              "value": "SCUM Manifesto"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Living in this society means, at best, dying of boredom. Nothing in this society concerns women. Therefore, all those with a shred of civic spirit, a sense of responsibility and a sense of humor have no option but to overthrow the government, abolish money, institute complete automation and eliminate the male sex.\nThe male is a biological accident; the Y (male) gene is merely an incomplete X (female) gene, an incomplete set of chromosomes. In other words, man is a failed woman, a walking miscarriage, a congenital runt.\nMen are a special kind of Midas: everything they touch turns to shit.\nWhat delights a man—insofar as this sinister, constipated creature is capable of feeling delight—is informing on others.",
+        "translated_date": "1967",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T08:11:11.390897+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0016-C004",
+        "source": {
+          "id": "A0016-C004",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Il est temps que les Amazones ne se fassent plus féconder par l’“ennemi” — et l’ennemi n’est-il pas celui qui prendra à la femme son enfant, pour l’élever ou le tuer à sa guise ?"
+            },
+            {
+              "name": "auteurs",
+              "value": "Natalie Clifford Barney"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Pensées d'une Amazone"
+            },
+            {
+              "name": "date",
+              "value": "1920"
+            }
+          ],
+          "citation": "Il est temps que les Amazones ne se fassent plus féconder par l’“ennemi” — et l’ennemi n’est-il pas celui qui prendra à la femme son enfant, pour l’élever ou le tuer à sa guise ?",
+          "date": "1920",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Natalie Clifford Barney"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Pensées d'une Amazone"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "It is time for Amazons to stop allowing themselves to be impregnated by the 'enemy'—and is the enemy not the one who will take a woman's child from her, to raise or kill as he pleases?",
+        "translated_date": "1920",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T08:11:11.390897+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0016-C005",
+        "source": {
+          "id": "A0016-C005",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "(…) J’ai en moi la haine de l’homme (…). Tout en eux me semble grossier et ridicule, j’ai la haine de leur corps, de leur chair, de leur sexe, de leur désir. Ils sont pour moi d’infâmes faiseurs d’enfants, blesseurs de rêve, ennemis et bourreaux de nos tendresse et de nos féminités. J’ai la haine de l’homme ! (…) Les hommes, quelle cochonnerie."
+            },
+            {
+              "name": "auteurs",
+              "value": "Mireille Havet"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Journal intime"
+            },
+            {
+              "name": "date",
+              "value": "1919"
+            }
+          ],
+          "citation": "(…) J’ai en moi la haine de l’homme (…). Tout en eux me semble grossier et ridicule, j’ai la haine de leur corps, de leur chair, de leur sexe, de leur désir. Ils sont pour moi d’infâmes faiseurs d’enfants, blesseurs de rêve, ennemis et bourreaux de nos tendresse et de nos féminités. J’ai la haine de l’homme ! (…) Les hommes, quelle cochonnerie.",
+          "date": "1919",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Mireille Havet"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Journal intime"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "(…) I harbor hatred for men (…). Everything about them seems coarse and ridiculous to me; I hate their bodies, their flesh, their sex, their desire. To me they are vile child-makers, destroyers of dreams, enemies and tormentors of our tenderness and our femininity. I hate men! (…) Men—what filth.",
+        "translated_date": "1919",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T08:11:11.390897+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Modern feminism flirts with misandry (hatred of men)\" argument",
+      "Modern feminism flirts with misandry (hatred of men) conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": true,
+    "historical_quantitative_transfer_note": "All numerical expressions were transferred exactly from the protected historical French summary and checked field by field."
+  },
+  "translation_sha256": "9ab71449bd910c407b3e46b6116b9be5380f8f69577d85a9db18465028d6446e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0016",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "fc5bafdc044f79349f9c4fe76d54ae3a5566cf0fd477a5ce344e173ab9fe457f"
+}

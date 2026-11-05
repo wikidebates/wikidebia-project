@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "9f10fa48c657639e9ac87e73c6dc87eca8fbab68f7ed55f20d96ff678f617bdd",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'interdiction de la burqa prétend libérer les femmes mais contribue à les emprisonner",
+    "identity_sha256": "7bd2c08755eceeda277f74872192e06981e244ab945f51c98538dc0c43508aa1"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "d291fb5b452b69f9b6553307516ff9603ecbb9ef13af90ccaf22927697cf8e7e"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Banning the burqa claims to liberate women but contributes to imprisoning them",
+    "displayed_title": "Banning the burqa claims to liberate women but contributes to imprisoning them",
+    "sections": [],
+    "keywords": [],
+    "summary": "Banning women from wearing a particular garment and legally forcing them to wear one in fact arise from the same motive: controlling their bodies, and therefore dominating them.",
+    "citations": [
+      {
+        "id": "A0237-C001",
+        "source": {
+          "id": "A0237-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Dans le même esprit paternaliste, '''au nom des droits des femmes, du sauvetage des musulmanes, on nous assigne à nos foyers.''' Ni éducation, [https://www.madmoizelle.com/les-hijabeuses-joueuses-football-voile-1115835 ni sport], ni travail, ni loisirs – ainsi tu seras libre en Macronie.\n\nEn réponse à ces mesures restrictives censées nous sauver, nous aimons à rappeler que nous portons le hijab par choix, qu’il s’agit avant tout de choix. Je pense que c’est un faux débat. La réalité n’est pas dans le fait de savoir si nous avons choisi de porter des foulards, il ne s’agit pas d’une discussion philosophique sur le libre arbitre, bien qu’il puisse y avoir beaucoup à dire.\n\n'''En vérité, c’est de notre émancipation en tant que femmes non blanches dont il s’agit.''' Assignées à des métiers précaires du ''care'', les femmes musulmanes issues de l’immigration postcoloniale (pour la majorité) doivent être utiles, doivent prendre soin des autres, éduquer leurs enfants dans la soumission et la discipline, ne pas sortir des cadres, être discrètes, souffrir en silence, être transparentes, invisibles, inexistantes. C’est cela le dessein qu’on veut nous imposer. C’est comme ça qu’on imagine une femme musulmane « libre »."
+            },
+            {
+              "name": "auteurs",
+              "value": "Aïda Djoupa"
+            },
+            {
+              "name": "article",
+              "value": "« La France est coincée dans une boucle infernale où l’islamophobie qui vise les femmes cadence nos vies »"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "date",
+              "value": "14 avril 2021"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/la-france-est-coincee-dans-une-boucle-infernale-ou-lislamophobie-qui-vise-les-femmes-cadence-nos-vies-1117775"
+            }
+          ],
+          "citation": "Dans le même esprit paternaliste, '''au nom des droits des femmes, du sauvetage des musulmanes, on nous assigne à nos foyers.''' Ni éducation, [https://www.madmoizelle.com/les-hijabeuses-joueuses-football-voile-1115835 ni sport], ni travail, ni loisirs – ainsi tu seras libre en Macronie.\n\nEn réponse à ces mesures restrictives censées nous sauver, nous aimons à rappeler que nous portons le hijab par choix, qu’il s’agit avant tout de choix. Je pense que c’est un faux débat. La réalité n’est pas dans le fait de savoir si nous avons choisi de porter des foulards, il ne s’agit pas d’une discussion philosophique sur le libre arbitre, bien qu’il puisse y avoir beaucoup à dire.\n\n'''En vérité, c’est de notre émancipation en tant que femmes non blanches dont il s’agit.''' Assignées à des métiers précaires du ''care'', les femmes musulmanes issues de l’immigration postcoloniale (pour la majorité) doivent être utiles, doivent prendre soin des autres, éduquer leurs enfants dans la soumission et la discipline, ne pas sortir des cadres, être discrètes, souffrir en silence, être transparentes, invisibles, inexistantes. C’est cela le dessein qu’on veut nous imposer. C’est comme ça qu’on imagine une femme musulmane « libre ».",
+          "date": "14 avril 2021",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Aïda Djoupa"
+            },
+            {
+              "name": "article",
+              "value": "« La France est coincée dans une boucle infernale où l’islamophobie qui vise les femmes cadence nos vies »"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/la-france-est-coincee-dans-une-boucle-infernale-ou-lislamophobie-qui-vise-les-femmes-cadence-nos-vies-1117775"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "In the same paternalistic spirit, '''in the name of women’s rights and saving Muslim women, we are confined to our homes.''' No education, [https://www.madmoizelle.com/les-hijabeuses-joueuses-football-voile-1115835 no sport], no work, no leisure—thus shall you be free in Macron’s France.\n\nIn response to these restrictive measures supposedly intended to save us, we like to point out that we wear the hijab by choice, that it is above all a matter of choice. I think this is a false debate. The reality does not lie in whether we chose to wear headscarves; this is not a philosophical discussion about free will, although there may be much to say about it.\n\n'''In truth, this is about our emancipation as nonwhite women.''' Confined to precarious ''care'' jobs, Muslim women from postcolonial immigrant backgrounds (for the most part) must be useful, must care for others, raise their children in submission and discipline, stay within the boundaries, remain discreet, suffer in silence, be transparent, invisible, nonexistent. This is the design they seek to impose on us. This is how a “free” Muslim woman is imagined.",
+        "translated_date": "14 April 2021",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:24:28.764474+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Banning the burqa claims to liberate women but contributes to imprisoning them\" argument",
+      "Banning the burqa claims to liberate women but contributes to imprisoning them conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "nominal_phrase",
+    "displayed_title_target_form": "nominal_phrase",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": false,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "10e328575c0665e25fbd00e98eb0f8e217713ebf54d6ed333386f943d936e583",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0237",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "dfb8cd84fb2eda91a8b2367936428ac5e5543862f87e48abbe2ebcc276b3e84b"
+}

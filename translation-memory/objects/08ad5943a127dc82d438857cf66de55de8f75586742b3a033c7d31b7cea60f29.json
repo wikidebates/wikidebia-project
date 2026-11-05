@@ -1,0 +1,240 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "0104f0f328346b18aefb1ffbe3024c2b7123600c00cc30254f5147bf81d6092c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La parité en politique n'est pas encore atteinte",
+    "identity_sha256": "e2a95bf957384cdad5a2ddc9022b94423ebf3e40ab911e0af98ae3c45f1a02b0"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "3c5fe76207c9ed2018d7f50b75603bd16a94462bc0f015c1f36e90db978dda17"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Gender parity in politics has not yet been achieved",
+    "displayed_title": "Gender parity in politics has not yet been achieved",
+    "sections": [
+      "Politics",
+      "Society"
+    ],
+    "keywords": [
+      "feminism",
+      "politics"
+    ],
+    "summary": "Although still underrepresented in politics, women have managed to establish themselves against all odds. The 2019 graduating class at Sciences Po, 60% of whom were women, confirms a trend. Politics remains a field with patriarchal foundations and therefore has both a solid glass ceiling and latent sexism. Women who entered politics more recently are still working to assert their legitimacy so that their voices and ideas prevail.\n\nThis finding is confirmed by the report of the High Council for Equality between Women and Men. The reasons cited include:\n\n* latent sexism in the political sphere\n* institutions with patriarchal foundations\n* women’s lack of rhetorical legitimacy because of their more recent arrival in politics (a reminder: women obtained the right to vote in France in 1944) and in the civil service",
+    "citations": [
+      {
+        "id": "A0031-C001",
+        "source": {
+          "id": "A0031-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "En France\n- Lors des premières élections législatives suivant l’ordonnance du 21 avril 1944, 33 femmes ont été élues députées lors des élections d’octobre 1945, sur 586 député.e.s. Elles représentaient alors 5,6 % des élu-e-s.\n- Lors des élections législatives de 2017, l’Assemblée nationale comprend 38,7% de députées (224 sur 577), pour 26,9% (155 sur 577) en 2012.\n- En octobre 2017, suite aux élections sénatoriales, le Sénat est composé de 31,6% de sénatrices (110 sur 348), contre 25% en 2014 (87 sur 348) et 22,1% en 2011 (77 sur 348).\nSources : HCE, Parité en politique : entre progrès et stagnations, 2015, et HCE, Les chiffres clés de la parité aux élections sénatoriales, 2018"
+            },
+            {
+              "name": "auteurs",
+              "value": "Haut conseil à l'égalité entre les femmes et les hommes"
+            },
+            {
+              "name": "article",
+              "value": "Rapport"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.haut-conseil-egalite.gouv.fr/parite/reperes-statistiques/"
+            }
+          ],
+          "citation": "En France\n- Lors des premières élections législatives suivant l’ordonnance du 21 avril 1944, 33 femmes ont été élues députées lors des élections d’octobre 1945, sur 586 député.e.s. Elles représentaient alors 5,6 % des élu-e-s.\n- Lors des élections législatives de 2017, l’Assemblée nationale comprend 38,7% de députées (224 sur 577), pour 26,9% (155 sur 577) en 2012.\n- En octobre 2017, suite aux élections sénatoriales, le Sénat est composé de 31,6% de sénatrices (110 sur 348), contre 25% en 2014 (87 sur 348) et 22,1% en 2011 (77 sur 348).\nSources : HCE, Parité en politique : entre progrès et stagnations, 2015, et HCE, Les chiffres clés de la parité aux élections sénatoriales, 2018",
+          "date": "",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Haut conseil à l'égalité entre les femmes et les hommes"
+            },
+            {
+              "name": "article",
+              "value": "Rapport"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.haut-conseil-egalite.gouv.fr/parite/reperes-statistiques/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "In France\n- In the first legislative elections following the ordinance of 21 April 1944, 33 women were elected as members of parliament in the October 1945 elections, out of 586 members. Women therefore accounted for 5.6% of those elected.\n- Following the 2017 legislative elections, the National Assembly included 38.7% women members (224 out of 577), compared with 26.9% (155 out of 577) in 2012.\n- In October 2017, following the Senate elections, women made up 31.6% of the Senate (110 out of 348), compared with 25% in 2014 (87 out of 348) and 22.1% in 2011 (77 out of 348).\nSources: HCE, Parité en politique : entre progrès et stagnations, 2015, and HCE, Les chiffres clés de la parité aux élections sénatoriales, 2018",
+        "translated_date": "",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every statistic, qualification and source line is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T13:55:50.224813+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Gender parity in politics has not yet been achieved\" argument",
+      "Gender parity in politics has not yet been achieved conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": true,
+    "historical_quantitative_transfer_note": "All numerical expressions were transferred exactly from the protected historical French summary and checked field by field."
+  },
+  "translation_sha256": "9a33877ce384ff6de9ed8249e71afb1fc99f8fb5534a09f7dad9658806648ca2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0031",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "08ad5943a127dc82d438857cf66de55de8f75586742b3a033c7d31b7cea60f29"
+}

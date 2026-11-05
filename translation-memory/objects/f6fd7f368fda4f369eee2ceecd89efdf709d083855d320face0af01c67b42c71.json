@@ -1,0 +1,262 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "39c663a067b34bb58d9cae1ebfc58fbb65019c494b33dda0c0b6a09b96e71ee3",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Limiter la liberté d'expression, c'est refuser de faire confiance en la raison",
+    "identity_sha256": "9fe9f5b8d5facc2c784ab64ce057fd3ee42ee3602630fe3a961ff40015633b34"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "d30254387848e5942253cbf291bb4bc5959c58ac53762e4bbcfb656a4d94d889"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Limiting freedom of expression means refusing to trust reason",
+    "displayed_title": "Limiting freedom of expression means refusing to trust reason",
+    "sections": [
+      "Law",
+      "Philosophy",
+      "Politics",
+      "Society"
+    ],
+    "keywords": [
+      "freedom of expression",
+      "limits",
+      "rationality"
+    ],
+    "summary": "Supporting freedom of expression means believing that the most reasonable and desirable views will emerge victorious from the confrontation of ideas. This implies an optimistic view of human beings as sufficiently reasonable to discern the correct and well-founded opinion. This optimism is the ultimate justification for democracies: it is because I believe that citizens assembled together are capable of sound reasoning that I think they can exercise power. If that is not the case—if people are manipulable, ruled by their interests and irrational passions, and incapable of reflection—then democracy has no foundation. Power must be taken away from the people and entrusted to enlightened rulers: monarchs, philosopher-kings, jurists, and so on.",
+    "citations": [
+      {
+        "id": "A0299-C001",
+        "source": {
+          "id": "A0299-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Si le citoyen n’est pas un être rationnel, capable de prendre part à la discussion et de faire la part des choses, en faisant des concessions si nécessaires quant à son propre intérêt, mais au contraire un simple spectateur suggestible et manipulable, prisonnier de bulles de filtres et irrémédiablement retenu en enfance par ses bas instincts, le débat ne peut être un moteur du progrès moral. Il convient dès lors de réguler le plus étroitement possible la discussion publique en établissant des règles de conduite, et notamment d’encadrer les réseaux sociaux qui matérialisent l’agora où se déroule le débat public.\n\nCette tentative « réformiste » de préserver le cœur du débat (le « cercle de la raison ») contre des extrêmes irrationnels (vis-à-vis desquels le caractère universel que renferme la notion de tolérance souffre une exception notable au nom de l’axiome de Karl Popper qui veut que l’on ne tolère pas les intolérants) se défend parfaitement aux noms d’une conception humaniste et progressiste de l’histoire. Elle n’en constitue pas moins une faillite de la représentativité politique, d’autant que les décisions fondamentales apparaissent désormais échapper à la délibération collective. De la non-prise en compte du référendum du Traité constitutionnel européen de 2005 à la politique de modération systématique pratiquée par les réseaux sociaux : ces multiples mises en échec du débat participent d’autant à discréditer la prétention du débat public qu’à garantir les intérêts de chacun. Dans un contexte marqué, par ailleurs, par l’archipélisation des grandes démocraties (comment croire que la France soit la seule affectée par ce processus ?), la conception de la politique n’est plus un art de parvenir au consensus, mais consiste désormais à distinguer ses amis et ses ennemis."
+            },
+            {
+              "name": "auteurs",
+              "value": "Damien Liccia, Jean-Baptiste Delhomme"
+            },
+            {
+              "name": "article",
+              "value": "La démocratie survivra-t-elle à la mort du débat public ?"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Observatoire stratégique de l'information"
+            },
+            {
+              "name": "date",
+              "value": "2/10/2020"
+            },
+            {
+              "name": "lien",
+              "value": "https://observatoire-strategique-information.fr/2020/10/02/la-democratie-survivra-t-elle-a-la-mort-du-debat-public/"
+            }
+          ],
+          "citation": "Si le citoyen n’est pas un être rationnel, capable de prendre part à la discussion et de faire la part des choses, en faisant des concessions si nécessaires quant à son propre intérêt, mais au contraire un simple spectateur suggestible et manipulable, prisonnier de bulles de filtres et irrémédiablement retenu en enfance par ses bas instincts, le débat ne peut être un moteur du progrès moral. Il convient dès lors de réguler le plus étroitement possible la discussion publique en établissant des règles de conduite, et notamment d’encadrer les réseaux sociaux qui matérialisent l’agora où se déroule le débat public.\n\nCette tentative « réformiste » de préserver le cœur du débat (le « cercle de la raison ») contre des extrêmes irrationnels (vis-à-vis desquels le caractère universel que renferme la notion de tolérance souffre une exception notable au nom de l’axiome de Karl Popper qui veut que l’on ne tolère pas les intolérants) se défend parfaitement aux noms d’une conception humaniste et progressiste de l’histoire. Elle n’en constitue pas moins une faillite de la représentativité politique, d’autant que les décisions fondamentales apparaissent désormais échapper à la délibération collective. De la non-prise en compte du référendum du Traité constitutionnel européen de 2005 à la politique de modération systématique pratiquée par les réseaux sociaux : ces multiples mises en échec du débat participent d’autant à discréditer la prétention du débat public qu’à garantir les intérêts de chacun. Dans un contexte marqué, par ailleurs, par l’archipélisation des grandes démocraties (comment croire que la France soit la seule affectée par ce processus ?), la conception de la politique n’est plus un art de parvenir au consensus, mais consiste désormais à distinguer ses amis et ses ennemis.",
+          "date": "2/10/2020",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Damien Liccia, Jean-Baptiste Delhomme"
+            },
+            {
+              "name": "article",
+              "value": "La démocratie survivra-t-elle à la mort du débat public ?"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Observatoire stratégique de l'information"
+            },
+            {
+              "name": "lien",
+              "value": "https://observatoire-strategique-information.fr/2020/10/02/la-democratie-survivra-t-elle-a-la-mort-du-debat-public/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "If citizens are not rational beings capable of taking part in discussion and distinguishing among arguments, making concessions regarding their own interests when necessary, but are instead merely suggestible and manipulable spectators, prisoners of filter bubbles and irremediably kept in childhood by their basest instincts, debate cannot drive moral progress. Public discussion must then be regulated as closely as possible by establishing rules of conduct, particularly by regulating the social networks that embody the agora where public debate takes place.\n\nThis “reformist” attempt to preserve the core of debate (the “circle of reason”) from irrational extremes (toward which the universal character contained in the notion of tolerance admits a notable exception in the name of Karl Popper’s axiom that the intolerant should not be tolerated) is perfectly defensible in the name of a humanist and progressive conception of history. It nonetheless constitutes a failure of political representation, especially since fundamental decisions now appear to escape collective deliberation. From the disregard of the 2005 referendum on the European Constitutional Treaty to the systematic moderation policies practiced by social networks, these many defeats of debate do as much to discredit public debate’s claim to guarantee everyone’s interests. In a context also marked by the fragmentation of the great democracies (how could one believe France alone is affected by this process?), politics is no longer conceived as the art of reaching consensus but now consists in distinguishing friends from enemies.",
+        "translated_date": "2/10/2020",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:23.774208+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Limiting freedom of expression means refusing to trust reason\" argument",
+      "Limiting freedom of expression means refusing to trust reason conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": true,
+    "semantic_risk_note": "Every detected polarity, modality, quantity, attribution or scope signal was checked directly against the French source.",
+    "semantic_risk_evidence": [
+      {
+        "risk": "marker_loss:comparison",
+        "source_excerpt": "Soutenir la liberté d'expression, c'est considérer que les points de vue les plus raisonnables et souhaitables sortiront victorieux de la confrontation d'idées. Cela implique une vision optimiste de l'être humain, comme suffisamment raisonnable pour discerner l'opinion juste et fondée. Cet optimisme est la justification ultime des démocraties : c'est parce que je crois que les citoyens assemblés sont susceptibles de bons raisonnements, que je pense qu'ils peuvent exercer le pouvoir. Si ce n'est pas le cas, si les personnes sont manipulables, dominées par leurs intérêts et des passions irrationnelles, incapables de réflexion, alors la démocratie n'a pas de fondement. Il faut retirer le pouvoir au peuple et le confier à des dirigeants éclairés : monarques, philosophes-rois, juristes, etc.",
+        "target_excerpt": "Supporting freedom of expression means believing that the most reasonable and desirable views will emerge victorious from the confrontation of ideas. This implies an optimistic view of human beings as sufficiently reasonable to discern the correct and well-founded opinion. This optimism is the ultimate justification for democracies: it is because I believe that citizens assembled together are capable of sound reasoning that I think they can exercise power. If that is not the case—if people are manipulable, ruled by their interests and irrational passions, and incapable of reflection—then democracy has no foundation. Power must be taken away from the people and entrusted to enlightened rulers: monarchs, philosopher-kings, jurists, and so on.",
+        "note": "The complete source and target fields were compared directly for this semantic-risk signal."
+      }
+    ],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "17a81078cbcd289a6a0fcf4e53950bdb49321349579b0b97bf311b5d77162635",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0299",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f6fd7f368fda4f369eee2ceecd89efdf709d083855d320face0af01c67b42c71"
+}

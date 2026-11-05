@@ -1,0 +1,303 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "58eba2a635dd22c7c84838a356b60a4b9d534bcc3465bea0d5e813c57292e546",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme bride la liberté de création",
+    "identity_sha256": "a4270aa7fd4184c5cf381b070ebd85b64470920836cc9b9f273349f58e879938"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "2fe9b55f83904896df1369c1e440529b967a5b4f628a84676daeb633db23bc0d"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Feminism restricts freedom of artistic creation",
+    "displayed_title": "Feminism restricts freedom of artistic creation",
+    "sections": [
+      "Society"
+    ],
+    "keywords": [
+      "feminism",
+      "artistic freedom"
+    ],
+    "summary": "Artistic creation is amoral, even anti-moral. By moralizing language and relations between men and women, feminism therefore often risks causing artists to censor themselves.",
+    "citations": [
+      {
+        "id": "A0019-C001",
+        "source": {
+          "id": "A0019-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "J’imaginais l’homme ronchon et réac, je me trompais. J’ai rencontré un petit garçon de 84 ans la tête dans les étoiles et les lèvres toujours prêtes à sourire. Un homme doux et sincère, un peu dépassé par le nouveau monde qu’il a du mal à comprendre tant il lui paraît absurde et qui l’inquiète tant il efface à grande vitesse tout ce qu’il a chéri, à commencer par la liberté et l’insouciance qui sont la grammaire de ses films.\nCauseur. Pensez-vous qu’aujourd’hui vous pourriez tourner Les Galettes de Pont-Aven ou Comme la lune ?\nJoël Séria. Oh non… ce serait impossible. Avec « Balance ton porc » et « Metoo », ce serait un scandale. Je trouve ahurissant tout ce qui se passe. Je ne comprends pas trop… On dirait que les féministes d’aujourd’hui détestent la drague. Des femmes font des scandales parce qu’on leur a touché le bras. Dans ces conditions, il n’y a plus rien de possible entre les hommes et les femmes, c’est tout. Vous imaginez si elles voyaient mes films ? Marielle leur touche un peu plus que le bras ! À la réflexion, plus personne n’oserait faire une comédie avec du cul. Or, il faut avouer que je suis très porté là-dessus. On me tomberait dessus.\n\nVous avez raison. Pour autant, il faut regarder la réalité dans son entièreté. Aujourd’hui, pour beaucoup de jeunes, Les Galettes de Pont-Aven est un film culte qui leur donne la nostalgie de cette époque de liberté qu’ils n’ont pas connue. En effet, malgré le politiquement correct totalitaire, les vraies gens continuent de parler entre eux de manière politiquement incorrecte. Les garçons parlent des filles comme vos personnages. Or le cinéma dit « populaire » d’aujourd’hui, soumis à la bien-pensance et à la morale, est déconnecté de la vraie vie, des vrais désirs sexuels, des vrais sentiments humains.\n\nEt le pire, c’est l’autocensure ! Les réalisateurs ne se battent pas contre des censeurs, ils se soumettent à l’air du temps. Je crois qu’aujourd’hui, je n’essaierais même pas de faire des films. C’est décourageant."
+            },
+            {
+              "name": "auteurs",
+              "value": "Joël Séria, Yannis Ezziadi"
+            },
+            {
+              "name": "article",
+              "value": "Joël Séria: « Aujourd’hui, ce serait impossible de tourner Les Galettes de Pont-Aven! »"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Causeur"
+            },
+            {
+              "name": "date",
+              "value": "25/02/2021"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.causeur.fr/joel-seria-aujourdhui-ce-serait-impossible-de-tourner-les-galettes-de-pont-aven-191938"
+            }
+          ],
+          "citation": "J’imaginais l’homme ronchon et réac, je me trompais. J’ai rencontré un petit garçon de 84 ans la tête dans les étoiles et les lèvres toujours prêtes à sourire. Un homme doux et sincère, un peu dépassé par le nouveau monde qu’il a du mal à comprendre tant il lui paraît absurde et qui l’inquiète tant il efface à grande vitesse tout ce qu’il a chéri, à commencer par la liberté et l’insouciance qui sont la grammaire de ses films.\nCauseur. Pensez-vous qu’aujourd’hui vous pourriez tourner Les Galettes de Pont-Aven ou Comme la lune ?\nJoël Séria. Oh non… ce serait impossible. Avec « Balance ton porc » et « Metoo », ce serait un scandale. Je trouve ahurissant tout ce qui se passe. Je ne comprends pas trop… On dirait que les féministes d’aujourd’hui détestent la drague. Des femmes font des scandales parce qu’on leur a touché le bras. Dans ces conditions, il n’y a plus rien de possible entre les hommes et les femmes, c’est tout. Vous imaginez si elles voyaient mes films ? Marielle leur touche un peu plus que le bras ! À la réflexion, plus personne n’oserait faire une comédie avec du cul. Or, il faut avouer que je suis très porté là-dessus. On me tomberait dessus.\n\nVous avez raison. Pour autant, il faut regarder la réalité dans son entièreté. Aujourd’hui, pour beaucoup de jeunes, Les Galettes de Pont-Aven est un film culte qui leur donne la nostalgie de cette époque de liberté qu’ils n’ont pas connue. En effet, malgré le politiquement correct totalitaire, les vraies gens continuent de parler entre eux de manière politiquement incorrecte. Les garçons parlent des filles comme vos personnages. Or le cinéma dit « populaire » d’aujourd’hui, soumis à la bien-pensance et à la morale, est déconnecté de la vraie vie, des vrais désirs sexuels, des vrais sentiments humains.\n\nEt le pire, c’est l’autocensure ! Les réalisateurs ne se battent pas contre des censeurs, ils se soumettent à l’air du temps. Je crois qu’aujourd’hui, je n’essaierais même pas de faire des films. C’est décourageant.",
+          "date": "25/02/2021",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Joël Séria, Yannis Ezziadi"
+            },
+            {
+              "name": "article",
+              "value": "Joël Séria: « Aujourd’hui, ce serait impossible de tourner Les Galettes de Pont-Aven! »"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Causeur"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.causeur.fr/joel-seria-aujourdhui-ce-serait-impossible-de-tourner-les-galettes-de-pont-aven-191938"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "I had imagined a grumpy reactionary; I was wrong. I met an 84-year-old little boy with his head in the stars and lips always ready to smile. A gentle and sincere man, somewhat overwhelmed by the new world, which he struggles to understand because it seems so absurd to him and which worries him because it is rapidly erasing everything he cherished, beginning with the freedom and carefree spirit that form the grammar of his films.\nCauseur. Do you think you could make Les Galettes de Pont-Aven or Comme la lune today?\nJoël Séria. Oh no... it would be impossible. With 'Balance ton porc' and 'MeToo,' it would cause a scandal. I find everything that is happening staggering. I do not really understand... It seems that today's feminists hate flirting. Women cause scandals because someone touched their arm. Under those conditions, nothing more is possible between men and women, that is all. Can you imagine if they saw my films? Marielle touches a little more than their arms! On reflection, no one would dare make a comedy with sex in it anymore. Admittedly, I am very fond of that. They would come down on me.\n\nYou are right. Even so, reality must be viewed in its entirety. Today, for many young people, Les Galettes de Pont-Aven is a cult film that makes them nostalgic for an era of freedom they never knew. Indeed, despite totalitarian political correctness, real people continue to speak to one another in politically incorrect ways. Boys talk about girls the way your characters do. Yet today's so-called 'popular' cinema, subject to conventional pieties and morality, is disconnected from real life, real sexual desires and real human feelings.\n\nAnd the worst thing is self-censorship! Directors are not fighting censors; they are submitting to the spirit of the times. I think that today I would not even try to make films. It is discouraging.",
+        "translated_date": "25/02/2021",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T13:52:26.576996+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0019-C002",
+        "source": {
+          "id": "A0019-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Si l’artiste n’est pas au-dessus des lois, car il est un citoyen comme tout un chacun et qu’il est comptable de ses actes quand il s’exprime dans une œuvre, il doit pouvoir représenter le racisme, le machisme, la domination masculine ou la colonisation sans qu’on le lui reproche […] Or, on voit se constituer ici et là des tribunaux populaires, pétitionnaires, qui se donnent le droit de prononcer des «sentences» relayées par les réseaux sociaux contre tel spectacle, telle scène de pièce de théâtre, telle rétrospective, telle chanson. Ces mises en cause publiques des œuvres ne se contentent pas - ce qu’elles seraient parfaitement libres de faire -, de critiquer, mais elles ne cherchent pas le débat. Elles assènent des lectures uniques, dogmatiques, et appellent à l’interdiction, hors de tout dispositif légal ou judiciaire. Ces attaques répétées risquent, au-delà des œuvres qu’elles visent, de conduire à la pire des censures"
+            },
+            {
+              "name": "auteurs",
+              "value": "L’Observatoire de la liberté de création"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Libération"
+            },
+            {
+              "name": "date",
+              "value": "03/01/2018"
+            }
+          ],
+          "citation": "Si l’artiste n’est pas au-dessus des lois, car il est un citoyen comme tout un chacun et qu’il est comptable de ses actes quand il s’exprime dans une œuvre, il doit pouvoir représenter le racisme, le machisme, la domination masculine ou la colonisation sans qu’on le lui reproche […] Or, on voit se constituer ici et là des tribunaux populaires, pétitionnaires, qui se donnent le droit de prononcer des «sentences» relayées par les réseaux sociaux contre tel spectacle, telle scène de pièce de théâtre, telle rétrospective, telle chanson. Ces mises en cause publiques des œuvres ne se contentent pas - ce qu’elles seraient parfaitement libres de faire -, de critiquer, mais elles ne cherchent pas le débat. Elles assènent des lectures uniques, dogmatiques, et appellent à l’interdiction, hors de tout dispositif légal ou judiciaire. Ces attaques répétées risquent, au-delà des œuvres qu’elles visent, de conduire à la pire des censures",
+          "date": "03/01/2018",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "L’Observatoire de la liberté de création"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Libération"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Although artists are not above the law, since they are citizens like everyone else and are accountable for their actions when they express themselves in a work, they must be able to depict racism, sexism, male domination or colonization without being reproached for doing so. [...] Yet here and there we see petitioning popular tribunals being formed, claiming the right to pronounce 'sentences,' relayed through social media, against a particular show, scene in a play, retrospective or song. These public challenges to works do not merely criticize them—which they would be perfectly free to do—but do not seek debate. They impose single, dogmatic interpretations and call for prohibition, outside any legal or judicial process. Beyond the works they target, these repeated attacks risk leading to the worst form of censorship.",
+        "translated_date": "03/01/2018",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T13:52:26.576996+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Feminism restricts freedom of artistic creation\" argument",
+      "Feminism restricts freedom of artistic creation conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "5a737609f44e443480d35045f68e10948f3db03e5476cc389375d492889d3be1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0019",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "09724db0e564ed0b108747ef92d5f3ad58a30a3f42420baa5a1e1ad0386b6fd6"
+}

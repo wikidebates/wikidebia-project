@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "e5f3dc680898161b2911dba5b9582548e950e16bccdee71e6f3530efd1c8fd0a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "C'est pour sauver la gauche que plusieurs intellectuel(le)s luttent contre le wokisme",
+    "identity_sha256": "99525eed24b6a578c5e304848bece854a794a128b0c24f8e9eb18d9a1270a26e"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "f581240e78776a79ff5e5b313cba73ee96071ecf0c2f6fc5872ca51e519f9f3a"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Several intellectuals fight wokeism in order to save the left",
+    "displayed_title": "Several intellectuals fight wokeism in order to save the left",
+    "sections": [],
+    "keywords": [],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0310-C001",
+        "source": {
+          "id": "A0310-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "'''Aujourd’hui, l’anti-wokisme n’est-il pas un marqueur de l’extrême droite ? Ron DeSantis et Donald Trump aux Etats-Unis, Eric Zemmour en France ou même [https://www.lexpress.fr/idees-et-debats/jean-francois-braunstein-en-russie-poutine-utilise-les-idees-woke-contre-l-occident_2180887.html Vladimir Poutine en Russie] ont tous anglé leur discours là-dessus…'''\n\nC’est pour ça, je pense, que mon livre a été traduit en douze langues. Il va même être publié en arabe. J’ai demandé à un confrère syrien comment ce livre pouvait intéresser un éditeur égyptien. \"Ah, les gens à gauche en ont simplement assez des concepts du postcolonialisme, et sont ravis qu’on les questionne\" m’a-t-il répondu. Mais c’est aussi ce pourquoi des amis m’ont déconseillé d’utiliser le mot \"woke\" en titre, car il a été considérablement instrumentalisé par la droite. Pourtant, dès la première page, je me définis comme une socialiste. Par ailleurs, on n’écartera pas l’extrême droite en faisant comme si la pensée woke était un non-problème ou un fantasme inventé par la droite pour faire taire toute demande de justice sociale. Au contraire, si les progressistes de gauche sont incapables de dénoncer les excès de la pensée woke, cela poussera des personnes dans les bras de la droite."
+            },
+            {
+              "name": "auteurs",
+              "value": "Susan Neiman"
+            },
+            {
+              "name": "article",
+              "value": "Susan Neiman : \"Dans le milieu universitaire, le wokisme est loin d’être fini\""
+            },
+            {
+              "name": "ouvrage",
+              "value": "L'Express"
+            },
+            {
+              "name": "date",
+              "value": "24/09/24"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lexpress.fr/idees-et-debats/susan-neiman-dans-le-milieu-universitaire-le-wokisme-est-loin-detre-fini-DHPGFWRWIJDGHASNU6W6QJSOLM/"
+            }
+          ],
+          "citation": "'''Aujourd’hui, l’anti-wokisme n’est-il pas un marqueur de l’extrême droite ? Ron DeSantis et Donald Trump aux Etats-Unis, Eric Zemmour en France ou même [https://www.lexpress.fr/idees-et-debats/jean-francois-braunstein-en-russie-poutine-utilise-les-idees-woke-contre-l-occident_2180887.html Vladimir Poutine en Russie] ont tous anglé leur discours là-dessus…'''\n\nC’est pour ça, je pense, que mon livre a été traduit en douze langues. Il va même être publié en arabe. J’ai demandé à un confrère syrien comment ce livre pouvait intéresser un éditeur égyptien. \"Ah, les gens à gauche en ont simplement assez des concepts du postcolonialisme, et sont ravis qu’on les questionne\" m’a-t-il répondu. Mais c’est aussi ce pourquoi des amis m’ont déconseillé d’utiliser le mot \"woke\" en titre, car il a été considérablement instrumentalisé par la droite. Pourtant, dès la première page, je me définis comme une socialiste. Par ailleurs, on n’écartera pas l’extrême droite en faisant comme si la pensée woke était un non-problème ou un fantasme inventé par la droite pour faire taire toute demande de justice sociale. Au contraire, si les progressistes de gauche sont incapables de dénoncer les excès de la pensée woke, cela poussera des personnes dans les bras de la droite.",
+          "date": "24/09/24",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Susan Neiman"
+            },
+            {
+              "name": "article",
+              "value": "Susan Neiman : \"Dans le milieu universitaire, le wokisme est loin d’être fini\""
+            },
+            {
+              "name": "ouvrage",
+              "value": "L'Express"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lexpress.fr/idees-et-debats/susan-neiman-dans-le-milieu-universitaire-le-wokisme-est-loin-detre-fini-DHPGFWRWIJDGHASNU6W6QJSOLM/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "'''Is anti-wokeism not a marker of the far right today? Ron DeSantis and Donald Trump in the United States, Éric Zemmour in France, and even [https://www.lexpress.fr/idees-et-debats/jean-francois-braunstein-en-russie-poutine-utilise-les-idees-woke-contre-l-occident_2180887.html Vladimir Putin in Russia] have all framed their discourse around it...'''\n\nThat is why, I think, my book has been translated into twelve languages. It will even be published in Arabic. I asked a Syrian colleague how this book could interest an Egyptian publisher. “Oh, people on the left are simply tired of the concepts of postcolonialism and are delighted to see them questioned,” he replied. But that is also why friends advised me not to use the word “woke” in the title, because it has been heavily instrumentalized by the right. Yet on the very first page I define myself as a socialist. Moreover, we will not push back the far right by pretending that woke thought is a nonissue or a fantasy invented by the right to silence every demand for social justice. On the contrary, if left-wing progressives are unable to denounce the excesses of woke thought, this will drive people into the arms of the right.",
+        "translated_date": "24/09/24",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:23.774208+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Several intellectuals fight wokeism in order to save the left\" argument",
+      "Several intellectuals fight wokeism in order to save the left conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "980a95d16ba118af2149261b72c910fcc098bdb26617bae61da9429323aa368b",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0310",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5f69d1cabc4f4c642200826854d2524c34d7524e6adb7242e50b017b07e3fef1"
+}

@@ -1,0 +1,253 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "fa983e347acee50b0f358c2817aed2bcd75a7c4cecf1b31491d5b03826c66c50",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La révolution russe a porté au plus haut la lutte pour l'émancipation des femmes",
+    "identity_sha256": "9f9c29456d11ec46f9460f3af4c7a766104a03ed05fc6d00abe9e0bd85f99183"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "689b977467e266f70aa8011bd1736e8bbc9b18c47445a40e5fdc1e23a0841aca"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "The Russian Revolution brought the struggle for women's emancipation to its highest point",
+    "displayed_title": "The Russian Revolution brought the struggle for women's emancipation to its highest point",
+    "sections": [
+      "History",
+      "Politics"
+    ],
+    "keywords": [
+      "russian revolution",
+      "emancipation",
+      "women"
+    ],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0278-C001",
+        "source": {
+          "id": "A0278-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "En s’emparant du pouvoir en octobre 1917, les travailleurs russes ont entrepris de construire leur État, à travers les soviets, pour défendre leurs intérêts et trouver des solutions qui n’auraient pas été possibles dans les limites de la propriété privée et des normes bourgeoises. La lutte pour l’émancipation des femmes faisait partie de ce combat. Le pouvoir soviétique a eu à cœur de créer des crèches, des cantines collectives. Il a autorisé l’union libre, le divorce et l’avortement. Aucun autre pays, même parmi les plus riches, n’en avait alors fait autant pour les droits des femmes. Toutes ces avancées matérielles allaient de pair avec des combats politiques, que les femmes ont menés en participant à la vie politique, économique, aux transformations sociales. Grâce à la révolution, elles ont pris des responsabilités dont elles étaient, jusque-là, écartées. Elles ont appris à défendre leur point de vue devant les hommes, que ce soit leurs maris, leurs pères, leurs frères, leurs camarades de travail. Elles se sont émancipées dans leur tête, et bon nombre d’hommes avec elles, à l’époque."
+            },
+            {
+              "name": "auteurs",
+              "value": "Nathalie Arthaud"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Communiste, révolutionnaire, internationaliste !"
+            },
+            {
+              "name": "édition",
+              "value": "Les bons caractères"
+            },
+            {
+              "name": "date",
+              "value": "2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste"
+            }
+          ],
+          "citation": "En s’emparant du pouvoir en octobre 1917, les travailleurs russes ont entrepris de construire leur État, à travers les soviets, pour défendre leurs intérêts et trouver des solutions qui n’auraient pas été possibles dans les limites de la propriété privée et des normes bourgeoises. La lutte pour l’émancipation des femmes faisait partie de ce combat. Le pouvoir soviétique a eu à cœur de créer des crèches, des cantines collectives. Il a autorisé l’union libre, le divorce et l’avortement. Aucun autre pays, même parmi les plus riches, n’en avait alors fait autant pour les droits des femmes. Toutes ces avancées matérielles allaient de pair avec des combats politiques, que les femmes ont menés en participant à la vie politique, économique, aux transformations sociales. Grâce à la révolution, elles ont pris des responsabilités dont elles étaient, jusque-là, écartées. Elles ont appris à défendre leur point de vue devant les hommes, que ce soit leurs maris, leurs pères, leurs frères, leurs camarades de travail. Elles se sont émancipées dans leur tête, et bon nombre d’hommes avec elles, à l’époque.",
+          "date": "2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Nathalie Arthaud"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Communiste, révolutionnaire, internationaliste !"
+            },
+            {
+              "name": "édition",
+              "value": "Les bons caractères"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "When they seized power in October 1917, Russian workers set about building their state through the soviets in order to defend their interests and find solutions that would not have been possible within the limits of private property and bourgeois norms. The struggle for women’s emancipation formed part of this fight. Soviet power made a priority of creating childcare centers and communal canteens. It authorized free unions, divorce, and abortion. No other country at the time, even among the richest, had done as much for women’s rights. All these material advances went hand in hand with political struggles that women waged by participating in political and economic life and in social transformations. Thanks to the revolution, they assumed responsibilities from which they had previously been excluded. They learned to defend their point of view before men, whether their husbands, fathers, brothers, or coworkers. They emancipated themselves in their minds, and many men did so with them at the time.",
+        "translated_date": "2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:24:41.278973+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"The Russian Revolution brought the struggle for women’s emancipation to its highest point\" argument",
+      "The Russian Revolution brought the struggle for women’s emancipation to its highest point conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "e79805deb9e5e1c04a565939cf31cccccbd3d944fd17484f54deec8f93d2de0c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0278",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e24cebd570e83f159831c65d8c831ab15f877dbda8d3284e950acbd7a32a05c6"
+}

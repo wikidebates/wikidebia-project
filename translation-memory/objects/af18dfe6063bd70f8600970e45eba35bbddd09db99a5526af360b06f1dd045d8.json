@@ -1,0 +1,298 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "50e64e2a28e7817b6d1d5cf3a213722eace116bfa6588dcafd69b0ac6471b363",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La Cancel culture est une arme du féminisme radical",
+    "identity_sha256": "7984e1e533809ed6a508f103462e10f5d8637b4b27c1c231ab79d25d6c0de93e"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "0b6d6691706315bc69542ba55a7f52dd88a43cd1fd5ece1dde71389588e93efe"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Cancel culture is a weapon of radical feminism",
+    "displayed_title": "Cancel culture is a weapon of radical feminism",
+    "sections": [],
+    "keywords": [],
+    "summary": "Both a weapon of radical feminist circles and a consequence of activist appeals, cancel culture, imported directly from the United States, is a movement that consists of silencing a person, group or “work” regarded as offensive. The principle is simple: denunciation on social media (on the sole basis of one or a few “victim” testimonies), followed by calls for a public figure to resign, be subjected to a media lynching and be banned. The concept seeks to cleanse society by boycotting or censoring the source judged discriminatory from social and cultural circles.\nCancel culture linked to the most radical feminism led to Tex being fired by France 2 from Les Z’Amours for a sexist joke and, more recently, to the cartoon character Pepé Le Pew being removed from the Warner platform for allegedly supporting rape culture. Removal sometimes becomes institutional: television channels, streaming platforms and film studios... recoil from those now deemed “unacceptable” and often yield to media pressure, sometimes without waiting for possible legal proceedings, out of fear of being associated with the controversy more than out of ethical concern. Those excommunicated have no opportunity to explain statements or acts that are sometimes time-barred, because what is at issue here is a trial of morality rather than a political or legal trial, and that is precisely the problem.",
+    "citations": [
+      {
+        "id": "A0123-C001",
+        "source": {
+          "id": "A0123-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Ce mortel ennui devant ce qui était l’arme des révolutionnaires – l’indignation – devenue la monnaie courante de tous les frustrés de la terre, des médiocres, de ceux qui veulent exister mais n’ont d’autres moyens que de vomir des insultes, de confondre les plans, l’opinion, la justice, la rumeur, les faits, d’invoquer un nouvel ordre moral au lieu de faire de la politique.\nEt que deviendra l’art, dans tout ça ? Des livrets de vertu qu’on distribuera au seuil des nouvelles églises ? Des éditoriaux pleins de bons sentiments mâtinés de haine rance de vieilles filles ? Des imprécations béni-oui-oui de néoromantiques exaltés par les combats sur Facebook ? Des œuvres théâtrales où l’on dira le catéchisme, le mal contre le bien, dont on voit vite les incarnations ? Des tableaux respectant la parité, homme, femme, Noir, Blanc, vieux, jeunes, handicapés, dans des champs de blé bio et des plants de tomates en permaculture ?\nMortel ennui. Et où mettra-t-on donc les déviants ? Car ils risquent de devenir très nombreux"
+            },
+            {
+              "name": "auteurs",
+              "value": "Mazarine Pingeot"
+            },
+            {
+              "name": "article",
+              "value": "Mazarine Pingeot au sujet des nouveaux combats féministes : « Ce mortel ennui qui me vient… »"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Le Monde"
+            },
+            {
+              "name": "date",
+              "value": "28/07/2020"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lemonde.fr/idees/article/2020/07/28/mazarine-pingeot-ce-mortel-ennui-qui-me-vient_6047461_3232.html"
+            }
+          ],
+          "citation": "Ce mortel ennui devant ce qui était l’arme des révolutionnaires – l’indignation – devenue la monnaie courante de tous les frustrés de la terre, des médiocres, de ceux qui veulent exister mais n’ont d’autres moyens que de vomir des insultes, de confondre les plans, l’opinion, la justice, la rumeur, les faits, d’invoquer un nouvel ordre moral au lieu de faire de la politique.\nEt que deviendra l’art, dans tout ça ? Des livrets de vertu qu’on distribuera au seuil des nouvelles églises ? Des éditoriaux pleins de bons sentiments mâtinés de haine rance de vieilles filles ? Des imprécations béni-oui-oui de néoromantiques exaltés par les combats sur Facebook ? Des œuvres théâtrales où l’on dira le catéchisme, le mal contre le bien, dont on voit vite les incarnations ? Des tableaux respectant la parité, homme, femme, Noir, Blanc, vieux, jeunes, handicapés, dans des champs de blé bio et des plants de tomates en permaculture ?\nMortel ennui. Et où mettra-t-on donc les déviants ? Car ils risquent de devenir très nombreux",
+          "date": "28/07/2020",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Mazarine Pingeot"
+            },
+            {
+              "name": "article",
+              "value": "Mazarine Pingeot au sujet des nouveaux combats féministes : « Ce mortel ennui qui me vient… »"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Le Monde"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lemonde.fr/idees/article/2020/07/28/mazarine-pingeot-ce-mortel-ennui-qui-me-vient_6047461_3232.html"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "This deadly boredom in the face of what was once the weapon of revolutionaries—indignation—now become the common currency of all the frustrated people on Earth, of the mediocre, of those who want to exist but have no means other than vomiting insults, confusing levels, opinion, justice, rumor and facts, and invoking a new moral order instead of engaging in politics.\nAnd what will become of art in all this? Booklets of virtue distributed at the entrance to the new churches? Editorials full of good intentions mixed with the stale hatred of old maids? Sanctimonious imprecations from neo-Romantics excited by battles on Facebook? Plays reciting catechism, evil against good, whose embodiments are quickly apparent? Paintings respecting parity—men, women, Black people, white people, old people, young people and disabled people—in organic wheat fields and among permaculture tomato plants?\nDeadly boredom. And where, then, will the deviants be placed? For they may become very numerous.",
+        "translated_date": "28/07/2020",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every claim and qualification is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:41:50.825952+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0123-C002",
+        "source": {
+          "id": "A0123-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "[…] il faut faire une différence entre #MeToo, qui a permis de montrer l’ampleur des violences faites aux femmes, et #BalanceTonPorc, qui a livré des noms à la vindicte populaire […] Il faut donc pouvoir critiquer #BalanceTonPorc, au nom d’un féminisme plus juste"
+            },
+            {
+              "name": "auteurs",
+              "value": "Laure Daussy"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Charlie Hebdo"
+            },
+            {
+              "name": "date",
+              "value": "09/11/2020"
+            }
+          ],
+          "citation": "[…] il faut faire une différence entre #MeToo, qui a permis de montrer l’ampleur des violences faites aux femmes, et #BalanceTonPorc, qui a livré des noms à la vindicte populaire […] Il faut donc pouvoir critiquer #BalanceTonPorc, au nom d’un féminisme plus juste",
+          "date": "09/11/2020",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Laure Daussy"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Charlie Hebdo"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "[...] a distinction must be made between #MeToo, which made it possible to show the scale of violence against women, and #BalanceTonPorc, which delivered names to popular vindictiveness [...] It must therefore be possible to criticize #BalanceTonPorc in the name of a fairer feminism.",
+        "translated_date": "09/11/2020",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every claim and qualification is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:41:50.825952+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Cancel culture is a weapon of radical feminism\" argument",
+      "Cancel culture is a weapon of radical feminism conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": true,
+    "historical_quantitative_transfer_note": "All numerical expressions were transferred exactly from the protected historical French summary and checked field by field."
+  },
+  "translation_sha256": "79bcc91274c05471a2c5bc6a6c169c0471205e6699018022bf3c656d9be006a4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0123",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "af18dfe6063bd70f8600970e45eba35bbddd09db99a5526af360b06f1dd045d8"
+}
