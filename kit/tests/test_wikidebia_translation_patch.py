@@ -30,11 +30,11 @@ def _fixture(tmp_path: Path, monkeypatch):
         "section_mapping": {},
         "arguments": [
             {"id": "A1", "review_unit_id": "U001", "translation": {
-                "status": "pending", "canonical_title": "Argument one",
+                "status": "pending", "canonical_title": "Argument one", "displayed_title": "Argument one",
                 "french": {"metadata": metadata["arguments"][0], "content": content["arguments"][0]},
             }},
             {"id": "A2", "review_unit_id": "U002", "translation": {
-                "status": "pending", "canonical_title": "Argument two",
+                "status": "pending", "canonical_title": "Argument two", "displayed_title": "Argument two",
                 "french": {"metadata": metadata["arguments"][1], "content": content["arguments"][1]},
             }},
         ],

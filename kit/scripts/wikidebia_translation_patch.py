@@ -13,6 +13,7 @@ from wikidebia_corpus_build import canonical_json, load_json, now_iso, relative_
 from wikidebia_editorial_workspace import WorkspaceError, validate_work_id
 from wikidebia_render import _load_workspace
 from wikidebia_translation_packet import TranslationPacketError, build_packet
+from wikidebia_translation_preflight import TranslationPreflightError, run_preflight
 from wikidebia_translation_resume import TranslationResumeError, write_resume_capsule
 from wikidebia_update import sha_object
 
@@ -134,7 +135,16 @@ def seal_patch(
         raise TranslationPatchError("Le correctif doit être un brouillon connu")
     if any(patch.get(key) != value for key, value in (("debate_id", debate_id), ("work_id", work_id), ("unit_id", unit_id))):
         raise TranslationPatchError("Identité du correctif divergente")
-    _current_packet(project_root, patch)
+    packet = _current_packet(project_root, patch)
+    preflight = run_preflight(
+        project_root, debate_id, work_id, unit_id,
+        patch=patch, packet=packet, workspace=workspace,
+    )
+    if preflight["status"] != "passed":
+        codes = sorted({row["code"] for row in preflight["findings"]})
+        raise TranslationPatchError(
+            "Préflight mécanique bloqué : " + ", ".join(codes)
+        )
     reviewer, note = reviewer.strip(), note.strip()
     if len(reviewer) < 3 or len(note) < 12 or unit_status not in {"pending", "approved"}:
         raise TranslationPatchError("Relecteur, note explicite et statut d’unité valides sont obligatoires")
@@ -265,6 +275,6 @@ def main(argv: Sequence[str] | None = None) -> int:
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
-    except (TranslationPatchError, TranslationPacketError, TranslationResumeError, WorkspaceError, OSError, ValueError, KeyError) as exc:
+    except (TranslationPatchError, TranslationPacketError, TranslationPreflightError, TranslationResumeError, WorkspaceError, OSError, ValueError, KeyError) as exc:
         print(f"CORRECTIF D’UNITÉ BLOQUÉ : {exc}", file=os.sys.stderr)
         raise SystemExit(2)
