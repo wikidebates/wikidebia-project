@@ -98,3 +98,30 @@ def test_generated_after_import_summary_still_required(tmp_path: Path):
     _remove_summary_everywhere(owner_root, page2, path2)
     report2 = validate_package(owner_root, scopes=["schema", "wikicode"])
     assert not any(f.code in {"WDV-MWK-004", "WDV-EDT-027", "WDV-EDT-030"} and (f.path == page2["file_path"] or f.details.get("page_id") == page2["page_id"]) for f in report2.findings)
+
+
+def test_preexisting_empty_classification_metadata_can_remain_absent(tmp_path: Path):
+    manifest, page, path = _package(tmp_path)
+    current = json.loads((tmp_path / "manifest.json").read_text(encoding="utf-8"))
+    stored_page = next(row for row in current["pages"] if row["page_id"] == page["page_id"] and row["language"] == "fr")
+    stored_page["page_origin"] = "preexisting"
+    dump(tmp_path / "manifest.json", current)
+
+    registry_path = tmp_path / "data/registre_debat.json"
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    node = next(row for row in registry["graph"]["nodes"] if row["id"] == page["page_id"])
+    node["fr"]["rubriques"] = []
+    node["fr"]["keywords"] = []
+    dump(registry_path, registry)
+
+    rendered = path.read_text(encoding="utf-8")
+    rendered = rendered.replace(f"|rubriques={_field(rendered, 'rubriques')}\n", "")
+    rendered = rendered.replace(f"|mots-clés={_field(rendered, 'mots-clés')}\n", "")
+    path.write_text(rendered, encoding="utf-8")
+
+    report = validate_package(tmp_path, scopes=["wikicode"])
+    missing = [
+        finding for finding in report.findings
+        if finding.code == "WDV-MWK-004" and finding.path == page["file_path"]
+    ]
+    assert not any("rubriques" in finding.message or "mots-clés" in finding.message for finding in missing)

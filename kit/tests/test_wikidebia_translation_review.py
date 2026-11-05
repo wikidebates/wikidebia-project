@@ -695,6 +695,8 @@ def test_apply_translation_creates_distinct_bilingual_copy(tmp_path: Path):
     registry = json.loads((target / "data/registre_debat.json").read_text(encoding="utf-8"))
     assert registry["debate"]["pages"]["en"]["canonical_title"] == "Test debate"
     assert all(node["en"]["title_status"] == "validated" for node in registry["graph"]["nodes"] if node["status"] == "active")
+    en_lock = json.loads((target / "data/en_content_lock.json").read_text(encoding="utf-8"))
+    assert all(row["dedicated_debate"] is None or isinstance(row["dedicated_debate"], str) for row in en_lock["arguments"])
     name_review = json.loads((target / "reviews/argument_name_discovery_review.json").read_text(encoding="utf-8"))
     assert name_review["normative_revision"] == translation.NORM_VERSION
     assert name_review["version"] == "wikidebia-argument-name-discovery-review-1.2"

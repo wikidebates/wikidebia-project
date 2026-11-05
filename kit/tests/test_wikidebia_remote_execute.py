@@ -100,7 +100,12 @@ def _fill_review(path: Path):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def make_approved_fixture(tmp_path: Path, *, no_changes: bool = False):
+def make_approved_fixture(
+    tmp_path: Path,
+    *,
+    no_changes: bool = False,
+    include_unplanned_manifest_page: bool = False,
+):
     project = tmp_path / "project"
     debate_id = "debat_test"
     work_id = "EDIT-EXEC-001"
@@ -112,16 +117,25 @@ def make_approved_fixture(tmp_path: Path, *, no_changes: bool = False):
     text = argument("Texte final")
     page_path = page_dir / "A0001.wiki"
     page_path.write_text(text, encoding="utf-8")
+    manifest_pages = [{
+        "language": "fr", "page_id": "A0001", "page_type": "argument",
+        "canonical_title": "Argument final", "file_path": "output/fr/arguments/A0001.wiki",
+        "sha256": update.sha_file(page_path),
+    }]
+    if include_unplanned_manifest_page:
+        excluded_path = page_dir / "A0002.wiki"
+        excluded_path.write_text(argument("Page réutilisée hors périmètre"), encoding="utf-8")
+        manifest_pages.append({
+            "language": "fr", "page_id": "A0002", "page_type": "argument",
+            "canonical_title": "Argument réutilisé", "file_path": "output/fr/arguments/A0002.wiki",
+            "sha256": update.sha_file(excluded_path),
+        })
     manifest = {
         "debate_id": debate_id,
         "global_status": "release_ready",
         "release_version": "test-release",
         "publication_gate": {"remote_write_authorized": False},
-        "pages": [{
-            "language": "fr", "page_id": "A0001", "page_type": "argument",
-            "canonical_title": "Argument final", "file_path": "output/fr/arguments/A0001.wiki",
-            "sha256": update.sha_file(page_path),
-        }],
+        "pages": manifest_pages,
     }
     (release / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (release / "release").mkdir()
@@ -249,6 +263,24 @@ def test_execution_blocks_if_remote_changes_after_preflight(tmp_path: Path):
         raise AssertionError("Une modification distante postérieure au préflight a été écrasée")
     assert not any(event[0] == "write" for event in adapter.events)
     assert (project / ".state/remote-executions" / debate_id / work_id / comparison_id / "execution-failure.json").is_file()
+
+
+def test_execution_attests_only_manifest_pages_in_signed_plan(tmp_path: Path):
+    project, debate_id, work_id, comparison_id, approved, adapter, text = make_approved_fixture(
+        tmp_path,
+        include_unplanned_manifest_page=True,
+    )
+    prepared = execution.prepare_execution(
+        project, debate_id, work_id, comparison_id, approved["acceptance_sha256"], adapter=adapter
+    )
+    receipt = execution.execute_accepted_plan(
+        project, debate_id, work_id, comparison_id, prepared["preflight_sha256"], adapter=adapter
+    )
+
+    assert receipt["status"] == "executed"
+    assert adapter.pages[("fr", "Argument final")][1] == text
+    state = json.loads((project / ".state/published" / debate_id / "fr/latest.json").read_text(encoding="utf-8"))
+    assert [row["page_id"] for row in state["pages"]] == ["A0001"]
 
 
 def test_prepare_refuses_wrong_acceptance_hash(tmp_path: Path):

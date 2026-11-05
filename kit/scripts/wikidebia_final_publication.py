@@ -29,7 +29,13 @@ from pathlib import Path
 from typing import Any, Iterable, Mapping
 
 from wikidebia_corpus_build import full_tree_sha256, load_json, now_iso, sha256_file, write_json
-from wikidebia_publish import GenericPublisher, PublicationError, sha_object as publish_sha_object, sha_text
+from wikidebia_publish import (
+    GenericPublisher,
+    PublicationError,
+    extract_parameter,
+    sha_object as publish_sha_object,
+    sha_text,
+)
 from wikidebia_release_info import KIT_VERSION, VALIDATOR_VERSION
 from wikidebia_update import RemoteUpdatePlanner, PlanExecutor, build_adapter, sha_object
 from wikidebia_workflow_baseline import (
@@ -41,6 +47,8 @@ FINAL_RECEIPT_SCHEMA = "wikidebia-final-publication-receipt-1.0"
 PREFLIGHT_SCHEMA = "wikidebia-final-publication-preflight-1.0"
 AUTHORIZATION_SCHEMA = "wikidebia-final-publication-authorization-1.0"
 ROLLOVER_SCHEMA = "wikidebia-final-publication-date-rollover-1.0"
+LATE_REUSE_SCHEMA = "wikidebia-late-existing-english-reuse-1.0"
+REMOTE_CONTENT_REPLACEMENTS_SCHEMA = "wikidebia-remote-content-replacements-1.0"
 
 
 class FinalPublicationError(RuntimeError):
@@ -219,9 +227,38 @@ def _english_config(project_root: Path, debate_id: str, corpus_root: Path, run_d
             "remote_title_overrides": {"en": {}},
         },
     })
+    value = _apply_remote_content_replacements(run_dir, debate_id, value)
     path = run_dir / "english-publication-config.json"
     write_json(path, value)
     return path, value
+
+
+def _apply_remote_content_replacements(
+    run_dir: Path,
+    debate_id: str,
+    config: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Load a debate-scoped, checksummed remote-compatibility receipt."""
+    value = copy.deepcopy(dict(config))
+    path = run_dir / "remote-content-replacements.json"
+    if not path.is_file():
+        return value
+    receipt = load_json(path, "reçu de remplacements de contenu distant")
+    if (
+        receipt.get("schema") != REMOTE_CONTENT_REPLACEMENTS_SCHEMA
+        or receipt.get("schema_version") != "1.0"
+        or receipt.get("debate_id") != debate_id
+        or receipt.get("receipt_sha256") != _canonical(receipt, "receipt_sha256")
+    ):
+        raise FinalPublicationError("Reçu de remplacements de contenu distant invalide")
+    replacements = receipt.get("replacements") or []
+    if not isinstance(replacements, list) or not replacements:
+        raise FinalPublicationError("Reçu de remplacements de contenu distant vide")
+    operation = dict(value.get("operation") or {})
+    operation["remote_content_replacements"] = copy.deepcopy(replacements)
+    operation["remote_content_replacements_receipt_sha256"] = receipt["receipt_sha256"]
+    value["operation"] = operation
+    return value
 
 
 def _reorder_english_plan(plan: dict[str, Any]) -> dict[str, Any]:
@@ -236,6 +273,177 @@ def _reorder_english_plan(plan: dict[str, Any]) -> dict[str, Any]:
     value["actions"] = actions
     value.pop("plan_sha256", None)
     value["plan_sha256"] = publish_sha_object(value)
+    return value
+
+
+def _interlanguage_target(text: str) -> str:
+    value = extract_parameter(text, "interlangue")
+    if not value.strip() or extract_parameter(value, "langue").strip() != "en":
+        return ""
+    return extract_parameter(value, "page").strip()
+
+
+def _late_reuse_pruned_page_ids(release_copy: Path, frontier_ids: set[str]) -> list[str]:
+    manifest = load_json(release_copy / "manifest.json", "manifest")
+    debate_ids = {
+        str(row.get("page_id") or "")
+        for row in manifest.get("pages") or []
+        if row.get("language") == "fr" and row.get("page_type") == "debate"
+    }
+    graph = load_json(release_copy / "graph/graphe_argumentatif.json", "graphe argumentatif")
+    node_ids = {
+        str(row.get("id") or "")
+        for row in graph.get("nodes") or []
+        if str(row.get("id") or "")
+    }
+    if frontier_ids & debate_ids:
+        return sorted(node_ids)
+
+    occurrences = list(graph.get("occurrences") or [])
+    children: dict[str, list[str]] = {}
+    occurrence_node: dict[str, str] = {}
+    by_node: dict[str, set[str]] = {}
+    frontier_occurrences: set[str] = set()
+    for row in occurrences:
+        occurrence_id = str(row.get("id") or "")
+        node_id = str(row.get("node_id") or "")
+        if not occurrence_id or not node_id:
+            continue
+        occurrence_node[occurrence_id] = node_id
+        by_node.setdefault(node_id, set()).add(occurrence_id)
+        parent_id = str(row.get("parent_occurrence_id") or "")
+        if parent_id:
+            children.setdefault(parent_id, []).append(occurrence_id)
+        if node_id in frontier_ids:
+            frontier_occurrences.add(occurrence_id)
+
+    descendants: set[str] = set()
+    pending = list(frontier_occurrences)
+    visited = set(frontier_occurrences)
+    while pending:
+        parent = pending.pop()
+        for child in children.get(parent, []):
+            if child in visited:
+                continue
+            visited.add(child)
+            descendants.add(child)
+            pending.append(child)
+    return sorted(
+        node_id
+        for node_id, ids in by_node.items()
+        if node_id not in frontier_ids and ids and ids <= descendants
+    )
+
+
+def _discover_late_existing_english_reuse(
+    project_root: Path,
+    release_copy: Path,
+    state_dir: Path,
+    french_plan: Mapping[str, Any],
+    english_config: Mapping[str, Any],
+) -> dict[str, Any] | None:
+    manifest = load_json(release_copy / "manifest.json", "manifest")
+    local_english_ids = {
+        str(row.get("page_id") or "")
+        for row in manifest.get("pages") or []
+        if row.get("language") == "en"
+    }
+    candidates: list[dict[str, Any]] = []
+    for row in (french_plan.get("operations") or {}).get("skip") or []:
+        page_id = str(row.get("page_id") or "")
+        if page_id not in local_english_ids:
+            continue
+        source = Path(str(row.get("source_path") or ""))
+        if not source.is_absolute():
+            source = project_root / source
+        if not source.is_file():
+            continue
+        target = _interlanguage_target(source.read_text(encoding="utf-8"))
+        if target:
+            candidates.append({"row": row, "english_title": target})
+    if not candidates:
+        return None
+
+    adapter = build_adapter(dict(english_config), project_root)
+    verified: list[dict[str, Any]] = []
+    adapter.open_language_read_only("en")
+    try:
+        for candidate in candidates:
+            exists, revision_id, text = adapter.read_page(candidate["english_title"])
+            if not exists or revision_id is None:
+                continue
+            row = candidate["row"]
+            verified.append({
+                "page_id": str(row.get("page_id") or ""),
+                "page_type": str(row.get("page_type") or ""),
+                "french_title": str(row.get("title") or ""),
+                "french_revision_id": row.get("observed_revision_id"),
+                "english_title": candidate["english_title"],
+                "english_revision_id": revision_id,
+                "english_sha256": sha_text(text),
+            })
+    finally:
+        adapter.close_language()
+    if not verified:
+        return None
+
+    frontier_ids = {row["page_id"] for row in verified}
+    pruned_ids = _late_reuse_pruned_page_ids(release_copy, frontier_ids)
+    value = {
+        "schema": LATE_REUSE_SCHEMA,
+        "schema_version": "1.0",
+        "detected_at": now_iso(),
+        "status": "verified",
+        "frontiers": sorted(verified, key=lambda row: row["page_id"]),
+        "pruned_descendant_page_ids": pruned_ids,
+        "excluded_english_page_ids": sorted(frontier_ids | set(pruned_ids)),
+        # Frontier pages already carry the verified link to the existing
+        # English translation.  Exclude them from the French execution plan as
+        # well: no write is required and a locally planned title may differ
+        # from the canonical pre-existing English title discovered late.
+        "excluded_french_page_ids": sorted(frontier_ids | set(pruned_ids)),
+        "french_plan_sha256": french_plan.get("plan_sha256"),
+        "remote_write_performed": False,
+    }
+    value["receipt_sha256"] = _canonical(value, "receipt_sha256")
+    write_json(state_dir / "late-existing-english-reuse.json", value)
+    return value
+
+
+def _filter_remote_update_plan(
+    plan: Mapping[str, Any],
+    excluded_by_language: Mapping[str, set[str]],
+) -> dict[str, Any]:
+    value = copy.deepcopy(dict(plan))
+    operations = value.get("operations") or {}
+    for name, rows in list(operations.items()):
+        operations[name] = [
+            row for row in rows
+            if str(row.get("page_id") or "") not in excluded_by_language.get(str(row.get("language") or ""), set())
+        ]
+    value["operations"] = operations
+    value["comparisons"] = [
+        row for row in (value.get("comparisons") or [])
+        if str(row.get("page_id") or "") not in excluded_by_language.get(str(row.get("language") or ""), set())
+    ]
+    value["counts"] = {name: len(rows) for name, rows in operations.items()}
+    value.pop("plan_sha256", None)
+    value["plan_sha256"] = sha_object(value)
+    return value
+
+
+def _apply_late_reuse_to_english_config(state_dir: Path, config: dict[str, Any]) -> dict[str, Any]:
+    receipt_path = state_dir / "late-existing-english-reuse.json"
+    if not receipt_path.is_file():
+        return config
+    receipt = load_json(receipt_path, "reçu de réutilisation anglaise tardive")
+    if receipt.get("receipt_sha256") != _canonical(receipt, "receipt_sha256"):
+        raise FinalPublicationError("Reçu de réutilisation anglaise tardive invalide")
+    value = copy.deepcopy(config)
+    operation = dict(value.get("operation") or {})
+    operation["exclude_page_ids"] = list(receipt.get("excluded_english_page_ids") or [])
+    operation["late_existing_english_reuse_receipt_sha256"] = receipt.get("receipt_sha256")
+    value["operation"] = operation
     return value
 
 
@@ -418,19 +626,42 @@ def _load_or_build_plans(
     # rejects it.  Authorization has not been created at this point, so saving
     # the plan cannot start a remote write and exposes the exact blocker for a
     # deterministic repair/resume.
-    _assert_safe_update_plan(safety_plan, full=True, approved_updates=approved_updates)
 
     # Exact FR execution plan, rebuilt separately so its signed state contains only
     # the interlanguage updates and cannot accidentally execute EN create rows.
     fr_config_path, fr_config = _update_config(
         project_root, debate_id, release_copy, state_dir, ["fr"], "french-update-config.json"
     )
+    # Final French publication is strictly an interlanguage-link overlay.  The
+    # live French page remains authoritative: human summaries, citations and
+    # graph relations added after the editorial snapshot must be preserved.
+    fr_config["interlanguage_only"] = True
+    write_json(fr_config_path, fr_config)
     fr_adapter = build_adapter(fr_config, project_root)
     fr_plan = RemoteUpdatePlanner(fr_config, fr_adapter, fr_config_path).build_plan(mode="no_delete")
+
+    en_config_path, en_config = _english_config(project_root, debate_id, release_copy, state_dir)
+    late_reuse = _discover_late_existing_english_reuse(
+        project_root, release_copy, state_dir, fr_plan, en_config
+    )
+    if late_reuse:
+        excluded_english = set(late_reuse.get("excluded_english_page_ids") or [])
+        excluded_french = set(late_reuse.get("excluded_french_page_ids") or [])
+        excluded_french.update(
+            str(row.get("page_id") or "") for row in (late_reuse.get("frontiers") or [])
+        )
+        safety_plan = _filter_remote_update_plan(
+            safety_plan, {"en": excluded_english, "fr": excluded_french}
+        )
+        fr_plan = _filter_remote_update_plan(fr_plan, {"fr": excluded_french})
+        en_config = _apply_late_reuse_to_english_config(state_dir, en_config)
+        write_json(en_config_path, en_config)
+
+    _assert_safe_update_plan(safety_plan, full=True, approved_updates=approved_updates)
+    write_json(state_dir / "safety-update-plan.json", safety_plan)
     _assert_safe_update_plan(fr_plan, full=False)
     write_json(state_dir / "french-update-plan.json", fr_plan)
 
-    en_config_path, en_config = _english_config(project_root, debate_id, release_copy, state_dir)
     en_adapter = build_adapter(en_config, project_root)
     en_publisher = GenericPublisher(en_config, en_adapter, en_config_path)
     en_plan = _reorder_english_plan(en_publisher.build_plan())
@@ -569,6 +800,8 @@ def _rollover_english_publication_date(
     old_authorization_sha = authorization.get("authorization_sha256")
     try:
         en_config_path, en_config = _english_config(project_root, debate_id, release_copy, state_dir)
+        en_config = _apply_late_reuse_to_english_config(state_dir, en_config)
+        write_json(en_config_path, en_config)
         en_adapter = build_adapter(en_config, project_root)
         publisher = GenericPublisher(en_config, en_adapter, en_config_path)
         new_plan = _reorder_english_plan(publisher.build_plan())
@@ -626,7 +859,12 @@ def _english_plan_needs_debate_first_migration(plan: Mapping[str, Any]) -> bool:
     return any(str(row.get("page_type") or "") == "argument" for row in creates[:first_debate])
 
 
-def _english_plan_order_transition(old_plan: Mapping[str, Any], new_plan: Mapping[str, Any]) -> dict[str, Any]:
+def _english_plan_order_transition(
+    old_plan: Mapping[str, Any],
+    new_plan: Mapping[str, Any],
+    *,
+    allowed_pending_desired_changes: Mapping[tuple[str, str], Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
     def keyed(plan: Mapping[str, Any]) -> dict[tuple[str, str], Mapping[str, Any]]:
         return {(str(row.get("language") or ""), str(row.get("page_id") or "")): row for row in (plan.get("actions") or [])}
 
@@ -642,6 +880,7 @@ def _english_plan_order_transition(old_plan: Mapping[str, Any], new_plan: Mappin
     completed: list[dict[str, Any]] = []
     remaining: list[dict[str, Any]] = []
     unchanged_skips: list[dict[str, Any]] = []
+    allowed_pending_desired_changes = allowed_pending_desired_changes or {}
     for key in sorted(old_actions):
         old = old_actions[key]
         new = new_actions[key]
@@ -650,6 +889,13 @@ def _english_plan_order_transition(old_plan: Mapping[str, Any], new_plan: Mappin
                 # An already-created translation must preserve exactly the old desired content.
                 if old.get(field) != new.get(field):
                     raise FinalPublicationError(f"Une page déjà créée diverge pendant la migration d'ordre : {old.get('title')}", remote_execution_started=True)
+                continue
+            if (
+                field == "desired_sha256"
+                and str(old.get("operation") or "") == "create"
+                and str(new.get("operation") or "") == "create"
+                and key in allowed_pending_desired_changes
+            ):
                 continue
             if old.get(field) != new.get(field):
                 raise FinalPublicationError(f"Le plan Debate-first modifie {field} pour {old.get('page_id')}", remote_execution_started=True)
@@ -670,7 +916,77 @@ def _english_plan_order_transition(old_plan: Mapping[str, Any], new_plan: Mappin
     if any(str(row.get("page_type") or "") == "debate" for row in pending_creates):
         if str(pending_creates[0].get("page_type") or "") != "debate":
             raise FinalPublicationError("Le plan successeur ne place pas Debate avant les Arguments restants", remote_execution_started=True)
-    return {"completed_before_order_migration": completed, "remaining_after_order_migration": remaining, "unchanged_skips": unchanged_skips}
+    return {
+        "completed_before_order_migration": completed,
+        "remaining_after_order_migration": remaining,
+        "unchanged_skips": unchanged_skips,
+        "pending_desired_content_replacements": [
+            dict(allowed_pending_desired_changes[key])
+            for key in sorted(allowed_pending_desired_changes)
+        ],
+    }
+
+
+def _verified_pending_remote_content_replacements(
+    old_plan: Mapping[str, Any],
+    new_plan: Mapping[str, Any],
+    publisher: GenericPublisher,
+    previous_publisher: GenericPublisher | None = None,
+) -> dict[tuple[str, str], dict[str, Any]]:
+    """Prove desired-hash changes caused only by signed remote rewrites.
+
+    Completed or pre-existing pages are deliberately excluded.  This recovery
+    is available solely to pending creates that remain absent remotely.
+    """
+    old_actions = {
+        (str(row.get("language") or ""), str(row.get("page_id") or "")): row
+        for row in (old_plan.get("actions") or [])
+    }
+    new_actions = {
+        (str(row.get("language") or ""), str(row.get("page_id") or "")): row
+        for row in (new_plan.get("actions") or [])
+    }
+    verified: dict[tuple[str, str], dict[str, Any]] = {}
+    for key in sorted(set(old_actions) & set(new_actions)):
+        old = old_actions[key]
+        new = new_actions[key]
+        if old.get("desired_sha256") == new.get("desired_sha256"):
+            continue
+        if old.get("operation") != "create" or new.get("operation") != "create":
+            continue
+        source_path = publisher.root / str(new.get("source_path") or "")
+        if not source_path.is_file() or sha256_file(source_path) != new.get("local_file_sha256"):
+            continue
+        raw_text = source_path.read_text(encoding="utf-8")
+        publication_date = str(new.get("publication_creation_date") or "")
+        if publication_date:
+            row = publisher._manifest_page(key[0], key[1])
+            if row is None:
+                continue
+            raw_text = publisher._english_translation_creation_text(row, raw_text, publication_date)
+        previous_text = (
+            previous_publisher._remote_content_text(key[0], raw_text)
+            if previous_publisher is not None
+            else raw_text
+        )
+        rewritten = publisher._remote_content_text(key[0], raw_text)
+        if (
+            rewritten == previous_text
+            or sha_text(previous_text) != old.get("desired_sha256")
+            or sha_text(rewritten) != new.get("desired_sha256")
+        ):
+            continue
+        verified[key] = {
+            "language": key[0],
+            "page_id": key[1],
+            "title": new.get("title"),
+            "previous_desired_sha256": old.get("desired_sha256"),
+            "successor_desired_sha256": new.get("desired_sha256"),
+            "remote_content_replacements": copy.deepcopy(
+                publisher.operation.get("remote_content_replacements") or []
+            ),
+        }
+    return verified
 
 
 def _migrate_english_publication_order(
@@ -692,6 +1008,8 @@ def _migrate_english_publication_order(
         _copy_if_present(state_dir / name, history / name)
     try:
         en_config_path, en_config = _english_config(project_root, debate_id, release_copy, state_dir)
+        en_config = _apply_late_reuse_to_english_config(state_dir, en_config)
+        write_json(en_config_path, en_config)
         en_adapter = build_adapter(en_config, project_root)
         publisher = GenericPublisher(en_config, en_adapter, en_config_path)
         new_plan = _reorder_english_plan(publisher.build_plan())
@@ -713,6 +1031,119 @@ def _migrate_english_publication_order(
             "previous_authorization_sha256": authorization.get("authorization_sha256"),
             "successor_authorization_sha256": new_authorization.get("authorization_sha256"),
             "remote_execution_already_started": True,
+            **transition,
+        }
+        audit["migration_sha256"] = _canonical(audit, "migration_sha256")
+        write_json(history / "migration.json", audit)
+        return new_plans, new_preflight, new_authorization
+    except Exception:
+        for name in tracked:
+            saved = history / name
+            target = state_dir / name
+            if saved.is_file():
+                shutil.copy2(saved, target)
+            elif target.exists():
+                target.unlink()
+        raise
+
+
+def _migrate_english_plan_after_kit_change(
+    project_root: Path,
+    debate_id: str,
+    release_copy: Path,
+    state_dir: Path,
+    baseline: Mapping[str, Any],
+    plans: Mapping[str, Any],
+    preflight: Mapping[str, Any],
+    authorization: Mapping[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    """Re-sign a partially executed English plan after a verified kit change.
+
+    The transition is intentionally as strict as the Debate-first recovery:
+    every page and immutable action field must remain identical, while an old
+    ``create`` may only become a cryptographically equivalent ``skip`` or stay
+    ``create``.  This permits verifier-only fixes without weakening the signed
+    publication contract.
+    """
+    old_plan = dict(plans["en_plan"])
+    adapter = build_adapter(dict(plans["en_config"]), project_root)
+    current_publisher = GenericPublisher(
+        dict(plans["en_config"]), adapter, Path(plans["en_config_path"])
+    )
+    expected_replacement_operation = (
+        _apply_remote_content_replacements(
+            state_dir, debate_id, {"operation": {}}
+        ).get("operation") or {}
+    )
+    expected_replacement_receipt = expected_replacement_operation.get(
+        "remote_content_replacements_receipt_sha256"
+    )
+    saved_replacement_receipt = (
+        (plans["en_config"].get("operation") or {}).get(
+            "remote_content_replacements_receipt_sha256"
+        )
+    )
+    if (
+        old_plan.get("package_fingerprints") == current_publisher._package_fingerprints()
+        and saved_replacement_receipt == expected_replacement_receipt
+    ):
+        return dict(plans), dict(preflight), dict(authorization)
+
+    history_root = state_dir / "kit-change-plan-migrations"
+    history_root.mkdir(parents=True, exist_ok=True)
+    index = 1
+    while (history_root / f"{index:03d}-verified-successor").exists():
+        index += 1
+    history = history_root / f"{index:03d}-verified-successor"
+    history.mkdir(parents=True)
+    tracked = (
+        "english-publication-config.json", "english-publication-plan.json",
+        "preflight.json", "authorization.json",
+    )
+    for name in tracked:
+        _copy_if_present(state_dir / name, history / name)
+
+    try:
+        en_config_path, en_config = _english_config(project_root, debate_id, release_copy, state_dir)
+        en_config = _apply_late_reuse_to_english_config(state_dir, en_config)
+        write_json(en_config_path, en_config)
+        en_adapter = build_adapter(en_config, project_root)
+        publisher = GenericPublisher(en_config, en_adapter, en_config_path)
+        new_plan = _reorder_english_plan(publisher.build_plan())
+        _assert_safe_english_plan(
+            new_plan, (en_config.get("operation") or {}).get("approved_existing_updates") or {}
+        )
+        verified_replacements = _verified_pending_remote_content_replacements(
+            old_plan, new_plan, publisher, current_publisher
+        )
+        transition = _english_plan_order_transition(
+            old_plan,
+            new_plan,
+            allowed_pending_desired_changes=verified_replacements,
+        )
+        write_json(state_dir / "english-publication-plan.json", new_plan)
+
+        new_plans = dict(plans)
+        new_plans.update({
+            "en_config_path": en_config_path,
+            "en_config": en_config,
+            "en_plan": new_plan,
+        })
+        new_preflight = _preflight(project_root, state_dir, new_plans)
+        new_authorization = _authorization(state_dir, baseline, new_preflight)
+        audit = {
+            "schema": "wikidebia-final-publication-kit-change-migration-1.0",
+            "schema_version": "1.0",
+            "debate_id": debate_id,
+            "migrated_at": now_iso(),
+            "reason": "verified_kit_change_after_partial_english_creation",
+            "remote_execution_already_started": True,
+            "previous_english_plan_sha256": old_plan.get("plan_sha256"),
+            "successor_english_plan_sha256": new_plan.get("plan_sha256"),
+            "previous_preflight_sha256": preflight.get("preflight_sha256"),
+            "successor_preflight_sha256": new_preflight.get("preflight_sha256"),
+            "previous_authorization_sha256": authorization.get("authorization_sha256"),
+            "successor_authorization_sha256": new_authorization.get("authorization_sha256"),
             **transition,
         }
         audit["migration_sha256"] = _canonical(audit, "migration_sha256")
@@ -796,6 +1227,9 @@ def publish_final_release(
             plans, preflight, authorization = _rollover_english_publication_date(
                 project_root, debate_id, release_copy, state_dir, baseline, plans, preflight, authorization
             )
+            plans, preflight, authorization = _migrate_english_plan_after_kit_change(
+                project_root, debate_id, release_copy, state_dir, baseline, plans, preflight, authorization
+            )
         if en_receipt_path.is_file():
             en_receipt = load_json(en_receipt_path, "reçu anglais final")
         else:
@@ -846,6 +1280,16 @@ def publish_final_release(
 
         release_tree_sha = str((baseline.get("release") or {}).get("release_copy_tree_sha256") or "")
         installed = _install_release_copy(project_root, debate_id, release_copy, release_tree_sha)
+        late_reuse_path = state_dir / "late-existing-english-reuse.json"
+        late_reuse = (
+            load_json(late_reuse_path, "reçu de réutilisation anglaise tardive")
+            if late_reuse_path.is_file() else None
+        )
+        remote_replacements_path = state_dir / "remote-content-replacements.json"
+        remote_replacements = (
+            load_json(remote_replacements_path, "reçu de remplacements de contenu distant")
+            if remote_replacements_path.is_file() else None
+        )
         receipt = {
             "schema": FINAL_RECEIPT_SCHEMA,
             "schema_version": "1.0",
@@ -862,6 +1306,12 @@ def publish_final_release(
             "french_receipt_sha256": fr_receipt.get("receipt_sha256"),
             "installed_release": installed,
             "semantic_convergence_reused_without_rerun": True,
+            "late_existing_english_reuse_receipt_sha256": (
+                late_reuse.get("receipt_sha256") if late_reuse else None
+            ),
+            "remote_content_replacements_receipt_sha256": (
+                remote_replacements.get("receipt_sha256") if remote_replacements else None
+            ),
             "publication_date_rollovers": [
                 load_json(path, "audit de changement de jour").get("rollover_sha256")
                 for path in sorted((state_dir / "publication-date-rollovers").glob("*/rollover.json"))

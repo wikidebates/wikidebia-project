@@ -27,6 +27,23 @@ REQUIRED_DIRECT_SCOPES = {"schema", "coherence", "graph", "files", "batches", "s
 PAIRED_EM_DASH_RE = re.compile(r"\s—\s[^—\n]{1,500}?\s—(?=\s|[.,;:!?])")
 SPLIT_ADJACENT_TEMPLATES_RE = re.compile(r"}}[ \t\r\n]+\{\{")
 LEGACY_PROFILE = "legacy"
+MEDIAWIKI_SUMMARY_CHARACTER_LIMIT = 500
+
+
+def mediawiki_summary_matches(expected: str, observed: str) -> bool:
+    """Accept the exact deterministic truncation performed by MediaWiki.
+
+    Edit summaries longer than 500 Unicode characters are stored as the first
+    497 characters followed by ``...``.  Content, author and tags remain
+    independently verified; this only prevents a successfully created page
+    from becoming unrecoverable because the server shortened its summary.
+    """
+    if observed == expected:
+        return True
+    return (
+        len(expected) > MEDIAWIKI_SUMMARY_CHARACTER_LIMIT
+        and observed == expected[: MEDIAWIKI_SUMMARY_CHARACTER_LIMIT - 3] + "..."
+    )
 DEFAULT_FAMILY_DIR = Path(__file__).resolve().parent.parent / "families"
 
 
@@ -562,11 +579,12 @@ class PywikibotAdapter:
         self.site = pywikibot.Site(code=self.codes[language], fam=self.family)
 
     def close_language(self) -> None:
-        try:
-            if self.site is not None and self.site.user() is not None:
-                self.site.logout()
-        finally:
-            self.site = None
+        # BotPassword credentials and cookies live only in this process.  A
+        # remote logout adds no publication safety, and MediaWiki logout calls
+        # can block indefinitely after a long write run.  Dropping the Site
+        # object closes our local session without introducing a fallible remote
+        # operation after all page revisions have already been verified.
+        self.site = None
 
     def assert_identity(self, expected_user: str) -> None:
         actual = None if self.site is None else self.site.user()
@@ -818,6 +836,35 @@ class GenericPublisher:
             )
         return replace_parameter(text, "creation-date", publication_date)
 
+    def _remote_content_text(self, language: str, text: str) -> str:
+        """Apply explicit, signed compatibility rewrites to remote content.
+
+        The release corpus remains byte-for-byte immutable.  Rewrites belong to
+        the publication operation and therefore participate in the config and
+        desired-content fingerprints recorded by the publication plan.
+        """
+        result = text
+        for index, replacement in enumerate(
+            self.operation.get("remote_content_replacements") or []
+        ):
+            if not isinstance(replacement, dict):
+                raise PublicationError(
+                    f"Remplacement de contenu distant invalide à l'index {index}"
+                )
+            source = str(replacement.get("from") or "")
+            target = str(replacement.get("to") or "")
+            languages = [
+                str(value) for value in (replacement.get("languages") or [])
+            ]
+            if not source or not target or source == target:
+                raise PublicationError(
+                    f"Remplacement de contenu distant incomplet à l'index {index}"
+                )
+            if languages and language not in languages:
+                continue
+            result = result.replace(source, target)
+        return result
+
     def _verified_existing_translation_creation(
         self,
         *,
@@ -838,7 +885,7 @@ class GenericPublisher:
             int(observed.get("parent_id", -1)) == 0
             and str(observed.get("user") or "") == expected_user
             and sha_text(str(observed.get("text", ""))) == sha_text(remote_text)
-            and str(observed.get("summary") or "") == summary
+            and mediawiki_summary_matches(summary, str(observed.get("summary") or ""))
             and all(tag in (observed.get("tags") or []) for tag in tags)
         )
 
@@ -898,6 +945,9 @@ class GenericPublisher:
                     raise PublicationError(
                         "page_type_order doit placer debate avant argument dans chaque langue"
                     )
+        # Validate publication-layer rewrites before any remote connection.  The
+        # actual application is deterministic and is covered by the signed plan.
+        self._remote_content_text(self.languages[0], "")
         if kind == "parameter_update":
             parameters = self.operation.get("parameters") or {}
             for language in self.languages:
@@ -1091,6 +1141,10 @@ class GenericPublisher:
     def _selected_pages(self) -> list[dict[str, Any]]:
         page_types = set(self.operation.get("page_types") or [])
         excluded = set(self.operation.get("exclude_page_types") or [])
+        excluded_page_ids = {
+            str(value) for value in (self.operation.get("exclude_page_ids") or [])
+            if str(value).strip()
+        }
         selected = []
         for row in self.manifest.get("pages", []):
             if row.get("language") not in self.languages:
@@ -1098,6 +1152,8 @@ class GenericPublisher:
             if page_types and row.get("page_type") not in page_types:
                 continue
             if row.get("page_type") in excluded:
+                continue
+            if str(row.get("page_id") or "") in excluded_page_ids:
                 continue
             selected.append(row)
         if not selected:
@@ -1610,6 +1666,7 @@ class GenericPublisher:
                     desired_create_text = self._english_translation_creation_text(
                         row, local_text, publication_creation_date
                     )
+                desired_create_text = self._remote_content_text(language, desired_create_text)
                 return PageAction(
                     **common,
                     publication_creation_date=publication_creation_date,
@@ -1695,6 +1752,7 @@ class GenericPublisher:
                     local_target,
                     insert_if_missing=insert_missing,
                 )
+            desired_text = self._remote_content_text(language, desired_text)
         except PublicationError as exc:
             return PageAction(
                 **common,
@@ -1810,6 +1868,7 @@ class GenericPublisher:
                 ),
             )
         )
+        desired = self._remote_content_text(str(action["language"]), desired)
         return desired, local_target
 
     def _verify_written_revision(
@@ -1830,7 +1889,7 @@ class GenericPublisher:
             if (
                 observed
                 and sha_text(str(observed.get("text", ""))) == sha_text(desired_text)
-                and observed.get("summary") == summary
+                and mediawiki_summary_matches(summary, str(observed.get("summary") or ""))
                 and all(tag in (observed.get("tags") or []) for tag in expected_tags)
             ):
                 return observed
@@ -2258,6 +2317,9 @@ class GenericPublisher:
                 desired_text = self._english_translation_creation_text(
                     row, desired_text, str(publication_creation_date)
                 )
+            desired_text = self._remote_content_text(
+                str(action.get("language") or ""), desired_text
+            )
             if sha_text(desired_text) != action["desired_sha256"]:
                 raise PublicationError(f"Contenu de création divergent du plan : {action['title']}")
             if exists:

@@ -2320,10 +2320,10 @@ def _validate_argument(item: Mapping[str, Any], mapping: Mapping[str, str], sour
     # adopting that exact remote revision.
     discovery_origin = "new" if existing_update is not None else lifecycle["page_origin"]
     argument_name, name_discovery = _validate_argument_name_discovery(row, node_id, discovery_origin)
-    dedicated_debate = _validate_dedicated_debate(row, node_id)
+    dedicated_debate_review = _validate_dedicated_debate(row, node_id)
     return {
         **({"existing_english_update": copy.deepcopy(existing_update)} if existing_update is not None else {}),
-        **dedicated_debate,
+        **dedicated_debate_review,
         "id": node_id, "canonical_title": canonical, "displayed_title": displayed,
         "sections": sections, "keywords": keywords, "summary": summary, "citations": citations, "citation_passages": passages, "sources": final_sources,
         "summary_provenance": summary_provenance or ("historical_absent" if summary_absent else "translated_source"),
@@ -2331,7 +2331,6 @@ def _validate_argument(item: Mapping[str, Any], mapping: Mapping[str, str], sour
         "summary_ratio_reviewed": bool(row.get("summary_ratio_reviewed")) if ratio is not None else True,
         "summary_ratio_exception_rationale": str(row.get("summary_ratio_exception_rationale") or "").strip(),
         "source_page_origin": source_page_origin, "forceful_expression": expression,
-        "dedicated_debate": dedicated_debate,
         "dedicated_debate_equivalent_to_french": dedicated_debate is not None,
         "dedicated_debate_review_note": dedicated_debate_review_note,
         "quantitative_claims": numbers, "quantitative_claims_verified": bool(row.get("quantitative_claims_verified")),

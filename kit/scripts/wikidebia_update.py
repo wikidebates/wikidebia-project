@@ -1486,6 +1486,7 @@ class RemoteUpdatePlanner:
         self.remote_adoptions = self._load_remote_adoptions()
         self.publication_url_replacements = self._load_publication_url_replacements()
         self.argument_name_assignments = self._load_argument_name_assignments()
+        self._registry_cache: dict[str, Any] | None | bool = False
         self._validate_config()
         inventory_root = self.config.get("state_inventory_root")
         resolved_inventory_root = self._resolve(inventory_root) if inventory_root else None
@@ -1770,14 +1771,47 @@ class RemoteUpdatePlanner:
             and str(row.get("page_id") or "") == page_id
             and str(row.get("page_type") or "") == page_type
         ]
-        if len(matches) != 1:
-            raise UpdateError(f"Titre anglais correspondant introuvable ou ambigu : {page_type}/{page_id}")
-        title = str(matches[0].get("canonical_title") or "").strip()
+        if len(matches) > 1:
+            raise UpdateError(f"Titre anglais correspondant ambigu : {page_type}/{page_id}")
+        title = str((matches[0] if matches else {}).get("canonical_title") or "").strip()
         if not title:
-            raise UpdateError(f"Titre anglais correspondant vide : {page_type}/{page_id}")
+            registry = self._registry()
+            record: dict[str, Any] | None = None
+            if page_type == "debate":
+                debate = registry.get("debate") or {}
+                candidate = ((debate.get("pages") or {}).get("en") or {})
+                if isinstance(candidate, dict):
+                    record = candidate
+            elif page_type == "argument":
+                for node in ((registry.get("graph") or {}).get("nodes") or []):
+                    if isinstance(node, dict) and str(node.get("id") or "") == page_id:
+                        candidate = node.get("en") or {}
+                        if isinstance(candidate, dict):
+                            record = candidate
+                        break
+            if record is not None and str(record.get("title_status") or "") == "locked":
+                title = str(record.get("canonical_title") or "").strip()
+        if not title:
+            raise UpdateError(f"Titre anglais correspondant introuvable : {page_type}/{page_id}")
         if any(char in title for char in "[]|"):
             raise UpdateError(f"Titre anglais incompatible avec un résumé MediaWiki : {page_type}/{page_id}")
         return title
+
+    def _registry(self) -> dict[str, Any]:
+        if self._registry_cache is not False:
+            return self._registry_cache if isinstance(self._registry_cache, dict) else {}
+        relative = str(((self.manifest.get("core_files") or {}).get("registry")) or "").strip()
+        if not relative:
+            self._registry_cache = None
+            return {}
+        path = self.corpus_root / relative
+        if not path.is_file():
+            raise UpdateError(f"Registre maître introuvable : {path}")
+        value = load_json(path)
+        if not isinstance(value, dict):
+            raise UpdateError(f"Registre maître invalide : {path}")
+        self._registry_cache = value
+        return value
 
     def _interlanguage_assignment_for(
         self,
@@ -3322,9 +3356,29 @@ class PlanExecutor:
             raise PlanConflict(f"Fichier local absent : {language}/{page_id}")
         return source, sha_text(source.read_text(encoding="utf-8"))
 
+    @staticmethod
+    def _planned_active_page_ids(plan: dict[str, Any], language: str) -> set[str]:
+        """Return manifest pages that the signed plan keeps in the managed state.
+
+        A final-publication plan may deliberately omit a manifest page when an
+        already translated English page is reused together with its descendants.
+        Such pages are outside this execution's signed scope and must therefore
+        not be compared with the local corpus or added to its published state.
+        """
+        operations = plan.get("operations") or {}
+        return {
+            str(operation.get("page_id"))
+            for name in ("create", "update", "move", "skip")
+            for operation in operations.get(name) or []
+            if operation.get("language") == language and operation.get("page_id") is not None
+        }
+
     def _verify_new_pages(self, language: str, plan: dict[str, Any]) -> None:
+        planned_page_ids = self._planned_active_page_ids(plan, language)
         for row in self.manifest.get("pages") or []:
             if row.get("language") != language:
+                continue
+            if str(row.get("page_id")) not in planned_page_ids:
                 continue
             _, desired_sha = self._planned_page_source(plan, language, str(row.get("page_id")), row)
             exists, _, remote_text = self.adapter.read_page(str(row.get("canonical_title")))
@@ -3397,6 +3451,7 @@ class PlanExecutor:
         # Read and verify the final remote state sequentially. This captures exact
         # revision IDs and prevents a stale or partial wiki state from being attested.
         for language in self.languages:
+            planned_page_ids = self._planned_active_page_ids(plan, language)
             user = str(self.config["sites"][language]["expected_user"])
             self.adapter.open_language(language, user)
             try:
@@ -3407,6 +3462,8 @@ class PlanExecutor:
                     if row.get("language") != language:
                         continue
                     page_id = str(row.get("page_id"))
+                    if page_id not in planned_page_ids:
+                        continue
                     active_ids.add(page_id)
                     title = str(row.get("canonical_title"))
                     if self.interlanguage_only:

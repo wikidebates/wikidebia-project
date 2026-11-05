@@ -292,6 +292,20 @@ def test_partial_managed_credentials_are_rejected_before_pywikibot_import(monkey
         raise AssertionError("identifiants gérés partiels acceptés")
 
 
+def test_pywikibot_adapter_close_is_local_and_never_calls_remote_logout(tmp_path):
+    adapter = module.PywikibotAdapter("wikidebates", {"en": "en"}, tmp_path)
+
+    class Site:
+        def logout(self):
+            raise AssertionError("remote logout must not be called")
+
+    adapter.site = Site()
+
+    adapter.close_language()
+
+    assert adapter.site is None
+
+
 def write_fixture(tmp_path: Path, kind: str):
     corpus = tmp_path / "corpus" / "demo"
     (corpus / "output" / "fr").mkdir(parents=True)

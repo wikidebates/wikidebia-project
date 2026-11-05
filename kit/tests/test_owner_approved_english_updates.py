@@ -129,6 +129,7 @@ def test_final_publication_plans_never_delete_pages_retired_from_the_work(monkey
     monkeypatch.setattr(final,'_update_config',update_config)
     monkeypatch.setattr(final,'_english_config',english_config)
     monkeypatch.setattr(final,'_approved_english_updates',lambda *args:{})
+    monkeypatch.setattr(final,'_discover_late_existing_english_reuse',lambda *args:{})
     monkeypatch.setattr(final,'_assert_safe_update_plan',lambda *args,**kwargs:None)
     monkeypatch.setattr(final,'_assert_safe_english_plan',lambda *args,**kwargs:None)
     final._load_or_build_plans(tmp_path,'debate','work',tmp_path/'release',tmp_path)

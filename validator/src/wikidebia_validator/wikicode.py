@@ -1002,6 +1002,25 @@ def validate_template_shape(ctx: PackageContext, tmpl: Template, lang: str, page
     ):
         spec['required'].remove('introduction')
     _apply_page_lifecycle_contract(ctx, spec, tmpl, lang, page_type, rel, page_manifest)
+    if (
+        lang == 'fr'
+        and page_type == 'argument'
+        and isinstance(page_manifest, dict)
+        and page_manifest.get('page_origin') == 'preexisting'
+    ):
+        page_id = str(page_manifest.get('page_id') or '')
+        registry_reader = getattr(ctx, 'registry', None)
+        registry = registry_reader() if callable(registry_reader) else {}
+        node = next(
+            (row for row in ((registry or {}).get('graph') or {}).get('nodes', []) if str(row.get('id') or '') == page_id),
+            None,
+        )
+        french = (node or {}).get('fr') or {}
+        # A differential render must preserve historically absent classification
+        # metadata instead of inventing it merely to satisfy creation-time rules.
+        for parameter, field in (('rubriques', 'rubriques'), ('mots-clés', 'keywords')):
+            if french.get(field) == [] and parameter in spec['required']:
+                spec['required'].remove(parameter)
     if tmpl.name != spec['model']:
         ctx.report.error('WDV-MWK-002', f"Modèle principal attendu {spec['model']}, trouvé {tmpl.name}", path=rel)
     keys = [k for k, _ in tmpl.params]
