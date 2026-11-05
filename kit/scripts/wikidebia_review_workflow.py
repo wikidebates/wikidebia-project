@@ -86,6 +86,12 @@ from wikidebia_release import release_workspace
 from wikidebia_final_publication import publish_final_release, FinalPublicationError
 from wikidebia_french_checkpoint import publish_checkpoint, FrenchCheckpointError
 from wikidebia_workflow_baseline import resolve_workflow_release_baseline, WorkflowBaselineError
+from wikidebia_access_preflight import (
+    AccessPreflightError,
+    access_contract_sha256,
+    run_access_preflight,
+    verify_access_receipt,
+)
 
 # Compatibility aliases: the historical CLI/tests used the metadata names.
 # Their semantics are now title-only; classification moved to the content review.
@@ -177,6 +183,60 @@ def _save_workflow(project_root: Path, state: Mapping[str, Any]) -> None:
     path = _workflow_path(project_root, str(state["debate_id"]))
     path.parent.mkdir(parents=True, exist_ok=True)
     write_json(path, dict(state))
+
+
+def _ensure_access_preflight(project_root: Path, state: dict[str, Any]) -> dict[str, Any]:
+    """Authenticate both publication identities before costly editorial work."""
+    if state.get("phase") == "published":
+        return state
+    # Minimal test fixtures and source-only consumers do not contain a runnable
+    # MediaWiki family. A real kit installation always does.
+    family_file = project_root / "kit/families/wikidebates_family.py"
+    if not family_file.is_file():
+        return state
+    contract_sha = access_contract_sha256(project_root)
+    receipt_path = _workflow_root(project_root, str(state["debate_id"])) / "access-preflight.json"
+    if receipt_path.is_file():
+        receipt = load_json(receipt_path, "reçu du diagnostic d’accès")
+        if verify_access_receipt(receipt, contract_sha):
+            summary = {
+                "status": "ready",
+                "checked_at": receipt.get("checked_at"),
+                "contract_sha256": contract_sha,
+                "receipt_sha256": receipt.get("receipt_sha256"),
+                "receipt_path": _relative(receipt_path, project_root),
+            }
+            if state.get("access_preflight") != summary:
+                state["access_preflight"] = summary
+                state["updated_at"] = now_iso()
+                _save_workflow(project_root, state)
+            return state
+    try:
+        receipt = run_access_preflight(project_root)
+    except AccessPreflightError as exc:
+        state["status"] = "blocked_access_preflight"
+        state["access_preflight"] = {
+            "status": "blocked",
+            "contract_sha256": contract_sha,
+            "error": str(exc),
+            "recorded_at": now_iso(),
+        }
+        state["updated_at"] = now_iso()
+        _save_workflow(project_root, state)
+        raise WorkflowError("Diagnostic d’accès bilingue bloqué : " + str(exc)) from exc
+    write_json(receipt_path, receipt)
+    state["access_preflight"] = {
+        "status": "ready",
+        "checked_at": receipt.get("checked_at"),
+        "contract_sha256": contract_sha,
+        "receipt_sha256": receipt.get("receipt_sha256"),
+        "receipt_path": _relative(receipt_path, project_root),
+    }
+    if state.get("status") == "blocked_access_preflight":
+        state["status"] = "running"
+    state["updated_at"] = now_iso()
+    _save_workflow(project_root, state)
+    return state
 
 
 def reconcile_workflow(project_root: Path, debate_id: str) -> dict[str, Any]:
@@ -1576,6 +1636,7 @@ def start_workflow(
             state.pop("last_remote_publication_execution_started", None)
             state["updated_at"] = now_iso()
             _save_workflow(project_root, state)
+        state = _ensure_access_preflight(project_root, state)
         try:
             return _mechanical_advance(project_root, state)
         except FrenchCheckpointError as exc:
@@ -1606,6 +1667,7 @@ def start_workflow(
         "updated_at": now_iso(),
     }
     _save_workflow(project_root, state)
+    state = _ensure_access_preflight(project_root, state)
     state["snapshot_path"] = _stage_snapshot_input(project_root, selected_id, snapshot)
     state["updated_at"] = now_iso()
     _save_workflow(project_root, state)
