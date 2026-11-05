@@ -319,14 +319,77 @@ def test_13_interruption_then_resume_is_idempotent(tmp_path):
     p, config, path, adapter = plan(tmp_path, old_pages=[], new_pages=[("fr","A1","Un",one),("fr","A2","Deux",two)])
     executor = module.PlanExecutor(config, adapter, path)
     adapter.fail_after_writes = 1
-    try:
+    with pytest.raises(RuntimeError, match="interruption"):
         executor.execute(p, p["plan_sha256"])
-    except RuntimeError:
-        pass
+
+    progress_path = tmp_path / "logs" / "update-progress.json"
+    progress = json.loads(progress_path.read_text(encoding="utf-8"))
+    checkpoint_sha = progress.pop("checkpoint_sha256")
+    assert checkpoint_sha == module.sha_object(progress)
+    assert progress["status"] == "failed"
+    assert [(row["operation"], row["page_id"]) for row in progress["completed"]] == [("create", "A1")]
+    assert "résumé=Un" not in progress_path.read_text(encoding="utf-8")
+
+    writes_before_resume = [event for event in adapter.events if event[0] == "write"]
     adapter.fail_after_writes = None
     receipt = executor.execute(p, p["plan_sha256"])
-    assert receipt["counts"]["already_done"] == 1
-    assert receipt["counts"]["created"] == 1
+    assert receipt["counts"] == {"created": 2}
+    assert adapter.write_count == 2
+    writes_after_resume = [event for event in adapter.events if event[0] == "write"]
+    assert writes_after_resume[len(writes_before_resume):] == [
+        ("write", "fr", "Deux", "Création de l'argument à partir du corpus validé")
+    ]
+    final_progress = json.loads(progress_path.read_text(encoding="utf-8"))
+    assert final_progress["status"] == "completed"
+    assert [row["page_id"] for row in final_progress["completed"]] == ["A1", "A2"]
+
+
+def test_13b_tampered_matching_checkpoint_blocks_resume(tmp_path):
+    one, two = argument("Un"), argument("Deux")
+    p, config, path, adapter = plan(
+        tmp_path,
+        old_pages=[],
+        new_pages=[("fr", "A1", "Un", one), ("fr", "A2", "Deux", two)],
+    )
+    executor = module.PlanExecutor(config, adapter, path)
+    adapter.fail_after_writes = 1
+    with pytest.raises(RuntimeError, match="interruption"):
+        executor.execute(p, p["plan_sha256"])
+
+    progress_path = tmp_path / "logs" / "update-progress.json"
+    progress = json.loads(progress_path.read_text(encoding="utf-8"))
+    progress["completed"][0]["page_id"] = "A2"
+    progress_path.write_text(json.dumps(progress), encoding="utf-8")
+
+    adapter.fail_after_writes = None
+    with pytest.raises(module.PlanConflict, match="Checkpoint d.exécution invalide"):
+        executor.execute(p, p["plan_sha256"])
+    assert adapter.write_count == 1
+
+
+def test_13c_signed_non_prefix_checkpoint_blocks_resume(tmp_path):
+    one, two = argument("Un"), argument("Deux")
+    p, config, path, adapter = plan(
+        tmp_path,
+        old_pages=[],
+        new_pages=[("fr", "A1", "Un", one), ("fr", "A2", "Deux", two)],
+    )
+    executor = module.PlanExecutor(config, adapter, path)
+    adapter.fail_after_writes = 1
+    with pytest.raises(RuntimeError, match="interruption"):
+        executor.execute(p, p["plan_sha256"])
+
+    progress_path = tmp_path / "logs" / "update-progress.json"
+    progress = json.loads(progress_path.read_text(encoding="utf-8"))
+    progress["completed"][0]["page_id"] = "A2"
+    progress.pop("checkpoint_sha256")
+    progress["checkpoint_sha256"] = module.sha_object(progress)
+    progress_path.write_text(json.dumps(progress), encoding="utf-8")
+
+    adapter.fail_after_writes = None
+    with pytest.raises(module.PlanConflict, match="préfixe exact"):
+        executor.execute(p, p["plan_sha256"])
+    assert adapter.write_count == 1
 
 
 def test_14_remote_change_after_plan_is_conflict(tmp_path):

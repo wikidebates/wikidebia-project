@@ -39,6 +39,7 @@ replace_parameter = _publish.replace_parameter
 PLAN_VERSION = "wikidebia-remote-update-plan-1.0"
 STATE_VERSION = "wikidebia-published-state-1.0"
 RECEIPT_VERSION = "wikidebia-remote-update-receipt-1.0"
+UPDATE_PROGRESS_SCHEMA = "wikidebia-update-progress-1.0"
 OPERATIONS = ("create", "update", "move", "redirect", "delete", "skip", "manual_review", "blocked")
 GENERATED_MARKERS = (
     "avertissements-argument=Argument généré par IA",
@@ -2915,6 +2916,119 @@ class PlanExecutor:
         return selected
 
     @staticmethod
+    def _execution_mode(*, only_delete: bool, no_delete: bool) -> str:
+        return "only_delete" if only_delete else ("no_delete" if no_delete else "full_update")
+
+    def _ordered_operations(self, selected: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        ordered: list[dict[str, Any]] = []
+        for language in self.languages:
+            rows = sorted(
+                (row for row in selected if row["language"] == language),
+                key=lambda item: (item.get("phase", 99), item.get("page_id", "")),
+            )
+            ordered.extend(item for item in rows if item["operation"] != "delete")
+            ordered.extend(item for item in rows if item["operation"] == "delete")
+        return ordered
+
+    @staticmethod
+    def _operation_identity(row: dict[str, Any]) -> tuple[str, str, str]:
+        return (
+            str(row.get("operation") or ""),
+            str(row.get("language") or ""),
+            str(row.get("page_id") or ""),
+        )
+
+    @staticmethod
+    def _allowed_result_statuses() -> dict[str, set[str]]:
+        return {
+            "create": {"created", "already_done"},
+            "update": {"updated", "already_done"},
+            "move": {"moved", "already_done"},
+            "redirect": {"redirected", "already_done", "already_absent"},
+            "delete": {"deleted", "already_absent"},
+            "skip": {"verified_unchanged"},
+        }
+
+    def _progress_path(self) -> Path:
+        configured = self.config.get("update_progress_path")
+        return self._resolve(str(configured)) if configured else self.logs_dir / "update-progress.json"
+
+    def _load_progress(
+        self,
+        plan: dict[str, Any],
+        execution_mode: str,
+        ordered: list[dict[str, Any]],
+    ) -> list[dict[str, Any]]:
+        path = self._progress_path()
+        if not path.is_file():
+            return []
+        value = load_json(path)
+        if value.get("plan_sha256") != plan.get("plan_sha256") or value.get("execution_mode") != execution_mode:
+            return []
+        unsigned = dict(value)
+        claimed = unsigned.pop("checkpoint_sha256", None)
+        if (
+            value.get("schema") != UPDATE_PROGRESS_SCHEMA
+            or value.get("schema_version") != "1.0"
+            or value.get("debate_id") != self.debate_id
+            or value.get("status") not in {"running", "failed", "operations_completed", "completed"}
+            or claimed != sha_object(unsigned)
+        ):
+            raise PlanConflict("Checkpoint d’exécution invalide")
+        completed = value.get("completed")
+        if not isinstance(completed, list):
+            raise PlanConflict("Résultats absents du checkpoint d’exécution")
+        expected_prefix = [self._operation_identity(row) for row in ordered[:len(completed)]]
+        actual: list[tuple[str, str, str]] = []
+        allowed = self._allowed_result_statuses()
+        for row in completed:
+            if not isinstance(row, dict):
+                raise PlanConflict("Résultat invalide dans le checkpoint d’exécution")
+            identity = self._operation_identity(row)
+            if str(row.get("status") or "") not in allowed.get(identity[0], set()):
+                raise PlanConflict(f"Statut non final dans le checkpoint : {identity[1]}/{identity[2]}")
+            actual.append(identity)
+        if actual != expected_prefix:
+            raise PlanConflict("Le checkpoint d’exécution n’est pas un préfixe exact du plan signé")
+        return [dict(row) for row in completed]
+
+    def _write_progress(
+        self,
+        plan: dict[str, Any],
+        execution_mode: str,
+        results: list[dict[str, Any]],
+        status: str,
+        *,
+        current: dict[str, Any] | None = None,
+        error: Exception | None = None,
+    ) -> None:
+        value: dict[str, Any] = {
+            "schema": UPDATE_PROGRESS_SCHEMA,
+            "schema_version": "1.0",
+            "debate_id": self.debate_id,
+            "plan_sha256": plan["plan_sha256"],
+            "execution_mode": execution_mode,
+            "status": status,
+            "updated_at": utc_now(),
+            "completed": [dict(row) for row in results],
+        }
+        if current is not None:
+            value["current"] = {
+                "operation": current.get("operation"),
+                "language": current.get("language"),
+                "page_id": current.get("page_id"),
+                "title": current.get("title"),
+            }
+        if error is not None:
+            value["error_type"] = type(error).__name__
+        value["checkpoint_sha256"] = sha_object(value)
+        path = self._progress_path()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = path.with_suffix(path.suffix + ".tmp")
+        temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+        os.replace(temporary, path)
+
+    @staticmethod
     def _required_rights(operation: str) -> set[str]:
         return {
             "create": {"edit", "createpage"},
@@ -2965,33 +3079,56 @@ class PlanExecutor:
         selected = self._selected_operations(plan, only_delete=only_delete, no_delete=no_delete)
         if not selected:
             raise PlanConflict("Le plan ne contient aucune opération exécutable")
-        self._preflight_rights(selected)
+        execution_mode = self._execution_mode(only_delete=only_delete, no_delete=no_delete)
+        ordered = self._ordered_operations(selected)
         lock = self._acquire_lock()
         results: list[dict[str, Any]] = []
+        current: dict[str, Any] | None = None
+        progress_loaded = False
         try:
+            results = self._load_progress(plan, execution_mode, ordered)
+            progress_loaded = True
+            remaining = ordered[len(results):]
+            self._write_progress(plan, execution_mode, results, "running")
+            self._preflight_rights(remaining)
             for language in self.languages:
-                rows = [row for row in selected if row["language"] == language]
+                rows = [row for row in remaining if row["language"] == language]
                 if not rows:
                     continue
                 user = str(self.config["sites"][language]["expected_user"])
                 self.adapter.open_language(language, user)
                 try:
                     self.adapter.assert_identity(user)
-                    ordered = sorted(rows, key=lambda item: (item.get("phase", 99), item.get("page_id", "")))
-                    for row in [item for item in ordered if item["operation"] != "delete"]:
+                    for row in [item for item in rows if item["operation"] != "delete"]:
+                        current = row
                         results.append(self._execute_one(row, user, plan))
+                        self._write_progress(plan, execution_mode, results, "running", current=row)
                     # Verify the complete new graph before the first destructive deletion.
-                    delete_rows = [item for item in ordered if item["operation"] == "delete"]
+                    delete_rows = [item for item in rows if item["operation"] == "delete"]
                     if delete_rows:
                         self._verify_new_pages(language, plan)
                     for row in delete_rows:
+                        current = row
                         results.append(self._execute_one(row, user, plan))
+                        self._write_progress(plan, execution_mode, results, "running", current=row)
                 finally:
                     self.adapter.close_language()
+            current = None
+            self._write_progress(plan, execution_mode, results, "operations_completed")
             receipt = self._final_receipt(plan, results, only_delete=only_delete, no_delete=no_delete)
             self._write_receipt(receipt)
             self._write_published_states(plan, receipt, preserve_pending_deletes=no_delete)
+            self._write_progress(plan, execution_mode, results, "completed")
             return receipt
+        except Exception as exc:
+            if progress_loaded:
+                try:
+                    self._write_progress(plan, execution_mode, results, "failed", current=current, error=exc)
+                except Exception:
+                    # Preserve the original execution error. A checkpoint write
+                    # failure must never disguise the operation that needs a retry.
+                    pass
+            raise
         finally:
             try:
                 lock.unlink()
@@ -3498,14 +3635,7 @@ class PlanExecutor:
         if receipt.get("execution_mode") != expected_execution_mode:
             raise PlanConflict("Mode du reçu d’exécution divergent")
 
-        allowed_statuses = {
-            "create": {"created", "already_done"},
-            "update": {"updated", "already_done"},
-            "move": {"moved", "already_done"},
-            "redirect": {"redirected", "already_done", "already_absent"},
-            "delete": {"deleted", "already_absent"},
-            "skip": {"verified_unchanged"},
-        }
+        allowed_statuses = self._allowed_result_statuses()
         if expected_execution_mode == "no_changes":
             if receipt.get("status") != "no_changes":
                 raise PlanConflict("Statut du reçu no_changes divergent")
