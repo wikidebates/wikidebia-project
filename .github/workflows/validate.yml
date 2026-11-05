@@ -11,19 +11,58 @@ concurrency:
   group: validation-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  checks: read
+  pull-requests: read
+
 jobs:
   tests:
     runs-on: ubuntu-24.04
     steps:
+      - name: Reuse the merged PR validation
+        id: pr-validation
+        uses: actions/github-script@v8
+        with:
+          result-encoding: string
+          script: |
+            if (context.eventName !== 'push' || context.ref !== 'refs/heads/main') {
+              return 'false';
+            }
+            const pulls = await github.paginate(
+              github.rest.repos.listPullRequestsAssociatedWithCommit,
+              {owner: context.repo.owner, repo: context.repo.repo, commit_sha: context.sha}
+            );
+            const merged = pulls.find(pr => pr.merged_at && pr.merge_commit_sha === context.sha);
+            if (!merged) return 'false';
+            const checks = await github.paginate(
+              github.rest.checks.listForRef,
+              {owner: context.repo.owner, repo: context.repo.repo, ref: merged.head.sha}
+            );
+            return checks.some(check =>
+              check.name === 'tests' && check.conclusion === 'success' &&
+              check.app && check.app.slug === 'github-actions'
+            ) ? 'true' : 'false';
       - uses: actions/checkout@v5
+        if: steps.pr-validation.outputs.result != 'true'
       - uses: actions/setup-python@v6
+        if: steps.pr-validation.outputs.result != 'true'
         with:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: validator/requirements-dev.txt
-      - run: python -m pip install -r validator/requirements-dev.txt
-      - run: PYTHONPATH=validator/src python -m pytest -q validator/tests
-      - run: python -m pytest -q kit/tests --junitxml=/tmp/kit-tests.xml
-      - run: python kit/scripts/refresh_package_metadata.py --junit-xml /tmp/kit-tests.xml --check
-      - run: python validator/scripts/self_audit.py
-      - run: python -m unittest discover -s deploy/tests -v
+      - if: steps.pr-validation.outputs.result != 'true'
+        run: python -m pip install -r validator/requirements-dev.txt
+      - if: steps.pr-validation.outputs.result != 'true'
+        run: PYTHONPATH=validator/src python -m pytest -q validator/tests
+      - if: steps.pr-validation.outputs.result != 'true'
+        run: python -m pytest -q kit/tests --junitxml=/tmp/kit-tests.xml
+      - if: steps.pr-validation.outputs.result != 'true'
+        run: python kit/scripts/refresh_package_metadata.py --junit-xml /tmp/kit-tests.xml --check
+      - if: steps.pr-validation.outputs.result != 'true'
+        run: python validator/scripts/self_audit.py
+      - if: steps.pr-validation.outputs.result != 'true'
+        run: python -m unittest discover -s deploy/tests -v
+      - name: Confirm reused validation
+        if: steps.pr-validation.outputs.result == 'true'
+        run: echo "The exact merge commit reuses its successful pull-request validation."
