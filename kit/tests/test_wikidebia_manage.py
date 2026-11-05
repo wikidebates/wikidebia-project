@@ -1107,6 +1107,16 @@ def test_translation_packet_command_is_exposed_by_manager():
     assert args.reuse_memory is False
 
 
+def test_translation_next_command_is_exposed_by_manager():
+    args = module.build_parser().parse_args([
+        "corpus-workspace-translation-next", "debat_test",
+        "--work-id", "EDIT-TEST-001", "--no-memory",
+    ])
+    assert args.command == "corpus-workspace-translation-next"
+    assert args.debate_id == "debat_test"
+    assert args.no_memory is True
+
+
 def test_translation_patch_command_is_exposed_by_manager():
     args = module.build_parser().parse_args([
         "corpus-workspace-translation-patch", "debat_test",
@@ -1173,6 +1183,7 @@ def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
         "wikidebia_editorial_workspace.py", "wikidebia_editorial_review.py",
         "wikidebia_content_review.py", "wikidebia_translation_review.py",
         "wikidebia_translation_worklist.py", "wikidebia_translation_packet.py",
+        "wikidebia_translation_next.py",
         "wikidebia_translation_patch.py", "wikidebia_translation_memory.py",
         "wikidebia_external_deletions.py",
         "refresh_package_metadata.py",
