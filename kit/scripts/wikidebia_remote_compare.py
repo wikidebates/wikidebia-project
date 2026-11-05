@@ -371,10 +371,44 @@ class RemoteReadCheckpoint:
         return len(self._pages)
 
 
+def _previous_signed_pages(
+    parent: Path, current_id: str, *, debate_id: str, work_id: str,
+) -> tuple[dict[tuple[str, str], tuple[bool, int | None, str]], dict[str, Any] | None]:
+    for candidate in sorted((path for path in parent.iterdir() if path.is_dir() and path.name != current_id), reverse=True):
+        receipt_path = candidate / "comparison-receipt.json"
+        checkpoint_path = candidate / "read-checkpoint.json"
+        if not receipt_path.is_file() or not checkpoint_path.is_file():
+            continue
+        receipt = load_corpus_json(receipt_path, "reçu de comparaison antérieur")
+        checkpoint = load_corpus_json(checkpoint_path, "checkpoint de comparaison antérieur")
+        if receipt.get("receipt_sha256") != _canonical_sha(receipt, "receipt_sha256"):
+            raise RemoteComparisonError("Empreinte du reçu de comparaison antérieur invalide")
+        if checkpoint.get("checkpoint_sha256") != _canonical_sha(checkpoint, "checkpoint_sha256"):
+            raise RemoteComparisonError("Empreinte du checkpoint antérieur invalide")
+        if receipt.get("read_checkpoint_sha256") and receipt.get("read_checkpoint_sha256") != checkpoint.get("checkpoint_sha256"):
+            raise RemoteComparisonError("Le checkpoint antérieur ne correspond pas à son reçu")
+        if receipt.get("debate_id") != debate_id or receipt.get("work_id") != work_id or checkpoint.get("debate_id") != debate_id or checkpoint.get("work_id") != work_id:
+            continue
+        pages: dict[tuple[str, str], tuple[bool, int | None, str]] = {}
+        for row in checkpoint.get("pages") or []:
+            language, title = str(row.get("language") or ""), str(row.get("canonical_title") or "")
+            if not language or not title:
+                raise RemoteComparisonError("Page invalide dans le checkpoint antérieur")
+            exists = row.get("exists") is True
+            pages[(language, title)] = (exists, int(row["revision_id"]) if exists else None, str(row.get("content") or "") if exists else "")
+        return pages, {
+            "comparison_id": receipt.get("comparison_id"),
+            "receipt_sha256": receipt.get("receipt_sha256"),
+            "checkpoint_sha256": checkpoint.get("checkpoint_sha256"),
+            "page_count": len(pages),
+        }
+    return {}, None
+
+
 class ReadOnlyRecordingAdapter:
     """Allow only the methods used by the planner and record every remote read."""
 
-    def __init__(self, base: Any, checkpoint: RemoteReadCheckpoint | None = None) -> None:
+    def __init__(self, base: Any, checkpoint: RemoteReadCheckpoint | None = None, previous_pages: Mapping[tuple[str, str], tuple[bool, int | None, str]] | None = None) -> None:
         self.base = base
         self.checkpoint = checkpoint
         self.current_language: str | None = None
@@ -385,6 +419,9 @@ class ReadOnlyRecordingAdapter:
         self.prefetched_pages: dict[tuple[str, str], tuple[bool, int | None, str]] = {}
         self.checkpoint_pages_reused = 0
         self.network_pages_read = 0
+        self.previous_pages = dict(previous_pages or {})
+        self.previous_pages_reused = 0
+        self.revision_metadata_pages_read = 0
 
     def open_language(self, language: str, expected_user: str) -> None:
         self.base.open_language(language, expected_user)
@@ -446,9 +483,29 @@ class ReadOnlyRecordingAdapter:
                 cached[title] = value
         pending = [title for title in requested if title not in cached]
         network_batches = 0
+        reused_before = self.previous_pages_reused
+        metadata_before = self.revision_metadata_pages_read
+        revision_reader = getattr(self.base, "read_page_revisions", None)
         for index in range(0, len(pending), 50):
             batch = pending[index:index + 50]
-            observed = reader(batch)
+            observed: dict[str, tuple[bool, int | None, str]] = {}
+            changed = list(batch)
+            if callable(revision_reader) and self.previous_pages:
+                revisions = revision_reader(batch)
+                if set(revisions) != set(batch):
+                    raise RemoteComparisonError("Lecture groupée des révisions incomplète")
+                changed = []
+                self.revision_metadata_pages_read += len(batch)
+                for title in batch:
+                    exists, revision_id = revisions[title]
+                    previous = self.previous_pages.get((language, title))
+                    if previous is not None and previous[0] == bool(exists) and previous[1] == revision_id:
+                        observed[title] = previous
+                        self.previous_pages_reused += 1
+                    else:
+                        changed.append(title)
+            if changed:
+                observed.update(reader(changed))
             missing = sorted(set(batch) - set(observed))
             if missing:
                 raise RemoteComparisonError(
@@ -457,10 +514,12 @@ class ReadOnlyRecordingAdapter:
             if self.checkpoint is not None:
                 self.checkpoint.record_batch(language, batch, observed)
             cached.update(observed)
-            network_batches += 1
+            network_batches += int(bool(changed))
         self.prefetched_pages.update({(language, title): value for title, value in cached.items()})
         self.checkpoint_pages_reused += len(requested) - len(pending)
-        self.network_pages_read += len(pending)
+        reused_now = self.previous_pages_reused - reused_before
+        metadata_now = self.revision_metadata_pages_read - metadata_before
+        self.network_pages_read += len(pending) - reused_now
         self.events.append({
             "event": "prefetch_pages",
             "language": language,
@@ -468,6 +527,8 @@ class ReadOnlyRecordingAdapter:
             "network_page_count": len(pending),
             "checkpoint_page_count": len(requested) - len(pending),
             "batch_count": network_batches,
+            "previous_inventory_page_count": reused_now,
+            "revision_metadata_page_count": metadata_now,
             "observed_at": now_iso(),
         })
 
@@ -612,13 +673,16 @@ def compare_workspace(
     else:
         run_dir.mkdir(parents=False)
         checkpoint = RemoteReadCheckpoint(checkpoint_path, checkpoint_identity)
+    previous_pages, previous_inventory = _previous_signed_pages(
+        parent, comparison_id, debate_id=debate_id, work_id=work_id,
+    )
     try:
         baseline_summary = _build_baseline(project_root, release_copy, run_dir, debate_id, languages)
         config = _config(project_root, release_copy, run_dir, debate_id, languages)
         config_path = run_dir / "config.json"
         write_json(config_path, config)
         base_adapter = adapter if adapter is not None else build_adapter(config, project_root)
-        recorder = ReadOnlyRecordingAdapter(base_adapter, checkpoint)
+        recorder = ReadOnlyRecordingAdapter(base_adapter, checkpoint, previous_pages)
         with _working_directory(project_root):
             planner = RemoteUpdatePlanner(config, recorder, config_path)
             plan = planner.build_plan(mode="all")
@@ -669,6 +733,9 @@ def compare_workspace(
             "read_checkpoint_page_count": checkpoint.page_count,
             "checkpoint_pages_reused": recorder.checkpoint_pages_reused,
             "network_pages_read": recorder.network_pages_read,
+            "previous_inventory": previous_inventory,
+            "previous_inventory_pages_reused": recorder.previous_pages_reused,
+            "revision_metadata_pages_read": recorder.revision_metadata_pages_read,
             "comparison_resumed": resumed,
             "validation_cache_status": planner.validation_cache_status,
             "validation_cache_key": planner.validation_cache_key,
@@ -707,6 +774,8 @@ def compare_workspace(
             "comparison_resumed": resumed,
             "checkpoint_pages_reused": recorder.checkpoint_pages_reused,
             "network_pages_read": recorder.network_pages_read,
+            "previous_inventory_pages_reused": recorder.previous_pages_reused,
+            "revision_metadata_pages_read": recorder.revision_metadata_pages_read,
             "validation_cache_status": planner.validation_cache_status,
             "validation_cache_key": planner.validation_cache_key,
             "external_deletions": external_deletions,

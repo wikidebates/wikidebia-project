@@ -82,6 +82,21 @@ class BatchFakeReadAdapter(FakeReadAdapter):
         return super().read_page(title)
 
 
+class RevisionBatchFakeAdapter(BatchFakeReadAdapter):
+    def __init__(self, pages):
+        super().__init__(pages)
+        self.revision_calls = []
+
+    def read_page_revisions(self, titles):
+        self.revision_calls.append((self.language, list(titles)))
+        return {
+            title: ((False, None) if (self.language, title) not in self.pages else (
+                True, self.pages[(self.language, title)][0],
+            ))
+            for title in titles
+        }
+
+
 class FailOnLanguageBatchAdapter(BatchFakeReadAdapter):
     def __init__(self, pages, language):
         super().__init__(pages)
@@ -281,6 +296,37 @@ def test_read_checkpoint_resumes_after_the_last_complete_batch(tmp_path: Path):
     assert resumed.checkpoint_pages_reused == 50
     assert resumed.network_pages_read == 70
     assert json.loads(path.read_text(encoding="utf-8"))["page_count"] == 120
+
+
+def test_prefetch_reuses_signed_content_when_revision_is_unchanged(tmp_path: Path):
+    identity = {
+        "debate_id": "debat_test", "work_id": "EDIT-REMOTE-001",
+        "comparison_id": "REMOTE-20260803-009", "scope": "fr",
+        "release_copy_tree_sha256": "a" * 64,
+    }
+    checkpoint = remote.RemoteReadCheckpoint(tmp_path / "checkpoint.json", identity)
+    base = RevisionBatchFakeAdapter({
+        ("fr", "Stable"): (10, "texte stable"),
+        ("fr", "Changed"): (12, "nouveau texte"),
+        ("fr", "New"): (1, "nouvelle page"),
+    })
+    previous = {
+        ("fr", "Stable"): (True, 10, "texte stable"),
+        ("fr", "Changed"): (True, 11, "ancien texte"),
+        ("fr", "Missing"): (False, None, ""),
+    }
+    recorder = remote.ReadOnlyRecordingAdapter(base, checkpoint, previous)
+    recorder.open_language("fr", "reader")
+
+    recorder.prefetch_pages(["Stable", "Changed", "New", "Missing"])
+
+    assert base.revision_calls == [("fr", ["Stable", "Changed", "New", "Missing"])]
+    assert base.batch_calls == [("fr", ["Changed", "New"])]
+    assert recorder.previous_pages_reused == 2
+    assert recorder.network_pages_read == 2
+    assert recorder.revision_metadata_pages_read == 4
+    assert recorder.read_page("Stable") == (True, 10, "texte stable")
+    assert json.loads((tmp_path / "checkpoint.json").read_text())["page_count"] == 4
 
 
 def test_remote_comparison_resumes_same_id_without_rereading_completed_language(tmp_path: Path, monkeypatch):

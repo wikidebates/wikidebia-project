@@ -5,7 +5,7 @@
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
   "declared_file_count": 436,
-  "declared_test_count": 945,
+  "declared_test_count": 947,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -1069,7 +1069,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2312,
-      "sha256": "87127ce89d25ef17b858570d069f7a7281d85bed1c2847d74c42c243e951bb8b"
+      "sha256": "872561588e53e7df1de398e629898e51ddeeb8c0ae00704155df6e11d3f267ea"
     },
     {
       "path": "VERSIONS.json",
@@ -1688,8 +1688,8 @@
     },
     {
       "path": "scripts/wikidebia_publish.py",
-      "size_bytes": 112357,
-      "sha256": "148ebb21fb9de13ba9c5f6c51a5cf008f19c74dd52da33fa61d090907bda261a"
+      "size_bytes": 113841,
+      "sha256": "549e9eb43f485d95cba3e54db8fe913cff98633360fa793a58f83caa3530e383"
     },
     {
       "path": "scripts/wikidebia_release.py",
@@ -1703,8 +1703,8 @@
     },
     {
       "path": "scripts/wikidebia_remote_compare.py",
-      "size_bytes": 35996,
-      "sha256": "4f37701fb465a93085b9e05d5fe7523c42865fba8af5682246d0b89f0bc6d8a5"
+      "size_bytes": 40497,
+      "sha256": "104e4109442c5fb08333af4051dedaa081d343475046f4175e409c2de1cb2209"
     },
     {
       "path": "scripts/wikidebia_remote_execute.py",
@@ -2118,8 +2118,8 @@
     },
     {
       "path": "tests/test_wikidebia_publish.py",
-      "size_bytes": 68562,
-      "sha256": "5eb230f08702754b7b6a8db3a4008109be442fd90463b062f9fb0a0f50a7c8a0"
+      "size_bytes": 69456,
+      "sha256": "28941961fcd1f033dd5d9167c9ff8563e9d56441175b00f73be83d9b3b2e13a3"
     },
     {
       "path": "tests/test_wikidebia_release.py",
@@ -2128,8 +2128,8 @@
     },
     {
       "path": "tests/test_wikidebia_remote_compare.py",
-      "size_bytes": 23018,
-      "sha256": "afdc0489994682f5dfad04781fefc7dc2f947035de317a23f35441c0e476aedb"
+      "size_bytes": 24867,
+      "sha256": "075b76bc4a9dc28fe6cf2d8dd3334a1f4e6234fd4321d41ebe7f00f0bbe44c5c"
     },
     {
       "path": "tests/test_wikidebia_remote_execute.py",
