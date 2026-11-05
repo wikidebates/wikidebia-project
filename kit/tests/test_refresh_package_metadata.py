@@ -67,3 +67,22 @@ def test_check_is_read_only_and_detects_drift(tmp_path: Path):
     (tmp_path / "scripts/tool.py").write_text("VALUE = 2\n", encoding="utf-8")
     with pytest.raises(module.PackageMetadataError, match="périmées"):
         module.check(tmp_path, test_count=11, generated_date="2026-11-04")
+
+
+def test_passed_test_count_is_derived_from_junit(tmp_path: Path):
+    report = tmp_path / "pytest.xml"
+    report.write_text(
+        '<testsuites tests="13" failures="0" errors="0" skipped="2"></testsuites>',
+        encoding="utf-8",
+    )
+    assert module.passed_test_count(report) == 11
+
+
+def test_junit_failures_are_never_accepted_as_package_proof(tmp_path: Path):
+    report = tmp_path / "pytest.xml"
+    report.write_text(
+        '<testsuite tests="13" failures="1" errors="0" skipped="1"></testsuite>',
+        encoding="utf-8",
+    )
+    with pytest.raises(module.PackageMetadataError, match="non réussie"):
+        module.passed_test_count(report)
