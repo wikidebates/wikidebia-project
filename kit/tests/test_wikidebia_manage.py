@@ -1115,6 +1115,16 @@ def test_translation_next_command_is_exposed_by_manager():
     assert args.command == "corpus-workspace-translation-next"
     assert args.debate_id == "debat_test"
     assert args.no_memory is True
+    assert args.context_mode == "compact"
+
+
+def test_translation_context_command_defaults_to_compact():
+    args = module.build_parser().parse_args([
+        "corpus-workspace-translation-context", "debat_test",
+        "--work-id", "EDIT-TEST-001", "--unit-id", "U001",
+    ])
+    assert args.command == "corpus-workspace-translation-context"
+    assert args.output_mode == "compact"
 
 
 def test_translation_resume_command_is_exposed_by_manager():
@@ -1210,6 +1220,7 @@ def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
         "wikidebia_editorial_workspace.py", "wikidebia_editorial_review.py",
         "wikidebia_content_review.py", "wikidebia_translation_review.py",
         "wikidebia_translation_worklist.py", "wikidebia_translation_packet.py",
+        "wikidebia_translation_context.py",
         "wikidebia_translation_next.py",
         "wikidebia_translation_patch.py", "wikidebia_translation_memory.py",
         "wikidebia_translation_preflight.py",
