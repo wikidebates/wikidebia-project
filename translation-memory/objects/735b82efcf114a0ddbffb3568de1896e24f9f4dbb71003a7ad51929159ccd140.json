@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "a7aefd1180e6824b9dea0b284e97be5b56b783e36bb0fa3873b834ccfb19c896",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "De nombreux gynécologues sont maltraitants",
+    "identity_sha256": "878f5a60707d73d86f858f2798da5450e85072ed6958e4c8c0495616ebea333a"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "8853c0ab207798f5ed8a41b14b17fb2c9460dc8abc5fd4f53cfeb05592b2a6cd"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Many gynecologists mistreat their patients",
+    "displayed_title": "Many gynecologists mistreat their patients",
+    "sections": [],
+    "keywords": [],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0057-C001",
+        "source": {
+          "id": "A0057-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "On parle ici de violences psychologiques et physiques, qui surviennent lors de simples consultations de suivi gynécologique, ou lors du suivi de grossesse, des accouchements et du post-partum.\n\nIl s’agit de violences qui touchent un grand nombre de femmes, et ce n’est pas anecdotique ! Elles portent atteinte à l’intégrité psychologique et physique des patientes, de façon ponctuelle ou répétée, et elles sont toujours néfastes.\n\nAu mois de février 2018, lorsque mon amie Luna et moi avons commencé à travailler sur notre projet de documentaire étudiant, le sujet de la maltraitance en gynécologie nous est venu naturellement.\n\nDans nos familles ou notre cercle d’amies, nous avions toutes une histoire à raconter. Une anecdote d’apparence banale, une gêne que nous avons intégrée, parce que, c’est normal… Aller chez le gynécologue, c’est désagréable, c’est intimidant, ça fait peur, ça fait mal.\n\nEt « c’est comme ça »."
+            },
+            {
+              "name": "auteurs",
+              "value": "Océane Viala"
+            },
+            {
+              "name": "article",
+              "value": "Des femmes témoignent des violences gynécologiques et obstétricales"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "date",
+              "value": "11 déc 2018"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/documentaire-violences-gynecologiques-et-obstetricales-corps-medical-939701"
+            }
+          ],
+          "citation": "On parle ici de violences psychologiques et physiques, qui surviennent lors de simples consultations de suivi gynécologique, ou lors du suivi de grossesse, des accouchements et du post-partum.\n\nIl s’agit de violences qui touchent un grand nombre de femmes, et ce n’est pas anecdotique ! Elles portent atteinte à l’intégrité psychologique et physique des patientes, de façon ponctuelle ou répétée, et elles sont toujours néfastes.\n\nAu mois de février 2018, lorsque mon amie Luna et moi avons commencé à travailler sur notre projet de documentaire étudiant, le sujet de la maltraitance en gynécologie nous est venu naturellement.\n\nDans nos familles ou notre cercle d’amies, nous avions toutes une histoire à raconter. Une anecdote d’apparence banale, une gêne que nous avons intégrée, parce que, c’est normal… Aller chez le gynécologue, c’est désagréable, c’est intimidant, ça fait peur, ça fait mal.\n\nEt « c’est comme ça ».",
+          "date": "11 déc 2018",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Océane Viala"
+            },
+            {
+              "name": "article",
+              "value": "Des femmes témoignent des violences gynécologiques et obstétricales"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/documentaire-violences-gynecologiques-et-obstetricales-corps-medical-939701"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "We are talking here about psychological and physical violence that occurs during routine gynecological checkups, or during pregnancy monitoring, childbirth and the postpartum period.\n\nThis violence affects a large number of women, and it is not anecdotal! It harms patients’ psychological and physical integrity, either occasionally or repeatedly, and it is always harmful.\n\nIn February 2018, when my friend Luna and I began working on our student documentary project, the subject of mistreatment in gynecology came to us naturally.\n\nIn our families or circles of friends, we all had a story to tell. A seemingly ordinary anecdote, a discomfort we had internalized because it is normal... Going to the gynecologist is unpleasant, intimidating, frightening and painful.\n\nAnd “that is just how it is.”",
+        "translated_date": "11 December 2018",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete source quotation was compared sentence by sentence with the English text; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T14:55:23.844048+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Many gynecologists mistreat their patients\" argument",
+      "Many gynecologists mistreat their patients conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "e144522c51881820ebecb3610100f3857c84cb2056ee84469826f3436bef0b95",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0057",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "735b82efcf114a0ddbffb3568de1896e24f9f4dbb71003a7ad51929159ccd140"
+}

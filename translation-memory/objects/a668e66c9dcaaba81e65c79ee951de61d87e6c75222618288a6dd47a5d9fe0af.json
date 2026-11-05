@@ -1,0 +1,520 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "61ca84927ac4cc6d1ae77b5731b15b27d142575529c46d6d452f4f305d7bdb61",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le discours féministe soutient la victimisation des femmes",
+    "identity_sha256": "e8ebc6839a80400024371bb6724d363aef804c77c475ac085351dea450b0e519"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "645044f589fb858c607cc24d553ea8a5bb1d141c2d595ac8f83972fa53ff3ca5"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Feminist discourse encourages women to identify as victims",
+    "displayed_title": "Feminist discourse encourages women to identify as victims",
+    "sections": [
+      "Ethics",
+      "Society"
+    ],
+    "keywords": [
+      "feminism",
+      "victimization"
+    ],
+    "summary": "Virginie Despentes theorized about rape victimhood in her 2006 essay \"King Kong Theory.\" Drawing on the American feminist Camille Paglia, she urges women, for the sake of freedom and in order not to live only half a life, to accept the risk she regards as inseparable from being a woman. If misfortune strikes, they should avoid seeing themselves as victims and endure it without denying or forgetting it. This is controversial among victim advocates, who see it as a platform for normalizing rape and as an obstacle to their entire approach, whose livelihood depends on recognizing victims.",
+    "citations": [
+      {
+        "id": "A0017-C001",
+        "source": {
+          "id": "A0017-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "J'ai besoin d'être une humaine forte. Je résiste à la victimologie. Il y a parfois de la malhonnêteté ou de la simplification à travers certains discours féministes. Les relations sont plus complexes, souvent de l'ordre de l'alchimie"
+            },
+            {
+              "name": "auteurs",
+              "value": "Blanche Gardin"
+            },
+            {
+              "name": "article",
+              "value": "Blanche Gardin prend ses distances avec les discours féministes : \"Je ne suis pas contre être avec quelqu'un qui m'en impose\""
+            },
+            {
+              "name": "ouvrage",
+              "value": "Télé-Loisirs"
+            },
+            {
+              "name": "date",
+              "value": "19/08/2020"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.programme-tv.net/news/people/259109-blanche-gardin-prend-ses-distances-avec-les-discours-feministes-je-ne-suis-pas-contre-etre-avec-quelquun-qui-men-impose/"
+            }
+          ],
+          "citation": "J'ai besoin d'être une humaine forte. Je résiste à la victimologie. Il y a parfois de la malhonnêteté ou de la simplification à travers certains discours féministes. Les relations sont plus complexes, souvent de l'ordre de l'alchimie",
+          "date": "19/08/2020",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Blanche Gardin"
+            },
+            {
+              "name": "article",
+              "value": "Blanche Gardin prend ses distances avec les discours féministes : \"Je ne suis pas contre être avec quelqu'un qui m'en impose\""
+            },
+            {
+              "name": "ouvrage",
+              "value": "Télé-Loisirs"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.programme-tv.net/news/people/259109-blanche-gardin-prend-ses-distances-avec-les-discours-feministes-je-ne-suis-pas-contre-etre-avec-quelquun-qui-men-impose/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "I need to be a strong human being. I resist victimology. There is sometimes dishonesty or oversimplification in certain feminist discourse. Relationships are more complex and often involve a kind of alchemy.",
+        "translated_date": "19/08/2020",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T08:11:36.520201+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0017-C002",
+        "source": {
+          "id": "A0017-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "S'inspirant de Camille Paglia : \"C’est un risque inévitable, c’est un risque que les femmes doivent prendre en compte et accepter de courir si elles veulent sortir de chez elles et circuler librement. Si ça t’arrive, remets-toi debout, dust yourself et passe à autre chose. Et si ça te fait trop peur, il faut rester chez maman et t’occuper de faire ta manucure […]\nPour la première fois, quelqu’un valorisait la faculté de s’en remettre, plutôt que de s’étendre complaisamment sur le florilège des traumas. Dévalorisation du viol, de sa portée, de sa résonance. Ça n’annulait rien à ce qui s’était passé, ça n’effaçait rien de ce qu’on avait appris cette nuit-là.[…]\nCamille Paglia est sans doute la plus controversée des féministes américaines. Elle proposait de penser le viol comme un risque à prendre inhérent à notre condition de filles. Une liberté inouïe, de dédramatisation. Oui, on avait été dehors, un espace qui n’était pas pour nous. Oui, on avait vécu, au lieu de mourir. Oui, on était en minijupe seules sans un mec avec nous, la nuit, oui on avait été connes, et faibles, incapables de leur péter la gueule, faibles comme les filles apprennent à l’être quand on les agresse. Oui, ça nous était arrivé, mais pour la première fois, on comprenait ce qu’on avait fait : on était sorties dans la rue parce que, chez papa-maman, il ne se passait pas grand chose. On avait pris le risque, on avait payé le prix, et plutôt qu’avoir honte d’être vivantes on pouvait décider de se relever et de s’en remettre le mieux possible. Paglia nous permettait de nous imaginer en guerrières, non plus responsables personnellement de ce qu’elles avaient bien cherché, mais victimes ordinaires de ce qu’il faut s’attendre à endurer si on est femme et qu’on veut s’aventurer à l’extérieur. Elle était la première à sortir le viol du cauchemar absolu, du non-dit, de ce qui ne doit surtout jamais arriver. Elle en faisait une circonstance politique, quelque chose qu’on devait apprendre à encaisser. Paglia changeait tout : il ne s’agissait plus de nier, ni de succomber, il s’agissait de faire avec.\"\n\nIl faut être traumatisée d’un viol, il y a une série de marques visibles qu’il faut respecter : peur des hommes, de la nuit, de l’autonomie, dégoût du sexe et autres joyeusetés"
+            },
+            {
+              "name": "auteurs",
+              "value": "Virginie Despentes"
+            },
+            {
+              "name": "ouvrage",
+              "value": "King Kong Théorie"
+            },
+            {
+              "name": "édition",
+              "value": "Grasset"
+            },
+            {
+              "name": "date",
+              "value": "2006"
+            }
+          ],
+          "citation": "S'inspirant de Camille Paglia : \"C’est un risque inévitable, c’est un risque que les femmes doivent prendre en compte et accepter de courir si elles veulent sortir de chez elles et circuler librement. Si ça t’arrive, remets-toi debout, dust yourself et passe à autre chose. Et si ça te fait trop peur, il faut rester chez maman et t’occuper de faire ta manucure […]\nPour la première fois, quelqu’un valorisait la faculté de s’en remettre, plutôt que de s’étendre complaisamment sur le florilège des traumas. Dévalorisation du viol, de sa portée, de sa résonance. Ça n’annulait rien à ce qui s’était passé, ça n’effaçait rien de ce qu’on avait appris cette nuit-là.[…]\nCamille Paglia est sans doute la plus controversée des féministes américaines. Elle proposait de penser le viol comme un risque à prendre inhérent à notre condition de filles. Une liberté inouïe, de dédramatisation. Oui, on avait été dehors, un espace qui n’était pas pour nous. Oui, on avait vécu, au lieu de mourir. Oui, on était en minijupe seules sans un mec avec nous, la nuit, oui on avait été connes, et faibles, incapables de leur péter la gueule, faibles comme les filles apprennent à l’être quand on les agresse. Oui, ça nous était arrivé, mais pour la première fois, on comprenait ce qu’on avait fait : on était sorties dans la rue parce que, chez papa-maman, il ne se passait pas grand chose. On avait pris le risque, on avait payé le prix, et plutôt qu’avoir honte d’être vivantes on pouvait décider de se relever et de s’en remettre le mieux possible. Paglia nous permettait de nous imaginer en guerrières, non plus responsables personnellement de ce qu’elles avaient bien cherché, mais victimes ordinaires de ce qu’il faut s’attendre à endurer si on est femme et qu’on veut s’aventurer à l’extérieur. Elle était la première à sortir le viol du cauchemar absolu, du non-dit, de ce qui ne doit surtout jamais arriver. Elle en faisait une circonstance politique, quelque chose qu’on devait apprendre à encaisser. Paglia changeait tout : il ne s’agissait plus de nier, ni de succomber, il s’agissait de faire avec.\"\n\nIl faut être traumatisée d’un viol, il y a une série de marques visibles qu’il faut respecter : peur des hommes, de la nuit, de l’autonomie, dégoût du sexe et autres joyeusetés",
+          "date": "2006",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Virginie Despentes"
+            },
+            {
+              "name": "ouvrage",
+              "value": "King Kong Théorie"
+            },
+            {
+              "name": "édition",
+              "value": "Grasset"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Drawing on Camille Paglia: 'It is an unavoidable risk, a risk women must take into account and agree to run if they want to leave their homes and move about freely. If it happens to you, get back on your feet, dust yourself off and move on. And if it scares you too much, you have to stay home with mommy and do your nails [...]\nFor the first time, someone valued the ability to recover instead of dwelling self-indulgently on an anthology of traumas. A downgrading of rape, of its significance, of its resonance. That did not undo anything that had happened; it did not erase anything we had learned that night. [...]\nCamille Paglia is probably the most controversial American feminist. She suggested thinking of rape as a risk inherent in our condition as girls that must be taken. An extraordinary freedom, a way of taking the drama out of it. Yes, we had gone outside, into a space that was not meant for us. Yes, we had lived instead of dying. Yes, we were out alone in miniskirts at night, without a guy with us; yes, we had been stupid and weak, unable to beat them up, weak in the way girls are taught to be when they are attacked. Yes, it had happened to us, but for the first time we understood what we had done: we had gone out into the street because not much was happening at mommy and daddy's place. We had taken the risk, we had paid the price, and instead of being ashamed to be alive, we could decide to get back up and recover as best we could. Paglia allowed us to imagine ourselves as warriors, no longer personally responsible for having asked for it, but ordinary victims of what one must expect to endure if one is a woman and wants to venture outside. She was the first to remove rape from the realm of the absolute nightmare, the unspeakable, the thing that above all must never happen. She made it a political circumstance, something we had to learn to withstand. Paglia changed everything: it was no longer a question of denying it or succumbing to it, but of living with it.'\n\nOne must be traumatized by rape; there is a series of visible signs that must be respected: fear of men, of the night, of autonomy, disgust with sex, and other delights.",
+        "translated_date": "2006",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T08:11:36.520201+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0017-C003",
+        "source": {
+          "id": "A0017-C003",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "J’en ai assez qu’on demande aux femmes de revendiquer la souffrance\n\nrevendiquer un statut de victime n’est pas une ambition\n\nLes femmes, il y a quand même autre chose à en dire ! Autre chose à dire que : comme c’est dur d’être une femme !"
+            },
+            {
+              "name": "auteurs",
+              "value": "Christine Angot"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Télérama"
+            },
+            {
+              "name": "date",
+              "value": "05/10/2017"
+            }
+          ],
+          "citation": "J’en ai assez qu’on demande aux femmes de revendiquer la souffrance\n\nrevendiquer un statut de victime n’est pas une ambition\n\nLes femmes, il y a quand même autre chose à en dire ! Autre chose à dire que : comme c’est dur d’être une femme !",
+          "date": "05/10/2017",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Christine Angot"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Télérama"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "I am tired of women being asked to lay claim to suffering\n\nClaiming victim status is not an ambition\n\nThere are still other things to say about women! Other things than: how hard it is to be a woman!",
+        "translated_date": "05/10/2017",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T08:11:36.520201+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0017-C004",
+        "source": {
+          "id": "A0017-C004",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Lorsque l’on se pose comme victime, on pose l’autre comme bourreau. C’est aussi ce qui ce qui passe avec le conflit israélo-palestinien. Je trouve cela très pervers, car je vois bien tout le travail pour montrer que les femmes sont victimes dans une proportion incroyable, que toutes les femmes sont potentiellement victimes des hommes. Ce thème est inlassablement développé. Si l’homme est bourreau, il en découle une véritable incompatibilité. Ce féminisme que je critique n’a absolument pas en vue d’établir des relations améliorées entre hommes et femmes. Ce n’est pas du tout le sujet."
+            },
+            {
+              "name": "auteurs",
+              "value": "Elisabeth Badinter"
+            },
+            {
+              "name": "ouvrage",
+              "value": "L'Arche"
+            },
+            {
+              "name": "date",
+              "value": "2003"
+            }
+          ],
+          "citation": "Lorsque l’on se pose comme victime, on pose l’autre comme bourreau. C’est aussi ce qui ce qui passe avec le conflit israélo-palestinien. Je trouve cela très pervers, car je vois bien tout le travail pour montrer que les femmes sont victimes dans une proportion incroyable, que toutes les femmes sont potentiellement victimes des hommes. Ce thème est inlassablement développé. Si l’homme est bourreau, il en découle une véritable incompatibilité. Ce féminisme que je critique n’a absolument pas en vue d’établir des relations améliorées entre hommes et femmes. Ce n’est pas du tout le sujet.",
+          "date": "2003",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Elisabeth Badinter"
+            },
+            {
+              "name": "ouvrage",
+              "value": "L'Arche"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "When one presents oneself as a victim, one casts the other as the perpetrator. That is also what happens in the Israeli-Palestinian conflict. I find this very perverse, because I can see all the work being done to show that women are victims to an incredible degree, that all women are potential victims of men. This theme is developed endlessly. If men are cast as perpetrators, genuine incompatibility follows. The feminism I criticize has absolutely no intention of establishing better relations between men and women. That is not the issue at all.",
+        "translated_date": "2003",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T08:11:36.520201+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0017-C005",
+        "source": {
+          "id": "A0017-C005",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Limitons-nous ici à la victimisation féminine. Si les femmes sont par nature des victimes, il faut conclure qu’elles sont condamnées à subir leur vie déterminée par leur naissance. En d’autres termes, elles ne possèdent ni le libre arbitre ni la force de briser les chaînes qui les entravent. Elles n’ont ainsi d’avenir qu’à travers leurs bourreaux, car une victime est inexorablement tributaire de son bourreau. Jamais elles ne pourront accéder à l’égalité."
+            },
+            {
+              "name": "auteurs",
+              "value": "Denise Bombardier"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Le journal de Montréal"
+            },
+            {
+              "name": "date",
+              "value": "2017"
+            }
+          ],
+          "citation": "Limitons-nous ici à la victimisation féminine. Si les femmes sont par nature des victimes, il faut conclure qu’elles sont condamnées à subir leur vie déterminée par leur naissance. En d’autres termes, elles ne possèdent ni le libre arbitre ni la force de briser les chaînes qui les entravent. Elles n’ont ainsi d’avenir qu’à travers leurs bourreaux, car une victime est inexorablement tributaire de son bourreau. Jamais elles ne pourront accéder à l’égalité.",
+          "date": "2017",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Denise Bombardier"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Le journal de Montréal"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Let us confine ourselves here to female victimization. If women are victims by nature, one must conclude that they are condemned to endure a life determined by their birth. In other words, they possess neither free will nor the strength to break the chains that bind them. Their future thus exists only through their perpetrators, because a victim is inexorably dependent on her perpetrator. They will never be able to achieve equality.",
+        "translated_date": "2017",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T08:11:36.520201+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0017-C006",
+        "source": {
+          "id": "A0017-C006",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "\"Féministe\", qu'est-ce qu'on entend par cela ? Je ne crois pas être féministe au sens de revendication des femmes : vouloir démontrer qu'elles ont été les esclaves des hommes et qu'elles ont été très malheureuses, je n'appréhende pas le problème de cette façon. Mais je crois que les femmes peuvent apporter beaucoup dans notre société. Maintenant qu'elles ont le sentiment d'avoir ce rôle à jouer, elles doivent pouvoir épanouir leur personnalité comme elles le souhaitent."
+            },
+            {
+              "name": "auteurs",
+              "value": "Simone Veil"
+            },
+            {
+              "name": "ouvrage",
+              "value": "ORTF"
+            },
+            {
+              "name": "date",
+              "value": "1974"
+            }
+          ],
+          "citation": "\"Féministe\", qu'est-ce qu'on entend par cela ? Je ne crois pas être féministe au sens de revendication des femmes : vouloir démontrer qu'elles ont été les esclaves des hommes et qu'elles ont été très malheureuses, je n'appréhende pas le problème de cette façon. Mais je crois que les femmes peuvent apporter beaucoup dans notre société. Maintenant qu'elles ont le sentiment d'avoir ce rôle à jouer, elles doivent pouvoir épanouir leur personnalité comme elles le souhaitent.",
+          "date": "1974",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Simone Veil"
+            },
+            {
+              "name": "ouvrage",
+              "value": "ORTF"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "'Feminist'—what is meant by that? I do not believe I am a feminist in the sense of asserting women's claims: seeking to demonstrate that they have been men's slaves and have been very unhappy—I do not see the issue that way. But I believe women can contribute a great deal to our society. Now that they feel they have that role to play, they must be able to develop their personalities as they wish.",
+        "translated_date": "1974",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every qualification and claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T08:11:36.520201+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Feminist discourse encourages women to identify as victims\" argument",
+      "Feminist discourse encourages women to identify as victims conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": true,
+    "historical_quantitative_transfer_note": "All numerical expressions were transferred exactly from the protected historical French summary and checked field by field."
+  },
+  "translation_sha256": "4772454b055ca18f92d0362e8a20f7c51ddf0a4064a2675d4bc9630b2232f627",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0017",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a668e66c9dcaaba81e65c79ee951de61d87e6c75222618288a6dd47a5d9fe0af"
+}

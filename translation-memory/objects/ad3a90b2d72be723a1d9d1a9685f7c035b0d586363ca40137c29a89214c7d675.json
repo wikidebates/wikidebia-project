@@ -1,0 +1,306 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "174561e143543f6923f24adff4536fc1c6a6664c41697dd8238bf252ad13a582",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des procès pour diffamation ne sont que des procédures-bâillon",
+    "identity_sha256": "0cc6f94e9cb56e98f0eba74b1f044d997d49873bb8991f436f7e485c89400024"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "0c653eaa8254194e0582d5a726b4c7890a73bdabf2b48476742caba64c660498"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Most defamation lawsuits are merely strategic lawsuits against public participation",
+    "displayed_title": "Most defamation lawsuits are merely strategic lawsuits against public participation",
+    "sections": [],
+    "keywords": [],
+    "summary": "The purpose of a strategic lawsuit is not so much to win a possible trial as to silence victims who, fearing costly and exhausting legal proceedings, will censor themselves.",
+    "citations": [
+      {
+        "id": "A0222-C001",
+        "source": {
+          "id": "A0222-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Pour Elli Tessier, les menaces [de plainte en diffamation] se muent également en action : lorsqu’il décide de dénoncer les violences subies, et de nommer son agresseur et ex-compagnon sur Twitter, c’est une plainte en diffamation qu’il reçoit en retour.\n\n''« C’est un mécanisme souvent utilisé par les auteurs de violences sexistes et sexuelles pour silencier leur victime »'', soutient Elodie M., qui déplore :<blockquote>« C’est efficace ; je le vois chez les patients et patientes qui, après avoir reçu ce genre de plaintes, ont de grosses difficultés à se confier, à poursuivre toute démarche nécessitant de parler. Ils et elles ont peur, constamment, et se tétanisent ». </blockquote>"
+            },
+            {
+              "name": "auteurs",
+              "value": "Val Leroy"
+            },
+            {
+              "name": "article",
+              "value": "Entre menace en l’air et risque réel, parlons de la plainte en diffamation envers les victimes de violences sexuelles"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "date",
+              "value": "06 avr 2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/entre-menace-en-lair-et-risque-reel-parlons-de-la-plainte-en-diffamation-envers-les-victimes-de-violences-sexuelles-1270815"
+            }
+          ],
+          "citation": "Pour Elli Tessier, les menaces [de plainte en diffamation] se muent également en action : lorsqu’il décide de dénoncer les violences subies, et de nommer son agresseur et ex-compagnon sur Twitter, c’est une plainte en diffamation qu’il reçoit en retour.\n\n''« C’est un mécanisme souvent utilisé par les auteurs de violences sexistes et sexuelles pour silencier leur victime »'', soutient Elodie M., qui déplore :<blockquote>« C’est efficace ; je le vois chez les patients et patientes qui, après avoir reçu ce genre de plaintes, ont de grosses difficultés à se confier, à poursuivre toute démarche nécessitant de parler. Ils et elles ont peur, constamment, et se tétanisent ». </blockquote>",
+          "date": "06 avr 2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Val Leroy"
+            },
+            {
+              "name": "article",
+              "value": "Entre menace en l’air et risque réel, parlons de la plainte en diffamation envers les victimes de violences sexuelles"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/entre-menace-en-lair-et-risque-reel-parlons-de-la-plainte-en-diffamation-envers-les-victimes-de-violences-sexuelles-1270815"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "For Elli Tessier, threats [of a defamation complaint] also turn into action: when he decides to denounce the violence he experienced and name his aggressor and former partner on Twitter, he receives a defamation complaint in return.\n\n''“This is a mechanism often used by perpetrators of sexist and sexual violence to silence their victim,”'' argues Élodie M., who laments:<blockquote>“It is effective; I see it among patients who, after receiving this kind of complaint, have enormous difficulty confiding in others or continuing any process that requires them to speak. They are constantly afraid and become paralyzed.”</blockquote>",
+        "translated_date": "6 April 2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:23:52.387206+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0222-C002",
+        "source": {
+          "id": "A0222-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Acquitté sur toute la ligne ! La cour d’appel de Bruxelles a rendu son arrêt dans l’affaire plaidée le 30 novembre 2023. Elle opposait l’ancien président de la Ligue des droits humains et actuel vice-président de la Fédération internationale pour les droits humains Alexis Deswaef au commissaire de police Pierre Vandersmissen. La cour confirme la décision rendue en première instance en juillet 2021. Pour la LDH et la FIDH, cette affaire illustre le problème démocratique créé par les “procédures-bâillons”."
+            },
+            {
+              "name": "article",
+              "value": "Alexis Deswaef acquitté dans le procès que lui a intenté le commissaire de police Vandersmissen"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Ligue des droits humains"
+            },
+            {
+              "name": "date",
+              "value": "12/01/2024"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.liguedh.be/alexis-deswaef-acquitte-dans-le-proces-que-lui-a-intente-le-commissaire-de-police-vandermissen/"
+            }
+          ],
+          "citation": "Acquitté sur toute la ligne ! La cour d’appel de Bruxelles a rendu son arrêt dans l’affaire plaidée le 30 novembre 2023. Elle opposait l’ancien président de la Ligue des droits humains et actuel vice-président de la Fédération internationale pour les droits humains Alexis Deswaef au commissaire de police Pierre Vandersmissen. La cour confirme la décision rendue en première instance en juillet 2021. Pour la LDH et la FIDH, cette affaire illustre le problème démocratique créé par les “procédures-bâillons”.",
+          "date": "12/01/2024",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "article",
+              "value": "Alexis Deswaef acquitté dans le procès que lui a intenté le commissaire de police Vandersmissen"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Ligue des droits humains"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.liguedh.be/alexis-deswaef-acquitte-dans-le-proces-que-lui-a-intente-le-commissaire-de-police-vandermissen/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Acquitted across the board! The Brussels Court of Appeal issued its ruling in the case argued on November 30, 2023. It pitted Alexis Deswaef, former president of the Human Rights League and current vice-president of the International Federation for Human Rights, against police commissioner Pierre Vandersmissen. The court upheld the first-instance decision issued in July 2021. For the LDH and FIDH, this case illustrates the democratic problem created by “SLAPPs.”",
+        "translated_date": "12/01/2024",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:23:52.387206+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Most defamation lawsuits are merely strategic lawsuits against public participation\" argument",
+      "Most defamation lawsuits are merely strategic lawsuits against public participation conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "5cb126ca6133c1a38cbd2f6cc8e38045e5740e670a207c0b4e93a1f6d335ad80",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0222",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ad3a90b2d72be723a1d9d1a9685f7c035b0d586363ca40137c29a89214c7d675"
+}

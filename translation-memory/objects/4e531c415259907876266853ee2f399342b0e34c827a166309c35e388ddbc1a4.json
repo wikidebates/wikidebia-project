@@ -1,0 +1,321 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "54fcca44ece6b0c5492ab4fddd5da45ad0b700dea4c5f7aa2b6a78e85fc934a0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Défendre le choix d'être femme au foyer est le paravent d'une extrême droite se faisant passer pour féministe",
+    "identity_sha256": "850a50882e03ceb4b074b89a41c13fa94a9cdbdc65b561cfb5188b0d0b623d03"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "1e54b988b525c24272089bd96b444653107d6a0d5ed3e7845138885209125cce"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Defending the choice to be a housewife is a cover for a far right masquerading as feminist",
+    "displayed_title": "Defending the choice to be a housewife is a cover for a far right masquerading as feminist",
+    "sections": [],
+    "keywords": [],
+    "summary": "The role of housewife, even when chosen, helps keep patriarchy comfortable. The element of “choice” is illusory and merely an argumentative sleight of hand used to pass off a highly conservative ideology as progressive.",
+    "citations": [
+      {
+        "id": "A0257-C001",
+        "source": {
+          "id": "A0257-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "[La] marotte [de Zemmour] du moment sur les femmes, c’est de '''louer notre capacité de choix''', celle de faire ce qu’on veut, à être [https://www.madmoizelle.com/motsclefs/childfree des mères si on le décide], à [https://www.madmoizelle.com/motsclefs/charge-mentale accomplir les tâches ménagères si on le souhaite]… \n\nLa veille du 8 mars, il a tenu cette ligne dans l’émission ''Face aux Françaises'' sur LCI et ça ne manque pas de piquant.\n\n\nCe petit malin d’ Eric Zemmour, qui met de la liberté de choix, un vocabulaire hautement féministe, là où ça l’arrange, par exemple, au hasard,  dans le foyer. « Dictature », hurle-t-il, en comparant donc la journaliste Ruth Elkrief à Staline, quand on lui parle, Ô scandale, '''de répartition équitable des tâches au sein du couple et de la cellule familiale'''. Bah oui, on n’est plus à une outrance près."
+            },
+            {
+              "name": "auteurs",
+              "value": "Mathis Grosos"
+            },
+            {
+              "name": "article",
+              "value": "Misogyne, agresseur présumé MAIS défenseur des femmes… de qui se moque Éric Zemmour ?"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "date",
+              "value": "11 mars 2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/podcasts/misogyne-agresseur-presume-mais-defenseur-des-femmes-de-qui-se-moque-eric-zemmour"
+            }
+          ],
+          "citation": "[La] marotte [de Zemmour] du moment sur les femmes, c’est de '''louer notre capacité de choix''', celle de faire ce qu’on veut, à être [https://www.madmoizelle.com/motsclefs/childfree des mères si on le décide], à [https://www.madmoizelle.com/motsclefs/charge-mentale accomplir les tâches ménagères si on le souhaite]… \n\nLa veille du 8 mars, il a tenu cette ligne dans l’émission ''Face aux Françaises'' sur LCI et ça ne manque pas de piquant.\n\n\nCe petit malin d’ Eric Zemmour, qui met de la liberté de choix, un vocabulaire hautement féministe, là où ça l’arrange, par exemple, au hasard,  dans le foyer. « Dictature », hurle-t-il, en comparant donc la journaliste Ruth Elkrief à Staline, quand on lui parle, Ô scandale, '''de répartition équitable des tâches au sein du couple et de la cellule familiale'''. Bah oui, on n’est plus à une outrance près.",
+          "date": "11 mars 2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Mathis Grosos"
+            },
+            {
+              "name": "article",
+              "value": "Misogyne, agresseur présumé MAIS défenseur des femmes… de qui se moque Éric Zemmour ?"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/podcasts/misogyne-agresseur-presume-mais-defenseur-des-femmes-de-qui-se-moque-eric-zemmour"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "[Zemmour’s] current obsession regarding women is to '''praise our capacity for choice''': doing what we want, [https://www.madmoizelle.com/motsclefs/childfree becoming mothers if we decide to], [https://www.madmoizelle.com/motsclefs/charge-mentale doing household chores if we wish], and so on.\n\nOn the eve of March 8, he took this line on LCI’s ''Face aux Françaises'', and it was not without irony.\n\nThat crafty Éric Zemmour inserts freedom of choice—highly feminist language—where it suits him, for example, entirely at random, in the home. “Dictatorship,” he shouts, thus comparing journalist Ruth Elkrief to Stalin when someone raises, oh the scandal, '''the equitable distribution of tasks within the couple and family unit'''. Indeed, he is well past worrying about one more excess.",
+        "translated_date": "11 March 2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:24:28.764474+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0257-C002",
+        "source": {
+          "id": "A0257-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Les années 2010 ont été marquées par de nouvelles stratégies de guerre sémantique, analyse Florence Rochefort. L’idée est de vider le féminisme, et plus globalement la gauche, de son potentiel de mobilisation, en reprenant ses symboles et ses mots. C’est une tactique inspirée par la droite américaine, qui vise à déstabiliser complètement les discours progressistes"
+            },
+            {
+              "name": "auteurs",
+              "value": "Lucie Ronfaut"
+            },
+            {
+              "name": "article",
+              "value": "Cinq ans après #metoo, l’antiféminisme prospère sur les réseaux sociaux"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Le Monde"
+            },
+            {
+              "name": "date",
+              "value": "12 octobre 2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lemonde.fr/pixels/article/2022/10/12/cinq-ans-apres-metoo-l-antifeminisme-prospere-sur-les-reseaux-sociaux_6145406_4408996.html#xtor=AL-32280270-[mail]-[ios]"
+            }
+          ],
+          "citation": "Les années 2010 ont été marquées par de nouvelles stratégies de guerre sémantique, analyse Florence Rochefort. L’idée est de vider le féminisme, et plus globalement la gauche, de son potentiel de mobilisation, en reprenant ses symboles et ses mots. C’est une tactique inspirée par la droite américaine, qui vise à déstabiliser complètement les discours progressistes",
+          "date": "12 octobre 2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Lucie Ronfaut"
+            },
+            {
+              "name": "article",
+              "value": "Cinq ans après #metoo, l’antiféminisme prospère sur les réseaux sociaux"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Le Monde"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.lemonde.fr/pixels/article/2022/10/12/cinq-ans-apres-metoo-l-antifeminisme-prospere-sur-les-reseaux-sociaux_6145406_4408996.html#xtor=AL-32280270-[mail]-[ios]"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "The 2010s were marked by new strategies of semantic warfare, Florence Rochefort explains. The idea is to strip feminism, and the left more broadly, of its capacity for mobilization by appropriating its symbols and words. It is a tactic inspired by the American right that seeks to destabilize progressive discourse completely.",
+        "translated_date": "12 October 2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:24:28.764474+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Defending the choice to be a housewife is a cover for a far right masquerading as feminist\" argument",
+      "Defending the choice to be a housewife is a cover for a far right masquerading as feminist conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": true,
+    "semantic_risk_note": "Every detected polarity, modality, quantity, attribution or scope signal was checked directly against the French source.",
+    "semantic_risk_evidence": [
+      {
+        "risk": "marker_loss:strong_intensity",
+        "source_excerpt": "Le rôle de femme au foyer, même choisi, contribue à caresser le patriarcat dans le sens du poil. L'aspect \"choix\" est illusoire et n'est qu'une pirouette argumentative pour faire passer pour progressiste une idéologie très conservatrice.",
+        "target_excerpt": "The role of housewife, even when chosen, helps keep patriarchy comfortable. The element of “choice” is illusory and merely an argumentative sleight of hand used to pass off a highly conservative ideology as progressive.",
+        "note": "The complete source and target fields were compared directly for this semantic-risk signal."
+      }
+    ],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "bcb2aacbb5023e6374487f8283ab823751fb7d71c1f93540c197547cfff7186e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0257",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4e531c415259907876266853ee2f399342b0e34c827a166309c35e388ddbc1a4"
+}

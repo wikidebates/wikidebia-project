@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "b6435c2a0b1cec47009a9285b9979aa0765223543ae8bcd7349dc4d35edfbc46",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les tradwives sont les idiotes utiles du sexisme",
+    "identity_sha256": "3c5f138f02f75f975f1de825ff6ebbdccd1a9082ad5891b9a54138595e88e4b1"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "cf019a035dfeb86cf9a584dba014d7914052c1dc47e971acc48779a2b50ce9df"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Tradwives are useful idiots for sexism",
+    "displayed_title": "Tradwives are useful idiots for sexism",
+    "sections": [],
+    "keywords": [],
+    "summary": "Being a woman in no way prevents someone from actively defending sexism. They generally do so in order to obtain privileges from those in power, although this does not protect them in any way from sexist violence.",
+    "citations": [
+      {
+        "id": "A0256-C001",
+        "source": {
+          "id": "A0256-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Ces youtubeuses prétendent sauver le monde en s’assurant que les hommes blancs restent bien au centre. Leur installation dans le paysage de YouTube témoigne de leur maîtrise des mécanismes du monde de l’influence mais, aussi, de la cristallisation croissante d’une part des femmes occidentales autour d’un projet de société fasciste : sans craindre de perdre ses clientes, Thérèse Curien a reçu Virginie Vota, révélant l’intrication très forte entre son commerce et la propagande suprématiste. Quant à Hanna, qui présente un personnage “apolitique”, elle s’est senti pousser des ailes : le 7 septembre 2021, elle poste une vidéo partageant son analyse complotiste et contestant l’existence d’une pandémie mondiale. Censurée par YouTube, elle a tenu à mettre sa vidéo en ligne via une autre plateforme. Quel rapport avec les robes et le respect des règles de l’étiquette ? La lutte pour un avenir qui ressemble plus à l’univers de [[frwikipedia:La_Servante_écarlate|''La Servante Écarlate'']] qu’à une société fondée sur la recherche de l’épanouissement de tous·tes. ''“Comment faire pour que mes proches aiment passer du temps avec moi ? Solution : je remplis mon devoir d’État de mère”'', résume Hanna dans sa newsletter #23."
+            },
+            {
+              "name": "auteurs",
+              "value": "Sarah Benichou"
+            },
+            {
+              "name": "article",
+              "value": "Tradwives” : des influenceuses cathos tissent leur toile"
+            },
+            {
+              "name": "ouvrage",
+              "value": "axellemag.be"
+            },
+            {
+              "name": "date",
+              "value": "Janvier-Février 2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.axellemag.be/tradwives-des-influenceuses-cathos-tissent-leur-toile/"
+            }
+          ],
+          "citation": "Ces youtubeuses prétendent sauver le monde en s’assurant que les hommes blancs restent bien au centre. Leur installation dans le paysage de YouTube témoigne de leur maîtrise des mécanismes du monde de l’influence mais, aussi, de la cristallisation croissante d’une part des femmes occidentales autour d’un projet de société fasciste : sans craindre de perdre ses clientes, Thérèse Curien a reçu Virginie Vota, révélant l’intrication très forte entre son commerce et la propagande suprématiste. Quant à Hanna, qui présente un personnage “apolitique”, elle s’est senti pousser des ailes : le 7 septembre 2021, elle poste une vidéo partageant son analyse complotiste et contestant l’existence d’une pandémie mondiale. Censurée par YouTube, elle a tenu à mettre sa vidéo en ligne via une autre plateforme. Quel rapport avec les robes et le respect des règles de l’étiquette ? La lutte pour un avenir qui ressemble plus à l’univers de [[frwikipedia:La_Servante_écarlate|''La Servante Écarlate'']] qu’à une société fondée sur la recherche de l’épanouissement de tous·tes. ''“Comment faire pour que mes proches aiment passer du temps avec moi ? Solution : je remplis mon devoir d’État de mère”'', résume Hanna dans sa newsletter #23.",
+          "date": "Janvier-Février 2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Sarah Benichou"
+            },
+            {
+              "name": "article",
+              "value": "Tradwives” : des influenceuses cathos tissent leur toile"
+            },
+            {
+              "name": "ouvrage",
+              "value": "axellemag.be"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.axellemag.be/tradwives-des-influenceuses-cathos-tissent-leur-toile/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "These women YouTubers claim to be saving the world by ensuring that white men remain firmly at the center. Their establishment in the YouTube landscape demonstrates their command of the mechanisms of the influencer world, but also the increasing crystallization of a segment of Western women around a fascist social project: without fearing the loss of her customers, Thérèse Curien hosted Virginie Vota, revealing the very close interweaving of her business and supremacist propaganda. As for Hanna, who presents an “apolitical” persona, she grew bolder: on September 7, 2021, she posted a video sharing her conspiratorial analysis and disputing the existence of a global pandemic. Censored by YouTube, she insisted on putting her video online through another platform. What does this have to do with dresses and observing the rules of etiquette? The struggle for a future that more closely resembles the world of [[enwikipedia:The_Handmaid's_Tale|''The Handmaid’s Tale'']] than a society founded on seeking fulfillment for everyone. ''“How can I make my loved ones enjoy spending time with me? Solution: I fulfill my duty as a mother,”'' Hanna summarizes in her newsletter no. 23.",
+        "translated_date": "January–February 2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:24:28.764474+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Tradwives are useful idiots for sexism\" argument",
+      "Tradwives are useful idiots for sexism conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "a098b2f93e2dfd354059e87ae96bf96ad49c7720d188ec31331ef2b1ecc8c7b8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0256",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "63b039dcfb09c1ae621c70f42df91ea68fa84caf51270211ed82820546dd1bfd"
+}

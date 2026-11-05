@@ -1,0 +1,226 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "ad8397bb031cd828c60bc63f304e17be63f8ba1b9effcc67052358b9634ea4b7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes sont sous-représentées dans l'ensemble du monde audiovisuel et des médias",
+    "identity_sha256": "21dac30be4bffd285a8ef46460f0afdbc07f1536e43557e14dd8286826cae445"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "4df0b47d744569bc902539b94f8641295c0815ea472c5048cf2251cac3af8589"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Women are underrepresented throughout the audiovisual and media world",
+    "displayed_title": "Women still suffer from underrepresentation throughout the audiovisual and media world:",
+    "sections": [
+      "Society"
+    ],
+    "keywords": [
+      "feminism"
+    ],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0029-C001",
+        "source": {
+          "id": "A0029-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Une infériorité globale du nombre de femmes: la part des femmes à la télévision est toujours loin de la parité, avec 58 % d’hommes et 42 % de femmes.\nDes femmes moins présentes aux heures de forte audience  : les heures de forte audience sont sujettes à de fortes inégalités. La proportion de femmes est de 39 % entre 18h \net 20h, elle n’est plus que de 29 % entre 21h et 23h.\nDes différences en nombre suivant les métiers et les fonctions : le taux global de présentatrices et/ou animatrices à la télévision est le taux global le plus élevé : 47 %. Le \npourcentage de journalistes et/ou chroniqueuses à la télévision est de 38 %. Le pourcentage de femmes parmi les invité.es politiques à la télévision est de 27 %.\nL’absence de femmes sur certains plateaux : 83 % des expert.es sollicité.es sont des hommes ; ils représentent 70 % des sources d’information et 70 % des porte-paroles.\nUn temps de parole des femmes encore largement inégal : alors que les femmes représentent 42 % des personnes à la télévision, leur taux de parole est de 32,7 %.\nUne image en décalage avec la réalité : les femmes doivent, avant tout, être agréables à regarder. Elles sont davantage caractérisées par leur apparence physique, leur âge et \nleur situation familiale que les hommes.\nUne absence de diversité : les femmes perçues comme non blanches sont très minoritaires et les femmes en situation de handicap sont absentes."
+            },
+            {
+              "name": "ouvrage",
+              "value": "Rapport annuel sur l'état du sexisme en France"
+            },
+            {
+              "name": "date",
+              "value": "2019"
+            }
+          ],
+          "citation": "Une infériorité globale du nombre de femmes: la part des femmes à la télévision est toujours loin de la parité, avec 58 % d’hommes et 42 % de femmes.\nDes femmes moins présentes aux heures de forte audience  : les heures de forte audience sont sujettes à de fortes inégalités. La proportion de femmes est de 39 % entre 18h \net 20h, elle n’est plus que de 29 % entre 21h et 23h.\nDes différences en nombre suivant les métiers et les fonctions : le taux global de présentatrices et/ou animatrices à la télévision est le taux global le plus élevé : 47 %. Le \npourcentage de journalistes et/ou chroniqueuses à la télévision est de 38 %. Le pourcentage de femmes parmi les invité.es politiques à la télévision est de 27 %.\nL’absence de femmes sur certains plateaux : 83 % des expert.es sollicité.es sont des hommes ; ils représentent 70 % des sources d’information et 70 % des porte-paroles.\nUn temps de parole des femmes encore largement inégal : alors que les femmes représentent 42 % des personnes à la télévision, leur taux de parole est de 32,7 %.\nUne image en décalage avec la réalité : les femmes doivent, avant tout, être agréables à regarder. Elles sont davantage caractérisées par leur apparence physique, leur âge et \nleur situation familiale que les hommes.\nUne absence de diversité : les femmes perçues comme non blanches sont très minoritaires et les femmes en situation de handicap sont absentes.",
+          "date": "2019",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "ouvrage",
+              "value": "Rapport annuel sur l'état du sexisme en France"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "An overall numerical disadvantage for women: the proportion of women on television remains far from parity, with 58% men and 42% women.\nFewer women during peak viewing hours: peak viewing hours are subject to marked inequalities. Women account for 39% of people appearing between 18h and 20h, but only 29% between 21h and 23h\nNumerical differences by occupation and role: the overall rate of female presenters and/or hosts on television is the highest overall rate, at 47%. The percentage of female journalists and/or columnists on television is 38%. The percentage of women among political guests on television is 27%.\nThe absence of women from some panels: 83% of the experts consulted are men; men account for 70% of information sources and 70% of spokespersons.\nWomen’s speaking time remains highly unequal: although women account for 42% of people on television, their share of speaking time is 32.7%.\nAn image at odds with reality: above all, women must be pleasant to look at. They are characterized by their physical appearance, age and family situation more often than men are.\nA lack of diversity: women perceived as non-white are a very small minority, and women with disabilities are absent.",
+        "translated_date": "2019",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every statistic, qualification and source line is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T13:55:50.224813+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Women are underrepresented throughout the audiovisual and media world\" argument",
+      "Women are underrepresented throughout the audiovisual and media world conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "nominal_phrase",
+    "displayed_title_target_form": "nominal_phrase",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": false,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "21b27398184e754ee3395f9b71180c70eccf7150adab7b90343793d099a5d005",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0029",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6eb8ce6ab204e802389378f99fcdbdb05d9960905a93fd5f484e907e1fb0d546"
+}

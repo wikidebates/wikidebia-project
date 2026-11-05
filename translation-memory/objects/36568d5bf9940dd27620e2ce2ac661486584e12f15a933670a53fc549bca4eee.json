@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "186af64511738dc77b10c904257f070839f8f5226a17045bcb639ddf7d90c6dd",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Sans l'extrême droite, il n'y aurait pas eu d'\"affaire Mila\"",
+    "identity_sha256": "5f279632b66de8eeb3a5f59dd5a4fcf8375560e68367540d198a8da21c6df454"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "0f02db5649bd1d0ed0a1a824a23ee67ad9b1e9099ad1984f06a4bff8fa62df3a"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Without the far right, there would have been no \"Mila affair\"",
+    "displayed_title": "Without the far right, there would have been no \"Mila affair\"",
+    "sections": [],
+    "keywords": [],
+    "summary": "The far right was very quick to take offense that the left did not display the same performative outrage, conveniently “forgetting” that it was entirely the far right’s fault that the affair had such an impact. Teenagers being harassed following an unfortunate social media post is sadly commonplace and never makes headlines, except when it enables political exploitation as here; the far right therefore behaved like an arsonist firefighter.",
+    "citations": [
+      {
+        "id": "A0230-C001",
+        "source": {
+          "id": "A0230-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "On constate que, quelque temps plus tard, Identitaires et pseudo-laïques se sont disputé la primeur du « combat pour Mila », revendiquant d’avoir été en première place pour « la défense » de l’adolescente… Mais les faits sont têtus : c’est bien la fachosphère qui a lancé l’affaire, et son hashtag a enregistré des scores de likes et de partages sans commune mesure avec ceux espérés par ses suiveurs, lesquels, en l’ayant adopté, lui ont assuré cette '''confortable résonance'''."
+            },
+            {
+              "name": "auteurs",
+              "value": "Isabelle Kersimon, Jean-Yves Pranchère, Alain Policar, Jean-Yves Camus, Georges Salines"
+            },
+            {
+              "name": "article",
+              "value": "Retour sur “l’affaire Mila” : un faux débat instrumenté par l’extrême droite"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Institut de recherches et d'études sur les radicalités"
+            },
+            {
+              "name": "date",
+              "value": "4 mai 2020"
+            },
+            {
+              "name": "lien",
+              "value": "https://inrer.org/2020/05/retour-sur-l-affaire-mila/"
+            }
+          ],
+          "citation": "On constate que, quelque temps plus tard, Identitaires et pseudo-laïques se sont disputé la primeur du « combat pour Mila », revendiquant d’avoir été en première place pour « la défense » de l’adolescente… Mais les faits sont têtus : c’est bien la fachosphère qui a lancé l’affaire, et son hashtag a enregistré des scores de likes et de partages sans commune mesure avec ceux espérés par ses suiveurs, lesquels, en l’ayant adopté, lui ont assuré cette '''confortable résonance'''.",
+          "date": "4 mai 2020",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Isabelle Kersimon, Jean-Yves Pranchère, Alain Policar, Jean-Yves Camus, Georges Salines"
+            },
+            {
+              "name": "article",
+              "value": "Retour sur “l’affaire Mila” : un faux débat instrumenté par l’extrême droite"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Institut de recherches et d'études sur les radicalités"
+            },
+            {
+              "name": "lien",
+              "value": "https://inrer.org/2020/05/retour-sur-l-affaire-mila/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Some time later, we see that Identitarians and pseudo-secularists competed to claim precedence in the “fight for Mila,” asserting that they had been at the forefront of the teenager’s “defense”... But the facts are stubborn: it was indeed the far-right online sphere that launched the affair, and its hashtag received numbers of likes and shares far beyond anything its followers could have hoped for; by adopting it, they gave it this '''comfortable resonance'''.",
+        "translated_date": "4 May 2020",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:23:52.387206+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Without the far right, there would have been no “Mila affair”\" argument",
+      "Without the far right, there would have been no “Mila affair” conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "nominal_phrase",
+    "displayed_title_target_form": "nominal_phrase",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": false,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "a1ddccda0abd132d88e66bc468519b197076905d0cbf391e842929d0e67629c9",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0230",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "36568d5bf9940dd27620e2ce2ac661486584e12f15a933670a53fc549bca4eee"
+}

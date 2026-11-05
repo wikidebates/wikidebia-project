@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "59ff7c6223c74b4b0db54d4e6ebafb20b93f736bd78b05766c07a7c35af0b61a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La sous-représentation des ingénieures a des conséquences très concrètes",
+    "identity_sha256": "93d90bcd4d53be68aacae009f63ecf458e0f5a07ea858bfe745271c34eecc0d1"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "86d11870fbbcabe9190e68679488b25b4751d10d050922ce84d182d4fe6a9df3"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "The underrepresentation of women engineers has very concrete consequences",
+    "displayed_title": "The underrepresentation of women engineers has very concrete consequences",
+    "sections": [],
+    "keywords": [],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0250-C001",
+        "source": {
+          "id": "A0250-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "'''''Science & Vie'' : L’absence de femmes ingénieures a-t-elle un véritable impact sur notre quotidien ?'''\n\n'''Delphine Virte :''' Oui ! Cette incidence est considérable et sous-estimée depuis un bon moment. Il suffit de penser au secteur automobile, qui était au départ essentiellement masculin. La conception des habitacles a été longtemps pensée par des hommes et pour des hommes, en fonction de l’anatomie d’un Européen moyen de 75 kg. Résultat : pédales, volant et ceinture de sécurité n’ont pas été dimensionnés pour des individus de petite taille. Cela représente statistiquement beaucoup de femmes. Lors du développement des mannequins et des premiers crash tests, l’erreur s’est répétée. Les premiers modèles ne tenaient pas compte des différences de taille entre sexes et s’avéraient donc inappropriés, voire dangereux pour les plus frêles.\n\n'''''S&V'' : Dans quels autres secteurs ces incidences sont-elles flagrantes ?'''\n\n'''D.V. :''' Sur les chantiers, que je connais bien, [https://www.science-et-vie.com/questions-reponses/d-ou-vient-le-boutonnage-inverse-selon-le-sexe-7448 les tenues] de protection ne sont pas toujours adaptés à nos tailles, ce qui pose des problèmes de sécurité quand on doit manœuvrer des machines. Dans un tout autre domaine, pharmaceutique, les impacts sont d’un autre ordre mais aussi très préoccupants. Pendant des années, les essais ont été effectués sur des souris mâles pour « éviter l’influence des hormones femelles qui variaient beaucoup », disait-on. Du coup, un grand nombre de [https://www.science-et-vie.com/corps-et-sante/medicaments-ils-soignent-mieux-les-hommes-que-les-femmes-48851 médicaments] ont été conçus sans être adaptés aux particularités physiologiques féminines"
+            },
+            {
+              "name": "auteurs",
+              "value": "Rédaction S&V"
+            },
+            {
+              "name": "article",
+              "value": "Voici comment la faible proportion de femmes ingénieures impacte nos vies"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Science & Vie"
+            },
+            {
+              "name": "date",
+              "value": "08 Mar 2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.science-et-vie.com/article-magazine/voici-comment-la-faible-proportion-de-femmes-ingenieures-impacte-nos-vies"
+            }
+          ],
+          "citation": "'''''Science & Vie'' : L’absence de femmes ingénieures a-t-elle un véritable impact sur notre quotidien ?'''\n\n'''Delphine Virte :''' Oui ! Cette incidence est considérable et sous-estimée depuis un bon moment. Il suffit de penser au secteur automobile, qui était au départ essentiellement masculin. La conception des habitacles a été longtemps pensée par des hommes et pour des hommes, en fonction de l’anatomie d’un Européen moyen de 75 kg. Résultat : pédales, volant et ceinture de sécurité n’ont pas été dimensionnés pour des individus de petite taille. Cela représente statistiquement beaucoup de femmes. Lors du développement des mannequins et des premiers crash tests, l’erreur s’est répétée. Les premiers modèles ne tenaient pas compte des différences de taille entre sexes et s’avéraient donc inappropriés, voire dangereux pour les plus frêles.\n\n'''''S&V'' : Dans quels autres secteurs ces incidences sont-elles flagrantes ?'''\n\n'''D.V. :''' Sur les chantiers, que je connais bien, [https://www.science-et-vie.com/questions-reponses/d-ou-vient-le-boutonnage-inverse-selon-le-sexe-7448 les tenues] de protection ne sont pas toujours adaptés à nos tailles, ce qui pose des problèmes de sécurité quand on doit manœuvrer des machines. Dans un tout autre domaine, pharmaceutique, les impacts sont d’un autre ordre mais aussi très préoccupants. Pendant des années, les essais ont été effectués sur des souris mâles pour « éviter l’influence des hormones femelles qui variaient beaucoup », disait-on. Du coup, un grand nombre de [https://www.science-et-vie.com/corps-et-sante/medicaments-ils-soignent-mieux-les-hommes-que-les-femmes-48851 médicaments] ont été conçus sans être adaptés aux particularités physiologiques féminines",
+          "date": "08 Mar 2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Rédaction S&V"
+            },
+            {
+              "name": "article",
+              "value": "Voici comment la faible proportion de femmes ingénieures impacte nos vies"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Science & Vie"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.science-et-vie.com/article-magazine/voici-comment-la-faible-proportion-de-femmes-ingenieures-impacte-nos-vies"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "'''''Science & Vie'': Does the absence of women engineers have a real impact on our daily lives?'''\n\n'''Delphine Virte:''' Yes! This impact is considerable and has been underestimated for quite some time. Just think of the automotive sector, which was initially overwhelmingly male. Vehicle interiors were designed for a long time by men and for men, based on the anatomy of an average 75-kilogram European man. As a result, pedals, steering wheels, and seat belts were not sized for smaller people. Statistically, that includes many women. The error was repeated when dummies and the first crash tests were developed. The first models did not account for size differences between the sexes and were therefore unsuitable, and even dangerous, for smaller people.\n\n'''''S&V'': In what other sectors are these effects conspicuous?'''\n\n'''D.V.:''' On construction sites, which I know well, [https://www.science-et-vie.com/questions-reponses/d-ou-vient-le-boutonnage-inverse-selon-le-sexe-7448 protective clothing] is not always suited to our sizes, which creates safety problems when operating machinery. In the entirely different pharmaceutical field, the effects are different but equally worrying. For years, trials were carried out on male mice to “avoid the influence of female hormones, which varied greatly,” as people said. Consequently, a large number of [https://www.science-et-vie.com/corps-et-sante/medicaments-ils-soignent-mieux-les-hommes-que-les-femmes-48851 medicines] were designed without being adapted to female physiological characteristics.",
+        "translated_date": "8 March 2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:24:28.764474+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"The underrepresentation of women engineers has very concrete consequences\" argument",
+      "The underrepresentation of women engineers has very concrete consequences conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "863645af1b20bebbf8903dae3fad3ee38d244cf7b5fb5a25fd52e21d458b1627",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0250",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "793ad099976780600600488f73c95a6c4b50ece948de907aa4de2a80059dd9e9"
+}

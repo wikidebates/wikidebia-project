@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "1efb7ccc2db33676321142dc27d6ed5971bb0cb77f9e1f89651eb86b87f02463",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes gagnent moins que les hommes",
+    "identity_sha256": "94c7d5ee371cde6fb6a6a0784e981c8f0bdcbd7eb5225b3846928fd0d6002f7a"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "e28a7ae6e4804b0262c845150be1782510310eacb7c4c2060615d7ee48ab0295"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Women earn less than men",
+    "displayed_title": "Women earn less than men",
+    "sections": [
+      "Society"
+    ],
+    "keywords": [
+      "feminism"
+    ],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0024-C001",
+        "source": {
+          "id": "A0024-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "\"En 2017, les femmes gagnent 24% de moins que les hommes (salaire annuel moyen).\nSource : Insee, Femmes et hommes, l’égalité en question, Édition 2017\nEn 2011, les femmes cadres gagnent :\n- 21,8% de moins que les hommes cadres dans le secteur privé et semi public.\n- 14,1% de moins dans la fonction publique étatique.\n- 15,7% de moins dans la fonction publique territoriale.\n- 21,6% de moins dans la fonction publique hospitalière.\nEn 2011, les femmes employées ou ouvrières gagnent :\n- 10,7% de moins que les hommes employés ou ouvriers dans le secteur privé ou semi-public.\n- 16,4% de moins que les hommes dans la fonction publique étatique.\n- 11,4% de moins dans la fonction publique territoriale.\n- 3% de moins dans la fonction publique hospitalière.\nSource : DADS, SIASP, INSEE. Traitement Insee, Drees, DGCL, département des études et des statistiques locales et DGAFP, département des études et des statistiques"
+            },
+            {
+              "name": "auteurs",
+              "value": "DADS, SIASP, INSEE"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Chiffres clés 2014"
+            },
+            {
+              "name": "page",
+              "value": "2"
+            },
+            {
+              "name": "localisation",
+              "value": "Thème 3"
+            }
+          ],
+          "citation": "\"En 2017, les femmes gagnent 24% de moins que les hommes (salaire annuel moyen).\nSource : Insee, Femmes et hommes, l’égalité en question, Édition 2017\nEn 2011, les femmes cadres gagnent :\n- 21,8% de moins que les hommes cadres dans le secteur privé et semi public.\n- 14,1% de moins dans la fonction publique étatique.\n- 15,7% de moins dans la fonction publique territoriale.\n- 21,6% de moins dans la fonction publique hospitalière.\nEn 2011, les femmes employées ou ouvrières gagnent :\n- 10,7% de moins que les hommes employés ou ouvriers dans le secteur privé ou semi-public.\n- 16,4% de moins que les hommes dans la fonction publique étatique.\n- 11,4% de moins dans la fonction publique territoriale.\n- 3% de moins dans la fonction publique hospitalière.\nSource : DADS, SIASP, INSEE. Traitement Insee, Drees, DGCL, département des études et des statistiques locales et DGAFP, département des études et des statistiques",
+          "date": "",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "DADS, SIASP, INSEE"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Chiffres clés 2014"
+            },
+            {
+              "name": "page",
+              "value": "2"
+            },
+            {
+              "name": "localisation",
+              "value": "Thème 3"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "\"In 2017, women earned 24% less than men (average annual salary).\nSource: Insee, Femmes et hommes, l’égalité en question, 2017 edition\nIn 2011, women in managerial positions earned:\n- 21.8% less than men in managerial positions in the private and semi-public sector.\n- 14.1% less in the central government civil service.\n- 15.7% less in the territorial civil service.\n- 21.6% less in the hospital civil service.\nIn 2011, women working as employees or manual workers earned:\n- 10.7% less than men working as employees or manual workers in the private or semi-public sector.\n- 16.4% less than men in the central government civil service.\n- 11.4% less in the territorial civil service.\n- 3% less in the hospital civil service.\nSource: DADS, SIASP, INSEE. Processing by Insee, Drees, DGCL, Department of Local Studies and Statistics, and DGAFP, Department of Studies and Statistics",
+        "translated_date": "",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every statistic, qualification and source line is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T13:54:47.675959+00:00",
+        "note": "Only the quotation was translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Women earn less than men\" argument",
+      "Women earn less than men conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "nominal_phrase",
+    "displayed_title_target_form": "nominal_phrase",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": false,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "469ed41a054b20ecbf527a66541a373968918c5dd4a8a35573725816752bd25c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0024",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a140137d1bbac4e1456dba4c7cc19dff5ecdebcacff64348feb26425df14888a"
+}

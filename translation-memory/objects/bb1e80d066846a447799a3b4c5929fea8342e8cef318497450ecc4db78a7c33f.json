@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "af837ba05aef8595030b236532414511ead1b04818a88b128beda28ceb30fef1",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La misandrie n'est pas l'équivalent de la misogynie",
+    "identity_sha256": "bfba6777316858915ae29c48b48fa789bf726a4becee7f711c2712b5ad7b6686"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "c4964dcd9dc8c34e37be30866fad79c1fcc9a00c29758d663fd5001220d70bb6"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Misandry is not equivalent to misogyny",
+    "displayed_title": "Misandry is not equivalent to misogyny",
+    "sections": [],
+    "keywords": [],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0103-C001",
+        "source": {
+          "id": "A0103-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "De fait, '''l’accusation de misandrie sert souvent à détourner l’attention des inégalités réelles et à invalider les revendications féministes.''' Comme le souligne l’écrivaine féministe Pauline Harmange, [https://www.radiofrance.fr/franceinter/podcasts/zoom-zoom-zen/zoom-zoom-zen-du-vendredi-08-mars-2024-6542220 '''la critique des comportements masculins oppressifs est trop souvent assimilée à une haine des hommes en tant que groupe, ce qui permet d’inverser les rôles et de présenter les hommes comme des victimes d’une oppression inexistante'''].\n\n[https://mrmondialisation.org/misogynie-en-ligne-terrain-dune-culture-du-viol-2-0/ '''Mais contrairement à la misogynie, la misandrie ne s’appuie sur aucune structure systémique de pouvoir''']. '''Elle ne se traduit pas par des violences institutionnalisées, des discriminations légales ou des inégalités socio-économiques.''' Là où la misogynie engendre des violences physiques, sexuelles et psychologiques massives envers les femmes, la misandrie se manifeste souvent par un évitement ou une méfiance envers les hommes, en réaction à des expériences traumatiques individuelles."
+            },
+            {
+              "name": "auteurs",
+              "value": "Elena Meilune"
+            },
+            {
+              "name": "article",
+              "value": "Non, la misandrie n’est pas l’équivalent de la misogynie"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mr Mondialisation"
+            },
+            {
+              "name": "date",
+              "value": "17 avril 2025"
+            },
+            {
+              "name": "lien",
+              "value": "https://mrmondialisation.org/misandrie-misogynie/"
+            }
+          ],
+          "citation": "De fait, '''l’accusation de misandrie sert souvent à détourner l’attention des inégalités réelles et à invalider les revendications féministes.''' Comme le souligne l’écrivaine féministe Pauline Harmange, [https://www.radiofrance.fr/franceinter/podcasts/zoom-zoom-zen/zoom-zoom-zen-du-vendredi-08-mars-2024-6542220 '''la critique des comportements masculins oppressifs est trop souvent assimilée à une haine des hommes en tant que groupe, ce qui permet d’inverser les rôles et de présenter les hommes comme des victimes d’une oppression inexistante'''].\n\n[https://mrmondialisation.org/misogynie-en-ligne-terrain-dune-culture-du-viol-2-0/ '''Mais contrairement à la misogynie, la misandrie ne s’appuie sur aucune structure systémique de pouvoir''']. '''Elle ne se traduit pas par des violences institutionnalisées, des discriminations légales ou des inégalités socio-économiques.''' Là où la misogynie engendre des violences physiques, sexuelles et psychologiques massives envers les femmes, la misandrie se manifeste souvent par un évitement ou une méfiance envers les hommes, en réaction à des expériences traumatiques individuelles.",
+          "date": "17 avril 2025",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Elena Meilune"
+            },
+            {
+              "name": "article",
+              "value": "Non, la misandrie n’est pas l’équivalent de la misogynie"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mr Mondialisation"
+            },
+            {
+              "name": "lien",
+              "value": "https://mrmondialisation.org/misandrie-misogynie/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "In fact, '''the accusation of misandry often serves to divert attention from real inequalities and invalidate feminist demands.''' As feminist writer Pauline Harmange points out, [https://www.radiofrance.fr/franceinter/podcasts/zoom-zoom-zen/zoom-zoom-zen-du-vendredi-08-mars-2024-6542220 '''criticism of oppressive male behavior is too often equated with hatred of men as a group, making it possible to reverse the roles and present men as victims of a nonexistent oppression'''].\n\n[https://mrmondialisation.org/misogynie-en-ligne-terrain-dune-culture-du-viol-2-0/ '''But unlike misogyny, misandry is not supported by any systemic structure of power''']. '''It does not result in institutionalized violence, legal discrimination or socioeconomic inequality.''' Whereas misogyny generates massive physical, sexual and psychological violence against women, misandry often manifests itself as avoidance or distrust of men in response to individual traumatic experiences.",
+        "translated_date": "17 April 2025",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every distinction, link and qualification is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:37:19.296391+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Misandry is not equivalent to misogyny\" argument",
+      "Misandry is not equivalent to misogyny conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "07efc68a2eb559142997da60b277e53670c18ea58e9531df7663b1f7193943b7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0103",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "bb1e80d066846a447799a3b4c5929fea8342e8cef318497450ecc4db78a7c33f"
+}

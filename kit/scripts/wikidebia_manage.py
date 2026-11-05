@@ -2136,6 +2136,25 @@ def corpus_workspace_translation_patch(
     return run(command, cwd=root, check=False).returncode
 
 
+def corpus_translation_memory(
+    root: Path, *, action: str, debate_id: str | None,
+    work_id: str | None, memory_root: Path,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_translation_memory.py"
+    if not script.is_file():
+        raise ManagementError("Mémoire de traduction inter-débats absente du kit")
+    command = [
+        python_command(root), str(script), action,
+        "--memory-root", str(memory_root),
+        "--project-root", str(root), "--machine-readable",
+    ]
+    if debate_id:
+        command.insert(3, debate_id)
+    if work_id:
+        command.extend(["--work-id", work_id])
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_external_deletion_accept(
     root: Path, debate_id: str, *, work_id: str, comparison_id: str,
     language: str, page_id: str, reason: str, accepted_by: str,
@@ -2332,6 +2351,7 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
         "wikidebia_translation_worklist.py",
         "wikidebia_translation_packet.py",
         "wikidebia_translation_patch.py",
+        "wikidebia_translation_memory.py",
         "wikidebia_external_deletions.py",
         "refresh_package_metadata.py",
         "wikidebia_render.py", "wikidebia_release.py",
@@ -2653,6 +2673,15 @@ def build_parser() -> argparse.ArgumentParser:
     translation_patch_parser.add_argument("--unit-status", choices=("pending", "approved"))
     translation_patch_parser.add_argument("--confirm-patch-sha256")
 
+    translation_memory_parser = sub.add_parser(
+        "corpus-translation-memory",
+        help="Exporter ou vérifier la mémoire de traduction inter-débats signée",
+    )
+    translation_memory_parser.add_argument("action", choices=("export", "verify"))
+    translation_memory_parser.add_argument("debate_id", nargs="?")
+    translation_memory_parser.add_argument("--work-id")
+    translation_memory_parser.add_argument("--memory-root", type=Path, default=Path("translation-memory"))
+
     external_deletion_parser = sub.add_parser(
         "corpus-external-deletion-accept",
         help="Accepter dans un registre signé une suppression constatée sur le wiki",
@@ -2919,6 +2948,14 @@ def main(argv: list[str] | None = None) -> int:
             overwrite=args.overwrite, reviewer=args.reviewer, note=args.note,
             unit_status=args.unit_status,
             confirm_patch_sha256=args.confirm_patch_sha256,
+        )
+
+    if args.command == "corpus-translation-memory":
+        if args.action == "export" and (not args.debate_id or not args.work_id):
+            raise ManagementError("export exige debate_id et --work-id")
+        return corpus_translation_memory(
+            root, action=args.action, debate_id=args.debate_id,
+            work_id=args.work_id, memory_root=args.memory_root,
         )
 
     if args.command == "corpus-external-deletion-accept":

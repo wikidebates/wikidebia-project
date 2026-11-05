@@ -1115,6 +1115,20 @@ def test_translation_patch_command_is_exposed_by_manager():
     assert args.prepare is True
 
 
+def test_translation_memory_commands_are_exposed_by_manager():
+    export = module.build_parser().parse_args([
+        "corpus-translation-memory", "export", "debat_test",
+        "--work-id", "EDIT-TEST-001",
+    ])
+    verify = module.build_parser().parse_args([
+        "corpus-translation-memory", "verify", "--memory-root", "shared-memory",
+    ])
+    assert export.debate_id == "debat_test"
+    assert export.work_id == "EDIT-TEST-001"
+    assert verify.debate_id is None
+    assert verify.memory_root == Path("shared-memory")
+
+
 def test_external_deletion_accept_command_is_exposed_by_manager():
     args = module.build_parser().parse_args([
         "corpus-external-deletion-accept", "debat_test",
@@ -1153,7 +1167,7 @@ def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
         "wikidebia_editorial_workspace.py", "wikidebia_editorial_review.py",
         "wikidebia_content_review.py", "wikidebia_translation_review.py",
         "wikidebia_translation_worklist.py", "wikidebia_translation_packet.py",
-        "wikidebia_translation_patch.py",
+        "wikidebia_translation_patch.py", "wikidebia_translation_memory.py",
         "wikidebia_external_deletions.py",
         "refresh_package_metadata.py",
         "wikidebia_render.py",

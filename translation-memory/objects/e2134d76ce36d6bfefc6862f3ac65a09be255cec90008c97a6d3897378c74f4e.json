@@ -1,0 +1,382 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "c3a4c70a4bedf7724ff4e3b9e5f108d9d500867e6f90b8f79e97503dce73a057",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les fémonationalistes ne proposent rien contre le sexisme qui sévit en occident",
+    "identity_sha256": "91bd1dc00a0a3e20a108198aaf59b32d1e8bc6437f06710fd0bf8a0af36d23b8"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "68b8a2c476a1d8576c1f7961ca1b2a6d115b7221d165f4beb6aa41c4c247e90e"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Femonationalists propose nothing to combat the sexism rampant in the West",
+    "displayed_title": "Femonationalists propose nothing to combat the sexism rampant in the West",
+    "sections": [],
+    "keywords": [],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0330-C001",
+        "source": {
+          "id": "A0330-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "[La perspective du collectif Némésis] est fémonationaliste : [il utilise] la cause des femmes pour faire avancer la cause nationaliste, identitaire et sécuritaire. D’ailleurs, elles ne disent rien concernant la santé reproductive ou les conditions de travail des femmes, leur objectif est de changer le contenu de ce que nous entendons pas « droits des femmes », pour y associer le droit à la sécurité, la défense d’une identité et une certaine vision de l’Occident."
+            },
+            {
+              "name": "auteurs",
+              "value": "Caroline Pernes"
+            },
+            {
+              "name": "article",
+              "value": "Collectif d’extrême droite Némésis : “Elles utilisent la cause des femmes pour faire avancer la cause nationaliste, identitaire et sécuritaire”"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Télérama"
+            },
+            {
+              "name": "date",
+              "value": "07 mars 2025"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.telerama.fr/debats-reportages/collectif-d-extreme-droite-nemesis-elles-utilisent-la-cause-des-femmes-pour-faire-avancer-la-cause-nationaliste-identitaire-et-securitaire-7024655.php"
+            }
+          ],
+          "citation": "[La perspective du collectif Némésis] est fémonationaliste : [il utilise] la cause des femmes pour faire avancer la cause nationaliste, identitaire et sécuritaire. D’ailleurs, elles ne disent rien concernant la santé reproductive ou les conditions de travail des femmes, leur objectif est de changer le contenu de ce que nous entendons pas « droits des femmes », pour y associer le droit à la sécurité, la défense d’une identité et une certaine vision de l’Occident.",
+          "date": "07 mars 2025",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Caroline Pernes"
+            },
+            {
+              "name": "article",
+              "value": "Collectif d’extrême droite Némésis : “Elles utilisent la cause des femmes pour faire avancer la cause nationaliste, identitaire et sécuritaire”"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Télérama"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.telerama.fr/debats-reportages/collectif-d-extreme-droite-nemesis-elles-utilisent-la-cause-des-femmes-pour-faire-avancer-la-cause-nationaliste-identitaire-et-securitaire-7024655.php"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "[The Némésis collective’s perspective] is femonationalist: [it uses] the cause of women to advance a nationalist, identitarian, and security-oriented cause. Moreover, they say nothing about reproductive health or women’s working conditions; their objective is to change the content of what we mean by ‘women’s rights’ so that it includes the right to security, the defense of an identity, and a certain vision of the West.",
+        "translated_date": "7 March 2025",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:50.570647+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0330-C002",
+        "source": {
+          "id": "A0330-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "[Le RN et Reconquête] ne proposent aucune mesure concrète pour lutter contre les violences sexuelles, et cette lutte est instrumentalisée en disant que les violences seraient perpétrées par des personnes étrangères, alors que tous les chiffres montrent que les auteurs de violences sont issus de tous les milieux sociaux. Éric Zemmour est par ailleurs accusé d’agressions sexuelles par huit femmes ; il n’est pas le seul, mais avoir un président mis en cause pour de tels faits serait un crachat aux visages des victimes"
+            },
+            {
+              "name": "auteurs",
+              "value": "La Rédaction"
+            },
+            {
+              "name": "article",
+              "value": "Le péril Le Pen : inventaire de ce qu’elle infligerait à la société"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mediapart"
+            },
+            {
+              "name": "date",
+              "value": "9 avril 2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.mediapart.fr/journal/france/090422/le-peril-le-pen-inventaire-de-ce-qu-elle-infligerait-la-societe"
+            }
+          ],
+          "citation": "[Le RN et Reconquête] ne proposent aucune mesure concrète pour lutter contre les violences sexuelles, et cette lutte est instrumentalisée en disant que les violences seraient perpétrées par des personnes étrangères, alors que tous les chiffres montrent que les auteurs de violences sont issus de tous les milieux sociaux. Éric Zemmour est par ailleurs accusé d’agressions sexuelles par huit femmes ; il n’est pas le seul, mais avoir un président mis en cause pour de tels faits serait un crachat aux visages des victimes",
+          "date": "9 avril 2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "La Rédaction"
+            },
+            {
+              "name": "article",
+              "value": "Le péril Le Pen : inventaire de ce qu’elle infligerait à la société"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mediapart"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.mediapart.fr/journal/france/090422/le-peril-le-pen-inventaire-de-ce-qu-elle-infligerait-la-societe"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "[The RN and Reconquête] propose no concrete measure to combat sexual violence, and this struggle is instrumentalized by claiming that violence is perpetrated by foreigners, even though all the figures show that perpetrators come from every social background. Éric Zemmour is also accused of sexual assault by eight women; he is not the only one, but having a president implicated in such acts would be a slap in the face to victims.",
+        "translated_date": "9 April 2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:50.570647+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0330-C003",
+        "source": {
+          "id": "A0330-C003",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "[Dans le programme du RN], rien sur les inégalités femmes-hommes (qui ne sont évoquées qu’en lien avec l’islamisme ou la charia), ni sur les discriminations salariales."
+            },
+            {
+              "name": "auteurs",
+              "value": "La Rédaction"
+            },
+            {
+              "name": "article",
+              "value": "Le péril Le Pen : inventaire de ce qu’elle infligerait à la société"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mediapart"
+            },
+            {
+              "name": "date",
+              "value": "9 avril 2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.mediapart.fr/journal/france/090422/le-peril-le-pen-inventaire-de-ce-qu-elle-infligerait-la-societe"
+            }
+          ],
+          "citation": "[Dans le programme du RN], rien sur les inégalités femmes-hommes (qui ne sont évoquées qu’en lien avec l’islamisme ou la charia), ni sur les discriminations salariales.",
+          "date": "9 avril 2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "La Rédaction"
+            },
+            {
+              "name": "article",
+              "value": "Le péril Le Pen : inventaire de ce qu’elle infligerait à la société"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mediapart"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.mediapart.fr/journal/france/090422/le-peril-le-pen-inventaire-de-ce-qu-elle-infligerait-la-societe"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "[In the RN platform], there is nothing about gender inequality (which is mentioned only in connection with Islamism or Sharia), nor about pay discrimination.",
+        "translated_date": "9 April 2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:25:50.570647+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Femonationalists propose nothing to combat the sexism rampant in the West\" argument",
+      "Femonationalists propose nothing to combat the sexism rampant in the West conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "nominal_phrase",
+    "displayed_title_target_form": "nominal_phrase",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": false,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "c0ff0a7c6a67fa3c590f629aa3979352841dedadb5265e25b3f3c018363ea124",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0330",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e2134d76ce36d6bfefc6862f3ac65a09be255cec90008c97a6d3897378c74f4e"
+}

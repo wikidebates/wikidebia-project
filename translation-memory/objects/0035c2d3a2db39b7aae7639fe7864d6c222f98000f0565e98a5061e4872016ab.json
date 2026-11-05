@@ -1,0 +1,506 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "964cf505d58e0e1ffa7b5585792ec970a95d447b6e6dd225a0d7fd137374b95b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'universalisme laisse sur le bas-côté de nombreux types d'oppression",
+    "identity_sha256": "2abfe0e702bbd89aa1dd708e85d15a1c93cc3ef99df8a07f06f4b61539f44bef"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "a88bdadd9323b1ab2bf1f5b84dae0c50bdc01c7e2a2e4655eaa8a04302159e43"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Universalism leaves many forms of oppression behind",
+    "displayed_title": "Universalism leaves many forms of oppression behind",
+    "sections": [],
+    "keywords": [],
+    "summary": "If we take violence against women as an example, universalism starts from the principle that all women experience exactly the same forms of oppression. This denies that forms of oppression can accumulate and take very different forms according to ethnicity, any possible disability or disabilities, transgender identity or social class, to name only a few examples. The sexism experienced by a nondisabled Black woman will not be the same as that experienced by a disabled white woman, and so on. Ignoring this aspect does not merely lead to forgetting some victims; it is also a source of internal oppression that can become entrenched within activist groups themselves.",
+    "citations": [
+      {
+        "id": "A0131-C001",
+        "source": {
+          "id": "A0131-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Comment expliquer le manque d’engagement politique contre le racisme ? Pour Nadhéra Beletreche, la réponse est forcément multifactorielle. La militante y voit déjà un lien avec cet universalisme à la française, une ''« histoire qui a écrasé les particularismes mais qui se croit vraiment universaliste »''."
+            },
+            {
+              "name": "auteurs",
+              "value": "Maëlle Le Corre"
+            },
+            {
+              "name": "article",
+              "value": "Pour lutter contre les discriminations raciales, des militantes lancent l’Observatoire contre le racisme en politique"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "date",
+              "value": "20 jan 2023"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/pour-lutter-contre-les-discriminations-raciales-des-militantes-lancent-lobservatoire-contre-le-racisme-en-politique-1484519"
+            }
+          ],
+          "citation": "Comment expliquer le manque d’engagement politique contre le racisme ? Pour Nadhéra Beletreche, la réponse est forcément multifactorielle. La militante y voit déjà un lien avec cet universalisme à la française, une ''« histoire qui a écrasé les particularismes mais qui se croit vraiment universaliste »''.",
+          "date": "20 jan 2023",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Maëlle Le Corre"
+            },
+            {
+              "name": "article",
+              "value": "Pour lutter contre les discriminations raciales, des militantes lancent l’Observatoire contre le racisme en politique"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/pour-lutter-contre-les-discriminations-raciales-des-militantes-lancent-lobservatoire-contre-le-racisme-en-politique-1484519"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "How can the lack of political engagement against racism be explained? For Nadhéra Beletreche, the answer is necessarily multifactorial. The activist already sees a link with this French-style universalism, a ''“history that crushed particularisms but truly believes itself to be universalist.”''",
+        "translated_date": "20 January 2023",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every claim, qualification, number and link is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:49:02.228898+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0131-C002",
+        "source": {
+          "id": "A0131-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "[Les notions d'universalisme et d'intersectionalité] crispent une partie de la population d’une part parce que la notion d’universalisme et sa définition a été accaparée par une élite blanche, [https://www.madmoizelle.com/questions-heterosexuels-170007 hétéro], [https://www.madmoizelle.com/kelsi-phung-artiste-non-binaire-zone-interdite-presente-la-non-binarite-comme-un-phenomene-de-mode-1073041 cisgenre], [https://www.madmoizelle.com/il-faut-que-les-valides-sachent-remettre-en-question-leurs-privileges-1077539 valide] qui définit ce qu’est l’universalisme au regard de son vécu privilégié et tente d’en faire une norme, une généralité. Cela crée des crispations de toutes parts car '''comment parler d’universalisme quand sa définition même exclue une grande partie de notre population ?'''"
+            },
+            {
+              "name": "auteurs",
+              "value": "Anthony Vincent"
+            },
+            {
+              "name": "article",
+              "value": "Comment militer sans s’épuiser ? Ce livre décrypte les nouvelles formes d’engagement"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "date",
+              "value": "23 août 2023"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/comment-militer-sans-sepuiser-ce-livre-decrypte-les-nouvelles-formes-dengagement-1317699"
+            }
+          ],
+          "citation": "[Les notions d'universalisme et d'intersectionalité] crispent une partie de la population d’une part parce que la notion d’universalisme et sa définition a été accaparée par une élite blanche, [https://www.madmoizelle.com/questions-heterosexuels-170007 hétéro], [https://www.madmoizelle.com/kelsi-phung-artiste-non-binaire-zone-interdite-presente-la-non-binarite-comme-un-phenomene-de-mode-1073041 cisgenre], [https://www.madmoizelle.com/il-faut-que-les-valides-sachent-remettre-en-question-leurs-privileges-1077539 valide] qui définit ce qu’est l’universalisme au regard de son vécu privilégié et tente d’en faire une norme, une généralité. Cela crée des crispations de toutes parts car '''comment parler d’universalisme quand sa définition même exclue une grande partie de notre population ?'''",
+          "date": "23 août 2023",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Anthony Vincent"
+            },
+            {
+              "name": "article",
+              "value": "Comment militer sans s’épuiser ? Ce livre décrypte les nouvelles formes d’engagement"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Madmoizelle.com"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.madmoizelle.com/comment-militer-sans-sepuiser-ce-livre-decrypte-les-nouvelles-formes-dengagement-1317699"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "[The concepts of universalism and intersectionality] make part of the population bristle, in part because the concept of universalism and its definition have been appropriated by a white, [https://www.madmoizelle.com/questions-heterosexuels-170007 heterosexual], [https://www.madmoizelle.com/kelsi-phung-artiste-non-binaire-zone-interdite-presente-la-non-binarite-comme-un-phenomene-de-mode-1073041 cisgender], [https://www.madmoizelle.com/il-faut-que-les-valides-sachent-remettre-en-question-leurs-privileges-1077539 nondisabled] elite that defines universalism in light of its privileged experience and tries to turn it into a norm, a general rule. This creates tensions on all sides, because '''how can one speak of universalism when its very definition excludes a large part of our population?'''",
+        "translated_date": "23 August 2023",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every claim, qualification, number and link is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:49:02.228898+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0131-C003",
+        "source": {
+          "id": "A0131-C003",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Dans ce sens, l’intersectionnalité ne peut pas être un frein ni une menace pour le féminisme, au contraire, c’est une approche inévitable et utile qui donne des outils pour comprendre une situation complexe et d’y faire face. C’est une approche intéressante pour toutes les femmes car [https://doi.org/10.3917/nqf.251.0012 elle permet de comprendre l’égalité des genres dans une approche dynamique (Nader, 2006)] en lien avec les relations intergroupes et leur conséquence sur les droits des femmes."
+            },
+            {
+              "name": "auteurs",
+              "value": "Noura Amer"
+            },
+            {
+              "name": "article",
+              "value": "\"L’intersectionnalité n’est pas un frein, ni une menace pour le féminisme\""
+            },
+            {
+              "name": "ouvrage",
+              "value": "RTBF"
+            },
+            {
+              "name": "date",
+              "value": "21/02/2023"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.rtbf.be/article/lintersectionnalite-nest-pas-un-frein-ni-une-menace-pour-le-feminisme-11156289"
+            }
+          ],
+          "citation": "Dans ce sens, l’intersectionnalité ne peut pas être un frein ni une menace pour le féminisme, au contraire, c’est une approche inévitable et utile qui donne des outils pour comprendre une situation complexe et d’y faire face. C’est une approche intéressante pour toutes les femmes car [https://doi.org/10.3917/nqf.251.0012 elle permet de comprendre l’égalité des genres dans une approche dynamique (Nader, 2006)] en lien avec les relations intergroupes et leur conséquence sur les droits des femmes.",
+          "date": "21/02/2023",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Noura Amer"
+            },
+            {
+              "name": "article",
+              "value": "\"L’intersectionnalité n’est pas un frein, ni une menace pour le féminisme\""
+            },
+            {
+              "name": "ouvrage",
+              "value": "RTBF"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.rtbf.be/article/lintersectionnalite-nest-pas-un-frein-ni-une-menace-pour-le-feminisme-11156289"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "In this sense, intersectionality cannot be an obstacle or a threat to feminism; on the contrary, it is an unavoidable and useful approach that provides tools for understanding a complex situation and dealing with it. It is an interesting approach for all women because [https://doi.org/10.3917/nqf.251.0012 it makes it possible to understand gender equality through a dynamic approach (Nader, 2006)] linked to intergroup relations and their consequences for women’s rights.",
+        "translated_date": "21/02/2023",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every claim, qualification, number and link is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:49:02.228898+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0131-C004",
+        "source": {
+          "id": "A0131-C004",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "La cour d’appel de Paris vient de reconnaître la discrimination « en raison de l’origine et du sexe » dont a été victime une ancienne salariée de la banque. Fait rare, cette décision évoque la notion de « discrimination intersectionnelle »."
+            },
+            {
+              "name": "auteurs",
+              "value": "Cécile Hautefeuille"
+            },
+            {
+              "name": "article",
+              "value": "Discriminée parce que femme et noire : une ex-salariée fait condamner la Société générale"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mediapart"
+            },
+            {
+              "name": "date",
+              "value": "24 octobre 2025"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.mediapart.fr/journal/economie-et-social/241025/discriminee-parce-que-femme-et-noire-une-ex-salariee-fait-condamner-la-societe-generale?utm_source=quotidienne-20251024-171329&fbclid=IwY2xjawN8hYFleHRuA2FlbQIxMQBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEe-6tMV4qpwwD_Wwx4YLPfBWx_q3BA0QsWzuBvlnqb7juWk8a30j-r_NureU4_aem_pQCxfUYROo0pmoVip_9dBA"
+            }
+          ],
+          "citation": "La cour d’appel de Paris vient de reconnaître la discrimination « en raison de l’origine et du sexe » dont a été victime une ancienne salariée de la banque. Fait rare, cette décision évoque la notion de « discrimination intersectionnelle ».",
+          "date": "24 octobre 2025",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Cécile Hautefeuille"
+            },
+            {
+              "name": "article",
+              "value": "Discriminée parce que femme et noire : une ex-salariée fait condamner la Société générale"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Mediapart"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.mediapart.fr/journal/economie-et-social/241025/discriminee-parce-que-femme-et-noire-une-ex-salariee-fait-condamner-la-societe-generale?utm_source=quotidienne-20251024-171329&fbclid=IwY2xjawN8hYFleHRuA2FlbQIxMQBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEe-6tMV4qpwwD_Wwx4YLPfBWx_q3BA0QsWzuBvlnqb7juWk8a30j-r_NureU4_aem_pQCxfUYROo0pmoVip_9dBA"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "The Paris Court of Appeal has just recognized the discrimination “on grounds of origin and sex” suffered by a former bank employee. In a rare development, the decision refers to the concept of “intersectional discrimination.”",
+        "translated_date": "24 October 2025",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every claim, qualification, number and link is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:49:02.228898+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0131-C005",
+        "source": {
+          "id": "A0131-C005",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "« Le féminisme n’a aucune valeur sans intersectionnalité ni inclusion », disait la féministe américaine Kimberlé Williams Crenshaw, qui a introduit le terme d’intersectionnalité à la fin des années quatre-vingt afin de montrer que les expériences vécues par une personne noire et par une femme ne peuvent pas être comprises et analysées comme deux données séparées ou indépendantes. Plus généralement, l’intersectionnalité vise à montrer que la domination est plurielle et tente de mesurer l’impact d’oppressions multiples : LGBTQIAphobies, sexisme, validisme, racisme, grossophobie, putophobie, classisme… « Admettons que même dans nos luttes, on a des personnes plus privilégiées que d’autres. Il faut normaliser la parole des concernées », résume Peter."
+            },
+            {
+              "name": "article",
+              "value": "Nous sommes non-binaires, pas imaginaires"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Castor Magazine"
+            },
+            {
+              "name": "lien",
+              "value": "https://web.archive.org/web/20240819002307/https://www.lecastormagazine.com/nous-sommes-non-binaires"
+            }
+          ],
+          "citation": "« Le féminisme n’a aucune valeur sans intersectionnalité ni inclusion », disait la féministe américaine Kimberlé Williams Crenshaw, qui a introduit le terme d’intersectionnalité à la fin des années quatre-vingt afin de montrer que les expériences vécues par une personne noire et par une femme ne peuvent pas être comprises et analysées comme deux données séparées ou indépendantes. Plus généralement, l’intersectionnalité vise à montrer que la domination est plurielle et tente de mesurer l’impact d’oppressions multiples : LGBTQIAphobies, sexisme, validisme, racisme, grossophobie, putophobie, classisme… « Admettons que même dans nos luttes, on a des personnes plus privilégiées que d’autres. Il faut normaliser la parole des concernées », résume Peter.",
+          "date": "",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "article",
+              "value": "Nous sommes non-binaires, pas imaginaires"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Castor Magazine"
+            },
+            {
+              "name": "lien",
+              "value": "https://web.archive.org/web/20240819002307/https://www.lecastormagazine.com/nous-sommes-non-binaires"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "“Feminism has no value without intersectionality and inclusion,” said American feminist Kimberlé Williams Crenshaw, who introduced the term intersectionality in the late eighties to show that the experiences of a Black person and a woman cannot be understood and analyzed as two separate or independent pieces of data. More generally, intersectionality seeks to show that domination is plural and attempts to measure the impact of multiple oppressions: anti-LGBTQIA prejudice, sexism, ableism, racism, fatphobia, whorephobia, classism... “Let us admit that even within our struggles, some people are more privileged than others. We must normalize the voices of those concerned,” Peter summarizes.",
+        "translated_date": "",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The complete French quotation was compared sentence by sentence with the English translation; every claim, qualification, number and link is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were checked for complete coverage; nothing was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T15:49:02.228898+00:00",
+        "note": "Only the quotation and its date were translated; the original documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Universalism leaves many forms of oppression behind\" argument",
+      "Universalism leaves many forms of oppression behind conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "nominal_phrase",
+    "displayed_title_target_form": "nominal_phrase",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": false,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": true,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": true,
+    "summary_opening_proposition_preserved": true,
+    "summary_closing_proposition_preserved": true,
+    "summary_conditions_exclusivities_preserved": true,
+    "summary_decisive_premises_preserved": true,
+    "summary_semantic_evidence_note": "Opening and closing propositions, conditions, exclusions, modalities and decisive premises were compared directly with the locked French summary.",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "e54822dd8019d240af0e35f597c2a6567110cae7d67e77886277a253396be58a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0131",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0035c2d3a2db39b7aae7639fe7864d6c222f98000f0565e98a5061e4872016ab"
+}

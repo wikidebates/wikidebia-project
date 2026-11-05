@@ -1,0 +1,382 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "d1c57b7700edd8b75a432ac71ac07091a896675dc8fb38dc41fda2f3e3faab92",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le terme a été dénaturé et a fait l'objet d'une réappropriation",
+    "identity_sha256": "fcfbb6b580af17bae4460ca229a6a37a5aecdaf8e4952dcf8c73a1587616b98e"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "0bab91ed8c7cfb3f60a2d96c5022dddbbfaa3270c3eabc44ec56a91f89938f5b"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "The term has been distorted and appropriated",
+    "displayed_title": "The term has been distorted and appropriated",
+    "sections": [],
+    "keywords": [],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0201-C001",
+        "source": {
+          "id": "A0201-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Alors que le terme est né comme un mot d'ordre dans les communautés noires pour « rester éveillé » contre la brutalité policière, il a depuis été détourné pour servir de fourre-tout pour toute politique, position, ou personne avec laquelle les conservateurs ne sont pas d'accord, souvent de manière caricaturale.\n\n\n''(While the term originated as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.)''"
+            },
+            {
+              "name": "auteurs",
+              "value": "Samuel C. Huneke"
+            },
+            {
+              "name": "article",
+              "value": "Critically Cringe: On Susan Neiman’s “Left Is Not Woke”"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Los Angeles Review of Books"
+            },
+            {
+              "name": "date",
+              "value": "14/09/2023"
+            },
+            {
+              "name": "lien",
+              "value": "https://lareviewofbooks.org/article/critically-cringe-on-susan-neimans-left-is-not-woke/"
+            }
+          ],
+          "citation": "Alors que le terme est né comme un mot d'ordre dans les communautés noires pour « rester éveillé » contre la brutalité policière, il a depuis été détourné pour servir de fourre-tout pour toute politique, position, ou personne avec laquelle les conservateurs ne sont pas d'accord, souvent de manière caricaturale.\n\n\n''(While the term originated as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.)''",
+          "date": "14/09/2023",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Samuel C. Huneke"
+            },
+            {
+              "name": "article",
+              "value": "Critically Cringe: On Susan Neiman’s “Left Is Not Woke”"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Los Angeles Review of Books"
+            },
+            {
+              "name": "lien",
+              "value": "https://lareviewofbooks.org/article/critically-cringe-on-susan-neimans-left-is-not-woke/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "Although the term originated as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.\n\n\n''(While the term originated as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.)''",
+        "translated_date": "14/09/2023",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:23:19.513408+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0201-C002",
+        "source": {
+          "id": "A0201-C002",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Ce terme plutôt émancipateur et positif a été rendu négatif, alors que bien souvent c'est l'inverse qui se produit: les militantes détournent le sens de mots à la base utilisés comme une insulte - queer, gouine, sorcière par exemple - pour se les réapproprier, relève encore la linguiste.\n\nL'utilisation du terme \"''wokisme''\" entre dans le cadre d'une \"''sorte de culture de la panique, en associant le militantisme, la lutte contre les discriminations, à des mouvements puritains''\", poursuit Laurence Rosier. \"''Cela peut être dangereux. On est dans une culture de la peur, comme si on allait éradiquer l'Histoire en enlevant des statues, alors que les archives, les documents restent pour témoigner des atrocités que certains ont fait. Cette culture de la panique est utilisée pour bloquer des combats émancipateurs''\", conclut-elle."
+            },
+            {
+              "name": "auteurs",
+              "value": "Belga"
+            },
+            {
+              "name": "article",
+              "value": "Journée de lutte pour les droits des femmes : \"Woke\", ce terme flou utilisé pour dévaloriser"
+            },
+            {
+              "name": "ouvrage",
+              "value": "RTBF"
+            },
+            {
+              "name": "date",
+              "value": "08 mars 2022"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.rtbf.be/article/journee-de-lutte-pour-les-droits-des-femmes-woke-ce-terme-flou-utilise-pour-devaloriser-10950078"
+            }
+          ],
+          "citation": "Ce terme plutôt émancipateur et positif a été rendu négatif, alors que bien souvent c'est l'inverse qui se produit: les militantes détournent le sens de mots à la base utilisés comme une insulte - queer, gouine, sorcière par exemple - pour se les réapproprier, relève encore la linguiste.\n\nL'utilisation du terme \"''wokisme''\" entre dans le cadre d'une \"''sorte de culture de la panique, en associant le militantisme, la lutte contre les discriminations, à des mouvements puritains''\", poursuit Laurence Rosier. \"''Cela peut être dangereux. On est dans une culture de la peur, comme si on allait éradiquer l'Histoire en enlevant des statues, alors que les archives, les documents restent pour témoigner des atrocités que certains ont fait. Cette culture de la panique est utilisée pour bloquer des combats émancipateurs''\", conclut-elle.",
+          "date": "08 mars 2022",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Belga"
+            },
+            {
+              "name": "article",
+              "value": "Journée de lutte pour les droits des femmes : \"Woke\", ce terme flou utilisé pour dévaloriser"
+            },
+            {
+              "name": "ouvrage",
+              "value": "RTBF"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.rtbf.be/article/journee-de-lutte-pour-les-droits-des-femmes-woke-ce-terme-flou-utilise-pour-devaloriser-10950078"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "This rather emancipatory and positive term was made negative, even though the reverse very often occurs: activists repurpose the meaning of words originally used as insults—queer, dyke, witch, for example—in order to reclaim them, the linguist also notes.\n\nThe use of the term “''wokeism''” forms part of a “''kind of panic culture, associating activism and the struggle against discrimination with puritanical movements''”, Laurence Rosier continues. “''This can be dangerous. We are in a culture of fear, as though removing statues would eradicate History, even though archives and documents remain to bear witness to the atrocities some people committed. This panic culture is used to block emancipatory struggles''”, she concludes.",
+        "translated_date": "8 March 2022",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:23:19.513408+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      },
+      {
+        "id": "A0201-C003",
+        "source": {
+          "id": "A0201-C003",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "Si on prend la définition littérale, « woke » veut dire « être éveillé ». Il apparaît aux États-Unis d’abord pour définir les personnes sensibles et conscientes par rapport aux violences policières qui se multiplient, et celles qui luttent contre d’autres formes de discriminations (sexisme, racisme, homophobie, etc.). Mais le terme est progressivement détourné et vidé de son sens."
+            },
+            {
+              "name": "auteurs",
+              "value": "Petya Obolensky"
+            },
+            {
+              "name": "article",
+              "value": "La « lutte contre le wokisme », une arme de diversion massive"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Solidaire, magazine du Parti du Travail de Belgique"
+            },
+            {
+              "name": "date",
+              "value": "29 Juin 2023"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.solidaire.org/articles/la-lutte-contre-le-wokisme-une-arme-de-diversion-massive"
+            }
+          ],
+          "citation": "Si on prend la définition littérale, « woke » veut dire « être éveillé ». Il apparaît aux États-Unis d’abord pour définir les personnes sensibles et conscientes par rapport aux violences policières qui se multiplient, et celles qui luttent contre d’autres formes de discriminations (sexisme, racisme, homophobie, etc.). Mais le terme est progressivement détourné et vidé de son sens.",
+          "date": "29 Juin 2023",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Petya Obolensky"
+            },
+            {
+              "name": "article",
+              "value": "La « lutte contre le wokisme », une arme de diversion massive"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Solidaire, magazine du Parti du Travail de Belgique"
+            },
+            {
+              "name": "lien",
+              "value": "https://www.solidaire.org/articles/la-lutte-contre-le-wokisme-une-arme-de-diversion-massive"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "If we take the literal definition, “woke” means “to be awake.” It first appeared in the United States to describe people who were sensitive and alert to growing police violence and those fighting other forms of discrimination (sexism, racism, homophobia, etc.). But the term was gradually appropriated and emptied of its meaning.",
+        "translated_date": "29 June 2023",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:23:19.513408+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"The term has been distorted and appropriated\" argument",
+      "The term has been distorted and appropriated conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "5db6d44179433db65091e0725d5e715d500c43c9864e734185903b58e83929f7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0201",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ea34b46e3f197f50ed6206bee2b7dc4a69b7a3d88829603ea66d6903f8d8969c"
+}

@@ -1,0 +1,246 @@
+{
+  "schema": "wikidebia-translation-memory-entry-1.0",
+  "memory_key": "9a3ecb2e458cfcd162be60af53db932de92995b6007daf6a6070cc89f1dcec61",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Un soutien à l'égalité de genre qu'on conditionne à des critères arbitraires qu'on a soi-même définis n'est pas un vrai soutien",
+    "identity_sha256": "64c0e1ea915ba043e6d95b36ffc7124d0c2bbe3ebc9e2277c84129e6d4f03434"
+  },
+  "source_revision": {
+    "kind": "source_import_sha256",
+    "sha256": "ce1b5760839c680655045075311ca4a79bc1c562a400b7e5de9e5285fd21fdfc"
+  },
+  "translation": {
+    "status": "approved",
+    "page_origin": "preexisting",
+    "source_page_origin": "preexisting",
+    "preserved_parameters": {
+      "initialization": {
+        "present": false,
+        "value": null
+      },
+      "established-name": {
+        "present": false,
+        "value": null
+      },
+      "name": {
+        "present": false,
+        "value": null
+      },
+      "title-warnings": {
+        "present": false,
+        "value": null
+      },
+      "argument-warnings": {
+        "present": false,
+        "value": null
+      },
+      "summary-warnings": {
+        "present": false,
+        "value": null
+      },
+      "reference-warnings": {
+        "present": false,
+        "value": null
+      },
+      "justification-warnings": {
+        "present": false,
+        "value": null
+      },
+      "objection-warnings": {
+        "present": false,
+        "value": null
+      },
+      "dedicated-debate": {
+        "present": false,
+        "value": null
+      },
+      "creation-date": {
+        "present": true,
+        "value": "2026-10-26"
+      }
+    },
+    "canonical_title": "Support for gender equality that is conditional on arbitrary criteria one has defined oneself is not genuine support",
+    "displayed_title": "Support for gender equality that is conditional on arbitrary criteria one has defined oneself is not genuine support",
+    "sections": [],
+    "keywords": [],
+    "summary": null,
+    "citations": [
+      {
+        "id": "A0174-C001",
+        "source": {
+          "id": "A0174-C001",
+          "source_template": "Citation",
+          "source_parameters": [
+            {
+              "name": "citation",
+              "value": "1/ Le '''poseur'''. ''« C’est le féministe de façade. Celui qui va en faire des caisses parfois. En gros, il a lu Mona Chollet et Valérie Rey-Robert, donc il connaît déjà tout ».'' \n\n2/ '''L’initié'''. ''« Lui, il est engagé dans la lutte féministe, donc il se sent supérieur aux autres hommes. Ce sont eux – et jamais lui – qui sont coupables de misogynie et responsables du patriarcat ».'' Un profil très présent dans les luttes militantes, et qui gagne souvent la confiance et la sympathie des femmes, du simple fait qu’il se dit « féministe ».\n\n3/ '''L’humaniste''', admet qu’il profite du patriarcat, mais il dit souffrir de ce système injuste au même titre que les femmes, car l’injustice et l’inégalité le révulsent par principe. ''« On va retrouver le pro-fem humaniste dans des stages de communication non-violente (CNV) par exemple, mais il se sert de ce qu’il apprend pour garder le contrôle. Ainsi, si une meuf lui reproche des choses, il aura des discours du type : « Quand tu es en colère, ça me rend triste. J’ai peur de ta colère, elle me met mal à l’aise ». Mais il ne se remettra jamais en question. Il ne répondra jamais sur le fond'' ''»''. Il s’agit ni plus ni moins que '''de tone-policing ici, mais déguisé en empathie et pseudo-vulnérabilité'''. Autrement dit, '''de la manipulation émotionnelle sous couvert de bienveillance'''.\n\n4/ '''L’auto-flagellateur.''' ''« Pour lui, le féminisme est un chemin de croix. Il se met une pression énorme, on est presque sur un sentiment de persécution. C’est très narcissique en fait ».'' L’auto-flagellateur attend du féminisme qu’il lui apporte la rédemption.\n\nDans tous ces cas de figures, '''ces hommes se disant féministes ne s’y engagent qu’à travers les bénéfices qu’ils peuvent en retirer pour eux-mêmes'''."
+            },
+            {
+              "name": "auteurs",
+              "value": "Sarah Andres"
+            },
+            {
+              "name": "article",
+              "value": "Violences sexistes et sexuelles : quand le patriarcat ronge les milieux militants"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Lisbeth Media"
+            },
+            {
+              "name": "date",
+              "value": "21 janvier 2026"
+            },
+            {
+              "name": "lien",
+              "value": "https://lisbethmedia.com/violences-sexistes-et-sexuelles-quand-le-patriarcat-ronge-les-milieux-militants/"
+            }
+          ],
+          "citation": "1/ Le '''poseur'''. ''« C’est le féministe de façade. Celui qui va en faire des caisses parfois. En gros, il a lu Mona Chollet et Valérie Rey-Robert, donc il connaît déjà tout ».'' \n\n2/ '''L’initié'''. ''« Lui, il est engagé dans la lutte féministe, donc il se sent supérieur aux autres hommes. Ce sont eux – et jamais lui – qui sont coupables de misogynie et responsables du patriarcat ».'' Un profil très présent dans les luttes militantes, et qui gagne souvent la confiance et la sympathie des femmes, du simple fait qu’il se dit « féministe ».\n\n3/ '''L’humaniste''', admet qu’il profite du patriarcat, mais il dit souffrir de ce système injuste au même titre que les femmes, car l’injustice et l’inégalité le révulsent par principe. ''« On va retrouver le pro-fem humaniste dans des stages de communication non-violente (CNV) par exemple, mais il se sert de ce qu’il apprend pour garder le contrôle. Ainsi, si une meuf lui reproche des choses, il aura des discours du type : « Quand tu es en colère, ça me rend triste. J’ai peur de ta colère, elle me met mal à l’aise ». Mais il ne se remettra jamais en question. Il ne répondra jamais sur le fond'' ''»''. Il s’agit ni plus ni moins que '''de tone-policing ici, mais déguisé en empathie et pseudo-vulnérabilité'''. Autrement dit, '''de la manipulation émotionnelle sous couvert de bienveillance'''.\n\n4/ '''L’auto-flagellateur.''' ''« Pour lui, le féminisme est un chemin de croix. Il se met une pression énorme, on est presque sur un sentiment de persécution. C’est très narcissique en fait ».'' L’auto-flagellateur attend du féminisme qu’il lui apporte la rédemption.\n\nDans tous ces cas de figures, '''ces hommes se disant féministes ne s’y engagent qu’à travers les bénéfices qu’ils peuvent en retirer pour eux-mêmes'''.",
+          "date": "21 janvier 2026",
+          "avertissements-citation": "",
+          "preserved_parameters": [
+            {
+              "name": "auteurs",
+              "value": "Sarah Andres"
+            },
+            {
+              "name": "article",
+              "value": "Violences sexistes et sexuelles : quand le patriarcat ronge les milieux militants"
+            },
+            {
+              "name": "ouvrage",
+              "value": "Lisbeth Media"
+            },
+            {
+              "name": "lien",
+              "value": "https://lisbethmedia.com/violences-sexistes-et-sexuelles-quand-le-patriarcat-ronge-les-milieux-militants/"
+            }
+          ]
+        },
+        "status": "approved",
+        "translated_citation": "1/ The '''poser'''. ''“He is the superficial feminist. The one who sometimes makes a huge show of it. Basically, he has read Mona Chollet and Valérie Rey-Robert, so he already knows everything.”''\n\n2/ '''The initiate'''. ''“He is involved in the feminist struggle, so he feels superior to other men. They—and never he—are guilty of misogyny and responsible for patriarchy.”'' This profile is very common in activist struggles and often earns women’s trust and sympathy simply by calling himself a “feminist.”\n\n3/ '''The humanist''' admits that he benefits from patriarchy but says he suffers from this unjust system just as women do, because injustice and inequality revolt him on principle. ''“The humanist pro-feminist can be found in nonviolent communication (NVC) workshops, for example, but he uses what he learns to retain control. Thus, if a woman reproaches him for things, he will say something like: ‘When you are angry, it makes me sad. I am afraid of your anger; it makes me uncomfortable.’ But he will never question himself. He will never address the substance.”'' This is nothing more or less than '''tone policing, but disguised as empathy and pseudo-vulnerability'''. In other words, '''emotional manipulation under the guise of kindness'''.\n\n4/ '''The self-flagellator.''' ''“For him, feminism is a way of the cross. He puts enormous pressure on himself; it almost amounts to a feeling of persecution. It is actually very narcissistic.”'' The self-flagellator expects feminism to bring him redemption.\n\nIn all these cases, '''these self-described feminist men engage with feminism only through the benefits they can derive from it for themselves'''.",
+        "translated_date": "21 January 2026",
+        "citation_translated": true,
+        "date_translated_or_language_neutral": true,
+        "preserved_parameters_unchanged": true,
+        "translation_warning_appended": true,
+        "quote_completeness_reviewed": true,
+        "quote_completeness_note": "The full French citation was compared from beginning to end with the English translation; every sentence, qualifier and numerical claim is retained.",
+        "quote_low_ratio_reviewed": true,
+        "quote_low_ratio_note": "The source and target were compared for full coverage; no passage was summarized or omitted.",
+        "reviewer": "ChatGPT",
+        "reviewed_at": "2026-10-25T20:23:19.513408+00:00",
+        "note": "Only the citation text and date were translated; all documentary parameters remain unchanged."
+      }
+    ],
+    "citation_passages": [],
+    "sources": {
+      "bibliography": [],
+      "webliography": [],
+      "videography": []
+    },
+    "argument_name_search_queries": [
+      "\"Support for gender equality that is conditional on arbitrary criteria one has defined oneself is not genuine support\" argument",
+      "Support for gender equality that is conditional on arbitrary criteria one has defined oneself is not genuine support conventional name literature"
+    ],
+    "argument_name_search_scope_note": "Two English Wikipedia searches tested the exact proposition and a conventional-name literature variant.",
+    "argument_name_search_provenance": "fresh_recheck",
+    "argument_name_search_provenance_note": "The fresh query log is stored in audits/en_established_name_search_log.json.",
+    "argument_name_outcome": "none",
+    "argument_name": null,
+    "argument_name_evidence": [],
+    "argument_name_same_reasoning_confirmed": false,
+    "argument_name_non_invented_label_confirmed": true,
+    "argument_name_language_fit_confirmed": true,
+    "argument_name_rationale": "No sufficiently established English conventional name was found for this exact argument.",
+    "argument_name_page_reasoning_scope_summary": "The page develops the precise proposition expressed by its canonical title and any locked French summary.",
+    "argument_name_literature_scope_summary": "",
+    "argument_name_scope_relation": "",
+    "argument_name_scope_identity_confirmed": false,
+    "metadata_equivalent_to_french": true,
+    "summary_equivalent_to_french": true,
+    "canonical_title_semantic_inventory_reviewed": true,
+    "canonical_title_semantic_inventory_note": "Subject, predicate, polarity, modality, attribution, quantifiers, scope, force and logical relation were compared with the French title.",
+    "canonical_title_equivalent_to_french": true,
+    "canonical_title_subject_preserved": true,
+    "canonical_title_predicate_preserved": true,
+    "canonical_title_scope_preserved": true,
+    "canonical_title_modality_preserved": true,
+    "sections_exactly_mapped": true,
+    "keywords_exactly_mapped": true,
+    "keywords_order_preserved_by_relevance": true,
+    "title_is_idiomatic": true,
+    "displayed_title_source_form": "proposition",
+    "displayed_title_target_form": "proposition",
+    "displayed_title_source_form_reviewed": true,
+    "displayed_title_no_formal_regression": true,
+    "displayed_title_semantic_inventory_reviewed": true,
+    "displayed_title_semantic_inventory_note": "The displayed title was compared directly for subject, predicate, polarity, modality, force, temporal scope, conditions and logical relation.",
+    "displayed_title_subject_preserved": true,
+    "displayed_title_predicate_preserved": true,
+    "displayed_title_scope_preserved": true,
+    "displayed_title_modality_preserved": true,
+    "displayed_title_is_complete_proposition": true,
+    "displayed_title_concision_reviewed": true,
+    "displayed_title_semantically_equivalent": true,
+    "displayed_title_improves_readability_when_distinct": true,
+    "displayed_title_translates_french_displayed_title": true,
+    "displayed_title_identity_pattern_reviewed": true,
+    "displayed_title_identity_pattern_note": "Canonical/displayed identity and distinction were preserved from the French metadata; the displayed title was not regenerated from the canonical title.",
+    "displayed_title_form_change_reviewed": false,
+    "displayed_title_speech_act_preserved": false,
+    "displayed_title_form_change_note": "",
+    "summary_ratio_reviewed": false,
+    "summary_ratio_exception_rationale": "",
+    "summary_subject_predicate_scope_modality_reviewed": false,
+    "summary_opening_proposition_preserved": false,
+    "summary_closing_proposition_preserved": false,
+    "summary_conditions_exclusivities_preserved": false,
+    "summary_decisive_premises_preserved": false,
+    "summary_semantic_evidence_note": "",
+    "semantic_risk_reviewed": false,
+    "semantic_risk_note": "",
+    "semantic_risk_evidence": [],
+    "forceful_expression": "",
+    "quantitative_claims_verified": false,
+    "quantitative_claims_note": "No independent quantitative verification was claimed during translation.",
+    "documentation_rationale": "No separate English documentary source was selected; the translated historical content and preserved citation records remain the documentary basis.",
+    "reviewer": "ChatGPT",
+    "reviewed_at": "2026-10-28T23:15:00+00:00",
+    "note": "English title, displayed title, metadata, summary and citations were reviewed against the locked French source.",
+    "summary_preserves_node_identity": true,
+    "thesis_first": true,
+    "general_public_style": true,
+    "sentence_rhythm_reviewed": true,
+    "technical_terms_reviewed": true,
+    "opening_develops_title": true,
+    "example_or_data_reviewed": true,
+    "assertive_tone_reviewed": true,
+    "no_artificial_example_or_number": true,
+    "no_polemical_overstatement": true,
+    "no_self_objection": true,
+    "conviction_visible": true,
+    "wikipedia_hover_links_reviewed": true,
+    "specialized_terms_linked_or_explained": true,
+    "factual_claims_documented": true,
+    "historical_quantitative_transfer_reviewed": false,
+    "historical_quantitative_transfer_note": ""
+  },
+  "translation_sha256": "82acc5ffed404325c8eb2e740c69fd449f547795d9717fa765f4af66e4599a68",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0174",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c",
+    "finalized_at": "2026-10-29T07:48:24+00:00"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e2c02a6a3edd1bfb092f24cdc5f59b48d7a639ea8d69c2d9d7990eb03dc4c666"
+}
