@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 import wikidebia_translation_packet as packet
+import wikidebia_translation_memory as memory
 from wikidebia_update import sha_object
 
 
@@ -95,3 +96,46 @@ def test_packet_marks_changed_locked_french_source(tmp_path: Path, monkeypatch):
     argument = result["arguments"][0]
     assert argument["source_changed"] is True
     assert argument["prepared_source_sha256"] != argument["current_source_sha256"]
+
+
+def test_packet_excludes_pages_covered_by_signed_memory_receipt(tmp_path: Path, monkeypatch):
+    project, workspace = _fixture(tmp_path, monkeypatch)
+    review_path = workspace / "reviews/en/translation_review.json"
+    review = json.loads(review_path.read_text())
+    review["arguments"][0]["translation"]["status"] = "approved"
+    review_path.write_text(json.dumps(review), encoding="utf-8")
+    metadata = {"entity_id": "A1", "canonical_title": "Argument un", "sections": ["Société"]}
+    content = {"id": "A1", "summary": "Source courante"}
+    _kind, revision = memory._source_revision(metadata, content)
+    applied = memory.sha_object(memory._reusable_translation(review["arguments"][0]["translation"]))
+    receipt = {
+        "schema": memory.REUSE_RECEIPT_SCHEMA,
+        "debate_id": "debat_test",
+        "work_id": "EDIT-TEST-001",
+        "memory_index_sha256": "a" * 64,
+        "review_before_sha256": "b" * 64,
+        "review_after_sha256": "c" * 64,
+        "reused": [{
+            "page_id": "A1",
+            "memory_key": "d" * 64,
+            "entry_sha256": "e" * 64,
+            "origin_page_id": "OLD1",
+            "source_revision_sha256": revision,
+            "applied_translation_sha256": applied,
+        }],
+        "stale_rejected": [],
+        "counts": {"matched": 1, "changed": 1, "already_identical": 0, "stale_rejected": 0},
+        "remote_access_performed": False,
+        "remote_write_performed": False,
+    }
+    receipt["receipt_sha256"] = memory.sha_object(receipt)
+    path = workspace / "audits/translation-memory/reuse.json"
+    path.parent.mkdir(parents=True)
+    path.write_text(json.dumps(receipt), encoding="utf-8")
+
+    result = packet.build_packet(project, "debat_test", "EDIT-TEST-001", "U001")
+
+    assert result["arguments"] == []
+    assert result["counts"]["unit_arguments"] == 1
+    assert result["counts"]["memory_reused"] == 1
+    assert result["memory_reuse"][0]["page_id"] == "A1"
