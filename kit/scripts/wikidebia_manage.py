@@ -2121,7 +2121,7 @@ def corpus_workspace_translation_packet(
 
 def corpus_workspace_translation_next(
     root: Path, debate_id: str, *, work_id: str,
-    memory_root: Path, no_memory: bool,
+    memory_root: Path, no_memory: bool, context_mode: str,
 ) -> int:
     script = root / "kit" / "scripts" / "wikidebia_translation_next.py"
     if not script.is_file():
@@ -2129,10 +2129,27 @@ def corpus_workspace_translation_next(
     command = [
         python_command(root), str(script), debate_id,
         "--work-id", work_id, "--memory-root", str(memory_root),
+        "--context-mode", context_mode,
         "--project-root", str(root), "--machine-readable",
     ]
     if no_memory:
         command.append("--no-memory")
+    return run(command, cwd=root, check=False).returncode
+
+
+def corpus_workspace_translation_context(
+    root: Path, debate_id: str, *, work_id: str,
+    unit_id: str, output_mode: str,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_translation_context.py"
+    if not script.is_file():
+        raise ManagementError("Contexte compact de traduction absent du kit")
+    command = [
+        python_command(root), str(script), debate_id,
+        "--work-id", work_id, "--unit-id", unit_id,
+        "--output-mode", output_mode,
+        "--project-root", str(root), "--machine-readable",
+    ]
     return run(command, cwd=root, check=False).returncode
 
 
@@ -2410,6 +2427,7 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
         "wikidebia_content_review.py", "wikidebia_translation_review.py",
         "wikidebia_translation_worklist.py",
         "wikidebia_translation_packet.py",
+        "wikidebia_translation_context.py",
         "wikidebia_translation_next.py",
         "wikidebia_translation_patch.py",
         "wikidebia_translation_preflight.py",
@@ -2735,6 +2753,20 @@ def build_parser() -> argparse.ArgumentParser:
     translation_next_parser.add_argument("--work-id", required=True)
     translation_next_parser.add_argument("--memory-root", type=Path, default=Path("translation-memory"))
     translation_next_parser.add_argument("--no-memory", action="store_true")
+    translation_next_parser.add_argument(
+        "--context-mode", choices=("compact", "full"), default="compact",
+    )
+
+    translation_context_parser = sub.add_parser(
+        "corpus-workspace-translation-context",
+        help="Produire un contexte compact et mesurer les octets évités",
+    )
+    translation_context_parser.add_argument("debate_id")
+    translation_context_parser.add_argument("--work-id", required=True)
+    translation_context_parser.add_argument("--unit-id", required=True)
+    translation_context_parser.add_argument(
+        "--output-mode", choices=("compact", "full"), default="compact",
+    )
 
     translation_resume_parser = sub.add_parser(
         "corpus-workspace-translation-resume",
@@ -3048,6 +3080,13 @@ def main(argv: list[str] | None = None) -> int:
         return corpus_workspace_translation_next(
             root, args.debate_id, work_id=args.work_id,
             memory_root=args.memory_root, no_memory=args.no_memory,
+            context_mode=args.context_mode,
+        )
+
+    if args.command == "corpus-workspace-translation-context":
+        return corpus_workspace_translation_context(
+            root, args.debate_id, work_id=args.work_id,
+            unit_id=args.unit_id, output_mode=args.output_mode,
         )
 
     if args.command == "corpus-workspace-translation-resume":

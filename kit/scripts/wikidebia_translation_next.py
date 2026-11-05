@@ -14,6 +14,7 @@ from wikidebia_render import _load_workspace
 from wikidebia_translation_packet import TranslationPacketError, build_packet
 from wikidebia_translation_patch import TranslationPatchError, prepare_patch
 from wikidebia_translation_resume import TranslationResumeError, write_resume_capsule
+from wikidebia_translation_context import TranslationContextError, build_translation_context
 from wikidebia_translation_worklist import TranslationWorklistError, build_worklist
 from wikidebia_update import sha_object
 
@@ -104,6 +105,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--work-id", required=True)
     parser.add_argument("--memory-root", type=Path, default=Path("translation-memory"))
     parser.add_argument("--no-memory", action="store_true")
+    parser.add_argument("--context-mode", choices=("compact", "full"), default="compact")
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
     parser.add_argument("--machine-readable", action="store_true")
     return parser
@@ -124,6 +126,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     result["capsule_path"] = capsule["capsule_path"]
     result["capsule_sha256"] = capsule["capsule_sha256"]
+    if result.get("unit_id"):
+        context = build_translation_context(
+            args.project_root, args.debate_id, args.work_id, result["unit_id"],
+            output_mode=args.context_mode,
+        )
+        result["context_path"] = context["context_path"]
+        result["context_sha256"] = context["context_sha256"]
+        result["context_mode"] = context["mode"]
+        result["avoided_context_bytes"] = context["telemetry"]["avoided_context_bytes"]
     if args.machine_readable:
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     else:
@@ -144,6 +155,7 @@ if __name__ == "__main__":
         TranslationPacketError,
         TranslationPatchError,
         TranslationResumeError,
+        TranslationContextError,
         WorkspaceError,
         OSError,
         ValueError,
