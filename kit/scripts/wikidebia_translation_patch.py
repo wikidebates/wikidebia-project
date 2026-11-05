@@ -13,6 +13,7 @@ from wikidebia_corpus_build import canonical_json, load_json, now_iso, relative_
 from wikidebia_editorial_workspace import WorkspaceError, validate_work_id
 from wikidebia_render import _load_workspace
 from wikidebia_translation_packet import TranslationPacketError, build_packet
+from wikidebia_translation_resume import TranslationResumeError, write_resume_capsule
 from wikidebia_update import sha_object
 
 
@@ -240,6 +241,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         if not args.confirm_patch_sha256:
             raise TranslationPatchError("--apply exige --confirm-patch-sha256")
         result = apply_patch(args.project_root, args.debate_id, args.work_id, args.unit_id, confirm_patch_sha256=args.confirm_patch_sha256)
+    capsule = write_resume_capsule(
+        args.project_root, args.debate_id, args.work_id,
+        event=f"translation_patch_{result.get('status')}", unit_id=args.unit_id,
+    )
     compact = {
         "status": result.get("status"), "debate_id": args.debate_id,
         "work_id": args.work_id, "unit_id": args.unit_id,
@@ -250,6 +255,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         "arguments_updated": result.get("arguments_updated"),
         "remote_access_performed": result.get("remote_access_performed", False),
         "remote_write_performed": result.get("remote_write_performed", False),
+        "capsule_path": capsule.get("capsule_path"),
+        "capsule_sha256": capsule.get("capsule_sha256"),
     }
     print(json.dumps(compact, ensure_ascii=False, sort_keys=True) if args.machine_readable else json.dumps(compact, ensure_ascii=False, indent=2))
     return 0
@@ -258,6 +265,6 @@ def main(argv: Sequence[str] | None = None) -> int:
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
-    except (TranslationPatchError, TranslationPacketError, WorkspaceError, OSError, ValueError, KeyError) as exc:
+    except (TranslationPatchError, TranslationPacketError, TranslationResumeError, WorkspaceError, OSError, ValueError, KeyError) as exc:
         print(f"CORRECTIF D’UNITÉ BLOQUÉ : {exc}", file=os.sys.stderr)
         raise SystemExit(2)

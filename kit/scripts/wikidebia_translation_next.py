@@ -13,6 +13,7 @@ from wikidebia_editorial_workspace import WorkspaceError, validate_work_id
 from wikidebia_render import _load_workspace
 from wikidebia_translation_packet import TranslationPacketError, build_packet
 from wikidebia_translation_patch import TranslationPatchError, prepare_patch
+from wikidebia_translation_resume import TranslationResumeError, write_resume_capsule
 from wikidebia_translation_worklist import TranslationWorklistError, build_worklist
 from wikidebia_update import sha_object
 
@@ -117,6 +118,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         memory_root=args.memory_root,
         reuse_memory=not args.no_memory,
     )
+    capsule = write_resume_capsule(
+        args.project_root, args.debate_id, args.work_id,
+        event="next_unit_prepared", unit_id=result.get("unit_id"),
+    )
+    result["capsule_path"] = capsule["capsule_path"]
+    result["capsule_sha256"] = capsule["capsule_sha256"]
     if args.machine_readable:
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     else:
@@ -136,6 +143,7 @@ if __name__ == "__main__":
         TranslationWorklistError,
         TranslationPacketError,
         TranslationPatchError,
+        TranslationResumeError,
         WorkspaceError,
         OSError,
         ValueError,
