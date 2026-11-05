@@ -1106,6 +1106,15 @@ def test_translation_packet_command_is_exposed_by_manager():
     assert args.unit_id == "U001"
 
 
+def test_translation_patch_command_is_exposed_by_manager():
+    args = module.build_parser().parse_args([
+        "corpus-workspace-translation-patch", "debat_test",
+        "--work-id", "EDIT-TEST-001", "--unit-id", "U001", "--prepare",
+    ])
+    assert args.command == "corpus-workspace-translation-patch"
+    assert args.prepare is True
+
+
 def test_external_deletion_accept_command_is_exposed_by_manager():
     args = module.build_parser().parse_args([
         "corpus-external-deletion-accept", "debat_test",
@@ -1128,6 +1137,7 @@ def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
         "wikidebia_editorial_workspace.py", "wikidebia_editorial_review.py",
         "wikidebia_content_review.py", "wikidebia_translation_review.py",
         "wikidebia_translation_worklist.py", "wikidebia_translation_packet.py",
+        "wikidebia_translation_patch.py",
         "wikidebia_external_deletions.py",
         "refresh_package_metadata.py",
         "wikidebia_render.py",

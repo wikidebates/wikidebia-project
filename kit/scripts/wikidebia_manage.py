@@ -2103,6 +2103,26 @@ def corpus_workspace_translation_packet(
     return run(command, cwd=root, check=False).returncode
 
 
+def corpus_workspace_translation_patch(
+    root: Path, debate_id: str, *, work_id: str, unit_id: str,
+    prepare: bool, seal: bool, apply: bool, overwrite: bool,
+    reviewer: str | None, note: str | None, unit_status: str | None,
+    confirm_patch_sha256: str | None,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_translation_patch.py"
+    if not script.is_file():
+        raise ManagementError("Outil de correctif d’unité de traduction absent du kit")
+    command = [
+        python_command(root), str(script), debate_id, "--work-id", work_id,
+        "--unit-id", unit_id, "--project-root", str(root), "--machine-readable",
+        "--prepare" if prepare else ("--seal" if seal else "--apply"),
+    ]
+    if overwrite: command.append("--overwrite")
+    for option, value in (("--reviewer", reviewer), ("--note", note), ("--unit-status", unit_status), ("--confirm-patch-sha256", confirm_patch_sha256)):
+        if value: command.extend([option, value])
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_external_deletion_accept(
     root: Path, debate_id: str, *, work_id: str, comparison_id: str,
     language: str, page_id: str, reason: str, accepted_by: str,
@@ -2298,6 +2318,7 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
         "wikidebia_content_review.py", "wikidebia_translation_review.py",
         "wikidebia_translation_worklist.py",
         "wikidebia_translation_packet.py",
+        "wikidebia_translation_patch.py",
         "wikidebia_external_deletions.py",
         "refresh_package_metadata.py",
         "wikidebia_render.py", "wikidebia_release.py",
@@ -2602,6 +2623,23 @@ def build_parser() -> argparse.ArgumentParser:
     translation_packet_parser.add_argument("--work-id", required=True)
     translation_packet_parser.add_argument("--unit-id", required=True)
 
+    translation_patch_parser = sub.add_parser(
+        "corpus-workspace-translation-patch",
+        help="Préparer, sceller ou appliquer un correctif limité à une unité",
+    )
+    translation_patch_parser.add_argument("debate_id")
+    translation_patch_parser.add_argument("--work-id", required=True)
+    translation_patch_parser.add_argument("--unit-id", required=True)
+    patch_action = translation_patch_parser.add_mutually_exclusive_group(required=True)
+    patch_action.add_argument("--prepare", action="store_true")
+    patch_action.add_argument("--seal", action="store_true")
+    patch_action.add_argument("--apply", action="store_true")
+    translation_patch_parser.add_argument("--overwrite", action="store_true")
+    translation_patch_parser.add_argument("--reviewer")
+    translation_patch_parser.add_argument("--note")
+    translation_patch_parser.add_argument("--unit-status", choices=("pending", "approved"))
+    translation_patch_parser.add_argument("--confirm-patch-sha256")
+
     external_deletion_parser = sub.add_parser(
         "corpus-external-deletion-accept",
         help="Accepter dans un registre signé une suppression constatée sur le wiki",
@@ -2846,6 +2884,15 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "corpus-workspace-translation-packet":
         return corpus_workspace_translation_packet(
             root, args.debate_id, work_id=args.work_id, unit_id=args.unit_id,
+        )
+
+    if args.command == "corpus-workspace-translation-patch":
+        return corpus_workspace_translation_patch(
+            root, args.debate_id, work_id=args.work_id, unit_id=args.unit_id,
+            prepare=args.prepare, seal=args.seal, apply=args.apply,
+            overwrite=args.overwrite, reviewer=args.reviewer, note=args.note,
+            unit_status=args.unit_status,
+            confirm_patch_sha256=args.confirm_patch_sha256,
         )
 
     if args.command == "corpus-external-deletion-accept":
