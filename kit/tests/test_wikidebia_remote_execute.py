@@ -46,6 +46,10 @@ class FakeAdapter:
         row = self.pages.get((self.language, title))
         return (False, None, "") if row is None else (True, row[0], row[1])
 
+    def read_pages(self, titles):
+        self.events.append(("read_pages", self.language, tuple(titles)))
+        return {title: self.read_page(title) for title in titles}
+
     def write_page(self, *, title, text, summary, tags, expected_user, create_only, base_revision_id):
         key = (self.language, title)
         if create_only and key in self.pages:
@@ -315,6 +319,35 @@ def test_no_changes_plan_is_attested_without_write(tmp_path: Path):
     assert receipt["status"] == "no_changes"
     assert receipt["remote_write_performed"] is False
     assert not any(event[0] in {"write", "move", "delete"} for event in adapter.events)
+    batches = [event for event in adapter.events if event[0] == "read_pages"]
+    assert batches == [
+        ("read_pages", "fr", ("Argument final",)),
+        ("read_pages", "fr", ("Argument final",)),
+    ]
+
+
+def test_no_changes_attestation_batches_only_pages_in_signed_plan(monkeypatch, tmp_path: Path):
+    project, debate_id, work_id, comparison_id, _, adapter, _ = make_approved_fixture(
+        tmp_path,
+        no_changes=True,
+        include_unplanned_manifest_page=True,
+    )
+    run = project / ".state/remote-comparisons" / debate_id / work_id / comparison_id
+    config_path = run / "config.json"
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    plan = json.loads((run / "update-plan.json").read_text(encoding="utf-8"))
+    monkeypatch.chdir(project)
+
+    receipt = update.PlanExecutor(config, adapter, config_path).attest_no_changes(plan, plan["plan_sha256"])
+
+    assert receipt["counts"] == {"verified_unchanged": 1}
+    batches = [event for event in adapter.events if event[0] == "read_pages"]
+    assert batches == [
+        ("read_pages", "fr", ("Argument final",)),
+        ("read_pages", "fr", ("Argument final",)),
+    ]
+    state = json.loads((project / ".state/published" / debate_id / "fr/latest.json").read_text(encoding="utf-8"))
+    assert [row["page_id"] for row in state["pages"]] == ["A0001"]
 
 
 def test_manage_exposes_workspace_plan_execute_command():

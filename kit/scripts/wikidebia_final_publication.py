@@ -1265,11 +1265,19 @@ def publish_final_release(
             executor = PlanExecutor(dict(plans["fr_config"]), fr_adapter, Path(plans["fr_config_path"]))
             operations = plans["fr_plan"].get("operations") or {}
             mutations = sum(len(operations.get(name) or []) for name in ("create", "update", "move", "redirect", "delete"))
+            execution_mode = "full_update" if mutations else "no_changes"
+            underlying = executor.resume_latest_receipt(
+                dict(plans["fr_plan"]),
+                str(plans["fr_plan"].get("plan_sha256")),
+                expected_execution_mode=execution_mode,
+            )
             if mutations:
-                underlying = executor.execute(dict(plans["fr_plan"]), str(plans["fr_plan"].get("plan_sha256")))
+                if underlying is None:
+                    underlying = executor.execute(dict(plans["fr_plan"]), str(plans["fr_plan"].get("plan_sha256")))
                 status = "published"
             else:
-                underlying = executor.attest_no_changes(dict(plans["fr_plan"]), str(plans["fr_plan"].get("plan_sha256")))
+                if underlying is None:
+                    underlying = executor.attest_no_changes(dict(plans["fr_plan"]), str(plans["fr_plan"].get("plan_sha256")))
                 status = "verified_no_changes"
             fr_receipt = {
                 "status": status, "completed_at": now_iso(), "plan_sha256": plans["fr_plan"].get("plan_sha256"),

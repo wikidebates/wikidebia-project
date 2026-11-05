@@ -2943,13 +2943,15 @@ class PlanExecutor:
                     )
                 # Check every existing summary before the first mutation, even
                 # for historical plans which did not enforce this scope.
-                for row in relevant:
-                    if row["operation"] not in {"update", "move"}:
-                        continue
+                checked = [row for row in relevant if row["operation"] in {"update", "move"}]
+                titles = [str(row.get("old_title", row["title"])) for row in checked]
+                titles.extend(str(row["new_title"]) for row in checked if row["operation"] == "move")
+                observed = self._read_pages(titles)
+                for row in checked:
                     source = row.get("old_title", row["title"])
-                    exists, _, text = self.adapter.read_page(source)
+                    exists, _, text = observed[str(source)]
                     if row["operation"] == "move" and not exists:
-                        exists, _, text = self.adapter.read_page(row["new_title"])
+                        exists, _, text = observed[str(row["new_title"])]
                     if exists:
                         self._assert_summary_scope(row, text, self._source_text(row))
                         self._assert_citation_scope(row, text, self._source_text(row))
@@ -3007,13 +3009,13 @@ class PlanExecutor:
             self.adapter.open_language(language, user)
             try:
                 self.adapter.assert_identity(user)
-                for row in self.manifest.get("pages") or []:
-                    if row.get("language") != language:
-                        continue
-                    page_id = str(row.get("page_id"))
-                    title = str(row.get("canonical_title"))
-                    source, desired_sha = self._planned_page_source(plan, language, page_id, row)
-                    exists, revision_id, remote_text = self.adapter.read_page(title)
+                planned = self._planned_manifest_pages(plan, language)
+                observed = self._read_pages([entry["title"] for entry in planned])
+                for entry in planned:
+                    page_id = entry["page_id"]
+                    title = entry["title"]
+                    desired_sha = entry["desired_sha"]
+                    exists, revision_id, remote_text = observed[title]
                     if not exists or revision_id is None or sha_text(remote_text) != desired_sha:
                         raise PlanConflict(f"État distant modifié depuis le plan : {language}/{page_id}")
                     results.append({
@@ -3373,19 +3375,75 @@ class PlanExecutor:
             if operation.get("language") == language and operation.get("page_id") is not None
         }
 
-    def _verify_new_pages(self, language: str, plan: dict[str, Any]) -> None:
+    def _read_pages(self, titles: list[str]) -> dict[str, tuple[bool, int | None, str]]:
+        """Read one stable snapshot, using the adapter's batch API when available."""
+        requested = list(dict.fromkeys(str(title) for title in titles if str(title)))
+        if not requested:
+            return {}
+        reader = getattr(self.adapter, "read_pages", None)
+        if callable(reader):
+            observed = reader(requested)
+            missing = [title for title in requested if title not in observed]
+            if missing:
+                raise PlanConflict("Lecture distante par lot incomplète : " + ", ".join(missing))
+            return {title: observed[title] for title in requested}
+        return {title: self.adapter.read_page(title) for title in requested}
+
+    def _planned_title(
+        self,
+        plan: dict[str, Any],
+        language: str,
+        page_id: str,
+        manifest_title: str,
+    ) -> str:
+        if not self.interlanguage_only:
+            return manifest_title
+        operations = plan.get("operations") or {}
+        resolutions = [
+            operation for name in ("update", "skip")
+            for operation in operations.get(name) or []
+            if operation.get("language") == language
+            and str(operation.get("page_id")) == page_id
+            and operation.get("interlanguage_title_resolution")
+        ]
+        if len(resolutions) > 1:
+            raise PlanConflict(f"Résolution de titre interlangue ambiguë : {page_id}")
+        if not resolutions:
+            return manifest_title
+        operation = resolutions[0]
+        resolution = operation["interlanguage_title_resolution"]
+        if resolution.get("manifest_title") != manifest_title or resolution.get("source_title") != operation["title"]:
+            raise PlanConflict(f"Résolution de titre interlangue divergente : {page_id}")
+        return str(operation["title"])
+
+    def _planned_manifest_pages(self, plan: dict[str, Any], language: str) -> list[dict[str, Any]]:
         planned_page_ids = self._planned_active_page_ids(plan, language)
+        pages: list[dict[str, Any]] = []
         for row in self.manifest.get("pages") or []:
             if row.get("language") != language:
                 continue
-            if str(row.get("page_id")) not in planned_page_ids:
+            page_id = str(row.get("page_id"))
+            if page_id not in planned_page_ids:
                 continue
-            _, desired_sha = self._planned_page_source(plan, language, str(row.get("page_id")), row)
-            exists, _, remote_text = self.adapter.read_page(str(row.get("canonical_title")))
-            if not exists or sha_text(remote_text) != desired_sha:
+            manifest_title = str(row.get("canonical_title"))
+            _, desired_sha = self._planned_page_source(plan, language, page_id, row)
+            pages.append({
+                "row": row,
+                "page_id": page_id,
+                "title": self._planned_title(plan, language, page_id, manifest_title),
+                "desired_sha": desired_sha,
+            })
+        return pages
+
+    def _verify_new_pages(self, language: str, plan: dict[str, Any]) -> None:
+        planned = self._planned_manifest_pages(plan, language)
+        observed = self._read_pages([entry["title"] for entry in planned])
+        for entry in planned:
+            exists, _, remote_text = observed[entry["title"]]
+            if not exists or sha_text(remote_text) != entry["desired_sha"]:
                 raise PlanConflict(
                     "Suppression finale interdite : le nouveau graphe publié n’est pas entièrement équivalent "
-                    f"pour {language}/{row.get('page_id')}"
+                    f"pour {language}/{entry['page_id']}"
                 )
 
     def _final_receipt(
@@ -3421,6 +3479,114 @@ class PlanExecutor:
         write_json(directory / f"{stamp}.json", receipt)
         write_json(directory / "latest.json", receipt)
 
+    def _verify_completed_receipt(
+        self,
+        plan: dict[str, Any],
+        receipt: dict[str, Any],
+        expected_execution_mode: str,
+    ) -> None:
+        unsigned = dict(receipt)
+        claimed = unsigned.pop("receipt_sha256", None)
+        if not claimed or claimed != sha_object(unsigned):
+            raise PlanConflict("Empreinte du reçu d’exécution divergent")
+        if receipt.get("receipt_version") != RECEIPT_VERSION:
+            raise PlanConflict("Version du reçu d’exécution incompatible")
+        if receipt.get("debate_id") != self.debate_id or receipt.get("plan_sha256") != plan.get("plan_sha256"):
+            raise PlanConflict("Reçu d’exécution rattaché à un autre plan")
+        if receipt.get("corpus_version") != plan.get("corpus_version"):
+            raise PlanConflict("Version de corpus divergente dans le reçu d’exécution")
+        if receipt.get("execution_mode") != expected_execution_mode:
+            raise PlanConflict("Mode du reçu d’exécution divergent")
+
+        allowed_statuses = {
+            "create": {"created", "already_done"},
+            "update": {"updated", "already_done"},
+            "move": {"moved", "already_done"},
+            "redirect": {"redirected", "already_done", "already_absent"},
+            "delete": {"deleted", "already_absent"},
+            "skip": {"verified_unchanged"},
+        }
+        if expected_execution_mode == "no_changes":
+            if receipt.get("status") != "no_changes":
+                raise PlanConflict("Statut du reçu no_changes divergent")
+            expected = [
+                ("skip", language, entry["page_id"])
+                for language in self.languages
+                for entry in self._planned_manifest_pages(plan, language)
+            ]
+        else:
+            if receipt.get("status") != "executed":
+                raise PlanConflict("Statut du reçu d’exécution divergent")
+            if expected_execution_mode not in {"full_update", "no_delete", "only_delete"}:
+                raise PlanConflict("Mode de reprise du reçu inconnu")
+            selected = self._selected_operations(
+                plan,
+                only_delete=expected_execution_mode == "only_delete",
+                no_delete=expected_execution_mode == "no_delete",
+            )
+            expected = [
+                (str(row["operation"]), str(row["language"]), str(row["page_id"]))
+                for row in selected
+            ]
+
+        results = receipt.get("results")
+        if not isinstance(results, list):
+            raise PlanConflict("Résultats absents du reçu d’exécution")
+        actual: list[tuple[str, str, str]] = []
+        for row in results:
+            if not isinstance(row, dict):
+                raise PlanConflict("Résultat invalide dans le reçu d’exécution")
+            operation = str(row.get("operation") or "")
+            identity = (operation, str(row.get("language") or ""), str(row.get("page_id") or ""))
+            if str(row.get("status") or "") not in allowed_statuses.get(operation, set()):
+                raise PlanConflict(f"Statut non final dans le reçu d’exécution : {identity[1]}/{identity[2]}")
+            actual.append(identity)
+        if len(expected) != len(set(expected)) or sorted(actual) != sorted(expected):
+            raise PlanConflict("Le reçu d’exécution ne couvre pas exactement le plan signé")
+        statuses = sorted({str(row.get("status")) for row in results})
+        counts = {status: sum(1 for row in results if row.get("status") == status) for status in statuses}
+        if receipt.get("counts") != counts:
+            raise PlanConflict("Compteurs divergents dans le reçu d’exécution")
+
+    def resume_latest_receipt(
+        self,
+        plan: dict[str, Any],
+        confirmation: str,
+        *,
+        expected_execution_mode: str,
+    ) -> dict[str, Any] | None:
+        """Resume final attestation after a completed, receipted execution.
+
+        A matching receipt proves that every signed mutation already reached a
+        terminal verified status. The remote state is still reread in full before
+        the published-state inventory is written, so concurrent human edits remain
+        blocking and are never overwritten during recovery.
+        """
+        self.verify_plan(plan, confirmation)
+        path = self.receipts_dir / self.debate_id / "latest.json"
+        if not path.is_file():
+            return None
+        receipt = load_json(path)
+        if receipt.get("plan_sha256") != plan.get("plan_sha256"):
+            return None
+        if receipt.get("execution_mode") != expected_execution_mode:
+            return None
+        self._verify_completed_receipt(plan, receipt, expected_execution_mode)
+        lock = self._acquire_lock()
+        try:
+            self._write_published_states(
+                plan,
+                receipt,
+                allow_no_changes=expected_execution_mode == "no_changes",
+                preserve_pending_deletes=expected_execution_mode == "no_delete",
+            )
+        finally:
+            try:
+                lock.unlink()
+            except FileNotFoundError:
+                pass
+        return receipt
+
     def _write_published_states(
         self,
         plan: dict[str, Any],
@@ -3448,42 +3614,33 @@ class PlanExecutor:
             for row in operations.get("delete") or []
         }
 
-        # Read and verify the final remote state sequentially. This captures exact
-        # revision IDs and prevents a stale or partial wiki state from being attested.
+        # Read and verify the final remote state in bounded API batches. This
+        # captures exact revision IDs while avoiding one HTTP request per page.
         for language in self.languages:
-            planned_page_ids = self._planned_active_page_ids(plan, language)
             user = str(self.config["sites"][language]["expected_user"])
             self.adapter.open_language(language, user)
             try:
                 self.adapter.assert_identity(user)
                 pages: list[dict[str, Any]] = []
-                active_ids: set[str] = set()
-                for row in self.manifest.get("pages") or []:
-                    if row.get("language") != language:
-                        continue
-                    page_id = str(row.get("page_id"))
-                    if page_id not in planned_page_ids:
-                        continue
-                    active_ids.add(page_id)
-                    title = str(row.get("canonical_title"))
-                    if self.interlanguage_only:
-                        resolutions = [
-                            operation for name in ("update", "skip")
-                            for operation in operations.get(name, [])
-                            if operation.get("language") == language
-                            and operation.get("page_id") == page_id
-                            and operation.get("interlanguage_title_resolution")
-                        ]
-                        if len(resolutions) > 1:
-                            raise PlanConflict(f"Résolution de titre interlangue ambiguë : {page_id}")
-                        if resolutions:
-                            operation = resolutions[0]
-                            resolution = operation["interlanguage_title_resolution"]
-                            if resolution.get("manifest_title") != title or resolution.get("source_title") != operation["title"]:
-                                raise PlanConflict(f"Résolution de titre interlangue divergente : {page_id}")
-                            title = str(operation["title"])
-                    _, desired_sha = self._planned_page_source(plan, language, page_id, row)
-                    exists, revision_id, remote_text = self.adapter.read_page(title)
+                planned = self._planned_manifest_pages(plan, language)
+                active_ids = {entry["page_id"] for entry in planned}
+                pending = [
+                    (page_id, prior)
+                    for (prior_language, page_id), prior in previous_state.items()
+                    if preserve_pending_deletes
+                    and prior_language == language
+                    and page_id not in active_ids
+                    and (language, page_id) in pending_delete_ids
+                ]
+                observed = self._read_pages(
+                    [entry["title"] for entry in planned] + [prior.title for _, prior in pending]
+                )
+                for entry in planned:
+                    row = entry["row"]
+                    page_id = entry["page_id"]
+                    title = entry["title"]
+                    desired_sha = entry["desired_sha"]
+                    exists, revision_id, remote_text = observed[title]
                     if not exists or revision_id is None or sha_text(remote_text) != desired_sha:
                         raise PlanConflict(f"État distant non équivalent au corpus pendant l’attestation : {language}/{page_id}")
                     pages.append({
@@ -3496,12 +3653,8 @@ class PlanExecutor:
                     })
 
                 if preserve_pending_deletes:
-                    for (prior_language, page_id), prior in previous_state.items():
-                        if prior_language != language or page_id in active_ids:
-                            continue
-                        if (language, page_id) not in pending_delete_ids:
-                            continue
-                        exists, revision_id, remote_text = self.adapter.read_page(prior.title)
+                    for page_id, prior in pending:
+                        exists, revision_id, remote_text = observed[prior.title]
                         if not exists or revision_id is None or sha_text(remote_text) != prior.content_sha256:
                             raise PlanConflict(f"Page en attente de suppression modifiée : {language}/{page_id}")
                         pages.append({

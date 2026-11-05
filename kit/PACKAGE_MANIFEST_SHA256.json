@@ -5,7 +5,7 @@
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
   "declared_file_count": 455,
-  "declared_test_count": 988,
+  "declared_test_count": 992,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -1099,7 +1099,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2312,
-      "sha256": "95c003d9a22a9c3c2a3769a40578d53e7d399698141c25de8eb26317939f0544"
+      "sha256": "5f44da2cbd6e98a9ac1cb3e8846d0110b57373de6d1df9aa1182421bfc8c5d12"
     },
     {
       "path": "VERSIONS.json",
@@ -1678,8 +1678,8 @@
     },
     {
       "path": "scripts/wikidebia_final_publication.py",
-      "size_bytes": 65536,
-      "sha256": "53185b6052c7e6eb1a221bc8d166b74b243f8324fed62a43c4d61c7193764933"
+      "size_bytes": 65921,
+      "sha256": "dd3b57a6296c373caed73563839a1d54ae4315b610388de4af88a3b18261dcc7"
     },
     {
       "path": "scripts/wikidebia_fr_publication_relay.py",
@@ -1828,8 +1828,8 @@
     },
     {
       "path": "scripts/wikidebia_update.py",
-      "size_bytes": 180239,
-      "sha256": "1fefec70c97ff242c9232a02ad7fbc6c4eb1afc82cf932c627a213129eaa3733"
+      "size_bytes": 187051,
+      "sha256": "0638b191ba4d6824032399cac97244093b397f5a56f63ad12b7102c13052d4b5"
     },
     {
       "path": "scripts/wikidebia_work_close.py",
@@ -2198,8 +2198,8 @@
     },
     {
       "path": "tests/test_wikidebia_remote_execute.py",
-      "size_bytes": 16795,
-      "sha256": "67386c487e0e5495f3e45b332d5a8203cf086af0d415bd3c11c6845d9ea45eb1"
+      "size_bytes": 18317,
+      "sha256": "8301cd1c68072340c395a334a7000262fe2ed454d0247bca31d227480fa8a6f3"
     },
     {
       "path": "tests/test_wikidebia_remote_plan_review.py",
@@ -2208,8 +2208,8 @@
     },
     {
       "path": "tests/test_wikidebia_remote_update.py",
-      "size_bytes": 70075,
-      "sha256": "bd195d478528f91437f8426d13732c7f3c4f6bb98c6ff866c24232872c53e17c"
+      "size_bytes": 73087,
+      "sha256": "a5714a079b3d6b363da762d7dabd403f6935ce84ee6b926fce16ffff861f28b0"
     },
     {
       "path": "tests/test_wikidebia_render.py",

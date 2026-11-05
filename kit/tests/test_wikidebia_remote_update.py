@@ -96,6 +96,10 @@ class FakeAdapter:
         row = self.pages.get((self.language, title))
         return (False, None, "") if row is None else (True, row[0], row[1])
 
+    def read_pages(self, titles):
+        self.events.append(("read_pages", self.language, tuple(titles)))
+        return {title: self.read_page(title) for title in titles}
+
     def write_page(self, *, title, text, summary, tags, expected_user, create_only, base_revision_id):
         if self.fail_after_writes is not None and self.write_count >= self.fail_after_writes:
             raise RuntimeError("interruption")
@@ -465,6 +469,83 @@ def test_19_no_changes_attestation_detects_remote_change_after_plan(tmp_path):
     else:
         raise AssertionError("une attestation obsolète a été acceptée")
     assert not (tmp_path / ".state" / "receipts").exists()
+
+
+def test_19b_matching_execution_receipt_resumes_attestation_without_rewriting(tmp_path):
+    text = argument("Contenu publié")
+    p, config, path, adapter = plan(
+        tmp_path,
+        old_pages=[],
+        new_pages=[("fr", "A1", "Titre", text)],
+        remote_pages={},
+    )
+    executor = module.PlanExecutor(config, adapter, path)
+    original = executor.execute(p, p["plan_sha256"])
+    write_count = adapter.write_count
+    adapter.events.clear()
+
+    resumed = module.PlanExecutor(config, adapter, path).resume_latest_receipt(
+        p,
+        p["plan_sha256"],
+        expected_execution_mode="full_update",
+    )
+
+    assert resumed is not None
+    assert resumed["receipt_sha256"] == original["receipt_sha256"]
+    assert adapter.write_count == write_count
+    assert not any(event[0] in {"write", "move", "delete"} for event in adapter.events)
+    assert [event for event in adapter.events if event[0] == "read_pages"] == [
+        ("read_pages", "fr", ("Titre",)),
+    ]
+
+
+def test_19c_matching_but_tampered_execution_receipt_is_rejected(tmp_path):
+    text = argument("Contenu publié")
+    p, config, path, adapter = plan(
+        tmp_path,
+        old_pages=[],
+        new_pages=[("fr", "A1", "Titre", text)],
+        remote_pages={},
+    )
+    executor = module.PlanExecutor(config, adapter, path)
+    executor.execute(p, p["plan_sha256"])
+    latest = tmp_path / ".state" / "receipts" / "demo" / "latest.json"
+    receipt = json.loads(latest.read_text(encoding="utf-8"))
+    receipt["counts"] = {"created": 2}
+    latest.write_text(json.dumps(receipt), encoding="utf-8")
+
+    with pytest.raises(module.PlanConflict, match="Empreinte du reçu"):
+        module.PlanExecutor(config, adapter, path).resume_latest_receipt(
+            p,
+            p["plan_sha256"],
+            expected_execution_mode="full_update",
+        )
+
+
+def test_19d_validly_hashed_but_incomplete_execution_receipt_is_rejected(tmp_path):
+    text = argument("Contenu publié")
+    p, config, path, adapter = plan(
+        tmp_path,
+        old_pages=[],
+        new_pages=[("fr", "A1", "Titre", text)],
+        remote_pages={},
+    )
+    executor = module.PlanExecutor(config, adapter, path)
+    executor.execute(p, p["plan_sha256"])
+    latest = tmp_path / ".state" / "receipts" / "demo" / "latest.json"
+    receipt = json.loads(latest.read_text(encoding="utf-8"))
+    receipt["results"] = []
+    receipt["counts"] = {}
+    receipt.pop("receipt_sha256")
+    receipt["receipt_sha256"] = module.sha_object(receipt)
+    latest.write_text(json.dumps(receipt), encoding="utf-8")
+
+    with pytest.raises(module.PlanConflict, match="ne couvre pas exactement"):
+        module.PlanExecutor(config, adapter, path).resume_latest_receipt(
+            p,
+            p["plan_sha256"],
+            expected_execution_mode="full_update",
+        )
 
 
 def test_20_no_delete_preserves_pending_pages_for_later_only_delete(tmp_path):
