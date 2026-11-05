@@ -9,6 +9,7 @@ import json
 import os
 import re
 import tempfile
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -20,6 +21,29 @@ RUNTIME_SUFFIXES = {".pyc", ".pyo"}
 
 class PackageMetadataError(RuntimeError):
     pass
+
+
+def passed_test_count(junit_xml: Path) -> int:
+    try:
+        root = ET.parse(junit_xml).getroot()
+    except (ET.ParseError, OSError) as exc:
+        raise PackageMetadataError(f"Rapport JUnit illisible : {exc}") from exc
+    suites = [root] if root.get("tests") is not None else list(root.findall("./testsuite"))
+    if not suites:
+        raise PackageMetadataError("Compteurs absents du rapport JUnit")
+    try:
+        total = sum(int(row.get("tests", "0")) for row in suites)
+        failures = sum(int(row.get("failures", "0")) for row in suites)
+        errors = sum(int(row.get("errors", "0")) for row in suites)
+        skipped = sum(int(row.get("skipped", "0")) for row in suites)
+    except ValueError as exc:
+        raise PackageMetadataError("Compteurs invalides dans le rapport JUnit") from exc
+    passed = total - failures - errors - skipped
+    if passed < 1 or failures or errors:
+        raise PackageMetadataError(
+            f"Suite JUnit non réussie : {passed} succès, {failures} échec(s), {errors} erreur(s)"
+        )
+    return passed
 
 
 def canonical_sha256(value: Mapping[str, Any]) -> str:
@@ -169,7 +193,9 @@ def check(root: Path, *, test_count: int, generated_date: str) -> dict[str, Any]
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
-    parser.add_argument("--test-count", type=int, required=True)
+    count = parser.add_mutually_exclusive_group(required=True)
+    count.add_argument("--test-count", type=int)
+    count.add_argument("--junit-xml", type=Path)
     parser.add_argument("--generated-date")
     parser.add_argument("--check", action="store_true")
     return parser
@@ -177,6 +203,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    test_count = args.test_count if args.test_count is not None else passed_test_count(args.junit_xml)
     generated_date = args.generated_date
     if generated_date is None and args.check:
         receipt_path = args.root / "PACKAGE_RECEIPT.json"
@@ -184,9 +211,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             generated_date = json.loads(receipt_path.read_text(encoding="utf-8")).get("generated_date")
     generated_date = generated_date or dt.datetime.now(dt.timezone.utc).date().isoformat()
     result = (
-        check(args.root, test_count=args.test_count, generated_date=generated_date)
+        check(args.root, test_count=test_count, generated_date=generated_date)
         if args.check else
-        refresh(args.root, test_count=args.test_count, generated_date=generated_date)
+        refresh(args.root, test_count=test_count, generated_date=generated_date)
     )
     print(json.dumps({
         "status": "valid" if args.check else "refreshed",
