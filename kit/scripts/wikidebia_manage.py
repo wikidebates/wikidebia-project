@@ -2149,6 +2149,20 @@ def corpus_workspace_translation_resume(
     return run(command, cwd=root, check=False).returncode
 
 
+def corpus_workspace_translation_preflight(
+    root: Path, debate_id: str, *, work_id: str, unit_id: str,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_translation_preflight.py"
+    if not script.is_file():
+        raise ManagementError("Préflight mécanique de traduction absent du kit")
+    command = [
+        python_command(root), str(script), debate_id,
+        "--work-id", work_id, "--unit-id", unit_id,
+        "--project-root", str(root), "--machine-readable",
+    ]
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_translation_patch(
     root: Path, debate_id: str, *, work_id: str, unit_id: str,
     prepare: bool, seal: bool, apply: bool, overwrite: bool,
@@ -2385,6 +2399,7 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
         "wikidebia_translation_packet.py",
         "wikidebia_translation_next.py",
         "wikidebia_translation_patch.py",
+        "wikidebia_translation_preflight.py",
         "wikidebia_translation_resume.py",
         "wikidebia_translation_memory.py",
         "wikidebia_external_deletions.py",
@@ -2714,6 +2729,14 @@ def build_parser() -> argparse.ArgumentParser:
     translation_resume_parser.add_argument("debate_id")
     translation_resume_parser.add_argument("--work-id", required=True)
 
+    translation_preflight_parser = sub.add_parser(
+        "corpus-workspace-translation-preflight",
+        help="Contrôler mécaniquement un correctif avant son scellement",
+    )
+    translation_preflight_parser.add_argument("debate_id")
+    translation_preflight_parser.add_argument("--work-id", required=True)
+    translation_preflight_parser.add_argument("--unit-id", required=True)
+
     translation_patch_parser = sub.add_parser(
         "corpus-workspace-translation-patch",
         help="Préparer, sceller ou appliquer un correctif limité à une unité",
@@ -3009,6 +3032,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "corpus-workspace-translation-resume":
         return corpus_workspace_translation_resume(
             root, args.debate_id, work_id=args.work_id,
+        )
+
+    if args.command == "corpus-workspace-translation-preflight":
+        return corpus_workspace_translation_preflight(
+            root, args.debate_id, work_id=args.work_id, unit_id=args.unit_id,
         )
 
     if args.command == "corpus-workspace-translation-patch":
