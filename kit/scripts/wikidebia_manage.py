@@ -2136,6 +2136,19 @@ def corpus_workspace_translation_next(
     return run(command, cwd=root, check=False).returncode
 
 
+def corpus_workspace_translation_resume(
+    root: Path, debate_id: str, *, work_id: str,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_translation_resume.py"
+    if not script.is_file():
+        raise ManagementError("Capsule de reprise de traduction absente du kit")
+    command = [
+        python_command(root), str(script), debate_id,
+        "--work-id", work_id, "--project-root", str(root), "--machine-readable",
+    ]
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_translation_patch(
     root: Path, debate_id: str, *, work_id: str, unit_id: str,
     prepare: bool, seal: bool, apply: bool, overwrite: bool,
@@ -2372,6 +2385,7 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
         "wikidebia_translation_packet.py",
         "wikidebia_translation_next.py",
         "wikidebia_translation_patch.py",
+        "wikidebia_translation_resume.py",
         "wikidebia_translation_memory.py",
         "wikidebia_external_deletions.py",
         "refresh_package_metadata.py",
@@ -2693,6 +2707,13 @@ def build_parser() -> argparse.ArgumentParser:
     translation_next_parser.add_argument("--memory-root", type=Path, default=Path("translation-memory"))
     translation_next_parser.add_argument("--no-memory", action="store_true")
 
+    translation_resume_parser = sub.add_parser(
+        "corpus-workspace-translation-resume",
+        help="Afficher et régénérer la capsule compacte de reprise",
+    )
+    translation_resume_parser.add_argument("debate_id")
+    translation_resume_parser.add_argument("--work-id", required=True)
+
     translation_patch_parser = sub.add_parser(
         "corpus-workspace-translation-patch",
         help="Préparer, sceller ou appliquer un correctif limité à une unité",
@@ -2983,6 +3004,11 @@ def main(argv: list[str] | None = None) -> int:
         return corpus_workspace_translation_next(
             root, args.debate_id, work_id=args.work_id,
             memory_root=args.memory_root, no_memory=args.no_memory,
+        )
+
+    if args.command == "corpus-workspace-translation-resume":
+        return corpus_workspace_translation_resume(
+            root, args.debate_id, work_id=args.work_id,
         )
 
     if args.command == "corpus-workspace-translation-patch":
