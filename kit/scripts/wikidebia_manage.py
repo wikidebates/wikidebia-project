@@ -2163,6 +2163,19 @@ def corpus_workspace_translation_preflight(
     return run(command, cwd=root, check=False).returncode
 
 
+def test_changed(root: Path, *, base: str, execute: bool) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_test_changed.py"
+    if not script.is_file():
+        raise ManagementError("Sélecteur local de tests absent du kit")
+    command = [
+        python_command(root), str(script), "--base", base,
+        "--project-root", str(root), "--machine-readable",
+    ]
+    if execute:
+        command.append("--execute")
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_translation_patch(
     root: Path, debate_id: str, *, work_id: str, unit_id: str,
     prepare: bool, seal: bool, apply: bool, overwrite: bool,
@@ -2401,6 +2414,7 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
         "wikidebia_translation_patch.py",
         "wikidebia_translation_preflight.py",
         "wikidebia_translation_resume.py",
+        "wikidebia_test_changed.py",
         "wikidebia_translation_memory.py",
         "wikidebia_external_deletions.py",
         "refresh_package_metadata.py",
@@ -2737,6 +2751,13 @@ def build_parser() -> argparse.ArgumentParser:
     translation_preflight_parser.add_argument("--work-id", required=True)
     translation_preflight_parser.add_argument("--unit-id", required=True)
 
+    changed_tests_parser = sub.add_parser(
+        "test-changed",
+        help="Sélectionner les validations locales depuis le diff Git",
+    )
+    changed_tests_parser.add_argument("--base", default="origin/main")
+    changed_tests_parser.add_argument("--execute", action="store_true")
+
     translation_patch_parser = sub.add_parser(
         "corpus-workspace-translation-patch",
         help="Préparer, sceller ou appliquer un correctif limité à une unité",
@@ -3038,6 +3059,9 @@ def main(argv: list[str] | None = None) -> int:
         return corpus_workspace_translation_preflight(
             root, args.debate_id, work_id=args.work_id, unit_id=args.unit_id,
         )
+
+    if args.command == "test-changed":
+        return test_changed(root, base=args.base, execute=args.execute)
 
     if args.command == "corpus-workspace-translation-patch":
         return corpus_workspace_translation_patch(
