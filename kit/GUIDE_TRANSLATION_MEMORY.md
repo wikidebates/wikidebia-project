@@ -26,5 +26,17 @@ Vérifiez toute la mémoire avec :
 ```
 
 Cette première commande construit et contrôle la mémoire. Sa réutilisation dans
-les paquets d’un autre débat est une opération séparée afin que chaque étape
-reste auditée indépendamment.
+les paquets d’un autre débat reste explicitement auditée :
+
+```text
+./wikidebia corpus-workspace-translation-packet <debate_id> \
+  --work-id <work_id> --unit-id U001 --reuse-memory
+```
+
+L’option applique d’abord les seules correspondances exactes à la revue
+brouillon, conserve les blocs français et les champs propres au nouveau Work,
+remappe les identifiants internes de la page, puis écrit un reçu signé sous
+`audits/translation-memory/reuse.json`. Les pages appliquées sont retirées du
+paquet compact, y compris lors de la préparation ultérieure d’un correctif
+d’unité. Une entrée portant le même titre mais une autre empreinte source est
+signalée comme obsolète et reste intégralement dans le paquet à traduire.

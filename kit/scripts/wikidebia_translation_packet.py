@@ -28,6 +28,11 @@ from wikidebia_translation_review import (
     _source_snapshot,
     translation_review_sha256,
 )
+from wikidebia_translation_memory import (
+    TranslationMemoryError,
+    reuse_review,
+    verified_reuse_coverage,
+)
 from wikidebia_update import sha_object
 
 
@@ -51,6 +56,9 @@ def _render_markdown(packet: Mapping[str, Any]) -> str:
         f"- Unité : `{packet['unit']['id']}`",
         f"- Risque maximal : `{packet['unit'].get('max_risk_level')}`",
         f"- Arguments : **{packet['counts']['arguments']}**",
+        f"- Arguments de l’unité : **{packet['counts']['unit_arguments']}**",
+        f"- Traductions réutilisées : **{packet['counts']['memory_reused']}**",
+        f"- Entrées obsolètes refusées : **{packet['counts']['memory_stale_rejected']}**",
         f"- Sources françaises modifiées : **{packet['counts']['changed_french_sources']}**",
         f"- Vocabulaire pertinent : **{packet['counts']['vocabulary']}**",
         f"- Libellés relationnels pertinents : **{packet['counts']['relation_labels']}**",
@@ -62,6 +70,14 @@ def _render_markdown(packet: Mapping[str, Any]) -> str:
         status = (argument.get("translation") or {}).get("status") or "unknown"
         changed = " — source française modifiée" if argument["source_changed"] else ""
         rows.append(f"- `{argument['id']}` : `{status}`{changed}")
+    if packet.get("memory_reuse"):
+        rows.extend(["", "## Traductions réutilisées", ""])
+        for reused in packet["memory_reuse"]:
+            rows.append(f"- `{reused['page_id']}` : `{reused['entry_sha256']}`")
+    if packet.get("memory_stale_rejected"):
+        rows.extend(["", "## Entrées obsolètes refusées", ""])
+        for stale in packet["memory_stale_rejected"]:
+            rows.append(f"- `{stale['page_id']}` : source française modifiée")
     rows.extend([
         "",
         "Le JSON contient uniquement cette unité, ses sources françaises courantes,",
@@ -73,7 +89,8 @@ def _render_markdown(packet: Mapping[str, Any]) -> str:
 
 
 def build_packet(
-    project_root: Path, debate_id: str, work_id: str, unit_id: str,
+    project_root: Path, debate_id: str, work_id: str, unit_id: str, *,
+    reuse_memory: bool = False, memory_root: Path = Path("translation-memory"),
 ) -> dict[str, Any]:
     project_root = project_root.expanduser().resolve()
     debate_id = validate_debate_id(debate_id)
@@ -81,6 +98,8 @@ def build_packet(
     if not UNIT_ID_RE.fullmatch(unit_id):
         raise TranslationPacketError("unit_id doit suivre U suivi d’au moins trois chiffres")
     workspace, meta = _load_workspace(project_root, debate_id, work_id)
+    if reuse_memory:
+        reuse_review(project_root, debate_id, work_id, memory_root)
     source = _assert_content_copy(workspace, meta)
     review = load_json(workspace / "reviews/en/translation_review.json", "revue anglaise")
     if (
@@ -113,6 +132,11 @@ def build_packet(
         str(row.get("id")): row
         for row in review.get("arguments") or [] if isinstance(row, Mapping) and row.get("id")
     }
+    reused_rows, stale_rows = verified_reuse_coverage(
+        workspace, review_by_id, metadata_by_id, content_by_id,
+    )
+    reused_by_id = {str(row["page_id"]): row for row in reused_rows}
+    stale_by_id = {str(row["page_id"]): row for row in stale_rows}
     arguments: list[dict[str, Any]] = []
     changed_sources = 0
     for page_id in page_ids:
@@ -121,6 +145,8 @@ def build_packet(
         content = content_by_id.get(page_id)
         if row is None or metadata is None or content is None:
             raise TranslationPacketError(f"Données de traduction ou source absentes : {page_id}")
+        if page_id in reused_by_id:
+            continue
         prepared = ((row.get("translation") or {}).get("french") or {})
         prepared_hash = _source_hash(
             prepared.get("metadata") or {}, prepared.get("content") or {},
@@ -166,10 +192,15 @@ def build_packet(
         "current_content_reviewed_copy_sha256": (meta.get("content_reviewed_copy") or {}).get("tree_sha256"),
         "section_mapping": copy.deepcopy(review.get("section_mapping") or {}),
         "arguments": arguments,
+        "memory_reuse": [copy.deepcopy(reused_by_id[page_id]) for page_id in page_ids if page_id in reused_by_id],
+        "memory_stale_rejected": [copy.deepcopy(stale_by_id[page_id]) for page_id in page_ids if page_id in stale_by_id],
         "vocabulary": vocabulary,
         "relation_labels": relation_labels,
         "counts": {
             "arguments": len(arguments),
+            "unit_arguments": len(page_ids),
+            "memory_reused": sum(page_id in reused_by_id for page_id in page_ids),
+            "memory_stale_rejected": sum(page_id in stale_by_id for page_id in page_ids),
             "changed_french_sources": changed_sources,
             "vocabulary": len(vocabulary),
             "relation_labels": len(relation_labels),
@@ -196,6 +227,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("debate_id")
     parser.add_argument("--work-id", required=True)
     parser.add_argument("--unit-id", required=True)
+    parser.add_argument("--reuse-memory", action="store_true")
+    parser.add_argument("--memory-root", type=Path, default=Path("translation-memory"))
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
     parser.add_argument("--machine-readable", action="store_true")
     return parser
@@ -203,7 +236,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    result = build_packet(args.project_root, args.debate_id, args.work_id, args.unit_id)
+    result = build_packet(
+        args.project_root, args.debate_id, args.work_id, args.unit_id,
+        reuse_memory=args.reuse_memory, memory_root=args.memory_root,
+    )
     if args.machine_readable:
         print(json.dumps({key: result[key] for key in (
             "schema", "debate_id", "work_id", "unit", "counts", "packet_sha256",
@@ -220,7 +256,7 @@ if __name__ == "__main__":
     try:
         raise SystemExit(main())
     except (
-        TranslationPacketError, TranslationReviewError, RenderError,
+        TranslationPacketError, TranslationMemoryError, TranslationReviewError, RenderError,
         WorkspaceError, CorpusBuildError, OSError, ValueError,
     ) as exc:
         print(f"PAQUET DE TRADUCTION BLOQUÉ : {exc}", file=os.sys.stderr)

@@ -2104,6 +2104,7 @@ def corpus_workspace_translation_worklist(root: Path, debate_id: str, *, work_id
 
 def corpus_workspace_translation_packet(
     root: Path, debate_id: str, *, work_id: str, unit_id: str,
+    reuse_memory: bool, memory_root: Path,
 ) -> int:
     script = root / "kit" / "scripts" / "wikidebia_translation_packet.py"
     if not script.is_file():
@@ -2113,6 +2114,8 @@ def corpus_workspace_translation_packet(
         "--work-id", work_id, "--unit-id", unit_id,
         "--project-root", str(root), "--machine-readable",
     ]
+    if reuse_memory:
+        command.extend(["--reuse-memory", "--memory-root", str(memory_root)])
     return run(command, cwd=root, check=False).returncode
 
 
@@ -2655,6 +2658,13 @@ def build_parser() -> argparse.ArgumentParser:
     translation_packet_parser.add_argument("debate_id", help="Identifiant du corpus sous corpus/")
     translation_packet_parser.add_argument("--work-id", required=True)
     translation_packet_parser.add_argument("--unit-id", required=True)
+    translation_packet_parser.add_argument(
+        "--reuse-memory", action="store_true",
+        help="Appliquer les correspondances exactes avant de construire le paquet",
+    )
+    translation_packet_parser.add_argument(
+        "--memory-root", type=Path, default=Path("translation-memory"),
+    )
 
     translation_patch_parser = sub.add_parser(
         "corpus-workspace-translation-patch",
@@ -2677,7 +2687,7 @@ def build_parser() -> argparse.ArgumentParser:
         "corpus-translation-memory",
         help="Exporter ou vérifier la mémoire de traduction inter-débats signée",
     )
-    translation_memory_parser.add_argument("action", choices=("export", "verify"))
+    translation_memory_parser.add_argument("action", choices=("export", "verify", "reuse"))
     translation_memory_parser.add_argument("debate_id", nargs="?")
     translation_memory_parser.add_argument("--work-id")
     translation_memory_parser.add_argument("--memory-root", type=Path, default=Path("translation-memory"))
@@ -2939,6 +2949,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "corpus-workspace-translation-packet":
         return corpus_workspace_translation_packet(
             root, args.debate_id, work_id=args.work_id, unit_id=args.unit_id,
+            reuse_memory=args.reuse_memory, memory_root=args.memory_root,
         )
 
     if args.command == "corpus-workspace-translation-patch":
@@ -2951,8 +2962,8 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     if args.command == "corpus-translation-memory":
-        if args.action == "export" and (not args.debate_id or not args.work_id):
-            raise ManagementError("export exige debate_id et --work-id")
+        if args.action in {"export", "reuse"} and (not args.debate_id or not args.work_id):
+            raise ManagementError(f"{args.action} exige debate_id et --work-id")
         return corpus_translation_memory(
             root, action=args.action, debate_id=args.debate_id,
             work_id=args.work_id, memory_root=args.memory_root,

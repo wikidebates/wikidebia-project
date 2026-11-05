@@ -41,6 +41,7 @@ def _fixture(tmp_path: Path, monkeypatch):
                 "status": "approved",
                 "canonical_title": "Shared argument",
                 "summary": "Translated one",
+                "citations": [{"id": "A1-C001", "translated_citation": "Quoted text"}],
                 "french": {"content": content["arguments"][0]},
                 "existing_english_update": {"observed_revision_id": 12},
             }},
@@ -63,11 +64,11 @@ def _fixture(tmp_path: Path, monkeypatch):
     monkeypatch.setattr(memory, "_source_snapshot", lambda *args: (
         {}, metadata, content, {},
     ))
-    return project, workspace, review_path
+    return project, workspace, review_path, metadata, content
 
 
 def test_export_builds_signed_content_addressed_memory(tmp_path: Path, monkeypatch):
-    project, _workspace, _review_path = _fixture(tmp_path, monkeypatch)
+    project, _workspace, _review_path, _metadata, _content = _fixture(tmp_path, monkeypatch)
 
     result = memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
     verified = memory.verify_memory(project, Path("translation-memory"))
@@ -88,7 +89,7 @@ def test_export_builds_signed_content_addressed_memory(tmp_path: Path, monkeypat
 
 
 def test_export_is_idempotent(tmp_path: Path, monkeypatch):
-    project, _workspace, _review_path = _fixture(tmp_path, monkeypatch)
+    project, _workspace, _review_path, _metadata, _content = _fixture(tmp_path, monkeypatch)
     first = memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
 
     second = memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
@@ -99,7 +100,7 @@ def test_export_is_idempotent(tmp_path: Path, monkeypatch):
 
 
 def test_export_refuses_divergent_translation_for_same_source(tmp_path: Path, monkeypatch):
-    project, _workspace, review_path = _fixture(tmp_path, monkeypatch)
+    project, _workspace, review_path, _metadata, _content = _fixture(tmp_path, monkeypatch)
     memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
     review = json.loads(review_path.read_text())
     review["arguments"][0]["translation"]["summary"] = "A conflicting translation"
@@ -111,7 +112,7 @@ def test_export_refuses_divergent_translation_for_same_source(tmp_path: Path, mo
 
 
 def test_verify_rejects_tampered_object(tmp_path: Path, monkeypatch):
-    project, _workspace, _review_path = _fixture(tmp_path, monkeypatch)
+    project, _workspace, _review_path, _metadata, _content = _fixture(tmp_path, monkeypatch)
     memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
     index = json.loads((project / "translation-memory/index.json").read_text())
     path = project / "translation-memory" / index["entries"][0]["object_path"]
@@ -121,3 +122,66 @@ def test_verify_rejects_tampered_object(tmp_path: Path, monkeypatch):
 
     with pytest.raises(memory.TranslationMemoryError, match="invalide"):
         memory.verify_memory(project, Path("translation-memory"))
+
+
+def test_reuse_applies_exact_entry_remaps_ids_and_rejects_stale(tmp_path: Path, monkeypatch):
+    project, workspace, review_path, metadata, content = _fixture(tmp_path, monkeypatch)
+    memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
+    review = json.loads(review_path.read_text())
+    review["status"] = "draft"
+    review["review_sha256"] = None
+    review["arguments"][0]["id"] = "B9"
+    review["arguments"][0]["translation"] = {
+        "status": "pending",
+        "canonical_title": "",
+        "page_origin": "new",
+        "existing_english_update": {"observed_revision_id": 99},
+        "french": {"content": {"id": "B9", "summary": "Current French"}},
+    }
+    review["arguments"][1]["translation"] = {
+        "status": "pending", "canonical_title": "", "french": {"content": {}},
+    }
+    review_path.write_text(json.dumps(review), encoding="utf-8")
+    metadata["arguments"][0]["entity_id"] = "B9"
+    content["arguments"][0]["id"] = "B9"
+    metadata["arguments"][1]["source_import_sha256"] = "c" * 64
+    content["arguments"][1]["import_sha256"] = "c" * 64
+
+    result = memory.reuse_review(
+        project, "debat_test", "EDIT-TEST-001", Path("translation-memory"),
+    )
+
+    updated = json.loads(review_path.read_text())
+    first = updated["arguments"][0]["translation"]
+    assert result["matched"] == 1
+    assert result["stale_rejected"] == 1
+    assert first["canonical_title"] == "Shared argument"
+    assert first["citations"][0]["id"] == "B9-C001"
+    assert first["french"]["content"]["summary"] == "Current French"
+    assert first["page_origin"] == "new"
+    assert first["existing_english_update"]["observed_revision_id"] == 99
+    assert updated["arguments"][1]["translation"]["status"] == "pending"
+    receipt = json.loads((workspace / "audits/translation-memory/reuse.json").read_text())
+    assert memory._signed(receipt, "receipt_sha256")
+    review_by_id = {row["id"]: row for row in updated["arguments"]}
+    reused, stale = memory.verified_reuse_coverage(
+        workspace,
+        review_by_id,
+        {row["entity_id"]: row for row in metadata["arguments"]},
+        {row["id"]: row for row in content["arguments"]},
+    )
+    assert [row["page_id"] for row in reused] == ["B9"]
+    assert [row["page_id"] for row in stale] == ["A2"]
+
+
+def test_reuse_refuses_divergent_already_approved_translation(tmp_path: Path, monkeypatch):
+    project, _workspace, review_path, _metadata, _content = _fixture(tmp_path, monkeypatch)
+    memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
+    review = json.loads(review_path.read_text())
+    review["status"] = "draft"
+    review["review_sha256"] = None
+    review["arguments"][0]["translation"]["summary"] = "Manual divergent approval"
+    review_path.write_text(json.dumps(review), encoding="utf-8")
+
+    with pytest.raises(memory.TranslationMemoryError, match="approuvée divergente"):
+        memory.reuse_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))

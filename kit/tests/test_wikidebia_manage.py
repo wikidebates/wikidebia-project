@@ -1104,6 +1104,7 @@ def test_translation_packet_command_is_exposed_by_manager():
     ])
     assert args.command == "corpus-workspace-translation-packet"
     assert args.unit_id == "U001"
+    assert args.reuse_memory is False
 
 
 def test_translation_patch_command_is_exposed_by_manager():
@@ -1123,10 +1124,15 @@ def test_translation_memory_commands_are_exposed_by_manager():
     verify = module.build_parser().parse_args([
         "corpus-translation-memory", "verify", "--memory-root", "shared-memory",
     ])
+    reuse = module.build_parser().parse_args([
+        "corpus-translation-memory", "reuse", "debat_test",
+        "--work-id", "EDIT-TEST-001",
+    ])
     assert export.debate_id == "debat_test"
     assert export.work_id == "EDIT-TEST-001"
     assert verify.debate_id is None
     assert verify.memory_root == Path("shared-memory")
+    assert reuse.action == "reuse"
 
 
 def test_external_deletion_accept_command_is_exposed_by_manager():
