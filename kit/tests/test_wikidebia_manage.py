@@ -1127,6 +1127,22 @@ def test_external_deletion_accept_command_is_exposed_by_manager():
     assert args.confirm_plan_sha256 == "a" * 64
 
 
+def test_external_deletion_transport_commands_are_exposed_by_manager():
+    export = module.build_parser().parse_args([
+        "corpus-external-deletion-export", "debat_test", "--output", "registry.json",
+    ])
+    revoke = module.build_parser().parse_args([
+        "corpus-external-deletion-revoke", "debat_test", "--language", "fr",
+        "--page-id", "A1", "--reason", "Décision réexaminée", "--revoked-by", "owner",
+    ])
+    imported = module.build_parser().parse_args([
+        "corpus-external-deletion-import", "debat_test", "--source", "registry.json",
+    ])
+    assert export.output == Path("registry.json")
+    assert revoke.revoked_by == "owner"
+    assert imported.source == Path("registry.json")
+
+
 def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
     (tmp_path / "private/pywikibot").mkdir(parents=True)
     (tmp_path / "private/pywikibot/user-config.py").write_text("# test\n", encoding="utf-8")

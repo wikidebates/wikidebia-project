@@ -1,0 +1,26 @@
+{
+  "schema": "wikidebia-accepted-external-deletions-1.0",
+  "debate_id": "le_feminisme_est_il_encore_necessaire",
+  "created_at": "2026-11-04T21:54:20+00:00",
+  "updated_at": "2026-11-04T21:54:20+00:00",
+  "entries": [
+    {
+      "language": "fr",
+      "page_id": "A0023",
+      "page_type": "argument",
+      "canonical_title": "Les féministes méprisent les hommes",
+      "status": "active",
+      "reason": "Page française supprimée par Stemy car considérée comme doublon, sans cible de redirection indiquée.",
+      "accepted_by": "project_owner",
+      "accepted_at": "2026-11-04T21:54:20+00:00",
+      "work_id": "EDIT-20261024-001",
+      "comparison_id": "REMOTE-20261104-003",
+      "comparison_receipt_sha256": "c18d76de7ed804551875b0db1c58be2d1b53f3ff7a313d021f16dd24a613a882",
+      "observed_absent_at": "2026-11-04T17:33:01+00:00",
+      "release_copy_tree_sha256": "a7655bc5b706395c9ee5de227fdc5a91f7bec2018bcc25915aa97ce35df33816",
+      "release_page_sha256": "95f547a1bee7aa7af07524c94cfd274c9fe3c9261e3a14b6f19cfb57b73d1f69",
+      "release_file_sha256": "c875f079226a38966020eaf0ae47e9efed2c269d25944665be1ba488d6b4ede2"
+    }
+  ],
+  "registry_sha256": "f33814b8d39bf7819f5d7ed2276a5153214cbd52c19a07c24b38d5e407af7a3b"
+}

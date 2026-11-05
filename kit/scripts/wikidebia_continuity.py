@@ -369,6 +369,15 @@ def verify_committed_snapshot(snapshot_root: Path, debate_id: str | None = None)
         raise ContinuityError("Racine de continuité absente")
     _verify_sha256sums(snapshot_root)
     debate_id = debate_id or snapshot_root.parent.name
+    external_registry_path = snapshot_root / "runtime/external-deletions/registry.json"
+    external_registry_sha256 = None
+    if external_registry_path.exists():
+        external_registry = _load_signed(
+            external_registry_path, "registry_sha256", "registre de suppressions externes",
+        )
+        if external_registry.get("debate_id") != debate_id:
+            raise ContinuityError("Registre de suppressions rattaché à un autre débat")
+        external_registry_sha256 = external_registry.get("registry_sha256")
 
     content_receipt = _load_signed(
         snapshot_root / "runtime/fr-publication/content/publication-receipt.json",
@@ -454,6 +463,7 @@ def verify_committed_snapshot(snapshot_root: Path, debate_id: str | None = None)
         "history_state_count": len(history),
         "post_checkpoint_correction_count": correction_count,
         "current_state_sha256": latest.get("state_sha256"),
+        "external_deletion_registry_sha256": external_registry_sha256,
     }
 
 
@@ -532,6 +542,16 @@ def sync_signed_french_history(
     required.append((latest_path, target_state_root / "latest.json"))
     required.append((content_receipt_path, snapshot_root / "runtime/fr-publication/content/publication-receipt.json"))
     required.append((workflow_path, snapshot_root / "runtime/workflow/workflow.json"))
+    external_registry_path = project_root / ".state/external-deletions" / f"{debate_id}.json"
+    external_registry_sha256 = None
+    if external_registry_path.exists():
+        external_registry = _load_signed(
+            external_registry_path, "registry_sha256", "registre de suppressions externes",
+        )
+        if external_registry.get("debate_id") != debate_id:
+            raise ContinuityError("Registre de suppressions rattaché à un autre débat")
+        external_registry_sha256 = external_registry.get("registry_sha256")
+        required.append((external_registry_path, snapshot_root / "runtime/external-deletions/registry.json"))
 
     anchor = history[anchor_index][1]
     previous = anchor
@@ -609,4 +629,5 @@ def sync_signed_french_history(
         "history_state_count": current_index + 1,
         "post_checkpoint_correction_count": correction_count,
         "current_state_sha256": latest.get("state_sha256"),
+        "external_deletion_registry_sha256": external_registry_sha256,
     }

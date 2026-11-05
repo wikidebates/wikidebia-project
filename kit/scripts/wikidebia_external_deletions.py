@@ -6,6 +6,7 @@ import argparse
 import json
 import os
 import re
+import shutil
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -68,6 +69,91 @@ def load_registry(project_root: Path, debate_id: str) -> tuple[Path, dict[str, A
         if entry.get("status") not in {"active", "revoked"}:
             raise ExternalDeletionError("Statut d’acceptation de suppression invalide")
     return path, value
+
+
+def revoke_external_deletion(
+    project_root: Path, debate_id: str, *, language: str, page_id: str,
+    reason: str, revoked_by: str,
+) -> dict[str, Any]:
+    debate_id = validate_debate_id(debate_id)
+    path, registry = load_registry(project_root, debate_id)
+    if registry is None:
+        raise ExternalDeletionError("Registre de suppressions externes absent")
+    reason, revoked_by = reason.strip(), revoked_by.strip()
+    if language not in {"fr", "en"} or not page_id.strip() or len(reason) < 10 or not revoked_by:
+        raise ExternalDeletionError("Langue, page, auteur et raison explicite sont obligatoires")
+    entry = next((row for row in registry["entries"] if row.get("language") == language and row.get("page_id") == page_id), None)
+    if entry is None:
+        raise ExternalDeletionError("Décision de suppression externe introuvable")
+    if entry.get("status") == "revoked":
+        return {"status": "already_revoked", "registry_path": relative_to_project(path, Path(project_root).resolve()), "registry_sha256": registry["registry_sha256"], "entry": entry, "remote_write_performed": False}
+    timestamp = now_iso()
+    entry.update({"status": "revoked", "revoked_at": timestamp, "revoked_by": revoked_by, "revocation_reason": reason})
+    registry["updated_at"] = timestamp
+    registry.pop("registry_sha256", None)
+    registry["registry_sha256"] = sha_object(registry)
+    write_json(path, registry)
+    return {"status": "revoked", "registry_path": relative_to_project(path, Path(project_root).resolve()), "registry_sha256": registry["registry_sha256"], "entry": entry, "remote_write_performed": False}
+
+
+def export_registry(project_root: Path, debate_id: str, output: Path) -> dict[str, Any]:
+    project_root = Path(project_root).expanduser().resolve()
+    path, registry = load_registry(project_root, validate_debate_id(debate_id))
+    if registry is None:
+        raise ExternalDeletionError("Registre de suppressions externes absent")
+    output = output.expanduser().resolve() if output.is_absolute() else (project_root / output).resolve()
+    if output.exists() and (output.is_symlink() or not output.is_file()):
+        raise ExternalDeletionError("Destination d’export non sûre")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(path, output)
+    if json.loads(output.read_text(encoding="utf-8")) != registry:
+        raise ExternalDeletionError("Export du registre divergent")
+    return {"status": "exported", "registry_path": relative_to_project(path, project_root), "export_path": relative_to_project(output, project_root), "registry_sha256": registry["registry_sha256"], "remote_write_performed": False}
+
+
+def _entry_can_follow(current: Mapping[str, Any], imported: Mapping[str, Any]) -> bool:
+    if current == imported:
+        return True
+    if current.get("status") != "active" or imported.get("status") != "revoked":
+        return False
+    allowed = {"status", "revoked_at", "revoked_by", "revocation_reason"}
+    return all(current.get(key) == value for key, value in imported.items() if key not in allowed) and all(
+        key in imported for key in ("revoked_at", "revoked_by", "revocation_reason")
+    )
+
+
+def import_registry(project_root: Path, debate_id: str, source: Path) -> dict[str, Any]:
+    project_root = Path(project_root).expanduser().resolve()
+    debate_id = validate_debate_id(debate_id)
+    source = source.expanduser().resolve() if source.is_absolute() else (project_root / source).resolve()
+    if not source.is_file() or source.is_symlink():
+        raise ExternalDeletionError("Registre à importer absent ou non sûr")
+    imported = json.loads(source.read_text(encoding="utf-8"))
+    if not isinstance(imported, dict) or imported.get("schema") != REGISTRY_SCHEMA or imported.get("debate_id") != debate_id or not _signed(imported, "registry_sha256"):
+        raise ExternalDeletionError("Registre importé invalide ou rattaché à un autre débat")
+    entries = imported.get("entries")
+    if not isinstance(entries, list):
+        raise ExternalDeletionError("Entrées du registre importé invalides")
+    identities: set[tuple[str, str]] = set()
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise ExternalDeletionError("Entrée du registre importé invalide")
+        identity = (str(entry.get("language") or ""), str(entry.get("page_id") or ""))
+        if identity[0] not in {"fr", "en"} or not identity[1] or identity in identities or entry.get("status") not in {"active", "revoked"}:
+            raise ExternalDeletionError("Identité ou statut invalide dans le registre importé")
+        identities.add(identity)
+    target, current = load_registry(project_root, debate_id)
+    if current is not None:
+        imported_by_id = {(str(row.get("language")), str(row.get("page_id"))): row for row in imported.get("entries") or []}
+        for row in current["entries"]:
+            successor = imported_by_id.get((str(row.get("language")), str(row.get("page_id"))))
+            if successor is None or not _entry_can_follow(row, successor):
+                raise ExternalDeletionError("L’import ferait régresser ou remplacer une décision existante")
+        if current == imported:
+            return {"status": "already_imported", "registry_path": relative_to_project(target, project_root), "registry_sha256": current["registry_sha256"], "remote_write_performed": False}
+    write_json(target, imported)
+    load_registry(project_root, debate_id)
+    return {"status": "imported", "registry_path": relative_to_project(target, project_root), "registry_sha256": imported["registry_sha256"], "entries": len(imported.get("entries") or []), "remote_write_performed": False}
 
 
 def _comparison_evidence(
@@ -284,13 +370,21 @@ def apply_external_deletions(
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("debate_id")
-    parser.add_argument("--work-id", required=True)
-    parser.add_argument("--comparison-id", required=True)
-    parser.add_argument("--language", choices=("fr", "en"), required=True)
-    parser.add_argument("--page-id", required=True)
-    parser.add_argument("--reason", required=True)
-    parser.add_argument("--accepted-by", required=True)
-    parser.add_argument("--confirm-plan-sha256", required=True)
+    action = parser.add_mutually_exclusive_group(required=True)
+    action.add_argument("--accept", action="store_true")
+    action.add_argument("--revoke", action="store_true")
+    action.add_argument("--export", action="store_true")
+    action.add_argument("--import", dest="import_", action="store_true")
+    parser.add_argument("--work-id")
+    parser.add_argument("--comparison-id")
+    parser.add_argument("--language", choices=("fr", "en"))
+    parser.add_argument("--page-id")
+    parser.add_argument("--reason")
+    parser.add_argument("--accepted-by")
+    parser.add_argument("--revoked-by")
+    parser.add_argument("--confirm-plan-sha256")
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--source", type=Path)
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
     parser.add_argument("--machine-readable", action="store_true")
     return parser
@@ -298,17 +392,31 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    result = accept_external_deletion(
-        args.project_root, args.debate_id, args.work_id, args.comparison_id,
-        language=args.language, page_id=args.page_id, reason=args.reason,
-        accepted_by=args.accepted_by, confirm_plan_sha256=args.confirm_plan_sha256,
-    )
+    if args.accept:
+        required = (args.work_id, args.comparison_id, args.language, args.page_id, args.reason, args.accepted_by, args.confirm_plan_sha256)
+        if not all(required): raise ExternalDeletionError("Options d’acceptation incomplètes")
+        result = accept_external_deletion(
+            args.project_root, args.debate_id, args.work_id, args.comparison_id,
+            language=args.language, page_id=args.page_id, reason=args.reason,
+            accepted_by=args.accepted_by, confirm_plan_sha256=args.confirm_plan_sha256,
+        )
+    elif args.revoke:
+        if not all((args.language, args.page_id, args.reason, args.revoked_by)):
+            raise ExternalDeletionError("Options de révocation incomplètes")
+        result = revoke_external_deletion(
+            args.project_root, args.debate_id, language=args.language,
+            page_id=args.page_id, reason=args.reason, revoked_by=args.revoked_by,
+        )
+    elif args.export:
+        if args.output is None: raise ExternalDeletionError("--export exige --output")
+        result = export_registry(args.project_root, args.debate_id, args.output)
+    else:
+        if args.source is None: raise ExternalDeletionError("--import exige --source")
+        result = import_registry(args.project_root, args.debate_id, args.source)
     if args.machine_readable:
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     else:
-        print("Suppression externe acceptée : " + result["entry"]["canonical_title"])
-        print("Registre : " + result["registry_path"])
-        print("Empreinte : " + result["registry_sha256"])
+        print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
 
 
