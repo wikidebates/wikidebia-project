@@ -1668,8 +1668,8 @@
     },
     {
       "path": "scripts/wikidebia_compact_index.py",
-      "size_bytes": 3590,
-      "sha256": "ddfa9a0c39e46200320d46c9e532183e1851e2d224336223d4b904bbc94aa0bc"
+      "size_bytes": 3578,
+      "sha256": "998497136496c6f89747dface60e1f6626bb0a6b9c3e74f82ba81d1e88fd4150"
     },
     {
       "path": "scripts/wikidebia_content_review.py",
