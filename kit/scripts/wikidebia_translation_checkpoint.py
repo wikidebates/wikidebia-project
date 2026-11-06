@@ -25,6 +25,7 @@ from wikidebia_corpus_build import (
 from wikidebia_editorial_workspace import WorkspaceError, validate_work_id
 from wikidebia_release_info import KIT_VERSION, NORM_VERSION, VALIDATOR_VERSION
 from wikidebia_render import _load_workspace
+from wikidebia_translation_packet import verified_fragment_coverage
 from wikidebia_update import sha_object
 
 
@@ -104,6 +105,17 @@ def _checkpoint_files(workspace: Path) -> list[Path]:
         "audits/translation-memory/reuse.json",
     ]
     files.extend(workspace / rel for rel in fixed if (workspace / rel).is_file())
+    review = load_json(required[1], "revue anglaise du checkpoint")
+    review_by_id = {
+        str(row.get("id")): row
+        for row in review.get("arguments") or []
+        if isinstance(row, dict) and row.get("id")
+    }
+    fragment_coverage = verified_fragment_coverage(workspace, review_by_id)
+    files.extend(
+        workspace / "audits/translation-fragments" / f"{page_id}-application.json"
+        for page_id in sorted(fragment_coverage)
+    )
     fragment_selection = _optional_identity(
         workspace / "audits/translation-fragment-next.json", "selection_sha256",
     )
@@ -169,6 +181,11 @@ def export_checkpoint(
         "work_id": work_id,
         "workspace_sha256": meta.get("workspace_sha256"),
         "translation_review_sha256": sha256_file(review_path),
+        "fragment_application_receipt_count": sum(
+            path.parent.name == "translation-fragments"
+            and path.name.endswith("-application.json")
+            for path in files
+        ),
         "files": entries,
         "expanded_bytes": sum(row["size"] for row in entries),
         "contains_secrets": False,

@@ -7,7 +7,13 @@ compressée et décrite par un manifeste signé. Elle contient uniquement :
 - le reçu du workspace ;
 - la source française verrouillée nécessaire à la reconstruction ;
 - la revue anglaise courante ;
+- toutes les preuves d’application de fragments correspondant encore exactement
+  à la revue anglaise courante ;
 - la capsule, la sélection, le paquet et le fragment actifs disponibles.
+
+Les preuves obsolètes ou altérées ne sont pas exportées. Après restauration, les
+arguments couverts par les preuves conservées restent donc exclus des paquets
+d’unité, sans devoir recharger leur contexte.
 
 Les configurations, identifiants, variables d’environnement, caches, copies de
 rendu, releases et sauvegardes générales ne font pas partie de la liste blanche.

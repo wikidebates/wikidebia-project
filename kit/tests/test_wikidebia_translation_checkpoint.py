@@ -7,6 +7,8 @@ from pathlib import Path
 import pytest
 
 import wikidebia_translation_checkpoint as checkpoint
+from wikidebia_corpus_build import canonical_json, sha256_bytes
+from wikidebia_translation_packet import verified_fragment_coverage
 from wikidebia_update import sha_object
 
 
@@ -41,6 +43,23 @@ def _fixture(root: Path) -> Path:
 def _fake_load(project_root: Path, debate_id: str, work_id: str):
     workspace = project_root / ".state/editorial-workspaces" / debate_id / work_id
     return workspace, json.loads((workspace / "workspace.json").read_text())
+
+
+def _fragment_receipt(workspace: Path, row: dict, page_id: str) -> Path:
+    receipt = {
+        "schema": "wikidebia-translation-argument-fragment-application-1.0",
+        "status": "applied",
+        "debate_id": "debat_test",
+        "work_id": "EDIT-TEST-001",
+        "unit_id": "U001",
+        "page_id": page_id,
+        "fragment_sha256": page_id.lower() * 32,
+        "argument_after_sha256": sha256_bytes(canonical_json(row)),
+    }
+    receipt["receipt_sha256"] = sha_object(receipt)
+    path = workspace / f"audits/translation-fragments/{page_id}-application.json"
+    _write(path, receipt)
+    return path
 
 
 def test_export_is_deterministic_signed_compressed_and_excludes_private_files(tmp_path: Path, monkeypatch):
@@ -135,3 +154,43 @@ def test_restore_rejects_symlinked_existing_parent(tmp_path: Path, monkeypatch):
         checkpoint.restore_checkpoint(target, archive)
 
     assert list(outside.iterdir()) == []
+
+
+def test_export_restores_every_valid_fragment_application_receipt(tmp_path: Path, monkeypatch):
+    source = tmp_path / "source"
+    workspace = _fixture(source)
+    review_path = workspace / "reviews/en/translation_review.json"
+    review = json.loads(review_path.read_text())
+    review["arguments"] = [
+        {"id": "A1", "translation": {"status": "approved", "summary": "One"}},
+        {"id": "A2", "translation": {"status": "approved", "summary": "Two"}},
+    ]
+    _write(review_path, review)
+    for row in review["arguments"]:
+        _fragment_receipt(workspace, row, row["id"])
+    invalid = _fragment_receipt(workspace, review["arguments"][0], "A3")
+    invalid_receipt = json.loads(invalid.read_text())
+    invalid_receipt["argument_after_sha256"] = "0" * 64
+    invalid_receipt.pop("receipt_sha256")
+    invalid_receipt["receipt_sha256"] = sha_object(invalid_receipt)
+    _write(invalid, invalid_receipt)
+    monkeypatch.setattr(checkpoint, "_load_workspace", _fake_load)
+
+    exported = checkpoint.export_checkpoint(source, "debat_test", "EDIT-TEST-001")
+    archive = source / exported["archive_path"]
+    with zipfile.ZipFile(archive) as zipped:
+        manifest = json.loads(zipped.read(checkpoint.MANIFEST_NAME))
+        names = set(zipped.namelist())
+    assert manifest["fragment_application_receipt_count"] == 2
+    assert "workspace/audits/translation-fragments/A1-application.json" in names
+    assert "workspace/audits/translation-fragments/A2-application.json" in names
+    assert "workspace/audits/translation-fragments/A3-application.json" not in names
+
+    target = tmp_path / "target"
+    restored = checkpoint.restore_checkpoint(target, archive)
+    restored_workspace = target / restored["workspace_path"]
+    restored_review = json.loads(
+        (restored_workspace / "reviews/en/translation_review.json").read_text()
+    )
+    review_by_id = {row["id"]: row for row in restored_review["arguments"]}
+    assert set(verified_fragment_coverage(restored_workspace, review_by_id)) == {"A1", "A2"}
