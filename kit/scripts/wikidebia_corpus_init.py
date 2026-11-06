@@ -678,7 +678,10 @@ def copy_import_pages(inp: ExtractionInput, snapshot: Mapping[str, Any], output_
 
 def inspect_existing_build(output_dir: Path, *, expected_debate_id: str) -> dict[str, Any]:
     """Read-only diagnostic; never authorizes automatic reuse."""
-    output_dir = output_dir.expanduser().resolve()
+    output_dir = output_dir.expanduser()
+    if output_dir.is_symlink():
+        return {"status": "invalid", "safe_to_reuse": False}
+    output_dir = output_dir.resolve()
     if not output_dir.exists():
         return {"status": "absent", "safe_to_reuse": False}
     if output_dir.is_symlink() or not output_dir.is_dir():
