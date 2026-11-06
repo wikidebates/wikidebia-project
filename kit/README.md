@@ -8,6 +8,14 @@ dépôt complet ; le relais n'est pas activé par une simple mise à jour du kit
 
 Le kit 2.16.47 conserve l’ordre final `Debate` puis `Argument` de 2.16.46 et corrige la reprise des plans distants signés après une mise à niveau : `kit_version` et `required_validator_version` sont traités comme provenance du producteur, tandis que la signature du plan, son schéma, le débat, le manifeste et la configuration exacts restent obligatoirement vérifiés. Norme active : 1.2.88. Validateur associé : 0.4.105.
 
+Les exécutions distantes utilisent un bail local identifié plutôt qu’un simple PID. Un
+processus vivant conserve toujours son verrou, y compris avec l’ancien format. Après un
+arrêt brutal, un PID local mort est récupéré immédiatement ; un verrou illisible ou créé
+sur un autre hôte doit expirer (six heures par défaut, configurable avec
+`update_lock_stale_seconds`). Chaque récupération est consignée sans contenu de page
+dans `.state/locks/IDENTIFIANT.recoveries.jsonl`, et seul le propriétaire du bail courant
+peut le libérer.
+
 Le kit 2.16.44 corrige la préparation de la publication finale anglaise : la configuration construite par `wikidebia_final_publication` transporte désormais explicitement `validator.fingerprint_path` et `max_warnings`, comme toutes les configurations `GenericPublisher` courantes. Sans ce champ, la construction du plan anglais atteignait `_package_fingerprints()` puis levait `KeyError('fingerprint_path')` après les connexions de préflight mais avant toute autorisation ou écriture distante. Le correctif ne modifie aucun corpus, plan français, convergence, contenu éditorial ni règle normative.
 
 

@@ -10,9 +10,11 @@ import importlib.util
 import json
 import os
 import re
+import socket
 import sys
 import threading
 import time
+import uuid
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
@@ -41,6 +43,7 @@ PLAN_VERSION = "wikidebia-remote-update-plan-1.0"
 STATE_VERSION = "wikidebia-published-state-1.0"
 RECEIPT_VERSION = "wikidebia-remote-update-receipt-1.0"
 UPDATE_PROGRESS_SCHEMA = "wikidebia-update-progress-1.0"
+UPDATE_LOCK_SCHEMA = "wikidebia-update-lock-1.0"
 OPERATIONS = ("create", "update", "move", "redirect", "delete", "skip", "manual_review", "blocked")
 GENERATED_MARKERS = (
     "avertissements-argument=Argument généré par IA",
@@ -3173,6 +3176,7 @@ class PlanExecutor:
         progress_loaded = False
         phase = "checkpoint_validation"
         heartbeat_handle: tuple[threading.Event, threading.Thread] | None = None
+        lock_heartbeat_handle = self._start_lock_heartbeat(lock)
         total_count = len(ordered)
         emit_stride = max(1, int(self.config.get("progress_emit_every_operations", 25)))
         execution_started = False
@@ -3261,10 +3265,9 @@ class PlanExecutor:
             if heartbeat_handle is not None:
                 heartbeat_handle[0].set()
                 heartbeat_handle[1].join(timeout=2)
-            try:
-                lock.unlink()
-            except FileNotFoundError:
-                pass
+            lock_heartbeat_handle[0].set()
+            lock_heartbeat_handle[1].join(timeout=2)
+            self._release_lock(lock)
 
     def attest_no_changes(self, plan: dict[str, Any], confirmation: str) -> dict[str, Any]:
         self.verify_plan(plan, confirmation)
@@ -3302,16 +3305,152 @@ class PlanExecutor:
         self._write_published_states(plan, receipt, allow_no_changes=True)
         return receipt
 
-    def _acquire_lock(self) -> Path:
+    @staticmethod
+    def _process_start_marker(pid: int) -> str | None:
+        """Return the Linux process start tick used to distinguish PID reuse."""
+        try:
+            # The command name is parenthesized and may contain spaces. Splitting
+            # after its final ')' keeps field 22 (starttime) at offset 19.
+            fields = Path(f"/proc/{pid}/stat").read_text(encoding="utf-8").rsplit(")", 1)[1].split()
+            return fields[19]
+        except (IndexError, OSError):
+            return None
+
+    @classmethod
+    def _process_identity_is_alive(cls, pid: int, start_marker: str | None) -> bool:
+        if pid <= 0:
+            return False
+        try:
+            os.kill(pid, 0)
+        except ProcessLookupError:
+            return False
+        except PermissionError:
+            pass
+        current_marker = cls._process_start_marker(pid)
+        if start_marker and current_marker and start_marker != current_marker:
+            return False
+        return True
+
+    def _stale_lock_reason(self, raw: str, age_seconds: float) -> str | None:
+        """Return a recovery reason, or None while ownership may still be live."""
+        max_age = max(60, int(self.config.get("update_lock_stale_seconds", 21600)))
+        try:
+            payload = json.loads(raw)
+        except json.JSONDecodeError:
+            payload = None
+
+        if isinstance(payload, dict) and payload.get("schema") == UPDATE_LOCK_SCHEMA:
+            try:
+                pid = int(payload["pid"])
+            except (KeyError, TypeError, ValueError):
+                return "invalid_lease" if age_seconds >= max_age else None
+            hostname = str(payload.get("hostname") or "")
+            if hostname == socket.gethostname():
+                marker = str(payload.get("process_start_marker") or "") or None
+                return None if self._process_identity_is_alive(pid, marker) else "dead_local_process"
+            return "expired_foreign_host_lease" if age_seconds >= max_age else None
+
+        # Backward compatibility with the historical lock containing only a PID.
+        legacy_pid = raw.strip()
+        if legacy_pid.isdigit():
+            return None if self._process_identity_is_alive(int(legacy_pid), None) else "dead_legacy_process"
+        return "expired_malformed_lock" if age_seconds >= max_age else None
+
+    def _recover_stale_lock(self, path: Path) -> bool:
+        """Remove a proven-stale lock without racing a newly acquired lease."""
+        try:
+            with path.open("r", encoding="utf-8") as stream:
+                stat = os.fstat(stream.fileno())
+                raw = stream.read()
+        except FileNotFoundError:
+            return True
+        reason = self._stale_lock_reason(raw, max(0.0, time.time() - stat.st_mtime))
+        if reason is None:
+            return False
+        try:
+            current = path.stat()
+        except FileNotFoundError:
+            return True
+        if (current.st_dev, current.st_ino) != (stat.st_dev, stat.st_ino):
+            return True
+        try:
+            path.unlink()
+        except FileNotFoundError:
+            return True
+        recovery_path = path.with_suffix(".recoveries.jsonl")
+        recovery = {
+            "schema": UPDATE_LOCK_SCHEMA,
+            "debate_id": self.debate_id,
+            "recovered_at": utc_now(),
+            "reason": reason,
+            "stale_lock_sha256": hashlib.sha256(raw.encode("utf-8")).hexdigest(),
+        }
+        with recovery_path.open("a", encoding="utf-8") as stream:
+            stream.write(json.dumps(recovery, ensure_ascii=False, sort_keys=True) + "\n")
+        return True
+
+    def _acquire_lock(self) -> tuple[Path, str]:
         path = self.project_root / ".state" / "locks" / f"{self.debate_id}.lock"
         path.parent.mkdir(parents=True, exist_ok=True)
+        owner_token = uuid.uuid4().hex
+        lease = {
+            "schema": UPDATE_LOCK_SCHEMA,
+            "debate_id": self.debate_id,
+            "owner_token": owner_token,
+            "pid": os.getpid(),
+            "hostname": socket.gethostname(),
+            "process_start_marker": self._process_start_marker(os.getpid()),
+            "created_at": utc_now(),
+        }
+        for _ in range(4):
+            try:
+                fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+            except FileExistsError:
+                if self._recover_stale_lock(path):
+                    continue
+                raise UpdateError(f"Une reprise est déjà verrouillée : {path}") from None
+            with os.fdopen(fd, "w", encoding="utf-8") as stream:
+                json.dump(lease, stream, ensure_ascii=False, sort_keys=True)
+                stream.write("\n")
+            return path, owner_token
+        raise UpdateError(f"Impossible d’acquérir le verrou après récupération : {path}")
+
+    @staticmethod
+    def _release_lock(lock: tuple[Path, str]) -> None:
+        path, owner_token = lock
         try:
-            fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-        except FileExistsError as exc:
-            raise UpdateError(f"Une reprise est déjà verrouillée : {path}") from exc
-        with os.fdopen(fd, "w", encoding="utf-8") as stream:
-            stream.write(str(os.getpid()))
-        return path
+            payload = load_json(path)
+        except (FileNotFoundError, json.JSONDecodeError, OSError, UpdateError):
+            return
+        if payload.get("schema") != UPDATE_LOCK_SCHEMA or payload.get("owner_token") != owner_token:
+            return
+        try:
+            path.unlink()
+        except FileNotFoundError:
+            pass
+
+    def _start_lock_heartbeat(self, lock: tuple[Path, str]) -> tuple[threading.Event, threading.Thread]:
+        stop = threading.Event()
+        interval = max(5, int(self.config.get("update_lock_heartbeat_seconds", 30)))
+
+        def heartbeat() -> None:
+            path, owner_token = lock
+            while not stop.wait(interval):
+                try:
+                    payload = load_json(path)
+                    if payload.get("schema") != UPDATE_LOCK_SCHEMA or payload.get("owner_token") != owner_token:
+                        return
+                    os.utime(path, None)
+                except (FileNotFoundError, json.JSONDecodeError, OSError, UpdateError):
+                    return
+
+        thread = threading.Thread(
+            target=heartbeat,
+            name=f"wikidebia-lock-{self.debate_id}",
+            daemon=True,
+        )
+        thread.start()
+        return stop, thread
 
     def _english_title_for(self, page_id: str, page_type: str) -> str:
         matches = [
@@ -3834,6 +3973,7 @@ class PlanExecutor:
             return None
         self._verify_completed_receipt(plan, receipt, expected_execution_mode)
         lock = self._acquire_lock()
+        lock_heartbeat_handle = self._start_lock_heartbeat(lock)
         try:
             self._write_published_states(
                 plan,
@@ -3842,10 +3982,9 @@ class PlanExecutor:
                 preserve_pending_deletes=expected_execution_mode == "no_delete",
             )
         finally:
-            try:
-                lock.unlink()
-            except FileNotFoundError:
-                pass
+            lock_heartbeat_handle[0].set()
+            lock_heartbeat_handle[1].join(timeout=2)
+            self._release_lock(lock)
         return receipt
 
     def _write_published_states(
