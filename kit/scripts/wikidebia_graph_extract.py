@@ -34,7 +34,7 @@ from pathlib import Path
 from typing import Any, Iterable, Mapping, Protocol, Sequence
 
 
-GRAPH_EXTRACT_VERSION = "1.2.0"
+GRAPH_EXTRACT_VERSION = "1.3.0"
 
 
 # ---------------------------------------------------------------------------
@@ -455,6 +455,9 @@ class PageClient(Protocol):
     def fetch(self, title: str) -> PageRecord:
         ...
 
+    def fetch_many(self, titles: Sequence[str]) -> dict[str, PageRecord]:
+        ...
+
 
 class PageMissingError(RuntimeError):
     pass
@@ -589,14 +592,57 @@ class PywikibotPageClient:
             finally:
                 login_module.ClientLoginManager = original_manager
 
+    def _remember(self, title: str, record: PageRecord) -> PageRecord:
+        self.aliases[title] = record.canonical_title
+        for alias in record.redirect_chain:
+            self.aliases[alias] = record.canonical_title
+        return record
+
+    def _record_from_page(self, title: str, page: Any, *, force: bool) -> PageRecord:
+        if not page.exists():
+            raise PageMissingError(f"Page inexistante: {title}")
+        chain: list[str] = []
+        seen: set[str] = set()
+        while page.isRedirectPage():
+            current = page.title(with_section=False, underscore=False)
+            if current in seen:
+                raise RuntimeError(f"Redirection circulaire détectée: {current}")
+            seen.add(current)
+            chain.append(current)
+            page = page.getRedirectTarget(ignore_section=True)
+        canonical = page.title(with_section=False, underscore=False)
+        text = page.get(force=force)
+        revision_id: int | None = None
+        revision_timestamp = ""
+        try:
+            revision = page.latest_revision
+            revision_id = int(revision.revid)
+            timestamp_value = getattr(revision, "timestamp", None)
+            if timestamp_value is not None:
+                revision_timestamp = timestamp_value.isoformat()
+        except Exception:
+            pass
+        record = PageRecord(
+            requested_title=title,
+            canonical_title=canonical,
+            text=text,
+            url=page.full_url(),
+            revision_id=revision_id,
+            revision_timestamp=revision_timestamp,
+            redirect_chain=chain,
+            fetched_at=dt.datetime.now(dt.timezone.utc).isoformat(),
+        )
+        self.cache.put(record)
+        return self._remember(
+            title,
+            record,
+        )
+
     def fetch(self, title: str) -> PageRecord:
         title = _strip_markup(title)
         cached = self.cache.get(title)
         if cached is not None:
-            self.aliases[title] = cached.canonical_title
-            for alias in cached.redirect_chain:
-                self.aliases[alias] = cached.canonical_title
-            return cached
+            return self._remember(title, cached)
 
         self._open()
         assert self._pywikibot is not None and self._site is not None
@@ -604,44 +650,7 @@ class PywikibotPageClient:
         for attempt in range(self.retries + 1):
             try:
                 page = self._pywikibot.Page(self._site, title)
-                if not page.exists():
-                    raise PageMissingError(f"Page inexistante: {title}")
-                chain: list[str] = []
-                seen: set[str] = set()
-                while page.isRedirectPage():
-                    current = page.title(with_section=False, underscore=False)
-                    if current in seen:
-                        raise RuntimeError(f"Redirection circulaire détectée: {current}")
-                    seen.add(current)
-                    chain.append(current)
-                    page = page.getRedirectTarget(ignore_section=True)
-                canonical = page.title(with_section=False, underscore=False)
-                text = page.get(force=self.cache.force_refresh)
-                revision_id: int | None = None
-                revision_timestamp = ""
-                try:
-                    revision = page.latest_revision
-                    revision_id = int(revision.revid)
-                    timestamp_value = getattr(revision, "timestamp", None)
-                    if timestamp_value is not None:
-                        revision_timestamp = timestamp_value.isoformat()
-                except Exception:
-                    pass
-                record = PageRecord(
-                    requested_title=title,
-                    canonical_title=canonical,
-                    text=text,
-                    url=page.full_url(),
-                    revision_id=revision_id,
-                    revision_timestamp=revision_timestamp,
-                    redirect_chain=chain,
-                    fetched_at=dt.datetime.now(dt.timezone.utc).isoformat(),
-                )
-                self.cache.put(record)
-                self.aliases[title] = canonical
-                for alias in chain:
-                    self.aliases[alias] = canonical
-                return record
+                return self._record_from_page(title, page, force=self.cache.force_refresh)
             except PageMissingError:
                 raise
             except Exception as exc:  # network/server errors vary by Pywikibot version
@@ -650,6 +659,72 @@ class PywikibotPageClient:
                     break
                 time.sleep(self.retry_delay * (2**attempt))
         raise RuntimeError(f"Échec de lecture de {title!r}: {last_error}") from last_error
+
+    def fetch_many(self, titles: Sequence[str]) -> dict[str, PageRecord]:
+        """Read uncached pages through one MediaWiki preload request per API group."""
+        normalized = list(dict.fromkeys(filter(None, (_strip_markup(title) for title in titles))))
+        records: dict[str, PageRecord] = {}
+        uncached: list[str] = []
+        for title in normalized:
+            cached = self.cache.get(title)
+            if cached is None:
+                uncached.append(title)
+            else:
+                records[title] = self._remember(title, cached)
+        if not uncached:
+            return records
+
+        self._open()
+        assert self._pywikibot is not None and self._site is not None
+        preload = getattr(self._site, "preloadpages", None)
+        if not callable(preload):
+            for title in uncached:
+                try:
+                    records[title] = self.fetch(title)
+                except PageMissingError:
+                    pass
+            return records
+
+        pages = [self._pywikibot.Page(self._site, title) for title in uncached]
+        last_error: Exception | None = None
+        for attempt in range(self.retries + 1):
+            try:
+                list(preload(pages, groupsize=50, quiet=True, content=True))
+                last_error = None
+                break
+            except Exception as exc:
+                last_error = exc
+                if attempt >= self.retries:
+                    break
+                time.sleep(self.retry_delay * (2**attempt))
+        if last_error is not None:
+            raise RuntimeError(f"Échec de lecture groupée de {len(uncached)} page(s): {last_error}") from last_error
+        for title, page in zip(uncached, pages):
+            try:
+                # preloadpages has already refreshed the page, including when the
+                # persistent cache was explicitly bypassed.
+                records[title] = self._record_from_page(title, page, force=False)
+            except PageMissingError:
+                pass
+            except Exception:
+                # Preserve the historical per-page retry behavior for redirect
+                # resolution or an isolated response that could not be decoded.
+                records[title] = self.fetch(title)
+        return records
+
+
+def _fetch_many(client: PageClient, titles: Sequence[str]) -> dict[str, PageRecord]:
+    normalized = list(dict.fromkeys(filter(None, (_strip_markup(title) for title in titles))))
+    batch = getattr(client, "fetch_many", None)
+    if callable(batch):
+        return batch(normalized)
+    records: dict[str, PageRecord] = {}
+    for title in normalized:
+        try:
+            records[title] = client.fetch(title)
+        except PageMissingError:
+            pass
+    return records
 
 
 # ---------------------------------------------------------------------------
@@ -685,6 +760,7 @@ class CrawlResult:
     existing_english_page_records: dict[str, PageRecord]
     depth_frontiers: dict[str, int]
     missing_pages: list[str]
+    missing_page_provenance: list[dict[str, Any]]
     crawl_options: dict[str, Any]
 
 
@@ -758,132 +834,166 @@ def crawl_graph(
     roots_con: list[str] = []
     root_displayed: dict[str, set[str]] = defaultdict(set)
     missing: list[str] = []
+    missing_provenance: list[dict[str, Any]] = []
     relation_map: dict[tuple[str, str, str], RelationDraft] = {}
     queue: deque[tuple[str, int]] = deque()
     queued_depth: dict[str, int] = {}
 
-    def resolve(entry: LinkEntry, *, context: str, depth: int) -> str | None:
-        try:
-            record = client.fetch(entry.page)
-        except PageMissingError:
-            missing.append(entry.page)
-            warnings.append(f"Page manquante ({context}): {entry.page}")
-            if allow_missing:
-                return entry.page
-            return None
-        canonical = record.canonical_title
-        page_records[canonical] = record
-        if entry.displayed_title:
-            root_displayed[canonical].add(entry.displayed_title)
-        if canonical not in queued_depth or depth < queued_depth[canonical]:
-            queued_depth[canonical] = depth
-            queue.append((canonical, depth))
-        return canonical
+    def note_missing(*, title: str, parent: str, relation: str, depth: int) -> None:
+        missing.append(title)
+        missing_provenance.append(
+            {
+                "page": title,
+                "parent": parent,
+                "relation": relation,
+                "profondeur_en_aretes": depth,
+            }
+        )
+        warnings.append(f"Page manquante ({parent} -> {relation}, profondeur {depth}): {title}")
 
     if not existing_english_debate_title:
-        for entry in parsed_debate.pro:
-            canonical = resolve(entry, context="argument pour", depth=0)
-            if canonical and canonical not in roots_pro:
-                roots_pro.append(canonical)
-        for entry in parsed_debate.con:
-            canonical = resolve(entry, context="argument contre", depth=0)
-            if canonical and canonical not in roots_con:
-                roots_con.append(canonical)
+        root_specs = [
+            (entry, "argument_pour", roots_pro) for entry in parsed_debate.pro
+        ] + [
+            (entry, "argument_contre", roots_con) for entry in parsed_debate.con
+        ]
+        root_records = _fetch_many(client, [entry.page for entry, _, _ in root_specs])
+        for entry, relation, destination in root_specs:
+            record = root_records.get(_strip_markup(entry.page))
+            if record is None:
+                note_missing(
+                    title=entry.page,
+                    parent=debate_record.canonical_title,
+                    relation=relation,
+                    depth=0,
+                )
+                canonical = entry.page if allow_missing else None
+            else:
+                canonical = record.canonical_title
+                page_records[canonical] = record
+                if entry.displayed_title:
+                    root_displayed[canonical].add(entry.displayed_title)
+                if canonical not in queued_depth:
+                    queued_depth[canonical] = 0
+                    queue.append((canonical, 0))
+            if canonical and canonical not in destination:
+                destination.append(canonical)
 
     processed = 0
     while queue:
-        title, depth = queue.popleft()
-        if title in parsed_arguments:
-            continue
-        if len(parsed_arguments) >= max_pages:
+        depth = queue[0][1]
+        frontier: list[str] = []
+        while queue and queue[0][1] == depth:
+            title, _ = queue.popleft()
+            if title not in parsed_arguments and title not in frontier:
+                frontier.append(title)
+        if len(parsed_arguments) + len(frontier) > max_pages:
             raise RuntimeError(f"Limite de sécurité atteinte: {max_pages} pages")
-        record = page_records.get(title) or client.fetch(title)
-        page_records[record.canonical_title] = record
-        parsed = parse_argument_wikitext(
-            record.text,
-            stop_on_detailed_debate=stop_on_detailed_debate,
-            stop_on_existing_english_translation=stop_on_existing_english_translation,
-        )
-        if parsed.existing_english_title and stop_on_existing_english_translation:
-            if english_client is None:
+        preliminary: list[tuple[PageRecord, ParsedArgument]] = []
+        for title in frontier:
+            record = page_records[title]
+            preliminary.append(
+                (
+                    record,
+                    parse_argument_wikitext(
+                        record.text,
+                        stop_on_detailed_debate=stop_on_detailed_debate,
+                        stop_on_existing_english_translation=stop_on_existing_english_translation,
+                    ),
+                )
+            )
+
+        english_records: dict[str, PageRecord] = {}
+        if stop_on_existing_english_translation:
+            declared = [parsed.existing_english_title for _, parsed in preliminary if parsed.existing_english_title]
+            if declared and english_client is None:
                 raise RuntimeError(
                     "Une cible interlangue anglaise doit être vérifiée avec un client anglais"
                 )
-            declared_english_title = parsed.existing_english_title
-            try:
-                english_record = english_client.fetch(declared_english_title)
-            except PageMissingError:
-                warnings.append(
-                    f"{record.canonical_title}: cible anglaise inexistante; "
-                    f"parcours français poursuivi: {declared_english_title}"
-                )
-                parsed = parse_argument_wikitext(
-                    record.text,
-                    stop_on_detailed_debate=stop_on_detailed_debate,
-                    stop_on_existing_english_translation=False,
-                )
-            else:
-                parsed.existing_english_title = english_record.canonical_title
-                parsed.existing_english_translation_verified = True
-                existing_english_page_records[record.canonical_title] = english_record
-        parsed_arguments[record.canonical_title] = parsed
-        warnings.extend(f"{record.canonical_title}: {warning}" for warning in parsed.warnings)
-        if parsed.existing_english_translation_verified:
-            existing_english_translation_frontiers[record.canonical_title] = (
-                parsed.existing_english_title
-            )
-            if stop_on_existing_english_translation:
-                frontier_information.append(
-                    f"{record.canonical_title}: traduction anglaise existante "
-                    f"{parsed.existing_english_title}; "
-                    f"{parsed.ignored_relations_at_existing_english_translation} "
-                    "relation(s) locale(s) non suivie(s)"
-                )
-        if parsed.detailed_debate and parsed.ignored_relations_at_frontier:
-            frontier_information.append(
-                f"{record.canonical_title}: frontière vers {parsed.detailed_debate}; "
-                f"{parsed.ignored_relations_at_frontier} relation(s) locale(s) non suivie(s)"
-            )
+            if declared and english_client is not None:
+                english_records = _fetch_many(english_client, declared)
 
-        relation_order = Counter()
-        for relation_type, entries in (
-            ("justification", parsed.justifications),
-            ("objection", parsed.objections),
-        ):
-            if max_depth is not None and depth >= max_depth:
-                if entries:
-                    depth_frontiers[record.canonical_title] = (
-                        depth_frontiers.get(record.canonical_title, 0) + len(entries)
-                    )
-                continue
-            for entry in entries:
-                relation_order[relation_type] += 1
-                try:
-                    child_record = client.fetch(entry.page)
-                    child = child_record.canonical_title
-                    page_records[child] = child_record
-                    child_depth = depth + 1
-                    if child not in queued_depth or child_depth < queued_depth[child]:
-                        queued_depth[child] = child_depth
-                        queue.append((child, child_depth))
-                except PageMissingError:
-                    missing.append(entry.page)
+        child_specs: list[tuple[str, str, LinkEntry, int, int]] = []
+        emit_progress = False
+        for record, parsed in preliminary:
+            if parsed.existing_english_title and stop_on_existing_english_translation:
+                declared_english_title = parsed.existing_english_title
+                english_record = english_records.get(_strip_markup(declared_english_title))
+                if english_record is None:
                     warnings.append(
-                        f"Page manquante ({record.canonical_title} -> {relation_type}): {entry.page}"
+                        f"{record.canonical_title}: cible anglaise inexistante; "
+                        f"parcours français poursuivi: {declared_english_title}"
                     )
-                    if not allow_missing:
-                        continue
-                    child = entry.page
-                _add_relation(
-                    relation_map,
-                    source=record.canonical_title,
-                    relation=relation_type,
-                    target=child,
-                    order=relation_order[relation_type],
-                    displayed_title=entry.displayed_title,
+                    parsed = parse_argument_wikitext(
+                        record.text,
+                        stop_on_detailed_debate=stop_on_detailed_debate,
+                        stop_on_existing_english_translation=False,
+                    )
+                else:
+                    parsed.existing_english_title = english_record.canonical_title
+                    parsed.existing_english_translation_verified = True
+                    existing_english_page_records[record.canonical_title] = english_record
+            parsed_arguments[record.canonical_title] = parsed
+            warnings.extend(f"{record.canonical_title}: {warning}" for warning in parsed.warnings)
+            if parsed.existing_english_translation_verified:
+                existing_english_translation_frontiers[record.canonical_title] = parsed.existing_english_title
+                if stop_on_existing_english_translation:
+                    frontier_information.append(
+                        f"{record.canonical_title}: traduction anglaise existante "
+                        f"{parsed.existing_english_title}; "
+                        f"{parsed.ignored_relations_at_existing_english_translation} "
+                        "relation(s) locale(s) non suivie(s)"
+                    )
+            if parsed.detailed_debate and parsed.ignored_relations_at_frontier:
+                frontier_information.append(
+                    f"{record.canonical_title}: frontière vers {parsed.detailed_debate}; "
+                    f"{parsed.ignored_relations_at_frontier} relation(s) locale(s) non suivie(s)"
                 )
-        processed += 1
-        if progress_every and processed % progress_every == 0:
+
+            for relation_type, entries in (
+                ("justification", parsed.justifications),
+                ("objection", parsed.objections),
+            ):
+                if max_depth is not None and depth >= max_depth:
+                    if entries:
+                        depth_frontiers[record.canonical_title] = (
+                            depth_frontiers.get(record.canonical_title, 0) + len(entries)
+                        )
+                    continue
+                for order, entry in enumerate(entries, start=1):
+                    child_specs.append((record.canonical_title, relation_type, entry, order, depth + 1))
+            processed += 1
+            if progress_every and processed % progress_every == 0:
+                emit_progress = True
+
+        child_records = _fetch_many(client, [entry.page for _, _, entry, _, _ in child_specs])
+        for parent, relation_type, entry, order, child_depth in child_specs:
+            child_record = child_records.get(_strip_markup(entry.page))
+            if child_record is None:
+                note_missing(
+                    title=entry.page,
+                    parent=parent,
+                    relation=relation_type,
+                    depth=child_depth,
+                )
+                if not allow_missing:
+                    continue
+                child = entry.page
+            else:
+                child = child_record.canonical_title
+                page_records[child] = child_record
+                if child not in queued_depth or child_depth < queued_depth[child]:
+                    queued_depth[child] = child_depth
+                    queue.append((child, child_depth))
+            _add_relation(
+                relation_map,
+                source=parent,
+                relation=relation_type,
+                target=child,
+                order=order,
+                displayed_title=entry.displayed_title,
+            )
+        if emit_progress:
             print(
                 f"[progression] {processed} pages analysées, "
                 f"{len(queue)} en file, {len(relation_map)} relations",
@@ -892,9 +1002,13 @@ def crawl_graph(
 
     if missing and not allow_missing:
         unique = sorted(set(missing))
+        samples = "; ".join(
+            f"{row['page']} <- {row['parent']} ({row['relation']}, profondeur {row['profondeur_en_aretes']})"
+            for row in missing_provenance[:10]
+        )
         raise RuntimeError(
             f"{len(unique)} page(s) manquante(s); relancez avec --allow-missing pour exporter malgré tout: "
-            + "; ".join(unique[:10])
+            + samples
         )
 
     return CrawlResult(
@@ -923,6 +1037,15 @@ def crawl_graph(
         existing_english_page_records=existing_english_page_records,
         depth_frontiers=dict(sorted(depth_frontiers.items(), key=lambda item: item[0].casefold())),
         missing_pages=sorted(set(missing)),
+        missing_page_provenance=sorted(
+            missing_provenance,
+            key=lambda row: (
+                int(row["profondeur_en_aretes"]),
+                str(row["parent"]).casefold(),
+                str(row["relation"]),
+                str(row["page"]).casefold(),
+            ),
+        ),
         crawl_options={
             "stop_on_detailed_debate": stop_on_detailed_debate,
             "stop_on_existing_english_translation": stop_on_existing_english_translation,
@@ -1286,6 +1409,7 @@ def analyze_graph(result: CrawlResult) -> dict[str, Any]:
             result.existing_english_translation_frontiers
         ),
         "frontières_profondeur": result.depth_frontiers,
+        "provenance_pages_manquantes": result.missing_page_provenance,
         "warnings": result.warnings,
     }
 
@@ -1328,6 +1452,19 @@ def audit_graph(graph: Mapping[str, Any]) -> list[dict[str, Any]]:
     check("racines présentes", all(root in nodes for root in roots))
     check("nœuds uniques", len(nodes) == len(graph["noeuds"]), len(nodes))
     check("relations uniques", len(edge_keys) == len(relations), len(edge_keys))
+    missing_provenance = graph.get("provenance_pages_manquantes", [])
+    check(
+        "provenance des pages manquantes",
+        sorted({str(row.get("page") or "") for row in missing_provenance})
+        == sorted(metadata.get("pages_manquantes", []))
+        and all(
+            row.get("parent")
+            and row.get("relation") in {"argument_pour", "argument_contre", "justification", "objection"}
+            and isinstance(row.get("profondeur_en_aretes"), int)
+            for row in missing_provenance
+        ),
+        missing_provenance[:10],
+    )
     check(
         "types de relation",
         all(r["relation"] in {"justification", "objection"} for r in relations),
@@ -1753,6 +1890,17 @@ def write_outputs(
             "Total des relations locales non suivies aux frontières : "
             f"**{m['relations_locales_ignorees_aux_frontières']}**."
         )
+    else:
+        report_lines.append("Aucune.")
+    report_lines.extend(["", "## Pages manquantes et provenance", ""])
+    missing_provenance = graph.get("provenance_pages_manquantes", [])
+    if missing_provenance:
+        for row in missing_provenance:
+            report_lines.append(
+                f"- **{row['page']}** — parent : {row['parent']} ; "
+                f"relation : `{row['relation']}` ; profondeur : "
+                f"{row['profondeur_en_aretes']} arête(s)"
+            )
     else:
         report_lines.append("Aucune.")
     report_lines.extend(["", "## Informations sur les frontières", ""])

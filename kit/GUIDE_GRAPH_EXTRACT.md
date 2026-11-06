@@ -39,6 +39,11 @@ Le dossier par défaut est :
 
 Chaque page lue est enregistrée immédiatement dans `.cache_pages/`. Une nouvelle exécution avec le même titre et le même dossier réutilise ce cache. Le parcours logique est recalculé, mais les pages déjà acquises ne sont pas relues à distance.
 
+Depuis l’extracteur 1.3.0, les pages absentes du cache qui appartiennent à une
+même profondeur sont préchargées par groupes MediaWiki. Cela réduit fortement le
+nombre d’allers-retours sans changer l’ordre en largeur, les limites de profondeur
+ni la résolution des redirections.
+
 ```bash
 ./wikidebia graph-extract "Dieu existe-t-il ?"
 ```
@@ -82,6 +87,12 @@ Le snapshot est l'entrée de `./wikidebia corpus-init-from-snapshot`. L'extracte
 --max-depth N             limiter la profondeur en arêtes (niveau 1 = profondeur 0)
 ```
 
+Avec `--allow-missing`, le JSON et le rapport ne conservent pas seulement le titre
+absent : `provenance_pages_manquantes` indique pour chaque occurrence son parent,
+le type de relation et sa profondeur en arêtes. L’audit reste en échec tant qu’une
+page manque, mais le diagnostic permet de la créer puis de reprendre sans enquête
+manuelle dans tout le graphe.
+
 Sans `--max-depth`, le parcours récursif reste illimité. Avec
 `--max-depth 4`, les arguments principaux et les quatre générations de relations
 suivantes sont conservés ; les relations qui partiraient vers la profondeur 5
@@ -110,7 +121,7 @@ Les fichiers sont des données d'extraction et de provenance, non un corpus `rel
 
 ## Niveaux, profondeurs et occurrences
 
-L’extracteur 1.2.0 distingue explicitement :
+L’extracteur 1.3.0 conserve les distinctions introduites par la version 1.2.0 :
 
 - le **niveau**, numéroté à partir de 1 pour un argument principal ;
 - la **profondeur en nombre d’arêtes**, égale au niveau moins un ;

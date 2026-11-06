@@ -5,7 +5,7 @@
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
   "declared_file_count": 469,
-  "declared_test_count": 1043,
+  "declared_test_count": 1046,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -283,8 +283,8 @@
     },
     {
       "path": "GUIDE_GRAPH_EXTRACT.md",
-      "size_bytes": 8000,
-      "sha256": "d741dfd652418c5cc950669f6558c1dd7fe1c180e36555f25c2651d6356ede41"
+      "size_bytes": 8695,
+      "sha256": "cd4f0dc230f03359ca6bd38d1a92e6c0dae5f3ba41740fbbfe2109aa8c73dc50"
     },
     {
       "path": "GUIDE_PACKAGE_METADATA.md",
@@ -1119,7 +1119,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "9194babbc874a84328aa136d6c3b7954f5cec6aadc89b94cf2f0cf5b165cd20a"
+      "sha256": "24757cff943f257c5bb259f1577c71c525a86a4c94875487d5da56c90d9fec4c"
     },
     {
       "path": "VERSIONS.json",
@@ -1733,8 +1733,8 @@
     },
     {
       "path": "scripts/wikidebia_graph_extract.py",
-      "size_bytes": 80903,
-      "sha256": "aad136a1a640fadb897dd4be29df76c37cc5baaf29bb678a1f4c2dde66c9cb4f"
+      "size_bytes": 87013,
+      "sha256": "72bcc3d76e16a76218f4e16cc74748e539841bab4a337ec1828d9c8efd7cba6a"
     },
     {
       "path": "scripts/wikidebia_manage.py",
@@ -2159,7 +2159,7 @@
     {
       "path": "tests/test_versions_file.py",
       "size_bytes": 2648,
-      "sha256": "729cfb00550999181a832ce161ec70048f555ab96c44e5b72870276c1646388e"
+      "sha256": "a8736af1694988f729d345bf5dc7bc75438a2454096723cefb663349c7720c91"
     },
     {
       "path": "tests/test_vote_electronique_citation_workflow_21620.py",
@@ -2218,8 +2218,8 @@
     },
     {
       "path": "tests/test_wikidebia_graph_extract.py",
-      "size_bytes": 24583,
-      "sha256": "4e0cdc826eea4c4216f1012de8b07a11293c04c413e3824776d4137e65d72b20"
+      "size_bytes": 29655,
+      "sha256": "3f9e2672c99aeabcd693791a4eaf8e7438ef88c1164e311e78597626a2f37b00"
     },
     {
       "path": "tests/test_wikidebia_manage.py",

@@ -34,6 +34,22 @@ class FakeClient:
         )
 
 
+class BatchTrackingClient(FakeClient):
+    def __init__(self, pages, aliases=None):
+        super().__init__(pages, aliases)
+        self.batches = []
+
+    def fetch_many(self, titles):
+        self.batches.append(tuple(titles))
+        records = {}
+        for title in titles:
+            try:
+                records[title] = self.fetch(title)
+            except mod.PageMissingError:
+                pass
+        return records
+
+
 class ParserTests(unittest.TestCase):
     def test_nested_debate_templates(self):
         text = """{{Débat
@@ -91,6 +107,70 @@ class ParserTests(unittest.TestCase):
 
 
 class CrawlTests(unittest.TestCase):
+    def test_pages_are_fetched_once_per_depth_frontier(self):
+        pages = {
+            "Débat test": "{{Débat|arguments-pour={{Argument pour|page=A}}{{Argument pour|page=B}}|arguments-contre=}}",
+            "A": "{{Argument|justifications={{Justification|page=C}}|objections=}}",
+            "B": "{{Argument|justifications={{Justification|page=D}}|objections=}}",
+            "C": "{{Argument|justifications=|objections=}}",
+            "D": "{{Argument|justifications=|objections=}}",
+        }
+        client = BatchTrackingClient(pages)
+
+        result = mod.crawl_graph(client, debate_title="Débat test", progress_every=0)
+
+        self.assertEqual(set(result.parsed_arguments), {"A", "B", "C", "D"})
+        self.assertEqual([batch for batch in client.batches if batch], [("A", "B"), ("C", "D")])
+
+    def test_missing_pages_retain_parent_relation_and_depth(self):
+        pages = {
+            "Débat test": "{{Débat|arguments-pour={{Argument pour|page=Racine absente}}|arguments-contre={{Argument contre|page=A}}}}",
+            "A": "{{Argument|justifications={{Justification|page=Enfant absent}}|objections=}}",
+        }
+
+        result = mod.crawl_graph(
+            BatchTrackingClient(pages),
+            debate_title="Débat test",
+            allow_missing=True,
+            progress_every=0,
+        )
+        graph = mod.analyze_graph(result)
+
+        self.assertEqual(result.missing_pages, ["Enfant absent", "Racine absente"])
+        self.assertEqual(
+            result.missing_page_provenance,
+            [
+                {
+                    "page": "Racine absente",
+                    "parent": "Débat test",
+                    "relation": "argument_pour",
+                    "profondeur_en_aretes": 0,
+                },
+                {
+                    "page": "Enfant absent",
+                    "parent": "A",
+                    "relation": "justification",
+                    "profondeur_en_aretes": 1,
+                },
+            ],
+        )
+        self.assertEqual(graph["provenance_pages_manquantes"], result.missing_page_provenance)
+        provenance_check = next(
+            check for check in mod.audit_graph(graph)
+            if check["contrôle"] == "provenance des pages manquantes"
+        )
+        self.assertTrue(provenance_check["ok"])
+        with self.assertRaisesRegex(
+            RuntimeError,
+            r"Racine absente <- Débat test \(argument_pour, profondeur 0\)",
+        ):
+            mod.crawl_graph(
+                BatchTrackingClient(pages),
+                debate_title="Débat test",
+                allow_missing=False,
+                progress_every=0,
+            )
+
     def test_existing_english_debate_stops_before_argument_crawl(self):
         pages = {
             "Débat test": """{{Débat
@@ -440,6 +520,61 @@ if __name__ == "__main__":
 
 
 class SafetyTests(unittest.TestCase):
+    def test_pywikibot_backend_preloads_uncached_titles_in_one_group(self):
+        pages = {
+            "A": "{{Argument|justifications=|objections=}}",
+            "B": "{{Argument|justifications=|objections=}}",
+        }
+
+        class FakePage:
+            def __init__(self, _site, title):
+                self._title = title
+                self.latest_revision = types.SimpleNamespace(revid=7, timestamp=None)
+
+            def exists(self):
+                return self._title in pages
+
+            def isRedirectPage(self):
+                return False
+
+            def title(self, **_kwargs):
+                return self._title
+
+            def get(self, **_kwargs):
+                return pages[self._title]
+
+            def full_url(self):
+                return f"https://example.test/wiki/{self._title}"
+
+        class FakeSite:
+            def __init__(self):
+                self.preload_calls = []
+
+            def preloadpages(self, page_list, **kwargs):
+                self.preload_calls.append((tuple(page._title for page in page_list), kwargs))
+                yield from page_list
+
+        with tempfile.TemporaryDirectory() as directory:
+            site = FakeSite()
+            client = mod.PywikibotPageClient(
+                family="wikidebates",
+                lang="fr",
+                family_file=None,
+                pywikibot_dir=None,
+                cache=mod.JsonPageCache(Path(directory) / "cache"),
+            )
+            client._site = site
+            client._pywikibot = types.SimpleNamespace(Page=FakePage)
+
+            records = client.fetch_many(["A", "B", "Missing"])
+            cached = client.fetch_many(["A", "B"])
+
+        self.assertEqual(set(records), {"A", "B"})
+        self.assertEqual(set(cached), {"A", "B"})
+        self.assertEqual(len(site.preload_calls), 1)
+        self.assertEqual(site.preload_calls[0][0], ("A", "B", "Missing"))
+        self.assertEqual(site.preload_calls[0][1]["groupsize"], 50)
+
     def test_extractor_contains_no_pywikibot_write_call(self):
         source = MODULE_PATH.read_text(encoding="utf-8")
         forbidden = ("page.save(", "page.put(", "page.delete(", "page.move(", "editpage(", "submit(")
