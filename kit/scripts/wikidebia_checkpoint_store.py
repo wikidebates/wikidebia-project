@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Conservative, offline checkpoint deduplication and inventory (issue #65).
 
-Default is read-only. --apply replaces identical ZIPs with hard links to a
-verified canonical ZIP on the same filesystem. --prune only removes unreferenced
-objects from this tool's private object store, never user checkpoints.
+Default is read-only. --apply uses copy-on-write reflinks where supported.
+Hardlinks are forbidden. --prune is disabled pending a safe redesign.
 """
 from __future__ import annotations
 
@@ -12,6 +11,7 @@ import hashlib
 import json
 import os
 import stat
+import fcntl
 import tempfile
 from collections import defaultdict
 from pathlib import Path
@@ -35,78 +35,53 @@ def _safe(path: Path, root: Path) -> None:
 def inventory(project_root: Path, *, apply: bool = False, prune: bool = False) -> dict:
     root = project_root / ".state/resume-checkpoints"
     objects = project_root / ".state/checkpoint-objects"
-    if root.is_symlink() or objects.is_symlink():
+    if (project_root / ".state").is_symlink() or root.is_symlink() or objects.is_symlink():
         raise StoreError("Racine symbolique interdite")
     groups = defaultdict(list)
     logical_bytes = 0
     if root.exists():
         for path in sorted(root.rglob("*.zip")):
             _safe(path, root)
+            if any(parent.is_symlink() for parent in path.parents if parent != project_root):
+                raise StoreError("Répertoire symbolique interdit")
             size = path.stat().st_size
             logical_bytes += size
             groups[(digest(path), size)].append(path)
-    # A private, content-addressed object is only created during explicit apply.
+    # Reflinks share extents with copy-on-write, not mutable inodes.
+    # Never fall back to hardlinks on unsupported filesystems.
+    FICLONE = 0x40049409
     linked = 0
     saved_bytes = 0
+    if apply and prune:
+        raise StoreError("--prune indisponible avec les reflinks")
     for (sha, size), paths in sorted(groups.items()):
-        if len(paths) < 2 or not apply:
+        if not apply or len(paths) < 2:
             continue
-        obj = objects / sha[:2] / sha
-        obj.parent.mkdir(parents=True, exist_ok=True)
-        if obj.exists():
-            _safe(obj, objects)
-            if digest(obj) != sha or obj.stat().st_size != size:
-                raise StoreError("Objet existant altéré")
-        else:
-            source = paths[0]
-            fd, tmp_name = tempfile.mkstemp(prefix=".object-", dir=obj.parent)
+        source = paths[0]
+        for path in paths[1:]:
+            if os.stat(source).st_ino == os.stat(path).st_ino and os.stat(source).st_dev == os.stat(path).st_dev:
+                raise StoreError("Liens physiques existants : réparation manuelle requise")
+            if digest(source) != sha or digest(path) != sha:
+                raise StoreError("Checkpoint modifié pendant l'inventaire")
+            fd, tmp_name = tempfile.mkstemp(prefix=".reflink-", dir=path.parent)
             try:
                 with os.fdopen(fd, "wb") as target, source.open("rb") as original:
-                    while True:
-                        chunk = original.read(1024 * 1024)
-                        if not chunk:
-                            break
-                        target.write(chunk)
+                    try:
+                        fcntl.ioctl(target.fileno(), FICLONE, original.fileno())
+                    except OSError as exc:
+                        raise StoreError("Reflink non pris en charge : aucun checkpoint modifié") from exc
                     target.flush()
                     os.fsync(target.fileno())
-                if digest(Path(tmp_name)) != sha:
-                    raise StoreError("Empreinte divergente durant la copie")
-                os.replace(tmp_name, obj)
-            finally:
-                if os.path.exists(tmp_name):
-                    os.unlink(tmp_name)
-        for path in paths:
-            if os.stat(path).st_ino == os.stat(obj).st_ino and os.stat(path).st_dev == os.stat(obj).st_dev:
-                continue
-            if digest(path) != sha:
-                raise StoreError("Checkpoint modifié pendant l'inventaire")
-            fd, tmp_name = tempfile.mkstemp(prefix=".link-", dir=path.parent)
-            os.close(fd)
-            os.unlink(tmp_name)
-            try:
-                os.link(obj, tmp_name)
-                if os.stat(path).st_dev != os.stat(obj).st_dev:
-                    raise StoreError("Volumes différents")
-                if digest(path) != sha:
-                    raise StoreError("Checkpoint modifié avant remplacement")
+                if digest(Path(tmp_name)) != sha or digest(path) != sha:
+                    raise StoreError("Empreinte divergente : remplacement refusé")
+                os.chmod(tmp_name, stat.S_IMODE(path.stat().st_mode))
                 os.replace(tmp_name, path)
             finally:
-                if os.path.lexists(tmp_name):
+                if os.path.exists(tmp_name):
                     os.unlink(tmp_name)
             linked += 1
             saved_bytes += size
     removed = 0
-    if prune and apply and objects.exists():
-        for path in sorted(objects.glob("*/*")):
-            _safe(path, objects)
-            if not (len(path.name) == 64 and path.parent.name == path.name[:2]):
-                raise StoreError("Objet non reconnu : nettoyage refusé")
-            if digest(path) != path.name:
-                raise StoreError("Objet altéré : nettoyage refusé")
-            # The object itself has one link; references keep nlink > 1.
-            if path.stat().st_nlink == 1:
-                path.unlink()
-                removed += 1
     rows = [{"sha256": sha, "size": size, "copies": len(paths)}
             for (sha, size), paths in sorted(groups.items())]
     return {
