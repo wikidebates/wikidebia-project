@@ -244,7 +244,7 @@
     {
       "path": "GUIDE_COMPACT_INDEX.md",
       "size_bytes": 920,
-      "sha256": "6d5a020afb8baddc07d4d4adcc8b36aca95d868c93108f0c58c21213a652ed46"
+      "sha256": "5ed23bb509c187166976993e0fdb47f6ebe9fe878e917c9610289f126fbbc9f2"
     },
     {
       "path": "GUIDE_CONTENT_REVIEW.md",
@@ -1669,7 +1669,7 @@
     {
       "path": "scripts/wikidebia_compact_index.py",
       "size_bytes": 2940,
-      "sha256": "8cf6085f281f432ade607e6640eb3b3af214bc66a2efdf9a06ff8925ec0d249e"
+      "sha256": "bb3aa6d557efbd993920a6cba376d8d44bc2797cde87a1fac75e32034564c813"
     },
     {
       "path": "scripts/wikidebia_content_review.py",
@@ -2199,7 +2199,7 @@
     {
       "path": "tests/test_wikidebia_compact_index.py",
       "size_bytes": 889,
-      "sha256": "587ad1f5df98bd785f0a1955ec9da3319ca732faba69513fa057ada3811b993e"
+      "sha256": "282130df97094a94a023ccc6ae8d2d8e9e5da4032b465e57975138539e5f51be"
     },
     {
       "path": "tests/test_wikidebia_content_review.py",
