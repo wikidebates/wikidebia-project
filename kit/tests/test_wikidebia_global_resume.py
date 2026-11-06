@@ -33,6 +33,33 @@ def _summary(debate_id: str, work_id: str, status: str = "remote_plan_ready"):
     }
 
 
+def _published(project: Path, debate_id: str, work_id: str) -> dict:
+    receipt = {
+        "schema": resume.FINAL_PUBLICATION_SCHEMA,
+        "schema_version": "1.0",
+        "debate_id": debate_id,
+        "work_id": work_id,
+        "status": "published",
+        "completed_at": "2026-11-06T00:00:00+00:00",
+    }
+    receipt["receipt_sha256"] = sha_object(receipt)
+    workflow = {
+        "schema": resume.WORKFLOW_SCHEMA,
+        "schema_version": "1.0",
+        "debate_id": debate_id,
+        "work_id": work_id,
+        "phase": "published",
+        "status": "published",
+        "final_publication": receipt,
+    }
+    _write(project / f".state/workflows/{debate_id}/workflow.json", workflow)
+    _write(
+        project / f".state/final-publication/{debate_id}/{work_id}/publication-receipt.json",
+        receipt,
+    )
+    return receipt
+
+
 def test_single_active_work_is_selected_and_journal_is_deduplicated(tmp_path: Path, monkeypatch):
     project = tmp_path / "project"
     _workspace(project, "debat_test", "EDIT-TEST-001")
@@ -131,3 +158,73 @@ def test_corrupt_registry_and_event_do_not_block_reconstruction(tmp_path: Path, 
     assert result["journal_event_count"] == 1
     repaired = json.loads((project / ".state/resume/registry.json").read_text())
     assert repaired["schema"] == resume.REGISTRY_SCHEMA
+
+
+def test_transaction_backup_workspace_is_ignored_without_blocking_valid_work(tmp_path: Path, monkeypatch):
+    project = tmp_path / "project"
+    _workspace(project, "debat_test", "EDIT-TEST-001")
+    _workspace(project, "debat_test", "EDIT-TEST-001.review-import-backup-deadbeef")
+    monkeypatch.setattr(
+        resume, "summarize_workspace",
+        lambda _root, debate_id, work_id: _summary(debate_id, work_id),
+    )
+
+    result = resume.discover_resume(project)
+
+    assert result["status"] == "ready"
+    assert result["selected"]["work_id"] == "EDIT-TEST-001"
+    assert result["active_count"] == 1
+    assert result["ignored_workspace_count"] == 1
+    registry = json.loads((project / ".state/resume/registry.json").read_text())
+    assert registry["ignored_workspaces"] == [{
+        "workspace_path": (
+            ".state/editorial-workspaces/debat_test/"
+            "EDIT-TEST-001.review-import-backup-deadbeef"
+        ),
+        "reason": "invalid_identity",
+    }]
+
+
+def test_signed_published_workflow_closes_stale_release_ready_workspace(tmp_path: Path, monkeypatch):
+    project = tmp_path / "project"
+    _workspace(project, "debat_test", "EDIT-TEST-001")
+    receipt = _published(project, "debat_test", "EDIT-TEST-001")
+    monkeypatch.setattr(
+        resume, "summarize_workspace",
+        lambda _root, debate_id, work_id: {
+            **_summary(debate_id, work_id, "release_ready"),
+            "phase": "release",
+            "next_action": "finalize_workspace_read_only",
+        },
+    )
+
+    result = resume.discover_resume(project)
+
+    assert result["status"] == "no_active_work"
+    assert result["active_count"] == 0
+    event_path = next((project / ".state/resume/events").glob("*.json"))
+    event = json.loads(event_path.read_text())
+    assert event["state"]["status"] == "published"
+    assert event["state"]["active"] is False
+    assert event["state"]["publication_receipt_sha256"] == receipt["receipt_sha256"]
+
+
+def test_tampered_publication_receipt_does_not_hide_active_workspace(tmp_path: Path, monkeypatch):
+    project = tmp_path / "project"
+    _workspace(project, "debat_test", "EDIT-TEST-001")
+    _published(project, "debat_test", "EDIT-TEST-001")
+    receipt_path = (
+        project / ".state/final-publication/debat_test/EDIT-TEST-001/publication-receipt.json"
+    )
+    receipt = json.loads(receipt_path.read_text())
+    receipt["status"] = "tampered"
+    _write(receipt_path, receipt)
+    monkeypatch.setattr(
+        resume, "summarize_workspace",
+        lambda _root, debate_id, work_id: _summary(debate_id, work_id, "release_ready"),
+    )
+
+    result = resume.discover_resume(project)
+
+    assert result["status"] == "ready"
+    assert result["selected"]["status"] == "release_ready"
