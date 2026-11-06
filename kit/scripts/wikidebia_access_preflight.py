@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import os
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -16,6 +17,7 @@ ACCESS_PREFLIGHT_SCHEMA = "wikidebia-access-preflight-1.0"
 DEFAULT_LANGUAGES = ("fr", "en")
 DEFAULT_REQUIRED_RIGHTS = ("createpage", "edit")
 DEFAULT_REQUIRED_TAGS = ("chatgpt",)
+DEFAULT_MAX_AGE_SECONDS = 6 * 60 * 60
 
 
 class AccessPreflightError(RuntimeError):
@@ -47,6 +49,26 @@ def access_contract(project_root: Path) -> dict[str, Any]:
     })
     if not required_rights:
         raise AccessPreflightError("Droits minimaux du diagnostic d’accès absents")
+    try:
+        max_age_seconds = int(
+            settings.get("access_preflight_max_age_seconds", DEFAULT_MAX_AGE_SECONDS)
+        )
+    except (TypeError, ValueError) as exc:
+        raise AccessPreflightError("Durée de validité du diagnostic d’accès invalide") from exc
+    if not 300 <= max_age_seconds <= 24 * 60 * 60:
+        raise AccessPreflightError("La durée de validité du diagnostic doit être comprise entre 300 et 86400 secondes")
+    credential_configuration = {
+        "local_pywikibot_config_present": (
+            project_root / "private/pywikibot/user-config.py"
+        ).is_file(),
+        "managed_variables": {
+            language: {
+                "username_present": bool(os.environ.get(f"WIKIDEBIA_{language.upper()}_BOT_USERNAME")),
+                "password_present": bool(os.environ.get(f"WIKIDEBIA_{language.upper()}_BOT_PASSWORD")),
+            }
+            for language in languages
+        },
+    }
     return {
         "family": str(settings.get("family") or "wikidebates"),
         "languages": list(languages),
@@ -59,6 +81,8 @@ def access_contract(project_root: Path) -> dict[str, Any]:
         },
         "required_rights": required_rights,
         "required_tags": required_tags,
+        "max_age_seconds": max_age_seconds,
+        "credential_configuration": credential_configuration,
     }
 
 
@@ -66,10 +90,15 @@ def access_contract_sha256(project_root: Path) -> str:
     return sha_object(access_contract(project_root))
 
 
-def verify_access_receipt(receipt: Mapping[str, Any], contract_sha256: str) -> bool:
+def verify_access_receipt(
+    receipt: Mapping[str, Any],
+    contract_sha256: str,
+    *,
+    now: dt.datetime | None = None,
+) -> bool:
     value = dict(receipt)
     claimed = value.pop("receipt_sha256", None)
-    return bool(
+    structurally_valid = bool(
         claimed
         and claimed == sha_object(value)
         and receipt.get("schema") == ACCESS_PREFLIGHT_SCHEMA
@@ -78,6 +107,20 @@ def verify_access_receipt(receipt: Mapping[str, Any], contract_sha256: str) -> b
         and receipt.get("contract_sha256") == contract_sha256
         and receipt.get("remote_write_performed") is False
     )
+    if not structurally_valid:
+        return False
+    try:
+        checked_at = dt.datetime.fromisoformat(str(receipt.get("checked_at") or "").replace("Z", "+00:00"))
+        max_age_seconds = int((receipt.get("contract") or {})["max_age_seconds"])
+    except (TypeError, ValueError, KeyError):
+        return False
+    if checked_at.tzinfo is None:
+        return False
+    current = now or dt.datetime.now(dt.timezone.utc)
+    if current.tzinfo is None:
+        current = current.replace(tzinfo=dt.timezone.utc)
+    age_seconds = (current.astimezone(dt.timezone.utc) - checked_at.astimezone(dt.timezone.utc)).total_seconds()
+    return -300 <= age_seconds <= max_age_seconds
 
 
 def run_access_preflight(

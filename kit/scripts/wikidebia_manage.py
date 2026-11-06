@@ -2466,7 +2466,28 @@ def check_wikidebates_apis(access_token: str, *, timeout: float = 15.0) -> dict[
     return results
 
 
-def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
+def check_wikidebates_write_access(root: Path) -> dict[str, Any]:
+    """Authenticate both writing identities without performing a wiki mutation."""
+    from wikidebia_access_preflight import run_access_preflight
+
+    receipt = run_access_preflight(root)
+    return {
+        "status": "passed",
+        "checked_at": receipt.get("checked_at"),
+        "languages": {
+            str(row.get("language")): {"status": row.get("status")}
+            for row in receipt.get("results") or []
+        },
+        "remote_write_performed": receipt.get("remote_write_performed"),
+    }
+
+
+def doctor(
+    root: Path,
+    *,
+    check_api: bool = False,
+    check_auth: bool = False,
+) -> dict[str, Any]:
     issues: list[str] = []
     versions = current_versions(root)
     if not versions:
@@ -2487,11 +2508,10 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
             issues.append(f"Identifiants Pywikibot gérés incomplets : {missing} absent")
         else:
             managed_credentials[language] = "absent"
-    if not local_pywikibot_config and "complete" not in managed_credentials.values():
-        issues.append(
-            "Accès Pywikibot absent : configurez private/pywikibot/user-config.py "
-            "ou les variables WIKIDEBIA_<LANG>_BOT_USERNAME/PASSWORD"
-        )
+            if not local_pywikibot_config:
+                issues.append(
+                    f"Identifiants Pywikibot gérés absents : {prefix}USERNAME/PASSWORD"
+                )
     api_access_token = os.environ.get("WIKIDEBIA_API_TOKEN")
     api_connectivity: dict[str, Any] = {"requested": check_api}
     if check_api:
@@ -2505,6 +2525,13 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
                 if result.get("status") != "passed":
                     detail = result.get("http_status") or result.get("error_type") or "erreur inconnue"
                     issues.append(f"API Wikidebates {language} inaccessible : {detail}")
+    write_access: dict[str, Any] = {"requested": check_auth}
+    if check_auth:
+        try:
+            write_access.update(check_wikidebates_write_access(root))
+        except Exception as exc:
+            write_access.update({"status": "failed", "error_type": type(exc).__name__})
+            issues.append("Diagnostic d’authentification bilingue refusé : " + str(exc))
     required_scripts = (
         "wikidebia_publish.py", "wikidebia_update.py",
         "wikidebia_graph_extract.py", "wikidebia_corpus_init.py",
@@ -2518,6 +2545,10 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
         "wikidebia_translation_patch.py",
         "wikidebia_translation_preflight.py",
         "wikidebia_translation_resume.py",
+        "wikidebia_translation_fragment.py",
+        "wikidebia_translation_checkpoint.py",
+        "wikidebia_global_resume.py",
+        "wikidebia_access_preflight.py",
         "wikidebia_test_changed.py",
         "wikidebia_translation_memory.py",
         "wikidebia_external_deletions.py",
@@ -2557,6 +2588,7 @@ def doctor(root: Path, *, check_api: bool = False) -> dict[str, Any]:
             "managed_credentials": managed_credentials,
             "api_access_header_configured": bool(api_access_token),
             "api_connectivity": api_connectivity,
+            "write_access": write_access,
         },
         "runtime_environment": runtime,
         "git_repository": git_is_repo(root),
@@ -3026,6 +3058,10 @@ def build_parser() -> argparse.ArgumentParser:
         "--check-api", action="store_true",
         help="Tester les API fr/en avec x-wikidebia-access sans afficher le jeton",
     )
+    doctor_parser.add_argument(
+        "--check-auth", action="store_true",
+        help="Authentifier les comptes d’écriture fr/en sans effectuer de modification",
+    )
     return parser
 
 
@@ -3319,7 +3355,7 @@ def main(argv: list[str] | None = None) -> int:
         github_sync(root)
         print("Dépôt GitHub synchronisé.")
         return 0
-    report = doctor(root, check_api=args.check_api)
+    report = doctor(root, check_api=args.check_api, check_auth=args.check_auth)
     print(json.dumps(report, ensure_ascii=False, indent=2))
     return 0 if report["status"] == "passed" else 2
 

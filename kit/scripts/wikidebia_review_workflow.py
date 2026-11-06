@@ -196,9 +196,12 @@ def _ensure_access_preflight(project_root: Path, state: dict[str, Any]) -> dict[
         return state
     contract_sha = access_contract_sha256(project_root)
     receipt_path = _workflow_root(project_root, str(state["debate_id"])) / "access-preflight.json"
+    publication_boundary = state.get("phase") in {
+        "release_ready", "final_publication", "final_publication_resume",
+    }
     if receipt_path.is_file():
         receipt = load_json(receipt_path, "reçu du diagnostic d’accès")
-        if verify_access_receipt(receipt, contract_sha):
+        if not publication_boundary and verify_access_receipt(receipt, contract_sha):
             summary = {
                 "status": "ready",
                 "checked_at": receipt.get("checked_at"),
