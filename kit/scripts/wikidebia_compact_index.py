@@ -5,7 +5,8 @@ import argparse
 import hashlib
 import json
 import re
-import subprocess
+import os
+import tempfile
 from pathlib import Path
 
 SKIP = {".git", ".venv", ".state", "private", "corpus", "archives",
@@ -44,6 +45,9 @@ def failure_report(log: str) -> dict:
             # Redact likely secrets from test diagnostics.
             safe = re.sub(r"(?i)(password|token|secret|api[_-]?key)\s*[=:]\s*\S+",
                           r"\1=[REDACTED]", line)
+            safe = re.sub(r"(?i)\bBearer\s+[^\s]+", "Bearer [REDACTED]", safe)
+            safe = re.sub(r"(?i)(authorization\s*[=:]\s*)(?:Basic\s+|Bearer\s+)?\S+", r"\1[REDACTED]", safe)
+            safe = re.sub(r"(https?://)[^/@\s:]+:[^/@\s]+@", r"\1[REDACTED]@", safe)
             selected.append({"line": number, "text": safe[:300]})
     return {"schema": "wikidebia-test-failures-1.0",
             "total_lines": len(lines), "failure_lines": selected[:200],
@@ -59,7 +63,16 @@ def main() -> int:
     data = json.dumps(result, ensure_ascii=False, separators=(",", ":")) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(data, encoding="utf-8")
+        fd, temporary = tempfile.mkstemp(prefix=".index-", dir=args.output.parent)
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as stream:
+                stream.write(data)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(temporary, args.output)
+        finally:
+            if os.path.exists(temporary):
+                os.unlink(temporary)
     else:
         print(data, end="")
     return 0

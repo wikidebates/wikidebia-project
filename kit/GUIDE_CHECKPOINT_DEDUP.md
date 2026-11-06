@@ -1,23 +1,18 @@
-# Déduplication locale des checkpoints (issue #65)
+# Déduplication sécurisée des checkpoints (#79)
 
-Commande autonome, hors ligne, sans écriture wiki :
+La commande est en lecture seule par défaut :
 
 ```sh
 python3 kit/scripts/wikidebia_checkpoint_store.py --project-root .
-python3 kit/scripts/wikidebia_checkpoint_store.py --project-root . --apply
-python3 kit/scripts/wikidebia_checkpoint_store.py --project-root . --apply --prune
 ```
 
-Par défaut, l'inventaire est **en lecture seule**. `--apply` crée un magasin
-d'objets SHA-256 sous `.state/checkpoint-objects/` et remplace uniquement les
-ZIP **strictement identiques** par des liens physiques sur le même volume.
-Les noms de checkpoints et leur format ZIP historique ne changent pas ; les
-restaurations existantes continuent de fonctionner. Les écritures utilisent un
-fichier temporaire et un remplacement atomique. Aucun secret n'est exporté.
+L'option `--apply` nécessite un système de fichiers Linux prenant en charge
+les reflinks (copy-on-write, FICLONE). Elle échoue sans modification si le
+système de fichiers ne les prend pas en charge. Aucun lien physique n'est créé.
+Les fichiers historiques peuvent toujours être restaurés individuellement.
+L'option `--prune` est temporairement désactivée par sécurité.
 
-`--prune` ne supprime que les objets du magasin sans autre lien physique
-(`st_nlink == 1`), après vérification de leur empreinte. Il ne supprime
-jamais un checkpoint utilisateur. La déduplication n'est pas automatique,
-notamment parce qu'un système de fichiers peut interdire les liens physiques.
-Le champ `potential_duplicate_bytes` est une estimation logique, pas une
-mesure de blocs effectivement récupérés.
+Ne pas exécuter `--apply` sur les sauvegardes de production avant d'avoir
+vérifié la restauration dans un environnement isolé. Les valeurs `linked_bytes`
+et `potential_duplicate_bytes` sont logiques et ne constituent pas une
+mesure des blocs effectivement économisés.
