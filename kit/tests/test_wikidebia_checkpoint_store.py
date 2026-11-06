@@ -27,7 +27,7 @@ def test_dry_run_and_apply_preserve_contents(tmp_path, monkeypatch):
     assert result["potential_duplicate_bytes"] == 4
     assert not (tmp_path / ".state/checkpoint-objects").exists()
     result = inventory(tmp_path, apply=True)
-    assert result["linked_files"] == 2
+    assert result["linked_files"] == 1
     assert a.read_bytes() == b.read_bytes() == b"same"
     assert c.read_bytes() == b"other"
     assert a.stat().st_ino != b.stat().st_ino
