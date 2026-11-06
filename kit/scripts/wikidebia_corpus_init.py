@@ -675,6 +675,31 @@ def copy_import_pages(inp: ExtractionInput, snapshot: Mapping[str, Any], output_
     return imported, {"debate_metadata": debate_meta, "provenance": provenance}
 
 
+
+def inspect_existing_build(output_dir: Path, *, expected_debate_id: str) -> dict[str, Any]:
+    """Read-only diagnostic; never authorizes automatic reuse."""
+    output_dir = output_dir.expanduser().resolve()
+    if not output_dir.exists():
+        return {"status": "absent", "safe_to_reuse": False}
+    if not output_dir.is_dir():
+        return {"status": "invalid", "safe_to_reuse": False}
+    required = ("manifest.json", "scope.json", "data/registre_debat.json",
+                "data/import_provenance.json", "graph/graphe_argumentatif.json")
+    missing = [name for name in required if not (output_dir / name).is_file()]
+    if missing:
+        return {"status": "incomplete", "safe_to_reuse": False, "missing": missing}
+    try:
+        manifest = json.loads((output_dir / "manifest.json").read_text(encoding="utf-8"))
+        registry = json.loads((output_dir / "data/registre_debat.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {"status": "invalid", "safe_to_reuse": False}
+    actual_id = str(manifest.get("debate_id") or "")
+    registry_id = str((registry.get("debate") or {}).get("id") or "")
+    if actual_id != expected_debate_id or registry_id != expected_debate_id:
+        return {"status": "mismatch", "safe_to_reuse": False}
+    return {"status": "unverified", "safe_to_reuse": False}
+
+
 def build_corpus(
     source: Path,
     output_dir: Path,
@@ -694,7 +719,7 @@ def build_corpus(
         output_dir = output_dir.expanduser().resolve()
         if output_dir.exists():
             if not overwrite:
-                raise CorpusInitError(f"Le dossier existe déjà : {output_dir}; utiliser --overwrite")
+                raise CorpusInitError(f"Le dossier existe déjà : {output_dir}; état={inspect_existing_build(output_dir, expected_debate_id=debate_id)[\x27status\x27]}; utiliser --overwrite")
             shutil.rmtree(output_dir)
         output_dir.mkdir(parents=True)
 
