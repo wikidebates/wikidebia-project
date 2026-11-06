@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
-  "declared_file_count": 466,
-  "declared_test_count": 1031,
+  "declared_file_count": 469,
+  "declared_test_count": 1039,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -370,6 +370,11 @@
       "path": "GUIDE_TRANSLATION_SOURCE_PRESERVATION.md",
       "size_bytes": 2986,
       "sha256": "7d463e3df0b7fcf273538902f285dd9d3a9ce9e3544fe4b1990ceb9cde8f57e1"
+    },
+    {
+      "path": "GUIDE_TRANSLATION_TOKEN_BUDGET.md",
+      "size_bytes": 1428,
+      "sha256": "5d0a614bc7bcddb0a12b8689720163939b0b631dd941f0416e34adf3f29c4ae5"
     },
     {
       "path": "GUIDE_TRANSLATION_WORKLIST.md",
@@ -1114,7 +1119,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "9e554e276d329394d80940f8c7d3250d19f9aaac7e574feded945907032b9938"
+      "sha256": "13f051f55ee245a3a6c3639a931b419aeb6803bc10662ef0e99d5eee47744556"
     },
     {
       "path": "VERSIONS.json",
@@ -1733,8 +1738,8 @@
     },
     {
       "path": "scripts/wikidebia_manage.py",
-      "size_bytes": 154111,
-      "sha256": "65e8f6b68d2fb95939314b0086ba66ab6a9ee3a687ab149e253fadb9f2bad40a"
+      "size_bytes": 154888,
+      "sha256": "da2db0bcb734b430cc850ac06740ae2ed10cc316402171bfa1266d110957496c"
     },
     {
       "path": "scripts/wikidebia_publication_dates.py",
@@ -1802,6 +1807,11 @@
       "sha256": "b5fc68abace857ebf08e248789e234d41a2d34517329f5c83663b24ba56a180c"
     },
     {
+      "path": "scripts/wikidebia_token_budget.py",
+      "size_bytes": 4329,
+      "sha256": "c060036d4788db8cb463f14ec010b21706b1ce7d757f3240dc89ee93fbda14d7"
+    },
+    {
       "path": "scripts/wikidebia_translation_checkpoint.py",
       "size_bytes": 15957,
       "sha256": "16b9a2e0a40f401a7210c82a914287dd9b5552cdecc06a92eae8e14b55bb4b01"
@@ -1813,8 +1823,8 @@
     },
     {
       "path": "scripts/wikidebia_translation_fragment.py",
-      "size_bytes": 21249,
-      "sha256": "f2bbad0a75f40a6ac3a125579e967c58f24b640458abdd0eaaaa8fb8798c839b"
+      "size_bytes": 23188,
+      "sha256": "e42a3125c2c38f2613cd05eb1fe7a15287825011108c0aa4d603555695884ef4"
     },
     {
       "path": "scripts/wikidebia_translation_memory.py",
@@ -1843,8 +1853,8 @@
     },
     {
       "path": "scripts/wikidebia_translation_resume.py",
-      "size_bytes": 10962,
-      "sha256": "5c9913e998e6a173d138efe7aa9655d69989edded7fa3abe5e5d641f7a166420"
+      "size_bytes": 11181,
+      "sha256": "e55e348e1cac66cee4f466d1f4929eba0e7400fefc3346a01b80b0e9f143ff85"
     },
     {
       "path": "scripts/wikidebia_translation_review.py",
@@ -2213,8 +2223,8 @@
     },
     {
       "path": "tests/test_wikidebia_manage.py",
-      "size_bytes": 66841,
-      "sha256": "1ceffcbeecee293a4ff7380c43f264dd277cd8f50e3b8fa10d57ae466b95f26a"
+      "size_bytes": 67009,
+      "sha256": "0117fa717482856c8bef962580ee3343974ade94683fb829680aafba28aca862"
     },
     {
       "path": "tests/test_wikidebia_norm_131.py",
@@ -2272,6 +2282,11 @@
       "sha256": "cb78cd048a0fb76ce7028fa01effa423a8dccda2fd2bb5cc6cea06f6734d4dc4"
     },
     {
+      "path": "tests/test_wikidebia_token_budget.py",
+      "size_bytes": 1453,
+      "sha256": "526bdada0542c315f7638a0228fe16fc6ef2743e4d4bc5f015002d65b89b395a"
+    },
+    {
       "path": "tests/test_wikidebia_translation_checkpoint.py",
       "size_bytes": 8302,
       "sha256": "b02e5baf9aad6f55d052a51d8669e29bdd8cb8eb26310dded1201c5bdf7e45c4"
@@ -2283,8 +2298,8 @@
     },
     {
       "path": "tests/test_wikidebia_translation_fragment.py",
-      "size_bytes": 7396,
-      "sha256": "0aabe5fc0dc3b878c4c54d14c380d37a0f13bff51ea06c4efc635c173a9b7c7d"
+      "size_bytes": 8389,
+      "sha256": "8cf0b63778c6e080f4f24f1b27acda40bc530377c2d4d110e90cdbbdf03d08ee"
     },
     {
       "path": "tests/test_wikidebia_translation_memory.py",
@@ -2313,8 +2328,8 @@
     },
     {
       "path": "tests/test_wikidebia_translation_resume.py",
-      "size_bytes": 5260,
-      "sha256": "2a52db21b195af6588c30d2d2ae7bd828228e0c9916dee44f9f8116f546d4dbe"
+      "size_bytes": 6158,
+      "sha256": "6f49bf04e72158a664de9d596f9981a1fd431219b3f8ba9902b624ea9b5e9228"
     },
     {
       "path": "tests/test_wikidebia_translation_review.py",

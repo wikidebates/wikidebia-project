@@ -1192,6 +1192,9 @@ def test_translation_fragment_command_exposes_argument_granularity():
     ])
     assert automatic.prepare_next is True
     assert automatic.page_id is None
+    assert automatic.max_context_tokens == 32000
+    assert automatic.response_reserve_tokens == 8000
+    assert automatic.token_estimator == "unicode_conservative_v1"
     assert explicit.unit_id == "U001"
     assert explicit.page_id == "A0001"
     assert explicit.prepare is True
