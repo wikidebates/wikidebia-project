@@ -45,6 +45,9 @@ def failure_report(log: str) -> dict:
             # Redact likely secrets from test diagnostics.
             safe = re.sub(r"(?i)(password|token|secret|api[_-]?key)\s*[=:]\s*\S+",
                           r"\1=[REDACTED]", line)
+            safe = re.sub(r"(?i)\\bBearer\\s+[^\\s]+", "Bearer [REDACTED]", safe)
+            safe = re.sub(r"(?i)(authorization\\s*[=:]\\s*)(?:Basic\\s+|Bearer\\s+)?\\S+", r"\\1[REDACTED]", safe)
+            safe = re.sub(r"(https?://)[^/@\\s:]+:[^/@\\s]+@", r"\\1[REDACTED]@", safe)
             selected.append({"line": number, "text": safe[:300]})
     return {"schema": "wikidebia-test-failures-1.0",
             "total_lines": len(lines), "failure_lines": selected[:200],
