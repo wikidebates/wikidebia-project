@@ -5,7 +5,8 @@ import argparse
 import hashlib
 import json
 import re
-import subprocess
+import os
+import tempfile
 from pathlib import Path
 
 SKIP = {".git", ".venv", ".state", "private", "corpus", "archives",
@@ -59,7 +60,16 @@ def main() -> int:
     data = json.dumps(result, ensure_ascii=False, separators=(",", ":")) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(data, encoding="utf-8")
+        fd, temporary = tempfile.mkstemp(prefix=".index-", dir=args.output.parent)
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as stream:
+                stream.write(data)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(temporary, args.output)
+        finally:
+            if os.path.exists(temporary):
+                os.unlink(temporary)
     else:
         print(data, end="")
     return 0
