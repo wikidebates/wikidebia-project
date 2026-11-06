@@ -681,7 +681,7 @@ def inspect_existing_build(output_dir: Path, *, expected_debate_id: str) -> dict
     output_dir = output_dir.expanduser().resolve()
     if not output_dir.exists():
         return {"status": "absent", "safe_to_reuse": False}
-    if not output_dir.is_dir():
+    if output_dir.is_symlink() or not output_dir.is_dir():
         return {"status": "invalid", "safe_to_reuse": False}
     required = ("manifest.json", "scope.json", "data/registre_debat.json",
                 "data/import_provenance.json", "graph/graphe_argumentatif.json")
@@ -692,6 +692,10 @@ def inspect_existing_build(output_dir: Path, *, expected_debate_id: str) -> dict
         manifest = json.loads((output_dir / "manifest.json").read_text(encoding="utf-8"))
         registry = json.loads((output_dir / "data/registre_debat.json").read_text(encoding="utf-8"))
     except (OSError, ValueError):
+        return {"status": "invalid", "safe_to_reuse": False}
+    if not isinstance(manifest, dict) or not isinstance(registry, dict):
+        return {"status": "invalid", "safe_to_reuse": False}
+    if not isinstance(registry.get("debate"), dict):
         return {"status": "invalid", "safe_to_reuse": False}
     actual_id = str(manifest.get("debate_id") or "")
     registry_id = str((registry.get("debate") or {}).get("id") or "")
