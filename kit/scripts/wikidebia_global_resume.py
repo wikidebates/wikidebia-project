@@ -29,6 +29,8 @@ class GlobalResumeError(WorkspaceError):
 
 REGISTRY_SCHEMA = "wikidebia-global-resume-registry-1.0"
 EVENT_SCHEMA = "wikidebia-global-resume-event-1.0"
+WORKFLOW_SCHEMA = "wikidebia-editorial-orchestration-1.0"
+FINAL_PUBLICATION_SCHEMA = "wikidebia-final-publication-receipt-1.0"
 
 
 def _signed(value: Mapping[str, Any], field: str) -> bool:
@@ -63,6 +65,45 @@ def _translation_resume(
     return capsule, None
 
 
+def _published_receipt(
+    project_root: Path, debate_id: str, work_id: str,
+) -> tuple[dict[str, Any], Path] | None:
+    """Return matching final evidence when the high-level workflow is published."""
+    workflow_path = project_root / ".state/workflows" / debate_id / "workflow.json"
+    receipt_path = (
+        project_root / ".state/final-publication" / debate_id / work_id
+        / "publication-receipt.json"
+    )
+    if (
+        not workflow_path.is_file() or workflow_path.is_symlink()
+        or not receipt_path.is_file() or receipt_path.is_symlink()
+    ):
+        return None
+    try:
+        workflow = load_json(workflow_path, "workflow publié")
+        receipt = load_json(receipt_path, "reçu de publication finale")
+    except (CorpusBuildError, OSError, ValueError, KeyError):
+        return None
+    embedded = workflow.get("final_publication")
+    if (
+        workflow.get("schema") != WORKFLOW_SCHEMA
+        or workflow.get("debate_id") != debate_id
+        or workflow.get("work_id") != work_id
+        or workflow.get("phase") != "published"
+        or workflow.get("status") != "published"
+        or not isinstance(embedded, dict)
+        or embedded != receipt
+        or receipt.get("schema") != FINAL_PUBLICATION_SCHEMA
+        or receipt.get("schema_version") != "1.0"
+        or receipt.get("debate_id") != debate_id
+        or receipt.get("work_id") != work_id
+        or receipt.get("status") != "published"
+        or not _signed(receipt, "receipt_sha256")
+    ):
+        return None
+    return receipt, receipt_path
+
+
 def _workspace_entry(
     project_root: Path, workspace_json: Path,
 ) -> dict[str, Any]:
@@ -83,6 +124,26 @@ def _workspace_entry(
             "next_action": "repair_workspace_state",
             "next_command": None,
             "error_type": type(exc).__name__,
+            "remote_access_performed": False,
+            "remote_write_performed": False,
+        }
+    publication = _published_receipt(project_root, debate_id, work_id)
+    if publication is not None:
+        receipt, receipt_path = publication
+        return {
+            "debate_id": debate_id,
+            "work_id": work_id,
+            "workspace_path": relative_to_project(workspace_json.parent, project_root),
+            "workspace_sha256": summary.get("workspace_sha256"),
+            "status": "published",
+            "phase": "complete",
+            "active": False,
+            "next_action": "complete",
+            "next_command": None,
+            "publication_receipt_path": relative_to_project(receipt_path, project_root),
+            "publication_receipt_sha256": receipt.get("receipt_sha256"),
+            "next_remote_read_possible": False,
+            "next_remote_write_possible": False,
             "remote_access_performed": False,
             "remote_write_performed": False,
         }
@@ -118,6 +179,27 @@ def _workspace_entry(
         "remote_access_performed": False,
         "remote_write_performed": False,
     }
+
+
+def _discover_workspace_entries(
+    project_root: Path,
+) -> tuple[list[dict[str, Any]], list[dict[str, str]]]:
+    workspaces_root = project_root / ".state/editorial-workspaces"
+    entries: list[dict[str, Any]] = []
+    ignored: list[dict[str, str]] = []
+    for path in sorted(workspaces_root.glob("*/*/workspace.json")):
+        relative = relative_to_project(path.parent, project_root)
+        if path.is_symlink() or path.parent.is_symlink() or path.parent.parent.is_symlink():
+            ignored.append({"workspace_path": relative, "reason": "unsafe_symlink"})
+            continue
+        try:
+            entries.append(_workspace_entry(project_root, path))
+        except (WorkspaceError, CorpusBuildError, ValueError, KeyError):
+            # Import and transaction backups deliberately live beside the
+            # canonical Work in historical repositories. They are evidence,
+            # not resumable identities, and must not block every valid Work.
+            ignored.append({"workspace_path": relative, "reason": "invalid_identity"})
+    return entries, ignored
 
 
 def _load_events(events_dir: Path) -> tuple[list[dict[str, Any]], int]:
@@ -189,14 +271,7 @@ def discover_resume(
         debate_id = validate_debate_id(debate_id)
     if work_id is not None:
         work_id = validate_work_id(work_id)
-    workspaces_root = project_root / ".state/editorial-workspaces"
-    entries = [
-        _workspace_entry(project_root, path)
-        for path in sorted(workspaces_root.glob("*/*/workspace.json"))
-        if not path.is_symlink()
-        and not path.parent.is_symlink()
-        and not path.parent.parent.is_symlink()
-    ]
+    entries, ignored_workspaces = _discover_workspace_entries(project_root)
     events, invalid_events = _record_events(project_root, entries)
     active = [row for row in entries if row.get("active") is True]
     registry: dict[str, Any] = {
@@ -215,6 +290,8 @@ def discover_resume(
         ],
         "journal_event_count": len(events),
         "ignored_invalid_event_count": invalid_events,
+        "ignored_workspace_count": len(ignored_workspaces),
+        "ignored_workspaces": ignored_workspaces,
         "remote_access_performed": False,
         "remote_write_performed": False,
     }
@@ -251,6 +328,7 @@ def discover_resume(
         "registry_sha256": registry["registry_sha256"],
         "journal_event_count": len(events),
         "ignored_invalid_event_count": invalid_events,
+        "ignored_workspace_count": len(ignored_workspaces),
         "remote_access_performed": False,
         "remote_write_performed": False,
     }
