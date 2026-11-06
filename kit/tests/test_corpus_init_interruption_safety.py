@@ -52,3 +52,44 @@ def test_existing_partial_build_is_preserved_without_overwrite(monkeypatch, tmp_
 
     assert marker.read_bytes() == original
     assert sorted(path.name for path in output.iterdir()) == [marker.name]
+
+@pytest.mark.parametrize("layout, expected", [
+    ("missing", "absent"),
+    ("partial", "incomplete"),
+    ("broken", "invalid"),
+    ("wrong_id", "mismatch"),
+    ("matching_legacy", "unverified"),
+])
+def test_inspection_is_read_only(tmp_path, layout, expected):
+    output = tmp_path / "corpus"
+    if layout != "missing":
+        output.mkdir()
+        if layout != "partial":
+            for name in (
+                "manifest.json", "scope.json", "data/registre_debat.json",
+                "data/import_provenance.json", "graph/graphe_argumentatif.json",
+            ):
+                path = output / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("{}\n", encoding="utf-8")
+            if layout == "broken":
+                (output / "manifest.json").write_text("{broken", encoding="utf-8")
+            else:
+                import json
+                debate_id = "other" if layout == "wrong_id" else "debat-test"
+                (output / "manifest.json").write_text(json.dumps({"debate_id": debate_id}), encoding="utf-8")
+                (output / "data/registre_debat.json").write_text(
+                    json.dumps({"debate": {"id": debate_id}}), encoding="utf-8"
+                )
+    before = {
+        p.relative_to(output).as_posix(): p.read_bytes()
+        for p in output.rglob("*") if p.is_file()
+    } if output.exists() else {}
+    result = corpus_init.inspect_existing_build(output, expected_debate_id="debat-test")
+    after = {
+        p.relative_to(output).as_posix(): p.read_bytes()
+        for p in output.rglob("*") if p.is_file()
+    } if output.exists() else {}
+    assert result["status"] == expected
+    assert result["safe_to_reuse"] is False
+    assert after == before
