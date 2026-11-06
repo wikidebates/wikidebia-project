@@ -719,7 +719,8 @@ def build_corpus(
         output_dir = output_dir.expanduser().resolve()
         if output_dir.exists():
             if not overwrite:
-                raise CorpusInitError(f"Le dossier existe déjà : {output_dir}; état={inspect_existing_build(output_dir, expected_debate_id=debate_id)[\x27status\x27]}; utiliser --overwrite")
+                state = inspect_existing_build(output_dir, expected_debate_id=debate_id)["status"]
+                raise CorpusInitError(f"Le dossier existe déjà : {output_dir}; état={state}; utiliser --overwrite")
             shutil.rmtree(output_dir)
         output_dir.mkdir(parents=True)
 
