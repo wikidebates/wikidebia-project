@@ -47,7 +47,7 @@ def test_resume_selects_next_pretranslation_stage(status, expected_action, comma
 
 def test_global_resume_reuses_existing_workspace_status(monkeypatch, tmp_path):
     """An existing French review must resume, not initialize another workspace."""
-    workspace = tmp_path / "corpus" / DEBATE / "workspaces" / WORK
+    workspace = tmp_path / ".state" / "editorial-workspaces" / DEBATE / WORK
     workspace.mkdir(parents=True)
     workspace_json = workspace / "workspace.json"
     workspace_json.write_text("{}", encoding="utf-8")
