@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b993d675acea5d84623e4a193430bf745ae4d75b3431b4946dd1c66048ad695f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les traits de masculinité toxique sont tellement banalisés qu'ils ne sont pas perçus comme tels",
+    "identity_sha256": "0d485cc96f1d71626afb4027135f826ebc5a302d28c17b5a8bdf7ef800815a82"
+  },
+  "source_value": "Les traits de masculinité toxique sont tellement banalisés qu'ils ne sont pas perçus comme tels",
+  "source_value_sha256": "4242b6c54db0efa0e7460abbf704dd8660519b7892f79fc885cd8ef6f4ec5033",
+  "target_value": "Traits of toxic masculinity are so normalized that they are not perceived as such",
+  "target_value_sha256": "c5c0d591473b8941490b9cb923b01d5d897b0d392529619d78ff2cfd7347e931",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0183",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "79ede02d20c0468c95f7c08edf6724ac2759d4e0b7317ac6413f267b3124cf5d"
+}

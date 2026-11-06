@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f423f27fa36373f1ae75088be051386a501e038d3b0417c7103859038f89aa82",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les différences entre femmes et hommes ne justifient pas des inégalités sociales",
+    "identity_sha256": "b37b1bb168525507d4a1c89d8531fba299af3eff13d7467c166f5a58c7250d27"
+  },
+  "source_value": "Les différences entre femmes et hommes ne justifient pas des inégalités sociales",
+  "source_value_sha256": "860c8599b48f0c0c034987fefaeda7a9024de12cda01e0a3db888b9bf37d54d9",
+  "target_value": "Differences between women and men do not justify social inequalities",
+  "target_value_sha256": "7bd3245c652ad9188b6f8152adfec1254476b9b6248af101d123772016267ff2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0116",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e3427f25d3a2fce88610f24450404940ab6df6de48e15519627b35149a31eadd"
+}

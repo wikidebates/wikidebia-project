@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0a1d7d8ed379a8055b19b7a68b1e6c91324b24e77ed0a06d06c97737318b0e42",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La culture woke est une alliée du féminisme radical",
+    "identity_sha256": "b6541c9d534997a88bd08a7914398d7f4ed98828a3a6b42da268d40a3fc963ea"
+  },
+  "source_value": "Débarquée comme tant d'autres mouvements des USA, la [https://fr.wikipedia.org/wiki/Woke Woke] culture impose sa loi aussi en France. Pas de jaloux. De l'anglais \"awake\" ou éveillé, elle synthétise tous les moyens mis en oeuvre dans le cas d'une forme de veille morale de tout type de discrimination. Un éveil permanent face à l'injustice contre les minorités et en particulier les femmes. Elle modélise un militantisme parfois radical et tendant à purifier les sphères sociales, où certaines minorités ont trop longtemps été opprimées. Aujourd'hui on assiste surtout à une hypersensibilité de communautés \"woke\" (éveillées) anti sexistes (et autres intersectionnalités : anti-racistes, écolos…) prêtes à dégainer l'argument numérique indigné et accusateur. ne courret-on pas vers une société épurée et aseptisée ?\nDans un article de Figaro paru le 26 janvier 2021, Benjamin Sire détaille :  \"La principale fonction de Twitter est désormais la confession publique. Elle donne un rôle majeur de caisse de résonance aux aspirations néo-puritaines qui se font jour dans un monde occidental de plus en plus frustré et déçu de lui-même, à la recherche d’une régénération morale dont le retour sur la scène publique est parfois déconcertant, d’autant qu’il n’y a pour l’heure pas de Contre-Reforme, ni de concile de Trente, à lui opposer…\nDépassant le cadre du militantisme pour certains, le phénomène est aussi apparenté à une inquisition 2.0, frisant avec la Cancel culture et amenant à un autre concept : le révisionnisme des oeuvres culturelles et historiques (considérée \"ne plus cadrer avec les idéaux actuels).",
+  "source_value_sha256": "0c9ad9df382623f3600bc252187d90fd640a880976a99323f0a52dc841803f29",
+  "target_value": "Arriving from the United States like so many other movements, [https://fr.wikipedia.org/wiki/Woke woke] culture also imposes its law in France. No one is spared. From the English word “awake,” it brings together all the methods used in a form of moral vigilance against every type of discrimination: permanent alertness to injustice against minorities and women in particular. It models an activism that is sometimes radical and tends to purify social spheres in which some minorities have been oppressed for too long. Today, what we mainly see is the hypersensitivity of “woke” communities—antisexist and representing other intersections such as antiracism and environmentalism—ready to draw the indignant and accusatory digital argument. Are we not heading toward a purified and sanitized society?\nIn a Figaro article published on 26 January 2021, Benjamin Sire explains: “Twitter’s primary function is now public confession. It gives a major sounding-board role to the neo-Puritan aspirations emerging in a Western world that is more and more frustrated and disappointed with itself, seeking a moral regeneration whose return to the public stage is sometimes disconcerting, especially since, for now, there is no Counter-Reformation or Council of Trent to oppose it...”\nFor some, the phenomenon goes beyond activism and is also likened to an Inquisition 2.0, bordering on cancel culture and leading to another concept: revisionism of cultural and historical works regarded as “no longer consistent with current ideals.”",
+  "target_value_sha256": "f1e0185b3a4d2e7216401bf61d9ac2b1b7b78cca04725fb9c2e5f696d185ab79",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0125",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4b50a53c986ec04392b134e90226811d7cf96ed39d62b8f35ae7b9fbf3ed42df"
+}

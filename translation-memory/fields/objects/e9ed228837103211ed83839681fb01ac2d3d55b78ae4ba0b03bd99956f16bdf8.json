@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c03ee2cf517a307930b4b178f356cfb52d5ea833ada1414781e1e3caeea6266b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'universalisme laisse sur le bas-côté de nombreux types d'oppression",
+    "identity_sha256": "2abfe0e702bbd89aa1dd708e85d15a1c93cc3ef99df8a07f06f4b61539f44bef"
+  },
+  "source_value": "La cour d’appel de Paris vient de reconnaître la discrimination « en raison de l’origine et du sexe » dont a été victime une ancienne salariée de la banque. Fait rare, cette décision évoque la notion de « discrimination intersectionnelle ».",
+  "source_value_sha256": "538c9adf993a333a462603612ebf16c79d4d8c1d9bd799eb06781860f1753d96",
+  "target_value": "The Paris Court of Appeal has just recognized the discrimination “on grounds of origin and sex” suffered by a former bank employee. In a rare development, the decision refers to the concept of “intersectional discrimination.”",
+  "target_value_sha256": "bde55046693f17785dfdc55e03711cfa410373e95f9c91fa4ffb8f562303482d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0131",
+    "target_path": "citations/A0131-C004",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e9ed228837103211ed83839681fb01ac2d3d55b78ae4ba0b03bd99956f16bdf8"
+}

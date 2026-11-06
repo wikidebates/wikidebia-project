@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4cfb9cb98f90b10e7a6e13cad4a6d0e16360555b82d5a7a57e5ddaedd6f14150",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les immigrés et descendants d'immigrés qui s'en sortent le mieux sont ceux qui n'adoptent pas une posture victimaire",
+    "identity_sha256": "4181761b2f892fda39483a392d7fbf32f32c5b5234f823247621ce83ef3888f4"
+  },
+  "source_value": "À une époque, moi-même je pensais que la plupart des personnes de mon université, Assas, étaient racistes. J’ai commencé à me plaindre auprès de mon père, qui était professeur à la faculté de Tours. Il m’a remis en place très sévèrement… Pour lui c’était inconcevable, non pas que le racisme existe, mais il me défendait toute victimisation. J’ai donc pris sur moi et je comprends aujourd’hui pourquoi il me disait qu’il fallait me concentrer sur mes études, plutôt que de perdre du temps. Les [https://www.lefigaro.fr/actualite-france/theorie-du-genre-decolonialisme-racialisme-ces-nouveaux-dogmes-qui-veulent-s-imposer-en-france-20210225 dogmes qui entrent à l’université] aujourd’hui troublent le rapport au travail, puisqu’ils obligent à ne parler que de soi-même en fonction de la «race» et du «sexe» et, dans le même mouvement, rendent illégitimes les enseignements sur l’histoire africaine d’un professeur blanc. À force, certains finissent par croire qu’il est nécessaire d’avoir une pensée décoloniale. C’est très problématique par rapport aux savoirs, à la connaissance et à notre héritage universaliste. Pour moi, ces idéologies sont une insulte aux grands hommes tels que Césaire, Manu Dibango, Édouard Glissant, avec lequel j’ai eu la chance de travailler, ou mon père, qui se sont affranchis de concepts revanchards pour tisser de nouveaux liens et conjuguer leur histoire avec celle de l’Europe.",
+  "source_value_sha256": "47e13bbdfc8e429ef3c1204e1a9ee794e36adf717c0fc49cebc8939c2e90b73d",
+  "target_value": "At one time, I myself thought that most people at my university, Assas, were racist. I began complaining to my father, who was a professor at the University of Tours. He put me firmly in my place... For him, it was inconceivable—not that racism existed, but he forbade me any self-victimization. I therefore endured it, and today I understand why he told me to focus on my studies rather than waste time. The [https://www.lefigaro.fr/actualite-france/theorie-du-genre-decolonialisme-racialisme-ces-nouveaux-dogmes-qui-veulent-s-imposer-en-france-20210225 dogmas entering universities] today disrupt people’s relationship to work, since they require everyone to speak only about themselves according to “race” and “sex” and, at the same time, make a white professor’s teaching of African history illegitimate. Eventually, some people come to believe that decolonial thought is necessary. This is highly problematic for scholarship, knowledge, and our universalist heritage. To me, these ideologies are an insult to great men such as Césaire, Manu Dibango, Édouard Glissant—with whom I had the good fortune to work—or my father, who freed themselves from vengeful concepts in order to forge new ties and combine their history with that of Europe.",
+  "target_value_sha256": "d429b4909e93f7d6a15cf95a14d0dfacf42336129a89d7fbb7949798b3f71508",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0200",
+    "target_path": "citations/A0200-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a8cace355c3f619fa20fae5d8b9656bcc251bfc2361f8d1791f43034b407a9aa"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a60b8490acb6f30be697038c1800fa1cba4ea48a3df2bb5ebe0c0ce89500128a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des hommes ne sont pas conscients de leur toxicité",
+    "identity_sha256": "c5dc0200a5bee187fc656f529315bcb5cf8033f14f8fb76d7bacfd7d2a85b047"
+  },
+  "source_value": "La plupart des hommes ne sont pas conscients de leur toxicité",
+  "source_value_sha256": "2830494c974e8a1f4e4b12b7e32a062f3b439fd8bacf2322a16f7b9a10150cbb",
+  "target_value": "Most men are not aware of their toxicity",
+  "target_value_sha256": "d616e4a6f1ff105b34c5d0512ad2bee4d245b7c0be0fe4bbbb50af9fcf5bf6a7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0185",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "18aeb77fb914a6474a368dd4eec800a9c7a99c1cb6fb40c3c02944d7cace4319"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "07bfbdfd94412bc88d9c211ae30793582cb428f892e4c9271b7cc31d7868612b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Pour la majorité des femmes, être une femme au foyer est une contrainte la plupart du temps",
+    "identity_sha256": "0df5cc4673b0f8e3d78d4a8acf96d63dd4262a2517ea873881caaa9e5adc3d0b"
+  },
+  "source_value": "Pour la majorité des femmes, être une femme au foyer est une contrainte la plupart du temps",
+  "source_value_sha256": "216c52344fd4a0c8e0c02b5881684486cda51eda1ce50920ca8f3d7d7e39f399",
+  "target_value": "For most women, being a housewife is a constraint most of the time",
+  "target_value_sha256": "754f4381c5bbf8ea6cb37c8ba6e44df15a2db26365eb1aaeaa8244970a4a4867",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0255",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6c6d42403d685a946f7b8d2e22634705062cd6306dbbceee488a89b09fcf5a53"
+}

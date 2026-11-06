@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a2b73f3327c14dec39a6580ef258c91abd48287da45db169f92c648df2725cd7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes ont joué un rôle moteur dans les révolutions passées",
+    "identity_sha256": "336f73542b018b50bacdbb48200068e7438dc9c435ff04564e5c96b05f16fb25"
+  },
+  "source_value": "Les femmes ont joué un rôle moteur dans les révolutions passées",
+  "source_value_sha256": "b2be85eb05e5f2fa77879a93634378b779f080b9a4899aebff8c1894407b9f44",
+  "target_value": "Women played a driving role in past revolutions",
+  "target_value_sha256": "3b3c68904abf48633c0df9d44c811c2b7b833a21bb73deaadab3045ea2529133",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0277",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "be6fb403fbd1cdc0e588d41e59bbb11395b872325ac6348a3b2d08f03ddef0b2"
+}

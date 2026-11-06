@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6e9a0950d96b59b6ecd5c852e1dbb551c3e2dff2e1367495532e688f82368789",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le traitement des femmes en Occident est très loin d'être irréprochable",
+    "identity_sha256": "ae150cdc915de434cd0d1899586c89cacbd982b86c4893683ee6c29a4237eb8a"
+  },
+  "source_value": "Le traitement des femmes en Occident est très loin d'être irréprochable",
+  "source_value_sha256": "43d61e38755f21b67771558bf745399100915b5b469af3eeea4467e467d2db05",
+  "target_value": "The treatment of women in the West is far from beyond reproach",
+  "target_value_sha256": "fe3c46fc921d1e23caa12439a9b966ab7cca9900afe2b763671b209a7e3b8a5a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0240",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "77c0f3d7241c16e57be9d8d3ffe82a89dc95349cfff059b3477775a8ff16b9a6"
+}

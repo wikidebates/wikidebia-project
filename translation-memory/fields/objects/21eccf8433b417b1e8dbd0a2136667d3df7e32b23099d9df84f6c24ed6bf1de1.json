@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "379885893b2c24464c3c4c90de30fbaecc4b094177ee07b0498bed633ddd8fab",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'homme prend encore trop de place dans l'espace public (Manspreading et Manslaming)",
+    "identity_sha256": "732558fcf01042937c66d110b821efc3b8085a4fc7d7480cac322aab64de48f8"
+  },
+  "source_value": "Toutes l'ont expérimenté dans l'espace public ou les transports, cette propension qu'ont certains hommes à \"s'étaler\", à s'asseoir jambes écartées dans le métro, à s'avachir sans se soucier des voisins et particulièrement des femmes, occupantes des sièges limitrophes. Cette attitude à un nom : le Manspreading.\nExpression d'une attitude machiste qui fait l'objet depuis 2013 de campagnes de pub dans les transports en commun des grandes villes du monde entier. Il pose question et fait les choux gras des pamphlets féministes.",
+  "source_value_sha256": "899a8eec1f7dd42b51054dc691dee662caf6f6c0f1338a9cfcd2f0af1937039f",
+  "target_value": "All women have experienced it in public places or on public transport: the tendency of some men to “spread out,” sit with their legs apart on the subway, or slouch without regard for their neighbors, particularly women in adjacent seats. This behavior has a name: manspreading.\nIt is the expression of a sexist attitude that has been targeted by advertising campaigns on public transport in major cities around the world since 2013. It raises questions and provides ample material for feminist pamphlets.",
+  "target_value_sha256": "31058bdc555d7d3c8ad996a333216d561652dad297909e72b6311e8b63fac77f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0071",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "21eccf8433b417b1e8dbd0a2136667d3df7e32b23099d9df84f6c24ed6bf1de1"
+}

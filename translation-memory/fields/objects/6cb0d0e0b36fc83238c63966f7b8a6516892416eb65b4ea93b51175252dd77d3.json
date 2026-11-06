@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3a9d6226e25c51de08cd73e30a7c40288e8f046dcf85abdfaa070e8474c287bb",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme peut sauver la société",
+    "identity_sha256": "014a55dcbf6384bfca863d22482d0e2f3b5ed4c3d3920dfc08273fcad35b3024"
+  },
+  "source_value": "Le féminisme peut sauver la société",
+  "source_value_sha256": "461534a2b97cb22603e4c9fd54fdc1d8eb66f03ac0fc345420a319d26da20a1d",
+  "target_value": "Feminism can save society",
+  "target_value_sha256": "701a46c3584f67579a37b78ea3eb6269040bf8ce179cf868b6ee047162a0d7da",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0007",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6cb0d0e0b36fc83238c63966f7b8a6516892416eb65b4ea93b51175252dd77d3"
+}

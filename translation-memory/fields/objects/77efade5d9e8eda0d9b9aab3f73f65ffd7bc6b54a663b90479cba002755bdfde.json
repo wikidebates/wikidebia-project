@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a449942deed32b47ff1d74071b44580c100571fecd7364b86c609433fd9c4251",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Dénoncer la cancel culture revient la plupart du temps à faire l'apologie de l'impunité",
+    "identity_sha256": "549abac860a66b3c9f0d31a36f2c1f38d297b70b42605123f785d2462fb09f5b"
+  },
+  "source_value": "Plutôt que des effets de la cancel culture, ne faudrait-il pas s’inquiéter de la culture de l’impunité, laquelle préfère la disqualification à la dispute argumentée ? Que les choses commencent à changer, nous ne pouvons que nous en réjouir et non redouter la ''« dictature des minorités »''. C’est, au contraire, des droits de ces dernières que nous devrions nous soucier si nous voulons combattre la dérive droitière à laquelle les organisateurs, en invitant Mathieu Bock-Côté à s’exprimer, sont coupablement inattentifs.",
+  "source_value_sha256": "86df6142100e2e7f7ba1e8adfd3e39cc493e8736101f8b2379503743d00411be",
+  "target_value": "Rather than the effects of cancel culture, should we not be concerned about a culture of impunity that favors disqualification over reasoned debate? We can only welcome, rather than fear, the fact that things are beginning to change and the supposed ''“dictatorship of minorities.”'' On the contrary, we should be concerned about their rights if we want to combat the rightward drift to which the organizers, by inviting Mathieu Bock-Côté to speak, are culpably inattentive.",
+  "target_value_sha256": "e8ff2bf836ab87037f4036697272b60e89438ebd1472585acb5fa853959fd9ff",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0216",
+    "target_path": "citations/A0216-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "77efade5d9e8eda0d9b9aab3f73f65ffd7bc6b54a663b90479cba002755bdfde"
+}

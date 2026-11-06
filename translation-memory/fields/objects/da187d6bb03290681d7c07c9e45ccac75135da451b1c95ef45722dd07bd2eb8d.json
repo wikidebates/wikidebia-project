@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "86749ca47d982de0713d16cf51c2008fa12a6e2077cac7c5fe69cad31498ab9b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les fémonationalistes soutiennent des personnalités ouvertement misogynes",
+    "identity_sha256": "a22bfad16b9d3f26b719b8407215549f3e5c34cd06fa9e2c61687eb58c5cf7be"
+  },
+  "source_value": "Les fémonationalistes soutiennent des personnalités ouvertement misogynes",
+  "source_value_sha256": "8ab81b3fe17a3b3d53dd0716933ac87730ee697e4c780a7c6417ebcb057ff1e5",
+  "target_value": "Femonationalists support openly misogynistic public figures",
+  "target_value_sha256": "cb4f09f5b27d81b6eb8555a6ee6c8a0b8f42ef83cf1fad121ab912a9207c73dd",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0340",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "da187d6bb03290681d7c07c9e45ccac75135da451b1c95ef45722dd07bd2eb8d"
+}

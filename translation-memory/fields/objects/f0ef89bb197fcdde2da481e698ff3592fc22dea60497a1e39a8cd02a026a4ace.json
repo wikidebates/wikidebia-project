@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7a37d1521e14a67d06354e05900dc059277bc545d7aa6c332824054f892d7d05",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes subissent des agressions",
+    "identity_sha256": "52a44f521147372e3af6d0b788a0f5f764db0beb042713408de432b4ab36d71b"
+  },
+  "source_value": "Agressions",
+  "source_value_sha256": "0bca55181646373d05eab46ec04d065b9d6145f86ca35e0fbd930946f2f87a98",
+  "target_value": "Assaults",
+  "target_value_sha256": "852c68734cc13b78e8d0a0b9f7ed91cd96ce0cdff4052fc4d431dccd5aef4ffd",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0039",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f0ef89bb197fcdde2da481e698ff3592fc22dea60497a1e39a8cd02a026a4ace"
+}

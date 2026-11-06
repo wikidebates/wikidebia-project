@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "55c0dcf9b5a1a052238a843db411c0f40dda93f1756a2da279b42e57c62dcdb9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Huit Françaises sur dix se sont déjà fait harceler dans les transports",
+    "identity_sha256": "f3b25bb4669228017d281d91a242972053fb091e176f35faf89b0ed2c7e3290c"
+  },
+  "source_value": "Huit Françaises sur dix se sont déjà fait harceler dans les transports",
+  "source_value_sha256": "edf798c3bd92151dff86179665e2dfefab80f1037007c1161a4193f9b23652ee",
+  "target_value": "Eight out of ten French women have experienced harassment on public transport",
+  "target_value_sha256": "e1918febdb461b6ba8914b3bf277239556e97bb21591dc5afb620c096e43e4a3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0347",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3a254df07a527f782f1b6128feec05ec9105ce4d07802a3607b40397837c852d"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "64db664c08f96ad759343bfe358223eab1724af482ad68d63e0764d237bc7cc6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le mansplaining est un concept qui permet de désigner de manière péjorative le simple fait de contre-argumenter",
+    "identity_sha256": "b1d03b3665a13ee39eb33aaf31facd2ac44acacb85f28151cb130d4f2ed97b8c"
+  },
+  "source_value": "Expliquer son point de vue n'est pas forcément du sexisme. Le mépris n'est pas forcément du mépris en fonction du sexe. Le mépris ou la condescendance que certain affiche lorsqu'ils argumentent n'est pas forcément lier au sexe de l'interlocuteur.",
+  "source_value_sha256": "cab2370c0a74ff3db343657f48db498cec855510fc33a9aec91d67e29cf91e76",
+  "target_value": "Explaining one’s point of view is not necessarily sexist. Contempt is not necessarily based on sex. The contempt or condescension some people display when arguing is not necessarily related to the other person’s sex.",
+  "target_value_sha256": "dc82feea852176cf270e5255738a0159870f8cf320d42709229ff346edfd4882",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0181",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9a9b51273785ffd87dba3724b739b2c9bef0bbb524e3e4d66b8f69de73cdc38f"
+}

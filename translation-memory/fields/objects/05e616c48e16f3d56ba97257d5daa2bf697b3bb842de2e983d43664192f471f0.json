@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6db5f5153f31dabd03f13e5043727d7be437b5ff4f7af54882dc0e0627b3a15d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les créateurs ne peuvent ignorer l'impact de leurs oeuvres sur la société",
+    "identity_sha256": "2953c4a555372c4a6c8f831aee5dbe88d8e23c9893e9ca64331cc96c0f4c8b01"
+  },
+  "source_value": "Les oeuvres culturelles ont un puissant pouvoir d'endoctrinement, une représentation largement valorisée dans ces dernières finit par être normalisé au sein de la société, les créateurs ont donc une responsabilité énorme.",
+  "source_value_sha256": "fa5d0e4b014b12cddf32ebab5236a04b87218746da15d5b7ecb36d4281045a11",
+  "target_value": "Cultural works have a powerful capacity for indoctrination. A representation that is widely celebrated in such works eventually becomes normalized within society, so creators bear enormous responsibility.",
+  "target_value_sha256": "aec5233d5df402dd64a8375945d2d5115c7aa0fbf1c9996655b696eef7759e2a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0111",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "05e616c48e16f3d56ba97257d5daa2bf697b3bb842de2e983d43664192f471f0"
+}

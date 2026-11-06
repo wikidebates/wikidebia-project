@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c4b3c226138597d93de2917d9525de0b799d821085a22090637b15d1dab8ca1b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Accuser les immigrés de \"victimisation\" est une aberration sociologique",
+    "identity_sha256": "825a81628a2642124919340ea6cc98d6aae9198ad9e63303c3e03fc5a780639b"
+  },
+  "source_value": "Accuser les immigrés de \"victimisation\" est une aberration sociologique",
+  "source_value_sha256": "8f0f4d9ced72f76b3dc22fa31b2a4aa57892c4bba8bec94e69c1473f5d30a906",
+  "target_value": "Accusing immigrants of \"playing the victim\" is a sociological aberration",
+  "target_value_sha256": "f41e0169ebd3e090c6e3d7d1a94ec517be109b38ae7b7740ccb619c79b753a3d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0288",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8b9dc44505d293e58cad16195204d679c9fd23839100d393f78fc31de34ca907"
+}

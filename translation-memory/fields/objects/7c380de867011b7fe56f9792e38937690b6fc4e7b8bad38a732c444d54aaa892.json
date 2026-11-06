@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "04dc236ab9fb2a3d01416fcc156948d4132236e004789640624f54146adf6ab5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes gagnent moins que les hommes",
+    "identity_sha256": "94c7d5ee371cde6fb6a6a0784e981c8f0bdcbd7eb5225b3846928fd0d6002f7a"
+  },
+  "source_value": "Les femmes gagnent moins que les hommes",
+  "source_value_sha256": "596cdd6a695a1b3d45dfc589868de72946d0fefbbdf3cd38504fd9722079eac0",
+  "target_value": "Women earn less than men",
+  "target_value_sha256": "26e3ab192787afb0a024a3a34dabbf1be558a4ab51b0fcbb2b5df32ebfe34964",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0024",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7c380de867011b7fe56f9792e38937690b6fc4e7b8bad38a732c444d54aaa892"
+}

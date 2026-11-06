@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "38ac5fe72a8e0b30a5cb5a9875b18681d00f1f292e4f47d8b65432f595ce722c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les contenus sexistes alimentent la culture du viol",
+    "identity_sha256": "672ec51bd7f9d529b6a6a9197ec7b0e9df6c0dd27a83f51b956e10d6e6b5b952"
+  },
+  "source_value": "Les contenus sexistes alimentent la culture du viol",
+  "source_value_sha256": "5d12cf9648c99c345ba7697aac8cee0ab3b6a6b7f9cb7912672015e2cbbc10d8",
+  "target_value": "Sexist content fuels rape culture",
+  "target_value_sha256": "453b40843cb2c4eb8f3bf79ebc8efd9c0d375147095e90f5f3f442c65942d4db",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0301",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "129cb539d4e6f4f4f0aa28a67ec8e4c16c304fee71daa5bbed0c329ead4e3076"
+}

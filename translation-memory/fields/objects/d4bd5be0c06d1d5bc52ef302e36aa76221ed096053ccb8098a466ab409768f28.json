@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c6fbc7f3944ebb401e17aa6eaf7d89cdd582e113c966a58114c138e2278d732d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Limiter la liberté d'expression, c'est refuser de faire confiance en la raison",
+    "identity_sha256": "9fe9f5b8d5facc2c784ab64ce057fd3ee42ee3602630fe3a961ff40015633b34"
+  },
+  "source_value": "Si le citoyen n’est pas un être rationnel, capable de prendre part à la discussion et de faire la part des choses, en faisant des concessions si nécessaires quant à son propre intérêt, mais au contraire un simple spectateur suggestible et manipulable, prisonnier de bulles de filtres et irrémédiablement retenu en enfance par ses bas instincts, le débat ne peut être un moteur du progrès moral. Il convient dès lors de réguler le plus étroitement possible la discussion publique en établissant des règles de conduite, et notamment d’encadrer les réseaux sociaux qui matérialisent l’agora où se déroule le débat public.\n\nCette tentative « réformiste » de préserver le cœur du débat (le « cercle de la raison ») contre des extrêmes irrationnels (vis-à-vis desquels le caractère universel que renferme la notion de tolérance souffre une exception notable au nom de l’axiome de Karl Popper qui veut que l’on ne tolère pas les intolérants) se défend parfaitement aux noms d’une conception humaniste et progressiste de l’histoire. Elle n’en constitue pas moins une faillite de la représentativité politique, d’autant que les décisions fondamentales apparaissent désormais échapper à la délibération collective. De la non-prise en compte du référendum du Traité constitutionnel européen de 2005 à la politique de modération systématique pratiquée par les réseaux sociaux : ces multiples mises en échec du débat participent d’autant à discréditer la prétention du débat public qu’à garantir les intérêts de chacun. Dans un contexte marqué, par ailleurs, par l’archipélisation des grandes démocraties (comment croire que la France soit la seule affectée par ce processus ?), la conception de la politique n’est plus un art de parvenir au consensus, mais consiste désormais à distinguer ses amis et ses ennemis.",
+  "source_value_sha256": "7e9b3d744eecd8429bc07378175b0485dff0719a33bd4671097deefd1da33ce4",
+  "target_value": "If citizens are not rational beings capable of taking part in discussion and distinguishing among arguments, making concessions regarding their own interests when necessary, but are instead merely suggestible and manipulable spectators, prisoners of filter bubbles and irremediably kept in childhood by their basest instincts, debate cannot drive moral progress. Public discussion must then be regulated as closely as possible by establishing rules of conduct, particularly by regulating the social networks that embody the agora where public debate takes place.\n\nThis “reformist” attempt to preserve the core of debate (the “circle of reason”) from irrational extremes (toward which the universal character contained in the notion of tolerance admits a notable exception in the name of Karl Popper’s axiom that the intolerant should not be tolerated) is perfectly defensible in the name of a humanist and progressive conception of history. It nonetheless constitutes a failure of political representation, especially since fundamental decisions now appear to escape collective deliberation. From the disregard of the 2005 referendum on the European Constitutional Treaty to the systematic moderation policies practiced by social networks, these many defeats of debate do as much to discredit public debate’s claim to guarantee everyone’s interests. In a context also marked by the fragmentation of the great democracies (how could one believe France alone is affected by this process?), politics is no longer conceived as the art of reaching consensus but now consists in distinguishing friends from enemies.",
+  "target_value_sha256": "68acc9272e5bfcba6b1bc3fa96504c58c0b662ab38ceff7f52a59c5b4e52be23",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0299",
+    "target_path": "citations/A0299-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d4bd5be0c06d1d5bc52ef302e36aa76221ed096053ccb8098a466ab409768f28"
+}

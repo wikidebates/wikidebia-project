@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fe4a81f0be6dbccfc602d76b0c48bb5402e4f82b884a15fceaeb96efff599c66",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite attribue aux \"woke\" des motivations qui n'existent que dans ses propres délires paranoïaques",
+    "identity_sha256": "156bc021f7b51dd6d24db88daa4bb4da3f245fc6b651927022eaf7e3136a7b89"
+  },
+  "source_value": "L'extrême droite attribue aux \"woke\" des motivations qui n'existent que dans ses propres délires paranoïaques",
+  "source_value_sha256": "0461863f6a519571902d0a1b111d9be1e716d06db781e4545e4acaf7a90d23bf",
+  "target_value": "The far right attributes to the \"woke\" motivations that exist only in its own paranoid delusions",
+  "target_value_sha256": "0f7b55d54b68acfdd997c9c4972b74cadf25ceef4801dfaa33c64dbdd818ed61",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0321",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c381965e6e53eb05e068f69f14d3d2d9b779406efde8de366d615dbaab50e7d3"
+}

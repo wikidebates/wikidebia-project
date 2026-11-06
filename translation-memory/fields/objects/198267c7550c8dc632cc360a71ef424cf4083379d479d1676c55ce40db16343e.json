@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8bf0d10d0c416df730e85785e0069ddbe6804a43cd7ab69fe97f19831579157e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La lutte contre le \"wokisme\" est le paravent de l'extrême droite",
+    "identity_sha256": "12a5d8ed86d87443ddf83cb17baa1cddefca71c089120f45cbe221413a0b4d82"
+  },
+  "source_value": "Fervent partisan de Donald Trump et adepte des théories de Steve Bannon, l’influenceur mobilise son importante communauté pour faire pression sur de grandes marques comme Ford, Harley Davidson ou Jack Daniels, afin qu’elles abandonnent leurs politiques d’inclusion.",
+  "source_value_sha256": "7b2e176a09ff20f02a66312a7db59f4f742ebe1c75df9c4e0e667b333938fd05",
+  "target_value": "A fervent supporter of Donald Trump and follower of Steve Bannon’s theories, the influencer mobilizes his large community to pressure major brands such as Ford, Harley-Davidson, and Jack Daniel’s into abandoning their inclusion policies.",
+  "target_value_sha256": "217a1dfbd141ce5f143019c33c1d99477f323e5673a9d633c02bc67a78b20c31",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0218",
+    "target_path": "citations/A0218-C004",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "198267c7550c8dc632cc360a71ef424cf4083379d479d1676c55ce40db16343e"
+}

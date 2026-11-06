@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a099511fdea3e7e071759904d98d85778cb0448d223736a7d7da4b178a8aed2b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le déséquilibre dans la gestion des tâches domestiques entrave le travail des chercheuses",
+    "identity_sha256": "64d6bee63438d9d2515320dece4bd75d8c31f74aad59965d3c54e5c8d2ae56e5"
+  },
+  "source_value": "Le déséquilibre dans la gestion des tâches domestiques entrave le travail des chercheuses",
+  "source_value_sha256": "9fb210b1011943230f31e0c20e02f413d6646e47d903c96c0f924d590abb096c",
+  "target_value": "The imbalance in the management of household tasks hinders women researchers' work",
+  "target_value_sha256": "812eb75a4a6a0a815e2b567dc2bb162813cd7f64206ad0adba9b57224fe0f5d2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0141",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "689c03c3aa769b0f6a59d6622b207787233e42ab62dba0aaf9eeb43833151bfd"
+}

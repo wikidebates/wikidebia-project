@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6f363e86cf545f30cacdb78bcf54add2044662bc0e898a88016d2db07ecea0de",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite ne s'intéresse aux viols que quand ils sont commis par les immigrés alors que la plupart des violeurs sont blancs",
+    "identity_sha256": "03281ebd8e4474669f5e1b2a4c85f5f795b123cfa9ade2da8f643901641a9842"
+  },
+  "source_value": "L'extrême droite ne s'intéresse aux viols que quand ils sont commis par les immigrés alors que la plupart des violeurs sont blancs",
+  "source_value_sha256": "99a7583da057bf326a1bf1f3bed0e512f95ef76b5c18433ed3cf131aab22b6cc",
+  "target_value": "The far right is interested in rape only when it is committed by immigrants, even though most rapists are white",
+  "target_value_sha256": "245f108bf09bfec5e8057bc618b6a1db318b1599d9df81875582c79ebb6ff3e0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0241",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b067ae3ce68812f98bd8884471109309c13d71f958ed0cc933de8faddf835ae9"
+}

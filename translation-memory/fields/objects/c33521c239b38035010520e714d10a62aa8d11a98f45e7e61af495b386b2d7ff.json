@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3fc6a3504321b2e95b9d94da549f66df24d4da65f8c2c4e00020664b8ba0b790",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme intersectionnel refuse de voir et de soutenir de nombreuses victimes du patriarcat",
+    "identity_sha256": "7f3d0bb8c353227686c1df7e25bfabd1af4df355a5a101d15bacf0991f8b48fc"
+  },
+  "source_value": "Le féminisme intersectionnel refuse de voir et de soutenir de nombreuses victimes du patriarcat",
+  "source_value_sha256": "d58f63a9f47643d6ad222ba9677ba2369d1915a86fda390c897fd5df93fb3415",
+  "target_value": "Intersectional feminism refuses to recognize and support many victims of patriarchy",
+  "target_value_sha256": "792a38b95f74d2298cb8e5cd6cf99c772d9769ab5aa218f320338daa0a45e075",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0022",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c33521c239b38035010520e714d10a62aa8d11a98f45e7e61af495b386b2d7ff"
+}

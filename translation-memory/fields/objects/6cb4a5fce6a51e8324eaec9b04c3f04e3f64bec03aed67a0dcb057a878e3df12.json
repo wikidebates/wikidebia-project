@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3fd38a58092e72a7da79850e1ba74ebe378f8ff782995db4ef7fd2e5ac7231b9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme radical est une réponse à l'échec du féminisme \"pacifiste\"",
+    "identity_sha256": "e092d6500448f1cdc64757241b1edac2b3b838b60044e0aa69b807f607a99250"
+  },
+  "source_value": "Encore une fois, ne dites pas que les militant.e.s ne devrait pas être violent.e.s car ça «décrédibilise » leurs revendications, que s’iels n’étaient pas violent.e.s ou ne résistaient pas iels ne subiraient pas la répression et les violences policières. Rappelez-vous le slogan des Suffragettes « Deeds not Words ! » (« des actes pas des mots ! »), ou encore celui des militant.e.s anti-racistes d’aujourd’hui « Black Lives Matter » (« les vies noires comptent »), leurs revendications sont pacifistes, seulement vous ne les écoutez pas.   \n\nLa violence n’est pas dans le camp des militant.e.s. Les militant.e.s deviennent violent.e.s car la seule réponse qu’iels obtiennent est la répression, et les seuls actes qu’ils arrachent sont les violentes policières. Toute cette répression politique fonctionne dans une logique punitive où l’Etat refuse de remettre en cause l’ordre politique et social.",
+  "source_value_sha256": "35ff3fa685e352f96072a319543766d90780d8405efe6b918816650c34f4b8e6",
+  "target_value": "Once again, do not say that activists should not be violent because that “discredits” their demands, or that if they were not violent or did not resist, they would not face repression and police violence. Remember the Suffragettes’ slogan “Deeds not Words!”, or that of today’s antiracist activists, “Black Lives Matter”; their demands are peaceful, but you do not listen to them.\n\nViolence is not on the activists’ side. Activists become violent because the only response they receive is repression, and the only actions they wrest from the authorities are acts of police violence. All this political repression follows a punitive logic in which the state refuses to challenge the political and social order.",
+  "target_value_sha256": "e04591ecc66a4ab3c4d28bdf1345b07b050b4500c1795f5bc01f55fec7440365",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0128",
+    "target_path": "citations/A0128-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6cb4a5fce6a51e8324eaec9b04c3f04e3f64bec03aed67a0dcb057a878e3df12"
+}

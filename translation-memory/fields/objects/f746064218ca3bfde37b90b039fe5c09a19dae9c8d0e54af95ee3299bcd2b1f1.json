@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0f52237acb78e0d60eeed77c35bf2fb5912db3d1ead92f7e23fed83c72fdf0a3",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'exploitation, les inégalités et la misère causées par le capitalisme amplifient l'oppression des femmes",
+    "identity_sha256": "68dbfa520f2e73dcabd82ed505a14725a0b2dd38e32ef12161f1e085f5bcb322"
+  },
+  "source_value": "Si le capitalisme n’a pas créé l’oppression des femmes, force est de constater qu’il la perpétue, car il utilise et renforce en permanence toutes les inégalités et toutes les oppressions.",
+  "source_value_sha256": "7b7ef42a813658f075dbf703edf7794e0a9410f67f335330a41a6881a46eafe3",
+  "target_value": "Although capitalism did not create the oppression of women, it must be acknowledged that it perpetuates it, because it continually uses and reinforces every inequality and every form of oppression.",
+  "target_value_sha256": "ee0f1c2194cd86ddb445991c158ca54e9a12bc015df3fc1753332cd53b10bd68",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0196",
+    "target_path": "citations/A0196-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f746064218ca3bfde37b90b039fe5c09a19dae9c8d0e54af95ee3299bcd2b1f1"
+}

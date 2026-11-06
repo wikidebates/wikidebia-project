@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f887479977e0e505164c5e8a8f9273fa9057f772a22db86ea066b6bc841120cd",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les réseaux sociaux ont été le principal instrument de l'emprise de l'extrême droite sur le monde",
+    "identity_sha256": "09749eec95ba400e97e0f28710689ac0e56e5a4dc02da37c8fc8ea6f21ae141a"
+  },
+  "source_value": "Les réseaux sociaux ont été le principal instrument de l'emprise de l'extrême droite sur le monde",
+  "source_value_sha256": "19ab7fa9cba6a79b3f173d3415b0a93b388cb3824fb4aba9548a57d5d26d9a3f",
+  "target_value": "Social networks have been the main instrument of the far right's hold on the world",
+  "target_value_sha256": "74c56b7d8796786a542e6a4bba60f83763466ea03ff115dbb4a4748390ce83e7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0159",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4910f6a5c8ea81dd127d78e5d064ee349201c09e1781c336f9e22ad5c0c3ff7a"
+}

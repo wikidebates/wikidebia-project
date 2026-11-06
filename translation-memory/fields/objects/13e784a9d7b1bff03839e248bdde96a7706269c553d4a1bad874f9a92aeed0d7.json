@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "73e4f660bd8c4248dd68608e948621fc0636607fe71ddf29910e0bd22382e680",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Si les femmes se comportent ainsi, c'est parce que le sexisme de notre culture les y encourage, voire les y force",
+    "identity_sha256": "22c116bec8140ec625f72480adeac1ae4a46a5ad74c125d9fb8f1845f149ff18"
+  },
+  "source_value": "Si les femmes se comporte ainsi, c'est parce que le sexisme de notre culture les y encourage, voire les force",
+  "source_value_sha256": "2c4df30b141ce52a346ab0d1f307cf172676ac56a733ea185a97a8c675b90e6f",
+  "target_value": "If women behave this way, it is because sexism in our culture encourages them, or even forces them, to do so",
+  "target_value_sha256": "3b0ec84cc8c3bee7581ff0341c2834ef206c228afbfb21b87a7ebe4e161c27d3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0283",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "13e784a9d7b1bff03839e248bdde96a7706269c553d4a1bad874f9a92aeed0d7"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "33414e222c9da38df24b4f6f7bed5df98325820b0f6ce12abbba75182ea2908e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La masculinité toxique pousse les hommes dans la criminalité",
+    "identity_sha256": "b3dec9e3b6d622369b5994e38ddf64582032fdcd570883b7d0bb43fad9cb9e2a"
+  },
+  "source_value": "La masculinité toxique pousse les hommes dans la criminalité",
+  "source_value_sha256": "94225d6c93aa0701d65444dfaf74652d3efe6f2e69563cec6eaacd44b901677c",
+  "target_value": "Toxic masculinity drives men into crime",
+  "target_value_sha256": "fd24831c1d4ae5445ae37200c742634985850d6621bad177cfc1f29a84e45507",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0195",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "332f76500342dd82236a740ff50b25601c78d0ba271e7c52d27beabc33946743"
+}

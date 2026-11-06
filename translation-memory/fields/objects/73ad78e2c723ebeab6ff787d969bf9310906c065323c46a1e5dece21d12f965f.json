@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "32095cad93119fe76fbfa086d8269b41ba291c78e3a5744cab23aa2b72ed4d8b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Des gens fortement misogynes se revendiquent féministes, donc ça ne veut rien dire",
+    "identity_sha256": "03f9e2ba6b76699a6e2dff2ba8e6348a3f6fb0e5acda65692e5c28dc3c33150f"
+  },
+  "source_value": "Cette année encore, le baromètre met une lumière un paradoxe qui nous fait soupirer bien fort : '''93 %, soit une immense majorité des Français et Françaises, estiment que les femmes et les hommes connaissent des différences de traitement''' dans au moins une des sphères de la société (travail, espace public, école, famille…), ce qui n’empêche pas '''une large part de la population d’adhérer à des stéréotypes sexistes'''. Par exemple, seulement '''49 % des femmes et 37 % des hommes estiment qu’il est problématique qu’une femme cuisine tous les jours pour toute la famille'''. '''40 % des hommes et 27 % des femmes déclarent aussi qu’il est normal pour une femme qu’elle s’arrête de travailler pour s’occuper de ses enfants''' (un chiffre en hausse de 6 points par rapport au baromètre publié l’an dernier). Côté couple et rapport de séduction, '''38 % des femmes et 52 % des hommes considèrent qu’il est normal que l’homme paye l’addition au premier rendez-vous'''. Un florilège du sexisme ordinaire, donc.",
+  "source_value_sha256": "6f6643c2279e80d67619364f437dc6743d6f53b1141d68e09f5386f23f1be747",
+  "target_value": "Once again this year, the barometer highlights a paradox that makes us sigh deeply: '''93%, an immense majority of people in France, believe that women and men receive different treatment''' in at least one sphere of society (work, public space, school, family, etc.), yet '''a large share of the population still subscribes to sexist stereotypes'''. For example, only '''49% of women and 37% of men believe it is problematic for a woman to cook every day for the whole family'''. '''Forty percent of men and 27% of women also say it is normal for a woman to stop working to take care of her children''' (a figure up six points from the barometer published last year). Regarding couples and courtship, '''38% of women and 52% of men consider it normal for the man to pay the bill on the first date'''. A veritable anthology of everyday sexism.",
+  "target_value_sha256": "df59309bb1bdf0343a22d9dcffd0f32f8d9807ead4b4374fd76dba446a0410bd",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0163",
+    "target_path": "citations/A0163-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "73ad78e2c723ebeab6ff787d969bf9310906c065323c46a1e5dece21d12f965f"
+}

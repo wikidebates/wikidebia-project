@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ad1fc70cdc76aea6550af87176e67d0eef6a9939a7b93c11a5f2f41a0ad4ecba",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des hommes sont éduqués à la masculinité toxique",
+    "identity_sha256": "6fcf2b54e36717ed418460d340a6abcebe439683b90d89045d2051ff34ca21a3"
+  },
+  "source_value": "Que ce soit au niveau de l'école, des médias, du divertissement, toute la société contribue à inculquer une certaine idée de la masculinité, au point que nous ne conscientisons même pas sa toxicité en dépit des conséquences sociétales désastreuses, notamment sur la santé mentale des hommes ou leur manière de se comporter avec autrui.",
+  "source_value_sha256": "af25dd41a91ffae0aca0d7f1366037fc4de3841684181e455657332147a084bf",
+  "target_value": "At school, in the media and in entertainment, all of society helps instill a certain idea of masculinity, to the point that we do not even recognize its toxicity despite its disastrous social consequences, particularly for men’s mental health and the way they behave toward others.",
+  "target_value_sha256": "af29e8afc5bd7db38cd986e556ba56deab2545d10fc3cf3856221ca3fe8307ec",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0182",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9f1af92ffc77270cce50ae1b5bcd00c76983fc112d9823c84b10f1ab8e5b5b22"
+}

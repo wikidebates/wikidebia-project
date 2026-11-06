@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e326a8add5cf3364667e5b89250fa286cfec1647e5c10706d7f0deedb7283db6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'intérêt apparent des fémonationalistes pour le sort des femmes musulmanes est le faux nez d'un paternalisme néocolonial",
+    "identity_sha256": "a8eaea4af4e5aedd4cad25ba4728d2d6d651e2b2f5ab0f2f97982223529965bf"
+  },
+  "source_value": "L'intérêt apparent des fémonationalistes pour le sort des femmes musulmanes est le faux nez d'un paternalisme néocolonial",
+  "source_value_sha256": "5f93e041337cab61e7f94cfd096809bd296659ecf52251b7c25f758a3222e975",
+  "target_value": "Femonationalists' apparent concern for Muslim women is a front for neocolonial paternalism",
+  "target_value_sha256": "ae3f6b96153bf2b7d9c984df2e6f61d123e1c3a9476cca79335b906202dfa4a5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0239",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b1ee1398e4fa59bff04629a66b5903ba67c0b6fba3c09f93bc708652ddb6b42f"
+}

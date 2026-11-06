@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "309b8a92f6a76d7c177aff73b2cc04775607bf2aaa04dce47686e2ad821e4cc1",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme moderne considère tous les hommes comme de potentiels agresseurs",
+    "identity_sha256": "e52a72decb597e45428899620ea1b56202b6a89666f49f45db3b6a348d8bda39"
+  },
+  "source_value": "Impossible pour un homme de lire Brownmiller - pourtant, par rapport à certaines de ses consoeurs féministes plus jeunes, plutôt \"modérée\" - sans avoir le sentiment d'appartenir à un genre haï, foncièrement condamnable, en somme d'être totalement exclu, de par sa condition mâle, de tout groupe civilisé. C'est le même sentiment que doivent éprouver les enseignants universitaires à la lecture du \"Professeur libidineux\", car ce livre est fondé sur la même croyance implicite […] : tout enseignant mâle, au contact d'étudiantes plus jeunes, plus \"faibles\", facilement impressionnées, rêvera de les posséder sexuellement et de les dominer intellectuellement, parce que c'est sa nature, parce qu'il est foncièrement libidineux. \nPour Brownmiller, il en est de même pour l'homme, qu'il soit enseignant, homme politique, laveur de carreaux - sa condition mâle est prédéterminante.",
+  "source_value_sha256": "8a0ce2961be949fe7954861877daa05dc31be0700ea2b4fc8efa00824c1102f5",
+  "target_value": "It is impossible for a man to read Brownmiller—who is, compared with some of her younger feminist colleagues, rather 'moderate'—without feeling that he belongs to a hated, fundamentally reprehensible sex; in short, without feeling entirely excluded, by virtue of being male, from every civilized group. University teachers must feel the same way when reading 'The Lecherous Professor,' because that book rests on the same implicit belief [...]: every male teacher, when dealing with younger, 'weaker,' easily impressed female students, will dream of possessing them sexually and dominating them intellectually, because that is his nature, because he is fundamentally lecherous.\nFor Brownmiller, the same applies to men, whether they are teachers, politicians, or window cleaners—their male condition predetermines them.",
+  "target_value_sha256": "921c79b84d642c747dc704f558e3881bf962f7337d994a360d6961c35a42c073",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0014",
+    "target_path": "citations/A0014-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "2f59e3cf34524164013d574c17d56e69379b35eb1dc9f84fcd6c6c975a31e416"
+}

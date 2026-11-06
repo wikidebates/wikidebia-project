@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8bc5286e4758221cd4428cf0e6443327ae74c9c1b142c15a089efcf75447181f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il est du devoir de tous, dans le combat comme dans la défense, de faire face aux autorités injustes et inégalitaires, à la servitude et aux préjugés",
+    "identity_sha256": "aa5608497395f3081458e193f5602095b5e48d9f58d3cc018a39ccbb40239ae3"
+  },
+  "source_value": "Le féminisme concerne tout le monde.",
+  "source_value_sha256": "ecce6c919a8c4c60149b0d133cff00883b69a5b11ed0556ccccd3831ddd36a6f",
+  "target_value": "Feminism concerns all people.",
+  "target_value_sha256": "976af1e4fb6f94f7dc402a5beb330cf778e75334aedef30444912a515b3b794b",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0075",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e38e1bcd4bf652f782c6d6d2a9418e6ee960e3145394248f327bbf3776d5d0c8"
+}

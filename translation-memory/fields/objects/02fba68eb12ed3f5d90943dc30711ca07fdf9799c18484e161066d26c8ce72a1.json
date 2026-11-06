@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5c436c2ffe5a8b9ac9b6613f9260ac5a35120364f1940e735348d3d7eaf8dd6c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le capitalisme est structurellement sexiste",
+    "identity_sha256": "09254ac4fc2cb2e18e5e6d11b63b1071c2b2d16544ea621663d9ff4adfc09705"
+  },
+  "source_value": "Contrairement à une idée reçue, le progrès économique n’aurait pas favorisé le statut de la femme. L’universitaire et militante féministe Silvia Federici démontre dans son recueil d’articles intitulé ''Marxisme et Patriarcat,'' que l’exploitation des femmes jusqu’au foyer domestique est une part fondamentale du système d’exploitation.\n\nLe fordisme a fortement contribué à définir une répartition des rôles préjudiciable aux femmes. ''« Dans les discours de l’époque, émerge l’idée que la femme doit non seulement faire à manger et éduquer les enfants, mais aussi satisfaire sexuellement son mari ouvrier et s’occuper de ses émotions. La femme est donc au centre de cette nouvelle forme de travail de reproduction ; elle devient même l’administratrice du salaire masculin et assure la bonne gestion du foyer. Sexe, émotion, administration, procréation : voilà ce qui va désormais définir la femme au foyer, cœur de la nouvelle famille nucléaire »'', explique Silvia Federici à ''l’Obs''.",
+  "source_value_sha256": "79cc1c7aff795f933b199f2976658a2ea08b2c49868e34cc3b7d3505f82c77a1",
+  "target_value": "Contrary to a common assumption, economic progress did not improve the status of women. In her collection of articles entitled ''Marxism and Patriarchy,'' academic and feminist activist Silvia Federici demonstrates that the exploitation of women, extending into the home, is a fundamental part of the system of exploitation.\n\nFordism contributed strongly to defining a division of roles that was harmful to women. ''‘In the discourse of the time, the idea emerged that a woman must not only cook and raise the children but also satisfy her worker husband sexually and attend to his emotions. The woman is therefore at the center of this new form of reproductive labor; she even becomes the administrator of the man’s wages and ensures the proper management of the household. Sex, emotion, administration, procreation: these are what will now define the housewife, the heart of the new nuclear family,’'' Silvia Federici explains to ''L’Obs''.",
+  "target_value_sha256": "ad1846e6546b5b6ba03ab827a32f47423cc319dd7322ebe8c90de9e8a905a5d0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0076",
+    "target_path": "citations/A0076-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "02fba68eb12ed3f5d90943dc30711ca07fdf9799c18484e161066d26c8ce72a1"
+}

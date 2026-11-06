@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "78b7e5806ce3f4718b5823e9f174dcc12ef8c41d31d59d5e558d64a3b1a96236",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite instrumentalise le féminisme à des fins racistes",
+    "identity_sha256": "b63ec2ed6534176417f49ba5a8bde2df9745111d1612ffc1015a5cdacf64266b"
+  },
+  "source_value": "Fémonationalisme :Intérêt pour l'égalité des genres dans le seul but de légitimer nos préjugés racistes, qui disparaît aussitôt que ces derniers ne rentrent plus dans l'équation. Conduit à surévaluer les agressions sexistes commises par des personnes perçues comme d'origine étrangères et à minimiser -voire nier- celles commises par des personnes blanches.",
+  "source_value_sha256": "c302ca1620c54045ba7d8d9cb8cb620c4df88017b6dd620aec84353b6f7826a8",
+  "target_value": "Femonationalism: an interest in gender equality for the sole purpose of legitimizing our racist prejudices, which disappears immediately when those prejudices are no more part of the equation. It leads to overestimating sexist assaults committed by people perceived as being of foreign origin and minimizing—or even denying—those committed by white people.",
+  "target_value_sha256": "afe6ed08e14b79907ee4f0cbf1edf89a5583006d589c478e3bb5f225d8c1379d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0133",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1f4ae26b6cb840d4cfe5bd28eee786d9653925f88b4f45c7cd7b83c3e904101f"
+}

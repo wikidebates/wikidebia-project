@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "af177727470d2989b7ec84c200f984dbb747973d3e059402ec6ca4cdb44d0779",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'homme cherche encore à donner des leçons de vie à la femme (Mansplaining)",
+    "identity_sha256": "852660f98d216f44fd80c799598481d7a69961504963406d0ab3b1863697c1fc"
+  },
+  "source_value": "L'homme cherche encore à donner des leçons de vie à la femme (Mansplaining)",
+  "source_value_sha256": "241db094c930d74ae74cf306b4cd53f4eb422b68f31f7d7d4fc1d4f771506879",
+  "target_value": "Men still try to lecture women about life (Mansplaining)",
+  "target_value_sha256": "0ca2c38ea699e03f317934b7de2507d0f1b055937e90bab0eb3fa76c8a9c24cf",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0067",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6974a1716c18700e0c274fb26301ec597c7421ce68ac15179e9f4d376e926f58"
+}

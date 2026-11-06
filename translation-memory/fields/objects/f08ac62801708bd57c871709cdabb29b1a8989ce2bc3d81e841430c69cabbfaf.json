@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "911ef80fed8fba3ac78e9aebc28f6069a5b93d6a17d38dfd66d882bd423d86c7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le rôle de femme au foyer ne vient pas des différences entre femmes et hommes mais du patriarcat",
+    "identity_sha256": "e6028ef0ee8ff948dfed2fc8ec6fe87b0ffc469626920993f0b3f18ac28d6d0b"
+  },
+  "source_value": "Le rôle de femme au foyer ne vient pas des différences entre femmes et hommes mais du patriarcat",
+  "source_value_sha256": "9d612b3e069fdd40315263d0564dcfa42d800cafdad2fd1ffe7f61965a427ea6",
+  "target_value": "The role of housewife does not arise from differences between women and men but from patriarchy",
+  "target_value_sha256": "c84014ab5f23a85cb6538e4cf5b1b2d944f95a5a16b39fe40bde3af4a75d647d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0118",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f08ac62801708bd57c871709cdabb29b1a8989ce2bc3d81e841430c69cabbfaf"
+}

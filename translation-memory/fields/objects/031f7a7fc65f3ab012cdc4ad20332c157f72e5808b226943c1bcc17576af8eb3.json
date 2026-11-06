@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c8f8b85d9ec03c61acb6a627f64c42ef407707449d4a0081039e526017b76532",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Prétendre que \"le groupe social masculin est oppresseur\" et \"tous les hommes sont méchants\" sont synonymes est au mieux un malentendu, au pire une manipulation grossière",
+    "identity_sha256": "dde1c9c5fab7b6e6faa7dc614f845f98a581c5907906e384e72ca6a2b227c36f"
+  },
+  "source_value": "Prétendre que \"le groupe social masculin est oppresseur\" et \"tous les hommes sont méchants\" sont synonymes est au mieux un malentendu, au pire une manipulation grossière",
+  "source_value_sha256": "bc87c769e46313f1abcbad810ba51dc1ee78307d020562677e976a2a12520c1a",
+  "target_value": "Claiming that \"the male social group is oppressive\" and \"all men are bad\" are synonymous is a misunderstanding in the better case and a gross manipulation in the worse case",
+  "target_value_sha256": "4cb1a494bbbabf7ffaaa2a5fce04ddcba89ccd8370d1d3df870b826b4f078710",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0169",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "031f7a7fc65f3ab012cdc4ad20332c157f72e5808b226943c1bcc17576af8eb3"
+}

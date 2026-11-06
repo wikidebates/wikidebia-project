@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "44ae2d3e2fe5e3017860b838ec481b83d9b7514066f2743bfa760f9eb141eefe",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le mouvement ouvrier socialiste a mené la lutte contre l'oppression des femmes dès le 19e siècle",
+    "identity_sha256": "b015df543efd13715850f999ef7349254cf5016fa0185b3effbf7aa1ad6dbe3c"
+  },
+  "source_value": "Le mouvement ouvrier socialiste a mené la lutte contre l'oppression des femmes dès le 19e siècle",
+  "source_value_sha256": "749fd1e9367b5c7d9e5625efe9c65ca0b5726eced52a253e578825b5f5c67c82",
+  "target_value": "The socialist labor movement waged the struggle against the oppression of women from the nineteenth century onward",
+  "target_value_sha256": "8638977518dcbcd4e68bca7d50701ebbf85f17e5593add8adc10908210ee6d2a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0273",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8aa733f9bc2b348057babccee2159e5251811608539763f9bcbfec81ca5aca18"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f1d0428f2d8fe7c807475b2551c6a72dfef6fcfaa54558f955be526f60db9a3f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les créateurs ne peuvent ignorer l'impact de leurs oeuvres sur la société",
+    "identity_sha256": "2953c4a555372c4a6c8f831aee5dbe88d8e23c9893e9ca64331cc96c0f4c8b01"
+  },
+  "source_value": "Les créateurs ne peuvent ignorer l'impact de leurs oeuvres sur la société",
+  "source_value_sha256": "028b53871acb3e9f5987e0737309f607a9a7273e74fee77e7f66bc961ac0dda1",
+  "target_value": "Creators can never ignore the impact of their works on society",
+  "target_value_sha256": "34509e4ded01a75664b198e612c5d829eba371c890f77a7262141d0f7d97b273",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0111",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a24bc9a25c8497e3215640e564a252df419532b8d1252762819c6ff8ca2793a3"
+}

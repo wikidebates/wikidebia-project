@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f9e3abfb76193b6300851f1e21bd38e58d8fab96cbf706e796d94853255f1497",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La sous-représentation des femmes dans les hauts postes normalise l'idée qu'elles ne sont bonnes que pour les postes subalternes",
+    "identity_sha256": "75c37bad2daf32144a369c9c380c3cf30d96137e6a9e1f77dfed98b1b0c17e7a"
+  },
+  "source_value": "La sous-représentation des femmes dans les hauts postes normalise l'idée qu'elles ne sont bonnes que pour les postes subalternes",
+  "source_value_sha256": "acc625fdd2c6924818dee4369f6ff389b5b9a118b7c98871c5089b98c660096f",
+  "target_value": "The underrepresentation of women in senior positions normalizes the idea that they are suited only to subordinate roles",
+  "target_value_sha256": "511cfa9fc3b7ec900b3c71f1c5a32a21fe313f48a3a1fd2667f05faa11c6b902",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0245",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9d192c292d2ad7303e407c8987b8a81b701b3a6cc265f882088a2083ccec1be2"
+}

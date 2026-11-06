@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0b373639facb3007464c4a7ab03ffe25635780af871ee419f4b95d03066f7fe7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes sont moins présentes dans les postes à hautes responsabilités et les filières \"masculines\"",
+    "identity_sha256": "d0fc388c0d2d241a2dd4d840c81ad2204a229b07147801164bd4cccb0939c3aa"
+  },
+  "source_value": "Les femmes sont moins présentes dans les postes à hautes responsabilités et les filières \"masculines\"",
+  "source_value_sha256": "c9851f94df0311e5e3be651dc87f7ebadb9c7014a4588e5b6c6799d89b1e9c26",
+  "target_value": "Women are less represented in positions of high responsibility and in \"male\" fields",
+  "target_value_sha256": "80b2855298760a970f98e24b4c24503187c041c5ef5dbdc2cd154f5583c96fc5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0026",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "54fd3c4f6dad70a675d57721dfbdfdd57e04c1ae4fb4d7f2996f2db3be5a6f68"
+}

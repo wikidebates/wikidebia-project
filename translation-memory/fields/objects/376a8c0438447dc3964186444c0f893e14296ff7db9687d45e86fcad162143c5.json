@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a3f556213d61c993bfcb2e7e3caa1f2cd3f5cc674666ddd13b5562ce4d84faaa",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme ne permet pas d'améliorer le niveau de vie des femmes",
+    "identity_sha256": "920e1a7a918e812542be79189a7dd60ab3e26ea59ec73eac8730de42a505b857"
+  },
+  "source_value": "Les inégalités de richesse entre les hommes et les femmes ne sont pas lié au sexisme, le féminisme n'offre aucune solution efficace pour réduire les inégalités de richesse entre les hommes et les femmes.\n\nLes inégalités de richesse entre les hommes et les femmes s'expliquent par des inégalités de richesse de manière générale. Donc pour baisser les inégalités de richesse entre les hommes et les femmes, il faut baisser les inégalités de richesse entre les gens de manière générale.",
+  "source_value_sha256": "fd3307400e8a12bd7559829a2f4383cd55c972871da9e011bcd6c67c49ddaecb",
+  "target_value": "Wealth inequalities between men and women are not linked to sexism, and feminism offers no effective solution for reducing wealth inequalities between men and women.\n\nWealth inequalities between men and women are explained by wealth inequalities in general. Therefore, to reduce wealth inequalities between men and women, wealth inequalities among people in general must be reduced.",
+  "target_value_sha256": "363ad687107e387d8cbd440355ef899d69c7fdec6586437015815a2c0c530d7e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0135",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "376a8c0438447dc3964186444c0f893e14296ff7db9687d45e86fcad162143c5"
+}

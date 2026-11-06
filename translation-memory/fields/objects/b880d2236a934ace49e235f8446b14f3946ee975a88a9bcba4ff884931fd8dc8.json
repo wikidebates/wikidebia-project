@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "15bbe0cd7dc74d07e600b068d0e8d89c7eab4c26fbfe93b39870431dd9ad2256",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La lutte contre le sexisme se confond avec un climat puritain qui compromet la création",
+    "identity_sha256": "528021febe4b56d5c49877e07e2333427e39c5a72ac0893ee3892b4bfb99cd81"
+  },
+  "source_value": "La lutte contre le sexisme se confond avec un climat puritain qui compromet la création",
+  "source_value_sha256": "d5249ebec5d370117fea9cd0fb1832ceb2ce27d803fc20faebd8aeff8a338133",
+  "target_value": "The fight against sexism merges with a puritanical climate that compromises artistic creation",
+  "target_value_sha256": "be787e8172a1b54d7634fe3c12af49e8b0c88cdc70d4a83334eda0a0f12245af",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0204",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b880d2236a934ace49e235f8446b14f3946ee975a88a9bcba4ff884931fd8dc8"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "304d5258864fe6596dfc47dc734f4672a7a344249452d6db3a07200fd0f61d3b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les plaintes pour viols constituent l'écrasante majorité des plaintes refusées illégitimement",
+    "identity_sha256": "4823ae61732d0f832e0b98a2d1b3e9859c315e627621ddaf22ba469d59c4b304"
+  },
+  "source_value": "Les plaintes pour viols constituent l'écrasante majorité des plaintes refusées illégitimement",
+  "source_value_sha256": "d0295adddd242c43d71e4bfbafa47fda673f24e49c00f2237fdc1c68971c3e20",
+  "target_value": "Rape complaints constitute the overwhelming majority of complaints illegitimately refused",
+  "target_value_sha256": "2490411d8983215ab614ae19d4db3a7b292bc75f83d2379a42c604610ea1ebb3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0161",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b73f0bba2745718cdc96a2c61a6d0c77ee8aa16243a6a9cb1435179f61fec51b"
+}

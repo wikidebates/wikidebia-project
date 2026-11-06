@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7fdc8833996d6b5a03919568aaf9d92ff341e95c36024b3b9ebda09deb6fc703",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les \"féministes\" wokes ne sont pas de vraies féministes car elles ne critiquent presque jamais le patriarcat non occidental",
+    "identity_sha256": "3d187a2fa2a35a060986e69e56b752dd0a7f123419d90d8a98bdf5a144c6a5fb"
+  },
+  "source_value": "Les \"féministes\" wokes ne sont pas de vraies féministes car elles ne critiquent presque jamais le patriarcat non occidental",
+  "source_value_sha256": "143fd4ad73c92e52c9cdbc8c90aa4f92e4262b624df352134ea5f03bd463a4ad",
+  "target_value": "\"Woke\" feminists are not real feminists because they almost never criticize non-Western patriarchy",
+  "target_value_sha256": "1e887136c3e3da9f0638d00bbb3f988ef73e6d48fc70acd1e49e46c69ac75fe6",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0333",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4802a4da0bef2ce98fc9387f2944c1c09f7f92930b7ccd5b6c40b19d3bba0ec7"
+}

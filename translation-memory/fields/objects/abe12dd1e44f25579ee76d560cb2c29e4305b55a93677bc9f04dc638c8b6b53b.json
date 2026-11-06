@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ee677741d3d5da3ecafe5874499d0f9404a8dab1ba22c3048161b68b363b28da",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme risque d'importer en France des dérives du féminisme américain",
+    "identity_sha256": "3bdad4d1475a9d828d64601d0c5062250abadb72daa78900cc83831bb9730885"
+  },
+  "source_value": "Sincèrement, je trouve que les relations entre hommes et femmes sont plus agréables en France qu'aux États-Unis. Metoo va sans doute aggraver la défiance qui existe déjà ici entre les deux sexes. D'ailleurs, MeToo n'a pas été initié par les féministes radicales. C'est le prolongement d'un mouvement amorcé depuis longtemps sur les campus américains et connu sous le nom de Title IX, nom d'une mesure adoptée en 1972 pour obliger les universités à financer à parts égales les équipes de sport féminines et masculines. Au fil des ans, son application s'est étendue à la lutte contre le harcèlement sexuel et les discriminations. Title IX a fait beaucoup pour l'égalité entre les sexes mais les meilleures intentions sont souvent perverties. La question du consentement, largement reprise par MeToo, l'illustre: est-il raisonnable, par exemple, qu'une femme puisse retirer son consentement après l'acte sexuel parce que, le lendemain, elle apprend que son partenaire lui a menti sur sa situation matrimoniale? […] Vous n'imaginez pas cependant à quel point les féministes sont divisées. Les plus radicales ne cherchent pas à en finir avec le patriarcat mais à prendre leur revanche en instaurant le matriarcat. L'homme blanc de plus de 50 ans est la cible préférée de ces féministes, mais elles s'en prennent aussi aux femmes blanches, accusées de ne pas être suffisamment conscientes des privilèges «associés» à leur couleur de peau. Alors pour répondre à votre question: non, ce genre de féminisme, si l'on peut dire, n'est pas une alternative au trumpisme puisqu'il est lui aussi, une manifestation de la «fracturation identitaire» qui mine les États-Unis.",
+  "source_value_sha256": "d8643e3ebe27ab8a78edc5f489090613c7702fdebae411aac9a92aae46867cb5",
+  "target_value": "Honestly, I find relations between men and women more pleasant in France than in the United States. MeToo will probably worsen the mistrust that already exists here between the sexes. Besides, MeToo was not initiated by radical feminists. It is the continuation of a movement that began long ago on American campuses and is known as Title IX, the name of a measure adopted in 1972 to require universities to fund women's and men's sports teams equally. Over the years, its application expanded to combating sexual harassment and discrimination. Title IX did much for gender equality, but the best intentions are often corrupted. The issue of consent, widely taken up by MeToo, illustrates this: is it reasonable, for example, for a woman to be able to withdraw her consent after sex because she learns the next day that her partner lied to her about his marital status? [...] Yet you cannot imagine how divided feminists are. The most radical do not seek to put an end to patriarchy, but to take revenge by instituting matriarchy. White men over 50 are these feminists' favorite target, but they also attack white women, who are accused of not being sufficiently aware of the privileges 'associated' with their skin color. So, to answer your question: no, this kind of feminism, if it can be called that, is not an alternative to Trumpism, since it too is a manifestation of the 'identity fragmentation' that is undermining the United States.",
+  "target_value_sha256": "bd33258e1e575068bc559ebf9ef528d058e40de3d3e0740a0ae54a1446f7b2fc",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0018",
+    "target_path": "citations/A0018-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "abe12dd1e44f25579ee76d560cb2c29e4305b55a93677bc9f04dc638c8b6b53b"
+}

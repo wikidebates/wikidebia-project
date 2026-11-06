@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "706113ca2aeef5747632390e7278592903dd7f6f7f5d523a49adf5913b81e94b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le discours féministe soutient la victimisation des femmes",
+    "identity_sha256": "e8ebc6839a80400024371bb6724d363aef804c77c475ac085351dea450b0e519"
+  },
+  "source_value": "Virginie Despentes théorise sur le sujet de victimisation de viol dans son essai King Kong Théorie en 2006. En s'inspirant de Camille Paglia, féministe américaine elle exorte les femmes à prendre le risque, indisociable de la condition féminine, par souci de liberté et pour de ne pas vivre sa vie à moitié. En cas de malheur, ne pas se victimiser et encaisser sans nier ou oublier. Polémique pour les défenseurs de victimes qui y voient une tribune à la banalisation du viol et entrave toute leur démarche dont leur fond de commerce repose sur le reconnaissance des victimes.",
+  "source_value_sha256": "35ee639734c64332dfa43dca3e5584c1c6d7375212356bf3204a4ede4292d638",
+  "target_value": "Virginie Despentes theorized about rape victimhood in her 2006 essay \"King Kong Theory.\" Drawing on the American feminist Camille Paglia, she urges women, for the sake of freedom and in order not to live only half a life, to accept the risk she regards as inseparable from being a woman. If misfortune strikes, they should avoid seeing themselves as victims and endure it without denying or forgetting it. This is controversial among victim advocates, who see it as a platform for normalizing rape and as an obstacle to their entire approach, whose livelihood depends on recognizing victims.",
+  "target_value_sha256": "be74b771b39356b1abdec0772ff475b5eb46ed525a163c5f756644bbc8b25759",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0017",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b0a08df880a4f43c7e6b96338103464eda7a26ca17220d9c68ed20424a74a967"
+}

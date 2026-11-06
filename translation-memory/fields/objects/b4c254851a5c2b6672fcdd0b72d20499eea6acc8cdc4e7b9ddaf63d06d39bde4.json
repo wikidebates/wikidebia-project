@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "73aa6f4b57d83aac0edcc13c43a9c8077bdead4f432f0bbb9dda3ee5f1fc4d1b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le co-fondateur et actuel co-dirigeant de Facebook est un idéologue conservateur",
+    "identity_sha256": "6fa1a87c124326b90ad728fda6883dd804570b4e0a1c567a5a497ace955b8cef"
+  },
+  "source_value": "Le co-fondateur et actuel co-dirigeant de Facebook est un idéologue conservateur",
+  "source_value_sha256": "a2a0f8962342958c061e8c1e9254cf5cb22e7915012f42ef847140c0fa92f39b",
+  "target_value": "Facebook's cofounder and current co-leader is a conservative ideologue",
+  "target_value_sha256": "a5633c1171eb58e0812d6094dbee607dee186d2cd64e2a8e783e3178a05f01be",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0160",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b4c254851a5c2b6672fcdd0b72d20499eea6acc8cdc4e7b9ddaf63d06d39bde4"
+}

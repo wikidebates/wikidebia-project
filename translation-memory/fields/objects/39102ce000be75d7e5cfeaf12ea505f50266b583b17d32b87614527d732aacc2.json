@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "dd9442cb5777b3e172066c3fb5953ccb734133f7156a652f15b35ab15fa122ce",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les victimes doivent être traitées avec respect, quel que soit leur sexe",
+    "identity_sha256": "022596d5c48d572947880afb9a74544a649eb546eecdc7cd2026d170fc89c1a7"
+  },
+  "source_value": "Même si les hommes constituaient 0.1% des victimes, rien ne justifierait de les mépriser, qu'ils ne sont pas grand choses voir rien du tout, qu'ils n'ont pas vraiment été victime puisqu'ils sont des hommes. Une victime, quelque soit son sexe, est une victime.",
+  "source_value_sha256": "0745f97a679f56aa88db9377d1e39289e8f53a3786da378cfd0a034c16968682",
+  "target_value": "Even if men accounted for 0.1% of victims, nothing would justify treating them with contempt, saying that they amount to little or nothing at all, or that they were not really victims because they are men. A victim, regardless of their sex, is a victim.",
+  "target_value_sha256": "584757027519c1e0caac760b2e1050c73a629c0046583c34961298836cfe4458",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0036",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "39102ce000be75d7e5cfeaf12ea505f50266b583b17d32b87614527d732aacc2"
+}

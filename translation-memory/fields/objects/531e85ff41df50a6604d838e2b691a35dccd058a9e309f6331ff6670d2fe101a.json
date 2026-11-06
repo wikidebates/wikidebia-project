@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "db9131ed14271bab445d70b1fddd94d1d306edf40a4e516430be3134b137088e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les \"attaques misandres\" restent bien gentillettes comparées aux attaques misogynes",
+    "identity_sha256": "f64ed7d390c056ec2c6da9c7d50dadb86ea6fa9e9c327ac76453e7eb42e3ec70"
+  },
+  "source_value": "Les \"attaques misandres\" restent bien gentillettes comparées aux attaques misogynes",
+  "source_value_sha256": "4cafaac8cc3661b26c0d631fb34ebc30c3a900dd82eef69d680fd782496c0e87",
+  "target_value": "\"Misandrist attacks\" remain very mild compared with misogynistic attacks",
+  "target_value_sha256": "9a2d9ba5bb11eb2ef65fb6744dee94ebc89deaefdf2ccf6d5d40cecf15a9b592",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0099",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "531e85ff41df50a6604d838e2b691a35dccd058a9e309f6331ff6670d2fe101a"
+}

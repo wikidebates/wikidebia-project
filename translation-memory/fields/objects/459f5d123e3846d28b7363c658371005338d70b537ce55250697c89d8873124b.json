@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d2d048035786eb3de456d2ef225ee5b07c719d3ffe1c75ba4e4400112e584ed5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'homme prend encore trop de place dans l'espace public (Manspreading et Manslaming)",
+    "identity_sha256": "732558fcf01042937c66d110b821efc3b8085a4fc7d7480cac322aab64de48f8"
+  },
+  "source_value": "L'homme prend encore trop de place dans l'espace public (Manspreading et Manslaming)",
+  "source_value_sha256": "cb21fe2ace92e50ad0b9c315ffb1cb68cbf4ecced57758363e48ad85bd5ef45c",
+  "target_value": "Men still take up too much space in public places (Manspreading and Manslaming)",
+  "target_value_sha256": "1b3114f5a9f144677c0f327381d490687f994a4ffa63f3222cf4778578fdbb76",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0071",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "459f5d123e3846d28b7363c658371005338d70b537ce55250697c89d8873124b"
+}

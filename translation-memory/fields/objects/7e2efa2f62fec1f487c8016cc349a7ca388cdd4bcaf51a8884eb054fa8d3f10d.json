@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4af11fa26e4d600cc97c052d0182af67a506a6fa77190a0c3c42729643c691f5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'immense majorité des données en la matière sont altérées par des biais statistiques très importants",
+    "identity_sha256": "684e3f20d67f795c995be2b761530ebc768c635bc76508185bb1652abfb5d9ef"
+  },
+  "source_value": "L'immense majorité des données en la matière sont altérés par des biais statistiques très importants",
+  "source_value_sha256": "47019dc6d8ce89c2ffa7ffd0613359b4c1e018ad080e9ee17c91b545913be560",
+  "target_value": "The overwhelming majority of data on the matter are distorted by very substantial statistical biases",
+  "target_value_sha256": "85a398cd454fc0c338199255f32f89815b65d401e51ac9c1f3f897a881f84be8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0260",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7e2efa2f62fec1f487c8016cc349a7ca388cdd4bcaf51a8884eb054fa8d3f10d"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "75a9979ae2052d7018f961e9db4b685c94dba0de0990557a975b0fb4c037eced",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Même les revendications de gauche modérées et/ou légitimes suffisent à radicaliser les conservateurs",
+    "identity_sha256": "2e0b23a430de3531854775810138e07c7be1a3ae0b1933004753d8fc2a4084b1"
+  },
+  "source_value": "Même les revendications de gauche modérées et/ou légitimes suffisent à radicaliser les conservateurs",
+  "source_value_sha256": "57346f89921251521d9a48db30dea65bf781f2079c11e438650461645ec0c292",
+  "target_value": "Even moderate and/or legitimate left-wing demands are enough to radicalize conservatives",
+  "target_value_sha256": "fe746f64d297b85f0f2acdd057e8132be0ec387ffedc3754f9f1bcf445b9300c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0267",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "aacd694f730909c5d22ccfc23143815472c62da9de54334c272b014a0f6ef5a6"
+}

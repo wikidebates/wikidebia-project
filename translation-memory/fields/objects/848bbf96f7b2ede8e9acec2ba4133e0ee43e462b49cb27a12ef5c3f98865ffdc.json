@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b505634b08ab99f7e6fb9a234e335ef2398a58021b976e19b56a0e29d93f6f92",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Certains activistes wokes utilisent des méthodes fascistes pour agresser ceux qui les contestent",
+    "identity_sha256": "48258483585f9c620da13bd93ad6d9e7c520619aca5ff88e6e0a7d6dbccd0ae1"
+  },
+  "source_value": "Ces deux femmes, devenues célèbres pour leur combat contre les dérives de l’idéologie transgenre, sont régulièrement la cible de menaces de mort émanant d’activistes d’extrême gauche. Avec ce communiqué, un nouveau seuil de violence a été franchi. ''« C’est la plus grave menace de mort que j’aie jamais reçue'', déclare Marguerite Stern au JDD, ''c’est un communiqué terroriste. On assiste à l’apparition d’un terrorisme trans. »'' ''« Des gens sont prêts à nous tuer, nous avons peur de mourir »'', confie Marguerite Stern, qui a porté plainte avec Dora Moutot.",
+  "source_value_sha256": "980108c5830de4e155e4604e0f30e57c67cafcdfe9f33766682366f4d85b1e78",
+  "target_value": "These two women, who became famous for their fight against the excesses of transgender ideology, are regularly targeted by death threats from far-left activists. This statement crossed a new threshold of violence. ''“It is the most serious death threat I have ever received,” Marguerite Stern told the JDD. “It is a terrorist statement. We are witnessing the emergence of trans terrorism.”'' ''“People are ready to kill us; we are afraid of dying,”'' says Marguerite Stern, who filed a complaint with Dora Moutot.",
+  "target_value_sha256": "67f5fc22f00fe0d7177f2a83f7d992f01687faf5032a85900d83d81bd6fe3e2d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0312",
+    "target_path": "citations/A0312-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "848bbf96f7b2ede8e9acec2ba4133e0ee43e462b49cb27a12ef5c3f98865ffdc"
+}

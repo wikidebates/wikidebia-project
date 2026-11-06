@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9dd6e8dbe2fbd730f383c924a4a8dcb11dc6458c18ade8b6177e9d4212d95fca",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La censure la plus à craindre ne provient pas du \"wokisme\"",
+    "identity_sha256": "a4498de8239b45c57738f39e9502baecc44e6f513c95b7cd0771de18cb5c5325"
+  },
+  "source_value": "L'extrême droite parle de manière étrangement passionnée des censures pour la plupart imaginaires qui viendraient de la gauche tout en faisant preuve d'un silence assourdissant aux censures bien réelles dont son propre camp se rend coupable. On se retrouve dans une réalité orwélienne où le défenseur le plus vocal de la liberté d'expression s'avère être son principal fossoyeur.",
+  "source_value_sha256": "0a348b6db868c05848abab05b8f0fa01c7eaf284ec47c032db7662979fd4bb63",
+  "target_value": "The far right speaks with strange passion about the mostly imaginary censorship supposedly coming from the left, while maintaining a deafening silence about the very real censorship committed by its own camp. We find ourselves in an Orwellian reality where the most vocal defender of freedom of expression turns out to be its principal gravedigger.",
+  "target_value_sha256": "5e0810c37966313941694f1330619cb2e7ab6a02f55ed86f00691c0992e6e4b3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0311",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3689867f5a224b6b3d4e3adaf470511ed7c196672fe1cc959ecf628900c3eae6"
+}

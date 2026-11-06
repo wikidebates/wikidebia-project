@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9f5fba9476faa416df4de4e9515dac066ca34a32401b60d86475233177b88848",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'oppression des femmes est apparue avec le développement de sociétés divisées en classes sociales",
+    "identity_sha256": "737a128bffeb50f5444488fec8c4832cd4279864d0189ad509c7d4946ab1096e"
+  },
+  "source_value": "L'oppression des femmes est apparue avec le développement de sociétés divisées en classes sociales",
+  "source_value_sha256": "4cf29933d0d915ffe2750c20b634436ce7d6d60feb2c9979d44d78b2e84f8932",
+  "target_value": "The oppression of women emerged with the development of societies divided into social classes",
+  "target_value_sha256": "65f4156fd061793aafc39da52d2d3fa4d72628f8488ea57230243a7784a55108",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0078",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5759297da6e28f9bfc045c16785cc7a0a89b01c049a57864a01d23c163ba64a0"
+}

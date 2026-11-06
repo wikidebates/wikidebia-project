@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "96ae962ac5c371788910c93b60c12462561f88e3cf1e5c5f26df55d73cbb18b4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La misandrie est une réponse à la misogynie et se veut majoritairement non violente",
+    "identity_sha256": "8e3716ece0463e198397791a59d5a9cf3d63eba39f549b1d32721ba9134b52d0"
+  },
+  "source_value": "La misandrie est une réponse à la misogynie et se veut majoritairement non violente",
+  "source_value_sha256": "439cd6ef459855344445d5ad2efc66d52aedafb4cc5df4b56852fb4c8e67197b",
+  "target_value": "Misandry is a response to misogyny and is intended to be predominantly nonviolent",
+  "target_value_sha256": "380a9ad08288677b36b7608376d1953e8e62b75aa335a8a70d4aa955aab4e07e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0097",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8bb6591cec4da573188dcb52c1346b970ffc9d770c4dcc0eabca70f116903e31"
+}

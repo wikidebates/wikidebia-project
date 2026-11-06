@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "62e8006f67d313bcdc9beab414c594d17bb0ef41b65bfce7e9c9e8c5013ca8dc",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Certains pseudo-féminismes ne sont que des idéologies réactionnaires qui ne disent pas leur nom",
+    "identity_sha256": "ba08b060d36095a4a205fea1bdc30be4266b035c6bfbfc4e91782778240c52a8"
+  },
+  "source_value": "Certains pseudo-féminismes ne sont que des idéologies réactionnaires qui ne disent pas leur nom",
+  "source_value_sha256": "cca5f5105c51eec17bf12816fd26387ebb6f33ec1974d2e8e1e7c29a532ce428",
+  "target_value": "Some pseudo-feminisms are nothing but reactionary ideologies that do not reveal their name",
+  "target_value_sha256": "ad985930e216689398171c47172b0adf0f9d7670014ecf175fc6413d14b6bb87",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0162",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "cdef562c605746f21d6fe9fad4bf2a9d5fdf87806768d162a4c5925697861653"
+}

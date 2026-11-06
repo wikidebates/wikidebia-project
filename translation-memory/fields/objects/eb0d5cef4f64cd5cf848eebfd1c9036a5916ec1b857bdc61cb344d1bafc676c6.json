@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b5af6b73637df5113713a82cb18b0b17a9b4bddc67158218e814fa650fe2a6b1",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La culture woke est une alliée du féminisme radical",
+    "identity_sha256": "b6541c9d534997a88bd08a7914398d7f4ed98828a3a6b42da268d40a3fc963ea"
+  },
+  "source_value": "La Woke culture est un allié du féminisme radical",
+  "source_value_sha256": "49918a3a8433f64225a5e298285c61c5d86f6d221c82b632e785c4ece8429fd5",
+  "target_value": "Woke culture is an ally of radical feminism",
+  "target_value_sha256": "c4f7e9320559f8943d2e93aadaa563cbcddd561033de69f6caaf6facfaabbbb9",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0125",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "eb0d5cef4f64cd5cf848eebfd1c9036a5916ec1b857bdc61cb344d1bafc676c6"
+}

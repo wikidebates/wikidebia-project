@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "df473c48f13a0c645794da1397706ceadc84a7277016deddbfb070ceeb201a5b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "C'est pour sauver la gauche que plusieurs intellectuel(le)s luttent contre le wokisme",
+    "identity_sha256": "99525eed24b6a578c5e304848bece854a794a128b0c24f8e9eb18d9a1270a26e"
+  },
+  "source_value": "'''Aujourd’hui, l’anti-wokisme n’est-il pas un marqueur de l’extrême droite ? Ron DeSantis et Donald Trump aux Etats-Unis, Eric Zemmour en France ou même [https://www.lexpress.fr/idees-et-debats/jean-francois-braunstein-en-russie-poutine-utilise-les-idees-woke-contre-l-occident_2180887.html Vladimir Poutine en Russie] ont tous anglé leur discours là-dessus…'''\n\nC’est pour ça, je pense, que mon livre a été traduit en douze langues. Il va même être publié en arabe. J’ai demandé à un confrère syrien comment ce livre pouvait intéresser un éditeur égyptien. \"Ah, les gens à gauche en ont simplement assez des concepts du postcolonialisme, et sont ravis qu’on les questionne\" m’a-t-il répondu. Mais c’est aussi ce pourquoi des amis m’ont déconseillé d’utiliser le mot \"woke\" en titre, car il a été considérablement instrumentalisé par la droite. Pourtant, dès la première page, je me définis comme une socialiste. Par ailleurs, on n’écartera pas l’extrême droite en faisant comme si la pensée woke était un non-problème ou un fantasme inventé par la droite pour faire taire toute demande de justice sociale. Au contraire, si les progressistes de gauche sont incapables de dénoncer les excès de la pensée woke, cela poussera des personnes dans les bras de la droite.",
+  "source_value_sha256": "8d0ead70da130d3a0376846d67bac82cf44060adee780f8bb5350b53b0d0fde4",
+  "target_value": "'''Is anti-wokeism not a marker of the far right today? Ron DeSantis and Donald Trump in the United States, Éric Zemmour in France, and even [https://www.lexpress.fr/idees-et-debats/jean-francois-braunstein-en-russie-poutine-utilise-les-idees-woke-contre-l-occident_2180887.html Vladimir Putin in Russia] have all framed their discourse around it...'''\n\nThat is why, I think, my book has been translated into twelve languages. It will even be published in Arabic. I asked a Syrian colleague how this book could interest an Egyptian publisher. “Oh, people on the left are simply tired of the concepts of postcolonialism and are delighted to see them questioned,” he replied. But that is also why friends advised me not to use the word “woke” in the title, because it has been heavily instrumentalized by the right. Yet on the very first page I define myself as a socialist. Moreover, we will not push back the far right by pretending that woke thought is a nonissue or a fantasy invented by the right to silence every demand for social justice. On the contrary, if left-wing progressives are unable to denounce the excesses of woke thought, this will drive people into the arms of the right.",
+  "target_value_sha256": "2872a7fea7742c5c6d813f40937572c0ebdc3d945141ad9ecc6b7fee2d471399",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0310",
+    "target_path": "citations/A0310-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ab2a58d4a1c5c76462b5b982744bca91a35182fddbf7077633472fe8e7c30717"
+}

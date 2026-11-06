@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9e77a4a25e9fcd1282986f85f5ef191cc92dd5d005ded314502c0bb16743acb4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le traitement des femmes en Occident est très loin d'être irréprochable",
+    "identity_sha256": "ae150cdc915de434cd0d1899586c89cacbd982b86c4893683ee6c29a4237eb8a"
+  },
+  "source_value": "En occident, on est encore très loin du traitement égalitaire. Un simple coup d'oeil sur les statistiques fait voler en éclat le mythe d'un occident qui traiterait bien les femmes.",
+  "source_value_sha256": "a184802e79d3b7104ca83f4b6e2d25391c3ef4167d482ff1d07a380add3aa9d9",
+  "target_value": "The West is still very far from equal treatment. A simple glance at the statistics shatters the myth of a West that treats women well.",
+  "target_value_sha256": "c666a86a5535310128f79e9f610b3ec5872ab8a4e9f137d26f0135313900c098",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0240",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f608228809c762417c8d66c937f29ccf0bdb47a6a2b76771489aa3848e382a35"
+}

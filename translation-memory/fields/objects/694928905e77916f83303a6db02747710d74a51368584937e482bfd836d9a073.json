@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0db7cc2cd842960637b530d519f52dd0135a0ee94b1e556a9d0ed9515f02c9dc",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La diffamation n'implique pas nécessairement le mensonge",
+    "identity_sha256": "3c1049dd71ec9fa65018ed9db841087196e2d549e770bcf1cb3781e272d6b23d"
+  },
+  "source_value": "Le concept de diffamation est souvent confondu avec celui de calomnie, or toutes les juridictions ne les considèrent pas comme des synonymes. Pour celles qui ne le font pas, l'atteinte à la personne est une raison suffisante pour qualifier une diffamation, la véracité ou non des propos n'entre pas en ligne de compte. Ainsi, que quelqu'un ait gagné un porocès en diffamation ne signifie aucunement que les propos diffamatoire étaient mensongers.",
+  "source_value_sha256": "29a6254516a109b047aa41ff81cf8877a75e5263c66e03048ec3adc46216eed2",
+  "target_value": "Defamation is often confused with slander, yet they are not regarded as synonyms in all jurisdictions. In those that do not, harm to the person is sufficient for a statement to qualify as defamatory; whether the statement is true simply does not enter into consideration. Thus, the fact that someone won a defamation case in no way means that the defamatory statements were false.",
+  "target_value_sha256": "5518ac27cb9667db7727e25b093b134147354d95aea9f57568b431250bb64cbd",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0223",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "694928905e77916f83303a6db02747710d74a51368584937e482bfd836d9a073"
+}

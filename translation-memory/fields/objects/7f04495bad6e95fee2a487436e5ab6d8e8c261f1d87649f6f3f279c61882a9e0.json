@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9d7464498572efa9ca54a41fb3c4e4ded49ea0222009318aa1402439de565c1b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les différences physiques entre hommes et femmes ne justifient pas les inégalités sociales",
+    "identity_sha256": "b462ecc7951d05278058d56c42f1f90faccfffd56fef084d76f828a43643084c"
+  },
+  "source_value": "Les différences physiques entre hommes et femmes ne justifient pas les inégalités sociales",
+  "source_value_sha256": "c9082dd60364a3acd5411d63830cbf482d2a4364f30af038dd2eb4d27dbf49c3",
+  "target_value": "Physical differences between men and women do not justify social inequalities",
+  "target_value_sha256": "478591ddbf70462c8ca1506dcfa9f05c47c8070afe108e464b2d13dafaf82d97",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0209",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7f04495bad6e95fee2a487436e5ab6d8e8c261f1d87649f6f3f279c61882a9e0"
+}

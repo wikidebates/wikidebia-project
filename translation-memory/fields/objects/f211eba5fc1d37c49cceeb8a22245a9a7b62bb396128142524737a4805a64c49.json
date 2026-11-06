@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "201c51fb94084cc0503bfbdc09c7781e1a103b0ab5978284b8225df76650c5ed",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme est le meilleur allié de la démocratie",
+    "identity_sha256": "6f9b416e6b07a475a9126888b417121a0486b78d5114ea03f480a921dfacf655"
+  },
+  "source_value": "Le féminisme est le meilleur allié de la démocratie",
+  "source_value_sha256": "3735eb060c925aa79a78c1b94c9163ea7f2eb98696927d8bcc72ecbcda83f8d5",
+  "target_value": "Feminism is democracy's best ally",
+  "target_value_sha256": "a322f700f19b6c369fe986398acf810a99afb10a1466d1f76f600685721d1194",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0065",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f211eba5fc1d37c49cceeb8a22245a9a7b62bb396128142524737a4805a64c49"
+}

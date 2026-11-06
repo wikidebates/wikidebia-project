@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ea17730986d9b19698b418862a137b982578df2a9ec45633b6f69a6c26399833",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les féministes ont fini le combat et ont obtenu l'égalité depuis longtemps",
+    "identity_sha256": "3a13fb8bfe3870c709818fd693a869bb7c6a1f3e60cbba583b4a3e3ed141c57e"
+  },
+  "source_value": "Les féministes ont fini le combat et ont obtenu l'égalité depuis longtemps",
+  "source_value_sha256": "a437b33f243a7f2202c47654bda3facf6d3bd144a0434bdad43194a62a5f69c7",
+  "target_value": "Feminists finished the fight and achieved equality long ago",
+  "target_value_sha256": "178135f39c957b57653ac0958b5b0caf002c0664863b04043b146b258a6da87b",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0012",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c721d889ee3f9612b32e24c4b63b7d08cf5d64b9cac1d8e6c6e7e885379b1023"
+}

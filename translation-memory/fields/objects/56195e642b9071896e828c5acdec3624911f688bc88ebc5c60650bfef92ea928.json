@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "87f968e7917aebb7d06356cf5ebdde5537d9a8245af6375284d9fbd156816793",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Tant que le capitalisme existera, l'oppression des femmes se maintiendra",
+    "identity_sha256": "0e4546bd96fc441a18f2cb8f9ca462eb56ccc6427363a9195519c4f8a07176f9"
+  },
+  "source_value": "«À la base, ce n'était pas mon terrain de mobilisation. Je me suis mobilisée sur les questions de féminisme et de violences sexuelles. Par une forme de contagion, tu te rends compte que les systèmes sont liés». Pour elle, le système capitaliste est incompatible avec le féminisme qu'elle porte.",
+  "source_value_sha256": "8cef066b8f1bbebc1cf933f86911601672a55c0ed87ab8a4c80401ce9d9d738a",
+  "target_value": "This was not originally my area of activism. I became involved in feminist issues and sexual violence. Through a kind of ripple effect, you realize that the systems are connected. For her, the capitalist system is incompatible with the feminism she advocates.",
+  "target_value_sha256": "39cf9b1d7c61fb73a17470f91f914a0547e048de2e9ca640f709ddac2716294f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0010",
+    "target_path": "citations/A0010-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "56195e642b9071896e828c5acdec3624911f688bc88ebc5c60650bfef92ea928"
+}

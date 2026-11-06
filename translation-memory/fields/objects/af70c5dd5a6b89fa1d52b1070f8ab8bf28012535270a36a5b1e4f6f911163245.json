@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7fc91f3814f42f9b9d678061fc0d1b7442b734cbc948c17d0caad52ec6e5dd1c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes de manière générale ne pâtissent en rien de cette sous-représentation",
+    "identity_sha256": "85d51fb749945b5b8606665e185c122ae109d03a8a9c019adf32af9ae855756a"
+  },
+  "source_value": "Cette sous représentation n'a aucune conséquence négative sur la vie des femmes de manière générale. Les hommes de manière générale ne tire aucun avantage de la surreprésentation des hommes dans ses postes et ses filières.",
+  "source_value_sha256": "64e2b40e6b4197c2ea5153f95611388977d80d722439eafdce505f5b78921551",
+  "target_value": "This underrepresentation has no negative consequences for women’s lives in general. Men in general derive no benefit from men’s overrepresentation in these positions and fields.",
+  "target_value_sha256": "aa2ee9f0197e354f71dbaecffa46fe5f713ff74afa500b62233e90d229d07c75",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0137",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "af70c5dd5a6b89fa1d52b1070f8ab8bf28012535270a36a5b1e4f6f911163245"
+}

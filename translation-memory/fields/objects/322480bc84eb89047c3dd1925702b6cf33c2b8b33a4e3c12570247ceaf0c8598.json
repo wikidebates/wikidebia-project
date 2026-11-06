@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "abd577e44a3c91b09b020a6f32b4f8b40615a10e3d27ccb81dec5f14e059e982",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le terme \"woke\" n'a pas de réelle signification",
+    "identity_sha256": "1976bb4684216c5e7a5f2af0c1e40e37c21821ae2e417c418dcfd908d4069108"
+  },
+  "source_value": "Le terme \"woke\" n'a pas de réelle signification",
+  "source_value_sha256": "bb111a32f7615138b1e4e6737b362d9374c0c6e7816e84a648f655a00dcfd539",
+  "target_value": "The term \"woke\" has no real meaning",
+  "target_value_sha256": "ef818ff2284a69d7a92bb11abfbc790d4aa6de25cd92ecc21ace204a175e86b4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0219",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "322480bc84eb89047c3dd1925702b6cf33c2b8b33a4e3c12570247ceaf0c8598"
+}

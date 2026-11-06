@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9d2a02543cabb635144530a1715fc8cfa4527993e96211c8e87766f7a2dab5c6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les fémonationalistes n'ont aucun problème avec le sexisme de l'occident",
+    "identity_sha256": "023c5760366bf88ff8e1c51769be1ebf8534aaaaf32f610693e62ca2792096ad"
+  },
+  "source_value": "Le fémonationalisme applique un double standard face au sexisme, et ne s'en offusque que quand ça lui permet de taper sur les boucs émissaires de l'extrême droite. Sa réaction face aux agressions sexistes dépend donc de facto de la couleur de peau de l'agresseur.",
+  "source_value_sha256": "18f98a46930a0bf8ecd01b2badd6fe900a61f840a62f84dbb8ec11472c5696dc",
+  "target_value": "Femonationalism applies a double standard to sexism and takes offense only when doing so enables it to attack the far right’s scapegoats. Its response to sexist assaults therefore depends, in practice, on the aggressor’s skin color.",
+  "target_value_sha256": "83b4ec12559af3e2864c2701cce12b37f82e229b819b0aee5a33ad42fbb27afa",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0235",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "624f3126bd8bbaddd5d0a0e91bf504bbda8e94973010e468f16654891cdb56d4"
+}

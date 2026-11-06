@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e53d56b72a6d7ce887e0d9867b08bd3a132172456aef19f979c8e4e9fb9d4cd9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Tout le monde peut subir des violences quel que soit son sexe",
+    "identity_sha256": "0cbe3a5a75c02bfab5e29d0174b0497a3c9fe0c34f7fc3d1ee8ed4ec0149764f"
+  },
+  "source_value": "74% des victimes d'homicides sont des hommes, la moitié des victimes d'agression physique sont des hommes, la moitié des personnes victimes de viol sont des hommes.",
+  "source_value_sha256": "87568e76e113fa115f51625e4b90b51e4d897aeb4718fe9026cc3d6329ad38e9",
+  "target_value": "74% of homicide victims are men, half of the victims of physical assault are men, and half of rape victims are men.",
+  "target_value_sha256": "a8f8774da1f70f9af76502a43770671d1b48fc95e7f7271c5224bcae991c82f0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0034",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "dc2f111587e54babc6d556c02a26b462378052b50b76c19f340c94fa10255264"
+}

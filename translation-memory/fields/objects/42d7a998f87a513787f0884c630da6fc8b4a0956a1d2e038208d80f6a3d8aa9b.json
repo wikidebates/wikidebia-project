@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2055ade9a191ea98a6527e79cd5f0206ef50f923c5257c315d76d8f83dc8582e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les victimes d'agressions sexistes subissent une victimisation secondaire",
+    "identity_sha256": "180094b65ef1be0fdcf3ff4f7c29f8150c92009b4ff3c9eba69c268090ff309f"
+  },
+  "source_value": "En plaidoierie, [L'avocat de Dépardieu] est revenu sur le traumatisme: \"votre trauma, quand bien même l'agression aurait bien eu lieu, il est relatif! C'est pas Guy Georges\" s'est-il mis à crier. \"\"Pendant qu'il me violait, il me cassait les dents\", je veux bien qu'il y aie des flashs, mais pas là\".\n\nEt la misogynie est revenue , jusqu'à asséner qu'Amélie, qui n'a pas voulu assister à sa plaidoierie, chercherait surtout à se mettre en scène devant les caméras. \"On le voit tous les soirs à la télévision, elle aime plaire\", a-t-il lancé, lui reprochant même d'avoir parlé \"tout sourire\" sur TF1 en produisant des photos d'elle que son entourage a prises en l'espionnant pendant le procès. \"Les parties civiles passent leur vie devant la télé, sont très souriantes, très heureuses d'avoir ce mur de caméras devant elles. C'est juste ridicule\". Alors qu'il est le premier à courir les caméras à chaque pause.\n\nEt à son paroxysme sexiste: \"Je veux bien qu'Amélie ne lise pas ''Le Monde'' parce que c'est trop compliquée pour elle, mais ''Closer''\", a-t-il encore osé lors de sa plaidoierie. Affublant encore les féministes, venues manifester sur le parvis du tribunal, de \"demi-décérébrées\".\n\nIl ne s'agit bien évidemment pas de contester les droits de la défense, qui est libre de sa stratégie (le silence, le déni, ...), mais là, il ne s'agit pas de stratégie mais de méthode. Défendre n'est pas détruire, \"massacrer\" la victime.\n\nCes argumentaires qui n'en sont pas ont pullulé dans l'humiliation dans les cris, dans le stress pendant quatre jours, sans aucun intérêt pour la manifestation de la vérité. Rien ne justifie une pluie de hurlements (hystériques?) et d'injures. C'est violent, ultra-violent; on est diffamé, notre parole est moquée ou coupée.\n\nAmélie a déclaré après ce procès qu'il avait été presque plus traumatisant que l'agression elle-même. C'est bel et bien le but.\n\nLa justice n'en ressort pas grandie et l'image de la profession d'avocat.e s'écorne un peu plus.",
+  "source_value_sha256": "fdbf084ca474cc0487d6ffcf0de0ccb82223bc60ef17d97ff2d0f0ca6c9ae647",
+  "target_value": "In his closing argument, [Depardieu's lawyer] returned to the issue of trauma: 'Your trauma, even if the assault did indeed take place, is relative! This is not Guy Georges,' he began shouting. ''While he was raping me, he was breaking my teeth'—I can accept that there may be flashbacks, but not in this case.'\n\nAnd the misogyny returned, culminating in the assertion that Amélie, who did not wish to attend his closing argument, was mainly seeking to put herself in the spotlight in front of the cameras. 'We see her on television every evening; she likes to please,' he declared, even reproaching her for having spoken 'with a broad smile' on TF1, while producing photographs of her taken by people around him who had spied on her during the trial. 'The civil parties spend their lives on television, smiling broadly, very happy to have this wall of cameras in front of them. It is simply ridiculous.' Yet he is the first to rush toward the cameras at every recess.\n\nAnd at the height of the sexism: 'I can accept that Amélie does not read ''Le Monde'' because it is too complicated for her, but ''Closer'',' he again dared to say during his closing argument. He also described the feminists who had come to demonstrate on the courthouse forecourt as 'half-brain-dead.'\n\nThis is obviously not about challenging the rights of the defense, which is free to choose its strategy (silence, denial, etc.); here, however, this is not a strategy but a method. Defending does not mean destroying or 'slaughtering' the victim.\n\nThese so-called arguments proliferated amid humiliation, shouting and stress for four days, without the slightest interest in establishing the truth. Nothing justifies a barrage of (hysterical?) yelling and insults. It is violent, ultra-violent; one is defamed, one's words are mocked or cut off.\n\nAfter the trial, Amélie said that it had been almost more traumatic than the assault itself. That is precisely the aim.\n\nJustice does not emerge enhanced by it, and the image of the legal profession is tarnished a little further.",
+  "target_value_sha256": "240381d1a3326872d2a4e25812859abe53718e9a5d4ab651d257a7689136b7c8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0047",
+    "target_path": "citations/A0047-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "42d7a998f87a513787f0884c630da6fc8b4a0956a1d2e038208d80f6a3d8aa9b"
+}

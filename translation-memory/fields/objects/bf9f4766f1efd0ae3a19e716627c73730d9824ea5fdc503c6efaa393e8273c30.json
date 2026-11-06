@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5ccff51aae22e23073aa5e7750710e46827b5b5a7de66a886d6c2209b6ee71bf",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'homme cherche encore à donner des leçons de vie à la femme (Mansplaining)",
+    "identity_sha256": "852660f98d216f44fd80c799598481d7a69961504963406d0ab3b1863697c1fc"
+  },
+  "source_value": "La différence entre un vis et un clou … dans mon propre magasin de bricolage",
+  "source_value_sha256": "556d82a1b908f72f1ff600c2b3fcd3940134c06833024a51d6144f70743a4ae7",
+  "target_value": "The difference between a screw and a nail... in my own hardware store",
+  "target_value_sha256": "fe91f249aaf639de69d93f08b13eb0d413c08dc792d2ebf86779bb3a1392c85c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0067",
+    "target_path": "citations/A0067-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "bf9f4766f1efd0ae3a19e716627c73730d9824ea5fdc503c6efaa393e8273c30"
+}

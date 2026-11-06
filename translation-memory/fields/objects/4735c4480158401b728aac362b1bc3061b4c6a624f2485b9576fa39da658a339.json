@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ba70caf95b70a923785ae6da951254ec58f0fc1498ec58b80ff0383d688735a8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme risque d'importer en France des dérives du féminisme américain",
+    "identity_sha256": "3bdad4d1475a9d828d64601d0c5062250abadb72daa78900cc83831bb9730885"
+  },
+  "source_value": "Le féminisme risque d'importer en France des dérives du féminisme américain",
+  "source_value_sha256": "0879ea710aedda4d9517f994e96d87a01968d983619cd3dbb427ae78cb47a224",
+  "target_value": "Feminism risks importing excesses of American feminism into France",
+  "target_value_sha256": "5be0425fda859d798a34d9d51f0c5ed6b70ea104dadbd2db4503982dcdf46aac",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0018",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4735c4480158401b728aac362b1bc3061b4c6a624f2485b9576fa39da658a339"
+}

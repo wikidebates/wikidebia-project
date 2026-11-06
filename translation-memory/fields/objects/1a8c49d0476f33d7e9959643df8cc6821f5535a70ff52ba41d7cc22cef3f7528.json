@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "73d533221168028ae51d8250a2b6230abdcf5e3fa8669d10a7bceaa8527a7144",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Si les hommes ne tiraient pas profit de cette représentation, ils ne dépenseraient pas autant d'énergie à en verrouiller l'accès aux femmes",
+    "identity_sha256": "47272e89b9f78eae58f46024c0a57264566ebc72f76d300e46fa22abc2116f22"
+  },
+  "source_value": "Si les hommes ne tiraient pas profit de cette représentation, ils ne dépenseraient pas autant d'énergie à en verrouiller l'acces aux femmes",
+  "source_value_sha256": "d24102ece950f9f9e251fe62e37f3741da22125c089c848ea59120393446ef81",
+  "target_value": "If men did not benefit from this representation, they would not expend so much energy denying women access to it",
+  "target_value_sha256": "ea5862ecf1472409b80cc66f6b0520f827684653338d45e93eb520e73ed26595",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0254",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1a8c49d0476f33d7e9959643df8cc6821f5535a70ff52ba41d7cc22cef3f7528"
+}

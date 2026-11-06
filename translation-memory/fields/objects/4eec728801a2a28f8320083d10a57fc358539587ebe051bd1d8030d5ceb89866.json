@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7601ebbb9f53d1c17cfb1ab5358988b84e82b13e91c3b0a0e844e10ab180d151",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'opinion publique se fiche éperdument des violences faites aux hommes quand ça ne lui permet plus de taper sur le féminisme",
+    "identity_sha256": "1a8ce6540d307c44d55c4c884b08cd3ddc98ff20800d84f2c55d1d3ee3389d04"
+  },
+  "source_value": "L'opinion publique se fiche éperdument des violences faites aux hommes quand ça ne lui permet plus de taper sur le féminisme",
+  "source_value_sha256": "f6292e511f718d62af54d747c05caa25d39ea2f235b92c3e94119e0307b2fbbd",
+  "target_value": "Public opinion is utterly indifferent to violence against men once it cannot use it any more to attack feminism",
+  "target_value_sha256": "3b5ede26066e169d549e35d09b30f955ab22fb6b681a05ff99476aa5fddfd95e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0153",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4eec728801a2a28f8320083d10a57fc358539587ebe051bd1d8030d5ceb89866"
+}

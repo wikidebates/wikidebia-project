@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1e15df2ff1e6dda5879846b17fac4db0cce5666d1a4024f4fa72a7bcdb8b9bd7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les crises économiques s'accompagnent systématiquement d'une montée des idéologies réactionnaires",
+    "identity_sha256": "151aa111d74633a5864506ac95ffd9b988a455780b88ad63354e1c4f2ee57391"
+  },
+  "source_value": "La marche vers le progrès n'est pas linéaire et est tributaire du climat socio-économique ambiant qui, pour peu qu'il se dégrade suffisamment, peut suffire à enclencher une dynamique de recul.",
+  "source_value_sha256": "7fd0afa582fe63fae5480cc32d85a5c529b5cded1ec7f37ead62fa2b6fc02b06",
+  "target_value": "The march toward progress is not linear and depends on the prevailing socioeconomic climate, which, if it deteriorates sufficiently, can be enough to trigger a regressive dynamic.",
+  "target_value_sha256": "9fb5a2cc857441a4e06220af2d42dbeb4e9c6936618aa6c1f17dbff94d20aa94",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0087",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "2b22490d238aaf6966f5decb53225f44dec9123d729bd967d006eb45934506f3"
+}

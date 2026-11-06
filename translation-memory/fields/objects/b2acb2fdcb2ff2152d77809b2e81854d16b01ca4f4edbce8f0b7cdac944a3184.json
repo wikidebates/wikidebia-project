@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5fbb30f0fbf68269148ec9d20169cf323cd6f7c1d47511e803dde8e24463d046",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les soi-disant silences médiatiques de la gauche sont des fake news propagées par les médias d'extrême droite",
+    "identity_sha256": "3719a21e51091bfba20615c7ec60583ef24524dfbfb9f3e16d21cc4626c233ff"
+  },
+  "source_value": "à entendre l'extrême droite, la gauche entretiendrait un storytelling disant en substance \"tous les musulmans sont gentils\", donc silencierait tout fait divers pouvant le mettre à mal, ce qui est évidemment faux, c'est juste que son traitement des affaires est plus nuancé que le sempiternel BOUGNOULES=CACA si cher aux médias réactionnaires.",
+  "source_value_sha256": "52a1783313832bbdc1f43f85232ac959d3492bf853a014a74221365cb17e43e6",
+  "target_value": "According to the far right, the left maintains a narrative essentially saying “all Muslims are nice” and therefore silences various news items if they could undermine it. This is obviously false; its handling of cases is simply more nuanced than the perennial RAGHEADS=POOP so dear to reactionary media.",
+  "target_value_sha256": "d502854be77b5edf733adab5d10f80c3e28577d0ca53b36183b5d03127ac8e98",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0134",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b2acb2fdcb2ff2152d77809b2e81854d16b01ca4f4edbce8f0b7cdac944a3184"
+}

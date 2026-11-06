@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "58a2ce85407bb6e25fc1bd15d1907f2b386cfb9ad1e2ff4ed780ecd0d27a4893",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes subissent un grand nombre de violences",
+    "identity_sha256": "b0d3039a5445ff12a3c5baa9c249de5ca0b72caeea0e0f6ce06a2ae41f54a898"
+  },
+  "source_value": "Les femmes subissent un grand nombre de violences",
+  "source_value_sha256": "9e6cfb17d5a3816ee6a23769030b0eea166be5b97938ddc0e6906f751415f381",
+  "target_value": "Women experience a great deal of violence",
+  "target_value_sha256": "fb407e4b0f94e6d34d5a9475fa62a98a5ba3ab9c1bc0deb0252e89da0c662e91",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0002",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4856fc05121126ff93a4d0d72505d1bcd01c974169314baa9ebcd8a41d8eeb53"
+}

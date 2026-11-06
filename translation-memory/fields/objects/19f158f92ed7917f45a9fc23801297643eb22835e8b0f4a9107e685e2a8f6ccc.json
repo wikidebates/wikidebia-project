@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4b5b3d91a32e7030d2424510107486b301ac2653728f86ff21f8a2db45010db8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'usage du mot \"délation\" sert surtout à diaboliser les dénonciations légitimes sans avoir à argumenter",
+    "identity_sha256": "981f6a778376c90f0186a015133b1ca05e1f76e7cce55d9958c4dda16509b211"
+  },
+  "source_value": "L'usage du mot \"délation\" sert surtout à diaboliser les dénonciations légitimes sans avoir à argumenter",
+  "source_value_sha256": "619cc089f5bb96878d59ff8afc8f4477ba4a6164302f676e927219514c9df338",
+  "target_value": "Use of the word \"informing\" mainly serves to demonize legitimate denunciations without having to argue",
+  "target_value_sha256": "8a58dcb6f3145d32b22d22b8c22ede280de81bdb68e70c89839431f2d2891499",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0227",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "19f158f92ed7917f45a9fc23801297643eb22835e8b0f4a9107e685e2a8f6ccc"
+}

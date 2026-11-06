@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "81718505ed342b80b266469bc9a0f7fbb72d515a3b1121ff77c72ce5227d504f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Des influenceurs font de la misogynie leur principal fonds de commerce",
+    "identity_sha256": "538132e25cac4cd5118af676c1770d26db991024a42851c5dde9bd4dad0cca45"
+  },
+  "source_value": "Des influenceurs font de la misogynie leur principal fonds de commerce",
+  "source_value_sha256": "61a91202b874265d46d3efa6b285b13dad61f6c82836b2600bdc59185d029149",
+  "target_value": "Some influencers make misogyny their main stock-in-trade",
+  "target_value_sha256": "6cf9d1fb9f94eb91fd9ba53ff0fc6441a6b7ac7cda26053b9a4504c55fd3b34f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0054",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "48246e7226e33e3eb0b22cdd0114fc2350529d089d8897fd7da0d5d77deb1228"
+}

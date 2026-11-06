@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f059996d4535aa46e25362158f73f9c7bbcc651eb71a854396f1458493466cf6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les fémonationalistes ne proposent rien contre le sexisme qui sévit en occident",
+    "identity_sha256": "91bd1dc00a0a3e20a108198aaf59b32d1e8bc6437f06710fd0bf8a0af36d23b8"
+  },
+  "source_value": "[Le RN et Reconquête] ne proposent aucune mesure concrète pour lutter contre les violences sexuelles, et cette lutte est instrumentalisée en disant que les violences seraient perpétrées par des personnes étrangères, alors que tous les chiffres montrent que les auteurs de violences sont issus de tous les milieux sociaux. Éric Zemmour est par ailleurs accusé d’agressions sexuelles par huit femmes ; il n’est pas le seul, mais avoir un président mis en cause pour de tels faits serait un crachat aux visages des victimes",
+  "source_value_sha256": "4f844aedff92ffea77a72e68ea02558226f6e3af3c4d7f144d7e2e8842390e30",
+  "target_value": "[The RN and Reconquête] propose no concrete measure to combat sexual violence, and this struggle is instrumentalized by claiming that violence is perpetrated by foreigners, even though all the figures show that perpetrators come from every social background. Éric Zemmour is also accused of sexual assault by eight women; he is not the only one, but having a president implicated in such acts would be a slap in the face to victims.",
+  "target_value_sha256": "1938085b910a3ab3bf28554eb1c4cab9514646bcccf2b03aec657df7106834b4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0330",
+    "target_path": "citations/A0330-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "cc0f6fceb5512f38ec291b67afb15b62570eac497164501c82bc93efd06418f4"
+}

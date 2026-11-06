@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2a11991f1f42dbffc9f5a4bf60cb913173810442959d782e1438470054af84ec",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "C'est dans les moments où l'organisation sociale est entièrement remise en cause que les rapports entre hommes et femmes peuvent être métamorphosés",
+    "identity_sha256": "bed85cc1297271864623fc7e98bb4918dc2af75dde0e2e06d2df3b3b25bc7b8a"
+  },
+  "source_value": "C'est dans les moments où l'organisation sociale est entièrement remise en cause que les rapports entre hommes et femmes peuvent être métamorphosés",
+  "source_value_sha256": "307a13001e7d829e1f07229b0fca3e41adf39521e17eca24cbb24cd6c0b9f8d0",
+  "target_value": "Relations between men and women can be transformed when the entire social organization is called into question",
+  "target_value_sha256": "4dc849d330e37396545bd3a1cb92722c65dbb7856278a217651f22f2a1291527",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0180",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "bc8bfccc0923ca447280577cd9a86e67d7c2e9ad369bcf9822d5f532f904e4f7"
+}

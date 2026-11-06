@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e93ebe457e34af9c8bcd63297cb3a1625f2250e2bae6a8fe796aee5a6927a568",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le terme a été dénaturé et a fait l'objet d'une réappropriation",
+    "identity_sha256": "fcfbb6b580af17bae4460ca229a6a37a5aecdaf8e4952dcf8c73a1587616b98e"
+  },
+  "source_value": "Si on prend la définition littérale, « woke » veut dire « être éveillé ». Il apparaît aux États-Unis d’abord pour définir les personnes sensibles et conscientes par rapport aux violences policières qui se multiplient, et celles qui luttent contre d’autres formes de discriminations (sexisme, racisme, homophobie, etc.). Mais le terme est progressivement détourné et vidé de son sens.",
+  "source_value_sha256": "5aab6dd5b84d93cd99ada0147979392a94c6691c35d97b1d41a51cc71e496fe4",
+  "target_value": "If we take the literal definition, “woke” means “to be awake.” It first appeared in the United States to describe people who were sensitive and alert to growing police violence and those fighting other forms of discrimination (sexism, racism, homophobia, etc.). But the term was gradually appropriated and emptied of its meaning.",
+  "target_value_sha256": "39913874aa1006fa5cf110c36d638f5318e9b59bcfbf7e76cbd21e486f888d12",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0201",
+    "target_path": "citations/A0201-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b220f7ef33499918558b30756ddb47f46a51d73e7170eba43aeff4163b7e5f4d"
+}

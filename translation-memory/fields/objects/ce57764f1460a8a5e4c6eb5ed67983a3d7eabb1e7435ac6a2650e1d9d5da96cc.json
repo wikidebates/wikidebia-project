@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "704c59bbc1f1a71f264cc5bd23991ca78268dfde735ecd14b6dbcee2a40903fa",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les critiques les plus vocales du \"wokisme\" sont réactionnaires",
+    "identity_sha256": "d6cf36960278feb08f78305b8a1b0587103e3c178824598e02e4836d8b79c358"
+  },
+  "source_value": "Les critiques les plus vocales du \"wokisme\" sont réactionnaires",
+  "source_value_sha256": "fafbf1ff555022ce7cf87436bd9f8601ad57f80b74ae697354c0ac5fcb733102",
+  "target_value": "The most vocal critics of \"wokeism\" are reactionaries",
+  "target_value_sha256": "e12cbc8ddaa61359748a8ccbbca74993f26adf03eb50dd51e046238548b14ab8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0319",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ce57764f1460a8a5e4c6eb5ed67983a3d7eabb1e7435ac6a2650e1d9d5da96cc"
+}

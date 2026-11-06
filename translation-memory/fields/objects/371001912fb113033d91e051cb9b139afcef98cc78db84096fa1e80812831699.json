@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "486963c18eb1ac8d6c416665aeda9c32a973aa4c4e1ea99dce8e7d82a25dca29",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La parité homme-femme en politique est injuste",
+    "identity_sha256": "ecbf88d24deef51851ea81ab0944b83a5d634e84752b7b9a796870edb75bda55"
+  },
+  "source_value": "La parité homme-femme en politique est injuste",
+  "source_value_sha256": "011e796a70d1ecb067cd0fafaad7ec406ac9849844af37dc6d1ef638eef2505a",
+  "target_value": "Gender parity in politics is unfair",
+  "target_value_sha256": "868a9385bffacc913ad6be2ac053f70fa68894775f7661d78037dda5b5c8ccbc",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0032",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "371001912fb113033d91e051cb9b139afcef98cc78db84096fa1e80812831699"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6898f73f350b36fa049ca5a7998de50db13c1e1ac4d53015ad9bb6150e119847",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Toutes les causes peuvent apparaître comme des tâches trop grandes, le combat n'en vaut pas moins la peine",
+    "identity_sha256": "653e7605d6505148a6e4be11844f0a33365717e6c7eed7129140284e8d395843"
+  },
+  "source_value": "Toutes les causes peuvent apparaître comme des tâches trop grandes, le combat n'en vaut pas moins la peine",
+  "source_value_sha256": "1b9fe4b613bb9b327215664ed9e243cabe91c5d8a5fe1fca265c7fe43336131e",
+  "target_value": "All causes can appear to be tasks that are too great, but the struggle is no less worthwhile",
+  "target_value_sha256": "62cc1dd9bf28c722bd86ab5218ea5c7aa439bd01165351671c0a87ca1577b50c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0095",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "71c45a5d53cd7a0c6d3ffd9900c3449c21ae1a0e35cef94f7e00f92de8cb5950"
+}

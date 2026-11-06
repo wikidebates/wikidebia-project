@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d51599fad14e727a7aa7046f6a6f03e994aaeb57bbca527d3181085e1295309d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "C'est important pour certaines femmes d'être reconnues comme victimes",
+    "identity_sha256": "8acb56784f34011876737548040e052ddbc32416999f4e78d7bd97f171b5fd44"
+  },
+  "source_value": "C'est important pour certaines femmes d'être reconnues comme victimes",
+  "source_value_sha256": "b929c258b0fa791fe2694e85289af3ef2385ce2c5f1a5dd99abbcf35a42c8231",
+  "target_value": "It is important for some women to be recognized as victims",
+  "target_value_sha256": "ccb6f6ddfd6ffa223d902b38c6aec48cfdf9483b30e6c5474e752332b84e54c0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0107",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "bab9603fcb5fa582055a8df36f52f5ea63688a54fa138997a7547e1b6ef2ee69"
+}

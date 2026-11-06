@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7deaee6ec27a23b10b55ccc83814f55843e08274796263df6c99125c5eda9868",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Faux, l'idée que les femmes n'ont pas marqué l'histoire accrédite l'idée qu'elles valent moins bien que les hommes",
+    "identity_sha256": "1b0d90127aa235bbf18525c66449efbbaac80e2f83a3481cca2aa8730740a851"
+  },
+  "source_value": "Faux, l'idée que les femmes n'ont pas marqué l'histoire accrédite l'idée qu'elles valent moins bien que les hommes",
+  "source_value_sha256": "8a1505b4b9ba99c8e68467d9d90013b8decd2a7789f3c90de84f169aad4bbc92",
+  "target_value": "False: the idea that women have not made history supports the idea that they are worth less than men",
+  "target_value_sha256": "20f9761a15c67a3fcb91639aa07c8d0547e2dd8581ec19955742a25a315e0d32",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0253",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "be9496f05fcc604854e2540909d3365a34d975400e83f370b593448cd6601cb1"
+}

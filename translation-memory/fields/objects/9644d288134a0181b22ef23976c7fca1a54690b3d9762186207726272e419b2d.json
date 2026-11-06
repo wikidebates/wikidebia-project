@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e29dcc18bbbe63491e263eb28a93ac1b4baa6a7495b32c11fb97af5d249cb5a6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'humour à propos d'un groupe discriminé contribue à normaliser l'exclusion et les violences qu'il subit",
+    "identity_sha256": "4257007dc0fa56df76aa1aea766c17319754bb163a013017d80beb336553dc81"
+  },
+  "source_value": "L'humour à propos d'un groupe discriminé contribue à normaliser l'exclusion et les violences qu'il subit",
+  "source_value_sha256": "1e8b86703c46a6ccfe57558a5ef3dcdbc98cb5c42f2d1380ec9c58a651c997dd",
+  "target_value": "Humor about a discriminated-against group helps normalize the exclusion and violence it faces",
+  "target_value_sha256": "8ebe21456e5342048bec09b755b4a95bf554961b1bb0859b0abac6f974b39ad0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0304",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9644d288134a0181b22ef23976c7fca1a54690b3d9762186207726272e419b2d"
+}

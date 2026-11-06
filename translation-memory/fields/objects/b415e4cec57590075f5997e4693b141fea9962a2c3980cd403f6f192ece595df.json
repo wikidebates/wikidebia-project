@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5e1011f8e5a4aaa7020af70252d2733e7a45da567d81a3a7ddc605a4aa6f58e4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le whataboutisme ne fait avancer aucune cause",
+    "identity_sha256": "bd18ffc7bed90b1bdf5742a06da89a77212e6f630ec587a251b3fa7acbdc20c0"
+  },
+  "source_value": "Le '''''<span lang=\"en\">whataboutism</span>''''', également trouvé sous la forme '''''<span lang=\"en\">whataboutery</span>''''' et parfois francisé en '''whataboutisme''', est un [https://wiki.froth.zone/wiki/Sophisme?lang=fr sophisme] visant à dévier une critique par des références à d'autres griefs réels ou présumés. L'''<span lang=\"en\">[https://wiki.froth.zone/wiki/Oxford_English_Dictionary?lang=fr Oxford English Dictionary]</span>'' définit ce terme comme une « technique ou pratique consistant à répondre à une accusation ou question difficile en faisant une contre-accusation ou en évoquant un problème différent.",
+  "source_value_sha256": "4d6b20e145e1c6c93ce8a5b28455c47ad227b3ce463beaf1587ec44c49623b51",
+  "target_value": "The '''''<span lang=\"en\">whataboutism</span>''''', also found in the form '''''<span lang=\"en\">whataboutery</span>''''' and sometimes rendered in French as '''whataboutisme''', is a [https://wiki.froth.zone/wiki/Sophisme?lang=fr fallacy] intended to deflect criticism by referring to other real or alleged grievances. The ''<span lang=\"en\">[https://wiki.froth.zone/wiki/Oxford_English_Dictionary?lang=fr Oxford English Dictionary]</span>'' defines the term as a “technique or practice of responding to an accusation or difficult question by making a counter-accusation or raising a different issue.",
+  "target_value_sha256": "e78630a0d8c173eaccfafe7033942e0a08090271d0252dde69ac7243dcf06a20",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0155",
+    "target_path": "citations/A0155-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b415e4cec57590075f5997e4693b141fea9962a2c3980cd403f6f192ece595df"
+}

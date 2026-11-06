@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "aaa55b743f6a8e070a9929617c75b802eef4ccbbccc42d85915984037723626f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite prétend s'offusquer des harcèlements mais les applaudit quand ça l'arrange",
+    "identity_sha256": "79fe147a62babb790f533259a9a39824c2ec15856d1bd70a9ed1320c33a5a992"
+  },
+  "source_value": "L'extrême droite prétend s'offusquer des harcèlements mais les applaudit quand ça l'arrange",
+  "source_value_sha256": "4515101e6cdab45e50b89621d305af1d70eb4c869fba5d9cca725bf18a117411",
+  "target_value": "The far right claims to be outraged by harassment but applauds it when convenient",
+  "target_value_sha256": "3032e8bbf59eb892814cda0bed3db63f371ac5be3ab0031dd7b908facfa5e6d4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0217",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a6d44068858a515c1b87951656ef6404cdfe46ebc643842f2f555e2b220c09ce"
+}

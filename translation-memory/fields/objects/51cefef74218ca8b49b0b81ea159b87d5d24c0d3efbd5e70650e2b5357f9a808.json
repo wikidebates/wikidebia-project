@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "862c1e8992faf16e0bc92a89da68150f33404d40dd1185041c0aa21f5a663588",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La société punit les personnes qui se démarquent des rôles genrés traditionnels",
+    "identity_sha256": "88a3025ef6f2d45c78e13223073650deebceb76b5e5c0696d432b3613336083c"
+  },
+  "source_value": "La société punit les personnes qui se démarquent des rôles genrés traditionnels",
+  "source_value_sha256": "88c551a604aff2a879054d9669ad0775b4e3eb1d69855084c2ac540f724b493d",
+  "target_value": "Society punishes people who depart from traditional gender roles",
+  "target_value_sha256": "e382dc7c431c6f87281cb584f036fa9ef8c49734ee9c48cc7fb1d08743995e75",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0121",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "51cefef74218ca8b49b0b81ea159b87d5d24c0d3efbd5e70650e2b5357f9a808"
+}

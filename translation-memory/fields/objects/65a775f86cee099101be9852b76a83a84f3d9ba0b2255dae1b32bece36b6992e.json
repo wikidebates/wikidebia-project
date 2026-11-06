@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1e408277d369b07d6b4e11d30d1e3b341b397be1946e66f723be43f7225d0fda",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La lutte contre le \"wokisme\" est le paravent de l'extrême droite",
+    "identity_sha256": "12a5d8ed86d87443ddf83cb17baa1cddefca71c089120f45cbe221413a0b4d82"
+  },
+  "source_value": "Anti-wokisme et extrême droite se téléscopent de façon tellement récurrente qu'il est de plus en plus difficile de ne pas les considérer comme une seule et même idéologie.",
+  "source_value_sha256": "507148c894a0b26da3b1180697f77d3b1d63a1ca0aef561424bdcdef0afbdd0f",
+  "target_value": "Anti-wokism and the far right overlap so repeatedly that they are more and more frequently being regarded as one and the same ideology, and it is difficult not to see them that way.",
+  "target_value_sha256": "1c624524d756fd902cc5887af31a9261ac9dd9e6a5cb75dba3e762c330e177fe",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0218",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "65a775f86cee099101be9852b76a83a84f3d9ba0b2255dae1b32bece36b6992e"
+}

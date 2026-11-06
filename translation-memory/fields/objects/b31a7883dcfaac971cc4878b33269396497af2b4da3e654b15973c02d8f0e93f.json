@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "439b258e5955291c9dd9a9d27809d0bc9d2d9c5a1e450ad54503685f8d08b723",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme permet de dénoncer la masculinité toxique moderne",
+    "identity_sha256": "c3e7249123ad85b7cc0f5714053ba58f9576d0e1b87f5ea8a4408a9b7469fd60"
+  },
+  "source_value": "Au travers de nouvelles masculinités recontexualisées dans la modernité, l'homme cherche encore, parfois involontairement à assoir une certaine hégémonie. Occupation démesurée de l'espace, intervention intempestive dans une conversation en coupant la parole à une femme, discours moraliste inutile envers une femme, domination violente, mise en danger de soi-même ou d'autrui… Ce sont les nouvelles masculinités : concepts affublés d'un néologisme anglicisé qui se veulent percutants et compréhensibles à leur seule évocation.",
+  "source_value_sha256": "f12198a02208df0b720f5be2c012f545d573e8e32d8476e587277a38dbdb9ae5",
+  "target_value": "Through new forms of masculinity reframed for the modern age, men still seek, sometimes unintentionally, to assert a degree of hegemony. Taking up an excessive amount of space, barging into a conversation by interrupting a woman, lecturing a woman unhelpfully, violent domination, endangering oneself or others... These are the new masculinities: concepts given Anglicized neologisms intended to be striking and self-explanatory.",
+  "target_value_sha256": "c055bfc2200d6e3e746545cb4b1f3803714720b295f4c4c57c50b92ac03c086e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0008",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b31a7883dcfaac971cc4878b33269396497af2b4da3e654b15973c02d8f0e93f"
+}

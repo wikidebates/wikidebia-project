@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "147adc4497bf58af081cc5527b82328cf36dde8f0836e76b5fbe0512eb653dac",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La cancel culture est un bon moyen de demander des comptes aux personnalités qui jusque-là agissaient impunément",
+    "identity_sha256": "bd2883f4404475ca8093657cdb623875d83e37fc7dba8d2fdad3cf485b88d84d"
+  },
+  "source_value": "Un exemple parlant: le chanteur R. Kelly a pendant très longtemps exploité sexuellement des jeunes filles en toute impunité, et ce n'est que grâce à l'indignation populaire que ses victimes ont enfin pu obtenir une condamnation.",
+  "source_value_sha256": "1efb0caf934696f92e934d36641835249b80b5bce044c4b96254fa2a47211135",
+  "target_value": "A telling example is the singer R. Kelly, who sexually exploited young girls with complete impunity for a very long time; it was only through public outrage that his victims were finally able to secure a conviction.",
+  "target_value_sha256": "c9d59718933f82645c9e769e2d8d2460405579853d3eadafea89d9ea86b1c9f2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0307",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "bd850090ef8f245f2da6f4e531f01c5d97b2aa7846f5c92c47a8139212892d38"
+}

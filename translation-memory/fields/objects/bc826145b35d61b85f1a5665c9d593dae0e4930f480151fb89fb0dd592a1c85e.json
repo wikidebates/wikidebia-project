@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "11c869f3e8d4b4fd5d13929f468cabb28ab706a9ccd60ee3f020202ba5e58a2f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes écartent les jambes parce qu'on leur a appris qu'ils avaient le droit de prendre tout l'espace public",
+    "identity_sha256": "de66be0af7eb16af91d6280b5a39d6d762bd27af043840b7bf55a5ffecdc17d2"
+  },
+  "source_value": "Les hommes écartent les jambes parce qu'on leur a appris qu'ils avaient le droit de prendre tout l'espace public",
+  "source_value_sha256": "4bcddca5e0b99a2802d3b2ab1ffd9054c3894f3acd8313a54404cdb49ddf1e98",
+  "target_value": "Men spread their legs because they have been taught that they are entitled to take up all public space",
+  "target_value_sha256": "ed34ec3724598c6e3417ec3ffd94cce6def607c0f6de49136b6a384fca134ec4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0284",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "bc826145b35d61b85f1a5665c9d593dae0e4930f480151fb89fb0dd592a1c85e"
+}

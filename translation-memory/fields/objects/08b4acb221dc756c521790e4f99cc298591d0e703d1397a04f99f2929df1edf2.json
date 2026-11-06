@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b299132125492fc5e3ab76272e88a0c9b4bfede9ee4b7d0acee1d57199a7a4b4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme est traversé de controverses, critiquer \"le féminisme\" comme si c'était une masse monolithique est donc fallacieux",
+    "identity_sha256": "55ce9cf96637297423a28815550278d19ca7fc8824a6a9941969fe4592b803cb"
+  },
+  "source_value": "Le féminisme est traversé de controverses, critiquer \"le féminisme\" comme si c'était une masse monolithique est donc fallacieux",
+  "source_value_sha256": "0ce9028d94471d41ff41376483000bc4a989a488d5a9cac2de225295d0181d78",
+  "target_value": "Feminism is marked by controversies, so criticizing \"feminism\" as if it were a monolithic mass is fallacious",
+  "target_value_sha256": "d1d72f287a9e17aa53d843b9df40a222fb229ad6cd862268a8a569a7571c56e7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0173",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "08b4acb221dc756c521790e4f99cc298591d0e703d1397a04f99f2929df1edf2"
+}

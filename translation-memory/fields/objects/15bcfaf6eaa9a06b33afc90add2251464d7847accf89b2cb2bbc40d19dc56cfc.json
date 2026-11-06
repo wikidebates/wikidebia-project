@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8fe6c201b02bdcb4734835434cbc71ce21abf33675269a0325af0b3f8f9cd3d2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes sont moins présentes dans les postes à hautes responsabilités et les filières \"masculines\"",
+    "identity_sha256": "d0fc388c0d2d241a2dd4d840c81ad2204a229b07147801164bd4cccb0939c3aa"
+  },
+  "source_value": "En France\nEn 2018, il y a 42,5% de femmes administratrices dans les entreprises du CAC40. (38% en 2016, 30% en 2014). Source : CAC40, Baromètre IFA – Ethics & Boards de la Composition des conseils, juin 2018\nEn 2016, il y a 38,4% d’administratrices dans les entreprises du SBF120. (33,7% en 2015, 30,5% en 2014 et 27,3% en 2013) Source : SBF120, Palmarès IFA Ethics & Boards de la composition des conseils, février 2017. \nEn 2016, au sein des hautes instances décisionnelles des sociétés cotées sur Euronext Paris, les femmes représentent des 4,1% président.e.s, PDG, DG et DG délégué.e.s des entreprises du compartiment A (Big Cap), 7,9% de celles du compartiment B (Mid Cap) et 7,6% de celles du compartiment C (Small Cap). Source : HCE, Vers un égal accès des femmes et des hommes aux responsabilités professionnelles : la part des femmes dans les conseils d’administration et de surveillance, 10 février 2016.\nEn 2014, les femmes représentent 38% des créateur.rice.s d’entreprise (32% en 2010) et représentent 40% des auto-entrepreneur.se.s (29% en 2006). Source : Ministère du redressement productif, 2013, Ministère des affaires sociales, de la santé et des droits des femmes, Vers l’égalité réelle entre les femmes et les hommes, Chiffres clés 2016.\nEn mars 2019, il y a 1 femme pour 13 hommes dans le bureau et 2 femmes pour 31 hommes dans le Conseil d’Administration de l’Assemblée Plénière des Chambres d’Agriculture (APCA). Source : https://chambres-agriculture.fr/chambres-dagriculture/nous-connaitre/le-reseau-des-chambres-dagriculture/chambres-dagriculture-france/",
+  "source_value_sha256": "9d11ef28217c3f44faad00d8c86e009843cdf12ddd61f96ac65bf8d0d9b4dea1",
+  "target_value": "In France\nIn 2018, women held 42.5% of board positions in CAC 40 companies (38% in 2016, 30% in 2014). Source: CAC 40, IFA–Ethics & Boards barometer of board composition, June 2018\nIn 2016, women held 38.4% of board positions in SBF 120 companies (33.7% in 2015, 30.5% in 2014 and 27.3% in 2013). Source: SBF 120, IFA Ethics & Boards ranking of board composition, February 2017.\nIn 2016, within the highest decision-making bodies of companies listed on Euronext Paris, women accounted for 4.1% of chairs, chief executive officers, managing directors and deputy managing directors in compartment A companies (Big Cap), 7.9% in compartment B companies (Mid Cap) and 7.6% in compartment C companies (Small Cap). Source: HCE, Vers un égal accès des femmes et des hommes aux responsabilités professionnelles : la part des femmes dans les conseils d’administration et de surveillance, 10 February 2016.\nIn 2014, women accounted for 38% of business founders (32% in 2010) and 40% of micro-entrepreneurs (29% in 2006). Source: Ministry for Industrial Renewal, 2013; Ministry of Social Affairs, Health and Women’s Rights, Vers l’égalité réelle entre les femmes et les hommes, Chiffres clés 2016.\nIn March 2019, there was 1 woman for every 13 men on the bureau and 2 women for every 31 men on the board of directors of the Permanent Assembly of Chambers of Agriculture (APCA). Source: https://chambres-agriculture.fr/chambres-dagriculture/nous-connaitre/le-reseau-des-chambres-dagriculture/chambres-dagriculture-france/",
+  "target_value_sha256": "c6ba814762b463795bc4ab4594da016cceeecd1ed1ddbfdf0d571a0f2fb286a5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0026",
+    "target_path": "citations/A0026-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "15bcfaf6eaa9a06b33afc90add2251464d7847accf89b2cb2bbc40d19dc56cfc"
+}

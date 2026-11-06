@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3aa196464cf660f7b12f9aa7be45695b7ad9b40acd80a157fff1e95de27d4f61",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'argument du respect de l'égalité de genre est hypocrite et opportuniste",
+    "identity_sha256": "e16744cf586f3494c062831103d1bbbb298149c2167e65b4a71dd2666a2802ed"
+  },
+  "source_value": "L'argument du respect de l'égalité de genre est hypocrite et opportuniste",
+  "source_value_sha256": "8859f8745e704ddcf0a47cd9a23d41c09961e8c5649b5045c6f41ee4dee1a464",
+  "target_value": "The argument about respecting gender equality is hypocritical and opportunistic",
+  "target_value_sha256": "5e0d0529b21382b5f8e21e54df9954c1b55f805ea668a9627bf3204765dd6e03",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0328",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "365d3579c0fb03d45e2ae8941c733aebe4e877788111d2ee81dd85bafc8a6d2e"
+}

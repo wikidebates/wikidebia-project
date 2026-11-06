@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d82d7c195a03391f554f7954b9c366a125eb761183f6e123756a95725eb37d78",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il n'y a pas d'assignation naturelle mais chaque individu se construit et diffère de tous les autres",
+    "identity_sha256": "e8ae2d64a505eb87f921bb2c67f510bda2e83c1ddd1dc8538a3e8b7c316a3a82"
+  },
+  "source_value": "Il n'y a pas d'assignation naturelle mais chaque individu se construit et diffère de tous les autres",
+  "source_value_sha256": "cdb8a131154c6b8f9eae3deb7042aec5dcdc93e5851d8fff7ae9eae2dbc420e0",
+  "target_value": "There is no natural assignment, but every individual develops and differs from all others",
+  "target_value_sha256": "439ab0a769808cbf4582afd64c3cd8bb3ed462628a3e0b52bdb726bda9ef4374",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0120",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8b53a7b920db1c15991a52472bd4b41fed271f3d2eae6bf0ee85d71d21e17abd"
+}

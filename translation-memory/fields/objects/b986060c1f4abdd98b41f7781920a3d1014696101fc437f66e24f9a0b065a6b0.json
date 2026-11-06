@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5242b93972a933f70c3ef128fd3aedd12f86dd3e49c01a0ea9860f40608f8799",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le qualificatif de \"woke\" sert à diaboliser les concepts progressistes sans avoir à argumenter",
+    "identity_sha256": "bae338143751b08f1633eac8ae029ce32538f9630a79aa0fa38957a98fb90788"
+  },
+  "source_value": "La méthode est on ne peut plus simple.\n\n* woke = caca\n* n'importe quel concept progressiste = woke\n* N'importe quel concept progressiste = caca",
+  "source_value_sha256": "d4a09e41db025b7edfcfeef3e7912a33935b7f0f318e7ae79011fa5a58a8f218",
+  "target_value": "The method could not be simpler.\n\n* woke = crap\n* any progressive concept = woke\n* Any progressive concept = crap",
+  "target_value_sha256": "c2cd3d2f6d5058ce726a0c74f04879edcc5b63e814014ad8b3b223b56f1c84a8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0308",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b986060c1f4abdd98b41f7781920a3d1014696101fc437f66e24f9a0b065a6b0"
+}

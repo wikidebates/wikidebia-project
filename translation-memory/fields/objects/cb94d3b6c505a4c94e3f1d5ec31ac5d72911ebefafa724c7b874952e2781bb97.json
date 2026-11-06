@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3d33b7033aa70af919535046b1f99c76703a20284569eeba24f7440652b6d814",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La modération de Facebook est sexiste",
+    "identity_sha256": "0f52d66f39e52e53a13bee66aa189b4a5d5f490a8755cc5f738e07e4e8f0ff37"
+  },
+  "source_value": "Facebook : une modération déficiente et problématique\n\nOn peut en effet, à l’instar de Jezebel, s’étonner d’une sorte de double standard concernant leurs produits « pour adultes » (enfin, ce qui est considéré comme tel, parfois à tort) et pour la santé sexuelle. Ne voit-on pas trôner fièrement sur les pages du réseau social des publicités pour préservatifs, on ne peut plus explicites, vantant plaisir et sensations ?\n\nC’est donc bien une modération asymétrique envers les hommes et les femmes qui est à l’œuvre quand il est possible d’afficher des pubs pour des pilules contre les troubles de l’érection et de bloquer celles qui proposent du matériel pour renforcer son périnée après la ménopause.\n\nC’est ici une mosaïque d’algorithmes très complexe qui est en cause — Facebook se défend bien sûr d’avoir blacklisté des mots qui proscrivent ces publicités, comme « ménopause » ou « vagin ».\n\nMais on a ici affaire à un problème systémique. Le groupe Meta place les efforts de modération ailleurs, sur les armes à feu, le cannabis… Évidemment ce sont des sujets très importants, mais une fois de plus ce sont les femmes qui trinquent, avec leurs corps et leurs problématiques à nouveau invisibilisés.\n\nLes algorithmes seraient-ils sexistes comme l’avançait le livre L’intelligence artificielle, pas sans elles ?\n\nUne pondibonderie questionnable sur le corps des femmes est à l’œuvre, indiquant que leur anatomie et leurs problèmes doivent restés discrets. Cachez-moi ce corps post-partum que je ne saurais voir…",
+  "source_value_sha256": "c7f3c7b65e749a2e6f84f1eb7807f6a003c8437eeab04c5eab24d615fa8ffbfa",
+  "target_value": "Facebook: deficient and problematic moderation\n\nLike Jezebel, one can indeed be surprised by a kind of double standard concerning “adult” products (or what is considered adult, sometimes wrongly) and sexual-health products. Do we not see highly explicit advertisements for condoms displayed proudly on the social network’s pages, extolling pleasure and sensation?\n\nAn asymmetrical form of moderation toward men and women is clearly at work when advertisements for erectile-dysfunction pills can be displayed while advertisements offering equipment to strengthen the pelvic floor after menopause are blocked.\n\nA highly complex mosaic of algorithms is at issue here—Facebook of course denies blacklisting words such as “menopause” or “vagina” that would bar these advertisements.\n\nBut this is a systemic problem. The Meta group directs its moderation efforts elsewhere, toward firearms, cannabis, and so on. These are obviously very important subjects, but once again women pay the price, with their bodies and issues rendered invisible yet again.\n\nCould algorithms be sexist, as the book L’intelligence artificielle, pas sans elles suggested?\n\nA questionable prudishness concerning women’s bodies is at work, indicating that their anatomy and problems must remain discreet. Hide this postpartum body that I cannot bear to see...",
+  "target_value_sha256": "190cb77af462f1c38881ddb603afed35861f25753d2157e2f0cddeb7b016abdc",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0265",
+    "target_path": "citations/A0265-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "cb94d3b6c505a4c94e3f1d5ec31ac5d72911ebefafa724c7b874952e2781bb97"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "bfeed0d95510c0ac44812a6939fb2fb4d73658dff2b7e6f0fe48b3c709e9b829",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les droits et acquis sont gravement menacés",
+    "identity_sha256": "9db869205006048bdea0c91b1678a083f7d015f0f314eadabfa6206e8bceb9c8"
+  },
+  "source_value": "Partout dans le monde, y compris chez nous, des idéologies de nature à freiner voire faire reculer l'égalité de genre connaissent une large expansion. Plusieurs pays ont d'ailleurs déjà pris des dispositions en la matière.",
+  "source_value_sha256": "8f0ebede7c144f45f97bedbb6a047f989532200b6933c67c7dff765073c85e9d",
+  "target_value": "Across the world, including in France, ideologies liable to slow or even reverse progress toward gender equality are expanding rapidly. Several countries have already taken measures to that effect.",
+  "target_value_sha256": "999a0a29809f636512758388ac0891c81fae55c56bdbf0067bc8b138c4f63b11",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0006",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "836b75ced0f6385a600ea00bc3a14a524e01e37657d1886882d893c42fcf4304"
+}

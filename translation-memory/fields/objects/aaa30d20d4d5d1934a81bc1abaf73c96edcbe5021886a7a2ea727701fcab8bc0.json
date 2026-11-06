@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c8c9790d7408f3da2ddf0e5f42e4902cff7167dd3a9ec578eca5880242007d22",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes ont des raisons physiologiques d'écarter les jambes",
+    "identity_sha256": "4e80a524818efb1eccb9748ba66c1fc351061fa9da9ac96cd44f3387ac0fb09c"
+  },
+  "source_value": "C'est à cause des parties génitales.",
+  "source_value_sha256": "3b9129ed55ae4f393eb819ded149646b9fb96076cd47d8bda4219add492ef26c",
+  "target_value": "It is because of their genitals.",
+  "target_value_sha256": "7867a3f2fd93381ad9876f159288619c08faabeee6358a4960113f38812ab3d5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0188",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "aaa30d20d4d5d1934a81bc1abaf73c96edcbe5021886a7a2ea727701fcab8bc0"
+}

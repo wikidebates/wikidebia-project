@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "394391e813a65ec4709c77bfed6505f8f608b276e05ef5adaf7ee974a7e4e070",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La parité en politique n'est pas encore atteinte",
+    "identity_sha256": "e2a95bf957384cdad5a2ddc9022b94423ebf3e40ab911e0af98ae3c45f1a02b0"
+  },
+  "source_value": "Les femmes encore sous représentées en politique ont su envers et contre tout s'imposer. Le promotion 2019 de sciences po affiche 60 % de diplômées confirme une tendance. La politique reste un milieu aux fondements patriarcaux et est donc dotée d'un plafond de verre solide doublée d'un sexisme latent. Les femmes plus récentes en politique travaillent encore à assumer leur légitimité afin d'imposer leur voix et leurs idées.\n\nUn constat confirmé par le rapport du Haut Conseil à l'égalité des femmes est des hommes. Parmi les raisons invoquées :\n\n* le sexisme latent dans la sphère politique\n* des institutions avec un fondement patriarcal\n* un manque de légitimité rhétorique des femmes du fait de leur arrivée plus récente en politique (rappel : droit de vote des femmes obtenu en 1944 en France) et dans la fonction publique",
+  "source_value_sha256": "a51f7c77cb99970b2dfd4bcaaf0e6b7a0e9f4ceffb635cb859a18fed0126ed7d",
+  "target_value": "Although still underrepresented in politics, women have managed to establish themselves against all odds. The 2019 graduating class at Sciences Po, 60% of whom were women, confirms a trend. Politics remains a field with patriarchal foundations and therefore has both a solid glass ceiling and latent sexism. Women who entered politics more recently are still working to assert their legitimacy so that their voices and ideas prevail.\n\nThis finding is confirmed by the report of the High Council for Equality between Women and Men. The reasons cited include:\n\n* latent sexism in the political sphere\n* institutions with patriarchal foundations\n* women’s lack of rhetorical legitimacy because of their more recent arrival in politics (a reminder: women obtained the right to vote in France in 1944) and in the civil service",
+  "target_value_sha256": "614cfc753a8c235cdc62f584cee1b112d0a04850ce35951fef44286c10327677",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0031",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3f51d2586f2ab88632d7603577d1816b565951680b74c6cf17d6f7ccbe700c49"
+}

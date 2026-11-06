@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "29c6144072ad08e536d43e54cc45fd8c74553616a416a165e589e27570c7110e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Une femme au foyer peut être parfaitement épanouie",
+    "identity_sha256": "d29ceaeeea7a68ca2d790246e3b49d0a6065ed6bc82d01dd394526e467570106"
+  },
+  "source_value": "Un mouvement inspiré des années 50 et baptisé  le #tradwife (ou femme au foyer traditionnelle) prône une féminité qui s'épanouit dans le travail domestique et le soin du mari comme de la famille. Une extension d'un autre mouvement similaire appelé le \"fascinating womanhood\"et théorisé par Helen Andelin en 1967. Antiféministe, ce courant veut mettre en avant des valeurs traditionnelles reposant sur un échange mutuel : le devoir de mère, les tâches ménagères et le soutien moral attribués à la femme contre la sécurité du foyer et le support financier attribués à l'homme. Il apparait alors inutile voir dangereux pour la femme au foyer de s'aventurer à l'extérieur pour travailler, source de dispersion et de stress alors que tout ce dont elle a besoin est à la maison. Il prétend ré-instaurer un équilibre sain entre hommes et femmes, en accord avec leurs attributions biologiques.",
+  "source_value_sha256": "d0b9deda9941c696bc4f2bb4c7a0c827c119969c9b47d1e4ab6965b1ed24781c",
+  "target_value": "A movement inspired by the 50s and called #tradwife (or traditional housewife) advocates a femininity fulfilled through domestic work and caring for one’s husband and family. It is an extension of a similar movement called “fascinating womanhood,” theorized by Helen Andelin in 1967. Antifeminist, this current promotes traditional values based on a mutual exchange: motherhood, household tasks and moral support attributed to the woman in return for household security and financial support attributed to the man. It then appears unnecessary or even dangerous for a housewife to venture outside to work, a source of distraction and stress when all she needs is at home. The movement claims to restore a healthy balance between men and women in accordance with their biological attributes.",
+  "target_value_sha256": "3038adb5bb7ee68a8b4d23af09bc6840e6b9c4f5b26d3209ae55b04e02c9a547",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0142",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "43519121f9ff05c57907adece59a1cd40c5ec0914695714c9df089e857ca812f"
+}

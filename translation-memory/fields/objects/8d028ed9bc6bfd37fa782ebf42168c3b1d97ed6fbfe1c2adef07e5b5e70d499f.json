@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "85b5ab1fce06a26c0863105f48f606f1b619b44dbf3c55bb5c5791fdc97b06b7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme moderne flirte avec la misandrie (haine des hommes)",
+    "identity_sha256": "20b068c2a737544861b5710cd49aa806a8c7642a0d408126ddad1a64424326fe"
+  },
+  "source_value": "Le féminisme moderne flirte avec la misandrie (haine des hommes)",
+  "source_value_sha256": "ac3c7088d71113cdeaa09122f5caba7f7d154796e53b37289c92071f89316fde",
+  "target_value": "Modern feminism flirts with misandry (hatred of men)",
+  "target_value_sha256": "7b3504f80f9577c1aee4867153beb9c663d8b493a6810f5b12b4de1ad0eefc13",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0016",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8d028ed9bc6bfd37fa782ebf42168c3b1d97ed6fbfe1c2adef07e5b5e70d499f"
+}

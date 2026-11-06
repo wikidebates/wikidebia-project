@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "372967951d5b184d8c88b4aa0dfe20e15b3e88ec03eec5a55daaf151f3fef0b9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme bourgeois ne relie pas l'oppression des femmes à l'exploitation capitaliste",
+    "identity_sha256": "9997436a1c3fbe7e9c92aaf334895dd91559f3e8f1c457d5cc9cdce138a0ff83"
+  },
+  "source_value": "Au cours de la primaire écologiste, où elle a connu un certain succès, Sandrine Rousseau s’est par exemple revendiquée d’un écoféminisme radical. Pour elle, ''« le cœur de notre système économique et social est la prédation »''. Qu’il s’agisse du corps des femmes, des ressources de la nature ou de la vie des plus précaires, ''« on prend, on utilise, on jette »'', a-t-elle martelé. [...] Cette vision empêche de comprendre les mécanismes bien plus complexes de l’exploitation capitaliste et des oppressions qu’elle perpétue",
+  "source_value_sha256": "800e5ac649dd8662d3cab1d124e32a8c890e4e3d9d56714e0069787fd627412d",
+  "target_value": "During the Green primary, in which she enjoyed some success, Sandrine Rousseau described herself, for example, as a radical ecofeminist. For her, ''“predation lies at the heart of our economic and social system.”'' Whether it concerns women’s bodies, natural resources, or the lives of the most vulnerable, ''“we take, use, and discard,”'' she insisted. [...] This view prevents an understanding of the far more complex mechanisms of capitalist exploitation and the forms of oppression it perpetuates.",
+  "target_value_sha256": "5e734b59f67217eb28e13b4d6bef7ea06ba2fb19780ef601ff2b86f74e27f015",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0274",
+    "target_path": "citations/A0274-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f69bdf928e322f22ee09e4cfc5d87f274e76f9122215661611bcbf28eace708d"
+}

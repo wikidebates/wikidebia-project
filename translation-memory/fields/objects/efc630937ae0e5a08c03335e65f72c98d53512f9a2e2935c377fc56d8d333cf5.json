@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4a011637cac9dcc616e3769b603c38d7a4a6b07fd0498567e3bb70f510b23a11",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La diffamation est un dommage collatéral du féminisme radical",
+    "identity_sha256": "db29808d72f06f8868aa75314f75e2911897d35e7a9e605e3f69733be6432b70"
+  },
+  "source_value": "Ma vie a été réduite en miettes après la publication de ces tweets. Ça a été une déflagration dans ma vie […] J’ai perdu les quelques missions que j’avais dans une société de conseil, j’ai perdu ma compagne, j’ai perdu ma réputation, je suis tombé dans une profonde dépression",
+  "source_value_sha256": "2f210b557a8568390fd0e8582638bd0034ec5675569d24bfe75e9ae98c4464f6",
+  "target_value": "My life was shattered after those tweets were published. It was an explosion in my life. [...] I lost the few assignments I had with a consulting firm, I lost my partner, I lost my reputation, and I fell into a deep depression.",
+  "target_value_sha256": "c6d22d7cd85f005913031f180876aa8fe1ea9c22834c23913c6851a22bf99e36",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0127",
+    "target_path": "citations/A0127-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "efc630937ae0e5a08c03335e65f72c98d53512f9a2e2935c377fc56d8d333cf5"
+}

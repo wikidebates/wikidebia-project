@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1035d4927ede882906a5f5d911839683a247cfd02642055e9a400f0439e947b2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les fantasmes sur la menace woke ne sont que le reflet d'une peur irrationnelle de la nouveauté",
+    "identity_sha256": "e687c9b1553c444ad417caf3650123fabbe2a5baa5c592ffe4da0c45372b058e"
+  },
+  "source_value": "Les fantasmes sur la menace woke ne sont que le reflet d'une peur irrationnelle de la nouveauté",
+  "source_value_sha256": "a6f49e544d5bf89ab5bb1c98292c04423ff599e809aaa4dc74184aca19ab4763",
+  "target_value": "Fantasies about the woke threat merely reflect an irrational fear of novelty",
+  "target_value_sha256": "ec37cbccc335ca4f41b469d1eb241a672a45af4002334fb429b4ea4608bb7dd0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0315",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "87b9d1867f41ccfd96684056c29bcac209f6a37a8c46883379d7055e4aada2e4"
+}

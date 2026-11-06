@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "67f1fd28c59423374bad2d814bd4e543b7dadda225aa47b0e6d91f7d831b2014",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les droits et acquis sont gravement menacés",
+    "identity_sha256": "9db869205006048bdea0c91b1678a083f7d015f0f314eadabfa6206e8bceb9c8"
+  },
+  "source_value": "Les droits et acquis sont gravement menacés",
+  "source_value_sha256": "cbbc6037c55d0f5198903a1d1c00a7a83852ab97c8776cfe29720444eca19a51",
+  "target_value": "Rights and hard-won gains are under serious threat",
+  "target_value_sha256": "a915dec5b14c6d00638b377aa30f06e15ec7e806f8d926f3aae6867bb7a4d0df",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0006",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7e8e1bb36c5c737a48afdf5db4ce1b0d3e73baf6f16acb42e50d14e064e3304f"
+}

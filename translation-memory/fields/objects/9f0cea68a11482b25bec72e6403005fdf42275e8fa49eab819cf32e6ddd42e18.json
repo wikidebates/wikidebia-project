@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "60a2fb81e6d7085e6a0afa259105bcd3019322a39b99bbaa3a713975a409f4e0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le capitalisme est structurellement sexiste",
+    "identity_sha256": "09254ac4fc2cb2e18e5e6d11b63b1071c2b2d16544ea621663d9ff4adfc09705"
+  },
+  "source_value": "'''Lutter contre toutes les violences masculines. Se réapproprier nos corps, pour se réapproprier nos sexualités et notre fécondité. Se réapproprier notre travail, pour interroger le système capitaliste qui prospère grâce au travail gratuit des femmes.''' \n\nL’autrice dessine alors des mesures et pistes d’action concrètes pour construire une politique radicalement féministe. Analysant les imbrications du capitalisme et du patriarcat et les systèmes de prédation qu’ils alimentent, elle définit '''les conditions d’une véritable émancipation sexuelle, reproductive, domestique et économique des femmes.'''",
+  "source_value_sha256": "6976da1273206ddc79a6823cb4e972f36b7a920d80910b41c974857c737687d1",
+  "target_value": "'''Fight all forms of male violence. Reclaim our bodies in order to reclaim our sexualities and fertility. Reclaim our labor in order to challenge the capitalist system that prospers through women’s unpaid labor.'''\n\nThe author then outlines concrete measures and courses of action for building a radically feminist policy. Analyzing the interconnections between capitalism and patriarchy and the systems of predation they sustain, she defines '''the conditions for women’s genuine sexual, reproductive, domestic and economic emancipation.'''",
+  "target_value_sha256": "b0a5f67e18fb0996a464fc6cddbe75b42c53163bfc496ec3a0de79bb4aad4326",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0076",
+    "target_path": "citations/A0076-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9f0cea68a11482b25bec72e6403005fdf42275e8fa49eab819cf32e6ddd42e18"
+}

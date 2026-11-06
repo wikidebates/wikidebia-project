@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2518786900e2e2722bb9414c2bfa7f894bbf6c2cc6e55d3713c1227beae03a62",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les victimes d'agressions sexistes subissent une victimisation secondaire",
+    "identity_sha256": "180094b65ef1be0fdcf3ff4f7c29f8150c92009b4ff3c9eba69c268090ff309f"
+  },
+  "source_value": "Une victimisation secondaire décrit une situation où la personne plaignante fait face à des formes de violences de la part de l'institution judiciaires qui, en plus de ne présenter aucun intérêt dans la recherche de la vérité, ajoutent un traumatisme supplémentaire à la victime. Ces violences peuvent être soit verbales soit institutionnelles et sont systémiques dans les cas de plaintes pour viols, mais pratiquement absentes de tous les autres types d'affaires judiciaires.",
+  "source_value_sha256": "565641f9d2b02e1c046958a7a270a338f812d37426cd9f1857bb0b58a39a180e",
+  "target_value": "Secondary victimization describes a situation in which a complainant faces forms of violence from the judicial institution which, in addition to showing no interest in establishing the truth, inflicts one more trauma on the victim. This violence may be either verbal or institutional and is systemic in rape complaints, but practically absent from all other types of legal cases.",
+  "target_value_sha256": "14a585febefa0a6aa89a20f5149edecb5c4862d883bfb641d22b2f29f74e3907",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0047",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "941230cea8c81cafd378e9d78eb19ea32502960b8a9e65bd350240c039e3dfa3"
+}

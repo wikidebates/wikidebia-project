@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "387d7b48b3f9aa182dbccd494a22db6d533ee31c5879033e40169a9c47e3bf34",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Même les causes féministes qu'aujourd'hui plus personne ne conteste ont en leur temps nourri les tentations réactionnaires",
+    "identity_sha256": "6f204fff536ba5cd62aed45a552e6cad604363fb1cdacde5e2985008476bbf56"
+  },
+  "source_value": "Même les causes féministes qu'aujourd'hui plus personne ne conteste ont en leur temps nourri les tentations réactionnaires",
+  "source_value_sha256": "e61c37df6fa20e890212fbb19f3c5fa97c71a46a0e65be437f8429c2c0433ac9",
+  "target_value": "Even feminist causes that no one contests any more today fueled reactionary temptations in their time",
+  "target_value_sha256": "6202eef137396aa0fc26509cdb0cde669d369e3cfbc7d99a405c59ee23152e83",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0171",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "01628c0eacccb5049de7cf10a2eb8e66d4de1cf717acbd16d0e86158d2e01f92"
+}

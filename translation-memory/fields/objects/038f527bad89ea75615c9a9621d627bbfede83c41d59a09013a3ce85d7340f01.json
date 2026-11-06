@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f7900d0fb211a96e35d86d036f7d5b4c39580af0fab8669544b83303c396d074",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Des gens fortement misogynes se revendiquent féministes, donc ça ne veut rien dire",
+    "identity_sha256": "03f9e2ba6b76699a6e2dff2ba8e6348a3f6fb0e5acda65692e5c28dc3c33150f"
+  },
+  "source_value": "Des gens fortement misogynes se revendiquent féministes, donc ça ne veut rien dire",
+  "source_value_sha256": "3e3ed408bcd5cf52c673f8d23c9b46d7541bf0cbedec485f2385c710aad2a95c",
+  "target_value": "Strongly misogynistic people call themselves feminists, so the label means nothing",
+  "target_value_sha256": "654edec22521638e5ffd12d8f4335be6ebd1f2abd029c0acd3c7ff6740c84a5e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0163",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "038f527bad89ea75615c9a9621d627bbfede83c41d59a09013a3ce85d7340f01"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "72bf5414a39d6152378f4019b2ef5893b238dfd9dbbf5d4966817b7734349a2b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les inégalités économiques touchent majoritairement les femmes, il est donc tout à fait pertinent de mener le combat à ce niveau",
+    "identity_sha256": "ed4b2f67eeff2f23fe65906ba8ebb61eaf5f5bd0f5f738b3642c55974ee433e3"
+  },
+  "source_value": "Les inégalités économiques touchent majoritairement les femmes, il est donc tout à fait pertinent de mener le combat à ce niveau",
+  "source_value_sha256": "36525be318ff6a8b951f272fa6c39a2455b793ed8c6e8710c872b4ad56076b41",
+  "target_value": "Economic inequalities predominantly affect women, so it is entirely relevant to fight at this level",
+  "target_value_sha256": "1d2a8d648e38053677de0c2fadd404709a166c064338d0171a49c5a84c940651",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0243",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "90e7ef269b6930a54d5746e35dd0b3072344ee64dc78666db50d80e54d8a5544"
+}

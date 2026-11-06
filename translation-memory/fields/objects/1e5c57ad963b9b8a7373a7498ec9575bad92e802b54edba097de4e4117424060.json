@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c6c36002c8155bd000233a21e6328e4a9900446b98d9529c766c8ca375970343",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les mises au ban imputables aux mouvements féministes sont très marginales",
+    "identity_sha256": "ea9ae3bfcb6272b826cf06b17d9463c9758b6fd838a9c503a1143f140bda7669"
+  },
+  "source_value": "Les mises au ban imputables aux mouvements féministes sont très marginales",
+  "source_value_sha256": "2d4eca19855c1f0da2b33e2ec2eb3f5af86fd26734b90b35eeb000506de1c885",
+  "target_value": "Exclusions attributable to feminist movements are very marginal",
+  "target_value_sha256": "a9fd0687b32ad9ecb9a44c2d330f340da280feb0bb2b235eeb4bea46b3fd1fe7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0214",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1e5c57ad963b9b8a7373a7498ec9575bad92e802b54edba097de4e4117424060"
+}

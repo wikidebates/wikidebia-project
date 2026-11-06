@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "173072222b11947eb3788a8ef18ee87a7ddf4ff031511301881e2361f66f64f5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'humour oppressif est le terreau des idéologies d'exclusion",
+    "identity_sha256": "1cc4f5ff3ea1e61195f75572a26e0f134a8e9db80cad7549da3279c8cb3d9d89"
+  },
+  "source_value": "Une blague raciste envoie à l’endogroupe¹ un message comme quoi le racisme est acceptable. (Si vous ne le trouvez pas acceptable, vous êtes dans l’exogroupe²) La personne racontant la blague raciste peut dire « je plaisante » – mais en le disant, elle se '''défend''' vis-à-vis de l’exogroupe. Elle n’a pas besoin de dire ça à l’endogroupe. C’est pourquoi ce n’est jamais « une plaisanterie ». Pour l’endogroupe, défendre la blague n’est pas nécessaire. L’idée transmise est acceptée/acceptable.\n\nAinsi, quand Trump plaisante à propos d’assassinat ou de révolte armée, il demande à l’endogroupe d’assimiler/d’accepter cette idée. C’est ce que font les blagues. Et quand il dit « je plaisante », c’est une défense face à l’exogroupe dont on n’attend jamais qu’il accepte/admette l’idée.\n\nDonc pour revenir au début, la blague '''elle-même''' est une façon de définir l’endogroupe et l’exogroupe, via l’intégration et l’exclusion. Si vous êtes prêt·es à accepter « je plaisante » en tant que défense, vous êtes prêt·es à rejoindre l’endogroupe où l’idée transmise par la blague est acceptable.\n\nEn un mot, si « je plaisante » excuse les blagues racistes, alors l’endogroupe a accepté l’idée du racisme comme faisant partie de ce groupe.\n\nIl en va de même pour les « blagues » sur la révolte armée ou l’assassinat d’Hillary Clinton. Elles ne peuvent pas être acceptées comme « de la plaisanterie ».",
+  "source_value_sha256": "667fed125159c02422587f347801e7d75b3a472d847261a22211742c9f07c7c8",
+  "target_value": "A racist joke sends the ingroup¹ a message that racism is acceptable. (If you do not find it acceptable, you are in the outgroup².) The person telling the racist joke can say “I’m joking”—but by saying so, they are '''defending''' themselves to the outgroup. They do not need to say that to the ingroup. This is why it is never “just a joke.” For the ingroup, defending the joke is unnecessary. The idea conveyed is accepted/acceptable.\n\nThus, when Trump jokes about assassination or armed revolt, he is asking the ingroup to assimilate/accept that idea. This is what jokes do. And when he says “I’m joking,” it is a defense addressed to the outgroup, which is never expected to accept/admit the idea.\n\nSo, to return to the beginning, the joke '''itself''' is a way of defining the ingroup and outgroup through inclusion and exclusion. If you are willing to accept “I’m joking” as a defense, you are willing to join the ingroup in which the idea conveyed by the joke is acceptable.\n\nIn short, if “I’m joking” excuses racist jokes, then the ingroup has accepted the idea of racism as part of that group.\n\nThe same applies to “jokes” about armed revolt or the assassination of Hillary Clinton. They cannot be accepted as “just joking.”",
+  "target_value_sha256": "bd6395428ed1e9ff9df293add9e3f7e63c38315ae6efbdef6aee65ef4f7507be",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0213",
+    "target_path": "citations/A0213-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "65156669182f926acfc6348e7e834549aa1bd42634e193a0bd980f11b48a898e"
+}

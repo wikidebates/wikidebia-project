@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7180022648fcce1e07b21a2de1ec42dd81a4d6f5e4f381b96a3861a21a5f9b7f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le qualificatif de \"woke\" sert à diaboliser les concepts progressistes sans avoir à argumenter",
+    "identity_sha256": "bae338143751b08f1633eac8ae029ce32538f9630a79aa0fa38957a98fb90788"
+  },
+  "source_value": "[La] conférence [de Mathieu Bock-Côté] porte sur le « wokisme ». Ce concept, issu de la « pensée » d’extrême droite, est utilisé pour désigner et rejeter toutes les luttes progressistes qui déplaisent aux réactionnaires. Féminismes, anti-racismes, luttes LGBTQIA+, luttes climatiques... bref tout ce qui s’attaque à leur monde rance et inégalitaire est désigné sous le vocable péjoratif de « wokisme ».",
+  "source_value_sha256": "019919df57b4fc22aa8815e5c023402781ddfaa1d9c8579f022d6ac9373491cb",
+  "target_value": "[Mathieu Bock-Côté’s] lecture concerns “wokeism.” This concept, born of far-right “thought,” is used to designate and reject every progressive struggle that reactionaries dislike. Feminisms, antiracisms, LGBTQIA+ struggles, climate struggles... in short, everything that attacks their stale and unequal world is designated by the pejorative term “wokeism.”",
+  "target_value_sha256": "f504d645a24557a21fac8dc9f4fa01915b2b091e903528d76fd28b1cdc27378c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0308",
+    "target_path": "citations/A0308-C005",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "2275d34d2ee60acea5c775ad0ab222bcd5f50789208671f6bb2b524409f8d323"
+}

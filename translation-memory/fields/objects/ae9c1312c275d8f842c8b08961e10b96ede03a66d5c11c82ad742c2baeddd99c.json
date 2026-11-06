@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "aa33d375a312a9d635f4b18cb1963d88149ac205d095c84ce68a7c16c7efaf75",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La lutte contre le \"wokisme\" est le paravent de l'extrême droite",
+    "identity_sha256": "12a5d8ed86d87443ddf83cb17baa1cddefca71c089120f45cbe221413a0b4d82"
+  },
+  "source_value": "'''Dans la Panique Woke, tu reviens sur le GamerGate en 2014. En quoi constitue-t-il un moment majeur dans la montée du néo-conservatisme qui aujourd’hui tient tant à se battre contre ce qu’il nomme le wokisme ?'''\n\nLe GamerGate, c’est une grande campagne de harcèlement envers des critiques féministes qui émane du milieu des jeux vidéos. Le but était de dire que des méchantes féministes hystériques, allaient leur voler leurs jeux vidéos, influencer leur culture, les mettre en danger. Et donc qu’il allait falloir se défendre contre elles par tous les moyens.\n\nCe déferlement d’anti-féminisme et de sexisme sur Internet – auquel se sont accolées ensuite la transphobie, le racisme et tous le package –, a été perçu comme un laboratoire par des intellectuels conservateurs et néo-réactionnaires et notamment un journaliste britannique expatrié aux États-Unis qui s’appelle Milo Yiannopoulos, qui va mener cette campagne en mobilisant des jeunes hommes plutôt blancs, plutôt hétéros, plutôt pas trop diplômés, à qui il va apprendre ce militantisme culturel.\n\nLeur but était de faire enrager les féministes, les post-modernes, les social justice warriors, les wokes et s’en payer une bonne tranche sur leur dos. L’important, n’était pas tellement les positions prises. L’important, c’était de battre l’ennemi. On pouvait être incohérent, dire tout et son contraire, ça n’avait pas d’importance.",
+  "source_value_sha256": "1a89836648a8b6580a83cee8e5f0d099f91d7f1dbfcb1ef07af84330daecb049",
+  "target_value": "'''In La Panique Woke, you revisit GamerGate in 2014. How did it constitute a major moment in the rise of neoconservatism, which today is so intent on fighting what it calls wokeism?'''\n\nGamerGate was a major harassment campaign against feminist critics originating in the video-game community. The idea was that evil, hysterical feminists were going to steal their video games, influence their culture, and endanger them, and that they would therefore have to defend themselves against these women by any means necessary.\n\nThis flood of antifeminism and sexism on the Internet—to which transphobia, racism, and the whole package were later added—was viewed as a laboratory by conservative and neo-reactionary intellectuals, notably a British journalist expatriated to the United States named Milo Yiannopoulos. He led this campaign by mobilizing young men who were mostly white, mostly heterosexual, and generally not highly educated, teaching them this form of cultural activism.\n\nTheir goal was to enrage feminists, postmodernists, social justice warriors, and woke people and have a good laugh at their expense. The positions taken were not really what mattered. What mattered was defeating the enemy. They could be inconsistent and say one thing and its opposite; it did not matter.",
+  "target_value_sha256": "1ca27b6756ebe32d63a1f97c0bf178975ff2b15729bed3424cacfea0f22dd61c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0218",
+    "target_path": "citations/A0218-C005",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ae9c1312c275d8f842c8b08961e10b96ede03a66d5c11c82ad742c2baeddd99c"
+}

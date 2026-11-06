@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "37579183b48cf6bbc1f70bd1f1cbefcbc611926f54e8f5e2ef1aaa9612b181bf",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Accuser les \"woke\" de puritanisme, c'est l'hopital qui se fout de la charité",
+    "identity_sha256": "8ed06d65adfbc1fa02c61e5225933dc719c5195760c586a571a6c315ff6012e2"
+  },
+  "source_value": "Accuser les \"woke\" de puritanisme, c'est l'hopital qui se fout de la charité",
+  "source_value_sha256": "20d3fbc888a7cb6635735cb03a2f9ed4bcb8e61b2be2e0287711a9205fe6ecdb",
+  "target_value": "Accusing \"woke\" people of puritanism is the pot calling the kettle black",
+  "target_value_sha256": "8ab6cf0ec43e43db649e5a5a07e15eafee227b4105050dcadaab4df81396fbb0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0221",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "befd481b63d16dd34a796dad72c27ca975717e51f215913af96b20328d182ec2"
+}

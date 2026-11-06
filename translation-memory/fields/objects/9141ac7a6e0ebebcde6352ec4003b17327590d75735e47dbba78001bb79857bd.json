@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "cfadafff3970a6c3bb0f00b95a3dc1ce04d7453ff1f65a0b4898a00be7fc0dc2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les différences entre femmes et hommes ne justifient pas des inégalités sociales",
+    "identity_sha256": "b37b1bb168525507d4a1c89d8531fba299af3eff13d7467c166f5a58c7250d27"
+  },
+  "source_value": "Le vivant, c’est de la variation, et l’humain n’y fait pas exception. Vous devant votre écran êtes différent de moi, que ce soit au niveau génétique, physiologique, neurologique ou comportemental. Votre frère ou votre soeur est aussi différent de vous. Et en fait, vous-même êtes différent de vous-même. Au niveau cognitif, vous n’êtes pas le même humain que vous étiez il y a 1 minute, et encore moins que celui que vous serez dans 30 ans, parce que vos circuits neuronaux se transforment en permanence. Ce qui fait que si on voulait vraiment baser l’attribution de droits sur l’égalité cognitive, on devrait donner des droits différents à votre vous d’aujourd’hui et votre vous de demain.",
+  "source_value_sha256": "697e2d4b3cb34a6caeaae441faf1d0fed56843e055a74b307fc6e3f814dc9cae",
+  "target_value": "Living things are characterized by variation, and human beings are no exception. You, in front of your screen, are different from me, whether genetically, physiologically, neurologically or behaviorally. Your brother or sister is also different from you. And in fact, you yourself are different from yourself. Cognitively, you are not the same human being you were 1 minute ago, and even less the person you will be in 30 years, because your neural circuits are constantly changing. Consequently, if we truly wanted to base the allocation of rights on cognitive equality, we would have to give different rights to your present self and your future self.",
+  "target_value_sha256": "19f2b310e07c2f6b63761088846f16592093be95fe54e8eefb3c42b680cb3fd0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0116",
+    "target_path": "citations/A0116-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9141ac7a6e0ebebcde6352ec4003b17327590d75735e47dbba78001bb79857bd"
+}

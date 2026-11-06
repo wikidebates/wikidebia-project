@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fedb6fd9bbe651f14dc5058ece817d7eae3948d64c2f7cdedf6a42e52d804404",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le \"wokisme\" n'existe que dans les discours anti-progressistes : c'est un homme de paille créé artificiellement pour faire semblant d'avoir un adversaire oppresseur",
+    "identity_sha256": "d0e26a09be2335aba1a4480ed8bf8b36109a610dd774d31a156036758420e7b6"
+  },
+  "source_value": "\"Pour le politologue [[frwikipedia:Clément_Viktorovitch|Clément Viktorovitch]], le terme « woke » est aujourd'hui davantage utilisé par les adversaires aux mouvements progressistes que par les militants eux-mêmes. D'après lui, ce mot est devenu un concept fourre-tout, « un outil purement rhétorique, une arme de disqualification massive utilisée contre le discours de gauche ». Il constate que les polémiques autour du ''wokisme'' ont progressivement remplacé celles autour de l'[[frwikipedia:Islamo-gauchisme|islamo-gauchisme]] mais qu'elles ont les mêmes finalités : « disqualifier les luttes antiracistes et féministes ». \"",
+  "source_value_sha256": "4af03ce620f358bf316ab21a807b29e6e73a113226fd69914071e16fa63acda9",
+  "target_value": "“According to political scientist [[enwikipedia:Clément_Viktorovitch|Clément Viktorovitch]], the term ‘woke’ is now used more by opponents of progressive movements than by activists themselves. In his view, the word has become a catch-all concept, ‘a purely rhetorical tool, a weapon of mass disqualification used against left-wing discourse.’ He observes that controversies surrounding ''wokeism'' have gradually replaced those surrounding [[enwikipedia:Islamo-leftism|Islamo-leftism]], but that they serve the same purposes: ‘disqualifying antiracist and feminist struggles.’”",
+  "target_value_sha256": "0866a059b3d1f32ffc01804927d02a81f3cb7e065493f17ff67d5ee79f15a89a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0320",
+    "target_path": "citations/A0320-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ea6edc8ddc174e1ccb3c022df4a4df93457fabf2b5adece93baca8162db528ee"
+}

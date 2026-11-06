@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0bdfdc0ca3f97d841922891f133cd73dc4236eed5ad64b57690293be026c24eb",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le mythe d'une \"victoire féministe totale\" n'est pas nouveau",
+    "identity_sha256": "5a081d1aad5d1a16c8af2277e088fe1bd95308f44f6080df7b1e69141dfe3061"
+  },
+  "source_value": "«Un des pièges du patriarcat est d’annoncer périodiquement sa propre fin. “Les femmes ont gagné”, proclamait-on déjà dans les années 1900, puis en 1945, lorsqu’elles votent pour la première fois, puis dans les années 1970, quand [https://www.neonmag.fr/societe-politique/merci-simone-lhommage-simone-veil-subit-des-degradations-509396 la loi Veil] [qui légalise l’IVG, ndlr] est adoptée… Il faut bien sûr reconnaître l’importance de ces victoires, tout en ayant conscience que le patriarcat les a bien digérées et préserve à tous les niveaux le pouvoir masculin.",
+  "source_value_sha256": "1ac70d8669b539f677915e9966866c06dc85283d3366c40da2b3720e62257618",
+  "target_value": "“One of the traps of patriarchy is that it periodically announces its own end. ‘Women have won,’ people were already proclaiming in the 1900s, then in 1945, when women voted for the first time, and then in the 1970s, when [https://www.neonmag.fr/societe-politique/merci-simone-lhommage-simone-veil-subit-des-degradations-509396 the Veil Law] [which legalized abortion, editor’s note] was adopted... Of course, the importance of these victories must be recognized, while remaining aware that patriarchy has absorbed them very well and preserves male power at every level.”",
+  "target_value_sha256": "f72972404acec831bbda7f050ace4852c888c247bc7d3bff685c10872a9cb5d2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0088",
+    "target_path": "citations/A0088-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "2802d716cfe020e6e3a3afce8fde58db89d10194a0cff897640160fbd7a8b169"
+}

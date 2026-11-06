@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "96bfb97977df0bda04ce6445cc4af9bc9a2dfb6c03a6a403ad44224f632f0d56",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les féministes veulent démonter la croyance selon laquelle l'homme est un agresseur par nature",
+    "identity_sha256": "c792ccd637505b4efb7fb2c5ae160f1706c8fd1c24ce9518f53df1164a6e5043"
+  },
+  "source_value": "Les féministes veulent démonter la croyance selon laquelle l'homme est un agresseur par nature",
+  "source_value_sha256": "301e8c3205217397fbc129c33aa555c16375e492a512c05a6f1ef1ab926d18d6",
+  "target_value": "Feminists seek to dismantle the belief according to which men are aggressors by nature",
+  "target_value_sha256": "9635e2d6e78fa6165e4647d8859c78b721b4f1b3e56d9dc9363b7f5ceaa9d55d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0090",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ec1088cdab01747f23360229207da82c8347fbd7203072e09e551615f9740be9"
+}

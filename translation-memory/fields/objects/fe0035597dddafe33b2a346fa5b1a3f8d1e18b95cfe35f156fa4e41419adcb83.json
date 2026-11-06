@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "cee8fbc0c596152441abb3c1235dffa72bb264be45c231132aeef45d1d463d65",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme risque d'importer en France des dérives du féminisme américain",
+    "identity_sha256": "3bdad4d1475a9d828d64601d0c5062250abadb72daa78900cc83831bb9730885"
+  },
+  "source_value": "[…] à l'université de Maryland, des participantes à un cours intitulé \"Issues contemporaines dans l'art féministe\", crurent bon de distribuer des centaines d'affiches à travers le campus où figuraient les noms, choisis au hasard, de cinquante étudiants avec la légende suivante : \"Attention : ces hommes sont des violeurs potentiels.\" Egalement dans le cadre de ce festival d'art féministe, sur tout un pan de mur de l'université, étaient inscrits les noms de 15 000 étudiants, avec la légende suivante : \"Beaucoup de ces hommes ont des vélléités de viol.\" Le professeur responsable du cours jugea ces manifestations \"follement couronnées de succès\".",
+  "source_value_sha256": "ae3889d7a3a1b7c96c59d9d65e099502deec79586babd684ec93af097c2bab3d",
+  "target_value": "[...] at the University of Maryland, participants in a course entitled 'Contemporary Issues in Feminist Art' thought it appropriate to distribute hundreds of posters across campus bearing the randomly selected names of fifty students with the following caption: 'Warning: these men are potential rapists.' Also as part of this feminist art festival, the names of 15,000 students were written across an entire university wall, with the following caption: 'Many of these men have inclinations toward rape.' The professor responsible for the course deemed these demonstrations 'wildly successful.'",
+  "target_value_sha256": "499c11abaf0937a8d68a434b28edb6ec86b69dff59c7f9a5a3d9305a25f05bde",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0018",
+    "target_path": "citations/A0018-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "fe0035597dddafe33b2a346fa5b1a3f8d1e18b95cfe35f156fa4e41419adcb83"
+}

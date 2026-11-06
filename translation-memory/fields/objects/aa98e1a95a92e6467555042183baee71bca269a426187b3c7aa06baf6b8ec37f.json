@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2b13fd4610c5a0bf0e97064665dc67b1869df30b5a3fddcd465f4a9808c4352a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les fémonationalistes ne proposent rien contre le sexisme qui sévit en occident",
+    "identity_sha256": "91bd1dc00a0a3e20a108198aaf59b32d1e8bc6437f06710fd0bf8a0af36d23b8"
+  },
+  "source_value": "[La perspective du collectif Némésis] est fémonationaliste : [il utilise] la cause des femmes pour faire avancer la cause nationaliste, identitaire et sécuritaire. D’ailleurs, elles ne disent rien concernant la santé reproductive ou les conditions de travail des femmes, leur objectif est de changer le contenu de ce que nous entendons pas « droits des femmes », pour y associer le droit à la sécurité, la défense d’une identité et une certaine vision de l’Occident.",
+  "source_value_sha256": "77c18e0881dd99bd3402a098146485a9ada5944c136759bbf8c709c47a770208",
+  "target_value": "[The Némésis collective’s perspective] is femonationalist: [it uses] the cause of women to advance a nationalist, identitarian, and security-oriented cause. Moreover, they say nothing about reproductive health or women’s working conditions; their objective is to change the content of what we mean by ‘women’s rights’ so that it includes the right to security, the defense of an identity, and a certain vision of the West.",
+  "target_value_sha256": "d9013fea63d60f32a6de4316d393c40827063b3f07b9e573e6ad1da80528c84a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0330",
+    "target_path": "citations/A0330-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "aa98e1a95a92e6467555042183baee71bca269a426187b3c7aa06baf6b8ec37f"
+}

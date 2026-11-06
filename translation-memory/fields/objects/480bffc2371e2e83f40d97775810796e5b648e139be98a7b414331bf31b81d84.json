@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b3159d65bf065406d0ac62c076f0c9b7e8d55936b86afc931d99e43e565c1261",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les dénonciations, même légitimes, retombent davantage sur la personne qui dénonce que sur celle qui se fait dénoncer",
+    "identity_sha256": "b3f6a022581c1c01aa40d767162192a5734de0f684e9734352f4b1247b205e94"
+  },
+  "source_value": "Les dénonciations, même légitimes, retombent davantage sur la personne qui dénonce que sur celle qui se fait dénoncer",
+  "source_value_sha256": "95fd6521d5323d69c2d54db5eb4debc8c9fb81960c977ee8ff90a9fa9090d258",
+  "target_value": "Denunciations, even legitimate ones, have greater repercussions for the accuser than for the accused",
+  "target_value_sha256": "73075ace91643f4ad2fd8ee4a85dc563f766f6d4bfb7b55596af9fad3770a6ac",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0224",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "480bffc2371e2e83f40d97775810796e5b648e139be98a7b414331bf31b81d84"
+}

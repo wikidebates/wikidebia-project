@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9247d6bb32c086b17907add13b30a2e5b77263810a1b9cd0edaf4ab6e6d538f9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les tradwives sont les idiotes utiles du sexisme",
+    "identity_sha256": "3c5f138f02f75f975f1de825ff6ebbdccd1a9082ad5891b9a54138595e88e4b1"
+  },
+  "source_value": "Être une femme n'empêche aucunement de défendre activement le sexisme. Généralement, elles agissent dans ce sens dans le but d'obtenir des privilèges de la part des dominants, bien que ça ne les protège aucunement des violences sexistes.",
+  "source_value_sha256": "34529cf74f634c79fc4c3bea79d9c915cd003d2f3800fa4c3f9614e86767b4a3",
+  "target_value": "Being a woman in no way prevents someone from actively defending sexism. They generally do so in order to obtain privileges from those in power, although this does not protect them in any way from sexist violence.",
+  "target_value_sha256": "1ce4263e1709c5701abc367d16fa50e90af744f7121bf8982ea796456e07efa1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0256",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a8c750d578f46a7cd9d43d85b6e597c7cde17468bfd8e30d970aaa8178779f7e"
+}

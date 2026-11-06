@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0fd994d605160d265fc2841d55bbb5a5323814a73ba615a68358f0f38c764eca",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Un nombre excessivement élevé de plaintes sont classées sans suite",
+    "identity_sha256": "cbbf231be3c6f5afa78690f119f2747df81bf99a79e07f1f762f089094b55d20"
+  },
+  "source_value": "Nombre excessivement élevé de classement sans suite",
+  "source_value_sha256": "b1a851e53a8d7059255efd31741976162f766f226e27e3c0719cd6828ff8d5e8",
+  "target_value": "An excessively high number of cases closed without further action",
+  "target_value_sha256": "f1d81fe5a6a7851ad390b3a1383b07d8d4e1a73e1d2c0064ca059eb0f1d2028a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0049",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0294d56ecb60c2aff706dff7b99b32336242eb0e7a76a572a6d8de68ed0f43ca"
+}

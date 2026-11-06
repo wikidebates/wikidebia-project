@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b83c643d5cad9b6cc7dc1bdc3054439caaa0c29c8601df076b601d64871b762b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Bien plus que le fonctionnement individuel des couples, c'est le fonctionnement de la société qui fait que ce sont les femmes qui font la majorité des tâches ménagères",
+    "identity_sha256": "7cd5c22d13a5a4e65b516847efc7e6b8f3411f45c8d49c7e245f160d7f7c16b9"
+  },
+  "source_value": "Pour que [l'équilibre de la charge des tâches ménagères dans la majorité des couples] change et obtenir un 50-50, on doit réunir plusieurs conditions :\n\n# un travail intellectuel et émotionnel de la part de la personne qui se trouve lésée : réfléchir, constater une insatisfaction, négocier ;\n# de l’écoute de la part des deux personnes. Or, on a un double problème avec cela : les hommes ne sont généralement pas éduqués à être dans l’écoute et la parole des femmes est décrédibilisée depuis des siècles ;\n# pour l’homme, un travail de déconstruction qui implique : primo, un minimum de volonté – il doit accepter de prendre conscience qu’il est privilégié, tout en vivant dans une société qui lui envoie des tonnes de messages qui normalisent ses privilèges – ; secundo, une remise en question de schémas de vie, qui ramène à sa propre histoire d’enfant, celle de ses parents.",
+  "source_value_sha256": "87b4a1ac14137b86c18bd024f527c8de8b9c4125c4b1696df31d919f3937865f",
+  "target_value": "For [the balance of household work in most couples] to change and reach a fifty-fifty split, several conditions must be met:\n\n# intellectual and emotional work by the disadvantaged person: reflecting, recognizing dissatisfaction, negotiating;\n# listening by both people. Yet there is a double problem here: men are generally not taught to listen, and women’s words have been discredited for centuries;\n# for the man, a process of unlearning that entails: first, a minimum of willingness—he must agree to recognize that he is privileged while living in a society that sends him countless messages normalizing his privileges; second, questioning patterns of life, which leads back to his own childhood history and that of his parents.",
+  "target_value_sha256": "74dc79265a201da620d1d261f2c5ed10e61a6e295fbdb6359b24620910adf9da",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0258",
+    "target_path": "citations/A0258-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f8f5a5c592f5017b67cbbb8f12155d8eeb7c2be4688ffdab44d2a7aa9e0a5c3f"
+}

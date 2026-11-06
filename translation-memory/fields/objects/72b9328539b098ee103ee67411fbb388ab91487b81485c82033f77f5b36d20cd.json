@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "00bf2cdd886b76ef9df196b800529460024650319d1aef35b2477f584e9aea58",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Ceux-là mêmes qui accusent le féminisme de puritanisme n'ont aucun problème avec celui de l'extrême droite catholique",
+    "identity_sha256": "f6c3b89f3911852b2ac5b5c53ae46adc6c579be462135e7d21dd9f279413d362"
+  },
+  "source_value": "Ceux-là mêmes qui accusent le féminisme de puritanisme n'ont aucun problème avec celui de l'extrême droite catholique",
+  "source_value_sha256": "d2550d0cb75723e2b38921aae14f351d851c4c1d880cfd08699f140ec46ddd0c",
+  "target_value": "The very people who accuse feminism of puritanism have no problem with the puritanism of the Catholic far right",
+  "target_value_sha256": "47ed19313afcfc79289050b451d0d02006ab8911666e42dc30d9974bb966c0ec",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0293",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "72b9328539b098ee103ee67411fbb388ab91487b81485c82033f77f5b36d20cd"
+}

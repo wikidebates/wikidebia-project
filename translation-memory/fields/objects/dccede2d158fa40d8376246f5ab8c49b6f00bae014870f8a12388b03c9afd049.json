@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "11dc03a468a6b106f7dfee8d39c0ca2ef44b9daa83d68b7aaaa5ef44a14f1201",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme n'a jamais prétendu lutter contre les inégalités autres que celles de nature sociétale, prétendre le contraire est un homme de paille",
+    "identity_sha256": "8fafbbcc541dd6b69550bd4a48e5e9331589c1becabb83782ef44f18748645d9"
+  },
+  "source_value": "Le féminisme n'a jamais prétendu lutter contre les inégalités autres que celles de nature sociétale, prétendre le contraire est un homme de paille",
+  "source_value_sha256": "8c326b0e19773c08d6c2602b804a2d8d17c05d875cee42a599434002be533440",
+  "target_value": "Feminism has only ever claimed to fight inequalities of a societal nature, so claiming otherwise is a straw man",
+  "target_value_sha256": "70c03d289fb80011134855242b03da77993ad535fe664f49c7b562ea1dac2fa8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0138",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "dccede2d158fa40d8376246f5ab8c49b6f00bae014870f8a12388b03c9afd049"
+}

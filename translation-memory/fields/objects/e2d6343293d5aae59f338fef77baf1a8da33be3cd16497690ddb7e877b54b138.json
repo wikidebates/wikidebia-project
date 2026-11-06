@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "234dcc17563b28432f1afbe740bcc32dc7c54d4cc2ac357db88d81b3f5d64704",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes subissent du harcèlement de rue",
+    "identity_sha256": "b5f1a54dcaee904711730d490ed498c1c17a27fcba9cc704b3b1a0532fe5304b"
+  },
+  "source_value": "Harcèlement de rue",
+  "source_value_sha256": "82d0f1d498c3462ea991c8c0d2a3acdec3319aae3184a00ba1f738c4add82a07",
+  "target_value": "Street harassment",
+  "target_value_sha256": "87159f9f9ac7b2107c9cdf50ef9d865ac94f95747c1d98e389f8711db0050857",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0041",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e2d6343293d5aae59f338fef77baf1a8da33be3cd16497690ddb7e877b54b138"
+}

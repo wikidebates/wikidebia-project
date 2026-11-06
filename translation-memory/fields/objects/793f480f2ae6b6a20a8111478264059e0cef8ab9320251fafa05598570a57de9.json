@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e1d5e569ce9202441bb079ca960ce55d26024ea5dfea2daa436979b4b92c9539",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les prétendues inégalités salariales causées par le sexisme reposent sur d'autres facteurs (temps de travail, productivité, investissement et congés)",
+    "identity_sha256": "ba7fe99a4ff81f8d9425286047eb65d22d63799011ba65668943815f305ef167"
+  },
+  "source_value": "Les prétendues inégalités salariales causées par le sexisme se basent sur d'autres facteurs (temps de travail, productivité, investissement, congés …)",
+  "source_value_sha256": "bd603cc2b6c3b7ba8c0756b77daa62359d114c5a0bf52c0c63ea81ef2538dfd8",
+  "target_value": "The alleged pay inequalities caused by sexism are based on other factors: working time, productivity, commitment and leave",
+  "target_value_sha256": "39eac6440200670c7fc93a98c23cd05288245b9fa53de4a6f3f5c3ae93d23f3a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0025",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "793f480f2ae6b6a20a8111478264059e0cef8ab9320251fafa05598570a57de9"
+}

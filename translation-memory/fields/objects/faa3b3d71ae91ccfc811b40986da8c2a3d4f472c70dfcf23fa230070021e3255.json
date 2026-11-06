@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7b74caab530483e4dda6d3b4a4343db68de17a0162ddf06a5566d389a34daeca",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes subissent bien plus de violences que les hommes",
+    "identity_sha256": "fbedb2528f41e6d33935afdeb65c17eb09b1c45675d4115d6807a49f927b63a6"
+  },
+  "source_value": "Les femmes subissent bien plus de violences que les hommes",
+  "source_value_sha256": "e14706ed7861a87f1ec4299a270efd6a669509eff29f08ce43dc60aade138db5",
+  "target_value": "Women experience far more violence than men",
+  "target_value_sha256": "1803676ac145cd13078b6caa4ba3c83c7cb6ca808737eb65688260cd1ca4a887",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0148",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "faa3b3d71ae91ccfc811b40986da8c2a3d4f472c70dfcf23fa230070021e3255"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a2d37993dda3bafe963f091e0c392ced446241b7ccc0c33beecc5d1a296de2e6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le qualificatif de \"woke\" sert à diaboliser les concepts progressistes sans avoir à argumenter",
+    "identity_sha256": "bae338143751b08f1633eac8ae029ce32538f9630a79aa0fa38957a98fb90788"
+  },
+  "source_value": "On remarquera que les points communs entre le climatoscepticisme, le masculinisme ou la lutte anti-woke sont la prédominance des discours d’extrême droite et la viralité sur les réseaux sociaux sans contre argumentaire.",
+  "source_value_sha256": "edd94fd481f870da6e63c29559d7a8a532841934a89b98571524d7ff3f44919b",
+  "target_value": "It is worth noting that climate-change denial, masculinism, and the anti-woke struggle share the predominance of far-right discourse and virality on social media without counterargument.",
+  "target_value_sha256": "b312d998fab2991d65fd61486ebcd471c058baa735caa3794c6a01880a1aec26",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0308",
+    "target_path": "citations/A0308-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "abcf68c2f584522bd5d9cc84ea219112f5114b04b74e60ba555cbe6b4d5d8463"
+}

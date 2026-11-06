@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7050d58ad95b593db8628f53b1524daa8b337b05e58e020b222ee8a31dcb5973",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes subissent du body shaming",
+    "identity_sha256": "09bc4c5ba0653fcde3a6f60fafe340dffc69f2646b8a69970876466c1f72bcc5"
+  },
+  "source_value": "Body shaming",
+  "source_value_sha256": "e95c17897922ab7376ed5c25a9af92b926c1c66917143bd29f0cafe1e9ff3ee0",
+  "target_value": "Body shaming",
+  "target_value_sha256": "e95c17897922ab7376ed5c25a9af92b926c1c66917143bd29f0cafe1e9ff3ee0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0040",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c4e3521da42d0e2a1eb9f9c583c320107fb4c2cb1b5425579ffbda2a716f24f3"
+}

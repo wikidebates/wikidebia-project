@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1da94ebd98bbd533b8cf34f6612d8710824410b95664c9e2a8e3fa6beee97ba4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "72 % des tâches ménagères sont effectuées par les femmes",
+    "identity_sha256": "0d6fefd66c4acb2f35d3ed9c3142804e5d7790c90cd9b82c664c386b367b52b9"
+  },
+  "source_value": "72 % des tâches ménagères sont effectuées par les femmes",
+  "source_value_sha256": "423fe842db53f2a65cbb95be572e500aecbf4c931864c79a6674230a5e2491d2",
+  "target_value": "Women perform 72% of household chores",
+  "target_value_sha256": "1bf4bdfc2ccc195d5914f568077409e16522af65011b6cd1aae57a3d803184b5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0346",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8db1294a2283ff21fb8dce9bd13cb160938b081ec5449fdc17d0776dc2aaaa76"
+}

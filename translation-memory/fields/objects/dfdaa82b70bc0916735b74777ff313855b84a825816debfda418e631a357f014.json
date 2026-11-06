@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b620b09f3c1de30e8d3bbad3a5d437d29d31c1f89846c3768bd94c10101161fe",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les contenus influencent les spectateurs",
+    "identity_sha256": "ac9caa5a916d743d4bf1da8eaf85f6779fe1eecbf57b352b3e32d42676b48f3f"
+  },
+  "source_value": "Il est évident que la télévision comme les jeux vidéos ont des effets, qui ne sont pas anodins. On ne peut pas diffuser tout et n'importe quoi comme si la liberté d'expression dédouanait les créateurs de leurs responsabilités.",
+  "source_value_sha256": "b42153c34350089d5578e31e8ffafc721662d7cb7ff542556da846117b46a1f7",
+  "target_value": "It is obvious that television and video games have effects that are not insignificant. One can not broadcast each and every thing as if freedom of expression released creators from their responsibilities.",
+  "target_value_sha256": "12187cde89654e0df8d0bd67621f742259f3bc6fdde35dca0f814c0868fde998",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0205",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "dfdaa82b70bc0916735b74777ff313855b84a825816debfda418e631a357f014"
+}

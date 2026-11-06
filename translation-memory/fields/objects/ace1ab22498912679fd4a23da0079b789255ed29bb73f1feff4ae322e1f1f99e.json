@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7a2a2e542fed06ac13f5d71b608ba12eb93957ba2ce1e92aea9ea97794262fa5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Bien des hommes ont fait la preuve de leur engagement pour le combat féministe",
+    "identity_sha256": "6a71b31b7c6bc272318b7d7d7f7845a0ac55f7a7add043dbc51b19d0d0139a5c"
+  },
+  "source_value": "Bien des hommes ont fait la preuve de leur engagement pour le combat féministe",
+  "source_value_sha256": "ef245580c7c700c43b9158993181c3f5d4985e6255694ba8b059c71dcf5dbad1",
+  "target_value": "Many men have demonstrated their commitment to the feminist struggle",
+  "target_value_sha256": "9374dda6f6f8a0c1480069cdae5aba3362fbbae645146d11ca8ba0ccc96a1542",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0276",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ace1ab22498912679fd4a23da0079b789255ed29bb73f1feff4ae322e1f1f99e"
+}

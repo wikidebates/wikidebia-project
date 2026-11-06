@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6e996fcd3c14f733d4997b1f1bf279b4d0fd2714e6eff20dead9143ef0ea9547",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les cas d'agressions sexistes sont mal traités par les instances policières et judiciaires",
+    "identity_sha256": "e18f42749bd8098f422fc6ddb673877cf1308325e8210ea808e912f6f1958c4f"
+  },
+  "source_value": "Les cas d'agressions sexistes sont mal traités par les instances policières et judiciaires",
+  "source_value_sha256": "c0541d20469b29368ade66e41f2080768be9e0eae6db91af301cd87103b2ae4e",
+  "target_value": "Cases of gender-based assault are poorly handled by police and judicial authorities",
+  "target_value_sha256": "f669d4616a6e1d662e2790ec60b7900c2b50ffaf73e78e01cb5f210f53f96c77",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0003",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9f131dd0766c104740562b72a653a016403210e65489a175c8a2a0cf30022efe"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "dc1b9e3f790d40f2c6b1e8e7c87c3080819e071f1e6c08cd11487c7cd6eab482",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'universalisme laisse sur le bas-côté de nombreux types d'oppression",
+    "identity_sha256": "2abfe0e702bbd89aa1dd708e85d15a1c93cc3ef99df8a07f06f4b61539f44bef"
+  },
+  "source_value": "L'universalisme laisse sur le bas-côté de nombreux types d'oppression",
+  "source_value_sha256": "0891f7a56d4cca1d2fb363dcaa26b6bcd7fb7a96a75c73c9f31a6a58bd522ca7",
+  "target_value": "Universalism leaves many forms of oppression behind",
+  "target_value_sha256": "0df4c0a036c1eede0027fce34e8fd00fa1a354e5549a30fe1f239de09339284f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0131",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "41d1e4bb5a732922a1b6483dbcfcc9e673e1df00feebab783fbe58695cf8316a"
+}

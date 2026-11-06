@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6ccce94df36282c068ef06a907a0e307594be672d65061cdd0a5ecbfc2d4749f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les capitalistes utilisent la division entre hommes et femmes pour mieux régner",
+    "identity_sha256": "52a2aa4447ae8a168674a96d3901af8e5fad09f5baefb63abc8573dc83f26f33"
+  },
+  "source_value": "Cette oppression révoltante concerne la moitié de l’humanité. Et le capitalisme, dont les avancées scientifiques et techniques ont conquis toute la planète, s’en accommode fort bien. Parce que l’oppression des femmes est inhérente aux sociétés de classes. Divisez pour mieux régner, dit-on souvent. Ainsi, les hommes les plus exploités ont-ils toujours quelqu’un de plus opprimé, de moins bien payé, de plus exploité qu’eux-mêmes : leur propre femme, la ''« prolétaire du prolétaire »,'' comme disait la militante socialiste Flora Tristan (1803-1844). Les capitalistes y ont trouvé leur compte, comme toutes les classes dominantes avant eux, tous les États, toutes les Églises.",
+  "source_value_sha256": "05175549d305d90e9afb5b216b7de0357293b51035822ffa776862ab127f6990",
+  "target_value": "This appalling oppression affects half of humanity. And capitalism, whose scientific and technical advances have conquered the entire planet, accommodates it very well. This is because the oppression of women is inherent in class societies. Divide and rule, as is often said. Thus, the most exploited men always have someone more oppressed, less well paid and more exploited than themselves: their own wife, the ''‘proletarian of the proletarian,’'' as socialist activist Flora Tristan (1803–1844) put it. Capitalists have benefited from it, as have all ruling classes before them, all states and all churches.",
+  "target_value_sha256": "6aa94e9ea8678a13bd1106600f43be2f5837ebb982850fd43501f817c9eb43da",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0079",
+    "target_path": "citations/A0079-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3a31a9793e18f8e84a446a63f2822ed4f15751d855644c7f217b2c72fffd76a0"
+}

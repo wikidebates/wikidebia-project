@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "666007dca6fe67aec764cd1889726a5ffbe41efa1788a36876ea995f55889514",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "S'exprimer sur les réseaux sociaux peut suffire à nous mettre en danger de mort",
+    "identity_sha256": "daa1a465bcb116a3c23f5b7e04ac7b67467f21bf38e6da3a6937ca7965a657fc"
+  },
+  "source_value": "Le cyberharcèlement ne se limite plus à l'espace virtuel et débouche de plus en plus souvent sur des agressions physiques qui vont parfois jusqu'au meurtre.",
+  "source_value_sha256": "bd3f4fcaee7f9b21d2972f3df4307d8a44b78b5416bbc98767127280896fceed",
+  "target_value": "Online harassment is no longer confined to the virtual sphere and more and more often leads to physical attacks that sometimes go as far as murder.",
+  "target_value_sha256": "892a1e6431f5e901cbf23e8c7a41cc4829137bd9b3abe291c0985821939fd385",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0158",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5d56fa6296d340f1c7957526f82902befff47a0bd5bae55ba4e54810c521eb1b"
+}

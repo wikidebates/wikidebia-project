@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a6fcd1e31d8005a093da27025c807d196ecc7cb08796e14dbb60299d59f295eb",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les actrices ou équipes de production d'oeuvres jugées trop féministes se font régulièrement harceler",
+    "identity_sha256": "56821add0ac19f6d03689429cc7c8c8c21710692eba3c43d7bbe263a114ccb78"
+  },
+  "source_value": "Les actrices ou équipes de production d'oeuvres jugées trop féministes se font régulièrement harceler",
+  "source_value_sha256": "ab158d206aa738ef9f373e8a528bd840a62b7a2168066db6bf823089415e1964",
+  "target_value": "Actresses or production teams involved in works considered too feminist are regularly harassed",
+  "target_value_sha256": "8fd9f64bf819137280d65b648d182b86e2cf2446ce048c4a011a37a4a541face",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0208",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a228ee5868182978a96f0af136b304de5bed585fa39ec832a49477a3301eb057"
+}

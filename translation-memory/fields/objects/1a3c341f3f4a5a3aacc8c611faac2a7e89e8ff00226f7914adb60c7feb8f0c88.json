@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c9a306bfcff9646535bb175d1d3c9905217e5c56fad06a4e4eff89c9ac7946e8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les oeuvres jugées trop féministes font l'objet d'appels au boycott",
+    "identity_sha256": "f32b3553a929eb47aa12367151aef15f41818d0b244322106a180cf858c4f356"
+  },
+  "source_value": "Les oeuvres jugées trop féministes font l'objet d'appels au boycott",
+  "source_value_sha256": "b968cbc618ebf1dbcdf70a4714734ef8fdebf1bf886fe084b36a0258dca8aaaa",
+  "target_value": "Works considered too feminist face calls for boycotts",
+  "target_value_sha256": "12798c9efd4ac20995d005c894aeee982d8195cebf7b80ff5c259e17c7ea9dee",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0206",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1a3c341f3f4a5a3aacc8c611faac2a7e89e8ff00226f7914adb60c7feb8f0c88"
+}

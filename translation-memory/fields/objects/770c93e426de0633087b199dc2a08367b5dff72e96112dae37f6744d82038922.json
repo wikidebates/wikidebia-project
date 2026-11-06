@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "39552ca2635aaf78fd1941dee56fd60af9c58fc723fab03370fea12cb658c131",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "\"L'affaire Mila\" n'est qu'un des coups médiatiques manigancés par l'extrême droite pour piéger la gauche",
+    "identity_sha256": "0958e78004f9327cab307e4f22c416fb72d439566cb5d8652dab71f8f44a5f56"
+  },
+  "source_value": "\"L'affaire Mila\" n'est qu'un des coups médiatiques manigancés par l'extrême droite pour piéger la gauche",
+  "source_value_sha256": "11580002cdf373859c279ad23b28639f542ee2cda2d0cf9dc84523f10dbab4f8",
+  "target_value": "The \"Mila affair\" is merely one of the media stunts engineered by the far right to trap the left",
+  "target_value_sha256": "8e5d95bd6f584baa583fc080d77c7a216879fe06fc0c9cde2517b5259cdfcf9c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0231",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "770c93e426de0633087b199dc2a08367b5dff72e96112dae37f6744d82038922"
+}

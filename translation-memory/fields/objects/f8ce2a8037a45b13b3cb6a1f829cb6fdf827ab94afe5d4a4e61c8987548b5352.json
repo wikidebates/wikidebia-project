@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "adfc6c57a41ee6ad0bc70d60834fd23764254b3078fb1f216fc3389375758b6e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les films de propagande montrent que les contenus influencent les spectateurs",
+    "identity_sha256": "e04467bffc7e603c6ed3e605a84f1ac8811e72601cf95ac2c1130eda0cf97aca"
+  },
+  "source_value": "Si le cinéma était aussi peu influent qu'on a tendance à le croire, aucun dirigeant ne se serait donné la peine de l'instrumentaliser afin de légitimer sa politique.",
+  "source_value_sha256": "b2040e5811239edae81477642cafb39777dee50f93c417e88d0b546d0aa85b9d",
+  "target_value": "If cinema were as uninfluential as people tend to believe, no leader would have gone to the trouble of using it to legitimize their policies.",
+  "target_value_sha256": "75d0bd6d7af2b5cdcc70ced62dffa2f1cca1f16053541e52a817e08af2e61975",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0296",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f8ce2a8037a45b13b3cb6a1f829cb6fdf827ab94afe5d4a4e61c8987548b5352"
+}

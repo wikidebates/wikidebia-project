@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c80c6af084bee9988ceecc4dee1734720bf60232c6059fc517b0b75ca393c615",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "De nombreux gynécologues sont maltraitants",
+    "identity_sha256": "878f5a60707d73d86f858f2798da5450e85072ed6958e4c8c0495616ebea333a"
+  },
+  "source_value": "De nombreux gynécologues sont maltraitants",
+  "source_value_sha256": "aeb7ee8684df6df836c405cf101e36a61578b1d6c39ad8db39ab91f8b30a7d6f",
+  "target_value": "Many gynecologists mistreat their patients",
+  "target_value_sha256": "d49e9b44aebd613269c7d1717dd95785e662ca7b31d670d95c50547798c7e875",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0057",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "aa18f2b4b61194d59774e6ae9fe09aec51c63a3be1715884e9fdd788dc6b808c"
+}

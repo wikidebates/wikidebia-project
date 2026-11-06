@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "21bb2c0843cf44cda7620cd95c55cbd56e2cbd37fe6a3667e55a5122e550ec28",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme est qualifié de misandre depuis le début de son existence",
+    "identity_sha256": "c41e1f7d250d44995beecda19f7ec7c23422a1ef1c892fb94a2b36962547364a"
+  },
+  "source_value": "Le féminisme est qualifié de misandre depuis le début de son existence",
+  "source_value_sha256": "0481df2e1853d553c49c718a0bf0747dc76ef57630c3ae54beacff48e538c6f3",
+  "target_value": "Feminism has been described as misandrist since the beginning of its existence",
+  "target_value_sha256": "0b2fff15022d239d2e276caba9c3726084a5339c59405d10bc0bc41e991e1f5c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0098",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "212b7e478c75a865c903e45f15630ef74af3164ecc6b0ec34d8b1283c53c537e"
+}

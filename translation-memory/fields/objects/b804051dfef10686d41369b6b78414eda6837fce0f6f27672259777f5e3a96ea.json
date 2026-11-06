@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7e90e33d0f5b842325c6b98c4cddd22df07344d61848a8d1fb60226623cb2c59",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La modération de Facebook est sexiste",
+    "identity_sha256": "0f52d66f39e52e53a13bee66aa189b4a5d5f490a8755cc5f738e07e4e8f0ff37"
+  },
+  "source_value": "La modération de Facebook est sexiste",
+  "source_value_sha256": "1e7a49cb370a23b17c84fe60bbe7d0e6092e906ea6607291e9e039474433f951",
+  "target_value": "Facebook moderation is sexist",
+  "target_value_sha256": "4475ad28b002b73f5d69ce91ca763d29835e07ee1d642f66f9f5dc2f2d3571b8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0265",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b804051dfef10686d41369b6b78414eda6837fce0f6f27672259777f5e3a96ea"
+}

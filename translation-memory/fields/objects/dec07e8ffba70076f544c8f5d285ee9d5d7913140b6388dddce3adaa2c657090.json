@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "32e1fda4a7478d164be63fc7474cefac3d0900eb4d616d1025b2f21a50a16df6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La masculinité toxique pousse les hommes à agresser d'autres hommes",
+    "identity_sha256": "83844147fe53f672f0595c14585f42dbd46cd50ef2580aba1514784b4f111aa9"
+  },
+  "source_value": "La masculinité toxique est le principal vecteur d'homophobie, les hommes gays étant perçus comme \"pas assez hommes\", donc comme des personnes méprisables.",
+  "source_value_sha256": "52316d1a8398cb79c3b65e828cff51e3184c6d7c129d91e521f632fdf88dfef8",
+  "target_value": "Toxic masculinity is the main vector of homophobia, with gay men perceived as “not man enough” and therefore as contemptible people.",
+  "target_value_sha256": "28bbf2b87ec6a27eb67cf7c12c5119f43227aef129d6bf22383e5f6b5c91839e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0194",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "dec07e8ffba70076f544c8f5d285ee9d5d7913140b6388dddce3adaa2c657090"
+}

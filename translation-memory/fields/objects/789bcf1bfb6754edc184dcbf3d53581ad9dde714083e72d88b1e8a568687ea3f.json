@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ebd17f119d81fa9f2b84ced13aaef9939718a1e263069fe1b2b2cf150bd8ef76",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes sont moins présentes dans les postes à hautes responsabilités et les filières \"masculines\"",
+    "identity_sha256": "d0fc388c0d2d241a2dd4d840c81ad2204a229b07147801164bd4cccb0939c3aa"
+  },
+  "source_value": "Les femmes sont encore moins présentes dans les postes à haute responsabilités ou dans les filières dites \"masculines\". La cause d'un plafond de verre découlant sur les bases d'une société patriarcale dont les préceptes tardent à à s'estomper.",
+  "source_value_sha256": "386b74adb022b7b8bd8bffd871f5bcb8575e7e3b7febdd7dcff3f4b3e30aae78",
+  "target_value": "Women are still less represented in positions of high responsibility and in fields regarded as “male.” This is due to a glass ceiling rooted in the foundations of a patriarchal society whose precepts have been slow to fade.",
+  "target_value_sha256": "c92f48ba0435f14109a2b1ed0f98841e1b6bae0a211b5bc8c4132549aa3f227a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0026",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "789bcf1bfb6754edc184dcbf3d53581ad9dde714083e72d88b1e8a568687ea3f"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fbdb238e9bfe4f384449874e563cb6b2ba6c5a76e9da269c769011ebd5b4fdac",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le qualificatif de \"woke\" sert à diaboliser les concepts progressistes sans avoir à argumenter",
+    "identity_sha256": "bae338143751b08f1633eac8ae029ce32538f9630a79aa0fa38957a98fb90788"
+  },
+  "source_value": "D'une part, \"''woke''\" a perdu de sa force - comme à chaque fois qu'un \"''mot est beaucoup utilisé''\", souligne la linguiste -, et \"''en est venu à désigner un engagement superficiel''\". D'autre part, le dérivé \"''wokisme''\" a été créé et est \"''surtout utilisé par celles et ceux qui veulent le combattre. C'est un terme assez flou''\", utilisé \"''pour s'attaquer aux personnes qui s'attaquent aux discriminations sur base du genre, du sexe, au mouvement décolonialiste...''\", [selon la linguiste] Laurence Rosier.\n\n(...)\n\nL'utilisation du terme \"''wokisme''\" entre dans le cadre d'une \"''sorte de culture de la panique, en associant le militantisme, la lutte contre les discriminations, à des mouvements puritains''\", poursuit Laurence Rosier. \"''Cela peut être dangereux. On est dans une culture de la peur, comme si on allait éradiquer l'Histoire en enlevant des statues, alors que les archives, les documents restent pour témoigner des atrocités que certains ont fait. Cette culture de la panique est utilisée pour bloquer des combats émancipateurs''\", conclut-elle.",
+  "source_value_sha256": "70b0a07a1e33c4119d7e80708c0f95e0fd188ba6e2c5308fa05434bc539850ac",
+  "target_value": "On the one hand, “''woke''” has lost some of its force—as happens whenever a “''word is used a great deal,''” the linguist emphasizes—and “''has come to designate superficial commitment.''” On the other hand, the derivative “''wokeism''” was created and is “''used mainly by those who want to fight it. It is a fairly vague term,''” used “''to attack people who challenge discrimination based on gender or sex, the decolonial movement...''”, [according to linguist] Laurence Rosier.\n\n(...)\n\nThe use of the term “''wokeism''” belongs to a “''kind of panic culture that associates activism and the struggle against discrimination with puritanical movements,''” Laurence Rosier continues. “''This can be dangerous. We are in a culture of fear, as though removing statues would eradicate History, even though archives and documents remain to bear witness to the atrocities some people committed. This panic culture is used to block emancipatory struggles,''” she concludes.",
+  "target_value_sha256": "2ac3ececf89a2d16fefd8a06943ae2597be74c32a0e5db401536bf1a0c3588d3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0308",
+    "target_path": "citations/A0308-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8113450ba13cdb311b144b589271422ee250e5384201725f874d588b07b5fb1e"
+}

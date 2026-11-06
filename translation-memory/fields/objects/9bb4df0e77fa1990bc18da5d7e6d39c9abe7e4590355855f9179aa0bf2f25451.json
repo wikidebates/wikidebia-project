@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4dbd5475ac931bc82e509898f0a20b5dd6d0e77d8a650d8258d0760b29d8c4c3",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le mythe d'une \"victoire féministe totale\" n'est pas nouveau",
+    "identity_sha256": "5a081d1aad5d1a16c8af2277e088fe1bd95308f44f6080df7b1e69141dfe3061"
+  },
+  "source_value": "Le mythe d'une \"victoire féministe totale\" n'est pas nouveau",
+  "source_value_sha256": "51f32a438002bf80f15f78ebcbbaedc8dc2e19309da8ced3d4c5a7a7bb208cc0",
+  "target_value": "The myth of a \"complete feminist victory\" is not new",
+  "target_value_sha256": "09b39e4cc630d4aebc57afc4eae6c4eb1c37b7b03170ec4e5b725891ebb99151",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0088",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9bb4df0e77fa1990bc18da5d7e6d39c9abe7e4590355855f9179aa0bf2f25451"
+}

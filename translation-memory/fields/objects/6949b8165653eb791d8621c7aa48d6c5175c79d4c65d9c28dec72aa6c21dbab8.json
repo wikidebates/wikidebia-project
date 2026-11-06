@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "bef2e5ed9c867cfc870f3746d7611b2f178bb50c5f1ab5381512914e7b0647d6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les droits des femmes s'étoffent chaque année grâce au combat féministe",
+    "identity_sha256": "0ca1c286f51d71fbae2bb2a68a57f1253d553604fd89e30d1185351d007aee26"
+  },
+  "source_value": "Les droits des femmes s'étoffent chaque année grâce au combat féministe",
+  "source_value_sha256": "4d7df4f4d3b2dce93abb7c4e8ccbbc56a082bcc7c2cdd5d89e2eb2d9a3f7aeb5",
+  "target_value": "Women's rights expand every year thanks to the feminist struggle",
+  "target_value_sha256": "e3be1d0d81355acaefc7b76a46f467ca154555ec384229eeaed537408a14937e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0081",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6949b8165653eb791d8621c7aa48d6c5175c79d4c65d9c28dec72aa6c21dbab8"
+}

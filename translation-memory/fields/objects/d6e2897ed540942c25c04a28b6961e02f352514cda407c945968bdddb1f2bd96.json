@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2052102857457b81afc9d78e449e938ec14d45f587927c227018fda0642b35a8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les \"attaques misandres\" restent bien gentillettes comparées aux attaques misogynes",
+    "identity_sha256": "f64ed7d390c056ec2c6da9c7d50dadb86ea6fa9e9c327ac76453e7eb42e3ec70"
+  },
+  "source_value": "Lorsque les hommes évoquent la «Terreur féministe», ils la rattachent au combat pour la PMA pour tou·tes ou à l'écriture inclusive. Même dans leurs articles délirants et leurs fantasmes de matriarcat, ces messieurs sont incapables d'imaginer, une seule seconde, des femmes s'organisant en groupe pour tuer les violeurs que la justice a laissés en liberté.",
+  "source_value_sha256": "4f3e2cdbeb618daeffcce5571cfc905d7ecf710d011b4acbe7d44a98028ff015",
+  "target_value": "When men speak of “Feminist Terror,” they associate it with the fight for assisted reproduction for everyone or with gender-inclusive writing. Even in their delusional articles and fantasies of matriarchy, these gentlemen are incapable of imagining, for even a single second, women organizing as a group to kill the rapists whom the justice system has left at liberty.",
+  "target_value_sha256": "d573530a3e115658f9d8637a51829f9ab6e7b4f4a8ba0dbd3fa4032bc5953de7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0099",
+    "target_path": "citations/A0099-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d6e2897ed540942c25c04a28b6961e02f352514cda407c945968bdddb1f2bd96"
+}

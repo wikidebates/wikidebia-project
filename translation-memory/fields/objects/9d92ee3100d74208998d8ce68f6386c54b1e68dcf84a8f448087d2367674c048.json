@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1cb44134bea712831f8f4e5719a9a2fd1ae5455919132d9f6e2358050e14574f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La censure la plus à craindre ne provient pas du \"wokisme\"",
+    "identity_sha256": "a4498de8239b45c57738f39e9502baecc44e6f513c95b7cd0771de18cb5c5325"
+  },
+  "source_value": "Les cyberviolences sont fréquemment utilisées pour cibler les groupes minorés et discriminés et discréditer leurs représentant·e·s afin de les pousser à cesser de s’exprimer. Internet et les technologies du numérique ne sont pas neutres. Les plateformes numériques et les réseaux sociaux sont conçus et développés par des individus appartenant à une catégorie sociale privilégiée. Il s’agit souvent d’hommes blancs, valides, cisgenres et très diplômés. Ces derniers ne sont pas ou peu confrontés aux discriminations liées au racisme, au sexisme, au handicap, à l’identité de genre et à l’orientation sexuelle notamment. Or, les espaces numériques où les cyberviolences s‘exercent sont des espaces politiques construits à leur image, au sein desquels la liberté d’expression, lorsqu’elle existe, demeure surtout celle des groupes sociaux dominants.\n\nAvec l’avènement des forums, des blogs, puis des réseaux sociaux, et l’investissement du numérique par les militant·e·s d’extrême droite, le cyberharcèlement s’est malheureusement imposé comme mode d’action politique. Le recours à la violence s’est normalisé et le fait de prendre à partie, voire de cyberharceler, une personne considérée comme un·e ennemi·e politique, est souvent considéré comme légitime. Le mode opératoire varie peu : une personne médiatique ou reconnue comme leader d’opinion lance une campagne de cyberharcèlement en mentionnant une personne ou une organisation cible, ce qui conduit invariablement ses nombreux et nombreuses abonné·e·s à la prendre à leur tour à partie. Sur les forums, les groupes Facebook et les fils de discussion privés, des individus peuvent aussi se concerter et coordonner leurs actions de cyberharcèlement, se livrant alors à de véritables raids numériques.",
+  "source_value_sha256": "1a0be8b7f868990a1894341fbe9b492ae946a886d5322895db3852d3976abf17",
+  "target_value": "Online violence is frequently used to target minority and discriminated groups and discredit their representatives in order to make them stop speaking out. The Internet and digital technologies are not neutral. Digital platforms and social networks are designed and developed by people belonging to a privileged social category. They are often white, able-bodied, cisgender, highly educated men. They encounter little or no discrimination linked in particular to racism, sexism, disability, gender identity, or sexual orientation. Yet the digital spaces where online violence occurs are political spaces built in their image, within which freedom of expression, when it exists, remains primarily that of dominant social groups.\n\nWith the advent of forums, blogs, and then social networks, and the far right’s investment in digital media, cyberharassment has unfortunately established itself as a mode of political action. The use of violence has become normalized, and targeting or even cyberharassing a person regarded as a political enemy is often considered legitimate. The method varies little: a media figure or recognized opinion leader launches a cyberharassment campaign by mentioning a targeted person or organization, invariably leading their many followers to target it in turn. On forums, Facebook groups, and private discussion threads, individuals can also confer and coordinate their cyberharassment actions, engaging in genuine digital raids.",
+  "target_value_sha256": "8ecdff7395bc30572bffe5bdbb62020710e270190e53c6b65a8cac514cff07fc",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0311",
+    "target_path": "citations/A0311-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9d92ee3100d74208998d8ce68f6386c54b1e68dcf84a8f448087d2367674c048"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4f8ad71cf079164a112e486e1e5be23cab978b97f1a765ebb6ca374f59f77ae9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Certaines femmes subissent du harcèlement uniquement parce qu'elles font un travail jugé masculin",
+    "identity_sha256": "29e087e4d286f07ea9ce507074a91415f017cdaaece5387a5fb12dcdcfefdc02"
+  },
+  "source_value": "Certaines femmes subissent du harcèlement uniquement parce qu'elles font un travail jugé masculin",
+  "source_value_sha256": "b0f91035c59581bffaa1081ecd8225781a62603928c51855884a442cdd981719",
+  "target_value": "Some women face harassment solely because they do work considered masculine",
+  "target_value_sha256": "d926fad26fa32b7a8f958530d9ae3a785cbf5ac3ca02cbf93bd64056b839c08d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0246",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ae29ff3c440506a72c490d3d4b1f0f5840c45adc97cfba4ad1db91b6409242f8"
+}

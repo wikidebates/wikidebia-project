@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6985c126d4d58d463b6f6242f93538659b3264d597d4deac55f1804c0f58e9fa",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les créatrices de contenu font globalement moins d'audience que les créateurs",
+    "identity_sha256": "8da34330ee6f1a3cad8635934e944be682c2e9f017c0fcc3f7fb6b3ef9ebcca2"
+  },
+  "source_value": "Les créatrices de contenu font globalement moins d'audience que les créateurs",
+  "source_value_sha256": "9dce9fadb56d901d7b9c484e9a6777b2246c65ac7acd709b882984c937e275ec",
+  "target_value": "Women content creators generally attract smaller audiences than men content creators",
+  "target_value_sha256": "31a298f06f3bc71fdc40e392617f4f4b5b2e841acb5495cc14161d1d49473a73",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0263",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b1b9bbffd307c43691ba51ff5bd0e80834f8bb8f358a5519f5da7bfd1b4b8d5e"
+}

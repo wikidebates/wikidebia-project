@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5974776157d660b6388611cce68f22e7015477130e0b7e0ffa1f354fa0f884ce",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le masculinisme existe grâce au sexisme, c'est donc bien un combat féministe",
+    "identity_sha256": "5fbcaa9f4e32113f7dbd86693ebace2756a6e2ec0607fbf5ab0be709fe238260"
+  },
+  "source_value": "Le maculinisme existe grâce au sexisme, c'est donc bien un combat féministe",
+  "source_value_sha256": "58faafc3ace1a547e660c0864ca1aaa65c69cf24cecbe77c2a9afb154721acfc",
+  "target_value": "Masculinism exists because of sexism, so opposing it is indeed a feminist struggle",
+  "target_value_sha256": "e4733c9b790ba5094d03aec07b0369c2617bd9e1cca486d9287dbaf620cea4a3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0287",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7d6ba221cfc4686e12340423cc9361f593fc40212a39a4ab9174a2d83b08a009"
+}

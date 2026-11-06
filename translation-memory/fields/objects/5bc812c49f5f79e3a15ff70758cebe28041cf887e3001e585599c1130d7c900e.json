@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f95566717a8c9189927085bd858380a3a8937fcae5d7006f66e959bda564ed80",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La peur que la parité incite à engager des femmes incompétentes juste pour les quotas est un fantasme",
+    "identity_sha256": "199535be354b8102d52ac3ff7355bf2f08efdf97776df4e4ed8ae96126b0ad74"
+  },
+  "source_value": "La peur que la parité incite à engager des femmes incompétentes juste pour les quotas est un fantasme",
+  "source_value_sha256": "c158c1dc3bc516025a693526860dc4020e58fadecf817dc04b60bd1d5df7170e",
+  "target_value": "The fear that parity encourages hiring incompetent women merely to meet quotas is a fantasy",
+  "target_value_sha256": "0575c06f32baab1c1eb8f0536d15a9772893d2bc4062c26d3d395aeb2b114247",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0147",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5bc812c49f5f79e3a15ff70758cebe28041cf887e3001e585599c1130d7c900e"
+}

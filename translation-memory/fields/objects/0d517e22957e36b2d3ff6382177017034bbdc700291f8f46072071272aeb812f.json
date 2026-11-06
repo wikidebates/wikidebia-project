@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "29c3be3f2b81b1a3c96b05422dd48da59038d761503d2a7bc8a6cc9ffaba10df",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes subissent des violences conjugales",
+    "identity_sha256": "54d004183a9a206d4c46b78e161a9e01f9fd6820ef3129505cdbce685b677d68"
+  },
+  "source_value": "Violences de couples",
+  "source_value_sha256": "22924c893885756c3818aa2dc3a50380c60930a249c0fbb28a87a6f01dce8499",
+  "target_value": "Intimate partner violence",
+  "target_value_sha256": "2143afcbf152283c2988eb7a12c2240d16405196ba67d90cff1c82ce5e1adb98",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0042",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0d517e22957e36b2d3ff6382177017034bbdc700291f8f46072071272aeb812f"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b39dd7b94ce904200f2637ff633034926ddfe0817fa02d522c5d726573cac4db",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les oeuvres jugées trop féministes subissent des vote-bombings",
+    "identity_sha256": "e452b2e9a50a33d5ee6937f72e13c6b4daa81868e9a56a1d1bf88ffa9aa43d44"
+  },
+  "source_value": "Les oeuvres jugées trop féministes subissent des vote-bombings",
+  "source_value_sha256": "dacf1f07872e2b43ea8f2d023158bdcd9174461197725e0b9894fa8646717bfe",
+  "target_value": "Works considered too feminist are subjected to vote bombing",
+  "target_value_sha256": "1f7258ac4e5eb7c87036196e4a41a1a17f9a41e46eff1af64a6a24d4d338760f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0207",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b7ecd8aa17e72a404d7fac0879d5fc75a8b206dfea29568832e8850113f4bd4d"
+}

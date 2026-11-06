@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c5115b804f6b192bb11e48c3819d226a213738f99968d0ad1f776f0b33d14947",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme bride la liberté de création",
+    "identity_sha256": "a4270aa7fd4184c5cf381b070ebd85b64470920836cc9b9f273349f58e879938"
+  },
+  "source_value": "Si l’artiste n’est pas au-dessus des lois, car il est un citoyen comme tout un chacun et qu’il est comptable de ses actes quand il s’exprime dans une œuvre, il doit pouvoir représenter le racisme, le machisme, la domination masculine ou la colonisation sans qu’on le lui reproche […] Or, on voit se constituer ici et là des tribunaux populaires, pétitionnaires, qui se donnent le droit de prononcer des «sentences» relayées par les réseaux sociaux contre tel spectacle, telle scène de pièce de théâtre, telle rétrospective, telle chanson. Ces mises en cause publiques des œuvres ne se contentent pas - ce qu’elles seraient parfaitement libres de faire -, de critiquer, mais elles ne cherchent pas le débat. Elles assènent des lectures uniques, dogmatiques, et appellent à l’interdiction, hors de tout dispositif légal ou judiciaire. Ces attaques répétées risquent, au-delà des œuvres qu’elles visent, de conduire à la pire des censures",
+  "source_value_sha256": "b913386f1ebbe09e21425ff6b0277b278f60a47e39f82a730aef9b0d841e9523",
+  "target_value": "Although artists are not above the law, since they are citizens like everyone else and are accountable for their actions when they express themselves in a work, they must be able to depict racism, sexism, male domination or colonization without being reproached for doing so. [...] Yet here and there we see petitioning popular tribunals being formed, claiming the right to pronounce 'sentences,' relayed through social media, against a particular show, scene in a play, retrospective or song. These public challenges to works do not merely criticize them—which they would be perfectly free to do—but do not seek debate. They impose single, dogmatic interpretations and call for prohibition, outside any legal or judicial process. Beyond the works they target, these repeated attacks risk leading to the worst form of censorship.",
+  "target_value_sha256": "a171bbf8a0bf849c6076ea04bbfd152a52fa45ceb77a1b7ad73d1e59307b0c4d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0019",
+    "target_path": "citations/A0019-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "68b534fcf55f31082d0f3746c194e5d6826a60f8beaae91c285322772d5f3ef1"
+}

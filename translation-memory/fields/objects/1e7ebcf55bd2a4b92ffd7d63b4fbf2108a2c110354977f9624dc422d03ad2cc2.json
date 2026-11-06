@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8259bec662d6db23fde4728c57b85559856ab79d7a6f9e032b0b4c81e7e1366e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'homme cherche encore à donner des leçons de vie à la femme (Mansplaining)",
+    "identity_sha256": "852660f98d216f44fd80c799598481d7a69961504963406d0ab3b1863697c1fc"
+  },
+  "source_value": "Un homme m’a récemment « mecspliqué » la grossesse ainsi qu’à trois autres femmes, dont l’une a eu 4 enfants. Miraculeusement, il est encore en vie",
+  "source_value_sha256": "aebdfb4dc16a3cd0c3b9945c32b18ba7bfa5caee79b591024e6ac25b4f88ed63",
+  "target_value": "A man recently mansplained pregnancy to me and three other women, one of whom has had 4 children. Miraculously, he is still alive.",
+  "target_value_sha256": "aa89cd944816064abb277bb9ce298aeb5ff52352230b265e403414561e09daad",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0067",
+    "target_path": "citations/A0067-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1e7ebcf55bd2a4b92ffd7d63b4fbf2108a2c110354977f9624dc422d03ad2cc2"
+}

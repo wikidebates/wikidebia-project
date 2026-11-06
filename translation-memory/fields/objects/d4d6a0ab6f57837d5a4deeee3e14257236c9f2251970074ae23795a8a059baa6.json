@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4a8f9c17367cb8eb4b37e986096e25ff37e30c00d8d3b26fd695a7b206fc4b2f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le terme a été dénaturé et a fait l'objet d'une réappropriation",
+    "identity_sha256": "fcfbb6b580af17bae4460ca229a6a37a5aecdaf8e4952dcf8c73a1587616b98e"
+  },
+  "source_value": "Le terme a été dénaturé et a fait l'objet d'une réappropriation",
+  "source_value_sha256": "05739f89d52301bbb5332da86f80de2d83e0a4e3aa50d4486b11f5183ca0ba15",
+  "target_value": "The term has been distorted and appropriated",
+  "target_value_sha256": "a10294a0d057e6107535a26cba6698e1efc5ce6474c1214d9f2af2e666d788b4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0201",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d4d6a0ab6f57837d5a4deeee3e14257236c9f2251970074ae23795a8a059baa6"
+}

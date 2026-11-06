@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1ac8d0c485f8d6244aadaf8ce4ce9b1bfbe273a80aeab15d2d80c4c2fb930d9c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les féministes doivent continuer le combat car de nombreuses inégalités subsistent",
+    "identity_sha256": "fb7c422bf9fe4e5c3c4906c40a9c5e10bd6f963615f6f2ba9225cc1bbf400b57"
+  },
+  "source_value": "Les femmes subissent encore et dans tous les domaines plus de discrimination sexiste : travail, sport, politique, famille, culture.",
+  "source_value_sha256": "e5f4524214df2c76bd3704c0f8eecbb31391681a11f9deee290180bf195ec729",
+  "target_value": "Women still face greater gender discrimination in every sphere: work, sport, politics, family life and culture.",
+  "target_value_sha256": "a131699fa993fd1c5f7914d7c61f53f9b126b9a8c8b41401bc3e905d2a8d8207",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0001",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "89c412c17176f6bdce37048a2aa306007fd0157723132eff2d460eca21b4587d"
+}

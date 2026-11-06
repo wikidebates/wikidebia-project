@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e9803089571db52cb07f40ba05e31872b3018e2c413a82123beb9e4c4af32b93",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des procès pour diffamation ne sont que des procédures-bâillon",
+    "identity_sha256": "0cc6f94e9cb56e98f0eba74b1f044d997d49873bb8991f436f7e485c89400024"
+  },
+  "source_value": "La plupart des procès pour diffamation ne sont que des procédures-bâillon",
+  "source_value_sha256": "a9926bf75ba3f58bf1cfa71276a440d4a615173a0f41dd6c4a20c970bbe51779",
+  "target_value": "Most defamation lawsuits are merely strategic lawsuits against public participation",
+  "target_value_sha256": "8288acff67083eafb07d378e038140b1d64fc45b8acf8de720d2374155d31b88",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0222",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "332d8797f575d377f7033b0e9bc647ffb2b2a7afc859e1cd5ab3e4d2ae1c8b6f"
+}

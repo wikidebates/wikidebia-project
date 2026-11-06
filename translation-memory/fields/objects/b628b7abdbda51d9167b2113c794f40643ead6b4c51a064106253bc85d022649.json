@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a2ed9e21d687b3838a1695a920ef0698095c6bedbd1068f7055d8008cd91618f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes qui accusent les féministes de les avoir poussés dans les bras de Trump n'étaient pas des alliés à la base",
+    "identity_sha256": "eed689cd3ec355f3a3bda08af9f94ee166c0443a58f0726b99f096757f08b340"
+  },
+  "source_value": "Si les gens sont devenus trumpistes à cause des féministes, c'est simplement parce qu'ils ont vu leurs privilèges menacés, ces derniers étant garantis par les violences et injustices permises par le patriarcat. Si ils préfèrent conserver leur position de supériorité plutôt qu'accorder aux femmes une humanité qu'on leur dénie injustement, c'est qu'ils étaient déjà les ennemis de ces dernières.",
+  "source_value_sha256": "6cd75146bad3d14a1ac0a51279ee3d6296eb5ca87b30156c3a18d6ae1b19de32",
+  "target_value": "If people became Trump supporters because of feminists, it is simply because they saw their privileges threatened, those privileges being guaranteed by the violence and injustices permitted by patriarchy. If they prefer to preserve their superior position rather than grant women a humanity unjustly denied to them, then they were already women’s enemies.",
+  "target_value_sha256": "8a4030b7d1ffe991471f2c33df37462fa57ea06ab7b942f1a5503f5ab1d84c43",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0168",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b628b7abdbda51d9167b2113c794f40643ead6b4c51a064106253bc85d022649"
+}

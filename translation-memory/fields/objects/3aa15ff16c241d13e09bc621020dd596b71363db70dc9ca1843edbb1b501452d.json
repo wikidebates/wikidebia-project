@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "86f02b5fa0b4a2fffa66c051d2b3d4799e9beb1dd0505b1649a6092ec7f46919",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'engagement féministe est une tâche trop grande et mène au burn-out militant",
+    "identity_sha256": "cd7a1ec1e9e24ecb0bc77ff2a27ba04eb43a4582087a60dc90dea4b0d3230950"
+  },
+  "source_value": "Elles sont plusieurs à témoigner de cet engagement qui a mis leur vie entre parenthèses. Le combat d'une existence, chronophage et usant. On parle de burn out militant. L'ampleur du phénomène a même crée l'émulation du hashtag #PayeTonBurnOutMilitant. Les victimes militantes parlent d'épuisement et certaines de stress post traumatique (ou traumatisme vicariant) chez certains travailleurs sociaux et professionnels de l'aide. Devant l'afflux des témoignages, elles vivent par procuration le désarroi des victimes. Considérant parfois \"faire le travail de l'état\" en étant sur toute la chaine d'accompagnement : prise en charge, consolation, suivi dans la procédure judiciaire… Certaines jettent l'éponge, pour retourner à une existence plus calme et classique, considérant le combat perdu d'avance et démesuré.",
+  "source_value_sha256": "9897d4f9931f3c1ba78c60190b53d9cf467e3a902c5713feb24abed78548c997",
+  "target_value": "Several women describe how this commitment put their lives on hold. A lifelong struggle, time-consuming and exhausting. This is known as activist burnout. The scale of the phenomenon even prompted the hashtag #PayeTonBurnOutMilitant. The activists affected describe exhaustion, and some mention post-traumatic stress, or vicarious trauma, among certain social workers and helping professionals. Faced with a flood of testimonies, they experience victims' distress vicariously. Some feel they are \"doing the state's job\" by being involved throughout the support process: taking people in, comforting them, and assisting with legal proceedings... Some give up and return to a quieter, more conventional life, regarding the struggle as disproportionate and lost in advance.",
+  "target_value_sha256": "9933400e13b0cd43a67288f9f1d83f38abe57405e65b3c47a084fdfd5ff8b7a3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0015",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3aa15ff16c241d13e09bc621020dd596b71363db70dc9ca1843edbb1b501452d"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "16db31e8811d79a31c31d0d81d40e48fabfe3246cf211e7495a56a48ec1d3601",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Défendre le choix d'être femme au foyer est le paravent d'une extrême droite se faisant passer pour féministe",
+    "identity_sha256": "850a50882e03ceb4b074b89a41c13fa94a9cdbdc65b561cfb5188b0d0b623d03"
+  },
+  "source_value": "Le rôle de femme au foyer, même choisi, contribue à caresser le patriarcat dans le sens du poil. L'aspect \"choix\" est illusoire et n'est qu'une pirouette argumentative pour faire passer pour progressiste une idéologie très conservatrice.",
+  "source_value_sha256": "35df0eb3517f0f05ffcaeb9df6452964821343a407cda7f3a836d6ed492c4423",
+  "target_value": "The role of housewife, even when chosen, helps keep patriarchy comfortable. The element of “choice” is illusory and merely an argumentative sleight of hand used to pass off a highly conservative ideology as progressive.",
+  "target_value_sha256": "301d26dfe0ce90a52db68be0cdb420a42e6f75e6ee8ec5b338863579f40fced7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0257",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6bd9e5c8eb25881fb5aaa5dd1574a0a877c8d4e1288e85187589c6feb9f85795"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "be888a5cc96fe592b7e8abd47fb2d5ccb61ef36f504afa5f4e98cbe2728039e4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme est le meilleur allié de la démocratie",
+    "identity_sha256": "6f9b416e6b07a475a9126888b417121a0486b78d5114ea03f480a921dfacf655"
+  },
+  "source_value": "Un trait commun aux populistes et aux dictateurs est qu'ils prônent ouvertement une infériorisation de la femme et que leur politique est l'archétype même de la violence masculine traditionnelle. Le féminisme peut donc aider à combattre ces dérives.",
+  "source_value_sha256": "a84d75b14db9ce6e7b1738d2353ce9bacfb2889e44fb548160853fcb6ef7c719",
+  "target_value": "One trait shared by populists and dictators is that they openly advocate the inferior status of women and that their politics is the very archetype of traditional male violence. Feminism can therefore help combat these excesses.",
+  "target_value_sha256": "8bf90edf41e1a0cea5c141a7b1dff037b62fcb1f9fd93a57862a227221b60ff0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0065",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "45bfae4a70efe6b07bdb33b3bd16f94b5811fb253e7359ea1e7f29087fff6143"
+}

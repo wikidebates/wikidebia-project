@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "214a1133086d3dbe374ad40b6b56d897fb7a51634e8d08676d4227addc630540",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes sont culturellement encouragés à se comporter comme des agresseurs sexuels",
+    "identity_sha256": "5f08cd0b162e094ec73df491b3d912456b40ca27a1e1647f99f44432aa66fe0c"
+  },
+  "source_value": "Les hommes sont culturellement encouragés à se comporter comme des agresseurs sexuels",
+  "source_value_sha256": "c6dcfa394fa36a49e69336b12f6d2763ea4450df554e6501d9bc17f478f2e1c1",
+  "target_value": "Men are culturally encouraged to behave like sexual aggressors",
+  "target_value_sha256": "bf30015eea624b2bf60da11710604dd12d96044249a5db149ea22a4bc9a58b63",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0091",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4f71d54c84dd413eb1726acca3b3b9ee36058bce921e715e972e84a3bbe29ed2"
+}

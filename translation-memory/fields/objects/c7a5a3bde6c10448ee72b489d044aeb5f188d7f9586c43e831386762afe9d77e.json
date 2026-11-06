@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2ec8db91b989d44492c717df2d55796a8f37f0023c1c499f7a10f80602f7aca8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme est une idéologie dont l'ensemble de l'échiquier politique se revendique",
+    "identity_sha256": "86669aa66bf7ae086f6fe3a6b2138bf33bfdaf84fac4ccfc9f33522721bc5073"
+  },
+  "source_value": "Depuis plusieurs dizaines d'année, les gouvernements successifs et l'ensemble des médias se revendiquent féministes. 65% des français se revendique féministes et 58% dans l'ensemble du monde.",
+  "source_value_sha256": "2ec55f18ca331c606a9ddbc9fca7924300759a85ae18c259280086e36ac639ea",
+  "target_value": "For several decades, successive governments and all media outlets have identified themselves as feminist. 65% of French people identify as feminists, as do 58% of people worldwide.",
+  "target_value_sha256": "63c6999cb1b9f784a2a13ab19abc89f37db492bac33181cc9ea096edeabbed1f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0051",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c7a5a3bde6c10448ee72b489d044aeb5f188d7f9586c43e831386762afe9d77e"
+}

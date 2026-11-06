@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "36ad49fe98f3f31369fe0dab757ab74abddfac52be1588a18a6107b97961694a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La Cancel culture est une arme du féminisme radical",
+    "identity_sha256": "7984e1e533809ed6a508f103462e10f5d8637b4b27c1c231ab79d25d6c0de93e"
+  },
+  "source_value": "Arme des rangs féministes radicaux autant que conséquence des appels militants, la Cancel culture, toute droite venue des Etats-Unis est un mouvement consistant à museler une personne, un groupe ou une \"oeuvre\" considérée comme offensante. Le principe est simple : dénonciation sur les réseaux sociaux (à la simple valeur d'un ou quelques témoignages de \"victimes\"), appel à la démission, au lynchage médiatique et au bannissement d'une personnalité. Le concept entend assainir la société en boycottant ou censurant la source, jugée discriminante, des cercles sociaux et culturels. \nLa Cancel culture liée au féminisme le plus radical a vu Tex se faire viré par France 2 des Z'Amours pour une blague sexiste et plus récemment le dessin animé Pépé le Putois supprimé de la plateforme Warner pour son supposé soutient à la culture du viol. La suppression devient parfois institutionnelle : chaines de télévision, plateformes de streaming, studios de cinéma… grincent des dents face au désormais \"infréquentable\" et cèdent souvent sous la pression médiatique (parfois sans attendre d'éventuelles suite juridiques) par peur d'être associés à la polémique, plus que par souci éthique. Les excommuniés n'ont pas le loisir de s'expliquer sur des propos ou actes parfois prescris parce qu'on bien ici de procès de moralité et non politico-juridique et c'est bien là le problème.",
+  "source_value_sha256": "49f13e89f52bbe337844efedb93400f4191fb668f9cd07f2d8a99917e1ffdd85",
+  "target_value": "Both a weapon of radical feminist circles and a consequence of activist appeals, cancel culture, imported directly from the United States, is a movement that consists of silencing a person, group or “work” regarded as offensive. The principle is simple: denunciation on social media (on the sole basis of one or a few “victim” testimonies), followed by calls for a public figure to resign, be subjected to a media lynching and be banned. The concept seeks to cleanse society by boycotting or censoring the source judged discriminatory from social and cultural circles.\nCancel culture linked to the most radical feminism led to Tex being fired by France 2 from Les Z’Amours for a sexist joke and, more recently, to the cartoon character Pepé Le Pew being removed from the Warner platform for allegedly supporting rape culture. Removal sometimes becomes institutional: television channels, streaming platforms and film studios... recoil from those now deemed “unacceptable” and often yield to media pressure, sometimes without waiting for possible legal proceedings, out of fear of being associated with the controversy more than out of ethical concern. Those excommunicated have no opportunity to explain statements or acts that are sometimes time-barred, because what is at issue here is a trial of morality rather than a political or legal trial, and that is precisely the problem.",
+  "target_value_sha256": "868847ea6921c30c5c608a1d1cb4ecc5138ed1d2bd6b42d2f8180217a0e0b24b",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0123",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e25d30214555a81e0f246453523a02efb22c663c3ab1097a55d9e8793529dd73"
+}

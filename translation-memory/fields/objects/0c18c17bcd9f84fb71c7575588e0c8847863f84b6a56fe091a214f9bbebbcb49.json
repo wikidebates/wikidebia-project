@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4f902803237b913533bf1be818038ea9a8b42ecfeeb1d9f7d782e13227f61aaa",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme est en partie responsable du recul des droits des femmes aux USA",
+    "identity_sha256": "6149a7434b97abd1ebc12f9557b8f2805afe78391c3f21f62f936db7c1bafbb3"
+  },
+  "source_value": "Aussi paradoxal que cela puisse paraître, la féminisme est en parti responsable du recul du droit des femmes au USA. Le féminisme n'a jamais eu autant d'influence au sein de la gauche américaine ces dernières années ; les luttes lgbt antiraciste et féministe ont constitué l'identité même du parti démocrate. Le problème est que le féminisme est une idéologie communautariste, qui analyse la société à travers le prisme de l'oppression du groupe \"homme\" sur le groupe \"femme\", et qui n'accepte aucune nuance. Soit vous êtes à 100% en adhésion avec le dogme féministe, soit vous êtes un ennemi des femmes. C'est ainsi que les idées machistes, construites en opposition au féminisme, se sont développées. De plus, ce communautarisme, cet hooliganisme idéologique s'est exacerbé ces derniers années, les deux camps se sont radicalisées, ce qui aboutit avec l'élection de Donald Trump et la décision de la Cour suprême de ne plus garantir le droit à l'avortement à l'échelle fédérale.",
+  "source_value_sha256": "0c41d441b5b7f768ec4bdf20ac84504c6733eb048eaaa61a6015141451876a6c",
+  "target_value": "Paradoxical though it may seem, feminism is partly responsible for the rollback of women’s rights in the United States. Feminism has never had as much influence within the American left as it has in recent years; LGBT, antiracist and feminist struggles have constituted the very identity of the Democratic Party. The problem is that feminism is a communitarian ideology that analyzes society through the prism of oppression of the “women” group by the “men” group and accepts no nuance. Either you agree 100% with feminist dogma, or you are an enemy of women. This is how sexist ideas, constructed in opposition to feminism, developed. Moreover, this communitarianism, this ideological hooliganism, has intensified in recent years; both camps have become radicalized, which resulted in the election of Donald Trump and the Supreme Court’s decision to cease guaranteeing the right to abortion at the federal level.",
+  "target_value_sha256": "8f566e1cd29340d61b7f2cfae4555bc72d0f7f5f3e5fa89eb1dd369e2e6f4f4a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0061",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0c18c17bcd9f84fb71c7575588e0c8847863f84b6a56fe091a214f9bbebbcb49"
+}

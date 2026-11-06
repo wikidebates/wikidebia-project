@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "beeaf78456b59ca9c39029bb08025f5eb5655b2dbcde0469b11e62d2ad22c4ae",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'homme coupe encore trop souvent la parole à la femme (Manterrupting)",
+    "identity_sha256": "4c8f61c6460d67fc53b35bb9825f56f79a5a22a7bc2480c71fa74dc5b003c11f"
+  },
+  "source_value": "L'homme coupe encore trop souvent la parole à la femme (Manterrupting)",
+  "source_value_sha256": "cb39f8ecb89281cc6d9f1a5bef9d4c1fa70e42fbee822bd45338e731e4b140c8",
+  "target_value": "Men still interrupt women far too often (Manterrupting)",
+  "target_value_sha256": "3fc729effc9b43200e0d48e261fa9e8cf259bc261c920031cb229cc3c21ec3ad",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0069",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1add09eae6d4ad12e476bd37028c72fc39e44618465aa10c39259715e18d0acb"
+}

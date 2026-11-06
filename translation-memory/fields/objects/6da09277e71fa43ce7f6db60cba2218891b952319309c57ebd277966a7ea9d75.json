@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5b466c61b79f085345dea49201ddb5ece924490e8895a1dd3c138675c0c8fe61",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Internet est globalement hostile aux femmes",
+    "identity_sha256": "a9db7d1e3b592f89157b909e8f06d18695bb254daf3e1cf2e91fb24c778a8cd1"
+  },
+  "source_value": "Internet est globalement hostile aux femmes",
+  "source_value_sha256": "05d4327688a0c4783aab9d74457a50a8477074c279810d3553059d401d07aa21",
+  "target_value": "The internet is generally hostile to women",
+  "target_value_sha256": "01952eca94ff191d1054238dfc2895a9c46657e108d5af6c682530b0d51255ce",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0156",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6da09277e71fa43ce7f6db60cba2218891b952319309c57ebd277966a7ea9d75"
+}

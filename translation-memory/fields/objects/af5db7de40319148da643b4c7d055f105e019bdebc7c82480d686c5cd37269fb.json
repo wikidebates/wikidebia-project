@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6c03c3bd67d26015907d46d90816e48b168a12491131362d3f47df79782ccee8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme moderne flirte avec la misandrie (haine des hommes)",
+    "identity_sha256": "20b068c2a737544861b5710cd49aa806a8c7642a0d408126ddad1a64424326fe"
+  },
+  "source_value": "Vivre dans cette société, c’est au mieux y mourir d’ennui. Rien dans cette société ne concerne les femmes. Alors, à toutes celles qui ont un brin de civisme, le sens des responsabilités et celui de la rigolade, il ne reste qu’à renverser le gouvernement, en finir avec l’argent, instaurer l’automation à tous les niveaux et supprimer le sexe masculin.\nLe mâle est un accident biologique ; le gène Y (mâle) n’est qu’un gène X (femelle) incomplet, une série incomplète de chromosomes. En d’autres termes, l’homme est une femme manquée, une fausse couche ambulante, un avorton congénital.\nLes hommes sont des Midas d’un genre spécial : tout ce qu’ils touchent se change en merde.\nCe qui met l’homme en joie – dans la mesure où cette créature sinistre et constipée est capable d’éprouver de la joie – c’est de dénoncer les autres.",
+  "source_value_sha256": "77ebf603970fe98d5605f5c007fa21400ec6ded0c563f3055f112eee0621b3c8",
+  "target_value": "Living in this society means, at best, dying of boredom. Nothing in this society concerns women. Therefore, all those with a shred of civic spirit, a sense of responsibility and a sense of humor have no option but to overthrow the government, abolish money, institute complete automation and eliminate the male sex.\nThe male is a biological accident; the Y (male) gene is merely an incomplete X (female) gene, an incomplete set of chromosomes. In other words, man is a failed woman, a walking miscarriage, a congenital runt.\nMen are a special kind of Midas: everything they touch turns to shit.\nWhat delights a man—insofar as this sinister, constipated creature is capable of feeling delight—is informing on others.",
+  "target_value_sha256": "5095dd6f3bb129d01f2f1df72f5000ab1b51b3374ad60c17bf4872d5fbb80a23",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0016",
+    "target_path": "citations/A0016-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "af5db7de40319148da643b4c7d055f105e019bdebc7c82480d686c5cd37269fb"
+}

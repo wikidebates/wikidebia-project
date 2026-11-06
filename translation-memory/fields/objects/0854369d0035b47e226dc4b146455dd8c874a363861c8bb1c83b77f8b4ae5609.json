@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e7b2466fb68e027900ce3a69aceb972436f645b8f7f6116b0fed2af82977f3e9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes ont tout simplement moins marqué l'histoire",
+    "identity_sha256": "1d610448671cb223b89f6a1bcb98ef1e9847bd13f9aae64bfdc30b4d30ab4634"
+  },
+  "source_value": "Les femmes ont tout simplement moins marqué l'histoire",
+  "source_value_sha256": "cf1ab5a2f5d58fee030c9340464ce087c2b01e0b095559b37413fd2e4135ccc7",
+  "target_value": "Women have, all in all, simply had less impact on history",
+  "target_value_sha256": "7b6bd3fac52188559e8d2cd03784cfe5e80c9bbacea3f97d690c297be10b0512",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0139",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0854369d0035b47e226dc4b146455dd8c874a363861c8bb1c83b77f8b4ae5609"
+}

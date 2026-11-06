@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c822d5f18c3f20ed566ff61f66bdbda21e852326c438eb91648755ac8eb4b99a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme est une idéologie dont l'ensemble de l'échiquier politique se revendique",
+    "identity_sha256": "86669aa66bf7ae086f6fe3a6b2138bf33bfdaf84fac4ccfc9f33522721bc5073"
+  },
+  "source_value": "Le féminisme est une idéologie dont l'ensemble de l'échiquier politique se revendique",
+  "source_value_sha256": "4a553f34acec2ff282358e32749098389a6ed2170843029fadae96dc293c5b63",
+  "target_value": "Feminism is an ideology claimed by the entire political spectrum",
+  "target_value_sha256": "f03504db66b5004a35143a1ffbc19ed01ad03d51925606f5c5ea61aeaa44da2a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0051",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6c0a867a25963bdc7b4cad1a79bba349f2572854f29b8073a536195d62a95fe8"
+}

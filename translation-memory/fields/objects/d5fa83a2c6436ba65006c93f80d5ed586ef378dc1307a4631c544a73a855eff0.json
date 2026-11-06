@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5cb1c9c0b0034ce4b09f57d235758c29827be31772d1f344402088029caf196f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "On ne devrait même pas avoir à demander aux hommes de ne pas écarter les jambes",
+    "identity_sha256": "9f62400787eb16ccf941b3755bb23f6c185901a599889266b4b074ae9092276f"
+  },
+  "source_value": "Ne pas prendre toute la place, ça s'appelle la politesse. Qu'on aie besoin de leur demander de le faire est en soi une anomalie.",
+  "source_value_sha256": "e233f61a22e16b192b0b06f7cf1fd16ca5be0a90b6dbadc6c9d5c29bc3093508",
+  "target_value": "Not taking up all the space is called courtesy. The fact that they need to be asked to do so is in itself an anomaly.",
+  "target_value_sha256": "dc730fdfdf48e4af28c7e276a88be56da651f9cfd0d401884ec9f682c0a6c1ed",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0286",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d5fa83a2c6436ba65006c93f80d5ed586ef378dc1307a4631c544a73a855eff0"
+}

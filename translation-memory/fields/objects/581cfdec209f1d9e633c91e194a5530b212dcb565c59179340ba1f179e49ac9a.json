@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b3622e0cece9358c85a533ffb3f4719d1fe1435264016e6de0c38a23dc0a9227",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Combattre l'usage du sexe à des fins de domination est tout le contraire du puritanisme",
+    "identity_sha256": "5cc902a0321ad9f5611a5542eb89dcb057c587162917feb6747e22ac63b624a6"
+  },
+  "source_value": "Combattre l'usage du sexe à des fins de domination est tout le contraire du puritanisme",
+  "source_value_sha256": "dbea1e27a924f8eff6021c8b3907b501762665fd79f79ea2e3f131991f4a51e8",
+  "target_value": "Fighting the use of sex as a means of domination is the exact opposite of puritanism",
+  "target_value_sha256": "51da30c9bbbd2eb83c08bca64bf2905dcff7ccdbd7a9ce466fcb4541b7cf0c22",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0294",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "581cfdec209f1d9e633c91e194a5530b212dcb565c59179340ba1f179e49ac9a"
+}

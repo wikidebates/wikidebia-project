@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "704cac25fd841ec27e6e9a2d7ef1e667464129bc08257e6d67b348ef8af682c9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les féminicides constituent une forme extrême de violence faite aux femmes",
+    "identity_sha256": "b90c0d0b60ae427f54fb13cbe162048f23bd1faa1147c5a7a5d3850048ce102e"
+  },
+  "source_value": "Tous les 3 jours, une femme meurt du fait de violences conjugales.",
+  "source_value_sha256": "d971caf4d8c03073dcb7f2f9fbe9bb0f002c80e6adefd57ed287d74a233aa97f",
+  "target_value": "Every 3 days, a woman dies as a result of intimate partner violence.",
+  "target_value_sha256": "bd973b3b2ba80bfed6466ca5f2969ec375b0fcb1107eddfec2a7bb58f986ea71",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0035",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3ee5e8713e4610b6a2588c0d6a96f2039ad79eba58503658b33ac47b5ab9c412"
+}

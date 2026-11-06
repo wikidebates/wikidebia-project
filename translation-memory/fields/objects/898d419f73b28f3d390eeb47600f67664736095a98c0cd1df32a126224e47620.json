@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "27c313b1033e0b334067235c330fedb3b6d5630d271006529a04103f8ea14f66",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La misogynie ambiante a empêché les femmes de marquer l'histoire",
+    "identity_sha256": "10d905131ec0ff8ae215f8d8973773c2c78f2dacb26d204df1c565a0ee2035ab"
+  },
+  "source_value": "La misogynie ambiante a empêché les femmes de marquer l'histoire",
+  "source_value_sha256": "ed60a4a529174f445df29614af0656f91b569ba1f0a88f530193a0790ab64c26",
+  "target_value": "Pervasive misogyny has prevented women from making history",
+  "target_value_sha256": "96534a64a5ab2c1e71b08715748ea72be30e4425f03cc48c4eaae676c1069149",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0251",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "898d419f73b28f3d390eeb47600f67664736095a98c0cd1df32a126224e47620"
+}

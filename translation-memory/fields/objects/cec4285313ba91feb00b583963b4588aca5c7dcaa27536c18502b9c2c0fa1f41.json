@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "52051e3c3dbdf2655cf21c18bddefb488cbc4166393a91e94c176be9fe6fbdcb",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le patriarcat crée des différences arbitraires et punit celles et ceux qui cherchent à s'en démarquer",
+    "identity_sha256": "d6f8688a20e8f7d5b064d016475581cc9d984181f49ec3c11c7a74ea3d557b46"
+  },
+  "source_value": "Le patriarcat crée des différences arbitraires et punit celles et ceux qui cherchent à s'en démarquer",
+  "source_value_sha256": "700944f38edb42a1551802ff1f546f547836eca7d2ac2325f75a140363c67841",
+  "target_value": "Patriarchy creates arbitrary differences and punishes those who seek to depart from them",
+  "target_value_sha256": "650662e5a4700299245198787fc58049d4d51e639eebfe3d8a80707d77eb8a24",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0212",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "cec4285313ba91feb00b583963b4588aca5c7dcaa27536c18502b9c2c0fa1f41"
+}

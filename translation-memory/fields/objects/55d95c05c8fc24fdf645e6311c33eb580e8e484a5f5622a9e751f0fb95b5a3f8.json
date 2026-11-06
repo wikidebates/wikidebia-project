@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "960590644daec6d666e722bb5a84181c0a5f9c378e6c3b13ef9b8700b57e84bc",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'impact historique des femmes a été important, mais a été volontairement passé sous silence",
+    "identity_sha256": "bdf65a79c72efae786a681fd2c854763dc350b93be0353b245d195cc0fc4f69b"
+  },
+  "source_value": "L'impact historique des femmes a été important, mais a été volontairement passé sous silence",
+  "source_value_sha256": "3eff64ef3c44124484907aa6b8e76016a517f2652130f0478d759a77b84ce672",
+  "target_value": "Women have had a significant historical impact, but it has deliberately been silenced",
+  "target_value_sha256": "f5a79abd0699a6c8f3586aa0344d62a527c5b8f7bed03fb5fd7021103a75e8ef",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0252",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "55d95c05c8fc24fdf645e6311c33eb580e8e484a5f5622a9e751f0fb95b5a3f8"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b5a97990c667c4095fb52b43d0dca6ee54f63a0496ba54ccef03a007392aa679",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La misandrie est une réponse à la misogynie et se veut majoritairement non violente",
+    "identity_sha256": "8e3716ece0463e198397791a59d5a9cf3d63eba39f549b1d32721ba9134b52d0"
+  },
+  "source_value": "Sortir de l’hétérosexualité a été un énorme soulagement",
+  "source_value_sha256": "ee6f1d9fdb89ecbee3b1c42369ad0593bf04d1498507fb9de3b7f12ad36fb0b2",
+  "target_value": "Leaving heterosexuality was an enormous relief.",
+  "target_value_sha256": "e712d166de95926db2a03bbf156a2a5af7630678bf6b3c470d52700ae233a73e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0097",
+    "target_path": "citations/A0097-C005",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "26d68ee6fd2d2b4ee934e6f0904154676decf5e72a2e2fd7c278cf54ab354117"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4920ed220e76faaca09e416ed1539c6f46e01d48d7b3cbdfceb8b2b3c9cdb5c2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme bride la liberté de création",
+    "identity_sha256": "a4270aa7fd4184c5cf381b070ebd85b64470920836cc9b9f273349f58e879938"
+  },
+  "source_value": "J’imaginais l’homme ronchon et réac, je me trompais. J’ai rencontré un petit garçon de 84 ans la tête dans les étoiles et les lèvres toujours prêtes à sourire. Un homme doux et sincère, un peu dépassé par le nouveau monde qu’il a du mal à comprendre tant il lui paraît absurde et qui l’inquiète tant il efface à grande vitesse tout ce qu’il a chéri, à commencer par la liberté et l’insouciance qui sont la grammaire de ses films.\nCauseur. Pensez-vous qu’aujourd’hui vous pourriez tourner Les Galettes de Pont-Aven ou Comme la lune ?\nJoël Séria. Oh non… ce serait impossible. Avec « Balance ton porc » et « Metoo », ce serait un scandale. Je trouve ahurissant tout ce qui se passe. Je ne comprends pas trop… On dirait que les féministes d’aujourd’hui détestent la drague. Des femmes font des scandales parce qu’on leur a touché le bras. Dans ces conditions, il n’y a plus rien de possible entre les hommes et les femmes, c’est tout. Vous imaginez si elles voyaient mes films ? Marielle leur touche un peu plus que le bras ! À la réflexion, plus personne n’oserait faire une comédie avec du cul. Or, il faut avouer que je suis très porté là-dessus. On me tomberait dessus.\n\nVous avez raison. Pour autant, il faut regarder la réalité dans son entièreté. Aujourd’hui, pour beaucoup de jeunes, Les Galettes de Pont-Aven est un film culte qui leur donne la nostalgie de cette époque de liberté qu’ils n’ont pas connue. En effet, malgré le politiquement correct totalitaire, les vraies gens continuent de parler entre eux de manière politiquement incorrecte. Les garçons parlent des filles comme vos personnages. Or le cinéma dit « populaire » d’aujourd’hui, soumis à la bien-pensance et à la morale, est déconnecté de la vraie vie, des vrais désirs sexuels, des vrais sentiments humains.\n\nEt le pire, c’est l’autocensure ! Les réalisateurs ne se battent pas contre des censeurs, ils se soumettent à l’air du temps. Je crois qu’aujourd’hui, je n’essaierais même pas de faire des films. C’est décourageant.",
+  "source_value_sha256": "0e23d7e21e99b2cbd26b753f784f4bc9925e53a46633b28cd9841089b37d2704",
+  "target_value": "I had imagined a grumpy reactionary; I was wrong. I met an 84-year-old little boy with his head in the stars and lips always ready to smile. A gentle and sincere man, somewhat overwhelmed by the new world, which he struggles to understand because it seems so absurd to him and which worries him because it is rapidly erasing everything he cherished, beginning with the freedom and carefree spirit that form the grammar of his films.\nCauseur. Do you think you could make Les Galettes de Pont-Aven or Comme la lune today?\nJoël Séria. Oh no... it would be impossible. With 'Balance ton porc' and 'MeToo,' it would cause a scandal. I find everything that is happening staggering. I do not really understand... It seems that today's feminists hate flirting. Women cause scandals because someone touched their arm. Under those conditions, nothing more is possible between men and women, that is all. Can you imagine if they saw my films? Marielle touches a little more than their arms! On reflection, no one would dare make a comedy with sex in it anymore. Admittedly, I am very fond of that. They would come down on me.\n\nYou are right. Even so, reality must be viewed in its entirety. Today, for many young people, Les Galettes de Pont-Aven is a cult film that makes them nostalgic for an era of freedom they never knew. Indeed, despite totalitarian political correctness, real people continue to speak to one another in politically incorrect ways. Boys talk about girls the way your characters do. Yet today's so-called 'popular' cinema, subject to conventional pieties and morality, is disconnected from real life, real sexual desires and real human feelings.\n\nAnd the worst thing is self-censorship! Directors are not fighting censors; they are submitting to the spirit of the times. I think that today I would not even try to make films. It is discouraging.",
+  "target_value_sha256": "292764aef34bf24522a23bbb96dcf81b08eff27ec9024ec73d6b63fd5f902ce1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0019",
+    "target_path": "citations/A0019-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b357ff39db3f7f199da8eec102fd8ded2ca242822692c4a1b1e957af7dcdd650"
+}

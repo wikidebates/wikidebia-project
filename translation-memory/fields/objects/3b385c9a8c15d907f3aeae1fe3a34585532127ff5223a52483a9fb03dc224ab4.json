@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3c4ccda9e502e52c2d5d44ccc60084026609072966354ea5d3132a135e59c644",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le terme woke désigne de façon commode un mouvement complexe, c'est un peu comme parler des Lumières sans nuancer",
+    "identity_sha256": "5cadd890570ed08e9b4424ffdd0c0014823e8db5042833e6cf1a63935d9f0ed6"
+  },
+  "source_value": "Le terme woke désigne de façon commode un mouvement complexe, c'est un peu comme parler des Lumières sans nuancer",
+  "source_value_sha256": "4af9e8034b601b57f76045c91edb1a81aee2741a874f15c5d3b7b87617efcf1f",
+  "target_value": "The term woke conveniently designates a complex movement, much as speaking of the Enlightenment does without nuance",
+  "target_value_sha256": "dfe6af59289b93f7c5ab026a50d1e9705e4d4f770f998051441b8bede48b261c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0289",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3b385c9a8c15d907f3aeae1fe3a34585532127ff5223a52483a9fb03dc224ab4"
+}

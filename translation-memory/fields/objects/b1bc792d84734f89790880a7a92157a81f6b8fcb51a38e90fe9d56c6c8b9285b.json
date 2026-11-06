@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c7f19df95d28cd58831387fd9675f96261bd04ef28dd440c6c23cc913029b21f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite instrumentalise le féminisme à des fins racistes",
+    "identity_sha256": "b63ec2ed6534176417f49ba5a8bde2df9745111d1612ffc1015a5cdacf64266b"
+  },
+  "source_value": "Je me permets de citer [https://www.madmoizelle.com/agression-reims-maillot-bain-401839 cet article] de Clémence Bodoc sur une affaire qui avait secoué la France en juillet 2015.\n\nÀ l’époque, une jeune femme en bikini avait été agressée dans un parc à Reims par une bande de filles. De nombreux médias avaient relayés l’affaire en la justifiant par un motif religieux, les agresseuses étant de confession musulmane. Sauf que non, la religion n’avait rien à voir dedans.\n\nCet article rappelait au passage le concept très simple de '''la paille dans l’œil de son voisin sans voir la poutre dans le sien'''…",
+  "source_value_sha256": "fc56a280149f86e615e6a961330fccc6db9c9a7f2e04c0667a8bdd2e082a083e",
+  "target_value": "I would like to cite [https://www.madmoizelle.com/agression-reims-maillot-bain-401839 this article] by Clémence Bodoc about a case that shook France in July 2015.\n\nAt the time, a young woman in a bikini was assaulted in a park in Reims by a group of girls. Many media outlets reported the case and explained it in religious terms because the assailants were Muslim. Except that they were wrong: religion had nothing to do with it.\n\nThe article also recalled the very simple concept of '''the speck in one’s neighbor’s eye while failing to see the beam in one’s own'''...",
+  "target_value_sha256": "ab108cfb6c3e6a7748c58b926eea315dd04bd36f432bbec68dda96934c0ebe88",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0133",
+    "target_path": "citations/A0133-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b1bc792d84734f89790880a7a92157a81f6b8fcb51a38e90fe9d56c6c8b9285b"
+}

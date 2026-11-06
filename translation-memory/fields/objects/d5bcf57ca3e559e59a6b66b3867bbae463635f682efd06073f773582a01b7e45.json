@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9079d5c3b90a74613aaf2da34ea79cbc1e65beca80551066035c8bd980cf15b4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La parité homme-femme en politique est injuste",
+    "identity_sha256": "ecbf88d24deef51851ea81ab0944b83a5d634e84752b7b9a796870edb75bda55"
+  },
+  "source_value": "Le choix des personnes pour candidater à une élection ne doit pas se faire selon le sexe de la personne. Seule les compétences, les idées et les projets défendues doivent compter.",
+  "source_value_sha256": "ab22d8477ce155bb667fa67abe0d643be84560b540da4815c8a365ef861f6a22",
+  "target_value": "Candidates for an election must not be chosen according to their sex. Only the candidates’ skills, ideas and proposed policies must count.",
+  "target_value_sha256": "5b71b399281208b6210a9b01c073df355cf046ce5c85b4fb283299c66bc4fa14",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0032",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d5bcf57ca3e559e59a6b66b3867bbae463635f682efd06073f773582a01b7e45"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "14af79a447f89b1f431e6977f3013956f1f6152ce65b7e345bb4d5b943fa93b8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "C'est pour sauver la gauche que plusieurs intellectuel(le)s luttent contre le wokisme",
+    "identity_sha256": "99525eed24b6a578c5e304848bece854a794a128b0c24f8e9eb18d9a1270a26e"
+  },
+  "source_value": "C'est pour sauver la gauche que plusieurs intellectuel(le)s luttent contre le wokisme",
+  "source_value_sha256": "e4428b722d12f48c678dfcfd27f0bb720e360c05fbbc31a42ec3466cfb7707e0",
+  "target_value": "Several intellectuals fight wokeism in order to save the left",
+  "target_value_sha256": "2808d4c85c6f72883c7832e12a4a5a3b8d6d2fdc4d78e5a0f889c095b84e9657",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0310",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5c8d2ab6fdc795fe20f51abecd76f66bc8af7565364ecc7e2a9c06ae3bf7d4ca"
+}

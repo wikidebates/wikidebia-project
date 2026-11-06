@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7b6123ebc4c5596935ded2a6c1f9d34605f697a7ea26789341ec11ea7b572359",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les spectacles utilisant le blackface ont contribué à la naissance des lois ségrégationnistes aux USA",
+    "identity_sha256": "1577fb880688a0e28bc051fae9fe713f8f888100d4b02959c406e4e875a4d103"
+  },
+  "source_value": "Les spectacles utilisant le blackface ont contribué à la naissance des lois ségrégationnistes aux USA",
+  "source_value_sha256": "40d3e2f6623f599bcc74cbb9e50e059befc981d0d91280424134773a48c74d9d",
+  "target_value": "Blackface performances contributed to the emergence of segregation laws in the United States",
+  "target_value_sha256": "80ba26094d6debbf6529eca3d14e2d19c26be59b549d175f629a84d5ac59fca8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0300",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9ddd9ea3ff3c43360d1ff1b2fd453e8d03df7b4f97d5c33797a3d4d1dda303a7"
+}

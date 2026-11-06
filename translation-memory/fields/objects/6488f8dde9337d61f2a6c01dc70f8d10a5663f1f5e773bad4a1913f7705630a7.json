@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b22bf6c92a3507ede2386d0dde68d818a23b4d1c1cef5e4d1adc2478ec4789c0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes sont sous-représentées dans l'ensemble du monde audiovisuel et des médias",
+    "identity_sha256": "21dac30be4bffd285a8ef46460f0afdbc07f1536e43557e14dd8286826cae445"
+  },
+  "source_value": "Une infériorité globale du nombre de femmes: la part des femmes à la télévision est toujours loin de la parité, avec 58 % d’hommes et 42 % de femmes.\nDes femmes moins présentes aux heures de forte audience  : les heures de forte audience sont sujettes à de fortes inégalités. La proportion de femmes est de 39 % entre 18h \net 20h, elle n’est plus que de 29 % entre 21h et 23h.\nDes différences en nombre suivant les métiers et les fonctions : le taux global de présentatrices et/ou animatrices à la télévision est le taux global le plus élevé : 47 %. Le \npourcentage de journalistes et/ou chroniqueuses à la télévision est de 38 %. Le pourcentage de femmes parmi les invité.es politiques à la télévision est de 27 %.\nL’absence de femmes sur certains plateaux : 83 % des expert.es sollicité.es sont des hommes ; ils représentent 70 % des sources d’information et 70 % des porte-paroles.\nUn temps de parole des femmes encore largement inégal : alors que les femmes représentent 42 % des personnes à la télévision, leur taux de parole est de 32,7 %.\nUne image en décalage avec la réalité : les femmes doivent, avant tout, être agréables à regarder. Elles sont davantage caractérisées par leur apparence physique, leur âge et \nleur situation familiale que les hommes.\nUne absence de diversité : les femmes perçues comme non blanches sont très minoritaires et les femmes en situation de handicap sont absentes.",
+  "source_value_sha256": "35503a6bcb5bdcb915975091536f5ad75dfdda20b2578713aa4ff86502a85f7c",
+  "target_value": "An overall numerical disadvantage for women: the proportion of women on television remains far from parity, with 58% men and 42% women.\nFewer women during peak viewing hours: peak viewing hours are subject to marked inequalities. Women account for 39% of people appearing between 18h and 20h, but only 29% between 21h and 23h\nNumerical differences by occupation and role: the overall rate of female presenters and/or hosts on television is the highest overall rate, at 47%. The percentage of female journalists and/or columnists on television is 38%. The percentage of women among political guests on television is 27%.\nThe absence of women from some panels: 83% of the experts consulted are men; men account for 70% of information sources and 70% of spokespersons.\nWomen’s speaking time remains highly unequal: although women account for 42% of people on television, their share of speaking time is 32.7%.\nAn image at odds with reality: above all, women must be pleasant to look at. They are characterized by their physical appearance, age and family situation more often than men are.\nA lack of diversity: women perceived as non-white are a very small minority, and women with disabilities are absent.",
+  "target_value_sha256": "f19999422d39d5db4ca2a682decda91931bfa142a23a5912fd93d5a2aa368ca5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0029",
+    "target_path": "citations/A0029-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6488f8dde9337d61f2a6c01dc70f8d10a5663f1f5e773bad4a1913f7705630a7"
+}

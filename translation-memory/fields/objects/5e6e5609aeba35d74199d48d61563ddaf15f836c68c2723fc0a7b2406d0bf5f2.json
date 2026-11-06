@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6cd4d9c23060e3a2f0263dfc0575bf89f0ac4c2c83a6339ac4dee49998769d34",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Parler d'extrême droite quand on critique le wokisme est une opération de diversion",
+    "identity_sha256": "04d9142a1a9a615b4ac6a3fcfd10ca1d262619ffd51dfd68b240655a9d19d081"
+  },
+  "source_value": "Parler d'extrême droite quand on critique le wokisme est une opération de diversion",
+  "source_value_sha256": "a27f4bd00026317054d9d7624c69ceeb835c604949e7d026ae9b62441480942a",
+  "target_value": "Invoking the far right when wokeism is criticized is a diversionary tactic",
+  "target_value_sha256": "7f77808b3403a9864a7e597a2b47b3fada92f994c30d2607b82d2b0e3d7181f1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0318",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5e6e5609aeba35d74199d48d61563ddaf15f836c68c2723fc0a7b2406d0bf5f2"
+}

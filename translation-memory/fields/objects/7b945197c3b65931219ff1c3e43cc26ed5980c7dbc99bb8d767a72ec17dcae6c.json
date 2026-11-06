@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0a214087670144a931ad1fd90617d084ac5585bb954410091d2961fa25868830",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La négation des discriminations systémiques est au mieux le reflet d'une incompréhension, au pire une stratégie politique",
+    "identity_sha256": "b23676b7ac09d3265d47a54e3c03c9c7b157408145f0db64e496e2c5a61b4867"
+  },
+  "source_value": "Le concept de discrimination systémique fait l'objet de nombreux malentendus et désinformations, volontaires ou non. Contrairement à ce qu'on dit souvent, il ne s'agit nullement d'affirmer que 100% des hommes sont mauvais et 100% des femmes sont de bonnes personnes, mais de faire le constat selon leque la société est structurée pour offrir des privilèges aux personnes appartenant au groupe social masculin: plus d'opportunités, moins d'exposition à la violence, moins d'exclusions injustes, etc. imputable au fait que depuis des millénaires, les hommes avaient le monopole du pouvoir et avaient donc tout intérêt à maintenir les privilèges qui leur avaient permis d'y accéder, ainsi que diaboliser les groupes cherchant à les abolir. Cela implique plusieurs choses:\n\n* Les hommes ne sont pas responsables de leurs privilèges de naissance.\n* Les hommes peuvent être en mesure de lutter contre leurs privilèges, mais en payeront un lourd prix le cas échéant.\n* Certaines femmes tirent un -certes relatif- profit à être activement complices de leur oppression (cf. \"Les Femmes de Droite\" d'Andrea Dworkin).",
+  "source_value_sha256": "bba51e7f153f8575ccd2aeb688000d8bf99049695b5d19e514e608c20fdc66d7",
+  "target_value": "The concept of systemic discrimination is subject to many misunderstandings and much misinformation, whether intentional or not. Contrary to what is often said, it is simply not a claim that 100% of men are bad and 100% of women are good people; rather, it is an observation according to which society is structured to offer privileges to people belonging to the male social group: more opportunities, less exposure to violence, fewer unjust exclusions, and so on. This is attributable to the fact that, for millennia, men held a monopoly on power and therefore had every interest in maintaining the privileges that had enabled them to gain access to it, as well as in demonizing groups seeking to abolish those privileges. This implies several things:\n\n* Men are not responsible for their birth privileges.\n* Men can be in a position to fight their privileges, but will pay a heavy price if they do.\n* Some women derive an admittedly relative benefit from being active accomplices in their own oppression (see Right-Wing Women by Andrea Dworkin).",
+  "target_value_sha256": "5fdece2331851d0999124710ad2a2a26026273e94fea8e01c06a10a30a7916ac",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0100",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7b945197c3b65931219ff1c3e43cc26ed5980c7dbc99bb8d767a72ec17dcae6c"
+}

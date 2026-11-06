@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e17540a49f3ec2410dc23c70ac70f882aa3f65a637d1ee6c5c7463eb11455aca",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'égalité de fait est loin d'être totalement effective",
+    "identity_sha256": "4e6a4729ce4cbf3d051942cc17875b4763a611c5039dcf787113f4c9dbdf0e98"
+  },
+  "source_value": "L'égalité de fait est loin d'être totalement effective",
+  "source_value_sha256": "6b7ab28834cdb762d087ca0d09033e5af369b026bfec41bb2c1c05df25c868ca",
+  "target_value": "Equality in practice is far from being fully effective",
+  "target_value_sha256": "50b237e0c3099050d796f5597cbbfa169d6eb56d3b94d9703dcb0ef1c52c51c4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0084",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a5b4628fe1a8a7d29d48f683e59f9c47c6d1b96eb3e58abf7a50daafad30b6ba"
+}

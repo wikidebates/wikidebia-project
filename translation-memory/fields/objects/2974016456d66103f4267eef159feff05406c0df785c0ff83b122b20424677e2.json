@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ce50fbdba6b1fa11a96af0aefc81b97c53d6c7f2a401def276ffd9a2199dc108",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La misandrie est une réponse à la misogynie et se veut majoritairement non violente",
+    "identity_sha256": "8e3716ece0463e198397791a59d5a9cf3d63eba39f549b1d32721ba9134b52d0"
+  },
+  "source_value": "Notre misandrie fait peur aux hommes, parce qu'elle est le signe qu'ils vont devoir commencer à mériter notre attention.\nDétester les hommes et tout ce qu'ils représentent est notre droit le plus strict. C'est aussi une fête. Qui aurait cru qu'il y aurait autant de joie dans la misandrie",
+  "source_value_sha256": "95e01865b06a2f900dab5f70ef2a91f1a6570f9cddbfda61cdf492d3c3f34d30",
+  "target_value": "Our misandry frightens men because it is a sign that they will have to begin earning our attention.\nHating men and everything they represent is our absolute right. It is also a celebration. Who would have thought there could be so much joy in misandry?",
+  "target_value_sha256": "f526de985f8aecb756a56871bb99a8e096dbd44d1114895aa930c3a3ffbe498e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0097",
+    "target_path": "citations/A0097-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "2974016456d66103f4267eef159feff05406c0df785c0ff83b122b20424677e2"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e54e78c4bb9bf782d6b3a662347e9a3ff6f2764502d9ac12318ff4a885dfe898",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les violences faites aux femmes sont nettement plus banalisées que celles faites aux hommes",
+    "identity_sha256": "90f87599353c657ef64cc7f284da39858bcfe84ea1805c84ce7341c5d0c22c2d"
+  },
+  "source_value": "Les violences faites aux femmes sont nettement plus banalisées que celles faites aux hommes",
+  "source_value_sha256": "c2f4684ce4235daf32ba3a8634ad57b4570c0a329af82bf367ccd7c4f09925ff",
+  "target_value": "Violence against women is normalized far more than violence against men, not less",
+  "target_value_sha256": "737a907384916b6a8dd011af418cde49b3c84fcb0a4d49eedb21fdc45b7db43d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0154",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "be37ba9bd52e537db2ab77c08fe4ebd8cccc1c5e9fca600e5e17cd984a241b5d"
+}

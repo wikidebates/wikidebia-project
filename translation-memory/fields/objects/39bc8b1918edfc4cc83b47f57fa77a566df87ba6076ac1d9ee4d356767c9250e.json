@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "cab1ab6d0099437fb884fcf9a1ead44489de9c19cbd3da0a4a56bc9432bdf571",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les antiféministes brident aussi la liberté de création",
+    "identity_sha256": "eacff869609a1efa9e1917bfc2ab1afbf53168e2862a03b7cec5114817e08450"
+  },
+  "source_value": "Les antiféministes brident aussi la liberté de création",
+  "source_value_sha256": "964f5c826ae17d2ae37cc9734a1c1c96c81a56da836d424f883afb81b654dfc5",
+  "target_value": "Antifeminists also restrict freedom of artistic creation",
+  "target_value_sha256": "3cdd589d1d00d1efa8e891e81d0ca6280daba5ec2894f0582f8077f6c50a1101",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0113",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "39bc8b1918edfc4cc83b47f57fa77a566df87ba6076ac1d9ee4d356767c9250e"
+}

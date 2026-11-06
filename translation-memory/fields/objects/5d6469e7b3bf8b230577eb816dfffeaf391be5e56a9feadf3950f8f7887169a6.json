@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0e4e8434353fbb5b44f8d2605a9a6bbafd09f92e912082fa8981c7dc6d04561b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La reconnaissance en tant que victime est essentielle pour montrer la réalité d'une agression",
+    "identity_sha256": "a12855b552e082535d95ffcc69f32b79c4c46e4d2f589ea3eef71fc6012f7969"
+  },
+  "source_value": "La reconnaissance en tant que victime est essentielle pour montrer la réalité d'une agression",
+  "source_value_sha256": "6d85c4807f6ce65d532fcdf0acf01404cb483dc5604c0dcccd7cead972cc5b34",
+  "target_value": "Recognition as a victim is essential to demonstrate the reality of an assault",
+  "target_value_sha256": "311c428bad6084189e62327c1c3528225691302bb8a5821eafe84f08db8337ad",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0105",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5d6469e7b3bf8b230577eb816dfffeaf391be5e56a9feadf3950f8f7887169a6"
+}

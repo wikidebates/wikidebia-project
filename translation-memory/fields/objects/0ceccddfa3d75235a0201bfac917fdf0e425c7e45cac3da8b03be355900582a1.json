@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "96bc61cbd29a42a172029da8c05cb6bf2f2548f7dd265a9a531d0e4f9f1bb75d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "150 intellectuels de la gauche américaine ont signé une tribune contre l'intolérance woke",
+    "identity_sha256": "306674b85afaa652d9e07afee911337523a5fcd48bd6f338edb59d32555777d3"
+  },
+  "source_value": "150 intellectuels de la gauche américaine ont signé une tribune contre l'intolérance woke",
+  "source_value_sha256": "6034fdee57beb5e92fe12f7466e7b14f1b228caed52556295d620f07545eda83",
+  "target_value": "One hundred and fifty intellectuals from the American left signed an op-ed against woke intolerance",
+  "target_value_sha256": "0b62916f31ec1cc9b75454e1356e763bd5daffe2dffaeb76d8ef3d090de9d018",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0316",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0ceccddfa3d75235a0201bfac917fdf0e425c7e45cac3da8b03be355900582a1"
+}

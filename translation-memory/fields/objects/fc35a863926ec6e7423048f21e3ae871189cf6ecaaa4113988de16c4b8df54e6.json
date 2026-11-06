@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fe8b54de17a56bee34250d985194d637f101edb1b4feabc8f4d529cf09ba1cdf",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La Cancel culture est une arme du féminisme radical",
+    "identity_sha256": "7984e1e533809ed6a508f103462e10f5d8637b4b27c1c231ab79d25d6c0de93e"
+  },
+  "source_value": "Ce mortel ennui devant ce qui était l’arme des révolutionnaires – l’indignation – devenue la monnaie courante de tous les frustrés de la terre, des médiocres, de ceux qui veulent exister mais n’ont d’autres moyens que de vomir des insultes, de confondre les plans, l’opinion, la justice, la rumeur, les faits, d’invoquer un nouvel ordre moral au lieu de faire de la politique.\nEt que deviendra l’art, dans tout ça ? Des livrets de vertu qu’on distribuera au seuil des nouvelles églises ? Des éditoriaux pleins de bons sentiments mâtinés de haine rance de vieilles filles ? Des imprécations béni-oui-oui de néoromantiques exaltés par les combats sur Facebook ? Des œuvres théâtrales où l’on dira le catéchisme, le mal contre le bien, dont on voit vite les incarnations ? Des tableaux respectant la parité, homme, femme, Noir, Blanc, vieux, jeunes, handicapés, dans des champs de blé bio et des plants de tomates en permaculture ?\nMortel ennui. Et où mettra-t-on donc les déviants ? Car ils risquent de devenir très nombreux",
+  "source_value_sha256": "a2dc939a5f35f0c4b1a6abedef79ed291122bd6730163008c844136c8fced912",
+  "target_value": "This deadly boredom in the face of what was once the weapon of revolutionaries—indignation—now become the common currency of all the frustrated people on Earth, of the mediocre, of those who want to exist but have no means other than vomiting insults, confusing levels, opinion, justice, rumor and facts, and invoking a new moral order instead of engaging in politics.\nAnd what will become of art in all this? Booklets of virtue distributed at the entrance to the new churches? Editorials full of good intentions mixed with the stale hatred of old maids? Sanctimonious imprecations from neo-Romantics excited by battles on Facebook? Plays reciting catechism, evil against good, whose embodiments are quickly apparent? Paintings respecting parity—men, women, Black people, white people, old people, young people and disabled people—in organic wheat fields and among permaculture tomato plants?\nDeadly boredom. And where, then, will the deviants be placed? For they may become very numerous.",
+  "target_value_sha256": "d345d30de3aba97113a1cfc41f08642a89bdfd846a44e8e55c79b3066d27396f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0123",
+    "target_path": "citations/A0123-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "fc35a863926ec6e7423048f21e3ae871189cf6ecaaa4113988de16c4b8df54e6"
+}

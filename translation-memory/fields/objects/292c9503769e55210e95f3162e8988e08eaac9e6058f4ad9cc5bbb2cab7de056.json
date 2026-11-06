@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e0b41f5223542126937e7343753e6894fdd2b5ff891ce515e0730aac0233c7d7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'oppression des femmes est bien antérieure au capitalisme",
+    "identity_sha256": "930739bef5f9686341e6ebd19fe8b05a887ee2577d98ece0e6e6768acb6a1fdd"
+  },
+  "source_value": "L'oppression des femmes est bien antérieure au capitalisme",
+  "source_value_sha256": "029943a6f297de89e6ffaa3d8a3cad6223e3363c2c4d758ba91d32d4fc8706eb",
+  "target_value": "The oppression of women long predates capitalism",
+  "target_value_sha256": "346c8f805dab7c9bc621f6c17251f1fd61405a156669bad8285c2dd342c10bfe",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0077",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "292c9503769e55210e95f3162e8988e08eaac9e6058f4ad9cc5bbb2cab7de056"
+}

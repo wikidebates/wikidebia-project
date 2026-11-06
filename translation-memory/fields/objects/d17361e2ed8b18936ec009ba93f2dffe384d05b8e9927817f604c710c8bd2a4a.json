@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e0a5a29dbe18dfe5f45f9727ec87cb118a513caefb77379c51e33c335234c925",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il n'y a pas besoin d'être féministe pour défendre les droits des femmes",
+    "identity_sha256": "9e6be4792735f23e3e532c56548ad52b52d10c38d3faafbfdd7628b7be869ab7"
+  },
+  "source_value": "Il n'y a pas besoin d'être féministe pour défendre les droits des femmes",
+  "source_value_sha256": "3303899a943d824ec7757556c82d7bd1ebc718442eacf46d3ec3092a7dc5bb94",
+  "target_value": "One need not be a feminist to defend women's rights",
+  "target_value_sha256": "fb68a38b9e8ca2c68c41dd8d7e9104e918f406fe5ef673dd9a53c1912e050869",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0060",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d17361e2ed8b18936ec009ba93f2dffe384d05b8e9927817f604c710c8bd2a4a"
+}

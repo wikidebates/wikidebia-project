@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "911e71f23caa48b02e6c8ce097c19e815afc2be4de2198167264da07d9f1fa88",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les victimes d'agressions sexistes subissent une victimisation secondaire",
+    "identity_sha256": "180094b65ef1be0fdcf3ff4f7c29f8150c92009b4ff3c9eba69c268090ff309f"
+  },
+  "source_value": "Victimisation secondaire",
+  "source_value_sha256": "27f5d2063af4ab50852d10b746e0c28b530d38a9c91dd4aa46702533100baac3",
+  "target_value": "Secondary victimization",
+  "target_value_sha256": "27bba7191a1a0e7fd661106c3379be774c4350b5ca9117238907da13a9677831",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0047",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0f8c5e012a491e1c3ac87c16042c2fe7e272fb96ae4c34b749679f3723778d56"
+}

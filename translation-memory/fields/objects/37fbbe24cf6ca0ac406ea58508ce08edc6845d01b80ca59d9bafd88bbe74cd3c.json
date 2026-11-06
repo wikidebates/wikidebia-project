@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "67fcb61c9b101fe2e6ae00ddd1d00a6a42df6bc7a2a1254e9d3cce86ec8ce655",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'universalisme laisse sur le bas-côté de nombreux types d'oppression",
+    "identity_sha256": "2abfe0e702bbd89aa1dd708e85d15a1c93cc3ef99df8a07f06f4b61539f44bef"
+  },
+  "source_value": "Dans ce sens, l’intersectionnalité ne peut pas être un frein ni une menace pour le féminisme, au contraire, c’est une approche inévitable et utile qui donne des outils pour comprendre une situation complexe et d’y faire face. C’est une approche intéressante pour toutes les femmes car [https://doi.org/10.3917/nqf.251.0012 elle permet de comprendre l’égalité des genres dans une approche dynamique (Nader, 2006)] en lien avec les relations intergroupes et leur conséquence sur les droits des femmes.",
+  "source_value_sha256": "3ca68b0e32af790c675f96b1fc38eec15a64029b1ba8123ec26b07aae948d9f9",
+  "target_value": "In this sense, intersectionality cannot be an obstacle or a threat to feminism; on the contrary, it is an unavoidable and useful approach that provides tools for understanding a complex situation and dealing with it. It is an interesting approach for all women because [https://doi.org/10.3917/nqf.251.0012 it makes it possible to understand gender equality through a dynamic approach (Nader, 2006)] linked to intergroup relations and their consequences for women’s rights.",
+  "target_value_sha256": "ac64cc042b80e0979deef6c96b4fb6a896a1bc165afeb8c93f51600413827311",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0131",
+    "target_path": "citations/A0131-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "37fbbe24cf6ca0ac406ea58508ce08edc6845d01b80ca59d9bafd88bbe74cd3c"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8f2136a83e1e110fef22449bc189cae3ab0e3bd4f0ab724ce681f2dc7b829eb2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'argument \"différences naturelles\" est un sophisme",
+    "identity_sha256": "1c6646b7dba16faac732479c18cbc67e27017f0914b85067f9bc0ac157d3ce1d"
+  },
+  "source_value": "Pour certaines personnes, si on montrait qu’il existe des différences naturelles entre humains, on devrait ensuite renoncer à se battre contre ces différences, selon le raisonnement que « ce qui est naturel est bon ». Mais penser que « le naturel est bon » c’est pas un raisonnement, c’est une erreur de raisonnement. On l’appelle couramment le sophisme naturaliste, ou le sophisme de l’appel à la nature, ou encore le paralogisme naturaliste.\n\nC’est une erreur de raisonnement qui fait peur parce que c’est celle qu’a commise le darwinisme social du XIXe siècle, qui concluait qu’il est normal de laisser les faibles et les pauvres mourir simplement parce que c’est ce qui se passe dans la nature.\n\nMais c’est aussi une erreur de raisonnement qu’on retrouve en dehors des contextes politiques, comme par exemple dans les milieux écolos où on préfère se soigner avec des produits « naturels » plutôt que « chimiques », comme si la nature n’était pas elle-même qu’un vaste ensemble de réactions chimiques capable de créer des poisons plus dangereux que n’importe quelle molécule synthétisée en laboratoire.",
+  "source_value_sha256": "d0155d236b7d51831a45bf4ec31a735160c1aaf67504308d640d24752164c895",
+  "target_value": "For some people, if it were shown that natural differences exist between human beings, we would then have to give up fighting those differences, according to the reasoning that “what is natural is good.” But thinking that “what is natural is good” is not reasoning; it is an error in reasoning. It is commonly called the naturalistic fallacy, the appeal-to-nature fallacy or the naturalistic paralogism.\n\nIt is a frightening error in reasoning because it is the one committed by nineteenth-century social Darwinism, which concluded that it is normal to let the weak and the poor die simply because that is what happens in nature.\n\nBut it is also an error in reasoning found outside political contexts, for example in environmentalist circles where people prefer to treat themselves with “natural” rather than “chemical” products, as though nature itself were not merely a vast set of chemical reactions capable of creating poisons more dangerous than any molecule synthesized in a laboratory.",
+  "target_value_sha256": "c3919ba17cde28b9f6860b0f93d492fb02fedf9f6c7953cd51928afff927aedf",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0122",
+    "target_path": "citations/A0122-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "df56111cf366f7d2266147e3ae647c47f69f5d7af698aa66db2ccc9c354b43f9"
+}

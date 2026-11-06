@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "bcb26d2c39669a18a021a066348d9f20bb22ee28401e733f58dacd1270e6a00e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite instrumentalise le féminisme à des fins racistes",
+    "identity_sha256": "b63ec2ed6534176417f49ba5a8bde2df9745111d1612ffc1015a5cdacf64266b"
+  },
+  "source_value": "Cette soi-disant défense des femmes musulmanes contre la \"pression\" qu'elles pourraient ressentir à se voiler et ainsi les \"libérer\" sert en fait de prétexte à stigmatiser et violenter toute une partie de la population française.",
+  "source_value_sha256": "39dc44aeac808a04db165958fe70ae5607a41520917a50a420696701d541aa4d",
+  "target_value": "This so-called defense of Muslim women against the “pressure” they might feel to wear the veil, thereby supposedly “liberating” them, in fact serves as a pretext for stigmatizing and inflicting violence on an entire part of the French population.",
+  "target_value_sha256": "06560d27da80af4f9666116232dc044ed9eceaa2d7388570cd831e09ea50f549",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0133",
+    "target_path": "citations/A0133-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6ebc9e67fbd15a0080a27e84ae76e493bfc8f2b2adddc8916148e5521a018904"
+}

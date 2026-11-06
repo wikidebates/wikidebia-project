@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "366f511809fea83392455b71d4be7cdea2472a26cfc629236bae72235eb6408e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La majorité des viols et agressions sexuelles sont commis par des proches de la victime",
+    "identity_sha256": "d2cd517682904523dae2a3a2008589e2e75c7b12421e5e10188e943782f4757d"
+  },
+  "source_value": "La majorité des viols et agressions sexuelles sont commis par des proches de la victime",
+  "source_value_sha256": "352a82aa5cef5e6a5a713465103606c13a6540728643eb4b5d5b70aba35e59e0",
+  "target_value": "Most rapes and sexual assaults are committed by people close to the victim",
+  "target_value_sha256": "c4a2a0178784d8d15f31fe88fa81afc703ed417c0601d0daeb056575b5c4e8fd",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0238",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "316b5ba40140dd2c22b89fc8929dba968b31f15023fa5c38d300029b36fb03f8"
+}

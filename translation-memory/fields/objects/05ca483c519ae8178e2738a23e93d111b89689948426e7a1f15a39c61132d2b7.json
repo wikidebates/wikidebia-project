@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f32aa71be56508dacc0aa2659c971193bb3fc6aec9de504373cec611c5b353aa",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Défendre le choix d'être femme au foyer est le paravent d'une extrême droite se faisant passer pour féministe",
+    "identity_sha256": "850a50882e03ceb4b074b89a41c13fa94a9cdbdc65b561cfb5188b0d0b623d03"
+  },
+  "source_value": "Défendre le choix d'être femme au foyer est le paravent d'une extrême droite se faisant passer pour féministe",
+  "source_value_sha256": "fc675c5454305972f5e5201199201a7e584d86002115b08c10f4f35fa9b798f6",
+  "target_value": "Defending the choice to be a housewife is a cover for a far right masquerading as feminist",
+  "target_value_sha256": "efbe19d39023ffdeb70f8f4086c56b5bb01ff303d983c629258c48258670000c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0257",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "05ca483c519ae8178e2738a23e93d111b89689948426e7a1f15a39c61132d2b7"
+}

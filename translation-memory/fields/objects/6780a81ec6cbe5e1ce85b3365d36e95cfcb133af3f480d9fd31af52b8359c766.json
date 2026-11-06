@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5683f7c08eebdca9e6f74980adbc71475d6c9eca195e32093c5e4fb4002aeea8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La reconnaissance en tant que victime est nécessaire pour se reconstruire",
+    "identity_sha256": "7dec82e3f3ca023d5d676f461f1378255b1eaf12d4adb936ad209d8343b15293"
+  },
+  "source_value": "La reconnaissance en tant que victime est nécessaire pour se reconstruire",
+  "source_value_sha256": "4d00c337d7f8d29b826df3306135f5dc9298d121b45062240b9883a6708b97ec",
+  "target_value": "Recognition as a victim is necessary for recovery",
+  "target_value_sha256": "e286527321192b04ab8b0d5b4475934a0a817395d6932ee9db6b9561b01032d9",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0104",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6780a81ec6cbe5e1ce85b3365d36e95cfcb133af3f480d9fd31af52b8359c766"
+}

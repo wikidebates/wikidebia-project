@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3d66cee239c0be308ec612b096b8abcd79303dfc9bc9b24c3eea9d72919a8829",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des plaintes pour diffamation sont retirées dès qu'elles ne font plus de bruit médiatique",
+    "identity_sha256": "77a5eb96501f48232408ad75526e21adc9e1e491f0a392a11b2b2db84c576723"
+  },
+  "source_value": "La plupart des plaintes pour diffamation sont retirées dès qu'elles ne font plus de bruit médiatique",
+  "source_value_sha256": "8c99e9f21bed79a067dc6b373333b94e59ff3e25d4dbab08523a32e9aab8813e",
+  "target_value": "Most defamation complaints are withdrawn once they do not attract media attention any more",
+  "target_value_sha256": "d8fe4273980bf08382b76d7bd50859c79f4825ba7de336b5dacad08b9ea14ad2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0226",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e175792a4d46870cd870ff4867cab67f869d240dd6c540a5418604dbc2982838"
+}

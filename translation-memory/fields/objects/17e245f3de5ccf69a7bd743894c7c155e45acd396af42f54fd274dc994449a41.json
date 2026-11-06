@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "12307f52d9f83b26d26e7295f1a4ccd564a1701fbbf8c03b3e8df333d518f021",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes sont encore sous-représentées dans les récits historiques profitant le plus souvent aux \"grandes\" figures masculines",
+    "identity_sha256": "ce144ebe8755b5c755e3c9cba7eab14c2b757ec604a10e1064d7ad8bedcdd79b"
+  },
+  "source_value": "Selon une étude conduite par le Centre Francillien hubertine Auclert en 2011 reprise par l'Observatoire des inégalités, parmi 35OO personnages historiques répertoriés dans les manuels scolaires toutes disciplines confondues, la part des femmes représente un sur cinq.",
+  "source_value_sha256": "668a5b9971b9da4c3a9c00c61d6cc76af537b09e6e009fa322673e11941d9421",
+  "target_value": "According to a 2011 study conducted by the Centre francilien Hubertine Auclert and reported by the Observatoire des inégalités, women account for one in five of the 35OO historical figures listed in school textbooks across all subjects.",
+  "target_value_sha256": "257f9573d29bab498150f3d044771cf8aaf8d04e269a18854da7f93778c3e66c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0028",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "17e245f3de5ccf69a7bd743894c7c155e45acd396af42f54fd274dc994449a41"
+}

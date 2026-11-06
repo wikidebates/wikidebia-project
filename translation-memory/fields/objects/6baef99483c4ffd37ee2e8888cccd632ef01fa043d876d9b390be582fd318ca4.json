@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "bf513e16c49d2ff86bda69798785d9afc1940970123aace771c97bded8c25c2e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les réseaux sociaux font du profit sur la haine et le harcèlement",
+    "identity_sha256": "8f53cb5f02fbaeedf71203734b7330f735ec348e46e69bbd0507ac65c2cd16e8"
+  },
+  "source_value": "On a constaté une nette augmentation du nombre d’attentats commis par des militants d’extrême droite, des nationalistes blancs ou des islamophobes en Europe occidentale et en Amérique du Nord au cours des vingt dernières années. Dans ces deux régions, on dénombrait trois cas en 2002 contre 59 en 2017, les médias sociaux ayant joué un rôle crucial  dans la diffusion de discours xénophobes et dans l’incitation à la violence.",
+  "source_value_sha256": "a7683229beb7950cf2288175fd380f2ab2383a754f149ca46ddd65c97026bb7c",
+  "target_value": "There has been a marked increase in the number of attacks committed by far-right activists, white nationalists or Islamophobes in Western Europe and North America over the past twenty years. Across these two regions, there were three cases in 2002, compared with 59 in 2017, with social media playing a crucial role in spreading xenophobic speech and inciting violence.",
+  "target_value_sha256": "39903fabb13900c6ae7de244e4a8d0c227ee4cbfe0d66a2dd640a7319df800f1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0038",
+    "target_path": "citations/A0038-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6baef99483c4ffd37ee2e8888cccd632ef01fa043d876d9b390be582fd318ca4"
+}

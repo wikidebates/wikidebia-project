@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5b1aeaf2c2427fccbc065a5e5731903193ff35831c3dc20214c541af1f4be732",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le mouvement ouvrier socialiste a mené la lutte contre l'oppression des femmes dès le 19e siècle",
+    "identity_sha256": "b015df543efd13715850f999ef7349254cf5016fa0185b3effbf7aa1ad6dbe3c"
+  },
+  "source_value": "Quand le mouvement ouvrier socialiste a connu son essor à la fin du 19e siècle, il a d’ailleurs pris le contre-pied idéologique des préjugés machistes et des idées religieuses, et ce n’est pas un hasard. Le combat pour l’émancipation des exploités, dans lequel les travailleuses ont naturellement pris leur part en luttant elles aussi, a conduit à remettre en question toutes les formes d’oppression et tout ce qui pouvait diviser les travailleurs.",
+  "source_value_sha256": "a772bee8de27cfc292c31550e41b6a3f86d11a2556931e97c679989880aa5e83",
+  "target_value": "When the socialist labor movement rose at the end of the nineteenth century, it took an ideological stand against sexist prejudices and religious ideas, and this was no coincidence. The struggle for the emancipation of the exploited, in which working women naturally played their part by fighting too, led to questioning every form of oppression and everything that could divide workers.",
+  "target_value_sha256": "b68f888b97c2af96542a6e060833ce93248c68ae188f793a05757134d9458cec",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0273",
+    "target_path": "citations/A0273-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8bf909d7ae25defc62f63c4361864c9ef2549a18af783a5a05d3d368d9b6bcb8"
+}

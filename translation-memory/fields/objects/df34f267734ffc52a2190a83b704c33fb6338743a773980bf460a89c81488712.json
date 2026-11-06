@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "18d4ded4dca68618eb41523840a9a05e1f0f63971ade870b2493c61654f653e0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'idée que les hommes sont agresseurs par nature sert à excuser les agressions sexistes, les féministes n'ont donc aucun intérêt à la défendre",
+    "identity_sha256": "839c8688993d17b88d14a59d834377e1909143b0c48916949f87c576cf7b4db6"
+  },
+  "source_value": "L'idée que les hommes sont agresseurs par nature sert à excuser les agressions sexistes, les féministes n'ont donc aucun intérêt à la défendre",
+  "source_value_sha256": "320932c93d70c1a4e8f05cdadcb19dbd0e1f267607fc12ec75b7604de6d62c74",
+  "target_value": "The idea that men are aggressors by nature serves to excuse sexist assaults, so feminists have no interest in defending it",
+  "target_value_sha256": "1a200e920745345e0cfa018d9ff1fc3f29877c27b705733e6a6fb9854d76d051",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0197",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "df34f267734ffc52a2190a83b704c33fb6338743a773980bf460a89c81488712"
+}

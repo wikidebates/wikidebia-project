@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5ae9a44a0ea54b79aabdb4e3c9ea9acec0460f1b4e1ef5c3c2912bd33f67106c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les critiques les plus vocales du \"wokisme\" sont réactionnaires",
+    "identity_sha256": "d6cf36960278feb08f78305b8a1b0587103e3c178824598e02e4836d8b79c358"
+  },
+  "source_value": "Alors que le terme est né comme un mot d'ordre dans les communautés noires pour « rester éveillé » contre la brutalité policière, il a depuis été réapproprié comme un fourre-tout contre toute politique, position, ou personne avec laquelle les conservateurs ne sont pas d'accord, souvent de manière caricaturale.\n\n\n(''While the term [https://www.vox.com/culture/21437879/stay-woke-wokeness-history-origin-evolution-controversy originated] as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.'')",
+  "source_value_sha256": "76a697d5586904d386bb0b60e2ed44db5d6ccc780791938cd34a8a040da11bbc",
+  "target_value": "Although the term originated as a watchword in Black communities to “stay woke” against police brutality, it has since been repurposed as a catch-all against any policy, position, or person with which conservatives disagree, often in cartoonish ways.\n\n\n(''While the term [https://www.vox.com/culture/21437879/stay-woke-wokeness-history-origin-evolution-controversy originated] as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.'')",
+  "target_value_sha256": "7ee55702151a91ac3eab4ac99a1ae96add698f0558758b31b4c7bc9e4e02431a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0319",
+    "target_path": "citations/A0319-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "24aa091099a4c1060ad3d6fc0355a4ec24826634d812ba3abe0295a88cf2b78e"
+}

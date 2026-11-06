@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0f271b53af444a78d498633d58a43f31224acf544c974a180b43820a464cfd32",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Certains groupes politiques revendiquent leur hostilité envers le féminisme",
+    "identity_sha256": "6cdfb7e113976593639f0c1e2468735d8c7e831bb02a260d1313058109d793ea"
+  },
+  "source_value": "Certains groupes politiques revendiquent leur hostilité envers le féminisme",
+  "source_value_sha256": "640fa28de171dc3a6b192cec607e701b3dfa35cac282e35562d9b62648b9f4d8",
+  "target_value": "Some political groups openly assert their hostility toward feminism",
+  "target_value_sha256": "25a66215384dd17839824615ffb35660e16469728d09281ce6dd7c129aaa4135",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0164",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6535268170359deeb6698886a51cdf5fc83c98906493a066335a6bc0c0e4a0d8"
+}

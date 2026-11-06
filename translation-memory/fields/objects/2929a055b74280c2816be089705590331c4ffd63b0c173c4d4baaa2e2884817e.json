@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f87e711aaf948bb3ea435929f42fd5419b36205e3cd650449035d8ff6dbb79fe",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'immense majorité des victimes de viols sont des femmes",
+    "identity_sha256": "bd0a370b77c08888c9c40846bd5d8514c8c7203991651760d32d36ab06d5d1cc"
+  },
+  "source_value": "L'immense majorité des victimes de viols sont des femmes",
+  "source_value_sha256": "4e6502d8be607fc92020f2516c746bd201f194a694d6559b4916447c6a528bb0",
+  "target_value": "The overwhelming majority of rape victims are women",
+  "target_value_sha256": "369155f59a53d21068defb6418ba655b42de0b0d818456f88b32bb016cc31355",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0149",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "2929a055b74280c2816be089705590331c4ffd63b0c173c4d4baaa2e2884817e"
+}

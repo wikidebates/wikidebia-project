@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "98532bd1996c1c8797452bd25e083d1fc9c95503f727be0afa9db29212dd6218",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme radical est une réponse à l'échec du féminisme \"pacifiste\"",
+    "identity_sha256": "e092d6500448f1cdc64757241b1edac2b3b838b60044e0aa69b807f607a99250"
+  },
+  "source_value": "Le féminisme radical est une réponse à l'échec du féminisme \"pacifiste\"",
+  "source_value_sha256": "72c5fe8117b8a4ec9a5333d910679f3c8fb63d2c1c23f3bb99342ed4b6bbe62e",
+  "target_value": "Radical feminism is a response to the failure of \"pacifist\" feminism",
+  "target_value_sha256": "2307968d33afb656b79a3f7a9d6fd377193b665a1e5e2367364ef5b60936c7bb",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0128",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "2170dd869587d66b801295d16c25ccd5ae7b80284f91b1f1bedc2246bdfbdae3"
+}

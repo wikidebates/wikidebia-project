@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "240306a610c527b370ee227dab429d8eb0279a11554db84585a4ee653c09d1fa",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Déjà à l'époque coloniale, l'inquiétude apparente sur le sort des femmes du Maghreb servait de justification à la colonisation",
+    "identity_sha256": "3649eae2addfaff620b6b407f346fc39f01128980b6ce412430e3a7793f4a9ce"
+  },
+  "source_value": "Déjà à l'époque coloniale, l'inquiétude apparente sur le sort des femmes du Maghreb servait de justification à la colonisation",
+  "source_value_sha256": "ab1f6b5802749cd6193a421c9a826c4a6998b1dce797def9f8ed5690f19a4ce7",
+  "target_value": "Even in the colonial era, apparent concern for the fate of North African women was used to justify colonization",
+  "target_value_sha256": "8b989086c7c3d550cc2699d3b3f1219c97abb52febb6a3b82f74e96e25755695",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0341",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "76c2edb4084bebb595324d3d2bf3db5a20f2a019b2dd18d24c95b2712e9c4f2c"
+}

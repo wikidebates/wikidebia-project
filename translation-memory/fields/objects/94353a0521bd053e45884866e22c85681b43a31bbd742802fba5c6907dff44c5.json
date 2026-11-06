@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "aeda6abb2ae33df5cdf88e15104f0ebdd001bb61a0468fe304936034596fcde9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme moderne flirte avec la misandrie (haine des hommes)",
+    "identity_sha256": "20b068c2a737544861b5710cd49aa806a8c7642a0d408126ddad1a64424326fe"
+  },
+  "source_value": "Il est temps que les Amazones ne se fassent plus féconder par l’“ennemi” — et l’ennemi n’est-il pas celui qui prendra à la femme son enfant, pour l’élever ou le tuer à sa guise ?",
+  "source_value_sha256": "3a5770a38ed79138457ecb69ef18cda02d95b161774ee3c7f871b763c23c67dc",
+  "target_value": "It is time for Amazons to stop allowing themselves to be impregnated by the 'enemy'—and is the enemy not the one who will take a woman's child from her, to raise or kill as he pleases?",
+  "target_value_sha256": "22a1444f4b6cdd2e0a3403c61f932a8686115b42f13cdae80d55110864f7de07",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0016",
+    "target_path": "citations/A0016-C004",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "94353a0521bd053e45884866e22c85681b43a31bbd742802fba5c6907dff44c5"
+}

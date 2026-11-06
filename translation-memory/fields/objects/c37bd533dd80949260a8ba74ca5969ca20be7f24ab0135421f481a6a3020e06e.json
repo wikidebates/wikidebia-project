@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3156ff85469a804480cde28c30400cd54e2b6b0078f10f3de0145ebb69569f5f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme moderne considère tous les hommes comme de potentiels agresseurs",
+    "identity_sha256": "e52a72decb597e45428899620ea1b56202b6a89666f49f45db3b6a348d8bda39"
+  },
+  "source_value": "Aujourd'hui, il est admis qu'une femme sur deux a été victime de viol, d'agression ou de harcèlement. En revanche, ce qui n'imprime pas, c'est la conclusion qu'il faut en tirer. A savoir qu'un homme sur deux ou sur trois est un agresseur",
+  "source_value_sha256": "996410fd3705369d55360380da9be2eee1c6c6c74db4e6a056b2135db4a5c81e",
+  "target_value": "Today, it is accepted that one woman in two has been a victim of rape, assault or harassment. What fails to register, however, is the conclusion that must be drawn from this: namely, that one man in two or three is an aggressor.",
+  "target_value_sha256": "9f044475d7748b5b5a27145f09afc2360bae21dff1f1835c133ea9e778bc3268",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0014",
+    "target_path": "citations/A0014-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c37bd533dd80949260a8ba74ca5969ca20be7f24ab0135421f481a6a3020e06e"
+}

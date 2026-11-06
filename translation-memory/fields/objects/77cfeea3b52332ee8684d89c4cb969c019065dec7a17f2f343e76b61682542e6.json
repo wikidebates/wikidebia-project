@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2c0d8d6c64c2569d91f0d3d9adda94aea14de8b5136d986ded3c89031490b3e9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'argument \"différences naturelles\" est un sophisme",
+    "identity_sha256": "1c6646b7dba16faac732479c18cbc67e27017f0914b85067f9bc0ac157d3ce1d"
+  },
+  "source_value": "L'argument \"différences naturelles\" est un sophisme",
+  "source_value_sha256": "b5bb9248c867e963bb1c732a592d68ff7869a048b94c881ce4cec8cbd6924568",
+  "target_value": "The \"natural differences\" argument is a fallacy",
+  "target_value_sha256": "1a078b4ba825ed2fb6607b86c623c2d13b53d7287a9d3292e910a43b795caec7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0122",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "77cfeea3b52332ee8684d89c4cb969c019065dec7a17f2f343e76b61682542e6"
+}

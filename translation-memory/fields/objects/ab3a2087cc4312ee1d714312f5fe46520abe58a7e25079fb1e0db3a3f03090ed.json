@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "69e1753ab397206777e933a8c663f51bfcc08bd4acbf3b4af1d629d5bbe63729",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme moderne considère tous les hommes comme de potentiels agresseurs",
+    "identity_sha256": "e52a72decb597e45428899620ea1b56202b6a89666f49f45db3b6a348d8bda39"
+  },
+  "source_value": "Le féminisme moderne considère tous les hommes comme de potentiels agresseurs",
+  "source_value_sha256": "4400bdeb761381e12a654c3de4148f3b50a21d5ad2d16df62fd38ca9ee090536",
+  "target_value": "All men are regarded as potential aggressors by modern feminism",
+  "target_value_sha256": "4152c45fd41a68376c6cec39dd67a258498bab6473899c22d128ffe286a9977c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0014",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ab3a2087cc4312ee1d714312f5fe46520abe58a7e25079fb1e0db3a3f03090ed"
+}

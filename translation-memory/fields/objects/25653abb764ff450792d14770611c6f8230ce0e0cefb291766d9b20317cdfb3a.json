@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a599756fe677ce48a4fafb4f5e3145dccf6462423ba670e5038c26b9d163b224",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes subissent des comportements irrespectueux (offense, présomption, rabaissement, minimisation et humiliation)",
+    "identity_sha256": "3e581a35c106ea81fca11bceed9ad002c66dce5225440f76dc9d80e1235af36a"
+  },
+  "source_value": "Les femmes subissent des comportements irrespectueux (offense, présomption, rabaissement, minimisation et humiliation)",
+  "source_value_sha256": "b9474d984203a7b5c1e78d4de74f9517f58ca78ed98d298059e1f02cc3448ede",
+  "target_value": "Women experience disrespectful behavior (offense, presumption, belittling, minimization and humiliation)",
+  "target_value_sha256": "c65a32f4d31fc5683ea00d9550e76bef41ab80c5e22e3e7aaeccfea805f348ab",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0046",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "25653abb764ff450792d14770611c6f8230ce0e0cefb291766d9b20317cdfb3a"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4794cede130d396b8b5e205b795ff34c1eef2e5ea2c8d4a4feed492b309b7ea8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme moderne flirte avec la misandrie (haine des hommes)",
+    "identity_sha256": "20b068c2a737544861b5710cd49aa806a8c7642a0d408126ddad1a64424326fe"
+  },
+  "source_value": "Je vois dans la misandrie une porte de sortie. Une manière d'exister en dehors du passage clouté, une manière de dire non à chaque respiration. Détester les hommes, en tant que groupe social et souvent en tant qu'individus aussi, m'apporte beaucoup de joie – et pas seulement parce que je suis une vieille sorcière folle à chats.\nSi on devenait toutes misandres, on pourrait former une grande et belle sarabande. On se rendrait compte (et ce serait peut-être un peu douloureux au début) qu'on n'a vraiment pas besoin des hommes. On pourrait, je crois, libérer un pouvoir insoupçonné : celui, en planant très loin au-dessus du regard des hommes et des exigences masculines, de nous révéler à nous-mêmes",
+  "source_value_sha256": "c14f77e0e09a0c8d75cb8cfd2cf76a31fdc72a75cab75e03e0eb7b0e007f03bc",
+  "target_value": "I see misandry as a way out. A way to exist outside the marked crossing, a way to say no with every breath. Hating men, as a social group and often as individuals too, brings me a great deal of joy—and not only because I am a crazy old cat lady.\nIf we all became misandrists, we could form one great, beautiful saraband. We would realize (and it might hurt a little at first) that we truly do not need men. I believe we could unleash an unsuspected power: that of revealing ourselves to ourselves by soaring far above men's gaze and male demands.",
+  "target_value_sha256": "93a143b5f873f7c509d457e11554d29ac74d8d207a11f3124ab78c8ead5785d3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0016",
+    "target_path": "citations/A0016-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "63ee060850ae5551fa10b573dd068b8d56f60dace57149bd9c6b807274e3bda2"
+}

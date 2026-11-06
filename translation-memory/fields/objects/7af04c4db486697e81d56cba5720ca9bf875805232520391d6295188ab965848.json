@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3dc0715163b7476f4c67e1d0b6da15aa40ce3b890266aab55c44e89af3c6893f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le mansplaining n'est pas juste un contre-argument, c'est la tendance qu'ont les hommes à se croire plus compétents que les femmes dans des domaines où elles sont pourtant expertes",
+    "identity_sha256": "a4839a9ccfb56f19cf1933ed0405f1aa809d6842ca71c85e9e7589c9fe1a1a77"
+  },
+  "source_value": "Le mansplaining n'est pas juste un contre-argument, c'est la tendance qu'ont les hommes à se croire plus compétents que les femmes dans des domaines où elles sont pourtant expertes",
+  "source_value_sha256": "003a2e88c5da3c63cc8f1ce995264030544a1721530292ad656c88a5e84f3899",
+  "target_value": "Mansplaining is not merely a counterargument but men's tendency to consider themselves more competent than women in fields where the women are in fact experts",
+  "target_value_sha256": "389d4b895aa06d28e568ac7338f0b9ae0820d0f6a367b81c1352f56a9b38ba85",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0279",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7af04c4db486697e81d56cba5720ca9bf875805232520391d6295188ab965848"
+}

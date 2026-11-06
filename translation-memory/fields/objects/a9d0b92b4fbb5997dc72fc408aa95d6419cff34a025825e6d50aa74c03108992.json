@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0df2ae83b33a419e78beebb751104db6aa1b998ac6753faf5a54924df623a714",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le cyberharcèlement est très largement impuni",
+    "identity_sha256": "7bd2fba8be95911d58de0b446e497a2642d81d592d02a9babd39796eee3e9704"
+  },
+  "source_value": "Face à ces affaires, les institutions ne sont pas toujours d’une grande aide et l’assistance pour les victimes est quasi inexistante. La streameuse Manonolita explique avoir porté plainte trois fois et avoir passé beaucoup de temps à expliquer comment fonctionnent les plateformes sur lesquelles elle est harcelée. Au final, la police lui a conseillé de quitter Internet…",
+  "source_value_sha256": "dcb3e3a3f8e5ee412ba37a1ffcd8f414feb8a8e84ad7d557c5574621f3568c1c",
+  "target_value": "Faced with these cases, institutions are not always much help, and assistance for victims is almost nonexistent. Streamer Manonolita explains that she filed complaints three times and spent a great deal of time explaining how the platforms on which she was harassed work. In the end, the police advised her to leave the Internet...",
+  "target_value_sha256": "89584673a02857209327b4842c9b5559d96e84cc75ac91e251c70f5654c937f5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0262",
+    "target_path": "citations/A0262-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a9d0b92b4fbb5997dc72fc408aa95d6419cff34a025825e6d50aa74c03108992"
+}

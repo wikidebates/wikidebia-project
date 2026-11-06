@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7f33841cba19cbb2f5ecdb2b36aa56e2b541c9cc8878320bac86d80291c32c32",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les gens qui dénoncent la cancel culture sont les idiots utiles de l'extrême droite",
+    "identity_sha256": "3be9f58cbb7d307b3ce7b30f8566842d8f0c1fd0e5b69ca8dd8997d15c6051c8"
+  },
+  "source_value": "Les gens qui dénoncent la cancel culture sont les idiots utiles de l'extrême droite",
+  "source_value_sha256": "73a7623cd03a47f3e33a8a140117e6130f8e8f98a76b844ad730872559f1ea3b",
+  "target_value": "People who denounce cancel culture are useful idiots of the far right",
+  "target_value_sha256": "5f3c823a63bd2fad63769f865ba3fa9c20830ac600cfafdd247bcf423a280b8e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0215",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "661f47eefb5368b7bf6e1d5953a0016e62ebc484da88c0a87864d141965c30ee"
+}

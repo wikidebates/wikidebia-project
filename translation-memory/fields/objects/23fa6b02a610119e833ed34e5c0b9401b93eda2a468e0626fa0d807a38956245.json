@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3d858541afe0c35ea124a7e0a9d475c86a5018b92865698003586e47ed743cd3",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Certains violences visent plus spécifiquement les femmes",
+    "identity_sha256": "2caa00c4161524b28dfe69c424419f242233f51d8ec502f53eba3eb8112af693"
+  },
+  "source_value": "Notamment le slutshaming (les hommes étant plutôt valorisés pour leurs nombreuses expériences sexuelles) et le bodyshaming (la laideur est davantage tolérée chez les hommes que chez les femmes), de même qu'il n'y a pas d'équivalent masculin au féminicide (aucun homme n'est tué en raison de son genre, alors que c'est relativement courant chez les femmes).",
+  "source_value_sha256": "6ff441678f5cbcc63ec969eeef862fff8a9e98e969e150481ff345e31ea17530",
+  "target_value": "Notably slut-shaming (men being valued more for having many sexual experiences) and body shaming (ugliness is tolerated more in men than in women); likewise, there is no male equivalent of femicide (no man is killed because of his gender, whereas this is relatively common among women).",
+  "target_value_sha256": "25cf85f5aa86d3a6613e87935df62a8da5d6f7da067a2c281e9ee171793e0bf2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0150",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "23fa6b02a610119e833ed34e5c0b9401b93eda2a468e0626fa0d807a38956245"
+}

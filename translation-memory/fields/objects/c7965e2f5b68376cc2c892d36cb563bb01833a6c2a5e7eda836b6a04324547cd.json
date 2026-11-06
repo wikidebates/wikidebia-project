@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2c22549f6da63ac9a8e1712cd992c58c7a86d73c08e0d74a9c3bb5c78413e550",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les crises économiques s'accompagnent systématiquement d'une montée des idéologies réactionnaires",
+    "identity_sha256": "151aa111d74633a5864506ac95ffd9b988a455780b88ad63354e1c4f2ee57391"
+  },
+  "source_value": "Puisque leurs arguments sont fondés sur les sentiments des gens (et notamment la peur et la haine) à l’inverse de leur rationalité, ils ne peuvent fonctionner qu’en période de grave crise économique ou sociale. Et c’est d’ailleurs toujours en réponse à ce type d’évènement que l’extrême droite a réussi à accéder au pouvoir : la première guerre mondiale pour Mussolini, la crise de 1929 pour Hitler ou encore la crise de 2008 pour Trump ou Bolsonaro.",
+  "source_value_sha256": "3f9b5f0af39ee67dd41a252632832b9a9d88c7d09827f1335e0887adeb42472a",
+  "target_value": "Because their arguments are based on people’s feelings, particularly fear and hatred, rather than on their rationality, they can work only during a serious economic or social crisis. And it is always in response to this type of event that the far right has managed to come to power: the First World War for Mussolini, the 1929 crisis for Hitler, and the 2008 crisis for Trump or Bolsonaro.",
+  "target_value_sha256": "6f7b91ea35a4b6a131201be9bf41acfae14cfd7688faa3c67f2c0f1141c06e28",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0087",
+    "target_path": "citations/A0087-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c7965e2f5b68376cc2c892d36cb563bb01833a6c2a5e7eda836b6a04324547cd"
+}

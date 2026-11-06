@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b6ecab2f039195383f34a165bd073ce2bfe9546cf633831823c207d83cfc0770",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le masculinisme est bien plus misandre que le féminisme",
+    "identity_sha256": "58e434120bf6a834355626cc67d6d86acf5ed63149f87dfc6a6fcb5cecd9c6ea"
+  },
+  "source_value": "Le masculinisme , qui entend défendre une vision très traditionnaliste de ce qu'est censé être un homme, donne une image désastreuse de ces derniers. Ainsi, à les endtendre, être un homme, c'est être:\n\n-Vaniteux\n\n-Insécure\n\n-Capricieux\n\n-Immature\n\n-Égocentrique\n\n-Incapable de se contrôler\n\nCe n'est donc peut-être pas les féministes qui sont à blâmer.",
+  "source_value_sha256": "eaefb98600310e7b4404133a43825b4113463fc1178833f856972be893e42c06",
+  "target_value": "Masculinism, which seeks to defend a very traditionalist vision of what a man is supposed to be, presents a disastrous image of men. Thus, according to masculinists, being a man means being:\n\n-Vain\n\n-Insecure\n\n-Capricious\n\n-Immature\n\n-Self-centered\n\n-Incapable of self-control\n\nIt may therefore not be feminists who are to blame.",
+  "target_value_sha256": "dab7de600fc120b8c8d22ec4025b7a51abaece8aa346562a9e910f3595c07254",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0101",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "aec35e6a02f6477b83b63725bdde94834f7f6d35f599f6749d81ca4526afc4a7"
+}

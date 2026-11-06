@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fcd75820efe922201f38b87db05dc4c40965b542c4bc579ce0bb6479c8c41376",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes ne sont pas dénuées de responsabilité",
+    "identity_sha256": "fecb7d5528209fc917ff6703b29ac125af61128fdcde3af187901b5c9077b210"
+  },
+  "source_value": "Les femmes ne sont pas dénuées de responsabilité",
+  "source_value_sha256": "0295488b589ca632651385ceaa84da1f80bc7160b029ce70222820fb32fa6c84",
+  "target_value": "Women are not devoid of responsibility",
+  "target_value_sha256": "7ed8c13aecbbc834862d520389c223d3147005d5d42fcbce447f122432fc6ef7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0187",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5dabfde9cf8779585f368cee3df19c96f0e67258c4c7712593b557c57e04e39f"
+}

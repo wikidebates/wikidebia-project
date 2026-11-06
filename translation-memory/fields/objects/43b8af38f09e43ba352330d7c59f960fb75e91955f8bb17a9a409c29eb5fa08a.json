@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "50a03d89626f154ddce9ef794b029b2781f6872c04b0f52b3c813175bc42477f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'interdiction de la burqa prétend libérer les femmes mais contribue à les emprisonner",
+    "identity_sha256": "7bd2c08755eceeda277f74872192e06981e244ab945f51c98538dc0c43508aa1"
+  },
+  "source_value": "L'interdiction ou la contrainte légale des femmes de porter un vêtement précis répondent en réalité à la même motivation: le contrôle de leur corps, donc leur domination.",
+  "source_value_sha256": "1f93df3a44dc4dfda2686dfff93bbfd4cd85a895e3f1b5754d1f081f3f55f146",
+  "target_value": "Banning women from wearing a particular garment and legally forcing them to wear one in fact arise from the same motive: controlling their bodies, and therefore dominating them.",
+  "target_value_sha256": "d306b32ac17931862cd96e9192fbf11a9cc8b57e6a42db45def0f596bad4ed73",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0237",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "43b8af38f09e43ba352330d7c59f960fb75e91955f8bb17a9a409c29eb5fa08a"
+}

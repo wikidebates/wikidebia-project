@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8b20b1101d3660cb399858f499faad6b3d198b19d20e856db9d8b562bf693fd8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les critiques les plus vocales du \"wokisme\" sont réactionnaires",
+    "identity_sha256": "d6cf36960278feb08f78305b8a1b0587103e3c178824598e02e4836d8b79c358"
+  },
+  "source_value": "Un choix de se rapprocher de l’extrême droite qui s’éclaire aussi à la lumière de l’enrolement de plusieurs militant·es du groupuscule fasciste, Chez Nous, au sein des listes électorales du parti il-libérale*. Le dernier en liste, après Noa Pozzi (finalement écarté pour cause d’une polémique grandissante) est Jason Galassi. Ces porosités entre le MR et ces partis néo-fascistes sont bien documentées par les collectifs antifascistes belges, comme le Front Antifasciste Liège 2.0.\n\nDepuis, c’est un véritable revirement que le MR souhaite opérer dans le monde politique belge francophone : GLB et ses comparses sont en campagne idéologique intensive contre ledit « wokisme » des féministes et des LGTBQ+, ledit « communautarisme » de l’Islam et des mulsuman·nes et ledit « communisme autoritaire » du PTB.",
+  "source_value_sha256": "dd77e2b2aefb67beffaa3980e378044c3f52408258b9def0623f27a0459ffe44",
+  "target_value": "This choice to move closer to the far right is also illuminated by the recruitment of several activists from the fascist group Chez Nous onto the electoral lists of the illiberal* party. The latest, after Noa Pozzi (eventually excluded as the controversy grew), is Jason Galassi. These porous boundaries between the MR and neo-fascist parties are well documented by Belgian antifascist collectives such as Front Antifasciste Liège 2.0.\n\nSince then, the MR has sought to bring about a genuine reversal in French-speaking Belgian politics: GLB and his associates are waging an intensive ideological campaign against the alleged “wokeism” of feminists and LGBTQ+ people, the alleged “communalism” of Islam and Muslims, and the alleged “authoritarian communism” of the PTB.",
+  "target_value_sha256": "08d298564f078e76bb8092d5d8392b914109f15a0492e1a72c39f44eb960d236",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0319",
+    "target_path": "citations/A0319-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4238852735e96a249200b1d6845c13fe20c6dcea990ac9d7275989a678b61280"
+}

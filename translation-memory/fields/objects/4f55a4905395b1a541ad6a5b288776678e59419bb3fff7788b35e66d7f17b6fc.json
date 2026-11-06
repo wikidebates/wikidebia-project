@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e250b474d46dc826bc4f015cf2edfb17b838f5d84e5d808c8331593f8c008875",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les capitalistes utilisent la division entre hommes et femmes pour mieux régner",
+    "identity_sha256": "52a2aa4447ae8a168674a96d3901af8e5fad09f5baefb63abc8573dc83f26f33"
+  },
+  "source_value": "Les capitalistes utilisent la division entre hommes et femmes pour mieux régner",
+  "source_value_sha256": "008e96b2b6b8b1c8a69ffa4a4c3db929410e56f8b6fe5788a162666a9dcd6fe6",
+  "target_value": "Capitalists use the division between men and women to divide and rule more effectively",
+  "target_value_sha256": "c0b06b1fa6dfcd2a6c4037e0165ca88e0d48ffe1b68c380c01d7946351e49c22",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0079",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4f55a4905395b1a541ad6a5b288776678e59419bb3fff7788b35e66d7f17b6fc"
+}

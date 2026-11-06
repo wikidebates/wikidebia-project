@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "869679da99899d37e158fba9f71c0ed3961fe4570e9263c6bb180769857e83e0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La masculinité toxique expose les hommes en dehors des canons de cette dernière à des violences",
+    "identity_sha256": "ef01ffd9d6318ab52e16bf09d8d16d4823f035824c9758133d7b9c2cc9942e22"
+  },
+  "source_value": "La masculinité toxique expose les hommes en dehors des canons de cette dernière à des violences",
+  "source_value_sha256": "c05fb69b191fa9f2fddd21bdee387832ac51429abe71424d2744e6d5deaac4f7",
+  "target_value": "Toxic masculinity exposes men who fall outside its norms to violence",
+  "target_value_sha256": "a1fa14797d4ca972cc610560c55fcd464021ef73a15ed77ce0d77363bbe3eed0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0281",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4ffb5509414a87e9f2c7b16be491c6464edd28c3b69d15cb97a5310c9d0dc289"
+}

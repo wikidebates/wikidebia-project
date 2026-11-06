@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "efd93993a08e7aa86d9e29e3ec9d371bb00eadaf8b13d0a02b887c3d836b36e0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'universalisme laisse sur le bas-côté de nombreux types d'oppression",
+    "identity_sha256": "2abfe0e702bbd89aa1dd708e85d15a1c93cc3ef99df8a07f06f4b61539f44bef"
+  },
+  "source_value": "[Les notions d'universalisme et d'intersectionalité] crispent une partie de la population d’une part parce que la notion d’universalisme et sa définition a été accaparée par une élite blanche, [https://www.madmoizelle.com/questions-heterosexuels-170007 hétéro], [https://www.madmoizelle.com/kelsi-phung-artiste-non-binaire-zone-interdite-presente-la-non-binarite-comme-un-phenomene-de-mode-1073041 cisgenre], [https://www.madmoizelle.com/il-faut-que-les-valides-sachent-remettre-en-question-leurs-privileges-1077539 valide] qui définit ce qu’est l’universalisme au regard de son vécu privilégié et tente d’en faire une norme, une généralité. Cela crée des crispations de toutes parts car '''comment parler d’universalisme quand sa définition même exclue une grande partie de notre population ?'''",
+  "source_value_sha256": "def0045128dcbe7ddafe2b55a8bce5eaba3aab81b4e1a9a9cd9059acc2cb1424",
+  "target_value": "[The concepts of universalism and intersectionality] make part of the population bristle, in part because the concept of universalism and its definition have been appropriated by a white, [https://www.madmoizelle.com/questions-heterosexuels-170007 heterosexual], [https://www.madmoizelle.com/kelsi-phung-artiste-non-binaire-zone-interdite-presente-la-non-binarite-comme-un-phenomene-de-mode-1073041 cisgender], [https://www.madmoizelle.com/il-faut-que-les-valides-sachent-remettre-en-question-leurs-privileges-1077539 nondisabled] elite that defines universalism in light of its privileged experience and tries to turn it into a norm, a general rule. This creates tensions on all sides, because '''how can one speak of universalism when its very definition excludes a large part of our population?'''",
+  "target_value_sha256": "535b609a8981b7b474a82bbc8d396ecb00074e825f643ee08121be1eb3b3e47d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0131",
+    "target_path": "citations/A0131-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a70921565244e3bbf403dad1046233c0c2c4058c45dfea4a7e0bdb46c24d3738"
+}

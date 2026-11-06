@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c647f4c5d02c99b188eb9792b767b25ad3f9bfb7eb37ecb0f568b6c3836ee520",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme moderne flirte avec la misandrie (haine des hommes)",
+    "identity_sha256": "20b068c2a737544861b5710cd49aa806a8c7642a0d408126ddad1a64424326fe"
+  },
+  "source_value": "Le 19 Août 2020, le pamphlet \"Moi les hommes, je les déteste\" faisait sa sortie de manière discrète édité à 450 exemplaires. Son autrice, Pauline Harmantage, 25 ans, mariée et relativement inconnue tient un blog et s'annonce féministe. L'ouvrage bénéficie d'une couverture médiatique inespérée suite à la menace d'interdiction par Ralph Zumély, chargé de mission pour l'égalité hommes/femmes. Un engouement à la portée de son titre provocateur. Pour répondre à la demande, l'essai ressort chez les éditions Seuil en septembre 2020 et se vend comme des petits pains. L'autrice assume, elle est misandre est entend dénoncer les hommes comme groupe social faisant du mal aux femmes.\nIl n'est pas sans rappeler des écrits ouvertement misandres du XXème siècle oubliés dont le fameux SCUM Manifesto de Valérie Solanas en 1967 (qui a tiré sur Andy Warhol), mais encore des essayistes comme Natalie Clifford Barney ou Mireille Havet. \n\n'''#menaretrash'''\nN'oublions pas le champ du numérique ! Vaste terrain de détestations. En 2016 est né le hashtag #menaretrash (traduisez par : \"les hommes sont des déchets\", ambiance…) en Afrique du Sud. Suite à une série de féminicides, il a connu un regain d'intérêt en 2017 pour ensuite se généraliser sur les réseaux sociaux au niveau mondial. Accompagné pour la plupart des tweets et autres posts par des dénonciations, d'aucun de lui conférer une valeur généraliste et stigmatisante sinon haineuse. Les plus réfractaires relancent le débat de la cancel culture et accusent le-dit hashtag de servir d'outil pour un tribunal populaire médiatique indépendamment des procédures juridiques et au risque même de la cannibaliser.\n\nLa question se pose sur la médiatisation et l'inquiétude de certains face à cette misandrie affichée : Vengeance ? Communautarisme ? Féminisme radical ? Le sujet n'a pas fini d'enflammer les foules des deux sexes.",
+  "source_value_sha256": "3cfb4771e2a601ec2f9dfbb3e9ff6c03f40c0a2f94721f630098b766a6d67fab",
+  "target_value": "On August 19, 2020, the pamphlet \"I Hate Men\" was quietly released in a print run of 450 copies. Its author, Pauline Harmange, 25, married and relatively unknown, ran a blog and described herself as a feminist. The book received unexpected media coverage after Ralph Zumély, an adviser on gender equality, threatened to have it banned. The enthusiasm matched the reach of its provocative title. To meet demand, the essay was republished by Seuil in September 2020 and sold like hotcakes. The author openly identifies as a misandrist and intends to denounce men as a social group that harms women.\nIt recalls openly misandrist writings from the twentieth century that have since been forgotten, including Valerie Solanas's famous 1967 SCUM Manifesto (Solanas shot Andy Warhol), as well as essayists such as Natalie Clifford Barney and Mireille Havet.\n\n'''#menaretrash'''\nNor should the digital sphere be forgotten: it offers vast territory for hatred. The hashtag #menaretrash (\"men are trash\") emerged in South Africa in 2016. After a series of femicides, it gained renewed attention in 2017 and then spread across social media worldwide. Although most tweets and other posts using it denounced abuse, some saw the hashtag as sweeping and stigmatizing, if not hateful. Those more hostile to it revived the debate over cancel culture and accused the hashtag of serving as a tool for trial by social media, independently of legal procedures and at the risk of overriding them.\n\nThe media attention and some people's concern about this overt misandry raise questions: revenge? Communitarianism? Radical feminism? The subject will continue to inflame people of both sexes.",
+  "target_value_sha256": "b548fba602b7a1b77d260cf8cc8740195095a7ed93a4b4c17e45ea32183d6e32",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0016",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "2966880ff06a0c0401ed03fbe1bba7fe3226bdd5ae499cbdb4c68b73269bd707"
+}

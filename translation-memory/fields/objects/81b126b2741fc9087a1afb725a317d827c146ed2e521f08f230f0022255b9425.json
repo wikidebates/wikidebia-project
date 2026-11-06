@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "cca2f762fb2459b97dbe4f88178aa64aec0a064291d64bbfed7552dcd0bf8603",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes sont physiologiquement capables de s'asseoir sans écarter les jambes",
+    "identity_sha256": "d8f836ae17f228be180e452de327fde7f9fe014e95618bdbbc159383c86c8a63"
+  },
+  "source_value": "Les hommes sont physiologiquement capables de s'asseoir sans écarter les jambes",
+  "source_value_sha256": "47b3bfebd234881881b571a69e62d97df9d256eb7460da4db4dbc7d2a377940b",
+  "target_value": "Men are physiologically capable of sitting without spreading their legs",
+  "target_value_sha256": "e981d4cd577e6471f7b98ff23ed60f97529492fdae2c5d86030813b50a76cdac",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0285",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "81b126b2741fc9087a1afb725a317d827c146ed2e521f08f230f0022255b9425"
+}

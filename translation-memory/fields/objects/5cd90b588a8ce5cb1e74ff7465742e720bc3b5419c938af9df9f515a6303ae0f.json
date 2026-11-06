@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d997106a9ef1b0b5f03d41c25d29ff91cde77016a1bcdebafdd9e7feb47b75b4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme radical conduit à des dérives",
+    "identity_sha256": "afaf3b7a6d33eb9c112cbbbeb2b1af89021c95ca564eed6a9005643eed3932c7"
+  },
+  "source_value": "Le féminisme radical conduit à des dérives",
+  "source_value_sha256": "610b20a2900e7b8eb61713770e2a2fee7a9e34a54021be005f738ceb839f6e8c",
+  "target_value": "Radical feminism leads to excesses",
+  "target_value_sha256": "30c7456b80ab43dcd282838bee61925c380a266a15b9d3e911061e760f9088c6",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0021",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5cd90b588a8ce5cb1e74ff7465742e720bc3b5419c938af9df9f515a6303ae0f"
+}

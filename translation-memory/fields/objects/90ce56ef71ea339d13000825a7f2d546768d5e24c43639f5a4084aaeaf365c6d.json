@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ced3dce6a7d0ef1767208e5b561d381a2d73e06941f03acb5403980cacd37c0b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme ne permet pas d'améliorer le niveau de vie des femmes",
+    "identity_sha256": "920e1a7a918e812542be79189a7dd60ab3e26ea59ec73eac8730de42a505b857"
+  },
+  "source_value": "Le féminisme ne permet pas d'améliorer le niveau de vie des femmes",
+  "source_value_sha256": "9d0f17073e6986f4f02a75d5713de1cd38bf935a8fc0c7f51f164db0f6923c13",
+  "target_value": "Feminism does not improve women's standard of living",
+  "target_value_sha256": "6cfaa6431dc9acea5e251a18ea075409a8a9be560dedf6630c80b8be9823cf6d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0135",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "90ce56ef71ea339d13000825a7f2d546768d5e24c43639f5a4084aaeaf365c6d"
+}

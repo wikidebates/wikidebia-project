@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0c1509f886f03ba60928feb76ee07757c34849e064ac282055324ace7bae754d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes subissent des violences économiques",
+    "identity_sha256": "5cc63c53673a45b54fc1a9e5a17f249a271bce48c28bcb05e0946928933afd5d"
+  },
+  "source_value": "Les femmes subissent des violences économiques",
+  "source_value_sha256": "32ead10e8381ecb6ae78cfc6a68d95cdbbbefaadb916979fdb286dbbe0b5ab4e",
+  "target_value": "Women experience economic abuse",
+  "target_value_sha256": "a9f00c3ec16bea0ef75b2c56568eb487fa5a94b00ff8dd2e38d5626d61ce0135",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0045",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "39f99c67abd0432f0ff19b1aae27fae65a832986baf45b7a6d9ab50c6bc1581f"
+}

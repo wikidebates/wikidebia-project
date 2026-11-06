@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1ed4dec74033471590f1b63426387b3f2834c488bbdb3ba2841946b20f51e6ec",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le terme \"woke\" est en train de devenir plus neutre et s'impose, même si son usage a été un moment polémique",
+    "identity_sha256": "0b5f4a5bbd4603edb03d45de475393d95b14deff3195c03ed8bbeb45a14455d1"
+  },
+  "source_value": "Le terme \"woke\" est en train de devenir plus neutre et s'impose, même si son usage a été un moment polémique",
+  "source_value_sha256": "b99bb0abcd74c19490a5d07f4117f569b71f6440e2ecc1291905ec0c8b62831c",
+  "target_value": "The term \"woke\" is becoming more neutral and gaining acceptance, even though its use was controversial for a time",
+  "target_value_sha256": "c0e6b328346d37bab50083ece8bbd5409b052b2565facdd96f1c7a5c79e87ea9",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0290",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "32c60e30465ecb2ff5bfe6feeafa6c9ed035289d11a917b517c45200d12b1384"
+}

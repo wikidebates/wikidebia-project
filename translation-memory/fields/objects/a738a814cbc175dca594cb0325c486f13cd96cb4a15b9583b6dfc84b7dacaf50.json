@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f2392b5180f04fd9712a5f0dae32d1698167f7f8da440aee098135f27b943f83",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les agressions sexuelles et les viols ne sont pas du sexe, mais un moyen de domination",
+    "identity_sha256": "5f09c905faa2beb8a0f8a854e3429c81f2f72332494eed0fb136aeb717535455"
+  },
+  "source_value": "Les agressions sexuelles et les viols ne sont pas du sexe, mais un moyen de domination",
+  "source_value_sha256": "832681cc6760a7b2dda584b824cc227d67f33a17113c8c9e56fc45a747b83e17",
+  "target_value": "Sexual assaults and rapes are not sex but a means of domination",
+  "target_value_sha256": "4ef61057641a20e9e7645198e1739d6669536f5eaa0156e0153df0f2258604b4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0295",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a738a814cbc175dca594cb0325c486f13cd96cb4a15b9583b6dfc84b7dacaf50"
+}

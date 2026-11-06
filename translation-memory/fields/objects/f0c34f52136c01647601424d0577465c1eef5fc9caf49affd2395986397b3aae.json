@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "06e74cbe720aff3581fa9eb3cae5b4b36fed05d9fc3514f68f0ee3f94822b6bd",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les trumpistes ne sont pas moins violents envers les femmes conservatrices qu'envers les féministes",
+    "identity_sha256": "802da21664ee7675a57ceabad664c4582cb140240d6b60739381a44eac703b87"
+  },
+  "source_value": "Le traitement des femmes conservatrices par les hommes de leur propre camp fait voler en éclats le narratif voulant que le féminisme serait la cause du trumpisme. En effet, ils sont tout aussi violents envers elles qu'envers les féministes, ce qui ne serait pas le cas si les griefs qu'ils avaient étaient uniquement dirigés vers ces dernières. Ces dernières ont donc appris à la dure que faire des concessions à un groupe social potentiellement antagoniste ne conduit pas à un meilleur traitement par ces derniers, bien au contraire.",
+  "source_value_sha256": "31d19cf10ace2e65e44ec26f862a7d18c498403fb3e7856a497922be275505a8",
+  "target_value": "The treatment of conservative women by men on their own side shatters the narrative that feminism is the cause of Trumpism. Indeed, these men are every bit as violent toward them as toward feminists, which would not be the case if their grievances were directed only at the latter. Conservative women therefore learned the hard way that making concessions to a potentially antagonistic social group does not lead to better treatment by that group—quite the contrary.",
+  "target_value_sha256": "7a5d2dc4e2f5ed932abb0a6f740f7c8dacc1f80cd6a28b32d292ee2468ff1e80",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0175",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f0c34f52136c01647601424d0577465c1eef5fc9caf49affd2395986397b3aae"
+}

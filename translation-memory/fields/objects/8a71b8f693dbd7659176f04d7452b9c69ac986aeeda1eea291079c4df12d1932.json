@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b1d3d95aaecd89c2b31aff159266742626ef2e1f050af1e233e014d55aff2e8f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme bourgeois ne relie pas l'oppression des femmes à l'exploitation capitaliste",
+    "identity_sha256": "9997436a1c3fbe7e9c92aaf334895dd91559f3e8f1c457d5cc9cdce138a0ff83"
+  },
+  "source_value": "Le féminisme bourgeois ne relie pas l'oppression des femmes à l'exploitation capitaliste",
+  "source_value_sha256": "f65d53de7e4449af6256c9147476cf919c3bdbd918c3277d46a5179097cf23f5",
+  "target_value": "Bourgeois feminism does not connect the oppression of women to capitalist exploitation",
+  "target_value_sha256": "0406b6b4cc24c7bfaa37950c1c5ebdb5b33ded534953f38a2337837f5442d621",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0274",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8a71b8f693dbd7659176f04d7452b9c69ac986aeeda1eea291079c4df12d1932"
+}

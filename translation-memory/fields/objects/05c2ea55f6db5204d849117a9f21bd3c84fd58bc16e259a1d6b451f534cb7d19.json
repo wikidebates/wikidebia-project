@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7f67d8dd319f622a1dc20db505abca33910bbc359ed1318185dce044ff6b9639",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme permet de dénoncer la masculinité toxique moderne",
+    "identity_sha256": "c3e7249123ad85b7cc0f5714053ba58f9576d0e1b87f5ea8a4408a9b7469fd60"
+  },
+  "source_value": "En France, les hommes représentent 84 % des auteurs d’accidents de la route mortels, 90 % des personnes condamnées par la justice, 86 % des mis en cause pour meurtre, 97 % des auteurs de violences sexuelles, etc.\n\nCette liste a un coût : direct pour l’État, qui dépense chaque année des dizaines de milliards d’euros en services de police, judiciaires, médicaux et éducatifs pour y faire face ; indirect pour la société, qui doit répondre aux souffrances des victimes.\n\nLucile Peytavin s’interroge sur les raisons de cette surreprésentation des hommes parmi les auteurs de violences et de comportements à risque, et tente d’estimer les conséquences financières de l’ensemble de ces préjudices. Quel est le coût des conséquences de la virilité érigée en idéologie dominante ? N’aurions-nous pas tous intérêt à nous comporter… comme les femmes ?!",
+  "source_value_sha256": "8c8585f8d603b0ed104a0ede2163ec50eebfc555926adc649232c948fa4d0119",
+  "target_value": "In France, men account for 84% of those responsible for fatal road accidents, 90% of people convicted by the courts, 86% of those accused of murder, 97% of perpetrators of sexual violence, and so on.\n\nThis list comes at a cost: a direct cost to the state, which spends tens of billions of euros every year on police, judicial, medical and educational services to address it; and an indirect cost to society, which must respond to victims' suffering.\n\nLucile Peytavin examines why men are overrepresented among perpetrators of violence and risky behavior, and attempts to estimate the financial consequences of all this harm. What is the cost of the consequences of virility elevated to a dominant ideology? Would it not be in everyone's interest to behave... like women?!",
+  "target_value_sha256": "04129da0d6fa1da14d6210876a5a1c4c0222398d204efb169000865607e16759",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0008",
+    "target_path": "citations/A0008-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "05c2ea55f6db5204d849117a9f21bd3c84fd58bc16e259a1d6b451f534cb7d19"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e8b208242d0ab9f7c1e93c65e4d245bd5fb07b5138929b4c39784a5e9aa06961",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Un soutien à l'égalité de genre qu'on conditionne à des critères arbitraires qu'on a soi-même définis n'est pas un vrai soutien",
+    "identity_sha256": "64c0e1ea915ba043e6d95b36ffc7124d0c2bbe3ebc9e2277c84129e6d4f03434"
+  },
+  "source_value": "1/ Le '''poseur'''. ''« C’est le féministe de façade. Celui qui va en faire des caisses parfois. En gros, il a lu Mona Chollet et Valérie Rey-Robert, donc il connaît déjà tout ».'' \n\n2/ '''L’initié'''. ''« Lui, il est engagé dans la lutte féministe, donc il se sent supérieur aux autres hommes. Ce sont eux – et jamais lui – qui sont coupables de misogynie et responsables du patriarcat ».'' Un profil très présent dans les luttes militantes, et qui gagne souvent la confiance et la sympathie des femmes, du simple fait qu’il se dit « féministe ».\n\n3/ '''L’humaniste''', admet qu’il profite du patriarcat, mais il dit souffrir de ce système injuste au même titre que les femmes, car l’injustice et l’inégalité le révulsent par principe. ''« On va retrouver le pro-fem humaniste dans des stages de communication non-violente (CNV) par exemple, mais il se sert de ce qu’il apprend pour garder le contrôle. Ainsi, si une meuf lui reproche des choses, il aura des discours du type : « Quand tu es en colère, ça me rend triste. J’ai peur de ta colère, elle me met mal à l’aise ». Mais il ne se remettra jamais en question. Il ne répondra jamais sur le fond'' ''»''. Il s’agit ni plus ni moins que '''de tone-policing ici, mais déguisé en empathie et pseudo-vulnérabilité'''. Autrement dit, '''de la manipulation émotionnelle sous couvert de bienveillance'''.\n\n4/ '''L’auto-flagellateur.''' ''« Pour lui, le féminisme est un chemin de croix. Il se met une pression énorme, on est presque sur un sentiment de persécution. C’est très narcissique en fait ».'' L’auto-flagellateur attend du féminisme qu’il lui apporte la rédemption.\n\nDans tous ces cas de figures, '''ces hommes se disant féministes ne s’y engagent qu’à travers les bénéfices qu’ils peuvent en retirer pour eux-mêmes'''.",
+  "source_value_sha256": "0610fc72797d89fc49441166247a3cd0662c8d8fcdc691f065ddf111c6705ef1",
+  "target_value": "1/ The '''poser'''. ''“He is the superficial feminist. The one who sometimes makes a huge show of it. Basically, he has read Mona Chollet and Valérie Rey-Robert, so he already knows everything.”''\n\n2/ '''The initiate'''. ''“He is involved in the feminist struggle, so he feels superior to other men. They—and never he—are guilty of misogyny and responsible for patriarchy.”'' This profile is very common in activist struggles and often earns women’s trust and sympathy simply by calling himself a “feminist.”\n\n3/ '''The humanist''' admits that he benefits from patriarchy but says he suffers from this unjust system just as women do, because injustice and inequality revolt him on principle. ''“The humanist pro-feminist can be found in nonviolent communication (NVC) workshops, for example, but he uses what he learns to retain control. Thus, if a woman reproaches him for things, he will say something like: ‘When you are angry, it makes me sad. I am afraid of your anger; it makes me uncomfortable.’ But he will never question himself. He will never address the substance.”'' This is nothing more or less than '''tone policing, but disguised as empathy and pseudo-vulnerability'''. In other words, '''emotional manipulation under the guise of kindness'''.\n\n4/ '''The self-flagellator.''' ''“For him, feminism is a way of the cross. He puts enormous pressure on himself; it almost amounts to a feeling of persecution. It is actually very narcissistic.”'' The self-flagellator expects feminism to bring him redemption.\n\nIn all these cases, '''these self-described feminist men engage with feminism only through the benefits they can derive from it for themselves'''.",
+  "target_value_sha256": "7dcafad0d66c69a67fd688bcf37de6083342b9f41d50b12cd8ec8c44b8c0afa9",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0174",
+    "target_path": "citations/A0174-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5dea49a6538153c5cc22f6705ff54acdd0033a6337d1192cd29a6d384727b85a"
+}

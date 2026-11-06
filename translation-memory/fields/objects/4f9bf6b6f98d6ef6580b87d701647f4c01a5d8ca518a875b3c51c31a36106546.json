@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "36077ee88580310f65bde2b822e0f4563e55d43264596e9899d425661dabbff7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes de manière générale ne pâtissent en rien de cette sous-représentation",
+    "identity_sha256": "85d51fb749945b5b8606665e185c122ae109d03a8a9c019adf32af9ae855756a"
+  },
+  "source_value": "Les femmes de manière générale ne pâtissent en rien de cette sous représentation",
+  "source_value_sha256": "a780e353086c005a93a8eca56aa248a7da4789791f29ed3f76174200a6bdf120",
+  "target_value": "Women in general do not suffer in any way from this underrepresentation",
+  "target_value_sha256": "b46ae3f8de89a4eef9f861d39ee23e58f656511f1c0ee0e4802400a764f85269",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0137",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4f9bf6b6f98d6ef6580b87d701647f4c01a5d8ca518a875b3c51c31a36106546"
+}

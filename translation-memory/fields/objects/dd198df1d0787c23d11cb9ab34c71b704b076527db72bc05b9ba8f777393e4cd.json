@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "41eab10b88e5a0e5111edf59c43eff8ced3eca5e2706ddcab7927e4895bcde79",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La nouvelle politique de modération de Facebook autorise désormais explicitement les discours de haine si chers à l'extrême droite",
+    "identity_sha256": "28bf175fe1cea348ea1bdac2eb70c9756ad4512903cb7d4e9d7ae27f93d87b17"
+  },
+  "source_value": "La nouvelle politique de modération de Facebook autorise désormais explicitement les discours de haine si chers à l'extrême droite",
+  "source_value_sha256": "a03fec0644f348e46c7dcd02abf3c61aa3bfdc706e8d8006bfe651dc70a70663",
+  "target_value": "Facebook's new moderation policy now explicitly permits the hate speech so dear to the far right",
+  "target_value_sha256": "8d031fe0ee385f6e7ac67db0759d1adb083ca4d260f343ed3466fdbf1538b3bc",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0266",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "dd198df1d0787c23d11cb9ab34c71b704b076527db72bc05b9ba8f777393e4cd"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1dfde56d257cb4ba3195b0e476bbe90c06bb4ccd711ce75cd890d0770ca4957f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les violences faites aux femmes sont nettement plus banalisées que celles faites aux hommes",
+    "identity_sha256": "90f87599353c657ef64cc7f284da39858bcfe84ea1805c84ce7341c5d0c22c2d"
+  },
+  "source_value": "Imagine qu’à la place des femmes qui sont tuées par les hommes, il s’agisse d’employés tués par leurs patrons. L’opinion publique se raidirait davantage. Tous les deux jours, la nouvelle d’un patron qui aurait tué son employé. On dirait, ça va trop loin. On doit pouvoir aller pointer sans risquer d’être étranglé ou criblé de coups ou abattu par balles. Si tous les deux jours, un employé tuait son patron, ce serait un scandale national. Pense à la gueule des gros titres : le patron avait déposé trois plaintes et obtenu un ordre d’éloignement mais l’employé l’a attendu devant chez lui et l’a abattu à bout portant. C’est quand tu le transposes que tu réalises à quel point le féminicide est bien toléré. Les hommes peuvent te tuer. Ça flotte au-dessus de nos têtes. On le sait.",
+  "source_value_sha256": "3d3388430db20451727442ed6d50005a9966f2f258a2107b785be319f17fd56a",
+  "target_value": "Imagine that, instead of women being killed by men, employees were being killed by their bosses. Public opinion would react more strongly. Every two days, there would be news of a boss killing an employee. People would say this has gone too far. One should be able to clock in without risking being strangled, beaten, or shot. If an employee killed their boss every two days, it would be a national scandal. Imagine the headlines: the boss had filed three complaints and obtained a restraining order, but the employee waited outside his home and shot him at point-blank range. It is when you transpose it that you realize just how tolerated femicide is. Men can kill you. That hangs over our heads. We know it.",
+  "target_value_sha256": "cc4356d97db58e212c464d140ab302900f646f8ffbfe27fc7c863b3b9c7c9302",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0154",
+    "target_path": "citations/A0154-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f47cd1b0eb5a6880dd7edbb5dec7ebb87fa6443918843c1efef4af39b73d0fe6"
+}

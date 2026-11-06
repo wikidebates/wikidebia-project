@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "26ac8b611f8c1879b86d354723cbf0f277d8d3d4fe03b021013d3a88a20269c4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes sont culturellement encouragés à se comporter comme des agresseurs sexuels",
+    "identity_sha256": "5f08cd0b162e094ec73df491b3d912456b40ca27a1e1647f99f44432aa66fe0c"
+  },
+  "source_value": "Dans une culture où on éduque et encourage les garçons à avoir des comportements d'agresseurs sexuels (pas d'éducation au consentement, absence d'empathie envers les femmes, validation sociale du comportement d'agression, impunité quasiment garantie), il n'est guère étonnant qu'une part significative d'entre eux passent à l'acte. Et comme chat échaudé craint l'eau froide, il est normal qu'à la suite d'une agression, on se mette à craindre les hommes même propres sur eux, surtout que ce n'est pas marqué sur leur front. Ces derniers devraient mettre leur égo de côté et faire preuve d'empathie, ils comprendraient que la peur qu'ils suscitent, fut-ce malgré eux, ne vient pas de nulle-part.\n\n<span class=\"oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-buttonElement oo-ui-buttonElement-framed oo-ui-iconElement oo-ui-labelElement oo-ui-flaggedElement-progressive oo-ui-buttonInputWidget\" aria-disabled=\"false\"></span>",
+  "source_value_sha256": "25808c26b16cddf46f2c3aa033adaa0950b6278864cfdce5a4b7b338165ed32d",
+  "target_value": "In a culture where boys are taught and encouraged to behave like sexual aggressors (no education about consent, lack of empathy toward women, social validation of aggressive behavior, virtually guaranteed impunity), it is hardly surprising that a significant proportion of them act on it. And just as a scalded cat fears cold water, it is normal after an assault to begin fearing even respectable-looking men, especially since it is not written on their foreheads. These men should set their egos aside and show empathy; they would understand that the fear they inspire, even despite themselves, does not come from nowhere.\n\n<span class=\"oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-buttonElement oo-ui-buttonElement-framed oo-ui-iconElement oo-ui-labelElement oo-ui-flaggedElement-progressive oo-ui-buttonInputWidget\" aria-disabled=\"false\"></span>",
+  "target_value_sha256": "0c58d12473d4642e8409a1836a79cc1e7952e0fa78a7601c6201394dcf50c289",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0091",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "cbadbaae1f453d65d34b0e701f264ef8a031dd4e791698cd681e076ab60d293f"
+}

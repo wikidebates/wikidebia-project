@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9961ccfe8e7c05c1c9b13af64c4391a0062fb97d2a9ac1329ae5ba34f1a44511",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les victimes doivent être traitées avec respect, quel que soit leur sexe",
+    "identity_sha256": "022596d5c48d572947880afb9a74544a649eb546eecdc7cd2026d170fc89c1a7"
+  },
+  "source_value": "Les victimes doivent être traités avec respect, quelque soit leur sexe",
+  "source_value_sha256": "0d5a71bd9a2c96201e3f303bad794883b34ced52454e0cacd773e1c050319557",
+  "target_value": "Victims must be treated with respect regardless of their sex",
+  "target_value_sha256": "0a5ffb09eb94f36204c63d46e19babfbec1f1d7b4bfc258933ff0c45f0cc183e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0036",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "54540f24da2c5cfd301237d71b3836c6649a73173d7396a65920202dff169f4d"
+}

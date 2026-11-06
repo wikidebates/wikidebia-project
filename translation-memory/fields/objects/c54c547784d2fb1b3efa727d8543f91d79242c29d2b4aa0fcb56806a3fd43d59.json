@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ba4ce10e8d59e317138b901ca09e6a8510a84884904063ec6ce74beed8af4d8f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le concept de \"cancel culture\" sert d'écran de fumée à des méfaits bien réels",
+    "identity_sha256": "f2847f2f35f4b2975cba84dcd67b386c178a3fdce1ccb5f988b338e22cc870ab"
+  },
+  "source_value": "Le concept de \"cancel culture\" sert d'écran de fumée à des méfaits bien réels",
+  "source_value_sha256": "4c51ce471d2f611d41fba79b2d2b224473cdf6015bc088a1dd0ce7c915f68ba8",
+  "target_value": "The concept of \"cancel culture\" serves as a smokescreen for very real wrongdoing",
+  "target_value_sha256": "b8122127a6f0479754e43b6e0a661d953d034b5c173b2ea1faa18723069820d0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0306",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c54c547784d2fb1b3efa727d8543f91d79242c29d2b4aa0fcb56806a3fd43d59"
+}

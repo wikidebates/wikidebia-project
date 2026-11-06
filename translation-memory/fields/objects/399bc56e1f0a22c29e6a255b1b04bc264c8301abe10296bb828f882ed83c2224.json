@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "abf8057b4dfca5736e377eb5591962e7264f8c764b31fddebe9062c62677481e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il est du devoir de tous, dans le combat comme dans la défense, de faire face aux autorités injustes et inégalitaires, à la servitude et aux préjugés",
+    "identity_sha256": "aa5608497395f3081458e193f5602095b5e48d9f58d3cc018a39ccbb40239ae3"
+  },
+  "source_value": "Il est du devoir de tous, dans le combat comme dans la défense, de faire face aux autorités injustes et inégalitaires, à la servitude et aux préjugés",
+  "source_value_sha256": "bfd8e0fced5f2ef152dcf6f7e45f3e03b5021641766e94a698dd505ace73244b",
+  "target_value": "Everyone has a duty, both in struggle and in defense, to confront unjust and unequal authorities, servitude and prejudice",
+  "target_value_sha256": "e4643184d1ca159bb9e928424c3c81488638bd3251bbf5c1996997c8669a909a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0075",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "399bc56e1f0a22c29e6a255b1b04bc264c8301abe10296bb828f882ed83c2224"
+}

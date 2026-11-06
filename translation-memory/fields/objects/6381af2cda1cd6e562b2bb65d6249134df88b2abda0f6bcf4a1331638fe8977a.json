@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6423c4c48dc9806d3972c1dec057bca77567015782caae064104ab1c6e56d4bb",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Même si les griefs envers les féministes étaient légitimes, cela ne justifierait pas davantage une punition collective",
+    "identity_sha256": "b20b18d03839fda8aa147cae51f961d25b68d1cbce2ae0b698543b977ce47b31"
+  },
+  "source_value": "En mettant Trump au pouvoir, les antiféministes n'ont pas puni seulement les féministes desquelles ils voulaient se venger, mais de littéralement toutes les femmes, y compris les conservatrices, les non-militantes, les mineures et celles qui ne sont pas encore nées, ç-à-d des gens qui n'ont pas joué le moindre rôle dans leurs griefs et qui pourtant seront des victimes collatérales.",
+  "source_value_sha256": "a5eb2cf10e11a4d09e2062431a2f336f03f7fd6a02b6eddd606c6eaccbc77946",
+  "target_value": "By putting Trump in power, antifeminists punished not only the feminists against whom they wanted revenge, but literally all women, including conservatives, nonactivists, minors and those not yet born—that is, people who played no part whatsoever in their grievances and who will nevertheless be collateral victims.",
+  "target_value_sha256": "4fc0f30b4ec5cb114159eba73e49139372d4e1b438a84ac3f6798745457de86a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0172",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6381af2cda1cd6e562b2bb65d6249134df88b2abda0f6bcf4a1331638fe8977a"
+}

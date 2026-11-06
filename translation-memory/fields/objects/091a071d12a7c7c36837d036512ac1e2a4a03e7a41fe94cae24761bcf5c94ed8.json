@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f6093a620c38ba7802244386724c172866170584c6967a16e9fad8bf59f5d30c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des procès pour diffamation ne sont que des procédures-bâillon",
+    "identity_sha256": "0cc6f94e9cb56e98f0eba74b1f044d997d49873bb8991f436f7e485c89400024"
+  },
+  "source_value": "Le but d'une procédure bâillon n'est pas tant de gagner un éventuel procès que de réduire au silence les victimes qui, par peur de procédures judiciaires coûteuses et épuisantes, vont s'autocensurer.",
+  "source_value_sha256": "fa907040e90ef6966dfceb834200449fdaaafa22a4676e0ed86cfc3d8b5b0901",
+  "target_value": "The purpose of a strategic lawsuit is not so much to win a possible trial as to silence victims who, fearing costly and exhausting legal proceedings, will censor themselves.",
+  "target_value_sha256": "b6903fed32b69d0335a7dcef393a4f3bd9945b5bef38c56ecc907767020a6538",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0222",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "091a071d12a7c7c36837d036512ac1e2a4a03e7a41fe94cae24761bcf5c94ed8"
+}

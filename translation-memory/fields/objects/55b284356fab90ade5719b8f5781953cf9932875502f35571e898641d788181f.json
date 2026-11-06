@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "228154464db3117e9861fbbc64685f7bb2ec1bbc5a3a1c69a34107705d533665",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Tout le monde peut subir des violences quel que soit son sexe",
+    "identity_sha256": "0cbe3a5a75c02bfab5e29d0174b0497a3c9fe0c34f7fc3d1ee8ed4ec0149764f"
+  },
+  "source_value": "Tout le monde peut subir des violences quelque soit son sexe",
+  "source_value_sha256": "fe496722d69f26cd78d763e62a42aa0152180b40614ded46aad2288a0b22c0ba",
+  "target_value": "All people can experience violence regardless of their sex",
+  "target_value_sha256": "629b03fdb04caea7c7d9042409a5bbc1067fbba30c3c9238e971988c0a7b7abe",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0034",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "55b284356fab90ade5719b8f5781953cf9932875502f35571e898641d788181f"
+}

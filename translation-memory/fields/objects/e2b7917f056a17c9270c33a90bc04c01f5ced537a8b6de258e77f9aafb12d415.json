@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "95d516d3442b1446c243e8d660b60e8d4b097fe6c64403f2d98d0042029f8bfa",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'interdiction de la burqa prétend libérer les femmes mais contribue à les emprisonner",
+    "identity_sha256": "7bd2c08755eceeda277f74872192e06981e244ab945f51c98538dc0c43508aa1"
+  },
+  "source_value": "Dans le même esprit paternaliste, '''au nom des droits des femmes, du sauvetage des musulmanes, on nous assigne à nos foyers.''' Ni éducation, [https://www.madmoizelle.com/les-hijabeuses-joueuses-football-voile-1115835 ni sport], ni travail, ni loisirs – ainsi tu seras libre en Macronie.\n\nEn réponse à ces mesures restrictives censées nous sauver, nous aimons à rappeler que nous portons le hijab par choix, qu’il s’agit avant tout de choix. Je pense que c’est un faux débat. La réalité n’est pas dans le fait de savoir si nous avons choisi de porter des foulards, il ne s’agit pas d’une discussion philosophique sur le libre arbitre, bien qu’il puisse y avoir beaucoup à dire.\n\n'''En vérité, c’est de notre émancipation en tant que femmes non blanches dont il s’agit.''' Assignées à des métiers précaires du ''care'', les femmes musulmanes issues de l’immigration postcoloniale (pour la majorité) doivent être utiles, doivent prendre soin des autres, éduquer leurs enfants dans la soumission et la discipline, ne pas sortir des cadres, être discrètes, souffrir en silence, être transparentes, invisibles, inexistantes. C’est cela le dessein qu’on veut nous imposer. C’est comme ça qu’on imagine une femme musulmane « libre ».",
+  "source_value_sha256": "37d974f06faa8b75ffbf413f8f0872b97cb43e35fe83950ff7924c888d45452a",
+  "target_value": "In the same paternalistic spirit, '''in the name of women’s rights and saving Muslim women, we are confined to our homes.''' No education, [https://www.madmoizelle.com/les-hijabeuses-joueuses-football-voile-1115835 no sport], no work, no leisure—thus shall you be free in Macron’s France.\n\nIn response to these restrictive measures supposedly intended to save us, we like to point out that we wear the hijab by choice, that it is above all a matter of choice. I think this is a false debate. The reality does not lie in whether we chose to wear headscarves; this is not a philosophical discussion about free will, although there may be much to say about it.\n\n'''In truth, this is about our emancipation as nonwhite women.''' Confined to precarious ''care'' jobs, Muslim women from postcolonial immigrant backgrounds (for the most part) must be useful, must care for others, raise their children in submission and discipline, stay within the boundaries, remain discreet, suffer in silence, be transparent, invisible, nonexistent. This is the design they seek to impose on us. This is how a “free” Muslim woman is imagined.",
+  "target_value_sha256": "d5427a599485578aa3c1e2612461bcb972bd0e6755b9956dfe1856d30aeb6b43",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0237",
+    "target_path": "citations/A0237-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e2b7917f056a17c9270c33a90bc04c01f5ced537a8b6de258e77f9aafb12d415"
+}

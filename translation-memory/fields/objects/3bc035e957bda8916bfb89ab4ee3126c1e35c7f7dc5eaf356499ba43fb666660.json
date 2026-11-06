@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6661f355ac0b04ecc614cc13c9c2a6413c700ba5ffeb7ac44f6b500ca8106463",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Contrairement aux femmes voilées, personne ne dénonce l'oppression des religieuses catholiques",
+    "identity_sha256": "d7da242b592f21b8e5bbf4761bfbe16443360685ec26d3e56acc1ef0155d5449"
+  },
+  "source_value": "Contrairement aux femmes voilées, personne ne dénonce l'oppression des religieuses catholiques",
+  "source_value_sha256": "405523e2f8fd2e55e8d3d43db94368cc4a3c5d01c393e9cea50d8e12b2d39771",
+  "target_value": "Unlike veiled women, no one denounces the oppression of Catholic nuns",
+  "target_value_sha256": "93a5e4767d96f9033a18bb4173064ed26ba8c0246c4cc7dfa269d25daf8b336a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0338",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3bc035e957bda8916bfb89ab4ee3126c1e35c7f7dc5eaf356499ba43fb666660"
+}

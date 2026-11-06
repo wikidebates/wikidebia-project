@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "13ae3e7ddc7bf3057df8c65a1a0b0461718f9c529ae6bab9ded0544fa465d919",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les victimes d'agressions sexistes subissent une victimisation secondaire",
+    "identity_sha256": "180094b65ef1be0fdcf3ff4f7c29f8150c92009b4ff3c9eba69c268090ff309f"
+  },
+  "source_value": "C'est en 2015 que la notion de \"victimisation secondaire\" apparaît officiellement dans un arrêt de la Cour européenne des droits de l'homme. En 2021, la CEDH condamne pour la première fois un État pour victimisation secondaire : dans une décision de justice rendue en Italie, l'exposé des motifs contient des stéréotypes sexistes. Dès lors, la CEDH détaille, dans un arrêt, l'obligation d'assurer une \"prise en charge adéquate de la victime durant la procédure pénale\". Si la notion de \"victimisation secondaire\" n'est pas inscrite dans le droit français, elle est de plus en plus saisie par la justice.",
+  "source_value_sha256": "c8df8faf26a76f1b22b85dad5a3880ad6465ac301e8473a7f189f9209e0f068c",
+  "target_value": "The concept of “secondary victimization” officially appeared in a judgment of the European Court of Human Rights in 2015. In 2021, the ECHR condemned a state for secondary victimization for the first time: the reasoning in a judicial decision issued in Italy contained sexist stereotypes. From that point onward, the ECHR set out in a judgment the obligation to ensure “appropriate treatment of the victim during criminal proceedings.” Although the concept of “secondary victimization” is not enshrined in French law, it is increasingly being taken up by the courts.",
+  "target_value_sha256": "3f206ea4d7c1f14ee893ab1f68f5f78a23b45026c315f6d32d1f1e376de32348",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0047",
+    "target_path": "citations/A0047-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "beeb5b99ea207cae3c3b0c127f8a51eac21d6e8633ee318da01520a3a02fcfa1"
+}

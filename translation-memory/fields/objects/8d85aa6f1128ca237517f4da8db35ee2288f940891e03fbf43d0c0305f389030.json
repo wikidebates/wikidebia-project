@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "cb556df1c7aab6de5c81b3f050d8df3a8cf29e2595b8e27cc4720d0155e0fc8a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Dénoncer la cancel culture revient la plupart du temps à faire l'apologie de l'impunité",
+    "identity_sha256": "549abac860a66b3c9f0d31a36f2c1f38d297b70b42605123f785d2462fb09f5b"
+  },
+  "source_value": "Quand on voit ce que la plupart des gens considèrent comme de la \"cancel culture\", on constate qu'en réalité, ce n'est qu'une peur de ne plus pouvoir abuser impunément de leur position dominante, donc ils se posent en victimes.",
+  "source_value_sha256": "595b5796545f06cddddfd4ffececd058985966f0479faf812d630bcb7468b1b6",
+  "target_value": "When one sees what most people regard as “cancel culture,” it becomes clear that it is actually merely fear of no longer being able to abuse their dominant position with impunity, so they are thereby regarded as victims in their own eyes.",
+  "target_value_sha256": "e9c46a9be14d7c86d1ee5a2a006fedf3cda89ffa4e359d904c7215cbc3dc17a3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0216",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8d85aa6f1128ca237517f4da8db35ee2288f940891e03fbf43d0c0305f389030"
+}

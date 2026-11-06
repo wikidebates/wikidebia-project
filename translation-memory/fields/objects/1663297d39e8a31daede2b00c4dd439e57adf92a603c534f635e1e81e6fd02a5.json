@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "82a020f241c56c4e0f65fb4710ef512df765925064531cdf812063463ecff890",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La masculinité toxique est un piège pour les hommes eux-mêmes",
+    "identity_sha256": "50d22b865a1d7a058e0747df3144dab6538744bbb103fd89d2a863ddd3991975"
+  },
+  "source_value": "La masculinité toxique est un piège pour les hommes eux-mêmes",
+  "source_value_sha256": "375255275813de3270934a1299c178e4bb985c08b37a9b8030565c16fa8c1131",
+  "target_value": "Toxic masculinity is a trap for men themselves",
+  "target_value_sha256": "7503309d7223f9a4cffee4c16a2836c9120e43030b242a325ff1ce8fc21e43b8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0073",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1663297d39e8a31daede2b00c4dd439e57adf92a603c534f635e1e81e6fd02a5"
+}

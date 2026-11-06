@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "bc885498783272c734a20a7926762d1e9ce1ff7bf22c5d4d3c64c18039b9f6dc",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le concept de wokisme existait bien avant de porter ce nom",
+    "identity_sha256": "900152136edbd13f20868b71e1e65100487847ef1c358ae0aaab463b71740f8a"
+  },
+  "source_value": "De tous temps, des revendications féministes ont été perçues comme extrémistes, y compris celles qu'aujourd'hui plus personne ne songerait à remettre en question.",
+  "source_value_sha256": "52e92c512a4a039e4f4020c2e912a2006df7b5aa687652069ed96e8a5f5ca633",
+  "target_value": "At all times throughout history, feminist demands have been perceived as extremist, including demands that no one would think of questioning any more today.",
+  "target_value_sha256": "c3487d4e3505d53b2a97cd35946cfa065a88da830f8dc45fddac6ea5b5ee1fd5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0220",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5586aa07eb975b33c2fa04e5196abe0ab4b51b783077b61625d4433a8f73bdcb"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "811a13ae7d2c0e2959019848636ecb0d0532a5cb97593aa18519fe4b99daf725",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le masculinisme est bien plus misandre que le féminisme",
+    "identity_sha256": "58e434120bf6a834355626cc67d6d86acf5ed63149f87dfc6a6fcb5cecd9c6ea"
+  },
+  "source_value": "Le masculinisme est bien plus misandre que le féminisme",
+  "source_value_sha256": "26a3e56ef8deb36e095de1d25e79eeb26f52c8dcdd314444696c81c92d1b3ae5",
+  "target_value": "Masculinism is far more misandrist than feminism",
+  "target_value_sha256": "e342a1c19a2f093464635151071b723f180862e5c272db504002cc1d5aec3815",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0101",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ddc9a0f2e13d0d5a6d139203ae52cb9b3ee6b3bbd344997cf6c1b9a023e01f03"
+}

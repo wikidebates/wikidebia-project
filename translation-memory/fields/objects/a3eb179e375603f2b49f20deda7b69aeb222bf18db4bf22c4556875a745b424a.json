@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6c736428ed341814d307a7e42d9c8b80650878e8e855f5c4df14ad62c8bf51ba",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Pour la majorité des femmes, être une femme au foyer est une contrainte la plupart du temps",
+    "identity_sha256": "0df5cc4673b0f8e3d78d4a8acf96d63dd4262a2517ea873881caaa9e5adc3d0b"
+  },
+  "source_value": "De nombreuses mères américaines, qui doivent gérer '''tout le quotidien pour leur famille''' (repas, lessives, devoirs, ménage…) ainsi que toutes les difficultés liées à la pandémie (tests, isolements, télétravail avec enfants…), se sentent '''au bord du gouffre'''.\n\nElles ont besoin de lâcher la pression, de passer leurs nerfs. Et c’est parfois dans des stades qu’elles se réunissent ensemble et crient, '''lors de scènes de catharsis''' impressionnantes à voir – et à entendre !\n\nCes femmes, qui doivent gérer '''les enfants, leur travail et la charge mentale''' de tout leur foyer, ont l’impression de devenir folles, tant elles sont sollicitées et n’ont aucun temps mort.",
+  "source_value_sha256": "45dde75f3cc7760ebb8ec9ab35eddf4f4b9aea632c24af07fc52797ad1efc119",
+  "target_value": "Many American mothers, who must manage '''all of their family’s daily life''' (meals, laundry, homework, housework, etc.) as well as every difficulty related to the pandemic (tests, isolation periods, working from home with children, etc.), feel '''on the edge of the abyss'''.\n\nThey need to release the pressure and vent their frustration. Sometimes they gather in stadiums and scream together in '''scenes of catharsis''' that are impressive to see—and hear!\n\nThese women, who must manage '''the children, their jobs, and the mental load''' of their entire household, feel as though they are going mad because so much is demanded of them and they have no downtime.",
+  "target_value_sha256": "e9cc49bb10ba6fa6636e3e56138e03737eacd43497d8601a8f3b6227fbbff644",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0255",
+    "target_path": "citations/A0255-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a3eb179e375603f2b49f20deda7b69aeb222bf18db4bf22c4556875a745b424a"
+}

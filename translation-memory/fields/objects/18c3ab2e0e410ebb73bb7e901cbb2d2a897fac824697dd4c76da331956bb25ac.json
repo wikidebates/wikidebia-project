@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b8396cc4d3efea535a443dfaee0b1a0978fad454dcf9156c4b15eb832720075f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'hostilité au féminisme va systématiquement de pair avec l'hostilité aux droits des femmes",
+    "identity_sha256": "99153876defe33345c73144e6459570dab18c91281bd028aa8517b23e779685a"
+  },
+  "source_value": "L'hostilité au féminisme va systématiquement de pair avec l'hostilité aux droits des femmes",
+  "source_value_sha256": "80790f1cb3391501a04faf3d794f14542fc69c42ac9e7d4b374bf53f8979108f",
+  "target_value": "Hostility toward feminism systematically goes hand in hand with hostility toward women's rights",
+  "target_value_sha256": "889b7512b12b2e3f90a47792d1d3d687ee019afb2942d69305232bf89b7897f8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0166",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "18c3ab2e0e410ebb73bb7e901cbb2d2a897fac824697dd4c76da331956bb25ac"
+}

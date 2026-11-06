@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "99d921c180d68ef525189ca1aa664de5d64180cdce60471f4d7cdeba5fb0ebd5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des hommes ne sont pas toxiques",
+    "identity_sha256": "a9a0c2f51d155ce66730bb69219d610483b530c192ea610554b4418f251384af"
+  },
+  "source_value": "La plupart des hommes ne sont pas toxiques",
+  "source_value_sha256": "349b7cd10a3361ef1f4fa1875f7c58e57289d50020502322f75c68aca3e400ce",
+  "target_value": "Most men are not toxic",
+  "target_value_sha256": "bb857396520ee3a4cd982721eb3a3261403f112e5804e47353a9db8b849edec2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0068",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "66c1746822b310ec77c8dd8a51f05e57429a5e428de66081eaad053cb1dda093"
+}

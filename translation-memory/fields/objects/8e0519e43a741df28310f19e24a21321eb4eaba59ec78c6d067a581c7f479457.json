@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "40c828aa9618742632dd686776b407b1aede84431b2da722bb2604b1e192404e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'humour oppressif est le terreau des idéologies d'exclusion",
+    "identity_sha256": "1cc4f5ff3ea1e61195f75572a26e0f134a8e9db80cad7549da3279c8cb3d9d89"
+  },
+  "source_value": "L'humour oppressif est le terreau des idéologies d'exclusion",
+  "source_value_sha256": "0ea7076f8d44dbcda643170ed2bcf28783e09061af446db8b4d1f492fa807de9",
+  "target_value": "Oppressive humor is a breeding ground for ideologies of exclusion",
+  "target_value_sha256": "aa25d240737e26551c39b6d3235eebd6b7366e71c4c26752714c7e03c19c8f42",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0213",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8e0519e43a741df28310f19e24a21321eb4eaba59ec78c6d067a581c7f479457"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7d494d3ed069d8b1c3a8823166a6c390ae353705cdc5aaa10ebfd7251479f494",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La nouvelle politique de modération de Facebook autorise désormais explicitement les discours de haine si chers à l'extrême droite",
+    "identity_sha256": "28bf175fe1cea348ea1bdac2eb70c9756ad4512903cb7d4e9d7ae27f93d87b17"
+  },
+  "source_value": "Il est désormais écrit noir sur blanc dans les règles de facebook que sont autorisées \" les allegations de troubles mentaux ou d'anormalité basées sur le genre ou l'orientation sexuelle\" (sic). Difficile dès lors de nier une orientation politique aussi cyniquement assumée.",
+  "source_value_sha256": "7eaa4b42138ec7045bcd6d9bf4715c3264f3cea7eea9991f9fbf7bac9b2c1bba",
+  "target_value": "Facebook’s rules now state in black and white that “allegations of mental illness or abnormality based on gender or sexual orientation” are permitted (sic). It is therefore difficult to deny such a cynically avowed political orientation.",
+  "target_value_sha256": "a72ac72900c035c1146bb5135c4c0b4059ef4c4112e49c03e6b8d5e8512bb732",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0266",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c638347576eff3bdafda41d8d05bebbe26df35ec95cc1b776139a677146fce4c"
+}

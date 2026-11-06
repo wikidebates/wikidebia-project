@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3ac46ff8825a8ce7621691cf8be70bcb80a53b61e206c50b6bc5f62419594c6f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme peut libérer des carcans sociétaux oppressants",
+    "identity_sha256": "147bc176a71ef908f72ccd39a2e4662c0f4d586777d1d38cd85fb8f90235af22"
+  },
+  "source_value": "Le féminisme peut libérer des carcans sociétaux oppressants",
+  "source_value_sha256": "ba9eee48847e1ff5681e31394aa10b1cddb3a096ba9afb96855a5d6d34f8392a",
+  "target_value": "Feminism can free people from oppressive social constraints",
+  "target_value_sha256": "643bfd58ea4d2cdd5009c700a5bb6fc61faf1a77c355409da90f02ab39e2e766",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0064",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b5192851f5eda8376978e994c4fb0ae3a4667e19dc1a34b7a8eb0a4097e10a32"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9f5216f8630fbfa69d3610535336c8eabe41c7942f263e3b0d2c1c8836a0edef",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le concept de \"cancel culture\" sert d'écran de fumée à des méfaits bien réels",
+    "identity_sha256": "f2847f2f35f4b2975cba84dcd67b386c178a3fdce1ccb5f988b338e22cc870ab"
+  },
+  "source_value": "On s'offusque des demandes pour que Polanski paye pour ses viols sur mineure, on s'offusque que des personnes transgenre soient mécontentes que JK Rowling leur ait gratuitement craché son fiel à la figure, on s'offusque qu'un auteur pédopornographe (et probablement lui-même pédocriminel) du nom de Bastien Vivès soit honoré par une exposition et on s'offusque également que les viols commis par Dépardieu ne soient pas impunis. à travers ces exemples, il apparaît évident sortir la carte \"cancel culture\" n'est qu'un moyen certes grossier mais efficace pour faire passer nos idoles pour d'innocentes victimes.",
+  "source_value_sha256": "168724cdbe4ae3b86d8798686e09dc8232f051e4efeddb77ca57378b3d32a1fa",
+  "target_value": "People are outraged by demands that Polanski pay for raping a minor; they are outraged that transgender people are unhappy that J. K. Rowling gratuitously spewed her bile in their faces; they are outraged that Bastien Vivès, an author of child pornography (and probably himself a child sex offender), should not be honored with an exhibition; and they are also outraged that the rapes committed by Depardieu should not go unpunished. Through these examples, it becomes obvious that playing the “cancel culture” card is merely a crude but effective way to portray our idols as innocent victims.",
+  "target_value_sha256": "3bfde5fc59cf0ced5c43aedab1054502be2f0c6eced7d8b0a3f69388d6996f6e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0306",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e6299bf47b550a9d1196047bcae17d0507edaa1c7f42afbd26e893799f2dd3ed"
+}

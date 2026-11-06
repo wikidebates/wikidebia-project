@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6106e60a62f03826c8babdab390351d0a8756f7b74fc0ea1eb4f8675024f322a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le \"wokisme\" n'existe que dans les discours anti-progressistes : c'est un homme de paille créé artificiellement pour faire semblant d'avoir un adversaire oppresseur",
+    "identity_sha256": "d0e26a09be2335aba1a4480ed8bf8b36109a610dd774d31a156036758420e7b6"
+  },
+  "source_value": "Personne ne se dit être \"woke\". Ce mot, ce néologisme, est utilisé pour se créer une figure progressiste mais autoritaire et intolérante pour pouvoir critiquer ouvertement les idées progressistes. Ce mot n'est donc utilisé que par les adversaires politiques de ces idées, et n'est absolument pas revendiquée par des groupes existants.",
+  "source_value_sha256": "fc6b925384c9671f941175f781969b972ea29a2f38330d060252b8075fe857d3",
+  "target_value": "No one describes themselves as “woke.” This word, this neologism, is used to create a progressive yet authoritarian and intolerant figure in order to criticize progressive ideas openly. The word is therefore used only by the political opponents of these ideas and is not claimed at all by any existing groups.",
+  "target_value_sha256": "a756f2230b0f62dd821e19f1980f3a1091d0412ea70fc50c30ed3aa912d29b6c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0320",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9d6950f4e0484c956aeba55ae2b7897d3bc4b472cc95b3c0180a433eaa25e8c8"
+}

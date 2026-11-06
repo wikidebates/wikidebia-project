@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "727b731997541eac7add181123cbb1666fcc87f31d8920f7772136ab46357df4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les cas d'agressions sexistes sont mal traités par les instances policières et judiciaires",
+    "identity_sha256": "e18f42749bd8098f422fc6ddb673877cf1308325e8210ea808e912f6f1958c4f"
+  },
+  "source_value": "Tout a commencé il y a une semaine, avec le témoignage d’une victime de viol qui a choisi de porter plainte le 9 septembre.\n\nAprès avoir raconté ce récit d’agression en story, Anna Toumazoff explique que cette victime a été questionnée par la personne en charge de recueillir sa plainte. Cette dernière aurait nié l’absence de consentement en raison de la consommation d’alcool et lui a demandé si elle avait ressenti du plaisir.\n\nSans grande surprise, après un tel accueil déplorable, la plainte a finalement été classée sans suite.\n\nUn incident isolé ? Au contraire.\n\nAprès ce témoignage, d’autres ont commencé à pleuvoir, relatant des expériences très similaires, avec des questions intrusives de la part des officiers, mais aussi des refus de plaintes.\n\nEn les relayant, Anna Toumazoff s’est fait la caisse de résonance de ces prises de paroles qui montrent un problème global dans la façon dont les victimes de violences sexistes et sexuelles sont reçues par la police.",
+  "source_value_sha256": "e1d2d5dbb00de7f7f9048911e86d3e149d336d6542f5319a857af4efbf6597f5",
+  "target_value": "It all began a week ago, with the account of a rape victim who decided to file a complaint on September 9.\n\nAfter sharing the assault in an Instagram story, Anna Toumazoff explains that the victim was questioned by the person responsible for taking her complaint. The officer allegedly denied that consent was absent because alcohol had been consumed and asked whether she had felt pleasure.\n\nUnsurprisingly, after such an appalling reception, the complaint was ultimately closed without further action.\n\nAn isolated incident? Quite the opposite.\n\nFollowing this account, others began pouring in, describing very similar experiences, with intrusive questions from officers as well as refusals to accept complaints.\n\nBy relaying them, Anna Toumazoff amplified these testimonies, which reveal a systemic problem in how victims of gender-based and sexual violence are received by the police.",
+  "target_value_sha256": "e5604c86876295d83abe1f073ae59e6e84409c5262e662b70cb0d839f6d7a0a7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0003",
+    "target_path": "citations/A0003-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "adf98aa89e4bc54e9b90dd64a5028bd26a185b95f905fa7c6fcc5d6ca96cf1bb"
+}

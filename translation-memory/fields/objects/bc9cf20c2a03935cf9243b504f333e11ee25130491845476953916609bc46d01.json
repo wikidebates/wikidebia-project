@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0fdf2b6c4099594d387c75086aaa8df33d8093ee3496f0c7d10e27e9b171af83",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des hommes sont éduqués à la masculinité toxique",
+    "identity_sha256": "6fcf2b54e36717ed418460d340a6abcebe439683b90d89045d2051ff34ca21a3"
+  },
+  "source_value": "La plupart des hommes sont éduqués à la masculinité toxique",
+  "source_value_sha256": "f32d5f0a3d79723c0b174b0a6ce9d1410b34b331e3a3897db23430aff710c12e",
+  "target_value": "Most men are taught toxic masculinity",
+  "target_value_sha256": "6cfb56831fad708ba1ac657261a206383e4bc8d5daf6657fa337d60cc1d294b3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0182",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "bc9cf20c2a03935cf9243b504f333e11ee25130491845476953916609bc46d01"
+}

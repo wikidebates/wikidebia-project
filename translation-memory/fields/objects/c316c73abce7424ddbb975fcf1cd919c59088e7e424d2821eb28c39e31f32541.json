@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7be73d724c0cf8611b876bea39733dbc7afeb4d235de2857f540a279e5df10c0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La parité en politique n'est pas encore atteinte",
+    "identity_sha256": "e2a95bf957384cdad5a2ddc9022b94423ebf3e40ab911e0af98ae3c45f1a02b0"
+  },
+  "source_value": "La parité en politique n'est pas encore atteinte",
+  "source_value_sha256": "f0830bfebead149c269debc89f7885059d94d37ffd5ac5632edd8341a5ef8834",
+  "target_value": "Gender parity in politics has not yet been achieved",
+  "target_value_sha256": "30072103bcebf56edaa62ddf736e6625d606d9d811cc977bbfffb956783132e9",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0031",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c316c73abce7424ddbb975fcf1cd919c59088e7e424d2821eb28c39e31f32541"
+}

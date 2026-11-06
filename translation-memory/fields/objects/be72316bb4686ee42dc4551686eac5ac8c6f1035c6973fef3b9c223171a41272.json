@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "080d530b43ea40331f7f341ad8a5dd8c563904eb6d5e447d5610ceee0e5433f3",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'argument du respect de l'égalité de genre est hypocrite et opportuniste",
+    "identity_sha256": "e16744cf586f3494c062831103d1bbbb298149c2167e65b4a71dd2666a2802ed"
+  },
+  "source_value": "[Nous dénonçons] la vision raciste du féminisme d'Etat, ciblant clairement les hommes des quartiers populaires.",
+  "source_value_sha256": "41e01600920942ad2788a4891c07405d8d63d736da9d4dbd46cacc3b726909b0",
+  "target_value": "[We denounce] the racist vision of state feminism, which clearly targets men from working-class neighborhoods.",
+  "target_value_sha256": "f83feed1cb83a62b813d18c265114ae30ed31f82139f3cf197951ebc259f8e58",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0328",
+    "target_path": "citations/A0328-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "be72316bb4686ee42dc4551686eac5ac8c6f1035c6973fef3b9c223171a41272"
+}

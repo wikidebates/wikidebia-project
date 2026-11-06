@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fd9f8f03c6294ce0eea98431f9bce11b17692819a17a6c559c4b0ba9c3542f20",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "On ne devrait même pas avoir à demander aux hommes de ne pas écarter les jambes",
+    "identity_sha256": "9f62400787eb16ccf941b3755bb23f6c185901a599889266b4b074ae9092276f"
+  },
+  "source_value": "On ne devrait même pas avoir à demander aux hommes de ne pas écarter les jambes",
+  "source_value_sha256": "87f93ba2cc0acd5250f620103155778baf41fc53cabd21300545950bc2ca3448",
+  "target_value": "We should not even have to ask men not to spread their legs",
+  "target_value_sha256": "673cae872763c14de26d24becf633f3502c0e497fd56c56ee4cfe1de0ba21aca",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0286",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c6582fdc35a1338e6f444da790b2b6743422df4065f543a67e0b1731dc390cc2"
+}

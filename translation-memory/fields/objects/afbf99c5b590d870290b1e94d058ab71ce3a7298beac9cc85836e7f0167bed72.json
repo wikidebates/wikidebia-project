@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c72fb4f6383770b6590421812bc6fd89c4f14b05ea349bd52e5d2b5bd59f806f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le discours féministe soutient la victimisation des femmes",
+    "identity_sha256": "e8ebc6839a80400024371bb6724d363aef804c77c475ac085351dea450b0e519"
+  },
+  "source_value": "J'ai besoin d'être une humaine forte. Je résiste à la victimologie. Il y a parfois de la malhonnêteté ou de la simplification à travers certains discours féministes. Les relations sont plus complexes, souvent de l'ordre de l'alchimie",
+  "source_value_sha256": "09142ce392c25138a6146d29114cc72b9f82bf10bff16365f38e5028c47b0d6b",
+  "target_value": "I need to be a strong human being. I resist victimology. There is sometimes dishonesty or oversimplification in certain feminist discourse. Relationships are more complex and often involve a kind of alchemy.",
+  "target_value_sha256": "b03c0bb020156c57bc27f53e95e17a3ffde246849013ac86b6ddcb5ab7b580ae",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0017",
+    "target_path": "citations/A0017-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "afbf99c5b590d870290b1e94d058ab71ce3a7298beac9cc85836e7f0167bed72"
+}

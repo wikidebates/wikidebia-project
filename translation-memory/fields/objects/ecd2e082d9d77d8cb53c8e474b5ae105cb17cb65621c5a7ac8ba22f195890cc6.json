@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1ffea51abfbf2ac4caec58fe63112494edb2502b8a0663908b76c4c9e6c0e1a9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme peut libérer des carcans sociétaux oppressants",
+    "identity_sha256": "147bc176a71ef908f72ccd39a2e4662c0f4d586777d1d38cd85fb8f90235af22"
+  },
+  "source_value": "Hommes comme femmes sont soumis à des injonctions étouffantes imposées arbitrarement par la société, telles que la douceur et l'abnégation pour les femmes ou la violence et l'insensibilité pour les hommes. Ces injonctions ont des impacts désastreux sur les deux genres: taux de suicide plus élevés chez les hommes, femmes victimes de violences masculines pouvant aller jusqu'au meurtre, déclassement social pour les hommes et femmes qui s'écartent des stéréotypes, violences LGBTphobes, etc. Un des fers de lance du féminisme est de combattre ces injonctions, ce qui bénéficierait à toute la société.",
+  "source_value_sha256": "5e46a6307ef254b286bd9efb327463c7c93b7541a83b09ebbf1036ae01dadd1f",
+  "target_value": "Men and women alike are subjected to stifling demands arbitrarily imposed by society, such as gentleness and self-denial for women or violence and insensitivity for men. These demands have disastrous effects on both genders: more frequent suicide among men; women subjected to male violence that can go as far as murder; loss of social status for men and women who depart from stereotypes; anti-LGBT violence; and so on. One of feminism’s leading causes is to combat these demands, which would benefit society as a whole.",
+  "target_value_sha256": "d7bbeeb127d26c4861d5442b03a4544b9c3736a46316fb7772bad9a6b75cec81",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0064",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ecd2e082d9d77d8cb53c8e474b5ae105cb17cb65621c5a7ac8ba22f195890cc6"
+}

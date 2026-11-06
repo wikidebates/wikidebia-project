@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "89a91437f6f522bf151a26fee842a3fe2c11b54721becf0ca10dff9ef08dcf7b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les tâches domestiques sont dévalorisées",
+    "identity_sha256": "fd548f31f2216d92104dc734344e69eb9bf289224486f4bf150008fcb681c9c7"
+  },
+  "source_value": "Les tâches domestiques sont dévalorisées",
+  "source_value_sha256": "b8ff308729392dec3502d01d76724aeb1015dda24a39a6e77a7e98f6fa4ea320",
+  "target_value": "Domestic tasks are undervalued",
+  "target_value_sha256": "0c4c25547c944fa4668e5cf6315e58cbe4b43fde908d8059dc062e4668afc78b",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0143",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "65dcfa772b8cc9acb168585b9a061b53b5e570f9c416e893879c1ba28f0c1c90"
+}

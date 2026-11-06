@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "51f2b77a0bb6bdc947185e61b792c312b4116dee4f0c5095a8fb06d45c36f7e5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les réseaux sociaux font du profit sur la haine et le harcèlement",
+    "identity_sha256": "8f53cb5f02fbaeedf71203734b7330f735ec348e46e69bbd0507ac65c2cd16e8"
+  },
+  "source_value": "Pour plusieurs chercheurs ou chercheuses, comme la sociologue américaine Jen Schradie, [le] système [d'algorithme de recommandations] privilégie la diffusion des idées conservatrices parce que celles-ci provoquent des débats en ligne, donc de la viralité. Fin 2021, Twitter a ainsi admis, à l’occasion d’une rare étude, que les partis et médias de droite sont davantage mis en avant par ses algorithmes de recommandation que ceux de la gauche.",
+  "source_value_sha256": "ac483b891e666e51039406cd94590e1f3334a0f17a943bb43265d7c9f27a4e4a",
+  "target_value": "According to several researchers, including American sociologist Jen Schradie, [the recommendation-algorithm] system favors the spread of conservative ideas because they provoke online debate and therefore virality. In late 2021, Twitter thus acknowledged in a rare study that right-wing parties and media are promoted more by its recommendation algorithms than left-wing parties and media.",
+  "target_value_sha256": "677675cda7cee60470c663ae79ebe1e5378a0be5fb96fdac1ca56a9dff9b07f4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0038",
+    "target_path": "citations/A0038-C004",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3a1ac0fe5d710585ec6ce5e1ead884eab12eb4931e78f6f027326231a9042f61"
+}

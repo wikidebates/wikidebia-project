@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0b712ba775003abf3735d192b6a3773815ebd583e255e8b3a3c76c199f801566",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "À capacités et compétences égales, une femme sera jugée moins compétente si elle fait un travail \"masculin\"",
+    "identity_sha256": "feee508919a95f3333e5ed23311e7be95e2c45a70a727cd428cab3de132515fe"
+  },
+  "source_value": "À capacités et compétences égales, une femme sera jugée moins compétente si elle fait un travail \"masculin\"",
+  "source_value_sha256": "c8a4f608e53016a9c3bcae1e5fa0be0fb5e90bc1a9c8e8b12dbbc75c9b402c79",
+  "target_value": "Given equal abilities and skills, a woman will be judged less competent if she does work considered \"masculine\"",
+  "target_value_sha256": "5d54508d7e53754a065bd802535b822d193ebec070389e919c6755cf164abd11",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0247",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f57ec2472d81f156609e60932b8e2e8cbac1c2e41e51f420e7ee55ee9e1f4503"
+}

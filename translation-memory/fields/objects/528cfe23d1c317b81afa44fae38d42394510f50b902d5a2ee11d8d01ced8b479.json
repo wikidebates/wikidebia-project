@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "028d41f467cbf78a5d2de144b444d4735d30f436b2d319f964f42d012ea173b6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le discours féministe soutient la victimisation des femmes",
+    "identity_sha256": "e8ebc6839a80400024371bb6724d363aef804c77c475ac085351dea450b0e519"
+  },
+  "source_value": "Limitons-nous ici à la victimisation féminine. Si les femmes sont par nature des victimes, il faut conclure qu’elles sont condamnées à subir leur vie déterminée par leur naissance. En d’autres termes, elles ne possèdent ni le libre arbitre ni la force de briser les chaînes qui les entravent. Elles n’ont ainsi d’avenir qu’à travers leurs bourreaux, car une victime est inexorablement tributaire de son bourreau. Jamais elles ne pourront accéder à l’égalité.",
+  "source_value_sha256": "5d1151b4235407162544da5204d6a8d6fa84f3643cea3f4c98d3afaa452040b4",
+  "target_value": "Let us confine ourselves here to female victimization. If women are victims by nature, one must conclude that they are condemned to endure a life determined by their birth. In other words, they possess neither free will nor the strength to break the chains that bind them. Their future thus exists only through their perpetrators, because a victim is inexorably dependent on her perpetrator. They will never be able to achieve equality.",
+  "target_value_sha256": "e88a0bfeb2be347c1beedf7f90f93860338eeea450158d933a93974346d147ad",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0017",
+    "target_path": "citations/A0017-C005",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "528cfe23d1c317b81afa44fae38d42394510f50b902d5a2ee11d8d01ced8b479"
+}

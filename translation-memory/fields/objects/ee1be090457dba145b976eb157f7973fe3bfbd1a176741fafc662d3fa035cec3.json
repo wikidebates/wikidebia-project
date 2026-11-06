@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a2759e5d763c234f0663724d5bb28eed5510af2079a63b9b61ba94bd1e7c8876",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'homme coupe encore trop souvent la parole à la femme (Manterrupting)",
+    "identity_sha256": "4c8f61c6460d67fc53b35bb9825f56f79a5a22a7bc2480c71fa74dc5b003c11f"
+  },
+  "source_value": "Les hommes affirment de manière asymétrique un droit de contrôle sur les sujets de conversation et ils le font avec des conséquences évidentes, écrivent-ils. Il faut en conclure que, au moins dans ces transcriptions, les hommes ­contestent aux femmes le statut de partenaires égaux dans la conversation",
+  "source_value_sha256": "f34e739163d2a7adbd98559af53ceb7a0db6b16f88b08dbdc9db2d0c4a636411",
+  "target_value": "“Men assert an asymmetrical right to control the topics of conversation, and they do so with obvious consequences,” they write. “The conclusion must be that, at least in these transcripts, men deny women the status of equal partners in conversation.”",
+  "target_value_sha256": "1dc560e62ba84f7a832153744ad6d6dcaf98d07ed86ed83dc17e6495454aac5e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0069",
+    "target_path": "citations/A0069-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ee1be090457dba145b976eb157f7973fe3bfbd1a176741fafc662d3fa035cec3"
+}

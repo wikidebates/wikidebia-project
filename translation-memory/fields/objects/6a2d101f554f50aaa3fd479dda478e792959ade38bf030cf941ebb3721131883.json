@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3fa98af2b44dba4eadcd774996c794d9c4d6b6b4f1e49e0ade8c567f91fa29f2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La masculinité toxique pousse les hommes au suicide",
+    "identity_sha256": "bc856492f7a9fdad83c4f3a05520bcd56987403f0c5cb555e92979d1250eaf33"
+  },
+  "source_value": "La masculinité toxique pousse les hommes au suicide",
+  "source_value_sha256": "270762b760bd15fea88f56c2e0561e1fd5c47074e15ecd94f55062e30651216c",
+  "target_value": "Toxic masculinity drives men to suicide",
+  "target_value_sha256": "757337790efc1e0226ba98c57865472835f427c9cd4929f04052bd71b1c83d36",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0193",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6a2d101f554f50aaa3fd479dda478e792959ade38bf030cf941ebb3721131883"
+}

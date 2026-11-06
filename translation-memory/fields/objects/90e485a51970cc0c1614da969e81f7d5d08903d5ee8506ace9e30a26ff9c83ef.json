@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b1b23ab9104e09a29db58252d602891b89299094c3b44433766d2863c1aa0862",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'expérience quotidienne du sexisme ne pourra jamais, tant qu'elle sera toujours effective, se dissocier d'un statut de victime",
+    "identity_sha256": "3c8ddc744f25ee929016b8b92bfabb0b9148bcdef4978f140708860c0c11aea6"
+  },
+  "source_value": "L'expérience quotidienne du sexisme ne pourra jamais, tant qu'elle sera toujours effective, se dissocier d'un statut de victime",
+  "source_value_sha256": "bd7ef61dc6ba10f710a7d77e36a2d03a8ef233dca7d6a2656f1c25f6e45c59fa",
+  "target_value": "The daily experience of sexism can never be dissociated from victim status while it is always present in practice",
+  "target_value_sha256": "0ba7ad080f83a6ff7729c49a7fabb905b72f2fd9950680ea79fda5f5fb04aaab",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0108",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "90e485a51970cc0c1614da969e81f7d5d08903d5ee8506ace9e30a26ff9c83ef"
+}

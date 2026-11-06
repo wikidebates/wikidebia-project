@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d8ec050f9c3e8f27db8e0f235f2b5e73169e38ff11bb27782073bce3c8d81109",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les oeuvres culturelles évoluent avec leur temps",
+    "identity_sha256": "e7bb58cd1464ce7b0cbb19664b36f51fb97ab0b82dd5b25d053b42b6d38e05bf"
+  },
+  "source_value": "Les oeuvres culturelles évoluent avec leur temps",
+  "source_value_sha256": "d2e4e0355edabd59fc736a8a793cd76a2a6d969050945a63931fd9f93cb25b5b",
+  "target_value": "Cultural works evolve with their times",
+  "target_value_sha256": "38870a94366f4e3f41764c10d445c28bbea2b5e0871cbe5ddd0a78ff943890ed",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0112",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "edf01134d2d54fee50e6e69e9990dd6be9f0189086236000fec9fb46ce25caf6"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5188bc1dd930c4a52ca8324d132c1e9be7075667df88b496358f77b64ddb7926",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les critiques les plus vocales du \"wokisme\" sont réactionnaires",
+    "identity_sha256": "d6cf36960278feb08f78305b8a1b0587103e3c178824598e02e4836d8b79c358"
+  },
+  "source_value": "Le mot [woke] a déboulé dans notre débat public, au début des années 2020, et sa critique est désormais la principale grille d’analyse des conservateurs et réactionnaires de tout poil, [https://www.humanite.fr/politique/woke/diabolisation-de-la-gauche-user-du-mot-wokisme-sert-une-propagande-politique-726320 pour dézinguer la gauche]. « Le Figaro » a du mal à boucler un édito sans s’en alarmer, CNews y dédie son temps d’antenne.",
+  "source_value_sha256": "46e27a7920e8507b17060502ff7fce20004eeb22bc06c87586a58af182d8f499",
+  "target_value": "The word [woke] burst into our public debate in the early 2020s, and criticizing it is now the principal analytical framework used by conservatives and reactionaries of every stripe [https://www.humanite.fr/politique/woke/diabolisation-de-la-gauche-user-du-mot-wokisme-sert-une-propagande-politique-726320 to attack the left]. Le Figaro struggles to complete an editorial without sounding the alarm about it, and CNews devotes its airtime to it.",
+  "target_value_sha256": "6dbd79bfb0696699737f88f0bd07f6c0096ac59ceb1780d8a37746acb47db40c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0319",
+    "target_path": "citations/A0319-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "08f798b12bf6c914a65d15f15b65d848e73f123306b3a543d31b37481592c9eb"
+}

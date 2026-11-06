@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "af50ce39e385c712b2c2b4c3a427d5c876d420b3e24db836ad7ba6d41aa6e48b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le qualificatif de \"woke\" sert à diaboliser les concepts progressistes sans avoir à argumenter",
+    "identity_sha256": "bae338143751b08f1633eac8ae029ce32538f9630a79aa0fa38957a98fb90788"
+  },
+  "source_value": "Le « wokisme » n’est pas le danger dans notre société. Ce discours alarmiste autour du terme « woke » est une stratégie consciente des courants réactionnaires pour affaiblir les mouvements sociaux et la lutte de classe.",
+  "source_value_sha256": "99d28061e62c787cd17b9405dab05532784d0c849ddfc35fd613ca478d4a7efa",
+  "target_value": "“Wokeism” is not the danger in our society. The alarmist discourse surrounding the term “woke” is a deliberate strategy by reactionary currents to weaken social movements and class struggle.",
+  "target_value_sha256": "08024d67452376721bd0867637c1514398d19478aa1eff4ba0adfd136c72e0f7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0308",
+    "target_path": "citations/A0308-C004",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "14f2c80d6a9f1bde85c93dc800cdf0f8fcfbe51e2bf50171e9faa8db8f992689"
+}

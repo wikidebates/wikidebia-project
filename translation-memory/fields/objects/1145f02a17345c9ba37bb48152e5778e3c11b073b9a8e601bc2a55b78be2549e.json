@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "aa9168e532baf639bb595237de89bd95c56dafae94a75c26d94af7647b0f44a5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Accuser le féminisme d'ignorer la souffrance des hommes est tout aussi absurde qu'accuser les organismes de lutte contre la pauvreté d'ignorer la souffrance des riches",
+    "identity_sha256": "92b5bbf064fe3704c65e941c02a798671c4b3cf3c6aea6368f0f873e44d6875b"
+  },
+  "source_value": "Il est logique qu'un mouvement destiné à un groupe particulier se concentre exclusivement sur ce dernier, puisque c'est sa raison d'exister. Reprocher aux féministes d'ignorer la souffrance des hommes n'a donc pas plus de sens que reprocher aux organismes de lutte contre la pauvreté d'ignorer la souffrance des riches, aux groupes queer d'ignorer la souffrance des cishet, aux groupes antiracistes d'ignorer la souffrance des blancs et ainsi de suite.",
+  "source_value_sha256": "161c6615f7723ee0765b6d059d63a59e4b915ee53b15377e9b1f69c4faeec34a",
+  "target_value": "It is logical for a movement intended for a particular group to focus exclusively on that group, since that is its reason for existing. Reproaching feminists for ignoring men’s suffering therefore makes no more sense than reproaching organizations fighting poverty for ignoring the suffering of the rich, queer groups for ignoring the suffering of cisgender heterosexual people, antiracist groups for ignoring the suffering of white people, and so on.",
+  "target_value_sha256": "6f8b5f3e7fd58d1ad1cf58dbf6988bb1e3af01165dc3648b8580c1b76e36225e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0089",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1145f02a17345c9ba37bb48152e5778e3c11b073b9a8e601bc2a55b78be2549e"
+}

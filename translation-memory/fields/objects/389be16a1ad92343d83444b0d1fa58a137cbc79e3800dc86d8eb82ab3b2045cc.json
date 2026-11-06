@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2a1c023d4081b0ebe7693748d37236f102fc43e3a5bc5b35afd1fc76518d0cf5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme lutte de classe néglige l'existence d'un privilège mâle",
+    "identity_sha256": "89ff70e89a29e5a7c226b86690f9c1fe5775fce0fa3970bb69e69589c13a846e"
+  },
+  "source_value": "Le féminisme lutte de classe néglige l'existence d'un privilège mâle",
+  "source_value_sha256": "362a12e0e4d517d0e870d0872256cc5e621defbea7ec829d27f9c09004f1212e",
+  "target_value": "Class-struggle feminism neglects the existence of male privilege",
+  "target_value_sha256": "15a514cf72cd58de04b86585b708ef241e7571c385b9c2ff17bdccf509f4a2c3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0179",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "389be16a1ad92343d83444b0d1fa58a137cbc79e3800dc86d8eb82ab3b2045cc"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b0cb1f7e744cbc6120590c93a911ec7af582db192f07cf45cf8135796d6d2a9b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme peut très bien servir de justification au nivellement par le bas",
+    "identity_sha256": "073d06592722023ebba120c72b59571367bc486c5808441c90704c3496495d0f"
+  },
+  "source_value": "Le féminisme peut très bien servir de justification au nivellement par le bas",
+  "source_value_sha256": "2e9dda307fcf0119f57318c1733524e7cb063cc0911b4f17b20e0389cb79aaf2",
+  "target_value": "Feminism can very well serve to justify leveling down",
+  "target_value_sha256": "c55c752e7d518f46ba402926b04991c3ad1a0d58fd2031367b863b0c1b24d12a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0176",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3ecfb413c98201a157e1fe32553a9400425862087d3144ab01dda1546dcc45b7"
+}

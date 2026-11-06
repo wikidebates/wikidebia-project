@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "48d3f1f61c27c6412a67443f9535d18d7efc68422140d30e0ec73bd9b12cdcd3",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La misandrie est une réponse à la misogynie et se veut majoritairement non violente",
+    "identity_sha256": "8e3716ece0463e198397791a59d5a9cf3d63eba39f549b1d32721ba9134b52d0"
+  },
+  "source_value": "Le Bas-bleu, c’est la femme littéraire. C’est la femme qui fait métier et marchandise de littérature. C’est la femme qui se croit cerveau d’homme et demande sa part dans la publicité et dans la gloire",
+  "source_value_sha256": "0a605cd4903389589873a0ecd93d61fdb09d6d7c1677f1519049b17fd7611ad7",
+  "target_value": "The bluestocking is the literary woman. She is the woman who makes a trade and a commodity of literature. She is the woman who believes she has a man’s brain and demands her share of publicity and glory.",
+  "target_value_sha256": "c99b150ff3e3a8b46435856247014e30c8c54a3148cb8a81e3a5c624179ad1d2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0097",
+    "target_path": "citations/A0097-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "23d5de046d0f8b07106653435978445b9e3d95f2f3bf39394415e807d28918f2"
+}

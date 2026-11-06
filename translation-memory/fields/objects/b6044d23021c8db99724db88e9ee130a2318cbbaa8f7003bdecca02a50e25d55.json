@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "57c0b8d0858ddb1805b4f5b0b62248632ccf5b8e1d94946a1e0262c9642f32eb",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme veut détruire les différences naturelles entre hommes et femmes et rendre ainsi les femmes malheureuses",
+    "identity_sha256": "c9d0b99cbf9222546606dd80d0d3d6d83d1f2d025322a805469a97761e7bee56"
+  },
+  "source_value": "Le féminisme veut détruire les différences naturelles entre hommes et femmes et rendre ainsi les femmes malheureuses",
+  "source_value_sha256": "8e1d31b89db73289f02bc57e1950f7f6817787a836e5101eb219a49c857d0260",
+  "target_value": "Feminism seeks to erase natural differences between men and women and therefore make women unhappy",
+  "target_value_sha256": "0042b2a1bc442a93d8be4c52b0b845fb1187fbc460c631c6efde7f65d1925857",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0020",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b6044d23021c8db99724db88e9ee130a2318cbbaa8f7003bdecca02a50e25d55"
+}

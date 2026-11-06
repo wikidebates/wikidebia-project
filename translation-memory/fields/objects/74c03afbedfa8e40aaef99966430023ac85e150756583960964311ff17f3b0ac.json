@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fbd0127ff9722ed487025ef0560b8211e7eeb14f131df23295969052dd6a5d14",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Toutes les causes peuvent apparaître comme des tâches trop grandes, le combat n'en vaut pas moins la peine",
+    "identity_sha256": "653e7605d6505148a6e4be11844f0a33365717e6c7eed7129140284e8d395843"
+  },
+  "source_value": "S'impliquer dans une cause, c'est une tâche ingrate, et les retombées immédiates sont loin d'être à la hauteur des efforts engrangés. Pourtant, de tous temps, des personnes se sont battues pour des bonnes causes dans des situations qui semblaient désespérées et n'ont pour la plupart même pas vécu assez longtemps pour que les impacts se soient produits de leur vivant, il n'en demeure pas moins qu'elles n'ont pas été vaines, et que les générations qui les ont succédé ont elle-mêmes pu en bénéficier, que les victoires soient parcellaires et/ou réversibles n'y change rien.",
+  "source_value_sha256": "bc414fa32719206d0e9821c8f56673f32b6ed3f0183113188ebbb2f32de726bf",
+  "target_value": "Committing to a cause is a thankless task, and the immediate results fall far short of the efforts invested. Yet at all times throughout history, people have fought for worthy causes in situations that seemed hopeless, and the greater part of them did not even live long enough to see the effects occur during their lifetimes. Nevertheless, their efforts were not in vain, and the generations that succeeded them were able to benefit from those efforts themselves; the fact that the victories may be partial and/or reversible changes nothing.",
+  "target_value_sha256": "e4c5932ed0737927a553c2081b99e40b578572ee3b9ecd3ec28a2eb21da77629",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0095",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "74c03afbedfa8e40aaef99966430023ac85e150756583960964311ff17f3b0ac"
+}

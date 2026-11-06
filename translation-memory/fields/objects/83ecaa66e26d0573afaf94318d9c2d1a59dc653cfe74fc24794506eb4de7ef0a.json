@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "832309eb7a92c407340a564563c7fbd9a16318d165014fc0abcf132824333d1b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Un exemple criant : \"l'affaire Mila\"",
+    "identity_sha256": "a4393738ce5da26ffc3bd1c96fd77fdb302cd5a7d0ed7da1e70e77ccc00736b1"
+  },
+  "source_value": "Et puis il y a Mila. Une jeune femme harcelée avec la plus impensable des violences pour avoir critiqué l’islam lorsqu’un dragueur très lourd sur Internet lui a promis le bûcher de l’enfer parce qu’elle lui avait répondu qu’elle était lesbienne et qu’il ferait mieux de lui foutre la paix. […]\nOr, bien qu’elle soit femme, lesbienne et clairement victime du patriarcat, les premiers sont fabuleusement silencieux face au sort de la seconde. Incompréhensible paradoxe et révoltante monstruosité […]\nEst-ce parce que le harceleur n’est pas un homme blanc (quoiqu’il soit pourtant très très « cis » !), encravaté et d’origine européenne – car c’est bien cela qui importe aux nouveaux antiracistes et féministes essentialistes, les origines ! – qu’on n’entend pas les associations LGBT ? Et qu'on ne voit pas, à de rares exceptions, les associations féministes se mettre toutes vent debout pour faire devant elle le barrage médiatique, politique et humain auquel on devrait s’attendre, et auquel assurément on assisterait si de la même manière elle avait été harcelée pour avoir raillé le catholicisme ou une secte évangéliste quelconque ?",
+  "source_value_sha256": "51463bda985165b452d4fff4f3b1885beaf026653b7b68f4ba3c617263ff6c9f",
+  "target_value": "And then there is Mila. A young woman harassed with the most unimaginable violence for criticizing Islam after an extremely persistent online suitor promised her the fires of hell because she had replied that she was a lesbian and that he should leave her alone. [...]\nYet, although she is a woman, a lesbian and clearly a victim of patriarchy, the former remain astonishingly silent about the latter’s fate. An incomprehensible paradox and a revolting monstrosity. [...]\nIs it because the harasser is not a white man of European origin wearing a tie—although he is nevertheless very, very “cis”!—since origins are precisely what matter to the new antiracists and essentialist feminists, that LGBT organizations cannot be heard? And that, with rare exceptions, feminist organizations are not all up in arms to form around her the media, political and human barrier one would expect, and would certainly see if she had similarly been harassed for mocking Catholicism or any evangelical sect?",
+  "target_value_sha256": "dd5db76cd3fbbaf309589d8c70e2c557bb4c468ab5f895c77028b623069abb08",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0130",
+    "target_path": "citations/A0130-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "83ecaa66e26d0573afaf94318d9c2d1a59dc653cfe74fc24794506eb4de7ef0a"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8b0a71b5e27f43463cdf987c2f8107baf2f628fd87de026975310e692087fc42",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Des femmes coupent aussi la parole et des hommes se font également couper la parole",
+    "identity_sha256": "2020a55e80da56ee75aafc8adc28d811e3327eddd70752c5879cc5829604ed40"
+  },
+  "source_value": "Il arrive aussi à des femmes de couper la parole. Il arrive à des hommes de se faire couper la parole",
+  "source_value_sha256": "87db34bacf4431d4560d1ce9d887d7608cdf4f85c3cc1129e4831d9b76c769b5",
+  "target_value": "Women also interrupt. Men are interrupted too",
+  "target_value_sha256": "bc4d62fe3597d968c172885628e2d9f6fbcdaa3f10fbb5b3db98950f095227a7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0186",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f76b317ce50dc75552dc1d10155834f4661aa5eeb76901eb4d84804064b36986"
+}

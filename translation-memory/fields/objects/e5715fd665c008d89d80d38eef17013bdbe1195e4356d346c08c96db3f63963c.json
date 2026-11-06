@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "11a7364b5b4590d503f37b2e0968a5e87058af32f94dcc3fbac873aa18dd458f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Dans l'affaire Eric Brion, l'accusatrice n'avait fait que rapporter les paroles de ce dernier",
+    "identity_sha256": "ddd344b31ed40364f9f4c2439091eddb780005a2814f557e84aab9cea9e9697b"
+  },
+  "source_value": "En première instance, le tribunal avait donné raison aux deux plaignants qui s'estimaient diffamés par leurs accusatrices, les condamnant à des dommages et intérêts. Mais la cour d'appel de Paris avait ensuite infirmé ces jugements, le 31 mars et le 14 avril 2021, estimant que les dénonciations relevaient de la liberté d'expression.",
+  "source_value_sha256": "d41b28150ce7ed1c4b6a39bdde82a0e44c7c8ba85a647f8b29c35d7c485e1bd3",
+  "target_value": "At first instance, the court had ruled in favor of the two plaintiffs, who believed they had been defamed by their accusers, and ordered the latter to pay damages. But the Paris Court of Appeal subsequently overturned those judgments on March 31 and April 14, 2021, finding that the allegations fell within freedom of expression.",
+  "target_value_sha256": "0c45a36a5155bc864bc953efef38da461a9d973f9b19a4ef7e9d18c1ba1fab54",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0225",
+    "target_path": "citations/A0225-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e5715fd665c008d89d80d38eef17013bdbe1195e4356d346c08c96db3f63963c"
+}

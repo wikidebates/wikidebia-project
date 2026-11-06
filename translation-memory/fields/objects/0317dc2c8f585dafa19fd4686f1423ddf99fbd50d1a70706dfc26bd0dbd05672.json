@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "048c334eefb476823902aa912a82035cc960be5786fae26977b12872df285248",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Une femme au foyer peut être parfaitement épanouie",
+    "identity_sha256": "d29ceaeeea7a68ca2d790246e3b49d0a6065ed6bc82d01dd394526e467570106"
+  },
+  "source_value": "C'est reconnaître l'homme comme étant le chef de la famille et donc user de ses talents et capacités pour le servir, de la même manière que l'homme est au service de sa femme en allant travailler, en subvenant à tous les besoins matériels du foyer. Et même par la reconnaissance et la fierté qu'il éprouve envers sa femme",
+  "source_value_sha256": "464c9bb41abcac8045c18fb5d7132d9a72baef781600434b1370487436c6729f",
+  "target_value": "This means recognizing the man as the head of the family and therefore using one’s talents and abilities to serve him, in the same way that the man serves his wife by going to work and providing for all the household’s material needs. It is also expressed through the appreciation and pride he feels toward his wife",
+  "target_value_sha256": "4066a9c563f3fa40e1029f140c6557c32c09e35c4f9a41409ed50e00266c861d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0142",
+    "target_path": "citations/A0142-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0317dc2c8f585dafa19fd4686f1423ddf99fbd50d1a70706dfc26bd0dbd05672"
+}

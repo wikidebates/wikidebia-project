@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "23264c29cfd19be59ecff4c7547c673147830407cf3c6ddca578e68a9fc9f820",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "On ne pourra jamais combattre le sexisme si on néglige son aspect systémique",
+    "identity_sha256": "f7ce7ccf4a9c5c4d25b8309f963a026e1470edf9c1f998dc5a85252d84b18a7d"
+  },
+  "source_value": "On ne pourra jamais combattre le sexisme si on néglige son aspect systémique",
+  "source_value_sha256": "17533aa1596f7d2fa4ef48e4804c3b8b74eeb2cbbae09bb6bb065ceb3f8c1a22",
+  "target_value": "We can never fight sexism if we neglect its systemic dimension",
+  "target_value_sha256": "80e68552802740f0fc0f0fd9a5412e31bf19caaf14f74b41ff81be40b1334c62",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0199",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7a3ab29504bca160070fc482a93888ee754d6d3f00017a2522b3f3d9317a569e"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "81cc58ec657f7e30b9380f51a09188ce2f2959154cf78050160d9e810737856c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Bien plus que le fonctionnement individuel des couples, c'est le fonctionnement de la société qui fait que ce sont les femmes qui font la majorité des tâches ménagères",
+    "identity_sha256": "7cd5c22d13a5a4e65b516847efc7e6b8f3411f45c8d49c7e245f160d7f7c16b9"
+  },
+  "source_value": "Bien plus que le fonctionnement individuel des couples, c'est le fonctionnement de la société qui fait que ce sont les femmes qui font la majorité des tâches ménagères",
+  "source_value_sha256": "11060c2a313289c10036edd36dabf2c5c6464a841e0e159a0fd99fed98f0dfc4",
+  "target_value": "Far more than the individual arrangements of couples, the way society operates is what causes women to do most household chores",
+  "target_value_sha256": "63feecb0696044f38c2d3fba651f0708422be5c069b5e3460c55149eeac1a401",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0258",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "77fa8a59b4980ced539c1e466a944bee6ae9058206414527c60c3068545d0b39"
+}

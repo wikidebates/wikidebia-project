@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3a65d19574033b009e40ee3352327752a1dd3e5a7a4096865e1b0fdcf78720f2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'universalisme laisse sur le bas-côté de nombreux types d'oppression",
+    "identity_sha256": "2abfe0e702bbd89aa1dd708e85d15a1c93cc3ef99df8a07f06f4b61539f44bef"
+  },
+  "source_value": "« Le féminisme n’a aucune valeur sans intersectionnalité ni inclusion », disait la féministe américaine Kimberlé Williams Crenshaw, qui a introduit le terme d’intersectionnalité à la fin des années quatre-vingt afin de montrer que les expériences vécues par une personne noire et par une femme ne peuvent pas être comprises et analysées comme deux données séparées ou indépendantes. Plus généralement, l’intersectionnalité vise à montrer que la domination est plurielle et tente de mesurer l’impact d’oppressions multiples : LGBTQIAphobies, sexisme, validisme, racisme, grossophobie, putophobie, classisme… « Admettons que même dans nos luttes, on a des personnes plus privilégiées que d’autres. Il faut normaliser la parole des concernées », résume Peter.",
+  "source_value_sha256": "428261a1d3aaed0e882a95c8516ee3d6e5b946f66736a79b7ac62e242e134791",
+  "target_value": "“Feminism has no value without intersectionality and inclusion,” said American feminist Kimberlé Williams Crenshaw, who introduced the term intersectionality in the late eighties to show that the experiences of a Black person and a woman cannot be understood and analyzed as two separate or independent pieces of data. More generally, intersectionality seeks to show that domination is plural and attempts to measure the impact of multiple oppressions: anti-LGBTQIA prejudice, sexism, ableism, racism, fatphobia, whorephobia, classism... “Let us admit that even within our struggles, some people are more privileged than others. We must normalize the voices of those concerned,” Peter summarizes.",
+  "target_value_sha256": "02439eb3eca1a57c52830e2ddc7315fd654d53c644484a9df1a21ab0fc0b3001",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0131",
+    "target_path": "citations/A0131-C005",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d47c5db49c04d1de0a16bfef52b62dfaf3324fb8b0fab1eee57f92bd1719bed2"
+}

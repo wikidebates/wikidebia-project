@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a07ff1b44b634166a148f9b8734af575e612cd582e13bc1f62537b98edde8e78",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les procès pour diffamation servent à dispenser les agresseurs d'assumer leurs actes",
+    "identity_sha256": "b0fce3b797cdfdbb5470967e797e205ecbe21a3637e213db423377e693def710"
+  },
+  "source_value": "Les procès pour diffamation servent à dispenser les agresseur d'assumer leurs actes",
+  "source_value_sha256": "574b639713a06c8bfed37d9f8e391ce79f18a48dc2dc28babdf7c7b14fdcc5d3",
+  "target_value": "Defamation lawsuits allow aggressors to avoid taking responsibility for their actions",
+  "target_value_sha256": "4018e6f5b44d458c040a231ce827eb61e25bbe9e7e317e64a7c0035d5cc0b526",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0324",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "26e8f4203e3b1ee246614fc7048d6b44933fde0f501fc569ae0ac9b151f2ba84"
+}

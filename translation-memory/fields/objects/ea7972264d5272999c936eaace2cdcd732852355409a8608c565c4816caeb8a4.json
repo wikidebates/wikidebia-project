@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "228ff45e038f9830715da5dd5b954d9debd7a685a7ac329516deeb3a831b03d5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les féministes doivent continuer le combat car de nombreuses inégalités subsistent",
+    "identity_sha256": "fb7c422bf9fe4e5c3c4906c40a9c5e10bd6f963615f6f2ba9225cc1bbf400b57"
+  },
+  "source_value": "Les féministes doivent continuer le combat car de nombreuses inégalités subsistent",
+  "source_value_sha256": "f62ad95bbfc5f42ec4fe7f7f9cfb6e6a0777cca27ac15550cf5fb802acdd43cc",
+  "target_value": "Feminists must continue the fight because many inequalities remain",
+  "target_value_sha256": "8c3482c0cca1e7590ba1f503c5ebe7193d11fcb020bdba67fd3336c8af55143c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0001",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ea7972264d5272999c936eaace2cdcd732852355409a8608c565c4816caeb8a4"
+}

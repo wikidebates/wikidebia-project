@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e91053c82f956d65c622f4926cc6825970281bf8ad0595f4489e8b1acea29b23",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "\"L'affaire Mila\" n'est qu'un des coups médiatiques manigancés par l'extrême droite pour piéger la gauche",
+    "identity_sha256": "0958e78004f9327cab307e4f22c416fb72d439566cb5d8652dab71f8f44a5f56"
+  },
+  "source_value": "Du fait de sa puissance médiatique, l'extrême droite a la capacité de décider ce qui fera polémique et comment cette dernière va s'articuler, de sorte à ce que quelle que soit la réaction de la gauche, cette dernière ressort perdante.\n\n-Si la gauche ne dit rien, elle est accusée d'un silence complice.\n\n-Si la gauche est d'accord avec l'extrême droite sur ce point précis, elle trahit ses valeurs et son bord politique.\n\n-Si la gauche tente de contredire l'extrême droite, ses positions sont caricaturées et sorties de leur contexte.\n\n-Si la gauche tente une explication dissipant toute ambiguïté, elle est ignorée du fait de sa longueur et de sa complexité.\n\n\nAinsi, la gauche est systématiquement traînée dans la boue même quand elle n'a objectivement rien à se reprocher.",
+  "source_value_sha256": "680b46b2f2fb3e63cc27bd8d32de19b76569ef91d6b6e3f7ac9106284342b337",
+  "target_value": "Through its media power, the far right can decide what will become controversial and how the controversy will unfold, ensuring that the left loses regardless of how it reacts.\n\n-If the left says nothing, it is accused of complicit silence.\n\n-If the left agrees with the far right on this specific point, it betrays its values and political camp.\n\n-If the left tries to contradict the far right, its positions are caricatured and taken out of context.\n\n-If the left attempts an explanation that dispels any ambiguity, it is ignored because of its length and complexity.\n\n\nThe left is thus systematically dragged through the mud even when it has objectively done nothing wrong.",
+  "target_value_sha256": "38f3d47ae91ab0a15e4fb57b52c4f8e0ce87d2510b2d68b4fe14c94fae6a8336",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0231",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8a5745940255adf0c0ae9ada648e4d4af20583366ef274b34aca7c6cd7dd54ae"
+}
