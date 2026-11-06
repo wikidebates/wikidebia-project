@@ -93,3 +93,28 @@ def test_inspection_is_read_only(tmp_path, layout, expected):
     assert result["status"] == expected
     assert result["safe_to_reuse"] is False
     assert after == before
+
+def test_inspection_rejects_non_object_metadata(tmp_path):
+    output = tmp_path / "corpus"
+    for name in (
+        "manifest.json", "scope.json", "data/registre_debat.json",
+        "data/import_provenance.json", "graph/graphe_argumentatif.json",
+    ):
+        path = output / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("[]", encoding="utf-8")
+    result = corpus_init.inspect_existing_build(output, expected_debate_id="debat-test")
+    assert result == {"status": "invalid", "safe_to_reuse": False}
+
+
+def test_inspection_rejects_symlinked_output(tmp_path):
+    target = tmp_path / "real"
+    target.mkdir()
+    output = tmp_path / "linked"
+    try:
+        output.symlink_to(target, target_is_directory=True)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlinks unavailable")
+    result = corpus_init.inspect_existing_build(output, expected_debate_id="debat-test")
+    assert result == {"status": "invalid", "safe_to_reuse": False}
+    assert target.is_dir()
