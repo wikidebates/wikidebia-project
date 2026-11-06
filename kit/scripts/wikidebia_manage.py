@@ -2226,6 +2226,32 @@ def corpus_workspace_translation_fragment(
     return run(command, cwd=root, check=False).returncode
 
 
+def corpus_workspace_translation_checkpoint(
+    root: Path,
+    *,
+    debate_id: str | None,
+    work_id: str | None,
+    export: bool,
+    restore: Path | None,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_translation_checkpoint.py"
+    if not script.is_file():
+        raise ManagementError("Outil de checkpoint portable absent du kit")
+    command = [
+        python_command(root), str(script),
+        "--project-root", str(root), "--machine-readable",
+    ]
+    if export:
+        command.append("--export")
+    elif restore:
+        command.extend(["--restore", str(restore)])
+    if debate_id:
+        command.extend(["--debate-id", debate_id])
+    if work_id:
+        command.extend(["--work-id", work_id])
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_translation_preflight(
     root: Path, debate_id: str, *, work_id: str, unit_id: str,
 ) -> int:
@@ -2860,6 +2886,16 @@ def build_parser() -> argparse.ArgumentParser:
     fragment_parser.add_argument("--note")
     fragment_parser.add_argument("--confirm-fragment-sha256")
 
+    checkpoint_parser = sub.add_parser(
+        "corpus-workspace-translation-checkpoint",
+        help="Exporter ou restaurer un checkpoint portable de traduction",
+    )
+    checkpoint_parser.add_argument("debate_id", nargs="?")
+    checkpoint_parser.add_argument("--work-id")
+    checkpoint_action = checkpoint_parser.add_mutually_exclusive_group(required=True)
+    checkpoint_action.add_argument("--export", action="store_true")
+    checkpoint_action.add_argument("--restore", type=Path, metavar="ARCHIVE")
+
     translation_preflight_parser = sub.add_parser(
         "corpus-workspace-translation-preflight",
         help="Contrôler mécaniquement un correctif avant son scellement",
@@ -3192,6 +3228,12 @@ def main(argv: list[str] | None = None) -> int:
             seal=args.seal, apply=args.apply, overwrite=args.overwrite,
             reviewer=args.reviewer, note=args.note,
             confirm_fragment_sha256=args.confirm_fragment_sha256,
+        )
+
+    if args.command == "corpus-workspace-translation-checkpoint":
+        return corpus_workspace_translation_checkpoint(
+            root, debate_id=args.debate_id, work_id=args.work_id,
+            export=args.export, restore=args.restore,
         )
 
     if args.command == "corpus-workspace-translation-preflight":

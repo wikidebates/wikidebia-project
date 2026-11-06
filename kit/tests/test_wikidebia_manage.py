@@ -1165,6 +1165,20 @@ def test_translation_fragment_command_exposes_argument_granularity():
     assert explicit.prepare is True
 
 
+def test_translation_checkpoint_command_exposes_export_and_restore():
+    export = module.build_parser().parse_args([
+        "corpus-workspace-translation-checkpoint", "debat_test",
+        "--work-id", "EDIT-TEST-001", "--export",
+    ])
+    restore = module.build_parser().parse_args([
+        "corpus-workspace-translation-checkpoint", "--restore", "checkpoint.zip",
+    ])
+    assert export.export is True
+    assert export.debate_id == "debat_test"
+    assert restore.restore == Path("checkpoint.zip")
+    assert restore.debate_id is None
+
+
 def test_translation_preflight_command_is_exposed_by_manager():
     args = module.build_parser().parse_args([
         "corpus-workspace-translation-preflight", "debat_test",

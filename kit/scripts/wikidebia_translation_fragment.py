@@ -27,6 +27,7 @@ from wikidebia_translation_packet import (
     _argument_hash,
     build_packet,
 )
+from wikidebia_translation_checkpoint import export_checkpoint
 from wikidebia_translation_preflight import analyze_patch
 from wikidebia_translation_resume import write_resume_capsule
 from wikidebia_translation_worklist import _pending_nested
@@ -483,6 +484,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         event=f"argument_fragment_{result.get('status')}",
         unit_id=result.get("unit_id"), page_id=result.get("page_id"),
     )
+    checkpoint = export_checkpoint(args.project_root, args.debate_id, args.work_id)
     compact = {
         key: result.get(key) for key in (
             "status", "debate_id", "work_id", "unit_id", "page_id",
@@ -494,6 +496,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     compact.update({
         "capsule_path": capsule["capsule_path"],
         "capsule_sha256": capsule["capsule_sha256"],
+        "checkpoint_path": checkpoint["archive_path"],
+        "checkpoint_sha256": checkpoint["checkpoint_sha256"],
+        "checkpoint_archive_sha256": checkpoint["archive_sha256"],
         "remote_access_performed": False,
         "remote_write_performed": False,
     })
