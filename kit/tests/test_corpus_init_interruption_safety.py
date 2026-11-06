@@ -118,3 +118,40 @@ def test_inspection_rejects_symlinked_output(tmp_path):
     result = corpus_init.inspect_existing_build(output, expected_debate_id="debat-test")
     assert result == {"status": "invalid", "safe_to_reuse": False}
     assert target.is_dir()
+
+def test_build_rejects_symlink_even_with_overwrite(monkeypatch, tmp_path):
+    target = tmp_path / "real"
+    target.mkdir()
+    marker = target / "keep.txt"
+    marker.write_text("keep", encoding="utf-8")
+    output = tmp_path / "linked"
+    try:
+        output.symlink_to(target, target_is_directory=True)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlinks unavailable")
+    source = tmp_path / "snapshot"
+    source.mkdir()
+    monkeypatch.setattr(
+        corpus_init, "resolve_extraction_input",
+        lambda _source: corpus_init.ExtractionInput(
+            root=source,
+            graph_path=source / "graph.json",
+            snapshot_manifest_path=source / "snapshot_manifest.json",
+        ),
+    )
+    monkeypatch.setattr(
+        corpus_init, "verify_extraction",
+        lambda _input: (
+            {"metadata": {"débat": "Un débat de test"}},
+            {"debate": {"canonical_title": "Un débat de test"}},
+        ),
+    )
+    with pytest.raises(corpus_init.CorpusInitError, match="lien symbolique"):
+        corpus_init.build_corpus(
+            source, output,
+            debate_id="debat-test",
+            short_code=None,
+            scope_summary=None,
+            overwrite=True,
+        )
+    assert marker.read_text(encoding="utf-8") == "keep"
