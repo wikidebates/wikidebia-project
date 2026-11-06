@@ -11,6 +11,7 @@ import json
 import os
 import re
 import sys
+import threading
 import time
 from collections import Counter
 from dataclasses import dataclass
@@ -2863,6 +2864,7 @@ class PlanExecutor:
         self.logs_dir = self._resolve(config.get("logs_dir") or "logs")
         self.state_dir = self._resolve(config.get("published_state_dir") or ".state/published")
         self.receipts_dir = self._resolve(config.get("receipts_dir") or ".state/receipts")
+        self._progress_io_lock = threading.Lock()
 
     def _resolve(self, value: str | Path) -> Path:
         path = Path(value).expanduser()
@@ -2999,34 +3001,118 @@ class PlanExecutor:
         results: list[dict[str, Any]],
         status: str,
         *,
+        phase: str,
+        total_count: int,
         current: dict[str, Any] | None = None,
         error: Exception | None = None,
+        emit: bool = False,
     ) -> None:
-        value: dict[str, Any] = {
-            "schema": UPDATE_PROGRESS_SCHEMA,
-            "schema_version": "1.0",
-            "debate_id": self.debate_id,
-            "plan_sha256": plan["plan_sha256"],
-            "execution_mode": execution_mode,
-            "status": status,
-            "updated_at": utc_now(),
-            "completed": [dict(row) for row in results],
-        }
-        if current is not None:
-            value["current"] = {
-                "operation": current.get("operation"),
-                "language": current.get("language"),
-                "page_id": current.get("page_id"),
-                "title": current.get("title"),
+        with self._progress_io_lock:
+            value: dict[str, Any] = {
+                "schema": UPDATE_PROGRESS_SCHEMA,
+                "schema_version": "1.0",
+                "debate_id": self.debate_id,
+                "plan_sha256": plan["plan_sha256"],
+                "execution_mode": execution_mode,
+                "phase": phase,
+                "status": status,
+                "completed_count": len(results),
+                "total_count": total_count,
+                "updated_at": utc_now(),
+                "completed": [dict(row) for row in results],
             }
-        if error is not None:
-            value["error_type"] = type(error).__name__
-        value["checkpoint_sha256"] = sha_object(value)
+            if current is not None:
+                value["current"] = {
+                    "operation": current.get("operation"),
+                    "language": current.get("language"),
+                    "page_id": current.get("page_id"),
+                }
+            if error is not None:
+                value["error_type"] = type(error).__name__
+            value["checkpoint_sha256"] = sha_object(value)
+            self._atomic_write_progress(value)
+        if emit:
+            self._emit_progress(value)
+
+    def _atomic_write_progress(self, value: dict[str, Any]) -> None:
         path = self._progress_path()
         path.parent.mkdir(parents=True, exist_ok=True)
         temporary = path.with_suffix(path.suffix + ".tmp")
         temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
         os.replace(temporary, path)
+
+    def _emit_progress(self, value: dict[str, Any]) -> None:
+        current = value.get("current") if isinstance(value.get("current"), dict) else {}
+        event = {
+            "event": "wikidebia_progress",
+            "debate_id": self.debate_id,
+            "phase": value.get("phase"),
+            "status": value.get("status"),
+            "completed_count": value.get("completed_count"),
+            "total_count": value.get("total_count"),
+            "language": current.get("language"),
+            "operation": current.get("operation"),
+            "page_id": current.get("page_id"),
+            "updated_at": value.get("updated_at"),
+        }
+        print(json.dumps(event, ensure_ascii=False, sort_keys=True), file=sys.stderr, flush=True)
+
+    def _refresh_progress_heartbeat(self, plan: dict[str, Any], execution_mode: str) -> None:
+        """Refresh and emit the last safe progress snapshot without page content."""
+        emitted: dict[str, Any] | None = None
+        with self._progress_io_lock:
+            path = self._progress_path()
+            if not path.is_file():
+                return
+            try:
+                value = load_json(path)
+            except (OSError, json.JSONDecodeError):
+                return
+            unsigned = dict(value)
+            claimed = unsigned.pop("checkpoint_sha256", None)
+            if (
+                claimed != sha_object(unsigned)
+                or value.get("plan_sha256") != plan.get("plan_sha256")
+                or value.get("execution_mode") != execution_mode
+                or value.get("status") not in {"running", "operations_completed"}
+            ):
+                return
+            value["updated_at"] = utc_now()
+            value["heartbeat_count"] = int(value.get("heartbeat_count") or 0) + 1
+            value["checkpoint_sha256"] = sha_object({
+                key: item for key, item in value.items() if key != "checkpoint_sha256"
+            })
+            self._atomic_write_progress(value)
+            emitted = value
+        if emitted is not None:
+            self._emit_progress(emitted)
+
+    def _start_progress_heartbeat(
+        self,
+        plan: dict[str, Any],
+        execution_mode: str,
+    ) -> tuple[threading.Event, threading.Thread] | None:
+        interval = float(self.config.get("progress_heartbeat_seconds", 30))
+        if interval <= 0:
+            return None
+        stop = threading.Event()
+
+        def heartbeat() -> None:
+            while not stop.wait(interval):
+                try:
+                    self._refresh_progress_heartbeat(plan, execution_mode)
+                except Exception:
+                    # Progress reporting is diagnostic. The foreground
+                    # execution remains authoritative and must keep running.
+                    return
+
+        thread = threading.Thread(
+            target=heartbeat,
+            name=f"wikidebia-progress-{self.debate_id}",
+            daemon=True,
+        )
+        thread.start()
+        return stop, thread
 
     @staticmethod
     def _required_rights(operation: str) -> set[str]:
@@ -3085,12 +3171,23 @@ class PlanExecutor:
         results: list[dict[str, Any]] = []
         current: dict[str, Any] | None = None
         progress_loaded = False
+        phase = "checkpoint_validation"
+        heartbeat_handle: tuple[threading.Event, threading.Thread] | None = None
+        total_count = len(ordered)
+        emit_stride = max(1, int(self.config.get("progress_emit_every_operations", 25)))
+        execution_started = False
         try:
             results = self._load_progress(plan, execution_mode, ordered)
             progress_loaded = True
             remaining = ordered[len(results):]
-            self._write_progress(plan, execution_mode, results, "running")
+            phase = "preflight"
+            self._write_progress(
+                plan, execution_mode, results, "running",
+                phase=phase, total_count=total_count, emit=True,
+            )
+            heartbeat_handle = self._start_progress_heartbeat(plan, execution_mode)
             self._preflight_rights(remaining)
+            phase = "execution"
             for language in self.languages:
                 rows = [row for row in remaining if row["language"] == language]
                 if not rows:
@@ -3101,35 +3198,69 @@ class PlanExecutor:
                     self.adapter.assert_identity(user)
                     for row in [item for item in rows if item["operation"] != "delete"]:
                         current = row
+                        self._write_progress(
+                            plan, execution_mode, results, "running",
+                            phase=phase, total_count=total_count, current=row,
+                            emit=not execution_started,
+                        )
+                        execution_started = True
                         results.append(self._execute_one(row, user, plan))
-                        self._write_progress(plan, execution_mode, results, "running", current=row)
+                        self._write_progress(
+                            plan, execution_mode, results, "running",
+                            phase=phase, total_count=total_count, current=row,
+                            emit=len(results) % emit_stride == 0 or len(results) == total_count,
+                        )
                     # Verify the complete new graph before the first destructive deletion.
                     delete_rows = [item for item in rows if item["operation"] == "delete"]
                     if delete_rows:
                         self._verify_new_pages(language, plan)
                     for row in delete_rows:
                         current = row
+                        self._write_progress(
+                            plan, execution_mode, results, "running",
+                            phase=phase, total_count=total_count, current=row,
+                            emit=not execution_started,
+                        )
+                        execution_started = True
                         results.append(self._execute_one(row, user, plan))
-                        self._write_progress(plan, execution_mode, results, "running", current=row)
+                        self._write_progress(
+                            plan, execution_mode, results, "running",
+                            phase=phase, total_count=total_count, current=row,
+                            emit=len(results) % emit_stride == 0 or len(results) == total_count,
+                        )
                 finally:
                     self.adapter.close_language()
             current = None
-            self._write_progress(plan, execution_mode, results, "operations_completed")
+            phase = "final_attestation"
+            self._write_progress(
+                plan, execution_mode, results, "operations_completed",
+                phase=phase, total_count=total_count, emit=True,
+            )
             receipt = self._final_receipt(plan, results, only_delete=only_delete, no_delete=no_delete)
             self._write_receipt(receipt)
             self._write_published_states(plan, receipt, preserve_pending_deletes=no_delete)
-            self._write_progress(plan, execution_mode, results, "completed")
+            phase = "completed"
+            self._write_progress(
+                plan, execution_mode, results, "completed",
+                phase=phase, total_count=total_count, emit=True,
+            )
             return receipt
         except Exception as exc:
             if progress_loaded:
                 try:
-                    self._write_progress(plan, execution_mode, results, "failed", current=current, error=exc)
+                    self._write_progress(
+                        plan, execution_mode, results, "failed",
+                        phase=phase, total_count=total_count, current=current, error=exc, emit=True,
+                    )
                 except Exception:
                     # Preserve the original execution error. A checkpoint write
                     # failure must never disguise the operation that needs a retry.
                     pass
             raise
         finally:
+            if heartbeat_handle is not None:
+                heartbeat_handle[0].set()
+                heartbeat_handle[1].join(timeout=2)
             try:
                 lock.unlink()
             except FileNotFoundError:

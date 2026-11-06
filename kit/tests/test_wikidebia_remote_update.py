@@ -327,6 +327,10 @@ def test_13_interruption_then_resume_is_idempotent(tmp_path):
     checkpoint_sha = progress.pop("checkpoint_sha256")
     assert checkpoint_sha == module.sha_object(progress)
     assert progress["status"] == "failed"
+    assert progress["phase"] == "execution"
+    assert progress["completed_count"] == 1
+    assert progress["total_count"] == 2
+    assert progress["current"] == {"operation": "create", "language": "fr", "page_id": "A2"}
     assert [(row["operation"], row["page_id"]) for row in progress["completed"]] == [("create", "A1")]
     assert "résumé=Un" not in progress_path.read_text(encoding="utf-8")
 
@@ -341,6 +345,8 @@ def test_13_interruption_then_resume_is_idempotent(tmp_path):
     ]
     final_progress = json.loads(progress_path.read_text(encoding="utf-8"))
     assert final_progress["status"] == "completed"
+    assert final_progress["phase"] == "completed"
+    assert final_progress["completed_count"] == final_progress["total_count"] == 2
     assert [row["page_id"] for row in final_progress["completed"]] == ["A1", "A2"]
 
 
@@ -390,6 +396,43 @@ def test_13c_signed_non_prefix_checkpoint_blocks_resume(tmp_path):
     with pytest.raises(module.PlanConflict, match="préfixe exact"):
         executor.execute(p, p["plan_sha256"])
     assert adapter.write_count == 1
+
+
+def test_13d_heartbeat_refreshes_signed_compact_progress(tmp_path, capsys):
+    text = argument("Contenu qui ne doit pas apparaître dans le heartbeat")
+    p, config, path, adapter = plan(
+        tmp_path,
+        old_pages=[],
+        new_pages=[("fr", "A1", "Titre confidentiel", text)],
+    )
+    executor = module.PlanExecutor(config, adapter, path)
+    executor._write_progress(
+        p, "full_update", [], "running",
+        phase="preflight", total_count=1,
+    )
+
+    executor._refresh_progress_heartbeat(p, "full_update")
+
+    progress_path = tmp_path / "logs" / "update-progress.json"
+    progress = json.loads(progress_path.read_text(encoding="utf-8"))
+    checkpoint_sha = progress.pop("checkpoint_sha256")
+    assert checkpoint_sha == module.sha_object(progress)
+    assert progress["heartbeat_count"] == 1
+    event = json.loads(capsys.readouterr().err)
+    assert event == {
+        "completed_count": 0,
+        "debate_id": "demo",
+        "event": "wikidebia_progress",
+        "language": None,
+        "operation": None,
+        "page_id": None,
+        "phase": "preflight",
+        "status": "running",
+        "total_count": 1,
+        "updated_at": progress["updated_at"],
+    }
+    assert "Titre confidentiel" not in json.dumps(event, ensure_ascii=False)
+    assert "Contenu qui ne doit pas apparaître" not in json.dumps(event, ensure_ascii=False)
 
 
 def test_14_remote_change_after_plan_is_conflict(tmp_path):

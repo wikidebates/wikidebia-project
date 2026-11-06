@@ -11,6 +11,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 import unicodedata
 from wikidebia_title_structure import canonical_title_structure_issues
@@ -789,6 +790,7 @@ class GenericPublisher:
         self.log_path = logs_dir / f"{operation_id}.jsonl"
         self._tag_cache: dict[str, set[str]] = {}
         self._registry_cache: dict[str, Any] | None | bool = False
+        self._progress_io_lock = threading.Lock()
         self._validate_configuration()
 
     def _resolve(self, value: str | Path) -> Path:
@@ -1007,35 +1009,120 @@ class GenericPublisher:
 
     def _write_progress(
         self, plan: dict[str, Any], progress: dict[tuple[str, str], str], status: str,
-        *, failed_action: dict[str, Any] | None = None, error: Exception | None = None,
+        *, phase: str, total_count: int, current_action: dict[str, Any] | None = None,
+        failed_action: dict[str, Any] | None = None, error: Exception | None = None,
+        emit: bool = False,
     ) -> None:
-        value: dict[str, Any] = {
-            "schema": "wikidebia-publication-progress-1.0",
-            "schema_version": "1.0",
-            "debate_id": self.config["debate_id"],
-            "operation_id": self.operation["id"],
-            "plan_sha256": plan["plan_sha256"],
-            "status": status,
-            "updated_at": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
-            "completed": [
-                {"language": language, "page_id": page_id, "result": result}
-                for (language, page_id), result in sorted(progress.items())
-            ],
-        }
-        if failed_action is not None:
-            value["failed_action"] = {
-                "language": failed_action.get("language"), "page_id": failed_action.get("page_id"),
-                "title": failed_action.get("title"),
+        with self._progress_io_lock:
+            value: dict[str, Any] = {
+                "schema": "wikidebia-publication-progress-1.0",
+                "schema_version": "1.0",
+                "debate_id": self.config["debate_id"],
+                "operation_id": self.operation["id"],
+                "plan_sha256": plan["plan_sha256"],
+                "phase": phase,
+                "status": status,
+                "completed_count": len(progress),
+                "total_count": total_count,
+                "updated_at": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
+                "completed": [
+                    {"language": language, "page_id": page_id, "result": result}
+                    for (language, page_id), result in sorted(progress.items())
+                ],
             }
-        if error is not None:
-            value["error_type"] = type(error).__name__
-            value["error"] = str(error)
-        value["checkpoint_sha256"] = sha_object(value)
+            action = current_action or failed_action
+            if action is not None:
+                value["current"] = {
+                    "language": action.get("language"),
+                    "page_id": action.get("page_id"),
+                    "operation": action.get("operation"),
+                }
+            if failed_action is not None:
+                value["failed_action"] = {
+                    "language": failed_action.get("language"),
+                    "page_id": failed_action.get("page_id"),
+                    "operation": failed_action.get("operation"),
+                }
+            if error is not None:
+                value["error_type"] = type(error).__name__
+            value["checkpoint_sha256"] = sha_object(value)
+            self._atomic_write_progress(value)
+        if emit:
+            self._emit_progress(value)
+
+    def _atomic_write_progress(self, value: dict[str, Any]) -> None:
         path = self._progress_path()
         path.parent.mkdir(parents=True, exist_ok=True)
         temporary = path.with_suffix(path.suffix + ".tmp")
         temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
         os.replace(temporary, path)
+
+    def _emit_progress(self, value: dict[str, Any]) -> None:
+        current = value.get("current") if isinstance(value.get("current"), dict) else {}
+        event = {
+            "event": "wikidebia_progress",
+            "debate_id": self.config["debate_id"],
+            "phase": value.get("phase"),
+            "status": value.get("status"),
+            "completed_count": value.get("completed_count"),
+            "total_count": value.get("total_count"),
+            "language": current.get("language"),
+            "operation": current.get("operation"),
+            "page_id": current.get("page_id"),
+            "updated_at": value.get("updated_at"),
+        }
+        print(json.dumps(event, ensure_ascii=False, sort_keys=True), file=sys.stderr, flush=True)
+
+    def _refresh_progress_heartbeat(self, plan: dict[str, Any]) -> None:
+        emitted: dict[str, Any] | None = None
+        with self._progress_io_lock:
+            path = self._progress_path()
+            if not path.is_file():
+                return
+            try:
+                value = json.loads(path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                return
+            unsigned = dict(value)
+            claimed = unsigned.pop("checkpoint_sha256", None)
+            if (
+                claimed != sha_object(unsigned)
+                or value.get("plan_sha256") != plan.get("plan_sha256")
+                or value.get("operation_id") != self.operation.get("id")
+                or value.get("status") != "running"
+            ):
+                return
+            value["updated_at"] = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat()
+            value["heartbeat_count"] = int(value.get("heartbeat_count") or 0) + 1
+            value["checkpoint_sha256"] = sha_object({
+                key: item for key, item in value.items() if key != "checkpoint_sha256"
+            })
+            self._atomic_write_progress(value)
+            emitted = value
+        if emitted is not None:
+            self._emit_progress(emitted)
+
+    def _start_progress_heartbeat(self, plan: dict[str, Any]) -> tuple[threading.Event, threading.Thread] | None:
+        interval = float(self.config.get("progress_heartbeat_seconds", 30))
+        if interval <= 0:
+            return None
+        stop = threading.Event()
+
+        def heartbeat() -> None:
+            while not stop.wait(interval):
+                try:
+                    self._refresh_progress_heartbeat(plan)
+                except Exception:
+                    # A diagnostic heartbeat must not interrupt publication.
+                    return
+
+        thread = threading.Thread(
+            target=heartbeat,
+            name=f"wikidebia-progress-{self.config['debate_id']}",
+            daemon=True,
+        )
+        thread.start()
+        return stop, thread
 
     def _site(self, language: str) -> tuple[str, str]:
         site = self.config["sites"][language]
@@ -2179,39 +2266,77 @@ class GenericPublisher:
         progress = self._load_progress(plan)
         if _progress is not None:
             progress.update(_progress)
-        self._write_progress(plan, progress, "running")
+        total_count = len(plan["actions"])
+        self._write_progress(
+            plan, progress, "running",
+            phase="preflight", total_count=total_count, emit=True,
+        )
+        heartbeat_handle = self._start_progress_heartbeat(plan)
         counts = {"created": 0, "updated": 0, "skipped": 0}
-        for current_language in self.languages:
-            language_actions = [item for item in actions if item["language"] == current_language]
-            if not language_actions:
-                continue
-            _, user = self._site(current_language)
-            self.adapter.open_language(current_language, user)
-            try:
-                self.adapter.assert_identity(user)
-                self._change_tag_gate(current_language)
-                for action in language_actions:
-                    summary = self._summary_for_action(action)
-                    try:
+        phase = "execution"
+        current_action: dict[str, Any] | None = None
+        execution_started = False
+        emit_stride = max(1, int(self.config.get("progress_emit_every_operations", 25)))
+        try:
+            for current_language in self.languages:
+                language_actions = [item for item in actions if item["language"] == current_language]
+                if not language_actions:
+                    continue
+                _, user = self._site(current_language)
+                self.adapter.open_language(current_language, user)
+                try:
+                    self.adapter.assert_identity(user)
+                    self._change_tag_gate(current_language)
+                    for action in language_actions:
+                        current_action = action
+                        self._write_progress(
+                            plan, progress, "running",
+                            phase=phase, total_count=total_count, current_action=action,
+                            emit=not execution_started,
+                        )
+                        execution_started = True
+                        summary = self._summary_for_action(action)
                         result = self._execute_action(action, user, summary)
-                    except Exception as exc:
-                        self._write_progress(plan, progress, "failed", failed_action=action, error=exc)
-                        raise
-                    key = (str(action["language"]), str(action["page_id"]))
-                    if key not in progress or result != "skipped":
-                        progress[key] = result
-                    if _progress is not None:
-                        _progress.update(progress)
-                    self._write_progress(plan, progress, "running")
-                    counts[result] += 1
-                    delay = max(0.0, float(self.config.get("write_delay_seconds", 0.5)))
-                    if result in {"created", "updated"} and delay:
-                        time.sleep(delay)
-                self._save_published_state(current_language, language_actions, plan)
-            finally:
-                self.adapter.close_language()
-        self._write_progress(plan, progress, "completed")
-        return counts
+                        key = (str(action["language"]), str(action["page_id"]))
+                        if key not in progress or result != "skipped":
+                            progress[key] = result
+                        if _progress is not None:
+                            _progress.update(progress)
+                        self._write_progress(
+                            plan, progress, "running",
+                            phase=phase, total_count=total_count, current_action=action,
+                            emit=len(progress) % emit_stride == 0 or len(progress) == total_count,
+                        )
+                        counts[result] += 1
+                        delay = max(0.0, float(self.config.get("write_delay_seconds", 0.5)))
+                        if result in {"created", "updated"} and delay:
+                            time.sleep(delay)
+                    self._save_published_state(current_language, language_actions, plan)
+                finally:
+                    self.adapter.close_language()
+            current_action = None
+            phase = "completed"
+            self._write_progress(
+                plan, progress, "completed",
+                phase=phase, total_count=total_count, emit=True,
+            )
+            return counts
+        except Exception as exc:
+            try:
+                self._write_progress(
+                    plan, progress, "failed",
+                    phase=phase, total_count=total_count,
+                    failed_action=current_action, error=exc, emit=True,
+                )
+            except Exception:
+                # Preserve the remote operation error if diagnostic storage
+                # itself is unavailable.
+                pass
+            raise
+        finally:
+            if heartbeat_handle is not None:
+                heartbeat_handle[0].set()
+                heartbeat_handle[1].join(timeout=2)
 
     def publish_with_date_refresh(
         self,

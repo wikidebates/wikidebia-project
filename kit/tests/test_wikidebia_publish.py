@@ -411,6 +411,8 @@ def test_full_page_creation_is_dynamic(tmp_path):
     assert adapter.pages[("en","Title EN")][1] == en
     checkpoint = json.loads((tmp_path / "logs/test-progress.json").read_text(encoding="utf-8"))
     assert checkpoint["status"] == "completed"
+    assert checkpoint["phase"] == "completed"
+    assert checkpoint["completed_count"] == checkpoint["total_count"] == 2
     assert checkpoint["checkpoint_sha256"] == module.sha_object({k: v for k, v in checkpoint.items() if k != "checkpoint_sha256"})
 
 
@@ -436,7 +438,12 @@ def test_publication_progress_checkpoint_survives_failure_and_resume(tmp_path):
     progress_path = tmp_path / "logs/test-progress.json"
     failed = json.loads(progress_path.read_text(encoding="utf-8"))
     assert failed["status"] == "failed"
-    assert failed["failed_action"]["language"] == "en"
+    assert failed["phase"] == "execution"
+    assert failed["completed_count"] == 1
+    assert failed["total_count"] == 2
+    assert failed["failed_action"] == {"language": "en", "page_id": "A1", "operation": "create"}
+    assert failed["error_type"] == "RuntimeError"
+    assert "error" not in failed
     assert failed["completed"] == [{"language": "fr", "page_id": "A1", "result": "created"}]
 
     adapter.write_page = original_write
@@ -444,6 +451,33 @@ def test_publication_progress_checkpoint_survives_failure_and_resume(tmp_path):
     completed = json.loads(progress_path.read_text(encoding="utf-8"))
     assert completed["status"] == "completed"
     assert {row["language"]: row["result"] for row in completed["completed"]} == {"fr": "created", "en": "created"}
+
+
+def test_publication_heartbeat_is_signed_and_content_free(tmp_path, capsys):
+    config, path, _fr, _en = write_fixture(tmp_path, "full_page")
+    publisher = module.GenericPublisher(config, FakeAdapter(), path)
+    plan = publisher.build_plan()
+    publisher._write_progress(
+        plan, {}, "running",
+        phase="preflight", total_count=len(plan["actions"]),
+    )
+
+    publisher._refresh_progress_heartbeat(plan)
+
+    progress_path = tmp_path / "logs/test-progress.json"
+    progress = json.loads(progress_path.read_text(encoding="utf-8"))
+    checkpoint_sha = progress.pop("checkpoint_sha256")
+    assert checkpoint_sha == module.sha_object(progress)
+    assert progress["heartbeat_count"] == 1
+    event = json.loads(capsys.readouterr().err)
+    assert event["event"] == "wikidebia_progress"
+    assert event["phase"] == "preflight"
+    assert event["completed_count"] == 0
+    assert event["total_count"] == 2
+    assert event["language"] is None
+    emitted = json.dumps(event, ensure_ascii=False)
+    assert "Titre FR" not in emitted
+    assert "Title EN" not in emitted
 
 
 def test_plan_blocks_spam_blacklist_before_any_remote_write(tmp_path):
