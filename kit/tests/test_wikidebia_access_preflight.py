@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime as dt
 import json
 import sys
 from pathlib import Path
@@ -70,7 +71,11 @@ def test_access_preflight_authenticates_both_sites_without_write(tmp_path: Path)
 
     assert receipt["status"] == "ready"
     assert receipt["remote_write_performed"] is False
-    assert access.verify_access_receipt(receipt, access.access_contract_sha256(project))
+    assert access.verify_access_receipt(
+        receipt,
+        access.access_contract_sha256(project),
+        now=dt.datetime(2026, 11, 5, 20, 0, tzinfo=dt.timezone.utc),
+    )
     assert [row["language"] for row in receipt["results"]] == ["fr", "en"]
     assert adapter.events == [
         ("open", "fr", "ChatGPT"), ("identity", "fr", "ChatGPT"), ("close", "fr"),
@@ -100,7 +105,7 @@ def test_workflow_access_preflight_is_reused_until_contract_changes(tmp_path: Pa
         return access.run_access_preflight(
             root,
             adapter=FakeAdapter(),
-            checked_at=f"2026-11-05T20:0{len(calls)}:00+00:00",
+            checked_at=dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
         )
 
     monkeypatch.setattr(workflow, "run_access_preflight", run)
@@ -115,6 +120,79 @@ def test_workflow_access_preflight_is_reused_until_contract_changes(tmp_path: Pa
     third = workflow._ensure_access_preflight(project, dict(second))
     assert len(calls) == 2
     assert third["access_preflight"]["contract_sha256"] != first["access_preflight"]["contract_sha256"]
+
+
+def test_workflow_rechecks_stale_access_receipt(tmp_path: Path, monkeypatch):
+    project = _project(tmp_path)
+    state = _state()
+    workflow._save_workflow(project, state)
+    calls = []
+
+    def run(root):
+        calls.append(len(calls))
+        checked_at = (
+            "2026-01-01T00:00:00+00:00"
+            if len(calls) == 1
+            else dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat()
+        )
+        return access.run_access_preflight(root, adapter=FakeAdapter(), checked_at=checked_at)
+
+    monkeypatch.setattr(workflow, "run_access_preflight", run)
+    first = workflow._ensure_access_preflight(project, state)
+    second = workflow._ensure_access_preflight(project, dict(first))
+
+    assert len(calls) == 2
+    assert second["access_preflight"]["checked_at"] != first["access_preflight"]["checked_at"]
+
+
+def test_workflow_rechecks_when_managed_credential_presence_changes(tmp_path: Path, monkeypatch):
+    project = _project(tmp_path)
+    state = _state()
+    workflow._save_workflow(project, state)
+    for language in ("FR", "EN"):
+        monkeypatch.setenv(f"WIKIDEBIA_{language}_BOT_USERNAME", f"ChatGPT@Codex-{language}")
+        monkeypatch.setenv(f"WIKIDEBIA_{language}_BOT_PASSWORD", "placeholder")
+    calls = []
+
+    def run(root):
+        calls.append(access.access_contract_sha256(root))
+        return access.run_access_preflight(
+            root,
+            adapter=FakeAdapter(),
+            checked_at=dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
+        )
+
+    monkeypatch.setattr(workflow, "run_access_preflight", run)
+    first = workflow._ensure_access_preflight(project, state)
+    monkeypatch.delenv("WIKIDEBIA_EN_BOT_USERNAME")
+    second = workflow._ensure_access_preflight(project, dict(first))
+
+    assert len(calls) == 2
+    assert second["access_preflight"]["contract_sha256"] != first["access_preflight"]["contract_sha256"]
+
+
+def test_workflow_rechecks_fresh_access_at_publication_boundary(tmp_path: Path, monkeypatch):
+    project = _project(tmp_path)
+    state = _state()
+    workflow._save_workflow(project, state)
+    calls = []
+
+    def run(root):
+        calls.append(len(calls))
+        return access.run_access_preflight(
+            root,
+            adapter=FakeAdapter(),
+            checked_at=dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
+        )
+
+    monkeypatch.setattr(workflow, "run_access_preflight", run)
+    first = workflow._ensure_access_preflight(project, state)
+    at_publication = dict(first)
+    at_publication["phase"] = "final_publication"
+    second = workflow._ensure_access_preflight(project, at_publication)
+
+    assert len(calls) == 2
+    assert second["access_preflight"]["status"] == "ready"
 
 
 def test_workflow_records_blocked_access_preflight(tmp_path: Path, monkeypatch):

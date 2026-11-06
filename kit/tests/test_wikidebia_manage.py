@@ -319,7 +319,7 @@ def test_doctor_reports_missing_runtime_environment(tmp_path: Path):
     assert any(".venv/bin/python" in issue for issue in report["issues"])
 
 
-def test_doctor_accepts_managed_pywikibot_credentials_without_server_config(tmp_path: Path, monkeypatch):
+def test_doctor_requires_bilingual_managed_credentials_without_server_config(tmp_path: Path, monkeypatch):
     monkeypatch.setenv("WIKIDEBIA_FR_BOT_USERNAME", "ChatGPT@Codex-FR")
     monkeypatch.setenv("WIKIDEBIA_FR_BOT_PASSWORD", "managed-placeholder")
     monkeypatch.setenv("WIKIDEBIA_API_TOKEN", "access-placeholder")
@@ -334,12 +334,13 @@ def test_doctor_accepts_managed_pywikibot_credentials_without_server_config(tmp_
 
     report = module.doctor(tmp_path)
 
-    assert not any("Accès Pywikibot absent" in issue for issue in report["issues"])
+    assert any("WIKIDEBIA_EN_BOT_USERNAME/PASSWORD" in issue for issue in report["issues"])
     assert report["access_configuration"] == {
         "local_pywikibot_config": False,
         "managed_credentials": {"fr": "complete", "en": "absent"},
         "api_access_header_configured": True,
         "api_connectivity": {"requested": False},
+        "write_access": {"requested": False},
     }
 
 
@@ -384,6 +385,31 @@ def test_doctor_api_check_reports_both_languages_without_exposing_token(tmp_path
         "en": {"status": "passed", "http_status": 200},
     }
     assert token not in json.dumps(report)
+
+
+def test_doctor_can_check_bilingual_write_auth_without_exposing_credentials(tmp_path: Path, monkeypatch):
+    for language in ("FR", "EN"):
+        monkeypatch.setenv(f"WIKIDEBIA_{language}_BOT_USERNAME", f"ChatGPT@Codex-{language}")
+        monkeypatch.setenv(f"WIKIDEBIA_{language}_BOT_PASSWORD", "secret-placeholder")
+    monkeypatch.setattr(module, "check_wikidebates_write_access", lambda root: {
+        "status": "passed",
+        "checked_at": "2026-11-06T08:00:00+00:00",
+        "languages": {"fr": {"status": "ready"}, "en": {"status": "ready"}},
+        "remote_write_performed": False,
+    })
+    monkeypatch.setattr(module, "runtime_environment_report", lambda root: {
+        "requirements_sha256": "x", "python_available": True,
+        "missing_modules": [], "probe_error": None,
+    })
+    monkeypatch.setattr(module, "assert_portable_sources", lambda root: None)
+    monkeypatch.setattr(module, "git_security_issues", lambda root: [])
+
+    report = module.doctor(tmp_path, check_auth=True)
+
+    assert report["access_configuration"]["write_access"]["status"] == "passed"
+    serialized = json.dumps(report)
+    assert "secret-placeholder" not in serialized
+    assert "ChatGPT@Codex" not in serialized
 
 
 def test_api_probe_sends_header_only_to_expected_hosts(monkeypatch):
@@ -476,6 +502,12 @@ def test_parser_exposes_optional_api_diagnostic():
     args = module.build_parser().parse_args(["doctor", "--check-api"])
     assert args.command == "doctor"
     assert args.check_api is True
+
+
+def test_parser_exposes_read_only_write_auth_diagnostic():
+    args = module.build_parser().parse_args(["doctor", "--check-auth"])
+    assert args.command == "doctor"
+    assert args.check_auth is True
 
 
 def test_parser_exposes_continuity_sync_check_command():
@@ -1268,6 +1300,10 @@ def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
         "wikidebia_translation_patch.py", "wikidebia_translation_memory.py",
         "wikidebia_translation_preflight.py",
         "wikidebia_translation_resume.py",
+        "wikidebia_translation_fragment.py",
+        "wikidebia_translation_checkpoint.py",
+        "wikidebia_global_resume.py",
+        "wikidebia_access_preflight.py",
         "wikidebia_test_changed.py",
         "wikidebia_external_deletions.py",
         "refresh_package_metadata.py",

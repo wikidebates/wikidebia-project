@@ -10,7 +10,8 @@
 - `./wikidebia update IDENTIFIANT [--dry-run|--no-delete|--only-delete]` : reprise distante contrôlée ;
 - `./wikidebia upgrade` : mise à niveau des composants depuis un ZIP complet unique de préférence ;
 - `./wikidebia doctor` : diagnostic local ; ajouter `--check-api` pour tester
-  explicitement les API française et anglaise avec `x-wikidebia-access`.
+  explicitement les API française et anglaise avec `x-wikidebia-access`, et
+  `--check-auth` pour authentifier les deux comptes d’écriture sans modifier le wiki.
 
 Sur le serveur Debian, les secrets Pywikibot résident dans `private/pywikibot/`.
 Dans un environnement Codex géré, ils sont injectés sous forme de variables
