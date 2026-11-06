@@ -675,6 +675,38 @@ def copy_import_pages(inp: ExtractionInput, snapshot: Mapping[str, Any], output_
     return imported, {"debate_metadata": debate_meta, "provenance": provenance}
 
 
+
+def inspect_existing_build(output_dir: Path, *, expected_debate_id: str) -> dict[str, Any]:
+    """Read-only diagnostic; never authorizes automatic reuse."""
+    output_dir = output_dir.expanduser()
+    if output_dir.is_symlink():
+        return {"status": "invalid", "safe_to_reuse": False}
+    output_dir = output_dir.resolve()
+    if not output_dir.exists():
+        return {"status": "absent", "safe_to_reuse": False}
+    if output_dir.is_symlink() or not output_dir.is_dir():
+        return {"status": "invalid", "safe_to_reuse": False}
+    required = ("manifest.json", "scope.json", "data/registre_debat.json",
+                "data/import_provenance.json", "graph/graphe_argumentatif.json")
+    missing = [name for name in required if not (output_dir / name).is_file()]
+    if missing:
+        return {"status": "incomplete", "safe_to_reuse": False, "missing": missing}
+    try:
+        manifest = json.loads((output_dir / "manifest.json").read_text(encoding="utf-8"))
+        registry = json.loads((output_dir / "data/registre_debat.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {"status": "invalid", "safe_to_reuse": False}
+    if not isinstance(manifest, dict) or not isinstance(registry, dict):
+        return {"status": "invalid", "safe_to_reuse": False}
+    if not isinstance(registry.get("debate"), dict):
+        return {"status": "invalid", "safe_to_reuse": False}
+    actual_id = str(manifest.get("debate_id") or "")
+    registry_id = str((registry.get("debate") or {}).get("id") or "")
+    if actual_id != expected_debate_id or registry_id != expected_debate_id:
+        return {"status": "mismatch", "safe_to_reuse": False}
+    return {"status": "unverified", "safe_to_reuse": False}
+
+
 def build_corpus(
     source: Path,
     output_dir: Path,
@@ -691,10 +723,14 @@ def build_corpus(
         debate_title, debate_title_changes = normalize_title(debate_title_source)
         debate_id = canonical_debate_id(debate_id or debate_title)
         short_code = validate_short_code(short_code) if short_code else derive_short_code(debate_id)
-        output_dir = output_dir.expanduser().resolve()
+        output_dir = output_dir.expanduser()
+        if output_dir.is_symlink():
+            raise CorpusInitError(f"Le dossier de sortie est un lien symbolique : {output_dir}")
+        output_dir = output_dir.resolve()
         if output_dir.exists():
             if not overwrite:
-                raise CorpusInitError(f"Le dossier existe déjà : {output_dir}; utiliser --overwrite")
+                state = inspect_existing_build(output_dir, expected_debate_id=debate_id)["status"]
+                raise CorpusInitError(f"Le dossier existe déjà : {output_dir}; état={state}; utiliser --overwrite")
             shutil.rmtree(output_dir)
         output_dir.mkdir(parents=True)
 
