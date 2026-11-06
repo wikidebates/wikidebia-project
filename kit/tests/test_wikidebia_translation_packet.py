@@ -139,3 +139,38 @@ def test_packet_excludes_pages_covered_by_signed_memory_receipt(tmp_path: Path, 
     assert result["counts"]["unit_arguments"] == 1
     assert result["counts"]["memory_reused"] == 1
     assert result["memory_reuse"][0]["page_id"] == "A1"
+
+
+def test_packet_excludes_only_argument_with_current_signed_fragment_receipt(tmp_path: Path, monkeypatch):
+    project, workspace = _fixture(tmp_path, monkeypatch)
+    review_path = workspace / "reviews/en/translation_review.json"
+    review = json.loads(review_path.read_text())
+    current = review["arguments"][0]
+    receipt = {
+        "schema": "wikidebia-translation-argument-fragment-application-1.0",
+        "status": "applied",
+        "debate_id": "debat_test",
+        "work_id": "EDIT-TEST-001",
+        "unit_id": "U001",
+        "page_id": "A1",
+        "fragment_sha256": "f" * 64,
+        "argument_after_sha256": packet._argument_hash(current),
+        "receipt_sha256": None,
+    }
+    receipt["receipt_sha256"] = sha_object({
+        key: value for key, value in receipt.items() if key != "receipt_sha256"
+    })
+    path = workspace / "audits/translation-fragments/A1-application.json"
+    path.parent.mkdir(parents=True)
+    path.write_text(json.dumps(receipt), encoding="utf-8")
+
+    result = packet.build_packet(project, "debat_test", "EDIT-TEST-001", "U001")
+
+    assert result["arguments"] == []
+    assert result["counts"]["argument_fragments_applied"] == 1
+    assert result["argument_fragments_applied"][0]["page_id"] == "A1"
+
+    review["arguments"][0]["translation"]["canonical_title"] = "Changed later"
+    review_path.write_text(json.dumps(review), encoding="utf-8")
+    stale = packet.build_packet(project, "debat_test", "EDIT-TEST-001", "U001")
+    assert [row["id"] for row in stale["arguments"]] == ["A1"]

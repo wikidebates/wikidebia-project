@@ -47,6 +47,45 @@ def _source_hash(metadata: Mapping[str, Any], content: Mapping[str, Any]) -> str
     return sha256_bytes(canonical_json({"metadata": metadata, "content": content}))
 
 
+def _argument_hash(row: Mapping[str, Any]) -> str:
+    return sha256_bytes(canonical_json(row))
+
+
+def verified_fragment_coverage(
+    workspace: Path, review_by_id: Mapping[str, Mapping[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    covered: dict[str, dict[str, Any]] = {}
+    root = workspace / "audits/translation-fragments"
+    if not root.is_dir():
+        return covered
+    for path in sorted(root.glob("*-application.json")):
+        try:
+            receipt = load_json(path, "reçu de fragment d’argument")
+        except CorpusBuildError:
+            continue
+        body = dict(receipt)
+        claimed = body.pop("receipt_sha256", None)
+        page_id = str(receipt.get("page_id") or "")
+        current = review_by_id.get(page_id)
+        if (
+            receipt.get("schema") != "wikidebia-translation-argument-fragment-application-1.0"
+            or receipt.get("status") != "applied"
+            or not claimed
+            or claimed != sha_object(body)
+            or current is None
+            or path.name != f"{page_id}-application.json"
+            or receipt.get("argument_after_sha256") != _argument_hash(current)
+        ):
+            continue
+        covered[page_id] = {
+            "page_id": page_id,
+            "fragment_sha256": receipt.get("fragment_sha256"),
+            "receipt_sha256": claimed,
+            "argument_after_sha256": receipt.get("argument_after_sha256"),
+        }
+    return covered
+
+
 def _render_markdown(packet: Mapping[str, Any]) -> str:
     rows = [
         "# Paquet d’unité de traduction anglaise",
@@ -78,6 +117,10 @@ def _render_markdown(packet: Mapping[str, Any]) -> str:
         rows.extend(["", "## Entrées obsolètes refusées", ""])
         for stale in packet["memory_stale_rejected"]:
             rows.append(f"- `{stale['page_id']}` : source française modifiée")
+    if packet.get("argument_fragments_applied"):
+        rows.extend(["", "## Fragments d’argument déjà appliqués", ""])
+        for fragment in packet["argument_fragments_applied"]:
+            rows.append(f"- `{fragment['page_id']}` : `{fragment['receipt_sha256']}`")
     rows.extend([
         "",
         "Le JSON contient uniquement cette unité, ses sources françaises courantes,",
@@ -137,6 +180,7 @@ def build_packet(
     )
     reused_by_id = {str(row["page_id"]): row for row in reused_rows}
     stale_by_id = {str(row["page_id"]): row for row in stale_rows}
+    fragment_by_id = verified_fragment_coverage(workspace, review_by_id)
     arguments: list[dict[str, Any]] = []
     changed_sources = 0
     for page_id in page_ids:
@@ -145,7 +189,7 @@ def build_packet(
         content = content_by_id.get(page_id)
         if row is None or metadata is None or content is None:
             raise TranslationPacketError(f"Données de traduction ou source absentes : {page_id}")
-        if page_id in reused_by_id:
+        if page_id in reused_by_id or page_id in fragment_by_id:
             continue
         prepared = ((row.get("translation") or {}).get("french") or {})
         prepared_hash = _source_hash(
@@ -194,6 +238,10 @@ def build_packet(
         "arguments": arguments,
         "memory_reuse": [copy.deepcopy(reused_by_id[page_id]) for page_id in page_ids if page_id in reused_by_id],
         "memory_stale_rejected": [copy.deepcopy(stale_by_id[page_id]) for page_id in page_ids if page_id in stale_by_id],
+        "argument_fragments_applied": [
+            copy.deepcopy(fragment_by_id[page_id])
+            for page_id in page_ids if page_id in fragment_by_id
+        ],
         "vocabulary": vocabulary,
         "relation_labels": relation_labels,
         "counts": {
@@ -201,6 +249,7 @@ def build_packet(
             "unit_arguments": len(page_ids),
             "memory_reused": sum(page_id in reused_by_id for page_id in page_ids),
             "memory_stale_rejected": sum(page_id in stale_by_id for page_id in page_ids),
+            "argument_fragments_applied": sum(page_id in fragment_by_id for page_id in page_ids),
             "changed_french_sources": changed_sources,
             "vocabulary": len(vocabulary),
             "relation_labels": len(relation_labels),

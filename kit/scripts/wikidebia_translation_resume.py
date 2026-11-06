@@ -54,6 +54,7 @@ def write_resume_capsule(
     *,
     event: str = "status_check",
     unit_id: str | None = None,
+    page_id: str | None = None,
 ) -> dict[str, Any]:
     project_root = project_root.expanduser().resolve()
     debate_id = validate_debate_id(debate_id)
@@ -80,7 +81,16 @@ def write_resume_capsule(
         memory_ref["counts"] = memory.get("counts") or {}
         artifacts["memory_reuse"] = memory_ref
 
+    fragment_selection, fragment_selection_ref = _signed_artifact(
+        project_root,
+        workspace / "audits/translation-fragment-next.json",
+        "selection_sha256",
+    )
+    if fragment_selection_ref:
+        artifacts["fragment_selection"] = fragment_selection_ref
+
     active_unit = unit_id or str((selection or {}).get("unit_id") or "") or None
+    active_page = page_id or str((fragment_selection or {}).get("page_id") or "") or None
     packet = patch = application = None
     if active_unit:
         packet, packet_ref = _signed_artifact(
@@ -115,6 +125,32 @@ def write_resume_capsule(
             application_ref["patch_sha256"] = application.get("patch_sha256")
             artifacts["application"] = application_ref
 
+    fragment = fragment_application = None
+    if active_page:
+        fragment_path = workspace / f"reviews/en/argument-fragments/{active_page}.json"
+        if fragment_path.is_file():
+            fragment = load_json(fragment_path, "fragment d’argument")
+            fragment_ref = {
+                "path": relative_to_project(fragment_path, project_root),
+                "status": fragment.get("status"),
+                "base_argument_sha256": fragment.get("base_argument_sha256"),
+            }
+            if fragment.get("status") == "sealed":
+                if not _signed(fragment, "fragment_sha256"):
+                    raise TranslationResumeError("Signature du fragment d’argument invalide")
+                fragment_ref["fragment_sha256"] = fragment["fragment_sha256"]
+            else:
+                fragment_ref["content_sha256"] = sha256_bytes(canonical_json(fragment))
+            artifacts["argument_fragment"] = fragment_ref
+        fragment_application, fragment_application_ref = _signed_artifact(
+            project_root,
+            workspace / f"audits/translation-fragments/{active_page}-application.json",
+            "receipt_sha256",
+        )
+        if fragment_application_ref:
+            fragment_application_ref["fragment_sha256"] = fragment_application.get("fragment_sha256")
+            artifacts["fragment_application"] = fragment_application_ref
+
     next_action = "prepare_next_unit"
     next_command: str | None = (
         f"./wikidebia corpus-workspace-translation-next {debate_id} --work-id {work_id}"
@@ -141,6 +177,33 @@ def write_resume_capsule(
                 f"--work-id {work_id} --unit-id {active_unit} --apply "
                 f"--confirm-patch-sha256 {patch_sha256}"
             )
+    if fragment_selection and fragment_selection.get("status") in {
+        "unit_arguments_complete", "all_arguments_complete",
+    }:
+        next_action = str(fragment_selection.get("next_action") or "prepare_unit_completion")
+        next_command = fragment_selection.get("next_command")
+    elif fragment and fragment.get("status") == "draft":
+        next_action = "edit_translation_argument_fragment"
+        next_command = None
+        edit_path = artifacts["argument_fragment"]["path"]
+    elif fragment and fragment.get("status") == "sealed":
+        fragment_sha256 = str(fragment.get("fragment_sha256") or "")
+        if (
+            fragment_application
+            and fragment_application.get("fragment_sha256") == fragment_sha256
+        ):
+            next_action = "prepare_next_argument_fragment"
+            next_command = (
+                f"./wikidebia corpus-workspace-translation-fragment {debate_id} "
+                f"--work-id {work_id} --prepare-next"
+            )
+        else:
+            next_action = "apply_translation_argument_fragment"
+            next_command = (
+                f"./wikidebia corpus-workspace-translation-fragment {debate_id} "
+                f"--work-id {work_id} --unit-id {active_unit} --page-id {active_page} "
+                f"--apply --confirm-fragment-sha256 {fragment_sha256}"
+            )
 
     capsule: dict[str, Any] = {
         "schema": "wikidebia-translation-resume-capsule-1.0",
@@ -152,6 +215,7 @@ def write_resume_capsule(
         "review_status": review.get("status"),
         "review_content_sha256": sha256_bytes(canonical_json(review)),
         "active_unit_id": active_unit,
+        "active_page_id": active_page,
         "artifacts": artifacts,
         "next_action": next_action,
         "next_command": next_command,
@@ -175,6 +239,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--work-id", required=True)
     parser.add_argument("--event", default="status_check")
     parser.add_argument("--unit-id")
+    parser.add_argument("--page-id")
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
     parser.add_argument("--machine-readable", action="store_true")
     return parser
@@ -184,7 +249,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     result = write_resume_capsule(
         args.project_root, args.debate_id, args.work_id,
-        event=args.event, unit_id=args.unit_id,
+        event=args.event, unit_id=args.unit_id, page_id=args.page_id,
     )
     print(json.dumps(result, ensure_ascii=False, sort_keys=True) if args.machine_readable else json.dumps(result, ensure_ascii=False, indent=2))
     return 0
