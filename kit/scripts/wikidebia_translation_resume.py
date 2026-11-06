@@ -177,7 +177,11 @@ def write_resume_capsule(
                 f"--work-id {work_id} --unit-id {active_unit} --apply "
                 f"--confirm-patch-sha256 {patch_sha256}"
             )
-    if fragment_selection and fragment_selection.get("status") in {
+    if fragment_selection and fragment_selection.get("status") == "context_budget_exceeded":
+        next_action = "increase_token_budget_or_split_argument_fields"
+        next_command = None
+        edit_path = None
+    elif fragment_selection and fragment_selection.get("status") in {
         "unit_arguments_complete", "all_arguments_complete",
     }:
         next_action = str(fragment_selection.get("next_action") or "prepare_unit_completion")

@@ -101,6 +101,27 @@ def test_next_fragment_contains_one_argument_and_reduces_context(tmp_path: Path,
     assert context["argument_source"]["id"] == "A1"
     assert "translation" not in context["argument_source"]
     assert context["fragment"]["translation"]["status"] == "pending"
+    assert context["token_budget"]["fits"] is True
+    assert context["token_budget"]["estimator"] == "unicode_conservative_v1"
+    assert context["token_budget"]["network_required"] is False
+
+
+def test_next_fragment_blocks_before_writing_context_over_budget(tmp_path: Path, monkeypatch):
+    project, workspace, _review_path = _fixture(tmp_path, monkeypatch)
+
+    result = fragment.prepare_next_fragment(
+        project, "debat_test", "EDIT-TEST-001",
+        max_context_tokens=1024, response_reserve_tokens=800,
+    )
+
+    assert result["status"] == "context_budget_exceeded"
+    assert result["token_budget"]["fits"] is False
+    assert result["token_budget"]["truncated"] is False
+    assert "context_path" not in result
+    assert not (workspace / "audits/translation-fragments/A1-context.json").exists()
+    selection = json.loads((workspace / "audits/translation-fragment-next.json").read_text())
+    body = dict(selection)
+    assert body.pop("selection_sha256") == sha_object(body)
 
 
 def test_two_prepared_arguments_apply_independently(tmp_path: Path, monkeypatch):

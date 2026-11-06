@@ -30,6 +30,13 @@ from wikidebia_translation_packet import (
 from wikidebia_translation_checkpoint import export_checkpoint
 from wikidebia_translation_preflight import analyze_patch
 from wikidebia_translation_resume import write_resume_capsule
+from wikidebia_token_budget import (
+    DEFAULT_MAX_CONTEXT_TOKENS,
+    DEFAULT_RESPONSE_RESERVE_TOKENS,
+    SUPPORTED_ESTIMATORS,
+    TokenBudgetError,
+    plan_token_budget,
+)
 from wikidebia_translation_worklist import _pending_nested
 from wikidebia_update import sha_object
 
@@ -315,7 +322,13 @@ def apply_fragment(
 
 
 def prepare_next_fragment(
-    project_root: Path, debate_id: str, work_id: str,
+    project_root: Path,
+    debate_id: str,
+    work_id: str,
+    *,
+    max_context_tokens: int = DEFAULT_MAX_CONTEXT_TOKENS,
+    response_reserve_tokens: int = DEFAULT_RESPONSE_RESERVE_TOKENS,
+    token_estimator: str = "unicode_conservative_v1",
 ) -> dict[str, Any]:
     project_root = project_root.expanduser().resolve()
     debate_id = validate_debate_id(debate_id)
@@ -384,13 +397,7 @@ def prepare_next_fragment(
         saved_fragment = load_json(
             project_root / fragment["fragment_path"], "fragment d’argument",
         )
-        context: dict[str, Any] = {
-            "schema": "wikidebia-translation-argument-context-1.0",
-            "debate_id": debate_id,
-            "work_id": work_id,
-            "unit_id": unit_id,
-            "page_id": page_id,
-            "packet_sha256": packet["packet_sha256"],
+        payload: dict[str, Any] = {
             "argument_source": compact_source,
             "fragment": saved_fragment,
             "vocabulary": [
@@ -402,27 +409,58 @@ def prepare_next_fragment(
                 if str(row.get("source_page_id")) == page_id
                 or str(row.get("target_node_id")) == page_id
             ],
+        }
+        token_budget = plan_token_budget(
+            payload,
+            max_context_tokens=max_context_tokens,
+            response_reserve_tokens=response_reserve_tokens,
+            estimator=token_estimator,
+        )
+        context: dict[str, Any] = {
+            "schema": "wikidebia-translation-argument-context-1.0",
+            "debate_id": debate_id,
+            "work_id": work_id,
+            "unit_id": unit_id,
+            "page_id": page_id,
+            "packet_sha256": packet["packet_sha256"],
+            **payload,
+            "token_budget": token_budget,
             "remote_access_performed": False,
             "remote_write_performed": False,
         }
         context["context_sha256"] = sha_object(context)
         context_path = workspace / "audits/translation-fragments" / f"{page_id}-context.json"
-        write_json(context_path, context)
         packet_path = workspace / "audits/translation-packets" / f"{unit_id}.json"
+        if token_budget["fits"]:
+            write_json(context_path, context)
+        elif context_path.exists():
+            context_path.unlink()
         result = {
             "schema": SELECTION_SCHEMA,
-            "status": "argument_fragment_prepared",
+            "status": (
+                "argument_fragment_prepared" if token_budget["fits"]
+                else "context_budget_exceeded"
+            ),
             "debate_id": debate_id,
             "work_id": work_id,
             "unit_id": unit_id,
             "page_id": page_id,
             "fragment_path": fragment["fragment_path"],
-            "context_path": relative_to_project(context_path, project_root),
-            "context_sha256": context["context_sha256"],
+            **({
+                "context_path": relative_to_project(context_path, project_root),
+                "context_sha256": context["context_sha256"],
+            } if token_budget["fits"] else {}),
             "unit_packet_bytes": packet_path.stat().st_size,
-            "argument_context_bytes": context_path.stat().st_size,
-            "avoided_context_bytes": max(0, packet_path.stat().st_size - context_path.stat().st_size),
-            "next_action": "edit_translation_argument_fragment",
+            "argument_context_bytes": context_path.stat().st_size if token_budget["fits"] else None,
+            "avoided_context_bytes": (
+                max(0, packet_path.stat().st_size - context_path.stat().st_size)
+                if token_budget["fits"] else None
+            ),
+            "token_budget": token_budget,
+            "next_action": (
+                "edit_translation_argument_fragment" if token_budget["fits"]
+                else "increase_token_budget_or_split_argument_fields"
+            ),
             "next_command": None,
             "remote_access_performed": False,
             "remote_write_performed": False,
@@ -449,6 +487,15 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--reviewer")
     parser.add_argument("--note")
     parser.add_argument("--confirm-fragment-sha256")
+    parser.add_argument("--max-context-tokens", type=int, default=DEFAULT_MAX_CONTEXT_TOKENS)
+    parser.add_argument(
+        "--response-reserve-tokens", type=int,
+        default=DEFAULT_RESPONSE_RESERVE_TOKENS,
+    )
+    parser.add_argument(
+        "--token-estimator", choices=SUPPORTED_ESTIMATORS,
+        default="unicode_conservative_v1",
+    )
     parser.add_argument("--machine-readable", action="store_true")
     return parser
 
@@ -456,7 +503,12 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.prepare_next:
-        result = prepare_next_fragment(args.project_root, args.debate_id, args.work_id)
+        result = prepare_next_fragment(
+            args.project_root, args.debate_id, args.work_id,
+            max_context_tokens=args.max_context_tokens,
+            response_reserve_tokens=args.response_reserve_tokens,
+            token_estimator=args.token_estimator,
+        )
     else:
         if not args.unit_id or not args.page_id:
             raise TranslationFragmentError("--unit-id et --page-id sont obligatoires pour cette action")
@@ -490,7 +542,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "status", "debate_id", "work_id", "unit_id", "page_id",
             "fragment_path", "fragment_sha256", "receipt_path", "receipt_sha256",
             "context_path", "context_sha256", "unit_packet_bytes",
-            "argument_context_bytes", "avoided_context_bytes", "next_action", "next_command",
+            "argument_context_bytes", "avoided_context_bytes", "token_budget",
+            "next_action", "next_command",
         ) if result.get(key) is not None
     }
     compact.update({
@@ -503,14 +556,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         "remote_write_performed": False,
     })
     print(json.dumps(compact, ensure_ascii=False, sort_keys=True) if args.machine_readable else json.dumps(compact, ensure_ascii=False, indent=2))
-    return 0
+    return 2 if result.get("status") == "context_budget_exceeded" else 0
 
 
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
     except (
-        TranslationFragmentError, TranslationPacketError, WorkspaceError, CorpusBuildError,
+        TranslationFragmentError, TranslationPacketError, TokenBudgetError,
+        WorkspaceError, CorpusBuildError,
         OSError, ValueError, KeyError,
     ) as exc:
         print(f"FRAGMENT DE TRADUCTION BLOQUÉ : {exc}", file=os.sys.stderr)

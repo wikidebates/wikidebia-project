@@ -2198,6 +2198,9 @@ def corpus_workspace_translation_fragment(
     reviewer: str | None,
     note: str | None,
     confirm_fragment_sha256: str | None,
+    max_context_tokens: int,
+    response_reserve_tokens: int,
+    token_estimator: str,
 ) -> int:
     script = root / "kit" / "scripts" / "wikidebia_translation_fragment.py"
     if not script.is_file():
@@ -2223,6 +2226,11 @@ def corpus_workspace_translation_fragment(
         command.extend(["--note", note])
     if confirm_fragment_sha256:
         command.extend(["--confirm-fragment-sha256", confirm_fragment_sha256])
+    command.extend([
+        "--max-context-tokens", str(max_context_tokens),
+        "--response-reserve-tokens", str(response_reserve_tokens),
+        "--token-estimator", token_estimator,
+    ])
     return run(command, cwd=root, check=False).returncode
 
 
@@ -2917,6 +2925,12 @@ def build_parser() -> argparse.ArgumentParser:
     fragment_parser.add_argument("--reviewer")
     fragment_parser.add_argument("--note")
     fragment_parser.add_argument("--confirm-fragment-sha256")
+    fragment_parser.add_argument("--max-context-tokens", type=int, default=32000)
+    fragment_parser.add_argument("--response-reserve-tokens", type=int, default=8000)
+    fragment_parser.add_argument(
+        "--token-estimator", choices=("unicode_conservative_v1",),
+        default="unicode_conservative_v1",
+    )
 
     checkpoint_parser = sub.add_parser(
         "corpus-workspace-translation-checkpoint",
@@ -3264,6 +3278,9 @@ def main(argv: list[str] | None = None) -> int:
             seal=args.seal, apply=args.apply, overwrite=args.overwrite,
             reviewer=args.reviewer, note=args.note,
             confirm_fragment_sha256=args.confirm_fragment_sha256,
+            max_context_tokens=args.max_context_tokens,
+            response_reserve_tokens=args.response_reserve_tokens,
+            token_estimator=args.token_estimator,
         )
 
     if args.command == "corpus-workspace-translation-checkpoint":
