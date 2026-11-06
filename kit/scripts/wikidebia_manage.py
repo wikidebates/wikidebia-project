@@ -2183,6 +2183,49 @@ def global_resume(
     return run(command, cwd=root, check=False).returncode
 
 
+def corpus_workspace_translation_fragment(
+    root: Path,
+    debate_id: str,
+    *,
+    work_id: str,
+    unit_id: str | None,
+    page_id: str | None,
+    prepare_next: bool,
+    prepare: bool,
+    seal: bool,
+    apply: bool,
+    overwrite: bool,
+    reviewer: str | None,
+    note: str | None,
+    confirm_fragment_sha256: str | None,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_translation_fragment.py"
+    if not script.is_file():
+        raise ManagementError("Outil de fragment de traduction absent du kit")
+    command = [
+        python_command(root), str(script), debate_id,
+        "--work-id", work_id, "--project-root", str(root), "--machine-readable",
+    ]
+    action = (
+        "--prepare-next" if prepare_next else "--prepare" if prepare
+        else "--seal" if seal else "--apply"
+    )
+    command.append(action)
+    if unit_id:
+        command.extend(["--unit-id", unit_id])
+    if page_id:
+        command.extend(["--page-id", page_id])
+    if overwrite:
+        command.append("--overwrite")
+    if reviewer:
+        command.extend(["--reviewer", reviewer])
+    if note:
+        command.extend(["--note", note])
+    if confirm_fragment_sha256:
+        command.extend(["--confirm-fragment-sha256", confirm_fragment_sha256])
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_translation_preflight(
     root: Path, debate_id: str, *, work_id: str, unit_id: str,
 ) -> int:
@@ -2799,6 +2842,24 @@ def build_parser() -> argparse.ArgumentParser:
     resume_parser.add_argument("--debate-id")
     resume_parser.add_argument("--work-id")
 
+    fragment_parser = sub.add_parser(
+        "corpus-workspace-translation-fragment",
+        help="Préparer, sceller ou appliquer une traduction argument par argument",
+    )
+    fragment_parser.add_argument("debate_id")
+    fragment_parser.add_argument("--work-id", required=True)
+    fragment_parser.add_argument("--unit-id")
+    fragment_parser.add_argument("--page-id")
+    fragment_action = fragment_parser.add_mutually_exclusive_group(required=True)
+    fragment_action.add_argument("--prepare-next", action="store_true")
+    fragment_action.add_argument("--prepare", action="store_true")
+    fragment_action.add_argument("--seal", action="store_true")
+    fragment_action.add_argument("--apply", action="store_true")
+    fragment_parser.add_argument("--overwrite", action="store_true")
+    fragment_parser.add_argument("--reviewer")
+    fragment_parser.add_argument("--note")
+    fragment_parser.add_argument("--confirm-fragment-sha256")
+
     translation_preflight_parser = sub.add_parser(
         "corpus-workspace-translation-preflight",
         help="Contrôler mécaniquement un correctif avant son scellement",
@@ -3121,6 +3182,16 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "resume":
         return global_resume(
             root, debate_id=args.debate_id, work_id=args.work_id,
+        )
+
+    if args.command == "corpus-workspace-translation-fragment":
+        return corpus_workspace_translation_fragment(
+            root, args.debate_id, work_id=args.work_id,
+            unit_id=args.unit_id, page_id=args.page_id,
+            prepare_next=args.prepare_next, prepare=args.prepare,
+            seal=args.seal, apply=args.apply, overwrite=args.overwrite,
+            reviewer=args.reviewer, note=args.note,
+            confirm_fragment_sha256=args.confirm_fragment_sha256,
         )
 
     if args.command == "corpus-workspace-translation-preflight":

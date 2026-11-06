@@ -1148,6 +1148,23 @@ def test_global_resume_command_needs_no_identifier_and_accepts_filters():
     assert selected.work_id == "EDIT-TEST-001"
 
 
+def test_translation_fragment_command_exposes_argument_granularity():
+    automatic = module.build_parser().parse_args([
+        "corpus-workspace-translation-fragment", "debat_test",
+        "--work-id", "EDIT-TEST-001", "--prepare-next",
+    ])
+    explicit = module.build_parser().parse_args([
+        "corpus-workspace-translation-fragment", "debat_test",
+        "--work-id", "EDIT-TEST-001", "--unit-id", "U001",
+        "--page-id", "A0001", "--prepare",
+    ])
+    assert automatic.prepare_next is True
+    assert automatic.page_id is None
+    assert explicit.unit_id == "U001"
+    assert explicit.page_id == "A0001"
+    assert explicit.prepare is True
+
+
 def test_translation_preflight_command_is_exposed_by_manager():
     args = module.build_parser().parse_args([
         "corpus-workspace-translation-preflight", "debat_test",

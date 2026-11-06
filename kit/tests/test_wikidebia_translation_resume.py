@@ -105,3 +105,23 @@ def test_capsule_rejects_tampered_signed_artifact(tmp_path: Path, monkeypatch):
 
     with pytest.raises(resume.TranslationResumeError, match="Signature invalide"):
         resume.write_resume_capsule(project, "debat_test", "EDIT-TEST-001")
+
+
+def test_capsule_points_to_active_argument_fragment(tmp_path: Path, monkeypatch):
+    project, workspace, _patch = _fixture(tmp_path, monkeypatch)
+    _write(workspace / "audits/translation-fragment-next.json", _signed({
+        "schema": "fragment-selection", "status": "argument_fragment_prepared",
+        "unit_id": "U001", "page_id": "A1", "selection_sha256": None,
+    }, "selection_sha256"))
+    _write(workspace / "reviews/en/argument-fragments/A1.json", {
+        "schema": "fragment", "status": "draft", "base_argument_sha256": "a" * 64,
+        "fragment_sha256": None,
+    })
+
+    result = resume.write_resume_capsule(
+        project, "debat_test", "EDIT-TEST-001", unit_id="U001", page_id="A1",
+    )
+
+    assert result["active_page_id"] == "A1"
+    assert result["next_action"] == "edit_translation_argument_fragment"
+    assert result["edit_path"].endswith("reviews/en/argument-fragments/A1.json")
