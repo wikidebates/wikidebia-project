@@ -2,7 +2,10 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
+import socket
 import sys
+import time
 from pathlib import Path
 
 import pytest
@@ -306,6 +309,79 @@ def test_11_missing_delete_right_stops_before_write(tmp_path):
     else:
         raise AssertionError("delete sans droit accepté")
     assert not any(event[0] in {"write","delete","move"} for event in adapter.events)
+
+
+def test_live_legacy_update_lock_is_never_stolen(tmp_path):
+    config, config_path = make_fixture(tmp_path, old_pages=[], new_pages=[])
+    lock_path = tmp_path / ".state" / "locks" / "demo.lock"
+    lock_path.parent.mkdir(parents=True)
+    lock_path.write_text(str(os.getpid()), encoding="utf-8")
+
+    executor = module.PlanExecutor(config, FakeAdapter(), config_path)
+    with pytest.raises(module.UpdateError, match="déjà verrouillée"):
+        executor._acquire_lock()
+
+    assert lock_path.read_text(encoding="utf-8") == str(os.getpid())
+
+
+def test_dead_update_lock_is_recovered_and_audited(tmp_path):
+    config, config_path = make_fixture(tmp_path, old_pages=[], new_pages=[])
+    lock_path = tmp_path / ".state" / "locks" / "demo.lock"
+    lock_path.parent.mkdir(parents=True)
+    stale = {
+        "schema": module.UPDATE_LOCK_SCHEMA,
+        "debate_id": "demo",
+        "owner_token": "stale-owner",
+        "pid": 2147483647,
+        "hostname": socket.gethostname(),
+        "process_start_marker": "1",
+        "created_at": "2026-01-01T00:00:00Z",
+    }
+    lock_path.write_text(json.dumps(stale), encoding="utf-8")
+
+    executor = module.PlanExecutor(config, FakeAdapter(), config_path)
+    lock = executor._acquire_lock()
+    current = json.loads(lock_path.read_text(encoding="utf-8"))
+    assert current["owner_token"] == lock[1]
+    assert current["pid"] == os.getpid()
+    recovery = json.loads(lock_path.with_suffix(".recoveries.jsonl").read_text(encoding="utf-8"))
+    assert recovery["reason"] == "dead_local_process"
+    assert len(recovery["stale_lock_sha256"]) == 64
+
+    executor._release_lock(lock)
+    assert not lock_path.exists()
+
+
+def test_lock_release_does_not_remove_another_owner(tmp_path):
+    config, config_path = make_fixture(tmp_path, old_pages=[], new_pages=[])
+    executor = module.PlanExecutor(config, FakeAdapter(), config_path)
+    lock = executor._acquire_lock()
+    lock_path, _ = lock
+    replacement = json.loads(lock_path.read_text(encoding="utf-8"))
+    replacement["owner_token"] = "replacement-owner"
+    lock_path.write_text(json.dumps(replacement), encoding="utf-8")
+
+    executor._release_lock(lock)
+
+    assert json.loads(lock_path.read_text(encoding="utf-8"))["owner_token"] == "replacement-owner"
+
+
+def test_fresh_malformed_lock_is_not_recovered_but_expired_one_is(tmp_path):
+    config, config_path = make_fixture(tmp_path, old_pages=[], new_pages=[])
+    config["update_lock_stale_seconds"] = 60
+    lock_path = tmp_path / ".state" / "locks" / "demo.lock"
+    lock_path.parent.mkdir(parents=True)
+    lock_path.write_text("truncated", encoding="utf-8")
+    executor = module.PlanExecutor(config, FakeAdapter(), config_path)
+
+    with pytest.raises(module.UpdateError, match="déjà verrouillée"):
+        executor._acquire_lock()
+    old = time.time() - 61
+    os.utime(lock_path, (old, old))
+    lock = executor._acquire_lock()
+
+    assert json.loads(lock_path.with_suffix(".recoveries.jsonl").read_text(encoding="utf-8"))["reason"] == "expired_malformed_lock"
+    executor._release_lock(lock)
 
 
 def test_12_french_then_english_sessions_are_sequential(tmp_path):
