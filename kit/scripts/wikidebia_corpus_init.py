@@ -723,7 +723,10 @@ def build_corpus(
         debate_title, debate_title_changes = normalize_title(debate_title_source)
         debate_id = canonical_debate_id(debate_id or debate_title)
         short_code = validate_short_code(short_code) if short_code else derive_short_code(debate_id)
-        output_dir = output_dir.expanduser().resolve()
+        output_dir = output_dir.expanduser()
+        if output_dir.is_symlink():
+            raise CorpusInitError(f"Le dossier de sortie est un lien symbolique : {output_dir}")
+        output_dir = output_dir.resolve()
         if output_dir.exists():
             if not overwrite:
                 state = inspect_existing_build(output_dir, expected_debate_id=debate_id)["status"]
