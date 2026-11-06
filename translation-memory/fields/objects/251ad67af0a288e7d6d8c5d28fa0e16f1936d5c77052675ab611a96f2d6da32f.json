@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5d96cfba7e0dc04352ac5269a0f41d36d24ae83b3b84a83959be1c00452b18a4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La Cancel culture est une arme du féminisme radical",
+    "identity_sha256": "7984e1e533809ed6a508f103462e10f5d8637b4b27c1c231ab79d25d6c0de93e"
+  },
+  "source_value": "La Cancel culture est une arme du féminisme radical",
+  "source_value_sha256": "4ea968344072aebf16009b9ab961f9ef8372c397ba2e404d595177a35c0c1af4",
+  "target_value": "Cancel culture is a weapon of radical feminism",
+  "target_value_sha256": "5ba3270b78f199ccc960e1730d190a53adf2b0925d297a6deaf509db1a526697",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0123",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "251ad67af0a288e7d6d8c5d28fa0e16f1936d5c77052675ab611a96f2d6da32f"
+}

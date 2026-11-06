@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "483532a24710e0aeea92d06bd1423fddca6bfc8df882f32af01b0e43bedb5296",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La Cancel culture est une arme du féminisme radical",
+    "identity_sha256": "7984e1e533809ed6a508f103462e10f5d8637b4b27c1c231ab79d25d6c0de93e"
+  },
+  "source_value": "[…] il faut faire une différence entre #MeToo, qui a permis de montrer l’ampleur des violences faites aux femmes, et #BalanceTonPorc, qui a livré des noms à la vindicte populaire […] Il faut donc pouvoir critiquer #BalanceTonPorc, au nom d’un féminisme plus juste",
+  "source_value_sha256": "ecf736746af6f9316f193908e46097e66fad1c973404d658130f6ed213862d08",
+  "target_value": "[...] a distinction must be made between #MeToo, which made it possible to show the scale of violence against women, and #BalanceTonPorc, which delivered names to popular vindictiveness [...] It must therefore be possible to criticize #BalanceTonPorc in the name of a fairer feminism.",
+  "target_value_sha256": "6e9913053b44f1d78ac471fa345788783ad2993a9a3cd531b9f555196420984c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0123",
+    "target_path": "citations/A0123-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "be12c5545c7e619bd7d5d276c8562f5a596d58e2a4a607f0728e24e8e4aa562e"
+}

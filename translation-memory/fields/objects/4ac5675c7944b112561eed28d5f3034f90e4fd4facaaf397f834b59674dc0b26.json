@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "811d9257f368e04920211f00899fca22cd1080316b1397399c80014af64aa95a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les médias véhiculent des représentations stéréotypées, voire objectifiantes, des femmes",
+    "identity_sha256": "801b5cf83a388cf40c372ae35df17ab176cc442ef4cca2065fce1fd6befaa8ee"
+  },
+  "source_value": "Représentation médiatiques stéréotypées, voire objectifiantes",
+  "source_value_sha256": "108a29d9b7327a63cf0ddcdbafbc6100872536d9abaa43064d0c00bf54106d3f",
+  "target_value": "Stereotypical and even objectifying media representations",
+  "target_value_sha256": "ea5d6053b6d01de68412510cb182256f4eb06ec0588703165dfc70ebc217ad15",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0052",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4ac5675c7944b112561eed28d5f3034f90e4fd4facaaf397f834b59674dc0b26"
+}

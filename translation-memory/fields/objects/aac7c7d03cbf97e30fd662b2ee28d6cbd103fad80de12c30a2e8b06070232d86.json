@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "81d24ca7a6c6e637fd4fd16a081b1f466e3ea192e24dd15ea7cf6d2ebd02f8bb",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La médecine a de nombreux biais genrés",
+    "identity_sha256": "a5aa01eee43fea42c8b4480673abd2a350427c4e5990a44d7db1de9238100b76"
+  },
+  "source_value": "La médecine a de nombreux biais genrés",
+  "source_value_sha256": "26dbf43b1f73ec50afa48c848829c5abb3c2403142efd1e26d1b847257168654",
+  "target_value": "Medicine has many gender biases",
+  "target_value_sha256": "3c547ee280dad7fee979a737700a0cee6f03742fafc7ab399dd69149be1604ca",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0005",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "aac7c7d03cbf97e30fd662b2ee28d6cbd103fad80de12c30a2e8b06070232d86"
+}

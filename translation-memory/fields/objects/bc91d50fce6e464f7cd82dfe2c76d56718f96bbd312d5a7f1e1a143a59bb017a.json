@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1f080c9aaaba1f53f05230c250ec3e9ef223f8f317c0c96f5fc13819b239f669",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le capitalisme est structurellement sexiste",
+    "identity_sha256": "09254ac4fc2cb2e18e5e6d11b63b1071c2b2d16544ea621663d9ff4adfc09705"
+  },
+  "source_value": "Le capitalisme est structurellement sexiste",
+  "source_value_sha256": "740a0db1e73c9bfe78cae2635315817b1016b25e8493533e1cb7c1212c76d0a1",
+  "target_value": "Capitalism is structurally sexist",
+  "target_value_sha256": "45fa53898ffde1e2bc18064194fb58fe43e49a21b10277e0777880a3f8bea8f9",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0076",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "bc91d50fce6e464f7cd82dfe2c76d56718f96bbd312d5a7f1e1a143a59bb017a"
+}

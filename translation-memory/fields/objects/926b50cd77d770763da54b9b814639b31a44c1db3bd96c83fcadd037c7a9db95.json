@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ed77591c647d0b50d7972365411f0674d6cd01bee1435473ff8ccf262d16293b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les fémonationalistes n'ont aucun problème avec le sexisme de l'occident",
+    "identity_sha256": "023c5760366bf88ff8e1c51769be1ebf8534aaaaf32f610693e62ca2792096ad"
+  },
+  "source_value": "Les fémonationalistes n'ont aucun problème avec le sexisme de l'occident",
+  "source_value_sha256": "33c418bdceaab2e1974da0c013fe6a9f89284588d77152498d3195bae9a72c0f",
+  "target_value": "Femonationalists have no problem with sexism in the West",
+  "target_value_sha256": "42099153656c959b1158cbc06eab7f78a2b319f27d025ffedd8d2aff1c0e226a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0235",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "926b50cd77d770763da54b9b814639b31a44c1db3bd96c83fcadd037c7a9db95"
+}

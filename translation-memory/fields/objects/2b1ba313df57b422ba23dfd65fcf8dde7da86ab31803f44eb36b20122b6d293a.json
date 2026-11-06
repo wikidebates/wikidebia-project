@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d231c633cc344d5582033f949cafd41eae3fad3162e0afda61745fdd3f51f2a3",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Notre culture est encore très largement hostile aux femmes",
+    "identity_sha256": "cb93f0d73525954c02cc8262fd5d9f3d6c7bbc27d5992eba55a580d99a50ee94"
+  },
+  "source_value": "Notre culture est encore très largement hostile aux femmes",
+  "source_value_sha256": "c64b05bdc88406d6aa630b1d0383cd4b11826fead1b07ac14ae0d5f5cce9dec9",
+  "target_value": "Our culture is still very widely hostile to women",
+  "target_value_sha256": "620bd5b3309e41420d57657091c2f0a145f05a49ccc3d9534d555867ab7384ac",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0004",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "2b1ba313df57b422ba23dfd65fcf8dde7da86ab31803f44eb36b20122b6d293a"
+}

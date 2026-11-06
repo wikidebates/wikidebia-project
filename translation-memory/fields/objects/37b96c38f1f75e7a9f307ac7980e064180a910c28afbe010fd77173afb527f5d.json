@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "eac6793c13efcd359b74d661cb78f2a70749cab0ad8cb4ca9d6abecda15ff0d0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme gomme les différences et empêche chacun et chacune de se réaliser",
+    "identity_sha256": "4e91c6bf5f6214c352e3a53e4b321fb12987389275a67a98de45a253f1d6e56b"
+  },
+  "source_value": "Le féminisme gomme les différences et empêche chacun et chacune de se réaliser",
+  "source_value_sha256": "94e1629623a238993995834022f2c6aba750f0ed20450ae9b94356b0a3f1f8ab",
+  "target_value": "Feminism erases differences and prevents everyone from fulfilling themselves",
+  "target_value_sha256": "25d6dabb427468e98fa69cc1745496c5fc4445ea31bb30f63da2218f1c4eb769",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0119",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "37b96c38f1f75e7a9f307ac7980e064180a910c28afbe010fd77173afb527f5d"
+}

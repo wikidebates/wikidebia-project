@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c66c8761d3a1f4f62f3a4c39e74967bb92c21047189e5c9d1c4596d2ff6c87cd",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le mouvement ouvrier a déjà montré son incapacité à prendre en charge le combat féministe",
+    "identity_sha256": "653e6797a47afaecf9844149c2326bbe51c0cf413fe8da8999e6b0ae41c84e20"
+  },
+  "source_value": "Le mouvement ouvrier a déjà montré son incapacité à prendre en charge le combat féministe",
+  "source_value_sha256": "d0d3734fcc12ca469700673c1f013232cacf4146d93234c620ec8d2374c9bf3c",
+  "target_value": "The labor movement has already demonstrated its inability to take responsibility for the feminist struggle",
+  "target_value_sha256": "71fe792188520a71d6a7a6b48021cfe05bd336695732bf027717020593232e86",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0177",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9236ec5e44ce95bda641b66e7a849eae97a0539fed9a52e06f36f2a1591ac317"
+}

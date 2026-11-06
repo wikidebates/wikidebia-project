@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "61d4e0fef4daef0751f10cb817b04da255b1a14993f6c36fcf260d229b87474d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le sexe des grandes figures historiques n'est pas important",
+    "identity_sha256": "d84ea85416887c3bd3cd9034e4cee0703143705c2769ce29c6d0000782ae5ff9"
+  },
+  "source_value": "Le sexe des grandes figures historiques n'est pas important",
+  "source_value_sha256": "5b1913e4ee5a0ddb6fc5d88cb2c2574fb12aef4ddce60205ad0ab74f02cad21d",
+  "target_value": "The sex of major historical figures is not important",
+  "target_value_sha256": "1fede3d63eb42a5a292cee74a6f455c236ae8c5104fa8934cf0a20ac0145fc14",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0140",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b4e1163b15f9ae832295ef99b51609e937b068ad3270e6e71f7b1f6d2893819d"
+}

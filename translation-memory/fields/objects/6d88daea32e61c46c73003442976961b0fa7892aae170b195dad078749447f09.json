@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fd25e206ff1bfcde6a52da9ed20cd12e257e561cf580f78ae59363f88a928240",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le concept de \"fémonationalisme\" désigne à la fois des \"féministes\" de droite et des féministes universalistes, ce qui n'est pas la même chose",
+    "identity_sha256": "26a94cbd2855166c6082045aae2b826b6e4a4e28514e5490e2cb8549106c9f0d"
+  },
+  "source_value": "Le concept de \"fémonationalisme\" désigne à la fois des \"féministes\" de droite et des féministes universalistes, ce qui n'est pas la même chose",
+  "source_value_sha256": "62960be75fc39b672addfa4a44927b1e0a53cbd04621fa512be403b8cfbb216b",
+  "target_value": "The concept of \"femonationalism\" designates both right-wing \"feminists\" and universalist feminists, which are not the same thing",
+  "target_value_sha256": "4cb5bb1f74ccb259fe98be6ed698f5cdfb023717f4d11450d2230828695cb4f5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0335",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6d88daea32e61c46c73003442976961b0fa7892aae170b195dad078749447f09"
+}

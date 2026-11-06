@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8838848ae964963d9ff8f2f30cc9823f8e76ad9ab3d323d8aa9cfb3d7a3a91b5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Défendre le choix d'être femme au foyer est le paravent d'une extrême droite se faisant passer pour féministe",
+    "identity_sha256": "850a50882e03ceb4b074b89a41c13fa94a9cdbdc65b561cfb5188b0d0b623d03"
+  },
+  "source_value": "[La] marotte [de Zemmour] du moment sur les femmes, c’est de '''louer notre capacité de choix''', celle de faire ce qu’on veut, à être [https://www.madmoizelle.com/motsclefs/childfree des mères si on le décide], à [https://www.madmoizelle.com/motsclefs/charge-mentale accomplir les tâches ménagères si on le souhaite]… \n\nLa veille du 8 mars, il a tenu cette ligne dans l’émission ''Face aux Françaises'' sur LCI et ça ne manque pas de piquant.\n\n\nCe petit malin d’ Eric Zemmour, qui met de la liberté de choix, un vocabulaire hautement féministe, là où ça l’arrange, par exemple, au hasard,  dans le foyer. « Dictature », hurle-t-il, en comparant donc la journaliste Ruth Elkrief à Staline, quand on lui parle, Ô scandale, '''de répartition équitable des tâches au sein du couple et de la cellule familiale'''. Bah oui, on n’est plus à une outrance près.",
+  "source_value_sha256": "80a29dc9f41b724f527c23ef38d13445f593e07d2b85600d1bad119de765534e",
+  "target_value": "[Zemmour’s] current obsession regarding women is to '''praise our capacity for choice''': doing what we want, [https://www.madmoizelle.com/motsclefs/childfree becoming mothers if we decide to], [https://www.madmoizelle.com/motsclefs/charge-mentale doing household chores if we wish], and so on.\n\nOn the eve of March 8, he took this line on LCI’s ''Face aux Françaises'', and it was not without irony.\n\nThat crafty Éric Zemmour inserts freedom of choice—highly feminist language—where it suits him, for example, entirely at random, in the home. “Dictatorship,” he shouts, thus comparing journalist Ruth Elkrief to Stalin when someone raises, oh the scandal, '''the equitable distribution of tasks within the couple and family unit'''. Indeed, he is well past worrying about one more excess.",
+  "target_value_sha256": "66f8d2a98632c6f18fde152fbf53f5c65ad5ed940069a417176d06aeb02b6892",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0257",
+    "target_path": "citations/A0257-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e2cc6813814f4451a649052a044a2983faeacb60766d76268b1a88df751f6ddc"
+}

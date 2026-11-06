@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "bd64c9318b945f43493bfa6b8d1fbe2ab1e3136605958de0ca291d25adc8c040",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme est en partie responsable du recul des droits des femmes aux USA",
+    "identity_sha256": "6149a7434b97abd1ebc12f9557b8f2805afe78391c3f21f62f936db7c1bafbb3"
+  },
+  "source_value": "Le féminisme est en partie responsable du recul des droits des femmes aux USA",
+  "source_value_sha256": "26330bd0531f70c66be2ce22c192e59a8584d135ea1a8d7f4f7333577d6e7db6",
+  "target_value": "Feminism is partly responsible for the rollback of women's rights in the United States",
+  "target_value_sha256": "04ca7715e8c1e417036df1eb40fa1d97c57a7ba79e9bc86fd61297b7e2b8044f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0061",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "541b528f28cd8bae459ef805601e0550c1e59dc5da01370894fa11294cbcd734"
+}

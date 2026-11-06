@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ce179aaf0db00bacfa66ebe2aa0db25bc11b308a45246c95c79f7aec49cdb187",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La révolution russe a porté au plus haut la lutte pour l'émancipation des femmes",
+    "identity_sha256": "9f9c29456d11ec46f9460f3af4c7a766104a03ed05fc6d00abe9e0bd85f99183"
+  },
+  "source_value": "La révolution russe a porté au plus haut la lutte pour l'émancipation des femmes",
+  "source_value_sha256": "9d11060ea920b3c066ad838ef592c392f62038a55cdcaea42776ab5a7e99c02c",
+  "target_value": "The Russian Revolution brought the struggle for women's emancipation to its highest point",
+  "target_value_sha256": "c813e3fc31f77699e2c0c883a4c48b7efe35df233bec647393229fe1cefd5e14",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0278",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "071024be8a84cd34dd87d6ab66b60243319b77327bbddb842914eeb78e776e4a"
+}

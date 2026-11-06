@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e737810962a6f900eabdfb991e599187ebc302c1c15c1ffb9f0988ef928e3b57",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La sortie de Naissance d'une nation a conduit à une renaissance du KKK",
+    "identity_sha256": "24d8606598f1179e552cb5e5c843d99969a6d02057d9ee7eaa91fa1801c7e8af"
+  },
+  "source_value": "La sortie de Naissance d'une nation a conduit à une renaissance du KKK",
+  "source_value_sha256": "4d01c54629f0be8c6afda1363c0f5a138468d1c21dd9aed4c3617adf49df994d",
+  "target_value": "The release of The Birth of a Nation led to a revival of the KKK",
+  "target_value_sha256": "d652a7757ac7d1b5ca18a5dc54a16ad052986f5e233c65e646337a9b08ff3e87",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0298",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b6baf41c9d3bfa614e938248c0d84b35ccbadb73da44f2debf3e11fdb612a37c"
+}

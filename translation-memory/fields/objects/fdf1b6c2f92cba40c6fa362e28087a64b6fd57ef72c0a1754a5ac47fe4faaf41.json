@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "75a65bb3f37eefe929db98911d70606f54d8dd9462fe4d55c8ae35519ac3091f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les critiques les plus vocales du \"wokisme\" sont réactionnaires",
+    "identity_sha256": "d6cf36960278feb08f78305b8a1b0587103e3c178824598e02e4836d8b79c358"
+  },
+  "source_value": "On trouve notamment Alain Finkielkraut, Jean-Michel Blanquer, Eric Zemmour, Vladimir Poutine, Marine Le Pen, Donald Trump, Ron De Santis, Bart de Wever, Georges-Louis Bouchez, autant de personnalités clairement pas connues pour être progressistes.\n\nCôté médias, on a bien évidemment toute la sphère de Bolloré, dont le positionnement politique du côté de la droite bien dure n'est plus à démontrer, qui s'est parfaitement illustrée dans cette obsession, ainsi que Valeurs Actuelles, Le Figaro et Marianne, trois journaux notoirement liés à la réactosphère. Et sans parler des influenceurs qui entre deux vagues de harcèlement de militants de gauche viennent se joindre à la fête.",
+  "source_value_sha256": "af8b33a520e8b50b9e99a6052629c1c17785274d5b12ccb5fe434e0a41170814",
+  "target_value": "They include Alain Finkielkraut, Jean-Michel Blanquer, Éric Zemmour, Vladimir Putin, Marine Le Pen, Donald Trump, Ron DeSantis, Bart De Wever, and Georges-Louis Bouchez—all figures clearly not known for being progressive.\n\nIn the media, there is of course the entire Bolloré sphere, whose hard-right political positioning no longer needs to be demonstrated and which has distinguished itself perfectly in this obsession, along with Valeurs Actuelles, Le Figaro, and Marianne, three newspapers notoriously connected to the reactionary sphere. This is without even mentioning the influencers who join the festivities between two waves of harassment against left-wing activists.",
+  "target_value_sha256": "796c58fbc9ebc914ac141e5a1913abed03208f295949d6317da1a088d4e49929",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0319",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "fdf1b6c2f92cba40c6fa362e28087a64b6fd57ef72c0a1754a5ac47fe4faaf41"
+}

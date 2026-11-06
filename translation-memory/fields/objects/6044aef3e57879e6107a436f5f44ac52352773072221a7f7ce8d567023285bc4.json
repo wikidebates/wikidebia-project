@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8673e28808a009dbf6dd24971e36dafa03321c37d8b4d909f672b3cf06a1543b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme bourgeois considère les femmes comme des victimes et pas comme des combattantes qui peuvent changer la société",
+    "identity_sha256": "4a6a741f07383b635494a303462c1204a352df3755bf4c97239d3d625daab4b6"
+  },
+  "source_value": "Elle [cette vision bourgeoise du féminisme] fait des femmes, comme des opprimés en général, des victimes qui subissent, plus que des combattants qui peuvent changer leur sort en même temps que toute la société.",
+  "source_value_sha256": "16b977c71c228faf17af512550fc8a42c725ce534c588a7343a3029969f57bfb",
+  "target_value": "It [this bourgeois view of feminism] turns women, like oppressed people in general, into victims who endure rather than fighters who can change their fate along with society as a whole.",
+  "target_value_sha256": "bbb4c9070fed1600d3ea7758b08dd47e739ac6ecf144c75cd7773a672fbe7e2d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0275",
+    "target_path": "citations/A0275-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6044aef3e57879e6107a436f5f44ac52352773072221a7f7ce8d567023285bc4"
+}

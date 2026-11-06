@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "18b50294722a5b194b6688d37fc0b1be3fe5ac33eaceb4b339301e4c6e0dde02",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'intersectionnalité existe depuis les années 80, soit bien avant la naissance du wokisme dans sa définition actuelle",
+    "identity_sha256": "50cfc364eda6cbe1b5170a2e5b3f8f5a4757d50063815340078a9302b098a263"
+  },
+  "source_value": "L'intersectionnalité existe depuis les années 80, soit bien avant la naissance du wokisme dans sa définition actuelle",
+  "source_value_sha256": "001597b4883b70910a8df52880c4da696a76ee75bf52186684661d9dbd210178",
+  "target_value": "Intersectionality has existed since the 1980s, well before the emergence of wokeism as it is defined today",
+  "target_value_sha256": "9e151d2c70199a0e16a19348b5eb852f2536e2f4e9336dcd4ed58c3501de69da",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0233",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "237cf2471a324f57cb68c8b3b8e0659a7444209eaf52417bcf104742a2ba5c43"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "64946c8a38244903ce270af26af264eb68d766584ab2df19001b604dc3103a01",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes qui accusent les féministes de les avoir poussés dans les bras de Trump n'étaient pas des alliés à la base",
+    "identity_sha256": "eed689cd3ec355f3a3bda08af9f94ee166c0443a58f0726b99f096757f08b340"
+  },
+  "source_value": "Les hommes qui accusent les féministes de les avoir poussés dans les bras de Trump n'étaient pas des alliés à la base",
+  "source_value_sha256": "2bd74bb91d094914bd9d647a5222ec85ddb283c21b264cf283b31434af445365",
+  "target_value": "Men who accuse feminists of driving them into Trump's arms were not allies to begin with",
+  "target_value_sha256": "6f776ef521a1590e43f3d845017a9efe65be180c8dd464364809fe0dfc926482",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0168",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "19210565c65e6141fc99001a917314e46588aa6101727fb8ab7f7bbaf91cced4"
+}

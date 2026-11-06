@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6ce0cdd5e15fc10ecc4f1aead9e5ecf5fd32ecd2b3ea2cf4cbe0ac8da2de4875",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le fémonationalisme utilise le sexisme comme écran de fumée au racisme",
+    "identity_sha256": "1477c566fcdb837f21aefe37730940e39362e0efb8adcf0d05aae786c0b18593"
+  },
+  "source_value": "Le fémonationalisme utilise le sexisme comme écran de fumée au racisme",
+  "source_value_sha256": "081a8acc85b685c2953c727e918939f2f02bed5c25bb7e4a12054885d7deee66",
+  "target_value": "Femonationalism uses sexism as a smokescreen for racism",
+  "target_value_sha256": "192b177aa82e75416e4341d3ea07c984489a9357254df951d94240f4f546b29f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0236",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "cf5c1501440c8dd076c536a9c4b3e34f9c25be902441f25e7a35567f152c28e4"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "34dc440ffa769f25a614ac3e21402377702944125823c3aa0fc983625843099b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes assurent en majorité les tâches domestiques au sein du foyer",
+    "identity_sha256": "f968c4d41dc234b57f94a960b61d6e73fa7e94cdb6f72e798ecb470f8cc5597e"
+  },
+  "source_value": "Les femmes assurent en majorité les tâches domestiques au sein du foyer",
+  "source_value_sha256": "7da359f1f6097a9394a76793e93f6b102d47823a18e5a9c73c3e727ddbc548a8",
+  "target_value": "Women perform most household tasks within the home",
+  "target_value_sha256": "eee91d22adc90733cf86fb2aba7984a45d8873c3a9a19fd80d3063dd59b7dfce",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0030",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1d5c19158be1e5585f171b2d5d67e597ab369039e69ed58b325595b6fd937aab"
+}

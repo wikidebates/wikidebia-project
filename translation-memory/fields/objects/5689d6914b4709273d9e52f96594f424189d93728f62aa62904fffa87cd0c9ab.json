@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "86598d318b4f90e709ac4d7f6a9d6007168344951a1d4319a31b0afc39505146",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les stages masculinistes stigmatisent le caractère patriarcal des hommes",
+    "identity_sha256": "b45e4bf9ba6e8308098eb0e851fc29aef9f023eb5a28236b52280c62537ac62a"
+  },
+  "source_value": "Ils pullulent ces dernières années \"en réponse\" à la surenchère féministe\" (qui n'aurait pour but de castrer les hommes\", les stages masculinistes entendent aider les hommes en mal de virilité. Déclin de la famille, déséquilibre du rapport amoureux, rejet du déterminisme biologique… sont autant d'arguments motivant ces rencontres testostéronnées.",
+  "source_value_sha256": "7d68ab17720d62d38e5d6a2513a9a5e95415e9ba6931eccf68453282256abb22",
+  "target_value": "Proliferating in recent years “in response” to the “feminist escalation” allegedly intended to castrate men, masculinist workshops claim to help men suffering from a lack of virility. The decline of the family, imbalance in romantic relationships and rejection of biological determinism provide just as many arguments motivating these testosterone-fueled gatherings.",
+  "target_value_sha256": "962fcb91cb2c42b5451b1b53ee8e7f64263de9852d230fd34acf24a20342ddb2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0192",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5689d6914b4709273d9e52f96594f424189d93728f62aa62904fffa87cd0c9ab"
+}

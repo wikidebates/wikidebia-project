@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "01acc5a5e409ff9c70b88e9a0531df8654a42d4c64488f62fb173ab743454dc5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Une inégalité n'est pas forcément injuste, inégalité n'est pas synonyme d'injustice",
+    "identity_sha256": "42e792c5d34f0ab7f292bb4bd906e7560b35d32b79d475c98bb200094a6dd729"
+  },
+  "source_value": "Une inégalité peut être justifiée, le fait que les femmes sont en moyenne moins fortes physiquement que les hommes est une inégalité mais ce n'est pas injuste. Le fait que les personnes qui travaillent à temps partiel gagnent moins d'argent est inégal mais pas injuste. Le fait qu'il y a beaucoup plus de femme qui travaillent à temps partiel que d'hommes est inégal mais pas injuste. Le fait que les personnes qui travaillent la nuit soit mieux payés est inégal mais pas injuste. Le fait que la plupart des personnes travaillant de nuit soit des hommes est inégal mais pas injuste.  Le fait que la plupart des ouvriers qualifiés du bâtiment sont des hommes ou que la plupart des aides à domiciles sont des femmes est inégal mais n'est pas injuste. Le fait que les femmes aient en moyenne les cheveux plus long que ceux des hommes est inégal mais pas injuste. Le fait que les femmes mettent en moyenne plus de chaussure à talon ou de maquillage que les hommes et inégal mais pas injuste.",
+  "source_value_sha256": "5f96c565380f0b6c842f74c7949abef73006cde9b0ce1950b4cd35e659abb30c",
+  "target_value": "An inequality can be justified. The fact that women are, on average, physically weaker than men is an inequality, but it is not unfair. The fact that people who work part-time earn less money is unequal, but not unfair. The fact that many more women than men work part-time is unequal, but not unfair. The fact that people who work at night are paid more is unequal, but not unfair. The fact that most people who work at night are men is unequal, but not unfair. The fact that most skilled construction workers are men, or that most home care workers are women, is unequal, but not unfair. The fact that women have longer hair than men on average is unequal, but not unfair. The fact that women wear high-heeled shoes or makeup more often than men on average is unequal, but not unfair.",
+  "target_value_sha256": "2b7ffce883522c3e66725863e8ba948fd5e2c72c2735203f786e56f1e591374f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0027",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8bc7480202fe6a7fdfae7088142209e4f2eca1edff14c3d930bb86f000d0d04a"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "73e4ab6713018cef630d5a5745e80c94189e5369cc0b4d0253ee7c1bd2d0c9ec",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La question des différences physiques entre hommes et femmes est bien plus complexe qu'on ne le croit",
+    "identity_sha256": "180f4ec6a45f86288a23737a3c398105b8bb18d2531dfb8798b7f4882cdc39a5"
+  },
+  "source_value": "La question des différences physiques entre hommes et femmes est bien plus complexe qu'on ne le croit",
+  "source_value_sha256": "687a77d67105f2024d190611614dd8f4e1998f4da7a131466694a3bb063b93e6",
+  "target_value": "The question of physical differences between men and women is far more complex than commonly believed",
+  "target_value_sha256": "529dd1bb370eaa7ab3ef1e0377dc5b418ab9f2cda37c92adf931600470db7122",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0210",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "645d49df139a384030fe3a416387c3d05a0ae2f695c13e45fc8710ffce6fcb72"
+}

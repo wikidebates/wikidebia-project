@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "814548ac90604ecca190cebcbc154387d20111268a614c2e0b8dddf109b51028",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Certains hommes font la majorité des tâches ménagères au sein de leur couple",
+    "identity_sha256": "1c7117729b2bd5078fcd2552d6eeef8f2f1ed36a53f0225620e0e88f3b49526b"
+  },
+  "source_value": "Certains couples décident que c'est l'homme qui fera la majorité des tâches ménagères. L'analyse systémique n'est pas pertinente, chaque couple est libre de son mode de fonctionnement.",
+  "source_value_sha256": "f47509580d1b89e8acbb4e27023bf69d164ba94a12f8f0f27fd7c00e476627ac",
+  "target_value": "Some couples decide that the man will perform the majority of household tasks. Systemic analysis is not relevant; every couple is free to choose how it operates.",
+  "target_value_sha256": "ad06c3941b2e58c949228ba1337a0d9ac9c8e418e3a373f98f06a85455ca8705",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0145",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6631ec597fad13f5a792bf037e8caf8344255c5544a21f777a6675608325a580"
+}

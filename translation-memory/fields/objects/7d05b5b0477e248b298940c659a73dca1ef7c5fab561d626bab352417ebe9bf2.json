@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4b801e059ccdac6360be72a9f9c0913e8e3ef04267b3b14d5b1f6f2f8915f79b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "De nombreuses maladies dites féminines souffrent d'errance médicale",
+    "identity_sha256": "c87ba77de41d485c281804e7ebf43c07d094ef6ae6aa3d751dd96518df9d5c29"
+  },
+  "source_value": "Non, ce n’est pas « normal » d’avoir mal pendant ses règles. Pourtant, cette lectrice a entendu ça tout au long de sa vie. Il lui a fallu des années de galères gynécologiques pour se faire diagnostiquer son endométriose.",
+  "source_value_sha256": "c4dbec988da4a0127aabd9da1304a1ac768945e726d068f87cba630ae02715a6",
+  "target_value": "No, it is not “normal” to experience pain during one’s period. Yet this reader heard that throughout her life. It took years of gynecological difficulties before her endometriosis was diagnosed.",
+  "target_value_sha256": "746a575b60662843ae79336332239ab80baecc22d5a6891cc7db5e2eb9abeb74",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0055",
+    "target_path": "citations/A0055-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7d05b5b0477e248b298940c659a73dca1ef7c5fab561d626bab352417ebe9bf2"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7b25fac7fca66c47e77c5ca95c0ebe33855034842c6d424914d2671b72184a04",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Même sans sexisme, la créativité reste large",
+    "identity_sha256": "cbe529f2d46384059a569ae0f9c879931bd97f20b647adaee13bbccbc734eba8"
+  },
+  "source_value": "Même sans sexisme, la créativité reste large",
+  "source_value_sha256": "c58097ba36813fb4b42a5d5f8c351576d2d8d9215b6db07dbcc45e583eae6d0f",
+  "target_value": "Creativity remains broad even without sexism",
+  "target_value_sha256": "06d042fede7ba84c830311d463547f2c08231b42e1747da2bef3bd0e2d3abe00",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0110",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c7aa9613dc6423066fa61b821a9841386edc2372160c0ca6e792cd75d285498b"
+}

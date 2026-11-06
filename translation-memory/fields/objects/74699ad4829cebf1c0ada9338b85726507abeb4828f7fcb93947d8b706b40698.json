@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ae63858daf2e218e95b0ef5a293ca0552aa76b55916bed5ee5671b0b873d07cc",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes sont encore sous-représentées dans les récits historiques profitant le plus souvent aux \"grandes\" figures masculines",
+    "identity_sha256": "ce144ebe8755b5c755e3c9cba7eab14c2b757ec604a10e1064d7ad8bedcdd79b"
+  },
+  "source_value": "Les femmes sont encore sous-représentées dans les récits historiques profitant le plus souvent aux \"grandes\" figures masculines",
+  "source_value_sha256": "7e55d614804014cf6ee8290cb907a4dfb216fd87456e98d7a895f3f980008b6f",
+  "target_value": "Women remain less represented in historical narratives, which most often favor \"great\" male figures",
+  "target_value_sha256": "1e00a906efeb04d416c596e77b0f1f9908a87eb0effbfb42dadbbf61c4813bb5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0028",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "74699ad4829cebf1c0ada9338b85726507abeb4828f7fcb93947d8b706b40698"
+}

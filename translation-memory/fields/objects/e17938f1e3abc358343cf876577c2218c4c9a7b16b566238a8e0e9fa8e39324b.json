@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "04392046e428d15768d4515a5c251576a316caa458133279f0dfa0d482da4a12",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'engagement féministe est une tâche trop grande et mène au burn-out militant",
+    "identity_sha256": "cd7a1ec1e9e24ecb0bc77ff2a27ba04eb43a4582087a60dc90dea4b0d3230950"
+  },
+  "source_value": "Je n’ai pas ou plus les épaules, je suis épuisée et, honnêtement, terrorisée […] Je n’arrive plus à lire vos témoignages et à les digérer en plus des violences que je vis dès que je mets le pied dehors. La colère que j’ai accumulée en presque 7 ans me bouffe et me pousse à réagir quasi systématiquement, et la plupart du temps, ça ne fait qu’envenimer la situation",
+  "source_value_sha256": "759d7dbce0848013780a551951680f197ac6c932d26b105aeebb0030971959cb",
+  "target_value": "I am no longer, or perhaps never was, strong enough; I am exhausted and, honestly, terrified [...] I can no longer read your testimonies and process them on top of the violence I experience whenever I step outside. The anger I have accumulated over almost seven years is eating me alive and drives me to react almost systematically, and most of the time it only makes the situation worse.",
+  "target_value_sha256": "eeac0605414e816f4c1a967b9d81423472732d9c503fd1f77e3d0b969f52a95c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0015",
+    "target_path": "citations/A0015-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e17938f1e3abc358343cf876577c2218c4c9a7b16b566238a8e0e9fa8e39324b"
+}

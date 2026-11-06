@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7ec3c8d9942528b353f618c281212afde6fa6c79ab33687376fd3d8204f19013",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'homme cherche encore à donner des leçons de vie à la femme (Mansplaining)",
+    "identity_sha256": "852660f98d216f44fd80c799598481d7a69961504963406d0ab3b1863697c1fc"
+  },
+  "source_value": "Comment mettre correctement un tampon. Non cette personne n’était pas médecin",
+  "source_value_sha256": "0a0771e079a21ba94ffef32dcea288f214f29d50a340499e739606facbf4dd13",
+  "target_value": "How to insert a tampon correctly. No, this person was not a doctor.",
+  "target_value_sha256": "70876e1eab1df65a910eb9e7076cf733a1f6d6de40ef2eeda100b20ef92f93dd",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0067",
+    "target_path": "citations/A0067-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9b500870bfd78e1cda499984a909c8f06db37e3a99d58bc1556b4d66654ffe3f"
+}

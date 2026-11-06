@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ab01b6bb44b38fc403464a3ff69bf580225d45fac235906c973b79aafdee1bc6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La lutte contre le \"wokisme\" est le paravent de l'extrême droite",
+    "identity_sha256": "12a5d8ed86d87443ddf83cb17baa1cddefca71c089120f45cbe221413a0b4d82"
+  },
+  "source_value": "Le ripolinage n'aura pas tenu longtemps. Depuis qu'il a envoyé en juin 2022 le plus gros contingent d'élus gays à l'Assemblée nationale, le Rassemblement national (RN) redoublait d'ardeur pour faire croire aux homos qu'il était de leur côté. Déjà démenties par de nombreux faits, ces déclarations d'intention se heurtent ce mercredi 15 avril à un nouvel acte : une quarantaine de députés, sénateurs et eurodéputés du parti de Marine Le Pen annoncent la création d'une association contre \"le poison du wokisme\".",
+  "source_value_sha256": "883a3e4a5f9c9b13bed7941563000c3ab3ee82f84962774ab3deaf47d83c5d6e",
+  "target_value": "The makeover did not last long. Since sending the largest contingent of gay elected representatives to the National Assembly in June 2022, the National Rally (RN) had redoubled its efforts to convince gay people that it was on their side. Already contradicted by numerous facts, these declarations of intent ran up against a new act on Wednesday, April 15: around forty deputies, senators, and Members of the European Parliament from Marine Le Pen’s party announced the creation of an association against “the poison of wokeism.”",
+  "target_value_sha256": "432001c4e2505e44d17907cf6b82ea98beed030110bf345c6b18aba4114e1e46",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0218",
+    "target_path": "citations/A0218-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "33697bc82733440e3ac1cfcca3c36a64d0381041a1e04be0a5a50504f93c42b0"
+}

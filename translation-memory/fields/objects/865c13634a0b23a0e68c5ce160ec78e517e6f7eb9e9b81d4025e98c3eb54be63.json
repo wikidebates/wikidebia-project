@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "827f39b230cdfb7bd2718b248094a113cb12cad9a78fc1717708700a6355ae87",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'exploitation, les inégalités et la misère causées par le capitalisme amplifient l'oppression des femmes",
+    "identity_sha256": "68dbfa520f2e73dcabd82ed505a14725a0b2dd38e32ef12161f1e085f5bcb322"
+  },
+  "source_value": "Évidemment, toutes les violences faites aux femmes, les mariages forcés ou les préjugés misogynes, ne sont pas directement causés par l’exploitation, les inégalités et la misère. Mais qui peut nier que celles-ci amplifient tout et rendent encore plus difficile le combat des femmes des classes populaires pour se faire respecter ? En France, en 2021, tous les trois ou quatre jours, une femme meurt encore sous les coups de son conjoint ou ex-conjoint. Les violences conjugales, les viols, le harcèlement moral ou sexuel qui s’exerce sur tant de femmes, en particulier dans les entreprises, ne reculent pas. Les associations féministes ne cessent de dénoncer l’insuffisance criante de moyens, ne serait-ce que d’hébergements d’urgence, et plus encore des possibilités de réinsertion pour les femmes qui fuient un conjoint violent.",
+  "source_value_sha256": "35196a023a9b9875fbd12671ce1ebe898605401064f03ae913f3dd28518b7dc9",
+  "target_value": "Of course, not all violence against women, forced marriages, or misogynistic prejudice are directly caused by exploitation, inequality, and poverty. But who can deny that these amplify everything and make it even harder for working-class women to fight for respect? In France in 2021, a woman was still dying from blows inflicted by her current or former partner every three or four days. Domestic violence, rape, and psychological or sexual harassment affecting so many women, particularly in the workplace, are not declining. Feminist organizations continually denounce the glaring lack of resources, including emergency accommodation alone, and even more so the lack of opportunities for women fleeing a violent partner to rebuild their lives.",
+  "target_value_sha256": "99fde0d1cea3793b96ae311538e48208cf99679e262878fffcf9893fd2209b7f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0196",
+    "target_path": "citations/A0196-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "865c13634a0b23a0e68c5ce160ec78e517e6f7eb9e9b81d4025e98c3eb54be63"
+}

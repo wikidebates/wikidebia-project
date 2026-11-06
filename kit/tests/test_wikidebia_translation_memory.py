@@ -41,7 +41,11 @@ def _fixture(tmp_path: Path, monkeypatch):
                 "status": "approved",
                 "canonical_title": "Shared argument",
                 "summary": "Translated one",
-                "citations": [{"id": "A1-C001", "translated_citation": "Quoted text"}],
+                "citations": [{
+                    "id": "A1-C001",
+                    "source": {"id": "A1-C001", "citation": "Texte cité"},
+                    "translated_citation": "Quoted text",
+                }],
                 "french": {"content": content["arguments"][0]},
                 "existing_english_update": {"observed_revision_id": 12},
             }},
@@ -76,6 +80,7 @@ def test_export_builds_signed_content_addressed_memory(tmp_path: Path, monkeypat
     assert result["entries_added"] == 2
     assert result["entries_reused"] == 0
     assert verified["entries"] == 2
+    assert verified["field_entries"] == 5
     index = json.loads((project / "translation-memory/index.json").read_text())
     assert memory._signed(index, "index_sha256")
     assert [row["memory_key"] for row in index["entries"]] == sorted(
@@ -86,6 +91,11 @@ def test_export_builds_signed_content_addressed_memory(tmp_path: Path, monkeypat
     assert "french" not in first["translation"]
     assert "existing_english_update" not in first["translation"]
     assert result["remote_write_performed"] is False
+    field_index = json.loads((project / "translation-memory/fields/index.json").read_text())
+    assert memory._signed(field_index, "index_sha256")
+    assert {row["field_kind"] for row in field_index["entries"]} == {
+        "canonical_title", "summary", "citation",
+    }
 
 
 def test_export_is_idempotent(tmp_path: Path, monkeypatch):
@@ -185,3 +195,96 @@ def test_reuse_refuses_divergent_already_approved_translation(tmp_path: Path, mo
 
     with pytest.raises(memory.TranslationMemoryError, match="approuvée divergente"):
         memory.reuse_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
+
+
+def test_field_memory_reuses_unchanged_fields_after_page_revision(tmp_path: Path, monkeypatch):
+    project, workspace, review_path, metadata, content = _fixture(tmp_path, monkeypatch)
+    memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
+    review = json.loads(review_path.read_text())
+    review["status"] = "draft"
+    review["review_sha256"] = None
+    translation = review["arguments"][0]["translation"]
+    french = translation["french"]
+    translation.update({
+        "status": "pending", "canonical_title": "", "summary": "", "french": french,
+    })
+    translation["citations"][0]["status"] = "pending"
+    translation["citations"][0]["translated_citation"] = ""
+    metadata["arguments"][0]["source_import_sha256"] = "c" * 64
+    content["arguments"][0]["import_sha256"] = "c" * 64
+    review_path.write_text(json.dumps(review), encoding="utf-8")
+
+    result = memory.reuse_review(
+        project, "debat_test", "EDIT-TEST-001", Path("translation-memory"),
+    )
+
+    updated = json.loads(review_path.read_text())
+    translated = updated["arguments"][0]["translation"]
+    assert result["stale_rejected"] == 1
+    assert result["field_changed"] >= 3
+    assert translated["status"] == "pending"
+    assert translated["canonical_title"] == "Shared argument"
+    assert translated["summary"] == "Translated one"
+    assert translated["citations"][0]["translated_citation"] == "Quoted text"
+    assert translated["french"] == french
+    reused = memory.verified_field_reuse_coverage(
+        workspace,
+        {row["id"]: row for row in updated["arguments"]},
+        {row["entity_id"]: row for row in metadata["arguments"]},
+        {row["id"]: row for row in content["arguments"]},
+    )
+    assert {row["field_kind"] for row in reused if row["page_id"] == "A1"} == {
+        "canonical_title", "summary", "citation",
+    }
+
+
+def test_field_memory_does_not_reuse_changed_source_field(tmp_path: Path, monkeypatch):
+    project, _workspace, review_path, metadata, content = _fixture(tmp_path, monkeypatch)
+    memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
+    review = json.loads(review_path.read_text())
+    review["status"] = "draft"
+    review["review_sha256"] = None
+    review["arguments"][0]["translation"]["status"] = "pending"
+    review["arguments"][0]["translation"]["summary"] = ""
+    metadata["arguments"][0]["source_import_sha256"] = "c" * 64
+    content["arguments"][0].update({"import_sha256": "c" * 64, "summary": "Source modifiée"})
+    review_path.write_text(json.dumps(review), encoding="utf-8")
+
+    memory.reuse_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
+
+    updated = json.loads(review_path.read_text())
+    assert updated["arguments"][0]["translation"]["summary"] == ""
+
+
+def test_field_reuse_receipt_detects_modified_target(tmp_path: Path, monkeypatch):
+    project, workspace, review_path, metadata, content = _fixture(tmp_path, monkeypatch)
+    memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
+    review = json.loads(review_path.read_text())
+    review["status"] = "draft"
+    review["review_sha256"] = None
+    review_path.write_text(json.dumps(review), encoding="utf-8")
+    memory.reuse_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
+    updated = json.loads(review_path.read_text())
+    updated["arguments"][0]["translation"]["summary"] = "Modified after reuse"
+
+    with pytest.raises(memory.TranslationMemoryError, match="devenue obsolète"):
+        memory.verified_field_reuse_coverage(
+            workspace,
+            {row["id"]: row for row in updated["arguments"]},
+            {row["entity_id"]: row for row in metadata["arguments"]},
+            {row["id"]: row for row in content["arguments"]},
+        )
+
+
+def test_field_export_refuses_divergent_target_after_unrelated_revision(tmp_path: Path, monkeypatch):
+    project, _workspace, review_path, metadata, content = _fixture(tmp_path, monkeypatch)
+    memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
+    review = json.loads(review_path.read_text())
+    review["arguments"][0]["translation"]["summary"] = "Conflicting field translation"
+    metadata["arguments"][0]["source_import_sha256"] = "c" * 64
+    content["arguments"][0]["import_sha256"] = "c" * 64
+    review["review_sha256"] = memory.translation_review_sha256(review)
+    review_path.write_text(json.dumps(review), encoding="utf-8")
+
+    with pytest.raises(memory.TranslationMemoryError, match="Traductions de champ divergentes"):
+        memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))

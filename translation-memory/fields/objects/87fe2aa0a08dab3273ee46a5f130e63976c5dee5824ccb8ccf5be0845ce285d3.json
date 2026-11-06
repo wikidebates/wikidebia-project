@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ac256c6196c9e17720bb4ed48657617df9fb60104d4e937e4f44a39db8d6160f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les immigrés et descendants d'immigrés qui s'en sortent le mieux sont ceux qui n'adoptent pas une posture victimaire",
+    "identity_sha256": "4181761b2f892fda39483a392d7fbf32f32c5b5234f823247621ce83ef3888f4"
+  },
+  "source_value": "'''Pourquoi estimez-vous que le fait de se considérer et de se positionner comme une victime n’est pas la bonne réaction face à ces micro-agressions ? Quelle serait pour vous la bonne attitude à adopter ?'''\n\nA titre personnel je n’aime pas être considérée comme victime. Ce serait pour moi une forme de concession. On peut répondre sans forcément s’abriter derrière le statut de victime ou chercher à culpabiliser l’autre, on peut simplement répondre et se confronter. C’est un point de vue très personnel, mais je trouve que la posture victimaire est une forme de paresse intellectuelle.",
+  "source_value_sha256": "761c73ccc6dbb63f89e93750f398bc2a949ce37ecf35bdc67e40f00f3a07bb99",
+  "target_value": "'''Why do you believe that considering and positioning oneself as a victim is not the right response to these microaggressions? What would be the right attitude to adopt?'''\n\nPersonally, I do not like being regarded as a victim. To me, that would be a form of concession. One can respond without necessarily sheltering behind victim status or trying to make the other person feel guilty; one can simply answer and confront them. This is a very personal point of view, but I find the posture of victimhood a form of intellectual laziness.",
+  "target_value_sha256": "fa469b32ff8cd6ea746219dfb197e789fbfa598439d2e38c66a4b0badbbe9739",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0200",
+    "target_path": "citations/A0200-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "87fe2aa0a08dab3273ee46a5f130e63976c5dee5824ccb8ccf5be0845ce285d3"
+}

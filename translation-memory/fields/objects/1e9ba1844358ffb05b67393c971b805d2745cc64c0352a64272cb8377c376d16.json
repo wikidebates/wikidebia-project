@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "11a03bec440c3ef15a3f557d54fc3ee9cdbb1ad80c7d3195b109548d77bb9eb7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les féministes doivent continuer le combat car de nombreuses inégalités subsistent",
+    "identity_sha256": "fb7c422bf9fe4e5c3c4906c40a9c5e10bd6f963615f6f2ba9225cc1bbf400b57"
+  },
+  "source_value": "Dans le domaine professionnel, 66 % des Français.es jugent insatisfaisant le niveau d’égalité entre les femmes et les hommes. De plus, les sondages révèlent que les femmes subissent de nombreuses violences sexistes  : harcèlement verbal ou visuel, harcèlement physique et harcèlement psychologique à visées sexuelles. Ainsi, 40 % des femmes ont fait l’objet de sifflements, de gestes ou de commentaires grossiers, ou encore de regards déplacés ; 33 % ont fait l’objet de remarques gênantes sur leur tenue ou  leur physique ; et 14 % se sont vues imposer des contacts sur une zone génitale ou érogène (mains sur les fesses, étreinte ou baiser forcé…) Toutes infractions pénales confondues, 87 % des victimes d’actes sexistes sont des femmes et 91 % des mis en cause sont des hommes.Par ailleurs, si le sexisme vécu par les françaises prend différentes formes (remarques, blagues, etc.), il est subi par la quasi-totalité d’entre elles : 99 % des femmes disent avoir été victimes d’un acte ou commentaire sexiste en 2019.",
+  "source_value_sha256": "c1a262e68862daf63021a3596c43447dff5709ef03b6580e352b6a3558c7b225",
+  "target_value": "In the workplace, 66% of people in France consider the level of equality between women and men unsatisfactory. Surveys also show that women experience many forms of sexist violence: verbal or visual harassment, physical harassment, and psychological harassment of a sexual nature. Thus, 40% of women have been subjected to whistling, crude gestures or comments, or inappropriate stares; 33% have received embarrassing remarks about their clothing or appearance; and 14% have been subjected to contact with a genital or erogenous area (hands on the buttocks, a forced embrace or kiss, etc.). Across all criminal offences, 87% of the victims of sexist acts are women and 91% of those accused are men. Moreover, although the sexism experienced by women in France takes different forms (remarks, jokes, etc.), almost all of them experience it: 99% of women say they were victims of a sexist act or comment in 2019.",
+  "target_value_sha256": "812e8674bb656ad5d3fbb603ea14ad55d460bf6482ed497d8e7d88aa1be6c03a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0001",
+    "target_path": "citations/A0001-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1e9ba1844358ffb05b67393c971b805d2745cc64c0352a64272cb8377c376d16"
+}

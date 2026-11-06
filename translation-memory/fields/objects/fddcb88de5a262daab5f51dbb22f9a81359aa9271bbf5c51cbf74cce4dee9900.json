@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b2220023373f94935d3a31ce3240c4e218ae94892d778f98fb7b5c409e559029",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les contenus féministes sont régulièrement censurés",
+    "identity_sha256": "d90d1f0d65308fee59bf1852e9d420f9ea485f8c8909793290a8bd77d56628c3"
+  },
+  "source_value": "Les contenus féministes sont régulièrement censurés",
+  "source_value_sha256": "a44861895c9a32a6ea3fc294aeb5ca90c559e0fe1da747dda8b88e3b937ebb94",
+  "target_value": "Feminist content is regularly censored",
+  "target_value_sha256": "0919cc4b42336f250a7b765bcfa7b58452151485fc64345620d8f050c04bffe1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0264",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "fddcb88de5a262daab5f51dbb22f9a81359aa9271bbf5c51cbf74cce4dee9900"
+}

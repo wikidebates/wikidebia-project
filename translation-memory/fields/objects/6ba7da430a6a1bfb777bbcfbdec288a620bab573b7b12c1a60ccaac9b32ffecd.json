@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5c7237d11139f1db9a062b86016e76546d1e84b0b5d6bdf45b1b80fbce140323",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les oeuvres jugées trop féministes subissent des vote-bombings",
+    "identity_sha256": "e452b2e9a50a33d5ee6937f72e13c6b4daa81868e9a56a1d1bf88ffa9aa43d44"
+  },
+  "source_value": "Une pratique qui s'observe sur les sites permettant de noter des oeuvres consiste à se réunir en meute afin de distribuer massivement des appréciations négatives à une oeuvre qu'on a généralement même pas vue pour des raisons purement idéologiques.",
+  "source_value_sha256": "8c445c8bbe819a23d17a4d282c229123d60d305b8dbb31b1838ca827dba8c388",
+  "target_value": "One practice observed on websites that allow works to be rated consists of gathering as a pack to distribute negative ratings en masse to a work that participants generally have not even seen, for purely ideological reasons.",
+  "target_value_sha256": "04bfed39b6340a56b51a7a9270837f88a02300e16e8eaf4a22c584c9d460ea7a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0207",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6ba7da430a6a1bfb777bbcfbdec288a620bab573b7b12c1a60ccaac9b32ffecd"
+}

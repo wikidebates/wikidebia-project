@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c809a648ff94ef569cfefed8ea9135a7f948144efc438ebc9c99cc8fa625caa1",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La \"menace woke\" a des similitudes troublantes avec la \"menace bolchevique\" si chère aux nazis",
+    "identity_sha256": "f2be7204dff73dadaac679d67bd30ef6b167db7c6c891fac3ed03a927f56f0c2"
+  },
+  "source_value": "La \"menace woke\" a des similitudes troublantes avec la \"menace bolchevique\" si chère aux nazis",
+  "source_value_sha256": "b08af2318b4251513f6021b443caac725cbde1085e1562bb8b1beb77eef9f22b",
+  "target_value": "The \"woke threat\" bears troubling similarities to the \"Bolshevik threat\" so dear to the Nazis",
+  "target_value_sha256": "3d96ca5fc9b7dfa0b1f66811cf3df36926568272fb39d6a438484eee0a8a4302",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0313",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "018201975dfa64d57c8bc5483d50b87f0b1f11b3b878a714baa205153c1c076f"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9236e7dc9e76b0d299d47cb7f3838bd2860711a9a6703574a6f8aa357eda3706",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'humour oppressif est le terreau des idéologies d'exclusion",
+    "identity_sha256": "1cc4f5ff3ea1e61195f75572a26e0f134a8e9db80cad7549da3279c8cb3d9d89"
+  },
+  "source_value": "Alors qu’on pense être en mesure d’exercer notre pensée critique à tout instant, il apparaît selon plusieurs études que rejeter ce qu’on entend demande plus d’effort et de concentration que l’accepter comme étant une vérité. Et lorsque l’humour auquel on est exposé ne présente pas de subtilité particulière, nous faisons logiquement l’économie de notre réflexion et cultivons alors des préjugés infondés. Autrement dit, l’humour facile nourrit les stéréotypes sur lesquels il se base. Les blagues ne sont pas que des blagues.\n\nC’est sans doute ce qui explique pourquoi à qualifications égales, les femmes blondes sont plus souvent refusées à un poste comparé aux femmes brunes comme le démontre un article de l'Observer à propos du racisme invisible.",
+  "source_value_sha256": "c9fdaaf15ffc97c4e9eaef935d3b9e51efd52dc4a6abbc45e3d2fa065df905e1",
+  "target_value": "Although we think we can exercise critical thinking at any moment, several studies indicate that rejecting what we hear requires more effort and concentration than accepting it as true. And when the humor to which we are exposed contains no particular subtlety, we logically spare ourselves the effort of reflection and thereby cultivate unfounded prejudices. In other words, easy humor feeds the stereotypes on which it is based. Jokes are not just jokes.\n\nThis probably explains why, given equal qualifications, blonde women are rejected for jobs more often than brunette women, as demonstrated by an Observer article about invisible racism.",
+  "target_value_sha256": "d2f6a424d7af40a3df1fd27f68753512b68d95a442d514d7ab3662abfe53afd5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0213",
+    "target_path": "citations/A0213-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d9e0c76c43ea5b7be04efa1356338bb2fec304d0430e505500d8e53b8d531fa8"
+}

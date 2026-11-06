@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1d05afefa356dffbda40fa98cc66436159ec38c74f85105cadf179f7db47f293",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des fémonationalistes se désintéressent du sexisme quand le voile ne rentre plus dans l'équation",
+    "identity_sha256": "74d3b0f03dfaa1a63221015e8ce005893f7522a61bfa6bc07d5b718795db9fce"
+  },
+  "source_value": "La plupart des fémonationalistes se désintéressent du sexisme quand le voile ne rentre plus dans l'équation",
+  "source_value_sha256": "0871762bd0f47c74d0d14da43bb40406dd81cb383220028f74bdf4670643b454",
+  "target_value": "Most femonationalists lose interest in sexism when the veil is no longer part of the equation",
+  "target_value_sha256": "df80c73aa3703e05ed82d2cd1edee6d347d7edb38178a0e3ad1b87ce5545c90f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0234",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "26830b58e4b851a1e4c0e4f87083343d1adcdd1850d090c6c25106187de5422e"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "00ee82bfe44cd32860b94b63c2d17672b47144e2d06c15441ff9263faf6fec3a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le terme \"woke\" n'a pas de réelle signification",
+    "identity_sha256": "1976bb4684216c5e7a5f2af0c1e40e37c21821ae2e417c418dcfd908d4069108"
+  },
+  "source_value": "Les réalités que recouvrent ce terme varient énormément selon l'orientation politique des personnes qui utilisent. Au sein de la gauche, il sert à ranger des techniques de militantisme jugées moralement indéfendables telles que le harcèlement, les autodafés (réels ou symboliques) ainsi que la performativité, tandis que l'ultradroite s'en sert soit pour faire passer la pilule d'une idéologie x-phobe et x-iste tout en prétendant le contraire (notamment en mettant des luttes arbitrairement choisies dans le même panier que des modes d'action contestables), soit pour diaboliser l'intégralité des luttes sociales. De plus, il n'y a pas de consensus sur ce qui peut ou non être rangé sous cette appellation, des luttes légitimes étant souvent mises dans le même panier que des modes d'action contestables. D'ailleurs, il n'a plus la même signification qu'au moment de sa naissance, son acception péjorative étant relativement récente.",
+  "source_value_sha256": "53638727a3714f4ad234ca3883d0b7258e016c74e9271fd59828e5bff354872e",
+  "target_value": "The realities covered by this term vary enormously according to the political orientation of those using it. Within the left, it thus serves to group activist techniques regarded as morally indefensible, such as harassment, book burning, whether real or symbolic, and performativity; the far right uses it either to make an x-phobic and x-ist ideology more palatable while claiming the opposite—particularly by arbitrarily grouping selected struggles with objectionable methods of action—or to demonize all social struggles. Moreover, there is no consensus on what can or cannot be placed under this label, and legitimate struggles are often lumped together with objectionable methods. Besides, it no longer has the same meaning as when it originated, since its pejorative meaning is relatively recent.",
+  "target_value_sha256": "4dbcec324b5e8e43b6d351ca354b148117592eefe9eda789c32e20bcc4194aa0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0219",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3d1cf562c1a4ae6cfca1799a4320bc614e5a1f2cdff1953d152a939d36bf0fc6"
+}

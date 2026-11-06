@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d7f31d65813661c2c4e93c0cd9f5a6fe3a1420984b7fb9ccdaf6d63ad20d4ad1",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'universalisme laisse sur le bas-côté de nombreux types d'oppression",
+    "identity_sha256": "2abfe0e702bbd89aa1dd708e85d15a1c93cc3ef99df8a07f06f4b61539f44bef"
+  },
+  "source_value": "Comment expliquer le manque d’engagement politique contre le racisme ? Pour Nadhéra Beletreche, la réponse est forcément multifactorielle. La militante y voit déjà un lien avec cet universalisme à la française, une ''« histoire qui a écrasé les particularismes mais qui se croit vraiment universaliste »''.",
+  "source_value_sha256": "463050df441e897f7d4c15897e091ca9f123d20bc70584a2c5f0f7541e655a83",
+  "target_value": "How can the lack of political engagement against racism be explained? For Nadhéra Beletreche, the answer is necessarily multifactorial. The activist already sees a link with this French-style universalism, a ''“history that crushed particularisms but truly believes itself to be universalist.”''",
+  "target_value_sha256": "f80d68ef42685f6a154c35029c4029c8c5718a5d1fde1c25cf50683c03802fdb",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0131",
+    "target_path": "citations/A0131-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9395d00daee769355dfc0072075be727bfadd9a0bd86245f71ab25ad37cbdf0b"
+}

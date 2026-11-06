@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f3152feaae694dc9b3e07bb27d8cc06c0cb7fbdb2d2aa04a40b30963277afe2f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les féministes voient de la toxicité là où il n'y en a pas",
+    "identity_sha256": "e87d589ef324ab7baf8995fdfe9cf82f93946dfec03e87f634c14b8f8f0f53ab"
+  },
+  "source_value": "Les féministes - dans une optique de confirmation de leur vision du monde et de leur narratif - développent des concepts se voulant mettre en exergue des comportant prétendument toxique qui n'en sont pas.",
+  "source_value_sha256": "a346060f3fc2a0174ead1b2120169b16696457b7ff7a4cc3d5397dac939462e4",
+  "target_value": "In an effort to confirm their worldview and narrative, feminists develop concepts intended to highlight supposedly toxic behaviors that are not actually toxic.",
+  "target_value_sha256": "14e532b01547247674589dac8bd268d044eb9d94e4601e91250025ad3ce2de60",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0070",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d3e18fcc43b4d0fac1fe9698446b5fdbc11c1901e2ee100e01fa8ee74f011565"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a7a48b0521785c30570f92f1ba483bac3782b35874ad93efbad2d9858b3d58f7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme moderne considère tous les hommes comme de potentiels agresseurs",
+    "identity_sha256": "e52a72decb597e45428899620ea1b56202b6a89666f49f45db3b6a348d8bda39"
+  },
+  "source_value": "Janvier 2021, comme pour fêter la nouvelle année, un nouveau hashtag fait son entrée dans la place twitter : #commentfairepourqueleshommescessentdevioler\nTwitter censure en invoquant une \"infraction à nos règles relatives aux conduites haineuses\". Car oui ce n'est pas \"comment fait-on pour que certains hommes\"… mais bien \"comment fait-on pour que les hommes\"… Le quiproquo n'est pas permis, tous les hommes sont concernés. \nOn se souvient alors les propos de Caroline de Haas dans l'Obs qui se pose la question de un ou deux hommes sur trois étant agresseurs. Même si les chiffres tendent en faveur d'une majorité d'hommes incriminée, une petite partie des agresseurs sont des agresseuses. 149 000 hommes ont été victimes de violences au sein de leur couple en 2012 et 2013, et 25 en sont morts selon l’Observatoire national de la délinquance et des réponses pénales. Sujet tabou et peu relayé mais non pas moins existant. Il laisse les victimes démunies car peu de structures encadrent ce phénomène.",
+  "source_value_sha256": "454dd28dd51517165141820fdfc4d0cad3047d73dedc5ddd2674833c1eb36450",
+  "target_value": "In January 2021, as if to celebrate the new year, a new hashtag appeared on Twitter: #commentfairepourqueleshommescessentdevioler [how to make men stop raping].\nTwitter censored it, citing a \"violation of our rules against hateful conduct.\" Because it did not say \"how do we make some men...\" but \"how do we make men...\" There is no room for misunderstanding: all men are concerned.\nThis recalls Caroline De Haas's remarks in L'Obs, where she asks whether one man in two or three is an aggressor. Even if the figures tend to suggest that most perpetrators are men, a small proportion are women. In 2012 and 2013, 149 000 men were victims of intimate partner violence, and 25 died from it, according to the French National Observatory for Crime and Criminal Justice Responses. The subject is taboo and receives little coverage, but it is no less real. It leaves victims without support because few organizations address the phenomenon.",
+  "target_value_sha256": "5cfdbc94683a43d5fd2ffe25198a784dd213a9015585a332e1459d733183f7ae",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0014",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "05f824548d684681a43e68ef5b5dac80284e0f717fa7dd30592b2469973cb7da"
+}

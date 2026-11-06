@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "42d6af4ec8ebfaba6002ae01a90a428ffbdb88db38b49415f9a2930581244921",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les fémonationalistes ne sont pas les derniers à agresser les femmes",
+    "identity_sha256": "a1e5e1071273e7e8e2763e05f3e41ec6ddb4035dd98c5ed921b6ff90b3165cd3"
+  },
+  "source_value": "Arrêté puis placé en garde à vue mardi 21 mai, un homme âgé de 26 ans, inconnu des services de police, a reconnu son aversion pour les femmes et sa volonté de perpétrer une tuerie de masse. L’attentat devait avoir lieu jeudi dans la cité girondine.",
+  "source_value_sha256": "56d62467f14dc4fc79e8e00d954636b152613ccf4176e061abbf29407d44deab",
+  "target_value": "Arrested and taken into custody on Tuesday, May 21, a 26-year-old man previously unknown to police admitted his hatred of women and his intention to carry out a mass killing. The attack was to take place on Thursday in the Gironde town.",
+  "target_value_sha256": "a34fbf7b7f5303cef391669ab9a8a62467f97bdade56df22c1b315be07b7b998",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0336",
+    "target_path": "citations/A0336-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "960f158b3c47e97e2fb8bd0a1059fa6203b49315d63640b4713873b9bf745c15"
+}

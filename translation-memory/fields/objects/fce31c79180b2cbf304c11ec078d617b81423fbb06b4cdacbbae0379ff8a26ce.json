@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e4fe56bee679d1fb9d4f9b268a6b48921252e38955e4cb89f526bb7f6082cb61",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les fémonationalistes ne proposent rien contre le sexisme qui sévit en occident",
+    "identity_sha256": "91bd1dc00a0a3e20a108198aaf59b32d1e8bc6437f06710fd0bf8a0af36d23b8"
+  },
+  "source_value": "Les fémonationalistes ne proposent rien contre le sexisme qui sévit en occident",
+  "source_value_sha256": "1b1c0c92d3101d917cfbc76e94a767cb2e32186cc72436e95507b0051983e847",
+  "target_value": "Femonationalists propose nothing to combat the sexism rampant in the West",
+  "target_value_sha256": "7c606fe43d255d467889abc83d8e4e30e74485bceef4fb57fe00c7bb99167a8a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0330",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "fce31c79180b2cbf304c11ec078d617b81423fbb06b4cdacbbae0379ff8a26ce"
+}

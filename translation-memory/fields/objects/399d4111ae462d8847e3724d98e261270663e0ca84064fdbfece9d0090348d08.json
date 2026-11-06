@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "dc365189849aaa6506477f26f8d29cd780a2625d295e4caf2b7229018b5c148c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes gagnent moins que les hommes",
+    "identity_sha256": "94c7d5ee371cde6fb6a6a0784e981c8f0bdcbd7eb5225b3846928fd0d6002f7a"
+  },
+  "source_value": "\"En 2017, les femmes gagnent 24% de moins que les hommes (salaire annuel moyen).\nSource : Insee, Femmes et hommes, l’égalité en question, Édition 2017\nEn 2011, les femmes cadres gagnent :\n- 21,8% de moins que les hommes cadres dans le secteur privé et semi public.\n- 14,1% de moins dans la fonction publique étatique.\n- 15,7% de moins dans la fonction publique territoriale.\n- 21,6% de moins dans la fonction publique hospitalière.\nEn 2011, les femmes employées ou ouvrières gagnent :\n- 10,7% de moins que les hommes employés ou ouvriers dans le secteur privé ou semi-public.\n- 16,4% de moins que les hommes dans la fonction publique étatique.\n- 11,4% de moins dans la fonction publique territoriale.\n- 3% de moins dans la fonction publique hospitalière.\nSource : DADS, SIASP, INSEE. Traitement Insee, Drees, DGCL, département des études et des statistiques locales et DGAFP, département des études et des statistiques",
+  "source_value_sha256": "c65b5a6acf3e3b3d0e901d1f4088fe74df5eb25fd1f651a19e552ae7959442e3",
+  "target_value": "\"In 2017, women earned 24% less than men (average annual salary).\nSource: Insee, Femmes et hommes, l’égalité en question, 2017 edition\nIn 2011, women in managerial positions earned:\n- 21.8% less than men in managerial positions in the private and semi-public sector.\n- 14.1% less in the central government civil service.\n- 15.7% less in the territorial civil service.\n- 21.6% less in the hospital civil service.\nIn 2011, women working as employees or manual workers earned:\n- 10.7% less than men working as employees or manual workers in the private or semi-public sector.\n- 16.4% less than men in the central government civil service.\n- 11.4% less in the territorial civil service.\n- 3% less in the hospital civil service.\nSource: DADS, SIASP, INSEE. Processing by Insee, Drees, DGCL, Department of Local Studies and Statistics, and DGAFP, Department of Studies and Statistics",
+  "target_value_sha256": "8138e3c436a97e91df2d9216bf5a1c51f5d3116dbbe16fa52cf7698c87d8d926",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0024",
+    "target_path": "citations/A0024-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "399d4111ae462d8847e3724d98e261270663e0ca84064fdbfece9d0090348d08"
+}

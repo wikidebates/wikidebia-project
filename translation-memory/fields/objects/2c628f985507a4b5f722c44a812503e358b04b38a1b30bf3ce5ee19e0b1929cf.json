@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9e57d2b7e6f34f91487e636f9de30b4fbb18427a38063e2158838262c36fadce",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le terme a été dénaturé et a fait l'objet d'une réappropriation",
+    "identity_sha256": "fcfbb6b580af17bae4460ca229a6a37a5aecdaf8e4952dcf8c73a1587616b98e"
+  },
+  "source_value": "Ce terme plutôt émancipateur et positif a été rendu négatif, alors que bien souvent c'est l'inverse qui se produit: les militantes détournent le sens de mots à la base utilisés comme une insulte - queer, gouine, sorcière par exemple - pour se les réapproprier, relève encore la linguiste.\n\nL'utilisation du terme \"''wokisme''\" entre dans le cadre d'une \"''sorte de culture de la panique, en associant le militantisme, la lutte contre les discriminations, à des mouvements puritains''\", poursuit Laurence Rosier. \"''Cela peut être dangereux. On est dans une culture de la peur, comme si on allait éradiquer l'Histoire en enlevant des statues, alors que les archives, les documents restent pour témoigner des atrocités que certains ont fait. Cette culture de la panique est utilisée pour bloquer des combats émancipateurs''\", conclut-elle.",
+  "source_value_sha256": "b021591bfb08b5c1d66209f3a0916bf900fd950bd31aa68eb53d0a0e9d0b3e70",
+  "target_value": "This rather emancipatory and positive term was made negative, even though the reverse very often occurs: activists repurpose the meaning of words originally used as insults—queer, dyke, witch, for example—in order to reclaim them, the linguist also notes.\n\nThe use of the term “''wokeism''” forms part of a “''kind of panic culture, associating activism and the struggle against discrimination with puritanical movements''”, Laurence Rosier continues. “''This can be dangerous. We are in a culture of fear, as though removing statues would eradicate History, even though archives and documents remain to bear witness to the atrocities some people committed. This panic culture is used to block emancipatory struggles''”, she concludes.",
+  "target_value_sha256": "59f5b0379daa5f6371cbb6845ab500b021563519fc4cf2b3579cbd6b23a8ee04",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0201",
+    "target_path": "citations/A0201-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "2c628f985507a4b5f722c44a812503e358b04b38a1b30bf3ce5ee19e0b1929cf"
+}

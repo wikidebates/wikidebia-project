@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d162991fb9362696fe9470ba6774006f164304848941fd641bb7a47cdec98532",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes ont joué un rôle moteur dans les révolutions passées",
+    "identity_sha256": "336f73542b018b50bacdbb48200068e7438dc9c435ff04564e5c96b05f16fb25"
+  },
+  "source_value": "L’histoire le montre, à chaque fois que l’heure de la révolution sonna, les femmes furent au rendez-vous, et même souvent aux avant-postes.",
+  "source_value_sha256": "e02e196daa143684f996c80606cb4728cb191b63f214a7a60608cc6468612b22",
+  "target_value": "History shows it: whenever the hour of revolution struck, women answered the call and were often even at the forefront.",
+  "target_value_sha256": "b6091f14dba032b5893dd84be4eaec052237c1651ae3757c5515c3d571670ea0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0277",
+    "target_path": "citations/A0277-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "51dc273692d711cfe60ab342ef51f2f5d9b3996317fb8a2138075bcbd97a7dee"
+}

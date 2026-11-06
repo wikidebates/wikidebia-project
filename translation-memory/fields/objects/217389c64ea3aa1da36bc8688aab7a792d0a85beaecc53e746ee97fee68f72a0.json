@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "06c4c2e1240f148f3f4dc90f9426b0cc34be63df7f653f445501e54c31ae49d7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "On ne peut pas juger l'intégralité d'un mouvement sur la seule base de ses dérives",
+    "identity_sha256": "7ead8349581504fd8e6657cf30a5bc688b637460d9fd1d68e4d43bb29f60b49f"
+  },
+  "source_value": "On ne peut pas juger l'intégralité d'un mouvement sur la seule base de ses dérives",
+  "source_value_sha256": "152ea54f549b9c85f84eebb26da3445178afdbb4a499619dfb38ecdebd6cda4e",
+  "target_value": "An entire movement can not be judged solely on the basis of its excesses",
+  "target_value_sha256": "df79d7549ba2a6405a56aa5cb9d09d1742b115a580d10f3d13299fe2965e2ff9",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0129",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "217389c64ea3aa1da36bc8688aab7a792d0a85beaecc53e746ee97fee68f72a0"
+}

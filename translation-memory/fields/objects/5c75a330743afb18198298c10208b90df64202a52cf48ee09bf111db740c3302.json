@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c01917fbbfa5b057853bcc73516dfa29907aed8e9b0494daac680bc499ff4a25",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme intersectionnel refuse de voir et de soutenir de nombreuses victimes du patriarcat",
+    "identity_sha256": "7f3d0bb8c353227686c1df7e25bfabd1af4df355a5a101d15bacf0991f8b48fc"
+  },
+  "source_value": "Pendant que des activistes du féminisme intersectionnel battent le pavé, de vraies victimes se taisent et subissent en silence pressions et violences. Leur liste ne cesse de s’allonger. Elle va de Sadia Sheikh, jeune Belge d’origine pakistanaise mariée religieusement par Internet et assassinée, jusqu’à Mila, cyberharcelée, menacée et contrainte à une existence recluse. […]\nMais derrière Sadia, derrière Mila, derrière cette étudiante, ils et (surtout) elles sont sans doute des milliers d’anonymes victimes de traditions étouffantes : mariages forcés, violences intrafamiliales, crimes d’honneur, attentats et agressions visant à pénétrer notre subconscient du relativisme culturel et du délit de blasphème, … Pourtant, ces victimes ont le droit pour elles. Notre arsenal législatif garantit la liberté de conscience, la liberté d’expression, le droit à l’intégrité physique, la protection de l’État contre les mariages forcés.\n\nComment se fait-il, alors, que leur parole soit moins audible, leur défense moins ardente, leur protection moins assurée que celle de ces victimes en carton-pâte qui se lancent aujourd’hui dans une indécente concurrence victimaire ?",
+  "source_value_sha256": "0b92598a8edc63f0afbbc0e9e4239301598623a99120ba5dbef7724943c1bed0",
+  "target_value": "While intersectional feminist activists take to the streets, real victims remain silent and quietly endure pressure and violence. Their number continues to grow. They range from Sadia Sheikh, a young Belgian woman of Pakistani origin who was married in a religious ceremony over the internet and murdered, to Mila, who was subjected to online harassment, threatened and forced into a secluded existence. [...]\nBut behind Sadia, behind Mila, behind this student, there are probably thousands of anonymous men and, above all, women who are victims of stifling traditions: forced marriages, domestic violence, honor crimes, attacks and assaults intended to instill cultural relativism and the offense of blasphemy in our subconscious... Yet these victims have the law on their side. Our legal framework guarantees freedom of conscience, freedom of expression, the right to physical integrity, and state protection against forced marriages.\n\nWhy, then, are their voices less audible, their defense less vigorous and their protection less assured than those of these sham victims who are now engaging in an indecent competition for victim status?",
+  "target_value_sha256": "4d14e175f7306f3fa602d135bd41e294c7a49ce0ccbc39d01f99bcd5f085c730",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0022",
+    "target_path": "citations/A0022-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5c75a330743afb18198298c10208b90df64202a52cf48ee09bf111db740c3302"
+}

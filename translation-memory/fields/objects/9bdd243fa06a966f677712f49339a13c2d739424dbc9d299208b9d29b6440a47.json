@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "517b558230ba1765652d479076f7fce280d38e269a0a7360f09923c27357af9b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le discours féministe soutient la victimisation des femmes",
+    "identity_sha256": "e8ebc6839a80400024371bb6724d363aef804c77c475ac085351dea450b0e519"
+  },
+  "source_value": "\"Féministe\", qu'est-ce qu'on entend par cela ? Je ne crois pas être féministe au sens de revendication des femmes : vouloir démontrer qu'elles ont été les esclaves des hommes et qu'elles ont été très malheureuses, je n'appréhende pas le problème de cette façon. Mais je crois que les femmes peuvent apporter beaucoup dans notre société. Maintenant qu'elles ont le sentiment d'avoir ce rôle à jouer, elles doivent pouvoir épanouir leur personnalité comme elles le souhaitent.",
+  "source_value_sha256": "2fbf4e3fca5f5cf634416f9caa3f1a065c615f7c78ff6a6522e47556e136a6f6",
+  "target_value": "'Feminist'—what is meant by that? I do not believe I am a feminist in the sense of asserting women's claims: seeking to demonstrate that they have been men's slaves and have been very unhappy—I do not see the issue that way. But I believe women can contribute a great deal to our society. Now that they feel they have that role to play, they must be able to develop their personalities as they wish.",
+  "target_value_sha256": "b53fa812c3a893359bf86bcd23c23e07d349112c1d98f1336d625b7e5607b37f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0017",
+    "target_path": "citations/A0017-C006",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9bdd243fa06a966f677712f49339a13c2d739424dbc9d299208b9d29b6440a47"
+}

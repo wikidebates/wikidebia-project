@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "dfc4b6d8e4754636ef41bbd1ae6f02c7685fa82819790ba2f776c36318d7b6dc",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des facteurs d'inégalité salariale touchent exclusivement les femmes",
+    "identity_sha256": "41f68429da649e25bae201dff57c379fe4d7f8574600b661b805afee7f8d0e9f"
+  },
+  "source_value": "La plupart des facteurs d'inégalité salariale touchent exclusivement les femmes",
+  "source_value_sha256": "128eb9f51dd314d88ca97b27664f0a87abee46f6d5453fe9c47502b437fe78c5",
+  "target_value": "Most factors behind pay inequality affect women exclusively",
+  "target_value_sha256": "919e7e72f6ed490a13937d2add14fadccb219627961d88a4fe6861fa0e215b67",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0244",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f142fba87a510f878db10598b8e53dd180796777bab4ee92d178063703bfa3a0"
+}

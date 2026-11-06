@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "045c063031ae2fbe8478d7575f5e9e6cd26773acffb7bcf1ca58c682375db75f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La diffamation est un dommage collatéral du féminisme radical",
+    "identity_sha256": "db29808d72f06f8868aa75314f75e2911897d35e7a9e605e3f69733be6432b70"
+  },
+  "source_value": "La diffamation est un dommage collatéral du féminisme radical",
+  "source_value_sha256": "57aaedb7e7ff7cff6c76be352b7075bf9167a78e2a436076ae45fb20c80f6e1e",
+  "target_value": "Defamation is collateral damage of radical feminism",
+  "target_value_sha256": "0757efd2e1db4474ae9f08108bef00e221e84862f508c23bccb1b098eed0f5ee",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0127",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "877607513deb48ef74db930e0dbbb7b1e7da1895faff4b660f87006eb9f0df0b"
+}

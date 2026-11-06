@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "da1a7f43bfc0ddbbeb907e804cc509d8ca1d776cc39b1b01003c6a529435fe00",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les douleurs dites féminines sont peu prises au sérieux, voire normalisées par la médecine",
+    "identity_sha256": "4e5c5692c9a73b42d1e508820f5437221f3e2f7c8c4e6e8b7cda7aa09abd392e"
+  },
+  "source_value": "Les douleurs dites féminines sont peu prises au sérieux, voire normalisées par la médecine",
+  "source_value_sha256": "313473ea595636464d91bf473ed52af3a16807b784708967dc8b62762226da71",
+  "target_value": "So-called female pain is rarely taken seriously and is even normalized by medicine",
+  "target_value_sha256": "afea342803721d4b16e182b5c4d34d9f5a2f2bfa0827054ad9494343d8a28d8f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0056",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d69129b7b15249b5e81b892fd01e7d480939c217f9664d49ca5ee4c0cc22fd84"
+}

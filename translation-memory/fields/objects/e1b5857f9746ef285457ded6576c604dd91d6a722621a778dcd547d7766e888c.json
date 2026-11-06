@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "40e909014cbd1d1326863543d622cc18e0cb2e83c5d76d93b5da2dd339dc0abf",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme peut très bien servir de justification au nivellement par le bas",
+    "identity_sha256": "073d06592722023ebba120c72b59571367bc486c5808441c90704c3496495d0f"
+  },
+  "source_value": "Bien sûr, je manifeste avec d’autres pour des revendications légitimes, comme « À travail égal, salaire égal », tout en étant consciente des limites d’un tel slogan, dans la mesure où le patronat et le gouvernement sont parfaitement capables de faire l’égalité vers le bas. Je me souviens qu’en 2000 le gouvernement Jospin avait, au nom de l’égalité des sexes, levé l’interdiction du travail de nuit pour les femmes dans l’industrie, ce qui était évidemment un recul en faveur du grand patronat. La lutte des classes est partout, c’est pourquoi je pense qu’on ne peut pas être féministe conséquente sans avoir pour objectif la révolution sociale.",
+  "source_value_sha256": "1dc42d62b7b7f055ee82b71ffd47e44d765a69ec243caf1e3bfbe83877d7aab2",
+  "target_value": "Of course, I demonstrate with others for legitimate demands such as “equal pay for equal work,” while remaining aware of the limitations of such a slogan, insofar as employers and the government are perfectly capable of creating equality by leveling down. I remember that in 2000, in the name of gender equality, the Jospin government lifted the ban on night work for women in industry, which was obviously a setback benefiting big business. Class struggle is everywhere, which is why I believe one cannot be a consistent feminist without making social revolution one’s objective.",
+  "target_value_sha256": "3deb49d30c4ec000127a0b34dd5bd503b0e47fe69efd7118983e378670c47efe",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0176",
+    "target_path": "citations/A0176-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e1b5857f9746ef285457ded6576c604dd91d6a722621a778dcd547d7766e888c"
+}

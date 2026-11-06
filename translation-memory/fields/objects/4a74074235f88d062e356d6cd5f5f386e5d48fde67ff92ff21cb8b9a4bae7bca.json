@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4f435c5d57903f79ed4c7d699e762078e3f15f7e80f048af3889e9fb6c2f1902",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Contrairement aux femmes voilées, personne ne dénonce l'oppression des religieuses catholiques",
+    "identity_sha256": "d7da242b592f21b8e5bbf4761bfbe16443360685ec26d3e56acc1ef0155d5449"
+  },
+  "source_value": "J’ai un scoop pour tous les auto-proclamés combattants des « morales liberticides » : attention à la poutre qui déforme votre jugement. Sachez que la France '''n’a pas attendu l’Islam pour découvrir les injonctions religieuses moralisatrices liberticides''', on en a PLEIN dans notre belle culture de « tradition catholique », et en plus, c’est exactement les mêmes que dans l’Islam ! »",
+  "source_value_sha256": "b6c029d001d494db9c280d00369712150e1138ad79102202f168dfcd87a3dd92",
+  "target_value": "I have a scoop for all the self-proclaimed fighters against “morality that destroys freedom”: beware the beam that distorts your judgment. You should know that France '''did not wait for Islam to discover moralizing religious injunctions that destroy freedom'''; our fine culture of “Catholic tradition” contains PLENTY of them, and what is more, they are exactly the same as in Islam!”",
+  "target_value_sha256": "7bf6852712442a0ebc83e8640b8378bffb19a2820924f27b152d88e7d872784f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0338",
+    "target_path": "citations/A0338-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4a74074235f88d062e356d6cd5f5f386e5d48fde67ff92ff21cb8b9a4bae7bca"
+}

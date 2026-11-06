@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6cc2ce4ad869630b56a66e640f53b6aba562d8f6249d3c00bbaf3978734cedb8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite a prétendu défendre Mila, mais a contribué à sa mise en danger en la surexposant médiatiquement",
+    "identity_sha256": "c2c2bb1c1ac974fdfc0ea0650c938af60f4b44da9b47d8c039a0c78566135e20"
+  },
+  "source_value": "L'extrême droite a prétendu défendre Mila, mais a contribué à sa mise en danger en la surexposant médiatiquement",
+  "source_value_sha256": "a2bfc3b9110f1a078ac8e2f2fa4fc77391db1ab655d9877d1621e073c6c6ea82",
+  "target_value": "The far right claimed to defend Mila but helped endanger her by overexposing her in the media",
+  "target_value_sha256": "8bd01c88469cf1875cb1dbbca72c5b1b101eeebd4a04c26cb1bd4177f6865009",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0326",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "14e6960161799edc64963d88695f709d459c332a1880b2204ce6bbb9e2accfd4"
+}

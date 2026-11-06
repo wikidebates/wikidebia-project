@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4ce191267a8fa12e7b2165cc11bb9817055b22ce41bb16fa4b9b04111492b72d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme permet de dénoncer la masculinité toxique moderne",
+    "identity_sha256": "c3e7249123ad85b7cc0f5714053ba58f9576d0e1b87f5ea8a4408a9b7469fd60"
+  },
+  "source_value": "Le féminisme permet de dénoncer la masculinité toxique moderne",
+  "source_value_sha256": "f6e6e6989f5c114950f91766c1e8c09383dc0e949aa9ae880c32b8f1ea221092",
+  "target_value": "Feminism helps expose modern toxic masculinity",
+  "target_value_sha256": "23e2879757ac4937493f5f8d157cfc1264bfb57b2895d9542811553200765179",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0008",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4502fcadda5e943a11d030066faee50659c69db523e7b39a99c32b34634eb5f8"
+}

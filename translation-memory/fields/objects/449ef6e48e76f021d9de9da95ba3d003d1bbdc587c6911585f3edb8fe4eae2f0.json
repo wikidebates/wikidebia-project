@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "cdd906d0a5eab5c3e76eed5fdd17ddce1aade3fb0e8dd51a9b11a1ae5ded97a1",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des hommes ne sont pas conscients de leur toxicité",
+    "identity_sha256": "c5dc0200a5bee187fc656f529315bcb5cf8033f14f8fb76d7bacfd7d2a85b047"
+  },
+  "source_value": "Devinez ce que ça donne quand tous les \"mecs bien\" s'octroient le droit de tracer [la] ligne [qui sépare les hommes bien des hommes mauvais]. ça donne le monde actuel. Un monde plein de mecs bien qui font de très mauvaises choses, tout en croyant du fond du coeur qu'ils sont bons puisqu'ils n'ont pas dépassé la ligne. Vu qu'ils l'ont redessinée à leur avantage.",
+  "source_value_sha256": "1f49735eeade558ef26696250dda9d24c2a53a787fa2175a4a5de8016be8916a",
+  "target_value": "Guess what happens when all the “good guys” grant themselves the right to draw [the] line [separating good men from bad men]. You get the world as it is today: a world full of good guys who do very bad things while believing deep down that they are good because they have not crossed the line—since they redrew it to their own advantage.",
+  "target_value_sha256": "28a96ce204440785d4ebaf3089c6d4d50e3879882ace91e52d8e15e121bd48a4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0185",
+    "target_path": "citations/A0185-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "449ef6e48e76f021d9de9da95ba3d003d1bbdc587c6911585f3edb8fe4eae2f0"
+}

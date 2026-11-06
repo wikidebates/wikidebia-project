@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e5227a6f224842a2b0441240a2d2bce7438218f041392623e7035690f9c258c0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les fémonationalistes ne sont pas les derniers à agresser les femmes",
+    "identity_sha256": "a1e5e1071273e7e8e2763e05f3e41ec6ddb4035dd98c5ed921b6ff90b3165cd3"
+  },
+  "source_value": "Les fémonationalistes ne sont pas les derniers à agresser les femmes",
+  "source_value_sha256": "5acec0849a7295c661abd1b7db9d88c764e5d6acef88660eabc3e32881ecdfc5",
+  "target_value": "Femonationalists are hardly above attacking women themselves",
+  "target_value_sha256": "25182ab22d1acd5000fa08d01e274104d783a5a56708b5eaf024d5f96dceadc8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0336",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "fdb8409ac97ba6708ff9df950fe69e3a3c989449764b8dc78a62084c73c45248"
+}

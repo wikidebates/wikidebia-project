@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0e2b688fe4fa03e67c7bfd8580fa1c19238945f296243122a04255549eccd734",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La censure la plus à craindre ne provient pas du \"wokisme\"",
+    "identity_sha256": "a4498de8239b45c57738f39e9502baecc44e6f513c95b7cd0771de18cb5c5325"
+  },
+  "source_value": "Le terme de woke est surtout un terme qui, aux USA, sert d'alibi à des campagnes de censure au nom de l'anti-wokisme et qui, en Europe, sert à importer (en l'absence de toute menace) les modes de pensée de l'extrême droite étasunienne.",
+  "source_value_sha256": "d2aac3b67adf89fcab2b76876e923921520922481fc3afc24c383da78a4815e3",
+  "target_value": "In the United States, the term woke serves above all as a pretext for censorship campaigns in the name of anti-wokeism; in Europe, it serves to import the modes of thought of the American far right in the absence of any threat.",
+  "target_value_sha256": "de297b188c3948090e3a45a5fc4ca605f75a351d6974d8d0902d0cdd7057b96f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0311",
+    "target_path": "citations/A0311-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d4091e8f889879a8d0f909cfbdf095d36a30fc5064907f351469a55b6b63a6c0"
+}

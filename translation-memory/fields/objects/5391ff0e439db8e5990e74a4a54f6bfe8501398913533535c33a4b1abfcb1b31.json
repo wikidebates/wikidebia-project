@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "296b185edb5d2bd74bb70b5e274fc024622e3f6f61a33684168007f15871ae00",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme ne peut être conséquent s'il n'a pas pour moyen la lutte des classes et pour objectif le renversement du capitalisme",
+    "identity_sha256": "008295830b6d2ffef850497e8a528f5a69e955c96681c4cfcddf8e5224f0650e"
+  },
+  "source_value": "Le féminisme ne peut être conséquent s'il n'a pas pour moyen la lutte des classes et pour objectif le renversement du capitalisme",
+  "source_value_sha256": "5caad2de4095d4a1eb2ce99d9691648680f33403e2133628ade2ecfbe7815a70",
+  "target_value": "It is not possible for feminism to be consistent unless class struggle is its means and the overthrow of capitalism is its objective",
+  "target_value_sha256": "6d9fe038194488f11edfc6e8893810e43cb563dbeac8344074963b5114a19806",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0063",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5391ff0e439db8e5990e74a4a54f6bfe8501398913533535c33a4b1abfcb1b31"
+}

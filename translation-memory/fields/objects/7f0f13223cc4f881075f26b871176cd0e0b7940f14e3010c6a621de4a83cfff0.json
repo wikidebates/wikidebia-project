@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f507f4426f4afc35cd0efb214602c3c1f01aa09838f9ca7d369f1e1847f8cf53",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Certains hommes font la majorité des tâches ménagères au sein de leur couple",
+    "identity_sha256": "1c7117729b2bd5078fcd2552d6eeef8f2f1ed36a53f0225620e0e88f3b49526b"
+  },
+  "source_value": "Certains hommes font la majorité des tâches ménagères au sein de leur couple",
+  "source_value_sha256": "e8a1d6bba358f8e3ccab5e6f86c6c9590f9cc4ab1c77d0351fdb0bf1539fa1f0",
+  "target_value": "Some men perform the majority of household tasks within their relationship",
+  "target_value_sha256": "c7ee02300e761e405f7cbc445e256b70915a7cf799d8c035ecbe62a645306c90",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0145",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7f0f13223cc4f881075f26b871176cd0e0b7940f14e3010c6a621de4a83cfff0"
+}

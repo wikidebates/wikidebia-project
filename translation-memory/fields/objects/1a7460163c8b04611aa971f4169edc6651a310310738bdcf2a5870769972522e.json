@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1d6ba9b9cbb016c0861c11a0626e25398a4c50dc5e12184edd1d8f39163cdec9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il n'y a pas besoin d'être féministe pour défendre les droits des femmes",
+    "identity_sha256": "9e6be4792735f23e3e532c56548ad52b52d10c38d3faafbfdd7628b7be869ab7"
+  },
+  "source_value": "Simone Veil n'était pas féministe.",
+  "source_value_sha256": "e24a30b1a70211e9ae54ec281efde0c8ce01166fd014563e23f294983192ac66",
+  "target_value": "Simone Veil was not a feminist.",
+  "target_value_sha256": "35c3766930765779ade817400a702e305d401fda8ff685695dff912de6146973",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0060",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1a7460163c8b04611aa971f4169edc6651a310310738bdcf2a5870769972522e"
+}

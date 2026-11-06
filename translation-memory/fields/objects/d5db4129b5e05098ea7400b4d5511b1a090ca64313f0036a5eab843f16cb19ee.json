@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d80877d121635f39ae79486c4c3a37de33b12731b43257f6f88ef2eb89812024",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des procès pour diffamation ne sont que des procédures-bâillon",
+    "identity_sha256": "0cc6f94e9cb56e98f0eba74b1f044d997d49873bb8991f436f7e485c89400024"
+  },
+  "source_value": "Acquitté sur toute la ligne ! La cour d’appel de Bruxelles a rendu son arrêt dans l’affaire plaidée le 30 novembre 2023. Elle opposait l’ancien président de la Ligue des droits humains et actuel vice-président de la Fédération internationale pour les droits humains Alexis Deswaef au commissaire de police Pierre Vandersmissen. La cour confirme la décision rendue en première instance en juillet 2021. Pour la LDH et la FIDH, cette affaire illustre le problème démocratique créé par les “procédures-bâillons”.",
+  "source_value_sha256": "2ac07104e0ab5f8ae93875ee779605ece30c752eee50e9609789d0d6dcc6c57f",
+  "target_value": "Acquitted across the board! The Brussels Court of Appeal issued its ruling in the case argued on November 30, 2023. It pitted Alexis Deswaef, former president of the Human Rights League and current vice-president of the International Federation for Human Rights, against police commissioner Pierre Vandersmissen. The court upheld the first-instance decision issued in July 2021. For the LDH and FIDH, this case illustrates the democratic problem created by “SLAPPs.”",
+  "target_value_sha256": "b2624ae15f118fd86b72f08a06887bc25f07fadfabdf2854cb38c0e3ba239cf0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0222",
+    "target_path": "citations/A0222-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d5db4129b5e05098ea7400b4d5511b1a090ca64313f0036a5eab843f16cb19ee"
+}

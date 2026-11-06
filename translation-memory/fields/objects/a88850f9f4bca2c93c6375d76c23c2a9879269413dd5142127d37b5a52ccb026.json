@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "499a60bdd2d54e04bc22832c7d8b01286dd0905b91bb49d1e85d3c1c6b3af0f5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Prendre la gauche pour responsable du vote populiste, c'est infantiliser les citoyens, qui sont assez grands pour prendre l'entière responsabilité de leur vote",
+    "identity_sha256": "e022a09df639e23c907eb46501ab014f8164ae9ba6cba884a8f80cd49b49ebae"
+  },
+  "source_value": "Les électeurs populistes sont supposés être adultes, donc entièrement responsables de la nature de leurs votes, ce n'est pas le rôle de la gauche que de les materner et assumer seule la charge de guider leurs choix politiques.",
+  "source_value_sha256": "1c2d91018c721695a7d44c487382e6abb054244d6dfac458aa8adcb6ac56da3d",
+  "target_value": "Populist voters are supposed to be adults and therefore fully responsible for the nature of their votes; it is not the left’s role to mother them and bear sole responsibility for guiding their political choices.",
+  "target_value_sha256": "77139b6ddbd1d2790e2ebfbce706b3c3c57dd91a6ad27cf7cee6313e2e0b8c31",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0167",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a88850f9f4bca2c93c6375d76c23c2a9879269413dd5142127d37b5a52ccb026"
+}

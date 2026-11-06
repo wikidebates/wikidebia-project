@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b0dfbdac39cddcf26ce96e53aa000b2366f31c35749c75ff74d8d79f6def1ab4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme peut nous libérer des coûts financiers de la masculinité toxique",
+    "identity_sha256": "cd8c0e88956f6c72418bea25fb0bb9ee2ab0588c99376a5024e2e088fbf1204d"
+  },
+  "source_value": "Le féminisme peut nous libérer des coûts financiers de la masculinité toxique",
+  "source_value_sha256": "c0fd599dfdba927cd39cbb7926c0a26cbfa68dcfd818421f420cc61c2abed38d",
+  "target_value": "Feminism can free us from the financial costs of toxic masculinity",
+  "target_value_sha256": "24081fa92270cc6e7a3b30e49aadba9ea4697b57e9dd5bf0acd6da007708af5c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0066",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "72e15178f093fd12945cd358ab595454c6632728b8cfc8e94de0e37b5dca365f"
+}

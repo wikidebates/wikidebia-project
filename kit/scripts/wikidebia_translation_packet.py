@@ -31,6 +31,7 @@ from wikidebia_translation_review import (
 from wikidebia_translation_memory import (
     TranslationMemoryError,
     reuse_review,
+    verified_field_reuse_coverage,
     verified_reuse_coverage,
 )
 from wikidebia_update import sha_object
@@ -97,6 +98,7 @@ def _render_markdown(packet: Mapping[str, Any]) -> str:
         f"- Arguments : **{packet['counts']['arguments']}**",
         f"- Arguments de l’unité : **{packet['counts']['unit_arguments']}**",
         f"- Traductions réutilisées : **{packet['counts']['memory_reused']}**",
+        f"- Champs réutilisés : **{packet['counts']['field_memory_reused']}**",
         f"- Entrées obsolètes refusées : **{packet['counts']['memory_stale_rejected']}**",
         f"- Sources françaises modifiées : **{packet['counts']['changed_french_sources']}**",
         f"- Vocabulaire pertinent : **{packet['counts']['vocabulary']}**",
@@ -178,6 +180,9 @@ def build_packet(
     reused_rows, stale_rows = verified_reuse_coverage(
         workspace, review_by_id, metadata_by_id, content_by_id,
     )
+    field_reused_rows = verified_field_reuse_coverage(
+        workspace, review_by_id, metadata_by_id, content_by_id,
+    )
     reused_by_id = {str(row["page_id"]): row for row in reused_rows}
     stale_by_id = {str(row["page_id"]): row for row in stale_rows}
     fragment_by_id = verified_fragment_coverage(workspace, review_by_id)
@@ -238,6 +243,10 @@ def build_packet(
         "arguments": arguments,
         "memory_reuse": [copy.deepcopy(reused_by_id[page_id]) for page_id in page_ids if page_id in reused_by_id],
         "memory_stale_rejected": [copy.deepcopy(stale_by_id[page_id]) for page_id in page_ids if page_id in stale_by_id],
+        "field_memory_reuse": [
+            copy.deepcopy(row) for row in field_reused_rows
+            if str(row.get("page_id")) in page_set
+        ],
         "argument_fragments_applied": [
             copy.deepcopy(fragment_by_id[page_id])
             for page_id in page_ids if page_id in fragment_by_id
@@ -249,6 +258,9 @@ def build_packet(
             "unit_arguments": len(page_ids),
             "memory_reused": sum(page_id in reused_by_id for page_id in page_ids),
             "memory_stale_rejected": sum(page_id in stale_by_id for page_id in page_ids),
+            "field_memory_reused": sum(
+                str(row.get("page_id")) in page_set for row in field_reused_rows
+            ),
             "argument_fragments_applied": sum(page_id in fragment_by_id for page_id in page_ids),
             "changed_french_sources": changed_sources,
             "vocabulary": len(vocabulary),

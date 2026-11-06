@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "329bd54f6c033843e6187fed616390024d724b52d4bee46033c1895cd9a5e1b4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Accuser les immigrés de \"victimisation\" est une aberration sociologique",
+    "identity_sha256": "825a81628a2642124919340ea6cc98d6aae9198ad9e63303c3e03fc5a780639b"
+  },
+  "source_value": "Les anti-woke renvoient les progressistes à un prétendu discours victimaire dans lequel ils sont accusés de se complaire – cela revient surtout à nier les structures de domination. On cherche à disqualifier la gauche en retournant le stigmate.",
+  "source_value_sha256": "97bee55e2e5844d55f07c66d613f70b3e72e2f90f097f3436a0a54c07c49e55e",
+  "target_value": "Anti-woke activists reduce progressives to a supposed discourse of victimhood in which they are accused of indulging—this mainly amounts to denying structures of domination. The aim is to discredit the left by reversing the stigma.",
+  "target_value_sha256": "5fc73f6b931734d843c9127b23d4dfe984e6c165a1af3ec0e23077afcbcba5da",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0288",
+    "target_path": "citations/A0288-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "23c1b8e2aca41c7477997652efbc0c9a89dcf5402318bc5397f81a50efd66bb6"
+}

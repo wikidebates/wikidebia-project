@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "54e8442b1c1bfb380eb98c293f2740cc3022ee8833e270343168531506b2b0c7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les immigrés et descendants d'immigrés qui s'en sortent le mieux sont ceux qui n'adoptent pas une posture victimaire",
+    "identity_sha256": "4181761b2f892fda39483a392d7fbf32f32c5b5234f823247621ce83ef3888f4"
+  },
+  "source_value": "Les immigrés et descendants d'immigrés qui s'en sortent le mieux sont ceux qui n'adoptent pas une posture victimaire",
+  "source_value_sha256": "08b9b16dce4032ff28c411c2489195e87f85cd0b0a6deac2857d6c4139f9bd44",
+  "target_value": "The immigrants and descendants of immigrants who fare better than others are those who do not adopt a victim mentality",
+  "target_value_sha256": "3bea194156385c773a454a5a2f92a65a1da74be4259bf881c3fb2e4a5086788f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0200",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b26f5806831b25a4372cfa1ac77231aee3259c3abd04893ed0ef9be977b23eb6"
+}

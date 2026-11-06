@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "40c762bde302353174a4a4d023b9db8267da7519e7375b30b1d86481459a13a7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les idées sexistes se portent bien",
+    "identity_sha256": "58d8ef78145e6296dd1c7fea9690ade5279ec770ffdd5894ec7c30bc87ae13de"
+  },
+  "source_value": "Les idées sexistes se portent bien",
+  "source_value_sha256": "40c92036e442eba6a0c5fe53b755161fc41147266d703d85be711d8f92dacdfb",
+  "target_value": "Sexist ideas are alive and well",
+  "target_value_sha256": "9a9307592629a6e6c43e10a8ac2593d97478120bd1f09eb33321091ba5a55c47",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0011",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9819e949a12a0b854964b32f49cc22ea3ea73d309f3eaf9c8200bcf17446540f"
+}

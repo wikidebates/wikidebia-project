@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "630f18769d9304f8bf8e2e37ef6c9d0a1fcbad052b99cc45fa5da02f479a142f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le wokisme est dénoncé par un spectre politique qui dépasse très largement l'ultradroite",
+    "identity_sha256": "560c07fe006a580d19f24255059341649f8137285b7559d10bf5452ef94e2702"
+  },
+  "source_value": "La pensée et les comportements wokes sont dénoncés par la frange politique qui va de la gauche républicaine à certains LREM jusqu'aux zemmouriens. Non seulement Finkielkraut et tous les intellectuels républicains (Jacques Julliard etc.), mais aussi certains intellectuel(le)s marxistes dénoncent le dévoiement de la gauche woke qui s'attaque aux Lumières (voir par exemple Stéphanie Roza, \"La gauche contre les Lumières ?\").",
+  "source_value_sha256": "f1e50fb080a5f460aebaf666a1e21c4a192266e18e9d2d44c504beb6bb5a5a23",
+  "target_value": "Woke thought and behavior are denounced by a political range extending from the republican left through some members of LREM to supporters of Zemmour. Not only Finkielkraut and all the republican intellectuals (Jacques Julliard and others), but also some Marxist intellectuals denounce the corruption of the woke left, which attacks the Enlightenment (see, for example, Stéphanie Roza, “La gauche contre les Lumières ?”).",
+  "target_value_sha256": "fcae443cc3858b9ee85ca5f599ceeadb50c6ea177d461ff78ab6520805703c9e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0309",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0c8561b20f72ab63c74860b8178e9b1181a9e6eb560a9bebdb883989f0438341"
+}

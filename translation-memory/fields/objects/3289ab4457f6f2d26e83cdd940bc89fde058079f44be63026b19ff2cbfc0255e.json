@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d35a171183c02e0ed79e78c2a68ee81503ef835ce1259338428777922c06d862",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Sans l'extrême droite, il n'y aurait pas eu d'\"affaire Mila\"",
+    "identity_sha256": "5f279632b66de8eeb3a5f59dd5a4fcf8375560e68367540d198a8da21c6df454"
+  },
+  "source_value": "On constate que, quelque temps plus tard, Identitaires et pseudo-laïques se sont disputé la primeur du « combat pour Mila », revendiquant d’avoir été en première place pour « la défense » de l’adolescente… Mais les faits sont têtus : c’est bien la fachosphère qui a lancé l’affaire, et son hashtag a enregistré des scores de likes et de partages sans commune mesure avec ceux espérés par ses suiveurs, lesquels, en l’ayant adopté, lui ont assuré cette '''confortable résonance'''.",
+  "source_value_sha256": "72fc6a34cdc15c4559c4cdd0c86ebfd7b0be5d6d597919c5b4ef44c71e886a95",
+  "target_value": "Some time later, we see that Identitarians and pseudo-secularists competed to claim precedence in the “fight for Mila,” asserting that they had been at the forefront of the teenager’s “defense”... But the facts are stubborn: it was indeed the far-right online sphere that launched the affair, and its hashtag received numbers of likes and shares far beyond anything its followers could have hoped for; by adopting it, they gave it this '''comfortable resonance'''.",
+  "target_value_sha256": "b04ebd3c1f3386e17f31d766c178d2fddda928b1486bfba0d35ecf16f67d9dec",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0230",
+    "target_path": "citations/A0230-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3289ab4457f6f2d26e83cdd940bc89fde058079f44be63026b19ff2cbfc0255e"
+}

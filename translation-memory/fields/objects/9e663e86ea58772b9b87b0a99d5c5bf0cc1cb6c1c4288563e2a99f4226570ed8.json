@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "109274810f80e6382bf391951885b4ab50e1145a4660a11b9fe952f0506e8cd0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le concept de \"cancel culture\" sert d'écran de fumée à des méfaits bien réels",
+    "identity_sha256": "f2847f2f35f4b2975cba84dcd67b386c178a3fdce1ccb5f988b338e22cc870ab"
+  },
+  "source_value": "Alors arrêtons de faire comme si nous étions atteints de cécité sélective. Personne ne demande de « Cancel » Depardieu. '''C’est une tentative de victimisation d’un agresseur sexuel qui assume à de nombreuses reprises et publiquement ses comportements.''' Depardieu fête ses 75 ans. Il sait à peine marcher. Il a fait une longue carrière dans le cinéma. Soyons honnêtes un instant. Arrêtons de faire croire qu’il reste quoi que ce soit à Cancel de lui !",
+  "source_value_sha256": "2d66dbf5d079657a62a0796e1913cf5482860acfb00d4f5211900aadf223cb89",
+  "target_value": "So let us stop pretending that we suffer from selective blindness. No one is asking to “cancel” Depardieu. '''This is an attempt to portray a sexual aggressor as a victim even though he has repeatedly and publicly owned his behavior.''' Depardieu is celebrating his seventy-fifth birthday. He can barely walk. He has had a long film career. Let us be honest for a moment. Let us stop pretending that there is anything left of him to cancel!",
+  "target_value_sha256": "7fe4aee2237cc907e9a6a90f31726eefce87bc3a6952ddf7487e34b0c88399bd",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0306",
+    "target_path": "citations/A0306-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9e663e86ea58772b9b87b0a99d5c5bf0cc1cb6c1c4288563e2a99f4226570ed8"
+}

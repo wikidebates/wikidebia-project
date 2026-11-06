@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9665fed6bb57746a38548717d5cb100968ef29f7b7a46f274e2585f1d228513a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La lutte antisexiste n'a pas le pouvoir d'empêcher des sorties",
+    "identity_sha256": "5c24c5211a4194382607b20795c83b393c6ac885f4e3541ce6b3504356fd994a"
+  },
+  "source_value": "La lutte antisexiste n'a pas le pouvoir d'empêcher des sorties",
+  "source_value_sha256": "d622bbc36f6476016c91599db5f914d80e8e49e5f3077e11f315fb3d23af721e",
+  "target_value": "The struggle against sexism has no power to prevent works from being released",
+  "target_value_sha256": "bea0c71182cb5d37cacf68d514526f5939e1a033510ffe776c20f7cb81a8dae6",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0291",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9d75ef7f5cdc58a58aefad54e30a303afa991d92a5e3ccb222879201ded25200"
+}

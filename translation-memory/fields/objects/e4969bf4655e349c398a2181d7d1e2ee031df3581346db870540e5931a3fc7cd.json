@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "109462ef7b873d234bedfe1f0fad11c283dd850dc6f32cc34ee7edad7f3db387",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le stalinisme a abandonné la lutte contre l'oppression des femmes",
+    "identity_sha256": "ec59d52bcf394a281d204ba5f8fd11dfe55f1649ceef07695bcff5d41bbe7470"
+  },
+  "source_value": "Le stalinisme a abandonné la lutte contre l'oppression des femmes",
+  "source_value_sha256": "0f29026403284fc2d7f02cfbbc52f4fd39660eeb82e714bfee96a2f5fe7867eb",
+  "target_value": "Stalinism abandoned the struggle against the oppression of women",
+  "target_value_sha256": "3e2df097c8a70ccbfc5f60aa7aa9509e7c3b8ec07eb003b328424e21222eb74e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0272",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e4969bf4655e349c398a2181d7d1e2ee031df3581346db870540e5931a3fc7cd"
+}

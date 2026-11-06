@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1f8e0c8f04e12fd318772a0684e70713e8a027cfea07104a65aa66dc3e1c1a9b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'égalité de droits est imparfaite",
+    "identity_sha256": "ecd019fc1fb7e9bce56c8e2522155a6707fb69ba71a6d10436c2c45205bf3d5a"
+  },
+  "source_value": "L'égalité de droits est imparfaite",
+  "source_value_sha256": "846b1bcf07f3e21cb6bc8ee8c84c9e3df6ac324c34ed477bb9c9a94d0d5326a3",
+  "target_value": "Equality before the law is imperfect",
+  "target_value_sha256": "f2476c9f180ea83174c9c10ab7cf93ea7f1abdac4e5174058a55b659289ba2a5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0086",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7b49bd50fb9d6fbd4b3acb51dbba625679fd7b36e6d999d9df766c836eced6f6"
+}

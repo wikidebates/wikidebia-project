@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d29bb873d9ca62bab372214eed2fd909bedd7bb3260642f88d13750a82b88111",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le terme \"woke\" a été utilisé à ses débuts par la gauche américaine",
+    "identity_sha256": "626b78d629862d521c60b6e2f7272ce27c8c10e07c63b1afda1da9a56b0d9dbe"
+  },
+  "source_value": "Le terme \"woke\" a été utilisé à ses débuts par la gauche américaine",
+  "source_value_sha256": "1425f64c74cc46ef246a415889bd7a0e7b97639320cef47b081bff648a6b859d",
+  "target_value": "The term \"woke\" was initially used by the American left",
+  "target_value_sha256": "e706d5c465c194ddd7f0993747d4912e919578d57b3c24b08f62c2d3637b5400",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0202",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9155e68d84e497e446358688af3157074feab4becada3c084ae2d6cc2d31ef61"
+}

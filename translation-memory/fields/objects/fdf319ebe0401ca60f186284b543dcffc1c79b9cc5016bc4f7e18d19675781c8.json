@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "be968350da7431c3ec22788f7ce95db19b6e3ae997d63a11be2133258ad68c16",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La lutte contre le wokisme est une lutte pour la culture et l'altérité",
+    "identity_sha256": "6644894b8e980cc23037a94fb9aa84cdbcf0dd22d521873c456e2cbc22d6eee1"
+  },
+  "source_value": "La lutte contre le wokisme est une lutte pour la culture et l'altérité",
+  "source_value_sha256": "72a9c3694208864b1fa89dddb524ba0111e3d860b8f3fd9bcb50a5747f92cd9b",
+  "target_value": "The struggle against wokeism is a struggle for culture and otherness",
+  "target_value_sha256": "19513d6bae515999d78c2f6e9db1599a7c7fd10d53775175f8dde7d23462aba0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0314",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "fdf319ebe0401ca60f186284b543dcffc1c79b9cc5016bc4f7e18d19675781c8"
+}

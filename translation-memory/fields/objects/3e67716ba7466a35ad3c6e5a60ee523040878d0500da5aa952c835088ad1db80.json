@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a894c32d05555a969f1a904b56b0386c35a6aee067d6b2c0de2c34e636b8eb52",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le discours féministe soutient la victimisation des femmes",
+    "identity_sha256": "e8ebc6839a80400024371bb6724d363aef804c77c475ac085351dea450b0e519"
+  },
+  "source_value": "S'inspirant de Camille Paglia : \"C’est un risque inévitable, c’est un risque que les femmes doivent prendre en compte et accepter de courir si elles veulent sortir de chez elles et circuler librement. Si ça t’arrive, remets-toi debout, dust yourself et passe à autre chose. Et si ça te fait trop peur, il faut rester chez maman et t’occuper de faire ta manucure […]\nPour la première fois, quelqu’un valorisait la faculté de s’en remettre, plutôt que de s’étendre complaisamment sur le florilège des traumas. Dévalorisation du viol, de sa portée, de sa résonance. Ça n’annulait rien à ce qui s’était passé, ça n’effaçait rien de ce qu’on avait appris cette nuit-là.[…]\nCamille Paglia est sans doute la plus controversée des féministes américaines. Elle proposait de penser le viol comme un risque à prendre inhérent à notre condition de filles. Une liberté inouïe, de dédramatisation. Oui, on avait été dehors, un espace qui n’était pas pour nous. Oui, on avait vécu, au lieu de mourir. Oui, on était en minijupe seules sans un mec avec nous, la nuit, oui on avait été connes, et faibles, incapables de leur péter la gueule, faibles comme les filles apprennent à l’être quand on les agresse. Oui, ça nous était arrivé, mais pour la première fois, on comprenait ce qu’on avait fait : on était sorties dans la rue parce que, chez papa-maman, il ne se passait pas grand chose. On avait pris le risque, on avait payé le prix, et plutôt qu’avoir honte d’être vivantes on pouvait décider de se relever et de s’en remettre le mieux possible. Paglia nous permettait de nous imaginer en guerrières, non plus responsables personnellement de ce qu’elles avaient bien cherché, mais victimes ordinaires de ce qu’il faut s’attendre à endurer si on est femme et qu’on veut s’aventurer à l’extérieur. Elle était la première à sortir le viol du cauchemar absolu, du non-dit, de ce qui ne doit surtout jamais arriver. Elle en faisait une circonstance politique, quelque chose qu’on devait apprendre à encaisser. Paglia changeait tout : il ne s’agissait plus de nier, ni de succomber, il s’agissait de faire avec.\"\n\nIl faut être traumatisée d’un viol, il y a une série de marques visibles qu’il faut respecter : peur des hommes, de la nuit, de l’autonomie, dégoût du sexe et autres joyeusetés",
+  "source_value_sha256": "a97b209b3aa662e8a0f86063f96a831fed2cde2d9e3f3b65f6e1ad364cb442fb",
+  "target_value": "Drawing on Camille Paglia: 'It is an unavoidable risk, a risk women must take into account and agree to run if they want to leave their homes and move about freely. If it happens to you, get back on your feet, dust yourself off and move on. And if it scares you too much, you have to stay home with mommy and do your nails [...]\nFor the first time, someone valued the ability to recover instead of dwelling self-indulgently on an anthology of traumas. A downgrading of rape, of its significance, of its resonance. That did not undo anything that had happened; it did not erase anything we had learned that night. [...]\nCamille Paglia is probably the most controversial American feminist. She suggested thinking of rape as a risk inherent in our condition as girls that must be taken. An extraordinary freedom, a way of taking the drama out of it. Yes, we had gone outside, into a space that was not meant for us. Yes, we had lived instead of dying. Yes, we were out alone in miniskirts at night, without a guy with us; yes, we had been stupid and weak, unable to beat them up, weak in the way girls are taught to be when they are attacked. Yes, it had happened to us, but for the first time we understood what we had done: we had gone out into the street because not much was happening at mommy and daddy's place. We had taken the risk, we had paid the price, and instead of being ashamed to be alive, we could decide to get back up and recover as best we could. Paglia allowed us to imagine ourselves as warriors, no longer personally responsible for having asked for it, but ordinary victims of what one must expect to endure if one is a woman and wants to venture outside. She was the first to remove rape from the realm of the absolute nightmare, the unspeakable, the thing that above all must never happen. She made it a political circumstance, something we had to learn to withstand. Paglia changed everything: it was no longer a question of denying it or succumbing to it, but of living with it.'\n\nOne must be traumatized by rape; there is a series of visible signs that must be respected: fear of men, of the night, of autonomy, disgust with sex, and other delights.",
+  "target_value_sha256": "a1389067a4688069c0433b1f3e72ae72279d108ae8cdd6c350837b1322ed0c0a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0017",
+    "target_path": "citations/A0017-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3e67716ba7466a35ad3c6e5a60ee523040878d0500da5aa952c835088ad1db80"
+}

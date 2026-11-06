@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a23a8258cb7c7571366e708cfb3ecc01146181f4d8f98cee3bd1eb8eaf210fcb",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le masculinisme constitue une autre forme de dérive",
+    "identity_sha256": "7350713aa79e4f2166b6d35e2d4b462545ef8e07c55655a22bbdb6a9aa41c47f"
+  },
+  "source_value": "Les autres formes de dérives : apologie du masculisnisme",
+  "source_value_sha256": "18c38785687544869eff7e5554e807dda367ffc7c1f51759cc68964972fc5c07",
+  "target_value": "Other forms of excess: advocacy of masculinism",
+  "target_value_sha256": "554ceebe2a9766b8f4eadd9fd42f4ec42fb69334ba8bafdd7c40faf45563ec21",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0072",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "15c95fc70dd8d7a78f83e53e9e5fd617c289f8bc4469aab8eb8b5914d5c33f0f"
+}

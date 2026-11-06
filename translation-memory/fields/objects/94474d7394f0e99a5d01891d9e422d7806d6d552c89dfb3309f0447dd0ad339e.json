@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1dd97728fa29110bc47e6d9d374066a079e4b505fc904a8ca1a16cce9b98161d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les oeuvres culturelles évoluent avec leur temps",
+    "identity_sha256": "e7bb58cd1464ce7b0cbb19664b36f51fb97ab0b82dd5b25d053b42b6d38e05bf"
+  },
+  "source_value": "De tous temps, les oeuvres culturelles ont dû se brider par rapport à ce qui était jugé acceptable ou pas par la société, et il n'y avait pas forcément moins de censure avant, certains films qu'on trouve tout à fait acceptables aujourd'hui n'auraient jamais pu sortir il y a quelques décennies.",
+  "source_value_sha256": "67f4d1ae35e5721f8d4f2fd5bb33f738c37594ee354b1442c1abe0ef37d198d4",
+  "target_value": "At all times throughout history, cultural works have had to restrain themselves according to that which society judged acceptable or unacceptable, and there was not necessarily less censorship in the past; some films that we find entirely acceptable today could never have been released a few decades ago.",
+  "target_value_sha256": "3cc1bc2eaccd4da4973c06a02a797c07ed12b630d113205abb57189894d66b2e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0112",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "94474d7394f0e99a5d01891d9e422d7806d6d552c89dfb3309f0447dd0ad339e"
+}

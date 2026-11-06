@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "30e25a207bc3be20cf2f8abf136c6339ad7050f03b662bcc6afa0118eb359090",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite instrumentalise le féminisme à des fins racistes",
+    "identity_sha256": "b63ec2ed6534176417f49ba5a8bde2df9745111d1612ffc1015a5cdacf64266b"
+  },
+  "source_value": "L'extrême droite instrumentalise le féminisme à des fins racistes",
+  "source_value_sha256": "968b19a10a50dd101c1d3c9023a64bd580c0c5dea7f49655d89862d1e0367991",
+  "target_value": "The far right instrumentalizes feminism for racist purposes",
+  "target_value_sha256": "8005dad5474aec645ce7d6c294a0513b38e473f9a4d1306a9198f4ca72f2388a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0133",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "38a2672452cd350243ce3efc148d18babdd2f05f96ab2f11afff515762131f91"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b841e2862075e6494648dc67842e74523ace9d28c66296c7a18174487691d501",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Des médecins diffusent des fake news liées à la santé féminine",
+    "identity_sha256": "a8835b8ba1c1d2a7e079f0445f76fecf4829ece153847a9d7d529d3a30f819f2"
+  },
+  "source_value": "Des médecins diffusent des fake news liées à la santé féminine",
+  "source_value_sha256": "1a0672ec1962c7eeaa9e5a0449610281a1ae7c5b10203592885d60e22354534d",
+  "target_value": "Doctors spread fake news about women's health",
+  "target_value_sha256": "91fad529a863c1298bdb1808d99020709478d53d167f0958683ab46239442092",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0059",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b803b75083d4008d055c35d2dcc804daa7b10cf0c1f8d9e1a817d0e840be26ac"
+}

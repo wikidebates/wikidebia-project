@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e3d67d54a4566e28b01ebd75aa026850716fdad194c9af7b9ed98aef29b468bc",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes ne sont pas dénuées de responsabilité",
+    "identity_sha256": "fecb7d5528209fc917ff6703b29ac125af61128fdcde3af187901b5c9077b210"
+  },
+  "source_value": "Les hommes ont tendance à plus couper la parole que les femmes, mais les femmes ont plus tendance à se laisser couper la parole que les hommes. La prise de parole, lorsqu'elle est en concurrence, est compliquée si elle n'est pas organisée. Les femmes en moyenne moins agressives, cherchent moins le conflit, sont plus discrètes que les hommes, et ont plus tendance à se laisser couper la parole dans ce genre de situation.",
+  "source_value_sha256": "926d8d36c68a55820fad34b801aa0312f71318b29828a21a5f71f7350e593fdf",
+  "target_value": "Men tend to interrupt more than women, but women are more likely than men to allow themselves to be interrupted. Speaking when people are competing for the floor is difficult if it is not organized. Women, who are on average less aggressive, seek conflict less, are more discreet than men, and are more likely to allow themselves to be interrupted in this type of situation.",
+  "target_value_sha256": "d35d80715774cd6b876e09dc72f55f922f853fac97d46a8cc2ba5f67ff0d93cf",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0187",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a864cf5ad465f0f88bfa45d05aed9cbdd0c23f12a265b59a65dd37d873b0d562"
+}

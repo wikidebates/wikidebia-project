@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "261aea8d05009ecc558b1a51e2f9ef389c5ffb50bfa43906eae152d877beabc4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Dans l'affaire Eric Brion, l'accusatrice n'avait fait que rapporter les paroles de ce dernier",
+    "identity_sha256": "ddd344b31ed40364f9f4c2439091eddb780005a2814f557e84aab9cea9e9697b"
+  },
+  "source_value": "Dans l'affaire Eric Brion, l'accusatrice n'avait fait que rapporter les paroles de ce dernier",
+  "source_value_sha256": "8292a0425165ecb07b091ddaf07154e50d5f16eec7a62218f69b92614ce4feb2",
+  "target_value": "In the Éric Brion case, the accuser merely reported his own words",
+  "target_value_sha256": "b1d8e28c3afae830ebec6faf57148e9d3afbae609e4fb52312ad0aa405f60a66",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0225",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a2bc00870a73d9f826a88173012352fe593e77c8cb683bb59679cf0fdfc41ed6"
+}

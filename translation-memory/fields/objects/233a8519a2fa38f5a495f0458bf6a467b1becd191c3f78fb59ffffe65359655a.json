@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "02b29047e7ae870ca7590072d069bed3a7ae3a6584e64162f3558317e49ff747",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'argument du respect de l'égalité de genre est hypocrite et opportuniste",
+    "identity_sha256": "e16744cf586f3494c062831103d1bbbb298149c2167e65b4a71dd2666a2802ed"
+  },
+  "source_value": "Le 2 octobre 2002, mourrait brulée vive Sohane Benziane à Vitry. Elle a été tuée par son ex compagnon, dans le local poubelle de son immeuble. Sa mort a bouleversé une génération de femmes de quartiers populaires, choquées par la violence des faits. Une mobilisation sans précédent a vu le jour pour dénoncer les féminicides, les violences sexistes et sexuelles dans nos quartiers, et ce avant le mouvement Me Too. Cette colère légitime a pourtant été récupérée par le PS et son mouvement Ni Pute Ni Soumise. Cette récupération d'Etat a ciblé les hommes des banlieues comme des barbares sexistes. Ce mouvement a voulu faire de la France et de sa République, le seul outil de libération possible des femmes des quartiers populaires. Depuis, nous vivons un conflit de loyauté qui nous condamne au silence, reproduisant le fameux \"laver son linge sale en famille\".\n\nPourtant, tous les ans, nous continuons à compter nos mort.e.s et mutilé.e.s. : Dinah, Alisha, Melissa, Farida, Fouad, Vanessa Campos … Les féminicides sont le haut de l'iceberg des violences faites aux femmes : agressions, harcèlements, suicides, corps abîmés par l'exploitation. Les femmes voilées subissent des violences racistes et sexistes spécifiques dans le contexte islamophobe actuel.",
+  "source_value_sha256": "44f5c7ea5b039decd4de2e846121e49b2a2779e2e5b87bbb522158ec8ee10fad",
+  "target_value": "On October 2, 2002, Sohane Benziane died after being burned alive in Vitry. She was killed by her former partner in the garbage room of her building. Her death shook a generation of women from working-class neighborhoods who were horrified by the violence of the crime. An unprecedented mobilization emerged to denounce femicides and sexist and sexual violence in our neighborhoods, before the MeToo movement. Yet this legitimate anger was appropriated by the Socialist Party and its movement Ni Putes Ni Soumises. This state appropriation targeted men from the suburbs as sexist barbarians. The movement sought to make France and its Republic the only possible means of liberating women from working-class neighborhoods. Since then, we have lived with a conflict of loyalty that condemns us to silence, reproducing the familiar injunction to “wash one’s dirty laundry in private.”\n\nYet every year we continue to count our dead and mutilated: Dinah, Alisha, Melissa, Farida, Fouad, Vanessa Campos... Femicides are the tip of the iceberg of violence against women: assaults, harassment, suicides, bodies damaged by exploitation. In the current Islamophobic context, veiled women experience specific racist and sexist violence.",
+  "target_value_sha256": "3e4c63733bc3401d03d23a865b0c657fedcd5e45d1b964b9b088f798b36291be",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0328",
+    "target_path": "citations/A0328-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "233a8519a2fa38f5a495f0458bf6a467b1becd191c3f78fb59ffffe65359655a"
+}

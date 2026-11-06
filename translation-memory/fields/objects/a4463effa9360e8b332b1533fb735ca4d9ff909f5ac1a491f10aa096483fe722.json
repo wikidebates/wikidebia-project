@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "56d3d7e6abb4a14b9f7d8104ce9b0401127bc32518b2dc18213c85c858f782d0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les postes à responsabilités sont mieux payés et donnent plus de pouvoir, les hommes ont donc clairement intérêt à en conserver le monopole",
+    "identity_sha256": "f5b2c89e85df9eeba34517d830ef053ce3ba6df063535c5261214975822e2e7d"
+  },
+  "source_value": "Les postes à responsabilités sont mieux payés et donnent plus de pouvoir, les hommes ont donc clairement intérêt à en conserver le monopole",
+  "source_value_sha256": "1e79a4db17cad8da67f768aa71bfc2920be1d8ee4d5413d0bd8450bcb5aa6173",
+  "target_value": "Positions of responsibility are better paid and confer more power, so men clearly have an interest in preserving their monopoly over them",
+  "target_value_sha256": "03b2ce233df9d8d9a57ccd0a44e7fa2f6a484f9c1b164fb58fb5fa7f16791739",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0248",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a4463effa9360e8b332b1533fb735ca4d9ff909f5ac1a491f10aa096483fe722"
+}

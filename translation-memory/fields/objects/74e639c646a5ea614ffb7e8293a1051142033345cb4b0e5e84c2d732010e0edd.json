@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4c1e63aeacbab7413029f9582961ac792836c8d0ddaa7a741bc2977b4d055b2b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "À poste et qualifications égales, les femmes sont rémunérées en moyenne 10 % de moins que les hommes",
+    "identity_sha256": "299db0f572e6b3e208a3a07baf10f611e883d9b22cebe97cc723f60cd205affd"
+  },
+  "source_value": "À poste et qualifications égales, les femmes sont rémunérées en moyenne 10 % de moins que les hommes",
+  "source_value_sha256": "13b5b75870f87116491360c659d727859452ed87c0e4deef162e64d497bccd73",
+  "target_value": "In the same positions and with equal qualifications, women are paid 10% less than men on average",
+  "target_value_sha256": "b6c5cd1477da50c4de88667faa1a5170bee157cdc43c3ec4f6a3861aa2141819",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0345",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "74e639c646a5ea614ffb7e8293a1051142033345cb4b0e5e84c2d732010e0edd"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d1bf361c1a580ecfe6701690b75110bf97aa3f95d4523418cf8d8920e657a940",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes ont de tout temps cherché à cadenasser l'accès des femmes aux postes élevés, ils en tirent donc bel et bien un bénéfice",
+    "identity_sha256": "b21604c26f6f1ccace2a2437444e526e8e67122e2ba266d62625e3368313df85"
+  },
+  "source_value": "Les hommes ont de tout temps cherché à cadenasser l'accès des femmes aux postes élevés, ils en tirent donc bel et bien un bénéfice",
+  "source_value_sha256": "fc7367382d726586cfae59a92e6e4a894d75a9986249ea03f4accacf8feb4fb5",
+  "target_value": "Throughout history, men have sought to lock women out of senior positions, so they do indeed benefit from doing so",
+  "target_value_sha256": "609cd463db467e232f5769694dddc62bd993fd402fe97f997761f3fd9cdd34a0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0249",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b8e14ee4cd4a0fe36096cac18bb5588a65e025de183ac8f777fb00251da1282d"
+}

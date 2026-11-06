@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c33482fae83ef7628d3ce625c591512e88ba88ec5b4eeb91c28f7e98f9d31c6c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Aujourd'hui en Orient, la lutte contre le voile est le fait de féministes",
+    "identity_sha256": "50f41497e28587aeb102ac2aed189b159487c92a1a0fee8665e5d98f3de445b5"
+  },
+  "source_value": "Aujourd'hui en Orient, la lutte contre le voile est le fait de féministes",
+  "source_value_sha256": "82f6052777d6c3e3056bd1a9543eee0804f65c2a6c7f1b20333f15c9a5785988",
+  "target_value": "Today in the East, opposition to the veil comes from feminists",
+  "target_value_sha256": "64bcce851ef250570cbc75445f7f934a2bda50dd306510bf16ad79ac380b5eda",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0342",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "fe5f8ba8016556b6c3484c9e4067c5c473806730143c1b62be67a815e0b289c7"
+}

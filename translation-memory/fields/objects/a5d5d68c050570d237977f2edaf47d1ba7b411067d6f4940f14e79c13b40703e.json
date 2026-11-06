@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6f9db8c7a496bcd64045689a1125388a38b756cd448c9e794a5a15d7c1c0e083",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "On constate du sexisme dans les quartiers populaires",
+    "identity_sha256": "8c87437b1f1c2297d23f3ab3088bdf9cbdb35f29b713da399040a2b51e8be3c8"
+  },
+  "source_value": "On constate du sexisme dans les quartiers populaires",
+  "source_value_sha256": "382b24c34e6f3aec822ddefafa372c086a4878e8587ded841081aaf5d218818e",
+  "target_value": "Sexism exists in working-class neighborhoods",
+  "target_value_sha256": "ff1575a7a697f7890934ac07442ed4b0136ddcf843bc80bae6fbfce9d3b32b3b",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0083",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a5d5d68c050570d237977f2edaf47d1ba7b411067d6f4940f14e79c13b40703e"
+}

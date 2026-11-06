@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "23eacc34d32953fd6b7f03e0f46a9e8a3ea21b82f9234520fad28c466cf44215",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des hommes ne sont pas toxiques",
+    "identity_sha256": "a9a0c2f51d155ce66730bb69219d610483b530c192ea610554b4418f251384af"
+  },
+  "source_value": "Le féminisme a un forte tendance à la généralisation et à l'amalgame misandre. Cela rejoint la rhétorique du racisme ou de l'homophobie.",
+  "source_value_sha256": "ba5d0ccd17374253f06731a0181f6ee6b87fdd43fe0f3cc9d7d3ebf09969b891",
+  "target_value": "Feminism has a strong tendency toward generalization and misandrist conflation. This resembles the rhetoric of racism or homophobia.",
+  "target_value_sha256": "b3597ff6675502d85b0d2eab12d3b28b27f751065fd927af3032af41b2037293",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0068",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8cc81f750d534aff81a680ff59dab172ed9d77e45467c8e2cddeccc1d04e2b9f"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d681c16de83825b7a976d88209a145056ff2771d8b5215d77ce3d5dca8e4b044",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La parité ne fait que corriger une situation qui, elle, est injuste",
+    "identity_sha256": "ec410153ab467f268114c5fb22b523fb90ed3f1e638ab50db49335a5c25f2c60"
+  },
+  "source_value": "Du genre de celle qu'à compétences égales, on prendra moins souvent une femme qu'un homme.",
+  "source_value_sha256": "249eba788e28515f07a94423fc4f701911178f5512717f9f63de950c3d1b0553",
+  "target_value": "For example, when qualifications are equal, a woman will be selected less often than a man.",
+  "target_value_sha256": "27b1667774f146481ee3285e821b3bf5f45c3f0b49acd584827bbf651e118537",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0146",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c1b6c02dcb601aa580f234373d05d22eaad35342ad7c3401084a45c07b7b11ad"
+}

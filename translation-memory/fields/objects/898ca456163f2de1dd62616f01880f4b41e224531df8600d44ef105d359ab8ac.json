@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "58bd31dd500773ee86b99fc68d175578733d587fe0b2cb6147a9653a80027db1",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La question des différences physiques entre hommes et femmes est bien plus complexe qu'on ne le croit",
+    "identity_sha256": "180f4ec6a45f86288a23737a3c398105b8bb18d2531dfb8798b7f4882cdc39a5"
+  },
+  "source_value": "Prétendre qu'il existe des traits communs à absolument tous les hommes ou toutes les femmes, c'est nier la très forte diversité en la matière, dont notamment:\n\n* Les femmes sans utérus\n* Les hommes sans pénis\n* Les personnes intersexe\n* Les personnes non-binaires\n* Les personnes androgynes",
+  "source_value_sha256": "3d4ec0aaa86968d9d0324b707ca42087c92cf04640a524375e4ecdf423cd4b61",
+  "target_value": "Claiming that traits are shared by absolutely all men or all women denies the very great diversity in this area, including:\n\n* Women without a uterus\n* Men without a penis\n* Intersex people\n* Nonbinary people\n* Androgynous people",
+  "target_value_sha256": "e2696373108923feb371c5e3713dff50f96500abe22a8269e0b9b7c24778acd1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0210",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "898ca456163f2de1dd62616f01880f4b41e224531df8600d44ef105d359ab8ac"
+}

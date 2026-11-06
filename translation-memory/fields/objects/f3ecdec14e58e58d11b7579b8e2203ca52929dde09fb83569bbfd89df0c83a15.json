@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "59b5b270690d3d2eec4fcf1c65ab570ebf84202de80ab9d10bd4183ba7f0df52",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les violences sexistes sont systémiques, contrairement à celles contre les hommes",
+    "identity_sha256": "ac07ff042e5bc076d57c9acf9afc44c047b11b7d42dd75cb4ce569459d164f40"
+  },
+  "source_value": "On ne peut clairement pas mettre au même niveau des violences qui relèvent du fait divers et des violences qui sont le produit de notre éducation et des médias.",
+  "source_value_sha256": "e2605c638688a6a15a04a69ea1aa28ae867c1e11479c2602ad458a2c6aebad9f",
+  "target_value": "Various forms of violence consisting of isolated incidents can clearly not be placed on the same level as violence produced by our education and the media.",
+  "target_value_sha256": "10f39331a2c23501178b28fb4c1b05fded09fe03f4ee57a00cc3fbc07372c05a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0151",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f3ecdec14e58e58d11b7579b8e2203ca52929dde09fb83569bbfd89df0c83a15"
+}

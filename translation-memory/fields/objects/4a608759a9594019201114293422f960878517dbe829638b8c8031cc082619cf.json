@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2b367e077378d46bea985bd20856a8dd95a8d94ec512fbd6fcb3cbfcb14b28cf",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Des oeuvres sont qualifiées de woke simplement pour avoir comme personnages principaux des cibles habituelles de l'extrême droite",
+    "identity_sha256": "02186d0d2de81e633a7d92921747ca83850f7a50fced110f9342f74cbf931848"
+  },
+  "source_value": "Des oeuvres sont qualifiées de woke simplement pour avoir comme personnages principaux des cibles habituelles de l'extrême droite",
+  "source_value_sha256": "fc2c50b16b1ed4831f108a6b687738a210cf7373c2d3f8bcec9bad7270915186",
+  "target_value": "Works are labeled woke merely for having as protagonists groups routinely targeted by the far right",
+  "target_value_sha256": "5b28f30c2f5239d7ad24c92d5ce3d699c0f9d9c342053f84bd373db786164c18",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0323",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4a608759a9594019201114293422f960878517dbe829638b8c8031cc082619cf"
+}

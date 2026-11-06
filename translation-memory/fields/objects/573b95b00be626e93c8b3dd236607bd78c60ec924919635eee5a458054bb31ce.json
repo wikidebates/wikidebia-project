@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5280ba88b294d8ec7e234225e1b20ee38b341ad22d25624d0c1c8e0e7d7af198",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La culture woke est une alliée du féminisme radical",
+    "identity_sha256": "b6541c9d534997a88bd08a7914398d7f4ed98828a3a6b42da268d40a3fc963ea"
+  },
+  "source_value": "Il y a des gens qui pensent que pour changer les choses, il suffit de constamment juger et critiquer les autres […] Si je fais un tweet ou un hashtag sur ce que tu as fait de mal, ou sur le fait que tu as utilisé le mauvais mot ou le mauvais verbe, alors après je peux me détendre et être fier de moi, parce que je suis super “woke” parce que je t'ai montré du doigt. Mais ce n'est pas vraiment de l'activisme. Ce n'est pas comme ça qu'on fait changer les choses […] le monde [était] compliqué et plein d'ambiguïtés",
+  "source_value_sha256": "b5da1a46d550835d90c63268d1c2fc0a939bef0ba0074c1440c005db239e7e29",
+  "target_value": "There are people who think that to change things, it is enough to judge and criticize others constantly. [...] If I post a tweet or a hashtag about what you did wrong, or about the fact that you used the wrong word or verb, then afterward I can relax and be proud of myself because I am super “woke,” because I pointed the finger at you. But that is not really activism. That is not how change is brought about. [...] the world [was] complicated and full of ambiguities.",
+  "target_value_sha256": "3a0b32182cf59119cbdadad847dee2c96c0dbe92dc20387c011f9c505df0cf65",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0125",
+    "target_path": "citations/A0125-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "573b95b00be626e93c8b3dd236607bd78c60ec924919635eee5a458054bb31ce"
+}

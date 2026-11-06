@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5b47f8d0c5a348114a38f9b39f3394a61a6ed3be5863444cb7e0acc0a95c8ff2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les crises économiques s'accompagnent systématiquement d'une montée des idéologies réactionnaires",
+    "identity_sha256": "151aa111d74633a5864506ac95ffd9b988a455780b88ad63354e1c4f2ee57391"
+  },
+  "source_value": "Les crises économiques s'accompagnent systématiquement d'une montée des idéologies réactionnaires",
+  "source_value_sha256": "b4e3b2c6abe4661f2b30c285ab2c214e6045de72caac68e7b1e46dc160a22253",
+  "target_value": "Economic crises are systematically accompanied by a rise in reactionary ideologies",
+  "target_value_sha256": "0d516f53dc6e9717c452a84fffa568c78ddcc0375d5e9dfe78f124aaf583d1a4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0087",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d387895a119a34afd02745642f42983720f55c7732d8e8205518b3b8576dca08"
+}

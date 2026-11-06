@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e8f30a27ccae14978d4af6bc86013adb72adda0f3811a56a238555d3a3b8955a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "De nombreux gynécologues sont maltraitants",
+    "identity_sha256": "878f5a60707d73d86f858f2798da5450e85072ed6958e4c8c0495616ebea333a"
+  },
+  "source_value": "On parle ici de violences psychologiques et physiques, qui surviennent lors de simples consultations de suivi gynécologique, ou lors du suivi de grossesse, des accouchements et du post-partum.\n\nIl s’agit de violences qui touchent un grand nombre de femmes, et ce n’est pas anecdotique ! Elles portent atteinte à l’intégrité psychologique et physique des patientes, de façon ponctuelle ou répétée, et elles sont toujours néfastes.\n\nAu mois de février 2018, lorsque mon amie Luna et moi avons commencé à travailler sur notre projet de documentaire étudiant, le sujet de la maltraitance en gynécologie nous est venu naturellement.\n\nDans nos familles ou notre cercle d’amies, nous avions toutes une histoire à raconter. Une anecdote d’apparence banale, une gêne que nous avons intégrée, parce que, c’est normal… Aller chez le gynécologue, c’est désagréable, c’est intimidant, ça fait peur, ça fait mal.\n\nEt « c’est comme ça ».",
+  "source_value_sha256": "2b088e65d3eea9a360e97edff460225e3d85e64da63aab8dd62d738f99e1220f",
+  "target_value": "We are talking here about psychological and physical violence that occurs during routine gynecological checkups, or during pregnancy monitoring, childbirth and the postpartum period.\n\nThis violence affects a large number of women, and it is not anecdotal! It harms patients’ psychological and physical integrity, either occasionally or repeatedly, and it is always harmful.\n\nIn February 2018, when my friend Luna and I began working on our student documentary project, the subject of mistreatment in gynecology came to us naturally.\n\nIn our families or circles of friends, we all had a story to tell. A seemingly ordinary anecdote, a discomfort we had internalized because it is normal... Going to the gynecologist is unpleasant, intimidating, frightening and painful.\n\nAnd “that is just how it is.”",
+  "target_value_sha256": "a6a946a0d77d03f8c7cd7081ce0db41e92584d73cef2083f6b8d6bb722867a4d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0057",
+    "target_path": "citations/A0057-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f0a4f57d39fa69e3658bdd5dc26a850ae33218eb5be5de4d933ed516d20fa3cf"
+}

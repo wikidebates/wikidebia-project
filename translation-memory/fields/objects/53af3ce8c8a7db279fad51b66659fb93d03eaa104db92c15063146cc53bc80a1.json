@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1028db15d14586bd24292584ef3c836fc7091ae502eadc1e3ac18f59d0e45b3b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Défendre le choix d'être femme au foyer est le paravent d'une extrême droite se faisant passer pour féministe",
+    "identity_sha256": "850a50882e03ceb4b074b89a41c13fa94a9cdbdc65b561cfb5188b0d0b623d03"
+  },
+  "source_value": "Les années 2010 ont été marquées par de nouvelles stratégies de guerre sémantique, analyse Florence Rochefort. L’idée est de vider le féminisme, et plus globalement la gauche, de son potentiel de mobilisation, en reprenant ses symboles et ses mots. C’est une tactique inspirée par la droite américaine, qui vise à déstabiliser complètement les discours progressistes",
+  "source_value_sha256": "f8271a659128ce5a0328a26c0450168bf950bababc007d8eafa7fce7e988ed20",
+  "target_value": "The 2010s were marked by new strategies of semantic warfare, Florence Rochefort explains. The idea is to strip feminism, and the left more broadly, of its capacity for mobilization by appropriating its symbols and words. It is a tactic inspired by the American right that seeks to destabilize progressive discourse completely.",
+  "target_value_sha256": "32211d3f38a00a930af89312545a6ad7598e76635b4d2c5693f9273c7857dc6c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0257",
+    "target_path": "citations/A0257-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "53af3ce8c8a7db279fad51b66659fb93d03eaa104db92c15063146cc53bc80a1"
+}

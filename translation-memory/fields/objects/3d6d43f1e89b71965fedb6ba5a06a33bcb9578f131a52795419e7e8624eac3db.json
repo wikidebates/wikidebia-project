@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "449cc2568e8b770e0c30d3cce58b22f464d1154debfdecd8f653418c962a2e96",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'intersectionnalité empêche des personnes marginalisées de creuser leur propre tombe par haine envers d'autres personnes marginalisées",
+    "identity_sha256": "8d5bd4c59a33dff27e2cc4936c60caae6b7d31f00217c07225271fc412d5e47e"
+  },
+  "source_value": "L'intersectionnalité empêche des personnes marginalisées de creuser leur propre tombe par haine envers d'autres personnes marginalisées",
+  "source_value_sha256": "bedc492c3e680201cd7fe5d1584c0e84ac62b8e6d948e620c2165d66680299e9",
+  "target_value": "Intersectionality prevents marginalized people from digging their own graves out of hatred for other marginalized people",
+  "target_value_sha256": "703530b0618efe1138441ae8e875ada0cca48e542147f4c48f1c61092a685464",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0232",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3d6d43f1e89b71965fedb6ba5a06a33bcb9578f131a52795419e7e8624eac3db"
+}

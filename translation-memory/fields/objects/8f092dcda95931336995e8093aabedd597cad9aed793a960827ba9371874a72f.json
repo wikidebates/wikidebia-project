@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "adf6a25921ff9fb0884bf53dff3c1ad96cb82e87f30764f567cc32ef36c63f63",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Sans l'extrême droite, il n'y aurait pas eu d'\"affaire Mila\"",
+    "identity_sha256": "5f279632b66de8eeb3a5f59dd5a4fcf8375560e68367540d198a8da21c6df454"
+  },
+  "source_value": "L'extrême droite a été très prompte pour s'offusquer que la gauche n'ait pas eu la même indignation performative qu'elle, \"oubliant\" bien commodément que c'est entièrement de sa faute qu'elle a eu un tel retentissement. Des ados qui se font harceler suite à une publication malheureuse sur les réseaux sociaux, c'est tristement banal et ne fait jamais les gros titres, sauf quand elle permet une récupération politique comme c'est le cas ici, l'extrême droite s'est donc donc comportée en pompier pyromane.",
+  "source_value_sha256": "a0957373bff1b1855ccc70a3a1afda30c1c9b42b7200e12cb7aac2ef7d0198d8",
+  "target_value": "The far right was very quick to take offense that the left did not display the same performative outrage, conveniently “forgetting” that it was entirely the far right’s fault that the affair had such an impact. Teenagers being harassed following an unfortunate social media post is sadly commonplace and never makes headlines, except when it enables political exploitation as here; the far right therefore behaved like an arsonist firefighter.",
+  "target_value_sha256": "4a58f65b611f8ad9a61a8920537142cf29d4fbb67229aa651c57a9ed8e5dcbc2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0230",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8f092dcda95931336995e8093aabedd597cad9aed793a960827ba9371874a72f"
+}

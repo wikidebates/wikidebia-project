@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fc6e61dd7513d063e109b23576a4f5c0189d59b18eb6d51828b8375863bff891",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les raisons pour lesquelles les femmes occupent des types de postes moins bien payés sont elles-mêmes imputables au sexisme",
+    "identity_sha256": "e049c5726e7357477b34d62fb35d34df85bc46ea3faa329aa206acf7c35d6416"
+  },
+  "source_value": "Les raisons pour lesquelles les femmes occupent des types de postes moins bien payés sont elles-mêmes imputables au sexisme",
+  "source_value_sha256": "a89999edc2f30ae21733ad73a209a4d6be1d323e344711951cb427c104a77e49",
+  "target_value": "The reasons women occupy less well-paid types of positions are themselves attributable to sexism",
+  "target_value_sha256": "6f72b080cf9d3c52b8f0f7f4d9682fcd455a43197e892232ccf21789623f2714",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0136",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e0c382c1eed7465cf67806d6ab77ed51d3928875a1a99c823f0bf035b1ac1bd2"
+}

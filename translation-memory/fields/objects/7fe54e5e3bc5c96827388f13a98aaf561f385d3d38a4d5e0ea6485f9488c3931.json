@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3b573de32a6d452cb76624d8490e26cfb7023d0c8f3ec97d79c01d78f9b3b771",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les trumpistes ne sont pas moins violents envers les femmes conservatrices qu'envers les féministes",
+    "identity_sha256": "802da21664ee7675a57ceabad664c4582cb140240d6b60739381a44eac703b87"
+  },
+  "source_value": "Les trumpistes ne sont pas moins violents envers les femmes conservatrices qu'envers les féministes",
+  "source_value_sha256": "e391fa60e6cfc14a8244c7abf90292b5bab21e4b23584d7c03031be109f96de1",
+  "target_value": "Trump supporters are no less violent toward conservative women than toward feminists",
+  "target_value_sha256": "a60217eb196b78dd45795629a6159e0ab8430638bfec1ddee107f44df9c52b28",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0175",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7fe54e5e3bc5c96827388f13a98aaf561f385d3d38a4d5e0ea6485f9488c3931"
+}

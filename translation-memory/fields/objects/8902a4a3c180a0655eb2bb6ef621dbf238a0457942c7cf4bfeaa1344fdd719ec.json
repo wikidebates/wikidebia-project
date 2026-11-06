@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a28672dbdca6c6a953c352b4bb939aa3bf40de41628b4e0e396a56a8bc4f1ba2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le mythe d'une \"victoire féministe totale\" n'est pas nouveau",
+    "identity_sha256": "5a081d1aad5d1a16c8af2277e088fe1bd95308f44f6080df7b1e69141dfe3061"
+  },
+  "source_value": "Déjà dans les années 50, on estimait que le féminisme avait déjà tout conquis, alors que de nos jours, cette époque est un archétype de conservatisme.",
+  "source_value_sha256": "84a1cd55fd0618730cfd2b61865de2c8ba40a18982cc845952752680bd89135c",
+  "target_value": "As early as the 50s, people believed that feminism had already achieved it all, even though today that era is an archetype of conservatism.",
+  "target_value_sha256": "92c6dc10deb0f92b5bb38f52d2f382da3ec860dbacd251f632dc5b81049a0334",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0088",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8902a4a3c180a0655eb2bb6ef621dbf238a0457942c7cf4bfeaa1344fdd719ec"
+}

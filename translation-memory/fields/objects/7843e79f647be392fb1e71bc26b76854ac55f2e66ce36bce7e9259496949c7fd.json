@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "50f908b11cfe080a491daeb632833fe387f5b81e7a67b7642e3d94ec081300ca",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les contenus influencent les spectateurs",
+    "identity_sha256": "ac9caa5a916d743d4bf1da8eaf85f6779fe1eecbf57b352b3e32d42676b48f3f"
+  },
+  "source_value": "Les contenus influencent les spectateurs",
+  "source_value_sha256": "64b4152c751c81f393f86f2bf1360e44eb0cca10e505252758e021fc87641770",
+  "target_value": "Content influences audiences",
+  "target_value_sha256": "90b85f2f7984d70e3f3c1e36c83066cfe90bd5bcf45bdeef791e5d72a0c738b0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0205",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7843e79f647be392fb1e71bc26b76854ac55f2e66ce36bce7e9259496949c7fd"
+}

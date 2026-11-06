@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2a0eac666cd89b1d62cbc4c8bbbf27e9450390c58e4889eff2e4a41ac8409b1c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les contenus influencent les spectateurs",
+    "identity_sha256": "ac9caa5a916d743d4bf1da8eaf85f6779fe1eecbf57b352b3e32d42676b48f3f"
+  },
+  "source_value": "Le pouvoir des récits, l'influence des fictions sur nos sociétés est un sujet central et passionnant dont on ne parle quasiment jamais. Nos vies, notre façon de percevoir le monde, notre imaginaire de l’avenir sont incroyablement influencés par les livres que nous lisons, les films que nous regardons, les publicités auxquelles nous sommes exposées.",
+  "source_value_sha256": "61fa2edf721188a462bb22c9b55ab1d25c7f6cfc7840b0d82dab71fc2a4ea017",
+  "target_value": "The power of narratives and the influence of fiction on our societies is a central and fascinating subject that is almost never discussed. Our lives, our way of perceiving the world, and our vision of the future are incredibly influenced by the books we read, the films we watch, and the advertisements to which we are exposed.",
+  "target_value_sha256": "0abb27494829ba570c7c79f5701dd57d5091943b65bdd18bd97945abaaa606d8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0205",
+    "target_path": "citations/A0205-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4101a8eee3ebcda7eee5201c1c105b6b204a412c2b53fd4ced945a5b9a3d34df"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e8c535ae9bbc9c382e788555e410163af4680d490beb2a4bb975cdc8208487a6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les cas de tâches ménagères équitablement partagées sont marginaux",
+    "identity_sha256": "83a9b93728ea46919a1b0549f69e4f6088fb4832bee8d627e616e21ff51c62c1"
+  },
+  "source_value": "Les cas de tâches ménagères équitablement partagées sont marginaux",
+  "source_value_sha256": "39b33ba151efe03217c51a1cc147a49e9e5b19e8ad80717543d43770a7eed881",
+  "target_value": "Cases where household chores are shared equally are marginal",
+  "target_value_sha256": "82910beec33fdc77048497ebe52e772b37e7a36ec512914942d3e30e01f2e330",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0259",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "cf5ae954402b33f18107dc8145953559a322631179cebf7ec480259723f19b07"
+}

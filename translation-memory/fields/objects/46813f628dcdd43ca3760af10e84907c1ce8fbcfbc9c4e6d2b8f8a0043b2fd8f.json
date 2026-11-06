@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "63ff635d9ea968db39fc5335d6483e9e583c046bce09f372a8c5f4319a8887b0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes assurent en majorité les tâches domestiques au sein du foyer",
+    "identity_sha256": "f968c4d41dc234b57f94a960b61d6e73fa7e94cdb6f72e798ecb470f8cc5597e"
+  },
+  "source_value": "En 1985-1986, les femmes vivant en couple assumaient 81 % des tâches les plus contraignantes du quotidien (ménage, cuisine, vaisselle, linge, etc.). Avec le temps, la part du travail réalisé par les femmes est en légère diminution, passant de 77 % en 1998 à 72 % en 2010. En 2010, les femmes vivant en couple et ayant au moins un enfant consacrent 34 heures hebdomadaires de travail domestique contre 18 heures pour les hommes dans même situation. Source : Insee et Ministère des familles, de l’enfance et des droits des femmes, Chiffres clés édition 2016",
+  "source_value_sha256": "ab870c91970550edd11c94ba6cb1333a4480c1150563158752e7dbcc09a8786c",
+  "target_value": "In 1985–1986, women living with a partner performed 81% of the most demanding daily tasks (cleaning, cooking, washing dishes, laundry, etc.). Over time, the share of work performed by women declined slightly, from 77% in 1998 to 72% in 2010. In 2010, women living with a partner and having at least one child spent 34 hours per week on domestic work, compared with 18 hours for men in the same situation. Source: Insee and the Ministry of Families, Children and Women’s Rights, Chiffres clés, 2016 edition",
+  "target_value_sha256": "b8d6efd6a649ccf6d364a86cad59dbefc1527b353af1dcb12529984955b320e7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0030",
+    "target_path": "citations/A0030-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "46813f628dcdd43ca3760af10e84907c1ce8fbcfbc9c4e6d2b8f8a0043b2fd8f"
+}

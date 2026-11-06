@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "349820892d320b538a7b19adbf48d963a7ff65d2cf5f249d392cce664d92ca1d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les stages masculinistes stigmatisent le caractère patriarcal des hommes",
+    "identity_sha256": "b45e4bf9ba6e8308098eb0e851fc29aef9f023eb5a28236b52280c62537ac62a"
+  },
+  "source_value": "Les stages masculinistes stigmatisent le caractère patriarcal des hommes",
+  "source_value_sha256": "9fc67542862e768b99e57122bdab5b62978f3c7388496de009f84d59d1c07dd5",
+  "target_value": "Masculinist workshops stigmatize men's patriarchal nature",
+  "target_value_sha256": "c7a0ba4dcc38107a97aae0206b52c1dd6fb64d47aaa2b589197150045676edeb",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0192",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f30dc1f760ceeb19b6c0bd3a232f6548af3a62f0e43af3834125da36823736a1"
+}

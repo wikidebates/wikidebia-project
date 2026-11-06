@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8d5b867fe9663da427afe54b68b16e1e22e912708c710a8930b6f17d512a981f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "En France, 219 000 femmes sont victimes de violences physiques ou sexuelles de la part de leur conjoint ou ancien conjoint chaque année",
+    "identity_sha256": "75679f383290344672b0ab09c595bc65c7b6a2a499f0a6dc8b447dfc764364cd"
+  },
+  "source_value": "En France, 219.000 femmes sont victimes de violences physiques et/ou sexuelles de la part de leur (ancien) conjoint chaque année",
+  "source_value_sha256": "a1fa3168bc05498156eed7226562fa3ceb4c657184826cdaac91c5bbcfe2511d",
+  "target_value": "In France, 219,000 women experience physical and/or sexual violence from their (current or former) partner each year",
+  "target_value_sha256": "dff908ebb9e4dcc22101d66b41d41d6cdff01ed3a117938afe320de0f1b203bf",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0343",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c1cb0d134fae711e14219e2d91a96bdd3c6ac47b386bb28bbf3aea81dc6b36e2"
+}

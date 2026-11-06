@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d59d6d9b3a06b5a9095cf31614d6c338bce20917a090a12afe22e20281618966",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Aux USA, la condition féminine régresse à une vitesse alarmante dans le silence assourdissant des fémonationalistes",
+    "identity_sha256": "8e04d70546fab5fc495fa3f67f4edf375153de82e863cc875772ca90f8871077"
+  },
+  "source_value": "Aux USA, la condition féminine régresse à une vitesse alarmante dans le silence assourdissant des fémonationalistes",
+  "source_value_sha256": "eef307c527534181114dce4040233bd52b9777b67e8602a73bf698548b7f8894",
+  "target_value": "In the United States, the condition of women is deteriorating at an alarming rate amid the deafening silence of femonationalists",
+  "target_value_sha256": "4979167c45ec7844cd19d16f9bdd826a110aceb81da250efb692400fb9abe89a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0339",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f03be4fca9805ffd9bed142b6a4a2eebeb92afcd89a86a001b98b11767e404c3"
+}

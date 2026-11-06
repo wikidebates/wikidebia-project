@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "39a0e405ae6b6d28c53438daf338f67ebbfbe47c9a5805eae9c5fe97c9848e7f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les réseaux sociaux font du profit sur la haine et le harcèlement",
+    "identity_sha256": "8f53cb5f02fbaeedf71203734b7330f735ec348e46e69bbd0507ac65c2cd16e8"
+  },
+  "source_value": "Pour Anna-Lena Von Hodenberg, présidente d’une association d’aide aux victimes allemande, les réseaux sociaux gagnent de l’argent grâce à ces contenus haineux qui fonctionnent mieux : «'' La haine fait partie de leur business model.'' »",
+  "source_value_sha256": "21edb5b9ee48db95dbbfc9393badfdd3005935d356081ef096eff37168e3b82c",
+  "target_value": "According to Anna-Lena Von Hodenberg, president of a German victim-support association, social networks make money from this hateful content because it performs better: “''Hate is part of their business model.''”",
+  "target_value_sha256": "2577eb373e45262bd71cbd19ea2843775130b4d7749dbab1d6c712f8fdeced26",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0038",
+    "target_path": "citations/A0038-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "594226863d0cd726d299a00e74e62c4536aa2f2246874c67cbdbebc90ea80753"
+}

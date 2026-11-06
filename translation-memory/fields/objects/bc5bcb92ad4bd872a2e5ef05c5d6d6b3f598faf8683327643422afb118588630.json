@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4f7dcbb182d3d9855181073e2c8133f55f7ed950130d36d34b534e5e5d75bf4e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La culture du viol témoigne de l'hostilité persistante envers les femmes",
+    "identity_sha256": "c7205604b9770f77b50e80557deaa8352593cc3b10f6c0c17cad0ffd3701d141"
+  },
+  "source_value": "Culture du viol",
+  "source_value_sha256": "0a7d76952e2c31456835c74b6582a554905b27764dcc8dfa8bfa9d1b7a290505",
+  "target_value": "Rape culture",
+  "target_value_sha256": "d23e23abfd2f13a32c3ca4638987c87a73247e7c76b010c81828cdc1fef9322c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0050",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "bc5bcb92ad4bd872a2e5ef05c5d6d6b3f598faf8683327643422afb118588630"
+}

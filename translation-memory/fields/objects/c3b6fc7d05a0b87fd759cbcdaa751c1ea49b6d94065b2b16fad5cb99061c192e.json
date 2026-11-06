@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "47831f6ee9acd0d8e167c6437bd8999e611259e3084802acf25fdd5d8cff5693",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il existe des différences physiques entre femmes et hommes qui impliquent des différences psychologiques",
+    "identity_sha256": "f95b883eb268970b6b5b09d958cfd147469ee7e110a2995054f2c61b47429bf2"
+  },
+  "source_value": "Il existe des différences physiques entre femmes et hommes qui impliquent des différences psychologiques",
+  "source_value_sha256": "fdb718975a432bc1d34c992b7d7d188de3250df041a7ad135758ff845c91c344",
+  "target_value": "Physical differences between women and men exist and entail psychological differences",
+  "target_value_sha256": "f0d5afb5b18f74a8f844b9bee157f5e9c64e1e152e955c789499534359c64c52",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0115",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c3b6fc7d05a0b87fd759cbcdaa751c1ea49b6d94065b2b16fad5cb99061c192e"
+}

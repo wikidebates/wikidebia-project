@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "784075af031a36480205a036d827a4bd9a953410a7f351a40f84bb263e3a13f1",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les fémonationalistes prétendent défendre les femmes, mais crachent sur toutes les mesures de lutte contre le sexisme",
+    "identity_sha256": "2831fcf8f051802495287186e2d5657524b3a44640f73e69a697cb4f467df2e9"
+  },
+  "source_value": "Les fémonationalistes prétendent défendre les femmes, mais crachent sur toutes les mesures de lutte contre le sexisme",
+  "source_value_sha256": "484adcc7c5b5ccdd91d7a8b546ff9ade14cd2bcf45c8a09e5c003cd296627738",
+  "target_value": "Femonationalists claim to defend women but disparage every measure to combat sexism",
+  "target_value_sha256": "279d9cb03bfc1673df0755cb06ce720dabc63d8554591302c6a201d5973aef07",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0334",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "af5f17868f5e45bc8212619feba27e77011abe5555627d151b20a5b0cf8da173"
+}

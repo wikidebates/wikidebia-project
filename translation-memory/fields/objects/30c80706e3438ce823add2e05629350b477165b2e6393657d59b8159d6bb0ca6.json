@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b5136398f4a13e4488b6d43dd52177f723b58a5c030f0e64378991c33481079c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il existe des différences hormonales entre femmes et hommes qui impliquent des différences psychologiques",
+    "identity_sha256": "4247e78800899448af9ef774b3ce5cf751cbfb498e65ca8e966d5539e00cf47c"
+  },
+  "source_value": "Il existe des différences hormonales entre femmes et hommes qui impliquent des différences psychologiques",
+  "source_value_sha256": "538beea2633c3d9c0eb7572b482db96bcc3c8ca971a3223a5228c2de51a0efb7",
+  "target_value": "Hormonal differences between women and men exist and entail psychological differences",
+  "target_value_sha256": "b1b9ca4d1de3ed3f36946a6e5c1a6d3520e8bed28e61f1d65962c0d8939b52e1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0117",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "30c80706e3438ce823add2e05629350b477165b2e6393657d59b8159d6bb0ca6"
+}

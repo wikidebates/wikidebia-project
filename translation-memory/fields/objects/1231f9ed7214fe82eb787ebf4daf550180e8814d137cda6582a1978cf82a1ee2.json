@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d554df9d1d4413728cadd0f0cff72c1a0a0a0f662c4f7ff29dd7fa8c0ab0287a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il y avait moins d'immigration dans les années 70, mais les viols et agressions sexuelles n'étaient pas moins nombreux qu'aujourd'hui",
+    "identity_sha256": "bf882c917d13300cd147a06c2f86963f50b3129d9deef072ae5ce4d9b8629329"
+  },
+  "source_value": "Il y avait moins d'immigration dans les années 70, les viols et agressions sexuelles n'en étaient pas pour autant moins nombreuses qu'aujourd'hui",
+  "source_value_sha256": "b9e08061b28749dcc8c50c4398c5ef71ca1e89f07c7e808d5d1344700caf298c",
+  "target_value": "There was less immigration in the 1970s, but rapes and sexual assaults were no less numerous than today",
+  "target_value_sha256": "b04da8ead30bd06ef298c44ecb5b0a4ed9940196f65f8a198a1c33a1e79fc002",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0337",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1231f9ed7214fe82eb787ebf4daf550180e8814d137cda6582a1978cf82a1ee2"
+}

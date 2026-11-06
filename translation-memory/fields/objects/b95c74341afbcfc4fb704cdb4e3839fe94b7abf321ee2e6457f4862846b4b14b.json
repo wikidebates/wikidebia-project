@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5e7abb9e52a0b7c8e264bb6d7fb0f98126d10060e71d80060b5da685f1836b8e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le sexe des grandes figures historiques n'est pas important",
+    "identity_sha256": "d84ea85416887c3bd3cd9034e4cee0703143705c2769ce29c6d0000782ae5ff9"
+  },
+  "source_value": "Les femmes d'aujourd'hui ne pâtissent d'aucune manière de la sous représentation de femme parmi les grandes figures historiques mises en avant. Les hommes d'aujourd'hui ne bénéficient d'aucune manière de la surreprésentation d'homme parmi les grandes figures historiques mises en avant.",
+  "source_value_sha256": "0009aad26e6a3c6461c19e85db3538d686b371f39de43203d2dab7c35d763367",
+  "target_value": "Women today do not suffer in any way from the underrepresentation of women among the prominent major historical figures. Men today do not benefit in any way from the overrepresentation of men among the prominent major historical figures.",
+  "target_value_sha256": "a0754a4c89d8e43a87e8035d057888609d811ae686406b6645bc282272c2cf23",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0140",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b95c74341afbcfc4fb704cdb4e3839fe94b7abf321ee2e6457f4862846b4b14b"
+}

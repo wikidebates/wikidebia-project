@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "97e00a5b9f0f6a70f5e9b479985c178499593179f83889478944a366f33ab29e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il y a un combat à mener à l'international pour le droit des femmes",
+    "identity_sha256": "976def4d248ef5190cb2a723bd91526b78aecd125afd53db74664526ba7d30a0"
+  },
+  "source_value": "Il y a un combat à mener à l'international pour le droit des femmes",
+  "source_value_sha256": "129d79d2b87b32238fb06da7660a5f036cba221aeb23cd7839b79c0088a051b7",
+  "target_value": "There is an international struggle to be waged for women's rights",
+  "target_value_sha256": "f55ce35d55905f661728901bbc0340d6429e5e7a6a24404dd29ca367235e4bd2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0082",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "487e3e3ae05f4995b7e23a573bea9906df77141e58cd2c25c7cf17e3d2b41413"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "57426f0d5ed3cc735d93af20ee31361395bb236b528256d74e4a64e82e158691",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'universalisme laisse sur le bas-côté de nombreux types d'oppression",
+    "identity_sha256": "2abfe0e702bbd89aa1dd708e85d15a1c93cc3ef99df8a07f06f4b61539f44bef"
+  },
+  "source_value": "Si on prend l'exemple des violences faites aux femmes, l'universalisme part du principe que toutes les femmes subissent exactement les mêmes oppressions. C'est faire le déni que les oppressions sont cumulables et prennent des formes très diverses selon l'ethnie, l(es) éventuel(s) handicap(s), la transidentité ou la classe sociale, pour ne citer que quelques exemples. Le sexisme subi par une femme noire valide ne sera pas le même que celui subi par une femme blanche handicapée, et ainsi de suite. Ignorer cet aspect ne conduit pas seulement à oublier certaines victimes, mais est également la source d'oppressions internes pouvant s'ancrer au sein même des groupes de lutte.",
+  "source_value_sha256": "5cce22f835a9efc2d82b0292af844e414c0f6802bf414960f6d3a689b4e3d4ed",
+  "target_value": "If we take violence against women as an example, universalism starts from the principle that all women experience exactly the same forms of oppression. This denies that forms of oppression can accumulate and take very different forms according to ethnicity, any possible disability or disabilities, transgender identity or social class, to name only a few examples. The sexism experienced by a nondisabled Black woman will not be the same as that experienced by a disabled white woman, and so on. Ignoring this aspect does not merely lead to forgetting some victims; it is also a source of internal oppression that can become entrenched within activist groups themselves.",
+  "target_value_sha256": "7a0b7f23b50943f5df0c60237ea1f1bf29bb48ad4a470967202252757c7473b4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0131",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "79823bb24d15d4225bbc1bf76974916d991d97eae0803566b824c77593705a50"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ce412f76da9cbfed944622d53dc848ece46554c5a28aee3bf549ac5be8dddda7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les incels représentent un groupe sectaire masculiniste dangereux",
+    "identity_sha256": "039de954925599d2208a1572e828db3c43afade01369468290de0daf6d1c97e2"
+  },
+  "source_value": "Les incels représentent un groupe sectaire masculiniste dangereux",
+  "source_value_sha256": "f4983cb9ff33f3ee7bab369ca4ca7201905434ff320e5f9e782167399d162c5e",
+  "target_value": "Incels constitute a dangerous masculinist cult-like group",
+  "target_value_sha256": "b6996873b238e41b5f4ff65299f26e4b09a60b09932dc023e4b3d2f0b381eb6d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0190",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d969da54519d6121a63e80a333f7f030a7d56966cefd9697eb10d00efab394f0"
+}

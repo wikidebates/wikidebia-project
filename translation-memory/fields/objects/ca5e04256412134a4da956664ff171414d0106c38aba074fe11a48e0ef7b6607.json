@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a81676a0c4067755f769d8d140ae9adf3ce4da3429d35c0791fd760e62820313",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les réseaux sociaux font du profit sur la haine et le harcèlement",
+    "identity_sha256": "8f53cb5f02fbaeedf71203734b7330f735ec348e46e69bbd0507ac65c2cd16e8"
+  },
+  "source_value": "Unia est un acteur incontournable dans le paysage des droits humains belge et européen. Notre institution travaille au quotidien pour une société plus égalitaire. L’évolution du réseau social X au cours de cette dernière année va à l’encontre des valeurs défendues par notre institution. La diffusion de discours haineux et la désinformation y sont omniprésentes. Le retrait de X du code européen des bonnes pratiques contre la désinformation en mai 2023 n’a fait qu’amplifier le phénomène.\n\nEn tant qu’institution publique indépendante qui lutte contre la discrimination et défend l’égalité en Belgique, Unia a donc décidé de quitter X.",
+  "source_value_sha256": "e8220b74eb82f55787d31557b2b5be54479d4a450c6b3e5b7562fedac8b75c2b",
+  "target_value": "Unia is a key actor in the Belgian and European human rights landscape. Every day, our institution works toward a more equal society. The evolution of the social network X over the past year runs counter to the values defended by our institution. Hate speech and disinformation are omnipresent there. X’s withdrawal from the European Code of Practice on Disinformation in May 2023 has only amplified the phenomenon.\n\nAs an independent public institution that fights discrimination and defends equality in Belgium, Unia has therefore decided to leave X.",
+  "target_value_sha256": "9429cef707ddccf6e5e40cc1248732b18e097fcfb564b5563f2f798aa8fe5777",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0038",
+    "target_path": "citations/A0038-C005",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ca5e04256412134a4da956664ff171414d0106c38aba074fe11a48e0ef7b6607"
+}

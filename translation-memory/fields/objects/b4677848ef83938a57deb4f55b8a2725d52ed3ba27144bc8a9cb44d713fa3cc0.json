@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f19d3fd49f03febbe61cbeea9f9abec08f9ea183f1d1d55990571e46e230a06f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Une femme au foyer peut être parfaitement épanouie",
+    "identity_sha256": "d29ceaeeea7a68ca2d790246e3b49d0a6065ed6bc82d01dd394526e467570106"
+  },
+  "source_value": "Une femme au foyer peut être parfaitement épanouie",
+  "source_value_sha256": "fdeb7a7a987ec3fcb934f530e002ebda75ca498ab96792805d9b1df7d2099ee5",
+  "target_value": "A housewife can be perfectly fulfilled",
+  "target_value_sha256": "8950acfc6dd8445d1dc655b7e88978568cecc1c6f24794a514ae2aa2aa44219f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0142",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b4677848ef83938a57deb4f55b8a2725d52ed3ba27144bc8a9cb44d713fa3cc0"
+}

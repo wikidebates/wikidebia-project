@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b9863bfb5f9fd9973ae807e76e9a642b5fd8910b78a3fc3a527e412a4ff6d3be",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "C'est important pour certaines femmes d'être reconnues comme victimes",
+    "identity_sha256": "8acb56784f34011876737548040e052ddbc32416999f4e78d7bd97f171b5fd44"
+  },
+  "source_value": "C’était important pour moi de montrer que les victimes sont plurielles et d’ailleurs, ce sont les personnes victimes, je me suis déjà fait reprendre là-dessus, et depuis je fais attention à ça. J’essaie d’écrire ''« personnes victimes »'' ou de dire ''« personnes victimes »'', autant que possible, car ce n’est pas un groupe uniforme, ce sont des personnes avec des histoires différentes. \n\nCertaines revendiquent le statut de victimes, d’autres ne veulent pas que ce mot leur soit accolé, certaines veulent que l’agresseur fasse de la prison, d’autres non, certaines veulent un procès public, certaines veulent qu’il soit justement entendu dans le bureau des policiers, d’autres attendent une reconnaissance des faits avant tout.",
+  "source_value_sha256": "e74fa9b03b287ba8dd9e1f02a5ba770fb5d683ff0b8066e2c5eb15635676b154",
+  "target_value": "It was important to me to show that victims are diverse—and, in fact, that they are “people who are victims”; I have already been corrected on that point, and I have been careful about it ever since. I try to write “people who are victims” or say “people who are victims” whenever possible, because this is not a uniform group but people with different stories.\n\nSome claim victim status, while others do not want that word attached to them; some want the aggressor to go to prison, while others do not; some want a public trial; some want the aggressor simply to be questioned in the police station; and others seek acknowledgment of the facts above all.",
+  "target_value_sha256": "07f83c30ef10c60594efa84c9b28aefc8d48aaccaf5eba4b1d7e9d45bd785d56",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0107",
+    "target_path": "citations/A0107-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a7f122dd38d747de1b83f7339f93be7afadb22dea32128977eb9134a60d99cde"
+}

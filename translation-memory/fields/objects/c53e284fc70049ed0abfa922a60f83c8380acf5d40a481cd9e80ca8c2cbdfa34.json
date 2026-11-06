@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ea9f4657f0da8bb1087b434d56113c36347894d4d58fbd76a94574219e259bd7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les immigrés et descendants d'immigrés qui s'en sortent le mieux sont ceux qui n'adoptent pas une posture victimaire",
+    "identity_sha256": "4181761b2f892fda39483a392d7fbf32f32c5b5234f823247621ce83ef3888f4"
+  },
+  "source_value": "Les immigrés et descendants d'immigrés encouragés à demander sans cesse des comptes à la France vivent mal, ne se concentrent pas toujours sur leurs études et rendent responsable les autres, le racisme, de leurs échecs. C'est une posture qui ne mène à rien et qu'il serait temps de changer.",
+  "source_value_sha256": "2f40b8b6d1c13c9872d2c10b931cea104c48107b31f21d573d33541bc0fe6ce5",
+  "target_value": "Immigrants and descendants of immigrants who are encouraged to demand constant explanations from France live poorly, do not always focus on their studies, and blame others and racism for their failures. This attitude leads nowhere and should be changed.",
+  "target_value_sha256": "5779b82e6fdb5fdd63c238d2cdc60b987f7d4c32d804380dd3d2d5af62c0d13c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0200",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c53e284fc70049ed0abfa922a60f83c8380acf5d40a481cd9e80ca8c2cbdfa34"
+}

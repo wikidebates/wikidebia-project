@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b01e7c5e7e74b585b9134379458681b771abd40313b3b72ff764f2524247677f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La masculinité toxique abîme la santé mentale des hommes",
+    "identity_sha256": "fd199693e2b3935114b7988ba59cb3d15a02634d4cae8f112485a34f71ef272e"
+  },
+  "source_value": "La masculinité toxique dénie aux hommes le droit d'exprimer leurs émotions, ce qui génère de grandes souffrances, voire des troubles mentaux plus ou moins sévères. C'est une des raisons pour laquelle la majorité des suicidés sont des hommes.",
+  "source_value_sha256": "6bd636e61467a0d3f606fb2785c81d7cec8868d2ecb666c3ac9b3745fd8c40ee",
+  "target_value": "Toxic masculinity denies men the right to express their emotions, generating great suffering and even mental disorders of varying severity. This is one reason why the majority of people who die by suicide are men.",
+  "target_value_sha256": "83eb1dc1682fc611de8161daefbbe5067154f40f508722f2eca7f91db78b4f6e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0280",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "346e003f8aa7487d27b5049fa687f4b916ec3848904c10b53f8ae0aa44edfa27"
+}

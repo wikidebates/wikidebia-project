@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f1ce4c511867f4c4c7d68e0bd7a22e4d7bbdac1929dea2a36167e4eb6b44de26",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La définition du sexisme est trop large pour permettre la création",
+    "identity_sha256": "9c2d9487c4820502463635dca044fa221148b3857c646bb6993baca1e4eaf278"
+  },
+  "source_value": "La définition du sexisme est trop large pour permettre la création",
+  "source_value_sha256": "23e63d76c0854b7bf9398a38a131db4eecae012cdecc2c66557962b647401ae5",
+  "target_value": "The definition of sexism is too broad to permit artistic creation",
+  "target_value_sha256": "58111dd47fb839a738efbf92a462e5387aadc56e13b2a5e74bdc153805305593",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0203",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "dd57e6c53d78789f474a12a5cd191f5a957eb3732b0a93c3eb12e787ac7eb26e"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "611897d602466188218a5de45e0480d996d538f978e022c7c195082bec945692",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le qualificatif de \"woke\" sert à diaboliser les concepts progressistes sans avoir à argumenter",
+    "identity_sha256": "bae338143751b08f1633eac8ae029ce32538f9630a79aa0fa38957a98fb90788"
+  },
+  "source_value": "Par ailleurs, alors que l’islamo-gauchisme semblait décrire une collusion suspecte entre ce que l’on appelle « une certaine gauche », [https://sysdiscours.hypotheses.org/352 notamment universitaire] et l’islamisme (même si l’utilisation du préfixe « islamo » laissait penser que l’islam dans son intégralité pouvait être visé), le « wokisme » dispose d’une forme de lâcheté polysémique particulièrement arrangeante : en d’autres termes, cette dernière a la particularité d’embrasser un ensemble très étendu de pratiques, de mouvements et de faits sociaux.\n\nEn effet, tout mouvement qui lutte pour le progrès social peut être qualifié de « woke », ce qui est commode, notamment pour les think tanks conservateurs comme Fondapol par exemple, qui, à travers une note de recherche aux prétentions objectives mais à la grille de lecture [https://www.fondapol.org/etude/lideologie-woke-1-anatomie-du-wokisme particulièrement discutable] – comme le rappelle par ailleurs Réjane Sénac, [https://www.liberation.fr/idees-et-debats/tribunes/le-wokisme-nexiste-pas-mais-il-parle-20211028_B6E7QRI5LZFN7DYULYUXV7AO7Y/ directrice de recherche au CNRS], évoquant ainsi le fait que cette note de recherche participe à la construction d’une « croisade » contre un « ennemi de la République ».",
+  "source_value_sha256": "7ba76629265ff95997b97e4e96b4a07de52cf76065ed40170d369a9c2253fc50",
+  "target_value": "Moreover, whereas Islamo-leftism appeared to describe a suspicious collusion between what is called “a certain left,” [https://sysdiscours.hypotheses.org/352 particularly in academia], and Islamism (even though the use of the prefix “Islamo-” suggested that Islam as a whole might be targeted), “wokeism” possesses a particularly convenient form of polysemous cowardice: in other words, it has the distinctive feature of encompassing a very broad set of practices, movements, and social facts.\n\nIndeed, any movement fighting for social progress can be described as “woke,” which is convenient, particularly for conservative think tanks such as Fondapol, whose research note makes claims to objectivity but uses a [https://www.fondapol.org/etude/lideologie-woke-1-anatomie-du-wokisme particularly questionable] interpretive framework—as Réjane Sénac, [https://www.liberation.fr/idees-et-debats/tribunes/le-wokisme-nexiste-pas-mais-il-parle-20211028_B6E7QRI5LZFN7DYULYUXV7AO7Y/ a CNRS research director], also points out, saying that this research note helps construct a “crusade” against an “enemy of the Republic.”",
+  "target_value_sha256": "6479a3a7162735a635e1c6478698c15755cbea344c1bf62e2808fc3f85c9983d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0308",
+    "target_path": "citations/A0308-C006",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "507fa01e7aac7bca879443735ca3c4873949d3a914830550daff4560453dba5d"
+}

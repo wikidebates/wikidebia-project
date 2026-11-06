@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "97f7fd32fa09649f915da21e54948cf5cdc218796e2cb453e0a407952730aa51",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "TPMP a peu à peu abandonné sa posture de prétention au second degré et assume désormais pleinement sa volonté propagandiste",
+    "identity_sha256": "649f8f0d126fae49b1c0202dda42b847d7e22da8051cec706719d79517529ec1"
+  },
+  "source_value": "TPMP a peu à peu abandonné sa posture de prétention au second degré et assume désormais pleinement sa volonté propagandiste",
+  "source_value_sha256": "3c2f5d53364cfa5ba8d4e60dd3c444148d57b37ac7beffab19491b7c854bc916",
+  "target_value": "TPMP gradually abandoned its pretense of ironic distance and now fully embraces its propaganda agenda",
+  "target_value_sha256": "4d3b06c8f86fc3fd2e7c2fcc7255156db730745586e12d8ef3b69179f4d8c759",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0305",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "57343bd2a91d7f1f70f3b7a0dfd74ac7784d27e88309cf6df06b6f5d8f461de4"
+}

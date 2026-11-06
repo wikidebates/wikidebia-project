@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5546aede36da365162763be486f11ecf1c3ad66316cede2585131d6118d9f34f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Accuser le féminisme d'ignorer la souffrance des hommes est tout aussi absurde qu'accuser les organismes de lutte contre la pauvreté d'ignorer la souffrance des riches",
+    "identity_sha256": "92b5bbf064fe3704c65e941c02a798671c4b3cf3c6aea6368f0f873e44d6875b"
+  },
+  "source_value": "Accuser le féminisme d'ignorer la souffrance des hommes est tout aussi absurde qu'accuser les organismes de lutte contre la pauvreté d'ignorer la souffrance des riches",
+  "source_value_sha256": "b911d1d94ad50eaf3b7e62c98bee716f07e64d137e00900135768fc79468e776",
+  "target_value": "Accusing feminism of ignoring men's suffering is every bit as absurd as accusing organizations fighting poverty of ignoring the suffering of the rich",
+  "target_value_sha256": "ba1727da495cab3d8e2ae2a60d2bea2e43583125beab9fd88b0d1280a5a8b481",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0089",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c6a4cbdb2a8f3c923b016259b0ee90acaf6dcf9a761f6b3b54dc83c469a7b260"
+}

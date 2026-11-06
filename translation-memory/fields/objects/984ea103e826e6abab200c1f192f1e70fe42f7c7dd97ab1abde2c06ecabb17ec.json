@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e329d26ba5ba290fe057799a8c1c936f476024306adf1af64a703a6df72c34d3",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Contrairement aux femmes voilées, personne ne dénonce l'oppression des religieuses catholiques",
+    "identity_sha256": "d7da242b592f21b8e5bbf4761bfbe16443360685ec26d3e56acc1ef0155d5449"
+  },
+  "source_value": "Tout le monde commente le sort des femmes enfermées vivantes derrière la burqa, mais personne ne se soucie pourtant des bonnes sœurs cisterciennes ou dominicaines, cloîtrées dans des couvents, interdites de parler ou de rire, voire de se laver… Et pourtant, il semble qu’elles soient encore bien plus nombreuses que les adeptes du niqab.",
+  "source_value_sha256": "e127dec2501a016ab1da7bf6b389174975978f78984f3ef1896d2e962bde809e",
+  "target_value": "Everyone comments on the fate of women buried alive behind the burqa, yet no one cares about Cistercian or Dominican nuns cloistered in convents, forbidden to speak or laugh, or even to wash... And yet they seem to be far more numerous than women who wear the niqab.",
+  "target_value_sha256": "efa4648e62ae527fe5b0c6b70435df7eb41d71f0c7e741fdb8da2faf3164dd79",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0338",
+    "target_path": "citations/A0338-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "984ea103e826e6abab200c1f192f1e70fe42f7c7dd97ab1abde2c06ecabb17ec"
+}

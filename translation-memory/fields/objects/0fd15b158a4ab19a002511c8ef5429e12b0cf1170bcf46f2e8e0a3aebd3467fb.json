@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1af2d0b05aade6665e39b65ef6a7abaeca8c8bc17adb2bbd0eb3b95f7f352a7e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il y a eu bien plus de morts à cause de la misogynie qu'à cause du féminisme",
+    "identity_sha256": "6d5df895a280d961fe8617ac2a8a4c0ad3d127cb045bd96248f0cbbf56f3452c"
+  },
+  "source_value": "Il y a eu bien plus de morts à cause de la misogynie qu'à cause du féminisme",
+  "source_value_sha256": "66752d26b05f241cfe56bd30d64dfcd767930b0ae726c7f58c392fb707c3816b",
+  "target_value": "Misogyny has caused far more deaths than feminism",
+  "target_value_sha256": "1bba249e72f358014745a9f4128242883d88b5197858244b841b2cf88609408a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0198",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0fd15b158a4ab19a002511c8ef5429e12b0cf1170bcf46f2e8e0a3aebd3467fb"
+}

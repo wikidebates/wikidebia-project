@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4417d6716d8f6aa8d8e289e5b555b942b998a75abc18d79558332a87af4d954d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Prétendre que les féministes accusent tous les hommes d'être des agresseurs est une opération de diversion",
+    "identity_sha256": "50b75f137ad173c0fdae3deca66c7d674e516818f3ab28c6e4adce4c2f7fbae5"
+  },
+  "source_value": "Prétendre que les féministes accusent tous les hommes d'être des agresseurs est une opération de diversion",
+  "source_value_sha256": "7facdae6d1abb2bec988bb254d1b7a8c522e7893327a83d3346e0172892b5afe",
+  "target_value": "Claiming that feminists accuse all men of being aggressors is a diversionary tactic",
+  "target_value_sha256": "a1d62027b7c9dd633532dbf2a4acc22df283d2c9ec5160d3c8788c23c37a974c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0092",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e9e9ca4dd96d46e5b0497fe52ba28eca70f9f3d82ecf2930ffa99e8a08a3f32c"
+}

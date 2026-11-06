@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c0649d4947199b480c3476f75f69ae779fa8f8c44a1c05e297b4c356582fbc09",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite a prétendu défendre Mila, mais a contribué à sa mise en danger en la surexposant médiatiquement",
+    "identity_sha256": "c2c2bb1c1ac974fdfc0ea0650c938af60f4b44da9b47d8c039a0c78566135e20"
+  },
+  "source_value": "La viralité des polémiques sur les réseaux sociaux opère et, sur Twitter, nombre de comptes que nous nommons néolaïques ou pseudo-laïques s’emparent très rapidement de l’affaire, en dénonçant un «  retour du blasphème », « les islamistes », ainsi que « la lâcheté » et « la soumission » de quiconque ne déclare pas immédiatement #JeSuisMila en proférant un soutien de circonstance : c’est ce que nous nommons « l’injonction à gueuler ». Soutien de circonstance car, en réalité, ces déclarations tonitruantes exposent la jeune fille de manière exponentielle et sa sécurité, déjà menacée, ne s’en trouve que plus fragilisée.",
+  "source_value_sha256": "00fc90fadcdd2360de1ba063144246217dafe4e5c604ef88f3ab1d9c3dfc1b65",
+  "target_value": "The virality of controversies on social networks takes effect, and on Twitter many accounts that we call neo-secular or pseudo-secular very quickly seize on the affair, denouncing a “return of blasphemy,” “the Islamists,” and the “cowardice” and “submission” of anyone who does not immediately proclaim #JeSuisMila with performative support: this is what we call “the injunction to shout.” The support is performative because, in reality, these thunderous declarations expose the young woman exponentially and further weaken her already threatened safety.",
+  "target_value_sha256": "a07698e546df8700d5dd986650c9515994948813273bf3033ea92e565f21b522",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0326",
+    "target_path": "citations/A0326-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "15733fd7ff08f6b3d0195f1d1acd27cf44a6a62fa6500b46721aff48f45bebae"
+}

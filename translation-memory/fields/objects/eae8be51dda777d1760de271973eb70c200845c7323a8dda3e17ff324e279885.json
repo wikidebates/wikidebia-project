@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c5cd1595803850e3a3c9ca343d8f9d23d7b3164118cdd56d104fe4913429db90",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Pour la majorité des femmes, être une femme au foyer est une contrainte la plupart du temps",
+    "identity_sha256": "0df5cc4673b0f8e3d78d4a8acf96d63dd4262a2517ea873881caaa9e5adc3d0b"
+  },
+  "source_value": "Les femmes peuvent certes être épanouies en tant que femmes au foyer, mais instrumentaliser cet argument pour balayer d'un revers de la main la charge mentale est un raisonnement fallacieux, et défendre le \"droit\" d'être une femme au foyer relève d'un féminisme au rabais qui enfonce des portes ouvertes.",
+  "source_value_sha256": "c086552cdef45f2052dd13d6872e0a43eea28ad8e31b0970111a7d04600f688c",
+  "target_value": "Women can certainly find fulfillment as housewives, but using this argument to dismiss the mental load out of hand is fallacious reasoning, and defending the “right” to be a housewife amounts to bargain-basement feminism that states the obvious.",
+  "target_value_sha256": "eaab9ead0322376014a985d487dde2f5f8264a3827d738c7ce14973bc64b4a5d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0255",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "eae8be51dda777d1760de271973eb70c200845c7323a8dda3e17ff324e279885"
+}

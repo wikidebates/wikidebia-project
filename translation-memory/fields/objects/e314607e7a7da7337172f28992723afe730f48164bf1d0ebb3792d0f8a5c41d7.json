@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "733310ca060c95f1d07469330b22101c4b7ffb1feadd511fae6ea696ab01e78d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les douleurs dites féminines sont peu prises au sérieux, voire normalisées par la médecine",
+    "identity_sha256": "4e5c5692c9a73b42d1e508820f5437221f3e2f7c8c4e6e8b7cda7aa09abd392e"
+  },
+  "source_value": "Toutes les témoins le disent à leur manière, leur douleur a souvent été niée, et surtout banalisée, comme si elle était normale. Comme l’endométriose, et sa longue invisibilisation, les pathologies vulvaires sont elles aussi des douleurs de l’intime, qui semblent perçues par le corps médical comme faisant partie du package quand on est dotée d’un vagin et d’une vulve.\n\nIl faudrait prendre sur soi, faire avec, et éventuellement se forcer à avoir des relations sexuelles, car il ne faudrait pas priver son partenaire. Pas étonnant qu’à l’arrivée, les personnes atteintes ne souffrent plus seulement de douleurs, mais soient aussi hautement fragilisées par la négation de tout ce qu’elles ont ressenti.",
+  "source_value_sha256": "a3507fd6ef665e14ca0cd25346e0ec8aed395ecfbe3dd8307be76322500a07d8",
+  "target_value": "All the women who testified say it in their own way: their pain was often denied and, above all, trivialized, as though it were normal. Like endometriosis and its long history of invisibility, vulvar conditions are also forms of intimate pain that the medical profession seems to perceive as part of the package when one has a vagina and a vulva.\n\nThey are expected to put up with it, live with it and possibly force themselves to have sex, because they should not deprive their partner. It is hardly surprising that, in the end, those affected no longer suffer only from pain, but are also left highly vulnerable by the denial of everything they have experienced.",
+  "target_value_sha256": "63259f1449ce0d6392a900f54a12a212adc930b80a3d1cc70ddc0a10b87c7764",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0056",
+    "target_path": "citations/A0056-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e314607e7a7da7337172f28992723afe730f48164bf1d0ebb3792d0f8a5c41d7"
+}

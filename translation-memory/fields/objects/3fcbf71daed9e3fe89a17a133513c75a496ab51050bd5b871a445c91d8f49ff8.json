@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3a9146e5a11bf648d559a357ee52b93eeb2aea0a340f70e7fe4c4b0c4058f087",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le rôle des hormones sexuelles dans nos comportements est très exagéré",
+    "identity_sha256": "99ce63c63d8b00a1ce34fa48c8eebc81ecc9fec250aaff8539cf192fc5d72298"
+  },
+  "source_value": "Le rôle des hormones sexuelles dans nos comportements est très exagéré",
+  "source_value_sha256": "34a3348ae5546c9fbce82f28bbde41a98244facb70ffecec4f80bd9e2fac1269",
+  "target_value": "The role of sex hormones in our behavior is very greatly exaggerated",
+  "target_value_sha256": "862401f75499fdf25db196bb0c44dda1ff3b669c7cf7d9d6a9abc07072d931e9",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0211",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3fcbf71daed9e3fe89a17a133513c75a496ab51050bd5b871a445c91d8f49ff8"
+}

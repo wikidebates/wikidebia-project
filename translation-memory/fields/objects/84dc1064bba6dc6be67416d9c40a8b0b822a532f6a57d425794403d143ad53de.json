@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d9c6b5fd6efc60c51927a252643ad2d38b087e189b39251a8353bb5feb26250e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Tant que le capitalisme existera, l'oppression des femmes se maintiendra",
+    "identity_sha256": "0e4546bd96fc441a18f2cb8f9ca462eb56ccc6427363a9195519c4f8a07176f9"
+  },
+  "source_value": "Tant que le capitalisme existera, l'oppression des femmes se maintiendra",
+  "source_value_sha256": "4a251241017bd705b989cbd968611cbeb9d301a3053ba78ba7a0aa5a6c83341d",
+  "target_value": "As long as capitalism exists, the oppression of women will persist",
+  "target_value_sha256": "98c2e8297e47a75fba12e620c4adba6d7296f6968d64705b429eaa565529299c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0010",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "84dc1064bba6dc6be67416d9c40a8b0b822a532f6a57d425794403d143ad53de"
+}

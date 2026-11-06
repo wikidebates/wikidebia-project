@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2adcf81e69c566fbe805c31d9c4aaa2269304ceedcf31383ad1f4a6b05b16869",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les fémonationalistes ne proposent rien contre le sexisme qui sévit en occident",
+    "identity_sha256": "91bd1dc00a0a3e20a108198aaf59b32d1e8bc6437f06710fd0bf8a0af36d23b8"
+  },
+  "source_value": "[Dans le programme du RN], rien sur les inégalités femmes-hommes (qui ne sont évoquées qu’en lien avec l’islamisme ou la charia), ni sur les discriminations salariales.",
+  "source_value_sha256": "1f04e22b4bd218cff839a49a9c3df46bac5e62acd74ef3b0ba1d96c253840f7c",
+  "target_value": "[In the RN platform], there is nothing about gender inequality (which is mentioned only in connection with Islamism or Sharia), nor about pay discrimination.",
+  "target_value_sha256": "55c864c240f2abaf95c7f977de4c8743042f9ba63dd93f65f80ab81efa8534c0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0330",
+    "target_path": "citations/A0330-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7f0a7b6fa2eb132a3f302db791b51acd2a7382eb9daa2c5e4ae36ad38690de4d"
+}

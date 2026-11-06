@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "445c81720b37da08b651f345db69894d9bf989c01171b8e380d2fb37a84d20d5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le terme \"woke\" n'a pas de réelle signification",
+    "identity_sha256": "1976bb4684216c5e7a5f2af0c1e40e37c21821ae2e417c418dcfd908d4069108"
+  },
+  "source_value": "Ce n'est d'ailleurs pas du tout un hasard que la définition de 'woke' soit difficile à poser : les conservateurs n'ont aucun intérêt à ce que l'on puisse définir le terme.",
+  "source_value_sha256": "c4c63826144e6cef20d3588b5f8e7910098b507d0749d3073e6c64c55880bc45",
+  "target_value": "It is no coincidence at all that “woke” is difficult to define: conservatives have no interest in allowing the term to be defined.",
+  "target_value_sha256": "9ee63eb0fc043824edca2b32516a514dd387732532160b4e1218b797224ae7cb",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0219",
+    "target_path": "citations/A0219-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "12185eeff59e98011db4d0ea124470f95b05238534a42c3291050187e71f9664"
+}

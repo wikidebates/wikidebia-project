@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7cd983829d69475f211425f6381b9f4c9c3e74b3534e537f16a831b9802c762e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes souffrent eux-mêmes de la masculinité toxique",
+    "identity_sha256": "86f9feb81eba61300f4f2591662f536af82672a02623a663a02322e3d578cdba"
+  },
+  "source_value": "La masculinité toxique a des conséquences désastreuses pour les hommes eux-mêmes. L'impossibilité pour eux de paraître \"faibles\" à cause du jugement social génère tellement de souffrance mentale que c'est chez eux que le taux de suicides est le plus élevé, sans parler des violences auxquelles ils se retrouveraient dès lors exposés.",
+  "source_value_sha256": "d500fb675dee1f95ce90731795832f498ba2d9de1042a2bf896fbaf8ce4e49f9",
+  "target_value": "Toxic masculinity has disastrous consequences for men themselves. Their inability to appear “weak” because of social judgment generates so much mental suffering that the suicide rate is greater for them than for others, not to mention the violence to which they consequently find themselves exposed.",
+  "target_value_sha256": "0f9907a1ae7ae2448bda2242b39e277e3af6575052f8d8fa793c6b69776ea9e7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0184",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "edf3d00ea981326d463952a22dd5dea04d5a08ff8f9dfb51d74b2da95e88e5d8"
+}

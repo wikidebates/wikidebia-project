@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e8e2cacb4d15105a2114fd4d7603697d0e32789b352d752f4210cc4b83106e92",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes subissent des violences verbales",
+    "identity_sha256": "e8da357e5267f0ed3ac2116409cda6c6adf47f428c09825fd5ed17430eba1303"
+  },
+  "source_value": "Les femmes subissent des violences verbales",
+  "source_value_sha256": "f7a72e9ca9b8b2a5720397d9db68e5a5493f8d885964568dccb4eb6528ccecd8",
+  "target_value": "Women experience verbal abuse",
+  "target_value_sha256": "6eb0684ceb02988eff10862ccbfc517e4387023b0e442197c2b19e96fb82d81d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0044",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5b4ab959002a9216da98c55a7fa3c02bf237acbe3d0560475b574e05d79ee77b"
+}

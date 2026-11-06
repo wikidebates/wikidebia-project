@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6e5ef6e38405256202742310ba0ee7610a281b886bca4edcff812bc272d027db",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "3 femmes sur 4 subissent du cyberharcèlement",
+    "identity_sha256": "17b5bf705bd23b68fa7361cdd55f7283790f2736843b95f44c1ff3f3ea9e1f3d"
+  },
+  "source_value": "Avec 73 % de femmes dans le monde qui ont déjà souffert de cyberviolence, ce ne sont pas les témoignages qui manquent.",
+  "source_value_sha256": "9f6c485da4c5a7b6bd3979c526d77391529441688c056a42753d944c70d99af6",
+  "target_value": "With 73% of women worldwide having already experienced online violence, there is no shortage of testimony.",
+  "target_value_sha256": "f7d47e1fea80e9af73342e571e6aff527852857bbc20ea23b979d44000fbb646",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0261",
+    "target_path": "citations/A0261-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9f5e1664c95ba7988ef492d6b56b632c89c1d329bb56b760e8c8e1ac0918cd6c"
+}

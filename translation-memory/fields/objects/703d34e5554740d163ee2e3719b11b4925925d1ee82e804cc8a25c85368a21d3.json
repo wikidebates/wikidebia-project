@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "912c3e215b4c079b57fd309eae816a16afab5ecc2a2d776cf9ea65d5ad1523f9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les droits des femmes s'étoffent chaque année grâce au combat féministe",
+    "identity_sha256": "0ca1c286f51d71fbae2bb2a68a57f1253d553604fd89e30d1185351d007aee26"
+  },
+  "source_value": "Les actions menées par les associations et sympathisants féministes obligent le gouvernement à réviser constamment les lois. La chronologie des droits des femmes indique que les dernières lois adoptées dans le cadre de la protection des femmes datent de 2020 :\n\nMars 2020\nDébut de la crise sanitaire liée au Covid-19 qui a eu un effet révélateur sur les violences conjugales, en forte hausse durant les confinements.\n\n25 août 2020\nUn décret étend la gratuité de la contraception aux filles de moins de 15 ans.\n\n23 septembre 2020\nUn décret met en place un dispositif électronique mobile anti-rapprochement destiné à assurer le contrôle à distance des conjoints ou ex-conjoints violents.\n\nCette constatation incite à affirmer que le combat pour l'égalité hommes/femmes n'est pas terminé.",
+  "source_value_sha256": "ea5c37136d55bc53eda213be8b8ca965f47830cef52a51a1764d21a07871288e",
+  "target_value": "Actions carried out by feminist organizations and supporters force the government to revise laws continually. The chronology of women’s rights indicates that the most recent laws adopted to protect women date from 2020:\n\nMarch 2020\nThe beginning of the Covid-19 health crisis, which exposed intimate partner violence as it rose sharply during lockdowns.\n\n25 August 2020\nA decree extends free contraception to girls less than 15 years old.\n\n23 September 2020\nA decree establishes a mobile electronic anti-approach device intended to provide remote monitoring of violent partners or former partners.\n\nThis finding supports the assertion that the struggle for equality between men and women is not over.",
+  "target_value_sha256": "e59147548d4bf31ce58ea52adc4f78b57d3708ce4782651211c002e74bc16f8b",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0081",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "703d34e5554740d163ee2e3719b11b4925925d1ee82e804cc8a25c85368a21d3"
+}

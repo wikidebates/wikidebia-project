@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e6cad1db0081483f35a3abd2341f49e015ef2da43cd9fe7b452aad1fab5774d4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La sous-représentation des ingénieures a des conséquences très concrètes",
+    "identity_sha256": "93d90bcd4d53be68aacae009f63ecf458e0f5a07ea858bfe745271c34eecc0d1"
+  },
+  "source_value": "La sous-représentation des ingénieures a des conséquences très concrètes",
+  "source_value_sha256": "e94a11f743a3b6d2451d253bd2f65abd4f07393b616431030906c9a40330ef95",
+  "target_value": "The underrepresentation of women engineers has very concrete consequences",
+  "target_value_sha256": "fbe986ec33bb55ff53fccba93f8720dc2ba96e6bd64bd7dd8ac3d80f332a3319",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0250",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e49e90c754357467c1e131c6a784202ec8606948e1fa7453fe5ace36461e6a92"
+}

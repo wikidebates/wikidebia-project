@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4d05aaaa60cf803f34ec2fc168271e92e6de6606d19bb7d922b5fa5284e0ea3a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La misandrie est une réponse à la misogynie et se veut majoritairement non violente",
+    "identity_sha256": "8e3716ece0463e198397791a59d5a9cf3d63eba39f549b1d32721ba9134b52d0"
+  },
+  "source_value": "Pour ma part j’ai toujours considéré les féministes comme d’aimables connes",
+  "source_value_sha256": "042505ef4a7d43863174c77542470fc95b01f6ecff9bff584f7633e184b2c4c5",
+  "target_value": "For my part, I have always regarded feminists as amiable idiots.",
+  "target_value_sha256": "23fc23ccb15b3edf6e773f5cec9be4f134f998a88ef005d8913f8db6b2ee0001",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0097",
+    "target_path": "citations/A0097-C004",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9a676edd5a35a43fd7d549d69e2af651b49be8d75a080a95ee87d3a3d347c32b"
+}

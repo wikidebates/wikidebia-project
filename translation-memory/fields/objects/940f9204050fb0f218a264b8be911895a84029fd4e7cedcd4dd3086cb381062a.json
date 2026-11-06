@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "070d37468d9939341da27bff1547cc4dc160feac2e6735992ada37903229c4cc",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La lutte contre le \"wokisme\" est le paravent de l'extrême droite",
+    "identity_sha256": "12a5d8ed86d87443ddf83cb17baa1cddefca71c089120f45cbe221413a0b4d82"
+  },
+  "source_value": "Pour le député Ecolo Guillaume Defossé, \"le MR défend le fascisme de Mussolini\". \"Après les republications de l'extrême droite française, le respect pour Zemmour, les discours délirants sur ce qu'il appelle le 'wokisme', ça fait longtemps que les lignes sont dépassées.”",
+  "source_value_sha256": "cd35653e61f70f3e09e90d0077470d13e7065f26ba81e434fed5a08582b34a0c",
+  "target_value": "For Ecolo MP Guillaume Defossé, “the MR defends Mussolini’s fascism.” “After reposting material from the French far right, showing respect for Zemmour, and making delirious speeches about what it calls ‘wokeism,’ the lines were crossed a long time ago.”",
+  "target_value_sha256": "7ee54789c55e1602150fa85deceab93b4c5eecbe44f3bc2f00b30768fe7aa9d4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0218",
+    "target_path": "citations/A0218-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "940f9204050fb0f218a264b8be911895a84029fd4e7cedcd4dd3086cb381062a"
+}

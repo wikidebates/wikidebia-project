@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0ba390e4dc1348e965683e989d84864a50f7ee5cac0dbaae12994b94f2ba0bac",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les thèses du féminisme radical sont controversées au sein même du mouvement féministe",
+    "identity_sha256": "d6b1a9fc94b938341ed0f033aea1431276dc20bbc2f285ba9e2b3f6309201532"
+  },
+  "source_value": "Les thèses du féminisme radical sont controversées au sein même du mouvement féministe",
+  "source_value_sha256": "70ab2b4b34e814b78256fcbccc4ecd2fa94d35664b6cf0f5368bd0adfd9aebb4",
+  "target_value": "The claims of radical feminism are controversial within the feminist movement itself",
+  "target_value_sha256": "314729c103b78abb4ed68d53d350db573080ba027945132f85ad2fcf3f3eabef",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0126",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b4038f810a5c4460cd99831ce89911d1170e019619102d39ccec9b57ad228d4f"
+}

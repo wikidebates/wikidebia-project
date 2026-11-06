@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c62bdfaac02e2d454206c3a4d1d42aa1578b43b790a8d7c5b0e53da37e92c668",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Une inégalité n'est pas forcément injuste, inégalité n'est pas synonyme d'injustice",
+    "identity_sha256": "42e792c5d34f0ab7f292bb4bd906e7560b35d32b79d475c98bb200094a6dd729"
+  },
+  "source_value": "Une inégalité n'est pas forcément injuste, inégalité n'est pas synonyme d'injustice",
+  "source_value_sha256": "6540eb26c930cf83bdacd21ab52ee6b99b4243f1acc569dc621b2f47fdaf7cb1",
+  "target_value": "Inequality is not necessarily unfair and is not synonymous with injustice",
+  "target_value_sha256": "118947539802342c44910527a8b720a92d36352b664cc4cffccda96f076a0f84",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0027",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4a87e4c8249aea44ee7fc1cbf64cdd97d146da259f1212fad38414d9765a42d5"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0420988c1e1010fda9786816c76c6feeaec317e419cfd3a615aa608e60404978",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'une des principales mesures en faveur des femmes devrait être d'augmenter les salaires et éradiquer le chômage",
+    "identity_sha256": "5ad783446b59ac4bc1e08351d72d363f214a3836bdad4a67bb257b9c9af803de"
+  },
+  "source_value": "''« Une fois au pouvoir, quelle serait la première mesure que vous prendriez en faveur des femmes ? »'', me demande-t-on régulièrement. ''« Ce serait d’augmenter les salaires et d’éradiquer le chômage de façon que toutes les femmes puissent être financièrement indépendantes d’un père ou d’un mari »'', ai-je souvent répondu. Cela agace souvent les journalistes, déçus que je revienne sur un terrain social, et en particulier sur la question des salaires et de l’emploi. Je persiste et signe. Si l’on me demande quelle est la première mesure favorable aux femmes, je reparlerai de l’emploi et du salaire, parce que je me place du point de vue des femmes des classes populaires.",
+  "source_value_sha256": "d4da1fbea3cf952f7533ec01cc30d38fbb2626099d19462a339097cd744aaa16",
+  "target_value": "''‘Once in power, what would be the first measure you would take in support of women?’'' I am regularly asked. ''‘It would be to raise wages and eradicate unemployment so that all women can be financially independent of a father or husband,’'' I have often replied. This often annoys journalists, who are disappointed that I return to social issues, particularly wages and employment. I stand by my answer. If I am asked what the first measure benefiting women would be, I will again talk about employment and wages, because I adopt the perspective of working-class women.",
+  "target_value_sha256": "958dee6b5cbb993b1e879dcfd8c6ed4328d4b38168417c151692bf326c422d61",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0074",
+    "target_path": "citations/A0074-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0c2de551565198b832b6c6993392130f9a7d771d7a6c82b0ea8c9f315a25a088"
+}

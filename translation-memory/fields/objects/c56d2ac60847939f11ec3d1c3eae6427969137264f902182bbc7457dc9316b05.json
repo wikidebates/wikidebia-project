@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "53feed2a9e1f9d4d9da3492f8a7fdf1a0a6d783399e365078a08e892d914409d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les incels représentent un groupe sectaire masculiniste dangereux",
+    "identity_sha256": "039de954925599d2208a1572e828db3c43afade01369468290de0daf6d1c97e2"
+  },
+  "source_value": "Les Incel (ou célibataires involontaires) ont surtout une racine sur Internet par le biais de blogs et de forums. Ces hommes \"boudés par les femmes\" ont organisé une entre-soi aussi aussi qualifié de \"manosphère\". Les femmes représentent l'ennemi, la source du rejet et sont la cause de tous leurs maux.",
+  "source_value_sha256": "681ed8cffa74b0c6f391156c3481f14bee57c50545acd25ae2d4a587b27ddb96",
+  "target_value": "Incels, or involuntary celibates, have their roots primarily on the internet through blogs and forums. These men “spurned by women” have organized an insular community also described as the “manosphere.” Women represent the enemy and the source of rejection and are blamed for all their troubles.",
+  "target_value_sha256": "52f4c1805ab048d3110fdb0ea49821ca42c72baf0e4435e95476d7c2e9f3a6c4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0190",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c56d2ac60847939f11ec3d1c3eae6427969137264f902182bbc7457dc9316b05"
+}

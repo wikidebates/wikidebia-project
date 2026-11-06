@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "021a43c4ba01e73396d5f17ab69073516f53915897b0d090d8c10c112a4bc88c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Si une cause peut permettre d'aider ne serait-ce qu'une seule victime, cela suffit à démontrer son utilité",
+    "identity_sha256": "1815c1b7c12967011c9537a608818c489856de26beb1812e4c0f6730604431aa"
+  },
+  "source_value": "Si une cause peut permettre d'aider ne serait-ce qu'une seule victime, cela suffit à démontrer son utilité",
+  "source_value_sha256": "78bdcc1c58d1d728d4a08ea6189b63f9257284e7ba71b5f7da19fa97e3787239",
+  "target_value": "If a cause can help even a single victim, that is enough to demonstrate its usefulness",
+  "target_value_sha256": "c5792078fb214597e2e33a1b533fceeb07d5ee869f9b6583e63de2f5423ff09d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0096",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a6d31ff0213f550d26df5a5c4fe8da95e664a28c7039a4b5b8bb69dbc82e5a49"
+}

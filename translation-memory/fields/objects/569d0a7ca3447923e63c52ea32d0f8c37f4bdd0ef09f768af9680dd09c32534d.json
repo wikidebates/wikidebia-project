@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1d343d7ed4ebd3d57e15c96c12c24e4c01b53c5f9ccd2c8cc2adb5d4f5ef3755",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Certains activistes wokes utilisent des méthodes fascistes pour agresser ceux qui les contestent",
+    "identity_sha256": "48258483585f9c620da13bd93ad6d9e7c520619aca5ff88e6e0a7d6dbccd0ae1"
+  },
+  "source_value": "Certains activistes wokes utilisent des méthodes fascistes pour agresser ceux qui les contestent",
+  "source_value_sha256": "d71a657a7a43cf8f0c8f702c52c50780133c5afed4590bf3cfe50c4f1ac5d833",
+  "target_value": "Some woke activists use fascist methods to assault those who challenge them",
+  "target_value_sha256": "da215f3fa0a2ddf34d6b7a4a287dad4ef50848c10fd71f98062b1a0dc7924e62",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0312",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "569d0a7ca3447923e63c52ea32d0f8c37f4bdd0ef09f768af9680dd09c32534d"
+}

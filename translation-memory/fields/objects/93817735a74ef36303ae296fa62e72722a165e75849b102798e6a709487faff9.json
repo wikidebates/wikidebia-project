@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2b79bdcc5812d23b00e693b08539f76ebf7a7690ca599f2294488b6196503154",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le discours féministe soutient la victimisation des femmes",
+    "identity_sha256": "e8ebc6839a80400024371bb6724d363aef804c77c475ac085351dea450b0e519"
+  },
+  "source_value": "J’en ai assez qu’on demande aux femmes de revendiquer la souffrance\n\nrevendiquer un statut de victime n’est pas une ambition\n\nLes femmes, il y a quand même autre chose à en dire ! Autre chose à dire que : comme c’est dur d’être une femme !",
+  "source_value_sha256": "0537218dfff5892822ba31607f2926a4c60222568252383726c094f9c57424bc",
+  "target_value": "I am tired of women being asked to lay claim to suffering\n\nClaiming victim status is not an ambition\n\nThere are still other things to say about women! Other things than: how hard it is to be a woman!",
+  "target_value_sha256": "d9d55885bc1e5e367f4b96b16c4d47b7ff29ef9f9881300d465707eb026d6ae0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0017",
+    "target_path": "citations/A0017-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "93817735a74ef36303ae296fa62e72722a165e75849b102798e6a709487faff9"
+}

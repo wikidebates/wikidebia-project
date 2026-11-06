@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "81790155eed5210081a3888acd78432e5456c2104fc9fea800df75db0baa7c3f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "3 femmes sur 4 subissent du cyberharcèlement",
+    "identity_sha256": "17b5bf705bd23b68fa7361cdd55f7283790f2736843b95f44c1ff3f3ea9e1f3d"
+  },
+  "source_value": "3 femmes sur 4 subissent du cyberharcèlement",
+  "source_value_sha256": "762a7a1dc0825020c342697b1e82165bcfc777a7083f287ee442fbebedd9a21e",
+  "target_value": "Three women out of four experience cyberharassment",
+  "target_value_sha256": "a381ee72b71258df6acf9f5e5b5a3beb45d1122fb226ba44a28efeaba5c8f260",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0261",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "59541dfb84628d9dbcd5743a501fb97c3cfb377d15266e36ecf4241d7d6d447e"
+}

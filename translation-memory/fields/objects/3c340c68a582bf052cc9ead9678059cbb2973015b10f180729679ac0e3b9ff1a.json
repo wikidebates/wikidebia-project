@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "21530c4e08e3faf9e86ed0050c3484a5afa67c74b28875587cc993c52d8a249a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le collectif féministe NousToutes a explicitement soutenu Mila",
+    "identity_sha256": "bf36f3ab0c57facde916c0e5340f866d4e9080ce75175bfecc9dcb44011b340b"
+  },
+  "source_value": "Le collectif féministe NousToutes a explicitement soutenu Mila",
+  "source_value_sha256": "bb8dd3b907cff26e112795ee81e35002ac3e9b5d38460ace29a668b034adc1ac",
+  "target_value": "The feminist collective NousToutes explicitly supported Mila",
+  "target_value_sha256": "e4a3eedb7da86fb2fa392df8f7b27d8a82584b96a74f4c7990d800435a85ecb3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0327",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3c340c68a582bf052cc9ead9678059cbb2973015b10f180729679ac0e3b9ff1a"
+}

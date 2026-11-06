@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8e9ec83e3dc4996704f4a86ab993b0870895adb335f9b8737297af0b261df0f2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite est étrangement silencieuse sur les affaires de harcèlement n'impliquant pas ses boucs émissaires préférés",
+    "identity_sha256": "b4654d8655edcf4feb7dffd910b26357a633a7f5188119067c071ae5c775aa54"
+  },
+  "source_value": "On ne peut ici taire le risque que le débat public s’en trouve configuré par '''les agendas politiques de ceux qui ont le pouvoir de mobiliser les réseaux sociaux'''. C’est ainsi que la médiatisation de l’affaire Mila contraste singulièrement avec le silence qui entoure, depuis plus de deux ans, les harcèlements et menaces que subit la journaliste Julie Hainaut de la part de néonazis parce que, dans le cadre de sa profession, elle a retranscrit les propos racistes de deux tenanciers de bar.\n\nC’est ainsi encore que les harcèlements en meute lancés contre des femmes par le dessinateur Marsault, soutenu par les éditions Ring, et qui ont débouché sur un procès où il a été heureusement condamné, n’ont pas fait grand bruit dans la presse — qui n’a pourtant pas hésité à relayer '''la fausse information d’un vandalisme massif et violent du stand des éditions Ring à Bruxelles''', « information » lancée par un tweet qui en profitait pour diffamer scandaleusement des personnes dont le seul tort était de ne pas se laisser intimider par Marsault…",
+  "source_value_sha256": "8302bb1ef798f5f29ddf53f940ce6344568a7b56edf3c1f69d2719686c74cc47",
+  "target_value": "We cannot overlook here the risk that public debate may be configured by '''the political agendas of those with the power to mobilize social networks'''. Thus, media coverage of the Mila affair contrasts strikingly with the silence that for more than two years has surrounded the harassment and threats suffered by journalist Julie Hainaut from neo-Nazis because, in the course of her work, she transcribed racist remarks made by two bar owners.\n\nLikewise, the coordinated harassment launched against women by cartoonist Marsault, supported by Ring publishing, which led to a trial in which he was fortunately convicted, made little noise in the press—even though the press did not hesitate to repeat '''the false claim that the Ring publishing stand in Brussels had been subjected to massive and violent vandalism''', “information” launched by a tweet that also scandalously defamed people whose only fault was refusing to be intimidated by Marsault...",
+  "target_value_sha256": "69368310296c4550f0d6747de3ca5393aa8c7bc7ab1da488c398bfb706959d26",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0325",
+    "target_path": "citations/A0325-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f13dd93b19fad2c6244a9649244dbb436adb6148a99d4f97b8af1c68c68412b8"
+}

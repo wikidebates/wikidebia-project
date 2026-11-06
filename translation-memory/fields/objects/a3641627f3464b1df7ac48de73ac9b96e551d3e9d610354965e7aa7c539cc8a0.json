@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8b63aad689bd6aff8626c7b73570e9a66a79db5490dd5ed33832c3f3e8fd3ad3",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le cyberharcèlement est très largement impuni",
+    "identity_sha256": "7bd2fba8be95911d58de0b446e497a2642d81d592d02a9babd39796eee3e9704"
+  },
+  "source_value": "Le cyberharcèlement est très largement impuni",
+  "source_value_sha256": "d7d114c19ae51a14aaa48a1f59e49cdaeec001f031c5ab5d41b780d1f96bf969",
+  "target_value": "Cyberharassment goes very largely unpunished",
+  "target_value_sha256": "6bb9faf92f2232fcb89729ae353535bc117d6ec54b627edba6d648d6632d8883",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0262",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a3641627f3464b1df7ac48de73ac9b96e551d3e9d610354965e7aa7c539cc8a0"
+}

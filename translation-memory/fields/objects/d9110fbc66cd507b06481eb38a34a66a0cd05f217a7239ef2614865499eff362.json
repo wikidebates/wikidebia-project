@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fe4142e772b111d781f6ab293ef42d2856d424f70023d4281fd06ed9857093ee",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le whataboutisme ne fait avancer aucune cause",
+    "identity_sha256": "bd18ffc7bed90b1bdf5742a06da89a77212e6f630ec587a251b3fa7acbdc20c0"
+  },
+  "source_value": "Le whataboutisme ne fait avancer aucune cause",
+  "source_value_sha256": "759084cd81e96b264b302e3430c38c73b0854c2f54f831f45abd964abb290976",
+  "target_value": "Whataboutism advances no cause",
+  "target_value_sha256": "2c6abee252ce1fdbb60a1c580744f9079c6d3d4bad9d826fe0b52b534f046743",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0155",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d9110fbc66cd507b06481eb38a34a66a0cd05f217a7239ef2614865499eff362"
+}

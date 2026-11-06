@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ad9226d4d87895fe2659df629bc176e18885a94b3937fd2bc543dfcaa7e6a2ee",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'homme coupe encore trop souvent la parole à la femme (Manterrupting)",
+    "identity_sha256": "4c8f61c6460d67fc53b35bb9825f56f79a5a22a7bc2480c71fa74dc5b003c11f"
+  },
+  "source_value": "En 1975 déjà, une étude des sociologues Don Zimmerman et Candace West révélait que, lors de 42 conversations entre hommes et femmes, la femme était toujours interrompue. En 2014, une autre étude analysait 900 minutes de conversation homme/femme au sein d’une entreprise. Il s’est avéré que les hommes interrompaient deux fois plus les femmes qu’elles ne le faisaient. En 2015, une autre étude menée sur 12 ans montrait que les femmes travaillant dans le domaine de la justice ne représentaient que 4% des interruptions de parole.",
+  "source_value_sha256": "aadf198ceaa4e588fff1e42d36dfe523430eb36327c996320501e0c8b168d1a8",
+  "target_value": "As early as 1975, a study by sociologists Don Zimmerman and Candace West revealed that, in 42 conversations between men and women, the woman was always interrupted. In 2014, another study analyzed 900 minutes of conversation between men and women in a company. It found that men interrupted women twice as often as women interrupted men. In 2015, another study conducted over 12 years showed that women working in the field of justice accounted for only 4% of interruptions.",
+  "target_value_sha256": "eb0813a0c1b21997df0cc3ab5c1fedcd2ff93e9ae3dc13610ce2c35ab27eca87",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0069",
+    "target_path": "citations/A0069-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d975633e63fefa936336cbfa35658603501bb9f4bac1ffb7831af1a93fa1c24a"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "acc9c65432c4772cfca7336df9f1a7096c60cedb5a0b0a9160d7b4157d5089f7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La lutte contre le \"wokisme\" est le paravent de l'extrême droite",
+    "identity_sha256": "12a5d8ed86d87443ddf83cb17baa1cddefca71c089120f45cbe221413a0b4d82"
+  },
+  "source_value": "la liste est inter­mi­nable des choses qui se sont ins­tal­lées, qu’on aurait crues impos­sibles il y a encore cinq ans, et qu’une vue rétros­pec­tive nous fait regar­der avec sidé­ra­tion : police défi­ni­ti­ve­ment dégon­dée, deve­nue bloc de racisme, de vio­lence et de men­songe, chancre auto­nome n’obéissant plus qu’à lui-même ; empire crois­sant d’un énorme groupe mul­ti­mé­dias occu­pé à pro­mou­voir en pleine lumière un can­di­dat ouver­te­ment fas­ciste (avec la béné­dic­tion pas­sive du CSA) ; groupes néo­na­zis déci­dés à ter­ro­ri­ser la rue quand ça n’est pas à s’armer et à pré­pa­rer des atten­tats ; isla­mo­pho­bie déchaî­née jusqu’aux plus hauts niveaux de l’État ; mac­car­thysme dans l’université ; stu­pé­fiant triomphe des idéo­logues d’extrême droite à impo­ser leurs thé­ma­tiques déli­rantes (« ''woke'' », « isla­mo­gau­chisme », « can­cel culture »).",
+  "source_value_sha256": "d88248a9fe68e6559123ad55123b7dcaa984765107ec08d983b3555447cb13a4",
+  "target_value": "The list is endless of things that have taken hold, that would still have seemed impossible five years ago, and that a retrospective view makes us contemplate with astonishment: a police force definitively unrestrained, turned into a bloc of racism, violence, and lies, an autonomous canker obeying only itself; the growing empire of an enormous multimedia group openly promoting an avowedly fascist candidate (with the passive blessing of the CSA); neo-Nazi groups determined to terrorize the streets, when they are not arming themselves and preparing attacks; Islamophobia unleashed at the highest levels of the state; McCarthyism in universities; the astonishing triumph of far-right ideologues in imposing their delirious themes (“''woke''”, “Islamo-leftism”, “cancel culture”).",
+  "target_value_sha256": "47a2b09727d2fe8c0e0db20f7e9e48f848bff17a600ba417c75e93d17f8d7a24",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0218",
+    "target_path": "citations/A0218-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "397d31553d3ff4cb4b88af7aa40d2c8b051dd9cf6ac9da2ce23a67b012d90a02"
+}

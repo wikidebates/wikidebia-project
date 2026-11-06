@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "13131729e505a3b71c4386662a0f5d8d0080a7c23ba653b53d546a4eb4674f15",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les victoires féministes sont parcellaires et régressent à la moindre crise",
+    "identity_sha256": "ef372ad19beb4c0550b0c966a97c747fbcea9c9cc4a754f0a40a0bfab17f0eee"
+  },
+  "source_value": "Les victoires féministes sont parcellaires et régressent à la moindre crise",
+  "source_value_sha256": "1c9dd0b36ad2661bf9d883b1302d6c5c552b00605b8d4d7a14e6441028b3c589",
+  "target_value": "Feminist victories are partial and recede at the slightest crisis",
+  "target_value_sha256": "0291ae63fbcc06771e51d0f8b2327210f2fd2d8d47f253e53223cc81df6ebded",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0348",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f6e951563a1a95f274f658824c1ba4cf7ffd88d64a11edfe9ac2e32155b01f32"
+}

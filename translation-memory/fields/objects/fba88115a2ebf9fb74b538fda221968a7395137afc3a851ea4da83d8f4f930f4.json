@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "098f1e0d5fe42cff86cd39551547be10088a485e937d1f58b742912602221a45",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les crises économiques s'accompagnent systématiquement d'une montée des idéologies réactionnaires",
+    "identity_sha256": "151aa111d74633a5864506ac95ffd9b988a455780b88ad63354e1c4f2ee57391"
+  },
+  "source_value": "Oxfam lance aussi un avertissement : les inégalités empoisonnent la politique. En effet, on assiste à un recul des droits démocratiques dans le monde entier. L'écart entre riches et pauvres nourrit les tendances autoritaires. Au lieu de chercher à combler ce fossé, certains dirigeants préfèrent stigmatiser les migrants, les autres groupes ethniques, les autres pays, les femmes ou les personnes en situation de précarité.",
+  "source_value_sha256": "0572f69aeed8ffd97ca9d93560638604b4e0334e00056b987cb4dd3401f32f24",
+  "target_value": "Oxfam also issues a warning: inequality poisons politics. Indeed, democratic rights are retreating around the world. The gap between rich and poor fuels authoritarian tendencies. Instead of seeking to close this gap, some leaders prefer to stigmatize migrants, other ethnic groups, other countries, women or people in precarious situations.",
+  "target_value_sha256": "7172396ce55c3fadc2894ed5839bb4ab397861a9c04b80259e5025e641b358c9",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0087",
+    "target_path": "citations/A0087-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "fba88115a2ebf9fb74b538fda221968a7395137afc3a851ea4da83d8f4f930f4"
+}

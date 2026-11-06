@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6aec11bc8e41e420473a4f66afdd15db2cc056e44e15dd84fe9e11a9a6615243",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les droits et acquis sont gravement menacés",
+    "identity_sha256": "9db869205006048bdea0c91b1678a083f7d015f0f314eadabfa6206e8bceb9c8"
+  },
+  "source_value": "151. [https://www.ouest-france.fr/monde/etats-unis/le-secretaire-americain-a-la-defense-a-partage-une-video-qui-soppose-au-droit-de-vote-des-femmes-d51ece66-76d7-11f0-9d15-80a5c5d7922a Le secrétaire à la Défense des États-Unis a relayé la vidéo de nationalistes chrétiens affirmant que les femmes ne devraient plus avoir le droit de vote]. La fenêtre d’Overton continue de s’élargir. Comme un air de « La servante écarlate » ?",
+  "source_value_sha256": "67765a13c2aae913c2550f02d5d6404d263fd94fd64fc5446ddf9daa45bd0774",
+  "target_value": "151. [https://www.ouest-france.fr/monde/etats-unis/le-secretaire-americain-a-la-defense-a-partage-une-video-qui-soppose-au-droit-de-vote-des-femmes-d51ece66-76d7-11f0-9d15-80a5c5d7922a The United States Secretary of Defense shared a video by Christian nationalists claiming that women should no longer have the right to vote]. The Overton window continues to widen. Shades of The Handmaid's Tale?",
+  "target_value_sha256": "1a30ef1ecc6568fe1c9c9c50dc38cb6003a3b14d120516791836c4a4d0b563d1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0006",
+    "target_path": "citations/A0006-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "026302abe368415ea377857291ccce2329e650df2ceb17a83bbabd688a142712"
+}

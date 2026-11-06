@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c6de48d704313f414461aa4728433af1a585b32a90f3db10b3766d4ae0969846",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Bien des hommes ont fait la preuve de leur engagement pour le combat féministe",
+    "identity_sha256": "6a71b31b7c6bc272318b7d7d7f7845a0ac55f7a7add043dbc51b19d0d0139a5c"
+  },
+  "source_value": "C’est un homme, le socialiste August Bebel, qui a écrit un ouvrage qui a fait date, ''La femme et le socialisme'' (1879). [Alors], quand j’entends aujourd’hui certaines féministes renvoyer tous les hommes dans le camp d’en face en parlant de « privilège mâle », je ne peux pas être d’accord. Les hommes qui se sont engagés dans le combat révolutionnaire ont eux aussi contribué à faire évoluer bien des idées. Et je le dis avec d’autant plus de confiance que, même si à Lutte ouvrière, comme dans les autres partis, les hommes sont majoritaires – ce qui n’est évidemment pas un choix – , cette majorité a choisi pour porte-parole une femme, Arlette Laguiller, dès 1974, en en faisant même la première femme candidate à une élection présidentielle en France. Non seulement ce choix s’est confirmé par la suite, mais il s’est même renouvelé lorsque j’ai été à mon tour désignée pour lui succéder dans ce rôle en 2008.",
+  "source_value_sha256": "a855a6a0da36b396d357df53f89511997b39c5915173059c4ab8d118a85f4a6d",
+  "target_value": "It was a man, the socialist August Bebel, who wrote the landmark work ''Woman and Socialism'' (1879). [So] when I hear some feminists today consign all men to the opposing camp by speaking of “male privilege,” I cannot agree. Men who committed themselves to the revolutionary struggle also helped many ideas evolve. I say this with all the more confidence because, even though men are the majority in Lutte Ouvrière, as in other parties—which is obviously not a choice—this majority chose a woman, Arlette Laguiller, as its spokesperson as early as 1974, even making her the first woman to run in a French presidential election. Not only was this choice subsequently confirmed, but it was renewed when I in turn was designated to succeed her in this role in 2008.",
+  "target_value_sha256": "d7f92070f2b9152af5e79485960d5c8a62e2398a3bde052532a15a270794fbff",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0276",
+    "target_path": "citations/A0276-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ff605a6bb3597bfb1a98e03c716e5bd889fae7bba96459709e13e76d9e096d85"
+}

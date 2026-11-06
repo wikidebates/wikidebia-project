@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "09edb0a8bc2534955def0bc906ef43d55d73dad1005625ad2d5e92290ddd6afe",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Être victime n'est pas une tare",
+    "identity_sha256": "6f18533c517dd25b176d8276fdb4657830d116dcf0e2724680f399aae7cd5415"
+  },
+  "source_value": "Être victime n'est pas une tare",
+  "source_value_sha256": "f692d70c0c63678fbce798a3cc863b0cd885f0f15b00672fab1a5506b1aae46d",
+  "target_value": "Being a victim is not a defect",
+  "target_value_sha256": "81e46817a8b93b4ac0f46070b2934f046cd5610cabde8f474dbc8990b9867c18",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0106",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4fb3705e49c98fba9fb0a1feaa48b955f4d14c2f20ff16c302125e6c63108f67"
+}

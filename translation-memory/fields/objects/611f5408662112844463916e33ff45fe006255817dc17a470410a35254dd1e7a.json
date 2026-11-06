@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "20897e4f2b597342c65d13e695cc051d1b9f2f6cdc14d851c4549ccb81f3be5e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme ne peut être conséquent s'il n'a pas pour moyen la lutte des classes et pour objectif le renversement du capitalisme",
+    "identity_sha256": "008295830b6d2ffef850497e8a528f5a69e955c96681c4cfcddf8e5224f0650e"
+  },
+  "source_value": "Si l’oppression des femmes est devenue permanente avec la naissance des classes sociales et l’apparition de la propriété privée, c’est bien dans les moments où cette base économique est remise en cause que les rapports entre humains, et donc entre hommes et femmes, peuvent changer. Et c’est précisément ce qui s’est produit en Russie en 1917. Alors, je le répète, pour moi, être communiste et féministe, c’est indissociable. Être une féministe conséquente, c’est se battre pour changer toute la société, à l’égal de n’importe quel homme.",
+  "source_value_sha256": "445888d9d2e468f26178baa4be7f647b2f1633b04e7cc988e7e35608937444f2",
+  "target_value": "If the oppression of women became permanent with the birth of social classes and the emergence of private property, it is precisely when this economic foundation is called into question that relations between human beings, and therefore between men and women, can change. And that is exactly what happened in Russia in 1917. So, I repeat, for me, being a communist and a feminist are inseparable. Being a consistent feminist means fighting to change the whole of society, on an equal footing with any man.",
+  "target_value_sha256": "30f11048d296d5b410b299cf619a17108c656d1734ee91dcc74ee5b78930d809",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0063",
+    "target_path": "citations/A0063-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "611f5408662112844463916e33ff45fe006255817dc17a470410a35254dd1e7a"
+}

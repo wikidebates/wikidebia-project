@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "aa2bb9267e64dc92edbf30b673200e049fdad2c8f7cbfabad313b451c703cd2e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le concept de wokisme existait bien avant de porter ce nom",
+    "identity_sha256": "900152136edbd13f20868b71e1e65100487847ef1c358ae0aaab463b71740f8a"
+  },
+  "source_value": "Le concept de wokisme existait bien avant de porter ce nom",
+  "source_value_sha256": "aba6f04b513f5d9da9733517ca158139ae7b1f46c4387a457e4d1820e15ab466",
+  "target_value": "The concept of wokism existed long before it bore that name",
+  "target_value_sha256": "2d08e0d939746528950eb9a33b288489354cee48c593a9778b27a4f5d98ca8a1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0220",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8b811d8363f4524ab5df8f6a1079c723fde7466f5d39c3cda9938ab7b6eeb5b2"
+}

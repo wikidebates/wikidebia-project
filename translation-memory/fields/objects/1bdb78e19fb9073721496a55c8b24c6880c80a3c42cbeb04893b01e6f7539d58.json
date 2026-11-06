@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "eb40936dc0f169d89da251e9d84caed3ede15dc6ef4265c866d7e23949e8e3f6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme permet de lutter contre la pollution",
+    "identity_sha256": "d6ddb26e7631c5dcb27f483b3f87670c79d083c8a4472d4227eb7f4c4bd7b8be"
+  },
+  "source_value": "Pollution et sexisme se rejoignent sur certains points, notamment que la plupart des gestes écolos sont posés par des femmes et que les hommes les plus violemment sexistes sont très souvent les plus violemment hostiles à l'écologie.",
+  "source_value_sha256": "07fc652eaf0bb186d777ac0199e327ee4553a8f2c251c5d12b857c1f6918828b",
+  "target_value": "Pollution and sexism overlap in certain respects, notably because most environmentally friendly actions are taken by women and because men who are more violently sexist are very often also more violently hostile to environmentalism.",
+  "target_value_sha256": "ffc5ec7320638b12819a6435f2fbbbdf1ac7e530a48ff8afc888791071b6ce52",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0062",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1bdb78e19fb9073721496a55c8b24c6880c80a3c42cbeb04893b01e6f7539d58"
+}

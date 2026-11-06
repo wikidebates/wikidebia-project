@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5e1ccce6ccb414dab4bba330923c5c91e04a85cd604dab6f1f1550016ae61d6d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les féministes considèrent certaines femmes comme leurs ennemies, il ne peut donc pas être misandre",
+    "identity_sha256": "5248fee27f6efc3a61f9050259d0a6c37693560213184002b9176d7ad34736c4"
+  },
+  "source_value": "Toutes les femmes ne sont pas féministes, loin s'en faut, certaines y sont même ouvertement hostiles au point de le combattre. à l'inverse, il existe même des hommes prêts à se battre contre la misogynie de la société, et que les féministes sont contentes d'avoir dans leurs rangs. Réduire leur combat à de la misandrie n'a donc aucun sens et ne sert qu'à une disqualification bien commode pour ne pas avoir à discuter du fond.",
+  "source_value_sha256": "cc521178fed4fded50cf899870564d54fcd56f2e29e17b8f1765e305ff84c04d",
+  "target_value": "Not all women are feminists, far from it; some are even openly hostile to feminism to the point of fighting it. Conversely, there are also men who are ready to fight society’s misogyny and whom feminists are glad to have in their ranks. Reducing their struggle to misandry therefore makes no sense and merely provides a convenient way to disqualify it so as to avoid discussing the substance.",
+  "target_value_sha256": "555757782747f96b2d1098e71e8550a5812630ed8e5e3264282f2f604a011462",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0102",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "2269e97831cc2d79fdda66f3c29b19fcd72b4031b61b18f2d564fe25349fb424"
+}

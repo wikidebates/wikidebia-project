@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b1da9968293e5727ebcb49e99dc57a62da9f2988c664d5518d03e1b49c7afcc8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La censure la plus à craindre ne provient pas du \"wokisme\"",
+    "identity_sha256": "a4498de8239b45c57738f39e9502baecc44e6f513c95b7cd0771de18cb5c5325"
+  },
+  "source_value": "Le cinéma municipal du Luc-en-Provence, une mairie varoise gérée par le Front national, avait prévu de diffuser le film \"Chez nous\" de Lucas Belvaux, qui décrit l'ascension de l'extrême droite dans le Nord… Avant de le retirer des écrans, a indiqué aujourd'hui le maire Pascal Verrelle. La ministre de la Culture Audrey Azoulay a dénoncé une \"censure\".",
+  "source_value_sha256": "ee91d218eba7b3231b9104065a94c703018bdf0c38c878ea100fd4b3df152075",
+  "target_value": "The municipal cinema in Le Luc-en-Provence, a town in the Var governed by the National Front, had planned to show Lucas Belvaux’s film “Chez nous,” which depicts the rise of the far right in northern France... before removing it from the screens, Mayor Pascal Verrelle said today. Culture Minister Audrey Azoulay denounced “censorship.”",
+  "target_value_sha256": "2902397befee7a05495e79a8994cae1f24f7e7eb5f404e0917c80fcf42e4df2e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0311",
+    "target_path": "citations/A0311-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1f920fb55b30df70b240294ac50a109984ce4d4da134e11f77e76629be21e98a"
+}

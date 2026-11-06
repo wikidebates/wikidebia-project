@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d0aab50f10bde2e62bb89821577d2225df2cbefa7533748c76c3289f404d72a0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Accuser les \"woke\" de puritanisme, c'est l'hopital qui se fout de la charité",
+    "identity_sha256": "8ed06d65adfbc1fa02c61e5225933dc719c5195760c586a571a6c315ff6012e2"
+  },
+  "source_value": "Sachant que parmi les anti-woke, il y a des courants religieux qui sont eux-mêmes puritains, et que beaucoup de censures au.nom de la lutte \"anti\"woke\" relèvent en réalité d'un puritanisme mal assumé.",
+  "source_value_sha256": "c5d667ed07b6d821d2f0492364b5d0ce7dc91547dbc0d48033dc2965f067f73b",
+  "target_value": "Among anti-woke groups are religious currents that are themselves puritanical, and many acts of censorship in the name of the fight against “wokism” actually stem from poorly acknowledged puritanism.",
+  "target_value_sha256": "18fc7a59059ff0211987a3738e09d1175cc5ea51aaf6d9ae9687ffeb01de241a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0221",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "044c523141db8fe941f513c0f63c9f464b9e7be46bdb99423479c185fd7de4e0"
+}

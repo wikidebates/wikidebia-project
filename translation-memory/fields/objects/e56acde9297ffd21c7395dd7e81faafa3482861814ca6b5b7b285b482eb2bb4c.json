@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "878ced372153f8694a4f59d06aaff613431b47ca90e252b737b95c0be94065e6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les mises au ban imputables aux mouvements féministes sont très marginales",
+    "identity_sha256": "ea9ae3bfcb6272b826cf06b17d9463c9758b6fd838a9c503a1143f140bda7669"
+  },
+  "source_value": "Quant aux « violeurs », [https://www.lemonde.fr/societe/article/2024/04/03/violences-sexuelles-86-de-classements-sans-suite_6225743_3224.html '''la majorité des affaires sont classées sans suite'''] ''': pas moins de 94 % dans les cas d’accusations de viols,''' selon une étude de l’Institut des politiques publiques portant sur la période de 2012 à 2021 ; et les acteurs concernés continuent leur vie faste.",
+  "source_value_sha256": "392e533b9937bba3123e2fa7dcc8bc4e353cb9075e3ba1cf23d3b74d4a40ddb7",
+  "target_value": "As for “rapists,” [https://www.lemonde.fr/societe/article/2024/04/03/violences-sexuelles-86-de-classements-sans-suite_6225743_3224.html '''the majority of cases are closed without further action''']: '''no fewer than 94% in cases involving rape allegations,''' according to a study by the Institut des politiques publiques covering the period from 2012 to 2021; meanwhile, the actors concerned continue their lavish lives.",
+  "target_value_sha256": "ff8d551f4a9cafa848563246e56c22e5a52abadecd3613c0b1522f0fdbd550fa",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0214",
+    "target_path": "citations/A0214-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e56acde9297ffd21c7395dd7e81faafa3482861814ca6b5b7b285b482eb2bb4c"
+}

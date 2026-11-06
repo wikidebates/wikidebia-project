@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3e2534cdbb4d451fe5f89a59c8cb20a2d7d91f41fa4d725654b2b566c4018d5a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Si les féministes n'avaient jamais été extrémistes selon les standards de leur époque, elles n'auraient jamais obtenu le droit de vote",
+    "identity_sha256": "dbf2585767ba06b0d453232de5bf5ee1afc0a2a51586ad795b8617f12ca62521"
+  },
+  "source_value": "Si les féministes n'avaient jamais été extrémistes selon les standards de leur époque, elles n'auraient jamais obtenu le droit de vote",
+  "source_value_sha256": "d73478467b76da79b95ff2418559fe2d50baf28efc1fb0433bc0bd7a2d6f394c",
+  "target_value": "If feminists had never been extremists by the standards of their time, they would never have won the right to vote",
+  "target_value_sha256": "b4b62886cea319186aa3cc6f4f5555ef219b8339e725e778a2179bfc69feed89",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0271",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "19a8fa02fa2343cae29e140479e2135c1813f96f402876f62f73a13ecf077a86"
+}

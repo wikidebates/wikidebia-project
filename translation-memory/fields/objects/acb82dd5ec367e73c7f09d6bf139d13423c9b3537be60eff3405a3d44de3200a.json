@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4ed5139572c54c8b447d9bab1a47ac81d25dc4a5ebbb2474084750170ac3a719",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La censure la plus à craindre ne provient pas du \"wokisme\"",
+    "identity_sha256": "a4498de8239b45c57738f39e9502baecc44e6f513c95b7cd0771de18cb5c5325"
+  },
+  "source_value": "Rappelons que si on adore parler de ''cancel culture'' quand il s’agit de la gauche, les conservateurs ne retiennent pas leurs coups quand il s’agit d’exprimer leur offense. Un humoriste a été renvoy de Canal+, ainsi que l’un de ses soutiens, pour avoir parodié la ligne éditoriale penchant droite dure de la chaîne CNews, du même propriétaire. La maison d’édition associative Monstrograph a fait les frais d’une irritation en haut lieu : en août 2020, ses fondateurs Martin Page et Coline Pierré reçoivent un mail d’un chargé de mission au secrétariat d’Etat à l’égalité femmes-hommes qui les somme, sous peine de poursuites pénales, de retirer du marché le livre ''Moi les hommes, je les déteste'', de Pauline Harmange. La Ligue des droits de l’homme et Mediapart s’en mêlent, et le livre profitera largement de cette tentative ratée de censure : l’autrice est aujourd’hui publiée aux éditions du Seuil et traduite en 17 langues.",
+  "source_value_sha256": "d1b7cf1726014253022777c3abc4b8f19decee8ac7b94a6418d7d918a8863c35",
+  "target_value": "Let us remember that although people love to talk about ''cancel culture'' when the left is involved, conservatives do not pull their punches when expressing offense. A comedian was fired from Canal+, along with one of his supporters, for parodying the hard-right editorial line of CNews, a channel with the same owner. The nonprofit publishing house Monstrograph paid the price for irritation in high places: in August 2020, its founders Martin Page and Coline Pierré received an email from an official at the Secretariat of State for Gender Equality ordering them, under threat of criminal prosecution, to withdraw Pauline Harmange’s book ''I Hate Men'' from the market. The Human Rights League and Mediapart became involved, and the book benefited greatly from this failed censorship attempt: the author is now published by Seuil and translated into seventeen languages.",
+  "target_value_sha256": "09d3aa6796ad6c4fecd71b3f56954a78d14eeda8c78741bc5bc532376a290749",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0311",
+    "target_path": "citations/A0311-C004",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "acb82dd5ec367e73c7f09d6bf139d13423c9b3537be60eff3405a3d44de3200a"
+}

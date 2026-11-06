@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e7d8ee018b033091c84e1b4a24b4f0c51494a897d30ec7b01b2b22c704be1513",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La lutte antisexiste n'a pas le pouvoir d'empêcher des sorties",
+    "identity_sha256": "5c24c5211a4194382607b20795c83b393c6ac885f4e3541ce6b3504356fd994a"
+  },
+  "source_value": "Des films qualifiés de sexistes continuent de sortir à l'heure actuelle et ne subissent comme sanction que des protestations fort peu impactantes.",
+  "source_value_sha256": "59a70306db2b98b42a8b2ea7d2f382743d4f2568863a07f7c7ad1fd559089e03",
+  "target_value": "Films described as sexist continue to be released today and face no sanction beyond protests with very little impact.",
+  "target_value_sha256": "b05296c964da3d44d02c802c58bba1c5c6919b637e360c442ed07aff4930faee",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0291",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1db8eed96bffb151a080dfadd359cf11e179a9f02bee64c429f7b0b182e5df3d"
+}

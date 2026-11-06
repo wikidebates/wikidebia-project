@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "38d70bfbbe7a61732bfe0db052be0b9df8a267f34f1982b0a918d5f1d9731c20",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme risque d'importer en France des dérives du féminisme américain",
+    "identity_sha256": "3bdad4d1475a9d828d64601d0c5062250abadb72daa78900cc83831bb9730885"
+  },
+  "source_value": "Quel est le point commun entre ces idéologies haineuses qui détournent ces luttes pourtant légitimes que sont le féminisme, l’écologie, la lutte contre les inégalités sociales, l’antiracisme, le combat contre l’homophobie ? L’affirmation que l’être humain doit devenir un être sain, exempt de toutes turpitudes, qu’il faut nettoyer de toutes traces du Mal, libérer de la cupidité, du pouvoir, de l’impureté afin d’en faire un être propre et sans souillures. Cette tentation totalitaire qui revient, une fois de plus, sur le devant de la scène prétend rétablir le règne du Bien, et donc inévitablement se propose d’éliminer le Mal et ses adeptes : Le juif, l’apostat, le pollueur, le capitaliste, le financier apatride, le pécheur, le fornicateur, le mâle blanc, le colonisateur (blanc)…\nLa pureté n'existe pas. Nous sommes des êtres faillibles, très imparfaits et c'est la raison pour laquelle nous avons besoin des autres, pour nous contredire, pour démolir nos arguments et nos certitudes.",
+  "source_value_sha256": "9a25c74390a076f62ac3abed54b96400deb7add2e8d87b9e2a88a408b9f05e0a",
+  "target_value": "What do these hateful ideologies that divert such legitimate struggles as feminism, environmentalism, the fight against social inequality, antiracism and the fight against homophobia have in common? The assertion that human beings must become wholesome beings, free of all depravity; that they must be cleansed of every trace of Evil, freed from greed, power and impurity so as to become clean and unstained. This totalitarian temptation, which is once again coming to the fore, claims to restore the reign of Good and therefore inevitably proposes to eliminate Evil and its followers: the Jew, the apostate, the polluter, the capitalist, the rootless financier, the sinner, the fornicator, the white male, the (white) colonizer...\nPurity does not exist. We are fallible, deeply imperfect beings, and that is why we need others: to contradict us and demolish our arguments and certainties.",
+  "target_value_sha256": "4457f752d78a83c70937374d17f6a8fdb38f15239e7af905f84342c779619d79",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0018",
+    "target_path": "citations/A0018-C004",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6b09d0acc525f7aa12706e06aca6d755db4282e48ed193a2a7f32b13a19dfb9c"
+}

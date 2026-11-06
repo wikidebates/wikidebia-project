@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "64499951d270b0247c89e06139340fa4d99f0ea5de4350d604172f0ebe23f83a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La diffamation n'implique pas nécessairement le mensonge",
+    "identity_sha256": "3c1049dd71ec9fa65018ed9db841087196e2d549e770bcf1cb3781e272d6b23d"
+  },
+  "source_value": "La diffamation n'implique pas nécessairement le mensonge",
+  "source_value_sha256": "2888a9945ad475db567a5d76679dbc15362e8659af2c2d681dba576d85b57886",
+  "target_value": "Defamation does not necessarily imply lying",
+  "target_value_sha256": "fe9cbf3297964234233004a62167c06e2f582c6ec3dfef26c70843ba4ede6b76",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0223",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f3c562f551ccf7f96059509a443776cfcfcc176880cbaef3ecd1e371f82544ec"
+}

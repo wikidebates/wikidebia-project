@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b655d42dab0fd083df55b3f91b50d93c2a910602bde1e28e4f7cf24c5d387d79",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les raisons pour lesquelles les femmes occupent des types de postes moins bien payés sont elles-mêmes imputables au sexisme",
+    "identity_sha256": "e049c5726e7357477b34d62fb35d34df85bc46ea3faa329aa206acf7c35d6416"
+  },
+  "source_value": "Ce n'est pas par choix ni par déterminisme que beaucoup de femmes prennent des temps partiels et des métiers moins bien payés, c'est notamment parce qu'elles sont conditionnées par notre culture et notre société à prendre en charge les tâches ménagères (donc moins de temps pour travailler).",
+  "source_value_sha256": "1604c5c35de6b4ae5d9de2f7a390b75d45bb942961abc8de0ce51efd5de99d88",
+  "target_value": "It is not by choice or determinism that many women take part-time and less well-paid jobs; it is notably because our culture and society condition them to take responsibility for household tasks, and therefore they have less time to work.",
+  "target_value_sha256": "b4cdf040754f29147b4c5f7fef96dcf3900f26ff8effd6e54c5ba7ac76b18cf2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0136",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e263b5196b31e4bc80d9b3a6307d45f89214525d32b2d3e67598572774f56a20"
+}

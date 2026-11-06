@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d7c825b8c6d3b2a1bfea4ebae59b81fd56c1a2c7274525c347bfa344c769235c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes coupent plus souvent la parole aux femmes que l'inverse",
+    "identity_sha256": "a59075a79b0f5949e485f1664bad078f6d184be23938bfa4020d5a293c960544"
+  },
+  "source_value": "Les hommes coupent plus souvent la parole aux femmes que l'inverse",
+  "source_value_sha256": "f4c5c0fcb991c768fb5022d78aa7541e47b743a420a607a6c33a30fca46333b4",
+  "target_value": "Men interrupt women more often than women interrupt men",
+  "target_value_sha256": "6ac221c829d867b048d152a78f4ecee87f9b6c2af6f48ff1cef7800903219a7e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0282",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d599bd0f260d7653c2ad8d9ea1c10bf17fa177aa5e6c5f4809fa557c79349c35"
+}

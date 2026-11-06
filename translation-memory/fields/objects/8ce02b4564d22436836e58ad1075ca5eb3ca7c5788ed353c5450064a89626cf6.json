@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "08ea0130bbe4a64dce5155c6230d4d49df15b28c6e770496356c148be83f75e1",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Être antiféministe, c'est cautionner les violences structurelles subies par les femmes, donc assez logiquement être leur ennemi",
+    "identity_sha256": "87c91b4632a6c0931edf4cc90274e9b44fdbdd531abaecd288fd77fc5cd91bc9"
+  },
+  "source_value": "Être antiféministe, c'est cautionner les violences structurelles subies par les femmes, donc assez logiquement être leur ennemi",
+  "source_value_sha256": "c6bd76f9c310ce509ead0c9be713f8a315885f66c250fd09d8759995cdaf6f93",
+  "target_value": "Being antifeminist means condoning the structural violence women experience and therefore, quite logically, being their enemy",
+  "target_value_sha256": "fa85f86c921415a45c90717f6e9bfc7b21c2d9f7f5c2d55c3fb4f0927ed2e71c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0170",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8ce02b4564d22436836e58ad1075ca5eb3ca7c5788ed353c5450064a89626cf6"
+}

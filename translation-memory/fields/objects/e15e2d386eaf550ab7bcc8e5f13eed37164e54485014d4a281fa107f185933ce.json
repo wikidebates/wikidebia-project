@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "346e14abde3da9141cd43fe61546f0597908fd06dd7dca998753b3ba00ac3757",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les féministes considèrent certaines femmes comme leurs ennemies, il ne peut donc pas être misandre",
+    "identity_sha256": "5248fee27f6efc3a61f9050259d0a6c37693560213184002b9176d7ad34736c4"
+  },
+  "source_value": "Les féministes considèrent certaines femmes comme leurs ennemies, il ne peut donc pas être misandre",
+  "source_value_sha256": "0938dccf39bf736b99b925de720e06cf8d7aacdca053447e1b1a3d48df159d73",
+  "target_value": "Some women are regarded as enemies by feminists, so feminism can therefore not be misandrist",
+  "target_value_sha256": "bdf0bf7b70e5815aa64aab18ff2e66371ec284915fad144c1665f7f014ef95a6",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0102",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "e15e2d386eaf550ab7bcc8e5f13eed37164e54485014d4a281fa107f185933ce"
+}

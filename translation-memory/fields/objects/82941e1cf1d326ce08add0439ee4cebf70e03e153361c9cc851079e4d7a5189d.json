@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "09ca1e34b372e9cfa89451a94be29816f61986bbeb1b8ed75c89f569af8a8121",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La \"menace woke\" a des similitudes troublantes avec la \"menace bolchevique\" si chère aux nazis",
+    "identity_sha256": "f2be7204dff73dadaac679d67bd30ef6b167db7c6c891fac3ed03a927f56f0c2"
+  },
+  "source_value": "Pour les nazis, les militants communistes (ou qu'il tenaient pour tels) constituaient le mal absolu, car ces derniers étant antinazis, il fallait à tout prix les éliminer. Commença alors une campagne de propagande calomnieuse destinée à les diaboliser et à les traiter comme des boucs émissaires, notamment de l'incendie du Reichstag commandité par les nazis eux-mêmes. L'histoire se répétant, on retrouve les mêmes mécanismes contre les \"woke\". Après-tout, l'\"islamo-gauchisme\" ne rappelle-t-il pas le \"judéo-bolchevisme\" que les nazis brandissaient alors ?",
+  "source_value_sha256": "4fbba99f952b6bc9619973e38d9076e593af2b130bf1294b541afe50a2a4c597",
+  "target_value": "For the Nazis, communist activists (or those they regarded as such) constituted absolute evil because, being anti-Nazi, they had to be eliminated at all costs. A slanderous propaganda campaign then began to demonize them and treat them as scapegoats, particularly for the Reichstag fire commissioned by the Nazis themselves. As history repeats itself, the same mechanisms are used against the “woke.” After all, does “Islamo-leftism” not recall the “Judeo-Bolshevism” brandished by the Nazis at the time?",
+  "target_value_sha256": "67a647149f9c1e194400f82182439a55c6a41658485e0e4cf2bdb4ad135e66de",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0313",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "82941e1cf1d326ce08add0439ee4cebf70e03e153361c9cc851079e4d7a5189d"
+}

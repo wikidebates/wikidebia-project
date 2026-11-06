@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "958cfb522f40aec578aab0c4476bcbf8c9dbe5eb8de526b89810a185558fe098",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Un soutien à l'égalité de genre qu'on conditionne à des critères arbitraires qu'on a soi-même définis n'est pas un vrai soutien",
+    "identity_sha256": "64c0e1ea915ba043e6d95b36ffc7124d0c2bbe3ebc9e2277c84129e6d4f03434"
+  },
+  "source_value": "Un soutien à l'égalité de genre qu'on conditionne à des critères arbitraires qu'on a soi-même définis n'est pas un vrai soutien",
+  "source_value_sha256": "0520a3396ce59a99be163424ab63795d60c9333928495bbd842760fe263fa153",
+  "target_value": "Support for gender equality that is conditional on arbitrary criteria one has defined oneself is not genuine support",
+  "target_value_sha256": "0c756e98108951300dd9470bcedd9febaf8e130b74449b2b697f9b9017d5bcad",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0174",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5f6a259e0718c9c87dd67521c867910f2b69e0e8e8f819de23d45ea70d6fd0ef"
+}

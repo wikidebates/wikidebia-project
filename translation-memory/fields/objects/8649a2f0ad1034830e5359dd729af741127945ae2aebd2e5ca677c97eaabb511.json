@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f1a9b01e465136970356648ddfcc89e920c4aa9a709975055341491fce855f43",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le discours féministe soutient la victimisation des femmes",
+    "identity_sha256": "e8ebc6839a80400024371bb6724d363aef804c77c475ac085351dea450b0e519"
+  },
+  "source_value": "Lorsque l’on se pose comme victime, on pose l’autre comme bourreau. C’est aussi ce qui ce qui passe avec le conflit israélo-palestinien. Je trouve cela très pervers, car je vois bien tout le travail pour montrer que les femmes sont victimes dans une proportion incroyable, que toutes les femmes sont potentiellement victimes des hommes. Ce thème est inlassablement développé. Si l’homme est bourreau, il en découle une véritable incompatibilité. Ce féminisme que je critique n’a absolument pas en vue d’établir des relations améliorées entre hommes et femmes. Ce n’est pas du tout le sujet.",
+  "source_value_sha256": "d7e4bb4ec97f4ced7501004e13366458b50bb42bfb156f7a15ccf56b2d715eb0",
+  "target_value": "When one presents oneself as a victim, one casts the other as the perpetrator. That is also what happens in the Israeli-Palestinian conflict. I find this very perverse, because I can see all the work being done to show that women are victims to an incredible degree, that all women are potential victims of men. This theme is developed endlessly. If men are cast as perpetrators, genuine incompatibility follows. The feminism I criticize has absolutely no intention of establishing better relations between men and women. That is not the issue at all.",
+  "target_value_sha256": "0e6c325122da07f541d13564286cd8e79c76a09729b7358772bfbd7f0bb32ddb",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0017",
+    "target_path": "citations/A0017-C004",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8649a2f0ad1034830e5359dd729af741127945ae2aebd2e5ca677c97eaabb511"
+}

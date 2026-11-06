@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8edb03cc395ce2f0fa12c308e6ea41be8febf93201ffdb30b78729aa7efcc9ae",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'humour oppressif est le terreau des idéologies d'exclusion",
+    "identity_sha256": "1cc4f5ff3ea1e61195f75572a26e0f134a8e9db80cad7549da3279c8cb3d9d89"
+  },
+  "source_value": "En alimentant les stéréotypes sur les femmes, présentées comme des objets dont on peut disposer à loisir, les blagues sexistes les exposeraient davantage aux violences sexuelles. Leur diffusion sur les grands médias n’arrangerait rien. Par ailleurs, si elles influent sur les comportements, c’est probablement aussi le cas d’autres types de blagues, par exemple racistes ou homophobes, qui accentueraient les discriminations. On se souvient de l’animateur Cyril Hanouna ridiculisant les homosexuels sous couvert d’humour dans son émission : « Touche pas à mon poste », et assurant prendre fait et cause pour les gays : non, ces « plaisanteries » ne font pas évoluer positivement les comportements, bien au contraire !",
+  "source_value_sha256": "ea222a26ac1cd0ccec687417a85d1dba757bec1e40eea79168bd7a9cb580a500",
+  "target_value": "By feeding stereotypes that portray women as objects available for anyone’s use, sexist jokes may expose them more to sexual violence. Their dissemination through major media outlets would only make matters worse. Moreover, if they influence behavior, the same is probably true of other kinds of jokes, such as racist or homophobic jokes, which may intensify discrimination. We remember host Cyril Hanouna ridiculing gay people under the guise of humor on his show “Touche pas à mon poste” while claiming to champion their cause: no, these “jokes” do not improve behavior—quite the contrary!",
+  "target_value_sha256": "2e4a7c8a1e9890c074a1994bde4340eb3762edc341ce34244de7a4c9fa8ca452",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0213",
+    "target_path": "citations/A0213-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b5143410f6ec302ae1b1bbc3cd7a8ff6c387ebfdc1e7f666e139b787e872923e"
+}

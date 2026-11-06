@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fe831c623b88b8fcf4dfd5e11e68c6ea9caee9c2c41342313ec4519aaebe6bcb",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'affaire Mila n'intéresse l'extrême droite que parce que les agresseurs sont musulmans",
+    "identity_sha256": "113085dd954ea26eca9b2867d933bf0c875a9b8dd98062db26c61a514e1b741f"
+  },
+  "source_value": "L'affaire Mila n'intéresse l'extrême droite que parce que les agresseurs sont musulmans",
+  "source_value_sha256": "a5f1c02eec8809cbdb821aa22a3b9fa00d91c9dcf36fa24bf688c957690e1f78",
+  "target_value": "The Mila affair interests the far right only because the aggressors are Muslim",
+  "target_value_sha256": "5bb50436f46390c09ef437094829f67bf19413a3d18325eef98ea9facd9a68ef",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0228",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ae25992c22a8dc65f90640c11365e3ef2f8718ab20bf76be88c6a5b67b637414"
+}

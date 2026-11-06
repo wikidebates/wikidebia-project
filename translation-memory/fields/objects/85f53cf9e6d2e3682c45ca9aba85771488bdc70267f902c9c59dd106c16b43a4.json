@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ab042ce63fa96df1ae7688f8d9ab91a381ff7168827e265d75a89455f1fb494b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme bride la liberté de création",
+    "identity_sha256": "a4270aa7fd4184c5cf381b070ebd85b64470920836cc9b9f273349f58e879938"
+  },
+  "source_value": "La création est a-morale, voire anti-morale. Or, en moralisant le langage et les relations hommes/femmes, le féminisme risque souvent d'aboutir à l'autocensure des artistes.",
+  "source_value_sha256": "f7d7fa1660cd54be996359183720a0565597b48c572e25a700f1894107deaa6e",
+  "target_value": "Artistic creation is amoral, even anti-moral. By moralizing language and relations between men and women, feminism therefore often risks causing artists to censor themselves.",
+  "target_value_sha256": "d29e7bb0d0961e2a85f8c1b9c244e7d53e049f2812797a3c3956f766c27a3e87",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0019",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "85f53cf9e6d2e3682c45ca9aba85771488bdc70267f902c9c59dd106c16b43a4"
+}

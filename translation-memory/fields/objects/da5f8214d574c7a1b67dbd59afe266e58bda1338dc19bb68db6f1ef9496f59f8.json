@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f6ef9d0143768f0ac8a05e2e8a7ef7e4790a5307694ca498da1756229f757fe7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes ont des raisons physiologiques d'écarter les jambes",
+    "identity_sha256": "4e80a524818efb1eccb9748ba66c1fc351061fa9da9ac96cd44f3387ac0fb09c"
+  },
+  "source_value": "Les hommes ont des raisons physiologiques d'écarter les jambes",
+  "source_value_sha256": "a42706d37ac9f9640aef324cece2105f3c8638d1a171fceb8351369b5efa0413",
+  "target_value": "Men have physiological reasons for spreading their legs",
+  "target_value_sha256": "4e8c0f4a7007d1cadaac48274b8094ebe36d7a4bc24637b60ee310eb70692d92",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0188",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "da5f8214d574c7a1b67dbd59afe266e58bda1338dc19bb68db6f1ef9496f59f8"
+}

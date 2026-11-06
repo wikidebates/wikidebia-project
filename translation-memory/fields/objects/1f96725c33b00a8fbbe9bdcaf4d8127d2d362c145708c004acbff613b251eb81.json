@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a80407fa80f7108062fb5707e686c0975ec022d1b55885a5f3e7129c250f9bba",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La lutte contre le \"wokisme\" est le paravent de l'extrême droite",
+    "identity_sha256": "12a5d8ed86d87443ddf83cb17baa1cddefca71c089120f45cbe221413a0b4d82"
+  },
+  "source_value": "La lutte contre le \"wokisme\" est le paravent de l'extrême droite",
+  "source_value_sha256": "82054daa4bf61494d71ae7f493bac304809429c567fdf63dc2fae205dab86d7e",
+  "target_value": "The fight against \"wokism\" is a smokescreen for the far right",
+  "target_value_sha256": "66a5d1175bf15e16337b3e0b833fb8f7b0fab5f794edc0b56f00473d4ea1eb61",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0218",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1f96725c33b00a8fbbe9bdcaf4d8127d2d362c145708c004acbff613b251eb81"
+}

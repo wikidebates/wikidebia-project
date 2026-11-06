@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "07b98be749aed5d00feccdd6eea033507909af800083420e61b73cfe589672cf",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme bourgeois peut avoir des positions contraires à l'émancipation des femmes et des hommes",
+    "identity_sha256": "21bdc6ad274114591a4947ff07039a0c55ad9a03d70a045b7aa49bc2781d8844"
+  },
+  "source_value": "Le féminisme bourgeois peut avoir des positions contraires à l'émancipation des femmes et des hommes",
+  "source_value_sha256": "54d0303ef4f05005f8b8e4acf42c1e9ec45f5fe00c7fc90b27c8364f9e28d467",
+  "target_value": "Bourgeois feminism can adopt positions contrary to the emancipation of women and men",
+  "target_value_sha256": "a4733c57fe6654988172590b23baacf88105df02c746a484e873b80794730b61",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0178",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5eefe98dc572a34c1ee750dab5490a22f70b4883cbfabc727342d65730a86999"
+}

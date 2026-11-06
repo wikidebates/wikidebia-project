@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a3ba9c95542aa64da64bc69066e22c8854d03420ea210e0c6fa7a4591a411bb2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'interdiction de la burqa prétend libérer les femmes mais contribue à les emprisonner",
+    "identity_sha256": "7bd2c08755eceeda277f74872192e06981e244ab945f51c98538dc0c43508aa1"
+  },
+  "source_value": "L'interdiction de la burqa prétend libérer les femmes mais contribue à les emprisonner",
+  "source_value_sha256": "58bfaa4a5253165e5e6b5283be161461cfea487a3dc3e1ab68caeade52a12a35",
+  "target_value": "Banning the burqa claims to liberate women but contributes to imprisoning them",
+  "target_value_sha256": "0ce256d5d18e148c487d94406bb4e18da4aa5e78c4c15e859a31d586fff50752",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0237",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0f19634337b5713d68881291178a63adbced5e435e3978418f0efa533c89b783"
+}

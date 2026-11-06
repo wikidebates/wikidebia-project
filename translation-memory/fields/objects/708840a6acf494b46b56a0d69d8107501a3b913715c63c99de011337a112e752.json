@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5740f84c953351045916266ce92e1c586e9c0b495870f94ee436b42ab978c27f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes ne sont pas forcées à faire les tâches ménagères",
+    "identity_sha256": "448f111ab14e93d3374233b009de467b73a3e85bb69ddea06a0fd10e7131ad23"
+  },
+  "source_value": "Les femmes ne sont pas forcées à faire les tâches ménagères",
+  "source_value_sha256": "fdb4081df6db32c69545c3920203e5cd397557383e6332765995b13f896692bf",
+  "target_value": "Women are not forced to perform household tasks",
+  "target_value_sha256": "a8f6a2ee45aa7d48efff7f14fa7db1678125d406f5d4661e6c513d13653f6280",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0144",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "708840a6acf494b46b56a0d69d8107501a3b913715c63c99de011337a112e752"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1339ea968c5c13fcc079e0dec85c6c2ebefc5329f4df25678666a455abad3c04",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes sont victimes de viols",
+    "identity_sha256": "380993009ea17c50db8f1b73dca33e17c25b1555bc82f173702b217ee3db6606"
+  },
+  "source_value": "Les femmes sont victimes de viols",
+  "source_value_sha256": "5c373be5b06c617ee7061a6c7269e884e8818cd9cefd758c627961d3a063389b",
+  "target_value": "Women are victims of rape",
+  "target_value_sha256": "79202b51ac157b26e07553481b2f41ad2d9af0663cb268d813666be81335d2be",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0033",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "97a9b97a59babf4a13447d9f1fdf3e41e59943c31d13eba523bfa5509a92fd70"
+}

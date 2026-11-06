@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1867a1b937a444ea0d4a5743893c4f35c505e1509d6fd2ea3b89b8cfe0313d17",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes subissent du slut-shaming",
+    "identity_sha256": "e4bd67a84b6b5dce567705c5147e333729cc1d470b9a42c07ef4e7383db024dd"
+  },
+  "source_value": "Les femmes subissent du slut-shaming",
+  "source_value_sha256": "0c1ab22281000a478b176363b976e324bcc3488dbeb9aac88b202c37773d6af0",
+  "target_value": "Women experience slut-shaming",
+  "target_value_sha256": "eae2642ebbb5c2483906e7a67b1a78b917ed19793af724e634e4a267c9fb2a67",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0037",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3c8f950597873ab9b81107650d58079ea024c743a50774ecc6376be22414ca5c"
+}

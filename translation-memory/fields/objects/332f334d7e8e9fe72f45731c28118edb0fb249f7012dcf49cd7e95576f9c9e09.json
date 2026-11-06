@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "de26814b5d8d3a44f63997346a57216a71d7f19d8b6dc93c3205fd6a4ed8707f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite est étrangement silencieuse sur les affaires de harcèlement n'impliquant pas ses boucs émissaires préférés",
+    "identity_sha256": "b4654d8655edcf4feb7dffd910b26357a633a7f5188119067c071ae5c775aa54"
+  },
+  "source_value": "L'extrême droite est étrangement silencieuse sur les affaires de harcèlement n'impliquant pas ses boucs émissaires préférés",
+  "source_value_sha256": "573818864ae6e338034743aaf155f454056da8ef5bf7809d477dd8f31b9d5838",
+  "target_value": "The far right is strangely silent about harassment cases that do not involve its favorite scapegoats",
+  "target_value_sha256": "4b46d9a637bf976a6c2d53961b944c5e3696f3defacb1a288628978731df3f1d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0325",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "332f334d7e8e9fe72f45731c28118edb0fb249f7012dcf49cd7e95576f9c9e09"
+}

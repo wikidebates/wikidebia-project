@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9a9ad8019f78611e1ae2ef339d194f22215d498f4aee1f3bfa3d906c8ed083b7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'intérêt apparent des fémonationalistes pour le sort des femmes musulmanes est le faux nez d'un paternalisme néocolonial",
+    "identity_sha256": "a8eaea4af4e5aedd4cad25ba4728d2d6d651e2b2f5ab0f2f97982223529965bf"
+  },
+  "source_value": "Interdire aux femmes de porter le voile \"pour leur bien\", fut-ce contre leur gré et en prenant sa propre culture comme grille de lecture, c'est décréter que le sauveur blanc sait mieux que les principaux concernés ce qui est bon pour eux. Cette infantilisation paternaliste et raciste est née de l'idéologie coloniale et nourrit encore de nos jours le racisme contemporain.",
+  "source_value_sha256": "de754f7b1ce1ae2579c9e9ab35f5965955c702c7485b2cb4c0ecd199315777c0",
+  "target_value": "Banning women from wearing the veil “for their own good,” even against their wishes and while using one’s own culture as the interpretive framework, amounts to declaring that the white savior knows better than the people chiefly concerned what is good for them. This paternalistic and racist infantilization arose from colonial ideology and continues to fuel contemporary racism.",
+  "target_value_sha256": "c4d9172fc57bff77e96c7e22118f9f6564233632cfe16b7ee0d492ba01b0e1d8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0239",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "cca71e8f40e402620885155d0215e606fa8d240ef855562bcb12978048dbdaf9"
+}

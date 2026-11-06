@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3eb6289ec17a7c4003b81cdcd2678078c51879849a785131db66491e7d60e8ac",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La parité ne fait que corriger une situation qui, elle, est injuste",
+    "identity_sha256": "ec410153ab467f268114c5fb22b523fb90ed3f1e638ab50db49335a5c25f2c60"
+  },
+  "source_value": "La parité ne fait que corriger une situation qui, elle, est injuste",
+  "source_value_sha256": "7b6a62f404e0448c64ae8daef5c18796b9bcd6bd4c85797cafdc878f95d1def3",
+  "target_value": "Parity merely corrects a situation that is itself unfair",
+  "target_value_sha256": "1b3c0c0aa0be41888dc492cb7aa856a16944ecd7e0993f0547ce73f18c5fe730",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0146",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8dfc828e0f75ad801aa82a87a6ba0695a449a08e95091dcc6cfd73eb32dce9de"
+}

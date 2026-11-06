@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e84676a998f43dbcf5f754afdb8778a2708f771a391a03c0390c7ded28454cd0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les féministes veulent démonter la croyance selon laquelle l'homme est un agresseur par nature",
+    "identity_sha256": "c792ccd637505b4efb7fb2c5ae160f1706c8fd1c24ce9518f53df1164a6e5043"
+  },
+  "source_value": "Maura Quint […] a un message clair à faire passer.\n\n    « Les violeurs, les agresseurs, et ceux qui les protègent nous disent qu’ils ne sont pas uniques, que tous les hommes agissent comme eux […]\n\n    Ils ont tort. Ils mentent. Ils essaient de normaliser quelque chose d’anormal, car s’ils y parviennent, alors personne ne pourra leur reprocher leurs actes gravissimes.\n\n    Choisir de violer, ce n’est pas normal. Agresser, ça n’est pas obligatoire pour le genre masculin. »\n\nLa puissante conclusion de l’auteure pose des mots sur une vérité qui ne sera jamais assez répétée :\n\n    « Ma vie a été émaillée d’expériences variées. Malheureusement, j’ai été agressée. J’ai aussi été pas agressée. La différence ne se trouvait jamais dans mes vêtements, ma façon de flirter, les quantités d’alcool que je buvais.\n\n    La seule différence, c’était : est-ce que les hommes se sentaient ou non en droit de m’agresser. »\n\nLes hommes ne sont pas des violeurs. DES hommes sont des violeurs. Car la culture du viol leur donne un sentiment de pouvoir, d’impunité, qu’ils exercent pour faire du mal.",
+  "source_value_sha256": "b49e053a87e520b2e5d73575686326fcca4e638974d88b78927e58d9385d311a",
+  "target_value": "Maura Quint [...] has a clear message to convey.\n\n    “Rapists, aggressors and those who protect them tell us that they are not unique, that all men act as they do [...]\n\n    They are wrong. They are lying. They are trying to normalize something abnormal, because if they succeed, no one will be able to reproach them for their extremely serious actions.\n\n    Choosing to rape is not normal. Assault is not compulsory for the male sex.”\n\nThe author’s powerful conclusion puts into words a truth that can never be repeated enough:\n\n    “My life has been marked by varied experiences. Unfortunately, I have been assaulted. I have also not been assaulted. The difference was never in my clothes, the way I flirted or the amounts of alcohol I drank.\n\n    The only difference was whether or not the men felt entitled to assault me.”\n\nMen are not rapists. SOME men are rapists. Because rape culture gives them a sense of power and impunity that they exercise in order to cause harm.",
+  "target_value_sha256": "7db4e521088c19e80f37198933a5dc0712b027ca3a646989e4d2204fff337196",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0090",
+    "target_path": "citations/A0090-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "db4da04abaeecad77fe90ecaca19bfbe07ac704db40e665f2bd2aa009ad17c6f"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "85b291ab06d9c623477c438473b5386a84986a80c89eafcad5f2d2ba77d42318",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Si les hommes ne tiraient pas profit de cette représentation, ils ne dépenseraient pas autant d'énergie à en verrouiller l'accès aux femmes",
+    "identity_sha256": "47272e89b9f78eae58f46024c0a57264566ebc72f76d300e46fa22abc2116f22"
+  },
+  "source_value": "Notamment en attribuant injustement à des hommes des découvertes faites par des femmes, appelé [[frwikipedia:Effet_Matilda|effet Matilda]].",
+  "source_value_sha256": "80d41c923708f4432400ee35ba90db2a80073ee7164afd8c26d672da20f99c94",
+  "target_value": "This includes unfairly attributing discoveries made by women to men, a phenomenon known as the [[enwikipedia:Matilda_effect|Matilda effect]].",
+  "target_value_sha256": "7eb9c98d063c3ed7a012ac2c22fec406b74ddb3b9733de6d6caeac697bd0122b",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0254",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d513aa42d3083a7921b3ccddbd46f193c719e50045b5ffb366895176ed0736c1"
+}

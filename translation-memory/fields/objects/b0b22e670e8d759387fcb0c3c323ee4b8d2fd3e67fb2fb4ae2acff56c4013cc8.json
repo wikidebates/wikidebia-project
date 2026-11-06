@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fe7fcb49298fdeb4890043843d506d4038ff40747d8fd851951a449e814302c0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes subissent des violences conjugales",
+    "identity_sha256": "54d004183a9a206d4c46b78e161a9e01f9fd6820ef3129505cdbce685b677d68"
+  },
+  "source_value": "88% des victimes des crimes et délits commis au sein du couple sont des femmes",
+  "source_value_sha256": "d1c0eaf04c37015e2ce3ea0f9e5512e6f2356ab954b676c22e750f225d31aabe",
+  "target_value": "88% of the victims of crimes and offenses committed within an intimate relationship are women.",
+  "target_value_sha256": "3393b0e0788a49b59cafa4492066eb4b1ffe094a08ff0ff257da821a92c24729",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0042",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b0b22e670e8d759387fcb0c3c323ee4b8d2fd3e67fb2fb4ae2acff56c4013cc8"
+}

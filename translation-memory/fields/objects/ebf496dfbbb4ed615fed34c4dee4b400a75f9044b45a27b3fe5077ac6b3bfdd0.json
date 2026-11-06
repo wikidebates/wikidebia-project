@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "566ced0f9b0f4bff63fbf86d081d2c7cc5bbd5ace818e34ff1c0557d7f2a5327",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les violences faites aux femmes sont déjà une tâche bien trop lourde pour y ajouter les autres types de violences",
+    "identity_sha256": "92a5bc30ccb6c38ea506cd2ad1faa6cebe0fad7547e93d962a4b0b023119b16a"
+  },
+  "source_value": "Les violences faites aux femmes sont déjà une tâche bien trop lourde pour y ajouter les autres types de violences",
+  "source_value_sha256": "fae384e739aee292ee3b2d22ddf12166eca919add064d01f5c0f5be7828764ee",
+  "target_value": "Violence against women is already far too heavy a task to add other forms of violence",
+  "target_value_sha256": "18fe0ffd58e6186d543f7e2bebbcf09f7af6d12f0429431d85b4e5ee2e5c18ab",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0152",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ebf496dfbbb4ed615fed34c4dee4b400a75f9044b45a27b3fe5077ac6b3bfdd0"
+}

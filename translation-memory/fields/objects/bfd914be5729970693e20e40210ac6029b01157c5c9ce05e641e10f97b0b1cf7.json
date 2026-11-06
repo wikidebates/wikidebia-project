@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1d1018d6c446ccdc812ea3eadf2df76c0b9e6e40b8af28c63274e7532d7aec5b",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le mansplaining est un concept qui permet de désigner de manière péjorative le simple fait de contre-argumenter",
+    "identity_sha256": "b1d03b3665a13ee39eb33aaf31facd2ac44acacb85f28151cb130d4f2ed97b8c"
+  },
+  "source_value": "Le mansplaining est un concept qui permet de désigner de manière péjorative le simple fait de contre-argumenter",
+  "source_value_sha256": "7cecdfe2a276d838c33c613ba706c3088e4ca274688caea6e596048c0c995921",
+  "target_value": "Mansplaining is a concept that makes it possible to describe the simple act of counterarguing in pejorative terms",
+  "target_value_sha256": "fc0eb7c276f2bf7aa2daf24c0efd3f6905776c757380479bed2e5e7a9fd346e0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0181",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "bfd914be5729970693e20e40210ac6029b01157c5c9ce05e641e10f97b0b1cf7"
+}

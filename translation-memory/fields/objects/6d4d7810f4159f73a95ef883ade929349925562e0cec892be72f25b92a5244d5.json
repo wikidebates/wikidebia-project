@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0391d9cd44df096b24e38290cf6174aac413da6ba9c5f8a3376e0c23323a252f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les oeuvres continuent d'être produites malgré la lutte antisexiste",
+    "identity_sha256": "c27a660f72f3ec0ad85a68c1dff29a2eec82a7d0c67e798c37054b249d104f77"
+  },
+  "source_value": "Les oeuvres continuent d'être produites malgré la lutte antisexiste",
+  "source_value_sha256": "8f13e900ac62b2436d052673b8701febc0818b21210e042e64a1188f73502902",
+  "target_value": "Works continue to be produced despite the struggle against sexism",
+  "target_value_sha256": "a3fa64cc5f75230db6be5ddbce9d099609922631615a71908598094a32546dd1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0292",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6d4d7810f4159f73a95ef883ade929349925562e0cec892be72f25b92a5244d5"
+}

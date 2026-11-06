@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f9cde2abca4be99691c9ff6bc1a72e085d80d874fdda54c14b085e2a42d7ff8e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "En France, 93 000 femmes déclarent avoir été victimes de viol ou de tentative de viol",
+    "identity_sha256": "dd914201a83107589ddf9e230a6217782a465b163cd378eaa03ebdba3319148d"
+  },
+  "source_value": "En France, 93.000 femmes déclarent avoir été victimes de viol ou tentative de viol",
+  "source_value_sha256": "9285e360cc30e5658da3a0d53ed4bb2da7107d95b80790ced774cd4b336afbe1",
+  "target_value": "In France, 93,000 women report having experienced rape or attempted rape",
+  "target_value_sha256": "cbebf60cd98449f1db68708232b44c9f29a40b5b98818db00c8e28de7cb1c612",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0344",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "88330c8ab1bd5a799d43c043f2d8c995509c964921934d691952b5b34a3d22cc"
+}

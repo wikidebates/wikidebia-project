@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1d3ae7d12a441403caa88dc05de8aeb5746a085b70a65782c12a5c26b13694ff",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les films mettant en scène des animaux provoquent des pics d'adoptions au moment de leur sortie",
+    "identity_sha256": "a1074a2ab2185c0b73d15aa597c252d0bd5c89d4bca5c96a1b35630e4e32c9b1"
+  },
+  "source_value": "Les films mettant en scène des animaux provoquent des pics d'adoptions au moment de leur sortie",
+  "source_value_sha256": "9e4061af4c65f2b8514376b987e9376a21fe83606a37ca76076e19434eaf9177",
+  "target_value": "Films featuring animals cause spikes in adoptions when they are released",
+  "target_value_sha256": "9c6c836cd5998df5df9f71208820c1a2e82a2121a4a6e675a4d1cc5f6bd0c5a7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0303",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "62b7824c222f7df42f42e5091d656891d9da4df81e7344c503e7afd3f2a476b4"
+}

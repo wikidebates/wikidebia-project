@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "bb43b96d8b6c532ecac9923db746b6555105106ec84baa214e5da08321cd1f7c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Un exemple criant : \"l'affaire Mila\"",
+    "identity_sha256": "a4393738ce5da26ffc3bd1c96fd77fdb302cd5a7d0ed7da1e70e77ccc00736b1"
+  },
+  "source_value": "Un exemple criant : \"l'affaire Mila\"",
+  "source_value_sha256": "459625700d8f3c35f1553864e49c5f61d7ccf9470d1c4c00c5f64658ffba2e8f",
+  "target_value": "A striking example: the \"Mila affair\"",
+  "target_value_sha256": "4189e82492d3d4745af94f0e4423b2d653a25d4f3b8c54f84013dba66d06c16f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0130",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8b741e7a7c121ca11ed7010d7b1900f7a18fb6dcd40d36085e719298f1f6f71b"
+}

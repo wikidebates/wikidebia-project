@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "dbc128e29f5eba20c13e4eb07dd9d23ebefbc0be00b720b330e3443d3202f597",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'une des principales mesures en faveur des femmes devrait être d'augmenter les salaires et éradiquer le chômage",
+    "identity_sha256": "5ad783446b59ac4bc1e08351d72d363f214a3836bdad4a67bb257b9c9af803de"
+  },
+  "source_value": "L'une des principales mesures en faveur des femmes devrait être d'augmenter les salaires et éradiquer le chômage",
+  "source_value_sha256": "83bff00016679d3e388d29603beaf1b546f4446e20d03b006b7c14f94c02e687",
+  "target_value": "One of the main measures in support of women should be to raise wages and eradicate unemployment",
+  "target_value_sha256": "df48c7fd15a102289616087a1cf15708d63276f82ef9272c4e6a86fccec361f2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0074",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "fab3127b5949a03fbd4ecee4e705e010660b3fceb0a31a680c949c1b84079efa"
+}

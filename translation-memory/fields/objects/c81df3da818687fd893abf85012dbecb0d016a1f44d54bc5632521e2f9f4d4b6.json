@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1cb3eaf82a43976a8d2c0be9596d685a10469b9af619182de532062cccb5b18c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite reconnaît elle-même à demi-mot qu'elle se fiche bien du sexisme",
+    "identity_sha256": "f7868af91014b9824fd906c2c74a7db754d2ee3374c075d7ae8d5b478d8e2495"
+  },
+  "source_value": "L'extrême droite reconnaît elle-même à demi-mot qu'elle se fiche bien du sexisme",
+  "source_value_sha256": "6c6e12262708a22ecb31162887fdab85027eec1ee6f7c1c08fa3583a2184a1bb",
+  "target_value": "The far right itself tacitly admits that it does not care about sexism",
+  "target_value_sha256": "9ee13361764c8b37b0df69607ab07a0f80783d94f2bf94ca2d211a5c842a6c34",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0242",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c81df3da818687fd893abf85012dbecb0d016a1f44d54bc5632521e2f9f4d4b6"
+}

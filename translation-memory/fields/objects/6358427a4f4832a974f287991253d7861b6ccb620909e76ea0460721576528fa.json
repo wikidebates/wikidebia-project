@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4a481e2c487b010a40a0bc4b6cc92990260b2529a2e657f07237938554b24f03",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les réseaux sociaux font du profit sur la haine et le harcèlement",
+    "identity_sha256": "8f53cb5f02fbaeedf71203734b7330f735ec348e46e69bbd0507ac65c2cd16e8"
+  },
+  "source_value": "Les réseaux sociaux font du profit sur la haine et le harcèlement",
+  "source_value_sha256": "c98c904a6774596a0c334e4062b1708f458b0f468b95161c394f2152c3e46fdc",
+  "target_value": "Social networks profit from hatred and harassment",
+  "target_value_sha256": "e1df4bac156eb560a6e87805456c29556fc9e7135be6eefb2fb61f89de31fd6d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0038",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6358427a4f4832a974f287991253d7861b6ccb620909e76ea0460721576528fa"
+}

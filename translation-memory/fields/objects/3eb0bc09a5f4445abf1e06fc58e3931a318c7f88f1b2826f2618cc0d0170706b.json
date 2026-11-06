@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fb927916e490ce00088dcad4bea7e73a53e303f77bc4e90e8976bdb4fb0c5225",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les réseaux sociaux font du profit sur la haine et le harcèlement",
+    "identity_sha256": "8f53cb5f02fbaeedf71203734b7330f735ec348e46e69bbd0507ac65c2cd16e8"
+  },
+  "source_value": "Le rapport visant à « [https://www.gouvernement.fr/partage/10528-rapport-visant-a-renforcer-la-lutte-contre-le-racisme-et-l-antisemitisme-sur-Internet renforcer la lutte contre le racisme et l’antisémitisme sur Internet] », commandé par le Premier ministre français et publié en septembre 2018, l’explique très bien. Il dénonce « un lien pervers entre propos haineux et impact publicitaire : les personnes tenant des propos choquants ou extrémistes sont celles qui « rapportent » le plus, car l’une d’entre elles peut en provoquer cinquante ou cent autres. Sous cet angle, l’intérêt des réseaux sociaux est d’en héberger le plus possible ». Plus généralement, le rapport regrette la « règle selon laquelle un propos choquant fera davantage de « buzz » qu’un propos consensuel, alimentant de façon plus sûre le modèle économique des plateformes ».",
+  "source_value_sha256": "ac26869a964020facbfd9f4cfc8de949626ac13c2b49cf8f0340cec42aa7646b",
+  "target_value": "The report seeking to “[https://www.gouvernement.fr/partage/10528-rapport-visant-a-renforcer-la-lutte-contre-le-racisme-et-l-antisemitisme-sur-Internet strengthen the fight against racism and antisemitism on the internet],” commissioned by the French prime minister and published in September 2018, explains this very clearly. It condemns “a perverse link between hateful speech and advertising impact: people who make shocking or extremist remarks are those who ‘bring in’ the most, because one such person can provoke fifty or a hundred others. From this perspective, it is in social networks’ interest to host as many of them as possible.” More generally, the report deplores the “rule under which a shocking statement will generate more ‘buzz’ than a consensual one, thereby feeding the platforms’ business model more reliably.”",
+  "target_value_sha256": "fa84ee0c2176c6ecd192506a5d1efc52797011cf9f1125ff8dc433447d42799e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0038",
+    "target_path": "citations/A0038-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3eb0bc09a5f4445abf1e06fc58e3931a318c7f88f1b2826f2618cc0d0170706b"
+}

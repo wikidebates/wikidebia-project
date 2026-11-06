@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a18f313f8edb63c29cd9ced7868ca4b5e3685b97cc0ca9ef8cf7e451afbf0337",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La diffamation est un dommage collatéral du féminisme radical",
+    "identity_sha256": "db29808d72f06f8868aa75314f75e2911897d35e7a9e605e3f69733be6432b70"
+  },
+  "source_value": "Comme tout type de délation, la cousine germaine diffamation n'est jamais loin. En témoigne le récent procès en appel pour diffamation intenté par Eric Brion. Sur le banc des accusés, Sandra Muller, à l'origine du #balancetonporc. Jugée imprudente et en dehors du cadre de harcèlement sexuel, la prévenue s'expose à des dommages et intérêts (15 000 € en première instance) pour son tweet :  \"#balancetonporc !! Toi aussi raconte en donnant le nom et les détails un harcèlent (sic) sexuel que tu as connu dans ton boulot. Je vous attends ». Quelques minutes plus tard, elle postait un second message : « Tu as des gros seins. Tu es mon type de femme. Je vais te faire jouir toute la nuit. Eric Brion ex-patron d'Equidia #balancetonporc\". Dérive ? De nombreux théoriciens voient en twitter notamment une plateforme propice à la diffamation et à la mythomanie.",
+  "source_value_sha256": "f96f007e75960fbd031226e6dbe4b5661d4347b9aa0bf40148b38e68f8e35946",
+  "target_value": "As with any form of denunciation, its close cousin, defamation, is never far away. The recent appeal trial for defamation brought by Éric Brion bears witness to this. In the dock was Sandra Muller, who originated #balancetonporc. Deemed reckless and outside the scope of sexual harassment, the defendant faced damages (€15 000 at first instance) for her tweet: “#balancetonporc! You too, tell your story, giving the name and details of sexual harassmnt (sic) that you experienced at work. I’m waiting for you.” After a few more minutes, she posted a second message: “You have big breasts. You are my type of woman. I’m going to make you come all night. Eric Brion, former head of Equidia #balancetonporc.” An excess? Many theorists see Twitter in particular as a platform conducive to defamation and mythomania.",
+  "target_value_sha256": "f005a5bc6aae21705048adfc0703c6ae1b3007d50048a532ebbbe044e2038851",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0127",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "00a2a0d68894fd42698bd91f37141f831672a4bb3fa4b75359fe9b7b9233af6d"
+}

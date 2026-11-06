@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "cc72d6eb700374153943720a5e9837b62b300e79345c85d42f6c9815ab249dbd",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Parler d'extrême droite quand on critique le wokisme est une opération de diversion",
+    "identity_sha256": "04d9142a1a9a615b4ac6a3fcfd10ca1d262619ffd51dfd68b240655a9d19d081"
+  },
+  "source_value": "Les critiques les plus importantes du wokisme se trouvent dans la gauche universaliste (par ex. Susan Neiman, Stéphanie Roza, ou Caroline Fourest...), les défenseurs de la science, et les défenseurs de l'universalisme. Certains aussi s'inquiètent de a réintroduction de la \"race\" au devant de la scène au nom du wokisme. Il n s'agit donc pas de critiques qu usent d'arguments qu l'on peut qualifier \"'extrême droite\" pour s'en débarrasser commodément.",
+  "source_value_sha256": "df43fa89316861f4d2e441b4901444f62b9f314ff534e85247dd4067616f8359",
+  "target_value": "The most significant criticisms of wokeism come from the universalist left (for example, Susan Neiman, Stéphanie Roza, or Caroline Fourest), defenders of science, and defenders of universalism. Some are also concerned about the reintroduction of “race” to the forefront in the name of wokeism. These are therefore not criticisms that use arguments which can be conveniently dismissed as “far right.”",
+  "target_value_sha256": "b2c11cdbeb234565e96e9018cac61dac401f4fc74fd7008ae6a2acf333419a8b",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0318",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3f61ced7d453064941c4c3f04cfb568647b9f5dad50aba07617513ec8ee11e29"
+}

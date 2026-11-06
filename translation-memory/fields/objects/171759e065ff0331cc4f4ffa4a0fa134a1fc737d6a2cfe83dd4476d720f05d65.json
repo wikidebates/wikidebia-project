@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f91c5091851a933bb590f1355c9fc9be1b5031e8425b3ba4e65d831a4e093b91",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il y a un combat à mener à l'international pour le droit des femmes",
+    "identity_sha256": "976def4d248ef5190cb2a723bd91526b78aecd125afd53db74664526ba7d30a0"
+  },
+  "source_value": "L'égalité de genre est inexistante dans de nombreux pays.",
+  "source_value_sha256": "6c45e0830acbdfbaa1456b366df923e538c66ad578f7a9641887efb990e622c0",
+  "target_value": "Gender equality is nonexistent in many countries.",
+  "target_value_sha256": "7631e43f31fc011363718ef5bdfbab6ad678ae59e34bd7117c4e09b2c7d4a4ba",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0082",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "171759e065ff0331cc4f4ffa4a0fa134a1fc737d6a2cfe83dd4476d720f05d65"
+}

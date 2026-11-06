@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "dcd6cdc1ae20c89ce485e898166e42ebef14ae9da7ec2c5b43c6880326f0ee9d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes sont sous-représentées dans l'ensemble du monde audiovisuel et des médias",
+    "identity_sha256": "21dac30be4bffd285a8ef46460f0afdbc07f1536e43557e14dd8286826cae445"
+  },
+  "source_value": "Les femmes sont sous-représentées dans l'ensemble du monde audiovisuel et des médias",
+  "source_value_sha256": "ff01f24d8fb186d96026af93398db38ac60310ee9f5099f63f8547b4d06e4f91",
+  "target_value": "Women are underrepresented throughout the audiovisual and media world",
+  "target_value_sha256": "5728bdcfff4e5d4e2868a905d1dd14c24cf85f92a9907b7763deae4bd49e6da9",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0029",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "90c78705ae0dea76846d9c2d90a6a5839ff632c34e01a26f3519da5f6ca5d939"
+}

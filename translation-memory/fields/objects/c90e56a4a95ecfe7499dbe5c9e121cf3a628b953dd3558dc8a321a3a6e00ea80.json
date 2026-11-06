@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "bdc0f53f208f583ca54118a89e971f5ba68a316146606a830e2ad3dda68987fb",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il existe des différences hormonales entre femmes et hommes qui impliquent des différences psychologiques",
+    "identity_sha256": "4247e78800899448af9ef774b3ce5cf751cbfb498e65ca8e966d5539e00cf47c"
+  },
+  "source_value": "L’ocytocine est un octopeptide synthétisé dans l’hypothalamus qui permet de stimuler l’émission de lait ainsi que les contractions utérines. […]\nL’ocytocine, en plus de son action sur l’allaitement et les contractions utérines, apparaît comme l’hormone de l’attachement, qui établit les liens protecteurs de la mère avec ses petits. Du point de vue phylogénétique, ces liens, en garantissant la sécurité des petits, favorisent la survie de l’espèce. En outre, l’ocytocine joue un rôle dans les liens sociaux et atténue la phobie sociale. Elle interviendrait dans le sentiment d’appartenance à un groupe et dans la confiance entre les éléments du groupe. Hormone de la confiance, elle augmente l’empathie et la générosité. Du point de vue clinique, les études actuelles sont de durée trop brève pour pouvoir proposer l’ocytocine comme traitement adjuvant dans la phobie sociale ou dans l’autisme, et des études prolongées sont encore nécessaires avant d’envisager son utilisation comme psychotrope.",
+  "source_value_sha256": "b5422a0154a110b31c16a25bae9ce506a6163e207b5ac95dbb977f6d39ac9e75",
+  "target_value": "Oxytocin is an octapeptide synthesized in the hypothalamus that stimulates milk ejection and uterine contractions. [...]\nOxytocin, in addition to its role in breastfeeding and uterine contractions, appears to be the attachment hormone that establishes the mother’s protective bonds with her young. From a phylogenetic perspective, these bonds promote the survival of the species by ensuring the safety of the young. In addition, oxytocin plays a role in social bonds and alleviates social phobia. It may be involved in the sense of belonging to a group and in trust among group members. As the hormone of trust, it increases empathy and generosity. From a clinical perspective, current studies are too short in duration to support proposing oxytocin as an adjunctive treatment for social phobia or autism, and longer studies are still required before considering its use as a psychotropic drug.",
+  "target_value_sha256": "2476f681dc487ec062983ca88c84baf7edf78b85a7ae16be5fbcac8352c0e40b",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0117",
+    "target_path": "citations/A0117-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c90e56a4a95ecfe7499dbe5c9e121cf3a628b953dd3558dc8a321a3a6e00ea80"
+}

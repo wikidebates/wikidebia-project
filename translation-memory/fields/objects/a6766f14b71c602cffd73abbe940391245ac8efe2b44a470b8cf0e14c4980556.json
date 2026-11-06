@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5b35f9b008668c006340afaa7159c2ace0d3e2b4626c28da6e78e98e587961f5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La parité en politique n'est pas encore atteinte",
+    "identity_sha256": "e2a95bf957384cdad5a2ddc9022b94423ebf3e40ab911e0af98ae3c45f1a02b0"
+  },
+  "source_value": "En France\n- Lors des premières élections législatives suivant l’ordonnance du 21 avril 1944, 33 femmes ont été élues députées lors des élections d’octobre 1945, sur 586 député.e.s. Elles représentaient alors 5,6 % des élu-e-s.\n- Lors des élections législatives de 2017, l’Assemblée nationale comprend 38,7% de députées (224 sur 577), pour 26,9% (155 sur 577) en 2012.\n- En octobre 2017, suite aux élections sénatoriales, le Sénat est composé de 31,6% de sénatrices (110 sur 348), contre 25% en 2014 (87 sur 348) et 22,1% en 2011 (77 sur 348).\nSources : HCE, Parité en politique : entre progrès et stagnations, 2015, et HCE, Les chiffres clés de la parité aux élections sénatoriales, 2018",
+  "source_value_sha256": "fe52ba18b878f809d09398207bf8e6cedc6a0e572791ad97416afc8617d4136d",
+  "target_value": "In France\n- In the first legislative elections following the ordinance of 21 April 1944, 33 women were elected as members of parliament in the October 1945 elections, out of 586 members. Women therefore accounted for 5.6% of those elected.\n- Following the 2017 legislative elections, the National Assembly included 38.7% women members (224 out of 577), compared with 26.9% (155 out of 577) in 2012.\n- In October 2017, following the Senate elections, women made up 31.6% of the Senate (110 out of 348), compared with 25% in 2014 (87 out of 348) and 22.1% in 2011 (77 out of 348).\nSources: HCE, Parité en politique : entre progrès et stagnations, 2015, and HCE, Les chiffres clés de la parité aux élections sénatoriales, 2018",
+  "target_value_sha256": "c727280ec6f8d4ca832de16e6029be2f9b5dea4b4523a811839ec773f59f1a8d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0031",
+    "target_path": "citations/A0031-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a6766f14b71c602cffd73abbe940391245ac8efe2b44a470b8cf0e14c4980556"
+}

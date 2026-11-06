@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0306a4a91afff6c1f91911b0af09cb851de46823d56c92d2e7bd871faf943883",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les soi-disant silences médiatiques de la gauche sont des fake news propagées par les médias d'extrême droite",
+    "identity_sha256": "3719a21e51091bfba20615c7ec60583ef24524dfbfb9f3e16d21cc4626c233ff"
+  },
+  "source_value": "Les soi-disant silences médiatiques de la gauche sont des fake news propagées par les médias d'extrême droite",
+  "source_value_sha256": "0ae8a7f95c505fb02b5eccd9ae8d812aee7e4f9f370002542a0183b4ea078b3b",
+  "target_value": "The so-called media silences of the left are fake news spread by far-right media",
+  "target_value_sha256": "a94ac3ce945c2a7e11c3e3c4b362a63f0a252b6805450f3811ac35212c8a34b7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0134",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4b554f5d2d93f79ba1e1dfd6c4b47eb4753b1d612c78ca488fe9a2c7f6914f00"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4a8e40547339acfc61eda195aee34373b613acd2491791e1720e9460262a6417",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'affaire Mila n'intéresse l'extrême droite que parce que les agresseurs sont musulmans",
+    "identity_sha256": "113085dd954ea26eca9b2867d933bf0c875a9b8dd98062db26c61a514e1b741f"
+  },
+  "source_value": "L'extrême droite se fiche éperdument du sort de Milla et ne la défend que parce que ses agresseurs font partie de ses boucs émissaires favoris, il s'agit donc plus d'un opportunisme crasse qu'une réelle préoccupation envers une victime. Si les harceleurs avaient été blancs et/ou fait partie de leur camp, nul doute que l'extrême droite aurait fait pareil que pour tous les harcèlements qui servent ses intérêts: applaudir.",
+  "source_value_sha256": "c13d0c8fc3da453184a78186015da40348945cc609b6fed7100aa242d30261e4",
+  "target_value": "The far right is utterly indifferent to Milla’s fate and defends her only because her aggressors belong to its favorite scapegoats; this is therefore more a matter of sordid opportunism than genuine concern for a victim. If the harassers had been white and/or belonged to its camp, there is no doubt that the far right would have done what it does with all harassment that serves its interests: applaud.",
+  "target_value_sha256": "5e63510bdf4395d7f4ac1a096f23c19c9f3941ca653232b2a662aaf26937dcea",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0228",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d7d7fe81df20aa354115f9d78f56d995ac8aae95c12fb75410199786add12c7d"
+}

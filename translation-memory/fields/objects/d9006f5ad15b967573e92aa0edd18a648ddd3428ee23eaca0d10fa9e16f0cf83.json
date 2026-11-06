@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ff255e0b7a83c2c15503c710a21f4f7e2df082d553154dda15f3a84d2cd8f2fb",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme permet de lutter contre la pollution",
+    "identity_sha256": "d6ddb26e7631c5dcb27f483b3f87670c79d083c8a4472d4227eb7f4c4bd7b8be"
+  },
+  "source_value": "Le féminisme permet de lutter contre la pollution",
+  "source_value_sha256": "826e4c5d13935a80fc65d2d07a714f2ef1db8a6b9dcf13859e6ddf862a2e3a3c",
+  "target_value": "Feminism helps fight pollution",
+  "target_value_sha256": "eb305dbe35cf96d01498d45523052a92ec18e259bdb376e0fc77745014f8525e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0062",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d9006f5ad15b967573e92aa0edd18a648ddd3428ee23eaca0d10fa9e16f0cf83"
+}

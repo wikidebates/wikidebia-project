@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "38168ad530b7043d8fdffcb7039bb1252c0ab177a00a86e6907229bbbc3cac7a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Certains violences visent plus spécifiquement les femmes",
+    "identity_sha256": "2caa00c4161524b28dfe69c424419f242233f51d8ec502f53eba3eb8112af693"
+  },
+  "source_value": "Certains violences visent plus spécifiquement les femmes",
+  "source_value_sha256": "a97c1357a92fae565367df804c2ebd68f9b02a011d51c26d149cff880f218faa",
+  "target_value": "Some forms of violence target women more specifically",
+  "target_value_sha256": "1cb5af86d85a1f31b31c6c644be490534732fb9c633e8545c530bf6b4348fd94",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0150",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4d1f1774cb4b4a7b7cd82ff3f9345ab813478e797d81a3faa9b1489cda949172"
+}

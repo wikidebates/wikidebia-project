@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "20ba25590cc99f0990cd399a5cd2aa50e033977a75a5ef79c29e5d19842ceb4a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il est faux de prétendre que les féministes n'ont pas parlé de l'affaire Mila",
+    "identity_sha256": "e1bcaaafc5cc3f89071e755717e0aef5c825d183c889df3e3ae0bd0e9acf8589"
+  },
+  "source_value": "Il est faux de prétendre que les féministes n'ont pas parlé de l'affaire Mila",
+  "source_value_sha256": "63cde960ae6d34bb989a875075f7b848b65170bbafc5e10688663eeaed4c1701",
+  "target_value": "It is false to claim that feminists did not speak about the Mila affair",
+  "target_value_sha256": "43e2c6822674c02045261b56bc1ffd17a4175f5933ff0690aae08a1657f09ee6",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0229",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a1a5a81bf3ea443acfe46042d6163510d5ad3cd760527fe8868d1f468e12a55b"
+}

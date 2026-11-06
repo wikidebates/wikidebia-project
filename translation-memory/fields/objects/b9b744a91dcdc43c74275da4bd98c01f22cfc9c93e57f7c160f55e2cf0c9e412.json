@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "aa31cb0cdbce9504f2dba0cfbfac5fbdc97f7977370790d4e4a8c22ee1573916",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes peuvent resserrer leurs jambes si on leur demande",
+    "identity_sha256": "8f1884d75aebf80dbdb1faa59dc53ad314b4e5308e2ca19ab07b7edf686cc95a"
+  },
+  "source_value": "Les hommes peuvent resserrer leurs jambe si on leur demande",
+  "source_value_sha256": "80dc82e76987bc0d4e7a174d8f603e8d0fd05744d7d0225f98e38e669ab08c02",
+  "target_value": "Men can bring their legs closer together if asked",
+  "target_value_sha256": "e279bcd6d833aad6c40cacaed2d3da533f84f8a187f3004bfb26a22ca9277913",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0189",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b9b744a91dcdc43c74275da4bd98c01f22cfc9c93e57f7c160f55e2cf0c9e412"
+}

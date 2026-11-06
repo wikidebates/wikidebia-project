@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "bdab1b06b3e7b046d2e95587d1c6a44a7e4394ba6144e98d8d8ee87f76c955ca",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les idées sexistes se portent bien",
+    "identity_sha256": "58d8ef78145e6296dd1c7fea9690ade5279ec770ffdd5894ec7c30bc87ae13de"
+  },
+  "source_value": "Le sexisme est bel et bien toujours (très) présent dans la société française, comme le démontre le dernier rapport du Haut Conseil à l’Égalité (HCE) paru ce lundi 22 janvier. Selon ce sixième rapport, les idées machistes ne cessent de grimper, notamment chez les jeunes de moins de 35 ans, hommes comme femmes.",
+  "source_value_sha256": "3a3f6ba99222b12490adfa5c963ce0cc4db95e42cf3017ff15fe1fe7fff70cdb",
+  "target_value": "Sexism is indeed still very much present in French society, as shown by the latest report from the High Council for Equality (HCE), published on Monday, January 22. According to this sixth report, sexist attitudes continue to gain ground, particularly among people under 35, both men and women.",
+  "target_value_sha256": "3099dcbc608a465c095729544558862ab1013ae7845d3c7e89dcceb6e3d5bddd",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0011",
+    "target_path": "citations/A0011-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "69fb9d1ca59bf9a2c2949674dfe777f9f82a0c7ba62794eb730337023e3ca908"
+}

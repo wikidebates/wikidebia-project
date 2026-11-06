@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "cc5b3a623876899bc39ee84a65e9f4d1c693fe463687748a9336ffaf5db23ac6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes devront se battre pour obtenir leur émancipation",
+    "identity_sha256": "a2074f2e16cd9fdf473d728c6777ee54c5a8672bbd695a5c3ab06caa2e6797f9"
+  },
+  "source_value": "Les femmes devront se battre pour obtenir leur émancipation",
+  "source_value_sha256": "fa96ca277d00750b13e7d880e0210bfd02cc2ac566a92125fdbad2b2a0373e77",
+  "target_value": "Women will have to fight to achieve their emancipation",
+  "target_value_sha256": "bf87573271622c6f7498669d21fe732c63640ecdc03349a217e7771c857a45a2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0009",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8b2135091bc425cc43270ddfe836693f84d33730aba057f10b8e490c04a92de1"
+}

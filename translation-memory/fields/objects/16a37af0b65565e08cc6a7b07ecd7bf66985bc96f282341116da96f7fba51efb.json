@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c7ffa4dc4ab98ea2234e747a958be84adc2b0622c9b75b585916a89847331c26",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les féminicides constituent une forme extrême de violence faite aux femmes",
+    "identity_sha256": "b90c0d0b60ae427f54fb13cbe162048f23bd1faa1147c5a7a5d3850048ce102e"
+  },
+  "source_value": "Féminicides",
+  "source_value_sha256": "a65f342c03e0f39f1e633f7cef4e744b106698b7187a631779e17a035d16b1ff",
+  "target_value": "Femicides",
+  "target_value_sha256": "5f6f59013e667d4cea3cf9848a789e704e628abb8cb102a8a640c62c36996ef8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0035",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "16a37af0b65565e08cc6a7b07ecd7bf66985bc96f282341116da96f7fba51efb"
+}

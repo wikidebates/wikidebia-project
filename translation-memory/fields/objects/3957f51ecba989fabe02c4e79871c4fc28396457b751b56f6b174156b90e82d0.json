@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d447cfd69c721ccdfbf420cc891affe0e22280b27722c2e78e252176a6a5d142",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Si Trump avait été réellement évincé pour des raisons idéologiques, son exclusion serait survenue beaucoup plus tôt",
+    "identity_sha256": "4773dc5fb8f2eb899fef7d68f8653d9e09bcf68999bbae83f183a0ad3a493fd0"
+  },
+  "source_value": "Trump n'a jamais fait mystère du caractère très droitard de son idéologie, et pourtant, il a pu la diffuser dans une impunité totale pendant de nombreuses années. Si il s'est fait finalement bannir, c'est parce que les réseaux sociaux craignaient d'être associés à l'assaut du capitole qu'il a commandité. Sans ce dernier, il est probable qu'il n'aurait jamais été exclu.",
+  "source_value_sha256": "5ab0d4579321db36349cb1d1c156d378060f65093e1a86ff205424b2a5b358fe",
+  "target_value": "Trump never concealed the very right-wing nature of his ideology, yet he was able to spread it with total impunity for many years. If he was eventually banned, it was because social networks feared being associated with the assault on the Capitol that he instigated. Without that assault, he probably would never have been excluded.",
+  "target_value_sha256": "9a74531d64a74dfee5f57aa5159fbc78b076c8a5b47432bdb2da10a4e34fcd97",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0157",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3957f51ecba989fabe02c4e79871c4fc28396457b751b56f6b174156b90e82d0"
+}

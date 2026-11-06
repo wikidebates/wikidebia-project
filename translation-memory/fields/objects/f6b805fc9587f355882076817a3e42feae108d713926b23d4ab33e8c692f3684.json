@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "35e184d3a98c07a936329a3b930e943c28494d65c1efe18c1344becfee158d63",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le qualificatif de \"woke\" sert à diaboliser les concepts progressistes sans avoir à argumenter",
+    "identity_sha256": "bae338143751b08f1633eac8ae029ce32538f9630a79aa0fa38957a98fb90788"
+  },
+  "source_value": "Le qualificatif de \"woke\" sert à diaboliser les concepts progressistes sans avoir à argumenter",
+  "source_value_sha256": "474e6f3d91805b899b87aacac075cb9a382df7f1f9b00040a07d9eaa79c5f611",
+  "target_value": "The label \"woke\" is used to demonize progressive concepts without having to argue",
+  "target_value_sha256": "24c2a7a72092872a41db3727815650ba4306761140801731a4856a4e2bcd09cd",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0308",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "f6b805fc9587f355882076817a3e42feae108d713926b23d4ab33e8c692f3684"
+}

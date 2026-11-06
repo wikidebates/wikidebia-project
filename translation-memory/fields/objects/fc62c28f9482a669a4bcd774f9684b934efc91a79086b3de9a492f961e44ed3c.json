@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c8da93ee37d396f91059961d8ec799117e827db1471a7074945536849fafa355",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Propos sexistes omniprésents dans l'espace médiatique",
+    "identity_sha256": "39fa2a5f50aecd5b2e536a331cdbc52c7d7571167e89c4cb8eff752bf996bc51"
+  },
+  "source_value": "Propos sexistes omniprésents dans l'espace médiatique",
+  "source_value_sha256": "44fb3be297cc3feb2b9f7c050f12ca1ffafa7cb59b92ca296a0a6e7b06d47685",
+  "target_value": "Sexist remarks are ubiquitous in the media",
+  "target_value_sha256": "f698229d0d8507a99b8a24a74ce5a1c35c9df5c0b6d2c37d66ddce18d1e01e8d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0053",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "fc62c28f9482a669a4bcd774f9684b934efc91a79086b3de9a492f961e44ed3c"
+}

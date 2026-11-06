@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "6cb731fde914af92994a93e5493f5301162ebc56c004848ced69384b94283388",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme peut nous libérer des coûts financiers de la masculinité toxique",
+    "identity_sha256": "cd8c0e88956f6c72418bea25fb0bb9ee2ab0588c99376a5024e2e088fbf1204d"
+  },
+  "source_value": "En France, les hommes sont responsables de l’écrasante majorité des comportements asociaux : ils représentent 84 % des auteurs d’accidents de la route mortels, 92 % des élèves sanctionnés pour des actes relevant d’atteinte aux biens et aux personnes au collège, 90 % des personnes condamnées par la justice, 86 % des mis en cause pour meurtre, 97 % des auteurs de violences sexuelles, etc.\n\nLa liste semble inépuisable. Elle a surtout un coût. Un coût direct pour l’État, qui dépense chaque année des milliards d’eu­ros en services de police, judiciaires, médicaux et éducatifs pour y faire face. Et un coût indirect pour la société, qui doit répondre aux souffrances physiques et psychologiques des victimes, et subit des pertes de productivité et des destructions de biens. Pourtant, cette réalité est presque toujours passée sous silence.\n\nLucile Peytavin s’interroge sur les raisons de cette surrepré­sentation des hommes comme principaux auteurs des violences et des comportements à risque, et tente d’estimer les conséquences financières de l’ensemble de ces préjudices pour l’État et donc pour chaque citoyenne et citoyen. Quel est le coût, en France, en 2020, des conséquences de la virilité érigée en idéologie culturelle dominante ?",
+  "source_value_sha256": "13fefab547ad01ca5052b37cd77e1b9c614613c78412bdad4649fee42a8a76bf",
+  "target_value": "In France, men are responsible for the overwhelming majority of antisocial behavior: they account for 84% of those responsible for fatal road accidents, 92% of students disciplined for acts involving harm to property or people in middle school, 90% of people convicted by the courts, 86% of suspects in murder cases, 97% of perpetrators of sexual violence, and so on.\n\nThe list seems endless. Above all, it comes at a cost: a direct cost to the state, which spends billions of euros each year on police, judicial, medical and educational services to deal with it, and an indirect cost to society, which must respond to victims’ physical and psychological suffering and bears losses in productivity and the destruction of property. Yet this reality is almost always passed over in silence.\n\nLucile Peytavin examines the reasons for this overrepresentation of men as the main perpetrators of violence and risky behavior and attempts to estimate the financial consequences of all this harm for the state and therefore for every citizen. What, in France in 2020, is the cost of the consequences of virility elevated to the status of a dominant cultural ideology?",
+  "target_value_sha256": "9a49411339b4ffce0c59f9cf0c7cb504f963c8d3ca41b537a9977ddc04bc6779",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0066",
+    "target_path": "citations/A0066-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "333da1808fc9e8d3c0629caea4714dff5d009f61649e6698887db038f93c640d"
+}

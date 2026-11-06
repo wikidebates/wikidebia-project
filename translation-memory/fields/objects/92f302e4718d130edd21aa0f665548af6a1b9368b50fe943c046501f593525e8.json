@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b7168ef66e5966d0e68049d647ba55573953dab6f073dc2572a1a56e12ccfb3c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes aussi peuvent se voir refuser leur plainte",
+    "identity_sha256": "7d896c858524ad987f57e5fb206b2f9936806b569617f36156716742a5ee7126"
+  },
+  "source_value": "Les hommes aussi peuvent se voir refuser leur plainte",
+  "source_value_sha256": "883c580e450e5cbaebf664d643adf16e52ad56d01376148ac50e4c6f76d34149",
+  "target_value": "Men too can have their complaints refused",
+  "target_value_sha256": "9ab4f04691a0e5265028b634625aac35245e8e1372d4bc863e8c285a07265404",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0048",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "92f302e4718d130edd21aa0f665548af6a1b9368b50fe943c046501f593525e8"
+}

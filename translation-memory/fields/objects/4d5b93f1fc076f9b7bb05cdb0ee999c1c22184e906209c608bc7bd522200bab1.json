@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "87d339a82c2eafcf3eaf79dd66d52eaa5ccaff36f6815deddad1729a17d0166f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'homme coupe encore trop souvent la parole à la femme (Manterrupting)",
+    "identity_sha256": "4c8f61c6460d67fc53b35bb9825f56f79a5a22a7bc2480c71fa74dc5b003c11f"
+  },
+  "source_value": "Un autre mot \"valise\" est arrivé sur le marché médiatique féministe en 2015: le manterrupting (\"man\" pour homme et \"-terrupting\" tiré de l'anglais \"interrupting\",interrompre) ou comment les hommes interrompent les femmes, leur coupe la parole, la plupart du temps pour les corriger, les contrer et monopoliser le discours. Jessica Benett l'emploie dans son essai \"Feminist Fight Club: An Office Survival Manual for a Sexist Workplace\" (Le fight Club féministe ouLe Manuel de Survie du bureau dans un lieu de travail sexiste). L'autrice le définit comme \"l'interruption non nécessaire d'une femme par un homme\". \nCertains politiciens comme Donald Trump sont passés maitres en la matière, coupant la parole à Hillary Clinton 51 fois en 2016 lors du débat présidentielcontre 17. Les relents d'une culture patriarcale ? L'arrivée des femmes en politique comme aux postes de pouvoir étant plus récente, elles peuvent donc avoir plus de difficulté à se légitimer.\nPour la politiste Frédérique Matonti, la réponse tient en un mot : la socialisation. \n''Les études sur l’éducation montrent que les parents, sans en avoir conscience, encouragent les filles au retrait plutôt qu’à la mise en avant, explique-t-elle. Les garçons ont souvent le droit de faire du bruit alors que les filles doivent rester discrètes et baisser la voix. Petit à petit, les enfants ­intériorisent ces valeurs masculines et féminines : les garçons apprennent à prendre la parole, à dire qu’ils n’ont pas peur et à faire face, les filles à écouter et à faire attention aux autres.''",
+  "source_value_sha256": "ae5df17ab2c4c0678e941e8cae9cb98a535c4c23961e6b093bfaafa5a5f0bf8d",
+  "target_value": "Another portmanteau entered the feminist media market in 2015: manterrupting (“man” and “-terrupting,” taken from the English word “interrupting”), describing how men interrupt women and cut them off, most often to correct or contradict them and monopolize the conversation. Jessica Bennett uses it in her book Feminist Fight Club: An Office Survival Manual for a Sexist Workplace. The author defines it as “the unnecessary interruption of a woman by a man.”\nSome politicians, such as Donald Trump, have become masters of the practice: he interrupted Hillary Clinton 51 times in 2016 during the presidential debate, compared with 17 interruptions in the other direction. Remnants of a patriarchal culture? Because women entered politics and positions of power more recently, they may therefore have greater difficulty establishing their legitimacy.\nFor political scientist Frédérique Matonti, the answer comes down to one word: socialization.\nStudies of education show that parents, without realizing it, encourage girls to hold back rather than put themselves forward, she explains. Boys are often allowed to make noise, whereas girls must remain discreet and lower their voices. Gradually, children internalize these masculine and feminine values: boys learn to speak up, say they are not afraid and stand their ground, while girls learn to listen and pay attention to others.",
+  "target_value_sha256": "890149d077277932824a8f3faba53f6de7a36d7643e4889365e4cac7dd5a4d42",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0069",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4d5b93f1fc076f9b7bb05cdb0ee999c1c22184e906209c608bc7bd522200bab1"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "d9a1105da99953c7813c015d99892b2eda76a022c9cd362539316359debb85a4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Que des oeuvres soient décriées par les féministes ne les empêche pas d'exister ni même d'avoir du succès",
+    "identity_sha256": "5aa80dd60c882cdf3cf788544af52e255e8183fdd186f0210c51c90e5f39867a"
+  },
+  "source_value": "Que des oeuvres soient décriées par les féministes ne les empêche pas d'exister ni même d'avoir du succès",
+  "source_value_sha256": "bbb31497c1d9fb7d94b8acd9ca3a73487aeb8faa9ba05dfd8d6c621317bb742e",
+  "target_value": "The fact that works are criticized by feminists does not prevent them from existing or even succeeding",
+  "target_value_sha256": "af4099096cb6789f343147efa0e15149ced71f6809b9f8ba5663ba82a2eaeb80",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0114",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "683cbe49f609fc2bf5b90266ed2078523bcf0eed56bccee4a38b4eef642a0fd3"
+}

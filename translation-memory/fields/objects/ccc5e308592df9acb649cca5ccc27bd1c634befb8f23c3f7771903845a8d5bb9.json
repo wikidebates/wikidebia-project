@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "987979ba80e5d18804e533046c494b66d94983b530ca1812cf168d096e063e68",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le burn-out militant vient avant tout d'une négligence de sa propre santé mentale",
+    "identity_sha256": "86ccea0cdc2e70f3641f075b2d3ac77c64f5d16cd6b50ee46b2afdf3ea111de8"
+  },
+  "source_value": "Le burn-out militant vient avant tout d'une négligence de sa propre santé mentale",
+  "source_value_sha256": "2dc6d638f83554ce21793749493ceabb133d8ed931a04f6791ed0ad9bca6bc92",
+  "target_value": "Activist burnout stems above all from neglecting one's own mental health",
+  "target_value_sha256": "35d792b1952d8c00573ecdb978a2910cd7fdbcce654b12231f0e03f611aad5c3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0093",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ccc5e308592df9acb649cca5ccc27bd1c634befb8f23c3f7771903845a8d5bb9"
+}

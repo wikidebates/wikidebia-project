@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1026ed5c711fc61a2782191cc541166f3e27882a4602b690a77ec1b086ef4a7c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les gens qui dénoncent la cancel culture sont les idiots utiles de l'extrême droite",
+    "identity_sha256": "3be9f58cbb7d307b3ce7b30f8566842d8f0c1fd0e5b69ca8dd8997d15c6051c8"
+  },
+  "source_value": "On ne hurle à la cancel culture que pour défendre des personnes dont les actes ou les propos servent les intérêts de l'extrême droite, alors que les militants progressistes ou issus des minorités se font canceller à tour de bras dans l'indifférence générale.",
+  "source_value_sha256": "b4973ae7a7cbc26f1c31ff4bb81507d9f841e32932a5aac687b2cfe0b02df49b",
+  "target_value": "People cry “cancel culture” only to defend those whose acts or statements serve far-right interests, while progressive or minority activists are canceled repeatedly amid general indifference.",
+  "target_value_sha256": "314493915a640da664d74ee9810102e53ef179385eb02527c9c70ab6bb297c36",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0215",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c3ea4bef25d5b7ddaeabf7ae6539e49b8bf3f8016a1306af97aeb30a06c4776f"
+}

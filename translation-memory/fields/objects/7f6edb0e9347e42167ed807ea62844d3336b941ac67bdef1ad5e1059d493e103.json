@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "dea9c41af1760140a220e39d8e5bf4300751302ecc23ad567862c39d1e58ebaa",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Si Trump avait été réellement évincé pour des raisons idéologiques, son exclusion serait survenue beaucoup plus tôt",
+    "identity_sha256": "4773dc5fb8f2eb899fef7d68f8653d9e09bcf68999bbae83f183a0ad3a493fd0"
+  },
+  "source_value": "Si Trump avait été réellement évincé pour des raisons idéologiques, son exclusion serait survenue beaucoup plus tôt",
+  "source_value_sha256": "73c59e6fd4be32a1b03b68a41410ff81c231e73177c3aad39841de456443c00b",
+  "target_value": "If Trump had truly been removed for ideological reasons, his exclusion would have occurred many years earlier, with much less delay",
+  "target_value_sha256": "843f01d6b9281228f433f997cf2e889e2bb9a4cbad645eb45dd44d2a3a7503d0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0157",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "7f6edb0e9347e42167ed807ea62844d3336b941ac67bdef1ad5e1059d493e103"
+}

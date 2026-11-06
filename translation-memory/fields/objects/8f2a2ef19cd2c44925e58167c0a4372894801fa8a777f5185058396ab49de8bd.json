@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4316b39552d3cfa7b63f9b8328ef72420b04918274a8f4dec18544a4aecf7e95",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Si Trump avait été réellement évincé pour des raisons idéologiques, son exclusion serait survenue beaucoup plus tôt",
+    "identity_sha256": "4773dc5fb8f2eb899fef7d68f8653d9e09bcf68999bbae83f183a0ad3a493fd0"
+  },
+  "source_value": "Si Twitter a attendu si longtemps pour s'attaquer aux tweets de Trump, c'est parce que son objectif principal est de générer des profits, pas de promouvoir la liberté d'expression.",
+  "source_value_sha256": "697da29aa0478c040b752b0856aaf744779013fd9214432941faac0e8028c471",
+  "target_value": "If Twitter waited so long to address Trump’s tweets, it is because its primary objective is to generate profits, not to promote freedom of expression.",
+  "target_value_sha256": "dc30eb9dbbe96a9f9cf74a9d9a432de8733b6b499c9d0c9c7f813935b6de2037",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0157",
+    "target_path": "citations/A0157-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8f2a2ef19cd2c44925e58167c0a4372894801fa8a777f5185058396ab49de8bd"
+}

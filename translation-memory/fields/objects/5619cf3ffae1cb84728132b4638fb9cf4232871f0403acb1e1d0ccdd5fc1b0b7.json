@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1cb8d88088aab2300ee9177851624f040c07865da88cbf0a3eb48afb6dc35c22",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "De nombreuses maladies dites féminines souffrent d'errance médicale",
+    "identity_sha256": "c87ba77de41d485c281804e7ebf43c07d094ef6ae6aa3d751dd96518df9d5c29"
+  },
+  "source_value": "De nombreuses maladies dites féminines souffrent d'errance médicale",
+  "source_value_sha256": "2fd3ec725bda448ef664fcefcd96d6fd33df92bda0c68f9606e40fe97d5ede69",
+  "target_value": "Many so-called female conditions are plagued by diagnostic delays",
+  "target_value_sha256": "9a742919977445167d9c28292234429909dd7cd952952a7e27e476a7b3b0b02a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0055",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5619cf3ffae1cb84728132b4638fb9cf4232871f0403acb1e1d0ccdd5fc1b0b7"
+}

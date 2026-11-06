@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b56b6f21763294087395035aa0b8a7b03d7137fe81f408faf03d9586170415fc",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "On ignore l'influence des contenus sur les récepteurs, donc il est impossible d'interdire tel ou tel contenu",
+    "identity_sha256": "cee30bae316953411c07beb6efe215f7c7f21cc48b4180de4a21a7280f1b092c"
+  },
+  "source_value": "On ignore l'influence des contenus sur les récepteurs, donc il est impossible d'interdire tel ou tel contenu",
+  "source_value_sha256": "846a17b380ca9bcd1a7647c780592d8a5c187346c4ff6a6347915d5bc06f4ac3",
+  "target_value": "We do not know how content influences audiences, so it is impossible to ban any particular content",
+  "target_value_sha256": "d9e04d648b45144d98b9d525b111bab6477267b0ee3c59398a36d2e4aa178e5e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0297",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "810cfc6c46855a762ff623ef9cf67c52252fdecd81aa47db4d9b450d0ca0dea4"
+}

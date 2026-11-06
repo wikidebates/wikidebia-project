@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "142ee1297308de6b5bb4cd418773fe9101c4f1001161d03383f13ec97837aee0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Limiter la liberté d'expression, c'est refuser de faire confiance en la raison",
+    "identity_sha256": "9fe9f5b8d5facc2c784ab64ce057fd3ee42ee3602630fe3a961ff40015633b34"
+  },
+  "source_value": "Limiter la liberté d'expression, c'est refuser de faire confiance en la raison",
+  "source_value_sha256": "bf4d40ece0fbfac5ae553cc35fb14b4406f3d624085192ddce9de9c7d533c2aa",
+  "target_value": "Limiting freedom of expression means refusing to trust reason",
+  "target_value_sha256": "8783bfe80f52e504950726563d589211611d275be313710ac2a10d8b0be6ab2a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0299",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "770e839e4409286a7311723ecd761ca766497fabf42ae3ea4d1f235eaf2b6e8f"
+}

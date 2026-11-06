@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "275da1f2896b51f37d5debd5d7a93c8b2ec94c605825b365ec0dab1db0b329e2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les lois garantissant l'égalité de droits ne sont pas toujours respectées",
+    "identity_sha256": "114073046fa8be1448b8524c992129c731954fcd77191a43c5103f0ae9005887"
+  },
+  "source_value": "Les lois sur l'égalité salariale et le viol sont très rarement respectées.",
+  "source_value_sha256": "69bf3945f0b5f7a869a19b798fce80f3b49f1ba6c9017f6dcab4a01b4df88ab4",
+  "target_value": "Laws on equal pay and rape are very rarely respected.",
+  "target_value_sha256": "2c23f6572c2a1a91ff1b27510d3dad1496fdc0dd77018ce03dd6d5cd3c523720",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0085",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0204287e3eb74fab19e70766aa12475af08e01066e12ffd197dc645148cb58db"
+}

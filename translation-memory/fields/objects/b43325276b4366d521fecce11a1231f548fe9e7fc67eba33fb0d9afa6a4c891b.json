@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f67eaa28eed32578be0eaeaf91716a109d1b5b16f1abd9678a4ed05ab057f3bb",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La misandrie n'est pas l'équivalent de la misogynie",
+    "identity_sha256": "bfba6777316858915ae29c48b48fa789bf726a4becee7f711c2712b5ad7b6686"
+  },
+  "source_value": "De fait, '''l’accusation de misandrie sert souvent à détourner l’attention des inégalités réelles et à invalider les revendications féministes.''' Comme le souligne l’écrivaine féministe Pauline Harmange, [https://www.radiofrance.fr/franceinter/podcasts/zoom-zoom-zen/zoom-zoom-zen-du-vendredi-08-mars-2024-6542220 '''la critique des comportements masculins oppressifs est trop souvent assimilée à une haine des hommes en tant que groupe, ce qui permet d’inverser les rôles et de présenter les hommes comme des victimes d’une oppression inexistante'''].\n\n[https://mrmondialisation.org/misogynie-en-ligne-terrain-dune-culture-du-viol-2-0/ '''Mais contrairement à la misogynie, la misandrie ne s’appuie sur aucune structure systémique de pouvoir''']. '''Elle ne se traduit pas par des violences institutionnalisées, des discriminations légales ou des inégalités socio-économiques.''' Là où la misogynie engendre des violences physiques, sexuelles et psychologiques massives envers les femmes, la misandrie se manifeste souvent par un évitement ou une méfiance envers les hommes, en réaction à des expériences traumatiques individuelles.",
+  "source_value_sha256": "134b70e3255c6b3638744b28a343ce677bc05f2c2e65eaae3b4ad33948ce8c90",
+  "target_value": "In fact, '''the accusation of misandry often serves to divert attention from real inequalities and invalidate feminist demands.''' As feminist writer Pauline Harmange points out, [https://www.radiofrance.fr/franceinter/podcasts/zoom-zoom-zen/zoom-zoom-zen-du-vendredi-08-mars-2024-6542220 '''criticism of oppressive male behavior is too often equated with hatred of men as a group, making it possible to reverse the roles and present men as victims of a nonexistent oppression'''].\n\n[https://mrmondialisation.org/misogynie-en-ligne-terrain-dune-culture-du-viol-2-0/ '''But unlike misogyny, misandry is not supported by any systemic structure of power''']. '''It does not result in institutionalized violence, legal discrimination or socioeconomic inequality.''' Whereas misogyny generates massive physical, sexual and psychological violence against women, misandry often manifests itself as avoidance or distrust of men in response to individual traumatic experiences.",
+  "target_value_sha256": "f1986679b961aea5aec4463e2a09b225684117c2aa7577849c46ad883075fa8e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0103",
+    "target_path": "citations/A0103-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b43325276b4366d521fecce11a1231f548fe9e7fc67eba33fb0d9afa6a4c891b"
+}

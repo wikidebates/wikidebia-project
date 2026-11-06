@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "84c7c64156a8fa35063365951715cc80bb0951f963b62bd8b27ccb466f96c572",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il faut revenir à un féminisme universaliste, qui ne soit pas dominé par les idées intersectionnelles et \"wokes\"",
+    "identity_sha256": "c8ad69e531d93698dd512e7e6d9c3b9e6214e56a641e13289f1ecca951c61e7e"
+  },
+  "source_value": "Marlène Schiappa […] en réponse à la question narquoise de Sonia Mabrouk sur Europe 1 le jeudi 6 février, ne trouve rien de mieux pour montrer que les féministes n'ont pas été absentes du débat, que de citer… Rokhaya Diallo, qui même si elle a pu dire chez Pujadas que la défense de Mila était l'affaire de toutes les féministes, est une adversaire de l'universalisme des droits prôné par les féministes d'antan (donc nous les signataires), et chantre et relais de l'intersectionnalité, de la défense des personnes \"racisées\" et autres victimes de la volonté de suprématie des blancs au détriment des \"colorés\", théories venant tout droit des \"études de genre\" anglo-saxonnes et… blanches.",
+  "source_value_sha256": "2061a7a31233ed52db048382196828fed8ed124905d44857262f4f90c49d937d",
+  "target_value": "Marlène Schiappa [...], responding to Sonia Mabrouk’s mocking question on Europe 1 on Thursday 6 February, can find nothing better to show that feminists were not absent from the debate than to cite... Rokhaya Diallo, who, even though she may have said on Pujadas’s program that defending Mila was the responsibility of all feminists, is an opponent of the universalism of rights advocated by feminists of the past (therefore by us, the signatories), and a champion and conduit of intersectionality, the defense of “racialized” people and other victims of white people’s desire for supremacy over “people of color”—theories coming directly from Anglo-Saxon and... white “gender studies.”",
+  "target_value_sha256": "b6961f9e82070b8fa17463b0214fa8540581565ff46d380e73e26b37a5c71790",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0132",
+    "target_path": "citations/A0132-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "769249d46d62b6d341d5bc8a46bf792bc1df6db5bd02508e59adcc72e5848ca3"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "908148c6ee6fecfc46cb6b81ad3690d0c293070479bab10f8e2f723a4b7a0a92",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les crises économiques s'accompagnent systématiquement d'une montée des idéologies réactionnaires",
+    "identity_sha256": "151aa111d74633a5864506ac95ffd9b988a455780b88ad63354e1c4f2ee57391"
+  },
+  "source_value": "N’oubliez jamais qu’il suffira d’une crise politique, économique ou religieuse pour que les droits des femmes soient remis en question. Ces droits ne sont jamais acquis. Vous devrez rester vigilantes votre vie durant.",
+  "source_value_sha256": "a3eb2bbfa17597475c2a45ba79b2b4036d3ba9a001361cb755a59d53ae21a866",
+  "target_value": "Never forget that a political, economic or religious crisis will be enough for women’s rights to be called into question. These rights are never permanently secured. You will have to remain vigilant throughout your lives.",
+  "target_value_sha256": "bda48140ceef77cdf4e271da61b7f6d8d96e5d95723c24217ba1c8bf96cfcfa8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0087",
+    "target_path": "citations/A0087-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "ad48b8bb553daab3a249730ec55ad42062b594b780e5effbd5c25f1b9eeadc86"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "266dc70a2baee6ba46f53e7f8ba6da0dea2dbe583a3db1da4e4a5baf752cfc2d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le qualificatif de \"woke\" sert à diaboliser les concepts progressistes sans avoir à argumenter",
+    "identity_sha256": "bae338143751b08f1633eac8ae029ce32538f9630a79aa0fa38957a98fb90788"
+  },
+  "source_value": "Nouvelle étiquette à la mode après « bobo-gauchiste » et [https://mrmondialisation.org/bisounours-linsulte-qui-cherche-a-detruire-laltruisme-doxa/ « bisounours »] (désormais passé de mode), '''le woke est le nouveau coupable de tous les maux de la société.''' De quoi permettre aux néo-réac’ de pouvoir enfin assumer '''une posture anti-sociale, anti-minorité, anti-écologie, anti-tout-ce-qui-sort-de-la-norme sans grand effort intellectuel.'''",
+  "source_value_sha256": "be6d7e7f2ff64f587d543e3421c0c7fb68767660a3fb3270ab74ab4ce825476d",
+  "target_value": "A fashionable new label after “bourgeois leftist” and [https://mrmondialisation.org/bisounours-linsulte-qui-cherche-a-detruire-laltruisme-doxa/ “Care Bear”] (now out of fashion), '''the woke person is the new culprit behind all society’s ills.''' It finally enables neo-reactionaries to embrace '''an antisocial, antiminority, antienvironmental, anti-everything-outside-the-norm stance without much intellectual effort.'''\n",
+  "target_value_sha256": "eaf16fb8a9aa9afc10d4f6aecce838fb4024ef6d3a3eaaaf6406321d93641c1a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0308",
+    "target_path": "citations/A0308-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0b43db6f51dd84a36f2149d2a9272ded37bdb6e75fe4eabf617b52d093685780"
+}

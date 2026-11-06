@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "64e485c843c328329d774488a567ad38e096efd3df046611738b9deed39afee6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le militantisme féministe doit se limiter car il occulte la souffrance des hommes",
+    "identity_sha256": "7b478530984fcb517b9f134d2d605ee5774d5439ead4ed7fe73ee4d5860f14a4"
+  },
+  "source_value": "Le militantisme féministe doit se limiter car il occulte la souffrance des hommes",
+  "source_value_sha256": "5e6504515b21ed11fa4b49bcfda244267c0209a42125d0208303a3475a3256ee",
+  "target_value": "Feminist activism must be limited because it obscures men's suffering",
+  "target_value_sha256": "4d9d222ffcc6a48216c90aae452c8883f63975c1bb0e973134441895c0b92e4a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0013",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "93964b244c3de76b6a8b1bd6e947a29420e3b5fb97f523d22fff3651e40ce204"
+}

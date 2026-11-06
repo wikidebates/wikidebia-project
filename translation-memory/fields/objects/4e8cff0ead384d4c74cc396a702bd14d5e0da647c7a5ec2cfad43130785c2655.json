@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "1ef6a3c144f4b5ddace2f3fe90c381342400e001e558f2912b1cf0e779502b5f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Pour obtenir des petites victoires, il faut viser de grands idéaux",
+    "identity_sha256": "703ad7628f9aed7191b3dbe5c605af094f4229c2928ac35af934570225186816"
+  },
+  "source_value": "Pour obtenir des petites victoires, il faut viser de grands idéaux",
+  "source_value_sha256": "a77e5c0f76c16d1d505be879179f949cc2f44d8012722fc82ef395f610cc3085",
+  "target_value": "To achieve small victories, one must aim for great ideals",
+  "target_value_sha256": "a80f00620e90c3922edcafdbd7d917ebccc08fa594b9f451fc07f069f3138189",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0094",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4e8cff0ead384d4c74cc396a702bd14d5e0da647c7a5ec2cfad43130785c2655"
+}

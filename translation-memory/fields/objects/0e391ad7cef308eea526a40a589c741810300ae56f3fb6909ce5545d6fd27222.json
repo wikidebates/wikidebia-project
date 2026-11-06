@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "83be31c20b3c3cb8bf10b17805fbaa4dc7e78faf524a249b6dcb824963bd9983",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les tradwives sont les idiotes utiles du sexisme",
+    "identity_sha256": "3c5f138f02f75f975f1de825ff6ebbdccd1a9082ad5891b9a54138595e88e4b1"
+  },
+  "source_value": "Les tradwives sont les idiotes utiles du sexisme",
+  "source_value_sha256": "eb535207b855935630faea781fad553c08ef3dfcc809c2019d596e3c222d5f53",
+  "target_value": "Tradwives are useful idiots for sexism",
+  "target_value_sha256": "c78260e7644696506900af6e07244271ba78db4f7a2fa9f685f3f71da91b1349",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0256",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0e391ad7cef308eea526a40a589c741810300ae56f3fb6909ce5545d6fd27222"
+}

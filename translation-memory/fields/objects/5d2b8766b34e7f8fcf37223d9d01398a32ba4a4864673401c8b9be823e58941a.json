@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4c30880e94fe56cb9d81c513f343c5ee4cabb032204b5188750c60d15d4f6176",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Même si les griefs envers les féministes étaient légitimes, cela ne justifierait pas davantage une punition collective",
+    "identity_sha256": "b20b18d03839fda8aa147cae51f961d25b68d1cbce2ae0b698543b977ce47b31"
+  },
+  "source_value": "Même si les griefs envers les féministes étaient légitimes, cela ne justifierait pas davantage une punition collective",
+  "source_value_sha256": "4fb7c8bfcec49429f0ebe5bc7ba03489dd0d537584721167084d1c86747b7934",
+  "target_value": "Even if grievances against feminists were legitimate, that would no more justify collective punishment",
+  "target_value_sha256": "b2f1b4e31e5ca28054dca7fbdde572e3974b23aad5e0af3ed9ca6ed2d901cbab",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0172",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5d2b8766b34e7f8fcf37223d9d01398a32ba4a4864673401c8b9be823e58941a"
+}

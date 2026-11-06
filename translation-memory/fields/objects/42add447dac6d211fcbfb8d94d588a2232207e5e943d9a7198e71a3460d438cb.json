@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2ae57a578cab2ec177c3a305ff3121d0e791bc4dfd83355778ff121979c46cc3",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme moderne flirte avec la misandrie (haine des hommes)",
+    "identity_sha256": "20b068c2a737544861b5710cd49aa806a8c7642a0d408126ddad1a64424326fe"
+  },
+  "source_value": "Ce livre est de toute évidence, tant au regard du résumé qui en est fait sur votre site qu’à la lecture de son titre, une ode à la misandrie (= haine des hommes). Or, je me permets de vous rappeler que la provocation à la haine à raison du sexe est un délit pénal ! En conséquence, je vous demande d’immédiatement retirer ce livre de votre catalogue sous peine de poursuites pénales.",
+  "source_value_sha256": "8cdad125e3c91f736a6ea5f8cd26a47cf1e7c562f458592349cba859e3439b69",
+  "target_value": "This book is quite obviously, both from the summary given on your website and from its title, an ode to misandry (= hatred of men). Let me remind you that incitement to hatred on grounds of sex is a criminal offense! I therefore ask you to remove this book from your catalogue immediately, failing which legal proceedings will be brought.",
+  "target_value_sha256": "db3187ed0e7d74334d18d5f4aaf90fcc5eddb79d864f1afeb013a34dc48846fe",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0016",
+    "target_path": "citations/A0016-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "42add447dac6d211fcbfb8d94d588a2232207e5e943d9a7198e71a3460d438cb"
+}

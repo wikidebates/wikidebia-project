@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5f9994bbbb254c1cafae5be477fc8ba3335ebc7604b79801a3dc84a8d2743af8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La gauche a une responsabilité écrasante dans la montée de l'extrême droite",
+    "identity_sha256": "0a480b1a5897cb194d00a719a89add247dfa4106196bfcf24cf47b00bf5d0835"
+  },
+  "source_value": "La gauche a une responsabilité écrasante dans la montée de l'extrême droite",
+  "source_value_sha256": "b750d4fa6e6c19c5a5a98f0565a5edf77764a252750584426a7b7a93fb25069c",
+  "target_value": "The left bears overwhelming responsibility for the rise of the far right",
+  "target_value_sha256": "66b357ce63792b3687c75da63b15c8ca270d6528ccf9a25c913a90fa3d1f4399",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0268",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "daaa642fc87992aceac3ca4edf6ef6c44d78bba4a759cdffc50ab3eeedf7815a"
+}

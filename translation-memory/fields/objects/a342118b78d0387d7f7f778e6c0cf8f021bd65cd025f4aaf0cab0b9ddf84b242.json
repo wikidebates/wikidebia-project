@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "52cca55f7bf3fabb9a7079c263bbdcc24eef7199be19546d3c6f824d23799223",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les victimes d'agressions sexistes subissent une victimisation secondaire",
+    "identity_sha256": "180094b65ef1be0fdcf3ff4f7c29f8150c92009b4ff3c9eba69c268090ff309f"
+  },
+  "source_value": "<u>La victimisation secondaire</u> : (concept qui, en résumé, renvoie au fait que la procédure judiciaire vient ajouter au traumatisme de l’agression) est une création désormais établie de la Cour européenne des droits de l’homme (CEDH). La France vient d’être condamnée notamment pour cela par la CEDH le 24 avril 2025 (elle le sera probablement encore dans les semaines à venir) ; la Cour de cassation avait déjà (23 mars 2022) opéré un bougé sur ce point en condamnant civilement l’accusé pour « l’aggravation du préjudice moral » que ses dénégations répétées (son système de défense) avaient causée à la victime. Certes, à ce jour, la jurisprudence de la CEDH vise davantage la responsabilité de l’État que celle du prévenu ou de son avocat, mais compte tenu notamment des dispositions de la Convention d’Istanbul, elle n’est pas figée et les États membres restent libres de la faire évoluer en interne.",
+  "source_value_sha256": "51a054f9fb967ec0209f11830c1421416acc499077f0c887b86304e80a22f279",
+  "target_value": "<u>Secondary victimization</u>: (a concept which, in summary, refers to the fact that judicial proceedings add to the trauma of the assault) is now an established development in the case law of the European Court of Human Rights (ECHR). France has just been condemned by the ECHR for this reason, among others, on 24 April 2025 (and will probably be condemned again in the coming weeks); the Court of Cassation had already shifted its position on this point on 23 March 2022 by holding the accused civilly liable for the “aggravation of the non-material harm” that his repeated denials (his defense strategy) had caused the victim. Admittedly, to date, ECHR case law focuses more on the responsibility of the state than on that of the defendant or their lawyer, but, particularly in view of the provisions of the Istanbul Convention, it is not fixed, and member states remain free to develop it domestically.",
+  "target_value_sha256": "e50650d224de2ef1a9d87ee9dd2ee3f345c7962aee81cac761b11de0e5120fc5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0047",
+    "target_path": "citations/A0047-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a342118b78d0387d7f7f778e6c0cf8f021bd65cd025f4aaf0cab0b9ddf84b242"
+}

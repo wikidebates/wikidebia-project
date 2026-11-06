@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "425f6c336c84af855e1792c2b4cde9dc40c90626325d8321d76eae1e229dbddf",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il n'y a pas besoin d'être féministe pour lutter contre ces groupes",
+    "identity_sha256": "4fd2adbfc51191add7c36198b3b5379ee9e72cc4450207e4bd1191ea5be709e7"
+  },
+  "source_value": "Il n'y a pas besoin d'être féministe pour lutter contre ces groupes",
+  "source_value_sha256": "a6fe8aacf3a68e167814d59b620846adb013625be415e567631fc5057e81fcdd",
+  "target_value": "One need not be a feminist to fight these groups",
+  "target_value_sha256": "57eb40c3ea0fdff7b1d6a0a85d64edfa764eeee943e27e45c889caa24f65a593",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0191",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "80d9e31a75d83ecd414852bb3a3c2ad65364b8b5de1fcd0bc3a2d6d6b5825295"
+}

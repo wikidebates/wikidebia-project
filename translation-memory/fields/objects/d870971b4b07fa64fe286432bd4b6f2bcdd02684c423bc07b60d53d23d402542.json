@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5f146136282caec0a6c7efbbf4ce25a1e54f0c4d1b2a8f0bf02ab2a77ab6dcee",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes sont très souvent exclues des essais cliniques",
+    "identity_sha256": "55d257b8f362bf958cf82191b96731e17f61daf779b0dfb35b32bcab09c3515e"
+  },
+  "source_value": "Les femmes sont très souvent exclues des essais cliniques",
+  "source_value_sha256": "76db97e9bec2ea4151b6a81c57d11bdbdbfc30024301701fcc08a33961c5922a",
+  "target_value": "Women are very often excluded from clinical trials",
+  "target_value_sha256": "66328dbe3d6630d3d8403b0003af46d3f66cd2ee1607fb4c3c567aae6b7cd768",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0058",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d870971b4b07fa64fe286432bd4b6f2bcdd02684c423bc07b60d53d23d402542"
+}

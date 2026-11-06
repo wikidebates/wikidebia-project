@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2c6ce1c40d5226ad1536765e08e57f7eb4ab7c13ff9e0c721a43c0cece74462e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Beaucoup de personnes qualifiées de \"fémonationalistes\" sont simplement des féministes universalistes qui critiquent aussi l'Occident",
+    "identity_sha256": "5bb72775c201850b1599823a31d2b17fe753f8c74e6a5e5d67065aa82a510db6"
+  },
+  "source_value": "Beaucoup de personnes qualifiées de \"fémonationalistes\" sont simplemnt des féministes universalistes qui critiquent aussi l'Occident",
+  "source_value_sha256": "cc1809e153e3032499576fa0d4f92587b00aff474be3961b6ef8749fac8c3068",
+  "target_value": "Many people described as \"femonationalists\" are simply universalist feminists who also criticize the West",
+  "target_value_sha256": "ed8ea4bc96e0386e2757bc733a2435766c3451c2fc6f4a4fb23dbd818139337b",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0331",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4822a1842dd53933f7a474411837fa3cb728824e118b441b341fd3556c0ff68a"
+}

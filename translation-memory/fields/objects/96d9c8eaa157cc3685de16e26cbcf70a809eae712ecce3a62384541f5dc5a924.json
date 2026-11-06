@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "83a6a59c922b034538aa5af27fa02212dd4a513ca0a2b5350f8408fe4d8479bc",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La misandrie n'est pas l'équivalent de la misogynie",
+    "identity_sha256": "bfba6777316858915ae29c48b48fa789bf726a4becee7f711c2712b5ad7b6686"
+  },
+  "source_value": "La misandrie n’est pas l’équivalent de la misogynie",
+  "source_value_sha256": "f69d2191a58b636f3c4a93a59d9f52e1e105608e29da1574733914a41e59b56e",
+  "target_value": "Misandry is not equivalent to misogyny",
+  "target_value_sha256": "215e08bebdf0c1e8fc868aeb4e45553b1ae1423fbff20606d3ff248e12d1f2e2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0103",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "96d9c8eaa157cc3685de16e26cbcf70a809eae712ecce3a62384541f5dc5a924"
+}

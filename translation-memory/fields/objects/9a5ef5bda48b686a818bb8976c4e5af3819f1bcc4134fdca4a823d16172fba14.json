@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3dbad35b0f00164da837af85f64f4b6703256329ba80cdc08e5825800c4c3235",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La plupart des procès pour diffamation ne sont que des procédures-bâillon",
+    "identity_sha256": "0cc6f94e9cb56e98f0eba74b1f044d997d49873bb8991f436f7e485c89400024"
+  },
+  "source_value": "Pour Elli Tessier, les menaces [de plainte en diffamation] se muent également en action : lorsqu’il décide de dénoncer les violences subies, et de nommer son agresseur et ex-compagnon sur Twitter, c’est une plainte en diffamation qu’il reçoit en retour.\n\n''« C’est un mécanisme souvent utilisé par les auteurs de violences sexistes et sexuelles pour silencier leur victime »'', soutient Elodie M., qui déplore :<blockquote>« C’est efficace ; je le vois chez les patients et patientes qui, après avoir reçu ce genre de plaintes, ont de grosses difficultés à se confier, à poursuivre toute démarche nécessitant de parler. Ils et elles ont peur, constamment, et se tétanisent ». </blockquote>",
+  "source_value_sha256": "30e49ffe16d8527fe68ebe8ca67e43a47183bee0bcb9b841b40de7e8da8de5eb",
+  "target_value": "For Elli Tessier, threats [of a defamation complaint] also turn into action: when he decides to denounce the violence he experienced and name his aggressor and former partner on Twitter, he receives a defamation complaint in return.\n\n''“This is a mechanism often used by perpetrators of sexist and sexual violence to silence their victim,”'' argues Élodie M., who laments:<blockquote>“It is effective; I see it among patients who, after receiving this kind of complaint, have enormous difficulty confiding in others or continuing any process that requires them to speak. They are constantly afraid and become paralyzed.”</blockquote>",
+  "target_value_sha256": "ec2271614bf51dce45050390812348287c1c6de0dad1536244a3a04de6e52a5f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0222",
+    "target_path": "citations/A0222-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9a5ef5bda48b686a818bb8976c4e5af3819f1bcc4134fdca4a823d16172fba14"
+}

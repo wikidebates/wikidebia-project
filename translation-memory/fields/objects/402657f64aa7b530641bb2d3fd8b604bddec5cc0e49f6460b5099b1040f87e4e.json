@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9086cc5ad8fc34228b0f94087fcfe5cb8373ee3b61c452696a5e611f54522fa9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le terme a été dénaturé et a fait l'objet d'une réappropriation",
+    "identity_sha256": "fcfbb6b580af17bae4460ca229a6a37a5aecdaf8e4952dcf8c73a1587616b98e"
+  },
+  "source_value": "Alors que le terme est né comme un mot d'ordre dans les communautés noires pour « rester éveillé » contre la brutalité policière, il a depuis été détourné pour servir de fourre-tout pour toute politique, position, ou personne avec laquelle les conservateurs ne sont pas d'accord, souvent de manière caricaturale.\n\n\n''(While the term originated as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.)''",
+  "source_value_sha256": "5b0712e1f7f6afde436a32bd0805e1cfd193ee6973f0fa3d8b77a65b3db8e787",
+  "target_value": "Although the term originated as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.\n\n\n''(While the term originated as a watchword in Black communities to “stay woke” against police brutality, it has since been expropriated as a catch-all for any policy, position, or person with which conservatives disagree, often in cartoonish ways.)''",
+  "target_value_sha256": "5c87d10ea8a915a278eea051d8c36eb0acff7ee63a999ad8bc4e5bd437a7d42f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0201",
+    "target_path": "citations/A0201-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "402657f64aa7b530641bb2d3fd8b604bddec5cc0e49f6460b5099b1040f87e4e"
+}

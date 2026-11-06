@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "b21c143682408880ed692d9b91519f27ac61d746b20664cf24660c25f7975adf",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "S'exprimer sur les réseaux sociaux peut suffire à nous mettre en danger de mort",
+    "identity_sha256": "daa1a465bcb116a3c23f5b7e04ac7b67467f21bf38e6da3a6937ca7965a657fc"
+  },
+  "source_value": "S'exprimer sur les réseaux sociaux peut suffire à nous mettre en danger de mort",
+  "source_value_sha256": "be86e0ed9384859d453799b5104552957ec0b708ec43d9aa17ff0de456bb546e",
+  "target_value": "Speaking on social media can be enough to put us in mortal danger",
+  "target_value_sha256": "2ca122882cfd84d679ccd45b652fe0096eb777c4e9c7b652d24e509cb0273c5e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0158",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "2df2051e9dd1e3f1d71a57a11e659fb25c53d4989088541c4dd9665162daaad2"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9dfe5fa9af575c5f2303304ce0dc0ebffa8eae85bc23475f3a454208f9fea083",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il faut revenir à un féminisme universaliste, qui ne soit pas dominé par les idées intersectionnelles et \"wokes\"",
+    "identity_sha256": "c8ad69e531d93698dd512e7e6d9c3b9e6214e56a641e13289f1ecca951c61e7e"
+  },
+  "source_value": "Il faut revenir à un féminisme universaliste, qui ne soit pas dominé par les idées intersectionnelles et \"wokes\"",
+  "source_value_sha256": "5aa892360f96fa3ce719182cf70448f11b8b8dee5c41f10e4fdf0f8a7c61e540",
+  "target_value": "We must return to a universalist feminism that is not dominated by intersectional and \"woke\" ideas",
+  "target_value_sha256": "de947e7dcb2d870fa5d0cf2d36d73cf1138fabb795d6b092574b7a40d0cc2911",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0132",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "6daa07bdb5d2947b09f7da46ef9a7d8ae7b998623d39c8cc710cefb9fda34f8f"
+}

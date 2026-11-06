@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4e2a7142dfd267875d101f4be68d22d4d3e874371f98ba6d04bdadcab7087727",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le fémonationalisme réduit les femmes à un statut de matraques vivantes",
+    "identity_sha256": "1bacf2c3022ab811c7d8c0d86b654808d737e1e76835a2b27fb8f21218b74285"
+  },
+  "source_value": "Le fémonationalisme réduit les femmes à un statut de matraques vivantes",
+  "source_value_sha256": "29d4133ec59638c8f60b87ffd11d835a462e425412af83960946d78364e5907e",
+  "target_value": "Femonationalism reduces women to the status of living batons",
+  "target_value_sha256": "27330d8a1d0e439cdf741bfdeb5f87ff681b1e5c98d198b4ab6fb633aad509f8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0329",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "9d20fc0b4cf64866c050e6b8b088d6501b373b78bc805ff4df4cd6dec6f9481b"
+}

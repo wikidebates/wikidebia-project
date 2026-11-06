@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3ff52422c194a2d5a90e109f948ccc403509c4f53275576b93b9d087a85c67ff",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les hommes souffrent eux-mêmes de la masculinité toxique",
+    "identity_sha256": "86f9feb81eba61300f4f2591662f536af82672a02623a663a02322e3d578cdba"
+  },
+  "source_value": "Les hommes souffrent eux-mêmes de la masculinité toxique",
+  "source_value_sha256": "98d19c85861ca6b6a95d12cf0c630722ab984051ec34ea255ae9631c1ab100aa",
+  "target_value": "Men themselves suffer from toxic masculinity",
+  "target_value_sha256": "0abc8cf06d500f114628250cbf781cb88be2223b6d21c00e75454c4f1acefe24",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0184",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8d49d32e7d87c0498c715cb767c5d14f8ce65b83ce9d6b179f3f7e9dcd485e88"
+}

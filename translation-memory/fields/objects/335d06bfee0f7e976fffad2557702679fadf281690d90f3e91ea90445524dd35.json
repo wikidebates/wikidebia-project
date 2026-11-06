@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "c8f2c6b14165527dcaf72545cee4f8edad0e4c013296b823bb93a3df51e7cac4",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La révolution russe a porté au plus haut la lutte pour l'émancipation des femmes",
+    "identity_sha256": "9f9c29456d11ec46f9460f3af4c7a766104a03ed05fc6d00abe9e0bd85f99183"
+  },
+  "source_value": "En s’emparant du pouvoir en octobre 1917, les travailleurs russes ont entrepris de construire leur État, à travers les soviets, pour défendre leurs intérêts et trouver des solutions qui n’auraient pas été possibles dans les limites de la propriété privée et des normes bourgeoises. La lutte pour l’émancipation des femmes faisait partie de ce combat. Le pouvoir soviétique a eu à cœur de créer des crèches, des cantines collectives. Il a autorisé l’union libre, le divorce et l’avortement. Aucun autre pays, même parmi les plus riches, n’en avait alors fait autant pour les droits des femmes. Toutes ces avancées matérielles allaient de pair avec des combats politiques, que les femmes ont menés en participant à la vie politique, économique, aux transformations sociales. Grâce à la révolution, elles ont pris des responsabilités dont elles étaient, jusque-là, écartées. Elles ont appris à défendre leur point de vue devant les hommes, que ce soit leurs maris, leurs pères, leurs frères, leurs camarades de travail. Elles se sont émancipées dans leur tête, et bon nombre d’hommes avec elles, à l’époque.",
+  "source_value_sha256": "f98108428ca8dcfcf67f8b834d80a287927a65458baa270b106e7c04fb1c5a19",
+  "target_value": "When they seized power in October 1917, Russian workers set about building their state through the soviets in order to defend their interests and find solutions that would not have been possible within the limits of private property and bourgeois norms. The struggle for women’s emancipation formed part of this fight. Soviet power made a priority of creating childcare centers and communal canteens. It authorized free unions, divorce, and abortion. No other country at the time, even among the richest, had done as much for women’s rights. All these material advances went hand in hand with political struggles that women waged by participating in political and economic life and in social transformations. Thanks to the revolution, they assumed responsibilities from which they had previously been excluded. They learned to defend their point of view before men, whether their husbands, fathers, brothers, or coworkers. They emancipated themselves in their minds, and many men did so with them at the time.",
+  "target_value_sha256": "c71e4351287558f1350b43ff9a2d4ee716405b86100e1ecd205f61be22142d80",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0278",
+    "target_path": "citations/A0278-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "335d06bfee0f7e976fffad2557702679fadf281690d90f3e91ea90445524dd35"
+}

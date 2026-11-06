@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ece82d3eb83591d7fcb43436b1206ce4af67b0d43f9e20dfb905035bf9b4b6af",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les féministes méprisent les hommes",
+    "identity_sha256": "9475955ef1d4b4ff7e885cd6d33e0ca415d46737a13a94fdbd0eddfea1d5344e"
+  },
+  "source_value": "Les féministes méprisent les hommes",
+  "source_value_sha256": "52f519acc4f388157f55c7d21e70f4ce6ff7b74100bda2c11f2bd0cbc537a687",
+  "target_value": "Feminists despise men",
+  "target_value_sha256": "aca799d732196072deaf65509a239065f5d769d8059347bc1fc1c1ac8a0ac169",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0023",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "49fffad017b3bf7d9a8b755bff88562dc43587976c12bc52a1c21c7c50ec42de"
+}

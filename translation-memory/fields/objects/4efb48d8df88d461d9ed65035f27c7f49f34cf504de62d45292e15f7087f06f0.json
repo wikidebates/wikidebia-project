@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0888577587be262fa0937b05cc442a53b9b87c2233bb900d9650f5b26d1a1907",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les antiféministes brident aussi la liberté de création",
+    "identity_sha256": "eacff869609a1efa9e1917bfc2ab1afbf53168e2862a03b7cec5114817e08450"
+  },
+  "source_value": "Un certain nombre d'oeuvres culturelles ont dû payer très cher leur progressisme.",
+  "source_value_sha256": "66ca653a9523e6cf0dc0bdf3411d24a2c8af221afcd023d3b61b6e7617fd7ecf",
+  "target_value": "A certain number of cultural works have paid a very high price for their progressivism.",
+  "target_value_sha256": "32ec9dd3ede6afc928f57cd9854b064de8ed0501630f357bc366eafcfb19b799",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0113",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4efb48d8df88d461d9ed65035f27c7f49f34cf504de62d45292e15f7087f06f0"
+}

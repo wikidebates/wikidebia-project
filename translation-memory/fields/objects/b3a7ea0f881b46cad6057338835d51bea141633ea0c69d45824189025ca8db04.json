@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9fc92d44e6ae50d057b03833b1be117dbf7329e932df31d08b7a64b1edf400dd",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme moderne flirte avec la misandrie (haine des hommes)",
+    "identity_sha256": "20b068c2a737544861b5710cd49aa806a8c7642a0d408126ddad1a64424326fe"
+  },
+  "source_value": "(…) J’ai en moi la haine de l’homme (…). Tout en eux me semble grossier et ridicule, j’ai la haine de leur corps, de leur chair, de leur sexe, de leur désir. Ils sont pour moi d’infâmes faiseurs d’enfants, blesseurs de rêve, ennemis et bourreaux de nos tendresse et de nos féminités. J’ai la haine de l’homme ! (…) Les hommes, quelle cochonnerie.",
+  "source_value_sha256": "2367b603775b4031ea79b9f411aa9a0869b617d2ad5a7c20fb490b5fe0e8cd74",
+  "target_value": "(…) I harbor hatred for men (…). Everything about them seems coarse and ridiculous to me; I hate their bodies, their flesh, their sex, their desire. To me they are vile child-makers, destroyers of dreams, enemies and tormentors of our tenderness and our femininity. I hate men! (…) Men—what filth.",
+  "target_value_sha256": "8b53eb4cff1985e8c795bc4c31553b5a0c65c64e4cdde942967fd231ebcc9c25",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0016",
+    "target_path": "citations/A0016-C005",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "b3a7ea0f881b46cad6057338835d51bea141633ea0c69d45824189025ca8db04"
+}

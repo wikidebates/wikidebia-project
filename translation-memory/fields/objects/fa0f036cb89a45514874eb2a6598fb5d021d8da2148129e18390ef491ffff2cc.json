@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "12fa1191767ba200aeab33e54fa4b29e6fea6346753c6e0c33280f1b2d9a6b9a",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Toutes les personnalités et médias se battant contre le wokisme ont des liens structurels avec l'extrême droite",
+    "identity_sha256": "ca143fa43eb1538b4005f01b94c7d0a6fb953a901f26c99077d6a6bdbd98092e"
+  },
+  "source_value": "*",
+  "source_value_sha256": "ed725292f5f32d61535958c16f8772f1be779c75203cf31b477673f9e564b3b5",
+  "target_value": "*",
+  "target_value_sha256": "ed725292f5f32d61535958c16f8772f1be779c75203cf31b477673f9e564b3b5",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0322",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "fa0f036cb89a45514874eb2a6598fb5d021d8da2148129e18390ef491ffff2cc"
+}

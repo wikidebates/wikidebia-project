@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "589231d70a88026e88ffc99d4e6ec52a621a4fb70f2ed9e460048d843bbd69e9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "C'est dans les moments où l'organisation sociale est entièrement remise en cause que les rapports entre hommes et femmes peuvent être métamorphosés",
+    "identity_sha256": "bed85cc1297271864623fc7e98bb4918dc2af75dde0e2e06d2df3b3b25bc7b8a"
+  },
+  "source_value": "Si l’oppression des femmes est devenue permanente avec la naissance des classes sociales et l’apparition de la propriété privée, c’est bien dans les moments où cette base économique est remise en cause que les rapports entre humains, et donc entre hommes et femmes, peuvent changer. Et c’est précisément ce qui s’est produit en Russie en 1917. Alors, je le répète, pour moi, être communiste et féministe, c’est indissociable. Être une féministe conséquente, c’est se battre pour changer toute la société, à l’égal de n’importe quel homme.",
+  "source_value_sha256": "445888d9d2e468f26178baa4be7f647b2f1633b04e7cc988e7e35608937444f2",
+  "target_value": "If the oppression of women became permanent with the emergence of social classes and private property, it is precisely when this economic foundation is challenged that relations among human beings, and therefore between men and women, can change. This is exactly what happened in Russia in 1917. So I repeat: for me, being a communist and a feminist is inseparable. Being a consistent feminist means fighting to change society as a whole, on an equal footing with any man.",
+  "target_value_sha256": "d811a75d0c5e45c96d400c6190e40b5717552f2d2c05c6e771333e2ce5f4c0f2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0180",
+    "target_path": "citations/A0180-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "dad89c65141e7bb284adb0b9c18b99a1964cdbbeca6572cfcfc887e1b8b34d48"
+}

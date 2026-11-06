@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "2fc2c109b54ba4465d2f08228e3045a085386bdad1c7865beb9397e394c10448",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La misandrie est une réponse à la misogynie et se veut majoritairement non violente",
+    "identity_sha256": "8e3716ece0463e198397791a59d5a9cf3d63eba39f549b1d32721ba9134b52d0"
+  },
+  "source_value": "Elle est bête, elle est lourde, elle est bavarde ; elle a dans les idées morales la même profondeur de jugement et la même délicatesse de sentiment que les concierges et les filles entretenues. (…) Que quelques hommes aient pu s’amouracher de cette latrine, c’est bien la preuve de l’abaissement des hommes de ce siècle",
+  "source_value_sha256": "becd31d570e2211c5db0ca0480c4571ba48d79ea52335253cfc324f8c4892c6f",
+  "target_value": "She is stupid, she is ponderous, she is talkative; in moral ideas, she has the same depth of judgment and the same delicacy of feeling as concierges and kept women. (...) That some men could have become infatuated with this latrine is clear proof of the degradation of the men of this century.",
+  "target_value_sha256": "c2492bc30d2a2a2ec67eb7cef0634fc3296ed113fa74281f886a95913588c1af",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0097",
+    "target_path": "citations/A0097-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "22791abf9433a48bcfb7bb4c239b95a400f3410703672b78a5691ab7c7984fe1"
+}

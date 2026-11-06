@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e38e9316e1d93bb081c6b06a8b66044f7995e58f75137f9b60a79eefc22fd0cc",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La masculinité toxique pousse les hommes au suicide",
+    "identity_sha256": "bc856492f7a9fdad83c4f3a05520bcd56987403f0c5cb555e92979d1250eaf33"
+  },
+  "source_value": "Si le taux de suicide est bien plus élevé chez les hommes que chez les femmes, c'est parce qu'ils sont encourager à garder pour eux leurs souffrances pour paraître forts, ce qui finit par devenir invivable.",
+  "source_value_sha256": "80d69ac3e24dd7ebaf1aa687301eb26734ed3b15e2f595025d072ace31f8825c",
+  "target_value": "If the suicide rate is far more elevated among men than among women, it is because they are encouraged to keep their suffering to themselves in order to appear strong, which ultimately becomes unbearable.",
+  "target_value_sha256": "7f2f8c72f56b25d6d9ecac26b911c150df9ee3f5997dfd115d5fbbbd7647433f",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0193",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5e5322ebd7c7755827d0a8506db39ef405c1cc0fd3ddccc151334b5a774f0642"
+}

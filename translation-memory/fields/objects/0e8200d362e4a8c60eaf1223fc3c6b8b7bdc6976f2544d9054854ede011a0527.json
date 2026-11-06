@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "141dd00af813829001e8c4b76f16b827e4d687c5df185cde87abec0229241a43",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'humour oppressif est le terreau des idéologies d'exclusion",
+    "identity_sha256": "1cc4f5ff3ea1e61195f75572a26e0f134a8e9db80cad7549da3279c8cb3d9d89"
+  },
+  "source_value": "En donnant une acception beaucoup trop large au second degré, à l'humour \"politiquement incorrect\" et à l'humour noir, la gauche a ouvert une faille qui a permis à l'extrême droite -qui, elle, avait bien compris le pouvoir endoctrinant de l'humour- de diffuser ses idées sans tomber sous le coup de la loi ni éveiller les soupçons. ça a tellement bien marché que ça a incité des personnes \"progressistes\" à défendre ce type d'humour, devenant de fait les idiotes utiles de la destruction de leur propre idéologie.",
+  "source_value_sha256": "853c4feba9318503815b84c7e00b0b16af0fbbe5bed188e938c6986fc4808106",
+  "target_value": "By giving, according to many measures, far too broad a meaning to irony, “politically incorrect” humor and dark humor, the left opened a breach that enabled the far right—which understood the indoctrinating power of humor—to spread its ideas without breaking the law or arousing suspicion. It worked so well that it encouraged “progressive” people to defend this type of humor, thereby becoming useful idiots in the destruction of their own ideology.",
+  "target_value_sha256": "af559a645751f381d58a24ce9509dfc5035f10ad7f8d3806a83d1939c1b5ecdc",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0213",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0e8200d362e4a8c60eaf1223fc3c6b8b7bdc6976f2544d9054854ede011a0527"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "247d6f535789ab38c4362bdf2104ff3b8f605dc145226f5040cabca55a2ddd07",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme bride la liberté de création",
+    "identity_sha256": "a4270aa7fd4184c5cf381b070ebd85b64470920836cc9b9f273349f58e879938"
+  },
+  "source_value": "Le féminisme bride la liberté de création",
+  "source_value_sha256": "c19d926ac3fb70449f3f53b21614d6422f507dd9fa236501e55751cb7d5d29d6",
+  "target_value": "Feminism restricts freedom of artistic creation",
+  "target_value_sha256": "e344588b7b0f00b5dcad4704695a2822677353ffd5c13328fdd225a04d04f99a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0019",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d96c2dabd4f635c519cde057c63f2d032e2f0031652b884b8502a5e550d5e7eb"
+}

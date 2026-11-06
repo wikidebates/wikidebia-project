@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "afb18d84c8c19db302f105d3962f1c295309cf29e5c82fdd8a2b93abccbaa2c0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les violences sexistes sont systémiques, contrairement à celles contre les hommes",
+    "identity_sha256": "ac07ff042e5bc076d57c9acf9afc44c047b11b7d42dd75cb4ce569459d164f40"
+  },
+  "source_value": "Les violences sexistes sont systémiques, contrairemment à celles contre les hommes",
+  "source_value_sha256": "54b36506ecd08b442ce3af2f0558612248ee76644a44e0d0f7e06eba831af4a9",
+  "target_value": "Sexist violence is systemic, unlike violence against men",
+  "target_value_sha256": "4d08c178ac9d0c2ad8a4faae7fda5bb7b63580decaeb0ea28ddd77d05927f062",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0151",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4fce06dca17390bc055bae3f8ad3435eb2be00046271eb7bd29ceadea36881d4"
+}

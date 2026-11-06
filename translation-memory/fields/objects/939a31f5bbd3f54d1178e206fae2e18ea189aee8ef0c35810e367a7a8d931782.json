@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "eb1d154d2417b5bea99684e50759002696e0be69ebfe6ae83840ac6f4f6fe5a9",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'expérience quotidienne du sexisme ne pourra jamais, tant qu'elle sera toujours effective, se dissocier d'un statut de victime",
+    "identity_sha256": "3c8ddc744f25ee929016b8b92bfabb0b9148bcdef4978f140708860c0c11aea6"
+  },
+  "source_value": "La victimisation est un processus normal tant que les éléments qui lui sont associés sont factuellement justifiés et banalisés.",
+  "source_value_sha256": "04f742393503f1bf249269c9b96b28496eabae0e8a17a8dfa31afb987571667f",
+  "target_value": "Victimization is a normal process as long as the elements associated with it are factually justified and commonplace.",
+  "target_value_sha256": "f7fca4555096efe72a7bf533bf929f1232df98e69e215ca66012b587be623fe2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0108",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "939a31f5bbd3f54d1178e206fae2e18ea189aee8ef0c35810e367a7a8d931782"
+}

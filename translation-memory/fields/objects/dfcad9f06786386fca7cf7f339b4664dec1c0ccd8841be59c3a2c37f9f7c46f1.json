@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e730e011dc2f13e179c4fb66de022c04e301d6dd87ca7ae64c5067b8646b054c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'homme cherche encore à donner des leçons de vie à la femme (Mansplaining)",
+    "identity_sha256": "852660f98d216f44fd80c799598481d7a69961504963406d0ab3b1863697c1fc"
+  },
+  "source_value": "Le mansplaining (de l'anglais « man », homme, et « explaining », explication) est un concept féministe né dans les années 2010 qui désigne une situation où un homme explique à une femme quelque chose qu'elle sait déjà, voire dont elle est experte, sur un ton potentiellement paternaliste ou condescendant.\nLe terme est apparu en 2008 aux États-Unis dans un article de Rebecca Solnit paru sur le site TomDispatch. L’article, intitulé Ces hommes qui m’expliquent ma vie, raconte comment un homme a voulu lui expliquer le sens d'un livre qu'elle avait elle-même écrit, sans l'écouter quand elle disait en être l'autrice. Elle voit dans ce phénomène une combinaison d'excès de confiance et d'ignorance de la part de l'interlocuteur.",
+  "source_value_sha256": "d6ea818d0eb3e2cec73d0391ab1ca7621439e4b679dc42172cbf9e0091ee9f96",
+  "target_value": "Mansplaining (from the English words “man” and “explaining”) is a feminist concept that emerged in the 2010s and describes a situation in which a man explains to a woman something she already knows, or even something in which she is an expert, in a potentially paternalistic or condescending tone.\nThe term appeared in the United States in 2008 in an article by Rebecca Solnit published on the TomDispatch website. The article, entitled Men Explain Things to Me, recounts how a man tried to explain the meaning of a book she had written herself without listening when she said that she was its author. She sees the phenomenon as a combination of overconfidence and ignorance on the part of the speaker.",
+  "target_value_sha256": "75d57b203af62bf3d0f028ae132fff4645f83a1a2cd908433d1d530daab19764",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0067",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "dfcad9f06786386fca7cf7f339b4664dec1c0ccd8841be59c3a2c37f9f7c46f1"
+}

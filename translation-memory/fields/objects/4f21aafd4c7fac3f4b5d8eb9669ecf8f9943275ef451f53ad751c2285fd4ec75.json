@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a7a567277a1dfef19a6b7c1175f76583c8e816ade1d8f9c85da235adcf2f351e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La masculinité toxique abîme la santé mentale des hommes",
+    "identity_sha256": "fd199693e2b3935114b7988ba59cb3d15a02634d4cae8f112485a34f71ef272e"
+  },
+  "source_value": "La masculinité toxique abîme la santé mentale des hommes",
+  "source_value_sha256": "eaf99190e63eb36a466fbdeeab5615acf846505fa561b2979394f8110127bc10",
+  "target_value": "Toxic masculinity damages men's mental health",
+  "target_value_sha256": "1723eed54e022730ff04660029ed2821210567f5b024f789836c179cbd93c5b4",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0280",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4f21aafd4c7fac3f4b5d8eb9669ecf8f9943275ef451f53ad751c2285fd4ec75"
+}

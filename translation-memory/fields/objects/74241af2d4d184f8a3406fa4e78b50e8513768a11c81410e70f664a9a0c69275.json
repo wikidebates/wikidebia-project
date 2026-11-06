@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "835ef640513eb6b81a424b385e877cc9f1a75ff1e39cf653cd68cfad57f0dc01",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La négation des discriminations systémiques est au mieux le reflet d'une incompréhension, au pire une stratégie politique",
+    "identity_sha256": "b23676b7ac09d3265d47a54e3c03c9c7b157408145f0db64e496e2c5a61b4867"
+  },
+  "source_value": "La négation des discriminations systémiques est au mieux le reflet d'une incompréhension, au pire une stratégie politique",
+  "source_value_sha256": "f04c90844b7a0b542d5191a254e9c1f4d688427eb901407ff3d4aebeb5014a87",
+  "target_value": "Denial of systemic discrimination reflects misunderstanding in the better case and is a political strategy in the worse case",
+  "target_value_sha256": "82dc4260e71e3803ce1b7e4f2b6c2ce11176a4c33e0fd4db24305702832c6568",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0100",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "74241af2d4d184f8a3406fa4e78b50e8513768a11c81410e70f664a9a0c69275"
+}

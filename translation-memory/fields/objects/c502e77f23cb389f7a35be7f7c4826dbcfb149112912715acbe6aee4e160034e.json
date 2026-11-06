@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "9e7db9bb30d1e220d91b4ac1a2ec374d96cc087bf0b228f720fd1020b74a4068",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le discours féministe soutient la victimisation des femmes",
+    "identity_sha256": "e8ebc6839a80400024371bb6724d363aef804c77c475ac085351dea450b0e519"
+  },
+  "source_value": "Le discours féministe soutient la victimisation des femmes",
+  "source_value_sha256": "ee3bc3b179b1a07d5daa7bd63685ec714184f74d0b33127417aee2b79e0459b1",
+  "target_value": "Feminist discourse encourages women to identify as victims",
+  "target_value_sha256": "f1852d1169b24c129962cb1cb0a6b3ba631564d21b3b4b214dea9687606abfd1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0017",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c502e77f23cb389f7a35be7f7c4826dbcfb149112912715acbe6aee4e160034e"
+}

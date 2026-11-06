@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4cb42490ba46362548ef2e08cecfb0b18123ee5199bf079613e7fe1b7781fb02",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Il est indécent d'accuser la gauche de ne pas être assez gentille alors que l'extrême droite est infiniment plus violente qu'elle sans que ça ne gêne personne",
+    "identity_sha256": "c47b71039bff9005ecad25436147d53b9295bb258c3b715d438f3c0ac78c9c4e"
+  },
+  "source_value": "Il est indécent d'accuser la gauche de ne pas être assez gentille alors que l'extrême droite est infiniment plus violente qu'elle sans que ça ne gêne personne",
+  "source_value_sha256": "eed540265deb9c278c6e15084fea109df26e32f5365b4fbad2c3812a74f18972",
+  "target_value": "Accusing the left of not being nice enough is indecent when the far right is infinitely more violent and no one seems to mind",
+  "target_value_sha256": "26127d61fd1f81be011bfb4ffbfa5c47f483177bd0becc7e3590db0856ab7ad2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0269",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "777205e12949ebfa3a86df0dfe697f68aee6618c0878367daf20c6ce36c6551b"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "5dacc57d483601e8c7ee6bbae3d2d2404ac94f72b6f92833dc6b71ee4f6ac6d7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La censure la plus à craindre ne provient pas du \"wokisme\"",
+    "identity_sha256": "a4498de8239b45c57738f39e9502baecc44e6f513c95b7cd0771de18cb5c5325"
+  },
+  "source_value": "La censure la plus à craindre ne provient pas du \"wokisme\"",
+  "source_value_sha256": "468bd22a2bf0b5b6d5849e23950bb2c13962706eeb4422e1d51c8ed0cf054e61",
+  "target_value": "The censorship we should fear most does not come from \"wokeism\"",
+  "target_value_sha256": "530bae37aebe437b3e3d946f7f1dd5f7a68f2b31196c532245670981bbb80588",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0311",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "04549f2ff01da7db37d60139cde580643fce5ca086f812e825ea74f322be1534"
+}

@@ -103,6 +103,7 @@ def _checkpoint_files(workspace: Path) -> list[Path]:
         "audits/translation-next.json",
         "audits/en_translation_worklist.json",
         "audits/translation-memory/reuse.json",
+        "audits/translation-memory/field-reuse.json",
     ]
     files.extend(workspace / rel for rel in fixed if (workspace / rel).is_file())
     review = load_json(required[1], "revue anglaise du checkpoint")

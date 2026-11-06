@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "12c693c942f9abe5d85ecf545db0bfa74bd3ff29052910ca55230fa6cebf26c5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les lois garantissant l'égalité de droits ne sont pas toujours respectées",
+    "identity_sha256": "114073046fa8be1448b8524c992129c731954fcd77191a43c5103f0ae9005887"
+  },
+  "source_value": "Les lois garantissant l'égalité de droits ne sont pas toujours respectées",
+  "source_value_sha256": "2b7c03a208339a8c1be0946636c95d133aefa13b1592313e7e9628325d4fa726",
+  "target_value": "Laws guaranteeing equal rights are not always respected",
+  "target_value_sha256": "d4f487a4f36055fd1d39747cc2dc5c23d29ac63c7d4c5267d7e9f0e5c6d669df",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0085",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3645107efcb77224d5da8670485cded904c97099a67de7a9219d4746e312006a"
+}

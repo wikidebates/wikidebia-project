@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "7277b0c8b9065686b521e1f0d99f61b48cc2cf68960ddf0cebc72cc5c8ebf464",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La sortie du film V pour Vendetta est à l'origine du mouvement Anonymous",
+    "identity_sha256": "0a32c58865fda889bb402fc2ffe10df2b4bd2cfaccb3e681349cdee79fbeb74f"
+  },
+  "source_value": "La sortie du film V pour Vendetta est à l'origine du mouvement Anonymous",
+  "source_value_sha256": "36f167c5ae734d03c32a9e4a3da7b8a508553f2c06d693da93df847795c22a68",
+  "target_value": "The release of V for Vendetta gave rise to the Anonymous movement",
+  "target_value_sha256": "1b80372bee2dcd416981eb54913fad7ea813b2c29a58316830be7ef8fd4a09a8",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0302",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "afd1d15a23769c9484cbf36efe70a77ab5ca6753a748c6fc720e22ed66e21621"
+}

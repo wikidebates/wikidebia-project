@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "27575e97afd0abc4974b9e6dd4991c63b6a1e90b986aeff96a85283f0411a5e7",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les violences faites aux femmes sont déjà une tâche bien trop lourde pour y ajouter les autres types de violences",
+    "identity_sha256": "92a5bc30ccb6c38ea506cd2ad1faa6cebe0fad7547e93d962a4b0b023119b16a"
+  },
+  "source_value": "Si les groupes féministes ne s'occupent pas du sujet, ce n'est pas tant par désintérêt que parce que les violences faites aux femmes sont plus diverses et plus fréquentes et constituent déjà une tâche très lourde. Donc au lieu de le leur reprocher, il serait plus intelligent de créer des groupes spécifiquement dédiés.",
+  "source_value_sha256": "26f2af0b3e7e0f9fbe9ee971558f90a5ce36dc51412802df38b71d749b34aebb",
+  "target_value": "If feminist groups do not address the issue, it is not so much out of disinterest as because violence against women is more various and more frequent and already constitutes a very heavy task. Therefore, instead of reproaching them, it would be more intelligent to create specifically dedicated groups.",
+  "target_value_sha256": "3a91c9e413393f73a7b732692ea232a98bf3bc5e2fbd2cc7aab925802b3b8c71",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0152",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8aca10e961d94c7dbc5f10d80ed31d24b99da94faa580b91075a6ad474085667"
+}

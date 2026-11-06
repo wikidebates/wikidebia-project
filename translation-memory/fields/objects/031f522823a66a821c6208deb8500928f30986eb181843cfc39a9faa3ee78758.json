@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "801653e403957698d37293c19ea97e087887c475d9d493a5023114f68b981c5f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Sans l'extrême droite, il n'y aurait pas eu d'\"affaire Mila\"",
+    "identity_sha256": "5f279632b66de8eeb3a5f59dd5a4fcf8375560e68367540d198a8da21c6df454"
+  },
+  "source_value": "Sans l'extrême droite, il n'y aurait pas eu d'\"affaire Mila\"",
+  "source_value_sha256": "432b90f5b42864278b24486e69571427c6f86fa0c724b00235ff94e6711b2f4f",
+  "target_value": "Without the far right, there would have been no \"Mila affair\"",
+  "target_value_sha256": "8d13f8a6b45070e879aab43fc752d62843415fc3561085d45e835f0f695b21ce",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0230",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "031f522823a66a821c6208deb8500928f30986eb181843cfc39a9faa3ee78758"
+}

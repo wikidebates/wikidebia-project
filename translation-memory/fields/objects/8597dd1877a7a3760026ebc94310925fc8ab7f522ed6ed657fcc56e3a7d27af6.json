@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4477511fd41dec85f47390d8a940e9ff2b5028c7a54e1cfb33d1a9e5b5c654f5",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Limiter la liberté d'expression, c'est refuser de faire confiance en la raison",
+    "identity_sha256": "9fe9f5b8d5facc2c784ab64ce057fd3ee42ee3602630fe3a961ff40015633b34"
+  },
+  "source_value": "Soutenir la liberté d'expression, c'est considérer que les points de vue les plus raisonnables et souhaitables sortiront victorieux de la confrontation d'idées. Cela implique une vision optimiste de l'être humain, comme suffisamment raisonnable pour discerner l'opinion juste et fondée. Cet optimisme est la justification ultime des démocraties : c'est parce que je crois que les citoyens assemblés sont susceptibles de bons raisonnements, que je pense qu'ils peuvent exercer le pouvoir. Si ce n'est pas le cas, si les personnes sont manipulables, dominées par leurs intérêts et des passions irrationnelles, incapables de réflexion, alors la démocratie n'a pas de fondement. Il faut retirer le pouvoir au peuple et le confier à des dirigeants éclairés : monarques, philosophes-rois, juristes, etc.",
+  "source_value_sha256": "0a306a63ffe1edf34bce19dc636ad7cb98f90e40971185d06e6abde96b9be063",
+  "target_value": "Supporting freedom of expression means believing that the most reasonable and desirable views will emerge victorious from the confrontation of ideas. This implies an optimistic view of human beings as sufficiently reasonable to discern the correct and well-founded opinion. This optimism is the ultimate justification for democracies: it is because I believe that citizens assembled together are capable of sound reasoning that I think they can exercise power. If that is not the case—if people are manipulable, ruled by their interests and irrational passions, and incapable of reflection—then democracy has no foundation. Power must be taken away from the people and entrusted to enlightened rulers: monarchs, philosopher-kings, jurists, and so on.",
+  "target_value_sha256": "c6fda39e66682d3592832256564e6fe8bd58f3ca8e863c68eabe009ac23449c7",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0299",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8597dd1877a7a3760026ebc94310925fc8ab7f522ed6ed657fcc56e3a7d27af6"
+}

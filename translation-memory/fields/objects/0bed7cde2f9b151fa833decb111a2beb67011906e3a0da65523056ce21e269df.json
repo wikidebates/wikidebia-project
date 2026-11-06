@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "03f31f8ce5d15ab22eb273a401fbf969b53c5e867aa58e5e8f7f070c8773f860",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Des influenceurs font de la misogynie leur principal fonds de commerce",
+    "identity_sha256": "538132e25cac4cd5118af676c1770d26db991024a42851c5dde9bd4dad0cca45"
+  },
+  "source_value": "Influencer brothers [https://apnews.com/article/romania-andrew-tristan-tate-travel-ban-lifted-3c8b56be5d99f9ed04045f4680e5f8c0 Andrew and Tristan Tate], whose social media empire promoting wealth, male dominance and misogyny has made them among the world's most polarizing internet personalities, were arrested Saturday in Miami as British authorities sought their extradition on rape and sex trafficking charges.",
+  "source_value_sha256": "2038da6b00633007c8dd283172b364c83edb51bbcd08b8ab5e9ff9e2a2c4eff1",
+  "target_value": "Influencer brothers [https://apnews.com/article/romania-andrew-tristan-tate-travel-ban-lifted-3c8b56be5d99f9ed04045f4680e5f8c0 Andrew and Tristan Tate], whose social media empire promoting wealth, male dominance and misogyny has made them among the world's most polarizing internet personalities, were arrested Saturday in Miami as British authorities sought their extradition on rape and sex trafficking charges.",
+  "target_value_sha256": "2038da6b00633007c8dd283172b364c83edb51bbcd08b8ab5e9ff9e2a2c4eff1",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0054",
+    "target_path": "citations/A0054-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0bed7cde2f9b151fa833decb111a2beb67011906e3a0da65523056ce21e269df"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "ab2a35bed6b26647c61dc15c0260827fc3b3d4ec5e76f8a30202307bdd89e880",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le wokisme est dénoncé par un spectre politique qui dépasse très largement l'ultradroite",
+    "identity_sha256": "560c07fe006a580d19f24255059341649f8137285b7559d10bf5452ef94e2702"
+  },
+  "source_value": "Le wokisme est dénoncé par un spectre politique qui dépasse très largement l'ultradroite",
+  "source_value_sha256": "64c69fe963f49b7c57d8ded63a22cf5e52ca7a6d60b0f99825352927c5b34015",
+  "target_value": "Wokeism is denounced across a political spectrum extending far beyond the far right",
+  "target_value_sha256": "280e0c3c61d31c9887fd0a66cb74c7f7c1a494eae7da9d4d37b1a430f8417cb9",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0309",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "4eb3ef9e40cbda3d06457f42986895b68e61a890d17e120136b970fdd297a1ae"
+}

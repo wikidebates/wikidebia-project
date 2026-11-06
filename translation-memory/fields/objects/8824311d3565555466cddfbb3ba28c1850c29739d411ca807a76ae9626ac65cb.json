@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a14ecaa5526f6e19cecb164bfdc3a32fc60e18fc24916c7f1b20a06521f9e609",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes assurent en majorité les tâches domestiques au sein du foyer",
+    "identity_sha256": "f968c4d41dc234b57f94a960b61d6e73fa7e94cdb6f72e798ecb470f8cc5597e"
+  },
+  "source_value": "Si les femmes faisaient le révolution sur ce plan là, sur la plan ménager, si elles le refusaient, si elles obligeaient les hommes à le faire avec elles….En plus c'est un travail clandestin auquel elles sont condamnées. Parce que je trouve que mener cette vie à longueur d'année, de vie, sans rien de productif, c'est vraiment une condamnation. Et bien si ceci était changé, toute la société serait bouleversée;",
+  "source_value_sha256": "6f7e7af71a9f412c2a50183f343e07d248f5f7f4d43d93979e2198f5f64603d6",
+  "target_value": "If women staged a revolution in this area, in the domestic sphere, if they refused it, if they forced men to do it with them... Moreover, it is clandestine work to which they are condemned. Because I find that living this life year after year, for a lifetime, without anything productive, really is a sentence. Well, if this changed, the whole of society would be transformed;",
+  "target_value_sha256": "d543e3bc4cda5aa033b4655b39d84f2ae2855f73d29131705360c75a21378109",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0030",
+    "target_path": "citations/A0030-C002",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8824311d3565555466cddfbb3ba28c1850c29739d411ca807a76ae9626ac65cb"
+}

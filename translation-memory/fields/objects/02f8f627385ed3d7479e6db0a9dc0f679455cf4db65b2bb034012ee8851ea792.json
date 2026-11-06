@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "37f56dc0d98cec70512c3cc57f0e14250b0d4fe26239244d71779d100fded1b0",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'engagement féministe est une tâche trop grande et mène au burn-out militant",
+    "identity_sha256": "cd7a1ec1e9e24ecb0bc77ff2a27ba04eb43a4582087a60dc90dea4b0d3230950"
+  },
+  "source_value": "L'engagement féministe est une tâche trop grande et mène au burn out militant",
+  "source_value_sha256": "f5bc705c1745444d2fbd4958644a5e413ba813c2a2ad3078ea238758efc9a9ee",
+  "target_value": "Feminist activism is too great a task and leads to activist burn-out",
+  "target_value_sha256": "58cfc6aee58b2b6d962dbcc3a1eb9c289bce7de0d48316fd4d3c0f58b17cc673",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0015",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "02f8f627385ed3d7479e6db0a9dc0f679455cf4db65b2bb034012ee8851ea792"
+}

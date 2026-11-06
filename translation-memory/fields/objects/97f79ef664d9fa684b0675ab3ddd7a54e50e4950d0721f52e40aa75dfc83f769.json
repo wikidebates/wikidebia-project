@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8da05bae323f7a2c699161f7ec356c4acba79049007f73543d958da09f5e7839",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Quand une agression sexiste est du fait d'un blanc, les fémonationalistes lui trouvent des excuses, voire l'applaudissent",
+    "identity_sha256": "7a35511eab22d212365352b6bf9a854a7ec27d97d9d7fdf9ae89ed6ad06d265c"
+  },
+  "source_value": "Quand une agression sexiste est du fait d'un blanc, les fémonationalistes lui trouvent des excuses, voire l'applaudissent",
+  "source_value_sha256": "13c7fa3f95d206d26a25a8fdcf159c9c0f2f7ce875124577bb8e2fa232d0f639",
+  "target_value": "When a sexist assault is committed by a white person, femonationalists make excuses for the aggressor or even applaud",
+  "target_value_sha256": "a4b119ddec31a9f8afe739c6e915f12943ab21f7a4c15c47ecaba4f3ee81ee6a",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0332",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "97f79ef664d9fa684b0675ab3ddd7a54e50e4950d0721f52e40aa75dfc83f769"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "e5c5b89b4fd457b6495eba2efffa86098bc8e58528c156b52335d40d1ae90e2f",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'acception contemporaine du terme \"woke\" est du fait de l'extrême droite américaine",
+    "identity_sha256": "60a3224d4b605f2c36ed557c97378753a162a9422aac0f4a21c7deee432b8aa5"
+  },
+  "source_value": "L'acception contemporaine du terme \"woke\" est du fait de l'extrême droite américaine",
+  "source_value_sha256": "d6d539f5b997dc681c948139a636918f2d8509380a0bf7e678eed5ffa220d06a",
+  "target_value": "The contemporary meaning of the term \"woke\" originates with the American far right",
+  "target_value_sha256": "927ac8aa4f57f2e57fb69fd09ed997573b233f9ca8d35c505e8ee4c2559a8602",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0109",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "053ff8a003250f15fda869b830f269afe96a6bf28652ff814ca0f7ea843611df"
+}

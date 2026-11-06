@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "a5652772d6770ecc7bd99b072551e4fceb85999ecdd8add9f18613374b944c03",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Prétendre que les féministes accusent tous les hommes d'être des agresseurs est une opération de diversion",
+    "identity_sha256": "50b75f137ad173c0fdae3deca66c7d674e516818f3ab28c6e4adce4c2f7fbae5"
+  },
+  "source_value": "C'est systématique, la phrase \"pas tous les hommes\" ressort systématiquement à toute évocation de VSS, même quand il n'a pas été évoqué -ni même sous-entendu- que c'était le contraire. Il s'agit d'un moyen très commode de mettre hors-jeu toute discussion tout en se faisant passer pour le camp raisonnable.",
+  "source_value_sha256": "930f02623dceaf0c7acadb726ea50030abe4528cbc2fc17bb0967f7abca618f8",
+  "target_value": "It happens systematically: the phrase “not all men” systematically resurfaces whenever sexual and gender-based violence is mentioned, even when the contrary has not been stated or even implied. It is a very convenient way to shut down all discussion while presenting oneself as the reasonable side.",
+  "target_value_sha256": "02a2ac1c200ee756c89a95d034444250b958bf1293f3ee5cd4aea323c8bbadd0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0092",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c9205402ec637776fcd4e3b9bfba708bf187ced2befa36f8300c8d39aef09be4"
+}

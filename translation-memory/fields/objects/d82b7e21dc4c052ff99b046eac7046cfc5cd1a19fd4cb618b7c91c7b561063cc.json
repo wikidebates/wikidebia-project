@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "57f7870f4be8cc97c9cd03fa55b30895036c14cbcc44d89e4c2b27fee9c817a8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'extrême droite qualifie de \"woke\" les causes de gauche qu'elle est incapable d'instrumentaliser",
+    "identity_sha256": "676c15444f6643be2572c0df7116b08b97a843667c695862ddd7e2608825f7fb"
+  },
+  "source_value": "L'extrême droite qualifie de \"woke\" les causes de gauche qu'elle est incapable d'instrumentaliser",
+  "source_value_sha256": "2d3d1b05233cbf967d63eb0359d4f5e3acac29cc65faf52a971fe222f92017eb",
+  "target_value": "The far right labels as \"woke\" the left-wing causes it cannot instrumentalize",
+  "target_value_sha256": "72ac7aee36634a73cdfd189c7ae7eb3360929277b4f779af93b98cea49de8a7d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0317",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "d82b7e21dc4c052ff99b046eac7046cfc5cd1a19fd4cb618b7c91c7b561063cc"
+}

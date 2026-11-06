@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "fb889085c6e267efcb7cd5f82e089921e2d2dbbba1aa96c6bc28d30cfe2c38b2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La majorité des viols et agressions sexuelles sont commis par des proches de la victime",
+    "identity_sha256": "d2cd517682904523dae2a3a2008589e2e75c7b12421e5e10188e943782f4757d"
+  },
+  "source_value": "'''Dans 66% des dossiers la victime connaissait l’auteur ou les auteurs''' : pour 15% des victimes, l’auteur était un (ex-) partenaire ; dans 11% des cas, il s’agissait d’un membre de la famille ou du ménage comme un parent ou beau-parent ; pour 40% des victimes, il s’agissait d’une connaissance. Dans 34% des cas, l’auteur était inconnu.\n\n\"''Ces chiffres montrent à quel point le profil des auteurs de violences sexuelles ne correspond pas à l’imaginaire collectif du violeur qui agresse sa victime dans l’espace public par surprise. La connaissance de cette complexité est nécessaire aussi en termes de prévention et sensibilisation''\", souligne Sarah Schlitz.",
+  "source_value_sha256": "e335a5313d960d8aa3814db08d3baeed3f767ab0972a86e45d4fe88e28494fde",
+  "target_value": "'''In 66% of cases, the victim knew the perpetrator or perpetrators''': for 15% of victims, the perpetrator was a current or former partner; in 11% of cases, it was a family or household member such as a parent or stepparent; for 40% of victims, it was an acquaintance. In 34% of cases, the perpetrator was unknown.\n\n“''These figures show how little the profile of perpetrators of sexual violence corresponds to the collective image of a rapist who surprises and assaults a victim in public space. Understanding this complexity is also necessary for prevention and awareness-raising,''” Sarah Schlitz emphasizes.",
+  "target_value_sha256": "c885b388dc24a7a08accdda8891c470a36b46ddfda822ce58bd3f1c57abf08ae",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0238",
+    "target_path": "citations/A0238-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "1d1c6c31b666f94d123fc092a5bd15e9d6fe9f9541cee2919e0c9fed8427a804"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "bc93a0985c682ee91ae65e191d6b6236cad2b6e6d1e35b00d442705f1a55c617",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'argument du respect de l'égalité de genre est hypocrite et opportuniste",
+    "identity_sha256": "e16744cf586f3494c062831103d1bbbb298149c2167e65b4a71dd2666a2802ed"
+  },
+  "source_value": "Les personnes qui interdisent le voile sous prétexte d'égalité hommes-femmes se désintéressent de cette dernière (voire sont les premières à la piétiner) dès lors que le voile n'entre plus dans l'équation. Ce dernier est d'ailleurs loin d'être le plus important facteur d'oppression des femmes musulmanes, qui sont harcelées, violentées et tuées dans l'indifférence générale -voire les applaudissements- de ceux qui entendent les \"sauver\" de leur voile.",
+  "source_value_sha256": "3772b3581ff18d367ea29756bf7ca279d9c27990be09455e76849064ec2b975c",
+  "target_value": "People who ban the veil on the pretext of gender equality lose interest in that equality—and may even be the first to trample it—as soon as the veil is no longer part of the equation. The veil is also far from the most significant factor in the oppression of Muslim women, who are harassed, assaulted, and killed amid the general indifference—or even applause—of those who intend to “save” them from their veil.",
+  "target_value_sha256": "d5fe9daf8950f52b19dd512943130a3a70dc242322834c54c40ba9eed1cd7060",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0328",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "49ec6f8592a1501a46170dfb1fb2c15d6b5a2cfde9e718d91e42c8f7198af586"
+}

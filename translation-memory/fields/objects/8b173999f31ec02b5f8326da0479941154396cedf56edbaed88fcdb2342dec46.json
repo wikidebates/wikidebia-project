@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "53bcf542ab4512c7273d6c6a516b48add3c570e3512fb6a14bdff9b02337a6a2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les femmes ne sont pas forcées à faire les tâches ménagères",
+    "identity_sha256": "448f111ab14e93d3374233b009de467b73a3e85bb69ddea06a0fd10e7131ad23"
+  },
+  "source_value": "Les couples décident du fonctionnement de leur relation, et peuvent se séparés si cela ne leur convient pas.",
+  "source_value_sha256": "d281e158a08a55f12b312bc38b6a48d1440b9e4dc1a1bfbcea0a4329c2874a74",
+  "target_value": "Couples decide how their relationship operates and can separate if it does not suit them.",
+  "target_value_sha256": "4470ffdffb40d417ceb72e2d05672cd7521cd6eb68bbd70a223e7e63c5e87be0",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0144",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "8b173999f31ec02b5f8326da0479941154396cedf56edbaed88fcdb2342dec46"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "4ff1786af4266aeff8f9a7d03dfe4f7ac5909e125c78e1d98f6e0829ef8611a3",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le féminisme risque d'importer en France des dérives du féminisme américain",
+    "identity_sha256": "3bdad4d1475a9d828d64601d0c5062250abadb72daa78900cc83831bb9730885"
+  },
+  "source_value": "Dans un livre récent, The Morning After, Katie Roiphe, une étudiante à Princeton, note que nombre d'étudiantes en droit se plaignent qu'elles n'ont pas le même contact avec leur professeur que les étudiants mâles. La raison est fort simple : dans leur hantise d'éviter une accusation de harcèlement sexuel, nombre d'enseignants esquivent tout simplement tout dialogue avec elles.\nCe type de comportement paraît, à première vue, si excessif et si lâche qu'il prête à rire. On ne peut le comprendre que si on prend la peine de réfléchir à la définition du harcèlement sexuel proposé par les manuels universitaires les plus respectables, ou par les publications d'organisations féministes […]  Un poster, affiché dans une des cafétérias les plus fréquentés de Princeton, qualifie de harcèlement sexuel \"tout comportement, toute activité intimidante, hostile ou blessante - ou considérée comme telle - par la personne qui estime en être la victime  […] \"; \"le harcèlement sexuel peut résulter d'une action consciente ou inconsciente\", et peut être \"flagrant ou subtil\". Selon Harvard, il \"peut être aussi brutal que le viol et aussi trouble qu'un regard […] cette définition n'implique pas un comportement ouvertement sexuel.\" Les étudiants coupables de harcèlement sexuel sont obligés de suivre des cours au département d'études féminines. En général, leur crime est d'avoir regardé, avec un peu trop d'insistance, des personnes de sexe féminin dans une bibliothèque de l'université, sans du reste leur adresser la parole.",
+  "source_value_sha256": "f6ed57ce55c1b655a4ed600e198f40d0154e4f39a94f4002eea59c7d7c23ec9f",
+  "target_value": "In a recent book, The Morning After, Katie Roiphe, a Princeton student, notes that many female law students complain that they do not have the same contact with their professor as male students do. The reason is very simple: in their fear of being accused of sexual harassment, many instructors simply avoid all dialogue with them.\nAt first glance, this type of behavior seems so excessive and cowardly that it is laughable. It can be understood only if one takes the trouble to consider the definition of sexual harassment proposed by the most respectable university manuals or by publications from feminist organizations. [...] A poster displayed in one of Princeton's busiest cafeterias describes as sexual harassment 'any behavior or activity that is intimidating, hostile or hurtful—or perceived as such—by the person who considers themselves its victim [...]'; 'sexual harassment may result from a conscious or unconscious action' and may be 'blatant or subtle.' According to Harvard, it 'can be as brutal as rape and as ambiguous as a look [...] this definition does not imply overtly sexual behavior.' Students found guilty of sexual harassment are required to take courses in the women's studies department. In general, their offense consists of having stared a little too insistently at women in a university library, without even speaking to them.",
+  "target_value_sha256": "185d4a576e308da70557555de167f2ef86bfd576cfdcef049ae0e1028e35c102",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0018",
+    "target_path": "citations/A0018-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "5f56119b1fb5d0227601fdeb58b66e0a7b3fe24de5d195b71e19ab9877119cb0"
+}

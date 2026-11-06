@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "70c941e013595a7e3960f68eb0e4b8dd9db6eebf867a2b2d42f7e1b4c7cfc72c",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "summary",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Le whataboutisme ne fait avancer aucune cause",
+    "identity_sha256": "bd18ffc7bed90b1bdf5742a06da89a77212e6f630ec587a251b3fa7acbdc20c0"
+  },
+  "source_value": "Même si il décidait de s'intéresser aux violences faites aux hommes, on continuerait de lui reprocher de ne pas s'occuper de telle ou telle cause. C'est sans fin et ça ne fait pas avancer les choses.",
+  "source_value_sha256": "d99a1e6a44674955915715500a0b4cf059cea2970ca6504c95e275bd98b5c1a6",
+  "target_value": "Even if feminism decided to take an interest in violence against men, people would continue to reproach it for failing to address one cause or another. It is endless and does not move matters forward.",
+  "target_value_sha256": "d6efb6cb4c0086abab6f97dbba144fa6ffa786e093140052a6be08ec004f620d",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0155",
+    "target_path": "summary",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "04cf834d4ce0d6369c99fd17c3910d983a8fad669a0abdd000d026171d9da96c"
+}

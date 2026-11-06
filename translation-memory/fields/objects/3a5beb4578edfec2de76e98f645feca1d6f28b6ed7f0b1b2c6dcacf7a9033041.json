@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "45f2c308e3fc1f44d5d0c44f5267098d7535f629d265e3b6dd87d7d8ddd4b979",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'homme coupe encore trop souvent la parole à la femme (Manterrupting)",
+    "identity_sha256": "4c8f61c6460d67fc53b35bb9825f56f79a5a22a7bc2480c71fa74dc5b003c11f"
+  },
+  "source_value": "Le genre constitue un handicap, toutes choses égales par ailleurs, écrivent-elles. En séances plénières, quel que soit en effet le type d’intervention (dépôt d’amendement, rappel au règlement, questions orales, ­explications de vote), les hommes interviennent toujours plus que les femmes : sur huit séances entre avril 2004 et mars 2005, les hommes sont intervenus 142 fois et les femmes 80",
+  "source_value_sha256": "c008c27728558acf30a43ba0a7428a0a8d5f0bb16a979566ed17330a4b0fb7b7",
+  "target_value": "“Gender constitutes a disadvantage, all other things being equal,” they write. Indeed, in plenary sessions, regardless of the type of intervention (tabling an amendment, raising a point of order, oral questions or explanations of vote), men always speak more than women: over eight sessions between April 2004 and March 2005, men spoke 142 times and women 80 times.",
+  "target_value_sha256": "012bfcd058b48b811634332243e4b31a0f5f4042de91449280308a1acb0c7f60",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0069",
+    "target_path": "citations/A0069-C003",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "3a5beb4578edfec2de76e98f645feca1d6f28b6ed7f0b1b2c6dcacf7a9033041"
+}

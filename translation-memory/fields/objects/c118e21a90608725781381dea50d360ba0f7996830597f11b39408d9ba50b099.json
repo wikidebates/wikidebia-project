@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "f108967e9850a35acb6e3c866ac55815bdec9c3c0e70411f673e67bd79c72be8",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Ce n'est pas de la faute de la gauche si les conservateurs ou les modérés ne sont pas capables de supporter leur propre dissonance cognitive",
+    "identity_sha256": "d07c1d7e0b8c08efb9ca5cd1b4c8585724a3b6cd63fee029e011e9b15622f60b"
+  },
+  "source_value": "Ce n'est pas de la faute de la gauche si les conservateurs ou les modérés ne sont pas capables de supporter leur propre dissonance cognitive",
+  "source_value_sha256": "9e03fbade985773e607a05faa1f2dd28e96d93c271dcb2e7cd16921891de6353",
+  "target_value": "The left is not to blame for conservatives' or moderates' inability to tolerate their own cognitive dissonance",
+  "target_value_sha256": "33478a4a7efcb6cf63125802498b40ed14fa0866237bbc303883ccd75a8b1d92",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0270",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "c118e21a90608725781381dea50d360ba0f7996830597f11b39408d9ba50b099"
+}

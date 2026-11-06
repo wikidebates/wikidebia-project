@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "51dc96dae36844c501f179b59d01fd91d1863de2d44caf6ef081432261115aa2",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Dénoncer la cancel culture revient la plupart du temps à faire l'apologie de l'impunité",
+    "identity_sha256": "549abac860a66b3c9f0d31a36f2c1f38d297b70b42605123f785d2462fb09f5b"
+  },
+  "source_value": "Dénoncer la cancel culture revient la plupart du temps à faire l'apologie de l'impunité",
+  "source_value_sha256": "d69519d6a7e2c2103299aaba94b8d7fe42e5a7538ee89f7a0b380078e0e9472b",
+  "target_value": "Denouncing cancel culture amounts, in the greater part of cases, to advocating impunity",
+  "target_value_sha256": "48e480e836d44db81dbd530eac00a8d640999551c3c5dfce6693384ceba7a095",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0216",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "31caf52ef3f49f4affb3c0c2f5180eb371d0864e64b5cec3d8d0108765291aaf"
+}

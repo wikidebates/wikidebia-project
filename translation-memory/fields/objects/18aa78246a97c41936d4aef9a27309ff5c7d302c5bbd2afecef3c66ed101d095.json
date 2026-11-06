@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3eee8d4e8a6f3ee5f91ae8be5293430dff1386053f8f614eb4831787d4676ea6",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les contenus féministes sont régulièrement censurés",
+    "identity_sha256": "d90d1f0d65308fee59bf1852e9d420f9ea485f8c8909793290a8bd77d56628c3"
+  },
+  "source_value": "La vidéo de Norman sur la masturbation, verbalement explicite, demeure monétisée – tout comme les nombreux épisodes de la série Bref, dans lesquels le héros regarde du porno tout en se masturbant.\n\nL’algorithme de YouTube serait-il donc sexiste ? Pour Amélie Coispel, c’est évident : alors même que la chaîne YouTube des Internettes suit exclusivement des femmes, toutes les vidéos recommandées sont créées par des hommes. Certaines youtubeuses, comme Clemity Jane, voient leurs vidéos démonétisées immédiatement après leur mise en ligne. « Je m’étonne plus, je prends même plus la peine de demander la vérification », a-t-elle tweeté.\n\nMarine Périn, alias Marinette, dont la chaîne publie vidéos et documentaires sur le féminisme, a vu son portrait de « militantes badass » russes démonétisé sans même qu’il aborde réellement les droits des femmes ou la sexualité. Elle ne sait pas pourquoi : « Autant celles sur l’IVG, les violences sexuelles, j’avais l’habitude. Mais là, ce n’est pas lié au sexe ou à des violences. Peut-être que c’est politique, pour le coup », s’interroge-t-elle.",
+  "source_value_sha256": "4d2095426e5d3df57cfb36b29730e6002a3347e82a6b2549fdd63266af8ad5bc",
+  "target_value": "Norman’s verbally explicit video about masturbation remains monetized—as do the many episodes of the series Bref in which the protagonist watches pornography while masturbating.\n\nCould YouTube’s algorithm therefore be sexist? For Amélie Coispel, it is obvious: even though the Les Internettes YouTube channel follows women exclusively, every recommended video is created by a man. Some women YouTubers, such as Clemity Jane, see their videos demonetized immediately after upload. “I’m not even surprised anymore; I don’t even bother asking for a review,” she tweeted.\n\nMarine Périn, also known as Marinette, whose channel publishes videos and documentaries about feminism, saw her profile of Russian “badass activists” demonetized even though it did not actually address women’s rights or sexuality. She does not know why: “I was used to it for videos about abortion and sexual violence. But here, it isn’t related to sex or violence. Maybe this time it’s political,” she wonders.",
+  "target_value_sha256": "72ca953ded7d62fe1dfeab045ed49df674c55d325503c32febad1100145aa7b3",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0264",
+    "target_path": "citations/A0264-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "18aa78246a97c41936d4aef9a27309ff5c7d302c5bbd2afecef3c66ed101d095"
+}

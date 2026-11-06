@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "93c0e36dc26baf067fff9621116c2c4d8417d25f6acf281e6e92515e5574ea1e",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "On devient de facto féministe quand on défend les droits des femmes",
+    "identity_sha256": "249f86c4a5c2bcf56de265c73828499b78a1a46cf436bee86cd151e7a5cb073d"
+  },
+  "source_value": "On devient de facto féministe quand on défend les droits des femmes",
+  "source_value_sha256": "a0c04d8d790e0efc2eb3c90b01a261a4f2414d389a063affd333c1f3232b9b2d",
+  "target_value": "One becomes a feminist de facto when one defends women's rights",
+  "target_value_sha256": "9a5ac2375c8e6ee8a8a29adbe43b419e5e3eb5525df813a0a9fbcc18b9819cb2",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0165",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "208deb03a9dcc7495f22375e21665a7da93d971befbaf9440ba44cf16d902570"
+}

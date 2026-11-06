@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "3864688823a7800c8c195dfe1ac8c32997f7db642d9a795bb61fc535a6a3bcad",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "displayed_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'égalité complète entre hommes et femmes est illusoire dans une société qui repose sur l'exploitation",
+    "identity_sha256": "82754cdfe5261f6c3a6b4f501443aad1feb72c1100e551fd26ce676f83e963d8"
+  },
+  "source_value": "L'égalité complète entre hommes et femmes est illusoire dans une société qui repose sur l'exploitation",
+  "source_value_sha256": "ea72c7cd900b65cfc724e48a19d86ea8ab6e967e75bccf5ac6e1cdc544829e50",
+  "target_value": "Complete equality between men and women is illusory in a society based on exploitation",
+  "target_value_sha256": "cb2017154494d07d5e1b378d2a1ca6a61b97c26929a882f79daeb0f27e5b6d96",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0080",
+    "target_path": "displayed_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "74b28fd075317c8f19094e3d48caef49f7aaa8edaaf0eeeb8f66625845f891af"
+}

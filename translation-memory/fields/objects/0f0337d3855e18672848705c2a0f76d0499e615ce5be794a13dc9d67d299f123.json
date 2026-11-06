@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "559a336e2c36422e613ca52f79db27ff803abd6204ea8ec4297f3dbc53638602",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "citation",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'affaire Mila n'intéresse l'extrême droite que parce que les agresseurs sont musulmans",
+    "identity_sha256": "113085dd954ea26eca9b2867d933bf0c875a9b8dd98062db26c61a514e1b741f"
+  },
+  "source_value": "L'extrême droite ne s'empare des questions de harcèlement ou de VSS que lorsque ça sert son agenda raciste. Sur les féminicides, les agressions dans le patinage artistique, on n'entend pas les fachos.",
+  "source_value_sha256": "3604382b5772fc20a5fd1f8462dd5c1e349a2d7ae1e985a3cac93c257d7b62f5",
+  "target_value": "The far right takes up issues of harassment or sexist and sexual violence only when doing so serves its racist agenda. When it comes to femicides or assaults in figure skating, the fascists are nowhere to be heard.",
+  "target_value_sha256": "f702f683842f73e0c9ff7bd5da8d6a5ba068becf9905f8a756487bd5b35bf19c",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0228",
+    "target_path": "citations/A0228-C001",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "0f0337d3855e18672848705c2a0f76d0499e615ce5be794a13dc9d67d299f123"
+}

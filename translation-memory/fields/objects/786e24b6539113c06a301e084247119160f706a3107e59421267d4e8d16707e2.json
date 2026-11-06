@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "0db9805b353298f075c937959eef509e565820726aa77c33b3b97c8c49e7068d",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "Les films de propagande montrent que les contenus influencent les spectateurs",
+    "identity_sha256": "e04467bffc7e603c6ed3e605a84f1ac8811e72601cf95ac2c1130eda0cf97aca"
+  },
+  "source_value": "Les films de propagande montrent que les contenus influencent les spectateurs",
+  "source_value_sha256": "7275975578356964c929a31e342c7d38a45b2daccd9ad172dd0ca6e95f19b823",
+  "target_value": "Propaganda films show that content influences audiences",
+  "target_value_sha256": "7fe73d1d858ebd0be55813dcbd25a262955a96a24a69b83ea1319cc37ef373dd",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0296",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "786e24b6539113c06a301e084247119160f706a3107e59421267d4e8d16707e2"
+}

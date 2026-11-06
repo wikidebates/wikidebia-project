@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "8cd6cdbac44d1aab0c9195b326ed639a420d1c77f4c82ae7be04e8a65eaf5484",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "L'exploitation, les inégalités et la misère causées par le capitalisme amplifient l'oppression des femmes",
+    "identity_sha256": "68dbfa520f2e73dcabd82ed505a14725a0b2dd38e32ef12161f1e085f5bcb322"
+  },
+  "source_value": "L'exploitation, les inégalités et la misère causées par le capitalisme amplifient l'oppression des femmes",
+  "source_value_sha256": "daf36d13e144a03f9d4e7c594a5dd9fdc1436f2d584b47a0f16f5b606ff326f8",
+  "target_value": "The exploitation, inequality and poverty caused by capitalism amplify the oppression of women",
+  "target_value_sha256": "e7a2b1dceba6ce5bcf5b57e69fa37efad0d291db842d652729cc788581951078",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0196",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "a083b8086c622907765352539680856b2b9293c162ef4f0d63eca87559af498a"
+}

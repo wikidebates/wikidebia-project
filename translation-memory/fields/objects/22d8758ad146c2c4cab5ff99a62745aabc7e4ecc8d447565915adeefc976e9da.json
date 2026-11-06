@@ -1,0 +1,28 @@
+{
+  "schema": "wikidebia-translation-field-memory-entry-1.0",
+  "memory_key": "89cdf5a6204f752b00ad53ba9012d7bf56902eff5fdf3d145157726f66664dcc",
+  "language_pair": {
+    "source": "fr",
+    "target": "en"
+  },
+  "field_kind": "canonical_title",
+  "source_identity": {
+    "entity_type": "argument",
+    "canonical_title": "La masculinité toxique pousse les hommes à agresser d'autres hommes",
+    "identity_sha256": "83844147fe53f672f0595c14585f42dbd46cd50ef2580aba1514784b4f111aa9"
+  },
+  "source_value": "La masculinité toxique pousse les hommes à agresser d'autres hommes",
+  "source_value_sha256": "58906d110f3e33de67d59be42c733ec372069e35347591e7bc961d24bd14677e",
+  "target_value": "Toxic masculinity drives men to attack other men",
+  "target_value_sha256": "397e3ef7a60c3d0ee86f7c360f24684dd566b38ac0d955ea0cd1fb4810992a2e",
+  "origin": {
+    "debate_id": "le_feminisme_est_il_encore_necessaire",
+    "work_id": "EDIT-20261024-001",
+    "page_id": "A0194",
+    "target_path": "canonical_title",
+    "translation_review_sha256": "a094a380b08c1f43870dd939c7efbe088bbdc1f79f9ea2adc3c04c61b433b75c"
+  },
+  "remote_access_performed": false,
+  "remote_write_performed": false,
+  "entry_sha256": "22d8758ad146c2c4cab5ff99a62745aabc7e4ecc8d447565915adeefc976e9da"
+}
