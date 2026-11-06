@@ -2166,6 +2166,23 @@ def corpus_workspace_translation_resume(
     return run(command, cwd=root, check=False).returncode
 
 
+def global_resume(
+    root: Path, *, debate_id: str | None, work_id: str | None,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_global_resume.py"
+    if not script.is_file():
+        raise ManagementError("Registre global de reprise absent du kit")
+    command = [
+        python_command(root), str(script),
+        "--project-root", str(root), "--machine-readable",
+    ]
+    if debate_id:
+        command.extend(["--debate-id", debate_id])
+    if work_id:
+        command.extend(["--work-id", work_id])
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_translation_preflight(
     root: Path, debate_id: str, *, work_id: str, unit_id: str,
 ) -> int:
@@ -2775,6 +2792,13 @@ def build_parser() -> argparse.ArgumentParser:
     translation_resume_parser.add_argument("debate_id")
     translation_resume_parser.add_argument("--work-id", required=True)
 
+    resume_parser = sub.add_parser(
+        "resume",
+        help="Découvrir les Works actifs et afficher la prochaine action sans identifiant",
+    )
+    resume_parser.add_argument("--debate-id")
+    resume_parser.add_argument("--work-id")
+
     translation_preflight_parser = sub.add_parser(
         "corpus-workspace-translation-preflight",
         help="Contrôler mécaniquement un correctif avant son scellement",
@@ -3092,6 +3116,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "corpus-workspace-translation-resume":
         return corpus_workspace_translation_resume(
             root, args.debate_id, work_id=args.work_id,
+        )
+
+    if args.command == "resume":
+        return global_resume(
+            root, debate_id=args.debate_id, work_id=args.work_id,
         )
 
     if args.command == "corpus-workspace-translation-preflight":

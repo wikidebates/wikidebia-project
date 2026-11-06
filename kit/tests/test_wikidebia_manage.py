@@ -1136,6 +1136,18 @@ def test_translation_resume_command_is_exposed_by_manager():
     assert args.work_id == "EDIT-TEST-001"
 
 
+def test_global_resume_command_needs_no_identifier_and_accepts_filters():
+    automatic = module.build_parser().parse_args(["resume"])
+    selected = module.build_parser().parse_args([
+        "resume", "--debate-id", "debat_test", "--work-id", "EDIT-TEST-001",
+    ])
+    assert automatic.command == "resume"
+    assert automatic.debate_id is None
+    assert automatic.work_id is None
+    assert selected.debate_id == "debat_test"
+    assert selected.work_id == "EDIT-TEST-001"
+
+
 def test_translation_preflight_command_is_exposed_by_manager():
     args = module.build_parser().parse_args([
         "corpus-workspace-translation-preflight", "debat_test",
