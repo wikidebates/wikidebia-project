@@ -18,7 +18,7 @@ from wikidebia_workspace_status import _next_step
 
 
 DEBATE = "test-reprise"
-WORK = "work-test"
+WORK = "WORK-TEST"
 
 
 @pytest.mark.parametrize(
