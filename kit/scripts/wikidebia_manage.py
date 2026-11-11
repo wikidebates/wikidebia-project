@@ -2242,6 +2242,7 @@ def pretranslation_benchmark(
     payload_bytes: int,
     iterations: int,
     output: Path | None,
+    snapshot: Path | None,
 ) -> int:
     script = root / "kit" / "scripts" / "wikidebia_pretranslation_benchmark.py"
     if not script.is_file():
@@ -2256,6 +2257,8 @@ def pretranslation_benchmark(
     ]
     if output is not None:
         command.extend(["--output", str(output)])
+    if snapshot is not None:
+        command.extend(["--snapshot", str(snapshot)])
     return run(command, cwd=root, check=False).returncode
 
 
@@ -3027,6 +3030,7 @@ def build_parser() -> argparse.ArgumentParser:
     benchmark_parser.add_argument("--arguments", type=int, default=250)
     benchmark_parser.add_argument("--payload-bytes", type=int, default=1024)
     benchmark_parser.add_argument("--iterations", type=int, default=3)
+    benchmark_parser.add_argument("--snapshot", type=Path)
     benchmark_parser.add_argument("--output", type=Path)
 
     fragment_parser = sub.add_parser(
@@ -3421,6 +3425,7 @@ def main(argv: list[str] | None = None) -> int:
             payload_bytes=args.payload_bytes,
             iterations=args.iterations,
             output=args.output,
+            snapshot=args.snapshot,
         )
 
     if args.command == "corpus-workspace-translation-fragment":

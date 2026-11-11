@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "status": "passed",
   "declared_file_count": 485,
-  "declared_test_count": 1128,
-  "package_manifest_sha256": "e45b73c82d99886dfd2c9a4e2396a44594ac2fdb5a8c470a50fe66c323fab306",
+  "declared_test_count": 1131,
+  "package_manifest_sha256": "e032f21c4dec5e8d7de16b497034e610dbce373d40910a7ffdbdc612824e1b4c",
   "generated_date": "2026-11-12",
-  "receipt_sha256": "abb5f75396fe2bf8ecfade926c69f55fd5ddc621292516544978197db936667b"
+  "receipt_sha256": "b7f9bbd1d25f8f91b2dd9c619df5b4a14eb136e68fd8e8eea80af75ce49273b7"
 }
