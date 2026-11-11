@@ -31,6 +31,9 @@ La découverte elle-même reste sans accès distant. Les champs
 `next_remote_read_possible` et `next_remote_write_possible` décrivent en revanche
 la commande proposée : ils signalent notamment qu’un `review-import` de graphe
 peut franchir ensuite le checkpoint de publication française.
+Lorsqu’une comparaison distante signée de portée `all` ne contient que des
+`skip`, `resume` propose directement la clôture locale liée au SHA-256 du plan.
+Cette commande ne relit pas le wiki et ne demande aucune revue vide.
 
 Si plusieurs Works sont actifs, aucune sélection implicite n’est faite. La
 sortie fournit pour chacun une commande de reprise explicite :

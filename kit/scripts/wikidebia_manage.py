@@ -2429,7 +2429,8 @@ def corpus_workspace_remote_execute(
 
 def corpus_workspace_close(
     root: Path, debate_id: str, *, work_id: str, comparison_id: str,
-    confirm_execution_sha256: str,
+    confirm_execution_sha256: str | None = None,
+    confirm_no_change_plan_sha256: str | None = None,
 ) -> int:
     script = root / "kit" / "scripts" / "wikidebia_work_close.py"
     if not script.is_file():
@@ -2437,9 +2438,14 @@ def corpus_workspace_close(
     command = [
         python_command(root), str(script), debate_id,
         "--work-id", work_id, "--comparison-id", comparison_id,
-        "--confirm-execution-sha256", confirm_execution_sha256,
-        "--project-root", str(root), "--machine-readable",
     ]
+    if confirm_no_change_plan_sha256:
+        command.extend(["--confirm-no-change-plan-sha256", confirm_no_change_plan_sha256])
+    elif confirm_execution_sha256:
+        command.extend(["--confirm-execution-sha256", confirm_execution_sha256])
+    else:
+        raise ManagementError("Une confirmation de clôture est obligatoire")
+    command.extend(["--project-root", str(root), "--machine-readable"])
     result = run(command, cwd=root, check=False)
     return result.returncode
 
@@ -3097,9 +3103,14 @@ def build_parser() -> argparse.ArgumentParser:
     corpus_close_parser.add_argument("debate_id", help="Identifiant du corpus sous corpus/")
     corpus_close_parser.add_argument("--work-id", required=True, help="Identifiant du workspace éditorial")
     corpus_close_parser.add_argument("--comparison-id", required=True, help="Identifiant REMOTE-AAAAMMJJ-NNN")
-    corpus_close_parser.add_argument(
-        "--confirm-execution-sha256", required=True,
+    close_confirmation = corpus_close_parser.add_mutually_exclusive_group(required=True)
+    close_confirmation.add_argument(
+        "--confirm-execution-sha256",
         help="Empreinte exacte du reçu d’exécution distante",
+    )
+    close_confirmation.add_argument(
+        "--confirm-no-change-plan-sha256",
+        help="Empreinte exacte d’un plan signé all-skip à clôturer sans accès wiki",
     )
 
     continuity_parser = sub.add_parser(
@@ -3416,6 +3427,7 @@ def main(argv: list[str] | None = None) -> int:
         return corpus_workspace_close(
             root, args.debate_id, work_id=args.work_id, comparison_id=args.comparison_id,
             confirm_execution_sha256=args.confirm_execution_sha256,
+            confirm_no_change_plan_sha256=args.confirm_no_change_plan_sha256,
         )
 
     if args.command == "continuity-sync":

@@ -12,6 +12,7 @@ from wikidebia_corpus_build import CorpusBuildError, validate_debate_id
 from wikidebia_editorial_workspace import WorkspaceError, validate_work_id
 from wikidebia_remote_plan_review import RemotePlanReviewError, _load_comparison
 from wikidebia_render import RenderError, _load_workspace
+from wikidebia_update import OPERATIONS
 
 
 class WorkspaceStatusError(WorkspaceError):
@@ -203,6 +204,7 @@ def summarize_workspace(project_root: Path, debate_id: str, work_id: str) -> dic
         raise WorkspaceStatusError("Statut du workspace absent")
 
     remote: dict[str, Any] | None = None
+    no_change_plan_sha256: str | None = None
     comparison_meta = meta.get("remote_comparison") or {}
     comparison_id = str(comparison_meta.get("comparison_id") or "")
     if status in REMOTE_STATUSES and comparison_id:
@@ -216,6 +218,17 @@ def summarize_workspace(project_root: Path, debate_id: str, work_id: str) -> dic
             "plan_sha256": receipt.get("plan_sha256"),
             "receipt_sha256": receipt.get("receipt_sha256"),
         }
+        plan = comparison["plan"]
+        operations = plan.get("operations") or {}
+        if (
+            status == "remote_plan_ready"
+            and receipt.get("status") == "plan_ready"
+            and receipt.get("scope") == "all"
+            and set(operations) == set(OPERATIONS)
+            and operations.get("skip")
+            and all(not operations.get(category) for category in OPERATIONS if category != "skip")
+        ):
+            no_change_plan_sha256 = str(plan.get("plan_sha256") or "") or None
 
     artifact_hashes = {
         name: str((meta.get(key) or {}).get(field) or "")
@@ -227,6 +240,18 @@ def summarize_workspace(project_root: Path, debate_id: str, work_id: str) -> dic
         if (meta.get(key) or {}).get(field)
     }
     next_step = _next_step(meta, debate_id, work_id)
+    if no_change_plan_sha256 and comparison_id:
+        next_step = {
+            "action": "close_workspace_from_signed_no_change_plan",
+            "command": _command(
+                "corpus-workspace-close", debate_id, work_id,
+                "--comparison-id", comparison_id,
+                "--confirm-no-change-plan-sha256", no_change_plan_sha256,
+            ),
+            "remote_read_possible": False,
+            "remote_write_possible": False,
+            "note": "Le plan signé de portée all ne contient que des skip ; la clôture reste locale.",
+        }
     return {
         "schema": "wikidebia-compact-workspace-status-1.0",
         "debate_id": debate_id,
