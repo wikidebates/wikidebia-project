@@ -676,18 +676,47 @@ def copy_import_pages(inp: ExtractionInput, snapshot: Mapping[str, Any], output_
 
 
 
-def inspect_existing_build(output_dir: Path, *, expected_debate_id: str) -> dict[str, Any]:
+def _first_symlink_component(path: Path) -> Path | None:
+    """Return the first symlink in an output path without resolving through it."""
+    absolute = path.expanduser().absolute()
+    for candidate in (absolute, *absolute.parents):
+        if candidate.is_symlink():
+            return candidate
+    return None
+
+
+def _has_relative_symlink(root: Path, relative: str) -> bool:
+    candidate = root / relative
+    while candidate != root:
+        if candidate.is_symlink():
+            return True
+        candidate = candidate.parent
+    return False
+
+
+def inspect_existing_build(
+    output_dir: Path,
+    *,
+    expected_debate_id: str | None,
+) -> dict[str, Any]:
     """Read-only diagnostic; never authorizes automatic reuse."""
-    output_dir = output_dir.expanduser()
-    if output_dir.is_symlink():
+    output_dir = output_dir.expanduser().absolute()
+    if _first_symlink_component(output_dir) is not None:
         return {"status": "invalid", "safe_to_reuse": False}
     output_dir = output_dir.resolve()
     if not output_dir.exists():
         return {"status": "absent", "safe_to_reuse": False}
-    if output_dir.is_symlink() or not output_dir.is_dir():
+    if not output_dir.is_dir():
         return {"status": "invalid", "safe_to_reuse": False}
-    required = ("manifest.json", "scope.json", "data/registre_debat.json",
-                "data/import_provenance.json", "graph/graphe_argumentatif.json")
+    required = (
+        "manifest.json",
+        "scope.json",
+        "data/registre_debat.json",
+        "data/import_provenance.json",
+        "graph/graphe_argumentatif.json",
+    )
+    if any(_has_relative_symlink(output_dir, name) for name in required):
+        return {"status": "invalid", "safe_to_reuse": False}
     missing = [name for name in required if not (output_dir / name).is_file()]
     if missing:
         return {"status": "incomplete", "safe_to_reuse": False, "missing": missing}
@@ -702,7 +731,10 @@ def inspect_existing_build(output_dir: Path, *, expected_debate_id: str) -> dict
         return {"status": "invalid", "safe_to_reuse": False}
     actual_id = str(manifest.get("debate_id") or "")
     registry_id = str((registry.get("debate") or {}).get("id") or "")
-    if actual_id != expected_debate_id or registry_id != expected_debate_id:
+    if actual_id != registry_id or (
+        expected_debate_id is not None
+        and (actual_id != expected_debate_id or registry_id != expected_debate_id)
+    ):
         return {"status": "mismatch", "safe_to_reuse": False}
     return {"status": "unverified", "safe_to_reuse": False}
 
@@ -716,6 +748,21 @@ def build_corpus(
     scope_summary: str | None,
     overwrite: bool,
 ) -> dict[str, Any]:
+    output_dir = output_dir.expanduser().absolute()
+    symlink = _first_symlink_component(output_dir)
+    if symlink is not None:
+        raise CorpusInitError(f"Le chemin de sortie traverse un lien symbolique : {symlink}")
+    output_dir = output_dir.resolve()
+    if output_dir.exists() and not overwrite:
+        expected_id = canonical_debate_id(debate_id) if debate_id else None
+        state = inspect_existing_build(
+            output_dir,
+            expected_debate_id=expected_id,
+        )["status"]
+        raise CorpusInitError(
+            f"Le dossier existe déjà : {output_dir}; état={state}; utiliser --overwrite"
+        )
+
     inp = resolve_extraction_input(source)
     try:
         graph, snapshot = verify_extraction(inp)
@@ -723,14 +770,7 @@ def build_corpus(
         debate_title, debate_title_changes = normalize_title(debate_title_source)
         debate_id = canonical_debate_id(debate_id or debate_title)
         short_code = validate_short_code(short_code) if short_code else derive_short_code(debate_id)
-        output_dir = output_dir.expanduser()
-        if output_dir.is_symlink():
-            raise CorpusInitError(f"Le dossier de sortie est un lien symbolique : {output_dir}")
-        output_dir = output_dir.resolve()
         if output_dir.exists():
-            if not overwrite:
-                state = inspect_existing_build(output_dir, expected_debate_id=debate_id)["status"]
-                raise CorpusInitError(f"Le dossier existe déjà : {output_dir}; état={state}; utiliser --overwrite")
             shutil.rmtree(output_dir)
         output_dir.mkdir(parents=True)
 

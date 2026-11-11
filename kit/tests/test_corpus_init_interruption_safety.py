@@ -25,20 +25,10 @@ def test_existing_partial_build_is_preserved_without_overwrite(monkeypatch, tmp_
 
     source = tmp_path / "snapshot"
     source.mkdir()
+    calls = []
     monkeypatch.setattr(
         corpus_init, "resolve_extraction_input",
-        lambda _source: corpus_init.ExtractionInput(
-            root=source,
-            graph_path=source / "graph.json",
-            snapshot_manifest_path=source / "snapshot_manifest.json",
-        ),
-    )
-    monkeypatch.setattr(
-        corpus_init, "verify_extraction",
-        lambda _input: (
-            {"metadata": {"débat": "Un débat de test"}},
-            {"debate": {"canonical_title": "Un débat de test"}},
-        ),
+        lambda _source: calls.append("resolve") or None,
     )
 
     with pytest.raises(corpus_init.CorpusInitError, match="existe déjà"):
@@ -52,6 +42,8 @@ def test_existing_partial_build_is_preserved_without_overwrite(monkeypatch, tmp_
 
     assert marker.read_bytes() == original
     assert sorted(path.name for path in output.iterdir()) == [marker.name]
+    assert calls == []
+
 
 @pytest.mark.parametrize("layout, expected", [
     ("missing", "absent"),
@@ -94,6 +86,7 @@ def test_inspection_is_read_only(tmp_path, layout, expected):
     assert result["safe_to_reuse"] is False
     assert after == before
 
+
 def test_inspection_rejects_non_object_metadata(tmp_path):
     output = tmp_path / "corpus"
     for name in (
@@ -118,6 +111,26 @@ def test_inspection_rejects_symlinked_output(tmp_path):
     result = corpus_init.inspect_existing_build(output, expected_debate_id="debat-test")
     assert result == {"status": "invalid", "safe_to_reuse": False}
     assert target.is_dir()
+
+
+def test_inspection_rejects_symlinked_required_directory(tmp_path):
+    output = tmp_path / "corpus"
+    output.mkdir()
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    (outside / "registre_debat.json").write_text("{}\n", encoding="utf-8")
+    try:
+        (output / "data").symlink_to(outside, target_is_directory=True)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlinks unavailable")
+
+    result = corpus_init.inspect_existing_build(
+        output,
+        expected_debate_id="debat-test",
+    )
+
+    assert result == {"status": "invalid", "safe_to_reuse": False}
+
 
 def test_build_rejects_symlink_even_with_overwrite(monkeypatch, tmp_path):
     target = tmp_path / "real"
@@ -155,3 +168,35 @@ def test_build_rejects_symlink_even_with_overwrite(monkeypatch, tmp_path):
             overwrite=True,
         )
     assert marker.read_text(encoding="utf-8") == "keep"
+
+
+def test_build_rejects_intermediate_symlink_before_reading_source(monkeypatch, tmp_path):
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    linked_parent = tmp_path / "linked-parent"
+    try:
+        linked_parent.symlink_to(outside, target_is_directory=True)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlinks unavailable")
+    output = linked_parent / "corpus"
+    source = tmp_path / "snapshot"
+    source.mkdir()
+    calls = []
+    monkeypatch.setattr(
+        corpus_init,
+        "resolve_extraction_input",
+        lambda _source: calls.append("resolve") or None,
+    )
+
+    with pytest.raises(corpus_init.CorpusInitError, match="lien symbolique"):
+        corpus_init.build_corpus(
+            source,
+            output,
+            debate_id="debat-test",
+            short_code=None,
+            scope_summary=None,
+            overwrite=True,
+        )
+
+    assert calls == []
+    assert list(outside.iterdir()) == []
