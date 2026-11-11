@@ -70,3 +70,30 @@ def test_unsupported_reflink_preserves_originals(tmp_path, monkeypatch):
         inventory(tmp_path, apply=True)
     assert a.read_bytes() == b.read_bytes() == b"same"
     assert a.stat().st_ino != b.stat().st_ino
+
+
+def test_legacy_hardlinks_are_reported_and_repaired_atomically(tmp_path):
+    a = _write(tmp_path, "a.zip", b"legacy shared checkpoint")
+    b = a.with_name("b.zip")
+    os.link(a, b)
+    external = tmp_path / ".state/checkpoint-objects/legacy.zip"
+    external.parent.mkdir(parents=True)
+    os.link(a, external)
+
+    report = inventory(tmp_path)
+    assert report["hardlinked_files"] == 2
+    assert report["hardlinked_inode_groups"] == 1
+    assert report["repaired_hardlinks"] == 0
+
+    repaired = inventory(tmp_path, repair_hardlinks=True)
+
+    assert repaired["repaired_hardlinks"] == 2
+    assert len({a.stat().st_ino, b.stat().st_ino, external.stat().st_ino}) == 3
+    a.write_bytes(b"changed independently")
+    assert b.read_bytes() == external.read_bytes() == b"legacy shared checkpoint"
+    assert inventory(tmp_path)["hardlinked_files"] == 0
+
+
+def test_repair_and_reflink_apply_are_mutually_exclusive(tmp_path):
+    with pytest.raises(StoreError, match="incompatibles"):
+        inventory(tmp_path, apply=True, repair_hardlinks=True)
