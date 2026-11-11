@@ -19,6 +19,14 @@ une capsule de traduction valide et rattachée à la revue courante est plus
 précise que le statut général : elle peut ainsi pointer directement vers le
 correctif à éditer ou la commande d’application exacte.
 
+Le workspace reste autoritatif après sa création, mais une revue française déjà
+empaquetée demeure un handoff du workflow. Si son type correspond encore au
+statut du workspace et si le ZIP porte exactement le SHA-256 enregistré,
+`resume` restitue son chemin et `review-import`. Si le ZIP manque ou a changé,
+la commande propose de reprendre l’orchestrateur afin de le reconstruire. Un
+ancien handoff français ne peut pas ramener en arrière un workspace déjà passé
+à la traduction, à la comparaison distante ou à la publication.
+
 La découverte elle-même reste sans accès distant. Les champs
 `next_remote_read_possible` et `next_remote_write_possible` décrivent en revanche
 la commande proposée : ils signalent notamment qu’un `review-import` de graphe

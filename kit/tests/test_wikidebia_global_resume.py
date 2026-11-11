@@ -167,6 +167,98 @@ def test_workspace_entry_supersedes_matching_preworkspace_workflow(tmp_path: Pat
     assert "workflow_path" not in result["selected"]
 
 
+def test_workspace_keeps_verified_french_review_handoff(tmp_path: Path, monkeypatch):
+    for review_type, workspace_status in (
+        ("fr_metadata_review", "workspace_initialized"),
+        ("fr_content_review", "fr_titles_applied"),
+    ):
+        project = tmp_path / review_type
+        work_id = "EDIT-TEST-001"
+        _workspace(project, "debat_test", work_id)
+        archive = project / f"outgoing/debat_test_{review_type}.zip"
+        archive.parent.mkdir(parents=True)
+        archive.write_bytes((review_type + " package").encode())
+        _workflow(
+            project, "debat_test", phase=review_type, status="awaiting_review",
+            work_id=work_id,
+            pending_review={
+                "review_type": review_type,
+                "package_path": str(archive.relative_to(project)),
+                "archive_sha256": sha256_bytes(archive.read_bytes()),
+            },
+        )
+        monkeypatch.setattr(
+            resume, "summarize_workspace",
+            lambda _root, debate_id, selected_work_id, status=workspace_status:
+                _summary(debate_id, selected_work_id, status),
+        )
+
+        result = resume.discover_resume(project)
+
+        assert result["active_count"] == 1
+        assert result["selected"]["workspace_path"].endswith(work_id)
+        assert result["selected"]["next_action"] == "complete_pending_review"
+        assert result["selected"]["next_command"] == "./wikidebia review-import debat_test"
+        assert result["selected"]["edit_path"] == str(archive.relative_to(project))
+        assert result["selected"]["workflow_review_type"] == review_type
+        assert result["selected"]["next_remote_write_possible"] is True
+
+
+def test_workspace_restores_missing_pending_review_package(tmp_path: Path, monkeypatch):
+    project = tmp_path / "project"
+    work_id = "EDIT-TEST-001"
+    _workspace(project, "debat_test", work_id)
+    _workflow(
+        project, "debat_test", phase="fr_metadata_review", status="awaiting_review",
+        work_id=work_id,
+        pending_review={
+            "review_type": "fr_metadata_review",
+            "package_path": "outgoing/missing.zip",
+            "archive_sha256": "a" * 64,
+        },
+    )
+    monkeypatch.setattr(
+        resume, "summarize_workspace",
+        lambda _root, debate_id, selected_work_id:
+            _summary(debate_id, selected_work_id, "workspace_initialized"),
+    )
+
+    result = resume.discover_resume(project)
+
+    assert result["selected"]["next_action"] == "restore_pending_review_package"
+    assert result["selected"]["resume_warning"] == "pending_review_package_missing_or_stale"
+    assert result["selected"]["next_command"].startswith("./wikidebia workflow ")
+    assert "edit_path" not in result["selected"]
+
+
+def test_stale_workflow_handoff_cannot_override_advanced_workspace(tmp_path: Path, monkeypatch):
+    project = tmp_path / "project"
+    work_id = "EDIT-TEST-001"
+    _workspace(project, "debat_test", work_id)
+    archive = project / "outgoing/stale.zip"
+    archive.parent.mkdir(parents=True)
+    archive.write_bytes(b"stale")
+    _workflow(
+        project, "debat_test", phase="fr_content_review", status="awaiting_review",
+        work_id=work_id,
+        pending_review={
+            "review_type": "fr_content_review",
+            "package_path": "outgoing/stale.zip",
+            "archive_sha256": sha256_bytes(b"stale"),
+        },
+    )
+    monkeypatch.setattr(
+        resume, "summarize_workspace",
+        lambda _root, debate_id, selected_work_id:
+            _summary(debate_id, selected_work_id, "remote_plan_ready"),
+    )
+
+    result = resume.discover_resume(project)
+
+    assert result["selected"]["next_action"] == "prepare_remote_plan_review"
+    assert "edit_path" not in result["selected"]
+
+
 def test_terminal_preworkspace_workflow_is_journaled_but_not_active(tmp_path: Path):
     project = tmp_path / "project"
     _workflow(
