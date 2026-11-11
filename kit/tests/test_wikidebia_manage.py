@@ -1120,6 +1120,14 @@ def test_workspace_publication_reconciliation_command_is_exposed_by_manager():
     assert args.work_id == "EDIT-TEST-001"
 
 
+def test_state_maintenance_command_is_exposed_by_manager():
+    args = module.build_parser().parse_args([
+        "state-maintenance", "--output", ".state/maintenance-plan.json",
+    ])
+    assert args.command == "state-maintenance"
+    assert args.output == Path(".state/maintenance-plan.json")
+
+
 def test_workspace_status_command_is_exposed_by_manager():
     args = module.build_parser().parse_args([
         "corpus-workspace-status", "debat_test", "--work-id", "EDIT-TEST-001",
@@ -1338,7 +1346,7 @@ def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
         "refresh_package_metadata.py",
         "wikidebia_render.py",
         "wikidebia_release.py", "wikidebia_remote_compare.py", "wikidebia_workspace_finalize.py",
-        "wikidebia_post_publication.py",
+        "wikidebia_post_publication.py", "wikidebia_state_maintenance.py",
         "wikidebia_workspace_status.py",
         "wikidebia_remote_plan_review.py",
         "wikidebia_remote_execute.py", "wikidebia_work_close.py",
