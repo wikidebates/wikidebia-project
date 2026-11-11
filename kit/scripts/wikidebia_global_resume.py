@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shlex
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -202,6 +203,79 @@ def _discover_workspace_entries(
     return entries, ignored
 
 
+def _workflow_entry(project_root: Path, workflow_path: Path) -> dict[str, Any]:
+    debate_id = validate_debate_id(workflow_path.parent.name)
+    workflow = load_json(workflow_path, "workflow pré-workspace")
+    if workflow.get("schema") != WORKFLOW_SCHEMA or workflow.get("debate_id") != debate_id:
+        raise GlobalResumeError("Identité ou schéma du workflow pré-workspace invalide")
+    raw_work_id = workflow.get("work_id")
+    work_id = validate_work_id(str(raw_work_id)) if raw_work_id else None
+    if work_id:
+        workspace_json = (
+            project_root / ".state/editorial-workspaces" / debate_id / work_id / "workspace.json"
+        )
+        if workspace_json.exists():
+            raise FileExistsError("workspace_authoritative")
+    phase = str(workflow.get("phase") or "unknown")
+    status = str(workflow.get("status") or "unknown")
+    terminal = phase in {"published", "already_translated"} or status in {
+        "published", "completed_existing_translation",
+    }
+    pending = workflow.get("pending_review")
+    if isinstance(pending, dict):
+        next_action = "complete_pending_review"
+        next_command = f"./wikidebia review-import {debate_id}"
+        edit_path = str(pending.get("package_path") or "") or None
+    else:
+        next_action = "complete" if terminal else "continue_editorial_workflow"
+        next_command = None if terminal else (
+            "./wikidebia workflow "
+            f"{shlex.quote(str(workflow.get('debate_title') or debate_id))} "
+            f"--debate-id {debate_id}"
+        )
+        edit_path = None
+    return {
+        "debate_id": debate_id,
+        "work_id": work_id,
+        "workflow_path": relative_to_project(workflow_path, project_root),
+        "workflow_sha256": sha256_bytes(canonical_json(workflow)),
+        "status": status,
+        "phase": phase,
+        "active": not terminal,
+        "next_action": next_action,
+        "next_command": next_command,
+        "next_remote_read_possible": bool(
+            not terminal and phase == "initialize_graph" and not workflow.get("snapshot_path")
+        ),
+        "next_remote_write_possible": False,
+        **({"edit_path": edit_path} if edit_path else {}),
+        "remote_access_performed": False,
+        "remote_write_performed": False,
+    }
+
+
+def _discover_preworkspace_entries(
+    project_root: Path,
+) -> tuple[list[dict[str, Any]], list[dict[str, str]]]:
+    workflows_root = project_root / ".state/workflows"
+    entries: list[dict[str, Any]] = []
+    ignored: list[dict[str, str]] = []
+    for path in sorted(workflows_root.glob("*/workflow.json")):
+        relative = relative_to_project(path, project_root)
+        if path.is_symlink() or path.parent.is_symlink():
+            ignored.append({"workflow_path": relative, "reason": "unsafe_symlink"})
+            continue
+        try:
+            entries.append(_workflow_entry(project_root, path))
+        except FileExistsError:
+            # The workspace summary is richer and becomes authoritative as soon
+            # as its canonical workspace.json exists.
+            continue
+        except (GlobalResumeError, WorkspaceError, CorpusBuildError, OSError, ValueError, KeyError):
+            ignored.append({"workflow_path": relative, "reason": "invalid_workflow"})
+    return entries, ignored
+
+
 def _load_events(events_dir: Path) -> tuple[list[dict[str, Any]], int]:
     valid: list[dict[str, Any]] = []
     invalid = 0
@@ -271,7 +345,12 @@ def discover_resume(
         debate_id = validate_debate_id(debate_id)
     if work_id is not None:
         work_id = validate_work_id(work_id)
-    entries, ignored_workspaces = _discover_workspace_entries(project_root)
+    workspace_entries, ignored_workspaces = _discover_workspace_entries(project_root)
+    workflow_entries, ignored_workflows = _discover_preworkspace_entries(project_root)
+    entries = sorted(
+        [*workspace_entries, *workflow_entries],
+        key=lambda row: (str(row.get("debate_id") or ""), str(row.get("work_id") or "")),
+    )
     events, invalid_events = _record_events(project_root, entries)
     active = [row for row in entries if row.get("active") is True]
     registry: dict[str, Any] = {
@@ -292,6 +371,8 @@ def discover_resume(
         "ignored_invalid_event_count": invalid_events,
         "ignored_workspace_count": len(ignored_workspaces),
         "ignored_workspaces": ignored_workspaces,
+        "ignored_workflow_count": len(ignored_workflows),
+        "ignored_workflows": ignored_workflows,
         "remote_access_performed": False,
         "remote_write_performed": False,
     }
@@ -313,7 +394,8 @@ def discover_resume(
             "status": row["status"],
             "phase": row["phase"],
             "resume_command": (
-                f"./wikidebia resume --debate-id {row['debate_id']} --work-id {row['work_id']}"
+                f"./wikidebia resume --debate-id {row['debate_id']}"
+                + (f" --work-id {row['work_id']}" if row.get("work_id") else "")
             ),
         }
         for row in matches
@@ -329,6 +411,7 @@ def discover_resume(
         "journal_event_count": len(events),
         "ignored_invalid_event_count": invalid_events,
         "ignored_workspace_count": len(ignored_workspaces),
+        "ignored_workflow_count": len(ignored_workflows),
         "remote_access_performed": False,
         "remote_write_performed": False,
     }
@@ -353,7 +436,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     elif result.get("selected"):
         selected = result["selected"]
         print(f"Débat : {selected['debate_id']}")
-        print(f"Work : {selected['work_id']}")
+        print(f"Work : {selected['work_id'] or 'pas encore créé'}")
         print(f"État : {selected['status']} ({selected['phase']})")
         print("Action suivante : " + str(selected.get("next_action") or "aucune"))
         print("Commande suivante : " + str(selected.get("next_command") or "aucune"))
