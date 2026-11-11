@@ -15,6 +15,7 @@ import dataclasses
 import datetime as dt
 import hashlib
 import json
+import os
 import re
 import shutil
 import stat
@@ -38,6 +39,9 @@ from wikidebia_graph_extract import (
 )
 
 CORPUS_INIT_VERSION = "1.0.0"
+BUILD_RECEIPT_SCHEMA = "wikidebia-corpus-build-receipt-1.0"
+BUILD_CONTRACT_SCHEMA = "wikidebia-corpus-build-contract-1.0"
+BUILD_RECEIPT_PATH = PurePosixPath("reports/corpus_build_receipt.json")
 RUBRIQUES = {
     "Aménagement", "Culture", "Droit", "Écologie", "Économie", "Éducation",
     "Éthique", "Géopolitique", "Histoire", "Philosophie", "Politique",
@@ -69,6 +73,37 @@ def write_json(path: Path, value: Any) -> None:
         encoding="utf-8",
         newline="\n",
     )
+
+
+def canonical_json_sha256(value: Any) -> str:
+    payload = json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return sha256_bytes(payload)
+
+
+def write_json_atomic(path: Path, value: Any) -> None:
+    """Durably replace one JSON file without exposing a partial receipt."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as handle:
+            json.dump(value, handle, ensure_ascii=False, indent=2, sort_keys=True)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+        directory_fd = os.open(path.parent, os.O_RDONLY)
+        try:
+            os.fsync(directory_fd)
+        finally:
+            os.close(directory_fd)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def safe_extract(archive: Path, destination: Path) -> None:
@@ -277,6 +312,54 @@ def verify_extraction(inp: ExtractionInput) -> tuple[dict[str, Any], dict[str, A
         if inp.snapshot_manifest_path.resolve() not in verified_package_files:
             raise CorpusInitError("Le manifeste de snapshot n'est pas couvert par le manifeste audité")
     return graph, snapshot
+
+
+def source_fingerprint(
+    inp: ExtractionInput,
+    graph: Mapping[str, Any],
+    snapshot: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Describe verified source content without depending on its local path."""
+    pages = [snapshot.get("debate") or {}, *(snapshot.get("arguments") or [])]
+    page_fingerprints = [
+        {
+            "canonical_title": str(row.get("canonical_title") or ""),
+            "relative_path": str(row.get("relative_path") or ""),
+            "revision_id": row.get("revision_id"),
+            "sha256": str(row.get("sha256") or ""),
+        }
+        for row in pages
+    ]
+    value = {
+        "schema": "wikidebia-corpus-source-fingerprint-1.0",
+        "graph_sha256": sha256_file(inp.graph_path),
+        "snapshot_manifest_sha256": sha256_file(inp.snapshot_manifest_path),
+        "pages": page_fingerprints,
+    }
+    value["sha256"] = canonical_json_sha256(value)
+    return value
+
+
+def make_build_contract(
+    inp: ExtractionInput,
+    graph: Mapping[str, Any],
+    snapshot: Mapping[str, Any],
+    *,
+    debate_id: str,
+    short_code: str,
+    scope_summary: str,
+) -> dict[str, Any]:
+    return {
+        "schema": BUILD_CONTRACT_SCHEMA,
+        "corpus_init_version": CORPUS_INIT_VERSION,
+        "kit_version": KIT_VERSION,
+        "norm_version": NORM_VERSION,
+        "validator_version": VALIDATOR_VERSION,
+        "debate_id": debate_id,
+        "short_code": short_code,
+        "scope_summary": scope_summary,
+        "source": source_fingerprint(inp, graph, snapshot),
+    }
 
 
 def ordered_titles(graph: Mapping[str, Any]) -> list[str]:
@@ -694,12 +777,120 @@ def _has_relative_symlink(root: Path, relative: str) -> bool:
     return False
 
 
+def build_tree_fingerprint(output_dir: Path) -> dict[str, Any]:
+    """Hash every regular build file except the receipt itself."""
+    root = output_dir.expanduser().absolute()
+    if _first_symlink_component(root) is not None:
+        raise CorpusInitError("Le build à certifier traverse un lien symbolique")
+    root = root.resolve()
+    if not root.is_dir():
+        raise CorpusInitError(f"Build absent ou non régulier : {root}")
+    entries: list[dict[str, Any]] = []
+    for path in sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
+        relative = path.relative_to(root).as_posix()
+        if path.is_symlink():
+            raise CorpusInitError(f"Lien symbolique interdit dans le build : {relative}")
+        if path.is_dir():
+            continue
+        if relative == BUILD_RECEIPT_PATH.as_posix():
+            continue
+        if not path.is_file():
+            raise CorpusInitError(f"Fichier non régulier interdit dans le build : {relative}")
+        entries.append({
+            "path": relative,
+            "size_bytes": path.stat().st_size,
+            "sha256": sha256_file(path),
+        })
+    return {
+        "file_count": len(entries),
+        "sha256": canonical_json_sha256(entries),
+    }
+
+
+def write_build_receipt(
+    output_dir: Path,
+    *,
+    build_contract: Mapping[str, Any],
+    validation: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Write a receipt only for a completely validated, unchanged build."""
+    if validation.get("status") != "passed":
+        raise CorpusInitError("Un reçu de build exige une validation initiale réussie")
+    contract = dict(build_contract)
+    if contract.get("schema") != BUILD_CONTRACT_SCHEMA:
+        raise CorpusInitError("Contrat de build absent ou non pris en charge")
+    tree = build_tree_fingerprint(output_dir)
+    receipt = {
+        "schema": BUILD_RECEIPT_SCHEMA,
+        "created_at": now_iso(),
+        "build_contract": contract,
+        "build_contract_sha256": canonical_json_sha256(contract),
+        "build_tree_sha256": tree["sha256"],
+        "build_file_count": tree["file_count"],
+        "validation_status": "passed",
+    }
+    receipt["receipt_sha256"] = canonical_json_sha256(receipt)
+    write_json_atomic(output_dir / BUILD_RECEIPT_PATH, receipt)
+    return receipt
+
+
+def verify_build_receipt(
+    output_dir: Path,
+    *,
+    expected_contract_sha256: str | None = None,
+) -> dict[str, Any]:
+    """Verify receipt integrity and, when supplied, exact source/options identity."""
+    receipt_path = output_dir / BUILD_RECEIPT_PATH
+    if _has_relative_symlink(output_dir, BUILD_RECEIPT_PATH.as_posix()):
+        return {"status": "invalid", "safe_to_reuse": False}
+    if not receipt_path.is_file():
+        return {"status": "unverified", "safe_to_reuse": False}
+    try:
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        if not isinstance(receipt, dict) or receipt.get("schema") != BUILD_RECEIPT_SCHEMA:
+            raise ValueError("receipt schema")
+        claimed_receipt_sha = str(receipt.get("receipt_sha256") or "")
+        unsigned_receipt = dict(receipt)
+        unsigned_receipt.pop("receipt_sha256", None)
+        if claimed_receipt_sha != canonical_json_sha256(unsigned_receipt):
+            raise ValueError("receipt hash")
+        contract = receipt.get("build_contract")
+        if not isinstance(contract, dict) or contract.get("schema") != BUILD_CONTRACT_SCHEMA:
+            raise ValueError("contract schema")
+        actual_contract_sha = canonical_json_sha256(contract)
+        if str(receipt.get("build_contract_sha256") or "") != actual_contract_sha:
+            raise ValueError("contract hash")
+        tree = build_tree_fingerprint(output_dir)
+        if (
+            str(receipt.get("build_tree_sha256") or "") != tree["sha256"]
+            or receipt.get("build_file_count") != tree["file_count"]
+            or receipt.get("validation_status") != "passed"
+        ):
+            raise ValueError("tree hash")
+    except (CorpusInitError, OSError, ValueError, TypeError):
+        return {"status": "invalid", "safe_to_reuse": False}
+    result = {
+        "status": "verified",
+        "safe_to_reuse": False,
+        "build_contract_sha256": actual_contract_sha,
+        "receipt_sha256": claimed_receipt_sha,
+    }
+    if expected_contract_sha256 is not None:
+        if actual_contract_sha != expected_contract_sha256:
+            result["status"] = "stale"
+        else:
+            result["status"] = "valid_and_matching"
+            result["safe_to_reuse"] = True
+    return result
+
+
 def inspect_existing_build(
     output_dir: Path,
     *,
     expected_debate_id: str | None,
+    expected_contract_sha256: str | None = None,
 ) -> dict[str, Any]:
-    """Read-only diagnostic; never authorizes automatic reuse."""
+    """Read-only diagnostic; reuse requires an exact verified contract."""
     output_dir = output_dir.expanduser().absolute()
     if _first_symlink_component(output_dir) is not None:
         return {"status": "invalid", "safe_to_reuse": False}
@@ -736,7 +927,10 @@ def inspect_existing_build(
         and (actual_id != expected_debate_id or registry_id != expected_debate_id)
     ):
         return {"status": "mismatch", "safe_to_reuse": False}
-    return {"status": "unverified", "safe_to_reuse": False}
+    return verify_build_receipt(
+        output_dir,
+        expected_contract_sha256=expected_contract_sha256,
+    )
 
 
 def build_corpus(
@@ -770,6 +964,15 @@ def build_corpus(
         debate_title, debate_title_changes = normalize_title(debate_title_source)
         debate_id = canonical_debate_id(debate_id or debate_title)
         short_code = validate_short_code(short_code) if short_code else derive_short_code(debate_id)
+        scope_summary = scope_summary or f"Cadrage importé depuis la page « {debate_title_source} »; périmètre éditorial à revoir avant validation du graphe."
+        build_contract = make_build_contract(
+            inp,
+            graph,
+            snapshot,
+            debate_id=debate_id,
+            short_code=short_code,
+            scope_summary=scope_summary,
+        )
         if output_dir.exists():
             shutil.rmtree(output_dir)
         output_dir.mkdir(parents=True)
@@ -790,7 +993,6 @@ def build_corpus(
         labels = {"fr": {"pro": "Arguments pour", "con": "Arguments contre"}, "en": {"pro": None, "con": None}}
         graph_block = {"lifecycle": lifecycle, "depth_policy": depth_policy, "nodes": nodes, "edges": edges, "occurrences": occurrences, "derived_counts": counts}
 
-        scope_summary = scope_summary or f"Cadrage importé depuis la page « {debate_title_source} »; périmètre éditorial à revoir avant validation du graphe."
         scope = {
             "scope_schema_version": "1.0",
             "debate_id": debate_id,
@@ -975,6 +1177,8 @@ def build_corpus(
                 "les occurrences dépliées de l'extracteur comptent tous les chemins."
             ),
             "imports": len(provenance["pages"]),
+            "build_contract": build_contract,
+            "build_contract_sha256": canonical_json_sha256(build_contract),
         }
     finally:
         if inp.cleanup:
@@ -1056,7 +1260,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     if not args.skip_validation and args.project_root:
         validation = run_validator(args.project_root.resolve(), args.output_dir.resolve())
         result["validation"] = validation
-        if validation["status"] == "failed":
+        if validation["status"] == "passed":
+            receipt = write_build_receipt(
+                args.output_dir.resolve(),
+                build_contract=result["build_contract"],
+                validation=validation,
+            )
+            result["build_receipt"] = {
+                "path": BUILD_RECEIPT_PATH.as_posix(),
+                "receipt_sha256": receipt["receipt_sha256"],
+                "build_contract_sha256": receipt["build_contract_sha256"],
+            }
+        elif validation["status"] == "failed":
             result["status"] = "created_but_validation_failed"
     print(json.dumps(result, ensure_ascii=False, sort_keys=True) if args.machine_readable else json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result["status"] == "created" else 2

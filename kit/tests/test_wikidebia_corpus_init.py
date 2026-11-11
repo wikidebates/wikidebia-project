@@ -157,6 +157,33 @@ def test_builds_graph_draft_and_preserves_imports(tmp_path: Path):
     assert len(secondary) == 1 and secondary[0]["render_children"] is False
 
 
+def test_cli_writes_verifiable_receipt_after_validation(tmp_path: Path, monkeypatch, capsys):
+    project = tmp_path / "project"
+    source = make_extraction(tmp_path / "source")
+    output = project / ".state/corpus-builds/debat_test"
+    monkeypatch.setattr(mod, "run_validator", lambda *_args: {"status": "passed"})
+
+    result_code = mod.main([
+        str(source),
+        "--output-dir", str(output),
+        "--debate-id", "debat_test",
+        "--short-code", "TEST",
+        "--project-root", str(project),
+        "--machine-readable",
+    ])
+
+    result = json.loads(capsys.readouterr().out)
+    assert result_code == 0
+    assert result["build_receipt"]["path"] == mod.BUILD_RECEIPT_PATH.as_posix()
+    inspected = mod.inspect_existing_build(
+        output,
+        expected_debate_id="debat_test",
+        expected_contract_sha256=result["build_contract_sha256"],
+    )
+    assert inspected["status"] == "valid_and_matching"
+    assert inspected["safe_to_reuse"] is True
+
+
 def test_existing_english_argument_is_registered_for_remote_reuse(tmp_path: Path):
     source = make_extraction(tmp_path / "source")
     graph_path = source / "test_graphe_recursif_2026-08-03.json"
