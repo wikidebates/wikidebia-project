@@ -110,6 +110,14 @@ Un paquet de revue contient uniquement :
 
 Le retour doit conserver exactement cette structure. Les fichiers de contexte, le manifeste et les instructions ne peuvent pas être modifiés. Les fichiers supplémentaires sont refusés. Les chemins dangereux, liens symboliques et paquets provenant d'un autre débat, d'un autre Work ou d'une ancienne revue sont refusés.
 
+La création du ZIP utilise un remplacement atomique : une interruption ne peut
+pas substituer une archive partielle à la dernière archive complète. Si le ZIP
+complet a été écrit mais que l’enregistrement suivant de `workflow.json` a été
+interrompu, la reprise le réadopte uniquement lorsque l’identité du débat et du
+Work, les versions, l’empreinte complète de la base, chaque fichier éditable,
+chaque contexte et les compteurs correspondent exactement. Sinon le ZIP
+orphelin est ignoré et reconstruit depuis la base courante.
+
 `outgoing/` est une zone privée exclue de Git. Aucun secret, cookie, fichier Pywikibot privé, configuration locale ou état de publication n'est inclus par les listes blanches de revue.
 
 ## Points éditoriaux orchestrés
