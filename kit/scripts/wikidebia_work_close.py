@@ -39,6 +39,7 @@ from wikidebia_corpus_build import (
 from wikidebia_editorial_review import _run_validator
 from wikidebia_editorial_workspace import WorkspaceError, fsync_directory, validate_work_id, workspace_receipt_hash
 from wikidebia_remote_compare import _validate_comparison_id
+from wikidebia_remote_plan_review import RemotePlanReviewError, _load_comparison
 from wikidebia_remote_execute import (
     AUTHORIZATION_SCHEMA,
     EXECUTION_RECEIPT_SCHEMA,
@@ -46,9 +47,10 @@ from wikidebia_remote_execute import (
     _canonical,
 )
 from wikidebia_render import _load_workspace
-from wikidebia_update import KIT_VERSION, sha_object, sha_text
+from wikidebia_update import KIT_VERSION, OPERATIONS, sha_object, sha_text
 
 CLOSURE_SCHEMA = "wikidebia-work-closure-receipt-1.0"
+CLOSURE_NO_CHANGE_SCHEMA = "wikidebia-work-no-change-closure-receipt-1.0"
 CLOSURE_PREFLIGHT_SCHEMA = "wikidebia-work-closure-preflight-1.0"
 EVIDENCE_MANIFEST_SCHEMA = "wikidebia-work-evidence-manifest-1.0"
 COMPLETED_INDEX_SCHEMA = "wikidebia-completed-work-index-1.0"
@@ -403,6 +405,140 @@ def _build_evidence_archive(project_root: Path, execution: Mapping[str, Any], cl
         shutil.rmtree(temp, ignore_errors=True)
 
 
+def _build_no_change_evidence_archive(
+    project_root: Path,
+    comparison: Mapping[str, Any],
+    archive_root: Path,
+) -> dict[str, Any]:
+    """Archive the signed read-only evidence used by a no-change closure."""
+    temp = Path(tempfile.mkdtemp(prefix=".evidence.tmp-", dir=archive_root.parent))
+    try:
+        evidence = temp / "evidence"
+        evidence.mkdir()
+        workspace = comparison["workspace"]
+        release_copy = workspace / "release-copy"
+        _copy_evidence_file(project_root, workspace / "workspace.json", evidence)
+        _copy_evidence_file(project_root, release_copy / "manifest.json", evidence)
+        _copy_evidence_file(project_root, release_copy / "release" / "release_manifest.json", evidence)
+        release_artifact = (
+            project_root / ".state" / "corpus-releases"
+            / str(comparison["receipt"]["debate_id"])
+            / str(comparison["receipt"]["work_id"])
+        )
+        if release_artifact.is_dir():
+            _copy_evidence_tree(project_root, release_artifact, evidence)
+        _copy_evidence_tree(project_root, comparison["run_dir"], evidence)
+        manifest_rel = "evidence-manifest.json"
+        manifest = {
+            "schema": EVIDENCE_MANIFEST_SCHEMA,
+            "debate_id": comparison["receipt"]["debate_id"],
+            "work_id": comparison["receipt"]["work_id"],
+            "comparison_id": comparison["receipt"]["comparison_id"],
+            "created_at": now_iso(),
+            "closure_mode": "signed_no_change_plan",
+            "files": _inventory(evidence, {manifest_rel}),
+            "self_excluded": [manifest_rel],
+        }
+        manifest["manifest_sha256"] = _canonical_sha(manifest, "manifest_sha256")
+        write_json(evidence / manifest_rel, manifest)
+        archive_root.mkdir(parents=True, exist_ok=False)
+        archive_path = archive_root / "work-evidence.zip"
+        _zip_tree(evidence, archive_path)
+        write_json(archive_root / "evidence-manifest.json", manifest)
+        return {
+            "archive": archive_path,
+            "archive_sha256": sha256_file(archive_path),
+            "archive_size_bytes": archive_path.stat().st_size,
+            "manifest": archive_root / "evidence-manifest.json",
+            "manifest_sha256": sha256_file(archive_root / "evidence-manifest.json"),
+        }
+    finally:
+        shutil.rmtree(temp, ignore_errors=True)
+
+
+def _load_no_change_comparison(
+    project_root: Path,
+    debate_id: str,
+    work_id: str,
+    comparison_id: str,
+    confirmation: str,
+) -> dict[str, Any]:
+    """Load a signed full comparison and prove that every page is a skip."""
+    try:
+        comparison = _load_comparison(project_root, debate_id, work_id, comparison_id)
+    except RemotePlanReviewError as exc:
+        raise WorkClosureError(str(exc)) from exc
+    meta = comparison["meta"]
+    if meta.get("status") != "remote_plan_ready":
+        raise WorkClosureError(f"Statut incompatible avec la clôture sans changement : {meta.get('status')}")
+    receipt = comparison["receipt"]
+    plan = comparison["plan"]
+    if receipt.get("status") != "plan_ready" or receipt.get("scope") != "all":
+        raise WorkClosureError("La clôture sans changement exige une comparaison prête de portée all")
+    if confirmation != plan.get("plan_sha256"):
+        raise WorkClosureError("L’empreinte confirmée ne correspond pas au plan sans changement")
+
+    counts = plan.get("counts") or {}
+    operations = plan.get("operations") or {}
+    receipt_counts = receipt.get("counts") or {}
+    if set(counts) != set(OPERATIONS) or set(operations) != set(OPERATIONS):
+        raise WorkClosureError("Le plan sans changement contient des catégories inattendues")
+    if any(receipt_counts.get(category) != counts.get(category) for category in OPERATIONS):
+        raise WorkClosureError("Les compteurs du reçu et du plan divergent")
+    non_skip = [category for category in OPERATIONS if category != "skip" and operations.get(category)]
+    if non_skip:
+        raise WorkClosureError("Le plan contient des opérations autres que skip : " + ", ".join(non_skip))
+
+    release_copy = comparison["workspace"] / "release-copy"
+    if not release_copy.is_dir() or release_copy.is_symlink():
+        raise WorkClosureError("release-copy absente ou non sûre")
+    assert_no_symlinks(release_copy)
+    release_sha = full_tree_sha256(release_copy)
+    expected_release_sha = str((meta.get("release_copy") or {}).get("tree_sha256") or "")
+    if (
+        not expected_release_sha
+        or release_sha != expected_release_sha
+        or release_sha != comparison.get("release_sha256")
+    ):
+        raise WorkClosureError("release-copy a changé depuis la comparaison distante")
+
+    release_pages = _release_pages(release_copy)
+    expected = {
+        (language, page_id): page
+        for language, pages in release_pages.items()
+        for page_id, page in pages.items()
+    }
+    observed: set[tuple[str, str]] = set()
+    for row in operations["skip"]:
+        if not isinstance(row, dict):
+            raise WorkClosureError("Opération skip invalide")
+        key = (str(row.get("language") or row.get("wiki") or ""), str(row.get("page_id") or ""))
+        page = expected.get(key)
+        if page is None or key in observed:
+            raise WorkClosureError(f"Page skip absente ou dupliquée : {key[0]}/{key[1]}")
+        source_path = (project_root / str(row.get("source_path") or "")).resolve()
+        expected_path = (release_copy / page["file_path"]).resolve()
+        if (
+            str(row.get("title") or "") != page["canonical_title"]
+            or str(row.get("new_sha256") or "") != page["content_sha256"]
+            or str(row.get("remote_sha256") or "") != page["content_sha256"]
+            or source_path != expected_path
+            or type(row.get("observed_revision_id")) is not int
+            or row["observed_revision_id"] <= 0
+        ):
+            raise WorkClosureError(f"Preuve skip divergente : {key[0]}/{key[1]}")
+        observed.add(key)
+    if observed != set(expected):
+        raise WorkClosureError("Les opérations skip ne couvrent pas exactement la release-copy")
+
+    return {
+        **comparison,
+        "release_copy": release_copy,
+        "release_sha256": release_sha,
+        "release_pages": release_pages,
+    }
+
+
 def _rename_exchange(first: Path, second: Path) -> None:
     if first.stat().st_dev != second.stat().st_dev:
         raise WorkClosureError("Échange atomique impossible entre systèmes de fichiers différents")
@@ -432,7 +568,7 @@ def _verify_active_source(project_root: Path, debate_id: str, meta: Mapping[str,
     return active, actual
 
 
-def _chain_hashes(meta: Mapping[str, Any], execution: Mapping[str, Any]) -> dict[str, Any]:
+def _metadata_chain_hashes(meta: Mapping[str, Any]) -> dict[str, Any]:
     keys = [
         "source", "working_copy", "reviewed_copy", "content_reviewed_copy",
         "translated_copy", "rendered_copy", "release_copy", "local_release",
@@ -445,6 +581,11 @@ def _chain_hashes(meta: Mapping[str, Any], execution: Mapping[str, Any]) -> dict
             selected = {name: item for name, item in value.items() if "sha256" in name or name in {"path", "status", "comparison_id", "mode"}}
             if selected:
                 result[key] = selected
+    return result
+
+
+def _chain_hashes(meta: Mapping[str, Any], execution: Mapping[str, Any]) -> dict[str, Any]:
+    result = _metadata_chain_hashes(meta)
     result["execution_receipt_sha256"] = execution["execution_receipt"]["receipt_sha256"]
     return result
 
@@ -458,7 +599,10 @@ def close_work(project_root: Path, debate_id: str, work_id: str, comparison_id: 
     final_receipt_path = closure_root / "work-closure-receipt.json"
     if final_receipt_path.is_file():
         receipt = load_json(final_receipt_path, "reçu de clôture")
-        if receipt.get("receipt_sha256") != _canonical_sha(receipt, "receipt_sha256"):
+        if (
+            receipt.get("schema") != CLOSURE_SCHEMA
+            or receipt.get("receipt_sha256") != _canonical_sha(receipt, "receipt_sha256")
+        ):
             raise WorkClosureError("Reçu de clôture existant invalide")
         if confirm_execution_sha256 != receipt.get("execution_receipt_sha256"):
             raise WorkClosureError("La confirmation ne correspond pas à la clôture existante")
@@ -609,12 +753,208 @@ def close_work(project_root: Path, debate_id: str, work_id: str, comparison_id: 
     return receipt
 
 
+def close_no_change_work(
+    project_root: Path,
+    debate_id: str,
+    work_id: str,
+    comparison_id: str,
+    confirm_plan_sha256: str,
+) -> dict[str, Any]:
+    """Close a Work from a signed all-skip comparison without wiki access."""
+    project_root = project_root.expanduser().resolve()
+    debate_id = validate_debate_id(debate_id)
+    work_id = validate_work_id(work_id)
+    comparison_id = _validate_comparison_id(comparison_id)
+    closure_root = _closure_dir(project_root, debate_id, work_id, comparison_id)
+    final_receipt_path = closure_root / "work-closure-receipt.json"
+    if final_receipt_path.is_file():
+        receipt = load_json(final_receipt_path, "reçu de clôture")
+        if (
+            receipt.get("schema") != CLOSURE_NO_CHANGE_SCHEMA
+            or receipt.get("receipt_sha256") != _canonical_sha(receipt, "receipt_sha256")
+        ):
+            raise WorkClosureError("Reçu de clôture existant invalide")
+        if receipt.get("closure_mode") != "signed_no_change_plan":
+            raise WorkClosureError("La clôture existante utilise un autre mode")
+        if confirm_plan_sha256 != receipt.get("plan_sha256"):
+            raise WorkClosureError("La confirmation ne correspond pas à la clôture existante")
+        active = project_root / "corpus" / debate_id
+        if not active.is_dir() or full_tree_sha256(active) != receipt.get("active_corpus_tree_sha256"):
+            raise WorkClosureError("Le corpus actif a changé après la clôture")
+        return {**receipt, "idempotent": True}
+    if closure_root.exists() or closure_root.is_symlink():
+        raise WorkClosureError("Une clôture partielle existe déjà pour cette comparaison")
+
+    comparison = _load_no_change_comparison(
+        project_root, debate_id, work_id, comparison_id, confirm_plan_sha256
+    )
+    active, old_tree_sha = _verify_active_source(project_root, debate_id, comparison["meta"])
+    closure_root.mkdir(parents=False)
+    validation_json = closure_root / "closure-validation.json"
+    validation_txt = closure_root / "closure-validation.txt"
+    validation = _run_validator(
+        project_root,
+        comparison["release_copy"],
+        scopes=("all",),
+        json_output=validation_json,
+        text_output=validation_txt,
+    )
+    if (
+        validation.get("result") not in {"passed", "passed_with_warnings"}
+        or int((validation.get("summary") or {}).get("errors", 0)) != 0
+    ):
+        raise WorkClosureError("La validation fraîche du corpus sans changement a échoué")
+
+    archive_root = _archive_dir(project_root, debate_id, work_id, comparison_id)
+    if archive_root.exists() or archive_root.is_symlink():
+        raise WorkClosureError("Le dossier d’archive du Work existe déjà")
+    evidence = _build_no_change_evidence_archive(project_root, comparison, archive_root)
+
+    corpus_parent = active.parent
+    if corpus_parent.stat().st_dev != archive_root.parent.stat().st_dev:
+        raise WorkClosureError("La sauvegarde du corpus précédent ne peut pas rester sur le même système de fichiers")
+    staging = Path(tempfile.mkdtemp(prefix=f".{debate_id}.published.tmp-", dir=corpus_parent))
+    shutil.rmtree(staging)
+    shutil.copytree(comparison["release_copy"], staging, copy_function=shutil.copy2)
+    assert_no_symlinks(staging)
+    new_tree_sha = full_tree_sha256(staging)
+    if new_tree_sha != comparison["release_sha256"]:
+        raise WorkClosureError("La copie de promotion ne correspond pas à release-copy")
+
+    preflight = {
+        "schema": CLOSURE_PREFLIGHT_SCHEMA,
+        "debate_id": debate_id,
+        "work_id": work_id,
+        "comparison_id": comparison_id,
+        "prepared_at": now_iso(),
+        "closure_mode": "signed_no_change_plan",
+        "comparison_receipt_sha256": comparison["receipt"]["receipt_sha256"],
+        "plan_sha256": comparison["plan"]["plan_sha256"],
+        "remote_inventory_sha256": comparison["inventory"]["inventory_sha256"],
+        "release_copy_tree_sha256": comparison["release_sha256"],
+        "active_corpus_tree_sha256_before": old_tree_sha,
+        "skip_count": len(comparison["plan"]["operations"]["skip"]),
+        "validation_result": validation.get("result"),
+        "validation_report_sha256": sha256_file(validation_json),
+        "evidence_archive_sha256": evidence["archive_sha256"],
+        "atomic_exchange_required": True,
+        "remote_access_performed": False,
+        "remote_write_performed": False,
+    }
+    preflight["preflight_sha256"] = _canonical_sha(preflight, "preflight_sha256")
+    write_json(closure_root / "closure-preflight.json", preflight)
+
+    backup = archive_root / "previous-corpus"
+    try:
+        _rename_exchange(active, staging)
+        fsync_directory(corpus_parent)
+        if full_tree_sha256(active) != new_tree_sha or full_tree_sha256(staging) != old_tree_sha:
+            _rename_exchange(active, staging)
+            raise WorkClosureError("Empreinte divergente après échange atomique; échange annulé")
+        os.replace(staging, backup)
+        fsync_directory(archive_root)
+    except Exception:
+        if staging.exists() and not backup.exists():
+            shutil.rmtree(staging, ignore_errors=True)
+        raise
+
+    meta = copy.deepcopy(comparison["meta"])
+    closed_at = now_iso()
+    meta["status"] = "work_closed"
+    meta["work_closure"] = {
+        "comparison_id": comparison_id,
+        "status": "closed",
+        "mode": "signed_no_change_plan",
+        "closed_at": closed_at,
+        "active_corpus_path": f"corpus/{debate_id}",
+        "active_corpus_tree_sha256": new_tree_sha,
+        "previous_corpus_archive": relative_to_project(backup, project_root),
+        "evidence_archive": relative_to_project(evidence["archive"], project_root),
+    }
+    meta.setdefault("boundaries", {}).update({
+        "remote_no_change_plan_verified": True,
+        "remote_equivalence_verified": True,
+        "active_corpus_promoted": True,
+        "work_closed": True,
+    })
+    meta["workspace_sha256"] = workspace_receipt_hash(meta)
+    write_json(comparison["workspace"] / "workspace.json", meta)
+
+    chain = _metadata_chain_hashes(meta)
+    chain.update({
+        "comparison_receipt_sha256": comparison["receipt"]["receipt_sha256"],
+        "plan_sha256": comparison["plan"]["plan_sha256"],
+        "remote_inventory_sha256": comparison["inventory"]["inventory_sha256"],
+    })
+    receipt = {
+        "schema": CLOSURE_NO_CHANGE_SCHEMA,
+        "schema_version": "1.0",
+        "debate_id": debate_id,
+        "work_id": work_id,
+        "comparison_id": comparison_id,
+        "closed_at": closed_at,
+        "normative_revision": NORM_VERSION,
+        "validator_version": VALIDATOR_VERSION,
+        "kit_version": KIT_VERSION,
+        "status": "work_closed",
+        "closure_mode": "signed_no_change_plan",
+        "execution_status": "not_required",
+        "comparison_receipt_sha256": comparison["receipt"]["receipt_sha256"],
+        "plan_sha256": comparison["plan"]["plan_sha256"],
+        "remote_inventory_sha256": comparison["inventory"]["inventory_sha256"],
+        "read_checkpoint_sha256": comparison["receipt"].get("read_checkpoint_sha256"),
+        "skip_count": len(comparison["plan"]["operations"]["skip"]),
+        "release_copy_tree_sha256": comparison["release_sha256"],
+        "active_corpus_tree_sha256": new_tree_sha,
+        "previous_corpus_tree_sha256": old_tree_sha,
+        "previous_corpus_archive": relative_to_project(backup, project_root),
+        "evidence_archive": relative_to_project(evidence["archive"], project_root),
+        "evidence_archive_sha256": evidence["archive_sha256"],
+        "evidence_manifest_sha256": evidence["manifest_sha256"],
+        "closure_validation_result": validation.get("result"),
+        "closure_validation_sha256": sha256_file(validation_json),
+        "workspace_sha256": meta["workspace_sha256"],
+        "chain": chain,
+        "atomic_exchange": True,
+        "remote_access_performed_during_closure": False,
+        "remote_write_performed_during_closure": False,
+        "publication_completed_before_closure": True,
+        "work_completed": True,
+    }
+    receipt["receipt_sha256"] = _canonical_sha(receipt, "receipt_sha256")
+    write_json(final_receipt_path, receipt)
+
+    completed_root = assert_control_directory(project_root / ".state" / "completed-works", project_root, create=True)
+    completed_debate = assert_control_directory(completed_root / debate_id, project_root, create=True)
+    index = {
+        "schema": COMPLETED_INDEX_SCHEMA,
+        "debate_id": debate_id,
+        "work_id": work_id,
+        "comparison_id": comparison_id,
+        "status": "work_closed",
+        "closed_at": closed_at,
+        "closure_mode": "signed_no_change_plan",
+        "receipt_path": relative_to_project(final_receipt_path, project_root),
+        "receipt_sha256": receipt["receipt_sha256"],
+        "active_corpus_tree_sha256": new_tree_sha,
+    }
+    index["index_sha256"] = _canonical_sha(index, "index_sha256")
+    write_json(completed_debate / f"{work_id}.json", index)
+    write_json(completed_debate / "latest.json", index)
+    return receipt
+
+
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Clôturer un Work après exécution distante vérifiée.")
+    parser = argparse.ArgumentParser(description="Clôturer un Work après preuve distante vérifiée.")
     parser.add_argument("debate_id")
     parser.add_argument("--work-id", required=True)
     parser.add_argument("--comparison-id", required=True)
-    parser.add_argument("--confirm-execution-sha256", required=True)
+    confirmation = parser.add_mutually_exclusive_group(required=True)
+    confirmation.add_argument("--confirm-execution-sha256")
+    confirmation.add_argument(
+        "--confirm-no-change-plan-sha256",
+        help="Clôturer localement un plan signé de portée all composé uniquement de skip",
+    )
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
     parser.add_argument("--machine-readable", action="store_true")
     return parser
@@ -624,7 +964,22 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     project_root = args.project_root.expanduser().resolve()
     with exclusive_lock(project_root, args.debate_id, "work-closure"):
-        result = close_work(project_root, args.debate_id, args.work_id, args.comparison_id, args.confirm_execution_sha256)
+        if args.confirm_no_change_plan_sha256:
+            result = close_no_change_work(
+                project_root,
+                args.debate_id,
+                args.work_id,
+                args.comparison_id,
+                args.confirm_no_change_plan_sha256,
+            )
+        else:
+            result = close_work(
+                project_root,
+                args.debate_id,
+                args.work_id,
+                args.comparison_id,
+                args.confirm_execution_sha256,
+            )
     print(json.dumps(result, ensure_ascii=False, sort_keys=True) if args.machine_readable else json.dumps(result, ensure_ascii=False, indent=2))
     return 0
 
