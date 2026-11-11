@@ -7,6 +7,7 @@ Hardlinks are forbidden. --prune is disabled pending a safe redesign.
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import hashlib
 import json
 import os
@@ -16,8 +17,25 @@ import tempfile
 from collections import defaultdict
 from pathlib import Path
 
+from wikidebia_corpus_build import assert_control_directory, write_json
+
+PLAN_SCHEMA = "wikidebia-checkpoint-mutation-plan-1.0"
+RECEIPT_SCHEMA = "wikidebia-checkpoint-mutation-receipt-1.0"
+
 class StoreError(RuntimeError):
     pass
+
+
+def _object_sha(value: dict) -> str:
+    payload = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def _relative(path: Path, project_root: Path) -> str:
+    try:
+        return path.relative_to(project_root).as_posix()
+    except ValueError as exc:
+        raise StoreError(f"Chemin extérieur au projet : {path}") from exc
 
 def digest(path: Path) -> str:
     h = hashlib.sha256()
@@ -54,10 +72,68 @@ def _replace_with_independent_copy(path: Path, expected_sha256: str) -> None:
             os.unlink(tmp_name)
 
 
+def _mutation_plan(
+    project_root: Path,
+    groups: dict,
+    inode_groups: dict,
+) -> dict:
+    files = []
+    for (sha256, size), paths in sorted(groups.items()):
+        for path in sorted(paths):
+            info = path.stat()
+            files.append({
+                "path": _relative(path, project_root),
+                "sha256": sha256,
+                "size_bytes": size,
+                "device": info.st_dev,
+                "inode": info.st_ino,
+                "link_count": info.st_nlink,
+            })
+    duplicates = []
+    for (sha256, size), paths in sorted(groups.items()):
+        if len(paths) > 1:
+            duplicates.append({
+                "sha256": sha256,
+                "size_bytes": size,
+                "source": _relative(paths[0], project_root),
+                "targets": [_relative(path, project_root) for path in paths[1:]],
+            })
+    hardlinks = []
+    for (device, inode), paths in sorted(inode_groups.items()):
+        hardlinks.append({
+            "device": device,
+            "inode": inode,
+            "paths": [_relative(path, project_root) for path in sorted(paths)],
+        })
+    plan = {
+        "schema": PLAN_SCHEMA,
+        "files": files,
+        "duplicate_groups": duplicates,
+        "legacy_hardlink_groups": hardlinks,
+        "remote_access_performed": False,
+        "remote_write_performed": False,
+    }
+    plan["plan_sha256"] = _object_sha(plan)
+    return plan
+
+
+def _write_mutation_receipt(project_root: Path, receipt: dict) -> Path:
+    state = assert_control_directory(project_root / ".state", project_root, create=True)
+    maintenance = assert_control_directory(state / "checkpoint-maintenance", project_root, create=True)
+    receipts = assert_control_directory(maintenance / "receipts", project_root, create=True)
+    timestamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    path = receipts / f"{timestamp}-{receipt['action']}-{receipt['plan_sha256'][:12]}.json"
+    if path.exists() or path.is_symlink():
+        raise StoreError("Collision de chemin pour le reçu de mutation")
+    write_json(path, receipt)
+    return path
+
+
 def inventory(
     project_root: Path, *, apply: bool = False, prune: bool = False,
-    repair_hardlinks: bool = False,
+    repair_hardlinks: bool = False, confirm_plan_sha256: str | None = None,
 ) -> dict:
+    project_root = project_root.expanduser().resolve()
     root = project_root / ".state/resume-checkpoints"
     objects = project_root / ".state/checkpoint-objects"
     if (project_root / ".state").is_symlink() or root.is_symlink() or objects.is_symlink():
@@ -86,11 +162,31 @@ def inventory(
         raise StoreError("--apply et --repair-hardlinks sont incompatibles")
     if apply and prune:
         raise StoreError("--prune indisponible avec les reflinks")
+    plan = _mutation_plan(project_root, groups, inode_groups)
+    action = "apply_reflinks" if apply else ("repair_hardlinks" if repair_hardlinks else None)
+    if action and confirm_plan_sha256 != plan["plan_sha256"]:
+        raise StoreError(
+            "Confirmation du plan obligatoire ou divergente; relancer l’inventaire et confirmer plan_sha256"
+        )
+    if apply and inode_groups:
+        raise StoreError("Liens physiques existants : exécuter d’abord --repair-hardlinks")
+    mutation_results = []
     if repair_hardlinks:
         for paths in inode_groups.values():
             for path in paths:
                 expected_sha256 = digest(path)
+                before = path.stat()
                 _replace_with_independent_copy(path, expected_sha256)
+                after = path.stat()
+                mutation_results.append({
+                    "operation": "independent_copy",
+                    "path": _relative(path, project_root),
+                    "sha256": expected_sha256,
+                    "before_device": before.st_dev,
+                    "before_inode": before.st_ino,
+                    "after_device": after.st_dev,
+                    "after_inode": after.st_ino,
+                })
                 repaired_hardlinks += 1
     for (sha, size), paths in sorted(groups.items()):
         if not apply or len(paths) < 2:
@@ -101,6 +197,7 @@ def inventory(
                 raise StoreError("Liens physiques existants : réparation manuelle requise")
             if digest(source) != sha or digest(path) != sha:
                 raise StoreError("Checkpoint modifié pendant l'inventaire")
+            before = path.stat()
             fd, tmp_name = tempfile.mkstemp(prefix=".reflink-", dir=path.parent)
             try:
                 with os.fdopen(fd, "wb") as target, source.open("rb") as original:
@@ -119,12 +216,24 @@ def inventory(
                     os.unlink(tmp_name)
             linked += 1
             saved_bytes += size
+            after = path.stat()
+            mutation_results.append({
+                "operation": "reflink_copy_on_write",
+                "source": _relative(source, project_root),
+                "path": _relative(path, project_root),
+                "sha256": sha,
+                "size_bytes": size,
+                "before_device": before.st_dev,
+                "before_inode": before.st_ino,
+                "after_device": after.st_dev,
+                "after_inode": after.st_ino,
+            })
     removed = 0
     rows = [{"sha256": sha, "size": size, "copies": len(paths)}
             for (sha, size), paths in sorted(groups.items())]
-    return {
+    result = {
         "schema": "wikidebia-checkpoint-dedup-inventory-1.0",
-        "mode": "apply" if apply else "dry_run",
+        "mode": action or "dry_run",
         "files": sum(len(paths) for paths in groups.values()),
         "unique_contents": len(groups),
         "logical_bytes": logical_bytes,
@@ -136,9 +245,35 @@ def inventory(
         "repaired_hardlinks": repaired_hardlinks,
         "pruned_objects": removed,
         "objects": rows,
+        "mutation_plan": plan,
+        "plan_sha256": plan["plan_sha256"],
         "remote_access_performed": False,
         "remote_write_performed": False,
     }
+    if action:
+        post = inventory(project_root)
+        receipt = {
+            "schema": RECEIPT_SCHEMA,
+            "action": action,
+            "completed_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+            "plan_sha256": plan["plan_sha256"],
+            "confirmed_plan_sha256": confirm_plan_sha256,
+            "mutation_plan": plan,
+            "pre_files": result["files"],
+            "pre_logical_bytes": result["logical_bytes"],
+            "mutations": mutation_results,
+            "mutation_count": len(mutation_results),
+            "post_plan_sha256": post["plan_sha256"],
+            "post_files": post["files"],
+            "post_hardlinked_files": post["hardlinked_files"],
+            "remote_access_performed": False,
+            "remote_write_performed": False,
+        }
+        receipt["receipt_sha256"] = _object_sha(receipt)
+        receipt_path = _write_mutation_receipt(project_root, receipt)
+        result["mutation_receipt"] = receipt
+        result["mutation_receipt_path"] = _relative(receipt_path, project_root)
+    return result
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -147,6 +282,10 @@ def main() -> int:
     actions.add_argument("--apply", action="store_true")
     actions.add_argument("--repair-hardlinks", action="store_true")
     parser.add_argument("--prune", action="store_true")
+    parser.add_argument(
+        "--confirm-plan-sha256",
+        help="Empreinte plan_sha256 exacte du dernier inventaire avant toute mutation",
+    )
     args = parser.parse_args()
     if args.prune and not args.apply:
         parser.error("--prune requires --apply")
@@ -154,6 +293,7 @@ def main() -> int:
         result = inventory(
             args.project_root.resolve(), apply=args.apply, prune=args.prune,
             repair_hardlinks=args.repair_hardlinks,
+            confirm_plan_sha256=args.confirm_plan_sha256,
         )
     except (StoreError, OSError) as exc:
         parser.exit(2, f"INVENTAIRE BLOQUÉ : {exc}\n")
