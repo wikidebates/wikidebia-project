@@ -33,6 +33,30 @@ def _summary(debate_id: str, work_id: str, status: str = "remote_plan_ready"):
     }
 
 
+def _workflow(
+    project: Path,
+    debate_id: str,
+    *,
+    phase: str = "initialize_graph",
+    status: str = "running",
+    work_id: str | None = None,
+    pending_review: dict | None = None,
+) -> Path:
+    path = project / ".state/workflows" / debate_id / "workflow.json"
+    _write(path, {
+        "schema": resume.WORKFLOW_SCHEMA,
+        "schema_version": "1.0",
+        "debate_id": debate_id,
+        "debate_title": "L'avenir de l'humanité ?",
+        "work_id": work_id,
+        "phase": phase,
+        "status": status,
+        "snapshot_path": ".state/snapshot" if phase == "initialize_graph" else None,
+        "pending_review": pending_review,
+    })
+    return path
+
+
 def _published(project: Path, debate_id: str, work_id: str) -> dict:
     receipt = {
         "schema": resume.FINAL_PUBLICATION_SCHEMA,
@@ -79,6 +103,79 @@ def test_single_active_work_is_selected_and_journal_is_deduplicated(tmp_path: Pa
     assert body.pop("registry_sha256") == sha_object(body)
     assert registry["active_count"] == 1
     assert registry["remote_access_performed"] is False
+
+
+def test_preworkspace_workflow_is_discovered_and_resumable(tmp_path: Path):
+    project = tmp_path / "project"
+    _workflow(project, "debat_test")
+
+    first = resume.discover_resume(project)
+    second = resume.discover_resume(project)
+
+    assert first["status"] == "ready"
+    assert first["selected"]["work_id"] is None
+    assert first["selected"]["phase"] == "initialize_graph"
+    assert first["selected"]["next_action"] == "continue_editorial_workflow"
+    assert first["selected"]["next_command"] == (
+        "./wikidebia workflow 'L'\"'\"'avenir de l'\"'\"'humanité ?' --debate-id debat_test"
+    )
+    assert second["journal_event_count"] == 1
+    assert first["selected"]["remote_access_performed"] is False
+
+
+def test_preworkspace_pending_review_points_to_existing_handoff(tmp_path: Path):
+    project = tmp_path / "project"
+    _workflow(
+        project,
+        "debat_test",
+        phase="graph_review",
+        status="awaiting_review",
+        work_id="EDIT-TEST-001",
+        pending_review={
+            "review_type": "graph_review",
+            "package_path": "outgoing/debat_test_graph_review.zip",
+        },
+    )
+
+    result = resume.discover_resume(project)
+
+    assert result["selected"]["next_action"] == "complete_pending_review"
+    assert result["selected"]["next_command"] == "./wikidebia review-import debat_test"
+    assert result["selected"]["edit_path"] == "outgoing/debat_test_graph_review.zip"
+
+
+def test_workspace_entry_supersedes_matching_preworkspace_workflow(tmp_path: Path, monkeypatch):
+    project = tmp_path / "project"
+    work_id = "EDIT-TEST-001"
+    _workflow(project, "debat_test", phase="promote_and_workspace", work_id=work_id)
+    _workspace(project, "debat_test", work_id)
+    monkeypatch.setattr(
+        resume,
+        "summarize_workspace",
+        lambda _root, debate_id, selected_work_id: _summary(debate_id, selected_work_id),
+    )
+
+    result = resume.discover_resume(project)
+
+    assert result["active_count"] == 1
+    assert result["selected"]["workspace_path"].endswith(work_id)
+    assert "workflow_path" not in result["selected"]
+
+
+def test_terminal_preworkspace_workflow_is_journaled_but_not_active(tmp_path: Path):
+    project = tmp_path / "project"
+    _workflow(
+        project,
+        "debat_test",
+        phase="already_translated",
+        status="completed_existing_translation",
+    )
+
+    result = resume.discover_resume(project)
+
+    assert result["status"] == "no_active_work"
+    assert result["active_count"] == 0
+    assert result["journal_event_count"] == 1
 
 
 def test_multiple_active_works_require_compact_explicit_selection(tmp_path: Path, monkeypatch):
