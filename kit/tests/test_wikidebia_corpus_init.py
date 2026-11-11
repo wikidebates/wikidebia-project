@@ -139,8 +139,15 @@ def make_extraction(root: Path) -> Path:
 def test_builds_graph_draft_and_preserves_imports(tmp_path: Path):
     source = make_extraction(tmp_path / "source")
     output = tmp_path / "build"
+    expected_contract = mod.compute_build_contract(
+        source,
+        debate_id="debat_test",
+        short_code="TEST",
+        scope_summary=None,
+    )
     result = mod.build_corpus(source, output, debate_id="debat_test", short_code="TEST", scope_summary=None, overwrite=False)
     assert result["status"] == "created"
+    assert result["build_contract"] == expected_contract
     assert result["source_unfolded_occurrences"] == 5
     assert result["normative_occurrences"] == 4
     assert result["occurrences"] == 4

@@ -41,7 +41,9 @@ from wikidebia_graph_extract import (
 CORPUS_INIT_VERSION = "1.0.0"
 BUILD_RECEIPT_SCHEMA = "wikidebia-corpus-build-receipt-1.0"
 BUILD_CONTRACT_SCHEMA = "wikidebia-corpus-build-contract-1.0"
+BUILD_CONTRACT_RECORD_SCHEMA = "wikidebia-corpus-build-contract-record-1.0"
 BUILD_RECEIPT_PATH = PurePosixPath("reports/corpus_build_receipt.json")
+BUILD_CONTRACT_PATH = PurePosixPath("reports/corpus_build_contract.json")
 RUBRIQUES = {
     "Aménagement", "Culture", "Droit", "Écologie", "Économie", "Éducation",
     "Éthique", "Géopolitique", "Histoire", "Philosophie", "Politique",
@@ -360,6 +362,40 @@ def make_build_contract(
         "scope_summary": scope_summary,
         "source": source_fingerprint(inp, graph, snapshot),
     }
+
+
+def compute_build_contract(
+    source: Path,
+    *,
+    debate_id: str | None,
+    short_code: str | None,
+    scope_summary: str | None,
+) -> dict[str, Any]:
+    """Verify an extraction and compute the contract without building output."""
+    inp = resolve_extraction_input(source)
+    try:
+        graph, snapshot = verify_extraction(inp)
+        debate_title_source = str(
+            graph.get("metadata", {}).get("débat")
+            or snapshot["debate"]["canonical_title"]
+        )
+        selected_id = canonical_debate_id(debate_id or normalize_title(debate_title_source)[0])
+        selected_code = validate_short_code(short_code) if short_code else derive_short_code(selected_id)
+        selected_scope = scope_summary or (
+            f"Cadrage importé depuis la page « {debate_title_source} »; "
+            "périmètre éditorial à revoir avant validation du graphe."
+        )
+        return make_build_contract(
+            inp,
+            graph,
+            snapshot,
+            debate_id=selected_id,
+            short_code=selected_code,
+            scope_summary=selected_scope,
+        )
+    finally:
+        if inp.cleanup:
+            shutil.rmtree(inp.cleanup, ignore_errors=True)
 
 
 def ordered_titles(graph: Mapping[str, Any]) -> list[str]:
@@ -777,6 +813,56 @@ def _has_relative_symlink(root: Path, relative: str) -> bool:
     return False
 
 
+def write_build_contract_record(
+    output_dir: Path,
+    build_contract: Mapping[str, Any],
+) -> dict[str, Any]:
+    contract = dict(build_contract)
+    if contract.get("schema") != BUILD_CONTRACT_SCHEMA:
+        raise CorpusInitError("Contrat de build absent ou non pris en charge")
+    record = {
+        "schema": BUILD_CONTRACT_RECORD_SCHEMA,
+        "build_contract": contract,
+        "build_contract_sha256": canonical_json_sha256(contract),
+    }
+    record["record_sha256"] = canonical_json_sha256(record)
+    write_json_atomic(output_dir / BUILD_CONTRACT_PATH, record)
+    return record
+
+
+def verify_build_contract_record(
+    output_dir: Path,
+    *,
+    expected_contract_sha256: str,
+) -> dict[str, Any]:
+    path = output_dir / BUILD_CONTRACT_PATH
+    if _has_relative_symlink(output_dir, BUILD_CONTRACT_PATH.as_posix()) or not path.is_file():
+        return {"status": "unverified", "matches": False}
+    try:
+        record = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(record, dict) or record.get("schema") != BUILD_CONTRACT_RECORD_SCHEMA:
+            raise ValueError("record schema")
+        claimed_record_sha = str(record.get("record_sha256") or "")
+        unsigned_record = dict(record)
+        unsigned_record.pop("record_sha256", None)
+        if claimed_record_sha != canonical_json_sha256(unsigned_record):
+            raise ValueError("record hash")
+        contract = record.get("build_contract")
+        if not isinstance(contract, dict) or contract.get("schema") != BUILD_CONTRACT_SCHEMA:
+            raise ValueError("contract schema")
+        actual_contract_sha = canonical_json_sha256(contract)
+        if str(record.get("build_contract_sha256") or "") != actual_contract_sha:
+            raise ValueError("contract hash")
+    except (OSError, ValueError, TypeError):
+        return {"status": "invalid", "matches": False}
+    return {
+        "status": "matching" if actual_contract_sha == expected_contract_sha256 else "stale",
+        "matches": actual_contract_sha == expected_contract_sha256,
+        "build_contract_sha256": actual_contract_sha,
+        "record_sha256": claimed_record_sha,
+    }
+
+
 def build_tree_fingerprint(output_dir: Path) -> dict[str, Any]:
     """Hash every regular build file except the receipt itself."""
     root = output_dir.expanduser().absolute()
@@ -819,12 +905,19 @@ def write_build_receipt(
     contract = dict(build_contract)
     if contract.get("schema") != BUILD_CONTRACT_SCHEMA:
         raise CorpusInitError("Contrat de build absent ou non pris en charge")
+    contract_sha = canonical_json_sha256(contract)
+    contract_record = verify_build_contract_record(
+        output_dir,
+        expected_contract_sha256=contract_sha,
+    )
+    if not contract_record.get("matches"):
+        raise CorpusInitError("Le contrat enregistré du build est absent, invalide ou différent")
     tree = build_tree_fingerprint(output_dir)
     receipt = {
         "schema": BUILD_RECEIPT_SCHEMA,
         "created_at": now_iso(),
         "build_contract": contract,
-        "build_contract_sha256": canonical_json_sha256(contract),
+        "build_contract_sha256": contract_sha,
         "build_tree_sha256": tree["sha256"],
         "build_file_count": tree["file_count"],
         "validation_status": "passed",
@@ -860,6 +953,12 @@ def verify_build_receipt(
         actual_contract_sha = canonical_json_sha256(contract)
         if str(receipt.get("build_contract_sha256") or "") != actual_contract_sha:
             raise ValueError("contract hash")
+        contract_record = verify_build_contract_record(
+            output_dir,
+            expected_contract_sha256=actual_contract_sha,
+        )
+        if not contract_record.get("matches"):
+            raise ValueError("contract record")
         tree = build_tree_fingerprint(output_dir)
         if (
             str(receipt.get("build_tree_sha256") or "") != tree["sha256"]
@@ -1162,6 +1261,7 @@ def build_corpus(
             },
         }
         write_json(output_dir / "manifest.json", manifest)
+        write_build_contract_record(output_dir, build_contract)
         return {
             "status": "created",
             "debate_id": debate_id,

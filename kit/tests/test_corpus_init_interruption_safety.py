@@ -134,6 +134,7 @@ def test_verified_receipt_allows_only_exact_contract_reuse(tmp_path):
     output = tmp_path / "corpus"
     _complete_build(output)
     contract = _contract()
+    corpus_init.write_build_contract_record(output, contract)
     receipt = corpus_init.write_build_receipt(
         output,
         build_contract=contract,
@@ -165,6 +166,7 @@ def test_receipt_detects_build_changed_after_validation(tmp_path):
     output = tmp_path / "corpus"
     _complete_build(output)
     contract = _contract()
+    corpus_init.write_build_contract_record(output, contract)
     corpus_init.write_build_receipt(
         output,
         build_contract=contract,
@@ -184,6 +186,7 @@ def test_receipt_detects_build_changed_after_validation(tmp_path):
 def test_failed_validation_cannot_create_receipt(tmp_path):
     output = tmp_path / "corpus"
     _complete_build(output)
+    corpus_init.write_build_contract_record(output, _contract())
 
     with pytest.raises(corpus_init.CorpusInitError, match="validation initiale réussie"):
         corpus_init.write_build_receipt(
