@@ -490,6 +490,44 @@ def test_resume_blocks_existing_build_when_options_changed(tmp_path: Path, monke
     assert calls == []
 
 
+def test_graph_review_package_resumes_after_interruption_post_template(tmp_path: Path, monkeypatch):
+    from test_wikidebia_corpus_init import make_extraction
+    project = tmp_path / "project"
+    project.mkdir()
+    source = make_extraction(tmp_path / "source")
+    build = project / ".state/corpus-builds/debat_test"
+    wf.build_corpus(
+        source, build,
+        debate_id="debat_test", short_code="TEST", scope_summary=None, overwrite=False,
+    )
+    state = {
+        "schema": wf.WORKFLOW_SCHEMA, "schema_version": "1.0", "debate_id": "debat_test",
+        "debate_title": "Débat test ?", "short_code": "TEST", "phase": "graph_review",
+        "status": "running", "work_id": "EDIT-20260811-001", "pending_review": None,
+        "snapshot_path": None, "force_refresh": False,
+        "created_at": "2026-08-11T12:00:00+02:00", "updated_at": "2026-08-11T12:00:00+02:00",
+    }
+    wf._save_workflow(project, state)
+    original_create = wf.create_review_package
+    monkeypatch.setattr(
+        wf,
+        "create_review_package",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(RuntimeError("interruption")),
+    )
+
+    with pytest.raises(RuntimeError, match="interruption"):
+        wf._prepare_graph_package(project, state)
+
+    assert (build / wf.REVIEW_ENVELOPE).is_file()
+    assert (build / wf.PLACEMENT_REVIEW).is_file()
+    monkeypatch.setattr(wf, "create_review_package", original_create)
+
+    pending = wf._prepare_graph_package(project, state)
+
+    assert pending["review_type"] == "graph_review"
+    assert (project / pending["package_path"]).is_file()
+
+
 def test_import_refuses_local_edit_outside_handoff(tmp_path: Path):
     project = tmp_path / "project"
     project.mkdir()
