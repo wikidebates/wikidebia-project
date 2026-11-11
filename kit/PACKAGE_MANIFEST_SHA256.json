@@ -5,7 +5,7 @@
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
   "declared_file_count": 480,
-  "declared_test_count": 1096,
+  "declared_test_count": 1098,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -238,8 +238,8 @@
     },
     {
       "path": "GUIDE_CHECKPOINT_DEDUP.md",
-      "size_bytes": 834,
-      "sha256": "c94e2f3c514c45a8e8e1ca11039fd1deab408aa8174c8a98df4f2ad0a0c7a563"
+      "size_bytes": 1346,
+      "sha256": "d19a09982312e36faaec18751a74fe58cc857e92a93ff2b754266e7e5b41a75c"
     },
     {
       "path": "GUIDE_COMPACT_INDEX.md",
@@ -1134,7 +1134,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "d613d708cdeb931b423c6f2134c2d3429931c735f540a9c3043762c4976be823"
+      "sha256": "34c4cc639cfca71b768c18c8919936750338ae1376580fb44edd8ba3354031ac"
     },
     {
       "path": "VERSIONS.json",
@@ -1663,8 +1663,8 @@
     },
     {
       "path": "scripts/wikidebia_checkpoint_store.py",
-      "size_bytes": 4940,
-      "sha256": "2fb2356232ff940d6a1e996e02e96ce276dc9fb1936bd0f7eb28ded6da562aac"
+      "size_bytes": 6941,
+      "sha256": "b6e681601a3b56f865ac55e1387d91fda9a01be60b704c6c01b208aa4eeb58be"
     },
     {
       "path": "scripts/wikidebia_citation_passages.py",
@@ -2213,8 +2213,8 @@
     },
     {
       "path": "tests/test_wikidebia_checkpoint_store.py",
-      "size_bytes": 2733,
-      "sha256": "8626079651d65b9209d2c60b2b8988d5c370c8def5beb9da00c16d487ecab304"
+      "size_bytes": 3782,
+      "sha256": "b0c23a6c1de00d6563065435912595eeebc20b4d6c350383b4bd195d50a17283"
     },
     {
       "path": "tests/test_wikidebia_compact_index.py",
