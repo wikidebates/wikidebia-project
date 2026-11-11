@@ -2183,6 +2183,30 @@ def global_resume(
     return run(command, cwd=root, check=False).returncode
 
 
+def pretranslation_benchmark(
+    root: Path,
+    *,
+    arguments: int,
+    payload_bytes: int,
+    iterations: int,
+    output: Path | None,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_pretranslation_benchmark.py"
+    if not script.is_file():
+        raise ManagementError("Benchmark de reprise prétraduction absent du kit")
+    command = [
+        python_command(root), str(script),
+        "--project-root", str(root),
+        "--arguments", str(arguments),
+        "--payload-bytes", str(payload_bytes),
+        "--iterations", str(iterations),
+        "--machine-readable",
+    ]
+    if output is not None:
+        command.extend(["--output", str(output)])
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_translation_fragment(
     root: Path,
     debate_id: str,
@@ -2556,6 +2580,7 @@ def doctor(
         "wikidebia_translation_fragment.py",
         "wikidebia_translation_checkpoint.py",
         "wikidebia_global_resume.py",
+        "wikidebia_pretranslation_benchmark.py",
         "wikidebia_access_preflight.py",
         "wikidebia_test_changed.py",
         "wikidebia_translation_memory.py",
@@ -2907,6 +2932,15 @@ def build_parser() -> argparse.ArgumentParser:
     )
     resume_parser.add_argument("--debate-id")
     resume_parser.add_argument("--work-id")
+
+    benchmark_parser = sub.add_parser(
+        "pretranslation-benchmark",
+        help="Mesurer localement les reprises techniques avant traduction",
+    )
+    benchmark_parser.add_argument("--arguments", type=int, default=250)
+    benchmark_parser.add_argument("--payload-bytes", type=int, default=1024)
+    benchmark_parser.add_argument("--iterations", type=int, default=3)
+    benchmark_parser.add_argument("--output", type=Path)
 
     fragment_parser = sub.add_parser(
         "corpus-workspace-translation-fragment",
@@ -3268,6 +3302,15 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "resume":
         return global_resume(
             root, debate_id=args.debate_id, work_id=args.work_id,
+        )
+
+    if args.command == "pretranslation-benchmark":
+        return pretranslation_benchmark(
+            root,
+            arguments=args.arguments,
+            payload_bytes=args.payload_bytes,
+            iterations=args.iterations,
+            output=args.output,
         )
 
     if args.command == "corpus-workspace-translation-fragment":

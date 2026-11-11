@@ -1180,6 +1180,21 @@ def test_global_resume_command_needs_no_identifier_and_accepts_filters():
     assert selected.work_id == "EDIT-TEST-001"
 
 
+def test_pretranslation_benchmark_command_exposes_reproducible_dimensions():
+    args = module.build_parser().parse_args([
+        "pretranslation-benchmark",
+        "--arguments", "878",
+        "--payload-bytes", "2048",
+        "--iterations", "5",
+        "--output", ".state/benchmarks/pretranslation.json",
+    ])
+    assert args.command == "pretranslation-benchmark"
+    assert args.arguments == 878
+    assert args.payload_bytes == 2048
+    assert args.iterations == 5
+    assert args.output == Path(".state/benchmarks/pretranslation.json")
+
+
 def test_translation_fragment_command_exposes_argument_granularity():
     automatic = module.build_parser().parse_args([
         "corpus-workspace-translation-fragment", "debat_test",
@@ -1306,6 +1321,7 @@ def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
         "wikidebia_translation_fragment.py",
         "wikidebia_translation_checkpoint.py",
         "wikidebia_global_resume.py",
+        "wikidebia_pretranslation_benchmark.py",
         "wikidebia_access_preflight.py",
         "wikidebia_test_changed.py",
         "wikidebia_external_deletions.py",
