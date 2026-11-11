@@ -150,7 +150,7 @@ def _next_step(meta: Mapping[str, Any], debate_id: str, work_id: str) -> dict[st
                 "--comparison-id", comparison_id,
                 "--confirm-execution-sha256", digest,
             )
-    elif status == "work_closed":
+    elif status in {"published", "work_closed"}:
         action = "complete"
     elif status in {"remote_plan_manual_review", "remote_plan_blocked"}:
         action = "resolve_remote_differences_then_refresh"
@@ -176,7 +176,7 @@ def _next_step(meta: Mapping[str, Any], debate_id: str, work_id: str) -> dict[st
 
 
 def _phase(status: str) -> str:
-    if status == "work_closed":
+    if status in {"published", "work_closed"}:
         return "complete"
     if status.startswith("remote_execution_"):
         return "remote_execution"

@@ -768,6 +768,7 @@ def test_full_orchestration_reaches_final_publication_through_all_editorial_stop
     monkeypatch.setattr(wf, "render_workspace", lambda *a, **k: calls.append("render") or {"rendered_copy_tree_sha256": "6" * 64})
     monkeypatch.setattr(wf, "release_workspace", lambda *a, **k: calls.append("release") or {"archive": "outgoing/debat_test_release.zip", "status": "release_ready"})
     monkeypatch.setattr(wf, "publish_final_release", lambda *a, **k: calls.append("final_publish") or {"status": "published", "installed_release": {"path": "corpus/debat_test"}, "receipt_sha256": "7" * 64})
+    monkeypatch.setattr(wf, "reconcile_published_workspace", lambda *a, **k: calls.append("reconcile") or {"status": "published"})
 
     # Metadata stop.
     state = wf._mechanical_advance(project, state)
@@ -801,7 +802,7 @@ def test_full_orchestration_reaches_final_publication_through_all_editorial_stop
     assert state["status"] == "published"
     assert state["phase"] == "published"
     assert pass_calls == ["proposition_by_proposition", "risk_marker_review"]
-    assert calls == ["apply", "render", "release", "final_publish"]
+    assert calls == ["apply", "render", "release", "final_publish", "reconcile"]
     assert state["release"]["archive"] == "outgoing/debat_test_release.zip"
 
 
@@ -1531,12 +1532,13 @@ def test_release_ready_resume_enters_final_publication_without_rerunning_semanti
     monkeypatch.setattr(wf, "publish_final_release", lambda *a, **k: calls.append("final") or {
         "status": "published", "installed_release": {"path": "corpus/debat_test"}, "receipt_sha256": "8" * 64,
     })
+    monkeypatch.setattr(wf, "reconcile_published_workspace", lambda *a, **k: calls.append("reconcile") or {"status": "published"})
     monkeypatch.setattr(wf, "render_workspace", lambda *a, **k: (_ for _ in ()).throw(AssertionError("render must not rerun")))
     monkeypatch.setattr(wf, "release_workspace", lambda *a, **k: (_ for _ in ()).throw(AssertionError("release must not rerun")))
     result = wf._mechanical_advance(project, state)
     assert result["status"] == "published"
     assert result["phase"] == "published"
-    assert calls == ["final"]
+    assert calls == ["final", "reconcile"]
 
 
 def test_final_publication_conflict_is_persisted_without_reopening_reviews(tmp_path: Path, monkeypatch):

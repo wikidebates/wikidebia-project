@@ -212,16 +212,20 @@ def _workspace_entry(
     publication = _published_receipt(project_root, debate_id, work_id)
     if publication is not None:
         receipt, receipt_path = publication
+        reconciled = summary.get("status") in {"published", "work_closed"}
         return {
             "debate_id": debate_id,
             "work_id": work_id,
             "workspace_path": relative_to_project(workspace_json.parent, project_root),
             "workspace_sha256": summary.get("workspace_sha256"),
-            "status": "published",
-            "phase": "complete",
-            "active": False,
-            "next_action": "complete",
-            "next_command": None,
+            "status": "published" if reconciled else "publication_reconciliation_required",
+            "phase": "complete" if reconciled else "post_publication",
+            "active": not reconciled,
+            "next_action": "complete" if reconciled else "reconcile_published_workspace",
+            "next_command": None if reconciled else (
+                f"./wikidebia corpus-workspace-reconcile-publication {debate_id} "
+                f"--work-id {work_id}"
+            ),
             "publication_receipt_path": relative_to_project(receipt_path, project_root),
             "publication_receipt_sha256": receipt.get("receipt_sha256"),
             "next_remote_read_possible": False,

@@ -126,3 +126,13 @@ def test_status_does_not_invent_semantic_review_inputs():
     assert result["action"] == "record_two_semantic_convergence_passes"
     assert result["command"] is None
     assert "humaines" in result["note"]
+
+
+def test_published_workspace_is_terminal():
+    result = status._next_step(
+        _meta("published"), "debat_test", "EDIT-TEST-001"
+    )
+
+    assert result["action"] == "complete"
+    assert result["command"] is None
+    assert status._phase("published") == "complete"

@@ -47,3 +47,15 @@ la reprise ; les événements valides et les workspaces sont relus. Un même ét
 n’est enregistré qu’une fois.
 
 Cette commande n’accède pas aux wikis, ne publie rien et ne copie aucun secret.
+
+Après une publication finale, le workflow et son reçu signé ne masquent plus un
+workspace resté à `release_ready`. La reprise propose alors la réconciliation locale :
+
+```sh
+./wikidebia corpus-workspace-reconcile-publication <debate_id> --work-id <WORK_ID>
+```
+
+La commande vérifie le workflow, la baseline, le reçu final, `release-copy` et le
+corpus actif installé. Elle écrit un reçu local signé puis place le workspace dans
+l’état terminal `published`, sans accès distant. Une coupure entre ces deux écritures
+reprend le même reçu de façon idempotente.

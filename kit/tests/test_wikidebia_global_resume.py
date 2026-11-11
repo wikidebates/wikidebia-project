@@ -379,7 +379,7 @@ def test_transaction_backup_workspace_is_ignored_without_blocking_valid_work(tmp
     }]
 
 
-def test_signed_published_workflow_closes_stale_release_ready_workspace(tmp_path: Path, monkeypatch):
+def test_signed_published_workflow_exposes_stale_release_ready_workspace(tmp_path: Path, monkeypatch):
     project = tmp_path / "project"
     _workspace(project, "debat_test", "EDIT-TEST-001")
     receipt = _published(project, "debat_test", "EDIT-TEST-001")
@@ -394,13 +394,38 @@ def test_signed_published_workflow_closes_stale_release_ready_workspace(tmp_path
 
     result = resume.discover_resume(project)
 
-    assert result["status"] == "no_active_work"
-    assert result["active_count"] == 0
+    assert result["status"] == "ready"
+    assert result["active_count"] == 1
+    assert result["selected"]["status"] == "publication_reconciliation_required"
+    assert result["selected"]["next_action"] == "reconcile_published_workspace"
+    assert result["selected"]["next_command"] == (
+        "./wikidebia corpus-workspace-reconcile-publication debat_test "
+        "--work-id EDIT-TEST-001"
+    )
     event_path = next((project / ".state/resume/events").glob("*.json"))
     event = json.loads(event_path.read_text())
-    assert event["state"]["status"] == "published"
-    assert event["state"]["active"] is False
+    assert event["state"]["status"] == "publication_reconciliation_required"
+    assert event["state"]["active"] is True
     assert event["state"]["publication_receipt_sha256"] == receipt["receipt_sha256"]
+
+
+def test_reconciled_published_workspace_is_terminal(tmp_path: Path, monkeypatch):
+    project = tmp_path / "project"
+    _workspace(project, "debat_test", "EDIT-TEST-001")
+    _published(project, "debat_test", "EDIT-TEST-001")
+    monkeypatch.setattr(
+        resume, "summarize_workspace",
+        lambda _root, debate_id, work_id: {
+            **_summary(debate_id, work_id, "published"),
+            "phase": "complete",
+            "next_action": "complete",
+        },
+    )
+
+    result = resume.discover_resume(project)
+
+    assert result["status"] == "no_active_work"
+    assert result["active_count"] == 0
 
 
 def test_tampered_publication_receipt_does_not_hide_active_workspace(tmp_path: Path, monkeypatch):

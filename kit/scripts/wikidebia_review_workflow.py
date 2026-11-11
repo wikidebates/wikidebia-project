@@ -85,6 +85,7 @@ from wikidebia_semantic_convergence import record_pass as record_semantic_pass
 from wikidebia_render import render_workspace
 from wikidebia_release import release_workspace
 from wikidebia_final_publication import publish_final_release, FinalPublicationError
+from wikidebia_post_publication import reconcile_published_workspace
 from wikidebia_french_checkpoint import publish_checkpoint, FrenchCheckpointError
 from wikidebia_workflow_baseline import resolve_workflow_release_baseline, WorkflowBaselineError
 from wikidebia_access_preflight import (
@@ -1552,8 +1553,10 @@ def _mechanical_advance(project_root: Path, state: dict[str, Any]) -> dict[str, 
             state["final_publication"] = copy.deepcopy(publication)
             state["updated_at"] = now_iso()
             _save_workflow(project_root, state)
+            reconcile_published_workspace(project_root, debate_id, str(state["work_id"]))
             return state
         if phase == "published":
+            reconcile_published_workspace(project_root, debate_id, str(state["work_id"]))
             return state
         raise WorkflowError(f"Phase d'orchestration inconnue : {phase}")
 
