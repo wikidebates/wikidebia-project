@@ -466,13 +466,82 @@ def _package_manifest_hash(manifest: Mapping[str, Any]) -> str:
 
 def _write_deterministic_zip(staging: Path, target: Path) -> None:
     target.parent.mkdir(parents=True, exist_ok=True)
-    with zipfile.ZipFile(target, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
-        for p in sorted((x for x in staging.rglob("*") if x.is_file()), key=lambda x: x.relative_to(staging).as_posix()):
-            rel = p.relative_to(staging).as_posix()
-            info = zipfile.ZipInfo(rel, date_time=(2026, 1, 1, 0, 0, 0))
-            info.create_system = 3
-            info.external_attr = 0o100644 << 16
-            archive.writestr(info, p.read_bytes())
+    temporary = target.with_name(f".{target.name}.tmp-{os.getpid()}-{uuid.uuid4().hex}")
+    try:
+        with zipfile.ZipFile(temporary, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
+            for p in sorted((x for x in staging.rglob("*") if x.is_file()), key=lambda x: x.relative_to(staging).as_posix()):
+                rel = p.relative_to(staging).as_posix()
+                info = zipfile.ZipInfo(rel, date_time=(2026, 1, 1, 0, 0, 0))
+                info.create_system = 3
+                info.external_attr = 0o100644 << 16
+                archive.writestr(info, p.read_bytes())
+        with temporary.open("rb") as stream:
+            os.fsync(stream.fileno())
+        os.replace(temporary, target)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def _adopt_existing_review_package(
+    project_root: Path,
+    state: dict[str, Any],
+    *,
+    target: Path,
+    review_type: str,
+    base: Path,
+    expected_editable: Sequence[Mapping[str, Any]],
+    expected_context: Sequence[Mapping[str, Any]],
+    expected_counts: Mapping[str, Any],
+    expected_source_anchor: str,
+) -> dict[str, Any] | None:
+    """Reattach a complete outgoing ZIP left just before workflow state save."""
+    if not target.is_file() or target.is_symlink():
+        return None
+    try:
+        manifest, files = _read_returned_package(target)
+    except (WorkflowError, KeyError, TypeError, ValueError, AttributeError):
+        return None
+    expected_identity = {
+        "review_type": review_type,
+        "debate_id": str(state["debate_id"]),
+        "work_id": state.get("work_id"),
+        "normative_revision": NORM_VERSION,
+        "validator_version": VALIDATOR_VERSION,
+        "kit_version": KIT_VERSION,
+        "source_anchor_sha256": expected_source_anchor,
+    }
+    if any(manifest.get(key) != value for key, value in expected_identity.items()):
+        return None
+    if manifest.get("counts") != dict(expected_counts):
+        return None
+    if manifest.get("editable_files") != list(expected_editable):
+        return None
+    if manifest.get("context_files") != list(expected_context):
+        return None
+    for row in expected_editable:
+        package_path = str(row["package_path"])
+        if _sha256_bytes(files[package_path]) != row["sha256_at_prepare"]:
+            return None
+    package_id = str(manifest.get("package_id") or "")
+    prepared_at = str(manifest.get("prepared_at") or "")
+    if not package_id or not prepared_at:
+        return None
+    pending = {
+        "package_id": package_id,
+        "review_type": review_type,
+        "package_path": _relative(target, project_root),
+        "archive_sha256": _sha256_file(target),
+        "manifest_sha256": manifest["manifest_sha256"],
+        "base_path": _relative(base, project_root),
+        "work_id": state.get("work_id"),
+        "created_at": prepared_at,
+        "counts": dict(expected_counts),
+    }
+    state["status"] = "awaiting_review"
+    state["pending_review"] = pending
+    state["updated_at"] = now_iso()
+    _save_workflow(project_root, state)
+    return pending
 
 
 def create_review_package(
@@ -506,41 +575,62 @@ def create_review_package(
     editable_set = {p.resolve() for p in editable_abs}
     context_abs = [p for p in context_abs if p.resolve() not in editable_set]
 
-    package_id = str(uuid.uuid4())
+    editable_entries = [
+        {
+            "package_path": f"editable/{source.relative_to(base).as_posix()}",
+            "target_path": source.relative_to(base).as_posix(),
+            "sha256_at_prepare": _sha256_file(source),
+        }
+        for source in editable_abs
+    ]
+    context_entries = [
+        {
+            "package_path": f"context/{source.relative_to(base).as_posix()}",
+            "target_path": source.relative_to(base).as_posix(),
+            "sha256": _sha256_file(source),
+        }
+        for source in context_abs
+    ]
+    source_anchor = full_tree_sha256(base) if base.is_dir() else None
+    if source_anchor is None:
+        raise WorkflowError("La base du paquet de revue est absente")
+    normalized_counts = dict(counts or {})
     outgoing = project_root / "outgoing"
     filename = f"{debate_id}_{review_type}.zip"
     target = outgoing / filename
+    adopted = _adopt_existing_review_package(
+        project_root,
+        state,
+        target=target,
+        review_type=review_type,
+        base=base,
+        expected_editable=editable_entries,
+        expected_context=context_entries,
+        expected_counts=normalized_counts,
+        expected_source_anchor=source_anchor,
+    )
+    if adopted is not None:
+        return adopted
+
+    package_id = str(uuid.uuid4())
     staging = Path(tempfile.mkdtemp(prefix=f".{debate_id}-{review_type}-", dir=str(outgoing) if outgoing.is_dir() else None))
     try:
         if staging.parent != outgoing and not outgoing.exists():
             outgoing.mkdir(parents=True, exist_ok=True)
             shutil.rmtree(staging)
             staging = Path(tempfile.mkdtemp(prefix=f".{debate_id}-{review_type}-", dir=outgoing))
-        editable_entries = []
-        context_entries = []
         for source in editable_abs:
             target_rel = source.relative_to(base).as_posix()
             package_rel = f"editable/{target_rel}"
             dest = staging / package_rel
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(source, dest)
-            editable_entries.append({
-                "package_path": package_rel,
-                "target_path": target_rel,
-                "sha256_at_prepare": _sha256_file(source),
-            })
         for source in context_abs:
             target_rel = source.relative_to(base).as_posix()
             package_rel = f"context/{target_rel}"
             dest = staging / package_rel
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(source, dest)
-            context_entries.append({
-                "package_path": package_rel,
-                "target_path": target_rel,
-                "sha256": _sha256_file(source),
-            })
-        source_anchor = full_tree_sha256(base) if base.is_dir() else None
         manifest = {
             "schema": PACKAGE_SCHEMA,
             "schema_version": "1.0",
@@ -555,7 +645,7 @@ def create_review_package(
             "source_anchor_sha256": source_anchor,
             "editable_files": editable_entries,
             "context_files": context_entries,
-            "counts": dict(counts or {}),
+            "counts": normalized_counts,
             "manifest_sha256": None,
         }
         instructions = _instructions(review_type, debate_id, str(work_id) if work_id else None, [x["package_path"] for x in editable_entries])
@@ -576,7 +666,7 @@ def create_review_package(
         "base_path": _relative(base, project_root),
         "work_id": work_id,
         "created_at": manifest["prepared_at"],
-        "counts": dict(counts or {}),
+        "counts": normalized_counts,
     }
     state["status"] = "awaiting_review"
     state["pending_review"] = pending_record
@@ -995,7 +1085,13 @@ def _reserve_graph_review_work_id(project_root: Path, state: dict[str, Any]) -> 
     return work_id
 
 
-def _make_graph_title_review(build: Path, debate_id: str, work_id: str) -> dict[str, Any]:
+def _make_graph_title_review(
+    build: Path,
+    debate_id: str,
+    work_id: str,
+    *,
+    overwrite: bool = False,
+) -> dict[str, Any]:
     """Prepare the title part of the combined graph review on graph_draft input.
 
     Classification fields are present only as source context and are ignored by
@@ -1050,7 +1146,20 @@ def _make_graph_title_review(build: Path, debate_id: str, work_id: str) -> dict[
         "generated_at": now_iso(),
         "items": items,
     }
-    write_json(build / GRAPH_TITLE_REVIEW, ledger)
+    review_path = build / GRAPH_TITLE_REVIEW
+    if review_path.exists() and not overwrite:
+        existing = load_json(review_path, "revue des titres du graphe")
+        comparable_existing = dict(existing)
+        comparable_expected = dict(ledger)
+        comparable_existing.pop("generated_at", None)
+        comparable_expected.pop("generated_at", None)
+        if comparable_existing == comparable_expected and existing.get("generated_at"):
+            return existing
+        raise WorkflowError(
+            "Une revue des titres du graphe existe mais ne correspond pas au modèle "
+            "vierge attendu; aucun écrasement automatique"
+        )
+    write_json(review_path, ledger)
     return ledger
 
 
@@ -1066,7 +1175,12 @@ def _prepare_graph_package(project_root: Path, state: dict[str, Any]) -> dict[st
     build = resolve_build(project_root, str(state["debate_id"]))
     overwrite = bool(state.pop("overwrite_graph_review", False))
     work_id = _reserve_graph_review_work_id(project_root, state)
-    title_review = _make_graph_title_review(build, str(state["debate_id"]), work_id)
+    title_review = _make_graph_title_review(
+        build,
+        str(state["debate_id"]),
+        work_id,
+        overwrite=overwrite,
+    )
     result = make_review_template(
         build,
         str(state["debate_id"]),
