@@ -88,12 +88,55 @@ def run_validator(project_root: Path, package: Path, json_output: Path, text_out
     return report
 
 
-def make_review_template(build: Path, debate_id: str, *, overwrite: bool) -> dict[str, Any]:
+def make_review_template(
+    build: Path,
+    debate_id: str,
+    *,
+    overwrite: bool,
+    reuse_matching: bool = False,
+) -> dict[str, Any]:
     manifest, registry, _ = assert_graph_draft_without_final_pages(build)
     envelope_path = build / REVIEW_ENVELOPE
     placement_path = build / PLACEMENT_REVIEW
     if not overwrite and (envelope_path.exists() or placement_path.exists()):
         existing = load_json(envelope_path, "revue globale") if envelope_path.exists() else {}
+        existing_placement = load_json(placement_path, "revue de placement") if placement_path.exists() else None
+        source_sha = build_payload_sha256(build)
+        expected_placement = prepare_placement_review(registry, debate_id)
+        reusable_envelope = {
+            "schema": "wikidebia-graph-build-review-1.0",
+            "schema_version": "1.0",
+            "normative_revision": NORM_VERSION,
+            "kit_version": KIT_VERSION,
+            "validator_version": VALIDATOR_VERSION,
+            "debate_id": debate_id,
+            "source_build_sha256": source_sha,
+            "source_global_status": manifest.get("global_status"),
+            "decision": "pending",
+            "reviewer": "",
+            "reviewed_at": None,
+            "attestations": {key: False for key in REQUIRED_ATTESTATIONS},
+            "blocking_issues": [],
+            "notes": "",
+            "review_sha256": None,
+        }
+        existing_without_time = dict(existing)
+        prepared_at = existing_without_time.pop("prepared_at", None)
+        if (
+            reuse_matching
+            and isinstance(prepared_at, str)
+            and prepared_at
+            and existing_without_time == reusable_envelope
+            and existing_placement == expected_placement
+        ):
+            return {
+                "status": "review_reused",
+                "debate_id": debate_id,
+                "source_build_sha256": source_sha,
+                "review_path": REVIEW_ENVELOPE,
+                "placement_review_path": PLACEMENT_REVIEW,
+                "occurrences": len(expected_placement["entries"]),
+            }
         if existing.get("schema") == "wikidebia-graph-build-review-1.0":
             raise CorpusBuildError("Une revue préparée existe déjà; utiliser --overwrite-review après modification du graphe")
     source_sha = build_payload_sha256(build)

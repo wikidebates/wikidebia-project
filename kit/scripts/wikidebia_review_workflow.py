@@ -1067,7 +1067,12 @@ def _prepare_graph_package(project_root: Path, state: dict[str, Any]) -> dict[st
     overwrite = bool(state.pop("overwrite_graph_review", False))
     work_id = _reserve_graph_review_work_id(project_root, state)
     title_review = _make_graph_title_review(build, str(state["debate_id"]), work_id)
-    result = make_review_template(build, str(state["debate_id"]), overwrite=overwrite)
+    result = make_review_template(
+        build,
+        str(state["debate_id"]),
+        overwrite=overwrite,
+        reuse_matching=not overwrite,
+    )
     return create_review_package(
         project_root, state,
         review_type="graph_review", base=build,

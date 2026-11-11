@@ -15,6 +15,14 @@ La commande contrôle que le build se trouve exactement sous `.state/corpus-buil
 
 Le SHA-256 du build source est enregistré. Les deux fichiers de revue sont exclus de cette empreinte afin de pouvoir être complétés, mais toute modification du graphe, du cadrage, du manifeste, du registre ou des imports impose une nouvelle préparation avec `--overwrite-review`.
 
+Dans le workflow orchestré, une interruption peut survenir après la création de
+ces registres mais avant l’enregistrement du paquet ZIP. La reprise réutilise
+alors uniquement des registres encore entièrement vierges, dont l’empreinte
+source et le contenu déterministe correspondent exactement. Dès qu’un champ de
+revue a été modifié, la réadoption automatique est refusée. La commande bas
+niveau conserve son refus par défaut ; cette tolérance est réservée à la reprise
+orchestrée vérifiée.
+
 ## 2. Compléter les deux registres
 
 Dans `graph_build_review.json`, renseigner :
