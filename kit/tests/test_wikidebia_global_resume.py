@@ -121,6 +121,8 @@ def test_preworkspace_workflow_is_discovered_and_resumable(tmp_path: Path):
     )
     assert second["journal_event_count"] == 1
     assert first["selected"]["remote_access_performed"] is False
+    assert first["selected"]["next_remote_read_possible"] is True
+    assert first["selected"]["next_remote_write_possible"] is False
 
 
 def test_preworkspace_pending_review_points_to_existing_handoff(tmp_path: Path):
@@ -142,6 +144,9 @@ def test_preworkspace_pending_review_points_to_existing_handoff(tmp_path: Path):
     assert result["selected"]["next_action"] == "complete_pending_review"
     assert result["selected"]["next_command"] == "./wikidebia review-import debat_test"
     assert result["selected"]["edit_path"] == "outgoing/debat_test_graph_review.zip"
+    assert result["selected"]["next_remote_read_possible"] is True
+    assert result["selected"]["next_remote_write_possible"] is True
+    assert result["selected"]["remote_write_performed"] is False
 
 
 def test_workspace_entry_supersedes_matching_preworkspace_workflow(tmp_path: Path, monkeypatch):

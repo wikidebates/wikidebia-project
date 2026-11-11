@@ -19,6 +19,11 @@ une capsule de traduction valide et rattachée à la revue courante est plus
 précise que le statut général : elle peut ainsi pointer directement vers le
 correctif à éditer ou la commande d’application exacte.
 
+La découverte elle-même reste sans accès distant. Les champs
+`next_remote_read_possible` et `next_remote_write_possible` décrivent en revanche
+la commande proposée : ils signalent notamment qu’un `review-import` de graphe
+peut franchir ensuite le checkpoint de publication française.
+
 Si plusieurs Works sont actifs, aucune sélection implicite n’est faite. La
 sortie fournit pour chacun une commande de reprise explicite :
 

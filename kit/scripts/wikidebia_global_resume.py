@@ -222,6 +222,7 @@ def _workflow_entry(project_root: Path, workflow_path: Path) -> dict[str, Any]:
         "published", "completed_existing_translation",
     }
     pending = workflow.get("pending_review")
+    pending_type = str(pending.get("review_type") or "") if isinstance(pending, dict) else ""
     if isinstance(pending, dict):
         next_action = "complete_pending_review"
         next_command = f"./wikidebia review-import {debate_id}"
@@ -244,10 +245,19 @@ def _workflow_entry(project_root: Path, workflow_path: Path) -> dict[str, Any]:
         "active": not terminal,
         "next_action": next_action,
         "next_command": next_command,
-        "next_remote_read_possible": bool(
-            not terminal and phase == "initialize_graph" and not workflow.get("snapshot_path")
+        # Continuing orchestration may refresh the access preflight or graph
+        # snapshot even though this discovery function itself stays local.
+        "next_remote_read_possible": not terminal,
+        "next_remote_write_possible": bool(
+            not terminal and (
+                pending_type in {"graph_review", "fr_metadata_review", "fr_content_review"}
+                or phase in {
+                    "promote_and_workspace", "graph_publication_resume",
+                    "en_translation_review", "apply_render_release",
+                    "release_ready", "final_publication", "final_publication_resume",
+                }
+            )
         ),
-        "next_remote_write_possible": False,
         **({"edit_path": edit_path} if edit_path else {}),
         "remote_access_performed": False,
         "remote_write_performed": False,
