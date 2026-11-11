@@ -38,6 +38,7 @@ Ils constituent une provenance historique. Ils ne sont pas copiés dans `output/
 - registres de revue initialisés à `pending` ;
 - rapport d’import ;
 - rapports de validation structurelle initiale.
+- contrat de construction `reports/corpus_build_contract.json` ;
 - reçu cryptographique `reports/corpus_build_receipt.json` après validation réussie.
 
 ## Identifiants et occurrences
@@ -70,6 +71,13 @@ correspondent exactement. Un build ancien sans reçu reste `unverified`; un reç
 dont la source ou les options diffèrent est `stale`; toute modification après
 validation rend le reçu `invalid`. Aucun de ces états ne déclenche un
 écrasement automatique.
+
+Le contrat est écrit avant la validation. Si une interruption survient entre la
+fin de la construction et le reçu, l’orchestrateur compare ce contrat au
+snapshot courant, relance uniquement la validation locale, puis écrit le reçu.
+Si un reçu valide et exactement correspondant existe déjà, la construction et
+la validation sont toutes deux réutilisées et le workflow passe directement à
+la revue du graphe.
 
 ## Options utiles
 

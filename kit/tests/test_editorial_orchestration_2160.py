@@ -422,6 +422,74 @@ def test_resume_after_interruption_adopts_existing_graph_draft_but_revalidates(t
     assert resumed["pending_review"]["review_type"] == "graph_review"
 
 
+def test_resume_reuses_exact_receipted_graph_draft_without_revalidation(tmp_path: Path, monkeypatch):
+    from test_wikidebia_corpus_init import make_extraction
+    project = tmp_path / "project"
+    project.mkdir()
+    source = make_extraction(project / "source")
+    build = project / ".state/corpus-builds/debat_test"
+    result = wf.build_corpus(
+        source, build,
+        debate_id="debat_test", short_code="TEST", scope_summary=None, overwrite=False,
+    )
+    wf.write_build_receipt(
+        build,
+        build_contract=result["build_contract"],
+        validation={"status": "passed"},
+    )
+    state = {
+        "schema": wf.WORKFLOW_SCHEMA, "schema_version": "1.0", "debate_id": "debat_test",
+        "debate_title": "Débat test ?", "short_code": "TEST", "phase": "initialize_graph",
+        "status": "running", "work_id": None, "pending_review": None,
+        "snapshot_path": "source", "force_refresh": False,
+        "created_at": "2026-08-11T12:00:00+02:00", "updated_at": "2026-08-11T12:00:00+02:00",
+    }
+    wf._save_workflow(project, state)
+    calls = []
+    monkeypatch.setattr(
+        wf,
+        "run_initial_validator",
+        lambda *_args: calls.append("validation") or {"status": "passed"},
+    )
+
+    resumed = wf.start_workflow(project, "Débat test ?", debate_id="debat_test")
+
+    assert calls == []
+    assert resumed["pending_review"]["review_type"] == "graph_review"
+    assert resumed["initial_build_receipt"]["status"] == "valid_and_matching"
+
+
+def test_resume_blocks_existing_build_when_options_changed(tmp_path: Path, monkeypatch):
+    from test_wikidebia_corpus_init import make_extraction
+    project = tmp_path / "project"
+    project.mkdir()
+    source = make_extraction(project / "source")
+    build = project / ".state/corpus-builds/debat_test"
+    wf.build_corpus(
+        source, build,
+        debate_id="debat_test", short_code="TEST", scope_summary=None, overwrite=False,
+    )
+    state = {
+        "schema": wf.WORKFLOW_SCHEMA, "schema_version": "1.0", "debate_id": "debat_test",
+        "debate_title": "Débat test ?", "short_code": "OTHER", "phase": "initialize_graph",
+        "status": "running", "work_id": None, "pending_review": None,
+        "snapshot_path": "source", "force_refresh": False,
+        "created_at": "2026-08-11T12:00:00+02:00", "updated_at": "2026-08-11T12:00:00+02:00",
+    }
+    wf._save_workflow(project, state)
+    calls = []
+    monkeypatch.setattr(
+        wf,
+        "run_initial_validator",
+        lambda *_args: calls.append("validation") or {"status": "passed"},
+    )
+
+    with pytest.raises(wf.WorkflowError, match="aucun écrasement automatique"):
+        wf.start_workflow(project, "Débat test ?", debate_id="debat_test")
+
+    assert calls == []
+
+
 def test_import_refuses_local_edit_outside_handoff(tmp_path: Path):
     project = tmp_path / "project"
     project.mkdir()

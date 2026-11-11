@@ -40,8 +40,9 @@ from wikidebia_corpus_build import (
     write_json,
 )
 from wikidebia_corpus_init import (
-    build_corpus, canonical_debate_id, derive_short_code, resolve_extraction_input,
-    validate_short_code,
+    build_corpus, canonical_debate_id, canonical_json_sha256, compute_build_contract,
+    derive_short_code, inspect_existing_build, resolve_extraction_input,
+    validate_short_code, verify_build_contract_record, write_build_receipt,
     run_validator as run_initial_validator,
 )
 from wikidebia_corpus_review import make_review_template, finalize_review as finalize_graph_review
@@ -1541,23 +1542,6 @@ def _stage_snapshot_input(project_root: Path, debate_id: str, snapshot: Path | N
 def _initialize_graph_stage(project_root: Path, state: dict[str, Any]) -> None:
     debate_id = str(state["debate_id"])
     build_dir = project_root / ".state" / "corpus-builds" / debate_id
-    if build_dir.is_dir():
-        manifest = load_json(build_dir / "manifest.json", "manifest build")
-        if manifest.get("debate_id") != debate_id or manifest.get("global_status") not in {"graph_draft", "graph_validated"}:
-            raise WorkflowError("Un build existant incompatible empêche la reprise automatique")
-        if manifest.get("global_status") == "graph_draft":
-            validation = run_initial_validator(project_root, build_dir)
-            if validation.get("status") == "failed":
-                _record_initial_validation_block(project_root, state, build_dir, validation)
-                return
-            state["phase"] = "graph_review"
-            state["status"] = "running"
-            state.pop("last_block", None)
-        else:
-            state["phase"] = "promote_and_workspace"
-        state["updated_at"] = now_iso()
-        _save_workflow(project_root, state)
-        return
     staged = state.get("snapshot_path")
     if staged:
         source = project_root / str(staged)
@@ -1574,6 +1558,71 @@ def _initialize_graph_stage(project_root: Path, state: dict[str, Any]) -> None:
         )
     if _stop_for_existing_english_debate(project_root, state, graph_metadata):
         return
+    try:
+        expected_contract = compute_build_contract(
+            source,
+            debate_id=debate_id,
+            short_code=state.get("short_code"),
+            scope_summary=None,
+        )
+    except Exception as exc:
+        raise WorkflowError(f"Impossible de vérifier le contrat du snapshot : {exc}") from exc
+    expected_contract_sha = canonical_json_sha256(expected_contract)
+    state["short_code"] = expected_contract["short_code"]
+    if build_dir.exists():
+        inspection = inspect_existing_build(
+            build_dir,
+            expected_debate_id=debate_id,
+            expected_contract_sha256=expected_contract_sha,
+        )
+        if not inspection.get("safe_to_reuse"):
+            contract_record = verify_build_contract_record(
+                build_dir,
+                expected_contract_sha256=expected_contract_sha,
+            )
+            if not contract_record.get("matches"):
+                raise WorkflowError(
+                    "Un build existant ne correspond pas exactement au snapshot et aux "
+                    f"paramètres courants (état={inspection.get('status')}, "
+                    f"contrat={contract_record.get('status')}); aucun écrasement automatique"
+                )
+            validation = run_initial_validator(project_root, build_dir)
+            if validation.get("status") == "failed":
+                _record_initial_validation_block(project_root, state, build_dir, validation)
+                return
+            if validation.get("status") != "passed":
+                raise WorkflowError("La validation initiale n'a pas produit un résultat réutilisable")
+            receipt = write_build_receipt(
+                build_dir,
+                build_contract=expected_contract,
+                validation=validation,
+            )
+            inspection = inspect_existing_build(
+                build_dir,
+                expected_debate_id=debate_id,
+                expected_contract_sha256=expected_contract_sha,
+            )
+            if not inspection.get("safe_to_reuse"):
+                raise WorkflowError("Le reçu du build nouvellement validé n'est pas vérifiable")
+        else:
+            receipt = {"receipt_sha256": inspection.get("receipt_sha256")}
+        manifest = load_json(build_dir / "manifest.json", "manifest build")
+        if manifest.get("debate_id") != debate_id or manifest.get("global_status") not in {"graph_draft", "graph_validated"}:
+            raise WorkflowError("Un build existant incompatible empêche la reprise automatique")
+        state["initial_build_receipt"] = {
+            "status": "valid_and_matching",
+            "build_contract_sha256": expected_contract_sha,
+            "receipt_sha256": receipt.get("receipt_sha256"),
+        }
+        if manifest.get("global_status") == "graph_draft":
+            state["phase"] = "graph_review"
+            state["status"] = "running"
+            state.pop("last_block", None)
+        else:
+            state["phase"] = "promote_and_workspace"
+        state["updated_at"] = now_iso()
+        _save_workflow(project_root, state)
+        return
     result = build_corpus(
         source, build_dir, debate_id=debate_id, short_code=state.get("short_code"),
         scope_summary=None, overwrite=False,
@@ -1583,6 +1632,18 @@ def _initialize_graph_stage(project_root: Path, state: dict[str, Any]) -> None:
     if validation.get("status") == "failed":
         _record_initial_validation_block(project_root, state, build_dir, validation)
         return
+    if validation.get("status") != "passed":
+        raise WorkflowError("La validation initiale n'a pas produit un résultat réutilisable")
+    receipt = write_build_receipt(
+        build_dir,
+        build_contract=result["build_contract"],
+        validation=validation,
+    )
+    state["initial_build_receipt"] = {
+        "status": "valid_and_matching",
+        "build_contract_sha256": result["build_contract_sha256"],
+        "receipt_sha256": receipt["receipt_sha256"],
+    }
     state["phase"] = "graph_review"
     state["status"] = "running"
     state.pop("last_block", None)
