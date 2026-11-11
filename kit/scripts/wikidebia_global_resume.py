@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import shlex
@@ -32,12 +33,24 @@ REGISTRY_SCHEMA = "wikidebia-global-resume-registry-1.0"
 EVENT_SCHEMA = "wikidebia-global-resume-event-1.0"
 WORKFLOW_SCHEMA = "wikidebia-editorial-orchestration-1.0"
 FINAL_PUBLICATION_SCHEMA = "wikidebia-final-publication-receipt-1.0"
+PRETRANSLATION_HANDOFF_STATUSES = {
+    "fr_metadata_review": {"workspace_initialized"},
+    "fr_content_review": {"fr_titles_applied", "fr_metadata_applied"},
+}
 
 
 def _signed(value: Mapping[str, Any], field: str) -> bool:
     body = dict(value)
     claimed = body.pop(field, None)
     return bool(claimed) and claimed == sha_object(body)
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def _translation_resume(
@@ -105,6 +118,74 @@ def _published_receipt(
     return receipt, receipt_path
 
 
+def _pretranslation_workflow_handoff(
+    project_root: Path, debate_id: str, work_id: str, workspace_status: str,
+) -> dict[str, Any] | None:
+    workflow_path = project_root / ".state/workflows" / debate_id / "workflow.json"
+    if (
+        not workflow_path.is_file() or workflow_path.is_symlink()
+        or workflow_path.parent.is_symlink()
+    ):
+        return None
+    try:
+        workflow = load_json(workflow_path, "workflow de handoff prétraduction")
+    except (CorpusBuildError, OSError, ValueError, KeyError):
+        return None
+    pending = workflow.get("pending_review")
+    pending_type = str(pending.get("review_type") or "") if isinstance(pending, Mapping) else ""
+    if (
+        workflow.get("schema") != WORKFLOW_SCHEMA
+        or workflow.get("debate_id") != debate_id
+        or workflow.get("work_id") != work_id
+        or workflow.get("status") != "awaiting_review"
+        or workflow.get("phase") != pending_type
+        or workspace_status not in PRETRANSLATION_HANDOFF_STATUSES.get(pending_type, set())
+    ):
+        return None
+    package_relative = str(pending.get("package_path") or "")
+    archive_sha256 = str(pending.get("archive_sha256") or "")
+    package_path = project_root / package_relative
+    package_valid = False
+    if package_relative and archive_sha256 and not Path(package_relative).is_absolute():
+        try:
+            package_valid = (
+                package_path.resolve().is_relative_to(project_root)
+                and package_path.is_file()
+                and not package_path.is_symlink()
+                and not any(
+                    parent.is_symlink()
+                    for parent in package_path.parents
+                    if parent != project_root and parent.is_relative_to(project_root)
+                )
+                and _sha256_file(package_path) == archive_sha256
+            )
+        except OSError:
+            package_valid = False
+    if package_valid:
+        return {
+            "next_action": "complete_pending_review",
+            "next_command": f"./wikidebia review-import {debate_id}",
+            "edit_path": package_relative,
+            "workflow_path": relative_to_project(workflow_path, project_root),
+            "workflow_review_type": pending_type,
+            "workflow_archive_sha256": archive_sha256,
+            "next_remote_read_possible": True,
+            "next_remote_write_possible": True,
+        }
+    title = str(workflow.get("debate_title") or debate_id)
+    return {
+        "next_action": "restore_pending_review_package",
+        "next_command": (
+            f"./wikidebia workflow {shlex.quote(title)} --debate-id {debate_id}"
+        ),
+        "workflow_path": relative_to_project(workflow_path, project_root),
+        "workflow_review_type": pending_type,
+        "resume_warning": "pending_review_package_missing_or_stale",
+        "next_remote_read_possible": True,
+        "next_remote_write_possible": False,
+    }
+
+
 def _workspace_entry(
     project_root: Path, workspace_json: Path,
 ) -> dict[str, Any]:
@@ -163,6 +244,20 @@ def _workspace_entry(
             "translation_capsule_sha256": capsule.get("capsule_sha256"),
             **({"edit_path": capsule["edit_path"]} if capsule.get("edit_path") else {}),
         }
+    handoff = _pretranslation_workflow_handoff(
+        project_root, debate_id, work_id, str(summary.get("status") or ""),
+    )
+    if handoff is not None:
+        next_action = handoff["next_action"]
+        next_command = handoff["next_command"]
+        warning = handoff.get("resume_warning")
+        extra = {
+            key: value for key, value in handoff.items()
+            if key not in {
+                "next_action", "next_command", "resume_warning",
+                "next_remote_read_possible", "next_remote_write_possible",
+            }
+        }
     return {
         "debate_id": debate_id,
         "work_id": work_id,
@@ -173,8 +268,14 @@ def _workspace_entry(
         "active": summary.get("status") != "work_closed",
         "next_action": next_action,
         "next_command": next_command,
-        "next_remote_read_possible": summary.get("next_remote_read_possible", False),
-        "next_remote_write_possible": summary.get("next_remote_write_possible", False),
+        "next_remote_read_possible": (
+            handoff.get("next_remote_read_possible", False) if handoff is not None
+            else summary.get("next_remote_read_possible", False)
+        ),
+        "next_remote_write_possible": (
+            handoff.get("next_remote_write_possible", False) if handoff is not None
+            else summary.get("next_remote_write_possible", False)
+        ),
         **extra,
         **({"resume_warning": warning} if warning else {}),
         "remote_access_performed": False,
