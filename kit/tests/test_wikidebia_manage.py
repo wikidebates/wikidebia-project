@@ -1110,6 +1110,16 @@ def test_workspace_finalize_command_is_exposed_by_manager():
     assert args.comparison_id == "REMOTE-20261104-009"
 
 
+def test_workspace_publication_reconciliation_command_is_exposed_by_manager():
+    args = module.build_parser().parse_args([
+        "corpus-workspace-reconcile-publication", "debat_test",
+        "--work-id", "EDIT-TEST-001",
+    ])
+    assert args.command == "corpus-workspace-reconcile-publication"
+    assert args.debate_id == "debat_test"
+    assert args.work_id == "EDIT-TEST-001"
+
+
 def test_workspace_status_command_is_exposed_by_manager():
     args = module.build_parser().parse_args([
         "corpus-workspace-status", "debat_test", "--work-id", "EDIT-TEST-001",
@@ -1328,6 +1338,7 @@ def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
         "refresh_package_metadata.py",
         "wikidebia_render.py",
         "wikidebia_release.py", "wikidebia_remote_compare.py", "wikidebia_workspace_finalize.py",
+        "wikidebia_post_publication.py",
         "wikidebia_workspace_status.py",
         "wikidebia_remote_plan_review.py",
         "wikidebia_remote_execute.py", "wikidebia_work_close.py",
