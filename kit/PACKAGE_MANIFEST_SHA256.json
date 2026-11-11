@@ -5,7 +5,7 @@
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
   "declared_file_count": 477,
-  "declared_test_count": 1074,
+  "declared_test_count": 1078,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -253,8 +253,8 @@
     },
     {
       "path": "GUIDE_CORPUS_INIT.md",
-      "size_bytes": 3775,
-      "sha256": "486dd621106faac29578d02857feb3f9ba846cd0e1745fa306c4cc41905da002"
+      "size_bytes": 4515,
+      "sha256": "11ebdc6e86d1687e375afcaffcc5cf1a8044465abbb587a3c4a93bacb73137c3"
     },
     {
       "path": "GUIDE_CORPUS_RELEASE.md",
@@ -1129,7 +1129,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "322083e79dff3e288b4a0e03cc9fad4df8b561c432aee1a3cd6a40d3fa2de576"
+      "sha256": "37cce1ddfde99bb4b6ebac13a5cecd7b8b55757c8d5a5598e9836b8c01f0813d"
     },
     {
       "path": "VERSIONS.json",
@@ -1688,8 +1688,8 @@
     },
     {
       "path": "scripts/wikidebia_corpus_init.py",
-      "size_bytes": 49025,
-      "sha256": "c532cf11116b81d88a80e5bef9e07b02a36d1a229fcb5f81d4f4ab7666bb9382"
+      "size_bytes": 57340,
+      "sha256": "e09982075490e645735db0b0ed9860d270f9b543586858a1395c078f38bf2b2d"
     },
     {
       "path": "scripts/wikidebia_corpus_promote.py",
@@ -1948,8 +1948,8 @@
     },
     {
       "path": "tests/test_corpus_init_interruption_safety.py",
-      "size_bytes": 6992,
-      "sha256": "91223cb96f61355c16d15530be0ca8ec0c830d7d91536e17bfa9b6bf1a3baa38"
+      "size_bytes": 10128,
+      "sha256": "73256a5ef9bffb531b8fce944af9f3555e0375e4a59ff182084eb39dca7efe20"
     },
     {
       "path": "tests/test_current_validator_contract.py",
@@ -2223,8 +2223,8 @@
     },
     {
       "path": "tests/test_wikidebia_corpus_init.py",
-      "size_bytes": 15697,
-      "sha256": "b8489d97e7297e1d6a0af23b71c4a180ad916bf973ef69bad5946655f23e8e98"
+      "size_bytes": 16684,
+      "sha256": "eb8a8c9557015c8c06834942a141a2311a340fd55c2b847b72157559f866a61c"
     },
     {
       "path": "tests/test_wikidebia_corpus_review.py",
