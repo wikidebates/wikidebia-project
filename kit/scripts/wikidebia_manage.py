@@ -2093,6 +2093,23 @@ def corpus_workspace_reconcile_publication(
     return run(command, cwd=root, check=False).returncode
 
 
+def state_maintenance(
+    root: Path, *, output: Path | None, apply_plan: Path | None,
+    confirm_plan_sha256: str | None,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_state_maintenance.py"
+    if not script.is_file():
+        raise ManagementError("Outil de maintenance locale de .state absent du kit")
+    command = [python_command(root), str(script), "--project-root", str(root), "--machine-readable"]
+    if output:
+        command.extend(["--output", str(output)])
+    if apply_plan:
+        command.extend(["--apply-plan", str(apply_plan)])
+    if confirm_plan_sha256:
+        command.extend(["--confirm-plan-sha256", confirm_plan_sha256])
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_status(root: Path, debate_id: str, *, work_id: str) -> int:
     script = root / "kit" / "scripts" / "wikidebia_workspace_status.py"
     if not script.is_file():
@@ -2607,7 +2624,7 @@ def doctor(
         "refresh_package_metadata.py",
         "wikidebia_render.py", "wikidebia_release.py",
         "wikidebia_remote_compare.py", "wikidebia_workspace_finalize.py",
-        "wikidebia_post_publication.py",
+        "wikidebia_post_publication.py", "wikidebia_state_maintenance.py",
         "wikidebia_workspace_status.py",
         "wikidebia_remote_plan_review.py",
         "wikidebia_remote_execute.py", "wikidebia_work_close.py",
@@ -2893,6 +2910,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     corpus_reconcile_publication_parser.add_argument("debate_id")
     corpus_reconcile_publication_parser.add_argument("--work-id", required=True)
+
+    state_maintenance_parser = sub.add_parser(
+        "state-maintenance",
+        help="Mesurer .state et planifier le nettoyage exact des sauvegardes obsolètes",
+    )
+    state_maintenance_parser.add_argument("--output", type=Path)
+    state_maintenance_parser.add_argument("--apply-plan", type=Path)
+    state_maintenance_parser.add_argument("--confirm-plan-sha256")
 
     corpus_status_parser = sub.add_parser(
         "corpus-workspace-status",
@@ -3302,6 +3327,12 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "corpus-workspace-reconcile-publication":
         return corpus_workspace_reconcile_publication(
             root, args.debate_id, work_id=args.work_id,
+        )
+
+    if args.command == "state-maintenance":
+        return state_maintenance(
+            root, output=args.output, apply_plan=args.apply_plan,
+            confirm_plan_sha256=args.confirm_plan_sha256,
         )
 
     if args.command == "corpus-workspace-status":
