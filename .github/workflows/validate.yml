@@ -54,7 +54,7 @@ jobs:
       - if: steps.pr-validation.outputs.result != 'true'
         run: python -m pip install -r validator/requirements-dev.txt
       - if: steps.pr-validation.outputs.result != 'true'
-        run: PYTHONPATH=validator/src python -m pytest -q validator/tests
+        run: PYTHONPATH=validator/src python -m pytest -q validator/tests --junitxml=/tmp/validator-tests.xml
       - if: steps.pr-validation.outputs.result != 'true'
         run: python -m pytest -q kit/tests --junitxml=/tmp/kit-tests.xml
       - if: steps.pr-validation.outputs.result != 'true'
@@ -63,6 +63,21 @@ jobs:
         run: python validator/scripts/self_audit.py
       - if: steps.pr-validation.outputs.result != 'true'
         run: python -m unittest discover -s deploy/tests -v
+      - name: Build compact structured failure report
+        if: failure() && steps.pr-validation.outputs.result != 'true'
+        run: >-
+          python kit/scripts/wikidebia_compact_index.py
+          --junit-xml /tmp/validator-tests.xml
+          --junit-xml /tmp/kit-tests.xml
+          --output /tmp/ci-failures.json
+      - name: Upload compact failure report
+        if: failure() && steps.pr-validation.outputs.result != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-failure-report-${{ github.run_id }}
+          path: /tmp/ci-failures.json
+          if-no-files-found: warn
+          retention-days: 7
       - name: Confirm reused validation
         if: steps.pr-validation.outputs.result == 'true'
         run: echo "The exact merge commit reuses its successful pull-request validation."
