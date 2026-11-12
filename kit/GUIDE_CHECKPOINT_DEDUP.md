@@ -1,9 +1,11 @@
 # Déduplication sécurisée des checkpoints (#79)
 
-La commande est en lecture seule par défaut :
+La commande principale est en lecture seule par défaut :
 
 ```sh
-python3 kit/scripts/wikidebia_checkpoint_store.py --project-root .
+./wikidebia storage-dedup \
+  --scope checkpoints \
+  --output .state/checkpoint-dedup-plan.json
 ```
 
 Elle retourne un `mutation_plan` déterministe et son `plan_sha256`. Le plan lie
@@ -16,7 +18,7 @@ checkpoints créés par l’ancienne implémentation à liens physiques. Ils peu
 être séparés, sans déduplication simultanée, avec :
 
 ```sh
-python3 kit/scripts/wikidebia_checkpoint_store.py --project-root . \
+./wikidebia storage-dedup --scope checkpoints \
   --repair-hardlinks \
   --confirm-plan-sha256 <plan_sha256>
 ```
@@ -32,7 +34,7 @@ Les fichiers historiques peuvent toujours être restaurés individuellement.
 L'option `--prune` est temporairement désactivée par sécurité.
 
 ```sh
-python3 kit/scripts/wikidebia_checkpoint_store.py --project-root . \
+./wikidebia storage-dedup --scope checkpoints \
   --apply \
   --confirm-plan-sha256 <plan_sha256>
 ```
@@ -43,6 +45,36 @@ chemin muté avec ses inodes avant/après et un nouvel inventaire postérieur. U
 confirmation absente, ancienne ou divergente bloque l’action avant la première
 mutation. Le reçu atteste aussi qu’aucun accès ni aucune écriture wiki n’a eu
 lieu.
+
+## Backups immuables volumineux
+
+Le même mécanisme inventorie les deux périmètres de sauvegarde qui concentrent
+les copies historiques les plus volumineuses :
+
+- `.state/release-rebuild-backups/` ;
+- `.state/editorial-workspaces/<débat>/<Work>/backups/`.
+
+Les copies actives du workspace (`working-copy`, `reviewed-copy`,
+`translated-copy`, `rendered-copy` et `release-copy`) sont exclues. Le mode
+`backups` groupe les contenus identiques entre les deux périmètres et conserve
+des inodes distincts avec copy-on-write :
+
+```sh
+./wikidebia storage-dedup \
+  --scope backups \
+  --output .state/backup-dedup-plan.json
+
+./wikidebia storage-dedup \
+  --scope backups \
+  --apply \
+  --confirm-plan-sha256 <plan_sha256> \
+  --output .state/backup-dedup-result.json
+```
+
+Avec `--output`, le plan complet reste dans le projet et la sortie standard ne
+contient qu’un résumé compact. Cela évite de recopier des milliers de chemins
+dans une conversation ou un journal CI. La confirmation devient invalide dès
+qu’un chemin, un contenu ou un inode du périmètre change.
 
 Ne pas exécuter `--apply` sur les sauvegardes de production avant d'avoir
 vérifié la restauration dans un environnement isolé. Les valeurs `linked_bytes`

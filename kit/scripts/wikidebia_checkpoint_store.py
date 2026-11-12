@@ -21,6 +21,7 @@ from wikidebia_corpus_build import assert_control_directory, write_json
 
 PLAN_SCHEMA = "wikidebia-checkpoint-mutation-plan-1.0"
 RECEIPT_SCHEMA = "wikidebia-checkpoint-mutation-receipt-1.0"
+SCOPES = ("checkpoints", "backups")
 
 class StoreError(RuntimeError):
     pass
@@ -76,6 +77,7 @@ def _mutation_plan(
     project_root: Path,
     groups: dict,
     inode_groups: dict,
+    scope: str,
 ) -> dict:
     files = []
     for (sha256, size), paths in sorted(groups.items()):
@@ -107,6 +109,7 @@ def _mutation_plan(
         })
     plan = {
         "schema": PLAN_SCHEMA,
+        "scope": scope,
         "files": files,
         "duplicate_groups": duplicates,
         "legacy_hardlink_groups": hardlinks,
@@ -132,17 +135,36 @@ def _write_mutation_receipt(project_root: Path, receipt: dict) -> Path:
 def inventory(
     project_root: Path, *, apply: bool = False, prune: bool = False,
     repair_hardlinks: bool = False, confirm_plan_sha256: str | None = None,
+    scope: str = "checkpoints",
 ) -> dict:
     project_root = project_root.expanduser().resolve()
-    root = project_root / ".state/resume-checkpoints"
+    if scope not in SCOPES:
+        raise StoreError(f"Périmètre inconnu : {scope}")
+    checkpoint_root = project_root / ".state/resume-checkpoints"
+    backup_roots = [project_root / ".state/release-rebuild-backups"]
+    workspace_root = project_root / ".state/editorial-workspaces"
+    if scope == "backups" and workspace_root.is_symlink():
+        raise StoreError("Racine symbolique interdite")
+    if workspace_root.is_dir() and not workspace_root.is_symlink():
+        backup_roots.extend(sorted(workspace_root.glob("*/*/backups")))
+    roots = [checkpoint_root] if scope == "checkpoints" else backup_roots
     objects = project_root / ".state/checkpoint-objects"
-    if (project_root / ".state").is_symlink() or root.is_symlink() or objects.is_symlink():
+    if (
+        (project_root / ".state").is_symlink()
+        or any(root.is_symlink() for root in roots)
+        or (scope == "checkpoints" and objects.is_symlink())
+    ):
         raise StoreError("Racine symbolique interdite")
     groups = defaultdict(list)
     inode_groups = defaultdict(list)
     logical_bytes = 0
-    if root.exists():
-        for path in sorted(root.rglob("*.zip")):
+    for root in roots:
+        if not root.exists():
+            continue
+        pattern = "*.zip" if scope == "checkpoints" else "*"
+        for path in sorted(root.rglob(pattern)):
+            if not path.is_file() and not path.is_symlink():
+                continue
             _safe(path, root)
             if any(parent.is_symlink() for parent in path.parents if parent != project_root):
                 raise StoreError("Répertoire symbolique interdit")
@@ -162,7 +184,7 @@ def inventory(
         raise StoreError("--apply et --repair-hardlinks sont incompatibles")
     if apply and prune:
         raise StoreError("--prune indisponible avec les reflinks")
-    plan = _mutation_plan(project_root, groups, inode_groups)
+    plan = _mutation_plan(project_root, groups, inode_groups, scope)
     action = "apply_reflinks" if apply else ("repair_hardlinks" if repair_hardlinks else None)
     if action and confirm_plan_sha256 != plan["plan_sha256"]:
         raise StoreError(
@@ -233,6 +255,7 @@ def inventory(
             for (sha, size), paths in sorted(groups.items())]
     result = {
         "schema": "wikidebia-checkpoint-dedup-inventory-1.0",
+        "scope": scope,
         "mode": action or "dry_run",
         "files": sum(len(paths) for paths in groups.values()),
         "unique_contents": len(groups),
@@ -251,10 +274,11 @@ def inventory(
         "remote_write_performed": False,
     }
     if action:
-        post = inventory(project_root)
+        post = inventory(project_root, scope=scope)
         receipt = {
             "schema": RECEIPT_SCHEMA,
             "action": action,
+            "scope": scope,
             "completed_at": dt.datetime.now(dt.timezone.utc).isoformat(),
             "plan_sha256": plan["plan_sha256"],
             "confirmed_plan_sha256": confirm_plan_sha256,
@@ -278,6 +302,10 @@ def inventory(
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
+    parser.add_argument(
+        "--scope", choices=SCOPES, default="checkpoints",
+        help="checkpoints ZIP ou sauvegardes immuables de reconstruction/workspace",
+    )
     actions = parser.add_mutually_exclusive_group()
     actions.add_argument("--apply", action="store_true")
     actions.add_argument("--repair-hardlinks", action="store_true")
@@ -285,6 +313,10 @@ def main() -> int:
     parser.add_argument(
         "--confirm-plan-sha256",
         help="Empreinte plan_sha256 exacte du dernier inventaire avant toute mutation",
+    )
+    parser.add_argument(
+        "--output", type=Path,
+        help="Écrire l’inventaire complet dans le projet et n’afficher qu’un résumé compact",
     )
     args = parser.parse_args()
     if args.prune and not args.apply:
@@ -294,10 +326,39 @@ def main() -> int:
             args.project_root.resolve(), apply=args.apply, prune=args.prune,
             repair_hardlinks=args.repair_hardlinks,
             confirm_plan_sha256=args.confirm_plan_sha256,
+            scope=args.scope,
         )
     except (StoreError, OSError) as exc:
         parser.exit(2, f"INVENTAIRE BLOQUÉ : {exc}\n")
-    print(json.dumps(result, ensure_ascii=False, indent=2))
+    if args.output:
+        output_candidate = (
+            args.output if args.output.is_absolute() else args.project_root / args.output
+        )
+        output_is_symlink = output_candidate.is_symlink()
+        output = output_candidate.resolve()
+        project_root = args.project_root.resolve()
+        if output_is_symlink or not output.is_relative_to(project_root) or any(
+            parent.is_symlink()
+            for parent in output.parents
+            if parent != project_root and parent.is_relative_to(project_root)
+        ):
+            parser.exit(2, "INVENTAIRE BLOQUÉ : sortie extérieure ou symbolique\n")
+        write_json(output, result)
+        summary = {
+            key: result[key]
+            for key in (
+                "scope", "mode", "files", "unique_contents", "logical_bytes",
+                "potential_duplicate_bytes", "hardlinked_files", "linked_files",
+                "repaired_hardlinks", "plan_sha256", "remote_access_performed",
+                "remote_write_performed",
+            )
+        }
+        summary["output"] = _relative(output, project_root)
+        if result.get("mutation_receipt_path"):
+            summary["mutation_receipt_path"] = result["mutation_receipt_path"]
+        print(json.dumps(summary, ensure_ascii=False, sort_keys=True))
+    else:
+        print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
 
 if __name__ == "__main__":

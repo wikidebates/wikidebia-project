@@ -3,6 +3,7 @@ import pytest
 import os
 import errno
 import json
+import sys
 import wikidebia_checkpoint_store as store
 from wikidebia_checkpoint_store import StoreError, inventory
 
@@ -142,3 +143,74 @@ def test_mutation_requires_exact_current_plan_confirmation(tmp_path):
     assert a.read_bytes() == b"same"
     assert b.read_bytes() == b"changed"
     assert not (tmp_path / ".state/checkpoint-maintenance").exists()
+
+
+def test_backup_scope_deduplicates_only_immutable_backup_roots(tmp_path, monkeypatch):
+    release_backup = (
+        tmp_path / ".state/release-rebuild-backups/debate/EDIT-TEST-001/run/release-copy/a.wiki"
+    )
+    workspace_backup = (
+        tmp_path / ".state/editorial-workspaces/debate/EDIT-TEST-001/backups/run/a.wiki"
+    )
+    active = tmp_path / ".state/editorial-workspaces/debate/EDIT-TEST-001/release-copy/a.wiki"
+    for path in (release_backup, workspace_backup, active):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"immutable duplicate")
+
+    report = inventory(tmp_path, scope="backups")
+    assert report["scope"] == "backups"
+    assert report["files"] == 2
+    assert report["potential_duplicate_bytes"] == len(b"immutable duplicate")
+    assert all(
+        "/release-copy/a.wiki" not in row["path"]
+        or "release-rebuild-backups" in row["path"]
+        for row in report["mutation_plan"]["files"]
+    )
+
+    def fake_reflink(dst, request, src):
+        os.lseek(src, 0, os.SEEK_SET)
+        os.write(dst, os.read(src, 4096))
+
+    monkeypatch.setattr(store.fcntl, "ioctl", fake_reflink)
+    applied = inventory(
+        tmp_path,
+        scope="backups",
+        apply=True,
+        confirm_plan_sha256=report["plan_sha256"],
+    )
+    assert applied["linked_files"] == 1
+    assert applied["mutation_receipt"]["scope"] == "backups"
+    assert release_backup.read_bytes() == workspace_backup.read_bytes() == b"immutable duplicate"
+    assert active.read_bytes() == b"immutable duplicate"
+    assert active.stat().st_ino not in {release_backup.stat().st_ino, workspace_backup.stat().st_ino}
+
+
+def test_unknown_storage_scope_is_rejected(tmp_path):
+    with pytest.raises(StoreError, match="Périmètre inconnu"):
+        inventory(tmp_path, scope="everything")
+
+
+def test_backup_scope_rejects_symbolic_workspace_root(tmp_path):
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    state = tmp_path / ".state"
+    state.mkdir()
+    (state / "editorial-workspaces").symlink_to(outside, target_is_directory=True)
+    with pytest.raises(StoreError, match="symbolique"):
+        inventory(tmp_path, scope="backups")
+
+
+def test_cli_output_keeps_large_plan_out_of_console(tmp_path, monkeypatch, capsys):
+    _write(tmp_path, "a.zip", b"same")
+    output = tmp_path / ".state/dedup-plan.json"
+    monkeypatch.setattr(sys, "argv", [
+        "wikidebia_checkpoint_store.py", "--project-root", str(tmp_path),
+        "--output", str(output),
+    ])
+    assert store.main() == 0
+    summary = json.loads(capsys.readouterr().out)
+    full = json.loads(output.read_text(encoding="utf-8"))
+    assert summary["output"] == ".state/dedup-plan.json"
+    assert summary["plan_sha256"] == full["plan_sha256"]
+    assert "mutation_plan" not in summary
+    assert full["mutation_plan"]["files"][0]["path"].endswith("a.zip")

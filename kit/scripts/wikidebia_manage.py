@@ -2110,6 +2110,28 @@ def state_maintenance(
     return run(command, cwd=root, check=False).returncode
 
 
+def storage_dedup(
+    root: Path, *, scope: str, apply: bool, repair_hardlinks: bool,
+    confirm_plan_sha256: str | None, output: Path | None,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_checkpoint_store.py"
+    if not script.is_file():
+        raise ManagementError("Outil de déduplication locale absent du kit")
+    command = [
+        python_command(root), str(script), "--project-root", str(root),
+        "--scope", scope,
+    ]
+    if apply:
+        command.append("--apply")
+    if repair_hardlinks:
+        command.append("--repair-hardlinks")
+    if confirm_plan_sha256:
+        command.extend(["--confirm-plan-sha256", confirm_plan_sha256])
+    if output:
+        command.extend(["--output", str(output)])
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_status(root: Path, debate_id: str, *, work_id: str) -> int:
     script = root / "kit" / "scripts" / "wikidebia_workspace_status.py"
     if not script.is_file():
@@ -2919,6 +2941,19 @@ def build_parser() -> argparse.ArgumentParser:
     state_maintenance_parser.add_argument("--apply-plan", type=Path)
     state_maintenance_parser.add_argument("--confirm-plan-sha256")
 
+    storage_dedup_parser = sub.add_parser(
+        "storage-dedup",
+        help="Inventorier ou dédupliquer par reflink les checkpoints et backups immuables",
+    )
+    storage_dedup_parser.add_argument(
+        "--scope", choices=("checkpoints", "backups"), default="checkpoints",
+    )
+    storage_action = storage_dedup_parser.add_mutually_exclusive_group()
+    storage_action.add_argument("--apply", action="store_true")
+    storage_action.add_argument("--repair-hardlinks", action="store_true")
+    storage_dedup_parser.add_argument("--confirm-plan-sha256")
+    storage_dedup_parser.add_argument("--output", type=Path)
+
     corpus_status_parser = sub.add_parser(
         "corpus-workspace-status",
         help="Afficher un état compact vérifié et la prochaine commande exacte",
@@ -3333,6 +3368,13 @@ def main(argv: list[str] | None = None) -> int:
         return state_maintenance(
             root, output=args.output, apply_plan=args.apply_plan,
             confirm_plan_sha256=args.confirm_plan_sha256,
+        )
+
+    if args.command == "storage-dedup":
+        return storage_dedup(
+            root, scope=args.scope, apply=args.apply,
+            repair_hardlinks=args.repair_hardlinks,
+            confirm_plan_sha256=args.confirm_plan_sha256, output=args.output,
         )
 
     if args.command == "corpus-workspace-status":
