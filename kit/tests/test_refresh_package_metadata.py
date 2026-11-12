@@ -86,3 +86,17 @@ def test_junit_failures_are_never_accepted_as_package_proof(tmp_path: Path):
     )
     with pytest.raises(module.PackageMetadataError, match="non réussie"):
         module.passed_test_count(report)
+
+
+def test_refresh_refuses_git_merge_conflict_markers(tmp_path: Path):
+    _fixture(tmp_path)
+    report = tmp_path / "TEST_REPORT.txt"
+    report.write_text(
+        report.read_text(encoding="utf-8")
+        + "<" * 7 + " HEAD\nconflicting value\n" + "=" * 7 + "\nother value\n"
+        + ">" * 7 + " branch\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(module.PackageMetadataError, match="Marqueurs de conflit Git"):
+        module.refresh(tmp_path, test_count=11, generated_date="2026-11-04")

@@ -17,10 +17,31 @@ from typing import Any, Mapping, Sequence
 SELF_EXCLUDED = {"PACKAGE_MANIFEST_SHA256.json", "PACKAGE_RECEIPT.json"}
 RUNTIME_DIRS = {"__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache"}
 RUNTIME_SUFFIXES = {".pyc", ".pyo"}
+TEXT_SUFFIXES = {".py", ".md", ".txt", ".json", ".toml", ".sh", ".yml", ".yaml"}
 
 
 class PackageMetadataError(RuntimeError):
     pass
+
+
+def assert_no_merge_conflict_markers(root: Path) -> None:
+    marker = re.compile(
+        rb"(?m)^(?:" + b"<" * 7 + rb" |" + b"=" * 7 + rb"$|" + b">" * 7 + rb" )"
+    )
+    conflicts = []
+    for path in sorted(root.rglob("*")):
+        if (
+            not path.is_file()
+            or path.suffix not in TEXT_SUFFIXES
+            or any(part in RUNTIME_DIRS for part in path.relative_to(root).parts)
+        ):
+            continue
+        if marker.search(path.read_bytes()):
+            conflicts.append(path.relative_to(root).as_posix())
+    if conflicts:
+        raise PackageMetadataError(
+            "Marqueurs de conflit Git présents : " + ", ".join(conflicts[:10])
+        )
 
 
 def passed_test_count(junit_xml: Path) -> int:
@@ -131,6 +152,7 @@ def expected_metadata(
     root = root.expanduser().resolve()
     if test_count < 1:
         raise PackageMetadataError("Le compteur de tests doit être positif")
+    assert_no_merge_conflict_markers(root)
     versions = json.loads((root / "VERSIONS.json").read_text(encoding="utf-8"))
     report_path = root / "TEST_REPORT.txt"
     report_raw = _updated_report(report_path.read_bytes(), versions, test_count)
