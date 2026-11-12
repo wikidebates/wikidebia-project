@@ -281,6 +281,181 @@ def test_signed_all_skip_plan_closes_without_remote_execution(tmp_path: Path):
     assert again["idempotent"] is True
 
 
+def test_signed_all_skip_plan_accepts_verified_effective_url_overlay(
+    tmp_path: Path, monkeypatch
+):
+    project, debate_id, work_id, comparison_id, plan, _ = make_signed_no_change_comparison(
+        tmp_path
+    )
+    row = plan["operations"]["skip"][0]
+    release = project / ".state/editorial-workspaces" / debate_id / work_id / "release-copy"
+    release_path = project / row["source_path"]
+    overlay = release_path.read_text(encoding="utf-8") + "\n"
+    overlay_sha = closure.sha_text(overlay)
+    effective = (
+        project
+        / ".state/update-effective"
+        / debate_id
+        / row["language"]
+        / f"{row['page_id']}-{overlay_sha[:16]}.wiki"
+    )
+    effective.parent.mkdir(parents=True)
+    effective.write_text(overlay, encoding="utf-8")
+    row.update({
+        "source_path": effective.relative_to(project).as_posix(),
+        "local_file_sha256": closure.sha256_file(effective),
+        "new_sha256": overlay_sha,
+        "remote_sha256": overlay_sha,
+    })
+    plan["plan_sha256"] = closure.sha_object(
+        {key: value for key, value in plan.items() if key != "plan_sha256"}
+    )
+    run = project / ".state/remote-comparisons" / debate_id / work_id / comparison_id
+    (run / "update-plan.json").write_text(
+        json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    receipt_path = run / "comparison-receipt.json"
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    receipt["plan_sha256"] = plan["plan_sha256"]
+    receipt["receipt_sha256"] = closure._canonical_sha(receipt, "receipt_sha256")
+    receipt_path.write_text(
+        json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    meta_path = release.parent / "workspace.json"
+    meta = json.loads(meta_path.read_text(encoding="utf-8"))
+    meta["remote_comparison"]["plan_sha256"] = plan["plan_sha256"]
+    meta["remote_comparisons"][-1]["plan_sha256"] = plan["plan_sha256"]
+    meta["workspace_sha256"] = workspace_mod.workspace_receipt_hash(meta)
+    meta_path.write_text(
+        json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    monkeypatch.setattr(
+        closure,
+        "_publication_url_overlays",
+        lambda *_args: {(row["language"], row["page_id"]): overlay},
+    )
+
+    result = closure.close_no_change_work(
+        project, debate_id, work_id, comparison_id, plan["plan_sha256"]
+    )
+    assert result["closure_mode"] == "signed_no_change_plan"
+    assert corpus.full_tree_sha256(project / "corpus" / debate_id) == corpus.full_tree_sha256(release)
+
+
+def test_publication_url_overlay_is_rebuilt_from_owner_approved_registry(tmp_path: Path):
+    release = tmp_path / "release-copy"
+    page_path = release / "output/en/arguments/A0001.wiki"
+    page_path.parent.mkdir(parents=True)
+    old_url = "https://archive.is/example"
+    new_url = "https://example.org/original"
+    source = "{{Argument\n|résumé=Test\n}}\n" + old_url + "\n"
+    page_path.write_text(source, encoding="utf-8")
+    data = release / "data"
+    data.mkdir()
+    (release / "manifest.json").write_text(
+        json.dumps({
+            "editorial_controls": {
+                "publication_url_replacements_path": "data/publication_url_replacements.json"
+            },
+            "pages": [{
+                "language": "en",
+                "page_id": "A0001",
+                "page_type": "argument",
+                "canonical_title": "Test",
+                "file_path": "output/en/arguments/A0001.wiki",
+                "sha256": closure.sha_text(source),
+            }],
+        }),
+        encoding="utf-8",
+    )
+    (data / "publication_url_replacements.json").write_text(
+        json.dumps({
+            "debate_id": "debat_test",
+            "entries": [{
+                "language": "en",
+                "page_id": "A0001",
+                "old_url": old_url,
+                "new_url": new_url,
+                "owner_approved": True,
+                "reason": "MediaWiki rejects the archive host; retain the original source.",
+                "authorization_receipt_sha256": "a" * 64,
+            }],
+        }),
+        encoding="utf-8",
+    )
+    pages = closure._release_pages(release)
+    overlays = closure._publication_url_overlays(release, "debat_test", pages)
+    assert overlays[("en", "A0001")] == source.replace(old_url, new_url)
+
+
+def test_external_deletion_skip_requires_current_signed_registry(tmp_path: Path):
+    project = tmp_path / "project"
+    source = project / "release-copy/output/fr/arguments/A0001.wiki"
+    source.parent.mkdir(parents=True)
+    source.write_text("{{Argument\n|résumé=Test\n}}\n", encoding="utf-8")
+    page = {
+        "canonical_title": "Argument supprimé",
+        "content_sha256": closure.sha_text(source.read_text(encoding="utf-8")),
+    }
+    entry = {
+        "language": "fr",
+        "page_id": "A0001",
+        "page_type": "argument",
+        "canonical_title": page["canonical_title"],
+        "status": "active",
+        "reason": "Suppression distante explicitement acceptée par le propriétaire.",
+        "accepted_by": "project_owner",
+        "accepted_at": "2026-11-12T08:00:00+00:00",
+        "work_id": "EDIT-20261112-001",
+        "comparison_id": "REMOTE-20261112-001",
+        "release_page_sha256": page["content_sha256"],
+        "release_file_sha256": closure.sha256_file(source),
+    }
+    registry = {
+        "schema": "wikidebia-accepted-external-deletions-1.0",
+        "debate_id": "debat_test",
+        "created_at": entry["accepted_at"],
+        "updated_at": entry["accepted_at"],
+        "entries": [entry],
+    }
+    registry["registry_sha256"] = closure.sha_object(registry)
+    registry_path = project / ".state/external-deletions/debat_test.json"
+    registry_path.parent.mkdir(parents=True)
+    registry_path.write_text(
+        json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    row = {
+        "language": "fr",
+        "page_id": "A0001",
+        "title": page["canonical_title"],
+        "new_sha256": page["content_sha256"],
+        "local_file_sha256": closure.sha256_file(source),
+        "remote_sha256": None,
+        "observed_revision_id": None,
+        "preconditions": [
+            "remote_title_absent",
+            "external_deletion_registry_signature_valid",
+            "release_page_matches_accepted_deletion",
+        ],
+        "external_deletion_acceptance": {
+            "registry_path": ".state/external-deletions/debat_test.json",
+            "registry_sha256": registry["registry_sha256"],
+            "accepted_at": entry["accepted_at"],
+            "accepted_by": entry["accepted_by"],
+            "comparison_id": entry["comparison_id"],
+        },
+    }
+    assert closure._validate_external_deletion_skip(
+        project,
+        "debat_test",
+        "EDIT-20261112-001",
+        row,
+        page,
+        source.resolve(),
+        source.resolve(),
+    ) is True
+
+
 def test_signed_all_skip_close_refuses_partial_scope(tmp_path: Path):
     project, debate_id, work_id, comparison_id, plan, _ = make_signed_no_change_comparison(tmp_path)
     receipt_path = project / ".state/remote-comparisons" / debate_id / work_id / comparison_id / "comparison-receipt.json"
