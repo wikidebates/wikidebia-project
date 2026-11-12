@@ -1,10 +1,6 @@
 Wikidéb’IA Kit 2.16.47 — rapport de tests
 
-<<<<<<< HEAD
-Tests pytest : 1127 réussis
-=======
-Tests pytest : 1113 réussis
->>>>>>> bd140bb1 (feat(state): audit and clean stale backups safely)
+Tests pytest : 1128 réussis
 Norme : 1.2.88
 Validateur : 0.4.105
 
