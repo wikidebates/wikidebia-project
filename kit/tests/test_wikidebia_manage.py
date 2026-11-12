@@ -1128,6 +1128,19 @@ def test_state_maintenance_command_is_exposed_by_manager():
     assert args.output == Path(".state/maintenance-plan.json")
 
 
+def test_storage_dedup_backup_scope_is_exposed_by_manager():
+    args = module.build_parser().parse_args([
+        "storage-dedup", "--scope", "backups", "--apply",
+        "--confirm-plan-sha256", "a" * 64,
+        "--output", ".state/backup-dedup.json",
+    ])
+    assert args.command == "storage-dedup"
+    assert args.scope == "backups"
+    assert args.apply is True
+    assert args.confirm_plan_sha256 == "a" * 64
+    assert args.output == Path(".state/backup-dedup.json")
+
+
 def test_workspace_status_command_is_exposed_by_manager():
     args = module.build_parser().parse_args([
         "corpus-workspace-status", "debat_test", "--work-id", "EDIT-TEST-001",
