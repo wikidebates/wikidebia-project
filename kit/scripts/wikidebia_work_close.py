@@ -16,6 +16,7 @@ import errno
 import hashlib
 import json
 import os
+import re
 import shutil
 import tempfile
 import zipfile
@@ -38,6 +39,7 @@ from wikidebia_corpus_build import (
 )
 from wikidebia_editorial_review import _run_validator
 from wikidebia_editorial_workspace import WorkspaceError, fsync_directory, validate_work_id, workspace_receipt_hash
+from wikidebia_external_deletions import ExternalDeletionError, load_registry
 from wikidebia_remote_compare import _validate_comparison_id
 from wikidebia_remote_plan_review import RemotePlanReviewError, _load_comparison
 from wikidebia_remote_execute import (
@@ -185,6 +187,117 @@ def _release_pages(release_copy: Path) -> dict[str, dict[str, dict[str, Any]]]:
     if not pages:
         raise WorkClosureError("Le corpus final ne contient aucune page")
     return pages
+
+
+def _publication_url_overlays(
+    release_copy: Path,
+    debate_id: str,
+    release_pages: Mapping[str, Mapping[str, Mapping[str, Any]]],
+) -> dict[tuple[str, str], str]:
+    """Rebuild owner-approved URL overlays from the sealed release copy."""
+    manifest = load_json(release_copy / "manifest.json", "manifest du corpus final")
+    controls = manifest.get("editorial_controls") or {}
+    relative = str(controls.get("publication_url_replacements_path") or "")
+    if not relative:
+        return {}
+    path = (release_copy / relative).resolve()
+    try:
+        path.relative_to(release_copy.resolve())
+    except ValueError as exc:
+        raise WorkClosureError("Registre de substitution d’URL extérieur à release-copy") from exc
+    if not path.is_file() or path.is_symlink():
+        raise WorkClosureError("Registre de substitution d’URL absent ou non sûr")
+    data = load_json(path, "registre de substitution d’URL")
+    if data.get("debate_id") != debate_id or not isinstance(data.get("entries"), list):
+        raise WorkClosureError("Registre de substitution d’URL invalide")
+
+    overlays: dict[tuple[str, str], str] = {}
+    seen: set[tuple[str, str, str]] = set()
+    for raw in data["entries"]:
+        row = dict(raw) if isinstance(raw, dict) else {}
+        language = str(row.get("language") or "")
+        page_id = str(row.get("page_id") or "")
+        old_url = str(row.get("old_url") or "")
+        new_url = str(row.get("new_url") or "")
+        key = (language, page_id, old_url)
+        if (
+            not all(key)
+            or key in seen
+            or row.get("owner_approved") is not True
+            or not old_url.startswith(("http://", "https://"))
+            or not new_url.startswith(("http://", "https://"))
+            or old_url == new_url
+            or len(str(row.get("reason") or "").strip()) < 24
+            or not re.fullmatch(r"[a-f0-9]{64}", str(row.get("authorization_receipt_sha256") or ""))
+        ):
+            raise WorkClosureError("Substitution d’URL de publication invalide")
+        seen.add(key)
+        page = release_pages.get(language, {}).get(page_id)
+        if page is None:
+            raise WorkClosureError(f"Substitution d’URL sans page finale : {language}/{page_id}")
+        page_key = (language, page_id)
+        text = overlays.get(page_key)
+        if text is None:
+            text = (release_copy / str(page["file_path"])).read_text(encoding="utf-8")
+        if text.count(old_url) != 1:
+            raise WorkClosureError(f"URL source absente ou dupliquée : {language}/{page_id}")
+        overlays[page_key] = text.replace(old_url, new_url, 1)
+    return overlays
+
+
+def _validate_external_deletion_skip(
+    project_root: Path,
+    debate_id: str,
+    work_id: str,
+    row: Mapping[str, Any],
+    page: Mapping[str, Any],
+    source_path: Path,
+    expected_path: Path,
+) -> bool:
+    acceptance = row.get("external_deletion_acceptance")
+    if acceptance is None:
+        return False
+    if not isinstance(acceptance, dict):
+        raise WorkClosureError("Preuve de suppression externe invalide")
+    try:
+        registry_path, registry = load_registry(project_root, debate_id)
+    except ExternalDeletionError as exc:
+        raise WorkClosureError(str(exc)) from exc
+    if registry is None:
+        raise WorkClosureError("Registre de suppressions externes absent")
+    language = str(row.get("language") or row.get("wiki") or "")
+    page_id = str(row.get("page_id") or "")
+    entry = next((
+        item for item in registry["entries"]
+        if item.get("language") == language and str(item.get("page_id")) == page_id
+    ), None)
+    expected_preconditions = {
+        "remote_title_absent",
+        "external_deletion_registry_signature_valid",
+        "release_page_matches_accepted_deletion",
+    }
+    if (
+        entry is None
+        or entry.get("status") != "active"
+        or entry.get("work_id") != work_id
+        or entry.get("canonical_title") != page["canonical_title"]
+        or str(row.get("title") or "") != page["canonical_title"]
+        or entry.get("release_page_sha256") != page["content_sha256"]
+        or entry.get("release_file_sha256") != sha256_file(expected_path)
+        or source_path != expected_path
+        or str(row.get("new_sha256") or "") != page["content_sha256"]
+        or str(row.get("local_file_sha256") or "") != entry.get("release_file_sha256")
+        or row.get("remote_sha256") is not None
+        or row.get("observed_revision_id") is not None
+        or set(row.get("preconditions") or []) != expected_preconditions
+        or acceptance.get("registry_path") != relative_to_project(registry_path, project_root)
+        or acceptance.get("registry_sha256") != registry.get("registry_sha256")
+        or acceptance.get("accepted_at") != entry.get("accepted_at")
+        or acceptance.get("accepted_by") != entry.get("accepted_by")
+        or acceptance.get("comparison_id") != entry.get("comparison_id")
+    ):
+        raise WorkClosureError(f"Preuve de suppression externe divergente : {language}/{page_id}")
+    return True
 
 
 def _effective_remote_pages(
@@ -503,6 +616,9 @@ def _load_no_change_comparison(
         raise WorkClosureError("release-copy a changé depuis la comparaison distante")
 
     release_pages = _release_pages(release_copy)
+    publication_overlays = _publication_url_overlays(
+        release_copy, str(receipt.get("debate_id") or ""), release_pages
+    )
     expected = {
         (language, page_id): page
         for language, pages in release_pages.items()
@@ -518,11 +634,43 @@ def _load_no_change_comparison(
             raise WorkClosureError(f"Page skip absente ou dupliquée : {key[0]}/{key[1]}")
         source_path = (project_root / str(row.get("source_path") or "")).resolve()
         expected_path = (release_copy / page["file_path"]).resolve()
-        if (
+        external_deletion = _validate_external_deletion_skip(
+            project_root,
+            str(receipt.get("debate_id") or ""),
+            str(receipt.get("work_id") or ""),
+            row,
+            page,
+            source_path,
+            expected_path,
+        )
+        expected_sha = page["content_sha256"]
+        overlay = publication_overlays.get(key)
+        if external_deletion:
+            if overlay is not None:
+                raise WorkClosureError(f"Suppression externe et overlay incompatibles : {key[0]}/{key[1]}")
+        elif overlay is not None:
+            expected_sha = sha_text(overlay)
+            effective_root = (
+                project_root / ".state" / "update-effective" / str(receipt["debate_id"]) / key[0]
+            )
+            try:
+                source_path.relative_to(effective_root.resolve())
+            except ValueError as exc:
+                raise WorkClosureError(f"Source effective hors périmètre : {key[0]}/{key[1]}") from exc
+            if (
+                source_path.name != f"{key[1]}-{expected_sha[:16]}.wiki"
+                or not source_path.is_file()
+                or source_path.is_symlink()
+                or source_path.read_text(encoding="utf-8") != overlay
+            ):
+                raise WorkClosureError(f"Source effective divergente : {key[0]}/{key[1]}")
+        elif source_path != expected_path:
+            raise WorkClosureError(f"Source skip divergente : {key[0]}/{key[1]}")
+        if not external_deletion and (
             str(row.get("title") or "") != page["canonical_title"]
-            or str(row.get("new_sha256") or "") != page["content_sha256"]
-            or str(row.get("remote_sha256") or "") != page["content_sha256"]
-            or source_path != expected_path
+            or str(row.get("new_sha256") or "") != expected_sha
+            or str(row.get("remote_sha256") or "") != expected_sha
+            or str(row.get("local_file_sha256") or "") != sha256_file(source_path)
             or type(row.get("observed_revision_id")) is not int
             or row["observed_revision_id"] <= 0
         ):
