@@ -14,30 +14,33 @@ SKIP = {".git", ".venv", ".state", "private", "corpus", "archives",
         "updates", "incoming", "outgoing", "logs", "plans", "__pycache__",
         ".pytest_cache", "translation-memory"}
 SECRET_NAMES = {"user-password.cfg", "wikidebia.local.json", ".env"}
+SAFE_TEST_ID = re.compile(
+    r"[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*(?:::[A-Za-z_][A-Za-z0-9_]*){0,3}"
+)
+SAFE_EXCEPTION_TYPE = re.compile(r"[A-Za-z_][A-Za-z0-9_.]{0,119}")
+SAFE_SOURCE_NAME = re.compile(r"[A-Za-z0-9_.-]{1,120}")
 
 
-def _redact(value: str) -> str:
-    safe = re.sub(
-        r"(?i)(password|token|secret|api[_-]?key)\s*[=:]\s*\S+",
-        r"\1=[REDACTED]", value,
-    )
-    safe = re.sub(r"(?i)\bBearer\s+[^\s]+", "Bearer [REDACTED]", safe)
-    safe = re.sub(
-        r"(?i)(authorization\s*[=:]\s*)(?:Basic\s+|Bearer\s+)?\S+",
-        r"\1[REDACTED]", safe,
-    )
-    safe = re.sub(r"(https?://)[^/@\s:]+:[^/@\s]+@", r"\1[REDACTED]@", safe)
-    safe = re.sub(r"\b(?:AKIA|ASIA)[A-Z0-9]{16}\b", "[REDACTED_AWS_KEY]", safe)
-    safe = re.sub(r"\bgh[pousr]_[A-Za-z0-9_]{20,}\b", "[REDACTED_GITHUB_TOKEN]", safe)
-    safe = re.sub(
-        r"\beyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\b",
-        "[REDACTED_JWT]", safe,
-    )
-    safe = re.sub(
-        r"-----BEGIN [A-Z0-9 ]*PRIVATE KEY-----.*",
-        "[REDACTED_PRIVATE_KEY]", safe,
-    )
-    return safe
+def _safe_source_name(path: Path) -> str:
+    return path.name if SAFE_SOURCE_NAME.fullmatch(path.name) else "untrusted-source.xml"
+
+
+def _safe_test_id(value: str) -> str | None:
+    # Parameter values can contain credentials or arbitrary user data.  Retain
+    # the structural test identity only and replace every parameter payload.
+    candidate = re.sub(r"\[[^\]\r\n]*\]", "[parameter]", value.strip())
+    candidate = candidate.split(" - ", 1)[0].strip()
+    if "[parameter]" in candidate:
+        base = candidate.replace("[parameter]", "")
+        if SAFE_TEST_ID.fullmatch(base):
+            return base + "[parameter]"
+        return None
+    return candidate if SAFE_TEST_ID.fullmatch(candidate) else None
+
+
+def _safe_exception_type(value: str) -> str | None:
+    candidate = value.strip()
+    return candidate if SAFE_EXCEPTION_TYPE.fullmatch(candidate) else None
 
 def compact_index(root: Path) -> dict:
     root = root.resolve()
@@ -67,12 +70,37 @@ def failure_report(log: str) -> dict:
                "E   ", "short test summary info", "tests failed", "test failed")
     for number, line in enumerate(lines, 1):
         if any(marker in line for marker in markers):
-            # Redact likely secrets from test diagnostics.
-            safe = _redact(line)
-            selected.append({"line": number, "text": safe[:300]})
-    return {"schema": "wikidebia-test-failures-1.0",
-            "total_lines": len(lines), "failure_lines": selected[:200],
-            "truncated": len(selected) > 200}
+            stripped = line.strip()
+            kind = "diagnostic"
+            test_id = None
+            exception_type = None
+            for prefix, selected_kind in (("FAILED ", "failure"), ("ERROR ", "error")):
+                if stripped.startswith(prefix):
+                    kind = selected_kind
+                    test_id = _safe_test_id(stripped[len(prefix):])
+                    break
+            if stripped.startswith("Traceback (most recent"):
+                kind = "traceback_start"
+            match = re.search(r"\b([A-Za-z_][A-Za-z0-9_.]*(?:Error|Exception))\b", stripped)
+            if match:
+                exception_type = _safe_exception_type(match.group(1))
+                if kind == "diagnostic":
+                    kind = "exception"
+            selected.append({
+                "line": number,
+                "kind": kind,
+                "test_id": test_id,
+                "exception_type": exception_type,
+            })
+    return {
+        "schema": "wikidebia-structured-log-failures-1.0",
+        "total_lines": len(lines),
+        "failure_event_count": len(selected),
+        "failure_events": selected[:200],
+        "truncated": len(selected) > 200,
+        "raw_tracebacks_included": False,
+        "arbitrary_log_lines_included": False,
+    }
 
 
 def junit_failure_report(paths: list[Path]) -> dict:
@@ -82,13 +110,17 @@ def junit_failure_report(paths: list[Path]) -> dict:
     missing_sources = []
     parse_errors = []
     for path in paths:
+        source_name = _safe_source_name(path)
         if not path.is_file() or path.is_symlink():
-            missing_sources.append(path.name)
+            missing_sources.append(source_name)
             continue
         try:
             root = ET.parse(path).getroot()
         except (ET.ParseError, OSError) as exc:
-            parse_errors.append({"source": path.name, "error_type": type(exc).__name__})
+            parse_errors.append({
+                "source": source_name,
+                "error_type": _safe_exception_type(type(exc).__name__),
+            })
             continue
         cases = list(root.iter("testcase"))
         source_failures = 0
@@ -107,18 +139,16 @@ def junit_failure_report(paths: list[Path]) -> dict:
                 if len(failures) >= 100:
                     continue
                 classname = str(case.get("classname") or "")
-                name = str(case.get("name") or "unknown")
-                test_id = f"{classname}::{name}" if classname else name
-                message = _redact(str(node.get("message") or "").replace("\n", " "))
+                name = str(case.get("name") or "")
+                test_id = _safe_test_id(f"{classname}::{name}" if classname else name)
                 failures.append({
-                    "source": path.name,
-                    "test_id": _redact(test_id)[:300],
+                    "source": source_name,
+                    "test_id": test_id,
                     "kind": kind,
-                    "exception_type": _redact(str(node.get("type") or ""))[:120] or None,
-                    "message": message[:300] or None,
+                    "exception_type": _safe_exception_type(str(node.get("type") or "")),
                 })
         sources.append({
-            "source": path.name,
+            "source": source_name,
             "tests": len(cases),
             "failures": source_failures,
             "errors": source_errors,
@@ -135,6 +165,7 @@ def junit_failure_report(paths: list[Path]) -> dict:
         "truncated": total_failures > len(failures),
         "raw_tracebacks_included": False,
         "arbitrary_log_lines_included": False,
+        "messages_included": False,
         "remote_access_performed": False,
         "remote_write_performed": False,
     }
