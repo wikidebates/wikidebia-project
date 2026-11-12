@@ -1217,12 +1217,14 @@ def test_pretranslation_benchmark_command_exposes_reproducible_dimensions():
         "--arguments", "878",
         "--payload-bytes", "2048",
         "--iterations", "5",
+        "--snapshot", ".state/graph-extract/example",
         "--output", ".state/benchmarks/pretranslation.json",
     ])
     assert args.command == "pretranslation-benchmark"
     assert args.arguments == 878
     assert args.payload_bytes == 2048
     assert args.iterations == 5
+    assert args.snapshot == Path(".state/graph-extract/example")
     assert args.output == Path(".state/benchmarks/pretranslation.json")
 
 

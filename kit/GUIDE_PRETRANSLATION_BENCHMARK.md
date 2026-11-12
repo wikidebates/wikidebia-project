@@ -17,6 +17,23 @@ justifications et objections, afin de mesurer aussi la construction d’un graph
 ramifié. La commande ne contacte aucun wiki et n’appelle aucun modèle de
 langage.
 
+Une extraction locale déjà figée peut remplacer le fixture synthétique :
+
+```bash
+./wikidebia pretranslation-benchmark \
+  --snapshot .state/graph-extract/<extraction> \
+  --iterations 3 \
+  --output .state/benchmarks/pretranslation-snapshot.json
+```
+
+Le chemin peut viser la racine de l’extraction ou son sous-répertoire `snapshot`.
+Le manifeste, le graphe récursif, les chemins et les liens symboliques sont contrôlés.
+La source est strictement en lecture seule ; tous les builds et reçus temporaires sont
+créés hors de l’extraction puis supprimés. Le rapport distingue explicitement
+`fixture.kind=synthetic` et `fixture.kind=snapshot` et conserve l’empreinte du manifeste.
+Le chemin `--output` est refusé s’il vise l’extraction mesurée ou l’un de ses
+sous-répertoires.
+
 ## Scénarios comparés
 
 Le rapport scellé par SHA-256 compare trois chemins portant exactement le même contrat de

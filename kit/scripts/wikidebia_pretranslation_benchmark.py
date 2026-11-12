@@ -14,7 +14,14 @@ import time
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
-from wikidebia_corpus_build import canonical_json, write_json
+from wikidebia_corpus_build import (
+    CorpusBuildError,
+    assert_no_symlinks,
+    canonical_json,
+    load_json,
+    relative_to_project,
+    write_json,
+)
 from wikidebia_corpus_init import (
     build_corpus,
     canonical_json_sha256,
@@ -165,6 +172,70 @@ def _tree_metrics(root: Path) -> dict[str, int]:
     }
 
 
+def _snapshot_source(project_root: Path, requested: Path) -> tuple[Path, dict[str, Any]]:
+    requested = requested.expanduser()
+    if not requested.is_absolute():
+        requested = project_root / requested
+    if requested.is_symlink():
+        raise PretranslationBenchmarkError("Le snapshot demandé est absent ou non sûr")
+    requested = requested.resolve()
+    if not requested.is_dir() or requested.is_symlink():
+        raise PretranslationBenchmarkError("Le snapshot demandé est absent ou non sûr")
+    if (requested / "snapshot/snapshot_manifest.json").is_file():
+        source = requested
+    elif (requested / "snapshot_manifest.json").is_file():
+        source = requested.parent
+    else:
+        raise PretranslationBenchmarkError(
+            "--snapshot doit viser une extraction ou son sous-répertoire snapshot"
+        )
+    assert_no_symlinks(source)
+    manifest = load_json(source / "snapshot/snapshot_manifest.json", "manifeste du snapshot")
+    if manifest.get("schema") != "wikidebia-graph-snapshot-1.0":
+        raise PretranslationBenchmarkError("Schéma de snapshot non pris en charge")
+    arguments = manifest.get("arguments") or []
+    declared_count = int((manifest.get("counts") or {}).get("argument_pages") or 0)
+    if not isinstance(arguments, list) or declared_count != len(arguments) or declared_count < 2:
+        raise PretranslationBenchmarkError("Le snapshot ne contient pas un graphe représentatif")
+    graph_paths = sorted(source.glob("*graphe_recursif*.json"))
+    if len(graph_paths) != 1:
+        raise PretranslationBenchmarkError("Le graphe récursif du snapshot est absent ou ambigu")
+    graph = load_json(graph_paths[0], "graphe récursif du snapshot")
+    roots = len(graph.get("arguments_pour_niveau_1") or []) + len(
+        graph.get("arguments_contre_niveau_1") or []
+    )
+    try:
+        source_path = relative_to_project(source, project_root)
+    except CorpusBuildError:
+        source_path = f"external:{source.name}"
+    return source, {
+        "kind": "snapshot",
+        "source_path": source_path,
+        "arguments": declared_count,
+        "root_arguments": roots,
+        "relations": len(graph.get("relations") or []),
+        "snapshot_manifest_sha256": _sha256(
+            (source / "snapshot/snapshot_manifest.json").read_bytes()
+        ),
+    }
+
+
+def _output_path(
+    project_root: Path, output: Path, snapshot: Path | None,
+) -> Path:
+    candidate = output if output.is_absolute() else project_root / output
+    if candidate.is_symlink():
+        raise PretranslationBenchmarkError("La sortie du benchmark est un lien symbolique")
+    resolved = candidate.resolve()
+    if snapshot is not None:
+        source, _ = _snapshot_source(project_root, snapshot)
+        if resolved == source or resolved.is_relative_to(source):
+            raise PretranslationBenchmarkError(
+                "La sortie du benchmark ne peut pas modifier l’extraction mesurée"
+            )
+    return resolved
+
+
 def _measure(operation: Callable[[], Any]) -> tuple[float, Any]:
     started = time.perf_counter()
     result = operation()
@@ -215,6 +286,7 @@ def run_benchmark(
     arguments: int,
     payload_bytes: int,
     iterations: int,
+    snapshot: Path | None = None,
 ) -> dict[str, Any]:
     project_root = project_root.expanduser().resolve()
     if iterations < 1:
@@ -225,11 +297,22 @@ def run_benchmark(
     contract_hashes: set[str] = set()
     with tempfile.TemporaryDirectory(prefix="wikidebia-pretranslation-benchmark-") as temp_name:
         temp_root = Path(temp_name)
-        source = make_synthetic_extraction(
-            temp_root / "source",
-            arguments=arguments,
-            payload_bytes=payload_bytes,
-        )
+        if snapshot is None:
+            source = make_synthetic_extraction(
+                temp_root / "source",
+                arguments=arguments,
+                payload_bytes=payload_bytes,
+            )
+            fixture = {
+                "kind": "synthetic",
+                "arguments": arguments,
+                "root_arguments": min(arguments, SYNTHETIC_ROOTS),
+                "relations": max(0, arguments - SYNTHETIC_ROOTS),
+                "branching_factor": SYNTHETIC_BRANCHING_FACTOR,
+                "payload_bytes_per_argument": payload_bytes,
+            }
+        else:
+            source, fixture = _snapshot_source(project_root, snapshot)
         source_metrics = _tree_metrics(source)
         output_metrics: dict[str, int] | None = None
         for index in range(iterations):
@@ -325,11 +408,7 @@ def run_benchmark(
                 "platform": platform.platform(),
             },
             "fixture": {
-                "arguments": arguments,
-                "root_arguments": min(arguments, SYNTHETIC_ROOTS),
-                "relations": max(0, arguments - SYNTHETIC_ROOTS),
-                "branching_factor": SYNTHETIC_BRANCHING_FACTOR,
-                "payload_bytes_per_argument": payload_bytes,
+                **fixture,
                 "iterations": iterations,
                 "source": source_metrics,
                 "validated_build": output_metrics,
@@ -360,6 +439,7 @@ def run_benchmark(
                 "exact_receipt_verified": True,
                 "translation_logic_exercised": False,
                 "wiki_access_performed": False,
+                "real_snapshot_used": snapshot is not None,
             },
             "billing": {
                 "llm_calls_performed": 0,
@@ -370,7 +450,11 @@ def run_benchmark(
             },
             "limitations": [
                 "Les temps dépendent de la machine, du cache disque et de la charge système.",
-                "Le corpus est synthétique; aucune équivalence linguistique n'est évaluée.",
+                (
+                    "Le snapshot réel est figé localement; aucune traduction ni équivalence linguistique n'est évaluée."
+                    if snapshot is not None else
+                    "Le corpus est synthétique; aucune équivalence linguistique n'est évaluée."
+                ),
                 "Les gains en crédits doivent être mesurés séparément dans la télémétrie du produit.",
             ],
         }
@@ -384,6 +468,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--arguments", type=int, default=250)
     parser.add_argument("--payload-bytes", type=int, default=1024)
     parser.add_argument("--iterations", type=int, default=3)
+    parser.add_argument(
+        "--snapshot", type=Path,
+        help="Extraction locale réelle, ou son répertoire snapshot, à mesurer sans accès wiki",
+    )
     parser.add_argument("--output", type=Path)
     parser.add_argument("--machine-readable", action="store_true")
     return parser
@@ -396,9 +484,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         arguments=args.arguments,
         payload_bytes=args.payload_bytes,
         iterations=args.iterations,
+        snapshot=args.snapshot,
     )
     if args.output:
-        output = args.output if args.output.is_absolute() else args.project_root / args.output
+        output = _output_path(
+            args.project_root.expanduser().resolve(), args.output, args.snapshot,
+        )
         write_json(output, report)
     print(
         json.dumps(report, ensure_ascii=False, sort_keys=True)

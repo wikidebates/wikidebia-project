@@ -20,6 +20,7 @@ def test_benchmark_measures_three_local_resume_paths(tmp_path: Path):
 
     assert report["schema"] == benchmark.REPORT_SCHEMA
     assert report["fixture"]["arguments"] == 4
+    assert report["fixture"]["kind"] == "synthetic"
     assert set(report["scenarios"]) == {
         "cold_build_validate_receipt",
         "resume_after_build_before_receipt",
@@ -32,6 +33,7 @@ def test_benchmark_measures_three_local_resume_paths(tmp_path: Path):
         "exact_receipt_verified": True,
         "translation_logic_exercised": False,
         "wiki_access_performed": False,
+        "real_snapshot_used": False,
     }
     assert report["billing"]["llm_calls_performed"] == 0
     assert report["billing"]["actual_billed_tokens"] is None
@@ -64,3 +66,52 @@ def test_benchmark_rejects_non_representative_parameters(
             payload_bytes=payload_bytes,
             iterations=iterations,
         )
+
+
+def test_benchmark_accepts_frozen_real_snapshot_without_modifying_it(tmp_path: Path):
+    project_root = Path(__file__).resolve().parents[2]
+    source = benchmark.make_synthetic_extraction(
+        tmp_path / "real-extraction", arguments=5, payload_bytes=64,
+    )
+    before = benchmark._tree_metrics(source)
+
+    report = benchmark.run_benchmark(
+        project_root,
+        arguments=250,
+        payload_bytes=1024,
+        iterations=1,
+        snapshot=source / "snapshot",
+    )
+
+    assert report["fixture"]["kind"] == "snapshot"
+    assert report["fixture"]["arguments"] == 5
+    assert report["fixture"]["root_arguments"] == 5
+    assert report["fixture"]["source"] == before
+    assert report["quality_controls"]["real_snapshot_used"] is True
+    assert report["quality_controls"]["wiki_access_performed"] is False
+    assert benchmark._tree_metrics(source) == before
+
+
+def test_benchmark_rejects_directory_without_snapshot_manifest(tmp_path: Path):
+    project_root = Path(__file__).resolve().parents[2]
+    with pytest.raises(benchmark.PretranslationBenchmarkError, match="extraction"):
+        benchmark.run_benchmark(
+            project_root,
+            arguments=2,
+            payload_bytes=64,
+            iterations=1,
+            snapshot=tmp_path,
+        )
+
+
+def test_snapshot_benchmark_output_cannot_modify_measured_extraction(tmp_path: Path):
+    source = benchmark.make_synthetic_extraction(
+        tmp_path / "real-extraction", arguments=5, payload_bytes=64,
+    )
+    with pytest.raises(benchmark.PretranslationBenchmarkError, match="modifier l’extraction"):
+        benchmark._output_path(tmp_path, source / "benchmark-report.json", source)
+
+    outside = benchmark._output_path(
+        tmp_path, tmp_path / "reports/benchmark-report.json", source / "snapshot",
+    )
+    assert outside == (tmp_path / "reports/benchmark-report.json").resolve()
