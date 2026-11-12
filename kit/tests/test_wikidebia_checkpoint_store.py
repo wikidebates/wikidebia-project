@@ -2,6 +2,7 @@ from pathlib import Path
 import pytest
 import os
 import errno
+import json
 import wikidebia_checkpoint_store as store
 from wikidebia_checkpoint_store import StoreError, inventory
 
@@ -25,15 +26,22 @@ def test_dry_run_and_apply_preserve_contents(tmp_path, monkeypatch):
     c = _write(tmp_path, "c.zip", b"other")
     result = inventory(tmp_path)
     assert result["potential_duplicate_bytes"] == 4
+    unsigned_plan = dict(result["mutation_plan"])
+    assert unsigned_plan.pop("plan_sha256") == store._object_sha(unsigned_plan)
     assert not (tmp_path / ".state/checkpoint-objects").exists()
-    result = inventory(tmp_path, apply=True)
+    result = inventory(tmp_path, apply=True, confirm_plan_sha256=result["plan_sha256"])
     assert result["linked_files"] == 1
+    assert result["mutation_receipt"]["mutation_count"] == 1
+    assert (tmp_path / result["mutation_receipt_path"]).is_file()
     assert a.read_bytes() == b.read_bytes() == b"same"
     assert c.read_bytes() == b"other"
     assert a.stat().st_ino != b.stat().st_ino
     a.write_bytes(b"changed")
     assert b.read_bytes() == b"same"
-    assert inventory(tmp_path, apply=True)["linked_files"] == 0
+    next_plan = inventory(tmp_path)
+    assert inventory(
+        tmp_path, apply=True, confirm_plan_sha256=next_plan["plan_sha256"]
+    )["linked_files"] == 0
 
 def test_prune_is_disabled(tmp_path):
     _write(tmp_path, "a.zip", b"same")
@@ -66,8 +74,9 @@ def test_unsupported_reflink_preserves_originals(tmp_path, monkeypatch):
     def unsupported(*args):
         raise OSError(errno.EOPNOTSUPP, "unsupported")
     monkeypatch.setattr(store.fcntl, "ioctl", unsupported)
+    plan = inventory(tmp_path)
     with pytest.raises(StoreError, match="Reflink"):
-        inventory(tmp_path, apply=True)
+        inventory(tmp_path, apply=True, confirm_plan_sha256=plan["plan_sha256"])
     assert a.read_bytes() == b.read_bytes() == b"same"
     assert a.stat().st_ino != b.stat().st_ino
 
@@ -85,15 +94,51 @@ def test_legacy_hardlinks_are_reported_and_repaired_atomically(tmp_path):
     assert report["hardlinked_inode_groups"] == 1
     assert report["repaired_hardlinks"] == 0
 
-    repaired = inventory(tmp_path, repair_hardlinks=True)
+    repaired = inventory(
+        tmp_path, repair_hardlinks=True, confirm_plan_sha256=report["plan_sha256"]
+    )
 
     assert repaired["repaired_hardlinks"] == 2
     assert len({a.stat().st_ino, b.stat().st_ino, external.stat().st_ino}) == 3
     a.write_bytes(b"changed independently")
     assert b.read_bytes() == external.read_bytes() == b"legacy shared checkpoint"
     assert inventory(tmp_path)["hardlinked_files"] == 0
+    receipt_path = tmp_path / repaired["mutation_receipt_path"]
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    unsigned = dict(receipt)
+    assert unsigned.pop("receipt_sha256") == store._object_sha(unsigned)
+    assert receipt["post_hardlinked_files"] == 0
+    assert receipt["mutation_plan"]["plan_sha256"] == repaired["plan_sha256"]
 
 
 def test_repair_and_reflink_apply_are_mutually_exclusive(tmp_path):
     with pytest.raises(StoreError, match="incompatibles"):
         inventory(tmp_path, apply=True, repair_hardlinks=True)
+
+
+def test_reflink_apply_refuses_legacy_hardlinks_before_mutation(tmp_path):
+    a = _write(tmp_path, "a.zip", b"same")
+    b = a.with_name("b.zip")
+    os.link(a, b)
+    plan = inventory(tmp_path)
+    inode = a.stat().st_ino
+    with pytest.raises(StoreError, match="repair-hardlinks"):
+        inventory(tmp_path, apply=True, confirm_plan_sha256=plan["plan_sha256"])
+    assert a.stat().st_ino == b.stat().st_ino == inode
+    assert not (tmp_path / ".state/checkpoint-maintenance").exists()
+
+
+def test_mutation_requires_exact_current_plan_confirmation(tmp_path):
+    a = _write(tmp_path, "a.zip", b"same")
+    b = _write(tmp_path, "b.zip", b"same")
+    plan = inventory(tmp_path)
+    with pytest.raises(StoreError, match="Confirmation du plan"):
+        inventory(tmp_path, apply=True)
+    with pytest.raises(StoreError, match="Confirmation du plan"):
+        inventory(tmp_path, apply=True, confirm_plan_sha256="0" * 64)
+    b.write_bytes(b"changed")
+    with pytest.raises(StoreError, match="Confirmation du plan"):
+        inventory(tmp_path, apply=True, confirm_plan_sha256=plan["plan_sha256"])
+    assert a.read_bytes() == b"same"
+    assert b.read_bytes() == b"changed"
+    assert not (tmp_path / ".state/checkpoint-maintenance").exists()
