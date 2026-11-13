@@ -15,6 +15,41 @@ def test_schema_violation(tmp_path: Path):
     assert any(f.code == "WDV-SCH-003" for f in report.findings)
 
 
+def test_schema_does_not_treat_self_identifying_build_receipt_as_archive_receipt(tmp_path: Path):
+    create_graph_package(tmp_path)
+    dump(tmp_path / "reports/corpus_build_receipt.json", {
+        "schema": "wikidebia-corpus-build-receipt-1.0",
+        "build_contract": {"debate_id": "exemple"},
+        "build_contract_sha256": "0" * 64,
+        "build_file_count": 7,
+        "build_tree_sha256": "1" * 64,
+        "created_at": "2026-07-23T18:00:00+02:00",
+        "receipt_sha256": "2" * 64,
+        "validation_status": "passed",
+    })
+
+    report = validate_package(tmp_path, scopes=["schema"])
+
+    assert not any(
+        finding.code == "WDV-SCH-003"
+        and finding.path == "reports/corpus_build_receipt.json"
+        for finding in report.findings
+    ), report.to_text()
+
+
+def test_schema_still_validates_legacy_archive_receipt_without_schema_discriminator(tmp_path: Path):
+    create_graph_package(tmp_path)
+    dump(tmp_path / "reports/archive_receipt.json", {"archive_receipt_version": "1.0"})
+
+    report = validate_package(tmp_path, scopes=["schema"])
+
+    assert any(
+        finding.code == "WDV-SCH-003"
+        and finding.path == "reports/archive_receipt.json"
+        for finding in report.findings
+    ), report.to_text()
+
+
 def test_cli_json_output(tmp_path: Path):
     create_graph_package(tmp_path)
     output = tmp_path / "report.json"
