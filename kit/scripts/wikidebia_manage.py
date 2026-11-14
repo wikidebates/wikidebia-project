@@ -1037,7 +1037,14 @@ def load_local_settings(root: Path) -> dict[str, Any]:
     return json_load(path)
 
 
-def ensure_credentials(root: Path) -> Path:
+def ensure_credentials(root: Path, languages: Iterable[str] = ("fr", "en")) -> Path:
+    """Accept either the Debian Pywikibot files or complete managed credentials.
+
+    The local configuration deliberately takes precedence on Debian.  A managed
+    environment must instead provide the Cloudflare token and the BotPassword
+    pair for every language used by the operation; no private server file is
+    copied or synthesized.
+    """
     private = root / "private" / "pywikibot"
     private.mkdir(parents=True, exist_ok=True)
     for name in ("user-config.py", "user-password.cfg"):
@@ -1046,8 +1053,29 @@ def ensure_credentials(root: Path) -> Path:
         if legacy.is_file() and not target.exists():
             shutil.move(str(legacy), target)
             target.chmod(0o600)
-    if not (private / "user-config.py").is_file():
-        raise ManagementError("private/pywikibot/user-config.py est absent")
+    if (private / "user-config.py").is_file():
+        return private
+
+    required_languages = tuple(dict.fromkeys(str(language) for language in languages))
+    invalid = [language for language in required_languages if language not in {"fr", "en"}]
+    if invalid:
+        raise ManagementError(
+            "Langues d’authentification gérée invalides : " + ", ".join(invalid)
+        )
+    missing: list[str] = []
+    if not os.environ.get("WIKIDEBIA_API_TOKEN"):
+        missing.append("WIKIDEBIA_API_TOKEN")
+    for language in required_languages:
+        prefix = f"WIKIDEBIA_{language.upper()}_BOT_"
+        for suffix in ("USERNAME", "PASSWORD"):
+            variable = prefix + suffix
+            if not os.environ.get(variable):
+                missing.append(variable)
+    if missing:
+        raise ManagementError(
+            "Configuration d’authentification absente ou incomplète : "
+            + ", ".join(missing)
+        )
     return private
 
 
@@ -1202,7 +1230,8 @@ def publisher_command(root: Path, config: Path, *args: str) -> list[str]:
 
 
 def publish_debate(root: Path, debate_identifier: str | None, scope: str, assume_yes: bool, keep_zip: bool) -> dict[str, int]:
-    ensure_credentials(root)
+    languages, _ = scope_values(scope)
+    ensure_credentials(root, languages)
     archive = find_debate_archive(root, debate_identifier)
     debate_id, _ = install_debate_corpus(root, archive)
     try:
@@ -1422,7 +1451,6 @@ def update_debate(
     archive_selector: str | None = None,
     interlanguage_only: bool = False,
 ) -> dict[str, Any]:
-    ensure_credentials(root)
     if no_delete and only_delete:
         raise ManagementError("--no-delete et --only-delete sont incompatibles")
     staging_root: Path | None = None
@@ -1430,6 +1458,8 @@ def update_debate(
     try:
         debate_id, archive, corpus_root, staging_root = _prepare_update_corpus(root, debate_identifier, archive_selector)
         effective_scope = resolve_update_scope(corpus_root, scope)
+        languages = ["fr", "en"] if effective_scope == "all" else [effective_scope]
+        ensure_credentials(root, languages)
         if interlanguage_only and effective_scope != "fr":
             raise ManagementError("--interlanguage-only exige --scope fr")
         if interlanguage_only and (no_delete or only_delete):
@@ -1544,7 +1574,7 @@ def update_debate(
 
 
 def tag_translated_fr(root: Path, debate_id: str, *, dry_run: bool) -> dict[str, Any]:
-    ensure_credentials(root)
+    ensure_credentials(root, ("en",))
     if not re.fullmatch(r"[A-Za-z0-9_.-]+", debate_id or ""):
         raise ManagementError("Identifiant de débat invalide")
     script = root / "kit" / "scripts" / "wikidebia_retro_tag.py"

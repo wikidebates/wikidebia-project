@@ -19,6 +19,24 @@ from test_wikidebia_editorial_review import make_workspace, complete_review
 from test_wikidebia_content_review import complete_content_review, make_metadata_applied
 
 
+def test_graph_actions_adapter_does_not_require_debian_private_config(tmp_path: Path, monkeypatch):
+    captured = {}
+
+    class ManagedAdapter:
+        def __init__(self, **kwargs):
+            captured.update(kwargs)
+
+    monkeypatch.setattr(graph_actions, "PywikibotAdapter", ManagedAdapter)
+
+    adapter, expected_user = graph_actions._adapter(tmp_path)
+
+    assert adapter.base.__class__ is ManagedAdapter
+    assert expected_user == "ChatGPT"
+    assert captured["codes"] == {"fr": "fr"}
+    assert captured["pywikibot_dir"] == tmp_path / "private/pywikibot"
+    assert not (tmp_path / "private/pywikibot/user-config.py").exists()
+
+
 def _title_applied(tmp_path: Path):
     project, workspace, work_id = make_workspace(tmp_path)
     complete_review(workspace)

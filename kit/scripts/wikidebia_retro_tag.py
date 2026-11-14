@@ -6,11 +6,12 @@ import argparse
 import datetime as dt
 import hashlib
 import json
-import os
 import sys
 import time
 from pathlib import Path
 from typing import Any, Iterable
+
+from wikidebia_publish import PywikibotAdapter
 
 TAG = "translated-fr"
 BASE_TAG = "chatgpt"
@@ -87,35 +88,27 @@ class PywikibotTagAdapter:
         self.family_file = family_file.expanduser().resolve()
         self.expected_user = expected_user
         self.site: Any | None = None
+        self._authentication_adapter: PywikibotAdapter | None = None
 
     def open(self) -> None:
-        if not self.pywikibot_dir.is_dir():
-            raise RetroTagError(f"Dossier Pywikibot introuvable : {self.pywikibot_dir}")
-        if not (self.pywikibot_dir / "user-config.py").is_file():
-            raise RetroTagError(f"user-config.py absent dans : {self.pywikibot_dir}")
-        os.environ["PYWIKIBOT_DIR"] = str(self.pywikibot_dir)
-        import pywikibot
-        family_files = getattr(getattr(pywikibot, "config", None), "family_files", None)
-        if family_files is None:
-            raise RetroTagError("Configuration des familles Pywikibot indisponible")
-        if self.family not in family_files:
-            if not self.family_file.is_file():
-                raise RetroTagError(f"Fichier de famille introuvable : {self.family_file}")
-            family_files[self.family] = str(self.family_file)
-        self.site = pywikibot.Site(code=self.code, fam=self.family)
-        if self.site.user() is not None:
-            self.site.logout()
-        self.site.login()
-        actual = self.site.user()
-        if actual != self.expected_user:
-            raise RetroTagError(f"Compte actif inattendu : {actual!r}; attendu : {self.expected_user!r}")
+        adapter = PywikibotAdapter(
+            self.family,
+            {self.code: self.code},
+            self.pywikibot_dir,
+            self.family_file,
+        )
+        try:
+            adapter.open_language(self.code, self.expected_user)
+        except Exception as exc:
+            raise RetroTagError(str(exc)) from exc
+        self._authentication_adapter = adapter
+        self.site = adapter.site
 
     def close(self) -> None:
-        try:
-            if self.site is not None and self.site.user() is not None:
-                self.site.logout()
-        finally:
-            self.site = None
+        if self._authentication_adapter is not None:
+            self._authentication_adapter.close_language()
+        self._authentication_adapter = None
+        self.site = None
 
     def _request(self, **params: Any) -> dict[str, Any]:
         if self.site is None:
