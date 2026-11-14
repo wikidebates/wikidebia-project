@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "wikidebia_retro_tag.py"
 spec = importlib.util.spec_from_file_location("wikidebia_retro_tag", SCRIPT)
@@ -30,6 +31,40 @@ class FakeAdapter:
                 tags.append(tag)
             self.revisions[rid]["tags"] = tags
             self.added.append(rid)
+
+
+def test_retro_tag_adapter_uses_shared_managed_authentication_without_local_config(
+    tmp_path, monkeypatch,
+):
+    events = []
+
+    class SharedAdapter:
+        def __init__(self, family, codes, pywikibot_dir, family_file):
+            events.append(("init", family, codes, pywikibot_dir, family_file))
+            self.site = SimpleNamespace()
+
+        def open_language(self, language, expected_user):
+            events.append(("open", language, expected_user))
+
+        def close_language(self):
+            events.append(("close",))
+            self.site = None
+
+    monkeypatch.setattr(mod, "PywikibotAdapter", SharedAdapter)
+    adapter = mod.PywikibotTagAdapter(
+        family="wikidebates",
+        code="en",
+        pywikibot_dir=tmp_path / "missing-private-config",
+        family_file=tmp_path / "wikidebates_family.py",
+        expected_user="ChatGPT",
+    )
+
+    adapter.open()
+    assert adapter.site is not None
+    adapter.close()
+
+    assert events[0][0:3] == ("init", "wikidebates", {"en": "en"})
+    assert events[1:] == [("open", "en", "ChatGPT"), ("close",)]
 
 
 def _write_project(tmp_path: Path, *, already=False, bad_summary=False):

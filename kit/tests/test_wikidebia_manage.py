@@ -319,6 +319,67 @@ def test_doctor_reports_missing_runtime_environment(tmp_path: Path):
     assert any(".venv/bin/python" in issue for issue in report["issues"])
 
 
+def test_ensure_credentials_accepts_debian_local_configuration(tmp_path: Path, monkeypatch):
+    private = tmp_path / "private/pywikibot"
+    private.mkdir(parents=True)
+    (private / "user-config.py").write_text("# local Debian configuration\n", encoding="utf-8")
+    for variable in (
+        "WIKIDEBIA_API_TOKEN",
+        "WIKIDEBIA_FR_BOT_USERNAME", "WIKIDEBIA_FR_BOT_PASSWORD",
+        "WIKIDEBIA_EN_BOT_USERNAME", "WIKIDEBIA_EN_BOT_PASSWORD",
+    ):
+        monkeypatch.delenv(variable, raising=False)
+
+    assert module.ensure_credentials(tmp_path, ("fr", "en")) == private
+
+
+def test_ensure_credentials_accepts_managed_english_independently(tmp_path: Path, monkeypatch):
+    monkeypatch.setenv("WIKIDEBIA_API_TOKEN", "access-placeholder")
+    monkeypatch.setenv("WIKIDEBIA_EN_BOT_USERNAME", "ChatGPT@Codex-EN")
+    monkeypatch.setenv("WIKIDEBIA_EN_BOT_PASSWORD", "password-placeholder")
+    monkeypatch.delenv("WIKIDEBIA_FR_BOT_USERNAME", raising=False)
+    monkeypatch.delenv("WIKIDEBIA_FR_BOT_PASSWORD", raising=False)
+
+    private = module.ensure_credentials(tmp_path, ("en",))
+
+    assert private == tmp_path / "private/pywikibot"
+    assert not (private / "user-config.py").exists()
+
+
+def test_ensure_credentials_rejects_managed_configuration_with_exact_missing_names(
+    tmp_path: Path, monkeypatch,
+):
+    monkeypatch.delenv("WIKIDEBIA_API_TOKEN", raising=False)
+    monkeypatch.setenv("WIKIDEBIA_EN_BOT_USERNAME", "ChatGPT@Codex-EN")
+    monkeypatch.delenv("WIKIDEBIA_EN_BOT_PASSWORD", raising=False)
+
+    with pytest.raises(module.ManagementError) as raised:
+        module.ensure_credentials(tmp_path, ("en",))
+
+    message = str(raised.value)
+    assert "WIKIDEBIA_API_TOKEN" in message
+    assert "WIKIDEBIA_EN_BOT_PASSWORD" in message
+    assert "ChatGPT@Codex-EN" not in message
+    assert "WIKIDEBIA_FR_BOT_USERNAME" not in message
+
+
+def test_ensure_credentials_rejects_absent_managed_credentials_without_server_config(
+    tmp_path: Path, monkeypatch,
+):
+    for variable in (
+        "WIKIDEBIA_API_TOKEN", "WIKIDEBIA_FR_BOT_USERNAME", "WIKIDEBIA_FR_BOT_PASSWORD",
+    ):
+        monkeypatch.delenv(variable, raising=False)
+
+    with pytest.raises(module.ManagementError) as raised:
+        module.ensure_credentials(tmp_path, ("fr",))
+
+    message = str(raised.value)
+    assert "WIKIDEBIA_API_TOKEN" in message
+    assert "WIKIDEBIA_FR_BOT_USERNAME" in message
+    assert "WIKIDEBIA_FR_BOT_PASSWORD" in message
+
+
 def test_doctor_requires_bilingual_managed_credentials_without_server_config(tmp_path: Path, monkeypatch):
     monkeypatch.setenv("WIKIDEBIA_FR_BOT_USERNAME", "ChatGPT@Codex-FR")
     monkeypatch.setenv("WIKIDEBIA_FR_BOT_PASSWORD", "managed-placeholder")
@@ -385,6 +446,33 @@ def test_doctor_api_check_reports_both_languages_without_exposing_token(tmp_path
         "en": {"status": "passed", "http_status": 200},
     }
     assert token not in json.dumps(report)
+
+
+def test_doctor_distinguishes_cloudflare_refusal_from_authentication(tmp_path: Path, monkeypatch):
+    monkeypatch.setenv("WIKIDEBIA_API_TOKEN", "secret-access-placeholder")
+    for language in ("FR", "EN"):
+        monkeypatch.setenv(f"WIKIDEBIA_{language}_BOT_USERNAME", f"ChatGPT@Codex-{language}")
+        monkeypatch.setenv(f"WIKIDEBIA_{language}_BOT_PASSWORD", "password-placeholder")
+    monkeypatch.setattr(module, "check_wikidebates_apis", lambda value: {
+        "fr": {"status": "failed", "http_status": 403},
+        "en": {"status": "failed", "http_status": 403},
+    })
+    monkeypatch.setattr(module, "check_wikidebates_write_access", lambda root: (_ for _ in ()).throw(
+        AssertionError("authentication must not be used to classify the API probe")
+    ))
+    monkeypatch.setattr(module, "runtime_environment_report", lambda root: {
+        "requirements_sha256": "x", "python_available": True,
+        "missing_modules": [], "probe_error": None,
+    })
+    monkeypatch.setattr(module, "assert_portable_sources", lambda root: None)
+    monkeypatch.setattr(module, "git_security_issues", lambda root: [])
+
+    report = module.doctor(tmp_path, check_api=True, check_auth=False)
+
+    assert report["access_configuration"]["api_connectivity"]["languages"]["en"] == {
+        "status": "failed", "http_status": 403,
+    }
+    assert any("API Wikidebates en inaccessible : 403" in issue for issue in report["issues"])
 
 
 def test_doctor_can_check_bilingual_write_auth_without_exposing_credentials(tmp_path: Path, monkeypatch):
@@ -557,7 +645,7 @@ def test_publish_command_has_no_interactive_prompt(monkeypatch, tmp_path: Path):
     def forbidden_input(*args, **kwargs):
         raise AssertionError("input() ne doit jamais être appelé par publish")
     monkeypatch.setattr("builtins.input", forbidden_input)
-    monkeypatch.setattr(module, "ensure_credentials", lambda root: None)
+    monkeypatch.setattr(module, "ensure_credentials", lambda root, languages=("fr", "en"): None)
     archive = tmp_path / "incoming" / "demo.zip"
     archive.parent.mkdir(parents=True)
     archive.write_bytes(b"zip")
@@ -605,7 +693,7 @@ def test_update_command_has_no_interactive_prompt(monkeypatch, tmp_path: Path):
     def forbidden_input(*args, **kwargs):
         raise AssertionError("input() ne doit jamais être appelé par update")
     monkeypatch.setattr("builtins.input", forbidden_input)
-    monkeypatch.setattr(module, "ensure_credentials", lambda root: None)
+    monkeypatch.setattr(module, "ensure_credentials", lambda root, languages=("fr", "en"): None)
     monkeypatch.setattr(module, "_prepare_update_corpus", lambda root, identifier, archive_selector=None: ("demo", None, root / "corpus" / "demo", None))
     monkeypatch.setattr(module, "remote_update_config", lambda root, debate_id, scope, run_dir, corpus_root=None: run_dir / "config.json")
     plan = {
@@ -689,7 +777,7 @@ def test_update_dry_run_with_archive_does_not_replace_active_corpus(monkeypatch,
     incoming = tmp_path / "incoming"
     incoming.mkdir()
     _write_debate_archive(incoming / "revised.zip", "demo", "revised")
-    monkeypatch.setattr(module, "ensure_credentials", lambda root: None)
+    monkeypatch.setattr(module, "ensure_credentials", lambda root, languages=("fr", "en"): None)
     monkeypatch.setattr(module, "remote_update_config", lambda root, debate_id, scope, run_dir, corpus_root=None: run_dir / "config.json")
 
     operations = {name: [] for name in ("create", "update", "move", "redirect", "delete", "skip", "manual_review", "blocked")}
@@ -718,7 +806,7 @@ def test_manual_review_blocks_manager_before_execute(monkeypatch, tmp_path: Path
     corpus = tmp_path / "corpus" / "demo"
     corpus.mkdir(parents=True)
     (corpus / "manifest.json").write_text(json.dumps({"debate_id": "demo"}), encoding="utf-8")
-    monkeypatch.setattr(module, "ensure_credentials", lambda root: None)
+    monkeypatch.setattr(module, "ensure_credentials", lambda root, languages=("fr", "en"): None)
     monkeypatch.setattr(module, "remote_update_config", lambda root, debate_id, scope, run_dir, corpus_root=None: run_dir / "config.json")
     operations = {name: [] for name in ("create", "update", "move", "redirect", "delete", "skip", "manual_review", "blocked")}
     operations["manual_review"] = [{"page_id": "A1"}]
@@ -753,7 +841,7 @@ def test_all_skip_returns_no_changes_after_signed_attestation(monkeypatch, tmp_p
     corpus = tmp_path / "corpus" / "demo"
     corpus.mkdir(parents=True)
     (corpus / "manifest.json").write_text(json.dumps({"debate_id": "demo"}), encoding="utf-8")
-    monkeypatch.setattr(module, "ensure_credentials", lambda root: None)
+    monkeypatch.setattr(module, "ensure_credentials", lambda root, languages=("fr", "en"): None)
     monkeypatch.setattr(module, "remote_update_config", lambda root, debate_id, scope, run_dir, corpus_root=None: run_dir / "config.json")
     operations = {name: [] for name in ("create", "update", "move", "redirect", "delete", "skip", "manual_review", "blocked")}
     operations["skip"] = [{"page_id": "A1"}]
@@ -839,7 +927,7 @@ def test_scope_without_selected_mutation_returns_no_changes_in_scope(monkeypatch
     corpus = tmp_path / "corpus" / "demo"
     corpus.mkdir(parents=True)
     (corpus / "manifest.json").write_text(json.dumps({"debate_id": "demo"}), encoding="utf-8")
-    monkeypatch.setattr(module, "ensure_credentials", lambda root: None)
+    monkeypatch.setattr(module, "ensure_credentials", lambda root, languages=("fr", "en"): None)
     monkeypatch.setattr(module, "remote_update_config", lambda root, debate_id, scope, run_dir, corpus_root=None: run_dir / "config.json")
     operations = {name: [] for name in ("create", "update", "move", "redirect", "delete", "skip", "manual_review", "blocked")}
     operations["update"] = [{"page_id": "A1"}]

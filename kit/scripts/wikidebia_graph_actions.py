@@ -972,8 +972,6 @@ def _local_settings(project_root: Path) -> dict[str, Any]:
 
 def _adapter(project_root: Path) -> tuple[UpdateAdapter, str]:
     private = project_root / "private/pywikibot"
-    if not (private / "user-config.py").is_file():
-        raise GraphActionError("private/pywikibot/user-config.py est absent")
     settings = _local_settings(project_root)
     family = str(settings.get("family") or "wikidebates")
     expected_user = str(((settings.get("expected_users") or {}).get("fr") or "ChatGPT"))

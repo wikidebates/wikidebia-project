@@ -24,6 +24,13 @@ retrouver. L’accès aux API protégées par Cloudflare utilise
 valeurs ne doivent jamais entrer dans le dépôt ou les journaux. Voir aussi
 [`AGENTS.md`](AGENTS.md).
 
+Les commandes opérationnelles (`publish`, `update`, `tag-translated-fr` et les
+actions de graphe) acceptent ces identifiants gérés sans exiger
+`private/pywikibot/user-config.py`. En mode géré, le jeton d’accès API et la
+paire BotPassword de chaque langue réellement concernée doivent être complets ;
+une configuration partielle est refusée avant toute écriture distante. La
+configuration locale continue de prévaloir sur le serveur Debian.
+
 Les corpus, plans, reçus, états, journaux et archives ne sont pas versionnés.
 
 Pour mettre à jour automatiquement une installation Debian après fusion sur GitHub,
