@@ -1,5 +1,13 @@
 # Wikidéb’IA Kit 2.16.47
 
+La réconciliation accepte désormais l’adoption explicite d’un Work local déjà
+`release_ready` lorsque le workflow historique est resté bloqué avant toute
+attribution de `work_id`. La commande `workflow-reconcile --work-id WORK`
+vérifie le workspace, le release-copy et le reçu de release sans accès distant,
+puis ouvre une phase dédiée. La relance ordinaire du workflow passe ensuite par
+les deux checkpoints français normaux et s’arrête de nouveau à `release_ready`
+avant toute publication finale. Aucun reçu n’est synthétisé.
+
 La commande `fr-publication-relay` transporte des demandes françaises explicitement
 approuvées par Git vers un relais Debian distinct du déploiement du programme.
 Elle réutilise les accès Pywikibot du serveur, contrôle les révisions avant écriture

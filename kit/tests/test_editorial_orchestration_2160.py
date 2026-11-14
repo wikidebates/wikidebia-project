@@ -97,6 +97,121 @@ def test_workflow_reconcile_restores_release_boundary_from_signed_evidence(tmp_p
     assert (tmp_path / ".state/workflows" / debate_id / "reconciliation.json").is_file()
 
 
+def _make_unbound_release_ready_work(tmp_path: Path):
+    debate_id, work_id = "debat_test", "EDIT-20261114-001"
+    state = {
+        "schema": wf.WORKFLOW_SCHEMA, "schema_version": "1.0",
+        "debate_id": debate_id, "debate_title": "Débat test ?",
+        "phase": "initialize_graph", "status": "blocked_access_preflight",
+        "work_id": None, "pending_review": None, "snapshot_path": None,
+        "created_at": "2026-11-14T06:00:00+00:00",
+        "updated_at": "2026-11-14T06:00:01+00:00",
+    }
+    wf._save_workflow(tmp_path, state)
+    workspace = tmp_path / ".state/editorial-workspaces" / debate_id / work_id
+    release_copy = workspace / "release-copy"
+    (release_copy / "reports").mkdir(parents=True)
+    common.write_json(release_copy / "reports/release_report.json", {
+        "debate_id": debate_id, "work_id": work_id,
+    })
+    (workspace / "reviewed-copy").mkdir()
+    (workspace / "content-reviewed-copy").mkdir()
+    tree = common.full_tree_sha256(release_copy)
+    meta = {
+        "schema": "wikidebia-editorial-workspace-1.0",
+        "debate_id": debate_id, "work_id": work_id, "status": "release_ready",
+        "release_copy": {"tree_sha256": tree},
+        "local_release": {"archive": "release.zip"},
+    }
+    meta["workspace_sha256"] = wf.workspace_receipt_hash(meta)
+    common.write_json(workspace / "workspace.json", meta)
+    receipt = {
+        "debate_id": debate_id, "work_id": work_id,
+        "release_copy_tree_sha256": tree, "publication_started": False,
+    }
+    receipt["receipt_sha256"] = wf._sha256_bytes(wf._canonical_json(receipt))
+    common.write_json(
+        tmp_path / ".state/corpus-releases" / debate_id / work_id / "release-receipt.json",
+        receipt,
+    )
+    return debate_id, work_id
+
+
+def test_workflow_reconcile_adopts_explicit_release_ready_work_without_remote_write(tmp_path: Path):
+    debate_id, work_id = _make_unbound_release_ready_work(tmp_path)
+
+    result = wf.reconcile_workflow(tmp_path, debate_id, adopt_work_id=work_id)
+
+    assert result["work_id"] == work_id
+    assert result["phase"] == "checkpoint_recovery"
+    assert result["status"] == "checkpoint_recovery_ready"
+    assert result["workflow_adoption"]["release_copy_tree_sha256"]
+    assert not (tmp_path / ".state/fr-publication").exists()
+    audit = common.load_json(
+        tmp_path / ".state/workflows" / debate_id / "adoption.json", "adoption",
+    )
+    unsigned = dict(audit)
+    claimed = unsigned.pop("adoption_sha256")
+    assert claimed == wf._sha256_bytes(wf._canonical_json(unsigned))
+
+
+def test_workflow_reconcile_refuses_unbound_adoption_after_english_publication(tmp_path: Path):
+    debate_id, work_id = _make_unbound_release_ready_work(tmp_path)
+    english = tmp_path / ".state/published" / debate_id / "en/latest.json"
+    english.parent.mkdir(parents=True)
+    english.write_text("{}\n", encoding="utf-8")
+
+    with pytest.raises(wf.WorkflowError, match="anglais signé"):
+        wf.reconcile_workflow(tmp_path, debate_id, adopt_work_id=work_id)
+
+
+def test_workflow_reconcile_adoption_is_idempotent_and_rechecks_sealed_evidence(tmp_path: Path):
+    debate_id, work_id = _make_unbound_release_ready_work(tmp_path)
+    first = wf.reconcile_workflow(tmp_path, debate_id, adopt_work_id=work_id)
+    second = wf.reconcile_workflow(tmp_path, debate_id, adopt_work_id=work_id)
+    assert second == first
+
+    workspace = tmp_path / ".state/editorial-workspaces" / debate_id / work_id
+    (workspace / "release-copy/reports/release_report.json").write_text("{}\n", encoding="utf-8")
+    with pytest.raises(wf.WorkflowError, match="release-copy adopté a changé"):
+        wf.reconcile_workflow(tmp_path, debate_id, adopt_work_id=work_id)
+
+
+def test_checkpoint_recovery_crosses_both_french_checkpoints_then_stops(tmp_path: Path, monkeypatch):
+    debate_id, work_id = _make_unbound_release_ready_work(tmp_path)
+    state = wf.reconcile_workflow(tmp_path, debate_id, adopt_work_id=work_id)
+    calls = []
+
+    def publish(_root, _debate_id, _work_id, *, stage):
+        calls.append(stage)
+        return {
+            "debate_id": debate_id, "work_id": work_id, "stage": stage,
+            "status": "verified_no_changes", "receipt_sha256": stage[0] * 64,
+        }
+
+    monkeypatch.setattr(wf, "publish_checkpoint", publish)
+    monkeypatch.setattr(
+        wf, "reconcile_workflow",
+        lambda root, selected, **kwargs: wf._load_workflow(root, selected),
+    )
+
+    result = wf._mechanical_advance(tmp_path, state)
+
+    assert calls == ["graph", "content"]
+    assert result["phase"] == result["status"] == "release_ready"
+    assert result["french_graph_publication"]["stage"] == "graph"
+    assert result["french_content_publication"]["stage"] == "content"
+    assert result["french_publication"] == result["french_content_publication"]
+
+
+def test_workflow_reconcile_cli_requires_explicit_optional_work_id():
+    args = wf.build_parser().parse_args([
+        "--project-root", ".", "workflow-reconcile", "debat_test",
+        "--work-id", "EDIT-20261114-001",
+    ])
+    assert args.work_id == "EDIT-20261114-001"
+
+
 def rewrite_zip(source: Path, target: Path, edit):
     temp = target.parent / "unzipped"
     shutil.rmtree(temp, ignore_errors=True)

@@ -598,6 +598,15 @@ def test_parser_exposes_read_only_write_auth_diagnostic():
     assert args.check_auth is True
 
 
+def test_parser_exposes_explicit_workflow_work_adoption():
+    args = module.build_parser().parse_args([
+        "workflow-reconcile", "debat_test", "--work-id", "EDIT-20261114-001",
+    ])
+    assert args.command == "workflow-reconcile"
+    assert args.debate_id == "debat_test"
+    assert args.work_id == "EDIT-20261114-001"
+
+
 def test_parser_exposes_continuity_sync_check_command():
     parser = module.build_parser()
     args = parser.parse_args(["continuity-sync", "debat_test", "--check"])

@@ -244,12 +244,146 @@ def _ensure_access_preflight(project_root: Path, state: dict[str, Any]) -> dict[
     return state
 
 
-def reconcile_workflow(project_root: Path, debate_id: str) -> dict[str, Any]:
+def _adopt_unbound_release_ready_work(
+    project_root: Path, debate_id: str, state: dict[str, Any], work_id: str,
+) -> dict[str, Any]:
+    """Bind a pristine pre-Work workflow to an independently sealed local Work.
+
+    This transition is deliberately local and performs no MediaWiki request. It
+    only opens the ordinary French checkpoint recovery phase; that later phase
+    must still compare and attest/publish both French checkpoints before the
+    final bilingual baseline can exist.
+    """
+    work_id = validate_work_id(work_id)
+    if str(state.get("work_id") or ""):
+        raise WorkflowError("Le workflow est déjà rattaché à un Work")
+    if state.get("phase") != "initialize_graph" or state.get("status") not in {
+        "blocked_access_preflight", "running",
+    }:
+        raise WorkflowError("Seul un workflow initial non attribué peut adopter un Work release_ready")
+    if state.get("pending_review") or state.get("snapshot_path"):
+        raise WorkflowError("Le workflow initial contient déjà une revue ou un snapshot et ne peut pas adopter ce Work")
+    forbidden = {
+        "french_graph_publication", "french_content_publication", "french_publication",
+        "final_publication", "workflow_reconciliation",
+    }
+    if any(state.get(field) for field in forbidden):
+        raise WorkflowError("Le workflow initial contient déjà des preuves de publication incompatibles")
+
+    workspace = _workspace_path(project_root, debate_id, work_id)
+    meta = load_json(workspace / "workspace.json", "workspace")
+    if meta.get("workspace_sha256") != workspace_receipt_hash(meta):
+        raise WorkflowError("Empreinte du workspace invalide")
+    if meta.get("debate_id") != debate_id or meta.get("work_id") != work_id:
+        raise WorkflowError("Workspace rattaché à un autre débat ou Work")
+    release_copy = workspace / "release-copy"
+    expected_tree = str((meta.get("release_copy") or {}).get("tree_sha256") or "")
+    if (meta.get("status") != "release_ready" or not release_copy.is_dir()
+            or not expected_tree or full_tree_sha256(release_copy) != expected_tree):
+        raise WorkflowError("Workspace non scellé à la frontière release_ready")
+    for required in ("reviewed-copy", "content-reviewed-copy"):
+        if not (workspace / required).is_dir():
+            raise WorkflowError(f"Copie française requise absente du workspace : {required}")
+    report = load_json(release_copy / "reports/release_report.json", "rapport de release")
+    if report.get("debate_id") != debate_id or report.get("work_id") != work_id:
+        raise WorkflowError("Le release-copy appartient à un autre débat ou Work")
+
+    receipt_path = project_root / ".state/corpus-releases" / debate_id / work_id / "release-receipt.json"
+    release_receipt = load_json(receipt_path, "reçu de release")
+    unsigned = dict(release_receipt)
+    claimed = unsigned.pop("receipt_sha256", None)
+    if claimed != _sha256_bytes(_canonical_json(unsigned)):
+        raise WorkflowError("Empreinte invalide : reçu de release")
+    if (release_receipt.get("debate_id") != debate_id or release_receipt.get("work_id") != work_id
+            or release_receipt.get("release_copy_tree_sha256") != expected_tree):
+        raise WorkflowError("Le reçu de release diverge du Work restauré")
+    if release_receipt.get("publication_started") is not False:
+        raise WorkflowError("Le Work restauré a déjà franchi une frontière de publication")
+
+    if (project_root / ".state/published" / debate_id / "en/latest.json").exists():
+        raise WorkflowError("Un état anglais signé existe déjà pour ce débat")
+    final_root = project_root / ".state/final-publication" / debate_id
+    if final_root.exists() and any(final_root.rglob("authorization.json")):
+        raise WorkflowError("Une autorisation de publication finale existe déjà pour ce débat")
+    french_root = project_root / ".state/fr-publication" / debate_id
+    if french_root.is_dir():
+        foreign = [path.name for path in french_root.iterdir() if path.is_dir() and path.name != work_id]
+        if foreign:
+            raise WorkflowError("Des checkpoints français existent pour un autre Work")
+
+    audit = {
+        "schema": "wikidebia-workflow-adoption-1.0", "schema_version": "1.0",
+        "debate_id": debate_id, "work_id": work_id, "adopted_at": now_iso(),
+        "previous_phase": state.get("phase"), "previous_status": state.get("status"),
+        "release_copy_tree_sha256": expected_tree,
+        "release_receipt_sha256": release_receipt.get("receipt_sha256"),
+        "next_phase": "checkpoint_recovery",
+    }
+    audit["adoption_sha256"] = _sha256_bytes(_canonical_json(audit))
+    candidate = copy.deepcopy(state)
+    candidate.update({
+        "work_id": work_id,
+        "phase": "checkpoint_recovery",
+        "status": "checkpoint_recovery_ready",
+        "release": copy.deepcopy(meta.get("local_release") or {}),
+        "workflow_adoption": copy.deepcopy(audit),
+        "updated_at": now_iso(),
+    })
+    write_json(_workflow_root(project_root, debate_id) / "adoption.json", audit)
+    _save_workflow(project_root, candidate)
+    return candidate
+
+
+def _verify_workflow_adoption(project_root: Path, state: Mapping[str, Any]) -> dict[str, Any]:
+    adoption = copy.deepcopy(state.get("workflow_adoption") or {})
+    claimed = adoption.pop("adoption_sha256", None)
+    if (not claimed or claimed != _sha256_bytes(_canonical_json(adoption))
+            or adoption.get("schema") != "wikidebia-workflow-adoption-1.0"):
+        raise WorkflowError("Preuve d’adoption du Work invalide")
+    debate_id = str(state.get("debate_id") or "")
+    work_id = str(state.get("work_id") or "")
+    if adoption.get("debate_id") != debate_id or adoption.get("work_id") != work_id:
+        raise WorkflowError("Preuve d’adoption rattachée à un autre débat ou Work")
+    workspace = _workspace_path(project_root, debate_id, work_id)
+    meta = load_json(workspace / "workspace.json", "workspace")
+    if meta.get("workspace_sha256") != workspace_receipt_hash(meta):
+        raise WorkflowError("Empreinte du workspace adopté invalide")
+    release_copy = workspace / "release-copy"
+    expected_tree = str(adoption.get("release_copy_tree_sha256") or "")
+    if (not release_copy.is_dir() or not expected_tree
+            or full_tree_sha256(release_copy) != expected_tree
+            or str((meta.get("release_copy") or {}).get("tree_sha256") or "") != expected_tree):
+        raise WorkflowError("Le release-copy adopté a changé")
+    receipt_path = project_root / ".state/corpus-releases" / debate_id / work_id / "release-receipt.json"
+    receipt = load_json(receipt_path, "reçu de release adopté")
+    unsigned = dict(receipt)
+    receipt_sha = unsigned.pop("receipt_sha256", None)
+    if (not receipt_sha or receipt_sha != _sha256_bytes(_canonical_json(unsigned))
+            or receipt_sha != adoption.get("release_receipt_sha256")):
+        raise WorkflowError("Le reçu de release adopté a changé")
+    if receipt.get("publication_started") is not False:
+        raise WorkflowError("Le reçu adopté a franchi la frontière de publication")
+    return {**adoption, "adoption_sha256": claimed}
+
+
+def reconcile_workflow(
+    project_root: Path, debate_id: str, *, adopt_work_id: str | None = None,
+) -> dict[str, Any]:
     """Restore a stale workflow to release_ready from signed Work evidence only."""
     state = _load_workflow(project_root, debate_id)
     work_id = str(state.get("work_id") or "")
     if not work_id:
-        raise WorkflowError("Workflow sans work_id à réconcilier")
+        if not adopt_work_id:
+            raise WorkflowError("Workflow sans work_id à réconcilier; indiquez explicitement --work-id")
+        return _adopt_unbound_release_ready_work(
+            project_root, debate_id, state, str(adopt_work_id),
+        )
+    if adopt_work_id and validate_work_id(str(adopt_work_id)) != work_id:
+        raise WorkflowError("Le --work-id demandé diverge du Work déjà rattaché")
+    if (adopt_work_id and state.get("phase") == "checkpoint_recovery"
+            and state.get("status") == "checkpoint_recovery_ready"):
+        _verify_workflow_adoption(project_root, state)
+        return state
     workspace = _workspace_path(project_root, debate_id, work_id)
     meta = load_json(workspace / "workspace.json", "workspace")
     if meta.get("workspace_sha256") != workspace_receipt_hash(meta):
@@ -1364,6 +1498,37 @@ def _mechanical_advance(project_root: Path, state: dict[str, Any]) -> dict[str, 
             return state
         if phase == "already_translated":
             return state
+        if phase == "checkpoint_recovery":
+            if not state.get("work_id") or not state.get("workflow_adoption"):
+                raise WorkflowError("Reprise des checkpoints sans adoption de Work signée")
+            _verify_workflow_adoption(project_root, state)
+            state["status"] = "running"
+            if not state.get("french_graph_publication"):
+                state["remote_publication_stage"] = "graph"
+                state["updated_at"] = now_iso(); _save_workflow(project_root, state)
+                publication = publish_checkpoint(
+                    project_root, debate_id, str(state["work_id"]), stage="graph",
+                )
+                state["french_graph_publication"] = copy.deepcopy(publication)
+                state.pop("remote_publication_stage", None)
+                state["updated_at"] = now_iso(); _save_workflow(project_root, state)
+            if not state.get("french_content_publication"):
+                state["remote_publication_stage"] = "content"
+                state["updated_at"] = now_iso(); _save_workflow(project_root, state)
+                publication = publish_checkpoint(
+                    project_root, debate_id, str(state["work_id"]), stage="content",
+                )
+                state["french_content_publication"] = copy.deepcopy(publication)
+                state["french_publication"] = copy.deepcopy(publication)
+                state.pop("remote_publication_stage", None)
+                state["updated_at"] = now_iso(); _save_workflow(project_root, state)
+            state["phase"] = "release_ready"
+            state["status"] = "release_ready"
+            state["updated_at"] = now_iso(); _save_workflow(project_root, state)
+            # Reuse the ordinary signed-evidence reconciliation to prove that
+            # both recovered checkpoints now form a valid final baseline. Stop
+            # here so final publication still requires a separate resume.
+            return reconcile_workflow(project_root, debate_id)
         if phase == "initialize_graph":
             _initialize_graph_stage(project_root, state)
             continue
@@ -2285,6 +2450,10 @@ def _print_user_result(state: Mapping[str, Any]) -> None:
         print("Corpus bilingue release_ready; la publication finale reprendra automatiquement à la prochaine relance.")
         print(f"Archive : {release.get('archive')}")
         return
+    if state.get("status") == "checkpoint_recovery_ready":
+        print("Work release_ready adopté; les checkpoints français doivent maintenant être vérifiés.")
+        print("Relancez ./wikidebia workflow avec le même titre et le même débat.")
+        return
     print(json.dumps(dict(state), ensure_ascii=False, indent=2))
 
 
@@ -2308,6 +2477,7 @@ def build_parser() -> argparse.ArgumentParser:
     status.add_argument("debate_id")
     reconcile = sub.add_parser("workflow-reconcile")
     reconcile.add_argument("debate_id")
+    reconcile.add_argument("--work-id", help="Work release_ready à adopter lorsque le workflow historique n'en possède aucun")
     return parser
 
 
@@ -2327,7 +2497,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 authorize_historical_changes=args.authorize_historical_changes,
             )
         elif args.command == "workflow-reconcile":
-            state = reconcile_workflow(root, args.debate_id)
+            state = reconcile_workflow(root, args.debate_id, adopt_work_id=args.work_id)
         else:
             state = status_summary(root, args.debate_id)
     except Exception as exc:
