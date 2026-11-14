@@ -38,6 +38,8 @@ Ils constituent une provenance historique. Ils ne sont pas copiés dans `output/
 - registres de revue initialisés à `pending` ;
 - rapport d’import ;
 - rapports de validation structurelle initiale.
+- contrat de construction `reports/corpus_build_contract.json` ;
+- reçu cryptographique `reports/corpus_build_receipt.json` après validation réussie.
 
 ## Identifiants et occurrences
 
@@ -61,6 +63,22 @@ La commande lance automatiquement les portées suivantes du validateur local :
 
 Elle n’exécute pas encore les contrôles `wikicode` ou `editorial`, car les pages importées ne sont pas des sorties normatives.
 
+Une validation réussie produit ensuite un reçu qui lie l’empreinte du snapshot et
+du graphe, les paramètres et versions de construction, puis l’empreinte de tous
+les fichiers du build. Une reprise ne peut considérer un build comme
+`valid_and_matching` que si le reçu, le contenu actuel et le contrat attendu
+correspondent exactement. Un build ancien sans reçu reste `unverified`; un reçu
+dont la source ou les options diffèrent est `stale`; toute modification après
+validation rend le reçu `invalid`. Aucun de ces états ne déclenche un
+écrasement automatique.
+
+Le contrat est écrit avant la validation. Si une interruption survient entre la
+fin de la construction et le reçu, l’orchestrateur compare ce contrat au
+snapshot courant, relance uniquement la validation locale, puis écrit le reçu.
+Si un reçu valide et exactement correspondant existe déjà, la construction et
+la validation sont toutes deux réutilisées et le workflow passe directement à
+la revue du graphe.
+
 ## Options utiles
 
 ```bash
@@ -69,6 +87,8 @@ Elle n’exécute pas encore les contrôles `wikicode` ou `editorial`, car les p
 --overwrite
 --skip-validation
 ```
+
+`--skip-validation` ne produit volontairement aucun reçu réutilisable.
 
 `--output-dir`, lorsqu’il est utilisé, doit rester sous `.state/corpus-builds/`. `--overwrite` ne concerne que le build local sélectionné dans cette zone. L’argument positionnel doit désigner la racine complète du paquet `graph-extract` ou son ZIP audité, et non le seul sous-dossier `snapshot/`, car le graphe JSON et le manifeste SHA-256 sont également requis. Le manifeste complet du paquet d’extraction, le graphe, le snapshot et chaque page importée sont revérifiés avant toute écriture locale. Aucune écriture MediaWiki et aucune promotion vers `corpus/` ne sont effectuées.
 ## Étape suivante

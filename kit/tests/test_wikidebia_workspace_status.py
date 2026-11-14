@@ -29,6 +29,13 @@ def test_summary_verifies_remote_comparison_and_returns_exact_command(tmp_path: 
         status,
         "_load_comparison",
         lambda *args: {
+            "plan": {
+                "plan_sha256": "p" * 64,
+                "operations": {
+                    "create": [{}], "update": [], "move": [], "redirect": [],
+                    "delete": [], "skip": [{}] * 697, "manual_review": [], "blocked": [],
+                },
+            },
             "receipt": {
                 "status": "plan_ready",
                 "scope": "all",
@@ -51,6 +58,38 @@ def test_summary_verifies_remote_comparison_and_returns_exact_command(tmp_path: 
     assert result["remote"]["counts"] == {"skip": 697, "create": 1}
     assert "remote_history" not in result
     assert len(json.dumps(result)) < 2500
+
+
+def test_summary_shortcuts_signed_all_skip_plan_to_local_closure(tmp_path: Path, monkeypatch):
+    meta = _meta(
+        "remote_plan_ready",
+        remote_comparison={"comparison_id": "REMOTE-20261104-003"},
+        remote_comparisons=[{"comparison_id": "REMOTE-20261104-003"}],
+    )
+    operations = {
+        "create": [], "update": [], "move": [], "redirect": [], "delete": [],
+        "skip": [{"page_id": "A0001"}], "manual_review": [], "blocked": [],
+    }
+    monkeypatch.setattr(status, "_load_workspace", lambda *args: (tmp_path, meta))
+    monkeypatch.setattr(
+        status,
+        "_load_comparison",
+        lambda *args: {
+            "plan": {"plan_sha256": "p" * 64, "operations": operations},
+            "receipt": {
+                "status": "plan_ready", "scope": "all", "counts": {"skip": 1},
+                "plan_sha256": "p" * 64, "receipt_sha256": "c" * 64,
+            },
+        },
+    )
+
+    result = status.summarize_workspace(tmp_path, "debat_test", "EDIT-TEST-001")
+
+    assert result["next_action"] == "close_workspace_from_signed_no_change_plan"
+    assert result["next_command"].endswith("--confirm-no-change-plan-sha256 " + "p" * 64)
+    assert result["next_remote_read_possible"] is False
+    assert result["next_remote_write_possible"] is False
+    assert "locale" in result["note"]
 
 
 def test_status_maps_signed_acceptance_to_preflight_command():
@@ -126,3 +165,13 @@ def test_status_does_not_invent_semantic_review_inputs():
     assert result["action"] == "record_two_semantic_convergence_passes"
     assert result["command"] is None
     assert "humaines" in result["note"]
+
+
+def test_published_workspace_is_terminal():
+    result = status._next_step(
+        _meta("published"), "debat_test", "EDIT-TEST-001"
+    )
+
+    assert result["action"] == "complete"
+    assert result["command"] is None
+    assert status._phase("published") == "complete"

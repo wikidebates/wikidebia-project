@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from wikidebia_compact_index import compact_index, failure_report
+from wikidebia_compact_index import compact_index, failure_report, junit_failure_report
 
 def test_index_is_deterministic_and_omits_state_and_secrets(tmp_path):
     (tmp_path / "kit").mkdir()
@@ -13,13 +13,19 @@ def test_index_is_deterministic_and_omits_state_and_secrets(tmp_path):
     assert [row["path"] for row in a["files"]] == ["kit/a.py"]
     assert "secret" not in json.dumps(a)
 
-def test_failure_report_only_retains_failure_lines_and_redacts_tokens():
-    report = failure_report("passed test\nFAILED test_a\ntoken=abc123\nE   password=hunter2\n")
-    assert len(report["failure_lines"]) == 2
+def test_failure_report_retains_only_structured_events_without_text():
+    report = failure_report(
+        "passed test\nFAILED kit/tests/test_a.py::test_ok - credential=unknown-value\n"
+        "E   password=hunter2\n"
+    )
+    assert len(report["failure_events"]) == 2
+    assert report["failure_events"][0]["test_id"] == "kit/tests/test_a.py::test_ok"
+    assert report["arbitrary_log_lines_included"] is False
+    assert "unknown-value" not in json.dumps(report)
     assert "hunter2" not in json.dumps(report)
     assert "passed test" not in json.dumps(report)
 
-def test_failure_report_redacts_authorization_and_url_credentials():
+def test_failure_report_drops_all_diagnostic_values_not_only_known_secrets():
     report = failure_report(
         "FAILED test_auth Bearer fake-token-123\n"
         "E   Authorization: Basic ZmFrZTpmYWtl\n"
@@ -29,7 +35,9 @@ def test_failure_report_redacts_authorization_and_url_credentials():
     assert "fake-token-123" not in output
     assert "ZmFrZTpmYWtl" not in output
     assert "fake-user:fake-pass" not in output
-    assert len(report["failure_lines"]) == 3
+    assert "example.invalid" not in output
+    assert len(report["failure_events"]) == 3
+    assert all("text" not in row for row in report["failure_events"])
 
 def test_atomic_output_preserves_existing_file_on_replace_failure(tmp_path, monkeypatch):
     import sys
@@ -45,3 +53,45 @@ def test_atomic_output_preserves_existing_file_on_replace_failure(tmp_path, monk
         module.main()
     assert output.read_text() == "original"
     assert not list(tmp_path.glob(".index-*"))
+
+
+def test_junit_report_is_structured_compact_and_omits_tracebacks(tmp_path):
+    junit = tmp_path / "kit-tests.xml"
+    junit.write_text("""<?xml version="1.0" encoding="utf-8"?>
+<testsuite tests="3" failures="1" errors="1" skipped="1">
+  <testcase classname="tests.test_auth" name="test_token=visible-secret">
+    <failure type="AssertionError" message="Bearer fake-token-123 rejected">TRACEBACK_PRIVATE_VALUE_987</failure>
+  </testcase>
+  <testcase classname="tests.test_url" name="test_url">
+    <error type="RuntimeError" message="https://fake-user:fake-pass@example.invalid/path">ANOTHER_PRIVATE_TRACE</error>
+  </testcase>
+  <testcase classname="tests.test_skip" name="test_skip"><skipped /></testcase>
+</testsuite>
+""", encoding="utf-8")
+
+    report = junit_failure_report([junit])
+    output = json.dumps(report)
+
+    assert report["failure_count"] == 2
+    assert report["sources"] == [{
+        "source": "kit-tests.xml", "tests": 3, "failures": 1, "errors": 1, "skipped": 1,
+    }]
+    assert report["raw_tracebacks_included"] is False
+    assert report["messages_included"] is False
+    assert "TRACEBACK_PRIVATE_VALUE_987" not in output
+    assert "ANOTHER_PRIVATE_TRACE" not in output
+    assert "visible-secret" not in output
+    assert "fake-token-123" not in output
+    assert "fake-user:fake-pass" not in output
+    assert all("message" not in row for row in report["failures"])
+
+
+def test_junit_report_tolerates_missing_and_partial_sources(tmp_path):
+    broken = tmp_path / "broken.xml"
+    broken.write_text("<testsuite><testcase>", encoding="utf-8")
+    report = junit_failure_report([tmp_path / "missing.xml", broken])
+    assert report["missing_sources"] == ["missing.xml"]
+    assert report["parse_errors"] == [{
+        "source": "broken.xml", "error_type": "ParseError",
+    }]
+    assert report["failure_count"] == 0

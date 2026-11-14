@@ -2110,6 +2110,58 @@ def corpus_workspace_finalize(
     return run(command, cwd=root, check=False).returncode
 
 
+def corpus_workspace_reconcile_publication(
+    root: Path, debate_id: str, *, work_id: str,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_post_publication.py"
+    if not script.is_file():
+        raise ManagementError("Outil de réconciliation post-publication absent du kit")
+    command = [
+        python_command(root), str(script), debate_id,
+        "--work-id", work_id, "--project-root", str(root), "--machine-readable",
+    ]
+    return run(command, cwd=root, check=False).returncode
+
+
+def state_maintenance(
+    root: Path, *, output: Path | None, apply_plan: Path | None,
+    confirm_plan_sha256: str | None,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_state_maintenance.py"
+    if not script.is_file():
+        raise ManagementError("Outil de maintenance locale de .state absent du kit")
+    command = [python_command(root), str(script), "--project-root", str(root), "--machine-readable"]
+    if output:
+        command.extend(["--output", str(output)])
+    if apply_plan:
+        command.extend(["--apply-plan", str(apply_plan)])
+    if confirm_plan_sha256:
+        command.extend(["--confirm-plan-sha256", confirm_plan_sha256])
+    return run(command, cwd=root, check=False).returncode
+
+
+def storage_dedup(
+    root: Path, *, scope: str, apply: bool, repair_hardlinks: bool,
+    confirm_plan_sha256: str | None, output: Path | None,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_checkpoint_store.py"
+    if not script.is_file():
+        raise ManagementError("Outil de déduplication locale absent du kit")
+    command = [
+        python_command(root), str(script), "--project-root", str(root),
+        "--scope", scope,
+    ]
+    if apply:
+        command.append("--apply")
+    if repair_hardlinks:
+        command.append("--repair-hardlinks")
+    if confirm_plan_sha256:
+        command.extend(["--confirm-plan-sha256", confirm_plan_sha256])
+    if output:
+        command.extend(["--output", str(output)])
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_status(root: Path, debate_id: str, *, work_id: str) -> int:
     script = root / "kit" / "scripts" / "wikidebia_workspace_status.py"
     if not script.is_file():
@@ -2210,6 +2262,33 @@ def global_resume(
         command.extend(["--debate-id", debate_id])
     if work_id:
         command.extend(["--work-id", work_id])
+    return run(command, cwd=root, check=False).returncode
+
+
+def pretranslation_benchmark(
+    root: Path,
+    *,
+    arguments: int,
+    payload_bytes: int,
+    iterations: int,
+    output: Path | None,
+    snapshot: Path | None,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_pretranslation_benchmark.py"
+    if not script.is_file():
+        raise ManagementError("Benchmark de reprise prétraduction absent du kit")
+    command = [
+        python_command(root), str(script),
+        "--project-root", str(root),
+        "--arguments", str(arguments),
+        "--payload-bytes", str(payload_bytes),
+        "--iterations", str(iterations),
+        "--machine-readable",
+    ]
+    if output is not None:
+        command.extend(["--output", str(output)])
+    if snapshot is not None:
+        command.extend(["--snapshot", str(snapshot)])
     return run(command, cwd=root, check=False).returncode
 
 
@@ -2422,7 +2501,8 @@ def corpus_workspace_remote_execute(
 
 def corpus_workspace_close(
     root: Path, debate_id: str, *, work_id: str, comparison_id: str,
-    confirm_execution_sha256: str,
+    confirm_execution_sha256: str | None = None,
+    confirm_no_change_plan_sha256: str | None = None,
 ) -> int:
     script = root / "kit" / "scripts" / "wikidebia_work_close.py"
     if not script.is_file():
@@ -2430,9 +2510,14 @@ def corpus_workspace_close(
     command = [
         python_command(root), str(script), debate_id,
         "--work-id", work_id, "--comparison-id", comparison_id,
-        "--confirm-execution-sha256", confirm_execution_sha256,
-        "--project-root", str(root), "--machine-readable",
     ]
+    if confirm_no_change_plan_sha256:
+        command.extend(["--confirm-no-change-plan-sha256", confirm_no_change_plan_sha256])
+    elif confirm_execution_sha256:
+        command.extend(["--confirm-execution-sha256", confirm_execution_sha256])
+    else:
+        raise ManagementError("Une confirmation de clôture est obligatoire")
+    command.extend(["--project-root", str(root), "--machine-readable"])
     result = run(command, cwd=root, check=False)
     return result.returncode
 
@@ -2586,6 +2671,7 @@ def doctor(
         "wikidebia_translation_fragment.py",
         "wikidebia_translation_checkpoint.py",
         "wikidebia_global_resume.py",
+        "wikidebia_pretranslation_benchmark.py",
         "wikidebia_access_preflight.py",
         "wikidebia_test_changed.py",
         "wikidebia_translation_memory.py",
@@ -2593,6 +2679,7 @@ def doctor(
         "refresh_package_metadata.py",
         "wikidebia_render.py", "wikidebia_release.py",
         "wikidebia_remote_compare.py", "wikidebia_workspace_finalize.py",
+        "wikidebia_post_publication.py", "wikidebia_state_maintenance.py",
         "wikidebia_workspace_status.py",
         "wikidebia_remote_plan_review.py",
         "wikidebia_remote_execute.py", "wikidebia_work_close.py",
@@ -2872,6 +2959,34 @@ def build_parser() -> argparse.ArgumentParser:
         "--comparison-id", help="Identifiant de la nouvelle comparaison (avec --refresh-remote)",
     )
 
+    corpus_reconcile_publication_parser = sub.add_parser(
+        "corpus-workspace-reconcile-publication",
+        help="Sceller localement le workspace après une publication finale vérifiée",
+    )
+    corpus_reconcile_publication_parser.add_argument("debate_id")
+    corpus_reconcile_publication_parser.add_argument("--work-id", required=True)
+
+    state_maintenance_parser = sub.add_parser(
+        "state-maintenance",
+        help="Mesurer .state et planifier le nettoyage exact des sauvegardes obsolètes",
+    )
+    state_maintenance_parser.add_argument("--output", type=Path)
+    state_maintenance_parser.add_argument("--apply-plan", type=Path)
+    state_maintenance_parser.add_argument("--confirm-plan-sha256")
+
+    storage_dedup_parser = sub.add_parser(
+        "storage-dedup",
+        help="Inventorier ou dédupliquer par reflink les checkpoints et backups immuables",
+    )
+    storage_dedup_parser.add_argument(
+        "--scope", choices=("checkpoints", "backups"), default="checkpoints",
+    )
+    storage_action = storage_dedup_parser.add_mutually_exclusive_group()
+    storage_action.add_argument("--apply", action="store_true")
+    storage_action.add_argument("--repair-hardlinks", action="store_true")
+    storage_dedup_parser.add_argument("--confirm-plan-sha256")
+    storage_dedup_parser.add_argument("--output", type=Path)
+
     corpus_status_parser = sub.add_parser(
         "corpus-workspace-status",
         help="Afficher un état compact vérifié et la prochaine commande exacte",
@@ -2937,6 +3052,16 @@ def build_parser() -> argparse.ArgumentParser:
     )
     resume_parser.add_argument("--debate-id")
     resume_parser.add_argument("--work-id")
+
+    benchmark_parser = sub.add_parser(
+        "pretranslation-benchmark",
+        help="Mesurer localement les reprises techniques avant traduction",
+    )
+    benchmark_parser.add_argument("--arguments", type=int, default=250)
+    benchmark_parser.add_argument("--payload-bytes", type=int, default=1024)
+    benchmark_parser.add_argument("--iterations", type=int, default=3)
+    benchmark_parser.add_argument("--snapshot", type=Path)
+    benchmark_parser.add_argument("--output", type=Path)
 
     fragment_parser = sub.add_parser(
         "corpus-workspace-translation-fragment",
@@ -3072,9 +3197,14 @@ def build_parser() -> argparse.ArgumentParser:
     corpus_close_parser.add_argument("debate_id", help="Identifiant du corpus sous corpus/")
     corpus_close_parser.add_argument("--work-id", required=True, help="Identifiant du workspace éditorial")
     corpus_close_parser.add_argument("--comparison-id", required=True, help="Identifiant REMOTE-AAAAMMJJ-NNN")
-    corpus_close_parser.add_argument(
-        "--confirm-execution-sha256", required=True,
+    close_confirmation = corpus_close_parser.add_mutually_exclusive_group(required=True)
+    close_confirmation.add_argument(
+        "--confirm-execution-sha256",
         help="Empreinte exacte du reçu d’exécution distante",
+    )
+    close_confirmation.add_argument(
+        "--confirm-no-change-plan-sha256",
+        help="Empreinte exacte d’un plan signé all-skip à clôturer sans accès wiki",
     )
 
     continuity_parser = sub.add_parser(
@@ -3263,6 +3393,24 @@ def main(argv: list[str] | None = None) -> int:
             refresh_remote=args.refresh_remote, comparison_id=args.comparison_id,
         )
 
+    if args.command == "corpus-workspace-reconcile-publication":
+        return corpus_workspace_reconcile_publication(
+            root, args.debate_id, work_id=args.work_id,
+        )
+
+    if args.command == "state-maintenance":
+        return state_maintenance(
+            root, output=args.output, apply_plan=args.apply_plan,
+            confirm_plan_sha256=args.confirm_plan_sha256,
+        )
+
+    if args.command == "storage-dedup":
+        return storage_dedup(
+            root, scope=args.scope, apply=args.apply,
+            repair_hardlinks=args.repair_hardlinks,
+            confirm_plan_sha256=args.confirm_plan_sha256, output=args.output,
+        )
+
     if args.command == "corpus-workspace-status":
         return corpus_workspace_status(root, args.debate_id, work_id=args.work_id)
 
@@ -3298,6 +3446,16 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "resume":
         return global_resume(
             root, debate_id=args.debate_id, work_id=args.work_id,
+        )
+
+    if args.command == "pretranslation-benchmark":
+        return pretranslation_benchmark(
+            root,
+            arguments=args.arguments,
+            payload_bytes=args.payload_bytes,
+            iterations=args.iterations,
+            output=args.output,
+            snapshot=args.snapshot,
         )
 
     if args.command == "corpus-workspace-translation-fragment":
@@ -3377,6 +3535,7 @@ def main(argv: list[str] | None = None) -> int:
         return corpus_workspace_close(
             root, args.debate_id, work_id=args.work_id, comparison_id=args.comparison_id,
             confirm_execution_sha256=args.confirm_execution_sha256,
+            confirm_no_change_plan_sha256=args.confirm_no_change_plan_sha256,
         )
 
     if args.command == "continuity-sync":

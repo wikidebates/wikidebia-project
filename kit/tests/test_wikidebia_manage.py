@@ -1198,6 +1198,37 @@ def test_workspace_finalize_command_is_exposed_by_manager():
     assert args.comparison_id == "REMOTE-20261104-009"
 
 
+def test_workspace_publication_reconciliation_command_is_exposed_by_manager():
+    args = module.build_parser().parse_args([
+        "corpus-workspace-reconcile-publication", "debat_test",
+        "--work-id", "EDIT-TEST-001",
+    ])
+    assert args.command == "corpus-workspace-reconcile-publication"
+    assert args.debate_id == "debat_test"
+    assert args.work_id == "EDIT-TEST-001"
+
+
+def test_state_maintenance_command_is_exposed_by_manager():
+    args = module.build_parser().parse_args([
+        "state-maintenance", "--output", ".state/maintenance-plan.json",
+    ])
+    assert args.command == "state-maintenance"
+    assert args.output == Path(".state/maintenance-plan.json")
+
+
+def test_storage_dedup_backup_scope_is_exposed_by_manager():
+    args = module.build_parser().parse_args([
+        "storage-dedup", "--scope", "backups", "--apply",
+        "--confirm-plan-sha256", "a" * 64,
+        "--output", ".state/backup-dedup.json",
+    ])
+    assert args.command == "storage-dedup"
+    assert args.scope == "backups"
+    assert args.apply is True
+    assert args.confirm_plan_sha256 == "a" * 64
+    assert args.output == Path(".state/backup-dedup.json")
+
+
 def test_workspace_status_command_is_exposed_by_manager():
     args = module.build_parser().parse_args([
         "corpus-workspace-status", "debat_test", "--work-id", "EDIT-TEST-001",
@@ -1266,6 +1297,23 @@ def test_global_resume_command_needs_no_identifier_and_accepts_filters():
     assert automatic.work_id is None
     assert selected.debate_id == "debat_test"
     assert selected.work_id == "EDIT-TEST-001"
+
+
+def test_pretranslation_benchmark_command_exposes_reproducible_dimensions():
+    args = module.build_parser().parse_args([
+        "pretranslation-benchmark",
+        "--arguments", "878",
+        "--payload-bytes", "2048",
+        "--iterations", "5",
+        "--snapshot", ".state/graph-extract/example",
+        "--output", ".state/benchmarks/pretranslation.json",
+    ])
+    assert args.command == "pretranslation-benchmark"
+    assert args.arguments == 878
+    assert args.payload_bytes == 2048
+    assert args.iterations == 5
+    assert args.snapshot == Path(".state/graph-extract/example")
+    assert args.output == Path(".state/benchmarks/pretranslation.json")
 
 
 def test_translation_fragment_command_exposes_argument_granularity():
@@ -1394,12 +1442,14 @@ def test_doctor_checks_every_pipeline_script(tmp_path: Path, monkeypatch):
         "wikidebia_translation_fragment.py",
         "wikidebia_translation_checkpoint.py",
         "wikidebia_global_resume.py",
+        "wikidebia_pretranslation_benchmark.py",
         "wikidebia_access_preflight.py",
         "wikidebia_test_changed.py",
         "wikidebia_external_deletions.py",
         "refresh_package_metadata.py",
         "wikidebia_render.py",
         "wikidebia_release.py", "wikidebia_remote_compare.py", "wikidebia_workspace_finalize.py",
+        "wikidebia_post_publication.py", "wikidebia_state_maintenance.py",
         "wikidebia_workspace_status.py",
         "wikidebia_remote_plan_review.py",
         "wikidebia_remote_execute.py", "wikidebia_work_close.py",

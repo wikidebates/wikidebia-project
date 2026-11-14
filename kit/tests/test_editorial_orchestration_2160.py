@@ -145,6 +145,86 @@ def test_package_creation_is_idempotent_while_review_pending(tmp_path: Path):
     assert first["archive_sha256"] == second["archive_sha256"]
 
 
+def test_complete_orphan_review_package_is_adopted_without_rebuild(tmp_path: Path, monkeypatch):
+    project = tmp_path / "project"
+    project.mkdir()
+    base = make_base(project)
+    state = make_state(project, base)
+    first = wf.create_review_package(
+        project,
+        state,
+        review_type="graph_review",
+        base=base,
+        editable_paths=["reviews/edit.json"],
+        context_paths=["data/context.json"],
+    )
+    restarted = make_state(project, base)
+    monkeypatch.setattr(
+        wf,
+        "_write_deterministic_zip",
+        lambda *_args: (_ for _ in ()).throw(AssertionError("ZIP reconstruit")),
+    )
+
+    adopted = wf.create_review_package(
+        project,
+        restarted,
+        review_type="graph_review",
+        base=base,
+        editable_paths=["reviews/edit.json"],
+        context_paths=["data/context.json"],
+    )
+
+    assert adopted["package_id"] == first["package_id"]
+    assert adopted["archive_sha256"] == first["archive_sha256"]
+    assert wf._load_workflow(project, "debat_test")["pending_review"] == adopted
+
+
+def test_stale_orphan_review_package_is_rebuilt(tmp_path: Path):
+    project = tmp_path / "project"
+    project.mkdir()
+    base = make_base(project)
+    state = make_state(project, base)
+    first = wf.create_review_package(
+        project,
+        state,
+        review_type="graph_review",
+        base=base,
+        editable_paths=["reviews/edit.json"],
+        context_paths=["data/context.json"],
+    )
+    common.write_json(base / "data/context.json", {"debate_id": "debat_test", "locked": "updated"})
+    restarted = make_state(project, base)
+
+    rebuilt = wf.create_review_package(
+        project,
+        restarted,
+        review_type="graph_review",
+        base=base,
+        editable_paths=["reviews/edit.json"],
+        context_paths=["data/context.json"],
+    )
+
+    assert rebuilt["package_id"] != first["package_id"]
+    with zipfile.ZipFile(project / rebuilt["package_path"]) as bundle:
+        assert json.loads(bundle.read("context/data/context.json"))["locked"] == "updated"
+
+
+def test_atomic_zip_failure_preserves_previous_archive(tmp_path: Path, monkeypatch):
+    staging = tmp_path / "staging"
+    staging.mkdir()
+    (staging / "new.txt").write_text("new\n", encoding="utf-8")
+    target = tmp_path / "package.zip"
+    target.write_bytes(b"previous archive")
+    original = target.read_bytes()
+    monkeypatch.setattr(wf.os, "replace", lambda *_args: (_ for _ in ()).throw(OSError("interruption")))
+
+    with pytest.raises(OSError, match="interruption"):
+        wf._write_deterministic_zip(staging, target)
+
+    assert target.read_bytes() == original
+    assert not list(tmp_path.glob(".package.zip.tmp-*"))
+
+
 def test_import_refuses_modified_context_and_wrong_corpus(tmp_path: Path):
     project = tmp_path / "project"
     project.mkdir()
@@ -422,6 +502,153 @@ def test_resume_after_interruption_adopts_existing_graph_draft_but_revalidates(t
     assert resumed["pending_review"]["review_type"] == "graph_review"
 
 
+def test_resume_reuses_exact_receipted_graph_draft_without_revalidation(tmp_path: Path, monkeypatch):
+    from test_wikidebia_corpus_init import make_extraction
+    project = tmp_path / "project"
+    project.mkdir()
+    source = make_extraction(project / "source")
+    build = project / ".state/corpus-builds/debat_test"
+    result = wf.build_corpus(
+        source, build,
+        debate_id="debat_test", short_code="TEST", scope_summary=None, overwrite=False,
+    )
+    wf.write_build_receipt(
+        build,
+        build_contract=result["build_contract"],
+        validation={"status": "passed"},
+    )
+    state = {
+        "schema": wf.WORKFLOW_SCHEMA, "schema_version": "1.0", "debate_id": "debat_test",
+        "debate_title": "Débat test ?", "short_code": "TEST", "phase": "initialize_graph",
+        "status": "running", "work_id": None, "pending_review": None,
+        "snapshot_path": "source", "force_refresh": False,
+        "created_at": "2026-08-11T12:00:00+02:00", "updated_at": "2026-08-11T12:00:00+02:00",
+    }
+    wf._save_workflow(project, state)
+    calls = []
+    monkeypatch.setattr(
+        wf,
+        "run_initial_validator",
+        lambda *_args: calls.append("validation") or {"status": "passed"},
+    )
+
+    resumed = wf.start_workflow(project, "Débat test ?", debate_id="debat_test")
+
+    assert calls == []
+    assert resumed["pending_review"]["review_type"] == "graph_review"
+    assert resumed["initial_build_receipt"]["status"] == "valid_and_matching"
+
+
+def test_resume_blocks_existing_build_when_options_changed(tmp_path: Path, monkeypatch):
+    from test_wikidebia_corpus_init import make_extraction
+    project = tmp_path / "project"
+    project.mkdir()
+    source = make_extraction(project / "source")
+    build = project / ".state/corpus-builds/debat_test"
+    wf.build_corpus(
+        source, build,
+        debate_id="debat_test", short_code="TEST", scope_summary=None, overwrite=False,
+    )
+    state = {
+        "schema": wf.WORKFLOW_SCHEMA, "schema_version": "1.0", "debate_id": "debat_test",
+        "debate_title": "Débat test ?", "short_code": "OTHER", "phase": "initialize_graph",
+        "status": "running", "work_id": None, "pending_review": None,
+        "snapshot_path": "source", "force_refresh": False,
+        "created_at": "2026-08-11T12:00:00+02:00", "updated_at": "2026-08-11T12:00:00+02:00",
+    }
+    wf._save_workflow(project, state)
+    calls = []
+    monkeypatch.setattr(
+        wf,
+        "run_initial_validator",
+        lambda *_args: calls.append("validation") or {"status": "passed"},
+    )
+
+    with pytest.raises(wf.WorkflowError, match="aucun écrasement automatique"):
+        wf.start_workflow(project, "Débat test ?", debate_id="debat_test")
+
+    assert calls == []
+
+
+def test_graph_review_package_resumes_after_interruption_post_template(tmp_path: Path, monkeypatch):
+    from test_wikidebia_corpus_init import make_extraction
+    project = tmp_path / "project"
+    project.mkdir()
+    source = make_extraction(tmp_path / "source")
+    build = project / ".state/corpus-builds/debat_test"
+    wf.build_corpus(
+        source, build,
+        debate_id="debat_test", short_code="TEST", scope_summary=None, overwrite=False,
+    )
+    state = {
+        "schema": wf.WORKFLOW_SCHEMA, "schema_version": "1.0", "debate_id": "debat_test",
+        "debate_title": "Débat test ?", "short_code": "TEST", "phase": "graph_review",
+        "status": "running", "work_id": "EDIT-20260811-001", "pending_review": None,
+        "snapshot_path": None, "force_refresh": False,
+        "created_at": "2026-08-11T12:00:00+02:00", "updated_at": "2026-08-11T12:00:00+02:00",
+    }
+    wf._save_workflow(project, state)
+    original_create = wf.create_review_package
+    monkeypatch.setattr(
+        wf,
+        "create_review_package",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(RuntimeError("interruption")),
+    )
+
+    with pytest.raises(RuntimeError, match="interruption"):
+        wf._prepare_graph_package(project, state)
+
+    assert (build / wf.REVIEW_ENVELOPE).is_file()
+    assert (build / wf.PLACEMENT_REVIEW).is_file()
+    monkeypatch.setattr(wf, "create_review_package", original_create)
+
+    pending = wf._prepare_graph_package(project, state)
+
+    assert pending["review_type"] == "graph_review"
+    assert (project / pending["package_path"]).is_file()
+
+
+def test_graph_review_adopts_zip_after_interruption_before_state_save(tmp_path: Path, monkeypatch):
+    from test_wikidebia_corpus_init import make_extraction
+    project = tmp_path / "project"
+    project.mkdir()
+    source = make_extraction(tmp_path / "source")
+    build = project / ".state/corpus-builds/debat_test"
+    wf.build_corpus(
+        source, build,
+        debate_id="debat_test", short_code="TEST", scope_summary=None, overwrite=False,
+    )
+    state = {
+        "schema": wf.WORKFLOW_SCHEMA, "schema_version": "1.0", "debate_id": "debat_test",
+        "debate_title": "Débat test ?", "short_code": "TEST", "phase": "graph_review",
+        "status": "running", "work_id": "EDIT-20260811-001", "pending_review": None,
+        "snapshot_path": None, "force_refresh": False,
+        "created_at": "2026-08-11T12:00:00+02:00", "updated_at": "2026-08-11T12:00:00+02:00",
+    }
+    wf._save_workflow(project, state)
+    original_save = wf._save_workflow
+    monkeypatch.setattr(
+        wf,
+        "_save_workflow",
+        lambda *_args: (_ for _ in ()).throw(RuntimeError("interruption avant état")),
+    )
+
+    with pytest.raises(RuntimeError, match="interruption avant état"):
+        wf._prepare_graph_package(project, state)
+
+    archive = project / "outgoing/debat_test_graph_review.zip"
+    with zipfile.ZipFile(archive) as bundle:
+        orphan_manifest = json.loads(bundle.read("REVIEW_PACKAGE.json"))
+    monkeypatch.setattr(wf, "_save_workflow", original_save)
+    restarted = wf._load_workflow(project, "debat_test")
+
+    adopted = wf._prepare_graph_package(project, restarted)
+
+    assert adopted["package_id"] == orphan_manifest["package_id"]
+    assert adopted["manifest_sha256"] == orphan_manifest["manifest_sha256"]
+    assert wf._load_workflow(project, "debat_test")["pending_review"] == adopted
+
+
 def test_import_refuses_local_edit_outside_handoff(tmp_path: Path):
     project = tmp_path / "project"
     project.mkdir()
@@ -541,6 +768,7 @@ def test_full_orchestration_reaches_final_publication_through_all_editorial_stop
     monkeypatch.setattr(wf, "render_workspace", lambda *a, **k: calls.append("render") or {"rendered_copy_tree_sha256": "6" * 64})
     monkeypatch.setattr(wf, "release_workspace", lambda *a, **k: calls.append("release") or {"archive": "outgoing/debat_test_release.zip", "status": "release_ready"})
     monkeypatch.setattr(wf, "publish_final_release", lambda *a, **k: calls.append("final_publish") or {"status": "published", "installed_release": {"path": "corpus/debat_test"}, "receipt_sha256": "7" * 64})
+    monkeypatch.setattr(wf, "reconcile_published_workspace", lambda *a, **k: calls.append("reconcile") or {"status": "published"})
 
     # Metadata stop.
     state = wf._mechanical_advance(project, state)
@@ -574,7 +802,7 @@ def test_full_orchestration_reaches_final_publication_through_all_editorial_stop
     assert state["status"] == "published"
     assert state["phase"] == "published"
     assert pass_calls == ["proposition_by_proposition", "risk_marker_review"]
-    assert calls == ["apply", "render", "release", "final_publish"]
+    assert calls == ["apply", "render", "release", "final_publish", "reconcile"]
     assert state["release"]["archive"] == "outgoing/debat_test_release.zip"
 
 
@@ -1304,12 +1532,13 @@ def test_release_ready_resume_enters_final_publication_without_rerunning_semanti
     monkeypatch.setattr(wf, "publish_final_release", lambda *a, **k: calls.append("final") or {
         "status": "published", "installed_release": {"path": "corpus/debat_test"}, "receipt_sha256": "8" * 64,
     })
+    monkeypatch.setattr(wf, "reconcile_published_workspace", lambda *a, **k: calls.append("reconcile") or {"status": "published"})
     monkeypatch.setattr(wf, "render_workspace", lambda *a, **k: (_ for _ in ()).throw(AssertionError("render must not rerun")))
     monkeypatch.setattr(wf, "release_workspace", lambda *a, **k: (_ for _ in ()).throw(AssertionError("release must not rerun")))
     result = wf._mechanical_advance(project, state)
     assert result["status"] == "published"
     assert result["phase"] == "published"
-    assert calls == ["final"]
+    assert calls == ["final", "reconcile"]
 
 
 def test_final_publication_conflict_is_persisted_without_reopening_reviews(tmp_path: Path, monkeypatch):

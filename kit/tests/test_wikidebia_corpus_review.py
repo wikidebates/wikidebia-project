@@ -107,6 +107,42 @@ def test_prepare_creates_occurrence_ledger_without_changing_status(tmp_path: Pat
     assert not (build / "output").exists()
 
 
+def test_prepare_reuses_only_untouched_matching_template_when_requested(tmp_path: Path):
+    _project, build = make_project(tmp_path)
+    first = review.make_review_template(build, "debat_test", overwrite=False)
+
+    reused = review.make_review_template(
+        build,
+        "debat_test",
+        overwrite=False,
+        reuse_matching=True,
+    )
+
+    assert first["source_build_sha256"] == reused["source_build_sha256"]
+    assert reused["status"] == "review_reused"
+
+
+def test_prepare_does_not_reuse_edited_template(tmp_path: Path):
+    _project, build = make_project(tmp_path)
+    review.make_review_template(build, "debat_test", overwrite=False)
+    placement_path = build / common.PLACEMENT_REVIEW
+    placement = json.loads(placement_path.read_text(encoding="utf-8"))
+    placement["entries"][0]["rationale"] = "édition inachevée"
+    common.write_json(placement_path, placement)
+
+    try:
+        review.make_review_template(
+            build,
+            "debat_test",
+            overwrite=False,
+            reuse_matching=True,
+        )
+    except common.CorpusBuildError as exc:
+        assert "revue préparée existe déjà" in str(exc)
+    else:
+        raise AssertionError("modèle de revue édité réutilisé silencieusement")
+
+
 def test_finalize_approved_review_sets_graph_validated_only(tmp_path: Path):
     project, build = make_project(tmp_path)
     review.make_review_template(build, "debat_test", overwrite=False)
