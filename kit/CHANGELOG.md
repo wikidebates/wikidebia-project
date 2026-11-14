@@ -1,3 +1,11 @@
+## Correctif du 14 novembre 2026 — adoption contrôlée d’un Work restauré
+
+- permet à un workflow initial sans `work_id` d’adopter explicitement un Work
+  `release_ready` dont le workspace et le reçu de release sont intacts ;
+- refuse l’adoption après toute publication anglaise ou autorisation finale ;
+- exige ensuite les deux checkpoints français ordinaires et leurs reçus signés ;
+- arrête la reprise à la frontière `release_ready` avant la publication finale.
+
 ## 2.15.54 — 10 août 2026 — alignement des métadonnées de première publication anglaise
 
 - aligne le validateur courant sur le contrat déjà actif : aucune projection `initialisation` → `initialization` pour une nouvelle traduction anglaise ;
