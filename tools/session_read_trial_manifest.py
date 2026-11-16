@@ -115,9 +115,12 @@ def finalize_trial(
         raise TrialManifestError("invalid_quality_review")
     if type(task_completed) is not bool:
         raise TrialManifestError("task_completed_must_be_boolean")
-    protocol_path = _safe_path(protocol_path)
-    _tracked_regular_file(root, protocol_path)
-    protocol_bytes = _read_public_bytes(root, protocol_path)
+    try:
+        protocol_path = _safe_path(protocol_path)
+        _tracked_regular_file(root, protocol_path)
+        protocol_bytes = _read_public_bytes(root, protocol_path)
+    except (ReadAuditError, OSError) as exc:
+        raise TrialManifestError("invalid_tracked_protocol") from exc
     head = _git_head(root, protocol_path)
 
     state = _private_state(root)
