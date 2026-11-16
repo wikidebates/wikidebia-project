@@ -379,7 +379,9 @@ def _find_unique_releasable_work(project_root: Path, debate_id: str) -> str:
                 meta = load_json(directory / "workspace.json", "workspace")
                 if (meta.get("debate_id") != debate_id or meta.get("work_id") != work_id
                         or meta.get("workspace_sha256") != workspace_receipt_hash(meta)
-                        or meta.get("status") != "release_ready"):
+                        or meta.get("status") != "release_ready"
+                        or any(not (directory / required).is_dir()
+                               for required in ("reviewed-copy", "content-reviewed-copy"))):
                     continue
                 release_copy = directory / "release-copy"
                 tree = str((meta.get("release_copy") or {}).get("tree_sha256") or "")
