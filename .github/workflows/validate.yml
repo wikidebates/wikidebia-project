@@ -58,17 +58,7 @@ jobs:
       - if: steps.pr-validation.outputs.result != 'true'
         run: python -m pytest -q kit/tests --junitxml=/tmp/kit-tests.xml
       - if: steps.pr-validation.outputs.result != 'true'
-        run: |
-          python kit/scripts/refresh_package_metadata.py --junit-xml /tmp/kit-tests.xml
-          python - <<'PY'
-          import base64
-          from pathlib import Path
-          for name in ("TEST_REPORT.txt", "PACKAGE_MANIFEST_SHA256.json", "PACKAGE_RECEIPT.json"):
-              print("METADATA_BEGIN:" + name)
-              print(base64.b64encode((Path("kit") / name).read_bytes()).decode("ascii"))
-              print("METADATA_END:" + name)
-          PY
-          python kit/scripts/refresh_package_metadata.py --junit-xml /tmp/kit-tests.xml --check
+        run: python kit/scripts/refresh_package_metadata.py --junit-xml /tmp/kit-tests.xml --check
       - if: steps.pr-validation.outputs.result != 'true'
         run: python validator/scripts/self_audit.py
       - if: steps.pr-validation.outputs.result != 'true'
