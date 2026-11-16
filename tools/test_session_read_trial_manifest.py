@@ -37,11 +37,13 @@ def _reads(root: Path, prefix: str) -> None:
 
 
 def _finalize(root: Path, **kwargs):
-    return finalize_trial(
-        root, condition="control", task_id="issue81_probe",
-        protocol_path="docs/protocol.md", task_completed=True,
-        quality_review="passed", **kwargs
-    )
+    args = {
+        "condition": "control", "task_id": "issue81_probe",
+        "protocol_path": "docs/protocol.md", "task_completed": True,
+        "quality_review": "passed",
+    }
+    args.update(kwargs)
+    return finalize_trial(root, **args)
 
 
 def test_produces_real_git_and_content_shas(tmp_path):
