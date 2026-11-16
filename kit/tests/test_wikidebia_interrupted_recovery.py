@@ -104,3 +104,18 @@ def test_recovery_does_not_prepare_review_for_blocked_comparison(monkeypatch, tm
     )
     assert result["draft_review"] is None
     assert result["new_plan_automatically_approved"] is False
+
+
+@pytest.mark.parametrize("unsafe_result", [
+    {"status": "plan_ready", "comparison_id": "REMOTE-20261116-999", "remote_write_performed": True},
+    {"status": "plan_ready", "comparison_id": "REMOTE-20261116-999"},
+    {"status": "plan_ready", "comparison_id": "REMOTE-20261116-999", "remote_write_performed": False, "execution_authorized": True},
+])
+def test_recovery_rejects_unproven_read_only_comparison_before_review(monkeypatch, tmp_path, unsafe_result):
+    project, debate_id, work_id, old_id, root, _ = _audited(tmp_path)
+    monkeypatch.setattr(recovery, "compare_workspace", lambda *a, **kw: unsafe_result)
+    with pytest.raises(execution.RemoteExecutionError):
+        recovery.prepare_fresh_recovery_comparison(
+            project, debate_id, work_id, old_id, prepare_draft_review=True,
+            prepare_review_fn=lambda *args: pytest.fail("unsafe result must never be reviewed"),
+        )
