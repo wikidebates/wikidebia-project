@@ -761,10 +761,20 @@ def close_scope_publication(
                 or receipt.get("receipt_sha256") != _canonical_sha(receipt, "receipt_sha256")
                 or receipt.get("execution_receipt_sha256") != confirm_execution_sha256):
             raise WorkClosureError("Reçu de clôture de périmètre existant invalide")
-        archive = project_root / str(receipt.get("evidence_archive") or "")
-        if (not archive.is_file() or archive.is_symlink()
+        archive_relative = str(receipt.get("evidence_archive") or "")
+        archive = project_root / archive_relative
+        expected_archive_root = _archive_dir(project_root, debate_id, work_id, comparison_id)
+        if (archive_relative != relative_to_project(expected_archive_root / "work-evidence.zip", project_root)
+                or not archive.is_file() or archive.is_symlink()
                 or sha256_file(archive) != receipt.get("evidence_archive_sha256")):
             raise WorkClosureError("Archive de clôture de périmètre absente ou altérée")
+        workspace, meta = _load_workspace(project_root, debate_id, work_id)
+        scope = meta.get("scope_closure") or {}
+        if (meta.get("status") != "scope_publication_completed"
+                or scope.get("comparison_id") != comparison_id
+                or scope.get("receipt_sha256") != receipt["receipt_sha256"]
+                or meta.get("workspace_sha256") != workspace_receipt_hash(meta)):
+            raise WorkClosureError("Workspace divergent du reçu de clôture de périmètre")
         return {**receipt, "idempotent": True}
     if closure_root.exists() or closure_root.is_symlink():
         raise WorkClosureError("Un dossier de clôture existe déjà pour cette comparaison")
