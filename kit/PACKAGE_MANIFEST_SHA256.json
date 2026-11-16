@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
-  "declared_file_count": 488,
-  "declared_test_count": 1157,
+  "declared_file_count": 489,
+  "declared_test_count": 1161,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -1139,7 +1139,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "fe537650e4e35ab8c6ec8d2a16478ff5affaf83f1a4dca11ee2ae3b246009368"
+      "sha256": "722a5121bc27349ced477da6047f43ee2c12e12b9e4a7769a3f91483672638cf"
     },
     {
       "path": "VERSIONS.json",
@@ -1923,8 +1923,8 @@
     },
     {
       "path": "scripts/wikidebia_work_close.py",
-      "size_bytes": 57671,
-      "sha256": "787943c10940a651eabb66303018b2b175154b2a7acf1b123ef5c5be905aa5aa"
+      "size_bytes": 58017,
+      "sha256": "e538596ef045b1c975852c5a845529285a6bbfcec8b3945cc7c7bdc43a92b203"
     },
     {
       "path": "scripts/wikidebia_workflow_baseline.py",
@@ -2435,6 +2435,11 @@
       "path": "tests/test_wikidebia_workspace_status.py",
       "size_bytes": 6293,
       "sha256": "400745d1e2cb800833c73104e8be716cef19b279368be93ac57bf85fc7e64559"
+    },
+    {
+      "path": "tests/test_work_close_scope_guard.py",
+      "size_bytes": 1110,
+      "sha256": "c13d17a3bd8a601ae2e6ff6f776ee674c3e469e232d9afc848ce71d264afd4c1"
     },
     {
       "path": "tests/test_workflow_status_reconciliation_guidance.py",
