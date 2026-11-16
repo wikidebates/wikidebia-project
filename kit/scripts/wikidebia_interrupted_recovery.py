@@ -18,7 +18,7 @@ from wikidebia_remote_execute import AUTHORIZATION_SCHEMA, RemoteExecutionError,
 
 def prepare_fresh_recovery_comparison(
     project_root: Path, debate_id: str, work_id: str, interrupted_comparison_id: str,
-    *, scope: str = "all", comparison_id: str | None = None, adapter=None,
+    *, scope: str | None = None, comparison_id: str | None = None, adapter=None,
     validate_plan_fn=None,
 ) -> dict:
     project_root = project_root.expanduser().resolve()
@@ -77,7 +77,12 @@ def prepare_fresh_recovery_comparison(
         raise RemoteExecutionError("Reçu de comparaison d’origine altéré")
     if source.get("debate_id") != debate_id or source.get("work_id") != work_id or source.get("comparison_id") != interrupted_comparison_id or source.get("plan_sha256") != audit.get("plan_sha256"):
         raise RemoteExecutionError("Identité de comparaison d’origine divergente")
-    if source.get("scope") != scope:
+    original_scope = source.get("scope")
+    if original_scope not in ("all", "fr", "en"):
+        raise RemoteExecutionError("Portée de la comparaison initiale invalide")
+    if scope is None:
+        scope = original_scope
+    elif scope != original_scope:
         raise RemoteExecutionError("La récupération doit conserver la portée de la comparaison initiale")
     release_sha = source.get("release_copy_tree_sha256")
     if not isinstance(release_sha, str) or len(release_sha) != 64:
@@ -102,7 +107,8 @@ def main() -> int:
     parser.add_argument("--work-id", required=True)
     parser.add_argument("--interrupted-comparison-id", required=True)
     parser.add_argument("--comparison-id")
-    parser.add_argument("--scope", choices=("all", "fr", "en"), default="all")
+    parser.add_argument("--scope", choices=("all", "fr", "en"), default=None,
+                        help="Par défaut, réutilise la portée signée de la comparaison interrompue")
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
     args = parser.parse_args()
     with exclusive_lock(args.project_root.resolve(), args.debate_id, "remote-compare"):

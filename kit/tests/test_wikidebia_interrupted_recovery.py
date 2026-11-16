@@ -33,7 +33,7 @@ def test_recovery_creates_new_readonly_comparison_without_approving(monkeypatch,
     source_path = project / ".state/remote-comparisons" / debate_id / work_id / old_id / "comparison-receipt.json"
     scope = json.loads(source_path.read_text())["scope"]
     output = recovery.prepare_fresh_recovery_comparison(
-        project, debate_id, work_id, old_id, scope=scope, comparison_id="REMOTE-20261116-999"
+        project, debate_id, work_id, old_id, comparison_id="REMOTE-20261116-999"
     )
     assert len(calls) == 1
     assert calls[0][1]["adapter"] is None
@@ -61,3 +61,13 @@ def test_recovery_refuses_same_comparison_id_before_remote_access(monkeypatch, t
     monkeypatch.setattr(recovery, "compare_workspace", lambda *a, **kw: pytest.fail("remote access"))
     with pytest.raises(execution.RemoteExecutionError, match="nouvel identifiant"):
         recovery.prepare_fresh_recovery_comparison(project, debate_id, work_id, old_id, comparison_id=old_id)
+
+
+def test_recovery_rejects_scope_expansion_before_remote_access(monkeypatch, tmp_path):
+    project, debate_id, work_id, old_id, root, _ = _audited(tmp_path)
+    source_path = project / ".state/remote-comparisons" / debate_id / work_id / old_id / "comparison-receipt.json"
+    original_scope = json.loads(source_path.read_text())["scope"]
+    different_scope = "fr" if original_scope != "fr" else "en"
+    monkeypatch.setattr(recovery, "compare_workspace", lambda *a, **kw: pytest.fail("remote access"))
+    with pytest.raises(execution.RemoteExecutionError, match="conserver la portée"):
+        recovery.prepare_fresh_recovery_comparison(project, debate_id, work_id, old_id, scope=different_scope)
