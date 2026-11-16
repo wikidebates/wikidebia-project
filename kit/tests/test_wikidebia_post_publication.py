@@ -129,3 +129,62 @@ def test_reconciliation_blocks_divergent_installed_corpus(tmp_path: Path):
 
     assert json.loads((workspace / "workspace.json").read_text()) == before
     assert not (tmp_path / ".state/post-publication").exists()
+
+
+
+def test_stale_remote_plan_ready_reconciles_only_with_signed_final_publication(tmp_path: Path):
+    workspace, meta = _fixture(tmp_path)
+    meta["status"] = "remote_plan_ready"
+    meta["workspace_sha256"] = workspace_receipt_hash(meta)
+    _write(workspace / "workspace.json", meta)
+
+    first = post.reconcile_published_workspace(tmp_path, DEBATE, WORK)
+    second = post.reconcile_published_workspace(tmp_path, DEBATE, WORK)
+
+    assert first["reconciliation"] == "completed"
+    assert second["reconciliation"] == "reused"
+    assert first["receipt_sha256"] == second["receipt_sha256"]
+    assert first["remote_access_performed"] is False
+    assert first["remote_write_performed"] is False
+    assert json.loads((workspace / "workspace.json").read_text())["status"] == "published"
+
+
+def test_stale_remote_plan_ready_rejects_invalid_publication_receipt(tmp_path: Path):
+    workspace, meta = _fixture(tmp_path)
+    meta["status"] = "remote_plan_ready"
+    meta["workspace_sha256"] = workspace_receipt_hash(meta)
+    _write(workspace / "workspace.json", meta)
+    receipt_path = (
+        tmp_path / f".state/final-publication/{DEBATE}/{WORK}/publication-receipt.json"
+    )
+    receipt = json.loads(receipt_path.read_text())
+    receipt["installed_release"]["tree_sha256"] = "tampered"
+    _write(receipt_path, receipt)
+
+    with pytest.raises(post.PostPublicationError, match="Empreinte invalide"):
+        post.reconcile_published_workspace(tmp_path, DEBATE, WORK)
+
+    assert json.loads((workspace / "workspace.json").read_text()) == meta
+    assert not (tmp_path / ".state/post-publication").exists()
+
+
+def test_stale_remote_plan_ready_rejects_mismatched_work_identity(tmp_path: Path):
+    workspace, meta = _fixture(tmp_path)
+    meta["status"] = "remote_plan_ready"
+    meta["workspace_sha256"] = workspace_receipt_hash(meta)
+    _write(workspace / "workspace.json", meta)
+    receipt_path = (
+        tmp_path / f".state/final-publication/{DEBATE}/{WORK}/publication-receipt.json"
+    )
+    receipt = json.loads(receipt_path.read_text())
+    receipt["work_id"] = "EDIT-OTHER-001"
+    receipt["receipt_sha256"] = sha_object({
+        key: value for key, value in receipt.items() if key != "receipt_sha256"
+    })
+    _write(receipt_path, receipt)
+
+    with pytest.raises(post.PostPublicationError):
+        post.reconcile_published_workspace(tmp_path, DEBATE, WORK)
+
+    assert json.loads((workspace / "workspace.json").read_text()) == meta
+    assert not (tmp_path / ".state/post-publication").exists()
