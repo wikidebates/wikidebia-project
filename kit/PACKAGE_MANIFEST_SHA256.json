@@ -5,7 +5,7 @@
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
   "declared_file_count": 497,
-  "declared_test_count": 1198,
+  "declared_test_count": 1199,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -1139,7 +1139,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "4f0b2b744102965e88ee76340ed361db824333058c54cc1359e1eaa7464e9a73"
+      "sha256": "4b460698aeefa1393103c6a2dce503d1c76f847b20e586e54c142863dfd8abde"
     },
     {
       "path": "VERSIONS.json",
@@ -1748,8 +1748,8 @@
     },
     {
       "path": "scripts/wikidebia_french_checkpoint.py",
-      "size_bytes": 53044,
-      "sha256": "6dd20e799c6c3a0654ef1d0f69ce83d7d15acbd94f00c83a42343ca383045c34"
+      "size_bytes": 52962,
+      "sha256": "1dd5e4e0e002e84091742f00b9000abfcc049dd391b9a760aeb8b947a3c1faa0"
     },
     {
       "path": "scripts/wikidebia_global_resume.py",
@@ -2198,8 +2198,8 @@
     },
     {
       "path": "tests/test_two_french_checkpoints_21614.py",
-      "size_bytes": 16700,
-      "sha256": "3bc1ac5e5947f4c03e8feb5166024029d31fd87bec7e251820c0258a1615bede"
+      "size_bytes": 17497,
+      "sha256": "a2c35297a8c45e33a52219af8e5e429da52675631ef566c0a5636f613d461ce6"
     },
     {
       "path": "tests/test_update_archive_autoselection_12141.py",
