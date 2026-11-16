@@ -107,6 +107,8 @@ def _read_existing(log: Path) -> list[dict]:
             raise CaptureError("unterminated_existing_session_log")
         entries = [json.loads(line) for line in raw.decode("utf-8").splitlines()]
         audit_read_events(entries)
+        if log.stat().st_mode & 0o077:
+            raise CaptureError("unsafe_session_log_permissions")
     except (OSError, UnicodeError, ValueError, TypeError) as exc:
         raise CaptureError("invalid_existing_session_log") from exc
     return entries
@@ -156,7 +158,9 @@ def capture_read(
             raise CaptureError("session_log_size_limit")
 
         # Do not count a read if its output stream refused the content.
-        output.write(data)
+        written = output.write(data)
+        if written != len(data):
+            raise CaptureError("short_output_write")
         output.flush()
 
         flags = os.O_CREAT | os.O_WRONLY | os.O_APPEND | getattr(os, "O_NOFOLLOW", 0)
