@@ -544,6 +544,37 @@ def execute_accepted_plan(
         existing = load_json(root / "execution-receipt.json", "reçu d’exécution")
         if existing.get("receipt_sha256") != _canonical(existing, "receipt_sha256"):
             raise RemoteExecutionError("Reçu d’exécution existant invalide")
+        # A retry must never accept a signed receipt from another execution.
+        expected = {
+            "schema": EXECUTION_RECEIPT_SCHEMA,
+            "schema_version": "1.0",
+            "debate_id": debate_id,
+            "work_id": work_id,
+            "comparison_id": comparison_id,
+            "mode": preflight.get("mode"),
+            "plan_sha256": handoff["plan"]["plan_sha256"],
+            "acceptance_sha256": handoff["acceptance"]["acceptance_sha256"],
+            "preflight_sha256": preflight["preflight_sha256"],
+            "execution_completed": True,
+        }
+        for field, value in expected.items():
+            if existing.get(field) != value:
+                raise RemoteExecutionError(f"Reçu d’exécution existant divergent : {field}")
+        events_path = project_root / str(existing.get("events_path") or "")
+        if (
+            not events_path.is_file()
+            or events_path.is_symlink()
+            or sha256_file(events_path) != existing.get("events_file_sha256")
+        ):
+            raise RemoteExecutionError("Journal d’exécution existant absent ou altéré")
+        underlying = existing.get("underlying_receipt")
+        if (
+            not isinstance(underlying, dict)
+            or existing.get("underlying_receipt_sha256")
+            != sha_object({k: v for k, v in underlying.items() if k != "receipt_sha256"})
+            or underlying.get("receipt_sha256") != existing.get("underlying_receipt_sha256")
+        ):
+            raise RemoteExecutionError("Reçu du moteur d’exécution existant invalide")
         return existing
     mode = str(preflight.get("mode") or "all")
     base = adapter if adapter is not None else build_adapter(handoff["config"], project_root)
