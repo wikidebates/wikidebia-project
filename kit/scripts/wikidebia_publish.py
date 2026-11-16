@@ -511,6 +511,35 @@ class PywikibotAdapter:
             raise PublicationError("Configuration des identités Pywikibot indisponible")
         usernames.setdefault(self.family, {})[self.codes[language]] = main_username
 
+    # Pywikibot has a SINGLE process-wide requests.Session and cookie jar.
+    # Wikidebates FR/EN set cookies for .wikidebates.org with the same names;
+    # logging into EN replaces the FR session.  A separate cookie jar is
+    # required for each wiki, including during Pywikibot's cookie-only login.
+    _wikidebates_cookie_jars: dict[tuple[str, str], Any] = {}
+
+    def _activate_site_cookies(self, pywikibot: Any, language: str) -> None:
+        if self.family != "wikidebates":
+            return
+        http = pywikibot.comms.http
+        key = (str(self.pywikibot_dir), self.codes[language])
+        jar = self._wikidebates_cookie_jars.get(key)
+        if jar is None:
+            # Separate files too: loading Pywikibot's default ChatGPT cookie
+            # file would reintroduce already-shared cross-wiki cookies.
+            # The username includes the wiki code only in the local filename;
+            # it does not change the remote MediaWiki account.
+            class SiteCookieJar(http.PywikibotCookieJar):
+                def load(self, user: str = "", *args: Any, **kwargs: Any) -> None:
+                    scoped_user = f"{user}-wikidebates-{language}"
+                    super().load(scoped_user, *args, **kwargs)
+
+            jar = SiteCookieJar()
+            self._wikidebates_cookie_jars[key] = jar
+        # Both references must change together. Pywikibot accesses cookie_jar
+        # to load/save, and Requests uses session.cookies on HTTP requests.
+        http.cookie_jar = jar
+        http.session.cookies = jar
+
     def _login(self, pywikibot: Any, language: str, expected_user: str) -> None:
         """Authenticate with a managed BotPassword without persisting its value."""
         username_variable = f"WIKIDEBIA_{language.upper()}_BOT_USERNAME"
@@ -559,6 +588,7 @@ class PywikibotAdapter:
         self._configure_access_header(pywikibot)
         self._register_family(pywikibot)
         self._configure_managed_username(pywikibot, language, expected_user)
+        self._activate_site_cookies(pywikibot, language)
         self.site = pywikibot.Site(code=self.codes[language], fam=self.family)
         # Pywikibot may return a cached Site with an expired server session.
         # Calling logout() here requires a valid CSRF token even when the
@@ -580,6 +610,7 @@ class PywikibotAdapter:
         import pywikibot
         self._configure_access_header(pywikibot)
         self._register_family(pywikibot)
+        self._activate_site_cookies(pywikibot, language)
         self.site = pywikibot.Site(code=self.codes[language], fam=self.family)
 
     def close_language(self) -> None:
