@@ -511,3 +511,38 @@ def test_failed_read_only_preflight_does_not_orphan_execution_directory(monkeypa
     )
     assert result["status"] == "ready"
     assert execution_root.is_dir()
+
+
+def test_preflight_rejects_signed_receipt_with_foreign_identity_or_paths(tmp_path: Path):
+    project, debate_id, work_id, comparison_id, approved, adapter, _ = make_approved_fixture(tmp_path)
+    prepared = execution.prepare_execution(
+        project, debate_id, work_id, comparison_id,
+        approved["acceptance_sha256"], adapter=adapter,
+    )
+    handoff = execution._load_approved_handoff(project, debate_id, work_id, comparison_id)
+    root = execution._execution_dir(project, debate_id, work_id, comparison_id)
+    receipt_path = root / "preflight-receipt.json"
+    original = json.loads(receipt_path.read_text(encoding="utf-8"))
+    for field, foreign in (
+        ("comparison_id", "REMOTE-20261116-999"),
+        ("debate_id", "other_debate"),
+        ("preflight_path", ".state/other/execution-preflight.json"),
+        ("events_path", ".state/other/preflight-events.jsonl"),
+        ("schema", "unexpected-receipt-schema"),
+    ):
+        forged = dict(original)
+        forged[field] = foreign
+        forged["receipt_sha256"] = execution._canonical(forged, "receipt_sha256")
+        corpus.write_json(receipt_path, forged)
+        try:
+            execution._load_preflight(project, handoff, comparison_id, prepared["preflight_sha256"])
+        except execution.RemoteExecutionError:
+            pass
+        else:
+            raise AssertionError(f"Signed foreign receipt accepted: {field}")
+    corpus.write_json(receipt_path, original)
+    root_loaded, preflight, receipt = execution._load_preflight(
+        project, handoff, comparison_id, prepared["preflight_sha256"],
+    )
+    assert root_loaded == root
+    assert receipt["receipt_sha256"] == original["receipt_sha256"]
