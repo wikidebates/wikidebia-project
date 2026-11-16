@@ -61,7 +61,7 @@ automatiquement un stash pendant les déploiements.
 Pour une **nouvelle installation seulement**, depuis le compte propriétaire :
 
 ```bash
-git clone --branch main https://github.com/wikidebates/wikidebia.git "$HOME/wikidebia"
+git clone --branch main https://github.com/wikidebates/wikidebia-project.git "$HOME/wikidebia"
 cd "$HOME/wikidebia"
 mkdir -p private/pywikibot
 ```
