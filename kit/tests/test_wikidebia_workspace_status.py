@@ -135,6 +135,7 @@ def test_status_maps_completed_execution_to_exact_closure_command():
         remote_execution={
             "comparison_id": "REMOTE-20261104-003",
             "receipt_sha256": "e" * 64,
+            "mode": "all",
         },
     )
 
