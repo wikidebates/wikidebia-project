@@ -135,3 +135,79 @@ ni les usages internes du modèle, ni un scénario à objectifs identiques.
 Elle ne permet pas de conclure à une économie de temps, de crédits ou de
 tokens. Un véritable essai A/B nécessitera des tâches comparables, des
 événements observés dans les deux branches et la même base de code.
+
+
+## Comparaison de deux reprises réellement observées
+
+Utiliser des **clones isolés issus du même commit**, un même objectif
+technique, le même protocole d'essai et le même nombre de sessions. Le groupe
+`control` réalise la reprise sans note narrative ; le groupe `handoff`
+reçoit une note de passation concise. L'ordre des essais, les modifications
+du dépôt et le résultat de la tâche doivent être consignés hors des journaux
+publics. La qualité doit être **revue séparément** : le SHA-256 ne prouve
+jamais la qualité sémantique.
+
+Pour chaque groupe, capturer seulement les lectures explicites des fichiers
+suivis par Git via `tools/session_read_capture.py`. Après les sessions
+`control`, conserver le journal local sous
+`.state/control.jsonl`, puis créer un nouveau journal local pour les
+sessions `handoff`, conservé sous `.state/handoff.jsonl`. Éviter de
+fusionner les deux journaux : ils doivent rester indépendants.
+
+Préparer deux fichiers de métadonnées privés, par exemple
+`.state/control-trial.json` et `.state/handoff-trial.json`, avec
+exactement les champs suivants (les valeurs en majuscules sont à remplacer
+par les données **vérifiées**, jamais par des valeurs d'exemple) :
+
+```json
+{
+  "schema": "wikidebia-session-read-trial-1.0",
+  "condition": "control",
+  "task_id": "IDENTIFIANT_PUBLIC_DE_L_ESSAI",
+  "base_commit": "COMMIT_GIT_DE_40_CARACTERES",
+  "protocol_sha256": "SHA256_DU_MÊME_PROTOCOLE",
+  "events_sha256": "SHA256_DU_JOURNAL_CONTROL",
+  "task_completed": true,
+  "quality_review": "passed",
+  "coverage": "instrumented_complete_file_reads_only"
+}
+```
+
+Le fichier `handoff-trial.json` a le même `task_id`,
+`base_commit` et `protocol_sha256`, mais `condition` vaut
+`handoff` et `events_sha256` correspond à l'autre journal.
+L'empreinte du journal s'obtient avec
+`sha256sum .state/control.jsonl`. Le résultat de la tâche et la revue
+qualité (`passed`, `failed` ou `not_reviewed`) doivent refléter
+l'évaluation effectuée par un humain ; l'outil ne les devine pas.
+
+```sh
+python tools/session_read_compare.py \
+  --control-events .state/control.jsonl \
+  --control-manifest .state/control-trial.json \
+  --handoff-events .state/handoff.jsonl \
+  --handoff-manifest .state/handoff-trial.json
+```
+
+Le comparateur refuse les tâches, commits, protocoles ou empreintes de
+journaux divergents, les identifiants de conditions incorrects et les
+fichiers dangereux. Il ne fournit une **différence descriptive** que si
+chaque groupe contient au moins deux sessions, que leur nombre est égal et
+que les deux tâches sont terminées avec une revue de qualité déclarée
+`passed`. Une revue non faite, une erreur ou une tâche inachevée produit
+un résultat explicitement non comparable, sans masquer les nombres de
+lectures.
+
+Même lorsque la comparaison descriptive est possible, les champs
+`causal_savings_established` et
+`experimental_equivalence_automatically_verified` restent
+`false`. Le commit, le protocole et le contrôle qualité sont attestés
+par les opérateurs, non établis automatiquement. Les économies de tokens,
+crédits et temps restent `null`. Le rapport ne contient ni chemins,
+ni IDs des sessions, ni textes lus, ni contenus privés.
+
+**Sécurité du lecteur** : les fichiers portant des noms sensibles, les
+liens symboliques (y compris remplacés entre le contrôle Git et la
+lecture), les sorties tronquées et les journaux existants trop permissifs
+sont refusés. La capture reste opt-in et n'altère ni la traduction, ni la
+publication, ni les checkpoints.
