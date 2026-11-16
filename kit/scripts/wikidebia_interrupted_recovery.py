@@ -92,6 +92,12 @@ def prepare_fresh_recovery_comparison(
     if validate_plan_fn is not None:
         kwargs["validate_plan_fn"] = validate_plan_fn
     result = compare_workspace(project_root, debate_id, work_id, release_sha, **kwargs)
+    # Never mask an unexpected write report from the read-only comparison.
+    # Fail closed before creating any draft review or reporting success.
+    if result.get("remote_write_performed") is not False:
+        raise RemoteExecutionError("La comparaison de récupération n'atteste pas l'absence d'écriture distante")
+    if result.get("execution_authorized") is True:
+        raise RemoteExecutionError("La comparaison de récupération ne peut pas autoriser l'exécution")
     draft_review = None
     if prepare_draft_review and result.get("status") == "plan_ready":
         new_comparison_id = result.get("comparison_id")
