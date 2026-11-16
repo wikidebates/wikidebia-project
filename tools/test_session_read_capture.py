@@ -185,3 +185,74 @@ def test_rejects_unterminated_log_before_append(tmp_path):
         capture_read(root, "kit/a.py", "two", out)
     assert out.getvalue() == b""
     assert log.read_bytes() == original
+
+
+def test_symlink_swap_after_git_check_still_refused(tmp_path, monkeypatch):
+    import session_read_capture as capture
+    root = _repo(tmp_path)
+    secret = tmp_path / "outside-password"
+    secret.write_bytes(b"DO-NOT-READ")
+    original = capture._tracked_regular_file
+
+    def swap_after_check(project, relative):
+        path = original(project, relative)
+        path.unlink()
+        path.symlink_to(secret)
+        return path
+
+    monkeypatch.setattr(capture, "_tracked_regular_file", swap_after_check)
+    out = io.BytesIO()
+    with pytest.raises(CaptureError, match="source_path_changed"):
+        capture.capture_read(root, "kit/a.py", "one", out)
+    assert out.getvalue() == b""
+    assert not (root / ".state/session-reads.jsonl").exists()
+
+
+def test_parent_directory_symlink_swap_refused(tmp_path, monkeypatch):
+    import session_read_capture as capture
+    root = _repo(tmp_path)
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    (outside / "a.py").write_bytes(b"DO-NOT-READ")
+    original = capture._tracked_regular_file
+
+    def swap_parent_after_check(project, relative):
+        path = original(project, relative)
+        directory = root / "kit"
+        directory.rename(root / "kit_saved")
+        directory.symlink_to(outside, target_is_directory=True)
+        return path
+
+    monkeypatch.setattr(capture, "_tracked_regular_file", swap_parent_after_check)
+    out = io.BytesIO()
+    with pytest.raises(CaptureError, match="source_path_changed"):
+        capture.capture_read(root, "kit/a.py", "one", out)
+    assert out.getvalue() == b""
+    assert not (root / ".state/session-reads.jsonl").exists()
+
+
+def test_partial_output_is_not_counted(tmp_path):
+    root = _repo(tmp_path)
+
+    class PartialOutput(io.BytesIO):
+        def write(self, data):
+            size = len(data) // 2
+            super().write(data[:size])
+            return size
+
+    out = PartialOutput()
+    with pytest.raises(CaptureError, match="short_output_write"):
+        capture_read(root, "kit/a.py", "one", out)
+    assert not (root / ".state/session-reads.jsonl").exists()
+
+
+def test_world_readable_existing_log_is_refused(tmp_path):
+    root = _repo(tmp_path)
+    _run(root, "one")
+    log = root / ".state/session-reads.jsonl"
+    log.chmod(0o644)
+    out = io.BytesIO()
+    with pytest.raises(CaptureError, match="invalid_existing_session_log"):
+        capture_read(root, "kit/a.py", "one", out)
+    assert out.getvalue() == b""
+    assert len(log.read_text().splitlines()) == 1
