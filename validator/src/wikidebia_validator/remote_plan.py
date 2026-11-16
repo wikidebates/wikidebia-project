@@ -54,7 +54,7 @@ def validate_remote_plan(path: str | Path) -> Report:
 
     individualized_contract = str(plan.get("edit_summary_contract") or "")
     allowed_summary_policies = {
-        "create": {"corpus_page_creation"},
+        "create": {"corpus_page_creation", "english_translation_creation"},
         "update": {"content_diff_v1", "french_interlanguage_addition"},
         "move": {"canonical_title_move_v1"},
         "redirect": {"merge_redirect_v1"},
@@ -75,7 +75,15 @@ def validate_remote_plan(path: str | Path) -> Report:
                 if individualized_contract == "page_specific_v1":
                     policy = str(row.get("edit_summary_policy") or "")
                     summary = str(row.get("edit_summary") or "").strip()
-                    if policy not in allowed_summary_policies.get(name, set()) or not summary or summary.casefold() == "corrections":
+                    translation_invalid = (
+                        policy == "english_translation_creation"
+                        and (
+                            row.get("language") != "en"
+                            or not summary.startswith("Translation of the French page: [[:fr:")
+                            or not summary.endswith("]]")
+                        )
+                    )
+                    if policy not in allowed_summary_policies.get(name, set()) or not summary or summary.casefold() == "corrections" or translation_invalid:
                         report.error(
                             "WDV-RMT-008",
                             "Opération mutante sans résumé MediaWiki individualisé conforme au contrat page_specific_v1",

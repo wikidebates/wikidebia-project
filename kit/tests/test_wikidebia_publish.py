@@ -1542,6 +1542,8 @@ def test_ready_english_translation_uses_page_specific_french_source_summary(tmp_
     path.write_text(json.dumps(config), encoding="utf-8")
     adapter = FakeAdapter()
     publisher = module.GenericPublisher(config, adapter, path)
+    # This unit test exercises metadata, not transactional authorization.
+    publisher._assert_paired_translation_authorization = lambda plan: None
     plan = publisher.build_plan()
     assert len(plan["actions"]) == 1
     action = plan["actions"][0]
@@ -1626,6 +1628,8 @@ def test_tampered_page_specific_translation_summary_is_rejected(tmp_path):
     config["operation"]["page_types"] = ["argument"]
     path.write_text(json.dumps(config), encoding="utf-8")
     publisher = module.GenericPublisher(config, FakeAdapter(), path)
+    # This unit test exercises metadata, not transactional authorization.
+    publisher._assert_paired_translation_authorization = lambda plan: None
     plan = publisher.build_plan()
     plan["actions"][0]["edit_summary"] = "Translation of another page"
     plan["plan_sha256"] = module.sha_object({k: v for k, v in plan.items() if k != "plan_sha256"})
@@ -1662,6 +1666,8 @@ def test_ready_english_translation_debate_uses_publication_date(tmp_path):
     path.write_text(json.dumps(config), encoding="utf-8")
     adapter = FakeAdapter()
     publisher = module.GenericPublisher(config, adapter, path)
+    # This unit test exercises metadata, not transactional authorization.
+    publisher._assert_paired_translation_authorization = lambda plan: None
     plan = publisher.build_plan()
     action = plan["actions"][0]
     assert action["publication_creation_date"] == publisher.publication_date
@@ -1682,6 +1688,8 @@ def test_english_creation_rechecks_date_immediately_before_each_write(tmp_path):
     config["operation"]["page_types"] = ["argument"]
     path.write_text(json.dumps(config), encoding="utf-8")
     publisher = module.GenericPublisher(config, FakeAdapter(), path)
+    # This unit test exercises metadata, not transactional authorization.
+    publisher._assert_paired_translation_authorization = lambda plan: None
     plan = publisher.build_plan()
     planned = plan["publication_date"]
     next_day = "2099-12-31" if planned != "2099-12-31" else "2099-12-30"
