@@ -366,6 +366,49 @@ def _verify_workflow_adoption(project_root: Path, state: Mapping[str, Any]) -> d
     return {**adoption, "adoption_sha256": claimed}
 
 
+def _find_unique_releasable_work(project_root: Path, debate_id: str) -> str:
+    """Select a unique signed release candidate; adoption rechecks all evidence."""
+    workspaces = project_root / ".state/editorial-workspaces" / debate_id
+    candidates: list[str] = []
+    if workspaces.is_dir():
+        for directory in sorted(workspaces.iterdir()):
+            if not directory.is_dir() or directory.is_symlink():
+                continue
+            try:
+                work_id = validate_work_id(directory.name)
+                meta = load_json(directory / "workspace.json", "workspace")
+                if (meta.get("debate_id") != debate_id or meta.get("work_id") != work_id
+                        or meta.get("workspace_sha256") != workspace_receipt_hash(meta)
+                        or meta.get("status") != "release_ready"
+                        or any(not (directory / required).is_dir()
+                               for required in ("reviewed-copy", "content-reviewed-copy"))):
+                    continue
+                release_copy = directory / "release-copy"
+                tree = str((meta.get("release_copy") or {}).get("tree_sha256") or "")
+                if not tree or not release_copy.is_dir() or full_tree_sha256(release_copy) != tree:
+                    continue
+                receipt = load_json(project_root / ".state/corpus-releases" / debate_id
+                                    / work_id / "release-receipt.json", "reçu de release")
+                unsigned = dict(receipt)
+                claimed = unsigned.pop("receipt_sha256", None)
+                if (claimed != _sha256_bytes(_canonical_json(unsigned))
+                        or receipt.get("debate_id") != debate_id
+                        or receipt.get("work_id") != work_id
+                        or receipt.get("release_copy_tree_sha256") != tree
+                        or receipt.get("publication_started") is not False):
+                    continue
+                candidates.append(work_id)
+            except (OSError, ValueError, TypeError, KeyError, RuntimeError, json.JSONDecodeError):
+                # A malformed candidate cannot authorize automatic adoption.
+                continue
+    if not candidates:
+        raise WorkflowError("Aucun Work release_ready avec preuves valides; utilisez --work-id après diagnostic")
+    if len(candidates) > 1:
+        raise WorkflowError("Plusieurs Work release_ready admissibles : "
+                            + ", ".join(candidates) + "; indiquez --work-id")
+    return candidates[0]
+
+
 def reconcile_workflow(
     project_root: Path, debate_id: str, *, adopt_work_id: str | None = None,
 ) -> dict[str, Any]:
@@ -373,8 +416,11 @@ def reconcile_workflow(
     state = _load_workflow(project_root, debate_id)
     work_id = str(state.get("work_id") or "")
     if not work_id:
+        if (state.get("phase") != "initialize_graph"
+                or state.get("status") not in {"blocked_access_preflight", "running"}):
+            raise WorkflowError("Seul un workflow initial sans Work peut adopter une release locale")
         if not adopt_work_id:
-            raise WorkflowError("Workflow sans work_id à réconcilier; indiquez explicitement --work-id")
+            adopt_work_id = _find_unique_releasable_work(project_root, debate_id)
         return _adopt_unbound_release_ready_work(
             project_root, debate_id, state, str(adopt_work_id),
         )
