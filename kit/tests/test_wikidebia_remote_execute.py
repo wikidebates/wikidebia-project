@@ -546,3 +546,50 @@ def test_preflight_rejects_signed_receipt_with_foreign_identity_or_paths(tmp_pat
     )
     assert root_loaded == root
     assert receipt["receipt_sha256"] == original["receipt_sha256"]
+
+
+def test_preflight_retry_reuses_verified_evidence_without_remote_access(tmp_path: Path):
+    project, debate_id, work_id, comparison_id, approved, adapter, _ = make_approved_fixture(tmp_path)
+    first = execution.prepare_execution(
+        project, debate_id, work_id, comparison_id,
+        approved["acceptance_sha256"], adapter=adapter,
+    )
+    root = execution._execution_dir(project, debate_id, work_id, comparison_id)
+    receipt_before = (root / "preflight-receipt.json").read_bytes()
+    events_before = list(adapter.events)
+    reused = execution.prepare_execution(
+        project, debate_id, work_id, comparison_id,
+        approved["acceptance_sha256"], adapter=adapter,
+    )
+    assert reused["preflight_reused"] is True
+    assert reused["preflight_sha256"] == first["preflight_sha256"]
+    assert adapter.events == events_before
+    assert (root / "preflight-receipt.json").read_bytes() == receipt_before
+
+
+def test_preflight_retry_rejects_changed_mode_and_execution_started(tmp_path: Path):
+    project, debate_id, work_id, comparison_id, approved, adapter, _ = make_approved_fixture(tmp_path)
+    execution.prepare_execution(
+        project, debate_id, work_id, comparison_id,
+        approved["acceptance_sha256"], adapter=adapter,
+    )
+    root = execution._execution_dir(project, debate_id, work_id, comparison_id)
+    try:
+        execution.prepare_execution(
+            project, debate_id, work_id, comparison_id,
+            approved["acceptance_sha256"], mode="no-delete", adapter=adapter,
+        )
+    except execution.RemoteExecutionError:
+        pass
+    else:
+        raise AssertionError("Existing preflight with another mode must be rejected")
+    (root / "execution-authorization.json").write_text("{}", encoding="utf-8")
+    try:
+        execution.prepare_execution(
+            project, debate_id, work_id, comparison_id,
+            approved["acceptance_sha256"], adapter=adapter,
+        )
+    except execution.RemoteExecutionError:
+        pass
+    else:
+        raise AssertionError("Preflight reuse after authorization must be rejected")
