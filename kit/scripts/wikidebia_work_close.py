@@ -830,7 +830,6 @@ def close_scope_publication(
     }
     receipt["receipt_sha256"] = _canonical_sha(receipt, "receipt_sha256")
     closure_root.mkdir(parents=False)
-    write_json(receipt_path, receipt)
     meta = copy.deepcopy(execution["meta"])
     meta["status"] = "scope_publication_completed"
     meta["scope_closure"] = {
@@ -839,6 +838,7 @@ def close_scope_publication(
     }
     meta["workspace_sha256"] = workspace_receipt_hash(meta)
     write_json(execution["workspace"] / "workspace.json", meta)
+    write_json(receipt_path, receipt)
     return receipt
 
 
