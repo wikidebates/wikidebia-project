@@ -405,6 +405,9 @@ def reconcile_workflow(
         project_root / ".state/corpus-releases" / debate_id / work_id / "release-receipt.json",
         "reçu de release",
     )
+    if (release_receipt.get("debate_id") != debate_id
+            or release_receipt.get("work_id") != work_id):
+        raise WorkflowError("Le reçu de release appartient à un autre débat ou Work")
     if release_receipt.get("release_copy_tree_sha256") != expected_tree:
         raise WorkflowError("Le reçu de release diverge du release-copy")
     content_path = project_root / ".state/fr-publication" / debate_id / work_id / "content/publication-receipt.json"
