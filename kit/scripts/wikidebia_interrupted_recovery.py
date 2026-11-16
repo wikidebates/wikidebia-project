@@ -13,7 +13,7 @@ from pathlib import Path
 from wikidebia_corpus_build import exclusive_lock, load_json, sha256_file, validate_debate_id
 from wikidebia_editorial_workspace import validate_work_id
 from wikidebia_remote_compare import _validate_comparison_id, compare_workspace
-from wikidebia_remote_execute import RemoteExecutionError, _canonical, _execution_dir
+from wikidebia_remote_execute import AUTHORIZATION_SCHEMA, RemoteExecutionError, _canonical, _execution_dir
 
 
 def prepare_fresh_recovery_comparison(
@@ -63,10 +63,10 @@ def prepare_fresh_recovery_comparison(
     if not authorization_path.is_file() or authorization_path.is_symlink():
         raise RemoteExecutionError("Autorisation initiale absente")
     authorization = load_json(authorization_path, "autorisation initiale")
-    if authorization.get("authorization_sha256") != _canonical(authorization, "authorization_sha256"):
+    if authorization.get("schema") != AUTHORIZATION_SCHEMA or authorization.get("authorization_sha256") != _canonical(authorization, "authorization_sha256"):
         raise RemoteExecutionError("Autorisation initiale altérée")
     for key in ("authorization_sha256", "plan_sha256", "preflight_sha256"):
-        expected = authorization.get(key) if key != "authorization_sha256" else authorization.get("authorization_sha256")
+        expected = authorization.get(key)
         if audit.get(key) != expected:
             raise RemoteExecutionError(f"Audit et autorisation divergents : {key}")
     source_receipt_path = project_root / ".state/remote-comparisons" / debate_id / work_id / interrupted_comparison_id / "comparison-receipt.json"
@@ -77,6 +77,8 @@ def prepare_fresh_recovery_comparison(
         raise RemoteExecutionError("Reçu de comparaison d’origine altéré")
     if source.get("debate_id") != debate_id or source.get("work_id") != work_id or source.get("comparison_id") != interrupted_comparison_id or source.get("plan_sha256") != audit.get("plan_sha256"):
         raise RemoteExecutionError("Identité de comparaison d’origine divergente")
+    if source.get("scope") != scope:
+        raise RemoteExecutionError("La récupération doit conserver la portée de la comparaison initiale")
     release_sha = source.get("release_copy_tree_sha256")
     if not isinstance(release_sha, str) or len(release_sha) != 64:
         raise RemoteExecutionError("Empreinte release-copy d’origine absente")
