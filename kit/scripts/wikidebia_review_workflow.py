@@ -414,6 +414,9 @@ def reconcile_workflow(
     state = _load_workflow(project_root, debate_id)
     work_id = str(state.get("work_id") or "")
     if not work_id:
+        if (state.get("phase") != "initialize_graph"
+                or state.get("status") not in {"blocked_access_preflight", "running"}):
+            raise WorkflowError("Seul un workflow initial sans Work peut adopter une release locale")
         if not adopt_work_id:
             adopt_work_id = _find_unique_releasable_work(project_root, debate_id)
         return _adopt_unbound_release_ready_work(
