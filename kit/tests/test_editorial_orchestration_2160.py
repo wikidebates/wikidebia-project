@@ -212,6 +212,72 @@ def test_workflow_reconcile_cli_requires_explicit_optional_work_id():
     assert args.work_id == "EDIT-20261114-001"
 
 
+
+@pytest.mark.parametrize("phase,expected_status", [
+    ("initialize_graph", "running"),
+    ("release_ready", "release_ready"),
+    ("final_publication", "final_publication"),
+    ("final_publication_resume", "final_publication"),
+])
+def test_restored_access_preflight_preserves_publication_boundary(
+    tmp_path: Path, monkeypatch, phase: str, expected_status: str,
+):
+    # Simulate a restored Work whose EN BotPassword preflight previously failed.
+    family = tmp_path / "kit/families/wikidebates_family.py"
+    family.parent.mkdir(parents=True)
+    family.write_text("# test-only family file\\n", encoding="utf-8")
+    state = {
+        "schema": wf.WORKFLOW_SCHEMA,
+        "debate_id": "debat_test",
+        "work_id": "EDIT-20261113-001",
+        "phase": phase,
+        "status": "blocked_access_preflight",
+        "release": {"status": "release_ready"},
+    }
+    wf._save_workflow(tmp_path, state)
+    monkeypatch.setattr(wf, "access_contract_sha256", lambda _: "c" * 64)
+    monkeypatch.setattr(wf, "run_access_preflight", lambda _: {
+        "checked_at": "2026-11-16T13:00:00+00:00",
+        "receipt_sha256": "f" * 64,
+    })
+
+    recovered = wf._ensure_access_preflight(tmp_path, state)
+
+    assert recovered["phase"] == phase
+    assert recovered["status"] == expected_status
+    assert recovered["access_preflight"]["status"] == "ready"
+    assert wf._load_workflow(tmp_path, "debat_test")["status"] == expected_status
+    assert not (tmp_path / ".state/final-publication").exists()
+    assert not (tmp_path / ".state/published").exists()
+
+
+def test_failed_access_preflight_cannot_cross_final_publication_boundary(
+    tmp_path: Path, monkeypatch,
+):
+    family = tmp_path / "kit/families/wikidebates_family.py"
+    family.parent.mkdir(parents=True)
+    family.write_text("# test-only family file\\n", encoding="utf-8")
+    state = {
+        "schema": wf.WORKFLOW_SCHEMA, "debate_id": "debat_test",
+        "work_id": "EDIT-20261113-001",
+        "phase": "final_publication", "status": "blocked_access_preflight",
+    }
+    wf._save_workflow(tmp_path, state)
+    monkeypatch.setattr(wf, "access_contract_sha256", lambda _: "c" * 64)
+
+    def reject(_):
+        raise wf.AccessPreflightError("simulated authentication failure")
+
+    monkeypatch.setattr(wf, "run_access_preflight", reject)
+    with pytest.raises(wf.WorkflowError, match="Diagnostic d'accès|Diagnostic d’accès"):
+        wf._ensure_access_preflight(tmp_path, state)
+
+    saved = wf._load_workflow(tmp_path, "debat_test")
+    assert saved["status"] == "blocked_access_preflight"
+    assert saved["phase"] == "final_publication"
+    assert saved["access_preflight"]["status"] == "blocked"
+    assert not (tmp_path / ".state/final-publication").exists()
+
 def rewrite_zip(source: Path, target: Path, edit):
     temp = target.parent / "unzipped"
     shutil.rmtree(temp, ignore_errors=True)
