@@ -45,6 +45,9 @@ def test_audit_reports_remote_matches_without_writing_or_releasing(tmp_path):
     assert result["observed_matching_content_count"] == 1
     assert result["observed_absent_delete_count"] == 0
     assert result["unresolved_operation_count"] == 0
+    assert result["recovery_decision"] == "observed_final_state_only"
+    assert result["automatic_replay_allowed"] is False
+    assert result["attribution_verified"] is False
     assert result["remote_write_performed"] is False
     assert result["execution_receipt_reconstructed"] is False
     assert not any(e[0] in {"write", "move", "delete"} for e in adapter.events[len(before):])
@@ -75,3 +78,15 @@ def test_audit_refuses_to_overwrite_existing_evidence(tmp_path):
             project, debate_id, work_id, comparison_id, prepared["preflight_sha256"], adapter=adapter
         )
     assert adapter.events == before
+
+
+def test_audit_classifies_unresolved_remote_operations(tmp_path):
+    project, debate_id, work_id, comparison_id, prepared, adapter, _, root = _interrupted(tmp_path)
+    result = audit.audit_interrupted_execution(
+        project, debate_id, work_id, comparison_id, prepared["preflight_sha256"], adapter=adapter
+    )
+    assert result["unresolved_operation_count"] == 1
+    assert result["recovery_decision"] == "requires_fresh_comparison_and_acceptance"
+    assert result["automatic_replay_allowed"] is False
+    assert result["fresh_plan_required_before_any_write"] is True
+    assert not (root / "execution-receipt.json").exists()
