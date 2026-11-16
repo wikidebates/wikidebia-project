@@ -13,13 +13,14 @@ from pathlib import Path
 from wikidebia_corpus_build import exclusive_lock, load_json, sha256_file, validate_debate_id
 from wikidebia_editorial_workspace import validate_work_id
 from wikidebia_remote_compare import _validate_comparison_id, compare_workspace
+from wikidebia_remote_plan_review import prepare_review
 from wikidebia_remote_execute import AUTHORIZATION_SCHEMA, RemoteExecutionError, _canonical, _execution_dir
 
 
 def prepare_fresh_recovery_comparison(
     project_root: Path, debate_id: str, work_id: str, interrupted_comparison_id: str,
     *, scope: str | None = None, comparison_id: str | None = None, adapter=None,
-    validate_plan_fn=None,
+    validate_plan_fn=None, prepare_review_fn=None, prepare_draft_review: bool = False,
 ) -> dict:
     project_root = project_root.expanduser().resolve()
     debate_id = validate_debate_id(debate_id)
@@ -91,12 +92,22 @@ def prepare_fresh_recovery_comparison(
     if validate_plan_fn is not None:
         kwargs["validate_plan_fn"] = validate_plan_fn
     result = compare_workspace(project_root, debate_id, work_id, release_sha, **kwargs)
+    draft_review = None
+    if prepare_draft_review and result.get("status") == "plan_ready":
+        new_comparison_id = result.get("comparison_id")
+        if not isinstance(new_comparison_id, str) or new_comparison_id == interrupted_comparison_id:
+            raise RemoteExecutionError("Identifiant de la nouvelle comparaison invalide")
+        review_preparer = prepare_review_fn if prepare_review_fn is not None else prepare_review
+        draft_review = review_preparer(project_root, debate_id, work_id, new_comparison_id)
+        if draft_review.get("status") != "review_ready":
+            raise RemoteExecutionError("Préparation de la revue non aboutie")
     return {
         **result,
         "recovery_source_comparison_id": interrupted_comparison_id,
         "recovery_source_audit_sha256": audit["audit_sha256"],
         "original_execution_replayed": False,
         "new_plan_automatically_approved": False,
+        "draft_review": draft_review,
         "remote_write_performed": False,
     }
 
@@ -107,6 +118,8 @@ def main() -> int:
     parser.add_argument("--work-id", required=True)
     parser.add_argument("--interrupted-comparison-id", required=True)
     parser.add_argument("--comparison-id")
+    parser.add_argument("--prepare-draft-review", action="store_true",
+                        help="Préparer une revue vierge, sans approbation ni écriture")
     parser.add_argument("--scope", choices=("all", "fr", "en"), default=None,
                         help="Par défaut, réutilise la portée signée de la comparaison interrompue")
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
@@ -115,6 +128,7 @@ def main() -> int:
         result = prepare_fresh_recovery_comparison(
             args.project_root, args.debate_id, args.work_id,
             args.interrupted_comparison_id, scope=args.scope, comparison_id=args.comparison_id,
+            prepare_draft_review=args.prepare_draft_review,
         )
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     return 0 if result["status"] == "plan_ready" else 3

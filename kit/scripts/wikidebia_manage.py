@@ -2095,7 +2095,7 @@ def corpus_workspace_remote_compare(
 
 def corpus_workspace_recover_interrupted(
     root: Path, debate_id: str, *, work_id: str, interrupted_comparison_id: str,
-    scope: str | None, comparison_id: str | None,
+    scope: str | None, comparison_id: str | None, prepare_draft_review: bool = False,
 ) -> int:
     script = root / "kit" / "scripts" / "wikidebia_interrupted_recovery.py"
     if not script.is_file():
@@ -2110,6 +2110,8 @@ def corpus_workspace_recover_interrupted(
         command.extend(["--scope", scope])
     if comparison_id:
         command.extend(["--comparison-id", comparison_id])
+    if prepare_draft_review:
+        command.append("--prepare-draft-review")
     return run(command, cwd=root, check=False).returncode
 
 
@@ -2976,6 +2978,7 @@ def build_parser() -> argparse.ArgumentParser:
     corpus_recovery_parser.add_argument("--interrupted-comparison-id", required=True)
     corpus_recovery_parser.add_argument("--scope", choices=("all", "fr", "en"), default=None)
     corpus_recovery_parser.add_argument("--comparison-id")
+    corpus_recovery_parser.add_argument("--prepare-draft-review", action="store_true")
 
     corpus_finalize_parser = sub.add_parser(
         "corpus-workspace-finalize",
@@ -3425,6 +3428,7 @@ def main(argv: list[str] | None = None) -> int:
             root, args.debate_id, work_id=args.work_id,
             interrupted_comparison_id=args.interrupted_comparison_id,
             scope=args.scope, comparison_id=args.comparison_id,
+            prepare_draft_review=args.prepare_draft_review,
         )
 
     if args.command == "corpus-workspace-finalize":
