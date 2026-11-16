@@ -396,7 +396,7 @@ def _find_unique_releasable_work(project_root: Path, debate_id: str) -> str:
                         or receipt.get("publication_started") is not False):
                     continue
                 candidates.append(work_id)
-            except (Exception):
+            except (OSError, ValueError, TypeError, KeyError, RuntimeError, json.JSONDecodeError):
                 # A malformed candidate cannot authorize automatic adoption.
                 continue
     if not candidates:
