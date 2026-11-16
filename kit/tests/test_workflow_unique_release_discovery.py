@@ -22,6 +22,8 @@ def _candidate(tmp_path, monkeypatch, work_id, *, signed=True):
     import wikidebia_review_workflow as workflow
     directory = tmp_path / ".state/editorial-workspaces/example" / work_id
     (directory / "release-copy").mkdir(parents=True)
+    (directory / "reviewed-copy").mkdir()
+    (directory / "content-reviewed-copy").mkdir()
     (directory / "workspace.json").write_text("{}", encoding="utf-8")
     receipt_path = (tmp_path / ".state/corpus-releases/example" / work_id
                     / "release-receipt.json")
