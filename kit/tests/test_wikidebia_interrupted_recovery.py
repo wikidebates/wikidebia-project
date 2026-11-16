@@ -30,12 +30,14 @@ def test_recovery_creates_new_readonly_comparison_without_approving(monkeypatch,
         calls.append((args, kwargs))
         return {"status": "plan_ready", "comparison_id": "REMOTE-20261116-999", "remote_write_performed": False}
     monkeypatch.setattr(recovery, "compare_workspace", fake_compare)
+    source_path = project / ".state/remote-comparisons" / debate_id / work_id / old_id / "comparison-receipt.json"
+    scope = json.loads(source_path.read_text())["scope"]
     output = recovery.prepare_fresh_recovery_comparison(
-        project, debate_id, work_id, old_id, comparison_id="REMOTE-20261116-999"
+        project, debate_id, work_id, old_id, scope=scope, comparison_id="REMOTE-20261116-999"
     )
     assert len(calls) == 1
     assert calls[0][1]["adapter"] is None
-    assert calls[0][1]["scope"] == "all"
+    assert calls[0][1]["scope"] == scope
     assert output["recovery_source_audit_sha256"] == result["audit_sha256"]
     assert output["original_execution_replayed"] is False
     assert output["new_plan_automatically_approved"] is False
