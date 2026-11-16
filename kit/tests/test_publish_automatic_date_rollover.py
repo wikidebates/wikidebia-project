@@ -39,6 +39,9 @@ def ready_publisher(tmp_path, monkeypatch, *, count=2, languages=None):
         return revision
     adapter.write_page=write
     publisher=module.GenericPublisher(config,adapter,path)
+    # Date-rollover tests isolate time/revision guards from the independently
+    # tested signed bilingual transaction authorization gate.
+    monkeypatch.setattr(module.GenericPublisher, '_assert_paired_translation_authorization', lambda self, plan: None)
     plan=publisher.build_plan()
     return publisher,adapter,clock,writes,plan,path
 
