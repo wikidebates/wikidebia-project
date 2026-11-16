@@ -66,6 +66,13 @@ def audit_interrupted_execution(
     matching = sum(row["status"] == "already_done" for row in results)
     deleted = sum(row["operation"] == "delete" and row["status"] == "already_absent" for row in results)
     unresolved = len(selected) - matching - deleted
+    # A matching final state cannot establish which execution wrote it.
+    if observed["blockers"]:
+        recovery_decision = "blocked_remote_divergence"
+    elif unresolved:
+        recovery_decision = "requires_fresh_comparison_and_acceptance"
+    else:
+        recovery_decision = "observed_final_state_only"
     # No replay can be inferred from this report. A matching remote state
     # may predate the interrupted run or have been written by a third party.
     audit = {
@@ -79,6 +86,10 @@ def audit_interrupted_execution(
         "observed_matching_content_count": matching,
         "observed_absent_delete_count": deleted,
         "unresolved_operation_count": unresolved,
+        "recovery_decision": recovery_decision,
+        "automatic_replay_allowed": False,
+        "fresh_plan_required_before_any_write": True,
+        "attribution_verified": False,
         "checks": observed["checks"], "blockers": observed["blockers"],
         "status": "requires_manual_reconciliation",
         "remote_access_performed": True, "remote_write_authorized": False,
