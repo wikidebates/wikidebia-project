@@ -188,7 +188,9 @@ def reconcile_published_workspace(
     debate_id = validate_debate_id(debate_id)
     work_id = validate_work_id(work_id)
     workspace, meta = _load_workspace(project_root, debate_id, work_id)
-    if meta.get("status") not in {"release_ready", "published"}:
+    # A completed, signed final publication may outlive an earlier remote plan state.
+    # The publication chain is verified below before any local state changes.
+    if meta.get("status") not in {"release_ready", "remote_plan_ready", "published"}:
         raise PostPublicationError(
             f"Statut incompatible avec la réconciliation : {meta.get('status')}"
         )
