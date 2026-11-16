@@ -211,3 +211,32 @@ liens symboliques (y compris remplacés entre le contrôle Git et la
 lecture), les sorties tronquées et les journaux existants trop permissifs
 sont refusés. La capture reste opt-in et n'altère ni la traduction, ni la
 publication, ni les checkpoints.
+
+
+## Finalisation des preuves sans inventer les métadonnées
+
+L'essai technique de référence est défini dans
+[`SESSION_READ_TRIAL_PROTOCOL.md`](SESSION_READ_TRIAL_PROTOCOL.md).
+Deux clones distincts doivent rester au même commit et utiliser le même
+protocole suivi par Git. Une fois **deux sessions réellement observées**
+dans chacun, le helper facultatif `tools/session_read_trial_manifest.py`
+fabrique le manifeste à partir de la vraie révision `HEAD`, des octets
+du protocole suivi et du journal privé lu en lecture seule :
+
+```sh
+python tools/session_read_trial_manifest.py \
+  --condition control \
+  --task-id issue81_checkpoint_resume \
+  --protocol docs/SESSION_READ_TRIAL_PROTOCOL.md
+```
+
+La même commande utilise `--condition handoff` dans l'autre clone.
+Les valeurs par défaut indiquent un travail **non terminé** et une revue
+qualité **non effectuée**. N'ajouter `--task-completed` et
+`--quality-review passed` qu'après des vérifications réelles. Le manifeste
+créé sous `.state/` est privé et ne peut pas être remplacé implicitement ;
+il sera rejeté si le protocole a été modifié depuis `HEAD`, si le journal
+est incomplet ou non privé, ou si moins de deux sessions sont présentes.
+Le comparateur existant consomme ensuite ces manifestes et les deux
+journaux, mais il reste descriptif : il n'atteste pas la qualité et ne
+mesure aucun crédit Codex.
