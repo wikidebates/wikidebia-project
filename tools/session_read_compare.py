@@ -14,7 +14,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from session_read_audit import ReadAuditError, audit_jsonl
+from session_read_audit import MAX_LOG_BYTES, ReadAuditError, audit_jsonl
 
 TRIAL_SCHEMA = "wikidebia-session-read-trial-1.0"
 REPORT_SCHEMA = "wikidebia-session-read-comparison-1.0"
@@ -56,13 +56,13 @@ def _load_manifest(path: Path, expected_condition: str, events: Path) -> dict[st
             raise ComparisonError("invalid_trial_digest")
     if type(raw["task_completed"]) is not bool:
         raise ComparisonError("invalid_task_completion_flag")
-    if raw["quality_review"] not in {"passed", "failed", "not_reviewed"}:
+    if not isinstance(raw["quality_review"], str) or raw["quality_review"] not in {"passed", "failed", "not_reviewed"}:
         raise ComparisonError("invalid_quality_review")
     if raw["coverage"] != COVERAGE:
         raise ComparisonError("invalid_observation_scope")
     # This input is local, not attested by GitHub: bind the manifest to the
     # exact JSONL bytes being evaluated, rather than an arbitrary filename.
-    if events.is_symlink() or not events.is_file():
+    if events.is_symlink() or not events.is_file() or events.stat().st_size > MAX_LOG_BYTES:
         raise ComparisonError("invalid_trial_events")
     if hashlib.sha256(events.read_bytes()).hexdigest() != raw["events_sha256"]:
         raise ComparisonError("trial_events_digest_mismatch")
