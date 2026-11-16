@@ -1768,8 +1768,8 @@
     },
     {
       "path": "scripts/wikidebia_interrupted_audit.py",
-      "size_bytes": 5916,
-      "sha256": "7098d94fd75c26bf5b79d5950aa49e49abfc6a69452ba63b96a3c231a040cc9f"
+      "size_bytes": 6349,
+      "sha256": "4adc82a9099197fc200fca6aec8ce433948e4df24ef6420b9d29e0d5d56a43aa"
     },
     {
       "path": "scripts/wikidebia_manage.py",
@@ -2298,8 +2298,8 @@
     },
     {
       "path": "tests/test_wikidebia_interrupted_audit.py",
-      "size_bytes": 3655,
-      "sha256": "d6256fd1f505d11ef3f7d3932276f76f80d7632c15f79d14a6aa5fc066729204"
+      "size_bytes": 3821,
+      "sha256": "657aeea899a0b18bb56f0b0c4496314db02b029b7b9470f1519709f5dd39034c"
     },
     {
       "path": "tests/test_wikidebia_manage.py",
