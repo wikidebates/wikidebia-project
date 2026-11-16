@@ -14,6 +14,7 @@ import json
 import os
 import subprocess
 import sys
+import stat
 from pathlib import Path
 from typing import BinaryIO
 
@@ -61,6 +62,40 @@ def _tracked_regular_file(root: Path, relative: str) -> Path:
     return current
 
 
+def _read_public_bytes(root: Path, relative_path: str) -> bytes:
+    """Read via directory FDs so an attacker cannot swap a parent for a symlink.
+
+    The Git tracking check is performed separately; only actual bytes read
+    from this descriptor enter the stdout stream and the audit digest.
+    """
+    parts = _safe_path(relative_path).split("/")
+    dir_flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW
+    file_flags = os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK
+    fd = None
+    try:
+        fd = os.open(root, dir_flags)
+        for part in parts[:-1]:
+            child = os.open(part, dir_flags, dir_fd=fd)
+            os.close(fd)
+            fd = child
+        source_fd = os.open(parts[-1], file_flags, dir_fd=fd)
+        with os.fdopen(source_fd, "rb") as stream:
+            size = os.fstat(stream.fileno())
+            if not stat.S_ISREG(size.st_mode):
+                raise CaptureError("source_not_regular_file")
+            if size.st_size > MAX_READ_BYTES:
+                raise CaptureError("source_exceeds_read_limit")
+            data = stream.read(MAX_READ_BYTES + 1)
+            if len(data) > MAX_READ_BYTES:
+                raise CaptureError("source_exceeds_read_limit")
+            return data
+    except OSError as exc:
+        raise CaptureError("source_path_changed_or_unreadable") from exc
+    finally:
+        if fd is not None:
+            os.close(fd)
+
+
 def _read_existing(log: Path) -> list[dict]:
     if not log.exists() and not log.is_symlink():
         return []
@@ -72,6 +107,8 @@ def _read_existing(log: Path) -> list[dict]:
             raise CaptureError("unterminated_existing_session_log")
         entries = [json.loads(line) for line in raw.decode("utf-8").splitlines()]
         audit_read_events(entries)
+        if log.stat().st_mode & 0o077:
+            raise CaptureError("unsafe_session_log_permissions")
     except (OSError, UnicodeError, ValueError, TypeError) as exc:
         raise CaptureError("invalid_existing_session_log") from exc
     return entries
@@ -85,10 +122,8 @@ def capture_read(
 ) -> dict[str, str]:
     """Stream a Git-tracked file and record one successfully delivered read."""
     root = project_root.expanduser().resolve()
-    source = _tracked_regular_file(root, relative_path)
-    data = source.read_bytes()
-    if len(data) > MAX_READ_BYTES:
-        raise CaptureError("source_exceeds_read_limit")
+    _tracked_regular_file(root, relative_path)
+    data = _read_public_bytes(root, relative_path)
     event = {
         "session_id": session_id,
         "path": _safe_path(relative_path),
@@ -123,7 +158,9 @@ def capture_read(
             raise CaptureError("session_log_size_limit")
 
         # Do not count a read if its output stream refused the content.
-        output.write(data)
+        written = output.write(data)
+        if written != len(data):
+            raise CaptureError("short_output_write")
         output.flush()
 
         flags = os.O_CREAT | os.O_WRONLY | os.O_APPEND | getattr(os, "O_NOFOLLOW", 0)

@@ -58,7 +58,7 @@ jobs:
       - if: steps.pr-validation.outputs.result != 'true'
         run: python -m pytest -q kit/tests --junitxml=/tmp/kit-tests.xml
       - if: steps.pr-validation.outputs.result != 'true'
-        run: python -m pytest -q tools/test_session_read_audit.py tools/test_session_read_capture.py --junitxml=/tmp/session-read-tests.xml
+        run: python -m pytest -q tools/test_session_read_audit.py tools/test_session_read_capture.py tools/test_session_read_compare.py --junitxml=/tmp/session-read-tests.xml
       - if: steps.pr-validation.outputs.result != 'true'
         run: python kit/scripts/refresh_package_metadata.py --junit-xml /tmp/kit-tests.xml --check
       - if: steps.pr-validation.outputs.result != 'true'

@@ -22,6 +22,12 @@ EXCLUDED_PARTS = {
     "incoming", "outgoing", "logs", "plans", "updates", "apicache",
     "__pycache__",
 }
+SENSITIVE_NAMES = {
+    "user-password.cfg", "user-config.py", "wikidebia.local.json",
+    ".gitconfig-wikidebia", "throttle.ctrl", ".netrc", ".npmrc",
+    ".pypirc", "id_rsa", "id_ed25519", "credentials.json",
+}
+SENSITIVE_SUFFIXES = (".pem", ".key", ".p12", ".pfx", ".kdbx", ".lwp")
 HEX_SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 SESSION_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,79}\Z")
 
@@ -42,7 +48,13 @@ def _safe_path(value: Any) -> str:
     if (
         path.is_absolute() or path.as_posix() != value
         or not path.parts or any(part in {"", ".", ".."} for part in value.split("/"))
-        or any(part in EXCLUDED_PARTS or part.startswith(".env") for part in path.parts)
+        or any(
+            part in EXCLUDED_PARTS
+            or part.lower() in SENSITIVE_NAMES
+            or part.lower().startswith((".env", ".secret"))
+            or part.lower().endswith(SENSITIVE_SUFFIXES)
+            for part in path.parts
+        )
     ):
         raise ReadAuditError("excluded_or_unsafe_repository_path")
     return value
