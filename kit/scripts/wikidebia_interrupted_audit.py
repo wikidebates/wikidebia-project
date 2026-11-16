@@ -61,7 +61,11 @@ def audit_interrupted_execution(
         raise RemoteExecutionError("Audit en lecture seule : tentative d’écriture")
     selected = _selected_rows(handoff["plan"], str(preflight["mode"]))
     results = [row for row in observed["checks"] if row["operation"] != "skip"]
-    completed = sum(row["status"] in {"already_done", "already_absent"} for row in results)
+    # An absent redirect is not evidence that it was installed.
+    # A matching hash alone does not establish attribution to this run.
+    matching = sum(row["status"] == "already_done" for row in results)
+    deleted = sum(row["operation"] == "delete" and row["status"] == "already_absent" for row in results)
+    unresolved = len(selected) - matching - deleted
     # No replay can be inferred from this report. A matching remote state
     # may predate the interrupted run or have been written by a third party.
     audit = {
@@ -71,7 +75,10 @@ def audit_interrupted_execution(
         "preflight_sha256": preflight["preflight_sha256"],
         "plan_sha256": handoff["plan"]["plan_sha256"],
         "mode": preflight["mode"], "selected_operation_count": len(selected),
-        "observed_matching_or_absent_count": completed,
+        "observed_matching_or_absent_count": matching + deleted,
+        "observed_matching_content_count": matching,
+        "observed_absent_delete_count": deleted,
+        "unresolved_operation_count": unresolved,
         "checks": observed["checks"], "blockers": observed["blockers"],
         "status": "requires_manual_reconciliation",
         "remote_access_performed": True, "remote_write_authorized": False,

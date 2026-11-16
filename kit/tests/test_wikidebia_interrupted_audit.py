@@ -42,6 +42,9 @@ def test_audit_reports_remote_matches_without_writing_or_releasing(tmp_path):
     )
     assert result["status"] == "requires_manual_reconciliation"
     assert result["observed_matching_or_absent_count"] == 1
+    assert result["observed_matching_content_count"] == 1
+    assert result["observed_absent_delete_count"] == 0
+    assert result["unresolved_operation_count"] == 0
     assert result["remote_write_performed"] is False
     assert result["execution_receipt_reconstructed"] is False
     assert not any(e[0] in {"write", "move", "delete"} for e in adapter.events[len(before):])
