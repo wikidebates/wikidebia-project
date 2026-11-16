@@ -116,6 +116,14 @@ def _load_execution(project_root: Path, debate_id: str, work_id: str, comparison
     authorization = load_json(paths["authorization"], "autorisation d’exécution")
     if receipt.get("schema") != EXECUTION_RECEIPT_SCHEMA or receipt.get("receipt_sha256") != _canonical(receipt, "receipt_sha256"):
         raise WorkClosureError("Reçu d’exécution invalide")
+    if (receipt.get("debate_id") != debate_id
+            or receipt.get("work_id") != work_id
+            or receipt.get("comparison_id") != comparison_id):
+        raise WorkClosureError("Le reçu d’exécution appartient à un autre débat, Work ou comparaison")
+    if receipt.get("mode") not in {"fr", "en", "all"}:
+        raise WorkClosureError("Périmètre du reçu d’exécution absent ou invalide")
+    if (meta.get("remote_execution") or {}).get("mode") != receipt.get("mode"):
+        raise WorkClosureError("Périmètre divergent entre le workspace et le reçu d’exécution")
     if confirmation != receipt.get("receipt_sha256"):
         raise WorkClosureError("L’empreinte confirmée ne correspond pas au reçu d’exécution")
     if receipt.get("status") not in {"executed", "no_changes"} or receipt.get("execution_completed") is not True:
