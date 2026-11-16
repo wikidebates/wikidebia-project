@@ -738,6 +738,110 @@ def _chain_hashes(meta: Mapping[str, Any], execution: Mapping[str, Any]) -> dict
     return result
 
 
+SCOPE_CLOSURE_SCHEMA = "wikidebia-scope-publication-closure-1.0"
+
+
+def close_scope_publication(
+    project_root: Path, debate_id: str, work_id: str, comparison_id: str,
+    confirm_execution_sha256: str,
+) -> dict[str, Any]:
+    """Close one published language without promoting the bilingual corpus."""
+    project_root = project_root.expanduser().resolve()
+    debate_id = validate_debate_id(debate_id)
+    work_id = validate_work_id(work_id)
+    comparison_id = _validate_comparison_id(comparison_id)
+    closure_root = _closure_dir(project_root, debate_id, work_id, comparison_id)
+    receipt_path = closure_root / "scope-closure-receipt.json"
+    if receipt_path.is_file():
+        receipt = load_json(receipt_path, "reçu de clôture de périmètre")
+        if (receipt.get("schema") != SCOPE_CLOSURE_SCHEMA
+                or receipt.get("debate_id") != debate_id
+                or receipt.get("work_id") != work_id
+                or receipt.get("comparison_id") != comparison_id
+                or receipt.get("receipt_sha256") != _canonical_sha(receipt, "receipt_sha256")
+                or receipt.get("execution_receipt_sha256") != confirm_execution_sha256):
+            raise WorkClosureError("Reçu de clôture de périmètre existant invalide")
+        archive = project_root / str(receipt.get("evidence_archive") or "")
+        if (not archive.is_file() or archive.is_symlink()
+                or sha256_file(archive) != receipt.get("evidence_archive_sha256")):
+            raise WorkClosureError("Archive de clôture de périmètre absente ou altérée")
+        return {**receipt, "idempotent": True}
+    if closure_root.exists() or closure_root.is_symlink():
+        raise WorkClosureError("Un dossier de clôture existe déjà pour cette comparaison")
+
+    execution = _load_execution(project_root, debate_id, work_id, comparison_id, confirm_execution_sha256)
+    remote_receipt = execution["execution_receipt"]
+    mode = remote_receipt.get("mode")
+    if (mode not in {"en", "fr"}
+            or (execution["meta"].get("remote_execution") or {}).get("mode") != mode):
+        raise WorkClosureError("La clôture de périmètre exige une exécution monolingue cohérente")
+    published = remote_receipt.get("published_states") or {}
+    if set(published) != {mode}:
+        raise WorkClosureError("Le reçu d’exécution doit attester uniquement la langue publiée")
+    release_pages = _release_pages(execution["release_copy"])
+    expected = _effective_remote_pages(project_root, execution, release_pages)
+    expected_pages = expected.get(mode) or {}
+    if not expected_pages:
+        raise WorkClosureError("Aucune page finale pour la langue publiée")
+    state_path = project_root / ".state/published" / debate_id / mode / "latest.json"
+    if not state_path.is_file() or state_path.is_symlink():
+        raise WorkClosureError("État publié signé absent pour la langue exécutée")
+    state = load_json(state_path, "état publié de périmètre")
+    unsigned = dict(state)
+    claimed = unsigned.pop("state_sha256", None)
+    if (claimed != sha_object(unsigned) or state.get("debate_id") != debate_id
+            or state.get("language") != mode
+            or state.get("plan_sha256") != remote_receipt.get("plan_sha256")
+            or state.get("receipt_sha256") != remote_receipt.get("underlying_receipt_sha256")
+            or (published[mode] or {}).get("state_sha256") != claimed):
+        raise WorkClosureError("État publié non signé ou non rattaché à l’exécution")
+    actual_pages = {str(row.get("page_id")): row for row in state.get("pages") or []}
+    if len(actual_pages) != len(state.get("pages") or []) or set(actual_pages) != set(expected_pages):
+        raise WorkClosureError("Inventaire publié incomplet ou dupliqué")
+    for page_id, page in expected_pages.items():
+        actual = actual_pages[page_id]
+        if (actual.get("status") != "published"
+                or actual.get("canonical_title") != page["canonical_title"]
+                or actual.get("content_sha256") != page["content_sha256"]
+                or not isinstance(actual.get("revision_id"), int)):
+            raise WorkClosureError(f"Page publiée non conforme : {mode}/{page_id}")
+
+    archive_root = _archive_dir(project_root, debate_id, work_id, comparison_id)
+    if archive_root.exists() or archive_root.is_symlink():
+        raise WorkClosureError("Une archive de clôture existe déjà")
+    states = {mode: {"path": relative_to_project(state_path, project_root),
+                     "state_sha256": claimed, "page_count": len(actual_pages)}}
+    evidence = _build_evidence_archive(project_root, execution, closure_root, archive_root, states)
+    closed_at = now_iso()
+    receipt = {
+        "schema": SCOPE_CLOSURE_SCHEMA, "schema_version": "1.0",
+        "debate_id": debate_id, "work_id": work_id, "comparison_id": comparison_id,
+        "status": "scope_publication_completed", "closed_at": closed_at,
+        "published_languages": [mode],
+        "unpublished_languages": sorted(set(release_pages) - {mode}),
+        "execution_receipt_sha256": remote_receipt["receipt_sha256"],
+        "release_copy_tree_sha256": execution["release_sha256"],
+        "published_states": states,
+        "evidence_archive": relative_to_project(evidence["archive"], project_root),
+        "evidence_archive_sha256": evidence["archive_sha256"],
+        "active_corpus_promoted": False,
+        "remote_access_performed_during_closure": False,
+        "remote_write_performed_during_closure": False,
+    }
+    receipt["receipt_sha256"] = _canonical_sha(receipt, "receipt_sha256")
+    closure_root.mkdir(parents=False)
+    write_json(receipt_path, receipt)
+    meta = copy.deepcopy(execution["meta"])
+    meta["status"] = "scope_publication_completed"
+    meta["scope_closure"] = {
+        "comparison_id": comparison_id, "receipt_sha256": receipt["receipt_sha256"],
+        "published_languages": [mode], "active_corpus_promoted": False,
+    }
+    meta["workspace_sha256"] = workspace_receipt_hash(meta)
+    write_json(execution["workspace"] / "workspace.json", meta)
+    return receipt
+
+
 def close_work(project_root: Path, debate_id: str, work_id: str, comparison_id: str, confirm_execution_sha256: str) -> dict[str, Any]:
     project_root = project_root.expanduser().resolve()
     debate_id = validate_debate_id(debate_id)
@@ -1103,6 +1207,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--confirm-no-change-plan-sha256",
         help="Clôturer localement un plan signé de portée all composé uniquement de skip",
     )
+    parser.add_argument("--scope-publication", action="store_true", help="Clôturer uniquement la langue exécutée sans promouvoir le corpus bilingue")
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
     parser.add_argument("--machine-readable", action="store_true")
     return parser
@@ -1112,7 +1217,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     project_root = args.project_root.expanduser().resolve()
     with exclusive_lock(project_root, args.debate_id, "work-closure"):
-        if args.confirm_no_change_plan_sha256:
+        if args.scope_publication:
+            if not args.confirm_execution_sha256:
+                raise WorkClosureError("--scope-publication exige --confirm-execution-sha256")
+            result = close_scope_publication(
+                project_root, args.debate_id, args.work_id, args.comparison_id,
+                args.confirm_execution_sha256,
+            )
+        elif args.confirm_no_change_plan_sha256:
             result = close_no_change_work(
                 project_root,
                 args.debate_id,
