@@ -36,6 +36,8 @@ les données personnelles.
   poursuivre la recherche nécessaire puis rédiger le même rapport final.
 - **Groupe control** : aucune passation narrative créée pour la session 2.
   Les états et outils techniques du dépôt restent toutefois disponibles.
+  Pour cet essai uniquement, cette consigne expérimentale déroge à la
+  recommandation générale de passation narrative d'`AGENTS.md`.
 - **Groupe handoff** : au terme de la session 1, joindre à la session 2
   uniquement une note courte suivant `docs/SESSION_HANDOFF.md`, contenant
   les chemins publics lus, décisions vérifiées, pistes écartées et SHA de
