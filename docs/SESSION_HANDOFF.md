@@ -85,3 +85,53 @@ entrées et objectifs identiques, distinguer les répétitions intra/inter,
 comparer les résultats et documenter les changements de commit et de
 contexte. Ne pas modifier les règles, prompts, corpus ni contrôles de
 traduction afin d'obtenir de meilleurs chiffres.
+
+
+### Capture facultative d'une lecture réelle
+
+Pour une comparaison contrôlée de sessions dans un clone local disposant de
+Git, utiliser le lecteur instrumenté ci-dessous **à la place d'une lecture
+complète normale** du même fichier, uniquement pendant la période mesurée :
+
+```sh
+python tools/session_read_capture.py --session run_a \
+  --path kit/GUIDE_GLOBAL_RESUME.md
+python tools/session_read_capture.py --session run_b \
+  --path kit/GUIDE_GLOBAL_RESUME.md
+python tools/session_read_audit.py --events .state/session-reads.jsonl
+```
+
+Ce lecteur affiche sur stdout les octets exacts du fichier réellement ouvert,
+calcule le SHA-256 de ces mêmes octets et écrit une seule ligne JSONL dans
+`.state/session-reads.jsonl`. Il accepte uniquement un fichier **suivi par
+Git**, interne au dépôt, sans lien symbolique et hors des répertoires privés.
+Les journaux restent locaux, non suivis par Git, et les identifiants de
+session doivent être pseudonymes, chronologiques et non entrelacés.
+La capture échoue fermement si le journal existant est corrompu, trop
+volumineux ou si la sortie ne peut pas être transmise correctement.
+
+La capture est facultative, limitée aux lectures complètes de fichiers
+de taille raisonnable (512 Ko maximum). Elle n'intercepte pas les autres
+lecteurs, les appels GitHub du connecteur ChatGPT, les lectures partielles,
+les requêtes de recherche ou les traitements internes des modèles. Les
+lectures hors de ce lecteur **ne figurent pas dans le rapport** : ne jamais
+les présenter comme des économies. Ne pas imposer cet outil au traducteur,
+à la publication ou aux mécanismes de reprise.
+
+### Première observation ponctuelle, sans essai A/B
+
+Sur l'issue #81 et la PR #133, la comparaison rétrospective des appels
+`fetch_file` explicitement visibles montre, pour la session de
+développement initiale, 19 lectures de fichiers dont 17 chemins distincts
+et 2 répétitions exactes dans la même session. Dans la reprise suivante,
+l'étape initiale a nécessité 3 lectures complètes : 2 chemins nouveaux,
+et `AGENTS.md` dont le blob Git avait changé. Aucune des 3 lectures
+n'a donc répété un contenu inchangé de la première session.
+
+Cette observation repose sur l'identité des blobs Git à deux commits
+(`3fabfb94` puis `6fcee356`), pas sur une collecte automatique
+d'événements JSONL. Elle ne couvre ni les autres consultations du dépôt,
+ni les usages internes du modèle, ni un scénario à objectifs identiques.
+Elle ne permet pas de conclure à une économie de temps, de crédits ou de
+tokens. Un véritable essai A/B nécessitera des tâches comparables, des
+événements observés dans les deux branches et la même base de code.
