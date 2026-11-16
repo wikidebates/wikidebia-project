@@ -361,3 +361,49 @@ def test_manage_exposes_workspace_plan_execute_command():
     ])
     assert args.command == "corpus-workspace-plan-execute"
     assert args.prepare is True
+
+
+
+def test_retry_completed_execution_reuses_receipt_without_remote_writes(tmp_path: Path):
+    project, debate_id, work_id, comparison_id, approved, adapter, _ = make_approved_fixture(tmp_path)
+    prepared = execution.prepare_execution(
+        project, debate_id, work_id, comparison_id, approved["acceptance_sha256"], adapter=adapter
+    )
+    first = execution.execute_accepted_plan(
+        project, debate_id, work_id, comparison_id, prepared["preflight_sha256"], adapter=adapter
+    )
+    writes_before = len([event for event in adapter.events if event[0] in {"write", "move", "delete"}])
+    second = execution.execute_accepted_plan(
+        project, debate_id, work_id, comparison_id, prepared["preflight_sha256"], adapter=adapter
+    )
+    writes_after = len([event for event in adapter.events if event[0] in {"write", "move", "delete"}])
+    assert first == second
+    assert writes_before == writes_after == 1
+
+
+def test_retry_rejects_signed_receipt_with_wrong_work_id(tmp_path: Path):
+    project, debate_id, work_id, comparison_id, approved, adapter, _ = make_approved_fixture(tmp_path)
+    prepared = execution.prepare_execution(
+        project, debate_id, work_id, comparison_id, approved["acceptance_sha256"], adapter=adapter
+    )
+    execution.execute_accepted_plan(
+        project, debate_id, work_id, comparison_id, prepared["preflight_sha256"], adapter=adapter
+    )
+    receipt_path = (
+        project / ".state/remote-executions" / debate_id / work_id
+        / comparison_id / "execution-receipt.json"
+    )
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    receipt["work_id"] = "EDIT-OTHER-001"
+    receipt["receipt_sha256"] = execution._canonical(receipt, "receipt_sha256")
+    receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+    before = list(adapter.events)
+    try:
+        execution.execute_accepted_plan(
+            project, debate_id, work_id, comparison_id, prepared["preflight_sha256"], adapter=adapter
+        )
+    except execution.RemoteExecutionError as exc:
+        assert "work_id" in str(exc)
+    else:
+        raise AssertionError("Un reçu signé pour un autre Work a été accepté")
+    assert adapter.events == before
