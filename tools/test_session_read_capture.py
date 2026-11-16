@@ -172,3 +172,16 @@ def test_cli_prints_only_file_bytes(tmp_path):
     assert completed.stdout == b"print('public')\n"
     assert completed.stderr == b""
     assert audit_jsonl(root / ".state/session-reads.jsonl")["event_count"] == 1
+
+
+def test_rejects_unterminated_log_before_append(tmp_path):
+    root = _repo(tmp_path)
+    _run(root, "one")
+    log = root / ".state/session-reads.jsonl"
+    original = log.read_bytes().rstrip(b"\n")
+    log.write_bytes(original)
+    out = io.BytesIO()
+    with pytest.raises(CaptureError, match="invalid_existing"):
+        capture_read(root, "kit/a.py", "two", out)
+    assert out.getvalue() == b""
+    assert log.read_bytes() == original
