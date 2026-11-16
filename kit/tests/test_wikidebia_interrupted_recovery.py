@@ -71,3 +71,36 @@ def test_recovery_rejects_scope_expansion_before_remote_access(monkeypatch, tmp_
     monkeypatch.setattr(recovery, "compare_workspace", lambda *a, **kw: pytest.fail("remote access"))
     with pytest.raises(execution.RemoteExecutionError, match="conserver la portée"):
         recovery.prepare_fresh_recovery_comparison(project, debate_id, work_id, old_id, scope=different_scope)
+
+
+def test_recovery_prepares_draft_review_without_approval(monkeypatch, tmp_path):
+    project, debate_id, work_id, old_id, root, _ = _audited(tmp_path)
+    calls = []
+    monkeypatch.setattr(recovery, "compare_workspace", lambda *a, **kw: {
+        "status": "plan_ready", "comparison_id": "REMOTE-20261116-999", "remote_write_performed": False
+    })
+    def draft(*args):
+        calls.append(args)
+        return {"status": "review_ready", "review": "draft-only"}
+    result = recovery.prepare_fresh_recovery_comparison(
+        project, debate_id, work_id, old_id,
+        prepare_draft_review=True, prepare_review_fn=draft,
+    )
+    assert len(calls) == 1
+    assert calls[0][-1] == "REMOTE-20261116-999"
+    assert result["draft_review"]["status"] == "review_ready"
+    assert result["new_plan_automatically_approved"] is False
+    assert result["remote_write_performed"] is False
+
+
+def test_recovery_does_not_prepare_review_for_blocked_comparison(monkeypatch, tmp_path):
+    project, debate_id, work_id, old_id, root, _ = _audited(tmp_path)
+    monkeypatch.setattr(recovery, "compare_workspace", lambda *a, **kw: {
+        "status": "blocked", "comparison_id": "REMOTE-20261116-999", "remote_write_performed": False
+    })
+    result = recovery.prepare_fresh_recovery_comparison(
+        project, debate_id, work_id, old_id, prepare_draft_review=True,
+        prepare_review_fn=lambda *args: pytest.fail("review should not be prepared"),
+    )
+    assert result["draft_review"] is None
+    assert result["new_plan_automatically_approved"] is False
