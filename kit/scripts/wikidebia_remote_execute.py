@@ -576,6 +576,15 @@ def execute_accepted_plan(
         ):
             raise RemoteExecutionError("Reçu du moteur d’exécution existant invalide")
         return existing
+    # An authorization is durably written before the first remote mutation.
+    # Without a completed receipt, the remote side may already have changed.
+    # Never silently re-run a possibly partial execution: recovery requires
+    # explicit read-only reconciliation of the original plan and receipts.
+    if (root / "execution-authorization.json").exists() or (root / "execution-failure.json").exists():
+        raise RemoteExecutionError(
+            "Exécution antérieure potentiellement partielle sans reçu final : "
+            "reprise automatique interdite ; réconciliation distante en lecture seule requise"
+        )
     mode = str(preflight.get("mode") or "all")
     base = adapter if adapter is not None else build_adapter(handoff["config"], project_root)
     recorder = ArmedRecordingAdapter(base)

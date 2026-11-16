@@ -433,3 +433,51 @@ def test_retry_rejects_tampered_execution_event_log(tmp_path: Path):
     else:
         raise AssertionError("Un journal d’exécution altéré a été accepté")
     assert adapter.events == before
+
+
+
+def test_interrupted_execution_without_receipt_never_replays_writes(tmp_path: Path):
+    project, debate_id, work_id, comparison_id, approved, adapter, _ = make_approved_fixture(tmp_path)
+    prepared = execution.prepare_execution(
+        project, debate_id, work_id, comparison_id, approved["acceptance_sha256"], adapter=adapter
+    )
+    execution_dir = (
+        project / ".state/remote-executions" / debate_id / work_id / comparison_id
+    )
+    (execution_dir / "execution-authorization.json").write_text(
+        '{"execution_started": true}\n', encoding="utf-8"
+    )
+    before = list(adapter.events)
+    try:
+        execution.execute_accepted_plan(
+            project, debate_id, work_id, comparison_id, prepared["preflight_sha256"], adapter=adapter
+        )
+    except execution.RemoteExecutionError as exc:
+        assert "reprise automatique interdite" in str(exc)
+    else:
+        raise AssertionError("Exécution partielle sans reçu final rejouée")
+    assert adapter.events == before
+    assert not (execution_dir / "execution-receipt.json").exists()
+
+
+def test_failed_execution_without_receipt_never_replays_writes(tmp_path: Path):
+    project, debate_id, work_id, comparison_id, approved, adapter, _ = make_approved_fixture(tmp_path)
+    prepared = execution.prepare_execution(
+        project, debate_id, work_id, comparison_id, approved["acceptance_sha256"], adapter=adapter
+    )
+    execution_dir = (
+        project / ".state/remote-executions" / debate_id / work_id / comparison_id
+    )
+    (execution_dir / "execution-failure.json").write_text(
+        '{"stage": "plan_execution"}\n', encoding="utf-8"
+    )
+    before = list(adapter.events)
+    try:
+        execution.execute_accepted_plan(
+            project, debate_id, work_id, comparison_id, prepared["preflight_sha256"], adapter=adapter
+        )
+    except execution.RemoteExecutionError as exc:
+        assert "reprise automatique interdite" in str(exc)
+    else:
+        raise AssertionError("Échec antérieur sans reçu final rejoué")
+    assert adapter.events == before
