@@ -2093,6 +2093,26 @@ def corpus_workspace_remote_compare(
     return result.returncode
 
 
+def corpus_workspace_recover_interrupted(
+    root: Path, debate_id: str, *, work_id: str, interrupted_comparison_id: str,
+    scope: str | None, comparison_id: str | None,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_interrupted_recovery.py"
+    if not script.is_file():
+        raise ManagementError("Outil de récupération en lecture seule absent du kit")
+    command = [
+        python_command(root), str(script), debate_id,
+        "--work-id", work_id,
+        "--interrupted-comparison-id", interrupted_comparison_id,
+        "--project-root", str(root),
+    ]
+    if scope:
+        command.extend(["--scope", scope])
+    if comparison_id:
+        command.extend(["--comparison-id", comparison_id])
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_finalize(
     root: Path, debate_id: str, *, work_id: str, scope: str,
     refresh_remote: bool, comparison_id: str | None,
@@ -2947,6 +2967,16 @@ def build_parser() -> argparse.ArgumentParser:
     corpus_remote_compare_parser.add_argument("--scope", choices=("all", "fr", "en"), default="all")
     corpus_remote_compare_parser.add_argument("--comparison-id", help="Identifiant REMOTE-AAAAMMJJ-NNN facultatif")
 
+    corpus_recovery_parser = sub.add_parser(
+        "corpus-workspace-recover-interrupted",
+        help="Préparer une nouvelle comparaison en lecture seule après audit signé d'une exécution interrompue",
+    )
+    corpus_recovery_parser.add_argument("debate_id")
+    corpus_recovery_parser.add_argument("--work-id", required=True)
+    corpus_recovery_parser.add_argument("--interrupted-comparison-id", required=True)
+    corpus_recovery_parser.add_argument("--scope", choices=("all", "fr", "en"), default=None)
+    corpus_recovery_parser.add_argument("--comparison-id")
+
     corpus_finalize_parser = sub.add_parser(
         "corpus-workspace-finalize",
         help="Reprendre automatiquement rendu, release et comparaison distante en lecture seule",
@@ -3387,6 +3417,13 @@ def main(argv: list[str] | None = None) -> int:
         return corpus_workspace_remote_compare(
             root, args.debate_id, work_id=args.work_id,
             confirm_release_sha256=args.confirm_release_sha256,
+            scope=args.scope, comparison_id=args.comparison_id,
+        )
+
+    if args.command == "corpus-workspace-recover-interrupted":
+        return corpus_workspace_recover_interrupted(
+            root, args.debate_id, work_id=args.work_id,
+            interrupted_comparison_id=args.interrupted_comparison_id,
             scope=args.scope, comparison_id=args.comparison_id,
         )
 
