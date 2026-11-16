@@ -407,3 +407,29 @@ def test_retry_rejects_signed_receipt_with_wrong_work_id(tmp_path: Path):
     else:
         raise AssertionError("Un reçu signé pour un autre Work a été accepté")
     assert adapter.events == before
+
+
+
+def test_retry_rejects_tampered_execution_event_log(tmp_path: Path):
+    project, debate_id, work_id, comparison_id, approved, adapter, _ = make_approved_fixture(tmp_path)
+    prepared = execution.prepare_execution(
+        project, debate_id, work_id, comparison_id, approved["acceptance_sha256"], adapter=adapter
+    )
+    execution.execute_accepted_plan(
+        project, debate_id, work_id, comparison_id, prepared["preflight_sha256"], adapter=adapter
+    )
+    events_path = (
+        project / ".state/remote-executions" / debate_id / work_id
+        / comparison_id / "execution-events.jsonl"
+    )
+    events_path.write_text(events_path.read_text(encoding="utf-8") + "{}\n", encoding="utf-8")
+    before = list(adapter.events)
+    try:
+        execution.execute_accepted_plan(
+            project, debate_id, work_id, comparison_id, prepared["preflight_sha256"], adapter=adapter
+        )
+    except execution.RemoteExecutionError as exc:
+        assert "Journal" in str(exc)
+    else:
+        raise AssertionError("Un journal d’exécution altéré a été accepté")
+    assert adapter.events == before
