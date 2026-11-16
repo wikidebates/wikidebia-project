@@ -94,3 +94,42 @@ def test_legacy_plan_without_individualized_contract_remains_readable(tmp_path: 
     path = tmp_path / "plan.json"
     path.write_text(json.dumps(plan), encoding="utf-8")
     assert validate_remote_plan(path).errors == 0
+
+
+def test_translation_creation_plan_requires_english_source_link(tmp_path: Path):
+    plan = valid_plan()
+    row = {
+        "wiki": "en", "language": "en", "title": "English title",
+        "page_id": "A1", "page_type": "argument", "old_sha256": None,
+        "new_sha256": "4" * 64, "expected_revision_id": None,
+        "observed_revision_id": None, "justification": "translation",
+        "preconditions": ["title_absent_at_execution"], "result": None,
+        "phase": 2, "edit_summary_policy": "english_translation_creation",
+        "edit_summary": "Translation of the French page: [[:fr:Titre français|Titre français]]",
+    }
+    plan["languages"] = ["en"]
+    plan["operations"]["create"] = [row]
+    plan["counts"]["create"] = 1
+    plan["plan_sha256"] = sha_object({k: v for k, v in plan.items() if k != "plan_sha256"})
+    path = tmp_path / "translation-plan.json"
+    path.write_text(json.dumps(plan), encoding="utf-8")
+    assert validate_remote_plan(path).errors == 0
+
+
+def test_translation_creation_plan_rejects_fake_language_or_summary(tmp_path: Path):
+    plan = valid_plan()
+    row = {
+        "wiki": "fr", "language": "fr", "title": "Titre",
+        "page_id": "A1", "page_type": "argument", "old_sha256": None,
+        "new_sha256": "4" * 64, "expected_revision_id": None,
+        "observed_revision_id": None, "justification": "translation",
+        "preconditions": ["title_absent_at_execution"], "result": None,
+        "phase": 2, "edit_summary_policy": "english_translation_creation",
+        "edit_summary": "Création ordinaire",
+    }
+    plan["operations"]["create"] = [row]
+    plan["counts"]["create"] = 1
+    plan["plan_sha256"] = sha_object({k: v for k, v in plan.items() if k != "plan_sha256"})
+    path = tmp_path / "invalid-translation-plan.json"
+    path.write_text(json.dumps(plan), encoding="utf-8")
+    assert any(f.code == "WDV-RMT-008" for f in validate_remote_plan(path).findings)

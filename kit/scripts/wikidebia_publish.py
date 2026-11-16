@@ -1942,6 +1942,7 @@ class GenericPublisher:
                     raise PublicationError(
                         f"Date de création anglaise divergente dans le plan : {action.get('page_id')}"
                     )
+        self._assert_paired_translation_authorization(plan)
         if plan.get("edit_summaries") != self.operation.get("edit_summaries"):
             raise PublicationError("Résumés de modification divergents du plan")
         for action in plan.get("actions", []):
@@ -1957,6 +1958,180 @@ class GenericPublisher:
             raise PublicationDateChanged(
                 "Le jour de publication a changé depuis le plan ; régénérez le plan avant de créer les pages anglaises"
             )
+
+    def _assert_paired_translation_authorization(self, plan: dict[str, Any]) -> None:
+        """Fail closed for English translations outside a signed bilingual Work.
+
+        This is deliberately checked when *loading* a signed plan, including
+        resumed or page-filtered publication. A forged operation ID alone can
+        never authorize an English edit.
+        """
+        if (
+            self.operation.get("kind") != "full_page"
+            or self._english_translation_status() not in {"ready", "published"}
+        ):
+            return
+        english_mutations = [
+            action for action in plan.get("actions") or []
+            if action.get("language") == "en"
+            and action.get("operation") in {"create", "update"}
+        ]
+        if not english_mutations:
+            return
+
+        # Keep the separate W11 path for an *initial* bilingual corpus: it
+        # creates the French debate as the canonical first write, uses one
+        # bilingual plan and requires its signed debate-test receipt. This
+        # exception does not apply to previously published French sources or
+        # stand-alone English plans.
+        french_debate_creates = [
+            action for action in plan.get("actions") or []
+            if action.get("language") == "fr"
+            and action.get("page_type") == "debate"
+            and action.get("operation") == "create"
+        ]
+        french_manifest = [
+            row for row in self.manifest.get("pages") or []
+            if row.get("language") == "fr"
+        ]
+        if (
+            self.operation.get("id") != "workflow_final_publish_en"
+            and self.publication_profile in DIRECT_PROFILES
+            and set(self.languages) == {"fr", "en"}
+            and len(french_debate_creates) == 1
+            and french_manifest
+            and all(row.get("page_origin", "new") == "new" for row in french_manifest)
+        ):
+            return
+
+        if self.operation.get("id") != "workflow_final_publish_en":
+            raise PublicationError(
+                "Traduction anglaise : publication générique interdite sans transaction bilingue attestée"
+            )
+
+        directory = self.config_path.parent
+        try:
+            expected_parent = (
+                self.project_root / ".state" / "final-publication"
+                / str(self.config.get("debate_id") or "")
+            ).resolve()
+            if (
+                self.config_path.name != "english-publication-config.json"
+                or directory.is_symlink()
+                or directory.parent != expected_parent
+                or not directory.name
+            ):
+                raise ValueError("Dossier de transaction bilingue inattendu")
+
+            def signed(name: str, field: str) -> dict[str, Any]:
+                path = directory / name
+                if path.is_symlink() or not path.is_file():
+                    raise ValueError(f"Preuve manquante : {name}")
+                data = json.loads(path.read_text(encoding="utf-8"))
+                if not isinstance(data, dict) or not data.get(field):
+                    raise ValueError(f"Preuve incorrecte : {name}")
+                body = {key: value for key, value in data.items() if key != field}
+                if data[field] != sha_object(body):
+                    raise ValueError(f"Empreinte incorrecte : {name}")
+                return data
+
+            baseline = signed("baseline.json", "baseline_sha256")
+            safety = signed("safety-update-plan.json", "plan_sha256")
+            french = signed("french-update-plan.json", "plan_sha256")
+            preflight = signed("preflight.json", "preflight_sha256")
+            authorization = signed("authorization.json", "authorization_sha256")
+            french_config_path = directory / "french-update-config.json"
+            if french_config_path.is_symlink() or not french_config_path.is_file():
+                raise ValueError("Configuration française manquante")
+            french_config = json.loads(french_config_path.read_text(encoding="utf-8"))
+            if not isinstance(french_config, dict):
+                raise ValueError("Configuration française incorrecte")
+
+            debate_id = self.config["debate_id"]
+            if (
+                baseline.get("debate_id") != debate_id
+                or baseline.get("work_id") != directory.name
+                or safety.get("debate_id") != debate_id
+                or french.get("debate_id") != debate_id
+                or french.get("languages") != ["fr"]
+                or french.get("edit_summary_contract") != "page_specific_v1"
+                or french.get("config_sha256") != sha_file(french_config_path)
+                or french.get("new_manifest_sha256") != sha_file(self.manifest_path)
+                or french_config.get("debate_id") != debate_id
+                or french_config.get("languages") != ["fr"]
+                or french_config.get("interlanguage_only") is not True
+                or Path(str(french_config.get("corpus_root") or "")).resolve() != self.root
+                or preflight.get("status") != "ready"
+                or preflight.get("remote_write_authorized") is not False
+                or preflight.get("remote_write_performed") is not False
+                or preflight.get("english_plan_sha256") != plan.get("plan_sha256")
+                or preflight.get("french_plan_sha256") != french.get("plan_sha256")
+                or preflight.get("safety_plan_sha256") != safety.get("plan_sha256")
+                or authorization.get("status") != "authorized"
+                or authorization.get("remote_write_authorized") is not True
+                or authorization.get("execution_started") is not True
+                or authorization.get("baseline_sha256") != baseline.get("baseline_sha256")
+                or authorization.get("preflight_sha256") != preflight.get("preflight_sha256")
+            ):
+                raise ValueError("La paire EN/FR ou les preuves signées divergent")
+
+            french_ops = french.get("operations") or {}
+            if any(french_ops.get(kind) for kind in (
+                "create", "move", "redirect", "delete", "manual_review", "blocked"
+            )):
+                raise ValueError("Le plan français contient des opérations non interlangues")
+            if any(
+                row.get("language") != "fr"
+                or row.get("edit_summary_policy") != "french_interlanguage_addition"
+                or "only_interlanguage_addition" not in (row.get("preconditions") or [])
+                for row in french_ops.get("update") or []
+            ):
+                raise ValueError("Mutation française hors ajout interlangue")
+            safety_ops = safety.get("operations") or {}
+            if any(safety_ops.get(kind) for kind in (
+                "move", "redirect", "delete", "manual_review", "blocked"
+            )):
+                raise ValueError("Le plan de sécurité contient des opérations bloquées")
+
+            # The preflight is a complete pair, not merely a plausible hash.
+            expected = {}
+            for row in plan.get("actions") or []:
+                if row.get("language") != "en":
+                    raise ValueError("Le plan anglais contient une autre langue")
+                kind = str(row.get("operation") or "")
+                if kind not in {"create", "update", "skip"}:
+                    raise ValueError("Opération anglaise non autorisée")
+                key = ("en", str(row.get("page_id") or ""), str(row.get("title") or ""))
+                if not key[1] or not key[2] or key in expected:
+                    raise ValueError("Identité anglaise absente ou dupliquée")
+                expected[key] = (kind, kind != "create")
+            for kind in ("update", "skip"):
+                for row in french_ops.get(kind) or []:
+                    key = ("fr", str(row.get("page_id") or ""), str(row.get("title") or ""))
+                    if not key[1] or not key[2] or key in expected:
+                        raise ValueError("Identité française absente ou dupliquée")
+                    expected[key] = (kind, True)
+            snapshots = preflight.get("remote_snapshots")
+            if not isinstance(snapshots, list) or len(snapshots) != len(expected):
+                raise ValueError("Préflight incomplet")
+            observed = {}
+            for row in snapshots:
+                if not isinstance(row, dict):
+                    raise ValueError("Snapshot invalide")
+                key = (
+                    str(row.get("language") or ""),
+                    str(row.get("page_id") or ""),
+                    str(row.get("title") or ""),
+                )
+                if key in observed:
+                    raise ValueError("Snapshot dupliqué")
+                observed[key] = (row.get("operation"), row.get("exists"))
+            if observed != expected:
+                raise ValueError("Le préflight ne couvre pas exactement les plans EN/FR")
+        except (OSError, ValueError, TypeError, KeyError, IndexError) as exc:
+            raise PublicationError(
+                "Préflight bilingue attesté requis pour la publication anglaise"
+            ) from exc
 
     def _desired_text(self, action: dict[str, Any], remote_text: str) -> tuple[str, str]:
         source_path = self.root / action["source_path"]
@@ -2289,6 +2464,17 @@ class GenericPublisher:
         self._validate_local()
         self._prepare_logging()
         actions = list(plan["actions"])
+        # The initial bilingual creation exception above is atomic: a page
+        # filter must not turn it into an English-only bypass.
+        if (
+            self._english_translation_status() in {"ready", "published"}
+            and self.operation.get("kind") == "full_page"
+            and self.operation.get("id") != "workflow_final_publish_en"
+            and any(a.get("language") == "en" and a.get("operation") in {"create", "update"} for a in actions)
+            and any(a.get("language") == "fr" and a.get("operation") == "create" for a in actions)
+            and (language is not None or page_id is not None or page_type is not None)
+        ):
+            raise PublicationError("Une création bilingue initiale ne peut être filtrée en publication anglaise isolée")
         if language:
             actions = [item for item in actions if item["language"] == language]
         if page_id:

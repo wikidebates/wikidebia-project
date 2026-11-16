@@ -284,6 +284,7 @@ def assert_relation_rendering_safe(
 EDIT_SUMMARY_CONTRACT = "page_specific_v1"
 EDIT_SUMMARY_POLICIES = {
     "corpus_page_creation",
+    "english_translation_creation",
     "content_diff_v1",
     "french_interlanguage_addition",
     "canonical_title_move_v1",
@@ -1466,6 +1467,22 @@ class UpdateAdapter:
         return found
 
 
+def english_translation_creation_summary(manifest: dict[str, Any], page_id: str, page_type: str) -> str:
+    """Bind a translated English creation to its unique locked French source."""
+    matches = [
+        row for row in manifest.get("pages") or []
+        if str(row.get("language") or "") == "fr"
+        and str(row.get("page_id") or "") == page_id
+        and str(row.get("page_type") or "") == page_type
+    ]
+    if len(matches) != 1:
+        raise UpdateError(f"Source française unique introuvable : {page_type}/{page_id}")
+    title = str(matches[0].get("canonical_title") or "").strip()
+    if not title or any(char in title for char in "[]|\n\r"):
+        raise UpdateError(f"Titre français incompatible avec le résumé MediaWiki : {page_type}/{page_id}")
+    return f"Translation of the French page: [[:fr:{title}|{title}]]"
+
+
 class RemoteUpdatePlanner:
     def __init__(self, config: dict[str, Any], adapter: Any, config_path: Path) -> None:
         self.config = config
@@ -1869,11 +1886,22 @@ class RemoteUpdatePlanner:
         op["edit_summary"] = content_diff_edit_summary(remote_text, proposed_text, language, page_type)
 
     def _apply_create_summary_policy(self, op: dict[str, Any]) -> None:
+        language = str(op.get("language") or "")
+        page_type = str(op.get("page_type") or "")
+        if (
+            language == "en"
+            and str(((self.manifest.get("translation_status") or {}).get("en") or "pending"))
+            in {"ready", "published"}
+        ):
+            # A French translation must never be mislabeled as a generic
+            # corpus creation, even in a read-only comparison plan.
+            op["edit_summary_policy"] = "english_translation_creation"
+            op["edit_summary"] = english_translation_creation_summary(
+                self.manifest, str(op.get("page_id") or ""), page_type,
+            )
+            return
         op["edit_summary_policy"] = "corpus_page_creation"
-        op["edit_summary"] = corpus_creation_edit_summary(
-            str(op.get("language") or ""),
-            str(op.get("page_type") or ""),
-        )
+        op["edit_summary"] = corpus_creation_edit_summary(language, page_type)
 
     def _apply_move_summary_policy(self, op: dict[str, Any], old_text: str, new_text: str) -> None:
         op["edit_summary_policy"] = "canonical_title_move_v1"
@@ -2894,6 +2922,16 @@ class PlanExecutor:
             if plan.get(field) != expected:
                 raise PlanConflict(f"Plan divergent : {field}")
         operations = plan.get("operations") or {}
+        # An update plan is not a two-wiki translation transaction.  Refuse
+        # even historically signed EN mutations before acquiring locks or
+        # contacting MediaWiki; final publication uses GenericPublisher instead.
+        if str(((self.manifest.get("translation_status") or {}).get("en") or "pending")) in {"ready", "published"}:
+            for category in ("create", "update", "move", "redirect", "delete"):
+                if any(str(row.get("language") or "") == "en" for row in operations.get(category) or []):
+                    raise PlanConflict(
+                        "Publication FR->EN par reprise générique interdite : "
+                        "utiliser la publication finale bilingue attestée"
+                    )
         if operations.get("blocked"):
             raise PlanConflict("Le plan contient des opérations bloquées")
         if operations.get("manual_review"):
@@ -3534,9 +3572,20 @@ class PlanExecutor:
             if language != "fr" or operation != "update":
                 raise PlanConflict(f"Politique interlangue appliquée à une opération invalide : {page_id}")
             expected = self._interlanguage_edit_summary(page_id, page_type)
+        elif policy == "english_translation_creation":
+            if language != "en" or operation != "create":
+                raise PlanConflict(f"Politique de traduction appliquée à une opération invalide : {page_id}")
+            try:
+                expected = english_translation_creation_summary(self.manifest, page_id, page_type)
+            except UpdateError as exc:
+                raise PlanConflict(str(exc)) from exc
         elif policy == "corpus_page_creation":
             if operation != "create":
                 raise PlanConflict(f"Politique de création appliquée à une opération invalide : {page_id}")
+            if language == "en" and str(
+                ((self.manifest.get("translation_status") or {}).get("en") or "pending")
+            ) in {"ready", "published"}:
+                raise PlanConflict(f"Création anglaise sous politique générique interdite : {page_id}")
             expected = corpus_creation_edit_summary(language, page_type)
         elif policy == "content_diff_v1":
             if operation != "update":
@@ -3619,6 +3668,13 @@ class PlanExecutor:
     def _execute_one(self, row: dict[str, Any], user: str, plan: dict[str, Any]) -> dict[str, Any]:
         operation = row["operation"]
         title = row["title"]
+        if (
+            row.get("language") == "en"
+            and operation in {"create", "update", "move", "redirect", "delete"}
+            and str(((self.manifest.get("translation_status") or {}).get("en") or "pending"))
+            in {"ready", "published"}
+        ):
+            raise PlanConflict("Publication FR->EN par reprise générique interdite avant toute lecture distante")
         exists, revision_id, remote_text = self.adapter.read_page(title)
         result = {"operation": operation, "language": row["language"], "page_id": row["page_id"], "title": title, "status": None}
         if operation == "create":

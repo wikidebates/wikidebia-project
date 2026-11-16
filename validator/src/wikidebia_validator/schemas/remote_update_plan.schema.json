@@ -280,6 +280,7 @@
         "edit_summary_policy": {
           "enum": [
             "corpus_page_creation",
+            "english_translation_creation",
             "content_diff_v1",
             "french_interlanguage_addition",
             "canonical_title_move_v1",
