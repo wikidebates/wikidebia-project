@@ -2523,6 +2523,20 @@ def corpus_workspace_remote_execute(
     return result.returncode
 
 
+def corpus_workspace_approved_preflight(
+    root: Path, debate_id: str, *, work_id: str, comparison_id: str, mode: str,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_approved_preflight.py"
+    if not script.is_file():
+        raise ManagementError("Outil de préflight accepté absent du kit")
+    command = [
+        python_command(root), str(script), debate_id,
+        "--work-id", work_id, "--comparison-id", comparison_id,
+        "--mode", mode, "--project-root", str(root),
+    ]
+    return run(command, cwd=root, check=False).returncode
+
+
 def corpus_workspace_close(
     root: Path, debate_id: str, *, work_id: str, comparison_id: str,
     confirm_execution_sha256: str | None = None,
@@ -3226,6 +3240,17 @@ def build_parser() -> argparse.ArgumentParser:
     corpus_remote_execute_parser.add_argument("--confirm-acceptance-sha256")
     corpus_remote_execute_parser.add_argument("--confirm-preflight-sha256")
 
+    corpus_approved_preflight_parser = sub.add_parser(
+        "corpus-workspace-approved-preflight",
+        help="Préparer le préflight en lecture seule d'un plan déjà explicitement accepté",
+    )
+    corpus_approved_preflight_parser.add_argument("debate_id")
+    corpus_approved_preflight_parser.add_argument("--work-id", required=True)
+    corpus_approved_preflight_parser.add_argument("--comparison-id", required=True)
+    corpus_approved_preflight_parser.add_argument(
+        "--mode", choices=("all", "no-delete", "only-delete"), default="all",
+    )
+
     corpus_close_parser = sub.add_parser(
         "corpus-workspace-close",
         help="Clôturer un Work après exécution distante vérifiée et promouvoir le corpus publié",
@@ -3573,6 +3598,12 @@ def main(argv: list[str] | None = None) -> int:
             prepare=args.prepare, execute=args.execute, mode=args.mode,
             confirm_acceptance_sha256=args.confirm_acceptance_sha256,
             confirm_preflight_sha256=args.confirm_preflight_sha256,
+        )
+
+    if args.command == "corpus-workspace-approved-preflight":
+        return corpus_workspace_approved_preflight(
+            root, args.debate_id, work_id=args.work_id,
+            comparison_id=args.comparison_id, mode=args.mode,
         )
 
     if args.command == "corpus-workspace-close":
