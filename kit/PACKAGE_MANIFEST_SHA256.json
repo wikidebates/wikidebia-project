@@ -1828,8 +1828,8 @@
     },
     {
       "path": "scripts/wikidebia_review_workflow.py",
-      "size_bytes": 134553,
-      "sha256": "ae4f4bfc30181a891b97d177742f09365d2d25b4a6e074883aaecb05d4f0a0a8"
+      "size_bytes": 134755,
+      "sha256": "00af3ee59ddf971e5ad087c248d5568ccce6d51047c9ed677410f6aba6cc0e67"
     },
     {
       "path": "scripts/wikidebia_semantic_convergence.py",
