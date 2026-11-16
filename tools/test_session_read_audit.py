@@ -105,3 +105,14 @@ def test_empty_evidence_does_not_fake_savings():
     assert report["session_count"] == 0
     assert report["repeated_reads_across_sessions"] == 0
     assert report["actual_billed_tokens"] is None
+
+
+@pytest.mark.parametrize("path", [
+    "config/wikidebia.local.json", "kit/user-password.cfg",
+    "user-config.py", "kit/credentials.json",
+    "docs/secret.pem", "kit/sample.key", ".gitconfig-wikidebia",
+    "kit/.secret_data", "kit/.npmrc",
+])
+def test_rejects_sensitive_tracked_filename_even_if_public_git_path(path):
+    with pytest.raises(audit.ReadAuditError, match="unsafe"):
+        audit.audit_read_events([event("session_1", path=path)])
