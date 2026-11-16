@@ -267,14 +267,14 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
     })
     debate_pages = (registry.get("debate") or {}).get("pages") or {}
     debate_pages["fr"]["title_status"] = "locked"
-    debate_pages["fr"].setdefault("interlanguage", {}).update({
-        "status": "deferred", "inserted_at": None, "verified_at": None,
-    })
+    _defer_unresolved_interlanguage(
+        debate_pages["fr"].setdefault("interlanguage", {})
+    )
     for node in nodes:
         node["fr"]["title_status"] = "locked"
-        node["pages"]["fr"].setdefault("interlanguage", {}).update({
-            "status": "deferred", "inserted_at": None, "verified_at": None,
-        })
+        _defer_unresolved_interlanguage(
+            node["pages"]["fr"].setdefault("interlanguage", {})
+        )
 
     output_paths: list[tuple[str, str, str, str, str]] = []
     debate_id_actual = str((registry.get("debate") or {}).get("id"))

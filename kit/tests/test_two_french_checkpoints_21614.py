@@ -74,6 +74,29 @@ def test_graph_checkpoint_defers_only_unresolved_english_links():
     assert reusable["target_title"] == "Existing English argument"
 
 
+def test_content_checkpoint_keeps_reusable_english_target_schema_consistent():
+    reusable = {
+        "status": "ready",
+        "target_language": "en",
+        "target_title": "Existing English argument",
+        "inserted_at": "2025-01-02T03:04:05+00:00",
+        "verified_at": "2025-01-02T03:05:06+00:00",
+    }
+
+    # The content checkpoint uses the same policy as the graph checkpoint:
+    # a known reusable target remains ready instead of becoming the invalid
+    # combination status=deferred with a non-null target_title.
+    checkpoint._defer_unresolved_interlanguage(reusable)
+
+    assert reusable == {
+        "status": "ready",
+        "target_language": "en",
+        "target_title": "Existing English argument",
+        "inserted_at": None,
+        "verified_at": None,
+    }
+
+
 def test_title_checkpoint_does_not_publish_classification_changes(tmp_path: Path):
     project, workspace, work_id = _title_applied(tmp_path)
     cp = checkpoint.build_checkpoint(project, "debat_test", work_id, stage="graph")

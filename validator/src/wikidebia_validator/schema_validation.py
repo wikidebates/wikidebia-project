@@ -362,14 +362,28 @@ def validate_all_schemas(ctx: PackageContext, store: SchemaStore) -> None:
         validate_instance(ctx, store, ctx.relative(path), "batch_manifest.schema.json")
     for path in sorted(ctx.iter_files("handoff/*.json")):
         validate_instance(ctx, store, ctx.relative(path), "handoff.schema.json")
+    release_receipt_rel = str(((manifest or {}).get("release") or {}).get("release_receipt_path") or "")
     for path in sorted(ctx.iter_files("**/*receipt*.json")):
         rel = ctx.relative(path)
         if rel == "data/source_preservation_receipt.json":
             validate_instance(ctx, store, rel, "translation_source_preservation.schema.json")
             if not _valid_translation_source_preservation(ctx):
                 ctx.report.error("WDV-SCH-003", "Reçu de préservation de source divergent des imports ou verrous français", path=rel)
-        else:
-            validate_instance(ctx, store, rel, "archive_receipt.schema.json")
+            continue
+        instance = ctx.load_json(rel)
+        # Archive receipts predate the self-identifying receipt families and do
+        # not carry a ``schema`` discriminator.  Newer workflow/build receipts
+        # do carry one and are validated by their owning component; treating
+        # every filename containing "receipt" as an archive receipt makes a
+        # valid graph build fail as soon as corpus_build_receipt.json exists.
+        is_declared_release_receipt = bool(release_receipt_rel and rel == release_receipt_rel)
+        is_legacy_archive_receipt = (
+            not isinstance(instance, dict)
+            or "archive_receipt_version" in instance
+            or not isinstance(instance.get("schema"), str)
+        )
+        if is_declared_release_receipt or is_legacy_archive_receipt:
+            validate_instance(ctx, store, rel, "archive_receipt.schema.json", instance)
     for path in sorted(ctx.iter_files("logs/*.jsonl")):
         rel = ctx.relative(path)
         for line_no, obj in ctx.load_jsonl(rel):
