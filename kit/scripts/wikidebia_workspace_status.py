@@ -143,14 +143,21 @@ def _next_step(meta: Mapping[str, Any], debate_id: str, work_id: str) -> dict[st
             remote_read = True
             remote_write = True
     elif status in {"remote_execution_completed", "remote_execution_no_changes"} and comparison_id:
-        digest = str(execution.get("receipt_sha256") or "")
-        if digest:
-            action = "close_workspace"
-            command = _command(
-                "corpus-workspace-close", debate_id, work_id,
-                "--comparison-id", comparison_id,
-                "--confirm-execution-sha256", digest,
-            )
+        mode = str(execution.get("mode") or "")
+        if mode != "all":
+            action = "partial_publication_requires_scope_closure"
+            note = ("Exécution distante limitée au périmètre " + (mode or "inconnu")
+                    + " ; ne pas lancer la clôture bilingue ni promouvoir le corpus actif. "
+                    "Une clôture de périmètre avec preuves signées reste nécessaire.")
+        else:
+            digest = str(execution.get("receipt_sha256") or "")
+            if digest:
+                action = "close_workspace"
+                command = _command(
+                    "corpus-workspace-close", debate_id, work_id,
+                    "--comparison-id", comparison_id,
+                    "--confirm-execution-sha256", digest,
+                )
     elif status in {"published", "work_closed"}:
         action = "complete"
     elif status in {"remote_plan_manual_review", "remote_plan_blocked"}:
