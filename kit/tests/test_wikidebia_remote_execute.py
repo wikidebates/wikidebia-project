@@ -481,3 +481,33 @@ def test_failed_execution_without_receipt_never_replays_writes(tmp_path: Path):
     else:
         raise AssertionError("Échec antérieur sans reçu final rejoué")
     assert adapter.events == before
+
+
+def test_failed_read_only_preflight_does_not_orphan_execution_directory(monkeypatch, tmp_path: Path):
+    project, debate_id, work_id, comparison_id, approved, adapter, _ = make_approved_fixture(tmp_path)
+    execution_root = execution._execution_dir(project, debate_id, work_id, comparison_id)
+    original_preflight = execution._run_preflight
+
+    def fail_before_preflight_result(*args, **kwargs):
+        raise RuntimeError("temporary read-only adapter outage")
+
+    monkeypatch.setattr(execution, "_run_preflight", fail_before_preflight_result)
+    try:
+        execution.prepare_execution(
+            project, debate_id, work_id, comparison_id,
+            approved["acceptance_sha256"], adapter=adapter,
+        )
+    except RuntimeError as exc:
+        assert "adapter outage" in str(exc)
+    else:
+        raise AssertionError("Read-only preflight outage should propagate")
+    assert not execution_root.exists()
+    assert not any(event[0] in {"write", "move", "delete"} for event in adapter.events)
+
+    monkeypatch.setattr(execution, "_run_preflight", original_preflight)
+    result = execution.prepare_execution(
+        project, debate_id, work_id, comparison_id,
+        approved["acceptance_sha256"], adapter=adapter,
+    )
+    assert result["status"] == "ready"
+    assert execution_root.is_dir()

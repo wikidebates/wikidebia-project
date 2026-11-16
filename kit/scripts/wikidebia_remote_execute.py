@@ -404,10 +404,12 @@ def prepare_execution(
     root = _execution_dir(project_root, debate_id, work_id, comparison_id)
     if root.exists() or root.is_symlink():
         raise RemoteExecutionError("Un préflight d’exécution existe déjà pour cette comparaison")
-    root.mkdir(parents=False)
+    # Do not reserve the immutable execution directory before the read-only
+    # adapter checks succeed. An exception here must remain safely retryable.
     base = adapter if adapter is not None else build_adapter(handoff["config"], project_root)
     recorder = ArmedRecordingAdapter(base)
     result = _run_preflight(handoff, recorder, mode)
+    root.mkdir(parents=False)
     preflight = {
         "schema": PREFLIGHT_SCHEMA,
         "schema_version": "1.0",
