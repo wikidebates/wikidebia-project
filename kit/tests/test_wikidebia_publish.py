@@ -156,6 +156,105 @@ def test_pywikibot_adapter_reports_missing_managed_write_identity(monkeypatch, t
 
 
 
+
+def _fake_pywikibot_http():
+    class FakeCookieJar:
+        def __init__(self):
+            self.loaded_users = []
+            self.session_owner = None
+
+        def load(self, user="", *args, **kwargs):
+            self.loaded_users.append(user)
+
+        def save(self, *args, **kwargs):
+            pass
+
+    original = FakeCookieJar()
+    return SimpleNamespace(
+        PywikibotCookieJar=FakeCookieJar,
+        cookie_jar=original,
+        session=SimpleNamespace(cookies=original),
+    )
+
+
+def test_pywikibot_adapter_preserves_fr_session_across_en_login(monkeypatch, tmp_path):
+    # Both wikis set cookies for the parent domain; mixing their cookies
+    # makes FR anonymous after an EN login in a single Python process.
+    (tmp_path / "user-config.py").write_text("# local configuration\n", encoding="utf-8")
+    for language in ("FR", "EN"):
+        monkeypatch.delenv(f"WIKIDEBIA_{language}_BOT_USERNAME", raising=False)
+        monkeypatch.delenv(f"WIKIDEBIA_{language}_BOT_PASSWORD", raising=False)
+    http = _fake_pywikibot_http()
+    jars = []
+
+    class FakeSite:
+        def __init__(self, code):
+            self.code = code
+
+        def login(self):
+            jar = http.session.cookies
+            jar.load("ChatGPT")
+            if jar.session_owner not in (None, self.code):
+                raise AssertionError("Shared session cookie was overwritten")
+            jar.session_owner = self.code
+
+        def user(self):
+            return ("ChatGPT" if http.session.cookies.session_owner == self.code
+                    else None)
+
+    fake = SimpleNamespace(
+        comms=SimpleNamespace(http=http),
+        config=SimpleNamespace(
+            extra_headers={}, family_files={},
+            usernames={"wikidebates": {"fr": "ChatGPT", "en": "ChatGPT"}},
+        ),
+        Site=lambda **kwargs: FakeSite(kwargs["code"]),
+    )
+    monkeypatch.setitem(sys.modules, "pywikibot", fake)
+    for language in ("fr", "en", "fr"):
+        adapter = module.PywikibotAdapter(
+            "wikidebates", {"fr": "fr", "en": "en"}, tmp_path,
+            SCRIPT.parents[1] / "families/wikidebates_family.py",
+        )
+        adapter.open_language(language, "ChatGPT")
+        assert adapter.site.user() == "ChatGPT"
+        assert http.cookie_jar is http.session.cookies
+        jars.append(http.cookie_jar)
+        adapter.close_language()
+
+    assert jars[0] is jars[2]
+    assert jars[0] is not jars[1]
+    assert jars[0].loaded_users == ["ChatGPT-wikidebates-fr", "ChatGPT-wikidebates-fr"]
+    assert jars[1].loaded_users == ["ChatGPT-wikidebates-en"]
+    assert jars[0].session_owner == "fr" and jars[1].session_owner == "en"
+
+
+def test_pywikibot_adapter_read_only_switches_cookie_scope(monkeypatch, tmp_path):
+    (tmp_path / "user-config.py").write_text("# local configuration\n", encoding="utf-8")
+    http = _fake_pywikibot_http()
+    fake = SimpleNamespace(
+        comms=SimpleNamespace(http=http),
+        config=SimpleNamespace(
+            extra_headers={}, family_files={},
+            usernames={"wikidebates": {"fr": "ChatGPT", "en": "ChatGPT"}},
+        ),
+        Site=lambda **kwargs: SimpleNamespace(code=kwargs["code"]),
+    )
+    monkeypatch.setitem(sys.modules, "pywikibot", fake)
+    adapter = module.PywikibotAdapter(
+        "wikidebates", {"fr": "fr", "en": "en"}, tmp_path,
+        SCRIPT.parents[1] / "families/wikidebates_family.py",
+    )
+    adapter.open_language_read_only("fr")
+    french = http.cookie_jar
+    adapter.close_language()
+    adapter.open_language_read_only("en")
+    english = http.cookie_jar
+    adapter.close_language()
+    adapter.open_language_read_only("fr")
+    assert http.cookie_jar is french
+    assert french is not english
+
 def test_pywikibot_adapter_reuses_cached_session_without_csrf_logout(monkeypatch, tmp_path):
     # The previous forced logout fetched a CSRF token, which is unavailable
     # when the server sees an anonymous user despite Pywikibot's cached state.
@@ -176,6 +275,7 @@ def test_pywikibot_adapter_reuses_cached_session_without_csrf_logout(monkeypatch
 
     site = FakeSite()
     fake = SimpleNamespace(
+        comms=SimpleNamespace(http=_fake_pywikibot_http()),
         config=SimpleNamespace(extra_headers={}, family_files={},
                                usernames={"wikidebates": {"fr": "ChatGPT"}}),
         Site=lambda **kwargs: site,
@@ -211,6 +311,7 @@ def test_pywikibot_adapter_never_logs_out_during_identity_failure(monkeypatch, t
             events.append("login")
 
     fake = SimpleNamespace(
+        comms=SimpleNamespace(http=_fake_pywikibot_http()),
         config=SimpleNamespace(extra_headers={}, family_files={},
                                usernames={"wikidebates": {"fr": "ChatGPT"}}),
         Site=lambda **kwargs: FakeSite(),
@@ -252,6 +353,7 @@ def test_pywikibot_adapter_authenticates_when_cached_site_is_anonymous(monkeypat
 
     site = FakeSite()
     fake = SimpleNamespace(
+        comms=SimpleNamespace(http=_fake_pywikibot_http()),
         config=SimpleNamespace(extra_headers={}, family_files={},
                                usernames={"wikidebates": {"en": "ChatGPT"}}),
         Site=lambda **kwargs: site,
@@ -276,6 +378,7 @@ def test_pywikibot_adapter_read_only_open_does_not_require_credentials(monkeypat
         pass
 
     fake = SimpleNamespace(
+        comms=SimpleNamespace(http=_fake_pywikibot_http()),
         config=SimpleNamespace(extra_headers={}, family_files={}),
         Site=lambda **kwargs: calls.append(kwargs) or FakeSite(),
     )
