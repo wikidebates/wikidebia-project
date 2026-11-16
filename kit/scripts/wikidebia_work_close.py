@@ -762,6 +762,12 @@ def close_work(project_root: Path, debate_id: str, work_id: str, comparison_id: 
         raise WorkClosureError("Une clôture partielle existe déjà pour cette comparaison")
 
     execution = _load_execution(project_root, debate_id, work_id, comparison_id, confirm_execution_sha256)
+    if (execution["execution_receipt"].get("mode") != "all"
+            or (execution["meta"].get("remote_execution") or {}).get("mode") != "all"):
+        raise WorkClosureError(
+            "Clôture bilingue interdite après une exécution de portée partielle ; "
+            "une clôture de périmètre distincte est nécessaire"
+        )
     active, old_tree_sha = _verify_active_source(project_root, debate_id, execution["meta"])
     states = _verify_published_states(project_root, debate_id, execution)
     closure_root.mkdir(parents=False)
