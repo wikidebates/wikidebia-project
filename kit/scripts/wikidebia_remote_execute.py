@@ -502,6 +502,22 @@ def _load_preflight(project_root: Path, handoff: Mapping[str, Any], comparison_i
         raise RemoteExecutionError("Empreinte du reçu de préflight invalide")
     if confirmation != preflight.get("preflight_sha256"):
         raise RemoteExecutionError("L’empreinte confirmée ne correspond pas au préflight")
+    # A valid self-hash alone does not bind a receipt to this execution.
+    # Reject foreign receipts and event paths before accessing the filesystem.
+    identity = {
+        "debate_id": str(handoff["plan"]["debate_id"]),
+        "work_id": str(handoff["review"]["work_id"]),
+        "comparison_id": comparison_id,
+    }
+    for field, expected_value in identity.items():
+        if preflight.get(field) != expected_value or receipt.get(field) != expected_value:
+            raise RemoteExecutionError(f"Identité du préflight divergente : {field}")
+    if preflight.get("schema") != PREFLIGHT_SCHEMA or receipt.get("schema") != PREFLIGHT_RECEIPT_SCHEMA:
+        raise RemoteExecutionError("Schéma de préflight ou de reçu inattendu")
+    if receipt.get("preflight_path") != relative_to_project(root / "execution-preflight.json", project_root):
+        raise RemoteExecutionError("Chemin de préflight divergent")
+    if receipt.get("events_path") != relative_to_project(root / "preflight-events.jsonl", project_root):
+        raise RemoteExecutionError("Chemin du journal de préflight divergent")
     if receipt.get("preflight_sha256") != preflight.get("preflight_sha256"):
         raise RemoteExecutionError("Le reçu ne vise pas le préflight chargé")
     if receipt.get("status") != "ready" or receipt.get("mode") != preflight.get("mode"):
