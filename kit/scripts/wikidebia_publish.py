@@ -560,8 +560,11 @@ class PywikibotAdapter:
         self._register_family(pywikibot)
         self._configure_managed_username(pywikibot, language, expected_user)
         self.site = pywikibot.Site(code=self.codes[language], fam=self.family)
-        if self.site.user() is not None:
-            self.site.logout()
+        # Pywikibot may return a cached Site with an expired server session.
+        # Calling logout() here requires a valid CSRF token even when the
+        # remote API now sees an anonymous user, and can prevent re-login.
+        # login() already reuses valid cookies or authenticates again; retain
+        # the strict identity assertion rather than invalidating the session.
         self._login(pywikibot, language, expected_user)
         self.assert_identity(expected_user)
 
