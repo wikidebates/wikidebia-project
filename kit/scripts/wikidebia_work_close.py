@@ -777,7 +777,10 @@ def close_scope_publication(
             raise WorkClosureError("Workspace divergent du reçu de clôture de périmètre")
         return {**receipt, "idempotent": True}
     if closure_root.exists() or closure_root.is_symlink():
-        raise WorkClosureError("Un dossier de clôture existe déjà pour cette comparaison")
+        raise WorkClosureError(
+            "Clôture de périmètre interrompue : preuves partielles présentes. "
+            "Vérifiez l'archive et le workspace avant toute reprise manuelle"
+        )
 
     execution = _load_execution(project_root, debate_id, work_id, comparison_id, confirm_execution_sha256)
     remote_receipt = execution["execution_receipt"]
