@@ -155,6 +155,119 @@ def test_pywikibot_adapter_reports_missing_managed_write_identity(monkeypatch, t
         raise AssertionError("identité d’écriture absente non détectée")
 
 
+
+def test_pywikibot_adapter_reuses_cached_session_without_csrf_logout(monkeypatch, tmp_path):
+    # The previous forced logout fetched a CSRF token, which is unavailable
+    # when the server sees an anonymous user despite Pywikibot's cached state.
+    (tmp_path / "user-config.py").write_text("# local config\\n", encoding="utf-8")
+    monkeypatch.delenv("WIKIDEBIA_FR_BOT_USERNAME", raising=False)
+    monkeypatch.delenv("WIKIDEBIA_FR_BOT_PASSWORD", raising=False)
+    calls = []
+
+    class FakeSite:
+        def user(self):
+            return "ChatGPT"
+
+        def logout(self):
+            raise KeyError("Invalid token 'csrf' for user None on wikidebates:fr wiki.")
+
+        def login(self):
+            calls.append("login")
+
+    site = FakeSite()
+    fake = SimpleNamespace(
+        config=SimpleNamespace(extra_headers={}, family_files={},
+                               usernames={"wikidebates": {"fr": "ChatGPT"}}),
+        Site=lambda **kwargs: site,
+    )
+    monkeypatch.setitem(sys.modules, "pywikibot", fake)
+    adapter = module.PywikibotAdapter(
+        "wikidebates", {"fr": "fr"}, tmp_path,
+        SCRIPT.parents[1] / "families/wikidebates_family.py",
+    )
+
+    adapter.open_language("fr", "ChatGPT")
+    adapter.close_language()
+    adapter.open_language("fr", "ChatGPT")
+
+    assert calls == ["login", "login"]
+    assert adapter.site is site
+
+
+def test_pywikibot_adapter_never_logs_out_during_identity_failure(monkeypatch, tmp_path):
+    (tmp_path / "user-config.py").write_text("# local config\\n", encoding="utf-8")
+    monkeypatch.delenv("WIKIDEBIA_FR_BOT_USERNAME", raising=False)
+    monkeypatch.delenv("WIKIDEBIA_FR_BOT_PASSWORD", raising=False)
+    events = []
+
+    class FakeSite:
+        def user(self):
+            return "UnexpectedUser"
+
+        def logout(self):
+            events.append("logout")
+
+        def login(self):
+            events.append("login")
+
+    fake = SimpleNamespace(
+        config=SimpleNamespace(extra_headers={}, family_files={},
+                               usernames={"wikidebates": {"fr": "ChatGPT"}}),
+        Site=lambda **kwargs: FakeSite(),
+    )
+    monkeypatch.setitem(sys.modules, "pywikibot", fake)
+    adapter = module.PywikibotAdapter(
+        "wikidebates", {"fr": "fr"}, tmp_path,
+        SCRIPT.parents[1] / "families/wikidebates_family.py",
+    )
+
+    try:
+        adapter.open_language("fr", "ChatGPT")
+    except module.IdentityError:
+        pass
+    else:
+        raise AssertionError("Unexpected remote identity should prevent publication")
+
+    assert events == ["login"]
+
+
+def test_pywikibot_adapter_authenticates_when_cached_site_is_anonymous(monkeypatch, tmp_path):
+    (tmp_path / "user-config.py").write_text("# local config\\n", encoding="utf-8")
+    monkeypatch.delenv("WIKIDEBIA_EN_BOT_USERNAME", raising=False)
+    monkeypatch.delenv("WIKIDEBIA_EN_BOT_PASSWORD", raising=False)
+    events = []
+
+    class FakeSite:
+        active = None
+
+        def user(self):
+            return self.active
+
+        def login(self):
+            events.append("login")
+            self.active = "ChatGPT"
+
+        def logout(self):
+            raise AssertionError("Do not log out while authenticating")
+
+    site = FakeSite()
+    fake = SimpleNamespace(
+        config=SimpleNamespace(extra_headers={}, family_files={},
+                               usernames={"wikidebates": {"en": "ChatGPT"}}),
+        Site=lambda **kwargs: site,
+    )
+    monkeypatch.setitem(sys.modules, "pywikibot", fake)
+    adapter = module.PywikibotAdapter(
+        "wikidebates", {"en": "en"}, tmp_path,
+        SCRIPT.parents[1] / "families/wikidebates_family.py",
+    )
+
+    adapter.open_language("en", "ChatGPT")
+
+    assert events == ["login"]
+    assert adapter.site.user() == "ChatGPT"
+
+
 def test_pywikibot_adapter_read_only_open_does_not_require_credentials(monkeypatch, tmp_path):
     (tmp_path / "user-config.py").write_text("# test\n", encoding="utf-8")
     calls = []
