@@ -67,7 +67,10 @@ def _read_existing(log: Path) -> list[dict]:
     if log.is_symlink() or not log.is_file() or log.stat().st_size > MAX_LOG_BYTES:
         raise CaptureError("unsafe_or_oversized_session_log")
     try:
-        entries = [json.loads(line) for line in log.read_text(encoding="utf-8").splitlines()]
+        raw = log.read_bytes()
+        if raw and not raw.endswith(b"\n"):
+            raise CaptureError("unterminated_existing_session_log")
+        entries = [json.loads(line) for line in raw.decode("utf-8").splitlines()]
         audit_read_events(entries)
     except (OSError, UnicodeError, ValueError, TypeError) as exc:
         raise CaptureError("invalid_existing_session_log") from exc
