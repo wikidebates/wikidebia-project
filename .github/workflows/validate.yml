@@ -67,6 +67,8 @@ jobs:
           git add kit/TEST_REPORT.txt kit/PACKAGE_MANIFEST_SHA256.json kit/PACKAGE_RECEIPT.json
           if ! git diff --cached --quiet; then
             git commit -m "build(kit): regenerate metadata after tests"
+            git fetch origin feat/interrupted-execution-readonly-audit-20261116
+            git rebase origin/feat/interrupted-execution-readonly-audit-20261116
             git push origin HEAD:feat/interrupted-execution-readonly-audit-20261116
           fi
       - if: steps.pr-validation.outputs.result != 'true'
