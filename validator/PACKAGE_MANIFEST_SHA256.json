@@ -5,7 +5,7 @@
   "stable_archive_name": "wikidebia-validator.zip",
   "version_source": "VERSIONS.json",
   "declared_file_count": 517,
-  "declared_test_count": 541,
+  "declared_test_count": 543,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -789,12 +789,12 @@
     {
       "path": "docs/SELF_AUDIT_REPORT.txt",
       "size_bytes": 727,
-      "sha256": "511895541f03a38cdcc99d858b99f1871236b378b99e1aebab674acc5221e038"
+      "sha256": "f82f73c35e56a28bcec5ea21326c3645e9bc94cb3313a4fdf76c55e13d4fb8c8"
     },
     {
       "path": "docs/TEST_REPORT.txt",
       "size_bytes": 1334,
-      "sha256": "4e0b2ba5e1770cbe4541dc42dd391bf2c63763cd035bd6e42ed9c8baaceaea71"
+      "sha256": "aeb430837a3b2530a1bff0ea3f00d789fdc45c65155408898c2e643b7c341e81"
     },
     {
       "path": "docs/history/README.md",
@@ -1808,8 +1808,8 @@
     },
     {
       "path": "src/wikidebia_validator/remote_plan.py",
-      "size_bytes": 5385,
-      "sha256": "90b5984eb0971ce91934e3d9c6b572346fee89ff50493266f82d364303710a3e"
+      "size_bytes": 5837,
+      "sha256": "e19a3f2fe4a50127b4fd08c43b861b7f7d75d233cc8677e0f64f2f76b3130462"
     },
     {
       "path": "src/wikidebia_validator/report.py",
@@ -1943,8 +1943,8 @@
     },
     {
       "path": "src/wikidebia_validator/schemas/remote_update_plan.schema.json",
-      "size_bytes": 7511,
-      "sha256": "ba3ceea3533f7ce8409c04340feeda174e937d0f8edc61ec32c9d3d267dd74c9"
+      "size_bytes": 7555,
+      "sha256": "d4c776c5fafc349ebee496a5b0cb54b08d9bcc93ebcf0ed776bde333c6825e57"
     },
     {
       "path": "src/wikidebia_validator/schemas/remote_update_receipt.schema.json",
@@ -2513,8 +2513,8 @@
     },
     {
       "path": "tests/test_remote_update_plan.py",
-      "size_bytes": 4896,
-      "sha256": "671f15cfd2ecf08dbdebb465cee6fe5ca51d24e333cc5a1cb184164e93af1fbe"
+      "size_bytes": 6828,
+      "sha256": "d109d5b71129fee4fd2fe7a7ccbeab04d906045079c842a3ea6bc1daf681ad99"
     },
     {
       "path": "tests/test_render_preflight_0499.py",
