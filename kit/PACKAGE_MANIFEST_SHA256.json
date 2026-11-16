@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
-  "declared_file_count": 485,
-  "declared_test_count": 1147,
+  "declared_file_count": 486,
+  "declared_test_count": 1150,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -1139,7 +1139,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "fa343f449fccf0ca93f00be1efda8c273e70c78f179ce1948d24fe1055d9be8c"
+      "sha256": "5915a4de29bd970e7823649409e4d263a160c860d8c9b165a695c5fc7c45ec35"
     },
     {
       "path": "VERSIONS.json",
@@ -1828,8 +1828,8 @@
     },
     {
       "path": "scripts/wikidebia_review_workflow.py",
-      "size_bytes": 134755,
-      "sha256": "00af3ee59ddf971e5ad087c248d5568ccce6d51047c9ed677410f6aba6cc0e67"
+      "size_bytes": 135279,
+      "sha256": "1332767211e1943e43008c1ca4020c442cda80f5552bf13608ee1db29c1392a2"
     },
     {
       "path": "scripts/wikidebia_semantic_convergence.py",
@@ -2435,6 +2435,11 @@
       "path": "tests/test_wikidebia_workspace_status.py",
       "size_bytes": 6266,
       "sha256": "0541bbc4c91ad0d73ca6c3ee9106e2bc757ecdea15968bbcb52d2817e31e8b92"
+    },
+    {
+      "path": "tests/test_workflow_status_reconciliation_guidance.py",
+      "size_bytes": 1223,
+      "sha256": "af92f3fcd64a5cc8f6996db5fd3a4928e666252944dea70ae8317cd20157097a"
     }
   ]
 }

@@ -2392,6 +2392,13 @@ def status_summary(project_root: Path, debate_id: str) -> dict[str, Any]:
 
 
 def _print_user_result(state: Mapping[str, Any]) -> None:
+    if (not state.get("work_id") and state.get("phase") == "initialize_graph"
+            and state.get("status") in {"blocked_access_preflight", "running"}):
+        print("Workflow initial sans Work associé.")
+        print("Si un Work local release_ready existe déjà, réconciliez-le avec ses preuves signées :")
+        print(f"./wikidebia workflow-reconcile {state.get('debate_id')} --work-id WORK_ID")
+        print("Cette commande ne publie aucune page; elle vérifie les preuves avant adoption.")
+        return
     pending = state.get("pending_review")
     if isinstance(pending, dict):
         spec = REVIEW_TYPES.get(str(pending.get("review_type")))
