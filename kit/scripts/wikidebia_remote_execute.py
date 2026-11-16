@@ -403,7 +403,34 @@ def prepare_execution(
         raise RemoteExecutionError("L’empreinte confirmée ne correspond pas à l’acceptation")
     root = _execution_dir(project_root, debate_id, work_id, comparison_id)
     if root.exists() or root.is_symlink():
-        raise RemoteExecutionError("Un préflight d’exécution existe déjà pour cette comparaison")
+        # Reuse only a complete, verified preflight for the same approved plan.
+        # Never re-run checks or replace evidence after execution has begun.
+        if not root.is_dir() or root.is_symlink():
+            raise RemoteExecutionError("Dossier de préflight existant non sûr")
+        if any((root / name).exists() or (root / name).is_symlink() for name in (
+            "execution-authorization.json", "execution-failure.json",
+            "execution-receipt.json", "execution-events.jsonl",
+        )):
+            raise RemoteExecutionError("Exécution déjà commencée ou bloquée : préflight non réutilisable")
+        receipt_path = root / "preflight-receipt.json"
+        if not receipt_path.is_file() or receipt_path.is_symlink():
+            raise RemoteExecutionError("Préflight incomplet : intervention manuelle requise")
+        existing_receipt = load_json(receipt_path, "reçu de préflight existant")
+        existing_sha = existing_receipt.get("preflight_sha256")
+        if not isinstance(existing_sha, str):
+            raise RemoteExecutionError("Empreinte du préflight existant absente")
+        _, existing, _ = _load_preflight(project_root, handoff, comparison_id, existing_sha)
+        if existing.get("mode") != mode:
+            raise RemoteExecutionError("Le mode du préflight existant diffère du mode demandé")
+        return {
+            "status": "ready", "debate_id": debate_id, "work_id": work_id,
+            "comparison_id": comparison_id, "mode": mode,
+            "preflight_sha256": existing_sha,
+            "selected_counts": existing["selected_counts"],
+            "blockers": existing["blockers"],
+            "remote_write_performed": False,
+            "preflight_reused": True,
+        }
     # Do not reserve the immutable execution directory before the read-only
     # adapter checks succeed. An exception here must remain safely retryable.
     base = adapter if adapter is not None else build_adapter(handoff["config"], project_root)
