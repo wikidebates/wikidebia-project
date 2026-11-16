@@ -238,7 +238,18 @@ def _ensure_access_preflight(project_root: Path, state: dict[str, Any]) -> dict[
         "receipt_path": _relative(receipt_path, project_root),
     }
     if state.get("status") == "blocked_access_preflight":
-        state["status"] = "running"
+        # A restored Work can already be at the sealed final-publication
+        # boundary. Authentication recovery must not demote it to a generic
+        # running state, which the Work-scoped baseline correctly rejects.
+        # The baseline still verifies the release and signed French checkpoints
+        # independently before any final MediaWiki write.
+        phase = str(state.get("phase") or "")
+        if phase in {"final_publication", "final_publication_resume"}:
+            state["status"] = "final_publication"
+        elif phase == "release_ready":
+            state["status"] = "release_ready"
+        else:
+            state["status"] = "running"
     state["updated_at"] = now_iso()
     _save_workflow(project_root, state)
     return state
