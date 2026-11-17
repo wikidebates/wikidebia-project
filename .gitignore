@@ -11,6 +11,9 @@
 /.state/
 /.venv/
 
+# Diagnostics locaux temporaires
+/revenu_de_base_render_preflight_diagnostic.zip
+
 # Configurations locales
 /config/wikidebia.local.json
 /configs/
