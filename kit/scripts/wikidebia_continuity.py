@@ -428,15 +428,29 @@ def verify_committed_snapshot(snapshot_root: Path, debate_id: str | None = None)
         if workflow.get("status") == "published" and not final_receipt_path.is_file():
             raise ContinuityError("Reçu de publication finale obligatoire pour un Work published")
         if final_receipt_path.exists():
-            for name, field in (
-                ("authorization.json", "authorization_sha256"),
-                ("publication-receipt.json", "receipt_sha256"),
-            ):
-                evidence = _load_signed(final_root / name, field, f"preuve préservée obligatoire {name}")
-                if evidence.get("debate_id") != debate_id or evidence.get("work_id") != work_id:
-                    raise ContinuityError("Preuve finale préservée rattachée à un autre Work")
-                if name == "publication-receipt.json" and evidence.get("status") != "published":
-                    raise ContinuityError("Reçu de publication finale sans statut published")
+            authorization = _load_signed(
+                final_root / "authorization.json", "authorization_sha256",
+                "autorisation finale préservée",
+            )
+            final_receipt = _load_signed(
+                final_receipt_path, "receipt_sha256", "reçu de publication finale préservé",
+            )
+            if (final_receipt.get("debate_id") != debate_id
+                    or final_receipt.get("work_id") != work_id
+                    or final_receipt.get("status") != "published"):
+                raise ContinuityError("Reçu de publication finale divergent du Work publié")
+            preflight = _load_signed(
+                final_root / "preflight.json", "preflight_sha256",
+                "préflight final préservé",
+            )
+            if (authorization.get("status") != "authorized"
+                    or authorization.get("remote_write_authorized") is not True
+                    or authorization.get("baseline_sha256") != baseline.get("baseline_sha256")
+                    or authorization.get("preflight_sha256") != preflight.get("preflight_sha256")
+                    or final_receipt.get("baseline_sha256") != baseline.get("baseline_sha256")
+                    or final_receipt.get("preflight_sha256") != preflight.get("preflight_sha256")
+                    or final_receipt.get("authorization_sha256") != authorization.get("authorization_sha256")):
+                raise ContinuityError("Chaîne des empreintes de publication préservée divergente")
         return {
             "status": "passed", "debate_id": debate_id, "work_id": work_id,
             "preserved_import": True,
