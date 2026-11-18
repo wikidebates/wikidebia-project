@@ -332,3 +332,28 @@ def test_every_committed_latest_snapshot_has_complete_signed_french_succession()
         pytest.skip("Les snapshots propres aux débats restent sur leurs branches dédiées")
     for snapshot in snapshots:
         continuity.verify_committed_snapshot(snapshot)
+
+def test_preserved_continuity_copies_signed_import_and_final_evidence(tmp_path):
+    from wikidebia_workflow_baseline import PRESERVED_IMPORT_POLICY
+    from wikidebia_editorial_workspace import workspace_receipt_hash
+    debate_id, work_id = 'debat_test', 'EDIT-20261023-001'
+    _write(tmp_path / '.state/workflows' / debate_id / 'workflow.json', {'debate_id': debate_id, 'work_id': work_id})
+    preservation = _signed({'debate_id': debate_id, 'work_id': work_id}, 'receipt_sha256')
+    workspace = {'debate_id': debate_id, 'work_id': work_id,
+                 'source_preservation': {'policy': PRESERVED_IMPORT_POLICY, 'receipt_sha256': preservation['receipt_sha256']}}
+    workspace['workspace_sha256'] = workspace_receipt_hash(workspace)
+    root = tmp_path / '.state/editorial-workspaces' / debate_id / work_id
+    _write(root / 'workspace.json', workspace)
+    _write(root / 'release-copy/data/source_preservation_receipt.json', preservation)
+    final = tmp_path / '.state/final-publication' / debate_id / work_id
+    _write(final / 'baseline.json', _signed({'debate_id': debate_id, 'work_id': work_id,
+           'fr': {'mode': 'preserved_french_import'}}, 'baseline_sha256'))
+    _write(final / 'preflight.json', _signed({'debate_id': debate_id, 'work_id': work_id}, 'preflight_sha256'))
+    snapshot = tmp_path / 'continuity' / debate_id / 'latest'
+    snapshot.mkdir(parents=True)
+    result = continuity.sync_signed_french_history(tmp_path, debate_id, work_id=work_id)
+    assert result['preserved_import'] is True
+    assert continuity.sync_signed_french_history(tmp_path, debate_id, work_id=work_id, check_only=True)['status'] == 'passed'
+    (snapshot / 'runtime/final-publication/preflight.json').write_text('tampered', encoding='utf-8')
+    with pytest.raises(continuity.ContinuityError, match='incomplète'):
+        continuity.sync_signed_french_history(tmp_path, debate_id, work_id=work_id, check_only=True)
