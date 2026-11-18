@@ -669,6 +669,16 @@ def _load_or_build_plans(
     _assert_safe_update_plan(fr_plan, full=False)
     write_json(state_dir / "french-update-plan.json", fr_plan)
 
+    if preserved:
+        fr_ops = fr_plan.get("operations") or {}
+        if fr_ops.get("create") or fr_ops.get("delete") or fr_ops.get("move"):
+            raise FinalPublicationError("La préservation interdit les créations, suppressions et déplacements français")
+        for action in fr_ops.get("update") or []:
+            if action.get("language") != "fr":
+                raise FinalPublicationError("Le plan français préservé contient une opération étrangère")
+        if not fr_config.get("interlanguage_only"):
+            raise FinalPublicationError("Le plan préservé doit être strictement interlangue")
+
     en_adapter = build_adapter(en_config, project_root)
     en_publisher = GenericPublisher(en_config, en_adapter, en_config_path)
     en_plan = _reorder_english_plan(en_publisher.build_plan())
