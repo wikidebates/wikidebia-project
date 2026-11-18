@@ -176,3 +176,28 @@ def test_published_workspace_is_terminal():
     assert result["action"] == "complete"
     assert result["command"] is None
     assert status._phase("published") == "complete"
+
+def test_preserved_release_uses_publish_preserved_without_remote_status_read(tmp_path, monkeypatch):
+    from wikidebia_workflow_baseline import PRESERVED_IMPORT_POLICY
+    monkeypatch.setattr(status, '_load_workspace', lambda *args: (tmp_path, _meta(
+        'release_ready', source_preservation={'policy': PRESERVED_IMPORT_POLICY},
+    )))
+    import wikidebia_global_resume as resume
+    monkeypatch.setattr(resume, '_published_receipt', lambda *args: None)
+    result = status.summarize_workspace(tmp_path, 'debat_test', 'EDIT-TEST-001')
+    assert result['next_command'] == './wikidebia publish-preserved debat_test --work-id EDIT-TEST-001'
+    assert result['next_remote_write_possible'] is True
+    assert result['status_check_remote_access'] is False
+    assert result['status_check_remote_write'] is False
+
+
+def test_preserved_published_receipt_requires_local_reconciliation(tmp_path, monkeypatch):
+    from wikidebia_workflow_baseline import PRESERVED_IMPORT_POLICY
+    monkeypatch.setattr(status, '_load_workspace', lambda *args: (tmp_path, _meta(
+        'release_ready', source_preservation={'policy': PRESERVED_IMPORT_POLICY},
+    )))
+    import wikidebia_global_resume as resume
+    monkeypatch.setattr(resume, '_published_receipt', lambda *args: ({'status': 'published'}, tmp_path / 'receipt.json'))
+    result = status.summarize_workspace(tmp_path, 'debat_test', 'EDIT-TEST-001')
+    assert result['next_command'] == './wikidebia corpus-workspace-reconcile-publication debat_test --work-id EDIT-TEST-001'
+    assert result['next_remote_write_possible'] is False
