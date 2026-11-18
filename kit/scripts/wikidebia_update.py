@@ -1101,11 +1101,12 @@ class StateResolver:
     therefore had an intentionally empty baseline.
     """
 
-    def __init__(self, project_root: Path, debate_id: str, corpus_root: Path, inventory_root: Path | None = None) -> None:
+    def __init__(self, project_root: Path, debate_id: str, corpus_root: Path, inventory_root: Path | None = None, *, allow_preserved: bool = False) -> None:
         self.project_root = project_root.resolve()
         self.debate_id = debate_id
         self.corpus_root = corpus_root.resolve()
         self.inventory_root = inventory_root.resolve() if inventory_root is not None else None
+        self.allow_preserved = allow_preserved
 
     def resolve(self, languages: Iterable[str]) -> tuple[dict[tuple[str, str], StatePage], dict[str, Any]]:
         wanted = sorted(set(languages))
@@ -1233,7 +1234,7 @@ class StateResolver:
         try:
             evidence = resolve_workflow_release_baseline(
                 self.project_root, self.debate_id, self.corpus_root,
-                allow_preserved=bool(self.config.get("preserved_source_publication")),
+                allow_preserved=self.allow_preserved,
             )
         except WorkflowBaselineError as exc:
             raise UpdateError(f"Baseline finale du Work invalide : {exc}") from exc
@@ -1514,7 +1515,8 @@ class RemoteUpdatePlanner:
         inventory_root = self.config.get("state_inventory_root")
         resolved_inventory_root = self._resolve(inventory_root) if inventory_root else None
         self.state, self.state_source = StateResolver(
-            self.project_root, self.debate_id, self.corpus_root, resolved_inventory_root
+            self.project_root, self.debate_id, self.corpus_root, resolved_inventory_root,
+            allow_preserved=self.config.get("preserved_source_publication") is True,
         ).resolve(self.languages)
         self.new_pages = self._new_pages()
 
