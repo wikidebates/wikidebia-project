@@ -41,6 +41,7 @@ from wikidebia_update import RemoteUpdatePlanner, PlanExecutor, build_adapter, s
 from wikidebia_workflow_baseline import (
     WorkflowBaselineError,
     seal_workflow_release_baseline,
+    PRESERVED_IMPORT_MODE,
 )
 
 FINAL_RECEIPT_SCHEMA = "wikidebia-final-publication-receipt-1.0"
@@ -729,6 +730,30 @@ def _preflight(project_root: Path, state_dir: Path, plans: Mapping[str, Any]) ->
 
 
 
+def _verify_preserved_preflight(
+    release_copy: Path, baseline: Mapping[str, Any], preflight: Mapping[str, Any],
+) -> None:
+    manifest = load_json(release_copy / "manifest.json", "manifeste de release")
+    snapshots = preflight["remote_snapshots"]
+    expected_french = {row["page_id"]: row for row in baseline["fr"]["pages"]}
+    expected_english = {row["page_id"] for row in manifest["pages"] if row["language"] == "en"}
+    french = [row for row in snapshots if row["language"] == "fr"]
+    english = [row for row in snapshots if row["language"] == "en"]
+    if len(french) != len(expected_french) or {row["page_id"] for row in french} != set(expected_french):
+        raise FinalPublicationError("Le préflight ne couvre pas exactement l'import français préservé")
+    if len(english) != len(expected_english) or {row["page_id"] for row in english} != expected_english:
+        raise FinalPublicationError("Le préflight ne couvre pas exactement les pages anglaises de la release")
+    for row in french:
+        expected = expected_french[row["page_id"]]
+        if (row["title"] != expected["canonical_title"]
+            or row["revision_id"] != expected["revision_id"]
+            or row["remote_sha256"] != expected["content_sha256"]):
+            raise FinalPublicationError(f"Révision française différente de l'import préservé : {row['title']}")
+    for row in english:
+        if row["exists"] or row["operation"] != "create":
+            raise FinalPublicationError(f"Titre anglais déjà occupé : {row['title']}")
+
+
 def _publication_date_from_config(config: Mapping[str, Any]) -> str:
     from zoneinfo import ZoneInfo
 
@@ -1192,6 +1217,8 @@ def publish_final_release(
     debate_id: str,
     work_id: str,
     release_copy: Path,
+    *,
+    allow_preserved: bool = False,
 ) -> dict[str, Any]:
     project_root = project_root.resolve()
     release_copy = release_copy.resolve()
@@ -1217,11 +1244,14 @@ def publish_final_release(
                 raise FinalPublicationError("Autorisation finale sauvegardée invalide", remote_execution_started=True)
         else:
             try:
-                baseline = seal_workflow_release_baseline(project_root, debate_id, work_id, release_copy)
+                baseline = seal_workflow_release_baseline(project_root, debate_id, work_id, release_copy, allow_preserved=allow_preserved)
             except WorkflowBaselineError as exc:
                 raise FinalPublicationError(str(exc)) from exc
-            plans = _load_or_build_plans(project_root, debate_id, work_id, release_copy, state_dir)
+            preserved = baseline["fr"]["mode"] == PRESERVED_IMPORT_MODE
+            plans = _load_or_build_plans(project_root, debate_id, work_id, release_copy, state_dir, preserved=preserved)
             preflight = _preflight(project_root, state_dir, plans)
+            if preserved:
+                _verify_preserved_preflight(release_copy, baseline, preflight)
             authorization = _authorization(state_dir, baseline, preflight)
             remote_started = True
 
