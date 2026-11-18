@@ -48,3 +48,11 @@ publié ; la refinalisation exige une nouvelle convergence sur l'empreinte coura
 
 Un paquet `release_ready` reste local. Ce mode n'autorise aucune publication,
 comparaison distante, mise à jour française ou fusion de branche.
+Pour contrôler l'avancement sans déclencher d'écriture distante :
+`./wikidebia corpus-workspace-status DEBAT --work-id WORK` ou
+`./wikidebia resume --debate-id DEBAT --work-id WORK`.
+La reprise de publication préservée passe toujours par `publish-preserved`,
+même après une interruption. `continuity-sync DEBAT --work-id WORK` projette
+les preuves signées de préservation et de publication finale sans exiger un
+checkpoint français inexistant dans ce parcours. `continuity-sync --check`
+contrôle la projection sans la modifier.
