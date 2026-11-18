@@ -1229,7 +1229,7 @@ class StateResolver:
         whose pre-final installed corpus explicitly kept English deferred.
         Remote absence is never inferred from a missing local receipt.
         """
-        if language != "en":
+        if language != "en" and not (language == "fr" and self.allow_preserved):
             return None
         try:
             evidence = resolve_workflow_release_baseline(
@@ -1240,6 +1240,34 @@ class StateResolver:
             raise UpdateError(f"Baseline finale du Work invalide : {exc}") from exc
         if evidence is None:
             return None
+        if language == "fr":
+            french = evidence.get("fr") or {}
+            if french.get("mode") != "preserved_french_import":
+                raise UpdateError("Baseline française préservée non conforme")
+            pages: dict[tuple[str, str], StatePage] = {}
+            for row in french.get("pages") or []:
+                page_id = str(row.get("page_id") or "")
+                title = str(row.get("canonical_title") or "")
+                revision = row.get("revision_id")
+                content_hash = str(row.get("content_sha256") or "")
+                if (not page_id or not title or type(revision) is not int or revision <= 0
+                        or len(content_hash) != 64 or page_key("fr", page_id) in pages):
+                    raise UpdateError("Page française de baseline préservée invalide")
+                pages[page_key("fr", page_id)] = StatePage(
+                    language="fr", page_id=page_id,
+                    page_type=str(row.get("page_type") or "unknown"),
+                    title=title, content_sha256=content_hash, revision_id=revision,
+                    status="published", source_path=str(row.get("source_path") or ""),
+                )
+            if not pages:
+                raise UpdateError("Baseline française préservée sans pages")
+            return pages, {
+                "kind": "workflow_release_baseline",
+                "work_id": str(evidence.get("work_id") or ""),
+                "baseline_sha256": str(evidence.get("baseline_sha256") or ""),
+                "reason": "preserved_french_import",
+                "remote_absence_not_assumed": True,
+            }
         en = evidence.get("en") or {}
         if en.get("mode") != "never_published_by_this_work" or en.get("empty_baseline") is not True:
             raise UpdateError("Baseline anglaise finale du Work non conforme")
