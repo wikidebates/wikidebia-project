@@ -412,6 +412,21 @@ def verify_committed_snapshot(snapshot_root: Path, debate_id: str | None = None)
         if (receipt.get("debate_id") != debate_id or receipt.get("work_id") != work_id
                 or receipt.get("receipt_sha256") != (workspace.get("source_preservation") or {}).get("receipt_sha256")):
             raise ContinuityError("Reçu d'import préservé divergent")
+        # A checksum list proves integrity of present files, not completeness.
+        # Require every signed publication-stage artifact that continuity-sync
+        # projects; an attacker must not be able to omit one and rehash the list.
+        final_root = snapshot_root / "runtime/final-publication"
+        required = ("baseline.json", "preflight.json")
+        for name in required:
+            _load_signed(final_root / name,
+                         "baseline_sha256" if name == "baseline.json" else "preflight_sha256",
+                         f"preuve préservée obligatoire {name}")
+        if (final_root / "publication-receipt.json").exists():
+            for name, field in (
+                ("authorization.json", "authorization_sha256"),
+                ("publication-receipt.json", "receipt_sha256"),
+            ):
+                _load_signed(final_root / name, field, f"preuve préservée obligatoire {name}")
         return {
             "status": "passed", "debate_id": debate_id, "work_id": work_id,
             "preserved_import": True,
