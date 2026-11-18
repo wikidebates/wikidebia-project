@@ -1693,8 +1693,8 @@
     },
     {
       "path": "scripts/wikidebia_continuity.py",
-      "size_bytes": 40177,
-      "sha256": "f285624ceb258225524402cc1a8f68c341a11faba0b3c8e7a0cfbd4b5ea3fd74"
+      "size_bytes": 41033,
+      "sha256": "a21382d252ebe39cfb66161c12fc2402f8ce32a6ddf22f56402cc32584a95fb4"
     },
     {
       "path": "scripts/wikidebia_corpus_build.py",
@@ -2273,8 +2273,8 @@
     },
     {
       "path": "tests/test_wikidebia_continuity.py",
-      "size_bytes": 19485,
-      "sha256": "cf48ff668c720787b1ec3964b199c3d08997751ab5e8c32a725076db03bdf299"
+      "size_bytes": 20278,
+      "sha256": "2a2f0e631cedba4936178f7de6a11c1335788e757f475e8f3dcf0bce3f71cd19"
     },
     {
       "path": "tests/test_wikidebia_corpus_init.py",

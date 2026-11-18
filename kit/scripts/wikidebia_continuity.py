@@ -421,12 +421,22 @@ def verify_committed_snapshot(snapshot_root: Path, debate_id: str | None = None)
             _load_signed(final_root / name,
                          "baseline_sha256" if name == "baseline.json" else "preflight_sha256",
                          f"preuve préservée obligatoire {name}")
-        if (final_root / "publication-receipt.json").exists():
+        # Published workflows must carry their final completion receipt.
+        # A recomputed SHA256SUMS cannot turn a missing receipt into a valid
+        # published snapshot. Pre-publication snapshots remain supported.
+        final_receipt_path = final_root / "publication-receipt.json"
+        if workflow.get("status") == "published" and not final_receipt_path.is_file():
+            raise ContinuityError("Reçu de publication finale obligatoire pour un Work published")
+        if final_receipt_path.exists():
             for name, field in (
                 ("authorization.json", "authorization_sha256"),
                 ("publication-receipt.json", "receipt_sha256"),
             ):
-                _load_signed(final_root / name, field, f"preuve préservée obligatoire {name}")
+                evidence = _load_signed(final_root / name, field, f"preuve préservée obligatoire {name}")
+                if evidence.get("debate_id") != debate_id or evidence.get("work_id") != work_id:
+                    raise ContinuityError("Preuve finale préservée rattachée à un autre Work")
+                if name == "publication-receipt.json" and evidence.get("status") != "published":
+                    raise ContinuityError("Reçu de publication finale sans statut published")
         return {
             "status": "passed", "debate_id": debate_id, "work_id": work_id,
             "preserved_import": True,
