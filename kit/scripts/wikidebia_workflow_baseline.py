@@ -249,6 +249,7 @@ def _preserved_french_baseline(corpus: Path, meta: Mapping[str, Any], release: M
             key in rows or key not in page_maps["fr"]
             or not title or type(revision) is not int or revision <= 0
             or not source.is_relative_to((corpus / "imports/fr").resolve())
+            or (corpus / relative).is_symlink()
             or not source.is_file() or sha256_file(source) != row.get("sha256")
         ):
             raise WorkflowBaselineError(f"Import français invalide : {page_id}")
