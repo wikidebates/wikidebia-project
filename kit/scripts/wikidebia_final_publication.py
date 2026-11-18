@@ -610,11 +610,15 @@ def _load_or_build_plans(
     work_id: str,
     release_copy: Path,
     state_dir: Path,
+    preserved: bool = False,
 ) -> dict[str, Any]:
     # Initial safety plan: full bilingual update semantics against Work baseline.
     safety_config_path, safety_config = _update_config(
-        project_root, debate_id, release_copy, state_dir, ["fr", "en"], "safety-update-config.json"
+        project_root, debate_id, release_copy, state_dir, ["en"] if preserved else ["fr", "en"], "safety-update-config.json"
     )
+    if preserved:
+        safety_config['preserved_source_publication'] = True
+        write_json(safety_config_path, safety_config)
     safety_adapter = build_adapter(safety_config, project_root)
     # Pages that belonged to an earlier, broader graph remain valid wiki pages
     # even when the current Work no longer references them.  Final publication
@@ -636,12 +640,14 @@ def _load_or_build_plans(
     # live French page remains authoritative: human summaries, citations and
     # graph relations added after the editorial snapshot must be preserved.
     fr_config["interlanguage_only"] = True
+    if preserved:
+        fr_config["preserved_source_publication"] = True
     write_json(fr_config_path, fr_config)
     fr_adapter = build_adapter(fr_config, project_root)
     fr_plan = RemoteUpdatePlanner(fr_config, fr_adapter, fr_config_path).build_plan(mode="no_delete")
 
     en_config_path, en_config = _english_config(project_root, debate_id, release_copy, state_dir)
-    late_reuse = _discover_late_existing_english_reuse(
+    late_reuse = None if preserved else _discover_late_existing_english_reuse(
         project_root, release_copy, state_dir, fr_plan, en_config
     )
     if late_reuse:
