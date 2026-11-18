@@ -496,6 +496,61 @@ def sync_signed_french_history(
     if not snapshot_root.is_dir():
         raise ContinuityError("Racine de continuité absente")
 
+    # Preserved imports have no French content checkpoint. Their immutable
+    # imported-source receipt and final-publication evidence replace that anchor.
+    workspace_path = project_root / ".state/editorial-workspaces" / debate_id / work_id / "workspace.json"
+    if workspace_path.is_file():
+        from wikidebia_workflow_baseline import PRESERVED_IMPORT_POLICY
+        from wikidebia_editorial_workspace import workspace_receipt_hash
+        workspace = json.loads(workspace_path.read_text(encoding="utf-8"))
+        if (workspace.get("source_preservation") or {}).get("policy") == PRESERVED_IMPORT_POLICY:
+            if workspace.get("workspace_sha256") != workspace_receipt_hash(workspace):
+                raise ContinuityError("Empreinte du Work préservé invalide")
+            final_root = project_root / ".state/final-publication" / debate_id / work_id
+            baseline = _load_signed(final_root / "baseline.json", "baseline_sha256", "baseline préservée")
+            if (baseline.get("debate_id") != debate_id or baseline.get("work_id") != work_id
+                    or (baseline.get("fr") or {}).get("mode") != "preserved_french_import"):
+                raise ContinuityError("Baseline préservée divergente")
+            source_receipt = project_root / ".state/editorial-workspaces" / debate_id / work_id / "release-copy/data/source_preservation_receipt.json"
+            preserved = _load_signed(source_receipt, "receipt_sha256", "reçu d'import préservé")
+            if (preserved.get("debate_id") != debate_id or preserved.get("work_id") != work_id
+                    or preserved.get("receipt_sha256") != (workspace.get("source_preservation") or {}).get("receipt_sha256")):
+                raise ContinuityError("Reçu d'import préservé divergent")
+            required = [
+                (workflow_path, snapshot_root / "runtime/workflow/workflow.json"),
+                (workspace_path, snapshot_root / "runtime/workspace/workspace.json"),
+                (source_receipt, snapshot_root / "runtime/preserved/source_preservation_receipt.json"),
+            ]
+            for source in sorted(final_root.rglob("*")):
+                if source.is_symlink():
+                    raise ContinuityError("Lien symbolique dans les preuves de publication préservée")
+                if not source.is_file():
+                    continue
+                relative = source.relative_to(final_root)
+                signed_fields = {
+                    "baseline.json": "baseline_sha256", "preflight.json": "preflight_sha256",
+                    "authorization.json": "authorization_sha256", "publication-receipt.json": "receipt_sha256",
+                }
+                if source.name in signed_fields:
+                    evidence = _load_signed(source, signed_fields[source.name], source.name)
+                    if evidence.get("debate_id", debate_id) != debate_id or evidence.get("work_id", work_id) != work_id:
+                        raise ContinuityError("Preuve de publication hors Work")
+                required.append((source, snapshot_root / "runtime/final-publication" / relative))
+            if check_only:
+                missing = [str(target.relative_to(snapshot_root)) for source, target in required if not _same_file(source, target)]
+                if missing:
+                    raise ContinuityError("Projection de continuité incomplète : " + ", ".join(missing))
+                _verify_sha256sums(snapshot_root)
+            else:
+                for source, target in required:
+                    _copy_exact(source, target)
+                _refresh_sha256sums(snapshot_root)
+                _verify_sha256sums(snapshot_root)
+            return {"status": "passed", "mode": "check" if check_only else "sync",
+                    "debate_id": debate_id, "work_id": work_id,
+                    "snapshot_root": snapshot_root.relative_to(project_root).as_posix(),
+                    "preserved_import": True, "evidence_file_count": len(required)}
+
     work_root = project_root / ".state/fr-publication" / debate_id / work_id
     content_receipt_path = work_root / "content/publication-receipt.json"
     content_receipt = _load_signed(content_receipt_path, "receipt_sha256", "reçu du checkpoint de contenu")
