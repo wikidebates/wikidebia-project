@@ -185,8 +185,9 @@ def test_preserved_release_uses_publish_preserved_without_remote_status_read(tmp
     import wikidebia_global_resume as resume
     monkeypatch.setattr(resume, '_published_receipt', lambda *args: None)
     result = status.summarize_workspace(tmp_path, 'debat_test', 'EDIT-TEST-001')
-    assert result['next_command'] == './wikidebia publish-preserved debat_test --work-id EDIT-TEST-001'
-    assert result['next_remote_write_possible'] is True
+    assert result['next_command'] is None
+    assert result['next_action'] == 'preserved_publication_requires_dedicated_workflow'
+    assert result['next_remote_write_possible'] is False
     assert result['status_check_remote_access'] is False
     assert result['status_check_remote_write'] is False
 
