@@ -26,3 +26,21 @@ lui-même reste local et porte toujours :
 Ce résumé se fonde sur le workspace signé. Il reste donc exact même si un ancien
 fichier d’orchestration générale n’a pas été actualisé après l’usage des
 commandes avancées.
+## Release française préservée
+
+Pour un Work portant un reçu de préservation, `release_ready` signifie **prêt
+localement**, et non « publié ». Le statut compact indique alors :
+
+```bash
+./wikidebia publish-preserved <debate_id> --work-id <work_id>
+```
+
+La même commande reprend une publication interrompue (y compris après des
+créations anglaises). Elle refait les contrôles distants nécessaires ; ne pas
+substituer `corpus-workspace-finalize` ou une publication française classique.
+Un reçu final signé et cohérent distingue une publication terminée ; si le Work
+local n'est pas encore réconcilié, la commande proposée est
+`corpus-workspace-reconcile-publication`. Le contrôle de statut reste local,
+sans accès ni écriture sur les wikis. Une révision française divergente ou un
+titre anglais occupé doivent bloquer la publication, pas être corrigés
+silencieusement.
