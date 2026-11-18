@@ -263,10 +263,10 @@ def summarize_workspace(project_root: Path, debate_id: str, work_id: str) -> dic
             }
         else:
             next_step = {
-                "action": "preserved_publication_requires_dedicated_workflow",
-                "command": None,
-                "remote_read_possible": False, "remote_write_possible": False,
-                "note": "La commande publish-preserved n'est pas encore disponible dans ce kit ; ne pas lancer le parcours standard.",
+                "action": "publish_preserved_release",
+                "command": _command("publish-preserved", debate_id, work_id),
+                "remote_read_possible": True, "remote_write_possible": True,
+                "note": "Publication préservée : vérifier les préflights distants et préserver le contenu français.",
             }
 
     if no_change_plan_sha256 and comparison_id:
