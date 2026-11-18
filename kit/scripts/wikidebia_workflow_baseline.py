@@ -276,6 +276,7 @@ def resolve_workflow_release_baseline(
     corpus_root: Path,
     *,
     expected_work_id: str | None = None,
+    allow_preserved: bool = False,
 ) -> dict[str, Any] | None:
     """Return verified Work-scoped baseline evidence, or ``None`` if not applicable.
 
@@ -353,44 +354,57 @@ def resolve_workflow_release_baseline(
         # pre-publication flag.
         raise WorkflowBaselineError("Le reçu de release ne porte pas la barrière prépublication attendue")
 
-    # Preservation must never silently fall back to a French checkpoint.
-    # Until the signed imported-source baseline is integrated, fail closed.
-    if (meta.get("source_preservation") or {}).get("policy") == PRESERVED_IMPORT_POLICY:
-        raise WorkflowBaselineError(
-            "Release de préservation détectée : baseline française importée non prise en charge "
-            "par le parcours de publication standard"
-        )
+    if allow_preserved:
+        if (
+            workflow.get("preserved_publication_release_sha256") != release_tree_sha
+            or corpus_root != release_copy
+            or release_receipt.get("release_manifest_sha256") != release_manifest_sha
+        ):
+            raise WorkflowBaselineError("La publication préservée exige le release-copy scellé du Work")
+        french = _preserved_french_baseline(release_copy, meta, release_receipt)
+    else:
+        if (meta.get("source_preservation") or {}).get("policy") == PRESERVED_IMPORT_POLICY:
+            raise WorkflowBaselineError("La publication préservée exige un parcours explicitement autorisé")
+        content_receipt_path = project_root / ".state/fr-publication" / debate_id / work_id / "content/publication-receipt.json"
+        if not content_receipt_path.is_file():
+            # compatibility with the single-checkpoint 2.16.13 path
+            legacy = project_root / ".state/fr-publication" / debate_id / work_id / "publication-receipt.json"
+            if legacy.is_file():
+                content_receipt_path = legacy
+            else:
+                raise WorkflowBaselineError("Reçu du dernier checkpoint français absent")
+        content_receipt = load_json(content_receipt_path, "reçu du checkpoint français final")
+        _verify_sha_object(content_receipt, "receipt_sha256", "du checkpoint français final")
+        if content_receipt.get("debate_id") != debate_id or content_receipt.get("work_id") != work_id:
+            raise WorkflowBaselineError("Checkpoint français final rattaché à un autre Work")
+        if str(content_receipt.get("status") or "") not in {"published", "verified_no_changes"}:
+            raise WorkflowBaselineError("Le checkpoint français final n'est pas attesté publié")
 
-    content_receipt_path = project_root / ".state/fr-publication" / debate_id / work_id / "content/publication-receipt.json"
-    if not content_receipt_path.is_file():
-        # compatibility with the single-checkpoint 2.16.13 path
-        legacy = project_root / ".state/fr-publication" / debate_id / work_id / "publication-receipt.json"
-        if legacy.is_file():
-            content_receipt_path = legacy
-        else:
-            raise WorkflowBaselineError("Reçu du dernier checkpoint français absent")
-    content_receipt = load_json(content_receipt_path, "reçu du checkpoint français final")
-    _verify_sha_object(content_receipt, "receipt_sha256", "du checkpoint français final")
-    if content_receipt.get("debate_id") != debate_id or content_receipt.get("work_id") != work_id:
-        raise WorkflowBaselineError("Checkpoint français final rattaché à un autre Work")
-    if str(content_receipt.get("status") or "") not in {"published", "verified_no_changes"}:
-        raise WorkflowBaselineError("Le checkpoint français final n'est pas attesté publié")
+        workflow_content = workflow.get("french_content_publication") or workflow.get("french_publication")
+        if not isinstance(workflow_content, dict):
+            raise WorkflowBaselineError("Le workflow ne référence pas son checkpoint français final")
+        if str(workflow_content.get("receipt_sha256") or "") != str(content_receipt.get("receipt_sha256") or ""):
+            raise WorkflowBaselineError("Le workflow et le reçu du checkpoint français final divergent")
 
-    workflow_content = workflow.get("french_content_publication") or workflow.get("french_publication")
-    if not isinstance(workflow_content, dict):
-        raise WorkflowBaselineError("Le workflow ne référence pas son checkpoint français final")
-    if str(workflow_content.get("receipt_sha256") or "") != str(content_receipt.get("receipt_sha256") or ""):
-        raise WorkflowBaselineError("Le workflow et le reçu du checkpoint français final divergent")
+        fr_state_entry = _load_signed_published_state(project_root, debate_id, "fr")
+        if fr_state_entry is None:
+            raise WorkflowBaselineError("État publié français signé absent après le checkpoint final")
+        fr_state_path, fr_state = fr_state_entry
+        fr_succession: dict[str, Any] | None = None
+        if str(fr_state.get("plan_sha256") or "") != str(content_receipt.get("plan_sha256") or ""):
+            fr_succession = _verify_french_state_succession(
+                project_root, debate_id, work_id, content_receipt, fr_state
+            )
 
-    fr_state_entry = _load_signed_published_state(project_root, debate_id, "fr")
-    if fr_state_entry is None:
-        raise WorkflowBaselineError("État publié français signé absent après le checkpoint final")
-    fr_state_path, fr_state = fr_state_entry
-    fr_succession: dict[str, Any] | None = None
-    if str(fr_state.get("plan_sha256") or "") != str(content_receipt.get("plan_sha256") or ""):
-        fr_succession = _verify_french_state_succession(
-            project_root, debate_id, work_id, content_receipt, fr_state
-        )
+        french = {
+            "mode": (fr_succession or {}).get("mode", "published_checkpoint_state"),
+            "checkpoint_receipt_path": _relative(content_receipt_path, project_root),
+            "checkpoint_receipt_sha256": str(content_receipt.get("receipt_sha256") or ""),
+            "published_state_path": _relative(fr_state_path, project_root),
+            "published_state_sha256": str(fr_state.get("state_sha256") or ""),
+            "plan_sha256": str(fr_state.get("plan_sha256") or ""),
+            **({"post_checkpoint_succession": fr_succession} if fr_succession else {}),
+        }
 
     installed_manifest_path = project_root / "corpus" / debate_id / "manifest.json"
     if not installed_manifest_path.is_file():
@@ -427,15 +441,7 @@ def resolve_workflow_release_baseline(
             "release_receipt_path": _relative(release_receipt_path, project_root),
             "release_receipt_sha256": str(release_receipt.get("receipt_sha256") or ""),
         },
-        "fr": {
-            "mode": (fr_succession or {}).get("mode", "published_checkpoint_state"),
-            "checkpoint_receipt_path": _relative(content_receipt_path, project_root),
-            "checkpoint_receipt_sha256": str(content_receipt.get("receipt_sha256") or ""),
-            "published_state_path": _relative(fr_state_path, project_root),
-            "published_state_sha256": str(fr_state.get("state_sha256") or ""),
-            "plan_sha256": str(fr_state.get("plan_sha256") or ""),
-            **({"post_checkpoint_succession": fr_succession} if fr_succession else {}),
-        },
+        "fr": french,
         "en": {
             "mode": "never_published_by_this_work",
             "empty_baseline": True,
