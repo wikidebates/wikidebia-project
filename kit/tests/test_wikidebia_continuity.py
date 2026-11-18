@@ -354,6 +354,15 @@ def test_preserved_continuity_copies_signed_import_and_final_evidence(tmp_path):
     result = continuity.sync_signed_french_history(tmp_path, debate_id, work_id=work_id)
     assert result['preserved_import'] is True
     assert continuity.verify_committed_snapshot(snapshot)['preserved_import'] is True
+    preflight = snapshot / "runtime/final-publication/preflight.json"
+    original = preflight.read_bytes()
+    preflight.unlink()
+    continuity._refresh_sha256sums(snapshot)
+    with pytest.raises(continuity.ContinuityError, match="preflight"):
+        continuity.verify_committed_snapshot(snapshot)
+    preflight.write_bytes(original)
+    continuity._refresh_sha256sums(snapshot)
+    assert continuity.verify_committed_snapshot(snapshot)["preserved_import"] is True
     assert continuity.sync_signed_french_history(tmp_path, debate_id, work_id=work_id, check_only=True)['status'] == 'passed'
     (snapshot / 'runtime/final-publication/preflight.json').write_text('tampered', encoding='utf-8')
     with pytest.raises(continuity.ContinuityError, match='incomplète'):
@@ -405,3 +414,24 @@ def test_update_planner_propagates_preserved_baseline_mode(monkeypatch, tmp_path
     ordinary = update.StateResolver(tmp_path, "debat_test", tmp_path)
     ordinary._workflow_release_language_state("en")
     assert seen == [True, False]
+
+
+def test_preserved_french_resolver_uses_signed_import_revisions(monkeypatch, tmp_path):
+    import wikidebia_update as update
+    pages = [
+        {"page_id": "A0001", "page_type": "argument", "canonical_title": "Argument français",
+         "revision_id": 42, "content_sha256": "a" * 64, "source_path": "imports/fr/A0001.wiki"},
+    ]
+    calls = []
+    def baseline(root, debate_id, corpus_root, *, allow_preserved=False):
+        calls.append(allow_preserved)
+        return {"work_id": "EDIT-TEST", "baseline_sha256": "b" * 64,
+                "fr": {"mode": "preserved_french_import", "pages": pages}}
+    monkeypatch.setattr(update, "resolve_workflow_release_baseline", baseline)
+    resolver = update.StateResolver(tmp_path, "debat_test", tmp_path, allow_preserved=True)
+    result, source = resolver._workflow_release_language_state("fr")
+    assert result[("fr", "A0001")].revision_id == 42
+    assert result[("fr", "A0001")].title == "Argument français"
+    assert source["reason"] == "preserved_french_import"
+    assert calls == [True]
+    assert update.StateResolver(tmp_path, "debat_test", tmp_path)._workflow_release_language_state("fr") is None
