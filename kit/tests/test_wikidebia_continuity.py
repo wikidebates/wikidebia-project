@@ -376,6 +376,39 @@ def test_preserved_continuity_copies_signed_import_and_final_evidence(tmp_path):
     workflow_path.write_bytes(original_workflow)
     continuity._refresh_sha256sums(snapshot)
     assert continuity.verify_committed_snapshot(snapshot)["preserved_import"] is True
+    # A real final authorization has no debate_id/work_id: its signed
+    # baseline/preflight hashes and the final receipt bind it to this Work.
+    final_snapshot = snapshot / "runtime/final-publication"
+    baseline = json.loads((final_snapshot / "baseline.json").read_text(encoding="utf-8"))
+    preflight_data = json.loads((final_snapshot / "preflight.json").read_text(encoding="utf-8"))
+    authorization = _signed({
+        "status": "authorized", "remote_write_authorized": True,
+        "baseline_sha256": baseline["baseline_sha256"],
+        "preflight_sha256": preflight_data["preflight_sha256"],
+    }, "authorization_sha256")
+    final_receipt = _signed({
+        "debate_id": debate_id, "work_id": work_id, "status": "published",
+        "baseline_sha256": baseline["baseline_sha256"],
+        "preflight_sha256": preflight_data["preflight_sha256"],
+        "authorization_sha256": authorization["authorization_sha256"],
+    }, "receipt_sha256")
+    _write(final_snapshot / "authorization.json", authorization)
+    _write(final_snapshot / "publication-receipt.json", final_receipt)
+    workflow_path = snapshot / "runtime/workflow/workflow.json"
+    workflow_path.write_text(json.dumps({"debate_id": debate_id, "work_id": work_id, "status": "published"}), encoding="utf-8")
+    continuity._refresh_sha256sums(snapshot)
+    assert continuity.verify_committed_snapshot(snapshot)["preserved_import"] is True
+    # A different signed authorization must not pass without a matching
+    # receipt, even after the checksum list has been regenerated.
+    authorization["preflight_sha256"] = "0" * 64
+    _write(final_snapshot / "authorization.json", _signed({
+        "status": "authorized", "remote_write_authorized": True,
+        "baseline_sha256": baseline["baseline_sha256"],
+        "preflight_sha256": "0" * 64,
+    }, "authorization_sha256"))
+    continuity._refresh_sha256sums(snapshot)
+    with pytest.raises(continuity.ContinuityError, match="Chaîne des empreintes"):
+        continuity.verify_committed_snapshot(snapshot)
     assert continuity.sync_signed_french_history(tmp_path, debate_id, work_id=work_id, check_only=True)['status'] == 'passed'
     (snapshot / 'runtime/final-publication/preflight.json').write_text('tampered', encoding='utf-8')
     with pytest.raises(continuity.ContinuityError, match='incomplète'):
