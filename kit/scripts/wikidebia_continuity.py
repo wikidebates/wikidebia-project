@@ -379,6 +379,45 @@ def verify_committed_snapshot(snapshot_root: Path, debate_id: str | None = None)
             raise ContinuityError("Registre de suppressions rattaché à un autre débat")
         external_registry_sha256 = external_registry.get("registry_sha256")
 
+    preserved_root = snapshot_root / "runtime/preserved"
+    if preserved_root.exists():
+        from wikidebia_workflow_baseline import PRESERVED_IMPORT_POLICY, PRESERVED_IMPORT_MODE
+        from wikidebia_editorial_workspace import workspace_receipt_hash
+
+        workspace = json.loads(
+            (snapshot_root / "runtime/workspace/workspace.json").read_text(encoding="utf-8")
+        )
+        if workspace.get("workspace_sha256") != workspace_receipt_hash(workspace):
+            raise ContinuityError("Empreinte du Work préservé invalide")
+        work_id = str(workspace.get("work_id") or "")
+        if (workspace.get("debate_id") != debate_id or not work_id
+                or (workspace.get("source_preservation") or {}).get("policy") != PRESERVED_IMPORT_POLICY):
+            raise ContinuityError("Work de continuité préservée divergent")
+        workflow = json.loads(
+            (snapshot_root / "runtime/workflow/workflow.json").read_text(encoding="utf-8")
+        )
+        if workflow.get("debate_id") != debate_id or workflow.get("work_id") != work_id:
+            raise ContinuityError("Workflow de continuité préservée divergent")
+        baseline = _load_signed(
+            snapshot_root / "runtime/final-publication/baseline.json",
+            "baseline_sha256", "baseline préservée",
+        )
+        if (baseline.get("debate_id") != debate_id or baseline.get("work_id") != work_id
+                or (baseline.get("fr") or {}).get("mode") != PRESERVED_IMPORT_MODE):
+            raise ContinuityError("Baseline préservée divergente")
+        receipt = _load_signed(
+            preserved_root / "source_preservation_receipt.json",
+            "receipt_sha256", "reçu d'import préservé",
+        )
+        if (receipt.get("debate_id") != debate_id or receipt.get("work_id") != work_id
+                or receipt.get("receipt_sha256") != (workspace.get("source_preservation") or {}).get("receipt_sha256")):
+            raise ContinuityError("Reçu d'import préservé divergent")
+        return {
+            "status": "passed", "debate_id": debate_id, "work_id": work_id,
+            "preserved_import": True,
+            "external_deletion_registry_sha256": external_registry_sha256,
+        }
+
     content_receipt = _load_signed(
         snapshot_root / "runtime/fr-publication/content/publication-receipt.json",
         "receipt_sha256",

@@ -353,7 +353,55 @@ def test_preserved_continuity_copies_signed_import_and_final_evidence(tmp_path):
     snapshot.mkdir(parents=True)
     result = continuity.sync_signed_french_history(tmp_path, debate_id, work_id=work_id)
     assert result['preserved_import'] is True
+    assert continuity.verify_committed_snapshot(snapshot)['preserved_import'] is True
     assert continuity.sync_signed_french_history(tmp_path, debate_id, work_id=work_id, check_only=True)['status'] == 'passed'
     (snapshot / 'runtime/final-publication/preflight.json').write_text('tampered', encoding='utf-8')
     with pytest.raises(continuity.ContinuityError, match='incomplète'):
         continuity.sync_signed_french_history(tmp_path, debate_id, work_id=work_id, check_only=True)
+
+
+def test_preserved_continuity_verification_rejects_tampered_signed_evidence(tmp_path):
+    from wikidebia_workflow_baseline import PRESERVED_IMPORT_POLICY
+    from wikidebia_editorial_workspace import workspace_receipt_hash
+    debate_id, work_id = "debat_test", "EDIT-20261023-001"
+    _write(tmp_path / ".state/workflows" / debate_id / "workflow.json",
+           {"debate_id": debate_id, "work_id": work_id})
+    preservation = _signed({"debate_id": debate_id, "work_id": work_id}, "receipt_sha256")
+    workspace = {"debate_id": debate_id, "work_id": work_id,
+                 "source_preservation": {"policy": PRESERVED_IMPORT_POLICY,
+                                         "receipt_sha256": preservation["receipt_sha256"]}}
+    workspace["workspace_sha256"] = workspace_receipt_hash(workspace)
+    root = tmp_path / ".state/editorial-workspaces" / debate_id / work_id
+    _write(root / "workspace.json", workspace)
+    _write(root / "release-copy/data/source_preservation_receipt.json", preservation)
+    final = tmp_path / ".state/final-publication" / debate_id / work_id
+    _write(final / "baseline.json", _signed({"debate_id": debate_id, "work_id": work_id,
+           "fr": {"mode": "preserved_french_import"}}, "baseline_sha256"))
+    snapshot = tmp_path / "continuity" / debate_id / "latest"
+    snapshot.mkdir(parents=True)
+    continuity.sync_signed_french_history(tmp_path, debate_id, work_id=work_id)
+    carried = snapshot / "runtime/preserved/source_preservation_receipt.json"
+    tampered = json.loads(carried.read_text(encoding="utf-8"))
+    tampered["work_id"] = "EDIT-OTHER"
+    _write(carried, tampered)
+    continuity._refresh_sha256sums(snapshot)
+    with pytest.raises(continuity.ContinuityError, match="reçu d'import préservé"):
+        continuity.verify_committed_snapshot(snapshot)
+
+
+def test_update_planner_propagates_preserved_baseline_mode(monkeypatch, tmp_path):
+    import wikidebia_update as update
+    seen = []
+    def fake_resolve(root, debate_id, corpus_root, *, allow_preserved=False):
+        seen.append(allow_preserved)
+        return {"work_id": "EDIT-TEST", "baseline_sha256": "a" * 64,
+                "en": {"mode": "never_published_by_this_work", "empty_baseline": True}}
+    monkeypatch.setattr(update, "resolve_workflow_release_baseline", fake_resolve)
+    resolver = update.StateResolver(tmp_path, "debat_test", tmp_path, allow_preserved=True)
+    pages, source = resolver._workflow_release_language_state("en")
+    assert pages == {}
+    assert source["empty_baseline"] is True
+    assert seen == [True]
+    ordinary = update.StateResolver(tmp_path, "debat_test", tmp_path)
+    ordinary._workflow_release_language_state("en")
+    assert seen == [True, False]
