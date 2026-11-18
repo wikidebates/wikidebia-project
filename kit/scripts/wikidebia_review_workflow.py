@@ -565,18 +565,12 @@ def publish_preserved_workflow(project_root: Path, debate_id: str, work_id: str)
                 _save_workflow(project_root, state)
                 raise
             state = candidate
-        # The standard final publisher still builds a French update plan.  A
-        # preserved import must never enter it until the dedicated no-write
-        # French planning and remote revision checks are available.
-        state["phase"] = "release_ready"
-        state["status"] = "blocked_preserved_final_publication"
-        state["preserved_publication_blocker"] = (
-            "Publication finale préservée non disponible : plan français sans écriture "
-            "et vérification des révisions distantes requis"
-        )
+        state["phase"] = "final_publication"
+        state["status"] = "final_publication"
+        state.pop("preserved_publication_blocker", None)
         state["updated_at"] = now_iso()
         _save_workflow(project_root, state)
-        return state
+        return _mechanical_advance(project_root, state)
 
 
 def _relative(path: Path, root: Path) -> str:
@@ -1825,7 +1819,8 @@ def _mechanical_advance(project_root: Path, state: dict[str, Any]) -> dict[str, 
             release_copy = workspace / "release-copy"
             try:
                 publication = publish_final_release(
-                    project_root, debate_id, str(state["work_id"]), release_copy
+                    project_root, debate_id, str(state["work_id"]), release_copy,
+                    allow_preserved=bool(state.get("preserved_publication_release_sha256")),
                 )
             except FinalPublicationError as exc:
                 state["phase"] = "final_publication"
