@@ -32,6 +32,7 @@ from wikidebia_corpus_build import (
     GRAPH_TITLE_REVIEW,
     build_payload_sha256,
     full_tree_sha256,
+    exclusive_lock,
     load_json,
     now_iso,
     resolve_build,
