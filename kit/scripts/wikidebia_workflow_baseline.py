@@ -19,6 +19,9 @@ from wikidebia_corpus_build import full_tree_sha256, load_json, now_iso, sha256_
 from wikidebia_editorial_workspace import workspace_receipt_hash
 import hashlib
 
+PRESERVED_IMPORT_POLICY = "published-french-import-preserved-for-translation-1.0"
+PRESERVED_IMPORT_MODE = "preserved_french_import"
+
 BASELINE_SCHEMA = "wikidebia-final-publication-baseline-1.0"
 WORKFLOW_SCHEMA = "wikidebia-editorial-orchestration-1.0"
 
