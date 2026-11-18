@@ -366,13 +366,14 @@ def test_preserved_continuity_copies_signed_import_and_final_evidence(tmp_path):
     # A published Work must retain its signed final completion receipt,
     # even if the attacker recomputes the snapshot checksum manifest.
     workflow_path = snapshot / "runtime/workflow/workflow.json"
-    workflow = json.loads(workflow_path.read_text(encoding="utf-8"))
+    original_workflow = workflow_path.read_bytes()
+    workflow = json.loads(original_workflow.decode("utf-8"))
     workflow["status"] = "published"
     workflow_path.write_text(json.dumps(workflow), encoding="utf-8")
     continuity._refresh_sha256sums(snapshot)
     with pytest.raises(continuity.ContinuityError, match="Reçu de publication finale"):
         continuity.verify_committed_snapshot(snapshot)
-    workflow_path.write_text(json.dumps({"debate_id": debate_id, "work_id": work_id}), encoding="utf-8")
+    workflow_path.write_bytes(original_workflow)
     continuity._refresh_sha256sums(snapshot)
     assert continuity.verify_committed_snapshot(snapshot)["preserved_import"] is True
     assert continuity.sync_signed_french_history(tmp_path, debate_id, work_id=work_id, check_only=True)['status'] == 'passed'
