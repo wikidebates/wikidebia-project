@@ -606,10 +606,14 @@ def seal_workflow_release_baseline(
     debate_id: str,
     work_id: str,
     corpus_root: Path,
+    *,
+    allow_preserved: bool = False,
 ) -> dict[str, Any]:
-    _repair_stale_workflow_content_receipt_reference(project_root, debate_id, work_id)
+    if not allow_preserved:
+        _repair_stale_workflow_content_receipt_reference(project_root, debate_id, work_id)
     evidence = resolve_workflow_release_baseline(
-        project_root, debate_id, corpus_root, expected_work_id=work_id
+        project_root, debate_id, corpus_root, expected_work_id=work_id,
+        allow_preserved=allow_preserved,
     )
     if evidence is None:
         raise WorkflowBaselineError("Le corpus n'est pas un release_ready de workflow reconnu")
