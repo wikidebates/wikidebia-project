@@ -387,3 +387,21 @@ def test_preserved_continuity_verification_rejects_tampered_signed_evidence(tmp_
     continuity._refresh_sha256sums(snapshot)
     with pytest.raises(continuity.ContinuityError, match="reçu d'import préservé"):
         continuity.verify_committed_snapshot(snapshot)
+
+
+def test_update_planner_propagates_preserved_baseline_mode(monkeypatch, tmp_path):
+    import wikidebia_update as update
+    seen = []
+    def fake_resolve(root, debate_id, corpus_root, *, allow_preserved=False):
+        seen.append(allow_preserved)
+        return {"work_id": "EDIT-TEST", "baseline_sha256": "a" * 64,
+                "en": {"mode": "never_published_by_this_work", "empty_baseline": True}}
+    monkeypatch.setattr(update, "resolve_workflow_release_baseline", fake_resolve)
+    resolver = update.StateResolver(tmp_path, "debat_test", tmp_path, allow_preserved=True)
+    pages, source = resolver._workflow_release_language_state("en")
+    assert pages == {}
+    assert source["empty_baseline"] is True
+    assert seen == [True]
+    ordinary = update.StateResolver(tmp_path, "debat_test", tmp_path)
+    ordinary._workflow_release_language_state("en")
+    assert seen == [True, False]
