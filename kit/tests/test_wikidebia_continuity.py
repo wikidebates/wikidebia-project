@@ -409,6 +409,10 @@ def test_preserved_continuity_copies_signed_import_and_final_evidence(tmp_path):
     continuity._refresh_sha256sums(snapshot)
     with pytest.raises(continuity.ContinuityError, match="Chaîne des empreintes"):
         continuity.verify_committed_snapshot(snapshot)
+    (final_snapshot / "authorization.json").unlink()
+    (final_snapshot / "publication-receipt.json").unlink()
+    workflow_path.write_bytes(original_workflow)
+    continuity._refresh_sha256sums(snapshot)
     assert continuity.sync_signed_french_history(tmp_path, debate_id, work_id=work_id, check_only=True)['status'] == 'passed'
     (snapshot / 'runtime/final-publication/preflight.json').write_text('tampered', encoding='utf-8')
     with pytest.raises(continuity.ContinuityError, match='incomplète'):
