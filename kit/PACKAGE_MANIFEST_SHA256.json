@@ -1139,7 +1139,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "dc463e933a879e9db78cb263f39e2db8cf440e0ded3b88b6945e3f61ef5cef7a"
+      "sha256": "d34e5d2148635ccd2371140a59de3b93b422d087bc258f183354b1ba8e7ed611"
     },
     {
       "path": "VERSIONS.json",
@@ -1658,8 +1658,8 @@
     },
     {
       "path": "scripts/refresh_package_metadata.py",
-      "size_bytes": 9819,
-      "sha256": "3eac7e0313e12c0993e901e90b97e54d2f36c32861160131062caadc5223ac39"
+      "size_bytes": 11537,
+      "sha256": "6161717ca66defffe829934532d9d9c8e21fac6effa293fbcfd18191d0bf0e61"
     },
     {
       "path": "scripts/wikidebia_access_preflight.py",
