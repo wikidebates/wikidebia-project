@@ -671,7 +671,7 @@ def _validate_citations(rows: Any, french_rows: Sequence[Mapping[str, Any]], nod
                     and not preserved_numeric_date):
                 # A complete translated Quote date must use British day-month-year
                 # spelling. Preserve opaque numeric historical values unchanged.
-                canonical = f"{fr_sig[2]} {calendar_date(fr_sig[0], fr_sig[1], fr_sig[2]).strftime('%B')} {fr_sig[0]}"
+                canonical = f"{fr_sig[2]} {next(name.title() for name, number in EN_MONTHS.items() if number == fr_sig[1])} {fr_sig[0]}"
                 if translated_date != canonical:
                     raise TranslationReviewError(
                         f"Format britannique D Month YYYY requis pour la date de citation {citation_id} : {canonical}"
