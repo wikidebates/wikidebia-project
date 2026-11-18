@@ -288,6 +288,14 @@ def resolve_workflow_release_baseline(
         # pre-publication flag.
         raise WorkflowBaselineError("Le reçu de release ne porte pas la barrière prépublication attendue")
 
+    # Preservation must never silently fall back to a French checkpoint.
+    # Until the signed imported-source baseline is integrated, fail closed.
+    if (meta.get("source_preservation") or {}).get("policy") == PRESERVED_IMPORT_POLICY:
+        raise WorkflowBaselineError(
+            "Release de préservation détectée : baseline française importée non prise en charge "
+            "par le parcours de publication standard"
+        )
+
     content_receipt_path = project_root / ".state/fr-publication" / debate_id / work_id / "content/publication-receipt.json"
     if not content_receipt_path.is_file():
         # compatibility with the single-checkpoint 2.16.13 path
