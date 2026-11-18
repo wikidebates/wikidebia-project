@@ -215,3 +215,13 @@ def test_preserved_release_without_final_receipt_fails_closed(tmp_path, monkeypa
     assert result["next_command"] == "./wikidebia publish-preserved debat_test --work-id EDIT-TEST-001"
     assert result["next_remote_write_possible"] is True
     assert "préservée" in result["note"]
+
+
+def test_main_cli_exposes_publish_preserved():
+    from wikidebia_manage import build_parser
+    args = build_parser().parse_args([
+        "publish-preserved", "debat_test", "--work-id", "EDIT-TEST-001",
+    ])
+    assert args.command == "publish-preserved"
+    assert args.debate_id == "debat_test"
+    assert args.work_id == "EDIT-TEST-001"
