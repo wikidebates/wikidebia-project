@@ -205,6 +205,70 @@ def _verify_french_state_succession(
     }
 
 
+def _preserved_french_baseline(corpus: Path, meta: Mapping[str, Any], release: Mapping[str, Any]) -> dict[str, Any]:
+    """Verify sealed French import provenance without modifying any French page."""
+    from wikidebia_publish import sha_text
+
+    receipt_path = "data/source_preservation_receipt.json"
+    receipt = load_json(corpus / receipt_path, "reçu de préservation")
+    digest = _verify_sha_object(receipt, "receipt_sha256", "du reçu de préservation")
+    if (
+        meta.get("source_preservation") != {"policy": PRESERVED_IMPORT_POLICY, "receipt_sha256": digest}
+        or receipt.get("schema") != "wikidebia-translation-source-preservation-1.0"
+        or receipt.get("policy") != PRESERVED_IMPORT_POLICY
+        or receipt.get("status") != "frozen_as_imported"
+        or receipt.get("french_pages_changed") is not False
+        or receipt.get("debate_id") != meta.get("debate_id")
+        or receipt.get("work_id") != meta.get("work_id")
+        or release.get("fresh_archive_validation_result") != "passed"
+        or release.get("semantic_convergence_passes") != 2
+    ):
+        raise WorkflowBaselineError("Reçu de préservation ou validation de release divergents")
+    provenance = load_json(corpus / "data/import_provenance.json", "provenance d'import")
+    if provenance.get("debate_id") != meta["debate_id"] or provenance.get("pages") != receipt.get("pages"):
+        raise WorkflowBaselineError("La provenance d'import diverge du reçu de préservation")
+    manifest = load_json(corpus / "manifest.json", "manifeste de release")
+    page_maps = {
+        language: _page_map({"pages": [
+            row for row in manifest.get("pages", []) if row.get("language") == language
+        ]}, f"le manifeste {language}")
+        for language in ("fr", "en")
+    }
+    if not page_maps["fr"] or set(page_maps["fr"]) != set(page_maps["en"]):
+        raise WorkflowBaselineError("La couverture des pages françaises et anglaises diverge")
+    rows: dict[tuple[str, str], dict[str, Any]] = {}
+    for row in receipt.get("pages") or []:
+        kind = row.get("kind")
+        page_id = meta["debate_id"] if kind == "debate" else row.get("page_id")
+        key = (kind, page_id)
+        title = str(row.get("canonical_title") or "")
+        revision = row.get("revision_id")
+        relative = str(row.get("import_path") or "")
+        source = (corpus / relative).resolve()
+        if (
+            key in rows or key not in page_maps["fr"]
+            or not title or type(revision) is not int or revision <= 0
+            or not source.is_relative_to((corpus / "imports/fr").resolve())
+            or not source.is_file() or sha256_file(source) != row.get("sha256")
+        ):
+            raise WorkflowBaselineError(f"Import français invalide : {page_id}")
+        manifest_title = page_maps["fr"][key].get("canonical_title")
+        if manifest_title not in {title, title.replace("’", "'").replace("‘", "'")}:
+            raise WorkflowBaselineError(f"Titre français divergent de l'import : {page_id}")
+        rows[key] = {
+            "page_id": page_id, "page_type": kind, "canonical_title": title,
+            "revision_id": revision, "source_path": relative,
+            "content_sha256": sha_text(source.read_text(encoding="utf-8")),
+        }
+    if set(rows) != set(page_maps["fr"]):
+        raise WorkflowBaselineError("L'import préservé ne couvre pas toutes les pages françaises")
+    return {
+        "mode": PRESERVED_IMPORT_MODE, "receipt_path": receipt_path, "receipt_sha256": digest,
+        "pages": [rows[key] for key in sorted(rows)],
+        "remote_verification_required": True,
+    }
+
+
 def resolve_workflow_release_baseline(
     project_root: Path,
     debate_id: str,
