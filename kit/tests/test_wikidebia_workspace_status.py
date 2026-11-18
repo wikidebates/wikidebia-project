@@ -202,3 +202,16 @@ def test_preserved_published_receipt_requires_local_reconciliation(tmp_path, mon
     result = status.summarize_workspace(tmp_path, 'debat_test', 'EDIT-TEST-001')
     assert result['next_command'] == './wikidebia corpus-workspace-reconcile-publication debat_test --work-id EDIT-TEST-001'
     assert result['next_remote_write_possible'] is False
+
+def test_preserved_release_without_final_receipt_fails_closed(tmp_path, monkeypatch):
+    from wikidebia_workflow_baseline import PRESERVED_IMPORT_POLICY
+    monkeypatch.setattr(status, "_load_workspace", lambda *args: (tmp_path, _meta(
+        "release_ready", source_preservation={"policy": PRESERVED_IMPORT_POLICY},
+    )))
+    import wikidebia_global_resume as resume
+    monkeypatch.setattr(resume, "_published_receipt", lambda *args: None)
+    result = status.summarize_workspace(tmp_path, "debat_test", "EDIT-TEST-001")
+    assert result["next_action"] == "preserved_publication_requires_dedicated_workflow"
+    assert result["next_command"] is None
+    assert result["next_remote_write_possible"] is False
+    assert "publish-preserved" in result["note"]
