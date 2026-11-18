@@ -384,9 +384,8 @@ def verify_committed_snapshot(snapshot_root: Path, debate_id: str | None = None)
         from wikidebia_workflow_baseline import PRESERVED_IMPORT_POLICY, PRESERVED_IMPORT_MODE
         from wikidebia_editorial_workspace import workspace_receipt_hash
 
-        workspace = _load_signed(
-            snapshot_root / "runtime/workspace/workspace.json",
-            "workspace_sha256", "Work préservé",
+        workspace = json.loads(
+            (snapshot_root / "runtime/workspace/workspace.json").read_text(encoding="utf-8")
         )
         if workspace.get("workspace_sha256") != workspace_receipt_hash(workspace):
             raise ContinuityError("Empreinte du Work préservé invalide")
