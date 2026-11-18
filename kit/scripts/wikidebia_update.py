@@ -1232,7 +1232,8 @@ class StateResolver:
             return None
         try:
             evidence = resolve_workflow_release_baseline(
-                self.project_root, self.debate_id, self.corpus_root
+                self.project_root, self.debate_id, self.corpus_root,
+                allow_preserved=bool(self.config.get("preserved_source_publication")),
             )
         except WorkflowBaselineError as exc:
             raise UpdateError(f"Baseline finale du Work invalide : {exc}") from exc
