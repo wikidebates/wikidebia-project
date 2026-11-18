@@ -19,6 +19,9 @@ from wikidebia_corpus_build import full_tree_sha256, load_json, now_iso, sha256_
 from wikidebia_editorial_workspace import workspace_receipt_hash
 import hashlib
 
+PRESERVED_IMPORT_POLICY = "published-french-import-preserved-for-translation-1.0"
+PRESERVED_IMPORT_MODE = "preserved_french_import"
+
 BASELINE_SCHEMA = "wikidebia-final-publication-baseline-1.0"
 WORKFLOW_SCHEMA = "wikidebia-editorial-orchestration-1.0"
 
@@ -202,12 +205,78 @@ def _verify_french_state_succession(
     }
 
 
+def _preserved_french_baseline(corpus: Path, meta: Mapping[str, Any], release: Mapping[str, Any]) -> dict[str, Any]:
+    """Verify sealed French import provenance without modifying any French page."""
+    from wikidebia_publish import sha_text
+
+    receipt_path = "data/source_preservation_receipt.json"
+    receipt = load_json(corpus / receipt_path, "reçu de préservation")
+    digest = _verify_sha_object(receipt, "receipt_sha256", "du reçu de préservation")
+    if (
+        meta.get("source_preservation") != {"policy": PRESERVED_IMPORT_POLICY, "receipt_sha256": digest}
+        or receipt.get("schema") != "wikidebia-translation-source-preservation-1.0"
+        or receipt.get("policy") != PRESERVED_IMPORT_POLICY
+        or receipt.get("status") != "frozen_as_imported"
+        or receipt.get("french_pages_changed") is not False
+        or receipt.get("debate_id") != meta.get("debate_id")
+        or receipt.get("work_id") != meta.get("work_id")
+        or release.get("fresh_archive_validation_result") != "passed"
+        or release.get("semantic_convergence_passes") != 2
+    ):
+        raise WorkflowBaselineError("Reçu de préservation ou validation de release divergents")
+    provenance = load_json(corpus / "data/import_provenance.json", "provenance d'import")
+    if provenance.get("debate_id") != meta["debate_id"] or provenance.get("pages") != receipt.get("pages"):
+        raise WorkflowBaselineError("La provenance d'import diverge du reçu de préservation")
+    manifest = load_json(corpus / "manifest.json", "manifeste de release")
+    page_maps = {
+        language: _page_map({"pages": [
+            row for row in manifest.get("pages", []) if row.get("language") == language
+        ]}, f"le manifeste {language}")
+        for language in ("fr", "en")
+    }
+    if not page_maps["fr"] or set(page_maps["fr"]) != set(page_maps["en"]):
+        raise WorkflowBaselineError("La couverture des pages françaises et anglaises diverge")
+    rows: dict[tuple[str, str], dict[str, Any]] = {}
+    for row in receipt.get("pages") or []:
+        kind = row.get("kind")
+        page_id = meta["debate_id"] if kind == "debate" else row.get("page_id")
+        key = (kind, page_id)
+        title = str(row.get("canonical_title") or "")
+        revision = row.get("revision_id")
+        relative = str(row.get("import_path") or "")
+        source = (corpus / relative).resolve()
+        if (
+            key in rows or key not in page_maps["fr"]
+            or not title or type(revision) is not int or revision <= 0
+            or not source.is_relative_to((corpus / "imports/fr").resolve())
+            or (corpus / relative).is_symlink()
+            or not source.is_file() or sha256_file(source) != row.get("sha256")
+        ):
+            raise WorkflowBaselineError(f"Import français invalide : {page_id}")
+        manifest_title = page_maps["fr"][key].get("canonical_title")
+        if manifest_title not in {title, title.replace("’", "'").replace("‘", "'")}:
+            raise WorkflowBaselineError(f"Titre français divergent de l'import : {page_id}")
+        rows[key] = {
+            "page_id": page_id, "page_type": kind, "canonical_title": title,
+            "revision_id": revision, "source_path": relative,
+            "content_sha256": sha_text(source.read_text(encoding="utf-8")),
+        }
+    if set(rows) != set(page_maps["fr"]):
+        raise WorkflowBaselineError("L'import préservé ne couvre pas toutes les pages françaises")
+    return {
+        "mode": PRESERVED_IMPORT_MODE, "receipt_path": receipt_path, "receipt_sha256": digest,
+        "pages": [rows[key] for key in sorted(rows)],
+        "remote_verification_required": True,
+    }
+
+
 def resolve_workflow_release_baseline(
     project_root: Path,
     debate_id: str,
     corpus_root: Path,
     *,
     expected_work_id: str | None = None,
+    allow_preserved: bool = False,
 ) -> dict[str, Any] | None:
     """Return verified Work-scoped baseline evidence, or ``None`` if not applicable.
 
@@ -285,36 +354,57 @@ def resolve_workflow_release_baseline(
         # pre-publication flag.
         raise WorkflowBaselineError("Le reçu de release ne porte pas la barrière prépublication attendue")
 
-    content_receipt_path = project_root / ".state/fr-publication" / debate_id / work_id / "content/publication-receipt.json"
-    if not content_receipt_path.is_file():
-        # compatibility with the single-checkpoint 2.16.13 path
-        legacy = project_root / ".state/fr-publication" / debate_id / work_id / "publication-receipt.json"
-        if legacy.is_file():
-            content_receipt_path = legacy
-        else:
-            raise WorkflowBaselineError("Reçu du dernier checkpoint français absent")
-    content_receipt = load_json(content_receipt_path, "reçu du checkpoint français final")
-    _verify_sha_object(content_receipt, "receipt_sha256", "du checkpoint français final")
-    if content_receipt.get("debate_id") != debate_id or content_receipt.get("work_id") != work_id:
-        raise WorkflowBaselineError("Checkpoint français final rattaché à un autre Work")
-    if str(content_receipt.get("status") or "") not in {"published", "verified_no_changes"}:
-        raise WorkflowBaselineError("Le checkpoint français final n'est pas attesté publié")
+    if allow_preserved:
+        if (
+            workflow.get("preserved_publication_release_sha256") != release_tree_sha
+            or corpus_root != release_copy
+            or release_receipt.get("release_manifest_sha256") != release_manifest_sha
+        ):
+            raise WorkflowBaselineError("La publication préservée exige le release-copy scellé du Work")
+        french = _preserved_french_baseline(release_copy, meta, release_receipt)
+    else:
+        if (meta.get("source_preservation") or {}).get("policy") == PRESERVED_IMPORT_POLICY:
+            raise WorkflowBaselineError("La publication préservée exige un parcours explicitement autorisé")
+        content_receipt_path = project_root / ".state/fr-publication" / debate_id / work_id / "content/publication-receipt.json"
+        if not content_receipt_path.is_file():
+            # compatibility with the single-checkpoint 2.16.13 path
+            legacy = project_root / ".state/fr-publication" / debate_id / work_id / "publication-receipt.json"
+            if legacy.is_file():
+                content_receipt_path = legacy
+            else:
+                raise WorkflowBaselineError("Reçu du dernier checkpoint français absent")
+        content_receipt = load_json(content_receipt_path, "reçu du checkpoint français final")
+        _verify_sha_object(content_receipt, "receipt_sha256", "du checkpoint français final")
+        if content_receipt.get("debate_id") != debate_id or content_receipt.get("work_id") != work_id:
+            raise WorkflowBaselineError("Checkpoint français final rattaché à un autre Work")
+        if str(content_receipt.get("status") or "") not in {"published", "verified_no_changes"}:
+            raise WorkflowBaselineError("Le checkpoint français final n'est pas attesté publié")
 
-    workflow_content = workflow.get("french_content_publication") or workflow.get("french_publication")
-    if not isinstance(workflow_content, dict):
-        raise WorkflowBaselineError("Le workflow ne référence pas son checkpoint français final")
-    if str(workflow_content.get("receipt_sha256") or "") != str(content_receipt.get("receipt_sha256") or ""):
-        raise WorkflowBaselineError("Le workflow et le reçu du checkpoint français final divergent")
+        workflow_content = workflow.get("french_content_publication") or workflow.get("french_publication")
+        if not isinstance(workflow_content, dict):
+            raise WorkflowBaselineError("Le workflow ne référence pas son checkpoint français final")
+        if str(workflow_content.get("receipt_sha256") or "") != str(content_receipt.get("receipt_sha256") or ""):
+            raise WorkflowBaselineError("Le workflow et le reçu du checkpoint français final divergent")
 
-    fr_state_entry = _load_signed_published_state(project_root, debate_id, "fr")
-    if fr_state_entry is None:
-        raise WorkflowBaselineError("État publié français signé absent après le checkpoint final")
-    fr_state_path, fr_state = fr_state_entry
-    fr_succession: dict[str, Any] | None = None
-    if str(fr_state.get("plan_sha256") or "") != str(content_receipt.get("plan_sha256") or ""):
-        fr_succession = _verify_french_state_succession(
-            project_root, debate_id, work_id, content_receipt, fr_state
-        )
+        fr_state_entry = _load_signed_published_state(project_root, debate_id, "fr")
+        if fr_state_entry is None:
+            raise WorkflowBaselineError("État publié français signé absent après le checkpoint final")
+        fr_state_path, fr_state = fr_state_entry
+        fr_succession: dict[str, Any] | None = None
+        if str(fr_state.get("plan_sha256") or "") != str(content_receipt.get("plan_sha256") or ""):
+            fr_succession = _verify_french_state_succession(
+                project_root, debate_id, work_id, content_receipt, fr_state
+            )
+
+        french = {
+            "mode": (fr_succession or {}).get("mode", "published_checkpoint_state"),
+            "checkpoint_receipt_path": _relative(content_receipt_path, project_root),
+            "checkpoint_receipt_sha256": str(content_receipt.get("receipt_sha256") or ""),
+            "published_state_path": _relative(fr_state_path, project_root),
+            "published_state_sha256": str(fr_state.get("state_sha256") or ""),
+            "plan_sha256": str(fr_state.get("plan_sha256") or ""),
+            **({"post_checkpoint_succession": fr_succession} if fr_succession else {}),
+        }
 
     installed_manifest_path = project_root / "corpus" / debate_id / "manifest.json"
     if not installed_manifest_path.is_file():
@@ -351,15 +441,7 @@ def resolve_workflow_release_baseline(
             "release_receipt_path": _relative(release_receipt_path, project_root),
             "release_receipt_sha256": str(release_receipt.get("receipt_sha256") or ""),
         },
-        "fr": {
-            "mode": (fr_succession or {}).get("mode", "published_checkpoint_state"),
-            "checkpoint_receipt_path": _relative(content_receipt_path, project_root),
-            "checkpoint_receipt_sha256": str(content_receipt.get("receipt_sha256") or ""),
-            "published_state_path": _relative(fr_state_path, project_root),
-            "published_state_sha256": str(fr_state.get("state_sha256") or ""),
-            "plan_sha256": str(fr_state.get("plan_sha256") or ""),
-            **({"post_checkpoint_succession": fr_succession} if fr_succession else {}),
-        },
+        "fr": french,
         "en": {
             "mode": "never_published_by_this_work",
             "empty_baseline": True,
@@ -524,10 +606,14 @@ def seal_workflow_release_baseline(
     debate_id: str,
     work_id: str,
     corpus_root: Path,
+    *,
+    allow_preserved: bool = False,
 ) -> dict[str, Any]:
-    _repair_stale_workflow_content_receipt_reference(project_root, debate_id, work_id)
+    if not allow_preserved:
+        _repair_stale_workflow_content_receipt_reference(project_root, debate_id, work_id)
     evidence = resolve_workflow_release_baseline(
-        project_root, debate_id, corpus_root, expected_work_id=work_id
+        project_root, debate_id, corpus_root, expected_work_id=work_id,
+        allow_preserved=allow_preserved,
     )
     if evidence is None:
         raise WorkflowBaselineError("Le corpus n'est pas un release_ready de workflow reconnu")

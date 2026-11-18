@@ -13,6 +13,7 @@ from wikidebia_editorial_workspace import WorkspaceError, validate_work_id
 from wikidebia_remote_plan_review import RemotePlanReviewError, _load_comparison
 from wikidebia_render import RenderError, _load_workspace
 from wikidebia_update import OPERATIONS
+from wikidebia_workflow_baseline import PRESERVED_IMPORT_POLICY
 
 
 class WorkspaceStatusError(WorkspaceError):
@@ -247,6 +248,27 @@ def summarize_workspace(project_root: Path, debate_id: str, work_id: str) -> dic
         if (meta.get(key) or {}).get(field)
     }
     next_step = _next_step(meta, debate_id, work_id)
+    preserved = (meta.get("source_preservation") or {}).get("policy") == PRESERVED_IMPORT_POLICY
+    if preserved and status in {"release_ready", "published"}:
+        # The workspace status is not the remote publication status: the final
+        # receipt is the authority, and this probe never contacts MediaWiki.
+        from wikidebia_global_resume import _published_receipt
+        published = _published_receipt(project_root, debate_id, work_id)
+        if published is not None:
+            next_step = {
+                "action": "complete" if status == "published" else "reconcile_published_workspace",
+                "command": None if status == "published" else _command(
+                    "corpus-workspace-reconcile-publication", debate_id, work_id),
+                "remote_read_possible": False, "remote_write_possible": False,
+            }
+        else:
+            next_step = {
+                "action": "publish_preserved_release",
+                "command": _command("publish-preserved", debate_id, work_id),
+                "remote_read_possible": True, "remote_write_possible": True,
+                "note": "Publication préservée : vérifier les préflights distants et préserver le contenu français.",
+            }
+
     if no_change_plan_sha256 and comparison_id:
         next_step = {
             "action": "close_workspace_from_signed_no_change_plan",

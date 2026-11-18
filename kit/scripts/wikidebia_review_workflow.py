@@ -32,6 +32,7 @@ from wikidebia_corpus_build import (
     GRAPH_TITLE_REVIEW,
     build_payload_sha256,
     full_tree_sha256,
+    exclusive_lock,
     load_json,
     now_iso,
     resolve_build,
@@ -87,7 +88,7 @@ from wikidebia_release import release_workspace
 from wikidebia_final_publication import publish_final_release, FinalPublicationError
 from wikidebia_post_publication import reconcile_published_workspace
 from wikidebia_french_checkpoint import publish_checkpoint, FrenchCheckpointError
-from wikidebia_workflow_baseline import resolve_workflow_release_baseline, WorkflowBaselineError
+from wikidebia_workflow_baseline import resolve_workflow_release_baseline, WorkflowBaselineError, PRESERVED_IMPORT_MODE, PRESERVED_IMPORT_POLICY
 from wikidebia_access_preflight import (
     AccessPreflightError,
     access_contract_sha256,
@@ -510,6 +511,66 @@ def reconcile_workflow(
     candidate["workflow_reconciliation"] = copy.deepcopy(audit)
     _save_workflow(project_root, candidate)
     return candidate
+
+
+def publish_preserved_workflow(project_root: Path, debate_id: str, work_id: str) -> dict[str, Any]:
+    """Adopt a sealed preservation release and use the ordinary final publisher."""
+    debate_id = validate_debate_id(debate_id)
+    work_id = validate_work_id(work_id)
+    with exclusive_lock(project_root, debate_id, "publish-preserved"):
+        workspace = _workspace_path(project_root, debate_id, work_id)
+        meta = load_json(workspace / "workspace.json", "workspace")
+        release_copy = workspace / "release-copy"
+        release_sha = (meta.get("release_copy") or {}).get("tree_sha256")
+        if (
+            meta.get("workspace_sha256") != workspace_receipt_hash(meta)
+            or meta.get("debate_id") != debate_id or meta.get("work_id") != work_id
+            or meta.get("status") not in {"release_ready", "published"}
+            or (meta.get("source_preservation") or {}).get("policy") != PRESERVED_IMPORT_POLICY
+            or not release_sha or not release_copy.is_dir()
+            or full_tree_sha256(release_copy) != release_sha
+        ):
+            raise WorkflowError("Le Work ne possède pas de release scellée en mode préservation")
+
+        state = _load_workflow(project_root, debate_id)
+        if state.get("work_id") != work_id:
+            raise WorkflowError("L'orchestration active appartient à un autre Work")
+        previous_sha = state.get("preserved_publication_release_sha256")
+        if previous_sha:
+            if previous_sha != release_sha:
+                raise WorkflowError("La reprise préservée vise une autre release")
+        else:
+            if state.get("phase") == "published" or state.get("french_content_publication") or state.get("french_publication"):
+                raise WorkflowError("Cette orchestration dispose déjà de son parcours de publication")
+            candidate = copy.deepcopy(state)
+            pending = candidate.pop("pending_review", None)
+            if pending:
+                candidate.setdefault("superseded_reviews", []).append({
+                    "reason": "sealed_preservation_release",
+                    "pending_review": pending, "recorded_at": now_iso(),
+                })
+            candidate.update(
+                phase="release_ready", status="release_ready",
+                preserved_publication_release_sha256=release_sha,
+                release=copy.deepcopy(meta.get("local_release") or {}), updated_at=now_iso(),
+            )
+            _save_workflow(project_root, candidate)
+            try:
+                baseline = resolve_workflow_release_baseline(
+                    project_root, debate_id, release_copy, expected_work_id=work_id, allow_preserved=True,
+                )
+                if baseline is None or baseline["fr"]["mode"] != PRESERVED_IMPORT_MODE:
+                    raise WorkflowError("La release ne fournit pas de baseline de préservation")
+            except Exception:
+                _save_workflow(project_root, state)
+                raise
+            state = candidate
+        state["phase"] = "final_publication"
+        state["status"] = "final_publication"
+        state.pop("preserved_publication_blocker", None)
+        state["updated_at"] = now_iso()
+        _save_workflow(project_root, state)
+        return _mechanical_advance(project_root, state)
 
 
 def _relative(path: Path, root: Path) -> str:
@@ -1758,7 +1819,8 @@ def _mechanical_advance(project_root: Path, state: dict[str, Any]) -> dict[str, 
             release_copy = workspace / "release-copy"
             try:
                 publication = publish_final_release(
-                    project_root, debate_id, str(state["work_id"]), release_copy
+                    project_root, debate_id, str(state["work_id"]), release_copy,
+                    allow_preserved=bool(state.get("preserved_publication_release_sha256")),
                 )
             except FinalPublicationError as exc:
                 state["phase"] = "final_publication"
@@ -2545,6 +2607,9 @@ def build_parser() -> argparse.ArgumentParser:
     reconcile = sub.add_parser("workflow-reconcile")
     reconcile.add_argument("debate_id")
     reconcile.add_argument("--work-id", help="Work release_ready à adopter lorsque le workflow historique n'en possède aucun")
+    preserved = sub.add_parser("publish-preserved")
+    preserved.add_argument("debate_id")
+    preserved.add_argument("--work-id", required=True)
     return parser
 
 
@@ -2565,6 +2630,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         elif args.command == "workflow-reconcile":
             state = reconcile_workflow(root, args.debate_id, adopt_work_id=args.work_id)
+        elif args.command == "publish-preserved":
+            state = publish_preserved_workflow(root, args.debate_id, args.work_id)
         else:
             state = status_summary(root, args.debate_id)
     except Exception as exc:
@@ -2577,7 +2644,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(json.dumps(state, ensure_ascii=False, sort_keys=True))
     else:
         _print_user_result(state)
-    return 0
+    return 2 if args.command == "publish-preserved" and state.get("status") != "published" else 0
 
 
 if __name__ == "__main__":

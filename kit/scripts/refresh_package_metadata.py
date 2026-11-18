@@ -208,7 +208,29 @@ def check(root: Path, *, test_count: int, generated_date: str) -> dict[str, Any]
     }
     drift = [name for name, raw in expected.items() if not (root / name).is_file() or (root / name).read_bytes() != raw]
     if drift:
-        raise PackageMetadataError("Métadonnées du kit périmées : " + ", ".join(drift))
+        details = []
+        if "PACKAGE_MANIFEST_SHA256.json" in drift:
+            try:
+                actual_manifest = json.loads((root / "PACKAGE_MANIFEST_SHA256.json").read_text(encoding="utf-8"))
+                actual_files = {row["path"]: row for row in actual_manifest.get("files", [])}
+                expected_files = {row["path"]: row for row in result["manifest"]["files"]}
+                changed = sorted(path for path in actual_files.keys() | expected_files.keys()
+                                 if actual_files.get(path) != expected_files.get(path))
+                changed_fields = sorted(key for key in actual_manifest.keys() | result["manifest"].keys()
+                                        if key != "files" and actual_manifest.get(key) != result["manifest"].get(key))
+                details.append("manifest files=" + repr(changed[:20]) + ", fields=" + repr(changed_fields))
+            except (OSError, ValueError, KeyError, TypeError) as exc:
+                details.append("manifest diagnostic unavailable: " + str(exc))
+        if "PACKAGE_RECEIPT.json" in drift:
+            try:
+                actual_receipt = json.loads((root / "PACKAGE_RECEIPT.json").read_text(encoding="utf-8"))
+                changed_fields = sorted(key for key in actual_receipt.keys() | result["receipt"].keys()
+                                        if actual_receipt.get(key) != result["receipt"].get(key))
+                details.append("receipt fields=" + repr(changed_fields))
+            except (OSError, ValueError, TypeError) as exc:
+                details.append("receipt diagnostic unavailable: " + str(exc))
+        raise PackageMetadataError("Métadonnées du kit périmées : " + ", ".join(drift)
+                                   + (" ; " + " ; ".join(details) if details else ""))
     return result
 
 
