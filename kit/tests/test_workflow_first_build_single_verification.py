@@ -90,7 +90,7 @@ def test_first_build_does_not_recompute_contract_but_records_verifiable_receipt(
     assert inspection["safe_to_reuse"] is True
     assert inspection["receipt_sha256"] == attestation["receipt_sha256"]
     assert state["phase"] == "graph_review"
-    assert state["short_code"] == "BENCH"
+    assert state["short_code"] == corpus_init.derive_short_code(DEBATE_ID)
 
 
 def test_first_build_still_rejects_modified_extraction_without_creating_output(
@@ -170,4 +170,4 @@ def test_verified_existing_build_reuses_without_rebuilding(
     assert computed == [True]
     assert state["phase"] == "graph_review"
     assert state["initial_build_receipt"]["receipt_sha256"] == receipt["receipt_sha256"]
-    assert state["short_code"] == "BENCH"
+    assert state["short_code"] == corpus_init.derive_short_code(DEBATE_ID)
