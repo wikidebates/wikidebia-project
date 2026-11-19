@@ -5,6 +5,7 @@ import importlib.util
 import json
 import sys
 import zipfile
+import pytest
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -458,3 +459,85 @@ def test_import_does_not_reread_copied_target_for_metadata(tmp_path: Path, monke
     metadata, provenance = mod.copy_import_pages(inp, snapshot, output, ids)
     assert len(metadata) == 3
     assert len(provenance["provenance"]["pages"]) == 4
+
+
+def _rewrite_snapshot_page_path(source: Path, relative: str, payload: bytes) -> None:
+    """Produce a consistently SHA-audited manifest with a chosen page locator."""
+    snapshot_path = source / "snapshot/snapshot_manifest.json"
+    manifest = json.loads(snapshot_path.read_text(encoding="utf-8"))
+    manifest["arguments"][0]["relative_path"] = relative
+    manifest["arguments"][0]["sha256"] = hashlib.sha256(payload).hexdigest()
+    manifest["arguments"][0]["size_bytes"] = len(payload)
+    snapshot_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    audit_path = source / "test_manifest_sha256_2026-08-03.json"
+    audit = json.loads(audit_path.read_text(encoding="utf-8"))
+    snapshot_payload = snapshot_path.read_bytes()
+    for row in audit["files"]:
+        if row["path"] == "snapshot/snapshot_manifest.json":
+            row["sha256"] = hashlib.sha256(snapshot_payload).hexdigest()
+            row["size_bytes"] = len(snapshot_payload)
+    audit_path.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+@pytest.mark.parametrize("kind", ("traversal", "absolute", "backslash"))
+def test_snapshot_rejects_unportable_and_outside_page_paths(tmp_path: Path, kind: str):
+    source = make_extraction(tmp_path / "source")
+    outside = tmp_path / "outside.wiki"
+    outside.write_text("{{Argument|résumé=Outside snapshot}}\n", encoding="utf-8")
+    relative = {
+        "traversal": "../../outside.wiki",
+        "absolute": outside.as_posix(),
+        "backslash": "pages\\arguments\\a.wiki",
+    }[kind]
+    _rewrite_snapshot_page_path(source, relative, outside.read_bytes())
+    inp = mod.resolve_extraction_input(source)
+    with pytest.raises(mod.CorpusInitError, match="Chemin de page invalide"):
+        mod.verify_extraction(inp)
+
+
+def test_snapshot_rejects_symlink_page_outside_root_even_without_audit_manifest(tmp_path: Path):
+    source = make_extraction(tmp_path / "source")
+    victim = source / "snapshot/pages/arguments/a.wiki"
+    outside = tmp_path / "outside.wiki"
+    outside.write_bytes(victim.read_bytes())
+    victim.unlink()
+    victim.symlink_to(outside)
+    (source / "test_manifest_sha256_2026-08-03.json").unlink()
+    with pytest.raises(mod.CorpusInitError, match="extérieure à son dossier"):
+        mod.verify_extraction(mod.resolve_extraction_input(source))
+
+
+def test_extraction_rejects_symlink_graph_outside_source_tree(tmp_path: Path):
+    source = make_extraction(tmp_path / "source")
+    graph = source / "test_graphe_recursif_2026-08-03.json"
+    outside = tmp_path / "other-graph.json"
+    graph.rename(outside)
+    graph.symlink_to(outside)
+    with pytest.raises(mod.CorpusInitError, match="Fichier d'extraction extérieur"):
+        mod.verify_extraction(mod.resolve_extraction_input(source))
+
+
+def test_extraction_rejects_symlink_audit_manifest_outside_source_tree(tmp_path: Path):
+    source = make_extraction(tmp_path / "source")
+    audit = source / "test_manifest_sha256_2026-08-03.json"
+    outside = tmp_path / "outside-manifest.json"
+    audit.rename(outside)
+    audit.symlink_to(outside)
+    with pytest.raises(mod.CorpusInitError, match="Manifeste d'extraction extérieur"):
+        mod.verify_extraction(mod.resolve_extraction_input(source))
+
+
+def test_snapshot_accepts_internal_symlink_when_verified_bytes_are_unchanged(tmp_path: Path):
+    source = make_extraction(tmp_path / "source")
+    victim = source / "snapshot/pages/arguments/a.wiki"
+    duplicate = victim.with_name("copy_a.wiki")
+    duplicate.write_bytes(victim.read_bytes())
+    victim.unlink()
+    victim.symlink_to(duplicate.name)
+    inp = mod.resolve_extraction_input(source)
+    _, snapshot = mod.verify_extraction(inp)
+    assert len(snapshot["arguments"]) == 3
+    ids = {row["canonical_title"]: f"A{i:04d}" for i, row in enumerate(snapshot["arguments"], 1)}
+    output = tmp_path / "build"
+    mod.copy_import_pages(inp, snapshot, output, ids)
+    assert (output / "imports/fr/arguments/A0001.wiki").read_bytes() == duplicate.read_bytes()
