@@ -935,8 +935,21 @@ def verify_build_contract_record(
     }
 
 
-def build_tree_fingerprint(output_dir: Path) -> dict[str, Any]:
-    """Hash every regular build file except the receipt itself."""
+def _stat_identity(info: os.stat_result) -> tuple[int, int, int, int, int]:
+    """Cache identity: size and both change timestamps, inode, device."""
+    return info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns
+
+
+def build_tree_fingerprint(
+    output_dir: Path,
+    *,
+    _verified_digests: Mapping[str, tuple[tuple[int, int, int, int, int], str]] | None = None,
+) -> dict[str, Any]:
+    """Hash every regular build file, reusing only in-call verified JSON bytes.
+
+    No persisted cache: the identity must still match at the moment this tree
+    is inspected. A changed entry is rehashed, never trusted by filename.
+    """
     root = output_dir.expanduser().absolute()
     if _first_symlink_component(root) is not None:
         raise CorpusInitError("Le build à certifier traverse un lien symbolique")
@@ -954,10 +967,16 @@ def build_tree_fingerprint(output_dir: Path) -> dict[str, Any]:
             continue
         if not path.is_file():
             raise CorpusInitError(f"Fichier non régulier interdit dans le build : {relative}")
+        info = path.stat()
+        cached = (_verified_digests or {}).get(relative)
+        digest = (
+            cached[1] if cached is not None and cached[0] == _stat_identity(info)
+            else sha256_file(path)
+        )
         entries.append({
             "path": relative,
-            "size_bytes": path.stat().st_size,
-            "sha256": sha256_file(path),
+            "size_bytes": info.st_size,
+            "sha256": digest,
         })
     return {
         "file_count": len(entries),
@@ -1003,6 +1022,7 @@ def verify_build_receipt(
     output_dir: Path,
     *,
     expected_contract_sha256: str | None = None,
+    _verified_digests: Mapping[str, tuple[tuple[int, int, int, int, int], str]] | None = None,
 ) -> dict[str, Any]:
     """Verify receipt integrity and, when supplied, exact source/options identity."""
     receipt_path = output_dir / BUILD_RECEIPT_PATH
@@ -1031,7 +1051,7 @@ def verify_build_receipt(
         )
         if not contract_record.get("matches"):
             raise ValueError("contract record")
-        tree = build_tree_fingerprint(output_dir)
+        tree = build_tree_fingerprint(output_dir, _verified_digests=_verified_digests)
         if (
             str(receipt.get("build_tree_sha256") or "") != tree["sha256"]
             or receipt.get("build_file_count") != tree["file_count"]
@@ -1082,9 +1102,22 @@ def inspect_existing_build(
     missing = [name for name in required if not (output_dir / name).is_file()]
     if missing:
         return {"status": "incomplete", "safe_to_reuse": False, "missing": missing}
+    verified_digests: dict[str, tuple[tuple[int, int, int, int, int], str]] = {}
+
+    def load_inspected_json(relative: str) -> Any:
+        path = output_dir / relative
+        before = _stat_identity(path.stat())
+        payload = path.read_bytes()
+        after = _stat_identity(path.stat())
+        if before != after:
+            raise ValueError(f"Fichier modifié pendant l'inspection : {relative}")
+        verified_digests[relative] = (after, sha256_bytes(payload))
+        # Preserve the old read_text(encoding="utf-8") decoding semantics.
+        return json.loads(payload.decode("utf-8"))
+
     try:
-        manifest = json.loads((output_dir / "manifest.json").read_text(encoding="utf-8"))
-        registry = json.loads((output_dir / "data/registre_debat.json").read_text(encoding="utf-8"))
+        manifest = load_inspected_json("manifest.json")
+        registry = load_inspected_json("data/registre_debat.json")
     except (OSError, ValueError):
         return {"status": "invalid", "safe_to_reuse": False}
     if not isinstance(manifest, dict) or not isinstance(registry, dict):
@@ -1101,6 +1134,7 @@ def inspect_existing_build(
     return verify_build_receipt(
         output_dir,
         expected_contract_sha256=expected_contract_sha256,
+        _verified_digests=verified_digests,
     )
 
 
