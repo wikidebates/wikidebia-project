@@ -5,7 +5,7 @@
   "stable_archive_name": "wikidebia-validator.zip",
   "version_source": "VERSIONS.json",
   "declared_file_count": 519,
-  "declared_test_count": 559,
+  "declared_test_count": 560,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -789,12 +789,12 @@
     {
       "path": "docs/SELF_AUDIT_REPORT.txt",
       "size_bytes": 727,
-      "sha256": "82e63e20f4360efd5c6ca0acda233e62164b8f81401ced962b2349a6dbe9b23a"
+      "sha256": "cf8cd02f7a2a3aabc3765c10d1af58c767c1370bcc48b26890db9be759280fd6"
     },
     {
       "path": "docs/TEST_REPORT.txt",
       "size_bytes": 1334,
-      "sha256": "223d7d0400cc9c6564ebd6f15317e8ade38e51328eac9504959e673384a129ce"
+      "sha256": "edead614c877137492356110410947c60ada1182ddd925b93cee00a9434a007e"
     },
     {
       "path": "docs/history/README.md",
@@ -1823,8 +1823,8 @@
     },
     {
       "path": "src/wikidebia_validator/schema_validation.py",
-      "size_bytes": 25175,
-      "sha256": "98748de36680484fb2beb37bca2980ee4c5ff2b109658c8fff2a775d646629d3"
+      "size_bytes": 26387,
+      "sha256": "30565170099173338d397fbe274e95ba360057f64a986b387b89b6ecee8870ae"
     },
     {
       "path": "src/wikidebia_validator/schemas/archive_receipt.schema.json",
@@ -2548,8 +2548,8 @@
     },
     {
       "path": "tests/test_shared_graph_schema_reuse.py",
-      "size_bytes": 5686,
-      "sha256": "68e816d5bcb7a883e9ef24ca484a42bc9ead84716495f7b76b3215d787f11230"
+      "size_bytes": 7372,
+      "sha256": "c724fd88cdd1c1e5ee1067452fb53cff0393384561cab5df0665f6d65793a421"
     },
     {
       "path": "tests/test_source_0428_feature_baseline.py",
