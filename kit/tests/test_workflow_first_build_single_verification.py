@@ -70,7 +70,15 @@ def test_first_build_does_not_recompute_contract_but_records_verifiable_receipt(
         lambda *_a: {"status": "passed"},
     )
     calls: list[str] = []
+    checks: list[str] = []
+    actual_verify = corpus_init.verify_extraction
     actual_build = workflow.build_corpus
+
+    def tracked_verify(extraction):
+        checks.append("verified")
+        return actual_verify(extraction)
+
+    monkeypatch.setattr(corpus_init, "verify_extraction", tracked_verify)
 
     def tracked_build(source_path, destination, **kwargs):
         calls.append("build")
@@ -87,6 +95,7 @@ def test_first_build_does_not_recompute_contract_but_records_verifiable_receipt(
         expected_contract_sha256=attestation["build_contract_sha256"],
     )
     assert calls == ["build"]
+    assert checks == ["verified"]  # includes every page and audited SHA-256 manifest
     assert inspection["safe_to_reuse"] is True
     assert inspection["receipt_sha256"] == attestation["receipt_sha256"]
     assert state["phase"] == "graph_review"
