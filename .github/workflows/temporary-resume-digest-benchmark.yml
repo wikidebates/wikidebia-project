@@ -1,0 +1,68 @@
+name: Temporary in-call resume digest benchmark
+on:
+  pull_request:
+    paths:
+      - .github/workflows/temporary-resume-digest-benchmark.yml
+permissions:
+  contents: read
+jobs:
+  compare:
+    if: github.head_ref == 'perf/inspect-reuse-json-digests-20261119'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Focused fail-closed cache tests
+        env:
+          PYTHONPATH: kit/scripts
+        run: python -m pytest -q kit/tests/test_inspect_existing_build_digest_reuse.py
+      - name: Benchmark exact verified resume before versus after
+        env:
+          PYTHONPATH: kit/scripts
+        run: |
+          git show afff1dc1732bae883ba048a811f2ede8cff64743:kit/scripts/wikidebia_corpus_init.py > /tmp/baseline_corpus_init.py
+          python - <<'PY'
+          import importlib.util, json, statistics, sys, tempfile, time
+          from pathlib import Path
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+          from wikidebia_corpus_init import build_corpus, inspect_existing_build, write_build_receipt, run_validator
+
+          spec = importlib.util.spec_from_file_location('baseline_corpus_init', '/tmp/baseline_corpus_init.py')
+          baseline = importlib.util.module_from_spec(spec)
+          sys.modules[spec.name] = baseline
+          spec.loader.exec_module(baseline)
+
+          with tempfile.TemporaryDirectory() as temp:
+              for n in (120, 300, 700):
+                  root = Path(temp) / str(n)
+                  src = make_synthetic_extraction(root/'source', arguments=n, payload_bytes=1024)
+                  built = build_corpus(src, root/'build', debate_id='benchmark_pretranslation', short_code='BENCH', scope_summary=None, overwrite=False)
+                  validation = run_validator(Path.cwd(), root/'build')
+                  assert validation['status'] == 'passed', validation
+                  receipt = write_build_receipt(root/'build', build_contract=built['build_contract'], validation=validation)
+                  expected = built['build_contract_sha256']
+                  cases = {'before':baseline.inspect_existing_build, 'after':inspect_existing_build}
+                  samples = {'before':[], 'after':[]}
+                  for i in range(16):
+                      for name in (('before','after') if i%2==0 else ('after','before')):
+                          start=time.perf_counter()
+                          report = cases[name](root/'build', expected_debate_id='benchmark_pretranslation', expected_contract_sha256=expected)
+                          elapsed=time.perf_counter()-start
+                          assert report['status']=='valid_and_matching' and report['safe_to_reuse']
+                          assert report['receipt_sha256']==receipt['receipt_sha256']
+                          samples[name].append(round(elapsed,6))
+                  medians={key:statistics.median(v) for key,v in samples.items()}
+                  print('MEASURE',json.dumps({
+                      'arguments':n, 'medians_seconds':medians,
+                      'samples_seconds':samples,
+                      'percent_reduction':round(100*(1-medians['after']/medians['before']),2),
+                      'identical_verified_receipt':True,'no_wiki_access':True,
+                  },sort_keys=True),flush=True)
+          PY
