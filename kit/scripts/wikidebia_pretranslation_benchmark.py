@@ -242,22 +242,36 @@ def _measure(operation: Callable[[], Any]) -> tuple[float, Any]:
     return time.perf_counter() - started, result
 
 
-def _validated_build(project_root: Path, source: Path, output: Path) -> dict[str, Any]:
-    result = build_corpus(
-        source,
-        output,
-        debate_id=DEBATE_ID,
-        short_code=SHORT_CODE,
-        scope_summary=None,
-        overwrite=False,
+def _validated_build(
+    project_root: Path,
+    source: Path,
+    output: Path,
+    *,
+    measure_stage: Callable[[str, Callable[[], Any]], Any] | None = None,
+) -> dict[str, Any]:
+    # Stage instrumentation is opt-in and never changes the underlying workflow.
+    record = measure_stage or (lambda _label, operation: operation())
+    result = record(
+        "build_corpus",
+        lambda: build_corpus(
+            source,
+            output,
+            debate_id=DEBATE_ID,
+            short_code=SHORT_CODE,
+            scope_summary=None,
+            overwrite=False,
+        ),
     )
-    validation = run_validator(project_root, output)
+    validation = record("initial_validator", lambda: run_validator(project_root, output))
     if validation.get("status") != "passed":
         raise PretranslationBenchmarkError("La validation du build synthétique a échoué")
-    receipt = write_build_receipt(
-        output,
-        build_contract=result["build_contract"],
-        validation=validation,
+    receipt = record(
+        "write_receipt",
+        lambda: write_build_receipt(
+            output,
+            build_contract=result["build_contract"],
+            validation=validation,
+        ),
     )
     return {"build": result, "validation": validation, "receipt": receipt}
 
@@ -265,10 +279,15 @@ def _validated_build(project_root: Path, source: Path, output: Path) -> dict[str
 def _summary(samples: Sequence[float]) -> dict[str, Any]:
     median = statistics.median(samples)
     return {
+        "sample_count": len(samples),
         "samples_seconds": [round(value, 6) for value in samples],
         "median_seconds": round(median, 6),
         "minimum_seconds": round(min(samples), 6),
         "maximum_seconds": round(max(samples), 6),
+        "population_stddev_seconds": round(statistics.pstdev(samples), 6),
+        "median_absolute_deviation_seconds": round(
+            statistics.median(abs(value - median) for value in samples), 6
+        ),
     }
 
 
@@ -294,6 +313,19 @@ def run_benchmark(
     cold_samples: list[float] = []
     interrupted_samples: list[float] = []
     exact_samples: list[float] = []
+    stage_samples: dict[str, dict[str, list[float]]] = {
+        "cold_build_validate_receipt": {},
+        "resume_after_build_before_receipt": {},
+        "resume_exact_verified_receipt": {},
+    }
+
+    def record_stage(
+        scenario: str, label: str, operation: Callable[[], Any],
+    ) -> Any:
+        elapsed, result = _measure(operation)
+        stage_samples[scenario].setdefault(label, []).append(elapsed)
+        return result
+
     contract_hashes: set[str] = set()
     with tempfile.TemporaryDirectory(prefix="wikidebia-pretranslation-benchmark-") as temp_name:
         temp_root = Path(temp_name)
@@ -318,7 +350,12 @@ def run_benchmark(
         for index in range(iterations):
             cold_output = temp_root / f"cold-{index}"
             cold_elapsed, cold = _measure(
-                lambda output=cold_output: _validated_build(project_root, source, output)
+                lambda output=cold_output: _validated_build(
+                    project_root, source, output,
+                    measure_stage=lambda label, operation: record_stage(
+                        "cold_build_validate_receipt", label, operation
+                    ),
+                )
             )
             cold_samples.append(cold_elapsed)
             contract_sha = str(cold["build"]["build_contract_sha256"])
@@ -337,32 +374,48 @@ def run_benchmark(
             contract_hashes.add(str(partial_build["build_contract_sha256"]))
 
             def resume_interrupted() -> str:
-                expected = compute_build_contract(
-                    source,
-                    debate_id=DEBATE_ID,
-                    short_code=SHORT_CODE,
-                    scope_summary=None,
+                scenario = "resume_after_build_before_receipt"
+                expected = record_stage(
+                    scenario, "verify_source_contract",
+                    lambda: compute_build_contract(
+                        source,
+                        debate_id=DEBATE_ID,
+                        short_code=SHORT_CODE,
+                        scope_summary=None,
+                    ),
                 )
                 expected_sha = canonical_json_sha256(expected)
-                before = inspect_existing_build(
-                    partial_output,
-                    expected_debate_id=DEBATE_ID,
-                    expected_contract_sha256=expected_sha,
+                before = record_stage(
+                    scenario, "inspect_unverified_build",
+                    lambda: inspect_existing_build(
+                        partial_output,
+                        expected_debate_id=DEBATE_ID,
+                        expected_contract_sha256=expected_sha,
+                    ),
                 )
                 if before.get("status") != "unverified":
                     raise PretranslationBenchmarkError("État interrompu synthétique inattendu")
-                validation = run_validator(project_root, partial_output)
+                validation = record_stage(
+                    scenario, "initial_validator",
+                    lambda: run_validator(project_root, partial_output),
+                )
                 if validation.get("status") != "passed":
                     raise PretranslationBenchmarkError("Validation de reprise échouée")
-                write_build_receipt(
-                    partial_output,
-                    build_contract=expected,
-                    validation=validation,
+                record_stage(
+                    scenario, "write_receipt",
+                    lambda: write_build_receipt(
+                        partial_output,
+                        build_contract=expected,
+                        validation=validation,
+                    ),
                 )
-                after = inspect_existing_build(
-                    partial_output,
-                    expected_debate_id=DEBATE_ID,
-                    expected_contract_sha256=expected_sha,
+                after = record_stage(
+                    scenario, "verify_written_receipt",
+                    lambda: inspect_existing_build(
+                        partial_output,
+                        expected_debate_id=DEBATE_ID,
+                        expected_contract_sha256=expected_sha,
+                    ),
                 )
                 if not after.get("safe_to_reuse"):
                     raise PretranslationBenchmarkError("Le reçu de reprise n'est pas réutilisable")
@@ -373,17 +426,24 @@ def run_benchmark(
             contract_hashes.add(interrupted_sha)
 
             def resume_exact() -> str:
-                expected = compute_build_contract(
-                    source,
-                    debate_id=DEBATE_ID,
-                    short_code=SHORT_CODE,
-                    scope_summary=None,
+                scenario = "resume_exact_verified_receipt"
+                expected = record_stage(
+                    scenario, "verify_source_contract",
+                    lambda: compute_build_contract(
+                        source,
+                        debate_id=DEBATE_ID,
+                        short_code=SHORT_CODE,
+                        scope_summary=None,
+                    ),
                 )
                 expected_sha = canonical_json_sha256(expected)
-                inspection = inspect_existing_build(
-                    cold_output,
-                    expected_debate_id=DEBATE_ID,
-                    expected_contract_sha256=expected_sha,
+                inspection = record_stage(
+                    scenario, "verify_build_receipt",
+                    lambda: inspect_existing_build(
+                        cold_output,
+                        expected_debate_id=DEBATE_ID,
+                        expected_contract_sha256=expected_sha,
+                    ),
                 )
                 if not inspection.get("safe_to_reuse"):
                     raise PretranslationBenchmarkError("Le build exact n'a pas été réutilisé")
@@ -398,6 +458,10 @@ def run_benchmark(
         cold = _summary(cold_samples)
         interrupted = _summary(interrupted_samples)
         exact = _summary(exact_samples)
+        stage_profiles = {
+            scenario: {name: _summary(samples) for name, samples in stages.items()}
+            for scenario, stages in stage_samples.items()
+        }
         report: dict[str, Any] = {
             "schema": REPORT_SCHEMA,
             "kit_version": KIT_VERSION,
@@ -418,16 +482,19 @@ def run_benchmark(
                 "cold_build_validate_receipt": {
                     **cold,
                     "operations": ["build_corpus", "initial_validator", "write_receipt"],
+                    "stage_timings_seconds": stage_profiles["cold_build_validate_receipt"],
                 },
                 "resume_after_build_before_receipt": {
                     **interrupted,
                     "operations": ["verify_source_contract", "initial_validator", "write_receipt"],
+                    "stage_timings_seconds": stage_profiles["resume_after_build_before_receipt"],
                     "avoided_operations": ["build_corpus"],
                     "gain_vs_cold": _gain(cold["median_seconds"], interrupted["median_seconds"]),
                 },
                 "resume_exact_verified_receipt": {
                     **exact,
                     "operations": ["verify_source_contract", "verify_build_receipt"],
+                    "stage_timings_seconds": stage_profiles["resume_exact_verified_receipt"],
                     "avoided_operations": ["build_corpus", "initial_validator"],
                     "gain_vs_cold": _gain(cold["median_seconds"], exact["median_seconds"]),
                 },
@@ -450,6 +517,8 @@ def run_benchmark(
             },
             "limitations": [
                 "Les temps dépendent de la machine, du cache disque et de la charge système.",
+                "Les étapes instrumentées sont incluses dans le temps total, et leur somme n'est pas nécessairement égale à sa médiane; la préparation d'un build partiel est exclue.",
+                "Les temps incluent les processus de validation, mais aucun comptage exhaustif des octets lus par ces sous-processus n'est encore disponible.",
                 (
                     "Le snapshot réel est figé localement; aucune traduction ni équivalence linguistique n'est évaluée."
                     if snapshot is not None else
