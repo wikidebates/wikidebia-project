@@ -1259,20 +1259,22 @@ def analyze_graph(result: CrawlResult) -> dict[str, Any]:
     reused_occurrences_by_level: dict[int, int] = {}
     reused_pages_by_level: dict[int, list[str]] = {}
     if not cycle_nodes:
+        # Index only the occurrence depths actually present for each node.
+        # Previously, every level scanned *all* nodes, which costs O(N * L)
+        # on a long graph where there may be as many levels as nodes.
+        # Preserve the original node iteration order for stable casefold ties.
+        reused_candidates: dict[int, list[str]] = defaultdict(list)
+        for title, counter in occurrences_by_level_for_node.items():
+            first_level = minimum_level.get(title, 10**9)
+            for level, count in counter.items():
+                if count and (first_level < level or count > 1):
+                    reused_candidates[level].append(title)
         for level in sorted(occurrences_by_level):
             reused_count = occurrences_by_level[level] - pages_by_minimum_level.get(level, 0)
             if reused_count:
                 reused_occurrences_by_level[level] = reused_count
                 reused_pages_by_level[level] = sorted(
-                    [
-                        title
-                        for title, counter in occurrences_by_level_for_node.items()
-                        if counter.get(level, 0)
-                        and (
-                            minimum_level.get(title, 10**9) < level
-                            or counter.get(level, 0) > 1
-                        )
-                    ],
+                    reused_candidates.get(level, []),
                     key=str.casefold,
                 )
 
