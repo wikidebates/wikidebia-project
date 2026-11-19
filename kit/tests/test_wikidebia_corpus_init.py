@@ -541,3 +541,15 @@ def test_snapshot_accepts_internal_symlink_when_verified_bytes_are_unchanged(tmp
     output = tmp_path / "build"
     mod.copy_import_pages(inp, snapshot, output, ids)
     assert (output / "imports/fr/arguments/A0001.wiki").read_bytes() == duplicate.read_bytes()
+
+
+def test_import_rechecks_page_path_boundary_without_prior_verification(tmp_path: Path):
+    source = make_extraction(tmp_path / "source")
+    inp = mod.resolve_extraction_input(source)
+    snapshot = json.loads(inp.snapshot_manifest_path.read_text(encoding="utf-8"))
+    snapshot["arguments"][0]["relative_path"] = "../../outside.wiki"
+    ids = {row["canonical_title"]: f"A{i:04d}" for i, row in enumerate(snapshot["arguments"], 1)}
+    output = tmp_path / "build"
+    with pytest.raises(mod.CorpusInitError, match="Chemin de page invalide"):
+        mod.copy_import_pages(inp, snapshot, output, ids)
+    assert not (output / "imports/fr/arguments/A0001.wiki").exists()
