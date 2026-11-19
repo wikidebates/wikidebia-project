@@ -40,13 +40,33 @@ class SchemaStore:
         pairs = [(name, Resource.from_contents(doc)) for name, doc in self.schemas.items()]
         self.registry = Registry().with_resources(pairs)
         self.format_checker = FormatChecker()
+        # Scoped to one SchemaStore/validation, not shared between runs.
+        # Content fingerprints invalidate a compiled validator even when a
+        # caller mutates a schema object in-place between two validations.
+        self._compiled: dict[str, tuple[str, Any]] = {}
 
     def validate(self, instance: Any, schema_name: str) -> list[Any]:
         schema = self.schemas[schema_name]
-        cls = validator_for(schema)
-        cls.check_schema(schema)
-        validator = cls(schema, registry=self.registry, format_checker=self.format_checker)
-        return sorted(validator.iter_errors(instance), key=lambda e: (list(e.absolute_path), e.message))
+        fingerprint = hashlib.sha256(
+            json.dumps(
+                schema, ensure_ascii=False, sort_keys=True,
+                separators=(",", ":"), allow_nan=False,
+            ).encode("utf-8")
+        ).hexdigest()
+        cached = self._compiled.get(schema_name)
+        if cached is None or cached[0] != fingerprint:
+            cls = validator_for(schema)
+            cls.check_schema(schema)
+            validator = cls(
+                schema, registry=self.registry, format_checker=self.format_checker,
+            )
+            self._compiled[schema_name] = (fingerprint, validator)
+        else:
+            validator = cached[1]
+        return sorted(
+            validator.iter_errors(instance),
+            key=lambda e: (list(e.absolute_path), e.message),
+        )
 
 
 def pointer(path: Any) -> str:
