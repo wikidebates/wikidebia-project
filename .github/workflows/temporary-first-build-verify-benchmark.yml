@@ -73,10 +73,10 @@ jobs:
                               assert checked == result['build_contract']
                               return result
                           build = old_double_build if name == 'before' else build_corpus
-                          with patch.object(workflow,'_graph_translation_preflight',preflight), \\
-                               patch.object(workflow,'_stop_for_existing_english_debate',lambda *_:False), \\
-                               patch.object(workflow,'_save_workflow',lambda *_:None), \\
-                               patch.object(workflow,'run_initial_validator',lambda *_:{'status':'passed'}), \\
+                          with patch.object(workflow,'_graph_translation_preflight',preflight), \
+                               patch.object(workflow,'_stop_for_existing_english_debate',lambda *_:False), \
+                               patch.object(workflow,'_save_workflow',lambda *_:None), \
+                               patch.object(workflow,'run_initial_validator',lambda *_:{'status':'passed'}), \
                                patch.object(workflow,'build_corpus',build):
                               began = time.perf_counter()
                               workflow._initialize_graph_stage(output_root,state)
