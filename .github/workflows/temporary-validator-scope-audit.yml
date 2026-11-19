@@ -49,7 +49,7 @@ jobs:
                           report = validate_package(target, scopes=[scope] if scope else None)
                           elapsed = time.perf_counter() - started
                           if report.errors:
-                              raise RuntimeError(f"Validator errors on size={size}, scope={scope}, count={len(report.errors)}")
+                              raise RuntimeError(f"Validator errors on size={size}, scope={scope}, count={report.errors}")
                           samples.append(elapsed)
                       print("AUDIT_SCOPE", json.dumps({
                           "size": size, "scope": scope or "all", "repeats": 4,
