@@ -125,7 +125,17 @@ def test_casefold_colliding_root_titles_keep_historical_sorting():
     edges=[(root,"justification","Common") for root in roots]
     edges.append(("Common","objection","Final"))
     result=synthetic_result(nodes,roots[:11],roots[11:],edges)
-    assert_matches_oracle(result)
+    analyzed=graph.analyze_graph(result)
+    expected=oracle(result)
+    for row in analyzed["noeuds"]:
+        names=row["arguments_racines"]
+        # The historical sorted(set(...), key=str.casefold) has no specified
+        # relative order for the distinct names ROOT/root with equal keys:
+        # two independently built sets can enumerate them differently.
+        # Compare exact membership and deterministic orientation instead.
+        assert set(names)==set(expected[row["titre"]][0])
+        assert row["orientations_racines"]==expected[row["titre"]][1]
+        assert [name.casefold() for name in names]==sorted(name.casefold() for name in names)
 
 
 def test_sparse_roots_keep_exact_labels_when_no_large_shared_target():
