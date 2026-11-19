@@ -1959,6 +1959,53 @@ def _initialize_graph_stage(project_root: Path, state: dict[str, Any]) -> None:
         state["snapshot_path"] = _relative(source, project_root)
         state["updated_at"] = now_iso()
         _save_workflow(project_root, state)
+
+    # When a snapshot is a ZIP, preflight + source-contract verification (on
+    # resume) or corpus construction previously extracted the same archive
+    # separately. Use one *ephemeral* extracted directory for this stage only.
+    # The original archive path stays in state; later resumes independently
+    # re-extract and reverify its current bytes. A full SHA-256 verification
+    # still happens inside compute_build_contract or build_corpus.
+    if source.is_file() and source.suffix.lower() == ".zip":
+        def zip_identity() -> tuple[int, int, int, int, int]:
+            info = source.stat()
+            return (
+                info.st_dev, info.st_ino, info.st_size,
+                info.st_mtime_ns, info.st_ctime_ns,
+            )
+
+        original_identity = zip_identity()
+        state_before_zip = copy.deepcopy(state)
+        extraction = resolve_extraction_input(source)
+        try:
+            _initialize_graph_stage_from_source(
+                project_root, state, build_dir, extraction.root,
+            )
+        finally:
+            if extraction.cleanup is not None:
+                shutil.rmtree(extraction.cleanup, ignore_errors=True)
+            # The source ZIP remains authoritative for any future resume.
+            # If it changed while the extracted copy was being processed, the
+            # stage cannot advance based on that copy. Restore the prior
+            # workflow state; any partly built output will be checked against
+            # the newly verified source on the next attempt (no overwrite).
+            try:
+                current_identity = zip_identity()
+            except OSError:
+                current_identity = None
+            if current_identity != original_identity:
+                state.clear()
+                state.update(state_before_zip)
+                _save_workflow(project_root, state)
+                raise WorkflowError("Snapshot ZIP modifié ou disparu pendant l'initialisation")
+        return
+    _initialize_graph_stage_from_source(project_root, state, build_dir, source)
+
+
+def _initialize_graph_stage_from_source(
+    project_root: Path, state: dict[str, Any], build_dir: Path, source: Path,
+) -> None:
+    debate_id = str(state["debate_id"])
     graph_metadata = _graph_translation_preflight(source)
     if "traduction_du_débat_requise" not in graph_metadata:
         raise WorkflowError(

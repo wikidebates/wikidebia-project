@@ -243,25 +243,37 @@ def _find_single(root: Path, patterns: Sequence[str], label: str) -> Path:
 def resolve_extraction_input(source: Path) -> ExtractionInput:
     source = source.expanduser().resolve()
     cleanup: Path | None = None
-    if source.is_file() and source.suffix.lower() == ".zip":
-        cleanup = Path(tempfile.mkdtemp(prefix="wikidebia-corpus-init-"))
-        safe_extract(source, cleanup)
-        root = cleanup
-    elif source.is_file() and source.name == "snapshot_manifest.json":
-        root = source.parent.parent
-    elif source.is_dir():
-        root = source
-    else:
-        raise CorpusInitError(f"Source introuvable ou non prise en charge : {source}")
+    try:
+        if source.is_file() and source.suffix.lower() == ".zip":
+            cleanup = Path(tempfile.mkdtemp(prefix="wikidebia-corpus-init-"))
+            safe_extract(source, cleanup)
+            root = cleanup
+        elif source.is_file() and source.name == "snapshot_manifest.json":
+            root = source.parent.parent
+        elif source.is_dir():
+            root = source
+        else:
+            raise CorpusInitError(f"Source introuvable ou non prise en charge : {source}")
 
-    snapshot = _find_single(root, ["snapshot_manifest.json"], "Manifeste de snapshot")
-    graph_candidates = [
-        path for path in root.rglob("*.json")
-        if path.is_file() and "graphe_recursif" in path.name and not path.name.endswith("manifest_sha256.json")
-    ]
-    if len(graph_candidates) != 1:
-        raise CorpusInitError(f"Graphe d'extraction: un fichier attendu, trouvé {len(graph_candidates)}")
-    return ExtractionInput(root=root, graph_path=graph_candidates[0], snapshot_manifest_path=snapshot, cleanup=cleanup)
+        snapshot = _find_single(root, ["snapshot_manifest.json"], "Manifeste de snapshot")
+        graph_candidates = [
+            path for path in root.rglob("*.json")
+            if path.is_file() and "graphe_recursif" in path.name and not path.name.endswith("manifest_sha256.json")
+        ]
+        if len(graph_candidates) != 1:
+            raise CorpusInitError(f"Graphe d'extraction: un fichier attendu, trouvé {len(graph_candidates)}")
+        return ExtractionInput(
+            root=root, graph_path=graph_candidates[0],
+            snapshot_manifest_path=snapshot, cleanup=cleanup,
+        )
+    except BaseException:
+        # A corrupt ZIP or a missing/ambiguous graph can fail *before* the
+        # caller receives ExtractionInput and its cleanup path. Delete the
+        # partially extracted snapshot here instead of leaking wiki content
+        # into the system temporary directory.
+        if cleanup is not None:
+            shutil.rmtree(cleanup, ignore_errors=True)
+        raise
 
 
 def _snapshot_page_path(snapshot_root: Path, relative: Any) -> Path:
