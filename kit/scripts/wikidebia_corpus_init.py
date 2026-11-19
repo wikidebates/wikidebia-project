@@ -839,15 +839,33 @@ def copy_import_pages(inp: ExtractionInput, snapshot: Mapping[str, Any], output_
     provenance_rows.append({**debate_row, "page_id": None, "import_path": debate_target.relative_to(output_root).as_posix(), "kind": "debate"})
 
     rows_by_title = {str(row["canonical_title"]): row for row in snapshot.get("arguments") or []}
+    # Most graph titles match their snapshot title byte-for-byte. Only build
+    # the normalization index on the first miss, instead of re-normalizing and
+    # scanning every snapshot title for each affected graph argument (O(N^2)).
+    # Preserve the historical first-match rule and error ordering, even if a
+    # malformed unused snapshot title appears before a matching candidate.
+    normalized_rows: dict[str, tuple[int, dict[str, Any]]] | None = None
+    first_invalid_title: tuple[int, CorpusInitError] | None = None
     for source_title, node_id in title_to_id.items():
         row = rows_by_title.get(source_title)
         if row is None:
             normalized_source, _ = normalize_title(source_title)
-            for title, candidate in rows_by_title.items():
-                normalized_candidate, _ = normalize_title(title)
-                if normalized_candidate == normalized_source:
-                    row = candidate
-                    break
+            if normalized_rows is None:
+                normalized_rows = {}
+                for position, (title, candidate) in enumerate(rows_by_title.items()):
+                    try:
+                        normalized_candidate, _ = normalize_title(title)
+                    except CorpusInitError as exc:
+                        if first_invalid_title is None:
+                            first_invalid_title = (position, exc)
+                        continue
+                    normalized_rows.setdefault(normalized_candidate, (position, candidate))
+            matched = normalized_rows.get(normalized_source)
+            if first_invalid_title is not None and (
+                matched is None or first_invalid_title[0] < matched[0]
+            ):
+                raise first_invalid_title[1]
+            row = matched[1] if matched is not None else None
         if row is None:
             raise CorpusInitError(f"Page absente du snapshot pour le nœud : {source_title}")
         target = output_root / f"imports/fr/arguments/{node_id}.wiki"
