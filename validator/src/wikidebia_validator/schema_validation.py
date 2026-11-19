@@ -333,6 +333,24 @@ def _json_identical(left: Any, right: Any) -> bool:
     return left == right
 
 
+def _shareable_reference_context(value: Any) -> bool:
+    # A relative local #/$defs ref would resolve against different schema
+    # roots. Only links into the same sibling common.schema.json are proven
+    # equivalent for both registry and projection.
+    if isinstance(value, dict):
+        if any(key in value for key in ("$id", "$schema", "$anchor", "$dynamicRef", "$dynamicAnchor")):
+            return False
+        if "$ref" in value and (
+            not isinstance(value["$ref"], str)
+            or not value["$ref"].startswith("common.schema.json#/$defs/")
+        ):
+            return False
+        return all(_shareable_reference_context(v) for v in value.values())
+    if isinstance(value, list):
+        return all(_shareable_reference_context(v) for v in value)
+    return True
+
+
 def _reusable_graph_fields(
     ctx: PackageContext, store: SchemaStore, registry_rel: str, graph_rel: str,
 ) -> tuple[str, ...]:
@@ -350,7 +368,9 @@ def _reusable_graph_fields(
         return ()
     shared = set(_SHARED_GRAPH_FIELDS)
     if (
-        set(embedded) != {"type", "properties", "additionalProperties", "required"}
+        registry_schema.get("$id") != "argument_registry.schema.json"
+        or graph_schema.get("$id") != "argument_graph.schema.json"
+        or set(embedded) != {"type", "properties", "additionalProperties", "required"}
         or embedded.get("type") != "object"
         or embedded.get("additionalProperties") is not False
         or not isinstance(embedded.get("properties"), dict)
@@ -368,9 +388,11 @@ def _reusable_graph_fields(
         or not shared.issubset(set(graph_schema.get("required") or []))
     ):
         return ()
-    if any(not _json_identical(
-        embedded["properties"][key], graph_schema["properties"][key]
-    ) for key in _SHARED_GRAPH_FIELDS):
+    if any(
+        not _json_identical(embedded["properties"][key], graph_schema["properties"][key])
+        or not _shareable_reference_context(embedded["properties"][key])
+        for key in _SHARED_GRAPH_FIELDS
+    ):
         return ()
     registry = ctx.load_json(registry_rel)
     projection = ctx.load_json(graph_rel)
@@ -393,7 +415,7 @@ def _reusable_graph_fields(
 def validate_instance(
     ctx: PackageContext, store: SchemaStore, rel: str, schema_name: str,
     instance: Any | None = None, *, _validated_graph_fields: tuple[str, ...] = (),
-) -> None:
+) -> bool:
     if instance is None:
         instance = ctx.load_json(rel)
     if instance is None:
@@ -409,6 +431,9 @@ def validate_instance(
         if _historical_classification_count(ctx, schema_name, instance, err) or _preserved_keyword_duplicates(ctx, schema_name, instance, err) or _preserved_empty_rubrics(ctx, schema_name, instance, err):
             continue
         ctx.report.error("WDV-SCH-003", err.message, path=rel, pointer=pointer(err.absolute_path), details={"schema": schema_name})
+    # The caller must not reuse common fields when raw schema errors were
+    # suppressed by a *contextual historic exception* in the loop above.
+    return not errors
 
 
 def _preserved_empty_rubrics(ctx: PackageContext, schema_name: str, instance: Any, err: Any) -> bool:
@@ -464,12 +489,10 @@ def validate_all_schemas(ctx: PackageContext, store: SchemaStore) -> None:
             canonical_graph_pair and rel == core["registry"]
             and schema == "argument_registry.schema.json"
         ):
-            before = len(ctx.report.findings)
-            validate_instance(ctx, store, rel, schema)
-            registry_valid = (
-                isinstance(ctx.load_json(rel), dict)
-                and not any(f.level == "ERROR" for f in ctx.report.findings[before:])
-            )
+            # This is raw schema validity, not merely the absence of emitted
+            # findings: historic exceptions may deliberately suppress some
+            # schema errors and cannot be treated as a reusable validation.
+            registry_valid = validate_instance(ctx, store, rel, schema) is True
         elif (
             canonical_graph_pair and registry_valid and rel == core["graph_json"]
             and schema == "argument_graph.schema.json"
