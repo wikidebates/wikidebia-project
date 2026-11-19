@@ -1,0 +1,64 @@
+name: Temporary shared graph schema parity and performance
+on:
+  pull_request:
+    paths:
+      - validator/src/wikidebia_validator/schema_validation.py
+      - validator/tests/test_shared_graph_schema_reuse.py
+      - .github/workflows/temporary-shared-graph-schema-benchmark.yml
+permissions:
+  contents: read
+jobs:
+  parity-and-benchmark:
+    if: github.head_ref == 'perf/reuse-equivalent-graph-schema-validation-20261119'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Run exact-report-parity regressions
+        env:
+          PYTHONPATH: validator/src
+        run: python -m pytest -q validator/tests/test_shared_graph_schema_reuse.py
+      - name: Compare full-schema and proven-shared schema branches offline
+        env:
+          PYTHONPATH: kit/scripts:validator/src
+        run: |
+          python - <<'PY'
+          import json, statistics, tempfile, time
+          from pathlib import Path
+          from unittest.mock import patch
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+          from wikidebia_corpus_init import build_corpus
+          import wikidebia_validator.schema_validation as schema_module
+          from wikidebia_validator.validator import validate_package
+
+          with tempfile.TemporaryDirectory() as work:
+              for n in (120,300):
+                  folder=Path(work)/str(n)
+                  src=make_synthetic_extraction(folder/'source', arguments=n, payload_bytes=1024)
+                  built=build_corpus(src, folder/'build', debate_id='benchmark_pretranslation', short_code='BENCH', scope_summary=None, overwrite=False)
+                  assert built['status']=='created'
+                  path=folder/'build'
+                  times={'full':[], 'shared':[]}
+                  for i in range(6):
+                      for name in (('full','shared') if i%2==0 else ('shared','full')):
+                          begin=time.perf_counter()
+                          if name=='full':
+                              with patch.object(schema_module,'_reusable_graph_fields',return_value=()):
+                                  report=validate_package(path,scopes=['schema']).to_dict()
+                          else:
+                              report=validate_package(path,scopes=['schema']).to_dict()
+                          times[name].append(round(time.perf_counter()-begin,6))
+                          if name=='full': baseline=report
+                          else: assert report==baseline,('report changed',n,i)
+                  print('MEASURE',json.dumps({
+                      'arguments':n,'times':times,
+                      'medians':{k:statistics.median(v) for k,v in times.items()},
+                      'identical_reports':True,'no_wiki_access':True
+                  },sort_keys=True),flush=True)
+          PY
