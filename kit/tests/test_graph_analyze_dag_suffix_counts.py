@@ -223,3 +223,19 @@ def test_more_than_bitset_limit_preserves_linear_path_counts():
         and row["niveau_maximal_occurrences"] == 1
         for row in graph["branches_niveau_1"]
     )
+
+
+def test_isolated_and_unreachable_nodes_do_not_inflate_branch_reachability():
+    roots = [f"R{i:02d}" for i in range(8)]
+    nodes = [*roots, "Shared", "Leaf", "Orphan"]
+    result = synthetic_result(
+        nodes, roots[:4], roots[4:],
+        [("R00", "justification", "Shared"),
+         ("R01", "objection", "Shared"),
+         ("Shared", "justification", "Leaf")],
+    )
+    graph = mod.analyze_graph(result)
+    assert graph["branches_niveau_1"] == expected_branch_counts(result)
+    assert graph["branches_niveau_1"][0]["pages_uniques_branche_racine_incluse"] == 3
+    assert graph["branches_niveau_1"][2]["pages_uniques_branche_racine_incluse"] == 1
+    assert "Orphan" in {node["titre"] for node in graph["noeuds"]}
