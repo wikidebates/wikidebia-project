@@ -787,12 +787,25 @@ def copy_import_pages(inp: ExtractionInput, snapshot: Mapping[str, Any], output_
     imported: dict[str, dict[str, Any]] = {}
     provenance_rows: list[dict[str, Any]] = []
 
+    def copy_verified(row: Mapping[str, Any], target: Path, *, debate: bool) -> dict[str, Any]:
+        # verify_extraction checked the source earlier, but it may change
+        # before the import is copied. Hash exactly the bytes that are written
+        # and parsed here, rather than trusting a previous path-based check.
+        source = snapshot_root / str(row["relative_path"])
+        payload = source.read_bytes()
+        if sha256_bytes(payload) != row.get("sha256"):
+            raise CorpusInitError(
+                f"Page modifiée entre la vérification et l'import : {row['relative_path']}"
+            )
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(payload)
+        # Keep metadata derived from the *same verified bytes* we just wrote.
+        # This also removes a redundant read of the imported target page.
+        return extract_page_metadata(payload.decode("utf-8"), debate=debate)
+
     debate_row = snapshot["debate"]
-    debate_source = snapshot_root / debate_row["relative_path"]
     debate_target = output_root / "imports/fr/debate/debate.wiki"
-    debate_target.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(debate_source, debate_target)
-    debate_meta = extract_page_metadata(debate_target.read_text(encoding="utf-8"), debate=True)
+    debate_meta = copy_verified(debate_row, debate_target, debate=True)
     provenance_rows.append({**debate_row, "page_id": None, "import_path": debate_target.relative_to(output_root).as_posix(), "kind": "debate"})
 
     rows_by_title = {str(row["canonical_title"]): row for row in snapshot.get("arguments") or []}
@@ -807,11 +820,8 @@ def copy_import_pages(inp: ExtractionInput, snapshot: Mapping[str, Any], output_
                     break
         if row is None:
             raise CorpusInitError(f"Page absente du snapshot pour le nœud : {source_title}")
-        source = snapshot_root / row["relative_path"]
         target = output_root / f"imports/fr/arguments/{node_id}.wiki"
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(source, target)
-        imported[source_title] = extract_page_metadata(target.read_text(encoding="utf-8"), debate=False)
+        imported[source_title] = copy_verified(row, target, debate=False)
         provenance_rows.append({**row, "page_id": node_id, "import_path": target.relative_to(output_root).as_posix(), "kind": "argument", "source_graph_title": source_title})
 
     provenance = {
