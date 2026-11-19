@@ -45,7 +45,10 @@ class SchemaStore:
         # caller mutates a schema object in-place between two validations.
         self._compiled: dict[str, tuple[str, Any]] = {}
 
-    def validate(self, instance: Any, schema_name: str) -> list[Any]:
+    def validate(
+        self, instance: Any, schema_name: str, *,
+        _validated_graph_fields: tuple[str, ...] = (),
+    ) -> list[Any]:
         schema = self.schemas[schema_name]
         fingerprint = hashlib.sha256(
             json.dumps(
@@ -63,6 +66,20 @@ class SchemaStore:
             self._compiled[schema_name] = (fingerprint, validator)
         else:
             validator = cached[1]
+        if _validated_graph_fields:
+            # Only validate_all_schemas may supply this proof. The full
+            # original schema has still undergone check_schema above; the
+            # already checked, identical common graph properties are replaced
+            # *for this instance only*. All exclusive and root constraints
+            # remain in force and the source schema is never mutated.
+            if schema_name != "argument_graph.schema.json":
+                raise ValueError("Graph-only schema optimization used with another schema")
+            narrowed_schema = dict(schema)
+            narrowed_schema["properties"] = {
+                key: (True if key in _validated_graph_fields else value)
+                for key, value in schema["properties"].items()
+            }
+            validator = validator.evolve(schema=narrowed_schema)
         return sorted(
             validator.iter_errors(instance),
             key=lambda e: (list(e.absolute_path), e.message),
@@ -295,13 +312,96 @@ def _preserved_keyword_duplicates(ctx: PackageContext, schema_name: str, instanc
     return len(set(expected)) == len(set(french)) and node.get("en", {}).get("keywords") == expected
 
 
-def validate_instance(ctx: PackageContext, store: SchemaStore, rel: str, schema_name: str, instance: Any | None = None) -> None:
+_SHARED_GRAPH_FIELDS = (
+    "lifecycle", "depth_policy", "nodes", "edges", "occurrences", "derived_counts",
+)
+
+
+def _json_identical(left: Any, right: Any) -> bool:
+    """Compare parsed JSON, including exact scalar types (True is not 1)."""
+    if type(left) is not type(right):
+        return False
+    if isinstance(left, dict):
+        return (
+            left.keys() == right.keys()
+            and all(_json_identical(value, right[key]) for key, value in left.items())
+        )
+    if isinstance(left, list):
+        return len(left) == len(right) and all(
+            _json_identical(a, b) for a, b in zip(left, right)
+        )
+    return left == right
+
+
+def _reusable_graph_fields(
+    ctx: PackageContext, store: SchemaStore, registry_rel: str, graph_rel: str,
+) -> tuple[str, ...]:
+    """Prove that both documents and their schemas share six validated fields.
+
+    Fail closed on schema evolution, missing fields, distinct values or types.
+    Metadata, root constraints and graph-only fields are always revalidated.
+    """
+    registry_schema = store.schemas.get("argument_registry.schema.json")
+    graph_schema = store.schemas.get("argument_graph.schema.json")
+    if not isinstance(registry_schema, dict) or not isinstance(graph_schema, dict):
+        return ()
+    embedded = (registry_schema.get("properties") or {}).get("graph")
+    if not isinstance(embedded, dict):
+        return ()
+    shared = set(_SHARED_GRAPH_FIELDS)
+    if (
+        set(embedded) != {"type", "properties", "additionalProperties", "required"}
+        or embedded.get("type") != "object"
+        or embedded.get("additionalProperties") is not False
+        or not isinstance(embedded.get("properties"), dict)
+        or set(embedded["properties"]) != shared
+        or set(embedded.get("required") or []) != shared
+        or len(embedded.get("required") or []) != len(shared)
+        or set(graph_schema) != {
+            "$schema", "$id", "title", "description", "type",
+            "additionalProperties", "properties", "required",
+        }
+        or graph_schema.get("type") != "object"
+        or graph_schema.get("additionalProperties") is not False
+        or not isinstance(graph_schema.get("properties"), dict)
+        or set(graph_schema["properties"]) != shared | {"graph_schema_version", "debate"}
+        or not shared.issubset(set(graph_schema.get("required") or []))
+    ):
+        return ()
+    if any(not _json_identical(
+        embedded["properties"][key], graph_schema["properties"][key]
+    ) for key in _SHARED_GRAPH_FIELDS):
+        return ()
+    registry = ctx.load_json(registry_rel)
+    projection = ctx.load_json(graph_rel)
+    if (
+        not isinstance(registry, dict)
+        or not isinstance(registry.get("graph"), dict)
+        or not isinstance(projection, dict)
+    ):
+        return ()
+    graph = registry["graph"]
+    if any(
+        key not in graph or key not in projection
+        or not _json_identical(graph[key], projection[key])
+        for key in _SHARED_GRAPH_FIELDS
+    ):
+        return ()
+    return _SHARED_GRAPH_FIELDS
+
+
+def validate_instance(
+    ctx: PackageContext, store: SchemaStore, rel: str, schema_name: str,
+    instance: Any | None = None, *, _validated_graph_fields: tuple[str, ...] = (),
+) -> None:
     if instance is None:
         instance = ctx.load_json(rel)
     if instance is None:
         return
     try:
-        errors = store.validate(instance, schema_name)
+        errors = store.validate(
+            instance, schema_name, _validated_graph_fields=_validated_graph_fields,
+        )
     except Exception as exc:
         ctx.report.error("WDV-SCH-002", f"Impossible d'appliquer {schema_name} : {exc}", path=rel)
         return
@@ -350,8 +450,39 @@ def validate_all_schemas(ctx: PackageContext, store: SchemaStore) -> None:
     mapping[core["registry"]] = "argument_registry.schema.json"
     mapping[core["graph_json"]] = "argument_graph.schema.json"
     mapping[core["sources"]] = "source_registry.schema.json"
+    registry_valid = False
+    # The canonical registry precedes the canonical graph in SCHEMA_BY_PATH.
+    # Nonstandard paths continue through the independent full validations.
+    canonical_graph_pair = (
+        core["registry"] == "data/registre_debat.json"
+        and core["graph_json"] == "graph/graphe_argumentatif.json"
+    )
     for rel, schema in mapping.items():
-        if ctx.exists(rel):
+        if not ctx.exists(rel):
+            continue
+        if (
+            canonical_graph_pair and rel == core["registry"]
+            and schema == "argument_registry.schema.json"
+        ):
+            before = len(ctx.report.findings)
+            validate_instance(ctx, store, rel, schema)
+            registry_valid = (
+                isinstance(ctx.load_json(rel), dict)
+                and not any(f.level == "ERROR" for f in ctx.report.findings[before:])
+            )
+        elif (
+            canonical_graph_pair and registry_valid and rel == core["graph_json"]
+            and schema == "argument_graph.schema.json"
+        ):
+            fields = _reusable_graph_fields(ctx, store, core["registry"], core["graph_json"])
+            if fields:
+                validate_instance(
+                    ctx, store, rel, schema, instance=ctx.load_json(rel),
+                    _validated_graph_fields=fields,
+                )
+            else:
+                validate_instance(ctx, store, rel, schema)
+        else:
             validate_instance(ctx, store, rel, schema)
     controls = (manifest or {}).get("editorial_controls") or {}
     for path_key, schema_name in (
