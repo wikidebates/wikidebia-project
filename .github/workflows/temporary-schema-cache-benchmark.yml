@@ -1,0 +1,79 @@
+name: Temporary schema cache before-after benchmark
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/temporary-schema-cache-benchmark.yml
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    if: github.head_ref == 'audit/schema-cache-benchmark-20261119'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Build one fixed synthetic 120-argument package from baseline
+        run: |
+          git checkout --detach 1f80a522d5ac0fdecd4b7f20bd8bff939dc62b22
+          PYTHONPATH=kit/scripts python - <<'PY'
+          from pathlib import Path
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+          from wikidebia_corpus_init import build_corpus
+          root = Path('/tmp/schema-cache-comparison')
+          source = make_synthetic_extraction(root / 'source', arguments=120, payload_bytes=1024)
+          result = build_corpus(source, root / 'build', debate_id='benchmark_pretranslation', short_code='BENCH', scope_summary=None, overwrite=False)
+          assert result['status'] == 'created'
+          print('Fixture: 120 synthetic arguments; build succeeded')
+          PY
+      - name: Baseline full JSON schema scope (7 runs)
+        run: |
+          PYTHONPATH=validator/src python - <<'PY'
+          from pathlib import Path
+          import json, statistics, time
+          from wikidebia_validator.validator import validate_package
+          root = Path('/tmp/schema-cache-comparison/build')
+          samples = []
+          expected_findings = None
+          for _ in range(7):
+              start = time.perf_counter()
+              report = validate_package(root, scopes=['schema'])
+              samples.append(time.perf_counter() - start)
+              found = [finding.to_dict() for finding in report.findings]
+              assert report.errors == 0, found[:5]
+              if expected_findings is None:
+                  expected_findings = found
+              assert found == expected_findings
+          Path('/tmp/schema-cache-comparison/baseline.json').write_text(json.dumps({'samples':samples,'findings':expected_findings}))
+          print('BASELINE_MEDIAN_SECONDS', statistics.median(samples), 'SAMPLES', samples)
+          PY
+      - name: Updated validator full JSON schema scope (7 runs), identical corpus
+        run: |
+          git checkout --detach 50bde613f07b22c60c35d1a38141b1d591631928
+          PYTHONPATH=validator/src python - <<'PY'
+          from pathlib import Path
+          import json, statistics, time
+          from wikidebia_validator.validator import validate_package
+          root = Path('/tmp/schema-cache-comparison/build')
+          samples = []
+          base = json.loads(Path('/tmp/schema-cache-comparison/baseline.json').read_text())
+          for _ in range(7):
+              start = time.perf_counter()
+              report = validate_package(root, scopes=['schema'])
+              samples.append(time.perf_counter() - start)
+              assert [finding.to_dict() for finding in report.findings] == base['findings'], 'Different findings after optimization'
+          before = statistics.median(base['samples'])
+          after = statistics.median(samples)
+          print('AFTER_MEDIAN_SECONDS', after, 'SAMPLES', samples)
+          print('BEFORE_AFTER_PERCENT', round((1 - after / before)*100,2) if before else None)
+          print('No wiki access; no translation; full schema scope and error parity checked.')
+          PY
