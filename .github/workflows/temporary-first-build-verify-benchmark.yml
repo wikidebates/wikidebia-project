@@ -27,7 +27,7 @@ jobs:
           PYTHONPATH: kit/scripts
         run: |
           python - <<'PY'
-          import json, statistics, tempfile, time, zipfile
+          import json, os, statistics, tempfile, time, zipfile
           from pathlib import Path
           from unittest.mock import patch
 
@@ -61,7 +61,7 @@ jobs:
                           output_root.mkdir()
                           state = {'debate_id': 'benchmark_pretranslation',
                                    'short_code': None,
-                                   'snapshot_path': source.relative_to(root).as_posix()}
+                                   'snapshot_path': os.path.relpath(source, output_root)}
                           def old_double_build(path, destination, **k):
                               checked = compute_build_contract(
                                   path,
