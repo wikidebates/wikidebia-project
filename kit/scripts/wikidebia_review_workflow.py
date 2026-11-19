@@ -1967,18 +1967,23 @@ def _initialize_graph_stage(project_root: Path, state: dict[str, Any]) -> None:
         )
     if _stop_for_existing_english_debate(project_root, state, graph_metadata):
         return
-    try:
-        expected_contract = compute_build_contract(
-            source,
-            debate_id=debate_id,
-            short_code=state.get("short_code"),
-            scope_summary=None,
-        )
-    except Exception as exc:
-        raise WorkflowError(f"Impossible de vérifier le contrat du snapshot : {exc}") from exc
-    expected_contract_sha = canonical_json_sha256(expected_contract)
-    state["short_code"] = expected_contract["short_code"]
     if build_dir.exists():
+        # The verified contract is needed to decide whether an EXISTING build
+        # can be reused. For a first build, build_corpus itself verifies the
+        # complete extraction and records the exact same contract; computing
+        # it separately here would rehash every snapshot page (and reopen a
+        # ZIP extraction) before performing the identical verification again.
+        try:
+            expected_contract = compute_build_contract(
+                source,
+                debate_id=debate_id,
+                short_code=state.get("short_code"),
+                scope_summary=None,
+            )
+        except Exception as exc:
+            raise WorkflowError(f"Impossible de vérifier le contrat du snapshot : {exc}") from exc
+        expected_contract_sha = canonical_json_sha256(expected_contract)
+        state["short_code"] = expected_contract["short_code"]
         inspection = inspect_existing_build(
             build_dir,
             expected_debate_id=debate_id,
