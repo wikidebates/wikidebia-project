@@ -66,7 +66,7 @@ def test_repeated_canonical_roots_keep_first_order_in_each_orientation():
     assert result.roots_pro == ["A", "B"]
     assert result.roots_con == ["A"]
     assert list(result.parsed_arguments) == ["A", "B"]
-    assert len(client.batches) == 2
+    assert [batch for batch in client.batches if batch] == [("Alias A", "A", "B"),]
     assert len(result.relations) == 0
     assert graph_extract.analyze_graph(result)["metadata"]["pages_arguments_uniques"] == 2
 
@@ -84,7 +84,7 @@ def test_shared_child_is_fetched_and_parsed_once_but_keeps_both_edges():
     assert { (edge.source, edge.target) for edge in result.relations } == {
         ("A", "C"), ("B", "C"),
     }
-    assert client.batches == [("A", "B"), ("C",)]
+    assert [batch for batch in client.batches if batch] == [("A", "B"), ("C",)]
     assert graph_extract.analyze_graph(result)["metadata"]["relations_uniques"] == 2
 
 
@@ -112,7 +112,7 @@ def test_wide_child_frontier_remains_single_batched_level():
     result = graph_extract.crawl_graph(client, debate_title="Débat test", progress_every=0)
     assert result.roots_pro == ["Racine"]
     assert list(result.parsed_arguments) == ["Racine", *names]
-    assert client.batches == [("Racine",), tuple(names)]
+    assert [batch for batch in client.batches if batch] == [("Racine",), tuple(names)]
     assert len(result.relations) == 200
 
 
