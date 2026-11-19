@@ -1,0 +1,103 @@
+name: Temporary first build verification benchmark
+on:
+  pull_request:
+    paths:
+      - .github/workflows/temporary-first-build-verify-benchmark.yml
+permissions:
+  contents: read
+jobs:
+  compare:
+    if: github.head_ref == 'perf/skip-double-new-corpus-verification-20261119'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Run targeted workflow contract regression suite
+        env:
+          PYTHONPATH: kit/scripts
+        run: python -m pytest -q kit/tests/test_workflow_first_build_single_verification.py
+      - name: Compare duplicated and single verification on identical synthetic sources
+        env:
+          PYTHONPATH: kit/scripts
+        run: |
+          python - <<'PY'
+          import json, statistics, tempfile, time, zipfile
+          from pathlib import Path
+          from unittest.mock import patch
+
+          import wikidebia_review_workflow as workflow
+          from wikidebia_corpus_init import (
+              build_corpus, compute_build_contract, inspect_existing_build,
+          )
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+
+          def preflight(_source):
+              return {'traduction_du_débat_requise': True}
+
+          with tempfile.TemporaryDirectory() as root_name:
+              root = Path(root_name)
+              for args, compressed in ((120, False), (300, False), (120, True)):
+                  fixture = root / ('input-'+str(args)+'-'+str(compressed))
+                  source = make_synthetic_extraction(fixture, arguments=args, payload_bytes=1024)
+                  if compressed:
+                      archive = root / 'input.zip'
+                      with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as zf:
+                          for f in sorted(source.rglob('*')):
+                              if f.is_file():
+                                  zf.write(f, arcname=f.relative_to(source).as_posix())
+                      source = archive
+
+                  samples = {'before': [], 'after': []}
+                  verified = {}
+                  for i in range(6):
+                      for name in (('before','after') if i % 2 == 0 else ('after','before')):
+                          output_root = root / ('run-'+str(args)+'-'+str(compressed)+'-'+str(i)+'-'+name)
+                          output_root.mkdir()
+                          state = {'debate_id': 'benchmark_pretranslation',
+                                   'short_code': None,
+                                   'snapshot_path': source.relative_to(root).as_posix()}
+                          def old_double_build(path, destination, **k):
+                              checked = compute_build_contract(
+                                  path,
+                                  debate_id=k['debate_id'],
+                                  short_code=k['short_code'],
+                                  scope_summary=k['scope_summary'],
+                              )
+                              result = build_corpus(path,destination,**k)
+                              assert checked == result['build_contract']
+                              return result
+                          build = old_double_build if name == 'before' else build_corpus
+                          with patch.object(workflow,'_graph_translation_preflight',preflight), \\
+                               patch.object(workflow,'_stop_for_existing_english_debate',lambda *_:False), \\
+                               patch.object(workflow,'_save_workflow',lambda *_:None), \\
+                               patch.object(workflow,'run_initial_validator',lambda *_:{'status':'passed'}), \\
+                               patch.object(workflow,'build_corpus',build):
+                              began = time.perf_counter()
+                              workflow._initialize_graph_stage(output_root,state)
+                              elapsed = time.perf_counter()-began
+                          contract_sha = state['initial_build_receipt']['build_contract_sha256']
+                          result = inspect_existing_build(
+                              output_root/'.state/corpus-builds/benchmark_pretranslation',
+                              expected_debate_id='benchmark_pretranslation',
+                              expected_contract_sha256=contract_sha,
+                          )
+                          assert result['safe_to_reuse'], result
+                          assert state['phase']=='graph_review'
+                          verified.setdefault(i,contract_sha)
+                          assert verified[i]==contract_sha
+                          samples[name].append(round(elapsed,6))
+                  medians={name:statistics.median(v) for name,v in samples.items()}
+                  print('MEASURE',json.dumps({
+                      'arguments':args, 'zipped':compressed,
+                      'medians_seconds':medians,
+                      'samples_seconds':samples,
+                      'contract_and_receipt_verified':True,
+                      'gain_pct':round(100*(1-medians['after']/medians['before']),2),
+                  },sort_keys=True),flush=True)
+          PY
