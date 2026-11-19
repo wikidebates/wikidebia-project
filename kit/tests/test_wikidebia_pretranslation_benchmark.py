@@ -115,3 +115,41 @@ def test_snapshot_benchmark_output_cannot_modify_measured_extraction(tmp_path: P
         tmp_path, tmp_path / "reports/benchmark-report.json", source / "snapshot",
     )
     assert outside == (tmp_path / "reports/benchmark-report.json").resolve()
+
+
+def test_stage_profiles_cover_each_resume_path(tmp_path: Path):
+    project_root = Path(__file__).resolve().parents[2]
+    report = benchmark.run_benchmark(
+        project_root, arguments=4, payload_bytes=64, iterations=2,
+    )
+    scenarios = report["scenarios"]
+    assert set(scenarios["cold_build_validate_receipt"]["stage_timings_seconds"]) == {
+        "build_corpus", "initial_validator", "write_receipt",
+    }
+    assert set(scenarios["resume_after_build_before_receipt"]["stage_timings_seconds"]) == {
+        "verify_source_contract", "inspect_unverified_build", "initial_validator",
+        "write_receipt", "verify_written_receipt",
+    }
+    assert set(scenarios["resume_exact_verified_receipt"]["stage_timings_seconds"]) == {
+        "verify_source_contract", "verify_build_receipt",
+    }
+    for scenario in scenarios.values():
+        assert scenario["sample_count"] == 2
+        assert scenario["population_stddev_seconds"] >= 0
+        assert scenario["median_absolute_deviation_seconds"] >= 0
+        for stage in scenario["stage_timings_seconds"].values():
+            assert stage["sample_count"] == 2
+            assert len(stage["samples_seconds"]) == 2
+            assert stage["median_seconds"] >= 0
+            assert stage["population_stddev_seconds"] >= 0
+
+
+def test_benchmark_stage_measurement_rethrows_failure():
+    expected = RuntimeError("stage failed")
+
+    def fail():
+        raise expected
+
+    with pytest.raises(RuntimeError) as raised:
+        benchmark._measure(fail)
+    assert raised.value is expected
