@@ -183,3 +183,28 @@ def test_non_zip_directory_path_does_not_allocate_temporary_extraction(tmp_path:
     workflow._initialize_graph_stage(tmp_path, state)
     assert dests == []
     assert state["phase"] == "graph_review"
+
+
+@pytest.mark.parametrize("failure", ["corrupt_zip", "missing_graph"])
+def test_resolve_extraction_cleans_tempdir_when_zip_cannot_be_used(
+    tmp_path: Path, monkeypatch, failure: str,
+):
+    archive = tmp_path / "invalid.zip"
+    if failure == "corrupt_zip":
+        archive.write_bytes(b"not a valid zip")
+    else:
+        with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as zf:
+            zf.writestr("snapshot/snapshot_manifest.json", '{"schema": "test"}')
+    created = []
+    actual_mkdtemp = corpus_init.tempfile.mkdtemp
+
+    def recorded(*args, **kwargs):
+        path = Path(actual_mkdtemp(*args, **kwargs))
+        created.append(path)
+        return str(path)
+
+    monkeypatch.setattr(corpus_init.tempfile, "mkdtemp", recorded)
+    with pytest.raises(corpus_init.CorpusInitError):
+        corpus_init.resolve_extraction_input(archive)
+    assert len(created) == 1
+    assert not created[0].exists()
