@@ -108,6 +108,17 @@ def test_fast_path_fails_closed_when_schema_changes(tmp_path: Path):
     store.schemas["argument_graph.schema.json"]["allOf"] = [{"required": ["nodes"]}]
     assert not _reusable_graph_fields(ctx, store, registry, projection)
 
+    store = SchemaStore()
+    store.schemas["argument_registry.schema.json"]["properties"]["graph"]["properties"]["nodes"]["items"]["properties"]["id"] = {"$ref": "#/$defs/localId"}
+    store.schemas["argument_graph.schema.json"]["properties"]["nodes"]["items"]["properties"]["id"] = {"$ref": "#/$defs/localId"}
+    # The references are now textually identical, but resolve under different
+    # root IDs. The shared fast path must refuse them.
+    assert not _reusable_graph_fields(ctx, store, registry, projection)
+
+    store = SchemaStore()
+    store.schemas["argument_graph.schema.json"]["$id"] = "other-graph.schema.json"
+    assert not _reusable_graph_fields(ctx, store, registry, projection)
+
 
 def test_json_identity_never_confuses_bool_and_integer():
     assert not _json_identical({"x": [1]}, {"x": [True]})
@@ -127,3 +138,22 @@ def test_noncanonical_graph_paths_keep_full_validation(tmp_path: Path):
     manifest["core_files"]["graph_json"] = graph_rel
     dump(manifest_path, manifest)
     _report_comparison(tmp_path, False)
+
+
+def test_suppressed_historic_schema_errors_are_not_trusted(tmp_path: Path):
+    create_graph_package(tmp_path)
+    registry_path = tmp_path / "data/registre_debat.json"
+    graph_path = tmp_path / "graph/graphe_argumentatif.json"
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    graph = json.loads(graph_path.read_text(encoding="utf-8"))
+    registry["graph"]["nodes"][0]["status"] = "INVALID"
+    graph["nodes"][0]["status"] = "INVALID"
+    dump(registry_path, registry)
+    dump(graph_path, graph)
+
+    # Simulate a historically permitted schema exception: the user-visible
+    # report is clean despite raw schema errors in the registry. A clean
+    # report is not proof that we may skip validation of the projection.
+    with patch.object(schema_validation, "_historical_classification_count", return_value=True):
+        report = _report_comparison(tmp_path, expect_reuse=False)
+    assert not any(f["code"] == "WDV-SCH-003" for f in report["findings"])
