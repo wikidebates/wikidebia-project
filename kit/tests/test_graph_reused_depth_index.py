@@ -178,3 +178,37 @@ def test_deep_exact_chain_without_reuse_does_not_invent_candidates():
     meta = _verify(result)
     assert meta["occurrences_reutilisees_par_niveau"] == {}
     assert meta["niveau_maximal_occurrences"] == 240
+
+
+def test_long_shared_chain_reports_one_reused_page_at_every_downstream_level():
+    roots = ["Root A", "Root B"]
+    shared = [f"S{i:03d}" for i in range(75)]
+    edges = [(root, "justification", shared[0]) for root in roots]
+    edges.extend(
+        (shared[i], "objection", shared[i+1])
+        for i in range(len(shared)-1)
+    )
+    meta = _verify(synthetic_result([*roots, *shared], roots, [], edges))
+    assert meta["occurrences_reutilisees_par_niveau"] == {
+        level: 1 for level in range(2, 77)
+    }
+    assert meta["pages_concernees_par_reutilisation_au_niveau"] == {
+        level: [shared[level - 2]] for level in range(2, 77)
+    }
+
+
+def test_eight_roots_sharing_long_branch_keep_exact_surplus_and_titles():
+    roots = [f"Root {i}" for i in range(8)]
+    shared = [f"S{i:03d}" for i in range(120)]
+    edges = [(root, "justification", shared[0]) for root in roots]
+    edges.extend(
+        (shared[i], "justification", shared[i+1])
+        for i in range(len(shared)-1)
+    )
+    meta = _verify(synthetic_result([*roots, *shared], roots[:4], roots[4:], edges))
+    assert meta["occurrences_reutilisees_par_niveau"] == {
+        level: 7 for level in range(2, 122)
+    }
+    assert meta["pages_concernees_par_reutilisation_au_niveau"] == {
+        level: [shared[level - 2]] for level in range(2, 122)
+    }
