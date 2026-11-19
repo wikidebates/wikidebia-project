@@ -264,10 +264,36 @@ def resolve_extraction_input(source: Path) -> ExtractionInput:
     return ExtractionInput(root=root, graph_path=graph_candidates[0], snapshot_manifest_path=snapshot, cleanup=cleanup)
 
 
+def _snapshot_page_path(snapshot_root: Path, relative: Any) -> Path:
+    """Keep snapshot pages inside their own tree, including after symlink resolution."""
+    if not isinstance(relative, str) or not relative:
+        raise CorpusInitError("Chemin absent dans le snapshot")
+    posix = PurePosixPath(relative)
+    if posix.is_absolute() or ".." in posix.parts or not posix.parts or "\\" in relative:
+        raise CorpusInitError(f"Chemin de page invalide dans le snapshot : {relative!r}")
+    root = snapshot_root.resolve()
+    path = root / Path(*posix.parts)
+    try:
+        path.resolve().relative_to(root)
+    except (OSError, ValueError, RuntimeError) as exc:
+        raise CorpusInitError(
+            f"Page du snapshot extérieure à son dossier : {relative!r}"
+        ) from exc
+    return path
+
+
 def verify_extraction(inp: ExtractionInput) -> tuple[dict[str, Any], dict[str, Any]]:
     # Snapshot pages and the audited package manifest often name the same files.
     # Reuse a digest *only within this invocation*, and only while the file
     # identity and change timestamps still match. No persistent trust cache.
+    source_root = inp.root.resolve()
+    for item in (inp.graph_path, inp.snapshot_manifest_path):
+        try:
+            item.resolve().relative_to(source_root)
+        except (OSError, ValueError, RuntimeError) as exc:
+            raise CorpusInitError(
+                f"Fichier d'extraction extérieur au paquet : {item}"
+            ) from exc
     fingerprints: dict[Path, tuple[int, str, tuple[int, int, int, int, int]]] = {}
 
     def signature(path: Path) -> tuple[int, int, int, int, int]:
@@ -304,9 +330,7 @@ def verify_extraction(inp: ExtractionInput) -> tuple[dict[str, Any], dict[str, A
     rows = [snapshot.get("debate") or {}, *(snapshot.get("arguments") or [])]
     for row in rows:
         rel = row.get("relative_path")
-        if not rel:
-            raise CorpusInitError("Chemin absent dans le snapshot")
-        path = inp.snapshot_manifest_path.parent / rel
+        path = _snapshot_page_path(inp.snapshot_manifest_path.parent, rel)
         if not path.is_file():
             raise CorpusInitError(f"Page du snapshot absente : {rel}")
         if fingerprint(path)[1] != row.get("sha256"):
@@ -314,6 +338,12 @@ def verify_extraction(inp: ExtractionInput) -> tuple[dict[str, Any], dict[str, A
     package_manifests = list(inp.root.rglob("*_manifest_sha256_*.json"))
     verified_package_files: set[Path] = set()
     for path in package_manifests:
+        try:
+            path.resolve().relative_to(source_root)
+        except (OSError, ValueError, RuntimeError) as exc:
+            raise CorpusInitError(
+                f"Manifeste d'extraction extérieur au paquet : {path}"
+            ) from exc
         data = json.loads(path.read_text(encoding="utf-8"))
         if data.get("schema") != "wikidebia-graph-extraction-package-1.0":
             continue
@@ -791,7 +821,7 @@ def copy_import_pages(inp: ExtractionInput, snapshot: Mapping[str, Any], output_
         # verify_extraction checked the source earlier, but it may change
         # before the import is copied. Hash exactly the bytes that are written
         # and parsed here, rather than trusting a previous path-based check.
-        source = snapshot_root / str(row["relative_path"])
+        source = _snapshot_page_path(snapshot_root, row["relative_path"])
         payload = source.read_bytes()
         if sha256_bytes(payload) != row.get("sha256"):
             raise CorpusInitError(
