@@ -61,12 +61,12 @@ jobs:
           scenarios=[
               ('common_chain',24,120,6),
               ('common_chain',80,440,6),
-              ('common_chain',300,800,4),
-              ('common_chain',400,2000,3),
+              ('common_chain',300,800,9),
+              ('common_chain',400,2000,9),
               ('two_clusters',80,440,5),
-              ('two_clusters',300,800,4),
+              ('two_clusters',300,800,9),
               ('wide_separate',120,120,6),
-              ('wide_separate',700,700,4),
+              ('wide_separate',700,700,9),
               ('casefold_tie',50,140,5),
           ]
           for kind,root_count,shared_count,reps in scenarios:
