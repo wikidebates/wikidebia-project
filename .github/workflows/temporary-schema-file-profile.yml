@@ -1,0 +1,72 @@
+name: Temporary schema input cost breakdown
+on:
+  pull_request:
+    paths:
+      - .github/workflows/temporary-schema-file-profile.yml
+permissions:
+  contents: read
+jobs:
+  breakdown:
+    if: github.head_ref == 'audit/schema-file-cost-breakdown-20261119'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: 4bff62a3ee6ba2d22b13d2db46bd072161fb7d78
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Per-file schema timings and unchanged findings on an offline corpus
+        env:
+          PYTHONPATH: kit/scripts:validator/src
+        run: |
+          python - <<'PY'
+          import collections, json, statistics, tempfile, time
+          from pathlib import Path
+          from unittest.mock import patch
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+          from wikidebia_corpus_init import build_corpus
+          from wikidebia_validator.validator import validate_package
+          import wikidebia_validator.schema_validation as schema_module
+          original = schema_module.validate_instance
+
+          with tempfile.TemporaryDirectory() as work:
+              for count in (120, 300):
+                  root = Path(work) / str(count)
+                  source = make_synthetic_extraction(root / 'source', arguments=count, payload_bytes=1024)
+                  built = build_corpus(source, root / 'build', debate_id='benchmark_pretranslation', short_code='BENCH', scope_summary=None, overwrite=False)
+                  assert built['status'] == 'created'
+                  corpus = root / 'build'
+                  reference = validate_package(corpus, scopes=['schema']).to_dict()
+                  assert reference['summary']['errors'] == 0
+                  measurements = collections.defaultdict(list)
+                  total = []
+                  for _ in range(4):
+                      def instrument(ctx, store, rel, schema_name, instance=None):
+                          begun = time.perf_counter()
+                          try:
+                              return original(ctx, store, rel, schema_name, instance)
+                          finally:
+                              measurements[(rel, schema_name)].append(time.perf_counter() - begun)
+                      with patch.object(schema_module, 'validate_instance', instrument):
+                          start = time.perf_counter()
+                          report = validate_package(corpus, scopes=['schema']).to_dict()
+                          total.append(time.perf_counter() - start)
+                      assert report == reference, 'Instrumentation changed validation report'
+                  stats = [
+                      {'path': rel, 'schema': schema,
+                       'median_seconds': round(statistics.median(values),6),
+                       'calls': len(values),
+                       'sum_seconds': round(sum(values),6)}
+                      for (rel,schema),values in measurements.items()
+                  ]
+                  stats.sort(key=lambda v:-v['sum_seconds'])
+                  print('PER_FILE',json.dumps({
+                      'argument_count': count,
+                      'median_total_seconds': round(statistics.median(total),6),
+                      'files':stats,'report_identical':True,
+                  },ensure_ascii=False,sort_keys=True),flush=True)
+          PY
