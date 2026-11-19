@@ -29,6 +29,7 @@ import sys
 import time
 import unicodedata
 import zipfile
+from functools import lru_cache
 from collections import Counter, defaultdict, deque
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Protocol, Sequence
@@ -1115,19 +1116,63 @@ def analyze_graph(result: CrawlResult) -> dict[str, Any]:
     occurrences_by_level_for_node: dict[str, Counter[int]] = {
         node: Counter() for node in nodes
     }
-    roots_reaching: dict[str, set[str]] = {node: set() for node in nodes}
+    roots_reaching: dict[str, set[str]] = {}
+    root_masks: dict[str, int] | None = None
+    unique_roots: list[str] = []
     if not cycle_nodes:
+        unique_roots = list(dict.fromkeys(roots))
+        # Root reachability is independent from path multiplicity. For graphs
+        # with many roots converging on the same argument, propagate compact
+        # bitmasks instead of repeatedly copying large Python string sets.
+        # Keep exact-set behavior on small/sparse graphs and casefold ties,
+        # where stable historical ordering cannot be guaranteed by masks.
+        use_root_masks = (
+            len(unique_roots) >= 16
+            and len(nodes) <= 8000
+            and len({name.casefold() for name in unique_roots}) == len(unique_roots)
+            and any(len(reverse[node]) >= 8 for node in nodes)
+        )
+        if use_root_masks:
+            root_masks = {node: 0 for node in nodes}
+            positions = {name: index for index, name in enumerate(unique_roots)}
+        else:
+            roots_reaching = {node: set() for node in nodes}
         for root in roots:
             occurrences_by_level_for_node[root][1] += 1
-            roots_reaching[root].add(root)
+            if root_masks is not None:
+                root_masks[root] |= 1 << positions[root]
+            else:
+                roots_reaching[root].add(root)
         for source in topo:
+            reaching = (
+                root_masks[source] if root_masks is not None
+                else roots_reaching[source]
+            )
             for target, _ in adjacency[source]:
-                roots_reaching[target].update(roots_reaching[source])
+                if root_masks is not None:
+                    root_masks[target] |= reaching
+                else:
+                    roots_reaching[target].update(reaching)
                 for source_level, count in occurrences_by_level_for_node[source].items():
                     occurrences_by_level_for_node[target][source_level + 1] += count
 
     orientation = {root: "pour" for root in result.roots_pro}
     orientation.update({root: "contre" for root in result.roots_con})
+    if root_masks is not None:
+        # Bounded, invocation-local cache: strongly shared descendants often
+        # have identical root sets. Return tuples; each output row still gets
+        # its own lists, matching the old independent-row behavior.
+        @lru_cache(maxsize=256)
+        def labels_for_roots(mask: int) -> tuple[tuple[str, ...], tuple[str, ...]]:
+            names: list[str] = []
+            while mask:
+                least = mask & -mask
+                names.append(unique_roots[least.bit_length() - 1])
+                mask -= least
+            return (
+                tuple(sorted(names, key=str.casefold)),
+                tuple(sorted({orientation[name] for name in names})),
+            )
     displayed_by_node: dict[str, set[str]] = defaultdict(set)
     for root, values in result.root_displayed_titles.items():
         displayed_by_node[root].update(values)
@@ -1162,8 +1207,14 @@ def analyze_graph(result: CrawlResult) -> dict[str, Any]:
             status = "page_manquante"
         else:
             status = "terminal"
-        root_set = roots_reaching.get(title, set())
-        orientation_set = sorted({orientation[root] for root in root_set})
+        if root_masks is not None:
+            root_titles_cached, orientations_cached = labels_for_roots(root_masks[title])
+            root_titles = list(root_titles_cached)
+            orientation_set = list(orientations_cached)
+        else:
+            root_set = roots_reaching.get(title, set())
+            root_titles = sorted(root_set, key=str.casefold)
+            orientation_set = sorted({orientation[root] for root in root_set})
         occurrence_levels = occurrences_by_level_for_node.get(title, Counter())
         level = None if minimum_level[title] >= 10**9 else minimum_level[title]
         edge_depth = None if level is None else level - 1
@@ -1182,7 +1233,7 @@ def analyze_graph(result: CrawlResult) -> dict[str, Any]:
                 "occurrences_par_profondeur_en_aretes": occurrences_by_edge_depth,
                 "occurrences_par_profondeur": dict(sorted(occurrence_levels.items())),
                 "orientations_racines": orientation_set,
-                "arguments_racines": sorted(root_set, key=str.casefold),
+                "arguments_racines": root_titles,
                 "nombre_parents": len({parent for parent, _ in reverse[title]}),
                 "nombre_enfants": out_count,
                 "relations_locales_ignorees_frontiere": ignored_at_frontier,
