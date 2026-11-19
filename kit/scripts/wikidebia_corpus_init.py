@@ -804,14 +804,24 @@ def _depth_policy(
     if not isinstance(frontier, Mapping):
         raise CorpusInitError("Frontières de profondeur invalides dans le snapshot")
     frontier_ids: list[str] = []
+    # Cache normalized canonical titles as they are reached, *not* by scanning
+    # the entire title set on the first miss. A single alias near the beginning
+    # costs almost nothing; many aliases still inspect each source title at
+    # most once. This iterator also preserves the original first-match and
+    # malformed-title exception ordering without special error caching.
+    normalized_ids: dict[str, str] = {}
+    unseen_titles = iter(title_to_id.items())
     for title in frontier:
         node_id = title_to_id.get(str(title))
         if node_id is None:
             normalized, _ = normalize_title(str(title))
-            node_id = next(
-                (candidate for source, candidate in title_to_id.items() if normalize_title(source)[0] == normalized),
-                None,
-            )
+            if normalized not in normalized_ids:
+                for source, candidate in unseen_titles:
+                    normalized_source, _ = normalize_title(source)
+                    normalized_ids.setdefault(normalized_source, candidate)
+                    if normalized_source == normalized:
+                        break
+            node_id = normalized_ids.get(normalized)
         if node_id is None:
             raise CorpusInitError(f"Frontière de profondeur sans nœud actif : {title}")
         frontier_ids.append(node_id)
