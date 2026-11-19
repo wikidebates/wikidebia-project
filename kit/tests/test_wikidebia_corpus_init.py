@@ -553,3 +553,91 @@ def test_import_rechecks_page_path_boundary_without_prior_verification(tmp_path:
     with pytest.raises(mod.CorpusInitError, match="Chemin de page invalide"):
         mod.copy_import_pages(inp, snapshot, output, ids)
     assert not (output / "imports/fr/arguments/A0001.wiki").exists()
+
+
+def test_copy_import_matches_normalized_snapshot_titles_without_rewriting_pages(tmp_path: Path):
+    source = make_extraction(tmp_path / "source")
+    inp = mod.resolve_extraction_input(source)
+    _, snapshot = mod.verify_extraction(inp)
+    for row in snapshot["arguments"]:
+        row["canonical_title"] = row["canonical_title"].replace(" ", "_")
+    ids = {"Argument A": "A0001", "Argument B": "A0002", "Argument C": "A0003"}
+    copied, import_data = mod.copy_import_pages(inp, snapshot, tmp_path / "build", ids)
+
+    assert set(copied) == set(ids)
+    for row, title in zip(snapshot["arguments"], ids):
+        expected = inp.snapshot_manifest_path.parent / row["relative_path"]
+        actual = tmp_path / "build" / f"imports/fr/arguments/{ids[title]}.wiki"
+        assert actual.read_bytes() == expected.read_bytes()
+    assert [row["source_graph_title"] for row in import_data["provenance"]["pages"][1:]] == list(ids)
+
+
+def test_exact_snapshot_title_takes_precedence_over_earlier_normalized_alias(tmp_path: Path):
+    source = make_extraction(tmp_path / "source")
+    inp = mod.resolve_extraction_input(source)
+    _, snapshot = mod.verify_extraction(inp)
+    snapshot["arguments"][0]["canonical_title"] = "Argument_A"
+    snapshot["arguments"][1]["canonical_title"] = "Argument A"
+    ids = {"Argument A": "A0001"}
+
+    _, import_data = mod.copy_import_pages(inp, snapshot, tmp_path / "build", ids)
+    expected = source / "snapshot/pages/arguments/b.wiki"
+    assert (tmp_path / "build/imports/fr/arguments/A0001.wiki").read_bytes() == expected.read_bytes()
+    assert import_data["provenance"]["pages"][1]["relative_path"] == "pages/arguments/b.wiki"
+
+
+def test_first_normalized_snapshot_match_is_preserved_on_alias_collision(tmp_path: Path):
+    source = make_extraction(tmp_path / "source")
+    inp = mod.resolve_extraction_input(source)
+    _, snapshot = mod.verify_extraction(inp)
+    snapshot["arguments"][0]["canonical_title"] = "Argument_A"
+    snapshot["arguments"][1]["canonical_title"] = "Argument__A"
+    ids = {"Argument A": "A0001"}
+    _, import_data = mod.copy_import_pages(inp, snapshot, tmp_path / "build", ids)
+    assert (tmp_path / "build/imports/fr/arguments/A0001.wiki").read_bytes() == (
+        source / "snapshot/pages/arguments/a.wiki"
+    ).read_bytes()
+    assert import_data["provenance"]["pages"][1]["relative_path"] == "pages/arguments/a.wiki"
+
+
+@pytest.mark.parametrize("invalid_before_match", [True, False])
+def test_normalized_lookup_retains_historical_invalid_title_error_order(
+    tmp_path: Path, invalid_before_match: bool,
+):
+    source = make_extraction(tmp_path / "source")
+    inp = mod.resolve_extraction_input(source)
+    _, snapshot = mod.verify_extraction(inp)
+    snapshot["arguments"][0]["canonical_title"] = "" if invalid_before_match else "Argument_A"
+    snapshot["arguments"][1]["canonical_title"] = "Argument_A" if invalid_before_match else ""
+    ids = {"Argument A": "A0001"}
+
+    if invalid_before_match:
+        with pytest.raises(mod.CorpusInitError, match="Titre vide après normalisation"):
+            mod.copy_import_pages(inp, snapshot, tmp_path / "build", ids)
+    else:
+        _, imported = mod.copy_import_pages(inp, snapshot, tmp_path / "build", ids)
+        assert imported["provenance"]["pages"][1]["relative_path"] == "pages/arguments/a.wiki"
+
+
+def test_normalization_is_linear_for_many_snapshot_aliases(tmp_path: Path, monkeypatch):
+    from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+
+    source = make_synthetic_extraction(tmp_path / "source", arguments=100, payload_bytes=80)
+    inp = mod.resolve_extraction_input(source)
+    _, snapshot = mod.verify_extraction(inp)
+    ids = {}
+    for i, row in enumerate(snapshot["arguments"], start=1):
+        ids[row["canonical_title"]] = f"A{i:04d}"
+        row["canonical_title"] = row["canonical_title"].replace(" ", "_")
+
+    original = mod.normalize_title
+    normalized_count = []
+
+    def counted(value):
+        normalized_count.append(value)
+        return original(value)
+
+    monkeypatch.setattr(mod, "normalize_title", counted)
+    copied, _ = mod.copy_import_pages(inp, snapshot, tmp_path / "build", ids)
+    assert len(copied) == 100
+    assert len(normalized_count) <= 2 * len(ids) + 2  # old scan: 5050+ normalizations
