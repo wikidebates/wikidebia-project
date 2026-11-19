@@ -265,8 +265,40 @@ def resolve_extraction_input(source: Path) -> ExtractionInput:
 
 
 def verify_extraction(inp: ExtractionInput) -> tuple[dict[str, Any], dict[str, Any]]:
-    graph = json.loads(inp.graph_path.read_text(encoding="utf-8"))
-    snapshot = json.loads(inp.snapshot_manifest_path.read_text(encoding="utf-8"))
+    # Snapshot pages and the audited package manifest often name the same files.
+    # Reuse a digest *only within this invocation*, and only while the file
+    # identity and change timestamps still match. No persistent trust cache.
+    fingerprints: dict[Path, tuple[int, str, tuple[int, int, int, int, int]]] = {}
+
+    def signature(path: Path) -> tuple[int, int, int, int, int]:
+        info = path.stat()
+        return (
+            info.st_dev, info.st_ino, info.st_size,
+            info.st_mtime_ns, info.st_ctime_ns,
+        )
+
+    def read_checked(path: Path) -> bytes:
+        before = signature(path)
+        payload = path.read_bytes()
+        after = signature(path)
+        if before != after:
+            raise CorpusInitError(
+                f"Fichier modifié pendant la vérification de l'extraction : {path}"
+            )
+        fingerprints[path.resolve()] = (len(payload), sha256_bytes(payload), after)
+        return payload
+
+    def fingerprint(path: Path) -> tuple[int, str]:
+        resolved = path.resolve()
+        previous = fingerprints.get(resolved)
+        if previous is not None and previous[2] == signature(path):
+            return previous[0], previous[1]
+        read_checked(path)
+        current = fingerprints[resolved]
+        return current[0], current[1]
+
+    graph = json.loads(read_checked(inp.graph_path))
+    snapshot = json.loads(read_checked(inp.snapshot_manifest_path))
     if snapshot.get("schema") != "wikidebia-graph-snapshot-1.0":
         raise CorpusInitError("Schéma de snapshot non pris en charge")
     rows = [snapshot.get("debate") or {}, *(snapshot.get("arguments") or [])]
@@ -277,7 +309,7 @@ def verify_extraction(inp: ExtractionInput) -> tuple[dict[str, Any], dict[str, A
         path = inp.snapshot_manifest_path.parent / rel
         if not path.is_file():
             raise CorpusInitError(f"Page du snapshot absente : {rel}")
-        if sha256_file(path) != row.get("sha256"):
+        if fingerprint(path)[1] != row.get("sha256"):
             raise CorpusInitError(f"Empreinte invalide dans le snapshot : {rel}")
     package_manifests = list(inp.root.rglob("*_manifest_sha256_*.json"))
     verified_package_files: set[Path] = set()
@@ -302,10 +334,10 @@ def verify_extraction(inp: ExtractionInput) -> tuple[dict[str, Any], dict[str, A
                 raise CorpusInitError(f"Chemin extérieur au paquet d'extraction : {rel.as_posix()}") from exc
             if not candidate.is_file():
                 raise CorpusInitError(f"Fichier déclaré absent du paquet d'extraction : {rel.as_posix()}")
-            payload = candidate.read_bytes()
-            if len(payload) != item.get("size_bytes"):
+            size, digest = fingerprint(candidate)
+            if size != item.get("size_bytes"):
                 raise CorpusInitError(f"Taille invalide dans le paquet d'extraction : {rel.as_posix()}")
-            if sha256_bytes(payload) != item.get("sha256"):
+            if digest != item.get("sha256"):
                 raise CorpusInitError(f"Empreinte invalide dans le paquet d'extraction : {rel.as_posix()}")
             verified_package_files.add(candidate)
     if verified_package_files:

@@ -347,3 +347,47 @@ def test_short_code_derivation_never_reintroduces_title_accents():
     code = mod.derive_short_code(debate_id)
     assert code == "URDBDIEI"
     assert code.isascii()
+
+
+def test_extraction_reuses_snapshot_page_digests_within_one_verification(tmp_path: Path, monkeypatch):
+    source = make_extraction(tmp_path / "source")
+    original_read = Path.read_bytes
+    read_counts = {}
+
+    def counted_read(path):
+        if path.suffix == ".wiki":
+            read_counts[path.resolve()] = read_counts.get(path.resolve(), 0) + 1
+        return original_read(path)
+
+    monkeypatch.setattr(Path, "read_bytes", counted_read)
+    inp = mod.resolve_extraction_input(source)
+    graph, snapshot = mod.verify_extraction(inp)
+
+    assert graph["metadata"]["débat"] == "Débat test"
+    assert len(snapshot["arguments"]) == 3
+    assert len(read_counts) == 4
+    assert set(read_counts.values()) == {1}
+
+
+def test_extraction_invalidates_digest_if_page_changes_between_manifests(tmp_path: Path, monkeypatch):
+    source = make_extraction(tmp_path / "source")
+    victim = source / "snapshot/pages/arguments/a.wiki"
+    package_manifest = source / "test_manifest_sha256_2026-08-03.json"
+    original_read_text = Path.read_text
+    changed = False
+
+    def changed_on_manifest(path, *args, **kwargs):
+        nonlocal changed
+        if path == package_manifest and not changed:
+            changed = True
+            victim.write_bytes(b"altered after first verification")
+        return original_read_text(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", changed_on_manifest)
+    inp = mod.resolve_extraction_input(source)
+    try:
+        mod.verify_extraction(inp)
+    except mod.CorpusInitError as exc:
+        assert "Taille invalide" in str(exc) or "Empreinte invalide" in str(exc)
+    else:
+        raise AssertionError("Une page modifiée entre les manifestes a été acceptée")
