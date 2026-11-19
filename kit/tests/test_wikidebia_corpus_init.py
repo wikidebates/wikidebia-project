@@ -391,3 +391,70 @@ def test_extraction_invalidates_digest_if_page_changes_between_manifests(tmp_pat
         assert "Taille invalide" in str(exc) or "Empreinte invalide" in str(exc)
     else:
         raise AssertionError("Une page modifiée entre les manifestes a été acceptée")
+
+
+def test_import_rejects_source_modified_after_manifest_verification(tmp_path: Path):
+    source = make_extraction(tmp_path / "source")
+    inp = mod.resolve_extraction_input(source)
+    _, snapshot = mod.verify_extraction(inp)
+    victim = source / "snapshot/pages/arguments/a.wiki"
+    victim.write_bytes(b"modified after verified source was accepted")
+
+    ids = {row["canonical_title"]: f"A{i:04d}" for i, row in enumerate(snapshot["arguments"], 1)}
+    target_root = tmp_path / "build"
+    try:
+        mod.copy_import_pages(inp, snapshot, target_root, ids)
+    except mod.CorpusInitError as exc:
+        assert "modifiée entre la vérification et l'import" in str(exc)
+    else:
+        raise AssertionError("La page altérée après vérification a été importée")
+    assert not (target_root / "imports/fr/arguments/A0001.wiki").exists()
+
+
+def test_import_uses_exact_verified_bytes_even_if_source_changes_during_copy(tmp_path: Path, monkeypatch):
+    source = make_extraction(tmp_path / "source")
+    inp = mod.resolve_extraction_input(source)
+    _, snapshot = mod.verify_extraction(inp)
+    victim = source / "snapshot/pages/arguments/a.wiki"
+    original_read = Path.read_bytes
+    modified = False
+
+    def mutate_after_read(path):
+        nonlocal modified
+        payload = original_read(path)
+        if path == victim and not modified:
+            modified = True
+            victim.write_bytes(b"tampered after original bytes were read")
+        return payload
+
+    monkeypatch.setattr(Path, "read_bytes", mutate_after_read)
+    ids = {row["canonical_title"]: f"A{i:04d}" for i, row in enumerate(snapshot["arguments"], 1)}
+    output = tmp_path / "build"
+    metadata, provenance = mod.copy_import_pages(inp, snapshot, output, ids)
+    imported = output / "imports/fr/arguments/A0001.wiki"
+    verified_payload = imported.read_bytes()
+    assert modified
+    assert hashlib.sha256(verified_payload).hexdigest() == snapshot["arguments"][0]["sha256"]
+    assert verified_payload != victim.read_bytes()
+    assert "Argument A" in metadata
+    assert any(row.get("page_id") == "A0001" and row.get("sha256") == snapshot["arguments"][0]["sha256"]
+               for row in provenance["provenance"]["pages"])
+
+
+def test_import_does_not_reread_copied_target_for_metadata(tmp_path: Path, monkeypatch):
+    source = make_extraction(tmp_path / "source")
+    inp = mod.resolve_extraction_input(source)
+    _, snapshot = mod.verify_extraction(inp)
+    ids = {row["canonical_title"]: f"A{i:04d}" for i, row in enumerate(snapshot["arguments"], 1)}
+    output = tmp_path / "build"
+    previous_read_text = Path.read_text
+
+    def forbid_target_read(path, *args, **kwargs):
+        if output in path.parents:
+            raise AssertionError("Imported page should be parsed from verified source bytes")
+        return previous_read_text(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", forbid_target_read)
+    metadata, provenance = mod.copy_import_pages(inp, snapshot, output, ids)
+    assert len(metadata) == 3
+    assert len(provenance["provenance"]["pages"]) == 4
