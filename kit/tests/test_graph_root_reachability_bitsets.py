@@ -184,3 +184,16 @@ def test_seeded_shared_dags_match_independent_reachability_oracle(seed):
     assert_matches_oracle(synthetic_result(
         [*roots,*shared],roots[:10],roots[10:],edges
     ))
+
+
+def test_more_than_eight_thousand_nodes_falls_back_to_exact_set_propagation():
+    roots = [f"R{i:02d}" for i in range(20)]
+    orphans = [f"Orphan{i:04d}" for i in range(8000)]
+    edges = [(root, "justification", "Common") for root in roots]
+    result = synthetic_result(
+        [*roots, "Common", *orphans], roots[:10], roots[10:], edges,
+    )
+    analyzed = assert_matches_oracle(result)
+    common = next(row for row in analyzed["noeuds"] if row["titre"] == "Common")
+    assert len(common["arguments_racines"]) == 20
+    assert analyzed["metadata"]["pages_arguments_uniques"] == 8021
