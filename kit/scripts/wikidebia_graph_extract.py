@@ -1277,37 +1277,63 @@ def analyze_graph(result: CrawlResult) -> dict[str, Any]:
                 )
 
     branch_rows: list[dict[str, Any]] = []
-    if not cycle_nodes:
-        for root in roots:
-            reachable: set[str] = set()
-            stack = [root]
-            while stack:
-                node = stack.pop()
-                if node in reachable:
-                    continue
-                reachable.add(node)
-                stack.extend(child for child, _ in adjacency[node])
-            branch_occ: dict[str, Counter[int]] = {node: Counter() for node in nodes}
-            branch_occ[root][1] = 1
-            for source in topo:
-                for target, _ in adjacency[source]:
-                    for source_level, count in branch_occ[source].items():
-                        branch_occ[target][source_level + 1] += count
-            total_occ = sum(sum(counter.values()) for counter in branch_occ.values())
-            max_level = max(
-                (level for counter in branch_occ.values() for level in counter),
-                default=1,
+    if not cycle_nodes and roots:
+        # On a DAG, the number of unfolded occurrences below a node equals
+        # one for the node itself plus all paths below each outgoing edge.
+        # Likewise, its maximum occurrence level is one plus the longest
+        # downstream path. These values do not depend on which root reaches
+        # the node: compute them once in reverse topological order, instead
+        # of rebuilding an N-node Counter/level graph for every root.
+        downstream_paths: dict[str, int] = {}
+        downstream_levels: dict[str, int] = {}
+
+        # For many roots, reuse a compact descendant bitset per node to count
+        # *distinct* reachable arguments (paths themselves may repeat nodes).
+        # At most 8000 nodes: worst-case bitset payload is about 8 MB.
+        # Small-root or very large graphs keep a simple per-root DFS instead.
+        use_descendant_bits = len(roots) >= 8 and len(nodes) <= 8000
+        if use_descendant_bits:
+            bit_position = {node: index for index, node in enumerate(topo)}
+            descendant_bits: dict[str, int] = {}
+
+        for node in reversed(topo):
+            child_edges = adjacency[node]
+            downstream_paths[node] = 1 + sum(
+                downstream_paths[child] for child, _ in child_edges
             )
-            max_depth = max_level - 1
+            downstream_levels[node] = 1 + max(
+                (downstream_levels[child] for child, _ in child_edges),
+                default=0,
+            )
+            if use_descendant_bits:
+                bits = 1 << bit_position[node]
+                for child, _ in child_edges:
+                    bits |= descendant_bits[child]
+                descendant_bits[node] = bits
+
+        for root in roots:
+            if use_descendant_bits:
+                distinct_count = descendant_bits[root].bit_count()
+            else:
+                reachable: set[str] = set()
+                stack = [root]
+                while stack:
+                    node = stack.pop()
+                    if node in reachable:
+                        continue
+                    reachable.add(node)
+                    stack.extend(child for child, _ in adjacency[node])
+                distinct_count = len(reachable)
+            max_level = downstream_levels[root]
             branch_rows.append(
                 {
                     "orientation": orientation[root],
                     "argument": root,
                     "enfants_directs": len(adjacency[root]),
-                    "pages_uniques_branche_racine_incluse": len(reachable),
-                    "occurrences_branche_racine_incluse": total_occ,
+                    "pages_uniques_branche_racine_incluse": distinct_count,
+                    "occurrences_branche_racine_incluse": downstream_paths[root],
                     "niveau_maximal_occurrences": max_level,
-                    "profondeur_maximale_en_aretes": max_depth,
+                    "profondeur_maximale_en_aretes": max_level - 1,
                     "profondeur_maximale": max_level,
                 }
             )
