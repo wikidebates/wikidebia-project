@@ -1975,6 +1975,7 @@ def _initialize_graph_stage(project_root: Path, state: dict[str, Any]) -> None:
             )
 
         original_identity = zip_identity()
+        state_before_zip = copy.deepcopy(state)
         extraction = resolve_extraction_input(source)
         try:
             _initialize_graph_stage_from_source(
@@ -1983,15 +1984,20 @@ def _initialize_graph_stage(project_root: Path, state: dict[str, Any]) -> None:
         finally:
             if extraction.cleanup is not None:
                 shutil.rmtree(extraction.cleanup, ignore_errors=True)
-            # Reuse only a snapshot whose original archive is unchanged
-            # throughout this stage. Even if an external process replaces it
-            # while we work on the extracted copy, never silently accept it.
+            # The source ZIP remains authoritative for any future resume.
+            # If it changed while the extracted copy was being processed, the
+            # stage cannot advance based on that copy. Restore the prior
+            # workflow state; any partly built output will be checked against
+            # the newly verified source on the next attempt (no overwrite).
             try:
                 current_identity = zip_identity()
-            except OSError as exc:
-                raise WorkflowError("Snapshot ZIP disparu pendant l'initialisation") from exc
+            except OSError:
+                current_identity = None
             if current_identity != original_identity:
-                raise WorkflowError("Snapshot ZIP modifié pendant l'initialisation")
+                state.clear()
+                state.update(state_before_zip)
+                _save_workflow(project_root, state)
+                raise WorkflowError("Snapshot ZIP modifié ou disparu pendant l'initialisation")
         return
     _initialize_graph_stage_from_source(project_root, state, build_dir, source)
 
