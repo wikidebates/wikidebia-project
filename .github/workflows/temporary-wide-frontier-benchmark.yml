@@ -68,12 +68,12 @@ jobs:
                   )+'|objections=}}'
               return pages
 
-          for n in (120,300,700):
+          for n in (120,300,700,2000,4000):
               for kind in ('roots','children'):
                   pages=pages_for(n,kind)
                   versions={'baseline':baseline,'sets':improved}
                   samples={'baseline':[],'sets':[]}
-                  for i in range(6):
+                  for i in range(6 if n<=700 else 4):
                       pair={}
                       for name in (('baseline','sets') if i%2==0 else ('sets','baseline')):
                           module=versions[name]
