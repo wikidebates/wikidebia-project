@@ -804,14 +804,33 @@ def _depth_policy(
     if not isinstance(frontier, Mapping):
         raise CorpusInitError("Frontières de profondeur invalides dans le snapshot")
     frontier_ids: list[str] = []
+    # For titles with non-exact spelling, the former fallback normalized every
+    # graph title for every frontier. Prepare the lookup once, on the first
+    # miss, while preserving exact-title priority and the first source match.
+    normalized_ids: dict[str, tuple[int, str]] | None = None
+    first_invalid_source: tuple[int, CorpusInitError] | None = None
     for title in frontier:
         node_id = title_to_id.get(str(title))
         if node_id is None:
             normalized, _ = normalize_title(str(title))
-            node_id = next(
-                (candidate for source, candidate in title_to_id.items() if normalize_title(source)[0] == normalized),
-                None,
-            )
+            if normalized_ids is None:
+                normalized_ids = {}
+                for position, (source, candidate) in enumerate(title_to_id.items()):
+                    try:
+                        normalized_source, _ = normalize_title(source)
+                    except CorpusInitError as exc:
+                        if first_invalid_source is None:
+                            first_invalid_source = (position, exc)
+                        continue
+                    normalized_ids.setdefault(normalized_source, (position, candidate))
+            matched = normalized_ids.get(normalized)
+            # The original next(generator) raised if an invalid source title
+            # appeared BEFORE its first match, but not after that match.
+            if first_invalid_source is not None and (
+                matched is None or first_invalid_source[0] < matched[0]
+            ):
+                raise first_invalid_source[1]
+            node_id = matched[1] if matched is not None else None
         if node_id is None:
             raise CorpusInitError(f"Frontière de profondeur sans nœud actif : {title}")
         frontier_ids.append(node_id)
