@@ -1967,6 +1967,14 @@ def _initialize_graph_stage(project_root: Path, state: dict[str, Any]) -> None:
     # re-extract and reverify its current bytes. A full SHA-256 verification
     # still happens inside compute_build_contract or build_corpus.
     if source.is_file() and source.suffix.lower() == ".zip":
+        def zip_identity() -> tuple[int, int, int, int, int]:
+            info = source.stat()
+            return (
+                info.st_dev, info.st_ino, info.st_size,
+                info.st_mtime_ns, info.st_ctime_ns,
+            )
+
+        original_identity = zip_identity()
         extraction = resolve_extraction_input(source)
         try:
             _initialize_graph_stage_from_source(
@@ -1975,6 +1983,15 @@ def _initialize_graph_stage(project_root: Path, state: dict[str, Any]) -> None:
         finally:
             if extraction.cleanup is not None:
                 shutil.rmtree(extraction.cleanup, ignore_errors=True)
+            # Reuse only a snapshot whose original archive is unchanged
+            # throughout this stage. Even if an external process replaces it
+            # while we work on the extracted copy, never silently accept it.
+            try:
+                current_identity = zip_identity()
+            except OSError as exc:
+                raise WorkflowError("Snapshot ZIP disparu pendant l'initialisation") from exc
+            if current_identity != original_identity:
+                raise WorkflowError("Snapshot ZIP modifié pendant l'initialisation")
         return
     _initialize_graph_stage_from_source(project_root, state, build_dir, source)
 
