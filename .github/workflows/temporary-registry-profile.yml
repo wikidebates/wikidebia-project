@@ -1,0 +1,71 @@
+name: Temporary registry resolution profile
+on:
+  pull_request:
+    paths:
+      - .github/workflows/temporary-registry-profile.yml
+permissions:
+  contents: read
+jobs:
+  profile:
+    if: github.head_ref == 'perf/schema-registry-traversal-20261119'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 4bff62a3ee6ba2d22b13d2db46bd072161fb7d78
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Benchmark reference crawling on the identical offline package
+        env:
+          PYTHONPATH: kit/scripts:validator/src
+        run: |
+          python - <<'PY'
+          import cProfile, io, json, pstats, statistics, tempfile, time
+          from pathlib import Path
+          from unittest.mock import patch
+          from wikidebia_corpus_init import build_corpus
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+          from wikidebia_validator.schema_validation import SchemaStore
+          from wikidebia_validator.validator import validate_package
+          import wikidebia_validator.validator as validator_module
+
+          class CrawledSchemaStore(SchemaStore):
+              def __init__(self):
+                  super().__init__()
+                  self.registry = self.registry.crawl()
+
+          with tempfile.TemporaryDirectory() as work:
+              for count in (120, 300):
+                  root = Path(work) / str(count)
+                  source = make_synthetic_extraction(root / 'source', arguments=count, payload_bytes=1024)
+                  build = root / 'build'
+                  built = build_corpus(source, build, debate_id='benchmark_pretranslation', short_code='BENCH', scope_summary=None, overwrite=False)
+                  assert built['status'] == 'created'
+                  baseline = validate_package(build, scopes=['schema']).to_dict()
+                  assert baseline['summary']['errors'] == 0, baseline['findings'][:5]
+                  samples = {'baseline': [], 'crawled': []}
+                  for iteration in range(6):
+                      for name in (('baseline', 'crawled') if iteration % 2 == 0 else ('crawled', 'baseline')):
+                          cls = SchemaStore if name == 'baseline' else CrawledSchemaStore
+                          with patch.object(validator_module, 'SchemaStore', cls):
+                              started = time.perf_counter()
+                              actual = validate_package(build, scopes=['schema']).to_dict()
+                              elapsed = time.perf_counter() - started
+                          assert actual == baseline, ('nonidentical_validation_report', count, name)
+                          samples[name].append(round(elapsed, 6))
+                  print('MEASURE', json.dumps({
+                      'arguments': count,
+                      'samples_seconds': samples,
+                      'medians_seconds': {k: statistics.median(v) for k, v in samples.items()},
+                      'identical_reports': True,
+                  }, sort_keys=True), flush=True)
+                  prof = cProfile.Profile()
+                  prof.runcall(validate_package, build, scopes=['schema'])
+                  stream = io.StringIO()
+                  pstats.Stats(prof, stream=stream).strip_dirs().sort_stats('cumulative').print_stats(35)
+                  print('PROFILE', count, stream.getvalue(), flush=True)
+          PY
