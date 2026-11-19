@@ -100,3 +100,37 @@ def test_invalid_frontier_structure_is_still_rejected():
     graph = {"metadata": {"limite_profondeur": 3}, "frontières_profondeur": ["wrong"]}
     with pytest.raises(corpus.CorpusInitError, match="Frontières de profondeur invalides"):
         corpus._depth_policy(graph, {}, 2)
+
+
+def test_single_frontier_alias_stops_index_at_first_matching_title(monkeypatch):
+    titles = {"Argument_0001": "A0001"}
+    titles.update({f"Argument_{i:04d}": f"A{i:04d}" for i in range(2, 1001)})
+    original = corpus.normalize_title
+    calls = []
+
+    def counted(value):
+        calls.append(value)
+        return original(value)
+
+    monkeypatch.setattr(corpus, "normalize_title", counted)
+    actual = policy({"Argument 0001": 1}, titles)
+    assert actual["frontier_node_ids"] == ["A0001"]
+    assert len(calls) == 2  # one requested alias + first matching canonical title
+
+
+def test_frontier_alias_order_reuses_already_visited_prefix(monkeypatch):
+    mapping = {f"Argument_{i:04d}": f"A{i:04d}" for i in range(1, 101)}
+    # First requested alias is last in the map: subsequent frontiers should
+    # be resolved from the cached prefix without rescanning it.
+    frontiers = {f"Argument {i:04d}": 1 for i in range(100, 0, -1)}
+    original = corpus.normalize_title
+    calls = []
+
+    def counted(value):
+        calls.append(value)
+        return original(value)
+
+    monkeypatch.setattr(corpus, "normalize_title", counted)
+    actual = policy(frontiers, mapping)
+    assert len(actual["frontier_node_ids"]) == 100
+    assert len(calls) == 200
