@@ -1,0 +1,91 @@
+name: Temporary graph root reachability bitset benchmark
+on:
+  pull_request:
+    paths:
+      - .github/workflows/temporary-graph-root-bitsets-benchmark.yml
+permissions:
+  contents: read
+jobs:
+  compare:
+    if: github.head_ref == 'perf/graph-root-reachability-bitsets-20261120'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Run independent graph root-provenance regressions
+        env:
+          PYTHONPATH: kit/scripts:kit/tests
+        run: python -m pytest -q kit/tests/test_graph_root_reachability_bitsets.py
+      - name: Compare full graph analysis to pinned main across shared and sparse cases
+        env:
+          PYTHONPATH: kit/scripts:kit/tests
+        run: |
+          git show 54b4005135cc89cf17b3d2a3ffc41a7cbd000493:kit/scripts/wikidebia_graph_extract.py > /tmp/baseline_graph_extract.py
+          python - <<'PY'
+          import importlib.util, json, statistics, sys, time
+          import wikidebia_graph_extract as modified
+          from test_graph_analyze_dag_suffix_counts import synthetic_result
+
+          spec=importlib.util.spec_from_file_location('baseline_graph_extract','/tmp/baseline_graph_extract.py')
+          old=importlib.util.module_from_spec(spec)
+          sys.modules[spec.name]=old
+          spec.loader.exec_module(old)
+
+          def fixture(shape,root_count,shared_count):
+              roots=[f'Root {i:04d}' for i in range(root_count)]
+              common=[f'Shared {i:04d}' for i in range(shared_count)]
+              if shape=='common_chain':
+                  edges=[(r,'justification',common[0]) for r in roots]
+                  edges += [(common[i],'objection',common[i+1]) for i in range(shared_count-1)]
+              elif shape=='wide_separate':
+                  edges=[(roots[i],'justification',common[i]) for i in range(root_count)]
+              elif shape=='two_clusters':
+                  edges=[(r,'justification',common[0] if i<root_count//2 else common[1])
+                         for i,r in enumerate(roots)]
+                  edges += [(common[0],'objection',common[2]),(common[1],'justification',common[2])]
+                  edges += [(common[i],'objection',common[i+1]) for i in range(2,shared_count-1)]
+              elif shape=='casefold_tie':
+                  roots[0]='ROOT'
+                  roots[1]='root'
+                  edges=[(r,'justification',common[0]) for r in roots]
+                  edges += [(common[i],'objection',common[i+1]) for i in range(shared_count-1)]
+              else: raise ValueError(shape)
+              return synthetic_result([*roots,*common],roots[:root_count//2],roots[root_count//2:],edges)
+          scenarios=[
+              ('common_chain',24,120,6),
+              ('common_chain',80,440,6),
+              ('common_chain',300,800,4),
+              ('common_chain',400,2000,3),
+              ('two_clusters',80,440,5),
+              ('two_clusters',300,800,4),
+              ('wide_separate',120,120,6),
+              ('wide_separate',700,700,4),
+              ('casefold_tie',50,140,5),
+          ]
+          for kind,root_count,shared_count,reps in scenarios:
+              inp=fixture(kind,root_count,shared_count)
+              implementations={'before':old.analyze_graph,'after':modified.analyze_graph}
+              samples={'before':[],'after':[]}
+              for i in range(reps):
+                  pair={}
+                  for variant in (('before','after') if i%2==0 else ('after','before')):
+                      start=time.perf_counter()
+                      result=implementations[variant](inp)
+                      samples[variant].append(round(time.perf_counter()-start,6))
+                      pair[variant]=result
+                  assert pair['before']==pair['after'],('entire_graph_changed',kind,root_count,shared_count,i)
+              medians={name:statistics.median(vals) for name,vals in samples.items()}
+              print('MEASURE',json.dumps({
+                  'shape':kind, 'roots':root_count,'nodes':root_count+shared_count,
+                  'medians_seconds':medians,'samples_seconds':samples,
+                  'gain_percent':round(100*(1-medians['after']/medians['before']),2),
+                  'identical_complete_analyzed_graph':True,'no_wiki_access':True,
+              },sort_keys=True),flush=True)
+          PY
