@@ -12,7 +12,7 @@ from wikidebia_validator.schema_validation import SchemaStore
 def test_repeated_validation_reuses_checked_schema_without_changing_findings():
     store = SchemaStore()
     schema = "scope.schema.json"
-    instance = {"unexpected": 42}
+    instance = "not an object"
     first = [(list(e.absolute_path), e.message) for e in store.validate(instance, schema)]
     assert first
     cached = store._compiled[schema][1]
