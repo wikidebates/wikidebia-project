@@ -73,8 +73,8 @@ jobs:
                               def counted(*a,**kw):
                                   counts.append(1)
                                   return actual(*a,**kw)
-                              with patch.object(corpus,'safe_extract',counted), \\
-                                   patch.object(impl,'_save_workflow',lambda *_:None), \\
+                              with patch.object(corpus,'safe_extract',counted), \
+                                   patch.object(impl,'_save_workflow',lambda *_:None), \
                                    patch.object(impl,'run_initial_validator',lambda *_:{'status':'passed'}):
                                   start=time.perf_counter()
                                   impl._initialize_graph_stage(project,state)
