@@ -59,4 +59,47 @@ jobs:
                           "stdev_seconds": round(statistics.pstdev(samples), 6),
                           "samples_seconds": [round(x,6) for x in samples]
                       }, sort_keys=True))
+          # Experimental only: measure the cost of JSON Schema meta-validation.
+          # No repository validator code is modified.
+          import jsonschema
+          from wikidebia_validator.validator import validate_package
+          from jsonschema.validators import Draft202012Validator
+          with tempfile.TemporaryDirectory(prefix="wikidebia-schema-audit-") as name:
+              folder = Path(name)
+              source = make_synthetic_extraction(folder / "source", arguments=120, payload_bytes=1024)
+              target = folder / "build"
+              build_corpus(source, target, debate_id="benchmark_pretranslation", short_code="BENCH", scope_summary=None, overwrite=False)
+              def run_n(times=5):
+                  samples = []
+                  canonical = None
+                  for _ in range(times):
+                      start = time.perf_counter()
+                      report = validate_package(target, scopes=["schema"])
+                      samples.append(time.perf_counter() - start)
+                      value = report.to_dict()
+                      if canonical is None:
+                          canonical = value
+                      elif value != canonical:
+                          raise RuntimeError("The identical validator yielded inconsistent reports")
+                  return samples, canonical
+              normal, before = run_n()
+              original_check = Draft202012Validator.__dict__.get("check_schema")
+              try:
+                  Draft202012Validator.check_schema = classmethod(lambda cls, schema, format_checker=None: None)
+                  nocheck, after = run_n()
+              finally:
+                  if original_check is None:
+                      delattr(Draft202012Validator, "check_schema")
+                  else:
+                      Draft202012Validator.check_schema = original_check
+              if before != after:
+                  raise RuntimeError("Error reports changed when schema meta-validation was bypassed experimentally")
+              print("SCHEMA_CHECK_EXPERIMENT", json.dumps({
+                  "size": 120, "samples_normal": [round(x,6) for x in normal],
+                  "samples_experimental": [round(x,6) for x in nocheck],
+                  "normal_median_seconds": round(statistics.median(normal),6),
+                  "experimental_median_seconds": round(statistics.median(nocheck),6),
+                  "reports_identical": True,
+                  "production_code_unchanged": True
+              }, sort_keys=True))
           PY
