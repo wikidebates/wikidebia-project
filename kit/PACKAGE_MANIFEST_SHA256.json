@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
-  "declared_file_count": 501,
-  "declared_test_count": 1277,
+  "declared_file_count": 502,
+  "declared_test_count": 1283,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -1139,7 +1139,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "a5876dc3b4262066141465cad3b620e7c0425da23c6c34892a3c6d3f8a7ba874"
+      "sha256": "5757ea7961d97ff4340306085c85559d5c21c96cee2e51f61decee28181f68ab"
     },
     {
       "path": "VERSIONS.json",
@@ -1768,8 +1768,8 @@
     },
     {
       "path": "scripts/wikidebia_graph_extract.py",
-      "size_bytes": 87013,
-      "sha256": "72bcc3d76e16a76218f4e16cc74748e539841bab4a337ec1828d9c8efd7cba6a"
+      "size_bytes": 87480,
+      "sha256": "772bd1922cbd3ed9ac7ca560c2ffd973f66fd09723ece2d6b5f51ce5c9541172"
     },
     {
       "path": "scripts/wikidebia_interrupted_audit.py",
@@ -2250,6 +2250,11 @@
       "path": "tests/test_vote_electronique_citation_workflow_21620.py",
       "size_bytes": 8012,
       "sha256": "865717b55425c0e101c60171cd64866768a5ef4da844d81e4ae4e7692c2d18cd"
+    },
+    {
+      "path": "tests/test_wide_graph_frontier_dedup.py",
+      "size_bytes": 5287,
+      "sha256": "f9a92f96aa6c627b6e582476c37e74fc62245d08c73b4ade0266996b3972419b"
     },
     {
       "path": "tests/test_wikidebia_access_preflight.py",

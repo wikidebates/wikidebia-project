@@ -832,6 +832,10 @@ def crawl_graph(
     parsed_arguments: dict[str, ParsedArgument] = {}
     roots_pro: list[str] = []
     roots_con: list[str] = []
+    # Preserve the first-seen order but avoid O(N^2) list membership checks
+    # when a debate has hundreds of root arguments or redirected aliases.
+    roots_seen_pro: set[str] = set()
+    roots_seen_con: set[str] = set()
     root_displayed: dict[str, set[str]] = defaultdict(set)
     missing: list[str] = []
     missing_provenance: list[dict[str, Any]] = []
@@ -876,16 +880,21 @@ def crawl_graph(
                 if canonical not in queued_depth:
                     queued_depth[canonical] = 0
                     queue.append((canonical, 0))
-            if canonical and canonical not in destination:
-                destination.append(canonical)
+            if canonical:
+                seen_roots = roots_seen_pro if destination is roots_pro else roots_seen_con
+                if canonical not in seen_roots:
+                    seen_roots.add(canonical)
+                    destination.append(canonical)
 
     processed = 0
     while queue:
         depth = queue[0][1]
         frontier: list[str] = []
+        frontier_seen: set[str] = set()
         while queue and queue[0][1] == depth:
             title, _ = queue.popleft()
-            if title not in parsed_arguments and title not in frontier:
+            if title not in parsed_arguments and title not in frontier_seen:
+                frontier_seen.add(title)
                 frontier.append(title)
         if len(parsed_arguments) + len(frontier) > max_pages:
             raise RuntimeError(f"Limite de sécurité atteinte: {max_pages} pages")
