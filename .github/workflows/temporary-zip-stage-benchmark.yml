@@ -1,0 +1,103 @@
+name: Temporary ZIP workflow stage extraction comparison
+on:
+  pull_request:
+    paths:
+      - .github/workflows/temporary-zip-stage-benchmark.yml
+permissions:
+  contents: read
+jobs:
+  compare:
+    if: github.head_ref == 'perf/reuse-zip-extraction-workflow-stage-20261119'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: ZIP workflow stage tests
+        env:
+          PYTHONPATH: kit/scripts
+        run: python -m pytest -q kit/tests/test_workflow_zip_stage_reuse.py
+      - name: Compare archive decompressions on identical cold and resumed builds
+        env:
+          PYTHONPATH: kit/scripts
+        run: |
+          git show 9ec9e57dfe42c54a731f03f416bde2ff72752fd0:kit/scripts/wikidebia_review_workflow.py > /tmp/baseline_review_workflow.py
+          python - <<'PY'
+          import importlib.util,json,os,statistics,sys,tempfile,time,zipfile
+          from pathlib import Path
+          from unittest.mock import patch
+          import wikidebia_review_workflow as new
+          import wikidebia_corpus_init as corpus
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+
+          spec=importlib.util.spec_from_file_location('baseline_review_workflow','/tmp/baseline_review_workflow.py')
+          old=importlib.util.module_from_spec(spec)
+          sys.modules[spec.name]=old
+          spec.loader.exec_module(old)
+
+          with tempfile.TemporaryDirectory() as d:
+              root=Path(d)
+              for n in (120,300,700):
+                  source=make_synthetic_extraction(root/f'source-{n}',arguments=n,payload_bytes=512)
+                  archive=root/f'source-{n}.zip'
+                  with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as zf:
+                      for item in sorted(source.rglob('*')):
+                          if item.is_file(): zf.write(item,arcname=item.relative_to(source).as_posix())
+                  for mode in ('cold','partial','exact'):
+                      times={'old':[],'single':[]}
+                      extractions={'old':[],'single':[]}
+                      for i in range(6):
+                          pair={}
+                          for key in (('old','single') if i%2==0 else ('single','old')):
+                              project=root/f'run-{n}-{mode}-{i}-{key}'
+                              project.mkdir()
+                              state={'debate_id':'benchmark_pretranslation','short_code':None,
+                                     'snapshot_path':os.path.relpath(archive,project)}
+                              output=project/'.state/corpus-builds/benchmark_pretranslation'
+                              receipt_before=None
+                              if mode!='cold':
+                                  result=corpus.build_corpus(source,output,debate_id='benchmark_pretranslation',
+                                                             short_code=None,scope_summary=None,overwrite=False)
+                                  if mode=='exact':
+                                      receipt_before=corpus.write_build_receipt(
+                                          output,build_contract=result['build_contract'],validation={'status':'passed'})
+                              impl=old if key=='old' else new
+                              counts=[]
+                              actual=corpus.safe_extract
+                              def counted(*a,**kw):
+                                  counts.append(1)
+                                  return actual(*a,**kw)
+                              with patch.object(corpus,'safe_extract',counted), \\
+                                   patch.object(impl,'_save_workflow',lambda *_:None), \\
+                                   patch.object(impl,'run_initial_validator',lambda *_:{'status':'passed'}):
+                                  start=time.perf_counter()
+                                  impl._initialize_graph_stage(project,state)
+                                  duration=time.perf_counter()-start
+                              expected_count=(2 if key=='old' else 1)
+                              assert len(counts)==expected_count,(mode,key,len(counts))
+                              assert state['phase']=='graph_review'
+                              assert state['snapshot_path']==os.path.relpath(archive,project)
+                              receipt=state['initial_build_receipt']
+                              assert corpus.inspect_existing_build(
+                                  output,expected_debate_id='benchmark_pretranslation',
+                                  expected_contract_sha256=receipt['build_contract_sha256']
+                              )['safe_to_reuse']
+                              if receipt_before is not None: assert receipt_before['receipt_sha256']==receipt['receipt_sha256']
+                              pair[key]=(receipt['build_contract_sha256'],len(list((output/'imports/fr/arguments').glob('*.wiki'))))
+                              times[key].append(round(duration,6))
+                              extractions[key].append(len(counts))
+                          assert pair['old']==pair['single'],(n,mode,i,pair)
+                      medians={key:statistics.median(v) for key,v in times.items()}
+                      print('MEASURE',json.dumps({
+                          'args':n,'mode':mode,'median_seconds':medians,'samples_seconds':times,
+                          'zip_extraction_count':{k:set(v).pop() for k,v in extractions.items()},
+                          'gain_pct':round(100*(1-medians['single']/medians['old']),2),
+                          'source_contract_and_receipt_identical':True,
+                      },sort_keys=True),flush=True)
+          PY
