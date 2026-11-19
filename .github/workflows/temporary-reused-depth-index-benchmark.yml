@@ -53,6 +53,11 @@ jobs:
                   edges=[(names[i],'justification',children[i]) for i in range(n)]
                   roots=names
                   names.extend(children)
+              elif kind=='shared_chain':
+                  roots=[f'Root {i}' for i in range(8)]
+                  names=[*roots, *[f'S{i:04d}' for i in range(n)]]
+                  edges=[(r,'justification',names[8]) for r in roots]
+                  edges.extend((names[i],'objection',names[i+1]) for i in range(8,len(names)-1))
               elif kind=='layered':
                   width=24
                   names=[f'L{l:03d}-{i:02d}' for l in range(n) for i in range(width)]
@@ -74,6 +79,10 @@ jobs:
               ('shortcut',240,5),
               ('shortcut',800,5),
               ('shortcut',2000,3),
+              ('shared_chain',240,5),
+              ('shared_chain',800,5),
+              ('shared_chain',2000,3),
+              ('shared_chain',4000,3),
               ('wide',300,5),
               ('layered',22,5),
           ]
