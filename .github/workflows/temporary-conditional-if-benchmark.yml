@@ -1,11 +1,11 @@
-name: Temporary attested registry condition profile
+name: Temporary production conditional-if differential benchmark
 on:
   pull_request:
     branches: [main]
 permissions:
   contents: read
 jobs:
-  experiment:
+  compare:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
@@ -14,7 +14,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install -r validator/requirements-dev.txt
-      - name: Compare native and guarded string-status if keywords on full reports
+      - name: Compare exact full validation with native and guarded conditionals
         env:
           PYTHONPATH: kit/scripts:validator/src
         run: |
@@ -26,126 +26,49 @@ jobs:
           from pathlib import Path
           from unittest.mock import patch
 
-          from jsonschema.validators import extend
           from wikidebia_pretranslation_benchmark import make_synthetic_extraction
           from wikidebia_corpus_init import build_corpus
           import wikidebia_validator.schema_validation as sv
           from wikidebia_validator.validator import validate_package
 
-          SCOPES = ["schema", "coherence", "graph", "files", "workflow"]
-          old_wrapper = sv._guarded_registry_nullable_oneof
-          discovered = []
-          counters = {"eligible": 0, "fast": 0, "fallback": 0, "then": 0}
-
-          def extended_with_if(cls, expanded):
-              with_nullable_guard = old_wrapper(cls, expanded)
-              eligible = {}
-              def scan(obj):
-                  if isinstance(obj, list):
-                      for x in obj: scan(x)
-                  elif isinstance(obj, dict):
-                      rule = obj.get("if")
-                      if isinstance(rule, dict) and set(rule) == {"properties"}:
-                          props = rule["properties"]
-                          if isinstance(props, dict) and len(props) == 1:
-                              field, test = next(iter(props.items()))
-                              if field in {"status", "check_status", "title_status", "occurrence_role", "result"} and isinstance(test, dict):
-                                  if set(test) == {"const"} and isinstance(test["const"], str):
-                                      eligible[id(obj)] = (field, "const", test["const"])
-                                  elif set(test) == {"enum"} and isinstance(test["enum"], list) and test["enum"] and all(isinstance(x,str) for x in test["enum"]):
-                                      eligible[id(obj)] = (field, "enum", tuple(test["enum"]))
-                      for x in obj.values():scan(x)
-              scan(expanded)
-              discovered.append(len(eligible))
-              original_if = with_nullable_guard.VALIDATORS["if"]
-              def fast_if(validator, if_schema, instance, schema):
-                  data = eligible.get(id(schema))
-                  if data is not None and isinstance(instance, dict) and (
-                      isinstance(instance.get(data[0]), str)
-                      and schema.get("if") is if_schema
-                      and set(schema).issubset({"if", "then", "else"})
-                      and if_schema == {"properties": {data[0]: (
-                          {"const": data[2]} if data[1] == "const" else {"enum": list(data[2])}
-                      )}}
-                  ):
-                      counters["fast"] += 1
-                      present = instance[data[0]]
-                      matched = (present == data[2] if data[1]=="const" else present in data[2])
-                      keyword = "then" if matched else "else"
-                      if keyword in schema:
-                          counters["then"] += 1
-                          yield from validator.descend(instance, schema[keyword], schema_path=keyword)
-                      return
-                  counters["fallback"] += 1
-                  yield from original_if(validator, if_schema, instance, schema)
-              return extend(with_nullable_guard,validators={"if": fast_if})
-
-          for count in (40,300,680):
-              with tempfile.TemporaryDirectory(prefix="wikidebia-conditional-if-") as directory:
-                  directory = Path(directory)
-                  source=make_synthetic_extraction(directory/"source",arguments=count,payload_bytes=1024)
-                  target=directory/"target"
-                  build_corpus(source,target,debate_id="benchmark_pretranslation",short_code="BENCH",scope_summary=None,overwrite=False)
-                  samples={"original":[],"experimental":[]}
-                  for i in range(7):
-                      order=("experimental","original") if i%2==0 else ("original","experimental")
-                      observed={}
-                      for version in order:
-                          started=time.perf_counter()
-                          if version=="experimental":
-                              with patch.object(sv,"_guarded_registry_nullable_oneof",extended_with_if):
-                                  observed[version]=validate_package(target,scopes=SCOPES).to_dict()
+          SCOPES=["schema","coherence","graph","files","workflow"]
+          if not sv._matches_attested_library_versions():
+              raise RuntimeError("Pinned library versions are mandatory for this experiment")
+          def native_if(cls, _expanded): return cls
+          for count in (40, 300, 680):
+              with tempfile.TemporaryDirectory(prefix="wikidebia-conditional-prod-") as tmp:
+                  root=Path(tmp)
+                  source=make_synthetic_extraction(root/"source",arguments=count,payload_bytes=1024)
+                  build=root/"build"
+                  build_corpus(source,build,debate_id="benchmark_pretranslation",short_code="BENCH",scope_summary=None,overwrite=False)
+                  data={"old":[],"new":[]}
+                  for round_no in range(7):
+                      reports={}
+                      for version in (("new","old") if round_no%2==0 else ("old","new")):
+                          began=time.perf_counter()
+                          if version=="old":
+                              with patch.object(sv,"_guarded_registry_status_if",native_if):
+                                  reports[version]=validate_package(build,scopes=SCOPES).to_dict()
                           else:
-                              observed[version]=validate_package(target,scopes=SCOPES).to_dict()
-                          samples[version].append(time.perf_counter()-started)
-                      if observed["original"]!=observed["experimental"]:
-                          raise AssertionError("Full valid reports differ")
-                      if observed["original"]["summary"]["errors"]:
-                          raise AssertionError("Synthetic corpus unexpectedly invalid")
-                  before=statistics.median(samples["original"])
-                  after=statistics.median(samples["experimental"])
-                  print("WIKIDEBIA_CONDITIONAL_IF_EXPERIMENT "+json.dumps({
-                      "arguments":count,"eligible_rule_count":sorted(set(discovered)),
-                      "native_median_seconds":round(before,6),
-                      "guarded_median_seconds":round(after,6),
-                      "gain_percent":round((before-after)/before*100,2),
-                      "native_samples_seconds":[round(x,6) for x in samples["original"]],
-                      "guarded_samples_seconds":[round(x,6) for x in samples["experimental"]],
-                      "same_complete_valid_reports":True,"counters":counters,
+                              reports[version]=validate_package(build,scopes=SCOPES).to_dict()
+                          data[version].append(time.perf_counter()-began)
+                      if reports["new"]!=reports["old"]:
+                          raise RuntimeError("Complete validator reports differed")
+                      if reports["new"]["summary"]["errors"]:
+                          raise RuntimeError("Normal synthetic build failed validation")
+                  old=statistics.median(data["old"])
+                  new=statistics.median(data["new"])
+                  print("WIKIDEBIA_PRODUCTION_IF_BENCHMARK "+json.dumps({
+                      "arguments":count,
+                      "before_median_seconds":round(old,6),
+                      "after_median_seconds":round(new,6),
+                      "gain_percent":round((old-new)/old*100,2),
+                      "before_samples_seconds":[round(x,6) for x in data["old"]],
+                      "after_samples_seconds":[round(x,6) for x in data["new"]],
+                      "iterations_per_variant":7,
+                      "five_validation_scopes":True,
+                      "complete_report_objects_identical":True,
+                      "source_schema_files_unchanged":True,
+                      "wiki_access_performed":False,
                   },sort_keys=True),flush=True)
-
-                  if count != 40:
-                      continue
-                  registry=target/"data/registre_debat.json"
-                  saved=registry.read_text(encoding="utf-8")
-                  cases=[
-                      ("status_not_string", lambda d:d["graph"]["nodes"][0]["pages"]["fr"]["generation"].__setitem__("status",True)),
-                      ("status_undeclared", lambda d:d["graph"]["nodes"][0]["pages"]["fr"]["generation"].__setitem__("status","unlisted")),
-                      ("status_missing", lambda d:d["graph"]["nodes"][0]["pages"]["fr"]["generation"].pop("status")),
-                      ("generation_validated", lambda d:d["graph"]["nodes"][0]["pages"]["fr"]["generation"].__setitem__("status","validated")),
-                      ("file_absent", lambda d:d["graph"]["nodes"][0]["pages"]["fr"]["file"].__setitem__("status","absent")),
-                      ("file_bad_sha", lambda d:d["graph"]["nodes"][0]["pages"]["fr"]["file"].__setitem__("sha256","bad")),
-                      ("wiki_created", lambda d:d["graph"]["nodes"][0]["pages"]["fr"]["wiki"].__setitem__("check_status","created")),
-                      ("wiki_status_bad", lambda d:d["graph"]["nodes"][0]["pages"]["fr"]["wiki"].__setitem__("check_status",32)),
-                      ("wiki_status_missing", lambda d:d["graph"]["nodes"][0]["pages"]["fr"]["wiki"].pop("check_status")),
-                      ("en_title_locked", lambda d:d["graph"]["nodes"][0]["en"].__setitem__("title_status","locked")),
-                      ("en_title_null", lambda d:d["graph"]["nodes"][0]["en"].__setitem__("canonical_title",None)),
-                      ("interlang_verified", lambda d:d["graph"]["nodes"][0]["pages"]["fr"]["interlanguage"].__setitem__("status","verified")),
-                      ("unknown_node", lambda d:d["graph"]["nodes"][0].__setitem__("extra",1)),
-                      ("bad_depth", lambda d:d["graph"]["occurrences"][0].__setitem__("depth",True)),
-                  ]
-                  for label, mutate in cases:
-                      data=json.loads(saved)
-                      mutate(data)
-                      registry.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-                      baseline=validate_package(target,scopes=SCOPES).to_dict()
-                      with patch.object(sv,"_guarded_registry_nullable_oneof",extended_with_if):
-                          experimental=validate_package(target,scopes=SCOPES).to_dict()
-                      if baseline!=experimental:
-                          raise AssertionError("Invalid diagnostic differs: "+label)
-                  registry.write_text(saved,encoding="utf-8")
-                  print("WIKIDEBIA_CONDITIONAL_IF_INVALID "+json.dumps({
-                      "cases":len(cases),"complete_reports_equal":True,
-                      "fallback_counter":counters["fallback"]
-                  }),flush=True)
           PY
