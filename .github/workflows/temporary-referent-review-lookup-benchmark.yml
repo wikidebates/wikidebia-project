@@ -1,0 +1,103 @@
+name: Temporary validator referent review lookup benchmark
+on:
+  pull_request:
+    paths:
+      - .github/workflows/temporary-referent-review-lookup-benchmark.yml
+permissions:
+  contents: read
+jobs:
+  compare:
+    if: github.head_ref == 'perf/validator-review-referent-lookup-20261120'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Verify review first-match, unsafe paths and contextual decisions
+        env:
+          PYTHONPATH: validator/src
+        run: python -m pytest -q validator/tests/test_graph_referent_review_index.py
+      - name: Paired complete validator reports against pinned main
+        env:
+          PYTHONPATH: validator/src
+        run: |
+          git show ba9a0d50fa5f9b87197c137ad17b5d58b49baadf:validator/src/wikidebia_validator/graph.py > /tmp/baseline_validator_graph.py
+          python - <<'PY'
+          import importlib.util,json,statistics,sys,tempfile,time
+          from pathlib import Path
+          from unittest.mock import patch
+          from wikidebia_validator import validator as driver
+          from wikidebia_validator.graph import structural_sha256
+          from validator.tests.helpers import dump,graph_projection
+          from validator.tests.test_graph_iterative_cycles import _deep_package
+
+          spec=importlib.util.spec_from_file_location(
+              'wikidebia_validator.baseline_graph','/tmp/baseline_validator_graph.py')
+          baseline=importlib.util.module_from_spec(spec)
+          sys.modules[spec.name]=baseline
+          spec.loader.exec_module(baseline)
+
+          def fixture(root,chain,review_rows,contextual=False,duplicate=False):
+              _deep_package(root,chain_length=chain)
+              registry_path=root/'data/registre_debat.json'
+              registry=json.loads(registry_path.read_text(encoding='utf-8'))
+              if contextual:
+                  for idx,node in enumerate(registry['graph']['nodes']):
+                      if idx%17==0:
+                          node['fr']['canonical_title']=f'Ce programme change la règle argumentée numéro {idx:04d}'
+                  registry['graph']['lifecycle']['structural_sha256']=structural_sha256(registry)
+                  dump(registry_path,registry)
+                  dump(root/'graph/graphe_argumentatif.json',graph_projection(registry))
+              manifest_path=root/'manifest.json'
+              manifest=json.loads(manifest_path.read_text(encoding='utf-8'))
+              rel='reviews/individual_title_review.json'
+              manifest['editorial_controls']={'individual_review_path':rel}
+              dump(manifest_path,manifest)
+              entries=[
+                  {'id':f'A{i:05d}','canonical_referents_explicit_fr':i%5==0}
+                  for i in range(1,review_rows+1)
+              ]
+              if duplicate:
+                  entries[:0]=[
+                      {'id':'A00001','canonical_referents_explicit_fr':False},
+                      {'id':'A00001','canonical_referents_explicit_fr':True},
+                  ]
+              dump(root/rel,{'entries':entries,'status':'reviewed'})
+
+          scenarios=[
+              ('normal-150',150,200,False,False,6),
+              ('review-400',400,650,False,False,6),
+              ('review-700',700,950,False,False,6),
+              ('contextual-400',400,650,True,True,6),
+              ('contextual-700',700,950,True,True,6),
+          ]
+          for label,chain,rows,contextual,duplicate,repeats in scenarios:
+              with tempfile.TemporaryDirectory(prefix='review-lookup-') as tmp:
+                  root=Path(tmp)
+                  fixture(root,chain,rows,contextual,duplicate)
+                  observations={'baseline':[],'indexed':[]}
+                  functions={'baseline':baseline.validate_graph,'indexed':driver.validate_graph}
+                  for repeat in range(repeats):
+                      pair={}
+                      for name in (('baseline','indexed') if repeat%2==0 else ('indexed','baseline')):
+                          with patch.object(driver,'validate_graph',functions[name]):
+                              before=time.perf_counter()
+                              result=driver.validate_package(root,scopes=['graph']).to_dict()
+                              observations[name].append(round(time.perf_counter()-before,6))
+                              pair[name]=result
+                      assert pair['baseline']==pair['indexed'],('complete_report_changed',label,repeat)
+                  medians={key:statistics.median(vals) for key,vals in observations.items()}
+                  print('MEASURE',json.dumps({
+                      'scenario':label,'nodes':chain+2,'review_rows':rows,
+                      'median_seconds':medians,'samples_seconds':observations,
+                      'gain_percent':round(100*(1-medians['indexed']/medians['baseline']),2),
+                      'all_report_findings_and_metrics_equal':True,
+                      'no_wiki_access':True,
+                  },sort_keys=True),flush=True)
+          PY
