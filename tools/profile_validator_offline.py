@@ -185,7 +185,10 @@ def _timed_validation(
         for name in STAGES:
             stack.enter_context(patch.object(
                 validator_mod, name,
-                wrap(getattr(validator_mod, name), "scope:" + name.removeprefix("validate_")),
+                wrap(getattr(validator_mod, name), "scope:" + (
+                    "schema" if name == "validate_all_schemas"
+                    else name.removeprefix("validate_")
+                )),
             ))
         for cls, method in METHODS:
             label = "method:" + cls.__name__ + "." + method
