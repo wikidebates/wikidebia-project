@@ -175,6 +175,12 @@ class SchemaStore:
             self._inlined_registry_common_sha256 = None
         cached = self._compiled.get(schema_name)
         if cached is None or cached[0] != fingerprint:
+            if schema_name == "argument_registry.schema.json":
+                # Drop an earlier optimized validator *before* a potentially
+                # failing metaschema check. An invalid in-place edit must not
+                # leave stale compiled rules eligible for later reuse.
+                self._compiled.pop(schema_name, None)
+                self._inlined_registry_common_sha256 = None
             cls = validator_for(schema)
             # An exact content+dependency match is a pre-validated *static*
             # schema: its meta-check was attested by the regression suite.
