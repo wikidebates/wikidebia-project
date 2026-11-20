@@ -37,7 +37,7 @@ SCENARIOS = (
 BENCHMARK_FILE = "kit/scripts/wikidebia_pretranslation_benchmark.py"
 SCHEMA = "wikidebia-pretranslation-revision-comparison-1.0"
 SHA_PATTERN = re.compile(r"[0-9a-fA-F]{40}\Z")
-DIGEST_PATTERN = re.compile(r"[0-9a-fA-F]{64}\\Z")
+DIGEST_PATTERN = re.compile(r"[0-9a-fA-F]{64}\Z")
 
 
 class RevisionComparisonError(RuntimeError):
