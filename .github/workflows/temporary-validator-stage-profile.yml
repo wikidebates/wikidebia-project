@@ -122,18 +122,17 @@ jobs:
                       if child.returncode:
                           raise RuntimeError("Full validator subprocess failed")
                       child_report=json.loads(child.stdout)
+                      # The official CLI intentionally injects a signed
+                      # runtime_attestation into Report.metrics. Keep it in
+                      # production, but ignore precisely that launcher-only
+                      # metadata when comparing against a direct Python call.
+                      proof=child_report.get("metrics",{}).get("runtime_attestation")
+                      if not isinstance(proof,dict) or not proof.get("cli_sha256"):
+                          raise RuntimeError("Official CLI runtime attestation missing")
+                      child_report["metrics"]=dict(child_report["metrics"])
+                      child_report["metrics"].pop("runtime_attestation")
                       if child_report!=baseline:
-                          differences=[key for key in baseline if baseline[key]!=child_report.get(key)]
-                          print("WIKIDEBIA_VALIDATOR_REPORT_DIFF "+json.dumps({
-                              "keys":differences,
-                              "first_summary":baseline.get("summary"),
-                              "second_summary":child_report.get("summary"),
-                              "first_metrics_keys":list(baseline.get("metrics",{})),
-                              "second_metrics_keys":list(child_report.get("metrics",{})),
-                              "first_findings_count":len(baseline.get("findings",[])),
-                              "second_findings_count":len(child_report.get("findings",[])),
-                          }),flush=True)
-                          raise RuntimeError("In-process and process validator reports differ")
+                          raise RuntimeError("Validator findings or metrics differ beyond CLI attestation")
 
                   prof=cProfile.Profile()
                   prof.enable()
