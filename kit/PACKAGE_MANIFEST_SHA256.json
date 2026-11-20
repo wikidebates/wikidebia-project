@@ -1768,8 +1768,8 @@
     },
     {
       "path": "scripts/wikidebia_graph_extract.py",
-      "size_bytes": 93192,
-      "sha256": "ab3cb4f48cc378ab9aa8a8cd6f16d1d212f17018e85554b46171a1fed9f37aa7"
+      "size_bytes": 93343,
+      "sha256": "4e85164d03fa40f02fc724c85b521595fe4afa8177b67be00f680b8c52797519"
     },
     {
       "path": "scripts/wikidebia_interrupted_audit.py",
@@ -2058,8 +2058,8 @@
     },
     {
       "path": "tests/test_graph_extract_parser_fastpath.py",
-      "size_bytes": 7736,
-      "sha256": "8dd79532360e1790708d4bda5c58633a7759ab1bac885e285bd760526600ba44"
+      "size_bytes": 7980,
+      "sha256": "45da95295894217960544bb4afaa8de52295afdfef398daca9d8dfe020887663"
     },
     {
       "path": "tests/test_graph_rejection_correction_2163.py",
