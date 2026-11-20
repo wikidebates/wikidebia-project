@@ -1,0 +1,145 @@
+name: Temporary null-oneOf schema hotpath experiment
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  bench:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Benchmark only schema-validating forms and complete invalid-report equivalence
+        env:
+          PYTHONPATH: kit/scripts:validator/src
+        run: |
+          python - <<'PY'
+          import copy
+          import json
+          import statistics
+          import tempfile
+          import time
+          from pathlib import Path
+          from unittest.mock import patch
+
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+          from wikidebia_corpus_init import build_corpus
+          import wikidebia_validator.schema_validation as sv
+          from wikidebia_validator.validator import validate_package
+
+          orig=sv._inline_attested_common_references
+          converted=[0]
+          def rewritten(schema,common):
+              root=orig(schema,common)
+              count=[0]
+              def replace(value):
+                  if isinstance(value,list):
+                      return [replace(item) for item in value]
+                  if not isinstance(value,dict):
+                      return value
+                  doc={key:replace(item) for key,item in value.items()}
+                  variants=doc.get("oneOf")
+                  if (
+                      set(doc)=={"oneOf"} and isinstance(variants,list)
+                      and len(variants)==2
+                      and any(isinstance(branch,dict) and branch=={"type":"null"} for branch in variants)
+                  ):
+                      others=[branch for branch in variants if branch!={"type":"null"}]
+                      if len(others)==1 and isinstance(others[0],dict) and (
+                          others[0].get("type")=="string" or others[0].get("type")=="integer"
+                      ):
+                          count[0]+=1
+                          return {"anyOf":variants}
+                  return doc
+              optimized=replace(root)
+              converted.append(count[0])
+              return optimized
+
+          def validate_pair(root):
+              # The experimental accelerated path always falls back to the
+              # official validator when its tentative report has any error.
+              baseline=validate_package(root,scopes=["schema"]).to_dict()
+              with patch.object(sv,"_inline_attested_common_references",rewritten):
+                  accelerated=validate_package(root,scopes=["schema"]).to_dict()
+              if accelerated["summary"]["errors"]:
+                  accelerated=baseline
+              if accelerated!=baseline:
+                  raise AssertionError("Violation de parité complète de rapport")
+              return baseline
+
+          for arguments in (40,300,680):
+              with tempfile.TemporaryDirectory(prefix="wikidebia-registry-null-exp-") as name:
+                  root=Path(name)
+                  source=make_synthetic_extraction(root/"source",arguments=arguments,payload_bytes=1024)
+                  corpus=root/"corpus"
+                  build_corpus(source,corpus,debate_id="benchmark_pretranslation",short_code="BENCH",scope_summary=None,overwrite=False)
+                  baseline_times=[]
+                  trial_times=[]
+                  for i in range(5):
+                      for variant in (("trial","original") if i%2==0 else ("original","trial")):
+                          started=time.perf_counter()
+                          if variant=="original":
+                              original=validate_package(corpus,scopes=["schema"]).to_dict()
+                          else:
+                              with patch.object(sv,"_inline_attested_common_references",rewritten):
+                                  trial=validate_package(corpus,scopes=["schema"]).to_dict()
+                          elapsed=time.perf_counter()-started
+                          if variant=="original":
+                              baseline_times.append(elapsed)
+                          else:
+                              trial_times.append(elapsed)
+                      if original!=trial:
+                          raise AssertionError("Difference de rapport sur corpus valide")
+                      if original["summary"]["errors"]:
+                          raise AssertionError("Corpus benchmark inattendu invalide")
+                  print("WIKIDEBIA_NULL_ONEOF_EXPERIMENT "+json.dumps({
+                      "arguments":arguments,
+                      "count_rewrites":sorted(set(converted)),
+                      "baseline_median_s":round(statistics.median(baseline_times),6),
+                      "trial_median_s":round(statistics.median(trial_times),6),
+                      "baseline_samples":[round(x,6) for x in baseline_times],
+                      "trial_samples":[round(x,6) for x in trial_times],
+                      "equal_valid_report":True,
+                  }),flush=True)
+                  if arguments!=40:
+                      continue
+                  registry_path=corpus/"data/registre_debat.json"
+                  valid=registry_path.read_text(encoding="utf-8")
+                  mutations=[
+                      ("invalid_node_id",lambda o:o["graph"]["nodes"][0].__setitem__("id","bad")),
+                      ("invalid_title",lambda o:o["graph"]["nodes"][0]["fr"].__setitem__("canonical_title","")),
+                      ("invalid_rubric",lambda o:o["graph"]["nodes"][0]["fr"].__setitem__("rubriques",["Unlisted"])),
+                      ("empty_rubrics",lambda o:o["graph"]["nodes"][0]["fr"].__setitem__("rubriques",[])),
+                      ("unknown_node_prop",lambda o:o["graph"]["nodes"][0].__setitem__("bad",1)),
+                      ("bad_generation_status",lambda o:o["graph"]["nodes"][0]["pages"]["fr"]["generation"].__setitem__("status","invalid")),
+                      ("validated_without_dates",lambda o:o["graph"]["nodes"][0]["pages"]["fr"]["generation"].__setitem__("status","validated")),
+                      ("published_without_check",lambda o:o["graph"]["nodes"][0]["pages"]["fr"]["wiki"].__setitem__("check_status","created")),
+                      ("bad_language_title",lambda o:o["graph"]["nodes"][0]["en"].__setitem__("canonical_title",17)),
+                      ("broken_interlanguage",lambda o:o["graph"]["nodes"][0]["pages"]["fr"]["interlanguage"].__setitem__("status","verified")),
+                      ("non_null_invalid_sha",lambda o:o["graph"]["nodes"][0]["pages"]["fr"]["file"].__setitem__("sha256","abc")),
+                      ("invalid_occurrence",lambda o:o["graph"]["occurrences"][0].__setitem__("id","bad")),
+                  ]
+                  for title, change in mutations:
+                      data=json.loads(valid)
+                      change(data)
+                      registry_path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+                      base=validate_package(corpus,scopes=["schema"]).to_dict()
+                      with patch.object(sv,"_inline_attested_common_references",rewritten):
+                          fast=validate_package(corpus,scopes=["schema"]).to_dict()
+                      if not base["summary"]["errors"]:
+                          raise AssertionError("Mutation non invalide: "+title)
+                      # Errors from anyOf differ in context; production must use
+                      # the original report for every malformed input.
+                      selected=base if fast["summary"]["errors"] else fast
+                      if selected!=base:
+                          raise AssertionError("Fast path accepted an invalid instance: "+title)
+                  registry_path.write_text(valid,encoding="utf-8")
+                  print("WIKIDEBIA_NULL_ONEOF_INVALID_CASES "+json.dumps({
+                      "cases":len(mutations),"full_report_fallback_identical":True
+                  }),flush=True)
+          PY
