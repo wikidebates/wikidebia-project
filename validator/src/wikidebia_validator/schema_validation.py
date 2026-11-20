@@ -300,6 +300,69 @@ def _guarded_registry_status_if(cls: Any, expanded: Any) -> Any:
     return extend(cls, validators={"if": guarded_if})
 
 
+# The safely expanded, fingerprint-attested registry has exactly 334 nodes
+# with one of these six primitive JSON Schema types. The positive path is
+# shortened only when the instance's *exact* builtin class proves the type.
+# Any mismatched type, custom subclass, missing attestation or mutated schema
+# continues through jsonschema's original keyword handler for full errors.
+_ATTESTED_REGISTRY_PRIMITIVE_TYPE_COUNT = 334
+_ATTESTED_PRIMITIVE_PYTHON_TYPES = {
+    "string": str,
+    "object": dict,
+    "array": list,
+    "boolean": bool,
+    "null": type(None),
+    "integer": int,
+}
+
+
+def _guarded_registry_primitive_type(cls: Any, expanded: Any) -> Any:
+    """Prove only valid primitive JSON types; never suppress a native error.
+
+    Called solely after the exact JSON-schema/runtime attestations and both
+    existing guarded handlers have succeeded. Operates on the *same* expanded
+    schema objects, never on or instead of the normative source documents.
+    """
+    eligible: dict[int, str] = {}
+
+    def scan(value: Any) -> None:
+        if isinstance(value, list):
+            for item in value:
+                scan(item)
+        elif isinstance(value, dict):
+            expected = value.get("type")
+            if isinstance(expected, str) and expected in _ATTESTED_PRIMITIVE_PYTHON_TYPES:
+                eligible[id(value)] = expected
+            for item in value.values():
+                scan(item)
+
+    scan(expanded)
+    native_type = cls.VALIDATORS.get("type")
+    if len(eligible) != _ATTESTED_REGISTRY_PRIMITIVE_TYPE_COUNT or native_type is None:
+        return cls
+
+    def guarded_type(
+        validator: Any, types: Any, instance: Any, schema: Any,
+    ) -> Any:
+        expected = eligible.get(id(schema))
+        if (
+            expected is not None
+            and isinstance(schema, dict)
+            and type(types) is str
+            and schema.get("type") == expected == types
+            # Keep custom type checkers on the original engine even if they
+            # redefine how primitive values should be classified.
+            and validator.TYPE_CHECKER is cls.TYPE_CHECKER
+            and type(instance) is _ATTESTED_PRIMITIVE_PYTHON_TYPES[expected]
+        ):
+            # The built-in Python value class unambiguously satisfies this
+            # particular pinned JSON Schema type. Other keywords still run.
+            return
+        yield from native_type(validator, types, instance, schema)
+
+    return extend(cls, validators={"type": guarded_type})
+
+
 class SchemaStore:
     def __init__(self) -> None:
         schema_dir = files("wikidebia_validator").joinpath("schemas")
@@ -374,11 +437,18 @@ class SchemaStore:
                     else:
                         self._inlined_registry_common_sha256 = _ATTESTED_COMMON_SHA256
                         first_guard = _guarded_registry_nullable_oneof(cls, validator_schema)
-                        # If the existing null/string proof fails, preserve
-                        # the original class entirely. Do not enable an
-                        # independent conditional shortcut in that state.
+                        # Honor the previous proofs in order: if any one
+                        # fails, never introduce an independent new shortcut.
                         if first_guard is not cls:
-                            cls = _guarded_registry_status_if(first_guard, validator_schema)
+                            conditional_guard = _guarded_registry_status_if(
+                                first_guard, validator_schema
+                            )
+                            if conditional_guard is not first_guard:
+                                cls = _guarded_registry_primitive_type(
+                                    conditional_guard, validator_schema
+                                )
+                            else:
+                                cls = first_guard
             validator = cls(
                 validator_schema, registry=self.registry, format_checker=self.format_checker,
             )
