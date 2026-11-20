@@ -62,74 +62,94 @@ def _template_spans(text: str) -> list[tuple[int, int]]:
     """Return balanced ``{{...}}`` spans, including nested templates.
 
     Triple-brace parameters are tracked independently so their braces do not
-    corrupt the template stack.
+    corrupt the template stack. Only brace characters can open/close them:
+    avoid repeated string-prefix checks on ordinary page content.
     """
     stack: list[tuple[int, int]] = []  # (brace width, start)
     spans: list[tuple[int, int]] = []
     i = 0
     while i < len(text):
-        if text.startswith("{{{", i):
-            stack.append((3, i))
-            i += 3
-            continue
-        if text.startswith("{{", i):
-            stack.append((2, i))
-            i += 2
-            continue
-        if text.startswith("}}}", i) and stack and stack[-1][0] == 3:
-            stack.pop()
-            i += 3
-            continue
-        if text.startswith("}}", i) and stack and stack[-1][0] == 2:
-            _, start = stack.pop()
-            spans.append((start, i + 2))
-            i += 2
-            continue
+        char = text[i]
+        if char == "{":
+            if text.startswith("{{{", i):
+                stack.append((3, i))
+                i += 3
+                continue
+            if text.startswith("{{", i):
+                stack.append((2, i))
+                i += 2
+                continue
+        elif char == "}" and stack:
+            if text.startswith("}}}", i) and stack[-1][0] == 3:
+                stack.pop()
+                i += 3
+                continue
+            if text.startswith("}}", i) and stack[-1][0] == 2:
+                _, start = stack.pop()
+                spans.append((start, i + 2))
+                i += 2
+                continue
         i += 1
     return sorted(spans, key=lambda item: (item[0], item[1] - item[0]))
 
 
 def _split_top_level(text: str, delimiter: str, maxsplit: int = -1) -> list[str]:
-    """Split while ignoring delimiters inside templates and wikilinks."""
+    """Split while ignoring delimiters inside templates and wikilinks.
+
+    The same token precedence as the historical parser is retained: triple
+    braces before double braces, template tokens before wikilinks, and both
+    before delimiters. Ordinary characters cannot start any of those tokens,
+    so do not call str.startswith repeatedly for them.
+    """
+    if not delimiter:
+        raise ValueError("Le séparateur ne peut pas être vide")
     parts: list[str] = []
     start = 0
     splits = 0
     template_stack: list[int] = []
     wikilink_depth = 0
+    delimiter_start = delimiter[0]
+    delimiter_length = len(delimiter)
     i = 0
     while i < len(text):
-        if text.startswith("{{{", i):
-            template_stack.append(3)
-            i += 3
-            continue
-        if text.startswith("{{", i):
-            template_stack.append(2)
-            i += 2
-            continue
-        if text.startswith("}}}", i) and template_stack and template_stack[-1] == 3:
-            template_stack.pop()
-            i += 3
-            continue
-        if text.startswith("}}", i) and template_stack and template_stack[-1] == 2:
-            template_stack.pop()
-            i += 2
-            continue
-        if text.startswith("[[", i):
-            wikilink_depth += 1
-            i += 2
-            continue
-        if text.startswith("]]", i) and wikilink_depth:
-            wikilink_depth -= 1
-            i += 2
-            continue
+        char = text[i]
+        if char == "{":
+            if text.startswith("{{{", i):
+                template_stack.append(3)
+                i += 3
+                continue
+            if text.startswith("{{", i):
+                template_stack.append(2)
+                i += 2
+                continue
+        elif char == "}" and template_stack:
+            if text.startswith("}}}", i) and template_stack[-1] == 3:
+                template_stack.pop()
+                i += 3
+                continue
+            if text.startswith("}}", i) and template_stack[-1] == 2:
+                template_stack.pop()
+                i += 2
+                continue
+        elif char == "[":
+            if text.startswith("[[", i):
+                wikilink_depth += 1
+                i += 2
+                continue
+        elif char == "]" and wikilink_depth:
+            if text.startswith("]]", i):
+                wikilink_depth -= 1
+                i += 2
+                continue
         if (
-            text.startswith(delimiter, i)
+            char == delimiter_start
+            and text.startswith(delimiter, i)
             and not template_stack
             and wikilink_depth == 0
             and (maxsplit < 0 or splits < maxsplit)
         ):
             parts.append(text[start:i])
-            i += len(delimiter)
+            i += delimiter_length
             start = i
             splits += 1
             continue
