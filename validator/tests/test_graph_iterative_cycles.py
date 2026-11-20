@@ -88,7 +88,6 @@ def _deep_package(root: Path, *, chain_length: int, add_cycle: bool = False) -> 
 
     for number in range(3, chain_length + 3):
         node_id = f"A{number:05d}"
-        previous_id = f"A{number - 1:05d}"
         node = copy.deepcopy(exemplar)
         node["id"] = node_id
         node["fr"]["canonical_title"] = f"La mesure X apporte un résultat argumentatif numéro {number}"
@@ -147,8 +146,10 @@ def test_deep_cycle_reports_graph_error_not_internal_error(tmp_path):
     assert "WDV-GRA-005" in codes, report.to_text()
     assert "WDV-INT-001" not in codes, report.to_text()
     cycle = next(f.message for f in report.findings if f.code == "WDV-GRA-005")
-    assert cycle.startswith("Cycle détecté : A0001 -> A00003")
-    assert cycle.endswith(" -> A0001")
+    # DFS starts from sorted active IDs: A00003 sorts before A0001,
+    # so the cycle can begin at the first chain node instead of the root.
+    assert cycle.startswith("Cycle détecté : A00003 -> A00004")
+    assert cycle.endswith(" -> A0001 -> A00003")
 
 
 def test_original_dfs_does_not_skip_disconnected_or_parallel_cycles():
