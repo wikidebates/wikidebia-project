@@ -143,3 +143,131 @@ jobs:
                       "cases":len(mutations),"full_report_fallback_identical":True
                   }),flush=True)
           PY
+      - name: Benchmark guarded fast-positive oneOf dispatch with original diagnostics
+        env:
+          PYTHONPATH: kit/scripts:validator/src
+        run: |
+          python - <<'PY'
+          import json
+          import statistics
+          import tempfile
+          import time
+          from pathlib import Path
+          from unittest.mock import patch
+          from jsonschema.validators import extend
+
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+          from wikidebia_corpus_init import build_corpus
+          import wikidebia_validator.schema_validation as sv
+          from wikidebia_validator.validator import validate_package
+
+          original_inline=sv._inline_attested_common_references
+          original_for=sv.validator_for
+          eligible=set()
+          count_holder=[]
+          original_oneof=original_for({"$schema":"https://json-schema.org/draft/2020-12/schema"}).VALIDATORS["oneOf"]
+
+          def inline_and_mark(schema,common):
+              expanded=original_inline(schema,common)
+              count=[0]
+              def walk(value):
+                  if isinstance(value,list):
+                      for entry in value:walk(entry)
+                  if not isinstance(value,dict):
+                      return
+                  options=value.get("oneOf")
+                  if (
+                      set(value)=={"oneOf"} and isinstance(options,list) and len(options)==2
+                      and any(part=={"type":"null"} for part in options)
+                  ):
+                      typed=[(index,part) for index,part in enumerate(options) if part!={"type":"null"}]
+                      if len(typed)==1 and isinstance(typed[0][1],dict) and typed[0][1].get("type")=="string":
+                          eligible.add(id(value))
+                          count[0]+=1
+                  for entry in value.values():walk(entry)
+              walk(expanded)
+              count_holder.append(count[0])
+              return expanded
+
+          def guard(validator,variants,instance,schema):
+              if id(schema) in eligible:
+                  if instance is None:
+                      return
+                  if isinstance(instance,str):
+                      typed_index=0 if variants[0]!={"type":"null"} else 1
+                      if not list(validator.descend(instance, variants[typed_index], schema_path=typed_index)):
+                          return
+              # For an invalid value, delegate EXACTLY to the unmodified
+              # jsonschema oneOf handler and retain its complete context.
+              yield from original_oneof(validator,variants,instance,schema)
+
+          extended=extend(original_for({"$schema":"https://json-schema.org/draft/2020-12/schema"}),{"oneOf":guard})
+
+          def patched_for(schema):
+              cls=original_for(schema)
+              if isinstance(schema,dict) and schema.get("$id")=="argument_registry.schema.json":
+                  return extended
+              return cls
+
+          for arguments in (40,300,680):
+              with tempfile.TemporaryDirectory(prefix="wikidebia-registry-oneof-guard-") as name:
+                  folder=Path(name)
+                  source=make_synthetic_extraction(folder/"source",arguments=arguments,payload_bytes=1024)
+                  corpus=folder/"corpus"
+                  build_corpus(source,corpus,debate_id="benchmark_pretranslation",short_code="BENCH",scope_summary=None,overwrite=False)
+                  original_times=[]
+                  trial_times=[]
+                  for round_no in range(5):
+                      variants=("trial","original") if round_no%2==0 else ("original","trial")
+                      for variant in variants:
+                          start=time.perf_counter()
+                          if variant=="trial":
+                              with patch.object(sv,"_inline_attested_common_references",inline_and_mark), patch.object(sv,"validator_for",patched_for):
+                                  report_trial=validate_package(corpus,scopes=["schema"]).to_dict()
+                              trial_times.append(time.perf_counter()-start)
+                          else:
+                              report_base=validate_package(corpus,scopes=["schema"]).to_dict()
+                              original_times.append(time.perf_counter()-start)
+                      if report_base!=report_trial:
+                          raise AssertionError("Fast keyword dispatch changed an unmodified report")
+                      if report_base["summary"]["errors"]:
+                          raise AssertionError("Unexpected invalid synthetic corpus")
+                  print("WIKIDEBIA_ONEOF_FASTPOSITIVE "+json.dumps({
+                      "arguments":arguments,"eligible_schemas":sorted(set(count_holder)),
+                      "before_s":round(statistics.median(original_times),6),
+                      "after_s":round(statistics.median(trial_times),6),
+                      "before_samples":[round(x,6) for x in original_times],
+                      "after_samples":[round(x,6) for x in trial_times],
+                      "report_equal":True,
+                  }),flush=True)
+                  if arguments!=40:
+                      continue
+                  registry=corpus/"data/registre_debat.json"
+                  saved=registry.read_text(encoding="utf-8")
+                  mutations=[
+                      ("node id",lambda o:o["graph"]["nodes"][0].__setitem__("id","bad")),
+                      ("rubriques",lambda o:o["graph"]["nodes"][0]["fr"].__setitem__("rubriques",[])),
+                      ("title",lambda o:o["graph"]["nodes"][0]["fr"].__setitem__("canonical_title","")),
+                      ("en title int",lambda o:o["graph"]["nodes"][0]["en"].__setitem__("canonical_title",77)),
+                      ("en title blank",lambda o:o["graph"]["nodes"][0]["en"].__setitem__("canonical_title","")),
+                      ("generation",lambda o:o["graph"]["nodes"][0]["pages"]["fr"]["generation"].__setitem__("status","validated")),
+                      ("wiki",lambda o:o["graph"]["nodes"][0]["pages"]["fr"]["wiki"].__setitem__("check_status","created")),
+                      ("interlanguage",lambda o:o["graph"]["nodes"][0]["pages"]["fr"]["interlanguage"].__setitem__("status","verified")),
+                      ("timestamp",lambda o:o["graph"]["nodes"][0]["pages"]["fr"]["generation"].__setitem__("created_at",12)),
+                      ("bad sha",lambda o:o["graph"]["nodes"][0]["pages"]["fr"]["file"].__setitem__("sha256","abc")),
+                      ("unknown",lambda o:o["graph"]["nodes"][0].__setitem__("unknown",True)),
+                      ("occurrence",lambda o:o["graph"]["occurrences"][0].__setitem__("edge_id","foo")),
+                  ]
+                  for name,fn in mutations:
+                      obj=json.loads(saved)
+                      fn(obj)
+                      registry.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+                      base=validate_package(corpus,scopes=["schema"]).to_dict()
+                      with patch.object(sv,"_inline_attested_common_references",inline_and_mark),patch.object(sv,"validator_for",patched_for):
+                          faster=validate_package(corpus,scopes=["schema"]).to_dict()
+                      if not base["summary"]["errors"] or base!=faster:
+                          raise AssertionError("Invalid findings changed: "+name)
+                  print("WIKIDEBIA_ONEOF_FASTPOSITIVE_INVALID "+json.dumps({
+                      "cases":len(mutations),"reports_equal":True
+                  }),flush=True)
+          PY
