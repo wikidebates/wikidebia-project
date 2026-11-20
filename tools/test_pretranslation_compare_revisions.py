@@ -164,11 +164,15 @@ def test_rotated_runs_keep_exact_contracts_and_disclose_no_titles(tmp_path: Path
         )
     monkeypatch.setattr(compare, "_resolve_revision", fake_resolve)
     monkeypatch.setattr(compare, "_materialize_revision", fake_archive)
+    monkeypatch.setattr(compare, "_fingerprint_built_corpus", lambda tree, snap, python:
+                        ("c" * 64, {"manifest.json": "e" * 40}))
     monkeypatch.setattr(compare, "_run_revision", fake_run)
     result = compare.compare_revisions(project, source, iterations=3)
     assert stages == ["candidate", "baseline", "baseline", "candidate", "candidate", "baseline"]
     assert result["scenarios"]["cold_build_validate_receipt"]["change"]["elapsed_reduction_percent"] == 48.0
     assert result["quality_controls"]["identical_source_manifest_and_build_contract"]
+    assert result["quality_controls"]["identical_built_file_sha256"]
+    assert result["identical_built_file_count"] == 1
     assert result["iterations_per_revision"] == 3
     assert all(secret not in json.dumps(result) for secret in ("requested_title", "source_path", "dummy-secret"))
     unsigned = dict(result)
@@ -183,6 +187,8 @@ def test_contract_changed_between_passes_rejects_entire_comparison(tmp_path: Pat
         (target / "kit/scripts").mkdir(parents=True)
         (target / compare.BENCHMARK_FILE).write_text("same benchmark", encoding="utf-8")
     monkeypatch.setattr(compare, "_materialize_revision", fake_archive)
+    monkeypatch.setattr(compare, "_fingerprint_built_corpus", lambda tree, snap, python:
+                        ("c" * 64, {"manifest.json": "e" * 40}))
     def fake_run(tree, snapshot, python):
         nonlocal count
         count += 1
@@ -191,6 +197,42 @@ def test_contract_changed_between_passes_rejects_entire_comparison(tmp_path: Pat
     monkeypatch.setattr(compare, "_run_revision", fake_run)
     with pytest.raises(compare.RevisionComparisonError, match="changé"):
         compare.compare_revisions(project, source, iterations=3)
+
+
+def test_changed_corpus_files_abort_before_benchmark(tmp_path: Path, monkeypatch):
+    project, source = _mock_snapshot(tmp_path)
+    monkeypatch.setattr(compare, "_resolve_revision", lambda repo, rev: "a" * 40)
+    def fake_archive(repo, sha, target):
+        (target / "kit/scripts").mkdir(parents=True)
+        (target / compare.BENCHMARK_FILE).write_text("same benchmark", encoding="utf-8")
+    monkeypatch.setattr(compare, "_materialize_revision", fake_archive)
+    monkeypatch.setattr(
+        compare, "_fingerprint_built_corpus",
+        lambda tree, snap, python: (
+            "c" * 64,
+            {"manifest.json": "1" * 40 if tree.name == "baseline" else "2" * 40},
+        ),
+    )
+    def no_benchmark(*args, **kwargs):
+        raise AssertionError("The benchmark must never run after built-file parity fails")
+    monkeypatch.setattr(compare, "_run_revision", no_benchmark)
+    with pytest.raises(compare.RevisionComparisonError, match="fichiers construits"):
+        compare.compare_revisions(project, source, iterations=3)
+
+
+def test_untrusted_fingerprint_report_is_not_accepted(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr(
+        compare.subprocess, "run",
+        lambda *args, **kwargs: SimpleNamespace(
+            returncode=0, stdout=json.dumps({
+                "status": "created",
+                "build_contract_sha256": "c" * 64,
+                "files": {"unsafe": "non-sha256"},
+            }),
+        ),
+    )
+    with pytest.raises(compare.RevisionComparisonError, match="Preuve SHA-256"):
+        compare._fingerprint_built_corpus(tmp_path, tmp_path, Path("/usr/bin/python3"))
 
 
 @pytest.mark.parametrize("iterations", [0, 1, 2, 21])
@@ -224,6 +266,8 @@ def test_real_git_archive_and_frozen_synthetic_snapshot_integration(tmp_path: Pa
     )
     assert result["quality_controls"]["signed_individual_reports_verified"]
     assert result["quality_controls"]["identical_source_manifest_and_build_contract"]
+    assert result["quality_controls"]["identical_built_file_sha256"]
+    assert result["identical_built_file_count"] > 0
     assert result["argument_count"] == 4
     assert all(len(result["scenarios"][key]["baseline"]["samples_seconds"]) == 3 for key in compare.SCENARIOS)
     after = {
