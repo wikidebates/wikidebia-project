@@ -155,7 +155,30 @@ def _timed_validation(
             try:
                 return func(*args, **kwargs)
             finally:
-                measures[name].append(time.perf_counter() - started)
+                elapsed = time.perf_counter() - started
+                measures[name].append(elapsed)
+                if name == "method:SchemaStore.validate":
+                    # Schema names come from a fixed validator schema registry,
+                    # not the user's MediaWiki text or page titles.
+                    schema = args[2] if len(args) > 2 else kwargs.get("schema_name")
+                    allowed = set(schema_mod.SCHEMA_BY_PATH.values()) | {
+                        "keyword_vocabulary.schema.json",
+                        "summary_style_review.schema.json",
+                        "manual_remote_adoptions.schema.json",
+                        "argument_name_assignments.schema.json",
+                        "argument_name_discovery_review.schema.json",
+                        "documentary_resource_registry.schema.json",
+                        "semantic_convergence_review.schema.json",
+                        "page_manifest.schema.json",
+                        "batch_manifest.schema.json",
+                        "handoff.schema.json",
+                        "translation_source_preservation.schema.json",
+                        "archive_receipt.schema.json",
+                        "operation_log_entry.schema.json",
+                        "historical_content_lock.schema.json",
+                    }
+                    label = schema if schema in allowed else "other"
+                    measures["schema:" + label].append(elapsed)
         return measured
 
     with contextlib.ExitStack() as stack:
