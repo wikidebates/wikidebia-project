@@ -1,0 +1,179 @@
+name: Temporary registry schema ref benchmark
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  ref-probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Compare experimental in-process inline refs against original JSON Schema engine
+        env:
+          PYTHONPATH: validator/src:kit/scripts
+        run: |
+          python - <<'PY'
+          import copy
+          import json
+          import statistics
+          import tempfile
+          import time
+          from pathlib import Path
+          from unittest.mock import patch
+          from jsonschema.validators import validator_for
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+          from wikidebia_corpus_init import build_corpus
+          from wikidebia_validator import schema_validation as sv
+          from wikidebia_validator.validator import validate_package
+
+          class UnsafeInline(Exception):
+              pass
+
+          def inline(node, defs, mode, stack=(), from_common=False):
+              if isinstance(node, list):
+                  return [inline(v, defs, mode, stack, from_common) for v in node]
+              if not isinstance(node, dict):
+                  return node
+              if set(node) == {"$ref"}:
+                  ref = node["$ref"]
+                  if isinstance(ref, str):
+                      prefix = "#/$defs/" if from_common else "common.schema.json#/$defs/"
+                      if ref.startswith(prefix):
+                          name = ref[len(prefix):]
+                          if "/" in name or name not in defs:
+                              raise UnsafeInline("unknown local/common ref " + ref)
+                          definition = defs[name]
+                          if mode == "leaf":
+                              def has_refs(v):
+                                  if isinstance(v, dict):
+                                      return any(k in ("$ref", "$dynamicRef", "$id", "$anchor", "$dynamicAnchor", "$schema") or has_refs(sub) for k, sub in v.items())
+                                  if isinstance(v, list):
+                                      return any(has_refs(sub) for sub in v)
+                                  return False
+                              if has_refs(definition):
+                                  if from_common:
+                                      raise UnsafeInline("unexpanded local reference")
+                                  return dict(node)
+                          if name in stack:
+                              raise UnsafeInline("cycle in common definitions")
+                          return inline(definition, defs, mode, stack+(name,), True)
+                      if from_common:
+                          raise UnsafeInline("unsupported common internal reference " + ref)
+                  return dict(node)
+              if from_common and any(k in node for k in ("$id", "$anchor", "$dynamicAnchor", "$dynamicRef", "$schema")):
+                  raise UnsafeInline("scope-changing common keyword")
+              return {k: inline(v, defs, mode, stack, from_common) for k,v in node.items()}
+
+          original = sv.SchemaStore.validate
+          store = sv.SchemaStore()
+          source = store.schemas["argument_registry.schema.json"]
+          common = store.schemas["common.schema.json"]
+          optimized = {}
+          for mode in ("leaf", "all"):
+              try:
+                  changed = inline(source, common["$defs"], mode)
+                  validator_for(changed).check_schema(changed)
+                  optimized[mode] = changed
+                  print("WIKIDEBIA_REF_SCHEMA " + json.dumps({"mode":mode,"bytes_before":len(json.dumps(source)), "bytes_after":len(json.dumps(changed))}))
+              except UnsafeInline as exc:
+                  print("WIKIDEBIA_REF_UNSAFE " + json.dumps({"mode": mode, "reason": str(exc)}))
+          if not optimized:
+              raise RuntimeError("No schema variant eligible for evaluation")
+
+          def run(root, mode):
+              if mode == "baseline":
+                  return validate_package(root, scopes=["schema"]).to_dict()
+              expanded = optimized[mode]
+              def validate(self, instance, schema_name, *, _validated_graph_fields=()):
+                  if schema_name == "argument_registry.schema.json" and schema_name not in self._compiled:
+                      orig = self.schemas[schema_name]
+                      if (self._attested_runtime
+                          and sv._schema_fingerprint(orig) == sv._ATTESTED_SCHEMA_SHA256[schema_name]
+                          and sv._schema_fingerprint(self.schemas["common.schema.json"]) == sv._ATTESTED_COMMON_SHA256):
+                          cls = validator_for(expanded)
+                          self._compiled[schema_name] = (
+                              sv._schema_fingerprint(orig),
+                              cls(expanded, registry=self.registry, format_checker=self.format_checker),
+                          )
+                  return original(self, instance, schema_name, _validated_graph_fields=_validated_graph_fields)
+              with patch.object(sv.SchemaStore,"validate",validate):
+                  return validate_package(root, scopes=["schema"]).to_dict()
+
+          def scenario(registry, code):
+              data=copy.deepcopy(registry)
+              nodes=data["graph"]["nodes"]
+              if code=="valid":
+                  pass
+              elif code=="invalid_node_id":
+                  nodes[0]["id"] = 1
+              elif code=="invalid_rubrics":
+                  nodes[0]["fr"]["rubriques"] = ["Science"]*5
+              elif code=="invalid_keywords":
+                  nodes[0]["fr"]["keywords"] = ["same", "same"]
+              elif code=="invalid_french_title":
+                  nodes[0]["fr"]["canonical_title"] = " "
+              elif code=="invalid_english_state":
+                  nodes[0]["en"]["title_status"] = "locked"
+              elif code=="invalid_lifecycle":
+                  data["graph"]["lifecycle"]["status"] = "locked"
+              elif code=="invalid_occurrence":
+                  data["graph"]["occurrences"][0]["node_id"] = None
+              elif code=="invalid_edge":
+                  data["graph"]["edges"][0]["parent_node_id"] = None
+              elif code=="invalid_fr_page":
+                  nodes[0]["pages"]["fr"]["wiki"]["remote_revision_id"] = True
+              elif code=="invalid_extra":
+                  nodes[0]["fr"]["unexpected"] = "outside"
+              elif code=="missing_node":
+                  del nodes[0]["status"]
+              else:
+                  raise RuntimeError(code)
+              return data
+
+          for arguments in (40,120,300):
+              with tempfile.TemporaryDirectory(prefix="wikidebia-ref-probe-") as tmp:
+                  root=Path(tmp)
+                  source=make_synthetic_extraction(root/"source",arguments=arguments,payload_bytes=1024)
+                  built=root/"built"
+                  build_corpus(source,built,debate_id="benchmark_pretranslation",short_code="BENCH",scope_summary=None,overwrite=False)
+                  samples = {name: [] for name in ("baseline", *optimized)}
+                  baseline_report = None
+                  modes = tuple(samples)
+                  for trial in range(5):
+                      for mode in modes[trial%len(modes):]+modes[:trial%len(modes)]:
+                          tick=time.perf_counter()
+                          report=run(built,mode)
+                          samples[mode].append(time.perf_counter()-tick)
+                          if baseline_report is None:
+                              baseline_report=report
+                          elif baseline_report != report:
+                              raise RuntimeError("Nonidentical valid report with " + mode)
+                  tests=(
+                      "valid","invalid_node_id","invalid_rubrics","invalid_keywords",
+                      "invalid_french_title","invalid_english_state","invalid_lifecycle",
+                      "invalid_occurrence","invalid_edge","invalid_fr_page",
+                      "invalid_extra","missing_node",
+                  )
+                  registry_path=built/"data/registre_debat.json"
+                  raw=registry_path.read_bytes()
+                  registry=json.loads(raw)
+                  for code in tests:
+                      registry_path.write_text(json.dumps(scenario(registry,code),ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+                      ref_report=run(built, "baseline")
+                      for mode in optimized:
+                          test_report=run(built,mode)
+                          if test_report != ref_report:
+                              raise RuntimeError("Nonidentical report for "+str((arguments,code,mode)))
+                  registry_path.write_bytes(raw)
+                  medians={k:round(statistics.median(v),6) for k,v in samples.items()}
+                  print("WIKIDEBIA_REF_BENCH "+json.dumps({
+                    "arguments":arguments,"medians_seconds":medians,
+                    "samples_seconds":{k:[round(v,6) for v in values] for k,values in samples.items()},
+                    "reports_identical":True,"negative_scenarios":len(tests)-1,
+                  }))
+          PY
