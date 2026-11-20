@@ -1,0 +1,136 @@
+name: Temporary attested registry primitive-type experiment
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  profile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Compare primitive type shortcuts against unchanged jsonschema
+        env:
+          PYTHONPATH: kit/scripts:validator/src
+        run: |
+          python - <<'PY'
+          import json
+          import statistics
+          import tempfile
+          import time
+          from pathlib import Path
+          from unittest.mock import patch
+
+          from jsonschema.validators import extend
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+          from wikidebia_corpus_init import build_corpus
+          from wikidebia_validator.validator import validate_package
+          import wikidebia_validator.schema_validation as sv
+
+          SCOPES=["schema","coherence","graph","files","workflow"]
+          original_conditional=sv._guarded_registry_status_if
+          counters={"fast":0,"fallback":0}
+          def extend_types(cls,expanded):
+              guarded=original_conditional(cls,expanded)
+              if guarded is cls:
+                  return cls
+              previous=guarded.VALIDATORS["type"]
+              builtins={
+                  "string":str,
+                  "object":dict,
+                  "array":list,
+                  "boolean":bool,
+                  "null":type(None),
+                  "integer":int,
+              }
+              def fast_type(validator,types,instance,schema):
+                  typ=builtins.get(types) if isinstance(types,str) else None
+                  if (
+                      typ is not None
+                      and isinstance(schema,dict)
+                      and schema.get("type")==types
+                      and validator.TYPE_CHECKER is guarded.TYPE_CHECKER
+                      and type(instance) is typ
+                  ):
+                      counters["fast"]+=1
+                      return
+                  counters["fallback"]+=1
+                  yield from previous(validator,types,instance,schema)
+              return extend(guarded,validators={"type":fast_type})
+
+          for count in (40,300,680):
+              with tempfile.TemporaryDirectory(prefix="wikidebia-attested-type-experiment-") as dirname:
+                  folder=Path(dirname)
+                  source=make_synthetic_extraction(folder/"source",arguments=count,payload_bytes=1024)
+                  output=folder/"build"
+                  build_corpus(source,output,debate_id="benchmark_pretranslation",short_code="BENCH",scope_summary=None,overwrite=False)
+                  samples={"original":[],"trial":[]}
+                  for round_no in range(7):
+                      reports={}
+                      for version in (("trial","original") if round_no%2==0 else ("original","trial")):
+                          began=time.perf_counter()
+                          if version=="trial":
+                              with patch.object(sv,"_guarded_registry_status_if",extend_types):
+                                  reports[version]=validate_package(output,scopes=SCOPES).to_dict()
+                          else:
+                              reports[version]=validate_package(output,scopes=SCOPES).to_dict()
+                          samples[version].append(time.perf_counter()-began)
+                      if reports["original"]!=reports["trial"]:
+                          raise AssertionError("Full valid report differs")
+                      if reports["original"]["summary"]["errors"]:
+                          raise AssertionError("Unexpectedly invalid synthetic package")
+                  old=statistics.median(samples["original"])
+                  new=statistics.median(samples["trial"])
+                  print("WIKIDEBIA_ATT_TYPE_VALID "+json.dumps({
+                      "arguments":count,
+                      "before_median_seconds":round(old,6),
+                      "after_median_seconds":round(new,6),
+                      "gain_percent":round((old-new)/old*100,2),
+                      "samples_original":[round(v,6) for v in samples["original"]],
+                      "samples_trial":[round(v,6) for v in samples["trial"]],
+                      "primitive_positive_calls_accumulated":counters["fast"],
+                      "native_fallback_calls_accumulated":counters["fallback"],
+                      "full_reports_identical":True,
+                  },sort_keys=True),flush=True)
+
+                  if count != 40:
+                      continue
+                  reg=output/"data/registre_debat.json"
+                  saved=reg.read_text(encoding="utf-8")
+                  cases=[
+                      ("node_id_bool",lambda x:x["graph"]["nodes"][0].__setitem__("id",True)),
+                      ("node_id_int",lambda x:x["graph"]["nodes"][0].__setitem__("id",1)),
+                      ("node_fr_object_invalid",lambda x:x["graph"]["nodes"][0].__setitem__("fr",[])),
+                      ("node_en_object_null",lambda x:x["graph"]["nodes"][0].__setitem__("en",None)),
+                      ("nodes_list_invalid",lambda x:x["graph"].__setitem__("nodes",{})),
+                      ("edges_list_invalid",lambda x:x["graph"].__setitem__("edges","unexpected")),
+                      ("node_status_invalid",lambda x:x["graph"]["nodes"][0].__setitem__("status",47)),
+                      ("fr_rubrics_dict",lambda x:x["graph"]["nodes"][0]["fr"].__setitem__("rubriques",{})),
+                      ("fr_rubrics_bool",lambda x:x["graph"]["nodes"][0]["fr"].__setitem__("rubriques",True)),
+                      ("fr_title_missing",lambda x:x["graph"]["nodes"][0]["fr"].pop("canonical_title",None)),
+                      ("en_canonical_title_wrong",lambda x:x["graph"]["nodes"][0]["en"].__setitem__("canonical_title",False)),
+                      ("file_status_missing",lambda x:x["graph"]["nodes"][0]["pages"]["fr"]["file"].pop("status",None)),
+                      ("wiki_checked_at_number",lambda x:x["graph"]["nodes"][0]["pages"]["fr"]["wiki"].__setitem__("checked_at",7)),
+                      ("occurrence_depth_true",lambda x:x["graph"]["occurrences"][0].__setitem__("depth",True)),
+                      ("occurrence_depth_float",lambda x:x["graph"]["occurrences"][0].__setitem__("depth",1.0)),
+                      ("generation_status_missing",lambda x:x["graph"]["nodes"][0]["pages"]["fr"]["generation"].pop("status",None)),
+                  ]
+                  for name, mutate in cases:
+                      data=json.loads(saved)
+                      mutate(data)
+                      reg.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+                      original=validate_package(output,scopes=SCOPES).to_dict()
+                      with patch.object(sv,"_guarded_registry_status_if",extend_types):
+                          trial=validate_package(output,scopes=SCOPES).to_dict()
+                      if original!=trial:
+                          raise AssertionError("Invalid findings changed: "+name)
+                  reg.write_text(saved,encoding="utf-8")
+                  print("WIKIDEBIA_ATT_TYPE_INVALID "+json.dumps({
+                      "cases":len(cases),"full_reports_identical":True,
+                  },sort_keys=True),flush=True)
+          PY
