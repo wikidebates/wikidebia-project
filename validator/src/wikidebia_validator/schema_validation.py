@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from jsonschema import FormatChecker
-from jsonschema.validators import validator_for
+from jsonschema.validators import extend, validator_for
 from referencing import Registry, Resource
 
 from .package import PackageContext
@@ -134,6 +134,89 @@ def _inline_attested_common_references(schema: Any, common: Any) -> Any:
     return expand(schema)
 
 
+# The exact, already-attested expanded registry contains 23 disjoint
+# nullable-string oneOfs. Only the positive path is shortened: every
+# unrecognized or invalid value still invokes jsonschema's own keyword
+# implementation, preserving its error objects and nested contexts.
+_ATTESTED_NULLABLE_STRING_ONEOF_COUNT = 23
+
+
+def _guarded_registry_nullable_oneof(cls: Any, expanded: Any) -> Any:
+    """Optimize provably exclusive null/string choices without rewriting schemas.
+
+    This helper is called ONLY after the library versions, the *source*
+    registry/common fingerprints, and the safe common-$ref expansion have all
+    been attested. For all other schemas or runtimes the caller uses cls.
+    """
+    eligible: dict[int, int] = {}
+
+    def scan(value: Any) -> None:
+        if isinstance(value, list):
+            for item in value:
+                scan(item)
+        elif isinstance(value, dict):
+            alternatives = value.get("oneOf")
+            if (
+                set(value) == {"oneOf"}
+                and isinstance(alternatives, list)
+                and len(alternatives) == 2
+            ):
+                for typed_index in (0, 1):
+                    typed = alternatives[typed_index]
+                    other = alternatives[1 - typed_index]
+                    if (
+                        isinstance(typed, dict)
+                        and typed.get("type") == "string"
+                        and other == {"type": "null"}
+                    ):
+                        eligible[id(value)] = typed_index
+                        break
+            for nested in value.values():
+                scan(nested)
+
+    scan(expanded)
+    if len(eligible) != _ATTESTED_NULLABLE_STRING_ONEOF_COUNT:
+        # Even under content attestation, unexpected expansion shape is a
+        # reason to keep the complete library validator rather than guess.
+        return cls
+    original_oneof = cls.VALIDATORS.get("oneOf")
+    if original_oneof is None:
+        return cls
+
+    def guarded_oneof(
+        validator: Any, alternatives: Any, instance: Any, schema: Any,
+    ) -> Any:
+        typed_index = eligible.get(id(schema))
+        if typed_index is not None and (
+            isinstance(schema, dict)
+            and len(schema) == 1
+            and schema.get("oneOf") is alternatives
+            and isinstance(alternatives, list)
+            and len(alternatives) == 2
+            and alternatives[1 - typed_index] == {"type": "null"}
+            and isinstance(alternatives[typed_index], dict)
+            and alternatives[typed_index].get("type") == "string"
+        ):
+            if instance is None:
+                # Exactly one branch accepts null; no second validation is
+                # needed, and the original oneOf would yield no errors.
+                return
+            if isinstance(instance, str) and not any(
+                validator.descend(
+                    instance, alternatives[typed_index],
+                    schema_path=typed_index,
+                )
+            ):
+                # The other branch accepts only null, so two successful
+                # alternatives are mathematically impossible.
+                return
+        # Invalid values, altered schemas and all unexpected instance types:
+        # delegate to the original function for identical diagnostics.
+        yield from original_oneof(validator, alternatives, instance, schema)
+
+    return extend(cls, validators={"oneOf": guarded_oneof})
+
+
 class SchemaStore:
     def __init__(self) -> None:
         schema_dir = files("wikidebia_validator").joinpath("schemas")
@@ -207,6 +290,7 @@ class SchemaStore:
                         validator_schema = schema
                     else:
                         self._inlined_registry_common_sha256 = _ATTESTED_COMMON_SHA256
+                        cls = _guarded_registry_nullable_oneof(cls, validator_schema)
             validator = cls(
                 validator_schema, registry=self.registry, format_checker=self.format_checker,
             )
