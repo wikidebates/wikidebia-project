@@ -202,4 +202,4 @@ def test_zero_split_returns_identical_string_without_any_character_scans(delimit
 
     text = NoIndexText("{{{not closed [[strange ]] |= " + "z" * 30000)
     assert graph._split_top_level(text, delimiter, maxsplit=0) == [text]
-    assert _legacy_split_top_level(text, delimiter, maxsplit=0) == [text]
+    assert _legacy_split_top_level(str(text), delimiter, maxsplit=0) == [str(text)]
