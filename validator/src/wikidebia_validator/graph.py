@@ -171,14 +171,40 @@ def structural_sha256(registry: dict[str, Any]) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
-def _canonical_referent_manually_verified(ctx: PackageContext, node_id: str, language: str) -> bool:
-    controls=((ctx.manifest() or {}).get('editorial_controls') or {})
-    rel=controls.get('individual_review_path')
-    if not isinstance(rel,str) or not ctx.exists(rel): return False
-    data=ctx.load_json(rel)
-    if not isinstance(data,dict): return False
-    row=next((e for e in data.get('entries') or [] if isinstance(e,dict) and str(e.get('id'))==str(node_id)),None)
-    return isinstance(row,dict) and row.get(f'canonical_referents_explicit_{language}') is True
+def _canonical_referent_manually_verified(
+    ctx: PackageContext, node_id: str, language: str, *,
+    _entry_index: dict[str, Any] | None = None,
+) -> bool:
+    controls = ((ctx.manifest() or {}).get("editorial_controls") or {})
+    rel = controls.get("individual_review_path")
+    if not isinstance(rel, str) or not ctx.exists(rel):
+        return False
+    data = ctx.load_json(rel)
+    if not isinstance(data, dict):
+        return False
+    entries = data.get("entries") or []
+    if _entry_index is not None and isinstance(entries, list) and len(entries) >= 32:
+        # The JSON document is cached by PackageContext for this invocation.
+        # Retain the *first* matching row, even for duplicated IDs. Rebuild if
+        # the cached document/list is replaced or its length changes.
+        marker = (rel, id(data), id(entries), len(entries))
+        if _entry_index.get("marker") != marker:
+            by_id: dict[str, dict[str, Any]] = {}
+            for entry in entries:
+                if isinstance(entry, dict):
+                    by_id.setdefault(str(entry.get("id")), entry)
+            _entry_index.clear()
+            _entry_index.update({"marker": marker, "rows": by_id})
+        row = _entry_index["rows"].get(str(node_id))
+    else:
+        row = next(
+            (
+                entry for entry in entries
+                if isinstance(entry, dict) and str(entry.get("id")) == str(node_id)
+            ),
+            None,
+        )
+    return isinstance(row, dict) and row.get(f"canonical_referents_explicit_{language}") is True
 
 
 def _locked_preexisting_displayed_title(
@@ -269,6 +295,9 @@ def validate_graph(ctx: PackageContext) -> None:
         "fr": ctx.exists("data/fr_page_metadata_lock.json"),
         "en": ctx.exists("data/en_page_metadata_lock.json"),
     }
+    # One index for this validation only; every title still rechecks the
+    # review path and loads the same PackageContext-validated JSON document.
+    referent_entry_index: dict[str, Any] = {}
     for lang in ("fr", "en"):
         seen: dict[str, str] = {}
         title_reporter = ctx.report.error if title_policy_locked[lang] else ctx.report.warning
@@ -307,7 +336,9 @@ def validate_graph(ctx: PackageContext) -> None:
                 "issues": contextual,
                 "deferred_until_metadata_lock": not title_policy_locked[lang],
             }
-            manual_referent_ok = _canonical_referent_manually_verified(ctx, str(node.get('id')), lang)
+            manual_referent_ok = _canonical_referent_manually_verified(
+                ctx, str(node.get("id")), lang, _entry_index=referent_entry_index,
+            )
             if ("implicit_referent" in contextual or "initial_contextual_referent" in contextual) and not manual_referent_ok:
                 title_reporter(
                     "WDV-EDT-016",
