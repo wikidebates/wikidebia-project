@@ -1,0 +1,116 @@
+name: Temporary corpus-build hotpath profile
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  profile:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Profile only offline corpus construction (not wiki, not translation)
+        env:
+          PYTHONPATH: kit/scripts
+        run: |
+          python - <<'PY'
+          import cProfile
+          import hashlib
+          import json
+          import pstats
+          import statistics
+          import tempfile
+          import time
+          from contextlib import ExitStack
+          from functools import wraps
+          from pathlib import Path
+          from unittest.mock import patch
+          import wikidebia_corpus_init as ci
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+
+          FUNCTIONS = (
+              "resolve_extraction_input", "verify_extraction",
+              "make_build_contract", "source_fingerprint",
+              "ordered_titles", "copy_import_pages", "extract_page_metadata",
+              "build_graph_objects", "compute_derived", "write_json",
+              "sha256_file", "write_build_contract_record",
+          )
+
+          for arguments in (40, 300, 878):
+              with tempfile.TemporaryDirectory(prefix="wikidebia-build-hotpath-") as tmp:
+                  root=Path(tmp)
+                  source=make_synthetic_extraction(root/"source", arguments=arguments, payload_bytes=1024)
+                  times=[]
+                  observed={name: [] for name in FUNCTIONS}
+                  contracts=set()
+                  for iteration in range(3):
+                      output=root/f"build-{iteration}"
+                      with ExitStack() as stack:
+                          for name in FUNCTIONS:
+                              original=getattr(ci,name)
+                              def wrapper(*args, _original=original, _name=name, **kwargs):
+                                  tick=time.perf_counter()
+                                  try:
+                                      return _original(*args, **kwargs)
+                                  finally:
+                                      observed[_name].append(time.perf_counter()-tick)
+                              stack.enter_context(patch.object(ci,name,wrapper))
+                          tick=time.perf_counter()
+                          result=ci.build_corpus(
+                              source, output, debate_id="benchmark_pretranslation",
+                              short_code="BENCH", scope_summary=None, overwrite=False,
+                          )
+                          times.append(time.perf_counter()-tick)
+                      if result["status"]!="created":
+                          raise RuntimeError("Unexpected build state")
+                      contracts.add(result["build_contract_sha256"])
+                  if len(contracts)!=1:
+                      raise RuntimeError("Build contracts changed during profiling")
+                  measurements={
+                      name: {
+                          "calls": len(values),
+                          "total_seconds": round(sum(values), 6),
+                          "median_seconds_per_call": round(statistics.median(values), 6)
+                          if values else 0,
+                      }
+                      for name, values in observed.items()
+                  }
+                  print("WIKIDEBIA_BUILD_STAGE_PROFILE "+json.dumps({
+                      "arguments": arguments,
+                      "samples_seconds": [round(x,6) for x in times],
+                      "median_seconds": round(statistics.median(times),6),
+                      "instrumented_function_calls": measurements,
+                      "contract_sha256": next(iter(contracts)),
+                  }),flush=True)
+
+                  profiler=cProfile.Profile()
+                  profiler.enable()
+                  result=ci.build_corpus(
+                      source, root/"profiled",
+                      debate_id="benchmark_pretranslation", short_code="BENCH",
+                      scope_summary=None, overwrite=False,
+                  )
+                  profiler.disable()
+                  if result["build_contract_sha256"] not in contracts:
+                      raise RuntimeError("Profiler changed build contract")
+                  pstats_data=pstats.Stats(profiler)
+                  top=[]
+                  for (path,line,fn),(_primitive,calls,own,cumulative,_callers) in pstats_data.stats.items():
+                      if cumulative>0.0005:
+                          top.append({
+                              "source":f"{Path(path).name}:{line}:{fn}",
+                              "calls":calls,
+                              "own_seconds":round(own,6),
+                              "cumulative_seconds":round(cumulative,6),
+                          })
+                  top.sort(key=lambda item:item["cumulative_seconds"],reverse=True)
+                  print("WIKIDEBIA_BUILD_CPROFILE "+json.dumps({
+                      "arguments":arguments,
+                      "top_cumulative":top[:42],
+                      "profiled_contract_identical":True,
+                  }),flush=True)
+          PY
