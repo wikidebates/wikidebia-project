@@ -363,6 +363,119 @@ def _guarded_registry_primitive_type(cls: Any, expanded: Any) -> Any:
     return extend(cls, validators={"type": guarded_type})
 
 
+# Exactly 49 clauses in the SHA-256-attested expanded argument registry
+# use "if" with a *single string-valued status const/enum*, have a "then",
+# and have NO "else". If a present built-in string differs from that test,
+# the whole clause is guaranteed to accept the instance, without invoking
+# jsonschema.descend. The 50th allOf clause tests numeric depth and has an
+# else branch; it must always run through the native engine.
+_ATTESTED_STATUS_ALLOF_FALSE_BRANCH_COUNT = 49
+
+
+def _guarded_registry_false_status_allof(cls: Any, expanded: Any) -> Any:
+    """Avoid proven no-op allOf clauses without skipping failing diagnostics.
+
+    Only compiled, content-attested registry nodes are eligible. A clause is
+    skipped only when its actual current 'if' shape remains identical to the
+    compiled proof, its own dict has exactly {'if', 'then'}, and the built-in
+    string status makes the condition false. Every other clause is descended
+    through jsonschema as before, preserving schema_path and nested errors.
+    """
+    eligible: dict[int, tuple[str, str, str | tuple[str, ...]]] = {}
+
+    def scan(value: Any) -> None:
+        if isinstance(value, list):
+            for item in value:
+                scan(item)
+        elif isinstance(value, dict):
+            clauses = value.get("allOf")
+            if type(clauses) is list:
+                for clause in clauses:
+                    if type(clause) is not dict or set(clause) != {"if", "then"}:
+                        continue
+                    condition = clause["if"]
+                    if type(condition) is not dict or set(condition) != {"properties"}:
+                        continue
+                    properties = condition["properties"]
+                    if type(properties) is not dict or len(properties) != 1:
+                        continue
+                    field, test = next(iter(properties.items()))
+                    if field not in _STATUS_IF_FIELDS or type(test) is not dict:
+                        continue
+                    if set(test) == {"const"} and type(test["const"]) is str:
+                        eligible[id(clause)] = (field, "const", test["const"])
+                    elif (
+                        set(test) == {"enum"}
+                        and type(test["enum"]) is list
+                        and bool(test["enum"])
+                        and all(type(item) is str for item in test["enum"])
+                    ):
+                        eligible[id(clause)] = (field, "enum", tuple(test["enum"]))
+            for nested in value.values():
+                scan(nested)
+
+    scan(expanded)
+    native_allof = cls.VALIDATORS.get("allOf")
+    # A custom keyword implementation could change the meaning of the
+    # condition. A subclass or a modified runtime handler is never shortened.
+    condition_keywords = ("if", "properties", "const", "enum")
+    original_handlers = {
+        key: cls.VALIDATORS.get(key) for key in condition_keywords
+    }
+    if (
+        len(eligible) != _ATTESTED_STATUS_ALLOF_FALSE_BRANCH_COUNT
+        or native_allof is None
+        or any(handler is None for handler in original_handlers.values())
+    ):
+        return cls
+
+    def guarded_allof(
+        validator: Any, clauses: Any, instance: Any, schema: Any,
+    ) -> Any:
+        if (
+            type(validator) is guarded_cls
+            and type(instance) is dict
+            and type(schema) is dict
+            and type(clauses) is list
+            and schema.get("allOf") is clauses
+            and all(
+                validator.VALIDATORS.get(key) is handler
+                for key, handler in original_handlers.items()
+            )
+        ):
+            for index, clause in enumerate(clauses):
+                proof = eligible.get(id(clause))
+                if (
+                    proof is not None
+                    and type(clause) is dict
+                    and set(clause) == {"if", "then"}
+                ):
+                    field, kind, expected = proof
+                    test = (
+                        {"const": expected} if kind == "const"
+                        else {"enum": list(expected)}
+                    )
+                    if clause["if"] == {"properties": {field: test}}:
+                        value = instance.get(field)
+                        if type(value) is str:
+                            matches = (
+                                value == expected if kind == "const"
+                                else value in expected
+                            )
+                            if not matches:
+                                # With no "else" the false condition makes
+                                # the *entire* clause valid: no errors to emit.
+                                continue
+                yield from validator.descend(
+                    instance, clause, schema_path=index,
+                )
+            return
+        yield from native_allof(validator, clauses, instance, schema)
+
+    guarded_cls = extend(cls, validators={"allOf": guarded_allof})
+    return guarded_cls
+
+
 class SchemaStore:
     def __init__(self) -> None:
         schema_dir = files("wikidebia_validator").joinpath("schemas")
@@ -444,9 +557,15 @@ class SchemaStore:
                                 first_guard, validator_schema
                             )
                             if conditional_guard is not first_guard:
-                                cls = _guarded_registry_primitive_type(
+                                primitive_guard = _guarded_registry_primitive_type(
                                     conditional_guard, validator_schema
                                 )
+                                if primitive_guard is not conditional_guard:
+                                    cls = _guarded_registry_false_status_allof(
+                                        primitive_guard, validator_schema
+                                    )
+                                else:
+                                    cls = conditional_guard
                             else:
                                 cls = first_guard
             validator = cls(
