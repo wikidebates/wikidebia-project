@@ -189,3 +189,25 @@ jobs:
                       "safe_for_production": False
                   }))
           PY
+      - name: Derive exact validator release metadata without pushing from CI
+        env:
+          PYTHONPATH: validator/src
+        run: |
+          python -m pytest -q validator/tests --junitxml=/tmp/schema-validator-tests.xml
+          python - <<'PY'
+          import subprocess
+          import xml.etree.ElementTree as ET
+          root = ET.parse("/tmp/schema-validator-tests.xml").getroot()
+          count = int(root.get("tests")) - int(root.get("skipped", "0")) - int(root.get("failures", "0")) - int(root.get("errors", "0"))
+          print("WIKIDEBIA_NEW_VALIDATOR_TEST_COUNT", count, flush=True)
+          subprocess.run([
+              "python", "validator/scripts/refresh_package_metadata.py",
+              "--test-count", str(count), "--generated-date", "2026-11-20",
+          ], check=True)
+          print("WIKIDEBIA_BEGIN_META_DIFF", flush=True)
+          subprocess.run(["git", "diff", "--", "validator/docs/TEST_REPORT.txt",
+              "validator/docs/SELF_AUDIT_REPORT.txt",
+              "validator/PACKAGE_MANIFEST_SHA256.json",
+              "validator/PACKAGE_RECEIPT.json"], check=True)
+          print("WIKIDEBIA_END_META_DIFF", flush=True)
+          PY
