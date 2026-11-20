@@ -217,8 +217,10 @@ def test_custom_typechecker_is_never_bypassed_even_for_builtin_values():
         compiled.schema["properties"]["graph"]["properties"]["nodes"]
         ["items"]["properties"]["fr"]["properties"]["canonical_title"]
     )
+    # Reject strings in the custom checker rather than pretending integers
+    # are strings: minLength/regex must never be fed integers by the test.
     checker = type(compiled).TYPE_CHECKER.redefine(
-        "string", lambda _checker, instance: type(instance) is int,
+        "string", lambda _checker, instance: False,
     )
     custom_guard = extend(type(compiled), type_checker=checker)
     native = extend(validator_for(store.schemas[REGISTRY]), type_checker=checker)
