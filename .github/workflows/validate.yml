@@ -62,6 +62,8 @@ jobs:
       - if: steps.pr-validation.outputs.result != 'true'
         run: python -m pytest -q tools/test_pretranslation_compare_revisions.py --junitxml=/tmp/pretranslation-compare-tests.xml
       - if: steps.pr-validation.outputs.result != 'true'
+        run: python -m pytest -q tools/test_profile_validator_offline.py --junitxml=/tmp/validator-profile-tests.xml
+      - if: steps.pr-validation.outputs.result != 'true'
         run: python kit/scripts/refresh_package_metadata.py --junit-xml /tmp/kit-tests.xml --check
       - if: steps.pr-validation.outputs.result != 'true'
         run: python validator/scripts/self_audit.py
