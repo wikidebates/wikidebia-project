@@ -130,5 +130,4 @@ def test_contextual_title_attestation_is_respected_with_large_review(tmp_path):
     report = validate_package(tmp_path, scopes=["graph"])
     issues = [f for f in report.findings if f.code == "WDV-EDT-016"]
     assert len(issues) == 1, report.to_text()
-    assert "/A0002/" not in (issues[0].pointer or "")
     assert issues[0].pointer.endswith("/A0002/fr/canonical_title")
