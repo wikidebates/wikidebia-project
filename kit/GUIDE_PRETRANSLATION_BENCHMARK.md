@@ -51,6 +51,48 @@ Pour chaque scénario, le rapport fournit les échantillons, médiane, minimum e
 maximum en secondes. Il indique aussi le nombre et la taille des fichiers du
 fixture, les opérations évitées et l’empreinte commune du contrat.
 
+
+## Profilage facultatif des lectures et hachages
+
+Pour diagnostiquer les opérations *avant* la traduction, activer explicitement :
+
+```bash
+./wikidebia pretranslation-benchmark \
+  --snapshot .state/graph-extract/<extraction> \
+  --iterations 3 \
+  --profile-file-io \
+  --output .state/benchmarks/pretranslation-io.json
+```
+
+Sans `--profile-file-io`, l'outil garde les mêmes scénarios, mesures et
+rapports qu'auparavant. Avec l'option, le rapport signé contient
+`file_io_profile.counters` en plus des `stage_timings_seconds` déjà
+disponibles. Pour chaque **étape nommée et chaque scénario**, les métriques
+comportent leurs observations brutes, leur médiane, minimum et maximum :
+
+- `read_bytes_calls`, `read_bytes_total_bytes`,
+  `read_bytes_distinct_paths` et `read_bytes_repeated_calls` : appels
+  réussis à `Path.read_bytes`, volume exact des octets retournés, nombre
+  de chemins distincts et nombre de lectures répétées dans une étape ;
+- `read_text_calls` et `read_text_total_characters` : appels réussis à
+  `Path.read_text` et caractères Unicode reçus (**pas** des octets disque) ;
+- `kit_sha256_calls` et `kit_sha256_input_bytes` : appels réussis et
+  octets passés à `wikidebia_corpus_init.sha256_bytes`.
+
+**Portée :** l'instrumentation concerne seulement le processus Python
+principal, pendant les étapes instrumentées ; elle ne couvre pas les accès
+via `open()` brut, les projections mémoire ni le **sous-processus isolé du
+validateur**. Un compteur nul signifie *aucune opération observée par cette
+instrumentation*, et non *aucune lecture disque*. Les métriques ne
+constituent pas une mesure complète de l'I/O système ni des crédits Codex.
+
+Le profilage ajoute lui-même un petit coût. Il faut donc effectuer **une
+exécution séparée sans `--profile-file-io`** pour mesurer des durées
+non perturbées. La comparaison d'empreintes et toutes les relectures
+nécessaires pour déceler une modification de source entre vérification et
+copie restent inchangées. Le traçage ne journalise pas les contenus
+historiques ni les titres, et ne conserve aucun cache.
+
 ## Ce que le rapport ne mesure pas
 
 Les temps dépendent de la machine, du cache disque et de la charge du moment.
