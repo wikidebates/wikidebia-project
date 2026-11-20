@@ -208,21 +208,39 @@ def _canonical_referent_manually_verified(
 
 
 def _locked_preexisting_displayed_title(
-    ctx: PackageContext, node_id: str, language: str, value: Any
+    ctx: PackageContext, node_id: str, language: str, value: Any, *,
+    _entry_index: dict[str, Any] | None = None,
 ) -> bool:
     """Return whether the French metadata lock proves exact historical preservation."""
-    if language != "fr" or not ctx.exists("data/fr_page_metadata_lock.json"):
+    rel = "data/fr_page_metadata_lock.json"
+    if language != "fr" or not ctx.exists(rel):
         return False
-    lock = ctx.load_json("data/fr_page_metadata_lock.json")
+    lock = ctx.load_json(rel)
     if not isinstance(lock, dict) or lock.get("schema") != "wikidebia-fr-page-metadata-lock-1.0":
         return False
-    row = next(
-        (
-            entry for entry in lock.get("arguments") or []
-            if isinstance(entry, dict) and str(entry.get("entity_id")) == str(node_id)
-        ),
-        None,
-    )
+    arguments = lock.get("arguments") or []
+    if _entry_index is not None and isinstance(arguments, list) and len(arguments) >= 32:
+        # One index per graph-validation call. Preserve the original first
+        # matching row even if the source contains duplicate entity_ids.
+        # The lock's existence, schema and the exact title/decision checks
+        # are still performed for every candidate historical title.
+        marker = (id(lock), id(arguments), len(arguments))
+        if _entry_index.get("marker") != marker:
+            by_id: dict[str, dict[str, Any]] = {}
+            for entry in arguments:
+                if isinstance(entry, dict):
+                    by_id.setdefault(str(entry.get("entity_id")), entry)
+            _entry_index.clear()
+            _entry_index.update({"marker": marker, "rows": by_id})
+        row = _entry_index["rows"].get(str(node_id))
+    else:
+        row = next(
+            (
+                entry for entry in arguments
+                if isinstance(entry, dict) and str(entry.get("entity_id")) == str(node_id)
+            ),
+            None,
+        )
     return bool(
         row
         and row.get("page_origin") == "preexisting"
@@ -298,6 +316,7 @@ def validate_graph(ctx: PackageContext) -> None:
     # One index for this validation only; every title still rechecks the
     # review path and loads the same PackageContext-validated JSON document.
     referent_entry_index: dict[str, Any] = {}
+    historical_title_index: dict[str, Any] = {}
     for lang in ("fr", "en"):
         seen: dict[str, str] = {}
         title_reporter = ctx.report.error if title_policy_locked[lang] else ctx.report.warning
@@ -317,7 +336,8 @@ def validate_graph(ctx: PackageContext) -> None:
             for field_name, field_value in (("canonical_title", title), ("displayed_title", displayed_title)):
                 if field_value and (field_value.endswith(".") or any(ch in field_value for ch in "’‘ʼ＇")):
                     if field_name == "displayed_title" and _locked_preexisting_displayed_title(
-                        ctx, str(node.get("id")), lang, field_value
+                        ctx, str(node.get("id")), lang, field_value,
+                        _entry_index=historical_title_index,
                     ):
                         continue
                     title_reporter(
