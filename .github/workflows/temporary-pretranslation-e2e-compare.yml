@@ -1,0 +1,164 @@
+name: Temporary paired pretranslation end-to-end benchmark
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install pinned JSON Schema evaluator versions
+        run: |
+          python -m pip install -r validator/requirements-dev.txt
+          python -m pip install 'jsonschema==4.26.0' 'referencing==0.37.0'
+      - name: Compare three historical versions with the exact same offline benchmark
+        env:
+          PYTHONNOUSERSITE: '1'
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import pathlib
+          import statistics
+          import subprocess
+          import sys
+          import tempfile
+
+          REVISION = {
+              "pre_178": "065bb4af6c895a456d7a92e1c9615115f134d5d7",
+              "post_178": "2d8e9b540016e2335d1613b9cbe9df13644fa9e4",
+              "post_179": "ba366eb79b7dc2dc7c1cfe32a54508ed0feac20a",
+          }
+          SCENARIOS = (
+              "cold_build_validate_receipt",
+              "resume_after_build_before_receipt",
+              "resume_exact_verified_receipt",
+          )
+          LEVELS = (40, 120, 300)
+          REPEATS = 5
+          repo = pathlib.Path(os.environ["GITHUB_WORKSPACE"])
+          with tempfile.TemporaryDirectory(prefix="wikidebia-paired-workflow-") as tmp:
+              root = pathlib.Path(tmp)
+              trees = {}
+              for label, sha in REVISION.items():
+                  target = root / ("worktree-" + label)
+                  subprocess.run(["git", "-C", str(repo), "worktree", "add",
+                                  "--detach", str(target), sha],
+                                 check=True, stdout=subprocess.DEVNULL)
+                  trees[label] = target
+              script = "kit/scripts/wikidebia_pretranslation_benchmark.py"
+              bench_digests = {
+                  label: hashlib.sha256((directory / script).read_bytes()).hexdigest()
+                  for label, directory in trees.items()
+              }
+              if len(set(bench_digests.values())) != 1:
+                  raise RuntimeError("Benchmark implementation differs across revisions")
+              results = {count: {label: [] for label in REVISION} for count in LEVELS}
+              fingerprints = {count: set() for count in LEVELS}
+              for count in LEVELS:
+                  for repeat in range(REPEATS):
+                      names = list(REVISION)
+                      names = names[repeat % len(names):] + names[:repeat % len(names)]
+                      if repeat % 2:
+                          names.reverse()
+                      for label in names:
+                          location = trees[label]
+                          env = dict(os.environ)
+                          env["PYTHONPATH"] = str(location / "kit/scripts")
+                          env["PYTHONNOUSERSITE"] = "1"
+                          env.pop("PYTHONHOME", None)
+                          command = [
+                              sys.executable, str(location / script),
+                              "--project-root", str(location),
+                              "--arguments", str(count),
+                              "--payload-bytes", "1024",
+                              "--iterations", "1",
+                              "--machine-readable",
+                          ]
+                          p = subprocess.run(command, env=env, text=True,
+                                             stdout=subprocess.PIPE,
+                                             stderr=subprocess.PIPE, check=False)
+                          if p.returncode:
+                              raise RuntimeError(
+                                  f"Local benchmark failed for {count}/{label}: "
+                                  + p.stderr[-1800:]
+                              )
+                          report = json.loads(p.stdout)
+                          claimed = report.pop("report_sha256")
+                          digest = hashlib.sha256(json.dumps(
+                              report, ensure_ascii=False, sort_keys=True,
+                              separators=(",", ":"), allow_nan=False,
+                          ).encode("utf-8")).hexdigest()
+                          if claimed != digest:
+                              raise RuntimeError("Signed benchmark report digest mismatch")
+                          controls = report["quality_controls"]
+                          if (not controls["same_build_contract"]
+                              or not controls["cold_validation_passed"]
+                              or not controls["interrupted_validation_passed"]
+                              or not controls["exact_receipt_verified"]
+                              or controls["translation_logic_exercised"]
+                              or controls["wiki_access_performed"]
+                              or controls["real_snapshot_used"]):
+                              raise RuntimeError("Unexpected safety controls")
+                          if report["fixture"]["kind"] != "synthetic":
+                              raise RuntimeError("Mislabelled synthetic source")
+                          fingerprints[count].add(report["fixture"]["build_contract_sha256"])
+                          data = {}
+                          for name in SCENARIOS:
+                              scenario = report["scenarios"][name]
+                              if scenario["sample_count"] != 1:
+                                  raise RuntimeError("Unexpected sample count")
+                              data[name] = scenario["median_seconds"]
+                              data[name + "_stages"] = {
+                                  stage: row["median_seconds"]
+                                  for stage, row in scenario["stage_timings_seconds"].items()
+                              }
+                          results[count][label].append(data)
+                          print("WIKIDEBIA_E2E_SAMPLE " + json.dumps({
+                              "arguments":count,"repeat":repeat+1,
+                              "variant":label,
+                              "seconds":{key:value for key,value in data.items()
+                                         if not key.endswith("_stages")},
+                          }), flush=True)
+                  if len(fingerprints[count]) != 1:
+                      raise RuntimeError(
+                          f"Source/build contracts differ between versions for {count}: "
+                          f"{len(fingerprints[count])}"
+                      )
+              for count in LEVELS:
+                  overview = {}
+                  for label, rows in results[count].items():
+                      for scenario in SCENARIOS:
+                          samples = [row[scenario] for row in rows]
+                          stages = set().union(*(row[scenario+"_stages"] for row in rows))
+                          overview.setdefault(label, {})[scenario] = {
+                              "samples_seconds": samples,
+                              "median_seconds": statistics.median(samples),
+                              "population_stddev_seconds": statistics.pstdev(samples),
+                              "stages_medians_seconds": {
+                                  stage: statistics.median([
+                                      row[scenario+"_stages"][stage]
+                                      for row in rows if stage in row[scenario+"_stages"]
+                                  ]) for stage in sorted(stages)
+                              },
+                          }
+                  print("WIKIDEBIA_E2E_SUMMARY " + json.dumps({
+                      "arguments": count,
+                      "repetitions":REPEATS,
+                      "versions":REVISION,
+                      "benchmark_sha256":next(iter(bench_digests.values())),
+                      "common_build_contract": next(iter(fingerprints[count])),
+                      "comparisons": overview,
+                      "quality_controls_verified_for_every_run":True,
+                      "only_synthetic_sources":True,
+                  }, sort_keys=True), flush=True)
+          PY
