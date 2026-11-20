@@ -81,8 +81,17 @@ def _snapshot_root(repo: Path, snapshot: Path) -> Path:
     source = snapshot.expanduser()
     if not source.is_absolute():
         source = repo / source
-    if source.is_symlink() or not source.is_dir():
+    if source.is_symlink():
         raise RevisionComparisonError("Le snapshot doit être un répertoire réel non symbolique")
+    if not source.exists():
+        raise RevisionComparisonError(
+            "Répertoire de snapshot introuvable : --snapshot doit viser le chemin réel "
+            "de l'extraction figée, contenant snapshot/snapshot_manifest.json"
+        )
+    if not source.is_dir():
+        raise RevisionComparisonError(
+            "Le snapshot doit être un répertoire, pas un fichier ou une archive ZIP"
+        )
     source = source.resolve()
     if (source / "snapshot_manifest.json").is_file():
         source = source.parent
@@ -432,7 +441,10 @@ def compare_revisions(
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
-    parser.add_argument("--snapshot", type=Path, required=True)
+    parser.add_argument(
+        "--snapshot", type=Path, required=True,
+        help="Dossier de l'extraction figée (ou son sous-dossier snapshot), sans lien symbolique ; pas de ZIP",
+    )
     parser.add_argument("--baseline", default=PARSER_BASELINE_SHA,
                         help="SHA complet du commit de référence, par défaut avant les PR #181/#182")
     parser.add_argument("--candidate", default="HEAD",
