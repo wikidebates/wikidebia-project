@@ -123,6 +123,16 @@ jobs:
                           raise RuntimeError("Full validator subprocess failed")
                       child_report=json.loads(child.stdout)
                       if child_report!=baseline:
+                          differences=[key for key in baseline if baseline[key]!=child_report.get(key)]
+                          print("WIKIDEBIA_VALIDATOR_REPORT_DIFF "+json.dumps({
+                              "keys":differences,
+                              "first_summary":baseline.get("summary"),
+                              "second_summary":child_report.get("summary"),
+                              "first_metrics_keys":list(baseline.get("metrics",{})),
+                              "second_metrics_keys":list(child_report.get("metrics",{})),
+                              "first_findings_count":len(baseline.get("findings",[])),
+                              "second_findings_count":len(child_report.get("findings",[])),
+                          }),flush=True)
                           raise RuntimeError("In-process and process validator reports differ")
 
                   prof=cProfile.Profile()
