@@ -1,11 +1,11 @@
-name: Temporary parser exact-output and speed comparison
+name: Temporary parser full pretranslation comparison
 on:
   pull_request:
     branches: [main]
 permissions:
   contents: read
 jobs:
-  parser-proof:
+  compare:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
@@ -13,8 +13,10 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - run: python -m pip install -r validator/requirements-dev.txt
-      - name: Prove exact built file parity and measure old/new parser on offline synthetic inputs
+      - run: |
+          python -m pip install -r validator/requirements-dev.txt
+          python -m pip install 'jsonschema==4.26.0' 'referencing==0.37.0'
+      - name: Compare complete offline workflows using original and optimized parser
         env:
           PYTHONPATH: kit/scripts:kit/tests
         run: |
@@ -22,90 +24,85 @@ jobs:
           import hashlib
           import json
           import statistics
-          import tempfile
-          import time
           from pathlib import Path
           from unittest.mock import patch
 
-          import wikidebia_corpus_init as ci
           import wikidebia_graph_extract as ge
+          from wikidebia_pretranslation_benchmark import run_benchmark
+          from wikidebia_corpus_build import canonical_json
           from test_graph_extract_parser_fastpath import (
               _legacy_template_spans, _legacy_split_top_level,
           )
-          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
 
-          def file_hashes(root):
-              return {
-                  path.relative_to(root).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
-                  for path in sorted(root.rglob("*")) if path.is_file()
-              }
-
-          for arguments in (40, 300, 878):
-              with tempfile.TemporaryDirectory(prefix="wikidebia-parser-parity-") as tmp:
-                  root=Path(tmp)
-                  source=make_synthetic_extraction(root/"source",arguments=arguments,payload_bytes=1024)
-                  samples={"legacy":[],"optimized":[]}
-                  expected=None
-                  for iteration in range(5):
-                      sequence=("legacy","optimized") if iteration%2 else ("optimized","legacy")
-                      for mode in sequence:
-                          target=root/f"{mode}-{iteration}"
-                          original_spans=(ge._template_spans if mode=="optimized" else _legacy_template_spans)
-                          original_split=(ge._split_top_level if mode=="optimized" else _legacy_split_top_level)
-                          with (
-                              patch.object(ge, "_template_spans", original_spans),
-                              patch.object(ge, "_split_top_level", original_split),
-                              patch.object(ci, "now_iso", lambda: "2026-11-20T12:00:00+00:00"),
-                          ):
-                              started=time.perf_counter()
-                              result=ci.build_corpus(
-                                  source,target,debate_id="benchmark_pretranslation",
-                                  short_code="BENCH",scope_summary=None,overwrite=False,
-                              )
-                              samples[mode].append(time.perf_counter()-started)
-                          if result["status"]!="created":
-                              raise RuntimeError("Corpus build not created")
-                          hashes=file_hashes(target)
-                          proof=(result["build_contract_sha256"],hashes)
-                          if expected is None:
-                              expected=proof
-                          elif expected!=proof:
-                              missing=sorted(set(expected[1])^set(hashes))
-                              changed=sorted(k for k in set(expected[1])&set(hashes) if expected[1][k]!=hashes[k])
-                              raise RuntimeError(
-                                  f"Changed source/output under {mode}, {arguments}: "
-                                  f"missing={missing[:8]}, changed={changed[:8]}"
-                              )
-                  before=statistics.median(samples["legacy"])
-                  after=statistics.median(samples["optimized"])
-                  print("WIKIDEBIA_PARSER_BUILD_PAIR "+json.dumps({
-                      "arguments":arguments,
-                      "medians_seconds":{"legacy":round(before,6),"optimized":round(after,6)},
-                      "raw_seconds":{k:[round(v,6) for v in values] for k,values in samples.items()},
-                      "relative_reduction_percent":round(100*(1-after/before),2),
-                      "identical_file_hashes":True,
-                      "file_count":len(expected[1]),
-                      "contract_sha256":expected[0],
-                      "frozen_output_timestamp":True,
-                  }),flush=True)
-          PY
-      - name: Run kit regression suite and derive signed package metadata without pushing from CI
-        env:
-          PYTHONPATH: kit/scripts
-        run: |
-          python -m pytest -q kit/tests --junitxml=/tmp/parser-kit-tests.xml
-          python - <<'PY'
-          from pathlib import Path
-          import subprocess
-          import xml.etree.ElementTree as ET
-          root=ET.parse("/tmp/parser-kit-tests.xml").getroot()
-          suites=[root] if root.get("tests") is not None else list(root.findall("./testsuite"))
-          count=sum(int(x.get("tests","0"))-int(x.get("failures","0"))-int(x.get("errors","0"))-int(x.get("skipped","0")) for x in suites)
-          print("WIKIDEBIA_PARSER_KIT_TEST_COUNT",count,flush=True)
-          subprocess.run(["python","kit/scripts/refresh_package_metadata.py",
-                          "--junit-xml","/tmp/parser-kit-tests.xml", "--generated-date","2026-11-20"],check=True)
-          print("WIKIDEBIA_PARSER_BEGIN_METADATA_DIFF",flush=True)
-          subprocess.run(["git","diff","--","kit/PACKAGE_MANIFEST_SHA256.json",
-                          "kit/PACKAGE_RECEIPT.json","kit/TEST_REPORT.txt"],check=True)
-          print("WIKIDEBIA_PARSER_END_METADATA_DIFF",flush=True)
+          scenarios=(
+              "cold_build_validate_receipt",
+              "resume_after_build_before_receipt",
+              "resume_exact_verified_receipt",
+          )
+          project_root=Path.cwd()
+          for arguments in (40,300,878):
+              reports={"old_parser":[],"new_parser":[]}
+              contracts=set()
+              for i in range(3):
+                  sequence=("old_parser","new_parser") if i%2 else ("new_parser","old_parser")
+                  for mode in sequence:
+                      spans=ge._template_spans if mode=="new_parser" else _legacy_template_spans
+                      splitter=ge._split_top_level if mode=="new_parser" else _legacy_split_top_level
+                      with (
+                          patch.object(ge,"_template_spans",spans),
+                          patch.object(ge,"_split_top_level",splitter),
+                      ):
+                          report=run_benchmark(
+                              project_root, arguments=arguments,
+                              payload_bytes=1024, iterations=1,
+                          )
+                      digest=report["report_sha256"]
+                      unsigned=dict(report)
+                      unsigned.pop("report_sha256")
+                      if hashlib.sha256(canonical_json(unsigned)).hexdigest()!=digest:
+                          raise RuntimeError("Tampered benchmark report")
+                      quality=report["quality_controls"]
+                      if (not quality["same_build_contract"]
+                          or not quality["cold_validation_passed"]
+                          or not quality["interrupted_validation_passed"]
+                          or not quality["exact_receipt_verified"]
+                          or quality["wiki_access_performed"]
+                          or quality["translation_logic_exercised"]
+                          or quality["real_snapshot_used"]):
+                          raise RuntimeError("Benchmark safety controls failed")
+                      contracts.add(report["fixture"]["build_contract_sha256"])
+                      reports[mode].append({
+                          name: {
+                              "seconds": report["scenarios"][name]["median_seconds"],
+                              "stages": {
+                                  key: value["median_seconds"]
+                                  for key,value in report["scenarios"][name]["stage_timings_seconds"].items()
+                              },
+                          } for name in scenarios
+                      })
+              if len(contracts)!=1:
+                  raise RuntimeError("Source contracts changed between parsers")
+              results={}
+              for mode, rows in reports.items():
+                  results[mode]={}
+                  for name in scenarios:
+                      samples=[entry[name]["seconds"] for entry in rows]
+                      stage_names=set().union(*(entry[name]["stages"].keys() for entry in rows))
+                      results[mode][name]={
+                          "samples_seconds":samples,
+                          "median_seconds":statistics.median(samples),
+                          "stages_medians_seconds":{
+                              key:statistics.median([
+                                  entry[name]["stages"][key] for entry in rows
+                              ]) for key in sorted(stage_names)
+                          },
+                      }
+              print("WIKIDEBIA_PARSER_END_TO_END "+json.dumps({
+                  "arguments":arguments,
+                  "repetitions":3,
+                  "build_contract_sha256":next(iter(contracts)),
+                  "scenarios":results,
+                  "quality_controls_verified":True,
+                  "synthetic_only":True,
+              },sort_keys=True),flush=True)
           PY
