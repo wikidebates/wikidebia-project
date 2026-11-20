@@ -1,0 +1,110 @@
+name: Temporary historical displayed title lock indexing benchmark
+on:
+  pull_request:
+    paths:
+      - .github/workflows/temporary-historical-title-lock-index-benchmark.yml
+permissions:
+  contents: read
+jobs:
+  compare:
+    if: github.head_ref == 'perf/validator-historical-displayed-title-lock-index-20261120'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Historical French title lock first-match and corruption regressions
+        env:
+          PYTHONPATH: validator/src
+        run: |
+          python -m pytest -q validator/tests/test_graph_historical_displayed_title_index.py
+      - name: Compare entire graph validation findings and metrics before and after
+        env:
+          PYTHONPATH: validator/src
+        run: |
+          git show f3648d179db1aa7fd97cbe1d9c9752a51da79def:validator/src/wikidebia_validator/graph.py > /tmp/baseline_validator_graph.py
+          python - <<'PY'
+          import importlib.util,json,statistics,sys,tempfile,time
+          from pathlib import Path
+          from unittest.mock import patch
+          from wikidebia_validator import validator as driver
+          from wikidebia_validator.graph import structural_sha256
+          from validator.tests.helpers import dump,graph_projection
+          from validator.tests.test_graph_iterative_cycles import _deep_package
+
+          spec=importlib.util.spec_from_file_location(
+              'wikidebia_validator.baseline_graph','/tmp/baseline_validator_graph.py')
+          old=importlib.util.module_from_spec(spec)
+          sys.modules[spec.name]=old
+          spec.loader.exec_module(old)
+
+          def fixture(root,chain,locked_ratio=1,has_duplicates=False):
+              _deep_package(root,chain_length=chain)
+              reg_path=root/'data/registre_debat.json'
+              registry=json.loads(reg_path.read_text(encoding='utf-8'))
+              entries=[]
+              for i,node in enumerate(registry['graph']['nodes']):
+                  node['fr']['displayed_title']=f"L’argument historique conserve sa formulation {i:05d}"
+                  entry={
+                      'entity_id':node['id'], 'page_origin':'preexisting',
+                      'decisions':{'displayed_title':'keep'},
+                      'displayed_title':node['fr']['displayed_title']
+                  }
+                  if locked_ratio!=1 and i % locked_ratio == 0:
+                      entry['decisions']['displayed_title']='modify'
+                  entries.append(entry)
+              if has_duplicates:
+                  entries[:0]=[
+                      {'entity_id':entries[0]['entity_id'],'page_origin':'new',
+                       'decisions':{'displayed_title':'keep'},
+                       'displayed_title':entries[0]['displayed_title']}
+                  ]
+              registry['graph']['lifecycle']['structural_sha256']=structural_sha256(registry)
+              dump(reg_path,registry)
+              dump(root/'graph/graphe_argumentatif.json',graph_projection(registry))
+              dump(root/'data/fr_page_metadata_lock.json',{
+                  'schema':'wikidebia-fr-page-metadata-lock-1.0',
+                  'arguments':entries
+              })
+
+          scenarios=[
+              ('small',120,1,False,6),
+              ('mid',350,1,False,6),
+              ('large',700,1,False,6),
+              ('deep',1100,1,False,4),
+              ('denied-titles',450,7,False,6),
+              ('duplicate-first',450,1,True,6),
+          ]
+          for label,chain,denied,dup,reps in scenarios:
+              with tempfile.TemporaryDirectory(prefix='historical-lock-') as tmp:
+                  package=Path(tmp)
+                  fixture(package,chain,denied,dup)
+                  samples={'before':[],'indexed':[]}
+                  implementations={'before':old.validate_graph,'indexed':driver.validate_graph}
+                  baseline_result=None
+                  for trial in range(reps):
+                      pair={}
+                      for variant in (('before','indexed') if trial%2==0 else ('indexed','before')):
+                          with patch.object(driver,'validate_graph',implementations[variant]):
+                              start=time.perf_counter()
+                              report=driver.validate_package(package,scopes=['graph']).to_dict()
+                              samples[variant].append(round(time.perf_counter()-start,6))
+                              pair[variant]=report
+                      assert pair['before']==pair['indexed'],('full_report_diverged',label,trial)
+                      if baseline_result is None: baseline_result=pair['before']
+                  median={mode:statistics.median(values) for mode,values in samples.items()}
+                  print('MEASURE',json.dumps({
+                      'scenario':label,'nodes':chain+2,'rows':chain+2+int(dup),
+                      'median_seconds':median,'samples_seconds':samples,
+                      'gain_percent':round(100*(1-median['indexed']/median['before']),2),
+                      'findings':len(baseline_result['findings']),
+                      'identical_complete_validation_report':True,
+                      'no_external_io':True,
+                  },sort_keys=True),flush=True)
+          PY
