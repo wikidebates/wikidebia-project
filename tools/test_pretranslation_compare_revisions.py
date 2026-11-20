@@ -101,6 +101,29 @@ def test_snapshot_output_refuses_in_source_and_symlink(tmp_path: Path):
         compare._snapshot_root(project, alias)
 
 
+def test_missing_snapshot_reports_actionable_path_instead_of_generic_symlink_error(tmp_path: Path):
+    project, _ = _mock_snapshot(tmp_path)
+    with pytest.raises(compare.RevisionComparisonError, match="Répertoire de snapshot introuvable.*--snapshot"):
+        compare._snapshot_root(project, Path("/CHEMIN/VERS/L_EXTRACTION_FIGEE"))
+    with pytest.raises(compare.RevisionComparisonError, match="Répertoire de snapshot introuvable"):
+        compare._snapshot_root(project, Path("does-not-exist"))
+
+
+def test_snapshot_zip_and_manifest_files_are_rejected_as_non_directories(tmp_path: Path):
+    project, source = _mock_snapshot(tmp_path)
+    archive = project / "extraction.zip"
+    archive.write_bytes(b"not-an-extraction")
+    for candidate in (archive, source / "snapshot" / "snapshot_manifest.json"):
+        with pytest.raises(compare.RevisionComparisonError, match="pas un fichier ou une archive ZIP"):
+            compare._snapshot_root(project, candidate)
+
+
+def test_snapshot_cli_help_explains_real_directory_and_no_zip():
+    help_text = compare.build_parser().format_help()
+    assert "extraction figée" in help_text
+    assert "ZIP" in help_text
+
+
 def test_benchmark_process_environment_excludes_secrets_and_user_python_paths(
     tmp_path: Path, monkeypatch,
 ):
