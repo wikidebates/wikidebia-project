@@ -76,8 +76,6 @@ jobs:
                   baseline = None
                   inprocess = []
                   for attempt in range(3):
-                      with patch.multiple(validator) as ignored:
-                          pass
                       patches = []
                       def wrap(function, name):
                           def measured(*args, **kwargs):
