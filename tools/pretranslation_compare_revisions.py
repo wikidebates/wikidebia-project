@@ -37,6 +37,7 @@ SCENARIOS = (
 BENCHMARK_FILE = "kit/scripts/wikidebia_pretranslation_benchmark.py"
 SCHEMA = "wikidebia-pretranslation-revision-comparison-1.0"
 SHA_PATTERN = re.compile(r"[0-9a-fA-F]{40}\Z")
+DIGEST_PATTERN = re.compile(r"[0-9a-fA-F]{64}\\Z")
 
 
 class RevisionComparisonError(RuntimeError):
@@ -262,7 +263,7 @@ def _fingerprint_built_corpus(
         or not report["files"]
         or any(
             not isinstance(path, str) or not isinstance(digest, str)
-            or not SHA_PATTERN.fullmatch(digest)
+            or not DIGEST_PATTERN.fullmatch(digest)
             for path, digest in report["files"].items()
         )
     ):
