@@ -1,0 +1,75 @@
+name: Temporary offline validator hotpath probe
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  schema-profile:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install validator dependencies
+        run: python -m pip install -r validator/requirements-dev.txt
+      - name: Profile identical synthetic corpus without any wiki access
+        env:
+          PYTHONPATH: validator/src:kit/scripts
+        run: |
+          python - <<'PY'
+          import cProfile
+          import json
+          import pstats
+          import statistics
+          import tempfile
+          import time
+          from pathlib import Path
+
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+          from wikidebia_corpus_init import build_corpus
+          from wikidebia_validator.validator import validate_package
+
+          for arguments in (40, 120):
+              with tempfile.TemporaryDirectory(prefix="wikidebia-schema-profile-") as tmp:
+                  root = Path(tmp)
+                  source = make_synthetic_extraction(root / "source", arguments=arguments, payload_bytes=1024)
+                  target = root / "built"
+                  build_corpus(source, target, debate_id="benchmark_pretranslation", short_code="BENCH", scope_summary=None, overwrite=False)
+                  samples = []
+                  baseline = None
+                  for attempt in range(5):
+                      start = time.perf_counter()
+                      report = validate_package(target, scopes=["schema"])
+                      samples.append(round(time.perf_counter() - start, 6))
+                      if report.errors:
+                          raise RuntimeError("Schema validation failed on fixture: " + report.to_text()[:1800])
+                      current = report.to_dict()
+                      if baseline is None:
+                          baseline = current
+                      elif baseline != current:
+                          raise RuntimeError("Nondeterministic validator report")
+                  profiler = cProfile.Profile()
+                  profiler.enable()
+                  profiled = validate_package(target, scopes=["schema"])
+                  profiler.disable()
+                  if profiled.to_dict() != baseline:
+                      raise RuntimeError("Profiler changed validator report")
+                  stats = pstats.Stats(profiler)
+                  rows = []
+                  for (path, line, function), (_primitive, calls, own, cumulative, _callers) in stats.stats.items():
+                      if cumulative >= 0.0005:
+                          rows.append((cumulative, calls, own, Path(path).name, line, function))
+                  rows.sort(reverse=True)
+                  print("WIKIDEBIA_SCHEMA_HOTPATH " + json.dumps({
+                      "arguments": arguments,
+                      "samples_seconds": samples,
+                      "median_seconds": statistics.median(samples),
+                      "top_cumulative": [
+                          {"cumulative": round(c, 6), "calls": n, "own": round(own, 6), "source": f"{path}:{line}:{function}"}
+                          for c,n,own,path,line,function in rows[:45]
+                      ],
+                  }, ensure_ascii=False))
+          PY
