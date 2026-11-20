@@ -373,8 +373,12 @@ class SchemaStore:
                         validator_schema = schema
                     else:
                         self._inlined_registry_common_sha256 = _ATTESTED_COMMON_SHA256
-                        cls = _guarded_registry_nullable_oneof(cls, validator_schema)
-                        cls = _guarded_registry_status_if(cls, validator_schema)
+                        first_guard = _guarded_registry_nullable_oneof(cls, validator_schema)
+                        # If the existing null/string proof fails, preserve
+                        # the original class entirely. Do not enable an
+                        # independent conditional shortcut in that state.
+                        if first_guard is not cls:
+                            cls = _guarded_registry_status_if(first_guard, validator_schema)
             validator = cls(
                 validator_schema, registry=self.registry, format_checker=self.format_checker,
             )
