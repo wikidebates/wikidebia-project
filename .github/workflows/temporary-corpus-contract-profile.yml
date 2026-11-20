@@ -128,7 +128,7 @@ jobs:
                   Path.cwd(),source,
                   baseline="11e9643b7205de2dd86bf4a3574beee95324ab97",
                   candidate="HEAD",
-                  iterations=3,
+                  iterations=5,
               )
               controls=report["quality_controls"]
               assert report["argument_count"]==680
