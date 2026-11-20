@@ -204,6 +204,45 @@ def _locked_preexisting_displayed_title(
         and row.get("displayed_title") == value
     )
 
+def _iter_cycle_paths(
+    node_by_id: dict[str, Any],
+    outgoing: dict[str, list[str]],
+):
+    """Yield cycles in the original recursive DFS order, without recursion.
+
+    Frames own outgoing iterators so backtracking and repeated edges behave
+    exactly as in the historical traversal. Only active nodes are colored;
+    missing targets are diagnosed separately by validate_graph.
+    """
+    colors = {node_id: 0 for node_id in node_by_id}
+    active_position: dict[str, int] = {}
+    for root in sorted(node_by_id):
+        if colors[root] != 0:
+            continue
+        colors[root] = 1
+        active_position[root] = 0
+        frames = [(root, iter(outgoing.get(root, ())))]
+        while frames:
+            node, children = frames[-1]
+            try:
+                child = next(children)
+            except StopIteration:
+                frames.pop()
+                active_position.pop(node)
+                colors[node] = 2
+                continue
+            state = colors.get(child)
+            if state == 0:
+                colors[child] = 1
+                active_position[child] = len(frames)
+                frames.append((child, iter(outgoing.get(child, ()))))
+            elif state == 1:
+                # A gray child lies on the active DFS path. The old routine
+                # used stack.index(child) and reported this same ordered path.
+                start = active_position[child]
+                yield [entry[0] for entry in frames[start:]] + [child]
+
+
 def validate_graph(ctx: PackageContext) -> None:
     registry = ctx.registry()
     if not registry:
@@ -299,24 +338,14 @@ def validate_graph(ctx: PackageContext) -> None:
         relation_keys.add(key)
         outgoing[p].append(c)
 
-    # Cycle detection on the active node graph.
-    colors: dict[str, int] = {node_id: 0 for node_id in node_by_id}
-    stack: list[str] = []
-    def visit(node_id: str) -> None:
-        colors[node_id] = 1
-        stack.append(node_id)
-        for child in outgoing.get(node_id, []):
-            if colors.get(child) == 0:
-                visit(child)
-            elif colors.get(child) == 1:
-                start = stack.index(child) if child in stack else 0
-                cycle = stack[start:] + [child]
-                ctx.report.error("WDV-GRA-005", "Cycle détecté : " + " -> ".join(cycle), path=ctx.core_paths()["registry"])
-        stack.pop()
-        colors[node_id] = 2
-    for node_id in sorted(node_by_id):
-        if colors[node_id] == 0:
-            visit(node_id)
+    # Walk the same depth-first order without Python recursion. A valid,
+    # unbounded graph may have more edges in one branch than the interpreter's
+    # recursion limit, and cycle detection must never become WDV-INT-001.
+    for cycle in _iter_cycle_paths(node_by_id, outgoing):
+        ctx.report.error(
+            "WDV-GRA-005", "Cycle détecté : " + " -> ".join(cycle),
+            path=ctx.core_paths()["registry"],
+        )
 
     children_by_occ: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for occ in occurrences:
