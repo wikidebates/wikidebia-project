@@ -1120,18 +1120,23 @@ def analyze_graph(result: CrawlResult) -> dict[str, Any]:
     root_masks: dict[str, int] | None = None
     unique_roots: list[str] = []
     if not cycle_nodes:
-        unique_roots = list(dict.fromkeys(roots))
         # Root reachability is independent from path multiplicity. For graphs
         # with many roots converging on the same argument, propagate compact
         # bitmasks instead of repeatedly copying large Python string sets.
-        # Keep exact-set behavior on small/sparse graphs and casefold ties,
-        # where stable historical ordering cannot be guaranteed by masks.
+        # Check indegree *first*: sparse graphs retain the original behavior
+        # without normalizing hundreds of root names or extending reverse[].
+        # Casefold ties still use the historical set sort (stable-tie order).
         use_root_masks = (
-            len(unique_roots) >= 16
+            len(roots) >= 16
             and len(nodes) <= 8000
-            and len({name.casefold() for name in unique_roots}) == len(unique_roots)
-            and any(len(reverse[node]) >= 8 for node in nodes)
+            and any(len(parents) >= 8 for parents in reverse.values())
         )
+        if use_root_masks:
+            unique_roots = list(dict.fromkeys(roots))
+            use_root_masks = (
+                len(unique_roots) >= 16
+                and len({name.casefold() for name in unique_roots}) == len(unique_roots)
+            )
         if use_root_masks:
             root_masks = {node: 0 for node in nodes}
             positions = {name: index for index, name in enumerate(unique_roots)}
