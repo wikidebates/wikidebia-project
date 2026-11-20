@@ -106,7 +106,9 @@ def _split_top_level(text: str, delimiter: str, maxsplit: int = -1) -> list[str]
     # No delimiter can be consumed when the caller requests zero splits.
     # This also avoids scanning an arbitrarily long historical parameter.
     if maxsplit == 0:
-        return [text]
+        # Preserve the legacy result type for str subclasses: the original
+        # exhausted loop appended text[0:] rather than the input object.
+        return [text[:]]
     parts: list[str] = []
     start = 0
     splits = 0
