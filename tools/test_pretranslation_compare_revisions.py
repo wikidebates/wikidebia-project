@@ -165,7 +165,7 @@ def test_rotated_runs_keep_exact_contracts_and_disclose_no_titles(tmp_path: Path
     monkeypatch.setattr(compare, "_resolve_revision", fake_resolve)
     monkeypatch.setattr(compare, "_materialize_revision", fake_archive)
     monkeypatch.setattr(compare, "_fingerprint_built_corpus", lambda tree, snap, python:
-                        ("c" * 64, {"manifest.json": "e" * 40}))
+                        ("c" * 64, {"manifest.json": "e" * 64}))
     monkeypatch.setattr(compare, "_run_revision", fake_run)
     result = compare.compare_revisions(project, source, iterations=3)
     assert stages == ["candidate", "baseline", "baseline", "candidate", "candidate", "baseline"]
@@ -188,7 +188,7 @@ def test_contract_changed_between_passes_rejects_entire_comparison(tmp_path: Pat
         (target / compare.BENCHMARK_FILE).write_text("same benchmark", encoding="utf-8")
     monkeypatch.setattr(compare, "_materialize_revision", fake_archive)
     monkeypatch.setattr(compare, "_fingerprint_built_corpus", lambda tree, snap, python:
-                        ("c" * 64, {"manifest.json": "e" * 40}))
+                        ("c" * 64, {"manifest.json": "e" * 64}))
     def fake_run(tree, snapshot, python):
         nonlocal count
         count += 1
@@ -210,7 +210,7 @@ def test_changed_corpus_files_abort_before_benchmark(tmp_path: Path, monkeypatch
         compare, "_fingerprint_built_corpus",
         lambda tree, snap, python: (
             "c" * 64,
-            {"manifest.json": "1" * 40 if tree.name == "baseline" else "2" * 40},
+            {"manifest.json": "1" * 64 if tree.name == "baseline" else "2" * 64},
         ),
     )
     def no_benchmark(*args, **kwargs):
