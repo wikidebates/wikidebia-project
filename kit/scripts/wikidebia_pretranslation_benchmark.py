@@ -11,8 +11,12 @@ import platform
 import statistics
 import tempfile
 import time
+from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, Callable, Mapping, Sequence
+from typing import Any, Callable, Iterator, Mapping, Sequence
+from unittest.mock import patch
+
+import wikidebia_corpus_init as corpus_init
 
 from wikidebia_corpus_build import (
     CorpusBuildError,
@@ -36,6 +40,19 @@ DEBATE_ID = "benchmark_pretranslation"
 SHORT_CODE = "BENCH"
 SYNTHETIC_ROOTS = 20
 SYNTHETIC_BRANCHING_FACTOR = 3
+
+# This is telemetry for the benchmark's *parent Python process* only.
+# The validator runs in an isolated subprocess and is NOT counted here.
+IO_METRICS = (
+    "read_bytes_calls",
+    "read_bytes_total_bytes",
+    "read_bytes_distinct_paths",
+    "read_bytes_repeated_calls",
+    "read_text_calls",
+    "read_text_total_characters",
+    "kit_sha256_calls",
+    "kit_sha256_input_bytes",
+)
 
 
 class PretranslationBenchmarkError(RuntimeError):
@@ -236,6 +253,65 @@ def _output_path(
     return resolved
 
 
+@contextmanager
+def _profile_python_io() -> Iterator[dict[str, int]]:
+    """Count benchmark-parent file reads and kit hash input, without changing bytes.
+
+    Patching is limited to one synchronous stage; it is restored on exceptions.
+    It cannot observe subprocess I/O, bare open(), or memory-mapped reads.
+    read_text reports Unicode characters, *not* on-disk byte counts.
+    """
+    counts = {metric: 0 for metric in IO_METRICS}
+    byte_paths: dict[str, int] = {}
+    original_read_bytes = Path.read_bytes
+    original_read_text = Path.read_text
+    original_hash = corpus_init.sha256_bytes
+
+    def counted_read_bytes(path: Path) -> bytes:
+        data = original_read_bytes(path)
+        counts["read_bytes_calls"] += 1
+        counts["read_bytes_total_bytes"] += len(data)
+        key = path.absolute().as_posix()
+        byte_paths[key] = byte_paths.get(key, 0) + 1
+        return data
+
+    def counted_read_text(path: Path, *args: Any, **kwargs: Any) -> str:
+        text = original_read_text(path, *args, **kwargs)
+        counts["read_text_calls"] += 1
+        counts["read_text_total_characters"] += len(text)
+        return text
+
+    def counted_hash(payload: bytes) -> str:
+        digest = original_hash(payload)
+        counts["kit_sha256_calls"] += 1
+        counts["kit_sha256_input_bytes"] += len(payload)
+        return digest
+
+    try:
+        with (
+            patch.object(Path, "read_bytes", counted_read_bytes),
+            patch.object(Path, "read_text", counted_read_text),
+            patch.object(corpus_init, "sha256_bytes", counted_hash),
+        ):
+            yield counts
+    finally:
+        counts["read_bytes_distinct_paths"] = len(byte_paths)
+        counts["read_bytes_repeated_calls"] = sum(
+            count - 1 for count in byte_paths.values() if count > 1
+        )
+
+
+def _count_summary(samples: Sequence[int]) -> dict[str, Any]:
+    """Summarize exact discrete observations without labeling them as seconds."""
+    return {
+        "sample_count": len(samples),
+        "samples": list(samples),
+        "median": statistics.median(samples),
+        "minimum": min(samples),
+        "maximum": max(samples),
+    }
+
+
 def _measure(operation: Callable[[], Any]) -> tuple[float, Any]:
     started = time.perf_counter()
     result = operation()
@@ -306,6 +382,7 @@ def run_benchmark(
     payload_bytes: int,
     iterations: int,
     snapshot: Path | None = None,
+    profile_file_io: bool = False,
 ) -> dict[str, Any]:
     project_root = project_root.expanduser().resolve()
     if iterations < 1:
@@ -318,11 +395,19 @@ def run_benchmark(
         "resume_after_build_before_receipt": {},
         "resume_exact_verified_receipt": {},
     }
+    io_samples: dict[str, dict[str, list[dict[str, int]]]] = {
+        scenario: {} for scenario in stage_samples
+    }
 
     def record_stage(
         scenario: str, label: str, operation: Callable[[], Any],
     ) -> Any:
-        elapsed, result = _measure(operation)
+        if profile_file_io:
+            with _profile_python_io() as counts:
+                elapsed, result = _measure(operation)
+            io_samples[scenario].setdefault(label, []).append(dict(counts))
+        else:
+            elapsed, result = _measure(operation)
         stage_samples[scenario].setdefault(label, []).append(elapsed)
         return result
 
@@ -527,6 +612,27 @@ def run_benchmark(
                 "Les gains en crédits doivent être mesurés séparément dans la télémétrie du produit.",
             ],
         }
+        if profile_file_io:
+            report["file_io_profile"] = {
+                "scope": "Python parent process, during the named benchmark stages only",
+                "counters": {
+                    scenario: {
+                        label: {
+                            metric: _count_summary([row[metric] for row in samples])
+                            for metric in IO_METRICS
+                        }
+                        for label, samples in stages.items()
+                    }
+                    for scenario, stages in io_samples.items()
+                },
+                "limitations": [
+                    "The validator runs in an isolated subprocess: its reads and hashes are excluded.",
+                    "read_bytes_total_bytes counts successful Path.read_bytes calls; bare open(), read_text, mmap and subprocess reads are excluded.",
+                    "read_text_total_characters is a Unicode character count, not a byte count.",
+                    "kit_sha256_input_bytes counts successful wikidebia_corpus_init.sha256_bytes calls; not every hash operation in other modules.",
+                    "Temporary Python instrumentation adds overhead; use a separate run without --profile-file-io for uncontaminated timings.",
+                ],
+            }
         report["report_sha256"] = _sha256(canonical_json(report))
         return report
 
@@ -543,6 +649,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--output", type=Path)
     parser.add_argument("--machine-readable", action="store_true")
+    parser.add_argument(
+        "--profile-file-io", action="store_true",
+        help="Mesurer les lectures Path et les entrées SHA-256 du processus Python local (pas du validateur enfant)",
+    )
     return parser
 
 
@@ -554,6 +664,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         payload_bytes=args.payload_bytes,
         iterations=args.iterations,
         snapshot=args.snapshot,
+        profile_file_io=args.profile_file_io,
     )
     if args.output:
         output = _output_path(
