@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import hashlib
+from importlib import metadata as package_metadata
 from importlib.resources import files
 from pathlib import Path
 from typing import Any
@@ -28,6 +29,41 @@ SCHEMA_BY_PATH = {
     "data/remote_migrations.json": "remote_migrations.schema.json",
 }
 
+# SHA-256 of the canonical parsed JSON for schemas meta-checked under the exact
+# jsonschema/referencing versions below. These values are checked against the
+# *real schema objects* at runtime and independently rechecked by pytest.
+# A new/modified schema or a different library version always follows the
+# original full check_schema path. No schema instance validation is omitted.
+_ATTESTED_LIBRARY_VERSIONS = ("4.26.0", "0.37.0")
+_ATTESTED_COMMON_SHA256 = "66b4955556c9009fc07100834b200d38fc81e8f32c00849c6fc67c099f3d9b41"
+_ATTESTED_SCHEMA_SHA256 = {
+    "debate_package.schema.json": "14d0527688938942cec9ea645c6b634b5068fe5cf9c79fbdb2ab1450dde097f7",
+    "scope.schema.json": "2ab3761d580bb2b084c4f64bcaf91b49607ac0323070d82e7b02e63de7a8af37",
+    "argument_registry.schema.json": "de90513203042c3829b2c892db4d01b17881bfe0a27ce084c1570ddfd6b36a8d",
+    "source_registry.schema.json": "c1bf72292f6092c1314eeaeb6d9cd2a38128172e7f3ee4ab2d0fdc93a2164e56",
+    "argument_graph.schema.json": "e4466cad35a46a598ffefce94faa7d892483438daf61deabd124cfb332ed209f",
+    "keyword_vocabulary.schema.json": "1e1b6aee4a3b160410a19542232a908ef51e1486b08b0ca2e37001e7995ed41e",
+}
+
+
+def _schema_fingerprint(schema: Any) -> str:
+    return hashlib.sha256(
+        json.dumps(
+            schema, ensure_ascii=False, sort_keys=True,
+            separators=(",", ":"), allow_nan=False,
+        ).encode("utf-8")
+    ).hexdigest()
+
+
+def _matches_attested_library_versions() -> bool:
+    try:
+        return (
+            package_metadata.version("jsonschema"),
+            package_metadata.version("referencing"),
+        ) == _ATTESTED_LIBRARY_VERSIONS
+    except package_metadata.PackageNotFoundError:
+        return False
+
 
 class SchemaStore:
     def __init__(self) -> None:
@@ -44,22 +80,28 @@ class SchemaStore:
         # Content fingerprints invalidate a compiled validator even when a
         # caller mutates a schema object in-place between two validations.
         self._compiled: dict[str, tuple[str, Any]] = {}
+        self._attested_runtime = _matches_attested_library_versions()
 
     def validate(
         self, instance: Any, schema_name: str, *,
         _validated_graph_fields: tuple[str, ...] = (),
     ) -> list[Any]:
         schema = self.schemas[schema_name]
-        fingerprint = hashlib.sha256(
-            json.dumps(
-                schema, ensure_ascii=False, sort_keys=True,
-                separators=(",", ":"), allow_nan=False,
-            ).encode("utf-8")
-        ).hexdigest()
+        fingerprint = _schema_fingerprint(schema)
         cached = self._compiled.get(schema_name)
         if cached is None or cached[0] != fingerprint:
             cls = validator_for(schema)
-            cls.check_schema(schema)
+            # An exact content+dependency match is a pre-validated *static*
+            # schema: its meta-check was attested by the regression suite.
+            # The common-reference schema must match its own attestation too.
+            # Any unrecognized/mutated schema always receives check_schema.
+            prechecked = (
+                self._attested_runtime
+                and fingerprint == _ATTESTED_SCHEMA_SHA256.get(schema_name)
+                and _schema_fingerprint(self.schemas.get("common.schema.json")) == _ATTESTED_COMMON_SHA256
+            )
+            if not prechecked:
+                cls.check_schema(schema)
             validator = cls(
                 schema, registry=self.registry, format_checker=self.format_checker,
             )
