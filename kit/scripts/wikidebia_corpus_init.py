@@ -276,14 +276,19 @@ def resolve_extraction_input(source: Path) -> ExtractionInput:
         raise
 
 
-def _snapshot_page_path(snapshot_root: Path, relative: Any) -> Path:
+def _snapshot_page_path(
+    snapshot_root: Path, relative: Any, *, _resolved_root: Path | None = None,
+) -> Path:
     """Keep snapshot pages inside their own tree, including after symlink resolution."""
     if not isinstance(relative, str) or not relative:
         raise CorpusInitError("Chemin absent dans le snapshot")
     posix = PurePosixPath(relative)
     if posix.is_absolute() or ".." in posix.parts or not posix.parts or "\\" in relative:
         raise CorpusInitError(f"Chemin de page invalide dans le snapshot : {relative!r}")
-    root = snapshot_root.resolve()
+    # Callers traversing many snapshot pages may reuse a once-resolved
+    # snapshot root; every individual page is STILL resolved and checked
+    # against the root before any data is read.
+    root = _resolved_root if _resolved_root is not None else snapshot_root.resolve()
     path = root / Path(*posix.parts)
     try:
         path.resolve().relative_to(root)
@@ -340,9 +345,13 @@ def verify_extraction(inp: ExtractionInput) -> tuple[dict[str, Any], dict[str, A
     if snapshot.get("schema") != "wikidebia-graph-snapshot-1.0":
         raise CorpusInitError("Schéma de snapshot non pris en charge")
     rows = [snapshot.get("debate") or {}, *(snapshot.get("arguments") or [])]
+    snapshot_root = inp.snapshot_manifest_path.parent
+    resolved_snapshot_root = snapshot_root.resolve()
     for row in rows:
         rel = row.get("relative_path")
-        path = _snapshot_page_path(inp.snapshot_manifest_path.parent, rel)
+        path = _snapshot_page_path(
+            snapshot_root, rel, _resolved_root=resolved_snapshot_root,
+        )
         if not path.is_file():
             raise CorpusInitError(f"Page du snapshot absente : {rel}")
         if fingerprint(path)[1] != row.get("sha256"):
@@ -836,6 +845,7 @@ def _depth_policy(
 
 def copy_import_pages(inp: ExtractionInput, snapshot: Mapping[str, Any], output_root: Path, title_to_id: Mapping[str, str]) -> tuple[dict[str, dict[str, Any]], dict[str, Any]]:
     snapshot_root = inp.snapshot_manifest_path.parent
+    resolved_snapshot_root = snapshot_root.resolve()
     imported: dict[str, dict[str, Any]] = {}
     provenance_rows: list[dict[str, Any]] = []
 
@@ -843,7 +853,9 @@ def copy_import_pages(inp: ExtractionInput, snapshot: Mapping[str, Any], output_
         # verify_extraction checked the source earlier, but it may change
         # before the import is copied. Hash exactly the bytes that are written
         # and parsed here, rather than trusting a previous path-based check.
-        source = _snapshot_page_path(snapshot_root, row["relative_path"])
+        source = _snapshot_page_path(
+            snapshot_root, row["relative_path"], _resolved_root=resolved_snapshot_root,
+        )
         payload = source.read_bytes()
         if sha256_bytes(payload) != row.get("sha256"):
             raise CorpusInitError(
