@@ -1,0 +1,166 @@
+name: Temporary offline validator stage hotpath investigation
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  profile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m pip install -r validator/requirements-dev.txt
+          python -m pip install 'jsonschema==4.26.0' 'referencing==0.37.0'
+      - name: Decompose full validator runtime, schema and file access without changing validation
+        env:
+          PYTHONPATH: kit/scripts:validator/src
+        run: |
+          python - <<'PY'
+          import cProfile
+          import hashlib
+          import json
+          import os
+          import pstats
+          import statistics
+          import subprocess
+          import sys
+          import tempfile
+          import time
+          from collections import defaultdict
+          from pathlib import Path
+          from unittest.mock import patch
+
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+          from wikidebia_corpus_init import build_corpus
+          import wikidebia_validator.validator as validator
+          import wikidebia_validator.package as package
+          import wikidebia_validator.schema_validation as schemas
+
+          SCOPES = ["schema", "coherence", "graph", "files", "workflow"]
+          STAGES = (
+              "validate_all_schemas", "validate_coherence", "validate_graph",
+              "validate_files", "validate_workflow",
+          )
+          METHODS = (
+              (schemas.SchemaStore, "__init__"),
+              (schemas.SchemaStore, "validate"),
+              (package.PackageContext, "safe_path"),
+              (package.PackageContext, "read_bytes"),
+              (package.PackageContext, "read_text"),
+              (package.PackageContext, "load_json"),
+              (package.PackageContext, "sha256"),
+          )
+          def digest(report):
+              return hashlib.sha256(json.dumps(
+                  report, ensure_ascii=False, sort_keys=True,
+                  separators=(",", ":"), allow_nan=False,
+              ).encode()).hexdigest()
+
+          for count in (40, 300, 680):
+              with tempfile.TemporaryDirectory(prefix="wikidebia-validator-stage-profile-") as temp:
+                  root = Path(temp)
+                  source = make_synthetic_extraction(
+                      root/"source", arguments=count, payload_bytes=1024,
+                  )
+                  output = root/"build"
+                  build_corpus(
+                      source,output,debate_id="benchmark_pretranslation",
+                      short_code="BENCH",scope_summary=None,overwrite=False,
+                  )
+                  spans = defaultdict(list)
+                  baseline = None
+                  inprocess = []
+                  for attempt in range(3):
+                      with patch.multiple(validator) as ignored:
+                          pass
+                      patches = []
+                      def wrap(function, name):
+                          def measured(*args, **kwargs):
+                              tick = time.perf_counter()
+                              try:
+                                  return function(*args, **kwargs)
+                              finally:
+                                  spans[name].append(time.perf_counter()-tick)
+                          return measured
+                      for name in STAGES:
+                          patches.append(patch.object(
+                              validator, name, wrap(getattr(validator,name), "stage_"+name)
+                          ))
+                      for cls, name in METHODS:
+                          patches.append(patch.object(
+                              cls, name, wrap(getattr(cls,name), "method_"+cls.__name__+"."+name)
+                          ))
+                      import contextlib
+                      with contextlib.ExitStack() as stack:
+                          for patcher in patches:
+                              stack.enter_context(patcher)
+                          started=time.perf_counter()
+                          report=validator.validate_package(output,scopes=SCOPES).to_dict()
+                          inprocess.append(time.perf_counter()-started)
+                      if baseline is None:
+                          baseline=report
+                      elif baseline!=report:
+                          raise RuntimeError("Instrumented reports differ")
+                      if report["summary"]["errors"]:
+                          raise RuntimeError("Offline synthetic corpus unexpectedly invalid")
+
+                  cli_script=Path("validator/scripts/wikidebia_validate.py").resolve()
+                  subprocess_samples=[]
+                  for attempt in range(3):
+                      started=time.perf_counter()
+                      child=subprocess.run(
+                          [sys.executable,"-I",str(cli_script),"validate",str(output),
+                           *sum((["--scope",scope] for scope in SCOPES),[]),
+                           "--format","json"],
+                          capture_output=True,text=True,check=False,
+                          env={**os.environ,"PYTHONNOUSERSITE":"1"},
+                      )
+                      subprocess_samples.append(time.perf_counter()-started)
+                      if child.returncode:
+                          raise RuntimeError("Full validator subprocess failed")
+                      child_report=json.loads(child.stdout)
+                      if child_report!=baseline:
+                          raise RuntimeError("In-process and process validator reports differ")
+
+                  prof=cProfile.Profile()
+                  prof.enable()
+                  checked=validator.validate_package(output,scopes=SCOPES).to_dict()
+                  prof.disable()
+                  if checked!=baseline:
+                      raise RuntimeError("Profiled validation altered the report")
+                  results=[]
+                  for (p,line,func),(_primitive,calls,own,cumul,_callers) in pstats.Stats(prof).stats.items():
+                      if cumul>=0.001:
+                          results.append({
+                              "symbol":f"{Path(p).name}:{line}:{func}",
+                              "calls":calls,
+                              "own_seconds":round(own,6),
+                              "cumulative_seconds":round(cumul,6),
+                          })
+                  results.sort(key=lambda r:r["cumulative_seconds"],reverse=True)
+                  sums = {
+                      name: {
+                          "calls":len(values),
+                          "total_seconds":round(sum(values),6),
+                          "median_per_call_seconds":round(statistics.median(values),6)
+                      } for name,values in sorted(spans.items()) if values
+                  }
+                  print("WIKIDEBIA_VALIDATOR_STAGE_PROFILE "+json.dumps({
+                      "arguments":count,
+                      "process_samples_seconds":[round(s,6) for s in subprocess_samples],
+                      "process_median_seconds":round(statistics.median(subprocess_samples),6),
+                      "inprocess_samples_seconds":[round(s,6) for s in inprocess],
+                      "inprocess_median_seconds":round(statistics.median(inprocess),6),
+                      "validated_report_digest":digest(baseline),
+                      "scope_stage_and_method_breakdown":sums,
+                      "top_cumulative_profile":results[:50],
+                      "reports_equal":True,
+                      "synthetic_only":True,
+                      "wiki_access_performed":False,
+                  },sort_keys=True),flush=True)
+          PY
