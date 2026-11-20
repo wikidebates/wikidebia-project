@@ -641,3 +641,96 @@ def test_normalization_is_linear_for_many_snapshot_aliases(tmp_path: Path, monke
     copied, _ = mod.copy_import_pages(inp, snapshot, tmp_path / "build", ids)
     assert len(copied) == 100
     assert len(normalized_count) <= 2 * len(ids) + 2  # old scan: 5050+ normalizations
+
+
+
+def test_source_verification_resolves_snapshot_root_only_once(tmp_path: Path, monkeypatch):
+    """Every page is still individually resolved; only the common root is reused."""
+    source = make_extraction(tmp_path / "source")
+    inp = mod.resolve_extraction_input(source)
+    snapshot_root = inp.snapshot_manifest_path.parent
+    original_resolve = Path.resolve
+    root_resolutions: list[Path] = []
+    page_resolutions: list[Path] = []
+
+    def counted_resolve(path, *args, **kwargs):
+        if path == snapshot_root:
+            root_resolutions.append(path)
+        if path.parent.name in {"arguments", "pages"}:
+            page_resolutions.append(path)
+        return original_resolve(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "resolve", counted_resolve)
+    _, snapshot = mod.verify_extraction(inp)
+    assert len(snapshot["arguments"]) == 3
+    assert len(root_resolutions) == 1
+    assert len(page_resolutions) >= len(snapshot["arguments"]) + 1
+
+
+def test_import_resolves_snapshot_root_only_once_and_copies_verified_bytes(
+    tmp_path: Path, monkeypatch,
+):
+    source = make_extraction(tmp_path / "source")
+    inp = mod.resolve_extraction_input(source)
+    _, snapshot = mod.verify_extraction(inp)
+    snapshot_root = inp.snapshot_manifest_path.parent
+    ids = {row["canonical_title"]: f"A{i:04d}" for i, row in enumerate(snapshot["arguments"], 1)}
+    original_resolve = Path.resolve
+    root_count = 0
+
+    def counted_resolve(path, *args, **kwargs):
+        nonlocal root_count
+        if path == snapshot_root:
+            root_count += 1
+        return original_resolve(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "resolve", counted_resolve)
+    target = tmp_path / "build"
+    copied, _ = mod.copy_import_pages(inp, snapshot, target, ids)
+    assert root_count == 1
+    assert len(copied) == 3
+    for row, node_id in zip(snapshot["arguments"], ids.values()):
+        actual = (target / f"imports/fr/arguments/{node_id}.wiki").read_bytes()
+        assert actual == (snapshot_root / row["relative_path"]).read_bytes()
+
+
+def test_cached_snapshot_root_preserves_portability_and_symlink_rejection(tmp_path: Path):
+    source = make_extraction(tmp_path / "source")
+    root = source / "snapshot"
+    cached_root = root.resolve()
+    for relative in ("pages/debate.wiki", "pages/arguments/a.wiki"):
+        assert mod._snapshot_page_path(root, relative) == mod._snapshot_page_path(
+            root, relative, _resolved_root=cached_root,
+        )
+    for relative in ("../outside.wiki", "/etc/passwd", "pages\\bad.wiki", ""):
+        with pytest.raises(mod.CorpusInitError) as normal:
+            mod._snapshot_page_path(root, relative)
+        with pytest.raises(mod.CorpusInitError) as accelerated:
+            mod._snapshot_page_path(root, relative, _resolved_root=cached_root)
+        assert str(normal.value) == str(accelerated.value)
+
+    outside = tmp_path / "outside.wiki"
+    outside.write_text("unsafe", encoding="utf-8")
+    victim = root / "pages/arguments/a.wiki"
+    victim.unlink()
+    victim.symlink_to(outside)
+    with pytest.raises(mod.CorpusInitError, match="extérieure"):
+        mod._snapshot_page_path(
+            root, "pages/arguments/a.wiki", _resolved_root=cached_root,
+        )
+
+
+def test_cached_root_fails_closed_if_snapshot_directory_is_repointed(tmp_path: Path):
+    source = make_extraction(tmp_path / "source")
+    root = source / "snapshot"
+    resolved_root = root.resolve()
+    foreign = tmp_path / "foreign"
+    foreign.mkdir()
+    (foreign / "pages/arguments").mkdir(parents=True)
+    (foreign / "pages/arguments/a.wiki").write_text("tampered", encoding="utf-8")
+    root.rename(tmp_path / "old_snapshot")
+    root.symlink_to(foreign, target_is_directory=True)
+    with pytest.raises(mod.CorpusInitError, match="extérieure"):
+        mod._snapshot_page_path(
+            root, "pages/arguments/a.wiki", _resolved_root=resolved_root,
+        )
