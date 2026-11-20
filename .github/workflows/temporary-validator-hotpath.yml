@@ -129,3 +129,63 @@ jobs:
                       "same_findings_with_full_graph": True
                   }, ensure_ascii=False))
           PY
+      - name: Bound the meta-schema cost with an experimental bypass (NOT production)
+        env:
+          PYTHONPATH: validator/src:kit/scripts
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import statistics
+          import tempfile
+          import time
+          from pathlib import Path
+          from unittest.mock import patch
+
+          from jsonschema import Draft202012Validator
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+          from wikidebia_corpus_init import build_corpus
+          from wikidebia_validator.schema_validation import SchemaStore
+          from wikidebia_validator.validator import validate_package
+          import importlib.metadata as metadata
+
+          store = SchemaStore()
+          print("WIKIDEBIA_META_VERSION " + json.dumps({
+              "jsonschema": metadata.version("jsonschema"),
+              "referencing": metadata.version("referencing"),
+              "digests": {
+                  name: hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")).hexdigest()
+                  for name, value in store.schemas.items()
+              },
+          }))
+          for arguments in (40, 120, 300):
+              with tempfile.TemporaryDirectory(prefix="wikidebia-check-schema-bound-") as tmp:
+                  root = Path(tmp)
+                  source = make_synthetic_extraction(root / "source", arguments=arguments, payload_bytes=1024)
+                  built = root / "built"
+                  build_corpus(source, built, debate_id="benchmark_pretranslation", short_code="BENCH", scope_summary=None, overwrite=False)
+                  samples = {"full_check": [], "unchecked_experiment": []}
+                  baseline = None
+                  for i in range(6):
+                      order = ("full_check", "unchecked_experiment") if i % 2 else ("unchecked_experiment", "full_check")
+                      for mode in order:
+                          start = time.perf_counter()
+                          if mode == "full_check":
+                              report = validate_package(built, scopes=["schema"]).to_dict()
+                          else:
+                              # Research only: never ship a blanket bypass.
+                              with patch.object(Draft202012Validator, "check_schema", return_value=None):
+                                  report = validate_package(built, scopes=["schema"]).to_dict()
+                          samples[mode].append(time.perf_counter() - start)
+                          if baseline is None:
+                              baseline = report
+                          elif baseline != report:
+                              raise RuntimeError("Meta-schema experiment changed validation report")
+                  print("WIKIDEBIA_META_BOUND " + json.dumps({
+                      "arguments": arguments,
+                      "medians_seconds": {k: round(statistics.median(v), 6) for k,v in samples.items()},
+                      "raw_seconds": {k: [round(v, 6) for v in values] for k, values in samples.items()},
+                      "reports_equal": True,
+                      "safe_for_production": False
+                  }))
+          PY
