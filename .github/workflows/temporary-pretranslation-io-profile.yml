@@ -1,0 +1,77 @@
+name: Temporary pretranslation parent I/O profile
+on:
+  pull_request:
+    paths:
+      - .github/workflows/temporary-pretranslation-io-profile.yml
+permissions:
+  contents: read
+jobs:
+  measure:
+    if: github.head_ref == 'perf/pretranslation-resume-io-profiling-20261120'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 23
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r validator/requirements-dev.txt
+      - name: Opt-in accounting and failure cleanup regression tests
+        env:
+          PYTHONPATH: kit/scripts
+        run: python -m pytest -q kit/tests/test_wikidebia_pretranslation_benchmark.py
+      - name: Small offline resume profile with three repetitions
+        env:
+          PYTHONPATH: kit/scripts
+        run: |
+          python kit/scripts/wikidebia_pretranslation_benchmark.py \
+            --project-root . --arguments 40 --payload-bytes 1024 \
+            --iterations 3 --profile-file-io --machine-readable \
+            --output /tmp/pretranslation-io-profile.json > /tmp/benchmark-stdout.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/pretranslation-io-profile.json',encoding='utf-8'))
+          assert r['quality_controls']['same_build_contract']
+          assert r['quality_controls']['exact_receipt_verified']
+          assert r['quality_controls']['wiki_access_performed'] is False
+          for scenario, stages in r['file_io_profile']['counters'].items():
+              for name, metrics in stages.items():
+                  print('IO_STAGE',json.dumps({
+                      'scenario':scenario,
+                      'stage':name,
+                      'read_bytes_calls':metrics['read_bytes_calls']['samples'],
+                      'read_bytes_total_bytes':metrics['read_bytes_total_bytes']['samples'],
+                      'repeated_read_bytes_calls':metrics['read_bytes_repeated_calls']['samples'],
+                      'kit_sha256_calls':metrics['kit_sha256_calls']['samples'],
+                      'kit_sha256_input_bytes':metrics['kit_sha256_input_bytes']['samples'],
+                      'duration_median_seconds':r['scenarios'][scenario]['stage_timings_seconds'][name]['median_seconds'],
+                  },sort_keys=True),flush=True)
+          for name,info in r['scenarios'].items():
+              print('RESUME_TOTAL',json.dumps({
+                  'scenario':name,'median_seconds':info['median_seconds'],
+                  'samples_seconds':info['samples_seconds'],
+              },sort_keys=True),flush=True)
+          PY
+      - name: Confirm original no-profile schema and compare stage timings
+        env:
+          PYTHONPATH: kit/scripts
+        run: |
+          python kit/scripts/wikidebia_pretranslation_benchmark.py \
+            --project-root . --arguments 40 --payload-bytes 1024 \
+            --iterations 3 --machine-readable \
+            --output /tmp/pretranslation-unprofiled.json > /tmp/benchmark-unprofiled-stdout.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/pretranslation-unprofiled.json',encoding='utf-8'))
+          assert 'file_io_profile' not in r
+          assert r['quality_controls']['wiki_access_performed'] is False
+          for name,info in r['scenarios'].items():
+              print('UNPROFILED_TOTAL',json.dumps({
+                  'scenario':name,'median_seconds':info['median_seconds'],
+                  'samples_seconds':info['samples_seconds'],
+                  'stage_medians':{stage:v['median_seconds'] for stage,v in info['stage_timings_seconds'].items()},
+              },sort_keys=True),flush=True)
+          PY
