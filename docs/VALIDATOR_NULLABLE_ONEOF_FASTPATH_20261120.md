@@ -48,6 +48,18 @@ Expérience temporaire [GitHub Actions #44749549202](https://github.com/wikideba
 
 Les rapports complets des corpus valides sont identiques. **12 variantes invalides** ont produit exactement le même rapport, avec le **même gestionnaire natif** dès que les branches accélérées étaient invalides. Ces mesures portent sur un prototype de même principe, et **ne doivent pas être présentées comme des gains réels du serveur**. Les résultats du code de production final sont vérifiés séparément avant fusion.
 
+## Mesure appariée de l'implémentation finale
+
+La comparaison du **véritable code candidat**, sans modification des schémas, a été exécutée par [GitHub Actions #44751111178](https://github.com/wikidebates/wikidebia-project/actions/runs/44751111178) sous Python 3.12 avec les bibliothèques attestées. Le seul commutateur expérimental désactive le nouveau gestionnaire `oneOf` pendant la mesure de la référence ; les autres optimisations du validateur restent identiques dans les deux variantes. Les cinq portées **`schema`, `coherence`, `graph`, `files`, `workflow`** sont toutes exécutées, sur le **même corpus synthétique**. Sept répétitions alternées par variante, et **rapports complets identiques à chaque passage**.
+
+| Arguments | Validation d'origine (médiane) | Validation avec chemin positif court (médiane) | Réduction |
+| ---: | ---: | ---: | ---: |
+| 40 | 0,061930 s | 0,059330 s | 4,20 % |
+| 300 | 0,393545 s | 0,368064 s | 6,47 % |
+| 680 | 0,879003 s | 0,819693 s | **6,75 %** |
+
+Le gain concerne la validation automatisée initiale, **pas** la construction du corpus, la traduction, la publication ou l'usage des crédits Codex. Les durées peuvent varier avec la plateforme et les caches ; **aucun gain sur le corpus réel Debian n'est encore prouvé pour cette nouvelle modification**. Une comparaison historique par `tools/pretranslation_compare_revisions.py` après fusion reste nécessaire.
+
 ## Contrôles de non-régression
 
 `validator/tests/test_registry_nullable_oneof_fastpath.py` ajoute **32 cas de test** : activation uniquement sur les schémas et versions attestés, refus d'un nombre inattendu d'alternatives, invalidation après modification du registre et du schéma commun, métavalidation des schémas modifiés, vérification d'une modification en mémoire de la branche, et comparaison de **rapports complets** sur une extraction synthétique valide et **25 variantes** (statuts, titres français et anglais, nombres, booléens, champs absents, classifications, contexte de `oneOf`, reçus et métadonnées de pages).
