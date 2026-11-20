@@ -65,6 +65,75 @@ def _matches_attested_library_versions() -> bool:
         return False
 
 
+class _UnsafeCommonReference(ValueError):
+    """The prevalidated common-schema reference cannot be inlined safely."""
+
+
+def _inline_attested_common_references(schema: Any, common: Any) -> Any:
+    """Expand acyclic, pure common $refs without changing the source schemas.
+
+    The caller MUST first prove the exact bundled root/common fingerprints
+    and the pinned validator library versions.  The expansion rejects local
+    cycles, mixed $ref siblings, scope-changing keywords and unknown refs.
+    These conditions prevent introducing a different base URI or dynamic
+    reference scope.  An unsuccessful proof must use the original schema.
+    """
+    if not isinstance(schema, dict) or not isinstance(common, dict):
+        raise _UnsafeCommonReference("Schema documents must be objects")
+    definitions = common.get("$defs")
+    if not isinstance(definitions, dict):
+        raise _UnsafeCommonReference("Missing common definitions")
+
+    def expand(value: Any, *, inside_common: bool = False,
+               ancestry: tuple[str, ...] = ()) -> Any:
+        if isinstance(value, list):
+            return [
+                expand(item, inside_common=inside_common, ancestry=ancestry)
+                for item in value
+            ]
+        if not isinstance(value, dict):
+            return value
+
+        if inside_common and set(value).intersection({
+            "$schema", "$id", "$anchor", "$dynamicAnchor",
+            "$dynamicRef", "$recursiveRef", "$recursiveAnchor",
+        }):
+            raise _UnsafeCommonReference("Unsafe reference scope in common definitions")
+
+        if "$ref" in value:
+            if len(value) != 1:
+                if inside_common:
+                    raise _UnsafeCommonReference("Common $ref with siblings")
+                # Keep non-trivial refs in the original source schema intact.
+                return {
+                    key: expand(item, ancestry=ancestry)
+                    for key, item in value.items()
+                }
+            reference = value["$ref"]
+            prefix = "#/$defs/" if inside_common else "common.schema.json#/$defs/"
+            if isinstance(reference, str) and reference.startswith(prefix):
+                definition = reference[len(prefix):]
+                if (
+                    not definition or "/" in definition
+                    or definition not in definitions or definition in ancestry
+                ):
+                    raise _UnsafeCommonReference("Unknown or cyclic common definition")
+                return expand(
+                    definitions[definition], inside_common=True,
+                    ancestry=(*ancestry, definition),
+                )
+            if inside_common:
+                raise _UnsafeCommonReference("Unsupported internal common reference")
+            return dict(value)
+
+        return {
+            key: expand(item, inside_common=inside_common, ancestry=ancestry)
+            for key, item in value.items()
+        }
+
+    return expand(schema)
+
+
 class SchemaStore:
     def __init__(self) -> None:
         schema_dir = files("wikidebia_validator").joinpath("schemas")
@@ -81,6 +150,9 @@ class SchemaStore:
         # caller mutates a schema object in-place between two validations.
         self._compiled: dict[str, tuple[str, Any]] = {}
         self._attested_runtime = _matches_attested_library_versions()
+        # A compiled registry with inlined definitions remains valid only
+        # while the common definitions and runtime attestation still match.
+        self._inlined_registry_common_sha256: str | None = None
 
     def validate(
         self, instance: Any, schema_name: str, *,
@@ -88,6 +160,19 @@ class SchemaStore:
     ) -> list[Any]:
         schema = self.schemas[schema_name]
         fingerprint = _schema_fingerprint(schema)
+        if (
+            schema_name == "argument_registry.schema.json"
+            and self._inlined_registry_common_sha256 is not None
+            and (
+                not self._attested_runtime
+                or _schema_fingerprint(self.schemas.get("common.schema.json"))
+                != self._inlined_registry_common_sha256
+            )
+        ):
+            # Common schemas may be modified in place by a caller: never
+            # continue using a stale inlined snapshot after such a change.
+            self._compiled.pop(schema_name, None)
+            self._inlined_registry_common_sha256 = None
         cached = self._compiled.get(schema_name)
         if cached is None or cached[0] != fingerprint:
             cls = validator_for(schema)
@@ -102,8 +187,22 @@ class SchemaStore:
             )
             if not prechecked:
                 cls.check_schema(schema)
+            validator_schema = schema
+            if schema_name == "argument_registry.schema.json":
+                self._inlined_registry_common_sha256 = None
+                if prechecked:
+                    try:
+                        validator_schema = _inline_attested_common_references(
+                            schema, self.schemas["common.schema.json"]
+                        )
+                    except _UnsafeCommonReference:
+                        # Unknown/schema-evolution paths use the original
+                        # library resolver instead of guessing at equivalence.
+                        validator_schema = schema
+                    else:
+                        self._inlined_registry_common_sha256 = _ATTESTED_COMMON_SHA256
             validator = cls(
-                schema, registry=self.registry, format_checker=self.format_checker,
+                validator_schema, registry=self.registry, format_checker=self.format_checker,
             )
             self._compiled[schema_name] = (fingerprint, validator)
         else:
