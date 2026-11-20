@@ -27,3 +27,14 @@ Les tests `validator/tests/test_registry_status_allof_fastpath.py` comparent les
 Un workflow de **profilage temporaire** mesure en CI des corpus entièrement **synthétiques** de 40 et 680 arguments, en alternant les deux implémentations et en vérifiant l'égalité intégrale des rapports ainsi que l'immuabilité SHA-256 des sources et du corpus. Ce workflow doit être **retiré avant fusion**. Les résultats de CI synthétiques ne doivent pas être présentés comme des mesures réelles sur Debian.
 
 L'optimisation n'effectue ni appels LLM, ni traductions, ni accès aux wikis. Elle ne porte que sur la préparation technique et n'implique aucune économie mesurée de crédits ou de tokens.
+
+## Résultats du premier benchmark synthétique
+
+[GitHub Actions #44777690902](https://github.com/wikidebates/wikidebia-project/actions/runs/44777690902), Python 3.12, `jsonschema 4.26.0`, `referencing 0.37.0`, itérations alternées **dans un même programme** avec tous les autres optimiseurs identiques. Le corpus et l'extraction sont demeurés bit à bit identiques ; pour chaque paire, les rapports complets du validateur sont égaux.
+
+| Taille du corpus | Répétitions par variante | Médiane native (s) | Médiane optimisée (s) | Différence |
+| --- | ---: | ---: | ---: | ---: |
+| 40 arguments | 3 | 0,049253 | 0,049226 | −0,05 % (négligeable) |
+| 680 arguments | 5 | 0,615375 | 0,605276 | **−1,64 %** |
+
+Ces mesures sont **synthétiques**, non des résultats Debian. Le gain est réel mais modeste à l'échelle de l'ensemble du validateur, et la dispersion limite la généralisation. Ne pas interpréter ces chiffres comme un gain sur la génération éditoriale, les traductions ou les reprises déjà vérifiées sans un benchmark spécifique sur le serveur.
