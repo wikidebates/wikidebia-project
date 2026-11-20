@@ -47,7 +47,17 @@ La [CI de la PR #188](https://github.com/wikidebates/wikidebia-project/pull/188)
 - Reprise exacte : médiane **0,296739 → 0,284543 s** (**−4,11 %**).
 - Préparation complète : médiane **1,669149 → 1,680781 s** (**+0,70 %**) à cause de la variabilité des autres étapes dans cet échantillon de trois ; **aucun gain global fiable ne doit être affirmé sur cette première mesure**.
 
-Les durées proviennent de GitHub Actions Ubuntu Python 3.12, pas du serveur Debian. Une nouvelle comparaison à cinq passages est ajoutée avant intégration pour vérifier la direction et l'ordre de grandeur des gains.
+Une seconde comparaison appariée de **cinq répétitions alternées** a ensuite été validée dans [GitHub Actions #44764566600](https://github.com/wikidebates/wikidebia-project/actions/runs/44764566600), avec les mêmes garanties : **694 fichiers identiques**, contrats inchangés, reçus signés vérifiés et aucune consultation des wikis.
+
+| Étape / scénario sur 680 arguments synthétiques | Avant | Après | Variation |
+| --- | ---: | ---: | ---: |
+| Vérification source avant reprise exacte | 0,145107 s | 0,134875 s | **−7,05 %** |
+| Construction du corpus | 0,544684 s | 0,525637 s | **−3,50 %** |
+| Préparation complète avec validation | 1,358339 s | 1,331558 s | **−1,97 %** |
+| Reprise exacte avec reçu vérifié | 0,216546 s | 0,206622 s | **−4,58 %** |
+| Reprise après construction avant reçu | 1,030276 s | 1,025691 s | −0,45 % (pas d'accélération nette du scénario) |
+
+Ces durées proviennent de GitHub Actions Ubuntu Python 3.12, **pas** du serveur Debian. Les deux campagnes comportent des temps absolus très différents, reflétant probablement les caractéristiques ou la charge des runners : **ne pas** comparer les absolus entre campagnes. En revanche, la direction des gains de vérification source et de construction est cohérente **au sein** de chaque comparaison appariée.
 
 ## Conditions d'intégration
 
