@@ -103,6 +103,12 @@ def _split_top_level(text: str, delimiter: str, maxsplit: int = -1) -> list[str]
     """
     if not delimiter:
         raise ValueError("Le séparateur ne peut pas être vide")
+    # No delimiter can be consumed when the caller requests zero splits.
+    # This also avoids scanning an arbitrarily long historical parameter.
+    if maxsplit == 0:
+        # Preserve the legacy result type for str subclasses: the original
+        # exhausted loop appended text[0:] rather than the input object.
+        return [text[:]]
     parts: list[str] = []
     start = 0
     splits = 0
@@ -152,6 +158,12 @@ def _split_top_level(text: str, delimiter: str, maxsplit: int = -1) -> list[str]
             i += delimiter_length
             start = i
             splits += 1
+            # A bounded split returns its tail verbatim. Continuing to scan
+            # cannot affect any result element once this limit is reached.
+            # In particular, maxsplit=1 is the common key=value parsing path.
+            if maxsplit > 0 and splits == maxsplit:
+                parts.append(text[start:])
+                return parts
             continue
         i += 1
     parts.append(text[start:])
