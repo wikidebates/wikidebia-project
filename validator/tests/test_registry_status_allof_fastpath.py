@@ -313,3 +313,54 @@ def test_subclass_and_modified_condition_keyword_implementations_cannot_be_skipp
                 override_cls({"allOf": clauses}, registry=store.registry),
                 instance,
             )
+
+
+def test_proven_false_branches_really_avoid_native_descend():
+    _, clauses, _, optimized = _allof_validators()
+    cls = type(optimized)
+    original_descend = cls.descend
+    descended_allof_indices = []
+
+    def audited_descend(self, instance, schema, path=None, schema_path=None, resolver=None):
+        if isinstance(schema_path, int):
+            descended_allof_indices.append(schema_path)
+        yield from original_descend(
+            self, instance, schema, path=path, schema_path=schema_path, resolver=resolver,
+        )
+
+    with patch.object(cls, "descend", audited_descend):
+        # All four non-else checks are false: none requires descending.
+        assert _errors(optimized, {"check_status": "future_status"}) == []
+        assert descended_allof_indices == []
+        # A satisfied 'if' must still descend into 'then', even if invalid.
+        assert _errors(
+            optimized, {"check_status": "unchecked", "checked_at": False},
+        )
+        assert descended_allof_indices == [0]
+
+
+def test_numeric_depth_with_else_remains_fully_native():
+    store = sv.SchemaStore()
+    store._attested_runtime = True
+    store.validate({}, REGISTRY)
+    compiled = store._compiled[REGISTRY][1]
+    schema = {
+        "allOf": (
+            compiled.schema["properties"]["graph"]["properties"]["occurrences"]
+            ["items"]["allOf"]
+        ),
+    }
+    native = validator_for(store.schemas[REGISTRY])(
+        schema, registry=store.registry, format_checker=store.format_checker,
+    )
+    candidate = type(compiled)(
+        schema, registry=store.registry, format_checker=store.format_checker,
+    )
+    for instance in (
+        {"depth": 1, "parent_occurrence_id": "INVALID"},
+        {"depth": 2, "parent_occurrence_id": None},
+        {"depth": True},
+        {"depth": None},
+        {},
+    ):
+        assert _errors(candidate, instance) == _errors(native, instance)
