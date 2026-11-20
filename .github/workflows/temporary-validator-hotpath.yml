@@ -198,7 +198,8 @@ jobs:
           import subprocess
           import xml.etree.ElementTree as ET
           root = ET.parse("/tmp/schema-validator-tests.xml").getroot()
-          count = int(root.get("tests")) - int(root.get("skipped", "0")) - int(root.get("failures", "0")) - int(root.get("errors", "0"))
+          suites = [root] if root.get("tests") is not None else list(root.findall("./testsuite"))
+          count = sum(int(row.get("tests", "0")) - int(row.get("skipped", "0")) - int(row.get("failures", "0")) - int(row.get("errors", "0")) for row in suites)
           print("WIKIDEBIA_NEW_VALIDATOR_TEST_COUNT", count, flush=True)
           subprocess.run([
               "python", "validator/scripts/refresh_package_metadata.py",
@@ -210,4 +211,47 @@ jobs:
               "validator/PACKAGE_MANIFEST_SHA256.json",
               "validator/PACKAGE_RECEIPT.json"], check=True)
           print("WIKIDEBIA_END_META_DIFF", flush=True)
+          PY
+      - name: Compare attested vs full metaschema checks with alternating identical inputs
+        env:
+          PYTHONPATH: validator/src:kit/scripts
+        run: |
+          python - <<'PY'
+          import json
+          import statistics
+          import tempfile
+          import time
+          from pathlib import Path
+          from unittest.mock import patch
+          from wikidebia_pretranslation_benchmark import make_synthetic_extraction
+          from wikidebia_corpus_init import build_corpus
+          from wikidebia_validator import schema_validation as sv
+          from wikidebia_validator.validator import validate_package
+
+          for arguments in (40, 120, 300):
+              with tempfile.TemporaryDirectory(prefix="wikidebia-attestation-pair-") as tmp:
+                  root = Path(tmp)
+                  source = make_synthetic_extraction(root / "source", arguments=arguments, payload_bytes=1024)
+                  built = root / "built"
+                  build_corpus(source, built, debate_id="benchmark_pretranslation", short_code="BENCH", scope_summary=None, overwrite=False)
+                  samples = {"full_metaschema": [], "attested": []}
+                  baseline = None
+                  for repeat in range(6):
+                      for mode in (("full_metaschema", "attested") if repeat % 2 else ("attested", "full_metaschema")):
+                          with patch.object(sv, "_matches_attested_library_versions", return_value=mode == "attested"):
+                              started = time.perf_counter()
+                              report = validate_package(built, scopes=["schema"]).to_dict()
+                              samples[mode].append(time.perf_counter() - started)
+                          if baseline is None:
+                              baseline = report
+                          elif baseline != report:
+                              raise RuntimeError("Attestation changed the full report")
+                  medians = {k: round(statistics.median(v), 6) for k,v in samples.items()}
+                  print("WIKIDEBIA_ATTESTED_PAIR " + json.dumps({
+                      "arguments": arguments,
+                      "medians_seconds": medians,
+                      "raw_seconds": {k: [round(v, 6) for v in values] for k, values in samples.items()},
+                      "percent_reduction": round(100*(1 - medians["attested"]/medians["full_metaschema"]), 2),
+                      "reports_equal": True,
+                  }))
           PY
