@@ -198,8 +198,13 @@ def test_bounded_split_keeps_unmatched_or_nested_rest_verbatim():
 def test_zero_split_returns_identical_string_without_any_character_scans(delimiter: str):
     class NoIndexText(str):
         def __getitem__(self, key):
-            raise AssertionError("zero-split path must not scan the string")
+            if isinstance(key, int):
+                raise AssertionError("zero-split path must not scan the string")
+            return super().__getitem__(key)
 
     text = NoIndexText("{{{not closed [[strange ]] |= " + "z" * 30000)
-    assert graph._split_top_level(text, delimiter, maxsplit=0) == [text]
-    assert _legacy_split_top_level(str(text), delimiter, maxsplit=0) == [str(text)]
+    actual = graph._split_top_level(text, delimiter, maxsplit=0)
+    # The original returns the full slice, which is a plain str even if the
+    # input is a subclass. Preserve exact output types and values.
+    assert actual == _legacy_split_top_level(text, delimiter, maxsplit=0)
+    assert type(actual[0]) is str
