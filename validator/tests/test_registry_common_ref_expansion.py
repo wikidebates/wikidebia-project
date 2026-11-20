@@ -94,6 +94,13 @@ def test_changed_registry_schema_is_not_inlined_and_gets_meta_checked():
     with pytest.raises(SchemaError):
         store.validate({}, REGISTRY)
     assert store._inlined_registry_common_sha256 is None
+    assert REGISTRY not in store._compiled
+    # Even if the original registry schema is restored, a subsequent
+    # common-definition change must never resurrect a stale optimized copy.
+    store.schemas[REGISTRY]["properties"]["graph"]["properties"]["nodes"]["type"] = "array"
+    store.schemas[COMMON]["$defs"]["nodeId"]["pattern"] = "^B[0-9]{4,}$"
+    store.validate({}, REGISTRY)
+    assert store._compiled[REGISTRY][1].schema is store.schemas[REGISTRY]
 
 
 def test_unattested_new_store_keeps_original_validator_schema():
