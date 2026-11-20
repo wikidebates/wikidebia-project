@@ -107,7 +107,7 @@ CASES = (
 def test_realistic_and_malformed_template_and_metadata_parity(text: str):
     assert graph._template_spans(text) == _legacy_template_spans(text)
     for delimiter in ("|", "=", "||", "::", "[[", "}}", "é"):
-        for limit in (-1, 0, 1, 3):
+        for limit in (-2, -1, 0, 1, 2, 3, 5):
             assert graph._split_top_level(text, delimiter, limit) == (
                 _legacy_split_top_level(text, delimiter, limit)
             )
@@ -141,7 +141,7 @@ def test_seeded_malformed_and_nested_differential_parser(seed: int):
         text = "".join(rng.choices(alphabet, k=size))
         assert graph._template_spans(text) == _legacy_template_spans(text)
         delimiter = rng.choice(delimiters)
-        maxsplit = rng.choice((-1, 0, 1, 2, 4))
+        maxsplit = rng.choice((-2, -1, 0, 1, 2, 4))
         assert graph._split_top_level(text, delimiter, maxsplit) == (
             _legacy_split_top_level(text, delimiter, maxsplit)
         )
@@ -156,3 +156,50 @@ def test_seeded_malformed_and_nested_differential_parser(seed: int):
 def test_empty_delimiter_fails_fast_instead_of_looping_forever():
     with pytest.raises(ValueError, match="séparateur"):
         graph._split_top_level("texte", "")
+
+
+@pytest.mark.parametrize("maxsplit", [0, 1, 2])
+def test_bounded_split_never_scans_a_tail_after_its_last_allowed_delimiter(maxsplit: int):
+    """Large historical summaries must stay intact after a key=value split."""
+    class TrackedText(str):
+        reads = 0
+
+        def __getitem__(self, key):
+            if isinstance(key, int):
+                self.reads += 1
+            return super().__getitem__(key)
+
+    prefix = "key=" if maxsplit == 1 else ("one|two|" if maxsplit == 2 else "")
+    tail = ("texte \u00e9clairci [[A|affich\u00e9]] {{Mod\u00e8le|a=b}} "
+            + "x" * 20000 + "}}} {{|=||[[") * 2
+    source = TrackedText(prefix + tail)
+    delimiter = "=" if maxsplit == 1 else "|"
+    expected = _legacy_split_top_level(source, delimiter, maxsplit)
+    assert graph._split_top_level(source, delimiter, maxsplit) == expected
+    assert source.reads <= len(prefix) + 4
+
+
+def test_bounded_split_keeps_unmatched_or_nested_rest_verbatim():
+    suffix = "}}} {{broken|a=b [[unterminated | x " + ("*" * 8192)
+    examples = (
+        ("nom=" + suffix, "=", 1),
+        ("name=[[a|b]]|value=" + suffix, "|", 1),
+        ("one|two|" + suffix, "|", 2),
+        ("word[[a=b]]|" + suffix, "|", 1),
+        ("no separator " + suffix, "=", 1),
+    )
+    for text, delimiter, maxsplit in examples:
+        assert graph._split_top_level(text, delimiter, maxsplit) == (
+            _legacy_split_top_level(text, delimiter, maxsplit)
+        )
+
+
+@pytest.mark.parametrize("delimiter", ["|", "=", "||"])
+def test_zero_split_returns_identical_string_without_any_character_scans(delimiter: str):
+    class NoIndexText(str):
+        def __getitem__(self, key):
+            raise AssertionError("zero-split path must not scan the string")
+
+    text = NoIndexText("{{{not closed [[strange ]] |= " + "z" * 30000)
+    assert graph._split_top_level(text, delimiter, maxsplit=0) == [text]
+    assert _legacy_split_top_level(text, delimiter, maxsplit=0) == [text]
