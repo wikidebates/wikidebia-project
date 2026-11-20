@@ -88,4 +88,24 @@ jobs:
                       'codes':[x['code'] for x in before['baseline']['findings']],
                       'complete_report_equal':True
                   },sort_keys=True),flush=True)
+
+          # Demonstrate the actual incident: the pinned historical cycle
+          # traversal aborts with WDV-INT-001 beyond recursion depth, while
+          # the new traversal completes the exact same valid graph.
+          from validator.tests.test_graph_iterative_cycles import _deep_package
+          with tempfile.TemporaryDirectory(prefix='cycle-long-proof-') as root:
+              package=Path(root)
+              _deep_package(package,chain_length=1150)
+              with patch.object(driver,'validate_graph',old.validate_graph):
+                  old_report=driver.validate_package(package,scopes=['graph'])
+              new_report=driver.validate_package(package,scopes=['graph'])
+              old_codes=[f.code for f in old_report.findings]
+              new_codes=[f.code for f in new_report.findings]
+              assert 'WDV-INT-001' in old_codes,old_codes
+              assert 'WDV-INT-001' not in new_codes,new_codes
+              assert new_report.errors==0,new_codes
+              print('DEEP_PROOF',json.dumps({
+                  'nodes':1152,'old_codes':old_codes,'new_codes':new_codes,
+                  'old_internal_failure_reproduced':True,'new_graph_validation_passed':True
+              },sort_keys=True),flush=True)
           PY
