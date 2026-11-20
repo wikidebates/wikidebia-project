@@ -1,116 +1,111 @@
-name: Temporary corpus-build hotpath profile
+name: Temporary parser exact-output and speed comparison
 on:
   pull_request:
     branches: [main]
 permissions:
   contents: read
 jobs:
-  profile:
+  parser-proof:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - run: python -m pip install -r validator/requirements-dev.txt
-      - name: Profile only offline corpus construction (not wiki, not translation)
+      - name: Prove exact built file parity and measure old/new parser on offline synthetic inputs
         env:
-          PYTHONPATH: kit/scripts
+          PYTHONPATH: kit/scripts:kit/tests
         run: |
           python - <<'PY'
-          import cProfile
           import hashlib
           import json
-          import pstats
           import statistics
           import tempfile
           import time
-          from contextlib import ExitStack
-          from functools import wraps
           from pathlib import Path
           from unittest.mock import patch
+
           import wikidebia_corpus_init as ci
+          import wikidebia_graph_extract as ge
+          from test_graph_extract_parser_fastpath import (
+              _legacy_template_spans, _legacy_split_top_level,
+          )
           from wikidebia_pretranslation_benchmark import make_synthetic_extraction
 
-          FUNCTIONS = (
-              "resolve_extraction_input", "verify_extraction",
-              "make_build_contract", "source_fingerprint",
-              "ordered_titles", "copy_import_pages", "extract_page_metadata",
-              "build_graph_objects", "compute_derived", "write_json",
-              "sha256_file", "write_build_contract_record",
-          )
+          def file_hashes(root):
+              return {
+                  path.relative_to(root).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+                  for path in sorted(root.rglob("*")) if path.is_file()
+              }
 
           for arguments in (40, 300, 878):
-              with tempfile.TemporaryDirectory(prefix="wikidebia-build-hotpath-") as tmp:
+              with tempfile.TemporaryDirectory(prefix="wikidebia-parser-parity-") as tmp:
                   root=Path(tmp)
-                  source=make_synthetic_extraction(root/"source", arguments=arguments, payload_bytes=1024)
-                  times=[]
-                  observed={name: [] for name in FUNCTIONS}
-                  contracts=set()
-                  for iteration in range(3):
-                      output=root/f"build-{iteration}"
-                      with ExitStack() as stack:
-                          for name in FUNCTIONS:
-                              original=getattr(ci,name)
-                              def wrapper(*args, _original=original, _name=name, **kwargs):
-                                  tick=time.perf_counter()
-                                  try:
-                                      return _original(*args, **kwargs)
-                                  finally:
-                                      observed[_name].append(time.perf_counter()-tick)
-                              stack.enter_context(patch.object(ci,name,wrapper))
-                          tick=time.perf_counter()
-                          result=ci.build_corpus(
-                              source, output, debate_id="benchmark_pretranslation",
-                              short_code="BENCH", scope_summary=None, overwrite=False,
-                          )
-                          times.append(time.perf_counter()-tick)
-                      if result["status"]!="created":
-                          raise RuntimeError("Unexpected build state")
-                      contracts.add(result["build_contract_sha256"])
-                  if len(contracts)!=1:
-                      raise RuntimeError("Build contracts changed during profiling")
-                  measurements={
-                      name: {
-                          "calls": len(values),
-                          "total_seconds": round(sum(values), 6),
-                          "median_seconds_per_call": round(statistics.median(values), 6)
-                          if values else 0,
-                      }
-                      for name, values in observed.items()
-                  }
-                  print("WIKIDEBIA_BUILD_STAGE_PROFILE "+json.dumps({
-                      "arguments": arguments,
-                      "samples_seconds": [round(x,6) for x in times],
-                      "median_seconds": round(statistics.median(times),6),
-                      "instrumented_function_calls": measurements,
-                      "contract_sha256": next(iter(contracts)),
-                  }),flush=True)
-
-                  profiler=cProfile.Profile()
-                  profiler.enable()
-                  result=ci.build_corpus(
-                      source, root/"profiled",
-                      debate_id="benchmark_pretranslation", short_code="BENCH",
-                      scope_summary=None, overwrite=False,
-                  )
-                  profiler.disable()
-                  if result["build_contract_sha256"] not in contracts:
-                      raise RuntimeError("Profiler changed build contract")
-                  pstats_data=pstats.Stats(profiler)
-                  top=[]
-                  for (path,line,fn),(_primitive,calls,own,cumulative,_callers) in pstats_data.stats.items():
-                      if cumulative>0.0005:
-                          top.append({
-                              "source":f"{Path(path).name}:{line}:{fn}",
-                              "calls":calls,
-                              "own_seconds":round(own,6),
-                              "cumulative_seconds":round(cumulative,6),
-                          })
-                  top.sort(key=lambda item:item["cumulative_seconds"],reverse=True)
-                  print("WIKIDEBIA_BUILD_CPROFILE "+json.dumps({
+                  source=make_synthetic_extraction(root/"source",arguments=arguments,payload_bytes=1024)
+                  samples={"legacy":[],"optimized":[]}
+                  expected=None
+                  for iteration in range(5):
+                      sequence=("legacy","optimized") if iteration%2 else ("optimized","legacy")
+                      for mode in sequence:
+                          target=root/f"{mode}-{iteration}"
+                          original_spans=(ge._template_spans if mode=="optimized" else _legacy_template_spans)
+                          original_split=(ge._split_top_level if mode=="optimized" else _legacy_split_top_level)
+                          with (
+                              patch.object(ge, "_template_spans", original_spans),
+                              patch.object(ge, "_split_top_level", original_split),
+                              patch.object(ci, "now_iso", lambda: "2026-11-20T12:00:00+00:00"),
+                          ):
+                              started=time.perf_counter()
+                              result=ci.build_corpus(
+                                  source,target,debate_id="benchmark_pretranslation",
+                                  short_code="BENCH",scope_summary=None,overwrite=False,
+                              )
+                              samples[mode].append(time.perf_counter()-started)
+                          if result["status"]!="created":
+                              raise RuntimeError("Corpus build not created")
+                          hashes=file_hashes(target)
+                          proof=(result["build_contract_sha256"],hashes)
+                          if expected is None:
+                              expected=proof
+                          elif expected!=proof:
+                              missing=sorted(set(expected[1])^set(hashes))
+                              changed=sorted(k for k in set(expected[1])&set(hashes) if expected[1][k]!=hashes[k])
+                              raise RuntimeError(
+                                  f"Changed source/output under {mode}, {arguments}: "
+                                  f"missing={missing[:8]}, changed={changed[:8]}"
+                              )
+                  before=statistics.median(samples["legacy"])
+                  after=statistics.median(samples["optimized"])
+                  print("WIKIDEBIA_PARSER_BUILD_PAIR "+json.dumps({
                       "arguments":arguments,
-                      "top_cumulative":top[:42],
-                      "profiled_contract_identical":True,
+                      "medians_seconds":{"legacy":round(before,6),"optimized":round(after,6)},
+                      "raw_seconds":{k:[round(v,6) for v in values] for k,values in samples.items()},
+                      "relative_reduction_percent":round(100*(1-after/before),2),
+                      "identical_file_hashes":True,
+                      "file_count":len(expected[1]),
+                      "contract_sha256":expected[0],
+                      "frozen_output_timestamp":True,
                   }),flush=True)
+          PY
+      - name: Run kit regression suite and derive signed package metadata without pushing from CI
+        env:
+          PYTHONPATH: kit/scripts
+        run: |
+          python -m pytest -q kit/tests --junitxml=/tmp/parser-kit-tests.xml
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess
+          import xml.etree.ElementTree as ET
+          root=ET.parse("/tmp/parser-kit-tests.xml").getroot()
+          suites=[root] if root.get("tests") is not None else list(root.findall("./testsuite"))
+          count=sum(int(x.get("tests","0"))-int(x.get("failures","0"))-int(x.get("errors","0"))-int(x.get("skipped","0")) for x in suites)
+          print("WIKIDEBIA_PARSER_KIT_TEST_COUNT",count,flush=True)
+          subprocess.run(["python","kit/scripts/refresh_package_metadata.py",
+                          "--junit-xml","/tmp/parser-kit-tests.xml", "--generated-date","2026-11-20"],check=True)
+          print("WIKIDEBIA_PARSER_BEGIN_METADATA_DIFF",flush=True)
+          subprocess.run(["git","diff","--","kit/PACKAGE_MANIFEST_SHA256.json",
+                          "kit/PACKAGE_RECEIPT.json","kit/TEST_REPORT.txt"],check=True)
+          print("WIKIDEBIA_PARSER_END_METADATA_DIFF",flush=True)
           PY
