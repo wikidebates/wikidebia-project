@@ -217,6 +217,89 @@ def _guarded_registry_nullable_oneof(cls: Any, expanded: Any) -> Any:
     return extend(cls, validators={"oneOf": guarded_oneof})
 
 
+# The canonical, safely expanded and SHA-256-attested registry contains 49
+# conditions whose entire test is a string-valued status const/enum. The
+# built-in implementation creates a nested validator to evaluate each such
+# condition. For a string value present at the expected key, its truth value
+# can instead be proved by direct comparison. The original 'then'/'else'
+# schema is still validated through validator.descend, preserving diagnostics.
+_ATTESTED_REGISTRY_STATUS_IF_COUNT = 49
+_STATUS_IF_FIELDS = frozenset({
+    "status", "check_status", "title_status", "occurrence_role", "result",
+})
+
+
+def _guarded_registry_status_if(cls: Any, expanded: Any) -> Any:
+    """Shortcut proven string-status conditions only within the attested registry.
+
+    Caller must first check the exact source/common SHA-256 and library
+    versions, then safely inline common refs. Never mutate the JSON schemas.
+    Missing/wrong-type status values, changed compiled conditions, or
+    unexpected rules use jsonschema's original if handler verbatim.
+    """
+    eligible: dict[int, tuple[str, str, str | tuple[str, ...]]] = {}
+
+    def scan(obj: Any) -> None:
+        if isinstance(obj, list):
+            for item in obj:
+                scan(item)
+        elif isinstance(obj, dict):
+            condition = obj.get("if")
+            if isinstance(condition, dict) and set(condition) == {"properties"}:
+                props = condition["properties"]
+                if isinstance(props, dict) and len(props) == 1:
+                    field, test = next(iter(props.items()))
+                    if field in _STATUS_IF_FIELDS and isinstance(test, dict):
+                        if set(test) == {"const"} and isinstance(test["const"], str):
+                            eligible[id(obj)] = (field, "const", test["const"])
+                        elif (
+                            set(test) == {"enum"}
+                            and isinstance(test["enum"], list)
+                            and bool(test["enum"])
+                            and all(isinstance(item, str) for item in test["enum"])
+                        ):
+                            eligible[id(obj)] = (field, "enum", tuple(test["enum"]))
+            for item in obj.values():
+                scan(item)
+
+    scan(expanded)
+    original_if = cls.VALIDATORS.get("if")
+    if len(eligible) != _ATTESTED_REGISTRY_STATUS_IF_COUNT or original_if is None:
+        return cls
+
+    def guarded_if(
+        validator: Any, if_schema: Any, instance: Any, schema: Any,
+    ) -> Any:
+        proof = eligible.get(id(schema))
+        if proof is not None and isinstance(schema, dict) and isinstance(instance, dict):
+            field, kind, expected = proof
+            value = instance.get(field)
+            if (
+                isinstance(value, str)
+                and set(schema).issubset({"if", "then", "else"})
+                and schema.get("if") is if_schema
+                and if_schema == {"properties": {
+                    field: (
+                        {"const": expected} if kind == "const"
+                        else {"enum": list(expected)}
+                    ),
+                }}
+            ):
+                # JSON Schema 'properties' does not reject absent keys or
+                # non-objects; both cases are deliberately delegated below.
+                # Here a present string means the entire if test is decided.
+                matches = value == expected if kind == "const" else value in expected
+                branch = "then" if matches else "else"
+                if branch in schema:
+                    yield from validator.descend(
+                        instance, schema[branch], schema_path=branch,
+                    )
+                return
+        yield from original_if(validator, if_schema, instance, schema)
+
+    return extend(cls, validators={"if": guarded_if})
+
+
 class SchemaStore:
     def __init__(self) -> None:
         schema_dir = files("wikidebia_validator").joinpath("schemas")
@@ -291,6 +374,7 @@ class SchemaStore:
                     else:
                         self._inlined_registry_common_sha256 = _ATTESTED_COMMON_SHA256
                         cls = _guarded_registry_nullable_oneof(cls, validator_schema)
+                        cls = _guarded_registry_status_if(cls, validator_schema)
             validator = cls(
                 validator_schema, registry=self.registry, format_checker=self.format_checker,
             )
