@@ -2793,6 +2793,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--root", type=Path, default=Path.cwd(), help=argparse.SUPPRESS)
     sub = parser.add_subparsers(dest="command", required=True)
 
+    from wikidebia_creation_init import add_arguments as add_creation_init_arguments
+    for name in ('creation-prepare', 'creation-init'):
+        add_creation_init_arguments(sub.add_parser(name, help='Initialiser un corpus nouveau apres revue explicite'),
+                                    preparing=name == 'creation-prepare')
+
     from wikidebia_creation_import import add_arguments as add_creation_import_arguments
     for name in ('creation-package', 'creation-import'):
         add_creation_import_arguments(sub.add_parser(name, help='Brouillons francais locaux, sans validation ni publication'),
@@ -3374,6 +3379,14 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     root = args.root.expanduser().resolve()
+    if args.command in {'creation-prepare', 'creation-init'}:
+        from wikidebia_creation_init import main as creation_init_main
+        command = ['--project-root', str(root), 'prepare' if args.command == 'creation-prepare' else 'init']
+        if args.command == 'creation-prepare':
+            command.extend(['--plan', args.plan])
+        elif args.archive:
+            command.extend(['--archive', args.archive])
+        return creation_init_main(command)
     if args.command in {'creation-package', 'creation-import'}:
         from wikidebia_creation_import import main as creation_import_main
         command = ['--project-root', str(root), 'prepare' if args.command == 'creation-package' else 'import',

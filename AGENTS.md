@@ -33,3 +33,9 @@ Pour les pages françaises préexistantes, conserver chaque `titre-affiché` con
 - Conserver les recherches effectivement réalisées dans `editable/RESEARCH.json` du paquet `creation-package`, puis importer avec `creation-import`. Lire `context/RESEARCH_HELP.md` pour le format ; un fichier vide reste sans effet.
 - Réutiliser les notes ciblées de `CORPUS_CONTEXT.json` sans relire le carnet entier. Vérifier leur date, les variantes et les drapeaux de changement ; une recherche négative ne prouve jamais l'absence de source. Ne jamais fabriquer des recherches, consultations ou preuves historiques.
 - `--research-only [--page-id IDENTIFIANT]` conserve tous les textes et statuts `unchanged`. Les notes ne valident ni source ni page et ne modifient pas `sources.json`. Les références retenues doivent encore suivre le workflow documentaire ordinaire. Voir `kit/GUIDE_CREATION_RESEARCH.md`.
+
+## Initialisation d'une création française
+
+- Pour un débat nouveau sans corpus, utiliser `creation-prepare --plan incoming/plan.json`, puis rendre la revue complète avec `creation-init --archive incoming/plan_revu.zip`. Voir `kit/GUIDE_CREATION_INIT.md` et le plan fictif non approuvé dans `kit/examples/creation_plan.example.json`.
+- Le plan ne constitue pas une approbation. Examiner réellement cadrage, omissions, titres, occurrences et lots ; ne jamais cocher les attestations automatiquement. Un rejet demande une correction du plan puis une nouvelle revue complète.
+- L'installation enregistre le graphe approuvé, pas des pages validées. Elle prépare le premier paquet de rédaction sans publier. Ne pas fabriquer de snapshot wiki, de date de page ou de recherche pour satisfaire un contrôle ; ne pas initialiser par-dessus un corpus existant. Une relance du même retour préserve toute progression ultérieure.

@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-validator.zip",
   "version_source": "VERSIONS.json",
-  "declared_file_count": 528,
-  "declared_test_count": 1162,
+  "declared_file_count": 529,
+  "declared_test_count": 1189,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -789,12 +789,12 @@
     {
       "path": "docs/SELF_AUDIT_REPORT.txt",
       "size_bytes": 728,
-      "sha256": "90ade3de07c0b9156784199f08e39efae814551c2eaf501d00cdd878b345d6da"
+      "sha256": "979a395e652ede9fb765d2f99de38008d254c17620112fb2cb65a7f85d584f19"
     },
     {
       "path": "docs/TEST_REPORT.txt",
       "size_bytes": 1335,
-      "sha256": "a61cfc4a4f7be92474be9891918dfe7e33fe1c33b742f0f2ec83f3b32a3cbba5"
+      "sha256": "25e458a0b27daacf224df17c28143e1127a119d850fe3e9b058ca6dcc2aa6dd0"
     },
     {
       "path": "docs/history/README.md",
@@ -1773,8 +1773,8 @@
     },
     {
       "path": "src/wikidebia_validator/coherence.py",
-      "size_bytes": 25380,
-      "sha256": "dea9cc769774b09c9d42a4ea8c573e15e99659ad2946aed4a2782fb81bdfe6ba"
+      "size_bytes": 27734,
+      "sha256": "76f27e69b8e1367601d3f3fb4f2e62064982454ed8701350b9c91251e3a100ca"
     },
     {
       "path": "src/wikidebia_validator/editorial.py",
@@ -2110,6 +2110,11 @@
       "path": "tests/test_corrective_119.py",
       "size_bytes": 5157,
       "sha256": "f4f34e54198cb9f807dd46d823d9e992f88e4d07d6c09aa013698f1534136fe3"
+    },
+    {
+      "path": "tests/test_creation_planned_name_discovery.py",
+      "size_bytes": 4364,
+      "sha256": "8ab86da22e96ed01912e929a910f7e4b994eb25e09be24ab126a86386fcc6b12"
     },
     {
       "path": "tests/test_cross_component_schema_1261.py",
