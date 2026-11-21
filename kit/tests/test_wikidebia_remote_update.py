@@ -1666,3 +1666,44 @@ def test_signed_plan_still_blocks_config_divergence_across_versions(tmp_path):
         assert "config_sha256" in str(exc)
     else:
         raise AssertionError("un plan signé pour une autre configuration a été accepté")
+
+def test_interlanguage_only_comparison_rejects_changes_outside_main_template():
+    original = "{{Argument\n|résumé=Source gelée\n|rubriques=Philosophie\n}}\n[[Catégorie:Source]]\n<!-- note -->\n"
+    proposed, kind = module.add_french_interlanguage_to_remote(
+        original, "argument", "English title"
+    )
+    assert kind == "template_added"
+    assert module.only_french_interlanguage_addition(
+        original, proposed, "argument", "English title"
+    )
+    assert module.only_french_interlanguage_overlay(
+        original, proposed, "argument", "English title"
+    )
+    for changed in (
+        proposed.replace("[[Catégorie:Source]]", "[[Catégorie:Autre]]"),
+        proposed.replace("<!-- note -->", "<!-- modified -->"),
+        proposed + "Ajout non autorisé",
+        proposed.rstrip("\n"),
+    ):
+        assert not module.only_french_interlanguage_addition(
+            original, changed, "argument", "English title"
+        )
+        assert not module.only_french_interlanguage_overlay(
+            original, changed, "argument", "English title"
+        )
+
+
+def test_redirect_interlanguage_preserves_original_trailing_whitespace():
+    original = "#REDIRECTION [[Cible historique]]\n\n<!-- conservé -->\n\n"
+    result, kind = module.add_french_interlanguage_to_remote(
+        original, "argument", "English title"
+    )
+    assert kind == "redirect_added"
+    assert result == original + "[[en:English title]]\n"
+    assert module.only_french_interlanguage_overlay(
+        original, result, "argument", "English title"
+    )
+    assert not module.only_french_interlanguage_overlay(
+        original, result.replace("\n\n<!-- conservé -->", "\n<!-- conservé -->"),
+        "argument", "English title"
+    )
