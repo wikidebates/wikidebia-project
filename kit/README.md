@@ -1,3 +1,14 @@
+
+## Publication finale préparée, sans écriture automatique
+
+Le workflow termine la convergence, le rendu et la release, construit en lecture seule les plans EN/FR signés et s'arrête à `publication_prepared`. L'utilisateur examine les rapports sous `.state/final-publication/<debate_id>/<work_id>/` et confirme explicitement le préflight :
+
+```bash
+./wikidebia workflow-publish <debate_id> --confirm-preflight-sha256 <sha256>
+```
+
+Cette commande recharge les plans signés, vérifie à nouveau les cibles distantes et refuse les changements concurrents. Un reçu de reprise doit rester lié au même préflight. La reprise d'une modification interlangue française dont `chatgpt` manque ne crée pas une nouvelle révision : elle ne rétablit la balise que sur une révision exacte attestée (parent, auteur, résumé, contenu et révision courante), avec droit `changetags` vérifié.
+
 # Wikidéb’IA Kit 2.16.47
 
 La réconciliation accepte désormais l’adoption explicite d’un Work local déjà

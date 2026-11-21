@@ -85,7 +85,7 @@ from wikidebia_translation_review import (
 from wikidebia_semantic_convergence import record_pass as record_semantic_pass
 from wikidebia_render import render_workspace
 from wikidebia_release import release_workspace
-from wikidebia_final_publication import publish_final_release, FinalPublicationError
+from wikidebia_final_publication import publish_final_release, prepare_final_release, FinalPublicationError
 from wikidebia_post_publication import reconcile_published_workspace
 from wikidebia_french_checkpoint import publish_checkpoint, FrenchCheckpointError
 from wikidebia_workflow_baseline import resolve_workflow_release_baseline, WorkflowBaselineError, PRESERVED_IMPORT_MODE, PRESERVED_IMPORT_POLICY
@@ -200,7 +200,7 @@ def _ensure_access_preflight(project_root: Path, state: dict[str, Any]) -> dict[
     contract_sha = access_contract_sha256(project_root)
     receipt_path = _workflow_root(project_root, str(state["debate_id"])) / "access-preflight.json"
     publication_boundary = state.get("phase") in {
-        "release_ready", "final_publication", "final_publication_resume",
+        "release_ready", "publication_prepared", "final_publication", "final_publication_resume",
     }
     if receipt_path.is_file():
         receipt = load_json(receipt_path, "reçu du diagnostic d’accès")
@@ -247,8 +247,8 @@ def _ensure_access_preflight(project_root: Path, state: dict[str, Any]) -> dict[
         phase = str(state.get("phase") or "")
         if phase in {"final_publication", "final_publication_resume"}:
             state["status"] = "final_publication"
-        elif phase == "release_ready":
-            state["status"] = "release_ready"
+        elif phase in {"release_ready", "publication_prepared"}:
+            state["status"] = phase
         else:
             state["status"] = "running"
     state["updated_at"] = now_iso()
@@ -1567,8 +1567,11 @@ def _reopen_translation_after_findings(project_root: Path, state: dict[str, Any]
     write_json(workspace / "workspace.json", meta)
 
 
-def _mechanical_advance(project_root: Path, state: dict[str, Any]) -> dict[str, Any]:
-    """Advance until a ChatGPT review, a blocked final preflight, or publication completion."""
+def _mechanical_advance(
+    project_root: Path, state: dict[str, Any], *,
+    confirm_preflight_sha256: str | None = None,
+) -> dict[str, Any]:
+    """Advance mechanically, but never publish final EN/FR without a signed-plan confirmation."""
     debate_id = str(state["debate_id"])
     while True:
         phase = str(state.get("phase") or "graph_review")
@@ -1800,27 +1803,53 @@ def _mechanical_advance(project_root: Path, state: dict[str, Any]) -> dict[str, 
             apply_translation_review(project_root, debate_id, str(state["work_id"]), review_sha)
             render = render_workspace(project_root, debate_id, str(state["work_id"]), review_sha)
             release = release_workspace(project_root, debate_id, str(state["work_id"]), str(render["rendered_copy_tree_sha256"]))
-            state["phase"] = "final_publication"
-            state["status"] = "final_publication"
+            state["phase"] = "release_ready"
+            state["status"] = "release_ready"
             state["release"] = release
             state["updated_at"] = now_iso()
             _save_workflow(project_root, state)
             continue
-        if phase == "release_ready":
-            # Resume Work states produced by 2.16.37/2.16.38 without rerunning
-            # rendering, release packaging or either semantic convergence pass.
-            state["phase"] = "final_publication"
-            state["status"] = "final_publication"
-            state["updated_at"] = now_iso()
-            _save_workflow(project_root, state)
-            continue
-        if phase in {"final_publication", "final_publication_resume"}:
+        if phase in {"release_ready", "final_publication", "final_publication_resume", "publication_prepared"}:
             workspace, meta = _current_workspace_meta(project_root, state)
             release_copy = workspace / "release-copy"
+            started = (project_root / ".state/final-publication" / debate_id
+                       / str(state["work_id"]) / "authorization.json").is_file()
+            if not started and phase != "publication_prepared":
+                try:
+                    preparation = prepare_final_release(
+                        project_root, debate_id, str(state["work_id"]), release_copy,
+                        allow_preserved=bool(state.get("preserved_publication_release_sha256")),
+                    )
+                except FinalPublicationError as exc:
+                    state["status"] = "blocked_final_publication"
+                    state["final_publication"] = {
+                        "status": "blocked", "remote_execution_started": False,
+                        "error": str(exc), "recorded_at": now_iso(),
+                    }
+                    state["updated_at"] = now_iso()
+                    _save_workflow(project_root, state)
+                    return state
+                state["phase"] = "publication_prepared"
+                state["status"] = "publication_prepared"
+                state["publication_preparation"] = {
+                    "preflight_sha256": preparation["preflight_sha256"],
+                    "preparation_sha256": preparation["preparation_sha256"],
+                    "english_plan_sha256": preparation["en_plan_sha256"],
+                    "french_plan_sha256": preparation["fr_plan_sha256"],
+                    "remote_write_authorized": False,
+                }
+                state["updated_at"] = now_iso()
+                _save_workflow(project_root, state)
+                return state
+            if not confirm_preflight_sha256:
+                # Existing interrupted publications also require a fresh explicit
+                # reference to their signed preflight on every resume.
+                return state
             try:
                 publication = publish_final_release(
                     project_root, debate_id, str(state["work_id"]), release_copy,
                     allow_preserved=bool(state.get("preserved_publication_release_sha256")),
+                    confirm_preflight_sha256=confirm_preflight_sha256,
                 )
             except FinalPublicationError as exc:
                 state["phase"] = "final_publication"
@@ -2557,6 +2586,21 @@ def import_review(
         return advanced
 
 
+def publish_prepared_workflow(
+    project_root: Path, debate_id: str, preflight_sha256: str,
+) -> dict[str, Any]:
+    state = _load_workflow(project_root, validate_debate_id(debate_id))
+    if state.get("phase") not in {
+        "publication_prepared", "final_publication", "final_publication_resume",
+    }:
+        raise WorkflowError("Aucune publication finale préparée ou reprise attestée pour ce débat")
+    if not preflight_sha256 or len(preflight_sha256) != 64:
+        raise WorkflowError("Empreinte SHA-256 du préflight obligatoire")
+    return _mechanical_advance(
+        project_root, state, confirm_preflight_sha256=preflight_sha256,
+    )
+
+
 def status_summary(project_root: Path, debate_id: str) -> dict[str, Any]:
     state = _load_workflow(project_root, validate_debate_id(debate_id))
     return state
@@ -2608,7 +2652,8 @@ def _print_user_result(state: Mapping[str, Any]) -> None:
         print(f"État/diagnostic : {final.get('state_path')}")
         print(f"Écriture distante déjà commencée : {'oui' if final.get('remote_execution_started') else 'non'}")
         print(f"Cause : {final.get('error')}")
-        print("Après résolution du conflit ou correction du kit, relancez simplement ./wikidebia workflow avec le même débat.")
+        print("Après résolution, préparez un nouveau plan si aucune écriture n'a commencé.")
+        print("Sinon, reprenez uniquement le préflight signé avec ./wikidebia workflow-publish <debate_id> --confirm-preflight-sha256 <sha256>.")
         return
     if state.get("status") == "blocked_remote_publication":
         print("Publication française bloquée avant la prochaine revue éditoriale.")
@@ -2626,10 +2671,16 @@ def _print_user_result(state: Mapping[str, Any]) -> None:
         if installed.get("path"):
             print(f"Corpus actif installé : {installed.get('path')}")
         return
+    if state.get("status") == "publication_prepared":
+        prepared = state.get("publication_preparation") or {}
+        print("Publication finale préparée (rendu et préflight terminés, aucune écriture finale autorisée).")
+        print(f"Plan anglais : {prepared.get('english_plan_sha256')}")
+        print(f"Plan français : {prepared.get('french_plan_sha256')}")
+        print(f"Préflight signé : {prepared.get('preflight_sha256')}")
+        print(f"Exécuter seulement après vérification : ./wikidebia workflow-publish {state.get('debate_id')} --confirm-preflight-sha256 {prepared.get('preflight_sha256')}")
+        return
     if state.get("status") == "release_ready":
-        release = state.get("release") or {}
-        print("Corpus bilingue release_ready; la publication finale reprendra automatiquement à la prochaine relance.")
-        print(f"Archive : {release.get('archive')}")
+        print("Release prête; relancez workflow pour préparer les plans sans publier.")
         return
     if state.get("status") == "checkpoint_recovery_ready":
         print("Work release_ready adopté; les checkpoints français doivent maintenant être vérifiés.")
@@ -2654,6 +2705,9 @@ def build_parser() -> argparse.ArgumentParser:
     imp.add_argument("archive", type=Path)
     imp.add_argument("--execute-graph-actions", action="store_true", help="Appliquer et publier immédiatement les décisions structurelles explicites de la revue du graphe")
     imp.add_argument("--authorize-historical-changes", action="store_true", help="Enregistrer le consentement propriétaire pour les seuls deltas historiques explicitement déclarés dans ce ZIP")
+    publication = sub.add_parser("workflow-publish")
+    publication.add_argument("debate_id")
+    publication.add_argument("--confirm-preflight-sha256", required=True)
     status = sub.add_parser("workflow-status")
     status.add_argument("debate_id")
     reconcile = sub.add_parser("workflow-reconcile")
@@ -2680,6 +2734,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 root, args.debate_id, archive.resolve(), execute_graph_actions=args.execute_graph_actions,
                 authorize_historical_changes=args.authorize_historical_changes,
             )
+        elif args.command == "workflow-publish":
+            state = publish_prepared_workflow(root, args.debate_id, args.confirm_preflight_sha256)
         elif args.command == "workflow-reconcile":
             state = reconcile_workflow(root, args.debate_id, adopt_work_id=args.work_id)
         elif args.command == "publish-preserved":
@@ -2696,7 +2752,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(json.dumps(state, ensure_ascii=False, sort_keys=True))
     else:
         _print_user_result(state)
-    return 2 if args.command == "publish-preserved" and state.get("status") != "published" else 0
+    return 2 if args.command == "publish-preserved" and state.get("status") not in {"published", "publication_prepared"} else 0
 
 
 if __name__ == "__main__":
