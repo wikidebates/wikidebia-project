@@ -3380,6 +3380,10 @@ def main(argv: list[str] | None = None) -> int:
                    '--corpus', args.corpus]
         if args.command == 'creation-package':
             command.extend(['--max-pages', str(args.max_pages)])
+            if args.research_only:
+                command.append('--research-only')
+            for page_id in args.page_id:
+                command.extend(['--page-id', page_id])
         elif args.recover:
             command.append('--recover')
         elif args.archive:
