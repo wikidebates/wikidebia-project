@@ -26,6 +26,7 @@ from wikidebia_post_publication import (
     PostPublicationError, _regular_json, _signed,
 )
 from wikidebia_render import _load_workspace
+from wikidebia_release_info import publication_plan_is_compatible
 from wikidebia_update import sha_object
 
 
@@ -102,7 +103,7 @@ def verify_bilingual_proofs(
         states[language] = state
 
     if (en_plan.get("debate_id") != debate_id
-            or en_plan.get("schema") != "wikidebia-publication-plan-1.0"
+            or not publication_plan_is_compatible(en_plan)
             or en_plan.get("blockers") not in ([], None)
             or fr_plan.get("debate_id") != debate_id
             or fr_plan.get("plan_version") != "wikidebia-remote-update-plan-1.0"
@@ -113,6 +114,7 @@ def verify_bilingual_proofs(
             or en_receipt.get("receipt_version") != "wikidebia-publication-state-receipt-1.0"
             or en_receipt.get("language") != "en"
             or fr_receipt.get("debate_id") != debate_id
+            or fr_receipt.get("receipt_version") != "wikidebia-remote-update-receipt-1.0"
             or fr_receipt.get("status") not in {"executed", "no_changes"}):
         _fail("Reçus linguistiques absents, étrangers ou non terminaux")
     if (en_receipt.get("plan_sha256") != en_plan.get("plan_sha256")
@@ -168,8 +170,13 @@ def verify_bilingual_proofs(
                 or title != state.get("canonical_title")
                 or record.get("revision_id") != state.get("revision_id")
                 or revision != _revision(state.get("revision_id"), f"état en {key}")
-                or record.get("content_sha256") != desired
-                or state.get("content_sha256") != desired
+                or record.get("content_sha256") != state.get("content_sha256")
+                or not (
+                    state.get("content_sha256") == desired
+                    or (action.get("operation") == "skip"
+                        and state.get("content_sha256") == action.get("remote_sha256")
+                        and revision == action.get("remote_revision_id"))
+                )
                 or state.get("status") != "published"):
             _fail(f"Preuves anglaises divergentes pour {key}")
 
@@ -191,8 +198,7 @@ def verify_bilingual_proofs(
             _fail(f"Plan ou état français divergent pour {key}")
         _revision(state.get("revision_id"), f"état fr {key}")
         if op in operations.get("update", []):
-            if (op.get("edit_summary_policy") != "french_interlanguage_addition"
-                    or "only_interlanguage_addition" not in (op.get("preconditions") or [])):
+            if op.get("edit_summary_policy") != "french_interlanguage_addition":
                 _fail(f"Édition française hors interlangue : {key}")
 
     results = fr_receipt.get("results")
@@ -209,7 +215,7 @@ def verify_bilingual_proofs(
     updates = {(str(row.get("operation") or "update"), str(row["page_id"])) for row in operations.get("update") or []}
     skips = {("skip", str(row["page_id"])) for row in operations.get("skip") or []}
     if fr_receipt.get("status") == "executed":
-        if fr_receipt.get("execution_mode") != "full_update" or set(receipt_results) != updates | skips:
+        if fr_receipt.get("execution_mode") != "full_update" or set(receipt_results) != updates:
             _fail("Reçu français incomplet ou mode d'exécution divergent")
     elif (fr_receipt.get("execution_mode") != "no_changes"
           or set(receipt_results) != skips or updates):
