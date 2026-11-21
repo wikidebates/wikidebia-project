@@ -3682,11 +3682,22 @@ class PlanExecutor:
                     and sha_text(str(observed.get("text") or "")) == expected_sha
                     and "chatgpt" in set(observed.get("tags") or [])):
                 assert_current()
-                return {
+                evidence = {
                     "status": status, "revision_id": revision_id,
+                    "page_id": row.get("page_id"), "title": title,
                     "plan_sha256": plan["plan_sha256"], "tag": "chatgpt",
                     "content_sha256": expected_sha, "parent_revision_id": old_id,
                 }
+                if status == "tag_added":
+                    # Dedicated local receipt: no new content revision is created.
+                    log_root = getattr(self, "logs_dir", None)
+                    if log_root is not None:
+                        log_root = Path(log_root)
+                        write_json(log_root / f"retro-chatgpt-{revision_id}.json", {
+                            **evidence, "recorded_at": utc_now(),
+                            "receipt_sha256": sha_object(evidence),
+                        })
+                return evidence
             if attempt + 1 < checks and delay:
                 time.sleep(delay)
         raise PlanConflict(f"Balise chatgpt absente après rattrapage : {title}/{revision_id}")
@@ -4299,6 +4310,23 @@ class PlanExecutor:
                     exists, revision_id, remote_text = observed[title]
                     if not exists or revision_id is None or sha_text(remote_text) != desired_sha:
                         raise PlanConflict(f"État distant non équivalent au corpus pendant l’attestation : {language}/{page_id}")
+                    # Re-attest the exact signed interlanguage revision even when
+                    # resuming from a previously completed receipt. Text hashes
+                    # alone must not make a missing chatgpt tag disappear.
+                    if language == "fr":
+                        interlanguage_rows = [
+                            op for op in operations.get("update") or []
+                            if op.get("language") == "fr"
+                            and str(op.get("page_id") or "") == page_id
+                            and op.get("edit_summary_policy") == "french_interlanguage_addition"
+                        ]
+                        if len(interlanguage_rows) > 1:
+                            raise PlanConflict(f"Opérations interlangues dupliquées : {page_id}")
+                        if interlanguage_rows:
+                            self._attest_french_interlanguage_tag(
+                                interlanguage_rows[0], plan, int(revision_id),
+                                self._source_text(interlanguage_rows[0]), user,
+                            )
                     pages.append({
                         "page_id": page_id,
                         "page_type": str(row.get("page_type") or "unknown"),
