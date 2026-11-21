@@ -2402,10 +2402,23 @@ class GenericPublisher:
                 previous = json.loads(latest.read_text(encoding="utf-8"))
                 unsigned = dict(previous)
                 claimed = unsigned.pop("state_sha256", None)
-                if claimed == sha_object(unsigned) and previous.get("debate_id") == self.config["debate_id"]:
-                    previous_pages = {str(row.get("page_id")): dict(row) for row in previous.get("pages") or []}
-            except (OSError, json.JSONDecodeError):
-                previous_pages = {}
+                if (
+                    not isinstance(claimed, str)
+                    or claimed != sha_object(unsigned)
+                    or previous.get("debate_id") != self.config["debate_id"]
+                    or previous.get("language") != language
+                    or not isinstance(previous.get("pages"), list)
+                ):
+                    raise PublicationError("État publié antérieur invalide : attestation refusée")
+                for row in previous["pages"]:
+                    if not isinstance(row, dict) or not row.get("page_id"):
+                        raise PublicationError("Inventaire publié antérieur invalide")
+                    page_id = str(row["page_id"])
+                    if page_id in previous_pages:
+                        raise PublicationError("Identifiant dupliqué dans l'état publié antérieur")
+                    previous_pages[page_id] = dict(row)
+            except (OSError, ValueError, TypeError) as exc:
+                raise PublicationError("État publié antérieur illisible : attestation refusée") from exc
         # Attestation is a complete read, never a best-effort inventory. An
         # incomplete API response or a concurrent wiki change cannot silently
         # become a signed, incomplete published state.
