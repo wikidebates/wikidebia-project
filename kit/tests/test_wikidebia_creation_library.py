@@ -183,6 +183,110 @@ def test_existing_canonical_usage_is_only_an_old_context_not_target_verification
     assert view['notices'][0]['requires_new_target_observation_and_review']
 
 
+def _unidentifiable_canonical(project, *, source_id='S00002', language='fr',
+                              metadata=None, page='A0001'):
+    path = project/ORIGIN/'data/sources.json'
+    canonical = load(path)
+    canonical['sources'].append({
+        'id': source_id, 'type': 'bibliography', 'language': language,
+        'metadata': metadata if metadata is not None else {
+            'work': 'Ancienne étude sans éditeur ni date', 'authors': ['Auteur ancien']},
+        'usage': [{'language': 'fr', 'page_id': page, 'role': 'supports_summary',
+                   'selection_reason': 'Source historique incomplète'}]})
+    put(path, canonical)
+
+
+def test_incomplete_historical_source_is_reported_not_reused_or_global_blocker(project):
+    origin(project, note=False, source_record=True)
+    _unidentifiable_canonical(project)
+    before = snapshot(project/ORIGIN)
+    report = library.build_library(project, [ORIGIN])
+    assert report['notices'] == 1 and report['identities'] == 1
+    assert report['omitted_unidentifiable_sources'] == 1
+    assert report['omissions_by_corpus'] == {ORIGIN: 1}
+    index, raw = library.load_library(project)
+    assert index['omissions'] == [{'debate_id': 'autre', 'source_id': 'S00002',
+                                  'reason': library.OMISSION_REASON}]
+    assert all(row['metadata']['title'] != 'Ancienne étude sans éditeur ni date'
+               for row in index['notices'])
+    assert prepared(project, reuse_library=True)['reuse_candidate_count'] == 1
+    assert snapshot(project/ORIGIN) == before
+    assert library.build_library(project, [ORIGIN])['status'] == 'built'
+    assert (project/library.LIBRARY_PATH).read_bytes() == raw
+
+
+def test_only_unidentifiable_historical_sources_yields_audited_empty_library(project):
+    origin(project, note=False)
+    _unidentifiable_canonical(project)
+    report = library.build_library(project, [ORIGIN])
+    assert (report['notices'], report['omitted_unidentifiable_sources']) == (0, 1)
+    loaded, _ = library.load_library(project)
+    assert loaded['notices'] == [] and len(loaded['omissions']) == 1
+    assert prepared(project, reuse_library=True)['reuse_candidate_count'] == 0
+
+
+def test_one_historical_source_with_multiple_uses_is_counted_once(project):
+    origin(project, note=False)
+    _unidentifiable_canonical(project)
+    path = project/ORIGIN/'data/sources.json'
+    canonical = load(path)
+    duplicate_use = dict(canonical['sources'][0]['usage'][0], page_id='A0002')
+    canonical['sources'][0]['usage'].append(duplicate_use)
+    put(path, canonical)
+    report = library.build_library(project, [ORIGIN])
+    assert report['omitted_unidentifiable_sources'] == 1
+    assert len(library.load_library(project)[0]['omissions']) == 1
+
+
+def test_incomplete_historical_foreign_source_is_not_counted_as_french(project):
+    origin(project, note=False)
+    _unidentifiable_canonical(project, language='en')
+    report = library.build_library(project, [ORIGIN])
+    assert report['notices'] == 0 and report['omitted_unidentifiable_sources'] == 0
+
+
+@pytest.mark.parametrize('metadata,error', [
+    ({'title': 'Bad address', 'link': 'http://localhost/private'}, 'local reference URL'),
+    ({'title': 'Bad data', 'link': 'https://example.org/ok', 'secret': 'bad'}, 'unexpected source metadata'),
+])
+def test_other_invalid_historical_sources_remain_blocking(project, metadata, error):
+    origin(project, note=False)
+    _unidentifiable_canonical(project, metadata=metadata)
+    with pytest.raises(cc.CreationContextError, match=error):
+        library.build_library(project, [ORIGIN])
+    assert not (project/library.LIBRARY_PATH).exists()
+
+
+def test_preexisting_signed_library_without_omission_field_still_loads(project):
+    origin(project, note=False, source_record=True)
+    library.build_library(project, [ORIGIN])
+    libpath = project/library.LIBRARY_PATH
+    old = load(libpath)
+    old.pop('omissions')
+    old['sha256'] = cc._sha(cc._json({k: v for k, v in old.items() if k != 'sha256'}))
+    put(libpath, old)
+    result, _ = library.load_library(project)
+    assert result['notices'] and result.get('omissions', []) == []
+
+
+def test_omission_report_cannot_claim_untracked_or_duplicate_source(project):
+    origin(project, note=False)
+    _unidentifiable_canonical(project)
+    library.build_library(project, [ORIGIN])
+    libpath = project/library.LIBRARY_PATH
+    for modified in ('unknown-debate', 'duplicate'):
+        lib = load(libpath)
+        if modified == 'unknown-debate':
+            lib['omissions'][0]['debate_id'] = 'other'
+        else:
+            lib['omissions'].append(dict(lib['omissions'][0]))
+        lib['sha256'] = cc._sha(cc._json({k: v for k, v in lib.items() if k != 'sha256'}))
+        put(libpath, lib)
+        with pytest.raises(cc.CreationContextError, match='omission'):
+            library.load_library(project)
+        library.build_library(project, [ORIGIN])
+
+
 def test_foreign_and_unknown_languages_are_never_treated_as_french(project):
     origin(project, note=True, language='en')
     assert library.build_library(project, [ORIGIN])['notices'] == 0
