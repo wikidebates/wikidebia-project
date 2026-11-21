@@ -1,0 +1,20 @@
+name: Creation import source (temporary)
+on:
+  push:
+    branches: [feat/creation-import-20261121]
+    paths: [.github/workflows/creation-import-source.yml]
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: git archive --format=zip HEAD -o "$RUNNER_TEMP/creation-import-source.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: creation-import-source
+          path: ${{ runner.temp }}/creation-import-source.zip
+          retention-days: 1
