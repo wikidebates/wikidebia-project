@@ -217,7 +217,7 @@ def prepare_package(project_root: Path, corpus_path: str, *, max_pages: int = 8,
         context_dir = _path(root, task['context']['context_path'])
         context_manifest = json.loads(_read(context_dir / 'CONTEXT_MANIFEST.json'))
         inputs.update({r['path']: r for r in context_manifest['inputs']})
-        key = _sha(_json([before, task['queue_sha256'], context_manifest['context_sha256'], 'research-v1', research_only]))
+        key = _sha(_json([before, task['queue_sha256'], context_manifest['context_sha256'], 'sources-v1', research_only]))
         package_id = str(uuid.uuid5(uuid.NAMESPACE_URL, key))
         request_path = _contained(root, control / (package_id + '.json'))
         target = _path(root, f'outgoing/{corpus.name}_creation_{package_id}.zip')
@@ -240,9 +240,19 @@ def prepare_package(project_root: Path, corpus_path: str, *, max_pages: int = 8,
         files[EDITABLE_PATH] = _json(empty_response())
         editable.append({'package_path': EDITABLE_PATH, 'target_path': 'RESEARCH.json',
                          'sha256_at_prepare': _sha(files[EDITABLE_PATH])})
+        if research_only:
+            from wikidebia_creation_sources import (empty_response as empty_source_review,
+                help_text as source_help, EDITABLE_PATH as SOURCE_EDITABLE_PATH)
+            files[SOURCE_EDITABLE_PATH] = _json(empty_source_review())
+            editable.append({'package_path': SOURCE_EDITABLE_PATH, 'target_path': 'SOURCES.json',
+                             'sha256_at_prepare': _sha(files[SOURCE_EDITABLE_PATH])})
         files['context/RESEARCH_HELP.md'] = response_help()
         context_entries = [{'package_path': 'context/RESEARCH_HELP.md', 'target_path': 'RESEARCH_HELP.md',
                             'sha256': _sha(files['context/RESEARCH_HELP.md'])}]
+        if research_only:
+            files['context/SOURCES_HELP.md'] = source_help()
+            context_entries.append({'package_path': 'context/SOURCES_HELP.md', 'target_path': 'SOURCES_HELP.md',
+                                    'sha256': _sha(files['context/SOURCES_HELP.md'])})
         for name in ('NORMATIVE_CONTEXT.md', 'CORPUS_CONTEXT.json'):
             raw = _read(_contained(root, context_dir / name))
             files['context/' + name] = raw
@@ -251,14 +261,16 @@ def prepare_package(project_root: Path, corpus_path: str, *, max_pages: int = 8,
             '# Brouillons de creation francaise\n\n'
             + ('RECHERCHE SEULE : conserver tous les textes et statuts unchanged.\n' if research_only else '')
             + 'Les recherches peuvent etre conservees dans editable/RESEARCH.json; lire context/RESEARCH_HELP.md.\n'
-            'Un RESEARCH.json vide laisse les notes inchangees; aucune promotion de source.\n'
+            + ('Selection de references apres verification explicite : editable/SOURCES.json et context/SOURCES_HELP.md.\n'
+               if research_only else '')
+            + 'Un RESEARCH.json vide laisse les notes inchangees; aucune promotion de source.\n'
             'Lire context/NORMATIVE_CONTEXT.md et context/CORPUS_CONTEXT.json.\n'
             'Modifier seulement editable/. Dans RESPONSE.json, conserver chaque page_id et choisir\n'
             'unchanged (texte inchange), partial (brouillon inacheve), generated (redaction terminee, a relire).\n'
             'Ne jamais ecrire validated. Les pages laissees unchanged ne sont pas remplacees.\n'
             'Une page generated exige le modele francais et une date-creation explicite au format ISO.\n'
             'Conserver la date de production deja declaree. Ne pas inventer de sources ni de preuves.\n'
-            'Les sources retenues, revues et controles restent a enregistrer dans le workflow ordinaire.\n'
+            'La selection de references ne remplace aucune revue finale, aucune validation de page et aucun controle documentaire.\n'
             'Cet import enregistre textes et notes : aucune revue, cloture de lot ou publication.\n'
             'Conserver les autres fichiers du ZIP intacts, le placer dans incoming/, puis lancer :\n'
             f'./wikidebia creation-import --corpus {corpus_path}\n'
@@ -498,7 +510,11 @@ def import_package(project_root: Path, corpus_path: str, *, archive: str | None 
                 raise CreationImportError('Stale package: context or norm changed')
         from wikidebia_creation_research import response_changes, save_notes
         research, research_counts = response_changes(root, corpus, request, files, changes)
-        if not changes and research is None:
+        from wikidebia_creation_sources import source_changes, save_source_changes
+        selected_sources, source_counts = source_changes(root, corpus, request, files)
+        if selected_sources is not None and research is not None:
+            raise CreationImportError('Review sources only from previously saved research; import new notes first')
+        if not changes and research is None and selected_sources is None:
             return {'status': 'no_changes', 'editorial_validation_performed': False, 'publication_authorized': False}
         transaction_id = _sha(_json([package_id, digest]))
         transaction = _contained(root, control / transaction_id)
@@ -517,6 +533,9 @@ def import_package(project_root: Path, corpus_path: str, *, archive: str | None 
             _apply_drafts(stage, changes, _now())
         if research is not None:
             save_notes(stage, research)
+        if selected_sources is not None:
+            core = json.loads(_read(stage / 'manifest.json'))['core_files']
+            save_source_changes(stage, selected_sources, core)
         # Check the newly written canonical metadata against the same resume contract.
         creation_inventory(ResumeInputs(root), stage.relative_to(root).as_posix())
         after = _tree(stage)
@@ -533,7 +552,8 @@ def import_package(project_root: Path, corpus_path: str, *, archive: str | None 
                          'transaction_id': transaction_id, 'package_id': package_id,
                          'response_sha256': digest, 'before': request['before'], 'after': after,
                          'pages_saved': [r['page_id'] for r, _, _ in changes],
-                         'research_saved': research_counts, 'source_verification_performed': False})
+                         'research_saved': research_counts, 'sources_selected': source_counts,
+                         'source_verification_performed': False})
         inputs.verify()
         if _tree(corpus) != request['before']:
             raise CreationImportError('Corpus changed before installation')
@@ -553,7 +573,8 @@ def import_package(project_root: Path, corpus_path: str, *, archive: str | None 
             # handles process death as well as exceptions; no blind rollback.
             raise
         return dict(result, package_id=package_id, pages_saved=journal['pages_saved'],
-                    research_saved=research_counts, source_verification_performed=False,
+                    research_saved=research_counts, sources_selected=source_counts,
+                    source_verification_performed=False,
                     receipt_path=receipt_path.relative_to(root).as_posix())
 
 

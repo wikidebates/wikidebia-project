@@ -82,6 +82,16 @@ Les observations anciennes restent visibles mais leur pertinence doit être
 réexaminée. Ces drapeaux ne détectent pas une modification du site distant :
 le kit ne contacte jamais les sites cités dans ce parcours.
 
+## Transférer les références réellement retenues
+
+Après enregistrement des observations, un paquet `creation-package
+--research-only` peut également contenir `editable/SOURCES.json` et
+`context/SOURCES_HELP.md`. Ils permettent de réutiliser les notices **déjà**
+enregistrées par leur identifiant, après une revue documentaire explicite
+et individuelle. Le transfert est décrit dans `GUIDE_CREATION_SOURCES.md` :
+il n'est pas déduit des notes et ne donne aucune validation aux pages.
+La sauvegarde des notes et leur approbation doivent être deux retours distincts.
+
 ## Limites et garanties
 
 Le registre canonique `sources.json`, ses usages réciproques, les attestations,
