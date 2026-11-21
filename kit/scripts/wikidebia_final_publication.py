@@ -1358,6 +1358,8 @@ def publish_final_release(
         existing = load_json(completion_path, "reçu de publication finale")
         if existing.get("receipt_sha256") != _canonical(existing, "receipt_sha256"):
             raise FinalPublicationError("Reçu de publication finale existant invalide", remote_execution_started=True)
+        if existing.get("preflight_sha256") != confirm_preflight_sha256:
+            raise FinalPublicationError("Reprise finale rattachée à un autre préflight signé", remote_execution_started=True)
         return existing
 
     authorization_path = state_dir / "authorization.json"
@@ -1373,7 +1375,9 @@ def publish_final_release(
             plans = _load_saved_plans(project_root, state_dir)
             preflight = load_json(state_dir / "preflight.json", "préflight final")
             authorization = load_json(authorization_path, "autorisation finale")
-            if authorization.get("authorization_sha256") != _canonical(authorization, "authorization_sha256"):
+            if (authorization.get("authorization_sha256") != _canonical(authorization, "authorization_sha256")
+                    or authorization.get("preflight_sha256") != preflight.get("preflight_sha256")
+                    or authorization.get("baseline_sha256") != baseline.get("baseline_sha256")):
                 raise FinalPublicationError("Autorisation finale sauvegardée invalide", remote_execution_started=True)
         else:
             baseline, plans, preflight = _verify_prepared_publication(
