@@ -268,8 +268,8 @@
     },
     {
       "path": "GUIDE_EDITORIAL_ORCHESTRATION.md",
-      "size_bytes": 15060,
-      "sha256": "127dcbf4c0a8d2cd2c4871dc5320336660d17a646100a4d6ceefc46312d5ad1b"
+      "size_bytes": 15194,
+      "sha256": "263e324ca25f5c6f62fbf9fa1b04505a4bb4651f26cd51aa8bdb2d5370b86f96"
     },
     {
       "path": "GUIDE_EDITORIAL_REVIEW.md",
@@ -308,8 +308,8 @@
     },
     {
       "path": "GUIDE_PUBLICATION.md",
-      "size_bytes": 10313,
-      "sha256": "d6f65932926b6ee1928ae951ebcbc4382a2b640c711be36c1b000cb87764bb14"
+      "size_bytes": 10976,
+      "sha256": "ba6ef3e1b67abeea44df80b237cb571b142889b2ecc15df60f37d7c7bf319569"
     },
     {
       "path": "GUIDE_REMOTE_COMPARISON.md",
@@ -1033,8 +1033,8 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 32759,
-      "sha256": "f949808401e1103ef0f5d9d6d23d15930adfec2b4a19acb9f0987d2c4d430256"
+      "size_bytes": 33652,
+      "sha256": "539017d54226dc9e8fabdbf5730aad5cafbf0fcb81f6b00e54e77de656f4004c"
     },
     {
       "path": "REGRESSION_AUDIT_2.15.38.md",
@@ -1738,8 +1738,8 @@
     },
     {
       "path": "scripts/wikidebia_final_publication.py",
-      "size_bytes": 75679,
-      "sha256": "be4522c8f1a573f2447f80bb744bb0480f8375a86bdb99303a74e9f71bbf5b13"
+      "size_bytes": 76077,
+      "sha256": "4aa8451964cec9e928f522ea6df2890f2bc75988ae5629a9adf4e0820c79ac98"
     },
     {
       "path": "scripts/wikidebia_fr_publication_relay.py",
@@ -1753,8 +1753,8 @@
     },
     {
       "path": "scripts/wikidebia_global_resume.py",
-      "size_bytes": 23800,
-      "sha256": "acf5165187e3a1ab56e0a5f8753a16e759786018b56f4cd49ebde47066c562b4"
+      "size_bytes": 24586,
+      "sha256": "6641dd6ac81893cd3379bd59a660b0541bf744aa1a297a8c9c17d4b6b75f3d6b"
     },
     {
       "path": "scripts/wikidebia_graph_actions.py",
@@ -1843,8 +1843,8 @@
     },
     {
       "path": "scripts/wikidebia_review_workflow.py",
-      "size_bytes": 148375,
-      "sha256": "7d0abb1b2b4b343afb0c30afdc2b779c32af5eb7ffc38f987e9cd813700e028e"
+      "size_bytes": 148519,
+      "sha256": "90fc08819491f9657cac07432d9b331364c2f8b79357921e870f87e7fa9aff8f"
     },
     {
       "path": "scripts/wikidebia_semantic_convergence.py",
