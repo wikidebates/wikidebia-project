@@ -7,7 +7,7 @@ import pytest
 
 import wikidebia_fr_alias_pageids as aliases
 import wikidebia_offline_bilingual as offline
-from wikidebia_corpus_build import full_tree_sha256
+from wikidebia_corpus_build import full_tree_sha256, sha256_file
 from wikidebia_editorial_workspace import workspace_receipt_hash
 from wikidebia_update import sha_object, sha_text
 from test_wikidebia_offline_bilingual import _fixture, _write, DEBATE, WORK
@@ -107,7 +107,7 @@ def _changed_fixture(tmp_path: Path):
     proof = {
         "schema": aliases.SCHEMA, "debate_id": DEBATE, "work_id": WORK,
         "release_copy_tree_sha256": metadata["release_copy"]["tree_sha256"],
-        "manifest_sha256": sha_text((workspace / "release-copy/manifest.json").read_text()),
+        "manifest_sha256": sha256_file(workspace / "release-copy/manifest.json"),
         "french_state_sha256": state["state_sha256"],
         "remote_access_mode": "read_only", "remote_writes": 0,
         "page_count": 1, "alias_count": 1,
