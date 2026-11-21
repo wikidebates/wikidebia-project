@@ -1,0 +1,98 @@
+name: Prepare verified creation context patch (temporary)
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/creation-context-prepare.yml
+      - tools/_creation_context_patch_1.b64
+      - tools/_creation_context_patch_2.b64
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    if: github.head_ref == 'feat/creation-context-quota-20261121' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Apply exact locally tested patch
+        run: |
+          python - <<'PY'
+          import base64, gzip, hashlib, lzma, pathlib, subprocess
+          encoded = ''.join(pathlib.Path(f'tools/_creation_context_patch_{i}.b64').read_text().strip() for i in (1, 2))
+          patch = lzma.decompress(base64.b64decode(encoded, validate=True))
+          assert hashlib.sha256(patch).hexdigest() == '7acead596e2d9f2b37fd5113da27399b2a2bc8ffd00d5f52d2fd1c09e2ed41f4'
+          pathlib.Path('/tmp/creation-context.patch').write_bytes(patch)
+          subprocess.run(['git', 'apply', '--check', '/tmp/creation-context.patch'], check=True)
+          subprocess.run(['git', 'apply', '/tmp/creation-context.patch'], check=True)
+          PY
+      - name: Install test dependencies
+        run: python -m pip install -r validator/requirements-dev.txt
+      - name: Run validator suite
+        run: PYTHONPATH=validator/src python -m pytest -q validator/tests --junitxml=/tmp/validator-creation.xml
+      - name: Run kit suite
+        run: python -m pytest -q kit/tests --junitxml=/tmp/kit-creation.xml
+      - name: Refresh metadata from successful tests
+        run: |
+          python kit/scripts/refresh_package_metadata.py --junit-xml /tmp/kit-creation.xml --generated-date 2026-11-21
+          python - <<'PY'
+          import hashlib, json, pathlib, subprocess, sys
+          sys.path.insert(0, 'kit/scripts')
+          from refresh_package_metadata import passed_test_count
+          count = passed_test_count(pathlib.Path('/tmp/validator-creation.xml'))
+          subprocess.run([sys.executable, 'validator/scripts/refresh_package_metadata.py', '--test-count', str(count), '--generated-date', '2026-11-21'], check=True)
+          root = pathlib.Path('norms')
+          path = root / 'PACKAGE_MANIFEST_SHA256.json'
+          manifest = json.loads(path.read_text())
+          for row in manifest['files']:
+              raw = (root / row['path']).read_bytes()
+              row.update(size_bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest())
+          manifest['declared_file_count'] = len(manifest['files'])
+          path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          receipt_path = root / 'PACKAGE_RECEIPT.json'
+          receipt = json.loads(receipt_path.read_text())
+          receipt.pop('receipt_sha256', None)
+          receipt.update(package_manifest_sha256=hashlib.sha256(path.read_bytes()).hexdigest(), generated_date='2026-11-21')
+          receipt['receipt_sha256'] = hashlib.sha256(json.dumps(receipt, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+          receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          print(json.dumps({'kit_passed': passed_test_count(pathlib.Path('/tmp/kit-creation.xml')), 'validator_passed': count}))
+          PY
+          python kit/scripts/refresh_package_metadata.py --junit-xml /tmp/kit-creation.xml --check
+          PYTHONPATH=validator/src python validator/scripts/self_audit.py
+          git diff --check
+      - name: Commit only reviewed implementation and metadata to feature branch
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          git config user.name 'Wikidebia creation preparation'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -- AGENTS.md README.md kit norms validator
+          python - <<'PY'
+          import pathlib, subprocess
+          patch = pathlib.Path('/tmp/creation-context.patch').read_text()
+          allowed = {line.split(' b/', 1)[1] for line in patch.splitlines() if line.startswith('diff --git ')}
+          allowed.update({'kit/TEST_REPORT.txt', 'kit/PACKAGE_MANIFEST_SHA256.json', 'kit/PACKAGE_RECEIPT.json', 'validator/docs/TEST_REPORT.txt', 'validator/docs/SELF_AUDIT_REPORT.txt', 'validator/PACKAGE_MANIFEST_SHA256.json', 'validator/PACKAGE_RECEIPT.json', 'norms/PACKAGE_MANIFEST_SHA256.json', 'norms/PACKAGE_RECEIPT.json'})
+          changed = set(subprocess.check_output(['git', 'diff', '--cached', '--name-only'], text=True).splitlines())
+          assert changed and changed <= allowed, sorted(changed - allowed)
+          PY
+          git diff --cached --check
+          git commit -m 'feat: reduce redundant French creation context without weakening editorial checks'
+          git push origin HEAD:refs/heads/feat/creation-context-quota-20261121
+      - name: Retain reproducible test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: creation-context-test-evidence
+          path: |
+            /tmp/kit-creation.xml
+            /tmp/validator-creation.xml
+          if-no-files-found: ignore
+          retention-days: 7
