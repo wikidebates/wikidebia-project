@@ -1393,16 +1393,27 @@ def publish_final_release(
         old_plans = _load_saved_plans(project_root, state_dir)
         old_reuse_path = state_dir / "late-existing-english-reuse.json"
         old_reuse = load_json(old_reuse_path) if old_reuse_path.is_file() else None
+        originally_attested = bool(existing.get("public_visibility_report_sha256"))
+        if originally_attested:
+            original = load_json(state_dir / "public-visibility-report.json", "preuve publique initiale")
+            if (original.get("report_sha256") != _canonical(original, "report_sha256")
+                    or original.get("report_sha256") != existing["public_visibility_report_sha256"]
+                    or original.get("status") != PUBLIC_VERIFIED
+                    or original.get("public_debate_url") != existing.get("public_debate_url")):
+                raise FinalPublicationError("Preuve publique initiale incompatible avec le reçu final", remote_execution_started=True)
         report = check_or_record(
             state_dir, debate_id, work_id,
             old_plans["en_plan"], old_plans["fr_plan"], late_reuse=old_reuse,
             manifest_sha256=sha256_file(release_copy / "manifest.json"),
+            report_filename=("public-visibility-recheck.json" if originally_attested
+                             else "public-visibility-report.json"),
         )
         if report["status"] != PUBLIC_VERIFIED:
             raise FinalPublicationError(
                 f"{report['status']} : pages EN {report['english_pages_verified']}/{report['english_pages_expected']}, "
                 f"liens FR {report['french_links_verified']}/{report['french_links_expected']} ; "
-                "voir public-visibility-report.json",
+                "voir public-visibility-recheck.json" if originally_attested
+                else "voir public-visibility-report.json",
                 remote_execution_started=True,
             )
         if existing.get("public_visibility_report_sha256") and existing.get("public_debate_url") != report.get("public_debate_url"):
