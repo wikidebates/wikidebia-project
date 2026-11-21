@@ -1513,7 +1513,11 @@ def _prepare_translation_package(project_root: Path, state: dict[str, Any], *, c
         base=workspace,
         editable_paths=["reviews/en/translation_review.json", "data/sources_en_working.json"],
         context_paths=context,
-        context_globs=["content-reviewed-copy/imports/fr/**/*.wiki", "content-reviewed-copy/imports/fr/**/*.json"],
+        context_globs=[
+            "content-reviewed-copy/imports/fr/**/*.wiki",
+            "content-reviewed-copy/imports/fr/**/*.json",
+            "reports/en_documentary_review_preflight.json",
+        ],
         counts={"arguments": len(review.get("arguments") or []), "review_units": len(review.get("review_units") or [])},
     )
 

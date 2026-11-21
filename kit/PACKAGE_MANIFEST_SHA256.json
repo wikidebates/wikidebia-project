@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
-  "declared_file_count": 509,
-  "declared_test_count": 1426,
+  "declared_file_count": 510,
+  "declared_test_count": 1438,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -268,8 +268,8 @@
     },
     {
       "path": "GUIDE_EDITORIAL_ORCHESTRATION.md",
-      "size_bytes": 15194,
-      "sha256": "263e324ca25f5c6f62fbf9fa1b04505a4bb4651f26cd51aa8bdb2d5370b86f96"
+      "size_bytes": 16146,
+      "sha256": "dc36c96714363ce053912b8e49851cc1da8320cccf3a5eeb23457044e2d89ffc"
     },
     {
       "path": "GUIDE_EDITORIAL_REVIEW.md",
@@ -1139,7 +1139,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "342fcf72bf0ccccd00a0ed026cf20a65e833aa88b16e9e33cc122c3ca80439f5"
+      "sha256": "0db50b4c72bf6baa5f4af12c11046c0601786150c7fbaa50ae58f677a76d513e"
     },
     {
       "path": "VERSIONS.json",
@@ -1843,8 +1843,8 @@
     },
     {
       "path": "scripts/wikidebia_review_workflow.py",
-      "size_bytes": 148519,
-      "sha256": "90fc08819491f9657cac07432d9b331364c2f8b79357921e870f87e7fa9aff8f"
+      "size_bytes": 148614,
+      "sha256": "2782a827a5d6403900a6e76a7716a39ab80c10cdf329e4787c4213368b0ac082"
     },
     {
       "path": "scripts/wikidebia_semantic_convergence.py",
@@ -1918,8 +1918,8 @@
     },
     {
       "path": "scripts/wikidebia_translation_review.py",
-      "size_bytes": 188323,
-      "sha256": "5e9f7d9f4fee7299bdc450f953db6f9d7b272b54b9c9d0cfbcfbe7e0bfc3d795"
+      "size_bytes": 196834,
+      "sha256": "50eaf43bfa8b06cfbcf760b7129dcd2149900f2bc1e29f92884cae06220c704d"
     },
     {
       "path": "scripts/wikidebia_translation_source.py",
@@ -2015,6 +2015,11 @@
       "path": "tests/test_editorial_orchestration_2160.py",
       "size_bytes": 88094,
       "sha256": "16ed081c5d4fb051f729ffd50561e35c56a565882571bc12f5d6d73743e97b29"
+    },
+    {
+      "path": "tests/test_english_render_documentary_early_findings.py",
+      "size_bytes": 4979,
+      "sha256": "1ae8fac0cd640d87a6aecf9047b8ca44c063c0200c09381f93606345d77bcf66"
     },
     {
       "path": "tests/test_final_publication_baseline_21639.py",
