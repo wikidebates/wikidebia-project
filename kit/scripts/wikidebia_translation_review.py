@@ -1425,7 +1425,7 @@ def collect_english_documentary_findings(review: Mapping[str, Any]) -> list[dict
     def fold_identity(value: Any) -> str:
         # Exact normalization from WDV-DOC-009, including typographic quotes.
         text = str(value or "").strip().casefold().replace("’", "'").replace("“", '"').replace("”", '"')
-        return re.sub(r"\\s+", " ", text)
+        return re.sub(r"\s+", " ", text)
 
     for (language, locator), rows in by_resource.items():
         if len(rows) < 2:
