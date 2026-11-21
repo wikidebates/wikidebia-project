@@ -272,7 +272,8 @@ def verify_alias_proof(
                     or a["pageid"] <= 0 or a["pageid"] != b["pageid"]
                     or not isinstance(a.get("resolved_title"), str)
                     or not isinstance(b.get("resolved_title"), str)
-                    or not a["resolved_title"] or not b["resolved_title"]):
+                    or not a["resolved_title"] or not b["resolved_title"]
+                    or a["resolved_title"] != b["resolved_title"]):
                 _block("Cibles de relation de pageid différents ou sans preuve : " + old + " / " + new)
             total_changes += 1
     if set(titles) != used or proof.get("page_count") != len(changed) or proof.get("alias_count") != total_changes:
