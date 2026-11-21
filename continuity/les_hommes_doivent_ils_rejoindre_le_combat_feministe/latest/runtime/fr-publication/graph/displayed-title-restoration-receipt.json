@@ -1,0 +1,58 @@
+{
+  "created_at": "2026-10-23T06:31:23.617956+00:00",
+  "plan_sha256": "d3ab588e853da3318ea7b8ca203cd038bbfca8a7f3798c66dea1fbd839b9b98a",
+  "receipt_sha256": "76b6e23e908540c9a3d8e511ea77eaf56b18d2be5c0fa4547b1581dfb2063f21",
+  "results": [
+    {
+      "after_sha256": "0d92e2a66b42da0ab781a4f8e8f83868211f32d6037b7119bfa3e2045871ce7b",
+      "new_revision_id": 245837,
+      "old_revision_id": 245818,
+      "page_id": "A0002",
+      "status": "restored_and_verified",
+      "title": "Les hommes ont intérêt à en finir avec le sexisme"
+    },
+    {
+      "after_sha256": "9f23ed4565a826d24bce3d54ecfb6aefc6059a157d90cd259feb02c52be53b20",
+      "new_revision_id": 245838,
+      "old_revision_id": 245822,
+      "page_id": "A0006",
+      "status": "restored_and_verified",
+      "title": "Les hommes sont socialisés pour dominer les femmes"
+    },
+    {
+      "after_sha256": "d7bbb6c9263b1a7d678627d6b4e381e4f3d313f77c68e4fb8d2365b0aa55cc43",
+      "new_revision_id": 245839,
+      "old_revision_id": 245825,
+      "page_id": "A0009",
+      "status": "restored_and_verified",
+      "title": "Une société ne peut pas fonctionner correctement si elle est égalitaire"
+    },
+    {
+      "after_sha256": "7885c8113e491d77bc2003d4c23eb14546c8f33fe3e0b48ffcbe65a092a3db2b",
+      "new_revision_id": 245840,
+      "old_revision_id": 245833,
+      "page_id": "A0017",
+      "status": "restored_and_verified",
+      "title": "Les hommes sont socialisés pour déshumaniser les femmes"
+    },
+    {
+      "after_sha256": "f4587221e76871a335835bfbcd3422309e63ddda61d1f44f15ba3824605455f6",
+      "new_revision_id": 245841,
+      "old_revision_id": 245835,
+      "page_id": "A0019",
+      "status": "restored_and_verified",
+      "title": "Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions"
+    },
+    {
+      "after_sha256": "8c8196ce8e53a8f512f82bbe2d15b4cf5c368052e203ee5b2ec7b438cd0c6158",
+      "new_revision_id": 245842,
+      "old_revision_id": 245836,
+      "page_id": "A0020",
+      "status": "restored_and_verified",
+      "title": "Les hommes bénéficient des discriminations envers les femmes"
+    }
+  ],
+  "schema": "wikidebia-displayed-title-restoration-receipt-1.0",
+  "summary": "Restauration des titres affichés d’origine",
+  "tag": "chatgpt"
+}

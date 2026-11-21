@@ -1,0 +1,107 @@
+{
+  "schema": "wikidebia-editorial-changeset-1.1",
+  "schema_version": "1.1",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "status": "applied",
+  "review_sha256": "2deaafb2133429bcf5033e6e69bd43e7972a7f2655c073b1bb96f4e550a9b211",
+  "applied_at": "2026-10-23T06:34:03+00:00",
+  "old_structural_sha256": "e9fbfc80def372a7370567a985a704eb41cb6417c51c59e423d3ad7a3002993d",
+  "new_structural_sha256": "83262089d6216339a5c54f338590b92823df30e58cea1ade1a06d1eadc5fc3c9",
+  "operation_count": 10,
+  "operations": [
+    {
+      "entity_type": "argument",
+      "entity_id": "A0024",
+      "field": "canonical_title",
+      "before": "La masculinité toxique génèrent des troubles mentaux et des suicides chez les hommes",
+      "after": "La masculinité toxique génère des troubles mentaux et des suicides chez les hommes",
+      "decision": "change",
+      "rationale": "Correction de l’accord du verbe avec le sujet singulier « la masculinité toxique », sans changer la thèse."
+    },
+    {
+      "entity_type": "argument",
+      "entity_id": "A0043",
+      "field": "canonical_title",
+      "before": "Il est possible de leur donner une autre éducation",
+      "after": "Il est possible de donner aux hommes une éducation non sexiste",
+      "decision": "change",
+      "rationale": "Le référent vague « leur » est remplacé par « aux hommes » et la finalité non sexiste est rendue explicite d’après le parent immédiat."
+    },
+    {
+      "entity_type": "argument",
+      "entity_id": "A0059",
+      "field": "canonical_title",
+      "before": "C'est plutôt l'inverse",
+      "after": "L'absence d'égalité empêche une société de fonctionner correctement",
+      "decision": "change",
+      "rationale": "Le libellé contextuel « C’est plutôt l’inverse » est remplacé par la proposition autonome qu’expriment sa relation d’objection et sa citation."
+    },
+    {
+      "entity_type": "argument",
+      "entity_id": "A0074",
+      "field": "canonical_title",
+      "before": "Le terme \"déshumaniser\" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe",
+      "after": "Qualifier le traitement des femmes de déshumanisation est démesuré et discrédite la cause féministe",
+      "decision": "change",
+      "rationale": "La formulation est ramenée à une seule proposition grammaticale qui conserve les deux prédicats centraux : caractère démesuré et effet discréditant."
+    },
+    {
+      "entity_type": "argument",
+      "entity_id": "A0075",
+      "field": "canonical_title",
+      "before": "L'injonction à la répression des émotions déteriore la santé mentale des hommes",
+      "after": "L'injonction à réprimer ses émotions détériore la santé mentale des hommes",
+      "decision": "change",
+      "rationale": "Correction orthographique de « détériore » et formulation plus directe de la même relation causale, sans élargissement de portée."
+    },
+    {
+      "entity_type": "argument",
+      "entity_id": "A0077",
+      "field": "canonical_title",
+      "before": "Seulement ceux qui se conforment à l'injonction à la virilité",
+      "after": "Seuls les hommes qui se conforment à l'injonction à la virilité bénéficient des discriminations envers les femmes",
+      "decision": "change",
+      "rationale": "Le fragment contextuel est développé en proposition autonome en reprenant exactement la restriction portée par le résumé historique."
+    },
+    {
+      "entity_type": "argument",
+      "entity_id": "A0084",
+      "field": "canonical_title",
+      "before": "L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes",
+      "after": "L'émancipation des femmes doit être l'œuvre des femmes elles-mêmes",
+      "decision": "change",
+      "rationale": "Correction orthotypographique de la ligature française, sans aucune modification du sens, de la modalité ou de la portée."
+    },
+    {
+      "entity_type": "argument",
+      "entity_id": "A0085",
+      "field": "canonical_title",
+      "before": "Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes",
+      "after": "Les hommes peuvent très facilement tuer dans l'œuf les actions militantes des femmes",
+      "decision": "change",
+      "rationale": "Correction orthotypographique et explicitation du référent des actions militantes, déduit sans ambiguïté de l’argument parent."
+    },
+    {
+      "entity_type": "argument",
+      "entity_id": "A0096",
+      "field": "canonical_title",
+      "before": "Les hommes pro féministes ne sont pas pris au sérieux par les autres hommes",
+      "after": "Les hommes proféministes ne sont pas pris au sérieux par les autres hommes",
+      "decision": "change",
+      "rationale": "Correction lexicale de « pro féministes » en « proféministes », en conservant le groupe qui exerce le jugement négatif."
+    },
+    {
+      "entity_type": "argument",
+      "entity_id": "A0099",
+      "field": "canonical_title",
+      "before": "La manière dont le femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation",
+      "after": "La manière dont les femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation",
+      "decision": "change",
+      "rationale": "Correction de la faute grammaticale « le femmes » en « les femmes », sans modification de la conclusion argumentative."
+    }
+  ],
+  "source_imports_mutated": false,
+  "final_pages_generated": false,
+  "english_translation_started": false
+}

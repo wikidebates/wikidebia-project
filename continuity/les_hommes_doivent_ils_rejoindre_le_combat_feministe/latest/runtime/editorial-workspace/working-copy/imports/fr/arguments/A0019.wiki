@@ -1,0 +1,13 @@
+{{Argument
+|justifications={{Justification
+|page=L'injonction à la répression des émotions déteriore la santé mentale des hommes
+|titre-affiché=L'injonction à la répression des émotions déteriore la santé mentale des hommes
+}}
+|objections={{Objection
+|page=L'expression des émotions affaiblirait la domination des hommes
+|titre-affiché=L'expression des émotions affaiblirait la domination des hommes
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Privilèges, Machisme, Sexisme, Virilisme, Emotions, Sensibilité
+|date-création=2019-12-25
+}}

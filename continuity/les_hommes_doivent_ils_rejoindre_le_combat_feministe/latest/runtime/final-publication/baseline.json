@@ -1,0 +1,66 @@
+{
+  "schema": "wikidebia-final-publication-baseline-1.0",
+  "schema_version": "1.0",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "attested_at": "2026-10-23T23:53:31+00:00",
+  "release": {
+    "release_copy_tree_sha256": "65d4a71510b05f4d25b39b2ab6bb9d4c8feb8b0460cb0dd21d04edf8dedd6b22",
+    "release_report_sha256": "0966559a605f84ef0d7598fe043d5f1266ed6100431568d0773deeb99f846619",
+    "release_manifest_sha256": "7f8f86329e74a5c6d5b0eb5e2adb286a31fc97689f612bf2beb391727adb3024",
+    "release_receipt_path": ".state/corpus-releases/les_hommes_doivent_ils_rejoindre_le_combat_feministe/EDIT-20261023-001/release-receipt.json",
+    "release_receipt_sha256": "a0265d6d74adc656715ddc6be5d1970089da9cebc273bb9f1be19192a0a93cda"
+  },
+  "fr": {
+    "mode": "published_checkpoint_with_signed_corrections",
+    "checkpoint_receipt_path": ".state/fr-publication/les_hommes_doivent_ils_rejoindre_le_combat_feministe/EDIT-20261023-001/content/publication-receipt.json",
+    "checkpoint_receipt_sha256": "d6e6b951a0f4a2de725733d5e54e5b8385167a5beb20819608f6d91fd1fc9a0e",
+    "published_state_path": ".state/published/les_hommes_doivent_ils_rejoindre_le_combat_feministe/fr/latest.json",
+    "published_state_sha256": "5287e554fc3b51570ebd4f239e62479cc3567aa62a7f598f6d94d046f939929a",
+    "plan_sha256": "a7eff98cdc01b4e8d1f167a92f346b6cf62fe00dd4c4811d2b1b7b38f49afc1a",
+    "post_checkpoint_succession": {
+      "mode": "published_checkpoint_with_signed_corrections",
+      "checkpoint_state_path": ".state/published/les_hommes_doivent_ils_rejoindre_le_combat_feministe/fr/20261023T132822Z.json",
+      "checkpoint_state_sha256": "aace8bb2bcfa1b4a149f344ee2f3f9e784c139476494a22ed7879a31ce9f1b4a",
+      "corrections": [
+        {
+          "path": ".state/fr-publication/les_hommes_doivent_ils_rejoindre_le_combat_feministe/EDIT-20261023-001/content/contextual-displayed-title-restoration-receipt.json",
+          "schema": "wikidebia-contextual-displayed-title-restoration-receipt-1.0",
+          "plan_sha256": "61713090e56a3846a94cd92521efd77b0bcb18d2d2816da1559b419e93eef4c1",
+          "receipt_sha256": "4f2df84b11ac0e4bcbaa7eae413a9d432d5f783cac96a3ee49fb1f80fb18668c",
+          "state_path": ".state/published/les_hommes_doivent_ils_rejoindre_le_combat_feministe/fr/20261023T175559Z.json",
+          "state_sha256": "3b5865bfafb0e5e854ca125270329739b65b3080f438850089115365a25255e8"
+        },
+        {
+          "path": ".state/fr-publication/les_hommes_doivent_ils_rejoindre_le_combat_feministe/EDIT-20261023-001/content/oe-canonical-title-restoration-receipt.json",
+          "schema": "wikidebia-oe-canonical-title-restoration-receipt-1.0",
+          "plan_sha256": "a7eff98cdc01b4e8d1f167a92f346b6cf62fe00dd4c4811d2b1b7b38f49afc1a",
+          "receipt_sha256": "f118b68b13dbf1f0128c596d6a53f6ce0bd984b97ede7fdd32b56a7b16b73109",
+          "state_path": ".state/published/les_hommes_doivent_ils_rejoindre_le_combat_feministe/fr/20261023T180859Z.json",
+          "state_sha256": "5287e554fc3b51570ebd4f239e62479cc3567aa62a7f598f6d94d046f939929a"
+        }
+      ]
+    }
+  },
+  "en": {
+    "mode": "never_published_by_this_work",
+    "empty_baseline": true,
+    "proof_basis": [
+      "workflow_reached_release_ready_without_an_english_publication_phase",
+      "pre_final_installed_manifest_explicitly_declares_translation_status_en_deferred",
+      "release_receipt_publication_started_false"
+    ],
+    "installed_manifest_path": "corpus/les_hommes_doivent_ils_rejoindre_le_combat_feministe/manifest.json",
+    "installed_manifest_sha256": "bf8c3416a988e2d13c200a4d6764a04db73dbe8e5a813a3ab11d1b9e07b29330",
+    "signed_english_state_absent": true,
+    "remote_absence_not_assumed": true,
+    "remote_title_collisions_must_be_checked_before_any_write": true
+  },
+  "semantic_convergence": {
+    "pass_count": 2,
+    "semantic_content_sha256": "082deef387edbb99e0b127f9a5c8d90d53c609780f3fa57e8ae9c20b63d359ab",
+    "review_sha256": "44711ee19cc430989c1575056df385af793f21dde8a59034110a21193007ddfe",
+    "reused_without_rerun": true
+  },
+  "baseline_sha256": "5dfd553e6270157cda7f3561bd98f8fb81c7398640b00792f0f9b98845b4237d"
+}

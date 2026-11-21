@@ -1,0 +1,8 @@
+{{Argument
+|objections={{Objection
+|page=Seuls les hommes qui se conforment à l'injonction à la virilité bénéficient des discriminations envers les femmes
+|titre-affiché=Seulement ceux qui se conforment à l'injonction à la virilité
+}}
+|justifications=
+|date-création=2021-03-18
+}}

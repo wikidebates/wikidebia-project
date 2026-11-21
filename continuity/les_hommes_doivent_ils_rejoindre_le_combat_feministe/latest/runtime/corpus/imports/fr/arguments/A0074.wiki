@@ -1,0 +1,11 @@
+{{Argument
+|initialisation=Objection@3698
+|objections={{Objection
+|page=La manière dont le femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation
+|titre-affiché=La manière dont le femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation
+}}{{Objection
+|page=Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base
+|titre-affiché=Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base
+}}
+|date-création=2024-02-02
+}}

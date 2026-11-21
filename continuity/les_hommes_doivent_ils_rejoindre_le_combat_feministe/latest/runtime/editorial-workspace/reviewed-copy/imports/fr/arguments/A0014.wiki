@@ -1,0 +1,10 @@
+{{Argument
+|résumé=Les hommes apprennent à étouffer leur empathie et non à la développer. La sensibilité est dénigrée comme étant de la sensiblerie et une faiblesse. C'est une qualité "virile" d'être assez dur pour être indifférent à la souffrance de l'autre. Etre capable de fusiller sans frémir des femmes et des enfants sans défense, était considéré comme un acte de courage et une preuve de virilité par les nazis. Ceux qui en étaient incapables étaient considérés comme lâches ou faibles. On retrouve le même état d'esprit dans le monde de l'entreprise aujourd'hui. Il faut être assez "fort" pour licencier du personnel, écraser les autres. Peu d'hommes sont réellement émus, touchés par les violences faites aux femmes (sauf les pères ou fils de victimes).
+|citations={{Citation
+|citation=virilité
+|auteurs=Christophe Dejours
+}}
+|rubriques=Éducation, Politique, Société
+|mots-clés=Hommes, Domination masculine, Féminisme, Socialisation, Souffrance, Empathie, Virilité
+|date-création=2019-11-24
+}}

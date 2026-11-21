@@ -1,0 +1,6 @@
+{{Argument
+|résumé=Les hommes jugés pas assez virils subissent du rejet et des violences.
+|rubriques=Politique
+|mots-clés=féminisme, discrimination, virilité, femmes
+|date-création=2021-12-09
+}}

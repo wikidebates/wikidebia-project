@@ -1,0 +1,73 @@
+{
+  "schema": "wikidebia-oe-canonical-title-restoration-plan-1.0",
+  "created_at": "2026-10-23T18:02:54.544713+00:00",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "language": "fr",
+  "expected_user": "ChatGPT",
+  "change_tag": "chatgpt",
+  "summary": "Rétablissement de la graphie oe dans les titres",
+  "moves": [
+    {
+      "page_id": "A0084",
+      "old_title": "L'émancipation des femmes doit être l'œuvre des femmes elles-mêmes",
+      "new_title": "L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes",
+      "mode": "already_moved",
+      "old_revision_id": 246144,
+      "old_sha256": "2f493bc365e3b65a88ff8ba5317485ff387b09af9f824322274a5d3462ec3f74",
+      "content_sha256": "1914bd4f20825536602a7cf6e667aa9b64699dd03f8bf58ffbe2dac6ed30e189",
+      "target_redirect": {
+        "exists": true,
+        "revision_id": 246143,
+        "sha256": "1914bd4f20825536602a7cf6e667aa9b64699dd03f8bf58ffbe2dac6ed30e189"
+      },
+      "backlink_updates": [
+        {
+          "title": "Les hommes peuvent faciliter et encourager l'émancipation de leur compagne",
+          "base_revision_id": 246073,
+          "before_sha256": "33bb09f09b98aad753878142d2c218b19873a091658a9af04aec10b0d104ba8b",
+          "after_sha256": "dc2f19b42da5dbace07b1b0c0a18ccc60e1a57a43a5803357f1f590dd757baa9",
+          "desired_text": "{{Argument\n|résumé=En particulier :\n* en faisant leur part dans le travail domestique\n* en donnant confiance et encourageant leur femme\n* en respectant le consentement de leur compagne\n* en écoutant et soutenant les femmes victimes\n|objections={{Objection\n|page=La majorité des hommes dominent leur compagne et freinent leur émancipation\n|titre-affiché=La majorité des hommes dominent leur compagne et freinent leur émancipation\n}}{{Objection\n|page=L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes\n|titre-affiché=L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes\n}}\n|rubriques=Politique, Société\n|mots-clés=féminisme, hommes, sexisme, femmes, émancipation\n|date-création=2019-11-24\n}}"
+        },
+        {
+          "title": "Seul un changement de comportement des hommes pourra mettre fin au sexisme",
+          "base_revision_id": 246068,
+          "before_sha256": "482513a3eb1f00f34ebc2aed4b9ad794ce5d198968ba83b3f1615367711abb5d",
+          "after_sha256": "6fa3ab928ef6f5e016216fd1767c321a83fa6e6501939e9cd4cc2594fd321d05",
+          "desired_text": "{{Argument\n|résumé=Car en sont les auteurs. Car ont le pouvoir.\n* remise en cause personnelle, travailler sur eux-mêmes\n|objections={{Objection\n|page=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges\n|titre-affiché=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges\n}}{{Objection\n|page=L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes\n|titre-affiché=L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes\n}}\n|rubriques=Politique, Société\n|mots-clés=féminisme, hommes, sexisme, domination masculine\n|date-création=2019-11-24\n}}"
+        }
+      ]
+    },
+    {
+      "page_id": "A0085",
+      "old_title": "Les hommes peuvent très facilement tuer dans l'œuf les actions militantes des femmes",
+      "new_title": "Les hommes peuvent très facilement tuer dans l'oeuf les actions militantes des femmes",
+      "mode": "move",
+      "old_revision_id": 246127,
+      "old_sha256": "90a13159588366df190a9a23b04b87dc795cef22054eb930dc31cf6a4d7c7f31",
+      "content_sha256": "90a13159588366df190a9a23b04b87dc795cef22054eb930dc31cf6a4d7c7f31",
+      "target_redirect": {
+        "exists": false,
+        "revision_id": null,
+        "sha256": null
+      },
+      "backlink_updates": [
+        {
+          "title": "Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes",
+          "base_revision_id": 246069,
+          "before_sha256": "4002dea19e8f948b26f16123fed466f939b612058e69c85fdf42957e5e2299da",
+          "after_sha256": "0b253e6febdb5dd68728694e478ca992b6da3e99944d9f0ac95f4e4297ab08bf",
+          "desired_text": "{{Argument\n|objections={{Objection\n|page=Les hommes peuvent très facilement tuer dans l'oeuf les actions militantes des femmes\n|titre-affiché=Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes\n}}\n|rubriques=Politique\n|mots-clés=féminisme, femmes\n|date-création=2021-03-18\n}}"
+        },
+        {
+          "title": "Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes",
+          "base_revision_id": 245942,
+          "before_sha256": "145b6eb0c7c9eb7b15f01a674cddd56ba02f9421807cb57fcf5e3a2305089a1d",
+          "after_sha256": "3706ad6e9d10ef068ffca97e64c7a4459d5c9c2bfdca90e1deb52dd9d35e7dc9",
+          "desired_text": "#REDIRECTION [[Les hommes peuvent très facilement tuer dans l'oeuf les actions militantes des femmes]]"
+        }
+      ]
+    }
+  ],
+  "plan_sha256": "a7eff98cdc01b4e8d1f167a92f346b6cf62fe00dd4c4811d2b1b7b38f49afc1a"
+}

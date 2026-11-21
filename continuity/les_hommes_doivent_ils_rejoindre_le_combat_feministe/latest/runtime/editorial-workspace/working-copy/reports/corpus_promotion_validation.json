@@ -1,0 +1,110 @@
+{
+  "schema": "wikidebia-validator-report-1.0",
+  "schema_version": "1.0",
+  "validator_version": "0.4.105",
+  "producer": {
+    "component": "validator",
+    "version": "0.4.105"
+  },
+  "package_root": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "scopes": [
+    "schema",
+    "coherence",
+    "graph",
+    "files",
+    "workflow"
+  ],
+  "result": "passed",
+  "result_scope": "automated_validation",
+  "result_meaning": "Automated structural, documentary and encoded editorial checks only; bilingual semantic fidelity still depends on the required human review attestations.",
+  "validation_layers": {
+    "structural": {
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "meaning": "Schémas, fichiers, graphe, wikicode, cohérence et workflow automatisables."
+    },
+    "documentary": {
+      "status": "not_run",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "meaning": "Les portées nécessaires n'ont pas été exécutées."
+    },
+    "semantic_review": {
+      "status": "not_run",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "meaning": "Les portées nécessaires n'ont pas été exécutées."
+    },
+    "fresh_archive": {
+      "status": "not_run",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "meaning": "Ce statut ne peut être établi qu'après création puis réextraction de l'archive exacte; il est scellé par le workflow de release."
+    }
+  },
+  "summary": {
+    "errors": 0,
+    "warnings": 0,
+    "infos": 1
+  },
+  "metrics": {
+    "runtime_attestation": {
+      "mode": "component_script_isolated_v2",
+      "cli_sha256": "6338d5bc331d22d66467c09b4ad2f2616b3c29db9b8c32c15e0f6d4c3f43a8d7",
+      "editorial_sha256": "d3d0633b8152ffd4b2c5132c71d3f005af45e5e7093e55e72eec27030cec8b05",
+      "wikicode_sha256": "85f8bfb82eab86e106dddca9511d87c639d2cd3039920470b1a0d791a1a335c3",
+      "historical_summary_sha256": "b987c154a4dbc09ad7a6376a4b348422ca373226832e2f2f20f956788cc7428a"
+    },
+    "coherence": {
+      "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+      "english_translation_deferred": true
+    },
+    "graph": {
+      "main_pro": 5,
+      "main_con": 5,
+      "justifications_by_depth": {
+        "2": 41,
+        "3": 7
+      },
+      "objections_by_depth": {
+        "2": 21,
+        "3": 44,
+        "4": 2
+      },
+      "distinct_nodes": 100,
+      "total_occurrences": 125,
+      "reused_nodes": 15,
+      "additional_reuses": 25,
+      "developed_nodes": 28,
+      "leaf_nodes": 72,
+      "maximum_depth": 4
+    },
+    "files": {
+      "declared_pages": 0,
+      "core_files": 5
+    },
+    "workflow": {
+      "global_status": "graph_validated",
+      "passed_validation_scopes": [
+        "graph"
+      ],
+      "english_translation_status": "deferred",
+      "english_translation_deferred": true
+    }
+  },
+  "findings": [
+    {
+      "code": "WDV-DOC-001",
+      "level": "INFO",
+      "message": "Les contrôles de qualité argumentative, d'équilibre, de quasi-doublons sémantiques et de fidélité documentaire restent soumis à une revue humaine.",
+      "path": null,
+      "pointer": null,
+      "details": {}
+    }
+  ]
+}

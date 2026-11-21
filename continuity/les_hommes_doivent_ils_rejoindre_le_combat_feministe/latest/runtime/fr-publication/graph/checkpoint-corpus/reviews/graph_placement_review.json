@@ -1,0 +1,3172 @@
+{
+  "schema_version": "1.0",
+  "normative_revision": "1.2.88",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "entries": [
+    {
+      "occurrence_id": "O00001",
+      "node_id": "A0001",
+      "declared_depth": 1,
+      "placement_status": "approved",
+      "declared_function": "main_argument",
+      "semantic_target": "debate",
+      "direct_fit": true,
+      "rationale": "La thèse « Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes » apporte une raison favorable directe et autonome sur la participation des hommes au combat féministe ; elle ouvre une famille distincte et n’est ni un simple exemple ni l’attaque d’un autre argument précis.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "main_argument_review": {
+        "direct_answer_to_debate": true,
+        "autonomous_without_parent": true,
+        "organizes_distinct_argument_family": true,
+        "more_general_nonduplicate_parent_available": false,
+        "principally_supports_or_attacks_specific_argument": false,
+        "principally_example_or_specialization": false
+      }
+    },
+    {
+      "occurrence_id": "O00002",
+      "node_id": "A0002",
+      "declared_depth": 1,
+      "placement_status": "approved",
+      "declared_function": "main_argument",
+      "semantic_target": "debate",
+      "direct_fit": true,
+      "rationale": "La thèse « Les hommes ont intérêt à en finir avec le sexisme » apporte une raison favorable directe et autonome sur la participation des hommes au combat féministe ; elle ouvre une famille distincte et n’est ni un simple exemple ni l’attaque d’un autre argument précis.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "main_argument_review": {
+        "direct_answer_to_debate": true,
+        "autonomous_without_parent": true,
+        "organizes_distinct_argument_family": true,
+        "more_general_nonduplicate_parent_available": false,
+        "principally_supports_or_attacks_specific_argument": false,
+        "principally_example_or_specialization": false
+      }
+    },
+    {
+      "occurrence_id": "O00003",
+      "node_id": "A0003",
+      "declared_depth": 1,
+      "placement_status": "approved",
+      "declared_function": "main_argument",
+      "semantic_target": "debate",
+      "direct_fit": true,
+      "rationale": "La thèse « Les femmes ont besoin des hommes pour en finir avec le sexisme » apporte une raison favorable directe et autonome sur la participation des hommes au combat féministe ; elle ouvre une famille distincte et n’est ni un simple exemple ni l’attaque d’un autre argument précis.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "main_argument_review": {
+        "direct_answer_to_debate": true,
+        "autonomous_without_parent": true,
+        "organizes_distinct_argument_family": true,
+        "more_general_nonduplicate_parent_available": false,
+        "principally_supports_or_attacks_specific_argument": false,
+        "principally_example_or_specialization": false
+      }
+    },
+    {
+      "occurrence_id": "O00004",
+      "node_id": "A0004",
+      "declared_depth": 1,
+      "placement_status": "approved",
+      "declared_function": "main_argument",
+      "semantic_target": "debate",
+      "direct_fit": true,
+      "rationale": "La thèse « Bien des hommes ont fait la preuve de leur engagement pour le combat féministe » apporte une raison favorable directe et autonome sur la participation des hommes au combat féministe ; elle ouvre une famille distincte et n’est ni un simple exemple ni l’attaque d’un autre argument précis.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "main_argument_review": {
+        "direct_answer_to_debate": true,
+        "autonomous_without_parent": true,
+        "organizes_distinct_argument_family": true,
+        "more_general_nonduplicate_parent_available": false,
+        "principally_supports_or_attacks_specific_argument": false,
+        "principally_example_or_specialization": false
+      }
+    },
+    {
+      "occurrence_id": "O00005",
+      "node_id": "A0005",
+      "declared_depth": 1,
+      "placement_status": "approved",
+      "declared_function": "main_argument",
+      "semantic_target": "debate",
+      "direct_fit": true,
+      "rationale": "La thèse « La société doit en finir avec le sexisme » apporte une raison favorable directe et autonome sur la participation des hommes au combat féministe ; elle ouvre une famille distincte et n’est ni un simple exemple ni l’attaque d’un autre argument précis.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "main_argument_review": {
+        "direct_answer_to_debate": true,
+        "autonomous_without_parent": true,
+        "organizes_distinct_argument_family": true,
+        "more_general_nonduplicate_parent_available": false,
+        "principally_supports_or_attacks_specific_argument": false,
+        "principally_example_or_specialization": false
+      }
+    },
+    {
+      "occurrence_id": "O00006",
+      "node_id": "A0006",
+      "declared_depth": 1,
+      "placement_status": "approved",
+      "declared_function": "main_argument",
+      "semantic_target": "debate",
+      "direct_fit": true,
+      "rationale": "La thèse « Les hommes sont socialisés pour dominer les femmes » apporte une raison défavorable directe et autonome sur la participation des hommes au combat féministe ; elle ouvre une famille distincte et n’est ni un simple exemple ni l’attaque d’un autre argument précis.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "main_argument_review": {
+        "direct_answer_to_debate": true,
+        "autonomous_without_parent": true,
+        "organizes_distinct_argument_family": true,
+        "more_general_nonduplicate_parent_available": false,
+        "principally_supports_or_attacks_specific_argument": false,
+        "principally_example_or_specialization": false
+      }
+    },
+    {
+      "occurrence_id": "O00007",
+      "node_id": "A0007",
+      "declared_depth": 1,
+      "placement_status": "approved",
+      "declared_function": "main_argument",
+      "semantic_target": "debate",
+      "direct_fit": true,
+      "rationale": "La thèse « Les hommes n'ont aucun intérêt à renoncer à leurs privilèges » apporte une raison défavorable directe et autonome sur la participation des hommes au combat féministe ; elle ouvre une famille distincte et n’est ni un simple exemple ni l’attaque d’un autre argument précis.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "main_argument_review": {
+        "direct_answer_to_debate": true,
+        "autonomous_without_parent": true,
+        "organizes_distinct_argument_family": true,
+        "more_general_nonduplicate_parent_available": false,
+        "principally_supports_or_attacks_specific_argument": false,
+        "principally_example_or_specialization": false
+      }
+    },
+    {
+      "occurrence_id": "O00008",
+      "node_id": "A0008",
+      "declared_depth": 1,
+      "placement_status": "approved",
+      "declared_function": "main_argument",
+      "semantic_target": "debate",
+      "direct_fit": true,
+      "rationale": "La thèse « Les femmes doivent s'organiser en non-mixité » apporte une raison défavorable directe et autonome sur la participation des hommes au combat féministe ; elle ouvre une famille distincte et n’est ni un simple exemple ni l’attaque d’un autre argument précis.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "main_argument_review": {
+        "direct_answer_to_debate": true,
+        "autonomous_without_parent": true,
+        "organizes_distinct_argument_family": true,
+        "more_general_nonduplicate_parent_available": false,
+        "principally_supports_or_attacks_specific_argument": false,
+        "principally_example_or_specialization": false
+      }
+    },
+    {
+      "occurrence_id": "O00009",
+      "node_id": "A0009",
+      "declared_depth": 1,
+      "placement_status": "approved",
+      "declared_function": "main_argument",
+      "semantic_target": "debate",
+      "direct_fit": true,
+      "rationale": "La thèse « Une société ne peut pas fonctionner correctement si elle est égalitaire » apporte une raison défavorable directe et autonome sur la participation des hommes au combat féministe ; elle ouvre une famille distincte et n’est ni un simple exemple ni l’attaque d’un autre argument précis.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "main_argument_review": {
+        "direct_answer_to_debate": true,
+        "autonomous_without_parent": true,
+        "organizes_distinct_argument_family": true,
+        "more_general_nonduplicate_parent_available": false,
+        "principally_supports_or_attacks_specific_argument": false,
+        "principally_example_or_specialization": false
+      }
+    },
+    {
+      "occurrence_id": "O00010",
+      "node_id": "A0010",
+      "declared_depth": 1,
+      "placement_status": "approved",
+      "declared_function": "main_argument",
+      "semantic_target": "debate",
+      "direct_fit": true,
+      "rationale": "La thèse « Le féminisme est un mouvement politique où les hommes ne sont pas défendus » apporte une raison défavorable directe et autonome sur la participation des hommes au combat féministe ; elle ouvre une famille distincte et n’est ni un simple exemple ni l’attaque d’un autre argument précis.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "main_argument_review": {
+        "direct_answer_to_debate": true,
+        "autonomous_without_parent": true,
+        "organizes_distinct_argument_family": true,
+        "more_general_nonduplicate_parent_available": false,
+        "principally_supports_or_attacks_specific_argument": false,
+        "principally_example_or_specialization": false
+      }
+    },
+    {
+      "occurrence_id": "O00011",
+      "node_id": "A0011",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00001",
+      "direct_fit": true,
+      "rationale": "La proposition « Le sexisme est omniprésent » étaye directement « Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00012",
+      "node_id": "A0012",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00001",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour être égoïstes » conteste ou limite directement « Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00013",
+      "node_id": "A0013",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00001",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes » étaye directement « Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00014",
+      "node_id": "A0014",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00001",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour être indifférents à la souffrance » conteste ou limite directement « Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00015",
+      "node_id": "A0015",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00001",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité » étaye directement « Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00016",
+      "node_id": "A0016",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00001",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour se sentir supérieurs aux femmes » conteste ou limite directement « Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00017",
+      "node_id": "A0017",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00001",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour déshumaniser les femmes » conteste ou limite directement « Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00018",
+      "node_id": "A0018",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00001",
+      "direct_fit": true,
+      "rationale": "La proposition « La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes » conteste ou limite directement « Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00019",
+      "node_id": "A0019",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00002",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions » étaye directement « Les hommes ont intérêt à en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00020",
+      "node_id": "A0020",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00002",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes bénéficient des discriminations envers les femmes » conteste ou limite directement « Les hommes ont intérêt à en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00021",
+      "node_id": "A0021",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00002",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité » étaye directement « Les hommes ont intérêt à en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00022",
+      "node_id": "A0022",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00002",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes » étaye directement « Les hommes ont intérêt à en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00023",
+      "node_id": "A0023",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00002",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction » étaye directement « Les hommes ont intérêt à en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00024",
+      "node_id": "A0024",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00002",
+      "direct_fit": true,
+      "rationale": "La proposition « La masculinité toxique génèrent des troubles mentaux et des suicides chez les hommes » étaye directement « Les hommes ont intérêt à en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00025",
+      "node_id": "A0025",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00002",
+      "direct_fit": true,
+      "rationale": "La proposition « La masculinité toxique est le terreau de l'homophobie » étaye directement « Les hommes ont intérêt à en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00026",
+      "node_id": "A0026",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00003",
+      "direct_fit": true,
+      "rationale": "La proposition « Seul un changement de comportement des hommes pourra mettre fin au sexisme » étaye directement « Les femmes ont besoin des hommes pour en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00027",
+      "node_id": "A0027",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00003",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes » conteste ou limite directement « Les femmes ont besoin des hommes pour en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00028",
+      "node_id": "A0028",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00003",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes » étaye directement « Les femmes ont besoin des hommes pour en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00029",
+      "node_id": "A0029",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00003",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes ont intérêt à mener le combat féministe sans les hommes » conteste ou limite directement « Les femmes ont besoin des hommes pour en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00030",
+      "node_id": "A0030",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00003",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ont davantage de moyens d'être entendus dans la société » étaye directement « Les femmes ont besoin des hommes pour en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00031",
+      "node_id": "A0031",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00003",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes peuvent faciliter et encourager l'émancipation de leur compagne » étaye directement « Les femmes ont besoin des hommes pour en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00032",
+      "node_id": "A0032",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00003",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes jouent un rôle essentiel dans l'éducation des enfants » étaye directement « Les femmes ont besoin des hommes pour en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00033",
+      "node_id": "A0033",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00003",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes peuvent parler et convaincre d'autres hommes de la nécessité du féminisme » étaye directement « Les femmes ont besoin des hommes pour en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00034",
+      "node_id": "A0034",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00003",
+      "direct_fit": true,
+      "rationale": "La proposition « Le combat féministe n'avancera que si les hommes décident de lâcher du lest » étaye directement « Les femmes ont besoin des hommes pour en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00035",
+      "node_id": "A0035",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00003",
+      "direct_fit": true,
+      "rationale": "La proposition « Le féminisme sera victorieux quand tous les hommes y adhèreront » étaye directement « Les femmes ont besoin des hommes pour en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00036",
+      "node_id": "A0036",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00003",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ne subissent pas l'épuisement généré par les discriminations sexistes » étaye directement « Les femmes ont besoin des hommes pour en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00037",
+      "node_id": "A0037",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00004",
+      "direct_fit": true,
+      "rationale": "La proposition « Le médecin communiste Willy Peers a permis la légalisation de l'avortement et la démocratisation de la contraception en Belgique » étaye directement « Bien des hommes ont fait la preuve de leur engagement pour le combat féministe » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00038",
+      "node_id": "A0038",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00004",
+      "direct_fit": true,
+      "rationale": "La proposition « Lénine avait lui-même des sensibilités féministes » étaye directement « Bien des hommes ont fait la preuve de leur engagement pour le combat féministe » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00039",
+      "node_id": "A0039",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00004",
+      "direct_fit": true,
+      "rationale": "La proposition « Victor Hugo avait des idées très féministes » étaye directement « Bien des hommes ont fait la preuve de leur engagement pour le combat féministe » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00040",
+      "node_id": "A0040",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00005",
+      "direct_fit": true,
+      "rationale": "La proposition « Une société n'est fonctionnelle que si elle est égalitaire » étaye directement « La société doit en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00041",
+      "node_id": "A0041",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00005",
+      "direct_fit": true,
+      "rationale": "La proposition « Les inégalités hommes/femmes sont un gouffre financier pour la société » étaye directement « La société doit en finir avec le sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00042",
+      "node_id": "A0017",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00006",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour déshumaniser les femmes » étaye directement « Les hommes sont socialisés pour dominer les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00043",
+      "node_id": "A0013",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00006",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes » conteste ou limite directement « Les hommes sont socialisés pour dominer les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00044",
+      "node_id": "A0012",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00006",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour être égoïstes » étaye directement « Les hommes sont socialisés pour dominer les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00045",
+      "node_id": "A0015",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00006",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité » conteste ou limite directement « Les hommes sont socialisés pour dominer les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00046",
+      "node_id": "A0016",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00006",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour se sentir supérieurs aux femmes » étaye directement « Les hommes sont socialisés pour dominer les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00047",
+      "node_id": "A0042",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00006",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs » conteste ou limite directement « Les hommes sont socialisés pour dominer les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00048",
+      "node_id": "A0014",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00006",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour être indifférents à la souffrance » étaye directement « Les hommes sont socialisés pour dominer les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00049",
+      "node_id": "A0043",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00006",
+      "direct_fit": true,
+      "rationale": "La proposition « Il est possible de leur donner une autre éducation » conteste ou limite directement « Les hommes sont socialisés pour dominer les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00050",
+      "node_id": "A0018",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00006",
+      "direct_fit": true,
+      "rationale": "La proposition « La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes » étaye directement « Les hommes sont socialisés pour dominer les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00051",
+      "node_id": "A0044",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00006",
+      "direct_fit": true,
+      "rationale": "La proposition « Le mouvement féministe doit rester à l'abri de la domination masculine » étaye directement « Les hommes sont socialisés pour dominer les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00052",
+      "node_id": "A0020",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00007",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes bénéficient des discriminations envers les femmes » étaye directement « Les hommes n'ont aucun intérêt à renoncer à leurs privilèges » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00053",
+      "node_id": "A0019",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00007",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions » conteste ou limite directement « Les hommes n'ont aucun intérêt à renoncer à leurs privilèges » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00054",
+      "node_id": "A0045",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00007",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ne veulent pas céder leurs places » étaye directement « Les hommes n'ont aucun intérêt à renoncer à leurs privilèges » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00055",
+      "node_id": "A0021",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00007",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité » conteste ou limite directement « Les hommes n'ont aucun intérêt à renoncer à leurs privilèges » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00056",
+      "node_id": "A0046",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00007",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes qui assument leur féminisme sont rejetés par les autres hommes » étaye directement « Les hommes n'ont aucun intérêt à renoncer à leurs privilèges » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00057",
+      "node_id": "A0022",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00007",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes » conteste ou limite directement « Les hommes n'ont aucun intérêt à renoncer à leurs privilèges » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00058",
+      "node_id": "A0023",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00007",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction » conteste ou limite directement « Les hommes n'ont aucun intérêt à renoncer à leurs privilèges » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00059",
+      "node_id": "A0047",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00007",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes n'ont pas de privilèges » conteste ou limite directement « Les hommes n'ont aucun intérêt à renoncer à leurs privilèges » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00060",
+      "node_id": "A0004",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00007",
+      "direct_fit": true,
+      "rationale": "La proposition « Bien des hommes ont fait la preuve de leur engagement pour le combat féministe » conteste ou limite directement « Les hommes n'ont aucun intérêt à renoncer à leurs privilèges » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00061",
+      "node_id": "A0048",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00008",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes doivent s'organiser en non-mixité pour créer un espace d'échange sûr et rassurant » étaye directement « Les femmes doivent s'organiser en non-mixité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00062",
+      "node_id": "A0049",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00008",
+      "direct_fit": true,
+      "rationale": "La proposition « La non-mixité doit être une solution temporaire » conteste ou limite directement « Les femmes doivent s'organiser en non-mixité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00063",
+      "node_id": "A0050",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00008",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes doivent s'organiser en non-mixité pour ne pas avoir à tout réexpliquer » étaye directement « Les femmes doivent s'organiser en non-mixité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00064",
+      "node_id": "A0051",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00008",
+      "direct_fit": true,
+      "rationale": "La proposition « Le combat n'avancera pas si on n'éduque pas les hommes » conteste ou limite directement « Les femmes doivent s'organiser en non-mixité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00065",
+      "node_id": "A0052",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00008",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes doivent s'organiser en non-mixité pour parler et communiquer librement » étaye directement « Les femmes doivent s'organiser en non-mixité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00066",
+      "node_id": "A0053",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00008",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes doivent s'organiser en non-mixité pour prendre conscience du caractère systémique de la domination » étaye directement « Les femmes doivent s'organiser en non-mixité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00067",
+      "node_id": "A0054",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00008",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes doivent s'organiser en non-mixité pour renforcer la sororité » étaye directement « Les femmes doivent s'organiser en non-mixité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00068",
+      "node_id": "A0055",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00008",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes doivent s'organiser en non-mixité pour diriger la lutte par elles-mêmes » étaye directement « Les femmes doivent s'organiser en non-mixité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00069",
+      "node_id": "A0056",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00008",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes doivent s'organiser en non-mixité pour apprendre à être autonomes » étaye directement « Les femmes doivent s'organiser en non-mixité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00070",
+      "node_id": "A0057",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00008",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur valeur individuelle » étaye directement « Les femmes doivent s'organiser en non-mixité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00071",
+      "node_id": "A0058",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00008",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur force collective » étaye directement « Les femmes doivent s'organiser en non-mixité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00072",
+      "node_id": "A0059",
+      "declared_depth": 2,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00009",
+      "direct_fit": true,
+      "rationale": "La proposition « C'est plutôt l'inverse » conteste ou limite directement « Une société ne peut pas fonctionner correctement si elle est égalitaire » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00073",
+      "node_id": "A0060",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00011",
+      "direct_fit": true,
+      "rationale": "La proposition « Les violences sexistes sont omniprésentes » étaye directement « Le sexisme est omniprésent » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00074",
+      "node_id": "A0061",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00011",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes sont victimes de discriminations économiques » étaye directement « Le sexisme est omniprésent » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00075",
+      "node_id": "A0062",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00011",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes assument la majeure partie des tâches domestiques » étaye directement « Le sexisme est omniprésent » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00076",
+      "node_id": "A0063",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00011",
+      "direct_fit": true,
+      "rationale": "La proposition « Le pouvoir est encore monopolisé par les hommes » étaye directement « Le sexisme est omniprésent » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00077",
+      "node_id": "A0064",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00011",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes sont constamment dévalorisées par rapport aux hommes » étaye directement « Le sexisme est omniprésent » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00078",
+      "node_id": "A0065",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00011",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes sont sans cesse ramenées à leur corps et à leur apparence » étaye directement « Le sexisme est omniprésent » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00079",
+      "node_id": "A0066",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00012",
+      "direct_fit": true,
+      "rationale": "La proposition « Beaucoup d'hommes ne sont pas égoïstes » conteste ou limite directement « Les hommes sont socialisés pour être égoïstes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00080",
+      "node_id": "A0067",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00012",
+      "direct_fit": true,
+      "rationale": "La proposition « La socialisation vise à lutter contre notre égoïsme naturel » conteste ou limite directement « Les hommes sont socialisés pour être égoïstes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00081",
+      "node_id": "A0068",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00013",
+      "direct_fit": true,
+      "rationale": "La proposition « Le sexisme est tellement banalisé qu'il n'est même pas perçu comme tel » conteste ou limite directement « Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00082",
+      "node_id": "A0069",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00013",
+      "direct_fit": true,
+      "rationale": "La proposition « Le traitement médiatique du sexisme est encore insuffisant » conteste ou limite directement « Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00083",
+      "node_id": "A0070",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00013",
+      "direct_fit": true,
+      "rationale": "La proposition « De nombreuses victimes n'osent pas parler des violences sexistes qu'elles ont subies, encore moins aux hommes » conteste ou limite directement « Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00084",
+      "node_id": "A0012",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00013",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour être égoïstes » conteste ou limite directement « Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00085",
+      "node_id": "A0014",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00013",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour être indifférents à la souffrance » conteste ou limite directement « Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00086",
+      "node_id": "A0012",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00015",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour être égoïstes » conteste ou limite directement « Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00087",
+      "node_id": "A0014",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00015",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour être indifférents à la souffrance » conteste ou limite directement « Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00088",
+      "node_id": "A0016",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00015",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour se sentir supérieurs aux femmes » conteste ou limite directement « Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00089",
+      "node_id": "A0017",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00015",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour déshumaniser les femmes » conteste ou limite directement « Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00090",
+      "node_id": "A0018",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00015",
+      "direct_fit": true,
+      "rationale": "La proposition « La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes » conteste ou limite directement « Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00091",
+      "node_id": "A0071",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00017",
+      "direct_fit": true,
+      "rationale": "La proposition « La domination masculine est de nos jours largement contestée dans tous les domaines de la société » conteste ou limite directement « Les hommes sont socialisés pour déshumaniser les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00092",
+      "node_id": "A0072",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00017",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques sexistes » conteste ou limite directement « Les hommes sont socialisés pour déshumaniser les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00093",
+      "node_id": "A0073",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00017",
+      "direct_fit": true,
+      "rationale": "La proposition « L'éducation vise à développer notre empathie » conteste ou limite directement « Les hommes sont socialisés pour déshumaniser les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00094",
+      "node_id": "A0074",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00017",
+      "direct_fit": true,
+      "rationale": "La proposition « Le terme \"déshumaniser\" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe » conteste ou limite directement « Les hommes sont socialisés pour déshumaniser les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00095",
+      "node_id": "A0075",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "justification",
+      "semantic_target": "O00019",
+      "direct_fit": true,
+      "rationale": "La proposition « L'injonction à la répression des émotions déteriore la santé mentale des hommes » étaye directement « Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00096",
+      "node_id": "A0076",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00019",
+      "direct_fit": true,
+      "rationale": "La proposition « L'expression des émotions affaiblirait la domination des hommes » conteste ou limite directement « Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00097",
+      "node_id": "A0077",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00020",
+      "direct_fit": true,
+      "rationale": "La proposition « Seulement ceux qui se conforment à l'injonction à la virilité » conteste ou limite directement « Les hommes bénéficient des discriminations envers les femmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00098",
+      "node_id": "A0078",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00021",
+      "direct_fit": true,
+      "rationale": "La proposition « En renonçant à la virilité, les hommes perdraient leur pouvoir » conteste ou limite directement « Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00099",
+      "node_id": "A0079",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00021",
+      "direct_fit": true,
+      "rationale": "La proposition « La virilité n'a pas que des mauvais côtés » conteste ou limite directement « Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00100",
+      "node_id": "A0080",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00022",
+      "direct_fit": true,
+      "rationale": "La proposition « La rivalité est une source d'émulation » conteste ou limite directement « Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00101",
+      "node_id": "A0081",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00022",
+      "direct_fit": true,
+      "rationale": "La proposition « La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes » conteste ou limite directement « Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00102",
+      "node_id": "A0082",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00023",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction » conteste ou limite directement « Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00103",
+      "node_id": "A0083",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00023",
+      "direct_fit": true,
+      "rationale": "La proposition « De nombreuses femmes préfèrent les hommes dominants » conteste ou limite directement « Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00104",
+      "node_id": "A0007",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00026",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes n'ont aucun intérêt à renoncer à leurs privilèges » conteste ou limite directement « Seul un changement de comportement des hommes pourra mettre fin au sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00105",
+      "node_id": "A0084",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00026",
+      "direct_fit": true,
+      "rationale": "La proposition « L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes » conteste ou limite directement « Seul un changement de comportement des hommes pourra mettre fin au sexisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00106",
+      "node_id": "A0085",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00027",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes » conteste ou limite directement « Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00107",
+      "node_id": "A0014",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00028",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes sont socialisés pour être indifférents à la souffrance » conteste ou limite directement « Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00108",
+      "node_id": "A0086",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00030",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes utilisent leur accès privilégié à la parole pour conforter la domination masculine » conteste ou limite directement « Les hommes ont davantage de moyens d'être entendus dans la société » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00109",
+      "node_id": "A0087",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00030",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes n'ont aucun intérêt à utiliser leur accès privilégié à la parole pour dénoncer le sexisme » conteste ou limite directement « Les hommes ont davantage de moyens d'être entendus dans la société » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00110",
+      "node_id": "A0088",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00030",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place » conteste ou limite directement « Les hommes ont davantage de moyens d'être entendus dans la société » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00111",
+      "node_id": "A0089",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00030",
+      "direct_fit": true,
+      "rationale": "La proposition « Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent » conteste ou limite directement « Les hommes ont davantage de moyens d'être entendus dans la société » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00112",
+      "node_id": "A0090",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00030",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes qui défendent le féminisme ne sont pas pris au sérieux » conteste ou limite directement « Les hommes ont davantage de moyens d'être entendus dans la société » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00113",
+      "node_id": "A0091",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00031",
+      "direct_fit": true,
+      "rationale": "La proposition « La majorité des hommes dominent leur compagne et freinent leur émancipation » conteste ou limite directement « Les hommes peuvent faciliter et encourager l'émancipation de leur compagne » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00114",
+      "node_id": "A0084",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00031",
+      "direct_fit": true,
+      "rationale": "La proposition « L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes » conteste ou limite directement « Les hommes peuvent faciliter et encourager l'émancipation de leur compagne » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00115",
+      "node_id": "A0092",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00032",
+      "direct_fit": true,
+      "rationale": "La proposition « Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques » conteste ou limite directement « Les hommes jouent un rôle essentiel dans l'éducation des enfants » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00116",
+      "node_id": "A0093",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00032",
+      "direct_fit": true,
+      "rationale": "La proposition « Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes » conteste ou limite directement « Les hommes jouent un rôle essentiel dans l'éducation des enfants » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00117",
+      "node_id": "A0094",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00032",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille » conteste ou limite directement « Les hommes jouent un rôle essentiel dans l'éducation des enfants » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00118",
+      "node_id": "A0095",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00032",
+      "direct_fit": true,
+      "rationale": "La proposition « Les couples lesbiens sont tout à fait aptes à élever un enfant » conteste ou limite directement « Les hommes jouent un rôle essentiel dans l'éducation des enfants » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00119",
+      "node_id": "A0007",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00033",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes n'ont aucun intérêt à renoncer à leurs privilèges » conteste ou limite directement « Les hommes peuvent parler et convaincre d'autres hommes de la nécessité du féminisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00120",
+      "node_id": "A0096",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00033",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes pro féministes ne sont pas pris au sérieux par les autres hommes » conteste ou limite directement « Les hommes peuvent parler et convaincre d'autres hommes de la nécessité du féminisme » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00121",
+      "node_id": "A0097",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00047",
+      "direct_fit": true,
+      "rationale": "La proposition « C'est la société qui est responsable du sexisme, pas les hommes » conteste ou limite directement « Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00122",
+      "node_id": "A0098",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00047",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes ne sont pas capables d'agir par devoir » conteste ou limite directement « Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00123",
+      "node_id": "A0007",
+      "declared_depth": 3,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00047",
+      "direct_fit": true,
+      "rationale": "La proposition « Les hommes n'ont aucun intérêt à renoncer à leurs privilèges » conteste ou limite directement « Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00124",
+      "node_id": "A0099",
+      "declared_depth": 4,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00094",
+      "direct_fit": true,
+      "rationale": "La proposition « La manière dont le femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation » conteste ou limite directement « Le terme \"déshumaniser\" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    },
+    {
+      "occurrence_id": "O00125",
+      "node_id": "A0100",
+      "declared_depth": 4,
+      "placement_status": "approved",
+      "declared_function": "objection",
+      "semantic_target": "O00094",
+      "direct_fit": true,
+      "rationale": "La proposition « Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base » conteste ou limite directement « Le terme \"déshumaniser\" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe » ; ce parent est sa meilleure cible immédiate et la relation déclarée rend explicitement sa fonction logique.",
+      "correction": {
+        "action": "none",
+        "target_node_id": null,
+        "new_parent_occurrence_id": null,
+        "new_relation": null,
+        "new_branch": null,
+        "page_disposition": null,
+        "reason": "",
+        "edit_summary_parent": "",
+        "edit_summary_page": ""
+      },
+      "subordinate_review": {
+        "parent_is_best_immediate_target": true,
+        "relation_to_parent_explicit": true
+      }
+    }
+  ]
+}

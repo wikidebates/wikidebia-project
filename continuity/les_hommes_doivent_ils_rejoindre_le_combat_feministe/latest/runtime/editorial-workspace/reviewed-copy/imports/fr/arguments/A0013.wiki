@@ -1,0 +1,22 @@
+{{Argument
+|résumé=Les violences sexistes sont visibles, car elles sont omniprésentes, elles sont de plus en plus médiatisées, et les hommes sont entourées par des femmes (sœurs, mères, compagnes, etc.) qui leur parlent des violences qu'elles ont subies. La parole des femmes se libère dans la plupart des milieux, il est difficile de l'ignorer.
+|objections={{Objection
+|page=Le sexisme est tellement banalisé qu'il n'est même pas perçu comme tel
+|titre-affiché=Le sexisme est tellement banalisé qu'il n'est même pas perçu comme tel
+}}{{Objection
+|page=Le traitement médiatique du sexisme est encore insuffisant
+|titre-affiché=Le traitement médiatique du sexisme est encore insuffisant
+}}{{Objection
+|page=De nombreuses victimes n'osent pas parler des violences sexistes qu'elles ont subies, encore moins aux hommes
+|titre-affiché=De nombreuses victimes n'osent pas parler des violences qu'elles ont subies, encore moins aux hommes
+}}{{Objection
+|page=Les hommes sont socialisés pour être égoïstes
+|titre-affiché=Les hommes sont socialisés pour être égoïstes
+}}{{Objection
+|page=Les hommes sont socialisés pour être indifférents à la souffrance
+|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Discrimination, Violence, Femmes
+|date-création=2019-11-24
+}}

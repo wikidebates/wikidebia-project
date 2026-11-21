@@ -1,0 +1,23 @@
+{{Argument
+|résumé=On peut être touchés par les souffrances de personnes qui sont en dehors de notre groupe d'appartenance. L'être humain est capable de laisser de côté ses intérêts pour mener un combat universel. Ainsi, des Blancs ont soutenu le mouvement antiraciste, des Juifs se battent aux côtés des Palestiniens. Des hommes se disent pro-féministes, et agissent en faveur de ce mouvement (John Stoltenberg, Léo Thiers Vidal, François Dupuis-Déri, Yvan Jablonka).
+|objections={{Objection
+|page=Les hommes sont socialisés pour être égoïstes
+|titre-affiché=Les hommes sont socialisés pour être égoïstes
+}}{{Objection
+|page=Les hommes sont socialisés pour être indifférents à la souffrance
+|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance
+}}{{Objection
+|page=Les hommes sont socialisés pour se sentir supérieurs aux femmes
+|titre-affiché=Les hommes sont socialisés pour se sentir supérieurs aux femmes
+}}{{Objection
+|page=Les hommes sont socialisés pour déshumaniser les femmes
+|titre-affiché=Les hommes sont socialisés pour déshumaniser les femmes
+}}{{Objection
+|page=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes
+|titre-affiché=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes
+}}
+|justifications=
+|rubriques=Politique, Société
+|mots-clés=Discrimination, Femmes, Féminisme, Hommes, Sexisme, Violence
+|date-création=2019-12-07
+}}

@@ -1,0 +1,13 @@
+{
+  "schema": "wikidebia-empty-fr-relation-parameter-restoration-verification-1.0",
+  "verified_at": "2026-10-23T13:03:44.390411+00:00",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "plan_sha256": "0b67e8983509c9d97682585fa8fcb1abb8d43a9a23acae3abdf6836945fbc5a4",
+  "receipt_sha256": "31ad1aae68486cf1ef8a40a52260d59f085aa278fd8a0a103449968212fc52c6",
+  "scanned_pages": 100,
+  "empty_relation_parameters": 0,
+  "receipt_mismatches": 0,
+  "status": "passed",
+  "verification_sha256": "2f830e0b6cd7f885865b5a08ce8de824c667f71f663fcd5f0cf268a2664a298f"
+}

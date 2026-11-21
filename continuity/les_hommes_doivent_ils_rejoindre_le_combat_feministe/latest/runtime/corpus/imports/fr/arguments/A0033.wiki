@@ -1,0 +1,12 @@
+{{Argument
+|objections={{Objection
+|page=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+|titre-affiché=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+}}{{Objection
+|page=Les hommes pro féministes ne sont pas pris au sérieux par les autres hommes
+|titre-affiché=Les hommes pro féministes ne sont pas pris au sérieux par les autres hommes
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Femmes, Prosélytisme
+|date-création=2020-03-19
+}}

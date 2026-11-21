@@ -1,0 +1,6 @@
+{{Argument
+|résumé=Le discours féministe est combattu, dénigré par un discours sexiste très virulent (exemple : Éric Zemmour). Le mouvement féministe est caricaturé et stigmatisé. Il y a encore beaucoup de sexisme dans les médias (télé-réalité, émissions de divertissement). La pensée dominante est encore du côté du sexisme. La culture du viol est encore présente. La prise de conscience du sexisme est donc difficile pour les hommes.
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Médias, Sexisme, Traitement médiatique
+|date-création=2020-04-16
+}}

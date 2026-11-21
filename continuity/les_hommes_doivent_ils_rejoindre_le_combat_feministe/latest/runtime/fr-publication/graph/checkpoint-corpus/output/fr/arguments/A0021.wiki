@@ -1,0 +1,13 @@
+{{Argument
+|objections={{Objection
+|page=En renonçant à la virilité, les hommes perdraient leur pouvoir
+|titre-affiché=En renonçant à la virilité, les hommes perdraient leur pouvoir
+}}{{Objection
+|page=La virilité n'a pas que des mauvais côtés
+|titre-affiché=La virilité n'a pas que des mauvais côtés
+}}
+|justifications=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Machisme, Sexisme, Virilisme
+|date-création=2019-12-25
+}}

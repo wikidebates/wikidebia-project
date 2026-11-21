@@ -1,0 +1,121 @@
+# Inventaire éditorial — les_hommes_doivent_ils_rejoindre_le_combat_feministe
+
+Work : `EDIT-20261023-001`
+
+Ce rapport ouvre des tâches de revue. Il n'applique aucune correction et ne génère aucune page finale.
+
+- Pages examinées : 101
+- Pages Argument : 100
+- Diagnostics : 317
+- Titres affichés identiques : 78 (78.0%)
+- Jeu exact de mots-clés dominant : 67 (67.0%)
+
+## Pages
+
+- `debate` — Les hommes doivent-ils rejoindre le combat féministe ? : KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0001` — Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0002` — Les hommes ont intérêt à en finir avec le sexisme : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0003` — Les femmes ont besoin des hommes pour en finir avec le sexisme : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0004` — Bien des hommes ont fait la preuve de leur engagement pour le combat féministe : revue obligatoire sans anomalie automatique
+- `A0005` — La société doit en finir avec le sexisme : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0006` — Les hommes sont socialisés pour dominer les femmes : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0007` — Les hommes n'ont aucun intérêt à renoncer à leurs privilèges : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0008` — Les femmes doivent s'organiser en non-mixité : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0009` — Une société ne peut pas fonctionner correctement si elle est égalitaire : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0010` — Le féminisme est un mouvement politique où les hommes ne sont pas défendus : KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0011` — Le sexisme est omniprésent : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0012` — Les hommes sont socialisés pour être égoïstes : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0013` — Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0014` — Les hommes sont socialisés pour être indifférents à la souffrance : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0015` — Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0016` — Les hommes sont socialisés pour se sentir supérieurs aux femmes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0017` — Les hommes sont socialisés pour déshumaniser les femmes : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0018` — La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0019` — Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0020` — Les hommes bénéficient des discriminations envers les femmes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0021` — Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0022` — Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0023` — Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0024` — La masculinité toxique génèrent des troubles mentaux et des suicides chez les hommes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0025` — La masculinité toxique est le terreau de l'homophobie : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0026` — Seul un changement de comportement des hommes pourra mettre fin au sexisme : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0027` — Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0028` — Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0029` — Les femmes ont intérêt à mener le combat féministe sans les hommes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0030` — Les hommes ont davantage de moyens d'être entendus dans la société : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0031` — Les hommes peuvent faciliter et encourager l'émancipation de leur compagne : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0032` — Les hommes jouent un rôle essentiel dans l'éducation des enfants : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0033` — Les hommes peuvent parler et convaincre d'autres hommes de la nécessité du féminisme : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0034` — Le combat féministe n'avancera que si les hommes décident de lâcher du lest : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0035` — Le féminisme sera victorieux quand tous les hommes y adhèreront : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0036` — Les hommes ne subissent pas l'épuisement généré par les discriminations sexistes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0037` — Le médecin communiste Willy Peers a permis la légalisation de l'avortement et la démocratisation de la contraception en Belgique : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0038` — Lénine avait lui-même des sensibilités féministes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0039` — Victor Hugo avait des idées très féministes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0040` — Une société n'est fonctionnelle que si elle est égalitaire : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0041` — Les inégalités hommes/femmes sont un gouffre financier pour la société : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0042` — Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0043` — Il est possible de leur donner une autre éducation : TITLE_CANONICAL_POSSIBLE_CONTEXT_DEPENDENCY, RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0044` — Le mouvement féministe doit rester à l'abri de la domination masculine : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0045` — Les hommes ne veulent pas céder leurs places : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0046` — Les hommes qui assument leur féminisme sont rejetés par les autres hommes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0047` — Les hommes n'ont pas de privilèges : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0048` — Les femmes doivent s'organiser en non-mixité pour créer un espace d'échange sûr et rassurant : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0049` — La non-mixité doit être une solution temporaire : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0050` — Les femmes doivent s'organiser en non-mixité pour ne pas avoir à tout réexpliquer : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0051` — Le combat n'avancera pas si on n'éduque pas les hommes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0052` — Les femmes doivent s'organiser en non-mixité pour parler et communiquer librement : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0053` — Les femmes doivent s'organiser en non-mixité pour prendre conscience du caractère systémique de la domination : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0054` — Les femmes doivent s'organiser en non-mixité pour renforcer la sororité : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0055` — Les femmes doivent s'organiser en non-mixité pour diriger la lutte par elles-mêmes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0056` — Les femmes doivent s'organiser en non-mixité pour apprendre à être autonomes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0057` — Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur valeur individuelle : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0058` — Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur force collective : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0059` — C'est plutôt l'inverse : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0060` — Les violences sexistes sont omniprésentes : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0061` — Les femmes sont victimes de discriminations économiques : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0062` — Les femmes assument la majeure partie des tâches domestiques : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0063` — Le pouvoir est encore monopolisé par les hommes : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0064` — Les femmes sont constamment dévalorisées par rapport aux hommes : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0065` — Les femmes sont sans cesse ramenées à leur corps et à leur apparence : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0066` — Beaucoup d'hommes ne sont pas égoïstes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0067` — La socialisation vise à lutter contre notre égoïsme naturel : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0068` — Le sexisme est tellement banalisé qu'il n'est même pas perçu comme tel : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0069` — Le traitement médiatique du sexisme est encore insuffisant : KEYWORDS_CAPITALIZATION_REVIEW
+- `A0070` — De nombreuses victimes n'osent pas parler des violences sexistes qu'elles ont subies, encore moins aux hommes : KEYWORDS_TOO_MANY, KEYWORDS_CAPITALIZATION_REVIEW
+- `A0071` — La domination masculine est de nos jours largement contestée dans tous les domaines de la société : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0072` — Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques sexistes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0073` — L'éducation vise à développer notre empathie : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0074` — Le terme "déshumaniser" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0075` — L'injonction à la répression des émotions déteriore la santé mentale des hommes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0076` — L'expression des émotions affaiblirait la domination des hommes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0077` — Seulement ceux qui se conforment à l'injonction à la virilité : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0078` — En renonçant à la virilité, les hommes perdraient leur pouvoir : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0079` — La virilité n'a pas que des mauvais côtés : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0080` — La rivalité est une source d'émulation : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0081` — La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0082` — Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0083` — De nombreuses femmes préfèrent les hommes dominants : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0084` — L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0085` — Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0086` — Les hommes utilisent leur accès privilégié à la parole pour conforter la domination masculine : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0087` — Les hommes n'ont aucun intérêt à utiliser leur accès privilégié à la parole pour dénoncer le sexisme : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0088` — Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0089` — Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0090` — Les hommes qui défendent le féminisme ne sont pas pris au sérieux : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0091` — La majorité des hommes dominent leur compagne et freinent leur émancipation : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0092` — Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0093` — Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0094` — Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0095` — Les couples lesbiens sont tout à fait aptes à élever un enfant : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0096` — Les hommes pro féministes ne sont pas pris au sérieux par les autres hommes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0097` — C'est la société qui est responsable du sexisme, pas les hommes : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0098` — Les hommes ne sont pas capables d'agir par devoir : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0099` — La manière dont le femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+- `A0100` — Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base : RUBRIQUES_IMPORTED_FALLBACK, KEYWORDS_TOO_FEW, KEYWORDS_CAPITALIZATION_REVIEW, KEYWORDS_IMPORTED_FALLBACK
+
+## Limites
+
+- Les diagnostics de propositionnalité et d'autonomie des titres sont heuristiques et exigent une revue humaine.
+- La pertinence sémantique des rubriques et mots-clés ne peut pas être décidée automatiquement.
+- Aucune traduction anglaise et aucun wikicode final ne sont produits dans cette phase.

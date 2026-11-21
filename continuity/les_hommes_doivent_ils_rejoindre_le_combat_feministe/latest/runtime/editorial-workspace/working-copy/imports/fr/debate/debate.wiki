@@ -1,0 +1,46 @@
+{{Débat
+|sujet=Féminisme
+|sujet-développé=l'inclusion des hommes dans le mouvement féministe
+|avancement=Débat en construction
+|articles-Wikipédia={{Article Wikipédia
+|page=Féminisme
+}}
+|arguments-pour={{Argument pour
+|page=Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes
+|titre-affiché=Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes
+}}{{Argument pour
+|page=Les hommes ont intérêt à en finir avec le sexisme
+|titre-affiché=Les hommes ont intérêt à en finir avec le sexisme
+}}{{Argument pour
+|page=Les femmes ont besoin des hommes pour en finir avec le sexisme
+|titre-affiché=Les femmes ont besoin des hommes pour en finir avec le sexisme
+}}{{Argument pour
+|page=Bien des hommes ont fait la preuve de leur engagement pour le combat féministe
+|titre-affiché=Bien des hommes ont fait la preuve de leur engagement pour le combat féministe
+}}{{Argument pour
+|page=La société doit en finir avec le sexisme
+|titre-affiché=La société doit en finir avec le sexisme
+}}
+|arguments-contre={{Argument contre
+|page=Les hommes sont socialisés pour dominer les femmes
+|titre-affiché=Les hommes sont socialisés pour dominer les femmes
+}}{{Argument contre
+|page=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+|titre-affiché=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+}}{{Argument contre
+|page=Les femmes doivent s'organiser en non-mixité
+|titre-affiché=Les femmes doivent s'organiser en non-mixité
+}}{{Argument contre
+|page=Une société ne peut pas fonctionner correctement si elle est égalitaire
+|titre-affiché=Une société ne peut pas fonctionner correctement si elle est égalitaire
+}}{{Argument contre
+|page=Le féminisme est un mouvement politique où les hommes ne sont pas défendus
+|titre-affiché=Le féminisme est un mouvement politique où les hommes ne sont pas défendus
+}}
+|débats-connexes={{Débat connexe
+|page=Le féminisme est-il encore vraiment nécessaire ?
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes
+|date-création=2019-10-28
+}}

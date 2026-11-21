@@ -1,0 +1,10 @@
+{{Argument
+|résumé=En particulier :
+* Accès à l'emploi, au logement, aux fonctions prestigieuses
+* Implication dans les tâches domestiques
+|justifications=
+|objections=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Privilèges
+|date-création=2019-11-24
+}}

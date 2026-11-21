@@ -1,0 +1,58 @@
+{
+  "schema": "wikidebia-oe-canonical-title-restoration-receipt-1.0",
+  "created_at": "2026-10-23T18:05:16.721236+00:00",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "plan_sha256": "a7eff98cdc01b4e8d1f167a92f346b6cf62fe00dd4c4811d2b1b7b38f49afc1a",
+  "expected_user": "ChatGPT",
+  "summary": "Rétablissement de la graphie oe dans les titres",
+  "counts": {
+    "moved_pages": 2,
+    "updated_backlinks": 4
+  },
+  "results": [
+    {
+      "page_id": "A0084",
+      "old_title": "L'émancipation des femmes doit être l'œuvre des femmes elles-mêmes",
+      "new_title": "L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes",
+      "content_sha256": "1914bd4f20825536602a7cf6e667aa9b64699dd03f8bf58ffbe2dac6ed30e189",
+      "backlink_updates": [
+        {
+          "title": "Les hommes peuvent faciliter et encourager l'émancipation de leur compagne",
+          "revision_id": 246147,
+          "sha256": "dc2f19b42da5dbace07b1b0c0a18ccc60e1a57a43a5803357f1f590dd757baa9"
+        },
+        {
+          "title": "Seul un changement de comportement des hommes pourra mettre fin au sexisme",
+          "revision_id": 246148,
+          "sha256": "6fa3ab928ef6f5e016216fd1767c321a83fa6e6501939e9cd4cc2594fd321d05"
+        }
+      ],
+      "mode": "already_moved",
+      "new_revision_id": 246143,
+      "redirect_revision_id": 246144
+    },
+    {
+      "page_id": "A0085",
+      "old_title": "Les hommes peuvent très facilement tuer dans l'œuf les actions militantes des femmes",
+      "new_title": "Les hommes peuvent très facilement tuer dans l'oeuf les actions militantes des femmes",
+      "content_sha256": "90a13159588366df190a9a23b04b87dc795cef22054eb930dc31cf6a4d7c7f31",
+      "backlink_updates": [
+        {
+          "title": "Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes",
+          "revision_id": 246149,
+          "sha256": "0b253e6febdb5dd68728694e478ca992b6da3e99944d9f0ac95f4e4297ab08bf"
+        },
+        {
+          "title": "Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes",
+          "revision_id": 246150,
+          "sha256": "3706ad6e9d10ef068ffca97e64c7a4459d5c9c2bfdca90e1deb52dd9d35e7dc9"
+        }
+      ],
+      "mode": "move",
+      "new_revision_id": 246151,
+      "redirect_revision_id": 246152
+    }
+  ],
+  "receipt_sha256": "f118b68b13dbf1f0128c596d6a53f6ce0bd984b97ede7fdd32b56a7b16b73109"
+}

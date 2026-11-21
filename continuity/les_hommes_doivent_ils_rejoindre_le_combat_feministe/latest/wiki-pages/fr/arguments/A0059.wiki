@@ -1,0 +1,9 @@
+{{Argument
+|citations={{Citation
+|citation=Sans égalité, pas de démocratie.
+|auteurs=Eleanor Roosvelt
+}}
+|rubriques=Politique
+|mots-clés=féminisme, égalité, société
+|date-création=2021-08-09
+}}

@@ -1,0 +1,37 @@
+{
+  "schema": "wikidebia-semantic-convergence-review-1.1",
+  "schema_version": "1.1",
+  "normative_revision": "1.2.88",
+  "kit_version": "2.16.47",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "translation_review_sha256": "75dc7ef38c90a0cabd6247c7ccea55bfe0ba22bf3d88502402854939852981dc",
+  "semantic_content_sha256": "082deef387edbb99e0b127f9a5c8d90d53c609780f3fa57e8ae9c20b63d359ab",
+  "status": "converged",
+  "passes": [
+    {
+      "pass_id": "P001",
+      "method_family": "proposition_by_proposition",
+      "method": "source-title and occurrence-by-occurrence proposition comparison",
+      "reviewer": "Codex source-title review A",
+      "reviewed_at": "2026-10-23T18:07:54+00:00",
+      "note": "Rechecked the two oe source-title reconciliations and all 125 occurrence labels; English meaning, subject, scope and modality remain unchanged.",
+      "new_certain_errors": 0,
+      "translation_review_sha256": "75dc7ef38c90a0cabd6247c7ccea55bfe0ba22bf3d88502402854939852981dc",
+      "semantic_content_sha256": "082deef387edbb99e0b127f9a5c8d90d53c609780f3fa57e8ae9c20b63d359ab"
+    },
+    {
+      "pass_id": "P002",
+      "method_family": "risk_marker_review",
+      "method": "independent source spelling and contextual-title risk review",
+      "reviewer": "Codex source-title review B",
+      "reviewed_at": "2026-10-23T18:07:55+00:00",
+      "note": "Verified that oe remains keyboard-accessible, that the five contextual displayed titles translate their historical French forms, and that no ligature correction altered English semantics.",
+      "new_certain_errors": 0,
+      "translation_review_sha256": "75dc7ef38c90a0cabd6247c7ccea55bfe0ba22bf3d88502402854939852981dc",
+      "semantic_content_sha256": "082deef387edbb99e0b127f9a5c8d90d53c609780f3fa57e8ae9c20b63d359ab"
+    }
+  ],
+  "converged_at": "2026-10-23T18:07:55+00:00",
+  "receipt_sha256": "719cc09070c395912a1f71ed229b829dc68f620d5c04f84ae8ca0fd4b424b52a"
+}

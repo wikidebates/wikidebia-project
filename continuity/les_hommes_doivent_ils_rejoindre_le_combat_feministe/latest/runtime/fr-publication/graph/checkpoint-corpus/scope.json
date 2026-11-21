@@ -1,0 +1,24 @@
+{
+  "canonical_title_fr": "Les hommes doivent-ils rejoindre le combat féministe ?",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "editorial_constraints": [
+    "Les fichiers sous imports/fr sont des sources historiques et ne sont pas des sorties validées."
+  ],
+  "excluded_topics": [],
+  "included_topics": [],
+  "jurisdiction": null,
+  "proposition_fr": "Les hommes doivent-ils rejoindre le combat féministe ?",
+  "related_debates": [],
+  "residual_ambiguities": [
+    "Le cadrage et le placement de chaque occurrence restent à valider après l'import technique."
+  ],
+  "scope_schema_version": "1.0",
+  "scope_summary_fr": "Cadrage importé depuis la page « Les hommes doivent-ils rejoindre le combat féministe ? »; périmètre éditorial à revoir avant validation du graphe.",
+  "source_documents": [
+    {
+      "path": "data/import_provenance.json",
+      "sha256": "3a4edf72be27346ff3acfe75f09b599356d2732dc859f0a126b01bf421fd8a8a"
+    }
+  ],
+  "timeframe": null
+}

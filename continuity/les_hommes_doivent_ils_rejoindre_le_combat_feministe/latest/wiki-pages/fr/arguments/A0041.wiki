@@ -1,0 +1,5 @@
+{{Argument
+|rubriques=Politique
+|mots-clés=féminisme, égalité, société, femmes
+|date-création=2022-03-06
+}}

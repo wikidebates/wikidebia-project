@@ -1,0 +1,57 @@
+{
+  "schema": "wikidebia-contextual-displayed-title-restoration-receipt-1.0",
+  "created_at": "2026-10-23T17:54:56.584943+00:00",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "plan_sha256": "61713090e56a3846a94cd92521efd77b0bcb18d2d2816da1559b419e93eef4c1",
+  "expected_user": "ChatGPT",
+  "change_tag": "chatgpt",
+  "edit_summary": "Rétablissement des titres affichés historiques",
+  "counts": {
+    "updated_pages": 2,
+    "restored_occurrences": 5
+  },
+  "results": [
+    {
+      "page_id": "A0007",
+      "title": "Les hommes n'ont aucun intérêt à renoncer à leurs privilèges",
+      "old_revision_id": 246049,
+      "new_revision_id": 246145,
+      "after_sha256": "2fde7d8ce490904e7a4623ac862fd5a99fd5a91967e51b4d5eba27d233674877",
+      "displayed_title_changes": [
+        {
+          "before": "Pour assumer leur sensibilité et leurs émotions",
+          "after": "Les hommes gagneraient à assumer leur sensibilité et leurs émotions"
+        },
+        {
+          "before": "Pour se délivrer de l'injonction à la virilité",
+          "after": "Les hommes gagneraient à se délivrer de l'injonction à la virilité"
+        },
+        {
+          "before": "Pour sortir des rapports de rivalité entre hommes",
+          "after": "Les hommes gagneraient à sortir des rapports de rivalité machistes"
+        },
+        {
+          "before": "Pour simplifier et libérer les rapports de séduction",
+          "after": "Les hommes gagneraient à ce que les rapports de séduction soient plus simples"
+        }
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0028",
+      "title": "Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes",
+      "old_revision_id": 246070,
+      "new_revision_id": 246146,
+      "after_sha256": "b84dc7f7b08304a838004f3dd4eb6a16a64de1068ca3234b0a98ecfbc8646ac7",
+      "displayed_title_changes": [
+        {
+          "before": "Les hommes sont socialisés pour être indifférents à la souffrance",
+          "after": "Les hommes sont socialisés pour être indifférents à la souffrance des femmes"
+        }
+      ],
+      "status": "verified"
+    }
+  ],
+  "receipt_sha256": "4f2df84b11ac0e4bcbaa7eae413a9d432d5f783cac96a3ee49fb1f80fb18668c"
+}

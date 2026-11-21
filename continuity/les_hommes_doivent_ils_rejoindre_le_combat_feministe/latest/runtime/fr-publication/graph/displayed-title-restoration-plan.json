@@ -1,0 +1,88 @@
+{
+  "candidate_pages": 19,
+  "created_at": "2026-10-23T06:30:08.602348+00:00",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "operations": [
+    {
+      "after_sha256": "0d92e2a66b42da0ab781a4f8e8f83868211f32d6037b7119bfa3e2045871ce7b",
+      "before_sha256": "ade50d2f0d0d961b8a7c70c6f3525941d2ec08adc3c3acddc572824f8c13fb09",
+      "changes": [
+        {
+          "from": "La masculinité toxique génère des troubles mentaux et des suicides chez les hommes",
+          "to": "La masculinité toxique génèrent des troubles mentaux et des suicides chez les hommes"
+        }
+      ],
+      "expected_revision_id": 245818,
+      "page_id": "A0002",
+      "title": "Les hommes ont intérêt à en finir avec le sexisme"
+    },
+    {
+      "after_sha256": "9f23ed4565a826d24bce3d54ecfb6aefc6059a157d90cd259feb02c52be53b20",
+      "before_sha256": "f36f8c76b327bc0868c97b037d3af3d3fe64bbab24039dfe0827ac998f9f175b",
+      "changes": [
+        {
+          "from": "Il est possible de donner aux hommes une éducation non sexiste",
+          "to": "Il est possible de leur donner une autre éducation"
+        }
+      ],
+      "expected_revision_id": 245822,
+      "page_id": "A0006",
+      "title": "Les hommes sont socialisés pour dominer les femmes"
+    },
+    {
+      "after_sha256": "d7bbb6c9263b1a7d678627d6b4e381e4f3d313f77c68e4fb8d2365b0aa55cc43",
+      "before_sha256": "7d1dd44621798c874803b8411f020806dc8cc8d8817f4ca2b31df8530d7acc61",
+      "changes": [
+        {
+          "from": "L'absence d'égalité empêche une société de fonctionner correctement",
+          "to": "C'est plutôt l'inverse"
+        }
+      ],
+      "expected_revision_id": 245825,
+      "page_id": "A0009",
+      "title": "Une société ne peut pas fonctionner correctement si elle est égalitaire"
+    },
+    {
+      "after_sha256": "7885c8113e491d77bc2003d4c23eb14546c8f33fe3e0b48ffcbe65a092a3db2b",
+      "before_sha256": "daa71a22b6f3a38c7895bffd6d11480cc06800cd8384660342b2f8ce68970e71",
+      "changes": [
+        {
+          "from": "Qualifier le traitement des femmes de déshumanisation est démesuré et discrédite la cause féministe",
+          "to": "Le terme \"déshumaniser\" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe"
+        }
+      ],
+      "expected_revision_id": 245833,
+      "page_id": "A0017",
+      "title": "Les hommes sont socialisés pour déshumaniser les femmes"
+    },
+    {
+      "after_sha256": "f4587221e76871a335835bfbcd3422309e63ddda61d1f44f15ba3824605455f6",
+      "before_sha256": "7af448e12cb69a11b8f64d9e1c586cc7c07d46a133760b4ce035d5759cfd4cd1",
+      "changes": [
+        {
+          "from": "L'injonction à réprimer ses émotions détériore la santé mentale des hommes",
+          "to": "L'injonction à la répression des émotions déteriore la santé mentale des hommes"
+        }
+      ],
+      "expected_revision_id": 245835,
+      "page_id": "A0019",
+      "title": "Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions"
+    },
+    {
+      "after_sha256": "8c8196ce8e53a8f512f82bbe2d15b4cf5c368052e203ee5b2ec7b438cd0c6158",
+      "before_sha256": "b8606b55ad226b8f695aee9c774234d977edc3cd6c911185ba89db56c07a42fb",
+      "changes": [
+        {
+          "from": "Seuls les hommes qui se conforment à l'injonction à la virilité bénéficient des discriminations envers les femmes",
+          "to": "Seulement ceux qui se conforment à l'injonction à la virilité"
+        }
+      ],
+      "expected_revision_id": 245836,
+      "page_id": "A0020",
+      "title": "Les hommes bénéficient des discriminations envers les femmes"
+    }
+  ],
+  "plan_sha256": "d3ab588e853da3318ea7b8ca203cd038bbfca8a7f3798c66dea1fbd839b9b98a",
+  "reason": "Conserver à l’identique les titres affichés des pages françaises sources pendant une traduction.",
+  "schema": "wikidebia-displayed-title-restoration-plan-1.0"
+}

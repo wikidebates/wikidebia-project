@@ -1,0 +1,1323 @@
+{
+  "schema": "fr_graph_checkpoint_differential_v1",
+  "schema_version": "1.0",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "status": "passed",
+  "policy": "exact_import_plus_graph_parameters",
+  "pages": [
+    {
+      "page_id": "A0001",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0001.wiki",
+      "import_sha256": "5a5194fab4fd44276960c4428d268f0572b1088f9ca6180cc6a8dbc395224a08",
+      "output_path": "output/fr/arguments/A0001.wiki",
+      "output_sha256": "5a5194fab4fd44276960c4428d268f0572b1088f9ca6180cc6a8dbc395224a08",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0002",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0002.wiki",
+      "import_sha256": "0b6538f7b4f1a97675852fb57a44e529215f0421889b8456f16482edd48f9ef3",
+      "output_path": "output/fr/arguments/A0002.wiki",
+      "output_sha256": "6a753685aa7944cc10937c2728ff9c44d5c181a07615caa5b907bdbce3218398",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0003",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0003.wiki",
+      "import_sha256": "0f5622f6207b61a1087d9156f9a00335bbdeada2a391c11e84fe816b8d8a3c13",
+      "output_path": "output/fr/arguments/A0003.wiki",
+      "output_sha256": "0f5622f6207b61a1087d9156f9a00335bbdeada2a391c11e84fe816b8d8a3c13",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0004",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0004.wiki",
+      "import_sha256": "42b915543cc7c9a06bd16a5205c9e94153681d585fd380cd2a81d7a7538a98b6",
+      "output_path": "output/fr/arguments/A0004.wiki",
+      "output_sha256": "9d47ba8e5dfd5bff0ce52f25a12a800ff9eedb1c4c3c445db680b3badfe7b618",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0005",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0005.wiki",
+      "import_sha256": "3214c6bba5adf45f583993552f896b5f574f99b5b2d4d732a8e1f96513fca6c0",
+      "output_path": "output/fr/arguments/A0005.wiki",
+      "output_sha256": "3be0c32e369e08884f83b2b52dd89f0efef83e5b257d80a829900ff2c7839880",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0006",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0006.wiki",
+      "import_sha256": "1a385a0bc5c356639bd3acdcc7b4061e6675631bb4f211a50b868696ebb93116",
+      "output_path": "output/fr/arguments/A0006.wiki",
+      "output_sha256": "9f23ed4565a826d24bce3d54ecfb6aefc6059a157d90cd259feb02c52be53b20",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0007",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0007.wiki",
+      "import_sha256": "efd7e0780d4a121636b2afd9d8c37e19681c30ae1898d6492de87cfad3dd5480",
+      "output_path": "output/fr/arguments/A0007.wiki",
+      "output_sha256": "31cb3b9669469ff5f5dfc6da785383ea4fbdecbe9b4a79224afe278a8340f13d",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0008",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0008.wiki",
+      "import_sha256": "d6402147a5138b1b728a79a758f4004f450cc65fee21fdcc8658a914792cee3f",
+      "output_path": "output/fr/arguments/A0008.wiki",
+      "output_sha256": "d6402147a5138b1b728a79a758f4004f450cc65fee21fdcc8658a914792cee3f",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0009",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0009.wiki",
+      "import_sha256": "18724e166d8a0fbe818bab3d211ab0b40a92d9eceb7056f36ff3f97b8625a04d",
+      "output_path": "output/fr/arguments/A0009.wiki",
+      "output_sha256": "d7bbb6c9263b1a7d678627d6b4e381e4f3d313f77c68e4fb8d2365b0aa55cc43",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0010",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0010.wiki",
+      "import_sha256": "8068fc21bc0789487b827fe2fdb7c240cb756b3875978a593f88c8d23d5ba189",
+      "output_path": "output/fr/arguments/A0010.wiki",
+      "output_sha256": "351f81d0875513afd98ccc9b528a4c33943e8b586961aa3e14fcb828e4e51d27",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0011",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0011.wiki",
+      "import_sha256": "33ca8c3d915350dfa6d50d236c3a38f86fd7504a040177070aa7baa5c9b804a9",
+      "output_path": "output/fr/arguments/A0011.wiki",
+      "output_sha256": "330d52bedeab194963693876edfdcd89c95139b2d42637fe909ea856b1e1ab20",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0012",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0012.wiki",
+      "import_sha256": "df1bd9bc5bb47465fbd1d3edd4fd134e1e839885c6825b195ff73a6bdd7a3212",
+      "output_path": "output/fr/arguments/A0012.wiki",
+      "output_sha256": "a7ba5e2887cfafbaf75613b196564dbd7d441eb878fce8e42a16248299cd998c",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0013",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0013.wiki",
+      "import_sha256": "4cd33e5c0623e85e14f9bdbbedf34b611ae1061f3d880eaf15721f15b90584d1",
+      "output_path": "output/fr/arguments/A0013.wiki",
+      "output_sha256": "96eb94f511e762ea1cc7fb7e6830fc5ea362f5ba3889940ae6540af641f02382",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0014",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0014.wiki",
+      "import_sha256": "3de4fb9cfdb6bdfdc75c90048dfa01ff5ec0171000470e28dbdc98b0e51a8cc6",
+      "output_path": "output/fr/arguments/A0014.wiki",
+      "output_sha256": "9cc13cefbd164145c93e5eef1fadcf46fb3943533f463ef21290efca6c3d4e21",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0015",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0015.wiki",
+      "import_sha256": "409f1868e474a3a0978635a39f18617beb802ca6b2b2222d0f9fb447e202a2b9",
+      "output_path": "output/fr/arguments/A0015.wiki",
+      "output_sha256": "b9acf7ee8d1e57156f10d1f9af768fa526229ba8b5d88fbf8ea1d771eacdb2d9",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0016",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0016.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0016.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0017",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0017.wiki",
+      "import_sha256": "036c92c4329a82bdaf1a894a1207577fd53628982ad7a174498a95db447e1aff",
+      "output_path": "output/fr/arguments/A0017.wiki",
+      "output_sha256": "640553ca4b91c713755c7daa30d9509f61e971856527fb2d4bc23f26aabcfd8e",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0018",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0018.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0018.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0019",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0019.wiki",
+      "import_sha256": "cc137e34ffa27036b5b2f2178b1a3956fb0f034490a876de1f5d84813fc2ffed",
+      "output_path": "output/fr/arguments/A0019.wiki",
+      "output_sha256": "f4587221e76871a335835bfbcd3422309e63ddda61d1f44f15ba3824605455f6",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0020",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0020.wiki",
+      "import_sha256": "5b85022c189c5fe18730c955eaf787fa265ff5fb72d8780fc9f15d150cba07fa",
+      "output_path": "output/fr/arguments/A0020.wiki",
+      "output_sha256": "8c8196ce8e53a8f512f82bbe2d15b4cf5c368052e203ee5b2ec7b438cd0c6158",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0021",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0021.wiki",
+      "import_sha256": "7a4d9ca2e9c9b0c4d774e9fdee13e7251b8ac9c9eb6d466a5f85120f5d9178d4",
+      "output_path": "output/fr/arguments/A0021.wiki",
+      "output_sha256": "cce51875eab77ee0d77cb44b1729d53b4067625335bd6a6115b2ff10691d2640",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0022",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0022.wiki",
+      "import_sha256": "ac9a6d8612eb74d40727ccf42adf3e457412125a25e4a91e5c3237cacc0385d8",
+      "output_path": "output/fr/arguments/A0022.wiki",
+      "output_sha256": "0acc6dc37deeb9c962d9aa4f8e70bb6051097c68fa44422dc8431a29022e1155",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0023",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0023.wiki",
+      "import_sha256": "462545bd2a4cd2bfe8545358bf89a97fb0146250ba16a1b331a9c1fdfea323ea",
+      "output_path": "output/fr/arguments/A0023.wiki",
+      "output_sha256": "ad7757c1e6eef91e2f309f28ce60bbf53859111b3e6bb0b97e1fa289b976a4ed",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0024",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0024.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0024.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0025",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0025.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0025.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0026",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0026.wiki",
+      "import_sha256": "6af1924196ddb1a365a9cb71696142837d447fc6d3c380afc5a175ef4a9d7693",
+      "output_path": "output/fr/arguments/A0026.wiki",
+      "output_sha256": "59d2cb4ec9f6f840c4ac4afe868793780e850a490c22c5e5da65fd93b17c631d",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0027",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0027.wiki",
+      "import_sha256": "a3c4f62dc88242b51e7c102f43c9fd3dc145e0e6945363f4af78bdc034989c07",
+      "output_path": "output/fr/arguments/A0027.wiki",
+      "output_sha256": "1a4961a98bcf3a1c214b58ed1f3abb30824e250849dfeb22e40eae73f5d32831",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0028",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0028.wiki",
+      "import_sha256": "be2510e6d526f222e32de4dee23577d801e6aff52b1456ce1c984a012247bf8a",
+      "output_path": "output/fr/arguments/A0028.wiki",
+      "output_sha256": "7f506da291a61eed731b6a72d33595449bb7e3d5ff97701ba8d5603277545611",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0029",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0029.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0029.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0030",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0030.wiki",
+      "import_sha256": "ac713cc4c7552b7784c17b5548c68426aa6a08bdde90bc28c65bbe41d82e473e",
+      "output_path": "output/fr/arguments/A0030.wiki",
+      "output_sha256": "3fd74d6e8337a2393368b03fbc8e0ffaa68a3ad11cf6791644458da0eb861a9d",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0031",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0031.wiki",
+      "import_sha256": "f97f85b2b971feb1c4c9a3cb96b08b48ac55be630f7feb12e17249a6db613203",
+      "output_path": "output/fr/arguments/A0031.wiki",
+      "output_sha256": "89ff42d5062bb404ba7d519f81c8057e886713130a39ad6e723267916510a870",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0032",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0032.wiki",
+      "import_sha256": "43a0d35ce36624919decc534225d490832c0ca82001613a9f4e7a9b3f7ba211d",
+      "output_path": "output/fr/arguments/A0032.wiki",
+      "output_sha256": "bb065e1c21bf9e5cf679cd38b3ca57a877eae93c89c6d13deecd8fa69970a188",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0033",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0033.wiki",
+      "import_sha256": "4d1597d8f4cabca6655509977afe4880d741a09f68334f8cdbaeafcd18c1140d",
+      "output_path": "output/fr/arguments/A0033.wiki",
+      "output_sha256": "e50de2c7b6c666f695d8e6d4f91e2dbaf9bec9d293a553354e00aaa3e2a2add4",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0034",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0034.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0034.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0035",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0035.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0035.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0036",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0036.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0036.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0037",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0037.wiki",
+      "import_sha256": "e24cfaec65b08591177812ca4dd93c185646feb3caec54087e652832d98f22b0",
+      "output_path": "output/fr/arguments/A0037.wiki",
+      "output_sha256": "426b561f9e832f1b1b87bae524bd49122acf1611a627ebaf06b9a8e6ecacbaa3",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0038",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0038.wiki",
+      "import_sha256": "4d53ca3bc498862dceb981b60a9ec55c882cae37c0aa9877b8fd0cb8a9d71381",
+      "output_path": "output/fr/arguments/A0038.wiki",
+      "output_sha256": "eb4ea60f05b7f38d056fac9d53179dfd5f85544f435b7ea1707f5e2f7ce5b006",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0039",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0039.wiki",
+      "import_sha256": "4cc3caff57aa2c2717a4df0860114cd0dbae9479a5c8fa4c892cf7315a5977e2",
+      "output_path": "output/fr/arguments/A0039.wiki",
+      "output_sha256": "9453096bfb00e65f5a58d8c08f2800d412d4b6ceb8be603e82270f43b7729068",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0040",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0040.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0040.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0041",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0041.wiki",
+      "import_sha256": "6ed08e900c34b8b75afc48ea0e666a5dc1b629c463c7ba9c151ad7b7c57d1a43",
+      "output_path": "output/fr/arguments/A0041.wiki",
+      "output_sha256": "e4566a2b3530c868c2f9eb01a7f3cdb458ab9a045edd863dc9d7d1fcd4173853",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0042",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0042.wiki",
+      "import_sha256": "33969ead7283c1418ffd5dfdebd6a8b5626233ca00f6e28c75c39af70abe84f2",
+      "output_path": "output/fr/arguments/A0042.wiki",
+      "output_sha256": "5c3b7b22f99330712eac090b3afc13f12e065bfc1bb4417da6d1cd098eb62a7d",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0043",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0043.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0043.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0044",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0044.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0044.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0045",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0045.wiki",
+      "import_sha256": "c6dde0c525aa3048e7cb12a216ed3294ed3e336d86aa2d8c897b4cad009a0faa",
+      "output_path": "output/fr/arguments/A0045.wiki",
+      "output_sha256": "907df82a9474d000f1cc97d3954eaa6c32344fda38af9fa035594c495dae7b3d",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0046",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0046.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0046.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0047",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0047.wiki",
+      "import_sha256": "fc23c3757ab936ee65c626b1c10c2ad3e31835f27b4f692485dd8bf64a064420",
+      "output_path": "output/fr/arguments/A0047.wiki",
+      "output_sha256": "fa41d117b1b6414df55d9fca4f1a3ecbe1904a123d2fbb424612cd52c3995a85",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0048",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0048.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0048.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0049",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0049.wiki",
+      "import_sha256": "bf61f3655c79d977a2bbad625e0f33a163e4c1e0f35b57271c3952ea6f413dd4",
+      "output_path": "output/fr/arguments/A0049.wiki",
+      "output_sha256": "1f7103d867bb06faf9d5bc35b7fd471812183ec11f828187f70825e59651c2c3",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0050",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0050.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0050.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0051",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0051.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0051.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0052",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0052.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0052.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0053",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0053.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0053.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0054",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0054.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0054.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0055",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0055.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0055.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0056",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0056.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0056.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0057",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0057.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0057.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0058",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0058.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0058.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0059",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0059.wiki",
+      "import_sha256": "ffc94ef6c7e184ec9b2298133fddb7402e41b04584c77f1f5421f6998e3aa973",
+      "output_path": "output/fr/arguments/A0059.wiki",
+      "output_sha256": "3c42349eefc530f836e4632311ade4c733d9e1f5f37dd90469af5d8eccd6c6e1",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0060",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0060.wiki",
+      "import_sha256": "36017065596edf8375bce2326538bed1f4486d1b7b832cd616c4cfd15da335a6",
+      "output_path": "output/fr/arguments/A0060.wiki",
+      "output_sha256": "29438b1156e1510b551c19dc3632fd50c4b5df7c8a49b7c71f7ef9ac11348ac6",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0061",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0061.wiki",
+      "import_sha256": "9aa1d6bf31537ebd44eb1d0b35bcefd428d679932306cc2058e9185516899ff8",
+      "output_path": "output/fr/arguments/A0061.wiki",
+      "output_sha256": "a9a219c9ac90b9a695f259dc35d352ce0ef26796a741c6b40f7726f7dc494dd6",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0062",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0062.wiki",
+      "import_sha256": "79d51ee0ac4ef1b1958f7bcfa90dd333202cfd3c257a5daad12fa7d1dedb768e",
+      "output_path": "output/fr/arguments/A0062.wiki",
+      "output_sha256": "896db92ea07cf4736a9d8bf2470cfd3540a238edf2cf09448cc539d3690f2302",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0063",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0063.wiki",
+      "import_sha256": "3650fe9044f7cd25100748d01a9d3bc497b7de5b84a49bd8da96b7d94ec335e6",
+      "output_path": "output/fr/arguments/A0063.wiki",
+      "output_sha256": "125ce7840a22be7e5f8467ea6c052bdebea72ec5af234158ba81a8da52a23bca",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0064",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0064.wiki",
+      "import_sha256": "f6d4fce698d45762c91c66435b3940080363500828b5cf2b981ef17dfc46df32",
+      "output_path": "output/fr/arguments/A0064.wiki",
+      "output_sha256": "87d2cc876d6d84eaedad0ef3795ef71496e19c0f892b01c4698f0d6a4afaf45c",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0065",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0065.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0065.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0066",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0066.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0066.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0067",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0067.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0067.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0068",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0068.wiki",
+      "import_sha256": "3fc049ee53cdf6b6accb78e5dd45605238d2cc6a69629caff4328ba8d486fd2e",
+      "output_path": "output/fr/arguments/A0068.wiki",
+      "output_sha256": "4a9a5b7298c9e7d5b3be09349e2ff3b6188e71cc34f8d4b173c7e1c3d76b216a",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0069",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0069.wiki",
+      "import_sha256": "8f1c68304c2e74bf43cc56dc961391d1a737f4847c39abb6e95bcc719bd55449",
+      "output_path": "output/fr/arguments/A0069.wiki",
+      "output_sha256": "db6f1f3a3dd2e808f72b47136612fd3c1e957beb5c95930d4ae337a9febc7088",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0070",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0070.wiki",
+      "import_sha256": "b846ee087a04befc39c15e4627cf76b20a17ecb2c4e2a9fe29a622a65edb2b24",
+      "output_path": "output/fr/arguments/A0070.wiki",
+      "output_sha256": "d74b3f4462b8384d48eec68706259bea083d3691ad99e557d825970d2548fdad",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0071",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0071.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0071.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0072",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0072.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0072.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0073",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0073.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0073.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0074",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0074.wiki",
+      "import_sha256": "4e1098a441ee3517c95901befc4e9c9ab0147b84555069e57136b3d159a395fe",
+      "output_path": "output/fr/arguments/A0074.wiki",
+      "output_sha256": "1a2ce865ce91511fecd9876af4932845c5089cb7dca5a3e5d68d2aeaedea2836",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0075",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0075.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0075.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0076",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0076.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0076.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0077",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0077.wiki",
+      "import_sha256": "8e26fc1ecf3f8018d00de93e977dfd9469b8a137dee980773adf4729e7dfd260",
+      "output_path": "output/fr/arguments/A0077.wiki",
+      "output_sha256": "65c77148dcaf7fd81702c44a2112bb200e888fbcc258d89ccabd0ea8ada9eacf",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0078",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0078.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0078.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0079",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0079.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0079.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0080",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0080.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0080.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0081",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0081.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0081.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0082",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0082.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0082.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0083",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0083.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0083.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0084",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0084.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0084.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0085",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0085.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0085.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0086",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0086.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0086.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0087",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0087.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0087.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0088",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0088.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0088.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0089",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0089.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0089.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0090",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0090.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0090.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0091",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0091.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0091.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0092",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0092.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0092.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0093",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0093.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0093.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0094",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0094.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0094.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0095",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0095.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0095.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0096",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0096.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0096.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0097",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0097.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0097.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0098",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0098.wiki",
+      "import_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "output_path": "output/fr/arguments/A0098.wiki",
+      "output_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0099",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0099.wiki",
+      "import_sha256": "5dc4e6b593ebc624cda6e398aa6e07bbe23ece6f483c064f2205a03edeb0c82e",
+      "output_path": "output/fr/arguments/A0099.wiki",
+      "output_sha256": "a73a385c647d590b7aed5379e52d187c68df31c2e5570d55f210fc718f2855d5",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "A0100",
+      "page_type": "argument",
+      "import_path": "imports/fr/arguments/A0100.wiki",
+      "import_sha256": "5dc4e6b593ebc624cda6e398aa6e07bbe23ece6f483c064f2205a03edeb0c82e",
+      "output_path": "output/fr/arguments/A0100.wiki",
+      "output_sha256": "a73a385c647d590b7aed5379e52d187c68df31c2e5570d55f210fc718f2855d5",
+      "allowed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "status": "verified"
+    },
+    {
+      "page_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+      "page_type": "debate",
+      "import_path": "imports/fr/debate/debate.wiki",
+      "import_sha256": "e325cd0b57b3cb4df7d07ec5502cb7b003c4a190fd3ce9765f969f226ea21ec2",
+      "output_path": "output/fr/debate/debate.wiki",
+      "output_sha256": "e325cd0b57b3cb4df7d07ec5502cb7b003c4a190fd3ce9765f969f226ea21ec2",
+      "allowed_parameters": [
+        "arguments-pour",
+        "arguments-contre"
+      ],
+      "status": "verified"
+    }
+  ]
+}

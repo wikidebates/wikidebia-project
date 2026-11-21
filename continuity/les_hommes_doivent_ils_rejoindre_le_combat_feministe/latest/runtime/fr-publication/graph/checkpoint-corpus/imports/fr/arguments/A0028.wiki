@@ -1,0 +1,11 @@
+{{Argument
+|résumé=Les femmes victimes ont besoin d'être entendues, prises au sérieux et soutenues par les hommes.
+Amitié, policiers, juges, journalistes.
+|objections={{Objection
+|page=Les hommes sont socialisés pour être indifférents à la souffrance
+|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance des femmes
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Femmes, Violences sexistes, Parole
+|date-création=2019-11-24
+}}

@@ -1,0 +1,16 @@
+{
+  "schema": "wikidebia-corpus-promotion-ready-1.0",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "global_status": "graph_validated",
+  "review_sha256": "ed5cfb009198c8cb438b4fe67ab168e76d38a95c2386daba76d2bb0f5b42026c",
+  "source_build_sha256": "fe6a3e887ff26b28486997bef2848cf6e328a206359e96b53cd6cb503bf7b9c9",
+  "approved_build_sha256": "101cac93b48c84b0eba5a3e95b59820b4f5030d34506ad4e697c14beb676a2f0",
+  "structural_sha256": "e9fbfc80def372a7370567a985a704eb41cb6417c51c59e423d3ad7a3002993d",
+  "validator_version": "0.4.105",
+  "preflight_report_path": "reports/graph_review_preflight.json",
+  "preflight_report_sha256": "d5008794b07146bb270f7c433cd5b107a9a05b1f4981a2b842637d03aedc5211",
+  "validation_report_path": "reports/graph_review_validation.json",
+  "validation_report_sha256": "8a28a50d1c796322a9fe16271f670ffddd58f3e116ca0ad864a72c1bd7ac2d8d",
+  "prepared_at": "2026-10-22T14:33:10+00:00",
+  "no_final_pages": true
+}

@@ -1,0 +1,7 @@
+{{Argument
+|objections={{Objection
+|page=Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes
+|titre-affiché=Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes
+}}
+|date-création=2021-03-18
+}}

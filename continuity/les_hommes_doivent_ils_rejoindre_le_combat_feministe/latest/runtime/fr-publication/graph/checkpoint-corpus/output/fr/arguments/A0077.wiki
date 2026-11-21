@@ -1,0 +1,6 @@
+{{Argument
+|résumé=Les hommes jugés pas assez virils subissent du rejet et des violences.
+|justifications=
+|objections=
+|date-création=2021-12-09
+}}

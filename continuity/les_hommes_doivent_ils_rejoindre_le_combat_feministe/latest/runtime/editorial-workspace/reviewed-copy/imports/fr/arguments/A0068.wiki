@@ -1,0 +1,6 @@
+{{Argument
+|résumé=La plupart des gens n'ont pas conscience du sexisme, car nous y sommes habitués depuis l'enfance. Le sexisme est naturalisé, il ne nous choque pas. Par exemple, de nombreuses personnes sont incapables d'identifier une publicité sexiste. De même, les crimes conjugaux sont qualifiés de "crimes passionnels", la dimension sexiste n'est pas perçue. La violence envers les femmes est considérée comme une preuve d'amour, et non comme un acte de domination et d'appropriation machiste. Il est donc difficile pour les hommes de percevoir la dimension sexiste d'un acte ou d'une situation.
+|rubriques=Politique, Société
+|mots-clés=Hommes, Banalisation, Sexisme
+|date-création=2020-04-16
+}}

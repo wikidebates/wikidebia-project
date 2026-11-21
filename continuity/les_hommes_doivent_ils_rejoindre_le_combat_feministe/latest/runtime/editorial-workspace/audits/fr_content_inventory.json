@@ -1,0 +1,33 @@
+{
+  "schema": "wikidebia-fr-content-inventory-1.0",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "generated_at": "2026-10-23T06:58:42+00:00",
+  "debate": {
+    "subject_present": true,
+    "complete_topic_present": true,
+    "introduction_present": false,
+    "subsections": 0,
+    "wikipedia_articles": 1,
+    "documentary_buckets_nonempty": 0,
+    "historical_introduction_preserved_by_default": true,
+    "historical_introduction_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "arguments": {
+    "count": 100,
+    "summaries_missing": 78,
+    "summaries_under_80_chars": 81,
+    "arguments_with_any_documentation": 2,
+    "citations": 7,
+    "arguments_with_citations": 6,
+    "historical_summaries_preserved_by_default": 100
+  },
+  "boundaries": {
+    "automatic_rewriting": false,
+    "historical_introduction_rewriting": false,
+    "historical_summary_rewriting": false,
+    "historical_absent_summary_generation": false,
+    "final_pages_generated": false,
+    "english_translation_started": false
+  }
+}

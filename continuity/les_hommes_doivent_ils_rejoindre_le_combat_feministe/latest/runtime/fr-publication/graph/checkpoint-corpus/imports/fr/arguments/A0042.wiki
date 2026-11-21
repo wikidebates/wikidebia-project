@@ -1,0 +1,15 @@
+{{Argument
+|objections={{Objection
+|page=C'est la société qui est responsable du sexisme, pas les hommes
+|titre-affiché=C'est la société qui est responsable du sexisme, pas les hommes
+}}{{Objection
+|page=Les hommes ne sont pas capables d'agir par devoir
+|titre-affiché=Les hommes ne sont pas capables d'agir par devoir
+}}{{Objection
+|page=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+|titre-affiché=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+}}
+|rubriques=Éthique, Politique, Société
+|mots-clés=Discrimination, Femmes, Hommes, Sexisme, Injustice, Devoir de réparation
+|date-création=2019-12-07
+}}

@@ -1,0 +1,11 @@
+{{Argument
+|initialisation=Justification@16449
+|citations={{Citation
+|citation=Une moitié de l'espèce humaine est hors de l'égalité, il faut l'y faire rentrer, donner pour contrepoids au droit de l'homme le droit de la femme.
+|auteurs=Victor Hugo
+|date=1872
+}}
+|justifications=
+|objections=
+|date-création=2024-11-24
+}}

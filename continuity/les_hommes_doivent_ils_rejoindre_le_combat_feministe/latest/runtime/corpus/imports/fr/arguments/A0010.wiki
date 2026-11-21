@@ -1,0 +1,7 @@
+{{Argument
+|initialisation=Argument contre@3040
+|résumé=Le féminisme est un mouvement politique qui prône l'égalité des sexes mais fait le constat que les femmes sont désavantagé dans la société, beaucoup d'hommes ne sont pas d'accord avec celui-ci et explique donc leur non-implication.
+|rubriques=Politique
+|mots-clés=Féminisme
+|date-création=2023-05-18
+}}

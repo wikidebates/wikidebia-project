@@ -1,0 +1,40 @@
+{{Argument
+|justifications={{Justification
+|page=Seul un changement de comportement des hommes pourra mettre fin au sexisme
+|titre-affiché=Seul un changement de comportement des hommes pourra mettre fin au sexisme
+}}{{Justification
+|page=Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes
+|titre-affiché=Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes
+}}{{Justification
+|page=Les hommes ont davantage de moyens d'être entendus dans la société
+|titre-affiché=Les hommes ont davantage de moyens d'être entendus dans la société
+}}{{Justification
+|page=Les hommes peuvent faciliter et encourager l'émancipation de leur compagne
+|titre-affiché=Les hommes peuvent faciliter et encourager l'émancipation de leur compagne
+}}{{Justification
+|page=Les hommes jouent un rôle essentiel dans l'éducation des enfants
+|titre-affiché=Les hommes jouent un rôle essentiel dans l'éducation des enfants
+}}{{Justification
+|page=Les hommes peuvent parler et convaincre d'autres hommes de la nécessité du féminisme
+|titre-affiché=Les hommes peuvent parler et convaincre d'autres hommes de la nécessité du féminisme
+}}{{Justification
+|page=Le combat féministe n'avancera que si les hommes décident de lâcher du lest
+|titre-affiché=Le combat féministe n'avancera que si les hommes décident de lâcher du lest
+}}{{Justification
+|page=Le féminisme sera victorieux quand tous les hommes y adhèreront
+|titre-affiché=Le féminisme sera victorieux quand tous les hommes y adhèreront
+}}{{Justification
+|page=Les hommes ne subissent pas l'épuisement généré par les discriminations sexistes
+|titre-affiché=L'absence de discrimination à leur égard leur facilite la tâche pour militer
+}}
+|objections={{Objection
+|page=Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes
+|titre-affiché=Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes
+}}{{Objection
+|page=Les femmes ont intérêt à mener le combat féministe sans les hommes
+|titre-affiché=Les femmes ont intérêt à mener le combat féministe sans les hommes
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Femmes
+|date-création=2019-11-24
+}}

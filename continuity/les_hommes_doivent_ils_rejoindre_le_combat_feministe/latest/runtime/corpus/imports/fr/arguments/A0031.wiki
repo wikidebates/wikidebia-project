@@ -1,0 +1,17 @@
+{{Argument
+|résumé=En particulier :
+* en faisant leur part dans le travail domestique
+* en donnant confiance et encourageant leur femme
+* en respectant le consentement de leur compagne
+* en écoutant et soutenant les femmes victimes
+|objections={{Objection
+|page=La majorité des hommes dominent leur compagne et freinent leur émancipation
+|titre-affiché=La majorité des hommes dominent leur compagne et freinent leur émancipation
+}}{{Objection
+|page=L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes
+|titre-affiché=L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Femmes, Émancipation
+|date-création=2019-11-24
+}}

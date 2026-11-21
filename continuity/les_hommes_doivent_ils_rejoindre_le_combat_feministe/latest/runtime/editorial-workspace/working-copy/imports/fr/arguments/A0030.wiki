@@ -1,0 +1,25 @@
+{{Argument
+|résumé=Les hommes ont le privilège d'être davantage écoutés, respectés et considérés. Leur parole est considérée plus légitime dans la société. Ils doivent utiliser ce privilège pour défendre la cause des femmes.
+* car ont un meilleur accès à la parole dans les médias, la culture, la politique. Peuvent se faire les porte-paroles des opprimées
+* car les hommes sont présumés plus compétents que les femmes et ont davantage confiance en eux
+* car décident de la répartition de la parole et peuvent la rendre plus égalitaire
+|objections={{Objection
+|page=Les hommes utilisent leur accès privilégié à la parole pour conforter la domination masculine
+|titre-affiché=Les hommes utilisent ce privilège pour conforter la domination masculine
+}}{{Objection
+|page=Les hommes n'ont aucun intérêt à utiliser leur accès privilégié à la parole pour dénoncer le sexisme
+|titre-affiché=Les hommes n'ont aucun intérêt à dénoncer le sexisme
+}}{{Objection
+|page=Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place
+|titre-affiché=Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place
+}}{{Objection
+|page=Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent
+|titre-affiché=Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent
+}}{{Objection
+|page=Les hommes qui défendent le féminisme ne sont pas pris au sérieux
+|titre-affiché=Les hommes qui défendent le féminisme ne sont pas pris au sérieux
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Femmes
+|date-création=2019-11-24
+}}
