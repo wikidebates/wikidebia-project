@@ -4666,17 +4666,18 @@
     {
       "id": "DFR-045",
       "domain": "debate_documentation",
-      "statement": "Each of the nine documentary parameters on every French Débat and English Debate page contains at least two distinct references.",
+      "statement": "Documentary parameters on French Débat and English Debate pages have no per-parameter quota. Include only relevant sources; one reference is allowed and an empty optional parameter is omitted. A reference belongs to only one orientation; a source substantially developing both positions belongs to neutral documentation.",
       "disposition": "active",
       "enforcement": "automatic+human",
       "sources": [
-        "owner decision 2026-07-30"
+        "owner decision 2026-07-30",
+        "owner decision 2026-08-06 — documentation, introduction and displayed titles"
       ],
       "normative_files": [
         "01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md",
         "01_normes/profils_rendu_wikidebia.md"
       ],
-      "note": null
+      "note": "Active wording reconciled with sections 7.1 and 8.1 of the consolidated norm. Historical snapshots and changelogs are unchanged; no new editorial rule is introduced."
     },
     {
       "id": "MW-024",

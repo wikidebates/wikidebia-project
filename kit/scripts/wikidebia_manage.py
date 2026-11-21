@@ -2793,6 +2793,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--root", type=Path, default=Path.cwd(), help=argparse.SUPPRESS)
     sub = parser.add_subparsers(dest="command", required=True)
 
+    from wikidebia_creation_context import add_arguments as add_creation_context_arguments
+    creation_context = sub.add_parser(
+        "creation-context", help="Preparer un contexte cible pour la creation francaise, sans validation ni publication",
+    )
+    add_creation_context_arguments(creation_context)
+
     publish = sub.add_parser("publish", help="Valider, planifier et publier un ZIP de débat")
     publish.add_argument("debate_identifier", nargs="?", help="Nom du ZIP sans .zip; facultatif si incoming/ contient un seul ZIP. Le debate_id interne peut être différent.")
     publish.add_argument("--scope", choices=SCOPES, default="all")
@@ -3358,6 +3364,16 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     root = args.root.expanduser().resolve()
+    if args.command == "creation-context":
+        from wikidebia_creation_context import main as creation_context_main
+        command = ["--project-root", str(root), "--stage", args.stage]
+        if args.corpus:
+            command.extend(["--corpus", args.corpus])
+        if args.batch_id:
+            command.extend(["--batch-id", args.batch_id])
+        for node_id in args.node_id:
+            command.extend(["--node-id", node_id])
+        return creation_context_main(command)
     if args.command == "publish":
         result = publish_debate(root, args.debate_identifier, args.scope, args.yes, args.keep_zip)
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))

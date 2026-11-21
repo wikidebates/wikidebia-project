@@ -236,7 +236,7 @@ Les règles abandonnées ne sont pas supprimées de la traçabilité : elles fig
 |---|---|---|
 | Dates documentaires naturelles | REF-030 | `WDV-DOC-005` |
 | Contenu direct sans modèle dans les introductions | MW-023 | `WDV-EDT-010` |
-| Plusieurs références dans chaque paramètre documentaire de débat | DFR-045 | `WDV-EDT-004` |
+| Documentation pertinente sans quota par paramètre de débat ; catégories vides omises | DFR-045 | `WDV-EDT-004` |
 | Acronyme courant dans le sujet complet | MW-024 | `WDV-EDT-018` |
 | Publication française indépendante | PUB-021 | préflight du kit 2.1.10 |
 
