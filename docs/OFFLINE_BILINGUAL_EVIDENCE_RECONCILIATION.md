@@ -42,6 +42,55 @@ d'exécution ou d'attestation du plan de mise à jour français
 `english-publication-receipt.json` et `french-publication-receipt.json`
 de l'orchestrateur final sont **des enveloppes** et ne les remplacent pas.
 
+## Preuve facultative pour les graphes français renommés
+
+Une release peut contenir des graphes français dont seuls certains paramètres
+`page=` ont changé d'orthographe. Ces changements ne sont pas acceptés sur
+la seule base d'une similarité de chaînes. Avant de les autoriser à la
+réconciliation, produire **en lecture seule** un inventaire de leurs
+identités MediaWiki :
+
+```sh
+./wikidebia corpus-workspace-prove-fr-relation-pageids mon_debat \\
+  --work-id EDIT-20261120-001
+```
+
+Ce programme relit en groupes uniquement les pages françaises dont les
+empreintes diffèrent, exige la **même révision et le même contenu** que l'état
+publié signé, masque temporairement les **seuls noms de cibles relationnelles**
+et compare tous les autres octets. Les libellés, l'ordre, les ancres,
+doublons, commentaires et contenus non relationnels doivent être inchangés.
+Chaque titre de relation, ancien et nouveau, est résolu via
+`action=query&prop=info&redirects=1` et doit désigner le **même pageid** ;
+les résolutions sont relues une deuxième fois, puis les révisions françaises
+sont revérifiées. Une page absente, un alias qui ne pointe pas vers la même
+page, une transformation ambiguë ou une réponse incomplète bloque.
+
+Le reçu local produit est
+`.state/post-publication/<débat>/<Work>/fr-relation-pageids.json`.
+Pour utiliser cette preuve lors de la clôture, ajouter le champ optionnel
+suivant au sélecteur JSON :
+
+```json
+"relation_pageids_proof": ".state/post-publication/mon_debat/EDIT-20261120-001/fr-relation-pageids.json"
+```
+
+Ce fragment est à **ajouter à l'objet JSON existant**, en veillant à placer
+une virgule entre les champs. En l'absence d'écart français, ce champ doit
+être omis. La clôture compare le contenu complet de chaque page divergente
+avec la preuve signée et refuse tout écart non autorisé. Une preuve obtenue
+dans le passé ne constitue pas une autorisation de publier aujourd'hui :
+aucune écriture MediaWiki n'est effectuée par ces deux commandes.
+
+## Limites techniques
+
+L'identifiant `pageid` prouve l'identité d'une cible de relation, **pas**
+l'identité d'un texte éditorial ou le caractère autorisé d'une publication.
+La collecte s'arrête en cas de format de relation inconnu, notamment les
+anciennes relations hors du modèle principal ; ces cas doivent rester
+bloqués jusqu'à une procédure explicite. Aucune comparaison de nombre seul
+(« 37 liens ») ne remplace l'égalité occurrence par occurrence.
+
 ## Commande
 
 ```sh
