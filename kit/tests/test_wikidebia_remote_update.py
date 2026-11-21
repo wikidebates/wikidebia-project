@@ -387,7 +387,8 @@ def test_fresh_malformed_lock_is_not_recovered_but_expired_one_is(tmp_path):
 def test_12_french_then_english_sessions_are_sequential(tmp_path):
     old_fr, old_en = argument("FR"), argument("EN")
     p, _, _, adapter = plan(tmp_path, languages=("fr","en"), old_pages=[("fr","A1","FR",old_fr),("en","A1","EN",old_en)], new_pages=[("fr","A1","FR",old_fr),("en","A1","EN",old_en)], remote_pages={("fr","FR"):(10,old_fr),("en","EN"):(11,old_en)})
-    assert adapter.events[:4] == [("open","fr"),("close","fr"),("open","en"),("close","en")]
+    session_events = [row for row in adapter.events if row[0] in {"open", "close"}]
+    assert session_events == [("open","fr"),("close","fr"),("open","en"),("close","en")]
 
 
 def test_13_interruption_then_resume_is_idempotent(tmp_path):
