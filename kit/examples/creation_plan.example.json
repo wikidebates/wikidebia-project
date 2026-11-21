@@ -1,0 +1,72 @@
+{
+  "schema": "wikidebia-creation-plan-1.0",
+  "debate_id": "creation_exemple",
+  "scope": {
+    "canonical_title_fr": "Faut-il adopter la mesure X ?",
+    "proposition_fr": "La mesure X doit être adoptée",
+    "scope_summary_fr": "Exemple fictif à remplacer : effets collectifs et risques pour les libertés.",
+    "jurisdiction": null,
+    "timeframe": null,
+    "included_topics": [
+      "Effets de X"
+    ],
+    "excluded_topics": [],
+    "residual_ambiguities": [],
+    "editorial_constraints": []
+  },
+  "nodes": [
+    {
+      "id": "A0001",
+      "canonical_title_fr": "La mesure X produit un avantage collectif",
+      "displayed_title_fr": "La mesure X produit un avantage collectif",
+      "rubriques": [
+        "Politique"
+      ],
+      "keywords": [
+        "mesure",
+        "politique"
+      ]
+    },
+    {
+      "id": "A0002",
+      "canonical_title_fr": "La mesure X menace les libertés",
+      "displayed_title_fr": "La mesure X menace les libertés",
+      "rubriques": [
+        "Politique"
+      ],
+      "keywords": [
+        "liberté",
+        "mesure"
+      ]
+    }
+  ],
+  "placements": [
+    {
+      "occurrence_id": "O00001",
+      "node_id": "A0001",
+      "parent_occurrence_id": null,
+      "relation": null,
+      "branch": "pro",
+      "order": 1,
+      "occurrence_role": "primary"
+    },
+    {
+      "occurrence_id": "O00002",
+      "node_id": "A0002",
+      "parent_occurrence_id": null,
+      "relation": null,
+      "branch": "con",
+      "order": 1,
+      "occurrence_role": "primary"
+    }
+  ],
+  "batches": [
+    {
+      "node_ids": [
+        "A0001",
+        "A0002"
+      ],
+      "dependency_node_ids": []
+    }
+  ]
+}

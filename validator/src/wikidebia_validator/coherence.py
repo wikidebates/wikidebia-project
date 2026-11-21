@@ -178,13 +178,49 @@ def validate_argument_name_assignments(ctx: PackageContext, manifest: dict[str, 
             ctx.report.error("WDV-EDT-031", "Une attribution explicite ne peut pas remplacer un nom consacré historique déjà présent", path=str(rel), details={"page_id": key[1]})
     ctx.report.metrics.setdefault("coherence", {})["argument_name_assignments"] = len(seen)
 
+def _unwritten_creation_argument(ctx: PackageContext, manifest: dict[str, Any], page: dict[str, Any],
+                                 nodes: dict[str, Any]) -> bool:
+    """A planned, physically absent FR page is not a produced argument yet.
+
+    This narrow pre-content deferral never covers English, imported content,
+    existing drafts, content locks, or a declared documentary review.
+    """
+    if (manifest.get("global_status") not in {"initialized", "graph_draft", "graph_validated", "graph_locked"}
+            or not english_translation_deferred(manifest)
+            or page.get("language") != "fr" or page.get("page_origin") != "new"
+            or page.get("status") != "planned" or page.get("sha256") or page.get("creation_date")
+            or (page.get("validation") or {}).get("status") != "pending"
+            or ctx.exists("data/import_provenance.json") or ctx.exists("data/fr_content_lock.json")):
+        return False
+    rel = page.get("file_path")
+    if not isinstance(rel, str) or not rel.startswith("output/fr/arguments/") or ctx.exists(rel):
+        return False
+    node = nodes.get(page.get("page_id"), {})
+    record = (node.get("pages") or {}).get("fr") or {}
+    file = record.get("file") or {}
+    generation = record.get("generation") or {}
+    if (file.get("status") != "absent" or file.get("path") != rel or file.get("sha256")
+            or generation.get("status") != "pending"
+            or any(generation.get(k) for k in ("creation_date", "generated_at", "validated_at"))):
+        return False
+    return all(w.get("check_status") == "unchecked" and not any(
+        w.get(k) for k in ("decision", "remote_revision_id", "remote_sha256", "published_at", "checked_at", "remote_title")
+    ) for w in (page.get("wiki") or {}, record.get("wiki") or {}))
+
+
 def validate_argument_name_discovery(ctx: PackageContext, manifest: dict[str, Any]) -> None:
     controls = manifest.get("editorial_controls") or {}
     rel = controls.get("argument_name_discovery_path")
+    planning = (not rel and manifest.get("global_status") in {"initialized", "graph_draft", "graph_validated", "graph_locked"}
+                and any(p.get("language") == "fr" and p.get("status") == "planned"
+                        and p.get("page_origin") == "new" for p in manifest.get("pages") or []))
+    nodes = {n.get("id"): n for n in ((ctx.registry() or {}).get("graph") or {}).get("nodes", [])
+             if n.get("status") == "active"} if planning else {}
     new_arguments = {
         (str(page.get("language") or ""), str(page.get("page_id") or "")): page
         for page in manifest.get("pages") or []
         if page.get("page_type") == "argument"
+        and not (not rel and _unwritten_creation_argument(ctx, manifest, page, nodes))
         and (
             page.get("page_origin") == "new"
             # A page may have been researched and translated as new in this

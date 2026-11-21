@@ -109,3 +109,9 @@ et observations de la sélection et de ses dépendances, pas le carnet entier.
 Les drapeaux `page_basis_changed`, `resource_basis_changed` et `recheck_due`
 signalent les réexamens nécessaires. Aucune note n'est une validation de source.
 Voir `GUIDE_CREATION_RESEARCH.md` pour l'enregistrement dans le ZIP de brouillons.
+
+## Démarrage sans corpus
+
+Pour initialiser les fichiers techniques depuis un plan de création réellement
+revu, utiliser le parcours distinct `creation-prepare` puis `creation-init` de
+`GUIDE_CREATION_INIT.md`. `creation-context` reste une aide de lecture sans mutation.
