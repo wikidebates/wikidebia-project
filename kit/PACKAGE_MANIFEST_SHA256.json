@@ -5,7 +5,7 @@
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
   "declared_file_count": 506,
-  "declared_test_count": 1393,
+  "declared_test_count": 1398,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -1139,7 +1139,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "16b560dad750e4989c464410cb3fbadaa0d614a24e63a58f68550376e0b42be0"
+      "sha256": "834d22320116e2d402e3f3b5a77a5ebedd189ce79d72c227ffb9f44f450ccc5c"
     },
     {
       "path": "VERSIONS.json",
@@ -1803,8 +1803,8 @@
     },
     {
       "path": "scripts/wikidebia_publish.py",
-      "size_bytes": 134531,
-      "sha256": "7907861d532c810e4eda7bec6a137b7baa9ae6994ff892bd8f70cd648afb2f4d"
+      "size_bytes": 137415,
+      "sha256": "c72e1de92f402a4de196c550886c0ba2adc80109732435cb0a09e48699ad4bcc"
     },
     {
       "path": "scripts/wikidebia_release.py",
@@ -1933,8 +1933,8 @@
     },
     {
       "path": "scripts/wikidebia_update.py",
-      "size_bytes": 209871,
-      "sha256": "a754f74ee5c32f6805ad9adc394a82719d102be8f99ec553940d12799db14c59"
+      "size_bytes": 210969,
+      "sha256": "c2ce1cdf83fc08c3b1ecf5fd51564b7cb8f2c41eb0ae8fc08f3914362f2c0d7c"
     },
     {
       "path": "scripts/wikidebia_work_close.py",
@@ -2383,8 +2383,8 @@
     },
     {
       "path": "tests/test_wikidebia_publish.py",
-      "size_bytes": 79569,
-      "sha256": "ceaeeb3e65628b8fe2e0472968daa6713a22d2bbe8ac100f3497c7e446155a42"
+      "size_bytes": 82633,
+      "sha256": "b1fd0097a1bb0c00ced08d9c102e17e7cf27d4579f205d1962c29fc096a9d7d9"
     },
     {
       "path": "tests/test_wikidebia_release.py",
@@ -2408,8 +2408,8 @@
     },
     {
       "path": "tests/test_wikidebia_remote_update.py",
-      "size_bytes": 80860,
-      "sha256": "cb30d483d0e75235a8c8132b62cda54d55e43e1ccf596f823b5a1e2d2a66a7c9"
+      "size_bytes": 82602,
+      "sha256": "a80b922855e1fac137d55e2311826fad5a33dae42fb03e24c6513721de45aa04"
     },
     {
       "path": "tests/test_wikidebia_render.py",
