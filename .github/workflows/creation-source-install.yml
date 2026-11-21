@@ -1,0 +1,37 @@
+name: Install tested French source adoption (temporary)
+on:
+  push:
+    branches: [feat/creation-sources-20261121]
+    paths: [.github/workflows/creation-source-install.yml]
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install and validate the exact local patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .github/creation-source-transfer-{1,2,3,4}.txt | base64 -d | xz -d > "$RUNNER_TEMP/source.patch"
+          echo "054f6e85f6585444de3dac29a073f5dc5761dac2fd19b8d2193147594c37d031  $RUNNER_TEMP/source.patch" | sha256sum -c -
+          git apply --check "$RUNNER_TEMP/source.patch"
+          git apply --index "$RUNNER_TEMP/source.patch"
+          python -m pip install -r validator/requirements-dev.txt
+          python -m pytest -q kit/tests --junitxml="$RUNNER_TEMP/kit.xml"
+          PYTHONPATH=validator/src python -m pytest -q validator/tests
+          python kit/scripts/refresh_package_metadata.py --junit-xml "$RUNNER_TEMP/kit.xml" --generated-date 2026-11-21
+          python kit/scripts/refresh_package_metadata.py --junit-xml "$RUNNER_TEMP/kit.xml" --generated-date 2026-11-21 --check
+          python validator/scripts/self_audit.py
+          rm .github/creation-source-transfer-{1,2,3,4}.txt .github/workflows/creation-source-install.yml
+          git add -A
+          git diff --cached --check
+          test "$(git write-tree)" = "d8d516856e6ada65cb0f46d7ac8166c1ab66e35f"
+          git -c user.name="Wikidebia creation preparation" -c user.email="github-actions[bot]@users.noreply.github.com" commit -m "feat: adopt explicitly reviewed French creation references"
+          git push origin HEAD:feat/creation-sources-20261121
