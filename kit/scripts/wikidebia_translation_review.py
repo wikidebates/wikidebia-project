@@ -667,6 +667,15 @@ def _validate_citations(rows: Any, french_rows: Sequence[Mapping[str, Any]], nod
                 en_sig = fr_sig
             if en_sig != fr_sig:
                 raise TranslationReviewError(f"La date traduite ne désigne pas la même date pour {citation_id}")
+            if fr_sig is not None and fr_sig[2] is not None and not preserved_numeric_date:
+                # A complete translated {{Quote}} date has a canonical British format.
+                # Keep unchanged historical numeric expressions and partial dates.
+                month = next(name.title() for name, number in EN_MONTHS.items() if number == fr_sig[1])
+                expected_date = f"{fr_sig[2]} {month} {fr_sig[0]}"
+                if translated_date != expected_date:
+                    raise TranslationReviewError(
+                        f"Format britannique D Month YYYY requis pour la date de citation {citation_id} : {expected_date}"
+                    )
         for field in ("citation_translated", "date_translated_or_language_neutral", "preserved_parameters_unchanged", "translation_warning_appended", "quote_completeness_reviewed"):
             if row.get(field) is not True:
                 raise TranslationReviewError(f"Attestation de citation manquante pour {citation_id} : {field}")
