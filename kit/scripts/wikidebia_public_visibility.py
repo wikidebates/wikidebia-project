@@ -25,7 +25,7 @@ from pathlib import Path
 from typing import Any, Mapping
 from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, quote, unquote, urlencode, urljoin, urlsplit
-from urllib.request import Request, build_opener
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from wikidebia_corpus_build import load_json, sha256_file, validate_debate_id, write_json
 from wikidebia_graph_extract import iter_templates, normalize_key
@@ -83,7 +83,7 @@ class _PublicDocument(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.heading_parts: list[str] = []
-        self.in_heading = 0
+        self.in_heading = False
         self.heading_seen = False
         self.content_seen = False
         self.missing_marker = False
@@ -94,10 +94,8 @@ class _PublicDocument(HTMLParser):
         ident = str(properties.get("id") or "")
         classes = str(properties.get("class") or "").split()
         if tag == "h1" and ident == "firstHeading":
-            self.in_heading = 1
+            self.in_heading = True
             self.heading_seen = True
-        elif self.in_heading:
-            self.in_heading += 1
         if "mw-parser-output" in classes or ident == "mw-content-text":
             self.content_seen = True
         if ident in {"noarticletext", "mw-newarticletext"} or "noarticletext" in classes:
@@ -106,8 +104,8 @@ class _PublicDocument(HTMLParser):
             self.links.append(str(properties["href"]))
 
     def handle_endtag(self, tag: str) -> None:
-        if self.in_heading and tag in {"h1", "span", "b", "i", "em", "strong"}:
-            self.in_heading = max(0, self.in_heading - 1)
+        if tag == "h1":
+            self.in_heading = False
 
     def handle_data(self, data: str) -> None:
         if self.in_heading:
@@ -118,12 +116,19 @@ class _PublicDocument(HTMLParser):
         return _title(html.unescape("".join(self.heading_parts)))
 
 
+class _RejectRedirect(HTTPRedirectHandler):
+    def redirect_request(self, request, fp, code, msg, headers, newurl):
+        # Explicitly forbid redirects, including cross-site redirects. Exact
+        # public page URLs must be directly readable at their planned titles.
+        return None
+
+
 class AnonymousMediaWiki:
     """Separate anonymous urllib opener; never imports an authenticated client."""
 
     def __init__(self, *, timeout: float = 15.0):
         self.timeout = timeout
-        self.opener = build_opener()
+        self.opener = build_opener(_RejectRedirect)
         self.headers = {
             "User-Agent": "WikidebiaPublicVisibility/1.0 (anonymous read-only audit)",
             "Accept": "text/html, application/json;q=0.8",
@@ -491,13 +496,16 @@ def check_or_record(
     late_reuse: Mapping[str, Any] | None = None,
     manifest_sha256: str = "",
     client: Any = None,
+    report_filename: str = "public-visibility-report.json",
 ) -> dict[str, Any]:
     """Always write the full report, including failures, before returning."""
+    if report_filename not in {"public-visibility-report.json", "public-visibility-recheck.json"}:
+        raise PublicVisibilityError("Nom de rapport non autorisé")
     report = verify_public_visibility(
         debate_id, work_id, english_plan, french_plan, late_reuse=late_reuse,
         manifest_sha256=manifest_sha256, client=client,
     )
-    write_json(state_dir / "public-visibility-report.json", report)
+    write_json(state_dir / report_filename, report)
     return report
 
 
