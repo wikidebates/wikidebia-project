@@ -9,7 +9,7 @@ import pytest
 import wikidebia_offline_bilingual as offline
 from wikidebia_corpus_build import full_tree_sha256, sha256_file
 from wikidebia_editorial_workspace import workspace_receipt_hash
-from wikidebia_update import sha_object
+from wikidebia_update import sha_object, sha_text
 
 
 DEBATE = "debat_test"
@@ -30,13 +30,17 @@ def _fixture(root: Path) -> tuple[Path, Path, dict]:
     workspace = root / ".state/editorial-workspaces" / DEBATE / WORK
     release = workspace / "release-copy"
     release.mkdir(parents=True)
+    fr_text = "{{Débat|interlangue={{Lien interlangue|langue=en|page=Should we agree?}}}}"
+    fr_source = release / "output/fr/debate.wiki"
+    fr_source.parent.mkdir(parents=True)
+    fr_source.write_text(fr_text, encoding="utf-8")
     manifest = {
         "debate_id": DEBATE,
         "pages": [
             {"language": "en", "page_id": "debate", "page_type": "debate",
              "canonical_title": "Should we agree?"},
             {"language": "fr", "page_id": "debate", "page_type": "debate",
-             "canonical_title": "Faut-il être d'accord ?"},
+             "canonical_title": "Faut-il être d'accord ?", "file_path": "output/fr/debate.wiki"},
         ],
     }
     _write(release / "manifest.json", manifest)
@@ -58,7 +62,7 @@ def _fixture(root: Path) -> tuple[Path, Path, dict]:
     (root_active / "previous.wiki").write_text("Source FR historique", encoding="utf-8")
 
     en_sha = "a" * 64
-    fr_sha = "b" * 64
+    fr_sha = sha_text(fr_text)
     en_plan = _signed({
         "schema": "wikidebia-publication-plan-1.0", "schema_version": "1.0",
         "debate_id": DEBATE, "blockers": [],
@@ -200,3 +204,16 @@ def test_active_corpus_tampering_blocks_resume(tmp_path: Path):
     with pytest.raises(offline.PostPublicationError):
         offline.reconcile_offline_bilingual(tmp_path, DEBATE, WORK, selector)
     assert (tmp_path / result["previous_corpus_backup"] / "previous.wiki").is_file()
+
+def test_french_release_content_must_be_byte_identical_to_attested_publication(tmp_path: Path):
+    selector, workspace, fixture = _fixture(tmp_path)
+    source = workspace / "release-copy/output/fr/debate.wiki"
+    source.write_text("FR content drifted", encoding="utf-8")
+    data = json.loads((workspace / "workspace.json").read_text(encoding="utf-8"))
+    data["release_copy"]["tree_sha256"] = full_tree_sha256(workspace / "release-copy")
+    data["workspace_sha256"] = workspace_receipt_hash(data)
+    _write(workspace / "workspace.json", data)
+    # A re-sealed local tree does not authorize changing a signed remote plan.
+    with pytest.raises(offline.PostPublicationError):
+        offline.reconcile_offline_bilingual(tmp_path, DEBATE, WORK, selector)
+    assert (tmp_path / "corpus" / DEBATE / "previous.wiki").is_file()
