@@ -101,3 +101,11 @@ périmé de deux sources par paramètre. Les sources sont choisies pour leur app
 réel, sans réduire artificiellement la documentation ; les catégories vides
 sont omises et les doublons entre orientations restent interdits. Les snapshots
 historiques et les changelogs restent intacts.
+
+## Notes documentaires conservées
+
+Lorsque `data/creation_research.json` existe, le contexte ajoute les recherches
+et observations de la sélection et de ses dépendances, pas le carnet entier.
+Les drapeaux `page_basis_changed`, `resource_basis_changed` et `recheck_due`
+signalent les réexamens nécessaires. Aucune note n'est une validation de source.
+Voir `GUIDE_CREATION_RESEARCH.md` pour l'enregistrement dans le ZIP de brouillons.

@@ -20,7 +20,8 @@ un nouveau paquet de rédaction. Elle ne rouvre jamais une page validée.
 
 Dans le ZIP, lire `INSTRUCTIONS.md` et les deux fichiers sous `context/`.
 Seuls les fichiers sous `editable/` sont modifiables : les pages `.wiki` et
-`RESPONSE.json`. Conserver tous les identifiants et choisir pour chaque page :
+`RESPONSE.json`, ainsi que les notes facultatives `RESEARCH.json` (voir
+`GUIDE_CREATION_RESEARCH.md`). Conserver tous les identifiants et choisir pour chaque page :
 
 - `unchanged` : ne pas remplacer le texte, qui doit rester identique ;
 - `partial` : enregistrer un brouillon inachevé, sans exiger une syntaxe finale ;
@@ -60,7 +61,9 @@ empreintes d'agrégats ne sont plus présentées comme courantes. Les rapports
 antérieurs restent conservés, sans être réutilisés pour valider le nouveau texte.
 Les autres pages, le graphe, les sources et les données anglaises restent intacts.
 
-Les sources documentaires et attestations éditoriales doivent encore être
+Les recherches peuvent être conservées avec les brouillons, dans le carnet de
+travail ciblé `data/creation_research.json`, sans promotion automatique de source.
+Les sources documentaires retenues et attestations éditoriales doivent encore être
 enregistrées et contrôlées par les parcours ordinaires. L'import ne les invente
 pas à partir de la prose et n'accepte pas de fichiers supplémentaires pour les
 modifier indirectement. Il ne ferme aucun Work ou lot, ne produit aucun

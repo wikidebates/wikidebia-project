@@ -27,3 +27,9 @@ Pour les pages françaises préexistantes, conserver chaque `titre-affiché` con
 - Pour un corpus français nouveau déjà constitué (graphe/titres verrouillés, anglais différé), commencer par `./wikidebia creation-next --corpus corpus/<id>`. La commande retrouve les pages restantes dans les états canoniques ; `creation-status` inspecte sans écrire.
 - Lire `read_first` et le contexte indiqué, pas l'inventaire exhaustif `QUEUE.json` ni les textes déjà produits sans rapport avec la tâche. Ne jamais éditer la file dérivée pour déclarer une page terminée. Un fichier non enregistré ou divergent doit être préservé et réconcilié, pas régénéré.
 - `generated` attend encore sa revue. `recorded_validated` est un état relu, pas une nouvelle preuve de validation. Ces commandes ne publient rien ; voir `kit/GUIDE_CREATION_RESUME.md`. Pour enregistrer des brouillons, utiliser `creation-package` puis `creation-import` selon `kit/GUIDE_CREATION_IMPORT.md`, sans modifier manuellement les empreintes. Un journal d'import interrompu se reprend par `creation-import --corpus corpus/<id> --recover`, jamais en supprimant l'état.
+
+## Recherches documentaires de création
+
+- Conserver les recherches effectivement réalisées dans `editable/RESEARCH.json` du paquet `creation-package`, puis importer avec `creation-import`. Lire `context/RESEARCH_HELP.md` pour le format ; un fichier vide reste sans effet.
+- Réutiliser les notes ciblées de `CORPUS_CONTEXT.json` sans relire le carnet entier. Vérifier leur date, les variantes et les drapeaux de changement ; une recherche négative ne prouve jamais l'absence de source. Ne jamais fabriquer des recherches, consultations ou preuves historiques.
+- `--research-only [--page-id IDENTIFIANT]` conserve tous les textes et statuts `unchanged`. Les notes ne valident ni source ni page et ne modifient pas `sources.json`. Les références retenues doivent encore suivre le workflow documentaire ordinaire. Voir `kit/GUIDE_CREATION_RESEARCH.md`.

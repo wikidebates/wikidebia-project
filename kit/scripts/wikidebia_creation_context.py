@@ -275,6 +275,12 @@ def corpus_context(inputs: Inputs, corpus: Path, stage: str, batch_id: str | Non
     # A documentary record is shared, but every page-specific usage is retained.
     # There is no network verification or automatic transfer of a prior verdict.
     selected_sources = [copy.deepcopy(source_index[sid]) for sid in sorted(source_ids)]
+    from wikidebia_creation_research import context_notes
+    research = context_notes(inputs, corpus, manifest, registry, docs["scope"], context_ids, sources)
+    known_sources = {s["id"] for s in selected_sources}
+    note_sources = research.pop("canonical_sources")
+    research["canonical_source_ids"] = [s["id"] for s in note_sources]
+    selected_sources.extend(s for s in note_sources if s["id"] not in known_sources)
     return {"debate_id": debate_id, "scope": docs["scope"],
             "debate": {"scope": registry["debate"].get("scope"),
                        "fr": registry["debate"].get("pages", {}).get("fr")},
@@ -282,7 +288,7 @@ def corpus_context(inputs: Inputs, corpus: Path, stage: str, batch_id: str | Non
             "dependency_node_ids": sorted(dependencies),
             "graph_overview": {"nodes": [{"id": n["id"], "fr": n.get("fr")} for n in nodes.values()],
                                "edges": edges, "occurrences": occurrences},
-            "page_texts": texts, "sources": selected_sources,
+            "page_texts": texts, "sources": selected_sources, "research_notes": research,
             "research_complete": False, "editorial_validation_performed": False,
             "remaining_checks": ["Research new sources and omissions; selection is not exhaustive.",
                                  "Review each source usage for its exact argument.",
