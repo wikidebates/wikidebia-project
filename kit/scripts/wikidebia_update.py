@@ -697,7 +697,28 @@ def only_french_interlanguage_addition(
     link = links[0]
     if set(link.params) != {"langue", "page"}:
         return False
-    return link.get("langue") == "en" and link.get("page") == expected_english_title
+    if link.get("langue") != "en" or link.get("page") != expected_english_title:
+        return False
+
+    # Parameter-map equality is necessary but not sufficient: it ignores
+    # whitespace, comments and formatting within the main template. Prove
+    # that removing exactly one newly inserted interlanguage parameter
+    # restores the source wikitext byte-for-byte, wherever the parameter
+    # was placed (including historical layouts).
+    before_raw, after_raw = before_calls[0].raw, after_calls[0].raw
+    pattern = re.compile(r"\|\s*interlangue\s*=\s*" + re.escape(link.raw))
+    for inserted in pattern.finditer(after_raw):
+        starts = [inserted.start()]
+        ends = [inserted.end()]
+        if inserted.start() > 0 and after_raw[inserted.start() - 1] == "\n":
+            starts.append(inserted.start() - 1)
+        if inserted.end() < len(after_raw) and after_raw[inserted.end()] == "\n":
+            ends.append(inserted.end() + 1)
+        for start in starts:
+            for end in ends:
+                if after_raw[:start] + after_raw[end:] == before_raw:
+                    return True
+    return False
 
 
 

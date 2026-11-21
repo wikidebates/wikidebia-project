@@ -1707,3 +1707,28 @@ def test_redirect_interlanguage_preserves_original_trailing_whitespace():
         original, result.replace("\n\n<!-- conservé -->", "\n<!-- conservé -->"),
         "argument", "English title"
     )
+
+
+def test_interlanguage_only_comparison_rejects_main_template_formatting_changes():
+    old = "{{Argument\n|résumé=Texte préservé\n|rubriques=Philosophie\n}}\n"
+    changed, _ = module.add_french_interlanguage_to_remote(old, "argument", "English title")
+    assert module.only_french_interlanguage_addition(old, changed, "argument", "English title")
+    modified = changed.replace("|rubriques=Philosophie", "|rubriques =Philosophie")
+    assert not module.only_french_interlanguage_addition(
+        old, modified, "argument", "English title"
+    )
+    assert not module.only_french_interlanguage_overlay(
+        old, modified, "argument", "English title"
+    )
+
+
+def test_pure_french_interlanguage_addition_accepts_historical_parameter_position():
+    old = "{{Argument\n|résumé=Texte préservé\n|rubriques=Philosophie\n|date-création=2020-01-01\n}}\n"
+    link = module.french_interlanguage_value("English title")
+    changed = old.replace("|rubriques=", "|interlangue=" + link + "\n|rubriques=", 1)
+    assert module.only_french_interlanguage_addition(
+        old, changed, "argument", "English title"
+    )
+    assert module.only_french_interlanguage_overlay(
+        old, changed, "argument", "English title"
+    )
