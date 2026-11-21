@@ -1268,9 +1268,9 @@ DEBATE_BIBLIOGRAPHY_SCOPES = {"foundational_work", "broad_synthesis"}
 # validator/src/wikidebia_validator/editorial.py. Keep the expressions aligned
 # and test their agreement so render-only failures are found at translation review.
 DOCUMENTARY_PAGE_VALUE = re.compile(r"^[0-9]+(?:-[0-9]+)?$")
-DOCUMENTARY_PAGE_IN_LOCATION = re.compile(r"^(?:pages?|pp?\\.)\\s*[0-9]+(?:\\s*[-–—]\\s*[0-9]+)?$", re.I)
-DOCUMENTARY_ACCESS_DATE = re.compile(r"\\b(?:consulté(?:e)?|accessed|retrieved)\\b", re.I)
-DOCUMENTARY_MACHINE_DATE = re.compile(r"^\\d{4}-\\d{2}(?:-\\d{2})?(?:[T ].*)?$")
+DOCUMENTARY_PAGE_IN_LOCATION = re.compile(r"^(?:pages?|pp?\.)\s*[0-9]+(?:\s*[-–—]\s*[0-9]+)?$", re.I)
+DOCUMENTARY_ACCESS_DATE = re.compile(r"\b(?:consulté(?:e)?|accessed|retrieved)\b", re.I)
+DOCUMENTARY_MACHINE_DATE = re.compile(r"^\d{4}-\d{2}(?:-\d{2})?(?:[T ].*)?$")
 
 
 def _fold_documentary(value: Any) -> str:
@@ -1349,7 +1349,7 @@ def collect_english_documentary_findings(review: Mapping[str, Any]) -> list[dict
                     "entity_type": "source", "entity_id": sid, "field": "metadata/page",
                     "issue": "bibliography_invalid_page_range", "validator_code": "WDV-DOC-002",
                     "disposition": "certain_normalization"
-                    if re.fullmatch(r"(?:pp?\\.?\\s*)?\\d+\\s*[-–—]\\s*\\d+", str(page).strip(), re.I)
+                    if re.fullmatch(r"(?:pp?\.?\s*)?\d+\s*[-–—]\s*\d+", str(page).strip(), re.I)
                     else "editorial_decision",
                     "current_value": page,
                     "required_correction": "Use only a page number or a numeric range such as 13-19. Verify whether a volume, collection number or issue has been incorrectly placed here; do not invent pages.",
