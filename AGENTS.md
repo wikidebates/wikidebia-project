@@ -51,6 +51,7 @@ Pour les pages françaises préexistantes, conserver chaque `titre-affiché` con
 - Par choix explicite seulement, construire `./wikidebia creation-library-build --corpus corpus/<ancien> [--corpus corpus/<autre>]` puis ajouter `--reuse-library` (et facultativement `--reuse-query 'notion'`) à `creation-package`. Voir `kit/GUIDE_CREATION_LIBRARY.md`.
 - Le fichier `private/creation_library.json` reste strictement local et ignoré par Git. Les seuls candidats lexicaux utiles sont placés sous `context/REUSE_CANDIDATES.json`, jamais comme preuves, attestations ou références approuvées. Les liens, observations, requêtes et relecteurs historiques ne sont pas transférables à une nouvelle page.
 - Un résultat de cette bibliothèque exige une **nouvelle consultation réelle et pertinente pour l'argument**, son enregistrement `RESEARCH.json`, puis une décision distincte dans `SOURCES.json` avant toute sélection canonique. Les revues, validations, traductions et publications gardent leurs protections ordinaires. Ne pas annoncer d'économies de quota non mesurées.
+- Les références canoniques historiques sans URL et sans auteur/date/éditeur suffisants sont conservées dans leur corpus mais omises de la bibliothèque. Lire `omitted_unidentifiable_sources`, `omissions_by_corpus` et la liste `omissions` dans le fichier privé avant de conclure à une absence de sources ; ne pas réparer des notices en inventant les renseignements manquants. Les URL dangereuses et les incohérences restent bloquantes.
 
 ## Mesure ponctuelle des optimisations de creation
 

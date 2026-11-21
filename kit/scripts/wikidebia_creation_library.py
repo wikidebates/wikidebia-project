@@ -33,6 +33,8 @@ MAX_CORPORA = 32
 MAX_VARIANTS = 12000
 MAX_LIBRARY_BYTES = 16 * 1024 * 1024
 MAX_PREVIEW_BYTES = 48 * 1024
+MAX_OMISSIONS = 12000
+OMISSION_REASON = 'incomplete_offline_identity'
 STOPWORDS = {'dans', 'avec', 'pour', 'contre', 'sont', 'etre', 'etre', 'elle',
              'elles', 'leur', 'leurs', 'dont', 'sans', 'tout', 'tous', 'toute',
              'comme', 'quelle', 'quelles', 'quels', 'quel', 'cette', 'ceux',
@@ -46,6 +48,10 @@ STOPWORDS = {'dans', 'avec', 'pour', 'contre', 'sont', 'etre', 'etre', 'elle',
 def _require(ok: bool, message: str) -> None:
     if not ok:
         raise CreationContextError('Creation library: ' + message)
+
+
+class UnidentifiableOfflineReference(CreationContextError):
+    """A historical notice cannot be safely identified as a reusable source."""
 
 
 def _clean_metadata(record: dict) -> dict | None:
@@ -73,8 +79,8 @@ def _clean_metadata(record: dict) -> dict | None:
     if metadata.get('link'):
         _url(metadata['link'])  # No private, local or credential-bearing URL in a hint.
     else:
-        _require(bool(metadata.get('authors')) and bool(metadata.get('date'))
-                 and bool(metadata.get('publisher')), 'unidentifiable offline reference')
+        if not (metadata.get('authors') and metadata.get('date') and metadata.get('publisher')):
+            raise UnidentifiableOfflineReference('Creation library: unidentifiable offline reference')
     return metadata
 
 
@@ -120,6 +126,7 @@ def build_library(root: Path, corpus_paths: list[str]) -> dict:
              and len(set(corpus_paths)) == len(corpus_paths), 'select 1..32 distinct corpora')
     variants: dict[str, dict] = {}
     fingerprints: dict[str, str | None] = {}
+    omitted: set[tuple[str, str]] = set()
     for corpus_path in sorted(corpus_paths):
         manifest, registry, sources, scope, notes, current_inputs = _source_inputs(root, corpus_path)
         for row in current_inputs:
@@ -131,7 +138,21 @@ def build_library(root: Path, corpus_paths: list[str]) -> dict:
         page_basis = basis(manifest, registry, scope)
 
         def include(source: dict, origin: dict) -> None:
-            metadata = _clean_metadata(source)
+            try:
+                metadata = _clean_metadata(source)
+            except UnidentifiableOfflineReference:
+                # Historical source registries can contain incomplete French
+                # bibliographies. An unusable *hint* must not abort all other
+                # discoveries, nor be silently promoted to a reference.
+                # Saved research records remain subject to their stricter rules.
+                if origin['prior_record'] != 'canonical_usage':
+                    raise
+                sid = source.get('id')
+                _require(isinstance(sid, str) and re.fullmatch(r'S\d{5,}', sid) is not None,
+                         'invalid identifier for omitted canonical source')
+                omitted.add((manifest['debate_id'], sid))
+                _require(len(omitted) <= MAX_OMISSIONS, 'too many unidentifiable historical sources')
+                return
             if metadata is None:
                 return
             record = {'type': source['type'], 'language': 'fr', 'metadata': metadata}
@@ -216,9 +237,11 @@ def build_library(root: Path, corpus_paths: list[str]) -> dict:
         counts[item['identity_key']] = counts.get(item['identity_key'], 0) + 1
     for item in source_list:
         item['variants_require_review'] = counts[item['identity_key']] > 1
+    omissions = [{'debate_id': debate_id, 'source_id': sid,
+                  'reason': OMISSION_REASON} for debate_id, sid in sorted(omitted)]
     payload = {'schema': SCHEMA, 'corpora': sorted(corpus_paths),
                'inputs': [{'path': key, 'sha256': fingerprints[key]} for key in sorted(fingerprints)],
-               'notices': source_list, 'authoritative_for_target': False,
+               'notices': source_list, 'omissions': omissions, 'authoritative_for_target': False,
                'source_verification_performed': False}
     signed = dict(payload, sha256=_sha(_json(payload)))
     raw = _json(signed)
@@ -242,9 +265,14 @@ def build_library(root: Path, corpus_paths: list[str]) -> dict:
         _sync_dir(directory)
     finally:
         Path(tmp).unlink(missing_ok=True)
+    omissions_by_corpus = {corpus: sum(row['debate_id'] == corpus.removeprefix('corpus/')
+                                       for row in omissions)
+                           for corpus in sorted(corpus_paths)}
     return {'status': 'built', 'path': LIBRARY_PATH, 'corpora': len(corpus_paths),
             'notices': len(source_list), 'identities': len(counts),
             'bytes': len(raw), 'source_verification_performed': False,
+            'omitted_unidentifiable_sources': len(omissions),
+            'omissions_by_corpus': omissions_by_corpus,
             'publication_authorized': False}
 
 
@@ -263,8 +291,9 @@ def load_library(root: Path) -> tuple[dict, bytes]:
              'library file must not be readable by other users')
     raw = _read(lib, MAX_LIBRARY_BYTES)
     value = json.loads(raw, object_pairs_hook=_unique_fields)
-    _require(isinstance(value, dict) and set(value) == {'schema', 'corpora', 'inputs', 'notices',
-                 'authoritative_for_target', 'source_verification_performed', 'sha256'},
+    required = {'schema', 'corpora', 'inputs', 'notices',
+                'authoritative_for_target', 'source_verification_performed', 'sha256'}
+    _require(isinstance(value, dict) and set(value) in (required, required | {'omissions'}),
              'invalid library schema')
     signature = value.pop('sha256')
     _require(value['schema'] == SCHEMA and value['authoritative_for_target'] is False
@@ -273,6 +302,18 @@ def load_library(root: Path) -> tuple[dict, bytes]:
     _require(isinstance(value['inputs'], list) and len(value['inputs']) <= MAX_CORPORA * 8
              and isinstance(value['notices'], list) and len(value['notices']) <= MAX_VARIANTS,
              'oversized catalogue')
+    omissions = value.get('omissions', [])
+    _require(isinstance(omissions, list) and len(omissions) <= MAX_OMISSIONS,
+             'invalid historical source omissions')
+    _require(all(isinstance(row, dict) and set(row) == {'debate_id', 'source_id', 'reason'}
+                 and 'corpus/' + row['debate_id'] in value['corpora']
+                 and isinstance(row['source_id'], str)
+                 and re.fullmatch(r'S\d{5,}', row['source_id']) is not None
+                 and row['reason'] == OMISSION_REASON for row in omissions),
+             'invalid historical source omission')
+    _require(omissions == sorted(omissions, key=lambda x: (x['debate_id'], x['source_id']))
+             and len({(row['debate_id'], row['source_id']) for row in omissions}) == len(omissions),
+             'duplicate or unordered historical source omissions')
     for input_record in value['inputs']:
         _require(isinstance(input_record, dict) and set(input_record) == {'path', 'sha256'}
                  and isinstance(input_record['path'], str)
