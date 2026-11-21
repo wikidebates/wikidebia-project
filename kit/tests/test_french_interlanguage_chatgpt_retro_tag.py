@@ -146,8 +146,16 @@ def test_signed_revision_provenance_mismatch_never_tags(field, wrong):
 
 
 def test_concurrent_edit_prevents_rattrapage():
-    adapter = TagAdapter()
-    adapter.page = (True, 42, NEW)
+    class ConcurrentAdapter(TagAdapter):
+        def __init__(self):
+            super().__init__()
+            self.page_reads = 0
+
+        def read_page(self, title):
+            self.page_reads += 1
+            return (True, 41, NEW) if self.page_reads == 1 else (True, 42, NEW)
+
+    adapter = ConcurrentAdapter()
     executor, row, plan = fixture(adapter)
     with pytest.raises(PlanConflict, match="concurrente"):
         executor._execute_one(row, "ChatGPT", plan)
