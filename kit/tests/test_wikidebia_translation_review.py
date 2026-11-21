@@ -737,6 +737,24 @@ def test_finalize_translation_preserves_citation_metadata_and_appends_warning(tm
     assert by_id["A0004"]["citations"][0]["date"] == "1971"
 
 
+@pytest.mark.parametrize("invalid_date", [
+    "June 25, 2012",
+    "25 juin 2012",
+    "25 Jun 2012",
+    "25 June 2012th",
+])
+def test_finalize_translation_rejects_non_british_quote_dates(tmp_path: Path, invalid_date: str):
+    project, workspace, work_id = make_french_locked(tmp_path)
+    translation.prepare_review(project, "debat_test", work_id)
+    complete_translation_review(workspace)
+    path = workspace / "reviews/en/translation_review.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["arguments"][0]["translation"]["citations"][0]["translated_date"] = invalid_date
+    common.write_json(path, data)
+    with pytest.raises(translation.TranslationReviewError, match="Format britannique|même date"):
+        translation.finalize_review(project, "debat_test", work_id)
+
+
 def test_finalize_translation_rejects_wrong_citation_date(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
     translation.prepare_review(project, "debat_test", work_id)
