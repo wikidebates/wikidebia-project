@@ -1298,9 +1298,9 @@ def collect_english_documentary_findings(review: Mapping[str, Any]) -> list[dict
             continue
         sid = str(source.get("id") or "")
         stype = str(source.get("type") or "")
-        metadata = source.get("metadata") or {}
-        verification = source.get("verification") or {}
-        usages = source.get("usage") or []
+        metadata = source.get("metadata") if isinstance(source.get("metadata"), Mapping) else {}
+        verification = source.get("verification") if isinstance(source.get("verification"), Mapping) else {}
+        usages = source.get("usage") if isinstance(source.get("usage"), list) else []
         if stype == "bibliography":
             debate_usages = [u for u in usages if isinstance(u, Mapping) and str(u.get("page_id") or "") == debate_id and u.get("language") == "en"]
             if debate_usages:
@@ -1422,17 +1422,22 @@ def collect_english_documentary_findings(review: Mapping[str, Any]) -> list[dict
             language = str(source.get("language") or metadata.get("language") or "").strip().casefold()
             by_resource.setdefault((language, locator), []).append(source)
     identity_fields = ("article", "work", "title", "date", "publisher", "site")
+    def fold_identity(value: Any) -> str:
+        # Exact normalization from WDV-DOC-009, including typographic quotes.
+        text = str(value or "").strip().casefold().replace("’", "'").replace("“", '"').replace("”", '"')
+        return re.sub(r"\\s+", " ", text)
+
     for (language, locator), rows in by_resource.items():
         if len(rows) < 2:
             continue
         conflicting_fields: list[str] = []
         for field in identity_fields:
-            values = {_fold_documentary((row.get("metadata") or {}).get(field)) for row in rows}
+            values = {fold_identity((row.get("metadata") or {}).get(field)) for row in rows}
             values.discard("")
             if len(values) > 1:
                 conflicting_fields.append(field)
         author_values = {
-            tuple(_fold_documentary(a) for a in ((row.get("metadata") or {}).get("authors") or []) if _fold_documentary(a))
+            tuple(fold_identity(a) for a in ((row.get("metadata") or {}).get("authors") or []) if fold_identity(a))
             for row in rows
         }
         author_values.discard(())
