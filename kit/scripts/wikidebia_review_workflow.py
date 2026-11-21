@@ -2674,7 +2674,20 @@ def _print_user_result(state: Mapping[str, Any]) -> None:
     if state.get("status") == "published":
         release = state.get("release") or {}
         final = state.get("final_publication") or {}
-        print("Workflow Wikidéb’IA terminé : corpus bilingue publié.")
+        if final.get("public_visibility_status") != "publié et vérifié":
+            print(
+                "Clôture historique enregistrée, mais visibilité publique non confirmée "
+                "par une attestation indépendante du kit."
+            )
+            print(
+                "Vérifier les pages publiques sans session bot avant d'annoncer "
+                "« publié et vérifié »."
+            )
+            return
+        print("Workflow Wikidéb’IA terminé : corpus bilingue publié et vérifié publiquement.")
+        print(f"URL publique contrôlée : {final.get('public_debate_url')}")
+        print(f"Pages anglaises vérifiées : {final.get('public_english_pages_verified')}")
+        print(f"Liens interlangues français vérifiés : {final.get('public_french_links_verified')}")
         print(f"Archive release_ready conservée : {release.get('archive')}")
         installed = final.get("installed_release") or {}
         if installed.get("path"):
