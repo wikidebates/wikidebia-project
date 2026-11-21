@@ -2413,8 +2413,8 @@
     },
     {
       "path": "tests/test_wikidebia_remote_update.py",
-      "size_bytes": 86742,
-      "sha256": "7d2d1a89a57388e571b59a6f96b38dd6b19e5aac30e88a6ec9d2b3fba00c2fc8"
+      "size_bytes": 86822,
+      "sha256": "070a864ed918ce93ebe95ddaf0da6cf26217987cff0517efe712afe54cbcbcdb"
     },
     {
       "path": "tests/test_wikidebia_render.py",
