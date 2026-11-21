@@ -2373,8 +2373,8 @@
     },
     {
       "path": "tests/test_wikidebia_fr_alias_pageids.py",
-      "size_bytes": 10299,
-      "sha256": "6796b7af25719b38dcd48fe01ec8f2322dcc8bce992a570241cb16fc04877a6b"
+      "size_bytes": 10301,
+      "sha256": "1070007cbe142cc295c7e8cf2a3ca912c502297cdcf40726d3fe3c2bbbac9175"
     },
     {
       "path": "tests/test_wikidebia_global_resume.py",
