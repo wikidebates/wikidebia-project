@@ -117,3 +117,12 @@ de redemander au modèle le travail documentaire déjà conservé et encore pert
 ```sh
 python -m pytest -q kit/tests/test_wikidebia_creation_research.py
 ```
+
+## Découverte de sources déjà rencontrées dans d'autres débats
+
+Une bibliothèque privée et facultative peut proposer des notices déjà vues
+ailleurs, avec `creation-library-build` puis `creation-package --reuse-library`.
+Ces pistes ne constituent **ni** des observations de la nouvelle page **ni**
+des attestations réutilisables : nouvelle consultation, nouvel enregistrement
+`RESEARCH.json` et revue `SOURCES.json` distincte restent requis.
+Voir `GUIDE_CREATION_LIBRARY.md`.

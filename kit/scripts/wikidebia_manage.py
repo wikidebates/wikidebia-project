@@ -2798,6 +2798,11 @@ def build_parser() -> argparse.ArgumentParser:
         add_creation_init_arguments(sub.add_parser(name, help='Initialiser un corpus nouveau apres revue explicite'),
                                     preparing=name == 'creation-prepare')
 
+    creation_library = sub.add_parser('creation-library-build',
+        help='Indexer les notices deja rencontrees dans plusieurs corpus, localement et sans approbation')
+    creation_library.add_argument('--corpus', action='append', required=True,
+                                  help='Corpus source explicite ; peut etre repete')
+
     from wikidebia_creation_import import add_arguments as add_creation_import_arguments
     for name in ('creation-package', 'creation-import'):
         add_creation_import_arguments(sub.add_parser(name, help='Brouillons francais locaux, sans validation ni publication'),
@@ -3387,6 +3392,12 @@ def main(argv: list[str] | None = None) -> int:
         elif args.archive:
             command.extend(['--archive', args.archive])
         return creation_init_main(command)
+    if args.command == 'creation-library-build':
+        from wikidebia_creation_library import main as creation_library_main
+        command = ['--project-root', str(root)]
+        for corpus in args.corpus:
+            command.extend(['--corpus', corpus])
+        return creation_library_main(command)
     if args.command in {'creation-package', 'creation-import'}:
         from wikidebia_creation_import import main as creation_import_main
         command = ['--project-root', str(root), 'prepare' if args.command == 'creation-package' else 'import',
@@ -3397,6 +3408,10 @@ def main(argv: list[str] | None = None) -> int:
                 command.append('--research-only')
             for page_id in args.page_id:
                 command.extend(['--page-id', page_id])
+            if args.reuse_library:
+                command.append('--reuse-library')
+            if args.reuse_query is not None:
+                command.extend(['--reuse-query', args.reuse_query])
         elif args.recover:
             command.append('--recover')
         elif args.archive:

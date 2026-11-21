@@ -127,3 +127,11 @@ l'avancement. Les tests ne mesurent ni tokens facturés ni crédits réels.
 ```sh
 python -m pytest -q kit/tests/test_wikidebia_creation_import.py
 ```
+
+## Réutilisation de notices entre débats (facultatif)
+
+`creation-library-build` construit un catalogue privé de notices d'autres corpus.
+`creation-package --reuse-library` ajoute seulement des candidats pertinents
+sous `context/REUSE_CANDIDATES.json` ; les textes, statuts et attestations
+restent inchangés. Voir `GUIDE_CREATION_LIBRARY.md` pour les contrôles de
+périmètre, d'empreintes et de nouvelles vérifications obligatoires.

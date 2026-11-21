@@ -191,7 +191,8 @@ def _zip_files(raw: bytes) -> dict[str, bytes]:
 
 
 def prepare_package(project_root: Path, corpus_path: str, *, max_pages: int = 8,
-                    research_only: bool = False, page_ids: list[str] | None = None) -> dict[str, Any]:
+                    research_only: bool = False, page_ids: list[str] | None = None,
+                    reuse_library: bool = False, reuse_query: str | None = None) -> dict[str, Any]:
     from wikidebia_review_workflow import _package_manifest_hash, _write_deterministic_zip
     root = project_root.resolve()
     corpus, control = _locations(root, corpus_path)
@@ -200,6 +201,8 @@ def prepare_package(project_root: Path, corpus_path: str, *, max_pages: int = 8,
         from wikidebia_creation_research import selection, empty_response, response_help, EDITABLE_PATH
         if page_ids and not research_only:
             raise CreationImportError('--page-id requires --research-only')
+        if reuse_query is not None and not reuse_library:
+            raise CreationImportError('--reuse-query requires --reuse-library')
         before = _tree(corpus)
         if research_only:
             task, selected, inputs = selection(root, corpus_path, max_pages, page_ids or [])
@@ -217,7 +220,22 @@ def prepare_package(project_root: Path, corpus_path: str, *, max_pages: int = 8,
         context_dir = _path(root, task['context']['context_path'])
         context_manifest = json.loads(_read(context_dir / 'CONTEXT_MANIFEST.json'))
         inputs.update({r['path']: r for r in context_manifest['inputs']})
-        key = _sha(_json([before, task['queue_sha256'], context_manifest['context_sha256'], 'sources-v1', research_only]))
+        preview = None
+        library_source_inputs = []
+        library_hash = None
+        reuse_candidate_count = 0
+        if reuse_library:
+            from wikidebia_creation_library import (load_library, preview_library, LIBRARY_PATH)
+            library, library_raw = load_library(root)
+            preview = preview_library(root, corpus, selected, user_query=reuse_query, library=library)
+            reuse_candidate_count = sum(len(row['candidates']) for row in json.loads(preview)['page_candidates'])
+            library_hash = _sha(library_raw)
+            library_source_inputs = library['inputs']
+        key_parts = [before, task['queue_sha256'], context_manifest['context_sha256'],
+                     'sources-v1', research_only]
+        if reuse_library:
+            key_parts.extend((library_hash, reuse_query))
+        key = _sha(_json(key_parts))  # Preserve exact historical IDs without opt-in.
         package_id = str(uuid.uuid5(uuid.NAMESPACE_URL, key))
         request_path = _contained(root, control / (package_id + '.json'))
         target = _path(root, f'outgoing/{corpus.name}_creation_{package_id}.zip')
@@ -225,7 +243,8 @@ def prepare_package(project_root: Path, corpus_path: str, *, max_pages: int = 8,
             old = _load(request_path, STATE_SCHEMA)
             if _sha(_read(target)) != old['archive_sha256']:
                 raise CreationImportError('Prepared archive changed; preserve it and use the original')
-            return dict(task, status='reused', package_path=target.relative_to(root).as_posix())
+            return dict(task, status='reused', package_path=target.relative_to(root).as_posix(),
+                        reuse_candidate_count=reuse_candidate_count, reuse_preview_bytes=len(preview or b''))
         files = {}
         editable = []
         for row in selected:
@@ -253,6 +272,13 @@ def prepare_package(project_root: Path, corpus_path: str, *, max_pages: int = 8,
             files['context/SOURCES_HELP.md'] = source_help()
             context_entries.append({'package_path': 'context/SOURCES_HELP.md', 'target_path': 'SOURCES_HELP.md',
                                     'sha256': _sha(files['context/SOURCES_HELP.md'])})
+        if preview is not None:
+            from wikidebia_creation_library import PREVIEW_PATH, HELP_PATH, help_text
+            files[PREVIEW_PATH] = preview
+            files[HELP_PATH] = help_text()
+            context_entries.extend({'package_path': name, 'target_path': name[8:],
+                                    'sha256': _sha(files[name])}
+                                   for name in (PREVIEW_PATH, HELP_PATH))
         for name in ('NORMATIVE_CONTEXT.md', 'CORPUS_CONTEXT.json'):
             raw = _read(_contained(root, context_dir / name))
             files['context/' + name] = raw
@@ -263,6 +289,9 @@ def prepare_package(project_root: Path, corpus_path: str, *, max_pages: int = 8,
             + 'Les recherches peuvent etre conservees dans editable/RESEARCH.json; lire context/RESEARCH_HELP.md.\n'
             + ('Selection de references apres verification explicite : editable/SOURCES.json et context/SOURCES_HELP.md.\n'
                if research_only else '')
+            + ('Hints inter-debats : lire context/REUSE_CANDIDATES.json et REUSE_HELP.md. '
+               'Pistes de recherche uniquement, jamais une preuve transposable.\n'
+               if reuse_library else '')
             + 'Un RESEARCH.json vide laisse les notes inchangees; aucune promotion de source.\n'
             'Lire context/NORMATIVE_CONTEXT.md et context/CORPUS_CONTEXT.json.\n'
             'Modifier seulement editable/. Dans RESPONSE.json, conserver chaque page_id et choisir\n'
@@ -292,6 +321,12 @@ def prepare_package(project_root: Path, corpus_path: str, *, max_pages: int = 8,
                 dest.write_bytes(raw)
             if _tree(corpus) != before:
                 raise CreationImportError('Corpus changed during preparation')
+            if library_hash is not None:
+                from wikidebia_creation_library import LIBRARY_PATH, MAX_LIBRARY_BYTES, _fingerprint
+                if _sha(_read(_path(root, LIBRARY_PATH), MAX_LIBRARY_BYTES)) != library_hash or any(
+                        _fingerprint(root, record['path']) != record['sha256']
+                        for record in library_source_inputs):
+                    raise CreationImportError('Cross-debate library or source changed during preparation')
             for record in inputs.values():
                 if _sha(_read(_path(root, record['path']))) != record['sha256']:
                     raise CreationImportError('Preparation inputs changed')
@@ -300,12 +335,15 @@ def prepare_package(project_root: Path, corpus_path: str, *, max_pages: int = 8,
             request = _seal({'schema': STATE_SCHEMA, 'manifest': manifest, 'corpus_path': corpus_path,
                              'before': before, 'selected': selected, 'inputs': list(inputs.values()),
                              'research_only': research_only,
+                             'library_source_inputs': library_source_inputs,
+                             'library_file_sha256': library_hash,
                              'files': {name: _sha(raw) for name, raw in files.items()},
                              'archive_sha256': _sha(_read(target))})
             _write(request_path, _json(request))
         finally:
             shutil.rmtree(temp)
-        return dict(task, status='prepared', package_path=target.relative_to(root).as_posix())
+        return dict(task, status='prepared', package_path=target.relative_to(root).as_posix(),
+                    reuse_candidate_count=reuse_candidate_count, reuse_preview_bytes=len(preview or b''))
 
 
 def _changes(request: dict[str, Any], files: dict[str, bytes]) -> list[tuple[dict[str, Any], str, bytes]]:
@@ -505,6 +543,15 @@ def import_package(project_root: Path, corpus_path: str, *, archive: str | None 
         inventory = creation_inventory(inputs, corpus_path)
         if inventory['debate_id'] != corpus.name:
             raise CreationImportError('Foreign corpus identity')
+        if request.get('library_file_sha256') is not None:
+            from wikidebia_creation_library import load_library
+            _, library_raw = load_library(root)  # Also checks mode, input snapshots and seal.
+            if _sha(library_raw) != request['library_file_sha256']:
+                raise CreationImportError('Private cross-debate library changed since package preparation')
+        for record in request.get('library_source_inputs', []):
+            from wikidebia_creation_library import _fingerprint
+            if _fingerprint(root, record['path']) != record['sha256']:
+                raise CreationImportError('Cross-debate library stale: source corpus changed')
         for record in request['inputs']:
             if _sha(inputs.read(_path(root, record['path']))) != record['sha256']:
                 raise CreationImportError('Stale package: context or norm changed')
@@ -555,6 +602,15 @@ def import_package(project_root: Path, corpus_path: str, *, archive: str | None 
                          'research_saved': research_counts, 'sources_selected': source_counts,
                          'source_verification_performed': False})
         inputs.verify()
+        if request.get('library_file_sha256') is not None:
+            from wikidebia_creation_library import load_library
+            _, library_raw = load_library(root)
+            if _sha(library_raw) != request['library_file_sha256']:
+                raise CreationImportError('Private library changed before installation')
+        for record in request.get('library_source_inputs', []):
+            from wikidebia_creation_library import _fingerprint
+            if _fingerprint(root, record['path']) != record['sha256']:
+                raise CreationImportError('Cross-debate source corpus changed before installation')
         if _tree(corpus) != request['before']:
             raise CreationImportError('Corpus changed before installation')
         _write(_contained(root, control / 'active.json'), _json(journal))
@@ -584,6 +640,8 @@ def add_arguments(parser: argparse.ArgumentParser, *, preparing: bool) -> None:
         parser.add_argument('--max-pages', type=int, default=8)
         parser.add_argument('--research-only', action='store_true', help='Save notes without changing page texts/states')
         parser.add_argument('--page-id', action='append', default=[], help='Explicit selection, research-only mode')
+        parser.add_argument('--reuse-library', action='store_true', help='Include bounded private cross-debate discovery hints')
+        parser.add_argument('--reuse-query', help='Optional keyword phrase to select relevant cross-debate notices')
     else:
         group = parser.add_mutually_exclusive_group()
         group.add_argument('--archive', help='Project-relative incoming/<file>.zip')
@@ -599,7 +657,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         result = (prepare_package(args.project_root, args.corpus, max_pages=args.max_pages,
-                                  research_only=args.research_only, page_ids=args.page_id)
+                                  research_only=args.research_only, page_ids=args.page_id,
+                                  reuse_library=args.reuse_library, reuse_query=args.reuse_query)
                   if args.command == 'prepare' else
                   import_package(args.project_root, args.corpus, archive=args.archive, recover=args.recover))
     except (CreationContextError, OSError, ValueError, KeyError, TypeError, zipfile.BadZipFile) as exc:
