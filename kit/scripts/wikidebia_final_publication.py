@@ -50,6 +50,7 @@ AUTHORIZATION_SCHEMA = "wikidebia-final-publication-authorization-1.0"
 ROLLOVER_SCHEMA = "wikidebia-final-publication-date-rollover-1.0"
 LATE_REUSE_SCHEMA = "wikidebia-late-existing-english-reuse-1.0"
 REMOTE_CONTENT_REPLACEMENTS_SCHEMA = "wikidebia-remote-content-replacements-1.0"
+PREPARED_PUBLICATION_SCHEMA = "wikidebia-final-publication-prepared-1.0"
 
 
 class FinalPublicationError(RuntimeError):
@@ -1251,6 +1252,93 @@ def _authorization(state_dir: Path, baseline: Mapping[str, Any], preflight: Mapp
     return value
 
 
+def prepare_final_release(
+    project_root: Path, debate_id: str, work_id: str, release_copy: Path,
+    *, allow_preserved: bool = False,
+) -> dict[str, Any]:
+    """Prepare and attest all three signed plans, without granting write access."""
+    project_root = project_root.resolve()
+    release_copy = release_copy.resolve()
+    state_dir = _state_dir(project_root, debate_id, work_id)
+    if (state_dir / "authorization.json").exists():
+        raise FinalPublicationError("Publication déjà autorisée : reprendre avec le plan autorisé")
+    preparation_path = state_dir / "publication-preparation.json"
+    if preparation_path.is_file():
+        existing = load_json(preparation_path, "préparation de publication")
+        if existing.get("preparation_sha256") != _canonical(existing, "preparation_sha256"):
+            raise FinalPublicationError("Préparation de publication altérée")
+        baseline = load_json(state_dir / "baseline.json", "baseline finale")
+        plans = _load_saved_plans(project_root, state_dir)
+        preflight = load_json(state_dir / "preflight.json", "préflight final")
+        if (baseline.get("baseline_sha256") != existing.get("baseline_sha256")
+                or preflight.get("preflight_sha256") != existing.get("preflight_sha256")
+                or any(plans[key + "_plan"].get("plan_sha256") != existing[key + "_plan_sha256"]
+                       for key in ("en", "fr", "safety"))
+                or full_tree_sha256(release_copy) != existing.get("release_copy_tree_sha256")):
+            raise FinalPublicationError("Préparation de publication devenue incohérente")
+        return existing
+    try:
+        baseline = seal_workflow_release_baseline(
+            project_root, debate_id, work_id, release_copy, allow_preserved=allow_preserved,
+        )
+    except WorkflowBaselineError as exc:
+        raise FinalPublicationError(str(exc)) from exc
+    preserved = baseline["fr"]["mode"] == PRESERVED_IMPORT_MODE
+    plans = _load_or_build_plans(project_root, debate_id, work_id, release_copy, state_dir, preserved=preserved)
+    preflight = _preflight(project_root, state_dir, plans)
+    if preserved:
+        _verify_preserved_preflight(release_copy, baseline, preflight)
+    value = {
+        "schema": PREPARED_PUBLICATION_SCHEMA, "schema_version": "1.0",
+        "debate_id": debate_id, "work_id": work_id,
+        "prepared_at": now_iso(), "status": "publication_prepared",
+        "baseline_sha256": baseline["baseline_sha256"],
+        "preflight_sha256": preflight["preflight_sha256"],
+        "en_plan_sha256": plans["en_plan"]["plan_sha256"],
+        "fr_plan_sha256": plans["fr_plan"]["plan_sha256"],
+        "safety_plan_sha256": plans["safety_plan"]["plan_sha256"],
+        "release_copy_tree_sha256": full_tree_sha256(release_copy),
+        "remote_write_authorized": False, "remote_write_performed": False,
+    }
+    value["preparation_sha256"] = _canonical(value, "preparation_sha256")
+    write_json(preparation_path, value)
+    return value
+
+
+def _verify_prepared_publication(
+    project_root: Path, debate_id: str, work_id: str,
+    release_copy: Path, state_dir: Path, confirmation: str,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    path = state_dir / "publication-preparation.json"
+    if not path.is_file():
+        raise FinalPublicationError("Préparation signée absente : préparez d'abord la publication")
+    prepared = load_json(path, "préparation finale")
+    if (prepared.get("preparation_sha256") != _canonical(prepared, "preparation_sha256")
+            or prepared.get("debate_id") != debate_id or prepared.get("work_id") != work_id
+            or prepared.get("preflight_sha256") != confirmation):
+        raise FinalPublicationError("Confirmation du plan signé différente de la préparation")
+    if full_tree_sha256(release_copy) != prepared.get("release_copy_tree_sha256"):
+        raise FinalPublicationError("Release modifiée depuis la préparation")
+    baseline = load_json(state_dir / "baseline.json", "baseline finale")
+    if (baseline.get("baseline_sha256") != _canonical(baseline, "baseline_sha256")
+            or baseline.get("baseline_sha256") != prepared.get("baseline_sha256")):
+        raise FinalPublicationError("Baseline finale modifiée depuis la préparation")
+    plans = _load_saved_plans(project_root, state_dir)
+    for key in ("safety", "en", "fr"):
+        if plans[key + "_plan"].get("plan_sha256") != prepared.get(key + "_plan_sha256"):
+            raise FinalPublicationError(f"Plan signé {key} modifié depuis la préparation")
+    old = load_json(state_dir / "preflight.json", "préflight initial")
+    if old.get("preflight_sha256") != _canonical(old, "preflight_sha256") or old.get("preflight_sha256") != confirmation:
+        raise FinalPublicationError("Préflight initial modifié depuis la préparation")
+    # A fresh read must not silently substitute a new target revision/content.
+    fresh = _preflight(project_root, state_dir, plans)
+    if fresh.get("remote_snapshots") != old.get("remote_snapshots"):
+        # Preserve the original attestation on conflict for diagnosis/retry.
+        write_json(state_dir / "preflight.json", old)
+        raise FinalPublicationError("État distant changé depuis le préflight signé : nouvelle préparation nécessaire")
+    return baseline, plans, fresh
+
+
 def publish_final_release(
     project_root: Path,
     debate_id: str,
@@ -1258,7 +1346,10 @@ def publish_final_release(
     release_copy: Path,
     *,
     allow_preserved: bool = False,
+    confirm_preflight_sha256: str | None = None,
 ) -> dict[str, Any]:
+    if not confirm_preflight_sha256:
+        raise FinalPublicationError("Empreinte du préflight signé obligatoire avant publication ou reprise")
     project_root = project_root.resolve()
     release_copy = release_copy.resolve()
     state_dir = _state_dir(project_root, debate_id, work_id)
@@ -1273,6 +1364,9 @@ def publish_final_release(
     remote_started = authorization_path.is_file()
     try:
         if remote_started:
+            saved_preflight = load_json(state_dir / "preflight.json", "préflight de reprise")
+            if saved_preflight.get("preflight_sha256") != confirm_preflight_sha256:
+                raise FinalPublicationError("La reprise doit nommer l'empreinte du préflight actuellement signé", remote_execution_started=True)
             baseline = load_json(state_dir / "baseline.json", "baseline finale")
             if baseline.get("baseline_sha256") != _canonical(baseline, "baseline_sha256"):
                 raise FinalPublicationError("Baseline finale sauvegardée invalide", remote_execution_started=True)
@@ -1282,14 +1376,11 @@ def publish_final_release(
             if authorization.get("authorization_sha256") != _canonical(authorization, "authorization_sha256"):
                 raise FinalPublicationError("Autorisation finale sauvegardée invalide", remote_execution_started=True)
         else:
-            try:
-                baseline = seal_workflow_release_baseline(project_root, debate_id, work_id, release_copy, allow_preserved=allow_preserved)
-            except WorkflowBaselineError as exc:
-                raise FinalPublicationError(str(exc)) from exc
-            preserved = baseline["fr"]["mode"] == PRESERVED_IMPORT_MODE
-            plans = _load_or_build_plans(project_root, debate_id, work_id, release_copy, state_dir, preserved=preserved)
-            preflight = _preflight(project_root, state_dir, plans)
-            if preserved:
+            baseline, plans, preflight = _verify_prepared_publication(
+                project_root, debate_id, work_id, release_copy, state_dir,
+                confirm_preflight_sha256,
+            )
+            if baseline["fr"]["mode"] == PRESERVED_IMPORT_MODE:
                 _verify_preserved_preflight(release_copy, baseline, preflight)
             authorization = _authorization(state_dir, baseline, preflight)
             remote_started = True
