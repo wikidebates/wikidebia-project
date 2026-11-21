@@ -38,6 +38,9 @@ from wikidebia_publish import (
 )
 from wikidebia_release_info import KIT_VERSION, VALIDATOR_VERSION
 from wikidebia_update import RemoteUpdatePlanner, PlanExecutor, build_adapter, sha_object
+from wikidebia_public_visibility import (
+    VERIFIED as PUBLIC_VERIFIED, PublicVisibilityError, check_or_record,
+)
 from wikidebia_workflow_baseline import (
     WorkflowBaselineError,
     seal_workflow_release_baseline,
@@ -1384,6 +1387,26 @@ def publish_final_release(
             raise FinalPublicationError("Reçu de publication finale existant invalide", remote_execution_started=True)
         if existing.get("preflight_sha256") != confirm_preflight_sha256:
             raise FinalPublicationError("Reprise finale rattachée à un autre préflight signé", remote_execution_started=True)
+        # A historic signed publication receipt is not independent public
+        # evidence. Do not alter historical receipts or replay any writes:
+        # re-read public pages anonymously before returning the signed record.
+        old_plans = _load_saved_plans(project_root, state_dir)
+        old_reuse_path = state_dir / "late-existing-english-reuse.json"
+        old_reuse = load_json(old_reuse_path) if old_reuse_path.is_file() else None
+        report = check_or_record(
+            state_dir, debate_id, work_id,
+            old_plans["en_plan"], old_plans["fr_plan"], late_reuse=old_reuse,
+            manifest_sha256=sha256_file(release_copy / "manifest.json"),
+        )
+        if report["status"] != PUBLIC_VERIFIED:
+            raise FinalPublicationError(
+                f"{report['status']} : pages EN {report['english_pages_verified']}/{report['english_pages_expected']}, "
+                f"liens FR {report['french_links_verified']}/{report['french_links_expected']} ; "
+                "voir public-visibility-report.json",
+                remote_execution_started=True,
+            )
+        if existing.get("public_visibility_report_sha256") and existing.get("public_debate_url") != report.get("public_debate_url"):
+            raise FinalPublicationError("URL du débat public incompatible avec le reçu historique", remote_execution_started=True)
         return existing
 
     authorization_path = state_dir / "authorization.json"
@@ -1480,13 +1503,32 @@ def publish_final_release(
             fr_receipt["receipt_sha256"] = _canonical(fr_receipt, "receipt_sha256")
             write_json(fr_receipt_path, fr_receipt)
 
-        release_tree_sha = str((baseline.get("release") or {}).get("release_copy_tree_sha256") or "")
-        installed = _install_release_copy(project_root, debate_id, release_copy, release_tree_sha)
         late_reuse_path = state_dir / "late-existing-english-reuse.json"
         late_reuse = (
             load_json(late_reuse_path, "reçu de réutilisation anglaise tardive")
             if late_reuse_path.is_file() else None
         )
+        # Post-write inspection is independent: HTTP/HTTPS with a new anonymous
+        # client; NEVER the authenticated writer or its cookie jar. A successful
+        # edit API response or signed local published state is insufficient.
+        public_report = check_or_record(
+            state_dir, debate_id, work_id,
+            plans["en_plan"], plans["fr_plan"], late_reuse=late_reuse,
+            manifest_sha256=sha256_file(release_copy / "manifest.json"),
+        )
+        if public_report["status"] != PUBLIC_VERIFIED:
+            raise FinalPublicationError(
+                f"{public_report['status']} : pages EN "
+                f"{public_report['english_pages_verified']}/{public_report['english_pages_expected']}, "
+                f"liens FR {public_report['french_links_verified']}/{public_report['french_links_expected']} ; "
+                f"URL {public_report['public_debate_url']} ; "
+                "écarts dans public-visibility-report.json. "
+                "Aucune nouvelle écriture n'est permise par ce contrôle.",
+                remote_execution_started=True,
+            )
+
+        release_tree_sha = str((baseline.get("release") or {}).get("release_copy_tree_sha256") or "")
+        installed = _install_release_copy(project_root, debate_id, release_copy, release_tree_sha)
         remote_replacements_path = state_dir / "remote-content-replacements.json"
         remote_replacements = (
             load_json(remote_replacements_path, "reçu de remplacements de contenu distant")
@@ -1499,6 +1541,13 @@ def publish_final_release(
             "work_id": work_id,
             "completed_at": now_iso(),
             "status": "published",
+            "public_visibility_status": PUBLIC_VERIFIED,
+            "public_debate_url": public_report["public_debate_url"],
+            "public_visibility_report_sha256": public_report["report_sha256"],
+            "public_english_pages_checked": public_report["english_pages_checked"],
+            "public_english_pages_verified": public_report["english_pages_verified"],
+            "public_french_links_checked": public_report["french_links_checked"],
+            "public_french_links_verified": public_report["french_links_verified"],
             "kit_version": KIT_VERSION,
             "validator_version": VALIDATOR_VERSION,
             "baseline_sha256": baseline.get("baseline_sha256"),
