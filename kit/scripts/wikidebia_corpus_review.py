@@ -24,6 +24,10 @@ from wikidebia_corpus_build import (
     REVIEW_ENVELOPE,
     REVIEW_REPORT_JSON,
     REVIEW_REPORT_TXT,
+    PLACEMENT_RESERVATIONS_JSON,
+    PLACEMENT_RESERVATIONS_TXT,
+    placement_reservations_report,
+    placement_reservations_text,
     VALIDATOR_VERSION,
     CorpusBuildError,
     assert_graph_draft_without_final_pages,
@@ -88,6 +92,19 @@ def run_validator(project_root: Path, package: Path, json_output: Path, text_out
     return report
 
 
+def _write_placement_reservations(
+    build: Path, registry: dict[str, Any], placement: dict[str, Any],
+    envelope: dict[str, Any],
+) -> dict[str, Any]:
+    """Refresh the read-only explanatory report; never execute graph actions."""
+    report = placement_reservations_report(registry, placement, envelope)
+    write_json(build / PLACEMENT_RESERVATIONS_JSON, report)
+    path = build / PLACEMENT_RESERVATIONS_TXT
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(placement_reservations_text(report), encoding="utf-8", newline="\n")
+    return report
+
+
 def make_review_template(
     build: Path,
     debate_id: str,
@@ -129,6 +146,7 @@ def make_review_template(
             and existing_without_time == reusable_envelope
             and existing_placement == expected_placement
         ):
+            _write_placement_reservations(build, registry, existing_placement, existing)
             return {
                 "status": "review_reused",
                 "debate_id": debate_id,
@@ -162,6 +180,7 @@ def make_review_template(
     }
     write_json(placement_path, placement)
     write_json(envelope_path, envelope)
+    _write_placement_reservations(build, registry, placement, envelope)
     return {
         "status": "review_prepared",
         "debate_id": debate_id,
@@ -218,6 +237,7 @@ def finalize_review(project_root: Path, build: Path, debate_id: str) -> dict[str
 
     review["review_sha256"] = review_sha256(review)
     write_json(envelope_path, review)
+    _write_placement_reservations(build, registry, placement, review)
 
     if review.get("decision") == "rejected":
         report = {
