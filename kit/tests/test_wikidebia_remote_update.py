@@ -1732,3 +1732,80 @@ def test_pure_french_interlanguage_addition_accepts_historical_parameter_positio
     assert module.only_french_interlanguage_overlay(
         old, changed, "argument", "English title"
     )
+
+
+
+def test_remote_update_plan_batches_current_pages_without_individual_reads(tmp_path):
+    first = argument("Premier")
+    second = argument("Deuxième")
+
+    class BatchedOnlyAdapter(FakeAdapter):
+        def read_pages(self, titles):
+            self.events.append(("batched_inventory", self.language, tuple(titles)))
+            return {
+                title: ((True, *self.pages[(self.language, title)])
+                        if (self.language, title) in self.pages else (False, None, ""))
+                for title in titles
+            }
+
+        def read_page(self, title):
+            self.events.append(("read_one", self.language, title))
+            raise AssertionError("per-page planning call despite a complete batch")
+
+    config, path = make_fixture(
+        tmp_path, languages=("fr",), old_pages=[],
+        new_pages=[
+            ("fr", "A1", "Titre premier", first),
+            ("fr", "A2", "Titre deuxième", second),
+        ],
+    )
+    adapter = BatchedOnlyAdapter()
+    p = module.RemoteUpdatePlanner(config, adapter, path).build_plan()
+    assert p["counts"]["create"] == 2
+    assert [row[0] for row in adapter.events].count("batched_inventory") == 1
+    assert not any(row[0] == "read_one" for row in adapter.events)
+
+
+def test_remote_update_plan_rejects_incomplete_batch(tmp_path):
+    class IncompleteAdapter(FakeAdapter):
+        def read_pages(self, titles):
+            return {}
+
+        def read_page(self, title):
+            raise AssertionError("must not silently fall back to unverified per-page reads")
+
+    config, path = make_fixture(
+        tmp_path, languages=("fr",), old_pages=[],
+        new_pages=[("fr", "A1", "Titre", argument("Nouveau"))],
+    )
+    adapter = IncompleteAdapter()
+    with pytest.raises(module.UpdateError, match="incomplète"):
+        module.RemoteUpdatePlanner(config, adapter, path).build_plan()
+    assert not any(e[0] == "write" for e in adapter.events)
+    assert adapter.language is None
+
+
+def test_remote_update_plan_respects_existing_prefetch_hook(tmp_path):
+    content = argument("Ancien")
+
+    class PrefetchedAdapter(FakeAdapter):
+        def __init__(self, pages):
+            super().__init__(pages)
+            self.prefetch_calls = 0
+
+        def prefetch_pages(self, titles):
+            self.prefetch_calls += 1
+            self.events.append(("prefetch", self.language, tuple(titles)))
+
+        def read_pages(self, titles):
+            raise AssertionError("planner must not duplicate recording adapter prefetch")
+
+    config, path = make_fixture(
+        tmp_path, languages=("fr",),
+        old_pages=[("fr", "A1", "Titre", content)],
+        new_pages=[("fr", "A1", "Titre", content)],
+    )
+    adapter = PrefetchedAdapter({("fr", "Titre"): (10, content)})
+    plan = module.RemoteUpdatePlanner(config, adapter, path).build_plan()
+    assert plan["counts"]["skip"] == 1
+    assert adapter.prefetch_calls == 1
