@@ -302,6 +302,8 @@ def build_creation_context(project_root: Path, stage: str, *, corpus_path: str |
     norm_raw, norm_info = normative_context(inputs, stage)
     payload = None
     if corpus_path:
+        from wikidebia_creation_import import assert_no_pending_import
+        assert_no_pending_import(root, corpus_path)
         payload = corpus_context(inputs, root / _relative_path(corpus_path), stage, batch_id, node_ids,
                                  dependency_node_ids=dependency_node_ids)
     instructions = (

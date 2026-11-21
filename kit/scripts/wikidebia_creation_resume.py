@@ -172,6 +172,8 @@ def _check_graph(registry: dict[str, Any]) -> None:
 
 
 def creation_inventory(inputs: ResumeInputs, corpus_path: str) -> dict[str, Any]:
+    from wikidebia_creation_import import assert_no_pending_import
+    assert_no_pending_import(inputs.root, corpus_path)
     corpus = _contained(inputs.root, inputs.root / _relative_path(corpus_path))
     if corpus.relative_to(inputs.root).as_posix() != corpus_path:
         raise CreationResumeError("Use a canonical project-relative corpus path")
