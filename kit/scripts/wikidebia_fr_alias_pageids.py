@@ -31,7 +31,7 @@ from wikidebia_publish import PywikibotAdapter
 
 SCHEMA = "wikidebia-french-relation-pageids-read-only-1.0"
 RELATIONS = {
-    "debate": {"arguments-pour": "argument pour", "arguments-contre": "argument contre"},
+    "debate": {"arguments pour": "argument pour", "arguments contre": "argument contre"},
     "argument": {"justifications": "justification", "objections": "objection"},
 }
 HEX64 = re.compile(r"[0-9a-f]{64}")
@@ -139,7 +139,7 @@ def _relation_targets(text: str, page_type: str) -> tuple[str, list[dict[str, st
             if text[abs_a:abs_b] != base:
                 _block("Le texte est ambigu à la position de la cible relationnelle")
             replacements.append((abs_a, abs_b))
-            found.append({"relation": relation, "title": base})
+            found.append({"relation": relation.replace(" ", "-") if page_type == "debate" else relation, "title": base})
 
     replaced = text
     for a, b in sorted(replacements, reverse=True):
