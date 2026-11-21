@@ -104,6 +104,10 @@ def test_prepare_creates_occurrence_ledger_without_changing_status(tmp_path: Pat
     assert manifest["global_status"] == "graph_draft"
     assert len(placement["entries"]) == 4
     assert {entry["placement_status"] for entry in placement["entries"]} == {"pending"}
+    reservation_report = json.loads((build / common.PLACEMENT_RESERVATIONS_JSON).read_text(encoding="utf-8"))
+    assert reservation_report["summary"]["total"] == len(placement["entries"])
+    assert reservation_report["no_automatic_graph_mutation"] is True
+    assert (build / common.PLACEMENT_RESERVATIONS_TXT).is_file()
     assert not (build / "output").exists()
 
 
@@ -157,6 +161,11 @@ def test_finalize_approved_review_sets_graph_validated_only(tmp_path: Path):
     assert manifest["pages"] == []
     assert not (build / "output").exists()
     assert (build / common.PROMOTION_READY).is_file()
+    approved_report = json.loads((build / common.PLACEMENT_RESERVATIONS_JSON).read_text(encoding="utf-8"))
+    assert approved_report["summary"]["attested_maintains"] == len(
+        json.loads((build / common.PLACEMENT_REVIEW).read_text(encoding="utf-8"))["entries"]
+    )
+    assert approved_report["summary"]["arbitrations"] == 0
 
 
 def test_finalize_rejects_incomplete_occurrence_review(tmp_path: Path):
