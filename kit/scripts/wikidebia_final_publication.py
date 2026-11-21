@@ -1412,8 +1412,8 @@ def publish_final_release(
             raise FinalPublicationError(
                 f"{report['status']} : pages EN {report['english_pages_verified']}/{report['english_pages_expected']}, "
                 f"liens FR {report['french_links_verified']}/{report['french_links_expected']} ; "
-                "voir public-visibility-recheck.json" if originally_attested
-                else "voir public-visibility-report.json",
+                + ("voir public-visibility-recheck.json" if originally_attested
+                   else "voir public-visibility-report.json"),
                 remote_execution_started=True,
             )
         if existing.get("public_visibility_report_sha256") and existing.get("public_debate_url") != report.get("public_debate_url"):
