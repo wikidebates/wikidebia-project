@@ -1,0 +1,35 @@
+name: Install tested creation measurement (temporary)
+on:
+  push:
+    branches: [feat/creation-measure-20261121]
+    paths: [.github/workflows/creation-measure-install.yml]
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Verify and commit the exact locally tested measurement patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .github/creation-measure-transfer-{00,01,02,03}.txt | base64 -d | xz -d > "$RUNNER_TEMP/creation-measure.patch"
+          echo "4233a74588c0a5d20eb04d092bee21a41e741bd100bd3753f563ef46f4b4cddf  $RUNNER_TEMP/creation-measure.patch" | sha256sum -c -
+          git apply --check "$RUNNER_TEMP/creation-measure.patch"
+          git apply --index "$RUNNER_TEMP/creation-measure.patch"
+          python -m pip install -r validator/requirements-dev.txt
+          python -m pytest -q kit/tests/test_wikidebia_creation_measure.py
+          python kit/scripts/refresh_package_metadata.py --test-count 1906 --generated-date 2026-11-21 --check
+          python validator/scripts/self_audit.py
+          rm .github/creation-measure-transfer-{00,01,02,03}.txt .github/workflows/creation-measure-install.yml
+          git add -A
+          git diff --cached --check
+          test "$(git write-tree)" = "b1c5d44aa3d6aefe393f0b60565dbeb8af0ff7e5"
+          git -c user.name="Wikidebia creation preparation" -c user.email="github-actions[bot]@users.noreply.github.com" commit -m "feat: measure actual French creation package payloads"
+          git push origin HEAD:feat/creation-measure-20261121
