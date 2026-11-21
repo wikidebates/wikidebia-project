@@ -1,0 +1,35 @@
+name: Install verified legacy source omission fix (temporary)
+on:
+  push:
+    branches: [fix/creation-library-legacy-offline-20261121]
+    paths: [.github/workflows/library-fix-install.yml]
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Verify and install exact locally tested patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .github/library-fix-patch-{00,01}.txt | base64 -d | xz -d > "$RUNNER_TEMP/library-fix.patch"
+          echo "46acb083300b2b33de37b295c684703b0cf31e7ab5dcea61ac2fb5e64caf205a  $RUNNER_TEMP/library-fix.patch" | sha256sum -c -
+          git apply --check "$RUNNER_TEMP/library-fix.patch"
+          git apply --index "$RUNNER_TEMP/library-fix.patch"
+          python -m pip install -r validator/requirements-dev.txt
+          python -m pytest -q kit/tests/test_wikidebia_creation_library.py
+          python kit/scripts/refresh_package_metadata.py --test-count 1914 --generated-date 2026-11-21 --check
+          python validator/scripts/self_audit.py
+          rm .github/library-fix-patch-{00,01}.txt .github/workflows/library-fix-install.yml
+          git add -A
+          git diff --cached --check
+          test "$(git write-tree)" = "12217e37fd7cea1bf90feb04ffa35b9ef8e511b0"
+          git -c user.name="Wikidebia verified fix" -c user.email="github-actions[bot]@users.noreply.github.com" commit -m "fix: skip and audit unidentifiable historical source notices"
+          git push origin HEAD:fix/creation-library-legacy-offline-20261121
