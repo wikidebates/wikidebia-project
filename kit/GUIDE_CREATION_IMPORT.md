@@ -21,7 +21,9 @@ un nouveau paquet de rédaction. Elle ne rouvre jamais une page validée.
 Dans le ZIP, lire `INSTRUCTIONS.md` et les deux fichiers sous `context/`.
 Seuls les fichiers sous `editable/` sont modifiables : les pages `.wiki` et
 `RESPONSE.json`, ainsi que les notes facultatives `RESEARCH.json` (voir
-`GUIDE_CREATION_RESEARCH.md`). Conserver tous les identifiants et choisir pour chaque page :
+`GUIDE_CREATION_RESEARCH.md`). En mode `--research-only`, le ZIP propose aussi
+`SOURCES.json` pour une sélection documentaire explicite depuis des notes
+**déjà** enregistrées (voir `GUIDE_CREATION_SOURCES.md`). Conserver tous les identifiants et choisir pour chaque page :
 
 - `unchanged` : ne pas remplacer le texte, qui doit rester identique ;
 - `partial` : enregistrer un brouillon inachevé, sans exiger une syntaxe finale ;
@@ -59,12 +61,16 @@ partiel reste `in_progress`. Une rédaction terminée devient `generated` avec
 validation `pending`. Les lots concernés restent ouverts ; leurs anciennes
 empreintes d'agrégats ne sont plus présentées comme courantes. Les rapports
 antérieurs restent conservés, sans être réutilisés pour valider le nouveau texte.
-Les autres pages, le graphe, les sources et les données anglaises restent intacts.
+Les autres pages, le graphe et les données anglaises restent intacts.
+Le registre documentaire demeure inchangé pour un import de brouillon ordinaire.
+Une revue `SOURCES.json` explicite peut le mettre à jour en mode recherche seule,
+sans modifier le texte ni le statut des pages.
 
 Les recherches peuvent être conservées avec les brouillons, dans le carnet de
 travail ciblé `data/creation_research.json`, sans promotion automatique de source.
-Les sources documentaires retenues et attestations éditoriales doivent encore être
-enregistrées et contrôlées par les parcours ordinaires. L'import ne les invente
+Les références sélectionnées après examen explicite peuvent être enregistrées
+localement par `SOURCES.json`, mais les contrôles documentaires complets et
+les attestations éditoriales finales restent obligatoires. L'import ne les invente
 pas à partir de la prose et n'accepte pas de fichiers supplémentaires pour les
 modifier indirectement. Il ne ferme aucun Work ou lot, ne produit aucun
 `release_ready` et n'autorise aucune publication. Les validations globales restent

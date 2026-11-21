@@ -34,6 +34,12 @@ Pour les pages françaises préexistantes, conserver chaque `titre-affiché` con
 - Réutiliser les notes ciblées de `CORPUS_CONTEXT.json` sans relire le carnet entier. Vérifier leur date, les variantes et les drapeaux de changement ; une recherche négative ne prouve jamais l'absence de source. Ne jamais fabriquer des recherches, consultations ou preuves historiques.
 - `--research-only [--page-id IDENTIFIANT]` conserve tous les textes et statuts `unchanged`. Les notes ne valident ni source ni page et ne modifient pas `sources.json`. Les références retenues doivent encore suivre le workflow documentaire ordinaire. Voir `kit/GUIDE_CREATION_RESEARCH.md`.
 
+## Sélection documentaire de création
+
+- Après avoir enregistré réellement les recherches, préparer `creation-package --corpus corpus/<id> --research-only --page-id A0001`. Ce paquet contient facultativement `editable/SOURCES.json` et `context/SOURCES_HELP.md` pour choisir des notices sauvegardées et leurs observations propres à chaque argument ; lire `kit/GUIDE_CREATION_SOURCES.md`.
+- Ne jamais préremplir les attestations de vérification ou inventer l'identité d'un relecteur. Un choix explicite ne remplace pas un contrôle réel de la ressource ; la machine ne certifie pas l'identité ni l'existence de la consultation. Aucune promotion automatique depuis `RESEARCH.json` ; sauvegarder les notes et leur sélection dans deux retours distincts.
+- Ce parcours local ne traite que des sources réellement francophones. Les variantes ou conflits doivent être examinés, les sources étrangères suivre le parcours ordinaire. Ne modifier ni wikicode ni statut validé ; passer tous les contrôles documentaires et éditoriaux avant publication.
+
 ## Initialisation d'une création française
 
 - Pour un débat nouveau sans corpus, utiliser `creation-prepare --plan incoming/plan.json`, puis rendre la revue complète avec `creation-init --archive incoming/plan_revu.zip`. Voir `kit/GUIDE_CREATION_INIT.md` et le plan fictif non approuvé dans `kit/examples/creation_plan.example.json`.
