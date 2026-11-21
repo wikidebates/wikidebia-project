@@ -3990,7 +3990,12 @@ class PlanExecutor:
                 raise PlanConflict(f"Déplacement non vérifiable : {new_title}")
             if sha_text(moved_text) != row["new_sha256"]:
                 moved_rev2 = self.adapter.write_page(title=new_title, text=desired, summary=summary, tags=["chatgpt"], expected_user=user, create_only=False, base_revision_id=moved_rev)
+                # A move's log entry is not a content-edit revision. If the
+                # signed move also writes the target content, verify that new
+                # revision immediately, just as for normal page updates.
+                self._verify_written_revision(new_title, moved_rev2, desired, summary)
                 moved_rev = moved_rev2
+                result.update(content_sha256=sha_text(desired), edit_summary=summary)
             result.update(status="moved", title=new_title, revision_id=moved_rev)
             return result
         if operation == "redirect":
@@ -4005,7 +4010,13 @@ class PlanExecutor:
                 raise PlanConflict(f"Page à rediriger modifiée depuis le plan : {title}")
             summary = self._expected_row_summary(row, operation, plan, remote_text)
             new_rev = self.adapter.write_page(title=title, text=desired, summary=summary, tags=["chatgpt"], expected_user=user, create_only=False, base_revision_id=revision_id)
-            result.update(status="redirected", revision_id=new_rev, target=row["redirect_target"])
+            # A redirect is a content write; reject unverifiable revision,
+            # summary or tag before recording the operation as completed.
+            self._verify_written_revision(title, new_rev, desired, summary)
+            result.update(
+                status="redirected", revision_id=new_rev, target=row["redirect_target"],
+                content_sha256=sha_text(desired), edit_summary=summary,
+            )
             return result
         if operation == "delete":
             if not exists:
