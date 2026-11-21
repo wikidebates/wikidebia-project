@@ -3624,9 +3624,11 @@ class PlanExecutor:
         the direct child of the signed old revision, be current, and have the
         exact author, summary and desired text of the signed interlanguage plan.
         """
-        if (row.get("operation") != "update" or row.get("language") != "fr"
+        if (row.get("operation", "update") != "update" or row.get("language") != "fr"
                 or row.get("edit_summary_policy") != "french_interlanguage_addition"
-                or not plan.get("plan_sha256")):
+                or not plan.get("plan_sha256")
+                or (isinstance(plan.get("operations"), dict)
+                    and row not in (plan["operations"].get("update") or []))):
             raise PlanConflict("Rattrapage chatgpt limité au plan interlangue français signé")
         old_id = int(row.get("expected_revision_id") or 0)
         if old_id <= 0 or int(revision_id) <= 0 or int(revision_id) == old_id:
