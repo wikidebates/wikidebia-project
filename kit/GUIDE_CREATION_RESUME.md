@@ -87,10 +87,11 @@ produit une nouvelle file et une sortie altérée bloque sans écrasement.
 Toujours relancer la commande au début d'une session, plutôt que de considérer
 un ancien `QUEUE.json` comme l'état courant.
 
-Cette livraison automatise **la sélection et la préparation**, pas l'enregistrement
-des réponses de l'IA. Elle ne fournit pas encore d'import transactionnel de
-brouillon, d'initialisation depuis un sujet, de validation incrémentale des contenus
-ou de mémoire documentaire inter-débats. Elle n'utilise pas `review-import` et
+Ces commandes automatisent **la sélection et la préparation**. L'enregistrement
+local des brouillons est maintenant disponible par `creation-package` puis
+`creation-import` ; voir [le guide d'import](GUIDE_CREATION_IMPORT.md).
+L'initialisation depuis un sujet, la validation incrémentale des contenus et la
+mémoire documentaire inter-débats restent distinctes. Cette reprise n'utilise pas `review-import` et
 ne touche pas au parcours de traduction ni aux commandes de publication.
 Les lots, Works et validations existants ne sont ni inventés ni automatiquement
 marqués terminés. Aucun modèle ni wiki n'est appelé.

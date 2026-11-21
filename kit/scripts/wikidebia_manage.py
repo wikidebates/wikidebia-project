@@ -2793,6 +2793,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--root", type=Path, default=Path.cwd(), help=argparse.SUPPRESS)
     sub = parser.add_subparsers(dest="command", required=True)
 
+    from wikidebia_creation_import import add_arguments as add_creation_import_arguments
+    for name in ('creation-package', 'creation-import'):
+        add_creation_import_arguments(sub.add_parser(name, help='Brouillons francais locaux, sans validation ni publication'),
+                                      preparing=name == 'creation-package')
+
     from wikidebia_creation_context import add_arguments as add_creation_context_arguments
     creation_context = sub.add_parser(
         "creation-context", help="Preparer un contexte cible pour la creation francaise, sans validation ni publication",
@@ -3369,6 +3374,17 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     root = args.root.expanduser().resolve()
+    if args.command in {'creation-package', 'creation-import'}:
+        from wikidebia_creation_import import main as creation_import_main
+        command = ['--project-root', str(root), 'prepare' if args.command == 'creation-package' else 'import',
+                   '--corpus', args.corpus]
+        if args.command == 'creation-package':
+            command.extend(['--max-pages', str(args.max_pages)])
+        elif args.recover:
+            command.append('--recover')
+        elif args.archive:
+            command.extend(['--archive', args.archive])
+        return creation_import_main(command)
     if args.command == "creation-context":
         from wikidebia_creation_context import main as creation_context_main
         command = ["--project-root", str(root), "--stage", args.stage]
