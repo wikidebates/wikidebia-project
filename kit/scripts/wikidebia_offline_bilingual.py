@@ -8,6 +8,7 @@ synthesizes a missing remote publication receipt.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import re
@@ -17,10 +18,10 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from wikidebia_corpus_build import (
-    assert_control_directory, assert_no_symlinks, full_tree_sha256,
+    validate_debate_id, exclusive_lock, assert_control_directory, assert_no_symlinks, full_tree_sha256,
     now_iso, relative_to_project, sha256_file, write_json,
 )
-from wikidebia_editorial_workspace import workspace_receipt_hash
+from wikidebia_editorial_workspace import validate_work_id, workspace_receipt_hash
 from wikidebia_post_publication import (
     PostPublicationError, _regular_json, _signed,
 )
@@ -208,9 +209,10 @@ def verify_bilingual_proofs(
     updates = {(str(row.get("operation") or "update"), str(row["page_id"])) for row in operations.get("update") or []}
     skips = {("skip", str(row["page_id"])) for row in operations.get("skip") or []}
     if fr_receipt.get("status") == "executed":
-        if fr_receipt.get("execution_mode") != "full_update" or set(receipt_results) != updates:
+        if fr_receipt.get("execution_mode") != "full_update" or set(receipt_results) != updates | skips:
             _fail("Reçu français incomplet ou mode d'exécution divergent")
-    elif set(receipt_results) != skips or updates:
+    elif (fr_receipt.get("execution_mode") != "no_changes"
+          or set(receipt_results) != skips or updates):
         _fail("Attestation sans changements française incomplète")
     for key, result in receipt_results.items():
         page_id = key[1]
@@ -318,6 +320,8 @@ def reconcile_offline_bilingual(
 ) -> dict[str, Any]:
     """Close a Work locally; no remote proof or receipt can be manufactured."""
     project = project.expanduser().resolve()
+    debate_id = validate_debate_id(debate_id)
+    work_id = validate_work_id(work_id)
     workspace, meta = _load_workspace(project, debate_id, work_id)
     if meta.get("status") not in {"release_ready", "remote_plan_ready", "published"}:
         _fail("Statut du workspace incompatible avec la clôture hors ligne")
@@ -408,3 +412,33 @@ def reconcile_offline_bilingual(
         "remote_access_performed": False, "remote_write_performed": False,
         "previous_corpus_backup": installed["backup_path"],
     }
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("debate_id")
+    parser.add_argument("--work-id", required=True)
+    parser.add_argument("--evidence", type=Path, required=True,
+                        help="Sélecteur local des quatre preuves signées, sans accès wiki")
+    parser.add_argument("--project-root", type=Path, default=Path.cwd())
+    parser.add_argument("--machine-readable", action="store_true")
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
+    project = args.project_root.expanduser().resolve()
+    with exclusive_lock(project, args.debate_id, "post-publication"):
+        result = reconcile_offline_bilingual(
+            project, args.debate_id, args.work_id, args.evidence,
+        )
+    print(json.dumps(result, ensure_ascii=False, sort_keys=True,
+                     indent=None if args.machine_readable else 2))
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except (PostPublicationError, OSError, ValueError, KeyError) as exc:
+        print(f"CLÔTURE BILINGUE HORS LIGNE BLOQUÉE : {exc}", file=os.sys.stderr)
+        raise SystemExit(2)
