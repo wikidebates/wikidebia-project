@@ -104,6 +104,16 @@ def test_delayed_tag_is_read_without_second_tag_or_edit():
     assert adapter.tag_calls == adapter.writes == 0
 
 
+def test_delayed_post_tag_visibility_retries_without_content_edit():
+    adapter = TagAdapter(delayed=2)
+    executor, row, plan = fixture(adapter)
+    result = executor._execute_one(row, "ChatGPT", plan)
+    assert result["tag_repair"]["status"] == "tag_added"
+    assert adapter.tag_calls == 1
+    assert adapter.reads >= 3
+    assert adapter.writes == 0
+
+
 def test_missing_manual_tag_permission_blocks_without_edit():
     adapter = TagAdapter(rights=False)
     executor, row, plan = fixture(adapter)
