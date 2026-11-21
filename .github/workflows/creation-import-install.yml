@@ -1,0 +1,48 @@
+name: Install byte-verified creation draft import (temporary)
+on:
+  push:
+    branches: [feat/creation-import-20261121]
+    paths: [.github/workflows/creation-import-install.yml]
+permissions:
+  contents: read
+jobs:
+  install:
+    if: github.repository == 'wikidebates/wikidebia-project' && github.ref == 'refs/heads/feat/creation-import-20261121'
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Apply exact integration and remove transfer files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object kit/scripts/wikidebia_creation_import.py)" = '8c9507031726dc7673bf9b8c3b3d21f98ecc4192'
+          test "$(git hash-object kit/tests/test_wikidebia_creation_import.py)" = 'b3923a217833ff60bd4230d647b9a2ec512d77e2'
+          test "$(git hash-object kit/GUIDE_CREATION_IMPORT.md)" = 'c6bc47453b248e056fdd3c4763ae7fbbb649cff4'
+          test "$(git hash-object .github/creation-import-integration.patch)" = 'b346738ca8b22d1ee4834b60e6c63930381127a7'
+          git apply --check .github/creation-import-integration.patch
+          git apply .github/creation-import-integration.patch
+          rm .github/creation-import-integration.patch .github/workflows/creation-import-install.yml
+          # 1669 is the actual successful local JUnit count, not a projected count.
+          # Ordinary PR CI must verify it against its own full-suite JUnit before merge.
+          python kit/scripts/refresh_package_metadata.py --test-count 1669 --generated-date 2026-11-21
+          git add -- AGENTS.md kit/GUIDE_CREATION_IMPORT.md kit/GUIDE_CREATION_RESUME.md kit/scripts/wikidebia_creation_import.py kit/scripts/wikidebia_creation_context.py kit/scripts/wikidebia_creation_resume.py kit/scripts/wikidebia_manage.py kit/tests/test_wikidebia_creation_import.py kit/PACKAGE_MANIFEST_SHA256.json kit/PACKAGE_RECEIPT.json kit/TEST_REPORT.txt
+          git add -u -- .github/creation-import-integration.patch .github/workflows/creation-import-install.yml
+          git diff --cached --check
+          actual=$(git write-tree)
+          test "$actual" = '547f8259a8edc098ddd8be505e75efa780a60114'
+          printf 'Exact locally tested tree: %s\n' "$actual"
+      - name: Commit exact tree to the feature branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Wikidebia creation preparation'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit -m 'feat: save French creation drafts with journaled recovery'
+          git push origin HEAD:refs/heads/feat/creation-import-20261121
