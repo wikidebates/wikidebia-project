@@ -668,6 +668,24 @@ def only_french_interlanguage_addition(
     after_name, after_positional, after_params = top_level_parameter_map(proposed_text, "fr", page_type)
     if normalize_key(before_name) != normalize_key(after_name) or before_positional != after_positional:
         return False
+    # Template parameters alone cannot establish that the rest of the page
+    # was left untouched (categories, comments, free text, redirect metadata).
+    # Compare every byte outside the one main template as well.
+    expected_model = "debat" if page_type == "debate" else "argument"
+    before_calls = [
+        call for call in iter_templates(remote_text)
+        if normalize_key(call.name) == expected_model
+    ]
+    after_calls = [
+        call for call in iter_templates(proposed_text)
+        if normalize_key(call.name) == expected_model
+    ]
+    if len(before_calls) != 1 or len(after_calls) != 1:
+        return False
+    before_prefix, before_marker, before_suffix = remote_text.partition(before_calls[0].raw)
+    after_prefix, after_marker, after_suffix = proposed_text.partition(after_calls[0].raw)
+    if not before_marker or not after_marker or (before_prefix, before_suffix) != (after_prefix, after_suffix):
+        return False
     if "interlangue" in before_params or "interlangue" not in after_params:
         return False
     link_value = after_params.pop("interlangue")
@@ -764,8 +782,8 @@ def add_french_interlanguage_to_remote(
             if existing != expected_english_title:
                 raise UpdateError("Lien interlangue anglais divergent sur la redirection")
             return remote_text, "redirect_existing"
-        base = remote_text.rstrip("\n")
-        return base + f"\n[[en:{expected_english_title}]]\n", "redirect_added"
+        separator = "" if remote_text.endswith("\n") else "\n"
+        return remote_text + separator + f"[[en:{expected_english_title}]]\n", "redirect_added"
 
     raise UpdateError(f"Modèle principal ou redirection introuvable (fr/{page_type})")
 
@@ -788,7 +806,9 @@ def only_french_interlanguage_overlay(
         )
     except UpdateError:
         return False
-    return normalize_wikicode(expected) == normalize_wikicode(desired_text)
+    # The transformation is derived from the current remote text; accept
+    # nothing that differs from it outside the explicitly requested link.
+    return expected == desired_text
 
 def lifecycle_parameters_unchanged(remote_text: str, proposed_text: str, language: str, page_type: str) -> tuple[bool, dict[str, Any]]:
     before = protected_lifecycle_snapshot(remote_text, language, page_type)

@@ -694,13 +694,14 @@ class PywikibotAdapter:
             by_title = {str(row.get("title") or ""): row for row in pages}
             for title in batch:
                 row = by_title.get(normalized.get(title, title))
-                if not row or "missing" in row or int(row.get("pageid", 0) or 0) < 0:
+                if row is None:
+                    raise PublicationError(f"Réponse MediaWiki incomplète pour la page : {title}")
+                if "missing" in row or int(row.get("pageid", 0) or 0) < 0:
                     result[title] = (False, None, "")
                     continue
                 revisions = row.get("revisions") or []
                 if not revisions:
-                    result[title] = (False, None, "")
-                    continue
+                    raise PublicationError(f"Révisions MediaWiki absentes pour une page existante : {title}")
                 revision = revisions[0]
                 slot = (revision.get("slots") or {}).get("main") or {}
                 text = slot.get("content", slot.get("*", revision.get("*", "")))
@@ -725,10 +726,14 @@ class PywikibotAdapter:
             by_title = {str(row.get("title") or ""): row for row in pages}
             for title in batch:
                 row = by_title.get(normalized.get(title, title))
-                revisions = (row or {}).get("revisions") or []
-                if not row or "missing" in row or int(row.get("pageid", 0) or 0) < 0 or not revisions:
+                if row is None:
+                    raise PublicationError(f"Réponse MediaWiki incomplète pour la page : {title}")
+                if "missing" in row or int(row.get("pageid", 0) or 0) < 0:
                     result[title] = (False, None)
                 else:
+                    revisions = row.get("revisions") or []
+                    if not revisions:
+                        raise PublicationError(f"Révisions MediaWiki absentes pour une page existante : {title}")
                     result[title] = (True, int(revisions[0]["revid"]))
         return result
 
@@ -2397,19 +2402,59 @@ class GenericPublisher:
                 previous = json.loads(latest.read_text(encoding="utf-8"))
                 unsigned = dict(previous)
                 claimed = unsigned.pop("state_sha256", None)
-                if claimed == sha_object(unsigned) and previous.get("debate_id") == self.config["debate_id"]:
-                    previous_pages = {str(row.get("page_id")): dict(row) for row in previous.get("pages") or []}
-            except (OSError, json.JSONDecodeError):
-                previous_pages = {}
+                if (
+                    not isinstance(claimed, str)
+                    or claimed != sha_object(unsigned)
+                    or previous.get("debate_id") != self.config["debate_id"]
+                    or previous.get("language") != language
+                    or not isinstance(previous.get("pages"), list)
+                ):
+                    raise PublicationError("État publié antérieur invalide : attestation refusée")
+                for row in previous["pages"]:
+                    if not isinstance(row, dict) or not row.get("page_id"):
+                        raise PublicationError("Inventaire publié antérieur invalide")
+                    page_id = str(row["page_id"])
+                    if page_id in previous_pages:
+                        raise PublicationError("Identifiant dupliqué dans l'état publié antérieur")
+                    previous_pages[page_id] = dict(row)
+            except (OSError, ValueError, TypeError) as exc:
+                raise PublicationError("État publié antérieur illisible : attestation refusée") from exc
+        # Attestation is a complete read, never a best-effort inventory. An
+        # incomplete API response or a concurrent wiki change cannot silently
+        # become a signed, incomplete published state.
+        titles = [str(action["title"]) for action in actions]
+        if len(titles) != len(set(titles)):
+            raise PublicationError("Titres dupliqués dans l'attestation de publication")
+        batch_reader = getattr(self.adapter, "read_pages", None)
+        observed = (
+            batch_reader(titles) if callable(batch_reader)
+            else {title: self.adapter.read_page(title) for title in titles}
+        )
+        if not isinstance(observed, dict) or set(observed) != set(titles):
+            raise RevisionConflict("Réponse MediaWiki incomplète pendant l'attestation")
         for action in actions:
-            exists, revision_id, remote_text = self.adapter.read_page(action["title"])
-            if not exists or revision_id is None:
-                continue
+            title = str(action["title"])
+            exists, revision_id, remote_text = observed[title]
+            if not exists or revision_id is None or int(revision_id) <= 0:
+                raise RevisionConflict(f"Page distante absente pendant l'attestation : {title}")
+            actual_sha = sha_text(remote_text)
+            desired_sha = action.get("desired_sha256")
+            if not isinstance(desired_sha, str) or len(desired_sha) != 64:
+                raise PublicationError(f"Empreinte attendue absente du plan : {title}")
+            if actual_sha != desired_sha:
+                # A signed skip may be equivalent modulo MediaWiki newline
+                # normalization: keep its original exact remote revision.
+                if not (
+                    action.get("operation") == "skip"
+                    and actual_sha == action.get("remote_sha256")
+                    and int(revision_id) == action.get("remote_revision_id")
+                ):
+                    raise RevisionConflict(f"Contenu distant divergent du plan pendant l'attestation : {title}")
             previous_pages[str(action["page_id"])] = {
                 "page_id": str(action["page_id"]),
                 "page_type": str(action.get("page_type") or "unknown"),
-                "canonical_title": str(action["title"]),
-                "content_sha256": sha_text(remote_text),
+                "canonical_title": title,
+                "content_sha256": actual_sha,
                 "revision_id": int(revision_id),
                 "status": "published",
             }

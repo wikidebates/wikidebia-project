@@ -1730,3 +1730,73 @@ def test_direct_profile_preserves_only_attested_french_related_debates(tmp_path)
     with pytest.raises(module.PublicationError):publisher._validate_norm_120_page(row,text.replace('Autre débat','Un ajout'))
     row['page_origin']='new'
     with pytest.raises(module.PublicationError):publisher._validate_norm_120_page(row,text)
+
+
+def test_pywikibot_batch_read_rejects_incomplete_responses(tmp_path):
+    import pytest
+
+    class Request:
+        def __init__(self, params):
+            self.params = params
+
+        def submit(self):
+            # The API returned one page while two were requested. This must
+            # never be interpreted as the second page being absent.
+            return {"query": {"pages": {
+                "1": {"title": "A", "pageid": 1, "revisions": [{
+                    "revid": 31, "slots": {"main": {"content": "A"}},
+                }]},
+            }}}
+
+    class Site:
+        def simple_request(self, **params):
+            return Request(params)
+
+    adapter = module.PywikibotAdapter("wikidebates", {"fr": "fr"}, tmp_path)
+    adapter.site = Site()
+    with pytest.raises(module.PublicationError, match="incomplète"):
+        adapter.read_pages(["A", "B"])
+    with pytest.raises(module.PublicationError, match="incomplète"):
+        adapter.read_page_revisions(["A", "B"])
+
+
+def test_published_state_attestation_rejects_missing_and_divergent_pages(tmp_path):
+    import pytest
+
+    config, path, _fr, _en = write_fixture(tmp_path, "full_page")
+    adapter = FakeAdapter()
+    publisher = module.GenericPublisher(config, adapter, path)
+    plan = publisher.build_plan()
+    action = next(row for row in plan["actions"] if row["language"] == "fr")
+    adapter.open_language("fr", "ChatGPT")
+    base = publisher._resolve(config.get("published_state_dir") or ".state/published") / config["debate_id"] / "fr"
+    for value in (None, (999, "Contenu différent de la version prévue")):
+        if value is None:
+            adapter.pages.pop(("fr", action["title"]), None)
+        else:
+            adapter.pages[("fr", action["title"])] = value
+        with pytest.raises(module.RevisionConflict):
+            publisher._save_published_state("fr", [action], plan)
+        assert not (base / "latest.json").exists()
+        receipts = publisher._resolve(config.get("receipts_dir") or ".state/receipts") / config["debate_id"]
+        assert not list(receipts.glob("publication-fr-*.json")) if receipts.exists() else True
+    adapter.close_language()
+
+
+def test_published_state_attestation_rejects_corrupt_previous_state(tmp_path):
+    import pytest
+
+    config, path, _fr, _en = write_fixture(tmp_path, "full_page")
+    adapter = FakeAdapter()
+    publisher = module.GenericPublisher(config, adapter, path)
+    plan = publisher.build_plan()
+    action = next(row for row in plan["actions"] if row["language"] == "fr")
+    state_dir = tmp_path / ".state" / "published" / config["debate_id"] / "fr"
+    state_dir.mkdir(parents=True)
+    original = '{"state_sha256":"invalid","pages":[]}'
+    (state_dir / "latest.json").write_text(original, encoding="utf-8")
+    adapter.open_language("fr", "ChatGPT")
+    with pytest.raises(module.PublicationError, match="État publié antérieur"):
+        publisher._save_published_state("fr", [action], plan)
+    adapter.close_language()
+    assert (state_dir / "latest.json").read_text(encoding="utf-8") == original
