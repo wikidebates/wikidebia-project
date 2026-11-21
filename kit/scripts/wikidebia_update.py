@@ -23,6 +23,7 @@ from typing import Any, Iterable
 from wikidebia_graph_extract import _split_top_level, iter_templates, normalize_key, parse_template
 from wikidebia_workflow_baseline import WorkflowBaselineError, resolve_workflow_release_baseline
 from wikidebia_title_structure import canonical_title_structure_issues
+from wikidebia_retro_tag import manual_tag_preflight, apply_manual_tag, RetroTagError
 
 # Import the publication adapter without requiring installation as a package.
 _PUBLISH_PATH = Path(__file__).resolve().with_name("wikidebia_publish.py")
@@ -1485,6 +1486,13 @@ class UpdateAdapter:
             raise UpdateError("Site non ouvert")
         data = site.simple_request(action="query", meta="userinfo", uiprop="rights").submit()
         return set(((data.get("query") or {}).get("userinfo") or {}).get("rights") or [])
+
+    def assert_manual_tag_available(self, tag: str) -> dict[str, Any]:
+        return manual_tag_preflight(getattr(self.base, "site", None), tag)
+
+    def add_manual_revision_tag(self, revision_id: int, tag: str, expected_user: str) -> None:
+        self.base.assert_identity(expected_user)
+        apply_manual_tag(getattr(self.base, "site", None), [revision_id], tag, expected_user)
 
     def move_page(self, *, old_title: str, new_title: str, reason: str, expected_user: str, leave_redirect: bool) -> int | None:
         site = getattr(self.base, "site", None)
@@ -3606,7 +3614,87 @@ class PlanExecutor:
         title = self._english_title_for(page_id, page_type)
         return f"Ajout du lien interlangue vers la page anglaise : [[:en:{title}|{title}]]"
 
-    def _verify_written_revision(self, title: str, revision_id: int, desired: str, summary: str) -> None:
+    def _attest_french_interlanguage_tag(
+        self, row: dict[str, Any], plan: dict[str, Any], revision_id: int,
+        desired: str, expected_user: str,
+    ) -> dict[str, Any]:
+        """Prove the exact signed update revision before adding a missing tag.
+
+        Never use content equality alone as attribution. The revision must be
+        the direct child of the signed old revision, be current, and have the
+        exact author, summary and desired text of the signed interlanguage plan.
+        """
+        if (row.get("operation") != "update" or row.get("language") != "fr"
+                or row.get("edit_summary_policy") != "french_interlanguage_addition"
+                or not plan.get("plan_sha256")):
+            raise PlanConflict("Rattrapage chatgpt limité au plan interlangue français signé")
+        old_id = int(row.get("expected_revision_id") or 0)
+        if old_id <= 0 or int(revision_id) <= 0 or int(revision_id) == old_id:
+            raise PlanConflict("Révisions du rattrapage interlangue non attestées")
+        title = str(row["title"])
+        summary = self._expected_row_summary(row, "update", plan, desired)
+        expected_sha = str(row["new_sha256"])
+        if sha_text(desired) != expected_sha:
+            raise PlanConflict("Empreinte interlangue signée divergente")
+        checks = max(1, int(self.config.get("verification_attempts", 8)))
+        delay = max(0.0, float(self.config.get("verification_delay_seconds", 2)))
+        revision = None
+        for attempt in range(checks):
+            revision = self.adapter.read_revision(title, revision_id)
+            if revision is not None and int(revision.get("revision_id") or 0) == revision_id:
+                break
+            if attempt + 1 < checks and delay:
+                time.sleep(delay)
+        if revision is None or int(revision.get("revision_id") or 0) != revision_id:
+            raise PlanConflict(f"Révision de rattrapage introuvable : {title}/{revision_id}")
+        if (int(revision.get("parent_id") or 0) != old_id
+                or str(revision.get("user") or "") != expected_user
+                or str(revision.get("summary") or "") != summary
+                or sha_text(str(revision.get("text") or "")) != expected_sha):
+            raise PlanConflict(f"Provenance de la révision non conforme au plan signé : {title}/{revision_id}")
+
+        def assert_current() -> None:
+            exists, current_id, current_text = self.adapter.read_page(title)
+            if not exists or current_id != revision_id or sha_text(current_text) != expected_sha:
+                raise PlanConflict(f"Modification concurrente avant rattrapage de balise : {title}")
+
+        assert_current()
+        status = "already_tagged"
+        if "chatgpt" not in set(revision.get("tags") or []):
+            try:
+                self.adapter.assert_manual_tag_available("chatgpt")
+            except RetroTagError as exc:
+                raise PlanConflict(f"Rattrapage chatgpt interdit : {exc}") from exc
+            assert_current()
+            try:
+                self.adapter.add_manual_revision_tag(revision_id, "chatgpt", expected_user)
+            except RetroTagError as exc:
+                raise PlanConflict(f"Échec du rattrapage chatgpt : {exc}") from exc
+            status = "tag_added"
+
+        for attempt in range(checks):
+            observed = self.adapter.read_revision(title, revision_id)
+            if (observed is not None
+                    and int(observed.get("revision_id") or 0) == revision_id
+                    and int(observed.get("parent_id") or 0) == old_id
+                    and str(observed.get("user") or "") == expected_user
+                    and str(observed.get("summary") or "") == summary
+                    and sha_text(str(observed.get("text") or "")) == expected_sha
+                    and "chatgpt" in set(observed.get("tags") or [])):
+                assert_current()
+                return {
+                    "status": status, "revision_id": revision_id,
+                    "plan_sha256": plan["plan_sha256"], "tag": "chatgpt",
+                    "content_sha256": expected_sha, "parent_revision_id": old_id,
+                }
+            if attempt + 1 < checks and delay:
+                time.sleep(delay)
+        raise PlanConflict(f"Balise chatgpt absente après rattrapage : {title}/{revision_id}")
+
+    def _verify_written_revision(
+        self, title: str, revision_id: int, desired: str, summary: str,
+        *, repair_missing_tag: Any | None = None,
+    ) -> None:
         # MediaWiki revision metadata (notably change tags) can briefly lag behind
         # the successful write on read replicas. Publication already tolerates this;
         # updates must use the same bounded post-write retry policy.
@@ -3634,6 +3722,9 @@ class PlanExecutor:
         if str(observed.get("summary") or "") != summary:
             raise PlanConflict(f"Résumé de modification distant divergent après écriture : {title}")
         if "chatgpt" not in {str(value) for value in (observed.get("tags") or [])}:
+            if repair_missing_tag is not None:
+                repair_missing_tag()
+                return
             raise PlanConflict(f"Balise chatgpt absente après écriture après {attempts} relectures : {title}")
 
     def _summary(self, language: str, operation: str, plan: dict[str, Any]) -> str:
@@ -3795,6 +3886,10 @@ class PlanExecutor:
             if not exists or revision_id is None:
                 raise PlanConflict(f"Page à mettre à jour devenue absente : {title}")
             if sha_text(remote_text) == row["new_sha256"]:
+                if row.get("edit_summary_policy") == "french_interlanguage_addition":
+                    result["tag_repair"] = self._attest_french_interlanguage_tag(
+                        row, plan, int(revision_id), desired, user,
+                    )
                 result.update(status="already_done", revision_id=revision_id)
                 return result
             if revision_id != row.get("expected_revision_id") or sha_text(remote_text) != row.get("old_sha256"):
@@ -3813,7 +3908,14 @@ class PlanExecutor:
                 ):
                     raise PlanConflict(f"La modification n'est plus un ajout interlangue pur : {row.get('page_id')}")
             new_rev = self.adapter.write_page(title=title, text=desired, summary=summary, tags=["chatgpt"], expected_user=user, create_only=False, base_revision_id=revision_id)
-            self._verify_written_revision(title, new_rev, desired, summary)
+            repair = (
+                lambda: self._attest_french_interlanguage_tag(row, plan, new_rev, desired, user)
+                if row.get("edit_summary_policy") == "french_interlanguage_addition" else None
+            )
+            self._verify_written_revision(
+                title, new_rev, desired, summary,
+                repair_missing_tag=repair if row.get("edit_summary_policy") == "french_interlanguage_addition" else None,
+            )
             result.update(status="updated", old_revision_id=revision_id, revision_id=new_rev, content_sha256=sha_text(desired), edit_summary=summary)
             return result
         if operation == "move":
