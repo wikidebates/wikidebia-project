@@ -86,7 +86,7 @@ def test_valid_british_date_and_historical_quote_remain_unchanged():
         "debate_id": "demo",
         "final_values": {
             "sources": [row],
-            "arguments": [{"id": "A0001", "canonical_title": "A coherent English title",
+            "arguments": [{"id": "A0001", "canonical_title": "The evidence supports the argument",
                            "citations": [{"text": "An original historical citation."}]}],
         },
     }
