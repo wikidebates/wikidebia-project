@@ -2652,7 +2652,8 @@ def _print_user_result(state: Mapping[str, Any]) -> None:
         print(f"État/diagnostic : {final.get('state_path')}")
         print(f"Écriture distante déjà commencée : {'oui' if final.get('remote_execution_started') else 'non'}")
         print(f"Cause : {final.get('error')}")
-        print("Après résolution du conflit ou correction du kit, relancez simplement ./wikidebia workflow avec le même débat.")
+        print("Après résolution, préparez un nouveau plan si aucune écriture n'a commencé.")
+        print("Sinon, reprenez uniquement le préflight signé avec ./wikidebia workflow-publish <debate_id> --confirm-preflight-sha256 <sha256>.")
         return
     if state.get("status") == "blocked_remote_publication":
         print("Publication française bloquée avant la prochaine revue éditoriale.")
@@ -2751,7 +2752,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(json.dumps(state, ensure_ascii=False, sort_keys=True))
     else:
         _print_user_result(state)
-    return 2 if args.command == "publish-preserved" and state.get("status") != "published" else 0
+    return 2 if args.command == "publish-preserved" and state.get("status") not in {"published", "publication_prepared"} else 0
 
 
 if __name__ == "__main__":
