@@ -1782,3 +1782,21 @@ def test_published_state_attestation_rejects_missing_and_divergent_pages(tmp_pat
         assert not list(receipts.glob("publication-fr-*.json")) if receipts.exists() else True
     adapter.close_language()
 
+
+def test_published_state_attestation_rejects_corrupt_previous_state(tmp_path):
+    import pytest
+
+    config, path, _fr, _en = write_fixture(tmp_path, "full_page")
+    adapter = FakeAdapter()
+    publisher = module.GenericPublisher(config, adapter, path)
+    plan = publisher.build_plan()
+    action = next(row for row in plan["actions"] if row["language"] == "fr")
+    state_dir = tmp_path / ".state" / "published" / config["debate_id"] / "fr"
+    state_dir.mkdir(parents=True)
+    original = '{"state_sha256":"invalid","pages":[]}'
+    (state_dir / "latest.json").write_text(original, encoding="utf-8")
+    adapter.open_language("fr", "ChatGPT")
+    with pytest.raises(module.PublicationError, match="État publié antérieur"):
+        publisher._save_published_state("fr", [action], plan)
+    adapter.close_language()
+    assert (state_dir / "latest.json").read_text(encoding="utf-8") == original
