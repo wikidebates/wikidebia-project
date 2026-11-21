@@ -35,6 +35,8 @@ MAX_LIBRARY_BYTES = 16 * 1024 * 1024
 MAX_PREVIEW_BYTES = 48 * 1024
 MAX_OMISSIONS = 12000
 OMISSION_REASON = 'incomplete_offline_identity'
+MISSING_TITLE_REASON = 'missing_real_title'
+OMISSION_REASONS = frozenset({OMISSION_REASON, MISSING_TITLE_REASON})
 STOPWORDS = {'dans', 'avec', 'pour', 'contre', 'sont', 'etre', 'etre', 'elle',
              'elles', 'leur', 'leurs', 'dont', 'sans', 'tout', 'tous', 'toute',
              'comme', 'quelle', 'quelles', 'quels', 'quel', 'cette', 'ceux',
@@ -50,8 +52,17 @@ def _require(ok: bool, message: str) -> None:
         raise CreationContextError('Creation library: ' + message)
 
 
-class UnidentifiableOfflineReference(CreationContextError):
-    """A historical notice cannot be safely identified as a reusable source."""
+class UnidentifiableHistoricalReference(CreationContextError):
+    """An incomplete canonical notice is not a reusable documentary identity."""
+    reason = ''
+
+
+class UnidentifiableOfflineReference(UnidentifiableHistoricalReference):
+    reason = OMISSION_REASON
+
+
+class MissingRealTitleReference(UnidentifiableHistoricalReference):
+    reason = MISSING_TITLE_REASON
 
 
 def _clean_metadata(record: dict) -> dict | None:
@@ -74,11 +85,13 @@ def _clean_metadata(record: dict) -> dict | None:
             _require(isinstance(value, str) and bool(value.strip()) and len(value) <= 4000
                      and '\x00' not in value, 'invalid documentary field')
         metadata[key] = copy.deepcopy(value)
-    _require(any(metadata.get(k) for k in ('title', 'article', 'work', 'page')),
-             'source missing its real title')
+    # Validate unsafe URLs *before* considering omissions. A historical record
+    # with no title must not conceal a private or credential-bearing link.
     if metadata.get('link'):
-        _url(metadata['link'])  # No private, local or credential-bearing URL in a hint.
-    else:
+        _url(metadata['link'])
+    if not any(metadata.get(k) for k in ('title', 'article', 'work', 'page')):
+        raise MissingRealTitleReference('Creation library: source missing its real title')
+    if not metadata.get('link'):
         if not (metadata.get('authors') and metadata.get('date') and metadata.get('publisher')):
             raise UnidentifiableOfflineReference('Creation library: unidentifiable offline reference')
     return metadata
@@ -126,7 +139,7 @@ def build_library(root: Path, corpus_paths: list[str]) -> dict:
              and len(set(corpus_paths)) == len(corpus_paths), 'select 1..32 distinct corpora')
     variants: dict[str, dict] = {}
     fingerprints: dict[str, str | None] = {}
-    omitted: set[tuple[str, str]] = set()
+    omitted: dict[tuple[str, str], str] = {}
     for corpus_path in sorted(corpus_paths):
         manifest, registry, sources, scope, notes, current_inputs = _source_inputs(root, corpus_path)
         for row in current_inputs:
@@ -140,7 +153,7 @@ def build_library(root: Path, corpus_paths: list[str]) -> dict:
         def include(source: dict, origin: dict) -> None:
             try:
                 metadata = _clean_metadata(source)
-            except UnidentifiableOfflineReference:
+            except UnidentifiableHistoricalReference as exc:
                 # Historical source registries can contain incomplete French
                 # bibliographies. An unusable *hint* must not abort all other
                 # discoveries, nor be silently promoted to a reference.
@@ -150,7 +163,10 @@ def build_library(root: Path, corpus_paths: list[str]) -> dict:
                 sid = source.get('id')
                 _require(isinstance(sid, str) and re.fullmatch(r'S\d{5,}', sid) is not None,
                          'invalid identifier for omitted canonical source')
-                omitted.add((manifest['debate_id'], sid))
+                key = (manifest['debate_id'], sid)
+                _require(key not in omitted or omitted[key] == exc.reason,
+                         'conflicting reasons for omitted canonical source')
+                omitted[key] = exc.reason
                 _require(len(omitted) <= MAX_OMISSIONS, 'too many unidentifiable historical sources')
                 return
             if metadata is None:
@@ -238,7 +254,7 @@ def build_library(root: Path, corpus_paths: list[str]) -> dict:
     for item in source_list:
         item['variants_require_review'] = counts[item['identity_key']] > 1
     omissions = [{'debate_id': debate_id, 'source_id': sid,
-                  'reason': OMISSION_REASON} for debate_id, sid in sorted(omitted)]
+                  'reason': omitted[(debate_id, sid)]} for debate_id, sid in sorted(omitted)]
     payload = {'schema': SCHEMA, 'corpora': sorted(corpus_paths),
                'inputs': [{'path': key, 'sha256': fingerprints[key]} for key in sorted(fingerprints)],
                'notices': source_list, 'omissions': omissions, 'authoritative_for_target': False,
@@ -273,6 +289,8 @@ def build_library(root: Path, corpus_paths: list[str]) -> dict:
             'bytes': len(raw), 'source_verification_performed': False,
             'omitted_unidentifiable_sources': len(omissions),
             'omissions_by_corpus': omissions_by_corpus,
+            'omissions_by_reason': {reason: sum(row['reason'] == reason for row in omissions)
+                                    for reason in sorted(OMISSION_REASONS)},
             'publication_authorized': False}
 
 
@@ -309,7 +327,7 @@ def load_library(root: Path) -> tuple[dict, bytes]:
                  and 'corpus/' + row['debate_id'] in value['corpora']
                  and isinstance(row['source_id'], str)
                  and re.fullmatch(r'S\d{5,}', row['source_id']) is not None
-                 and row['reason'] == OMISSION_REASON for row in omissions),
+                 and row['reason'] in OMISSION_REASONS for row in omissions),
              'invalid historical source omission')
     _require(omissions == sorted(omissions, key=lambda x: (x['debate_id'], x['source_id']))
              and len({(row['debate_id'], row['source_id']) for row in omissions}) == len(omissions),

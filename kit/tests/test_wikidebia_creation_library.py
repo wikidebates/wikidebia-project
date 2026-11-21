@@ -215,6 +215,91 @@ def test_incomplete_historical_source_is_reported_not_reused_or_global_blocker(p
     assert (project/library.LIBRARY_PATH).read_bytes() == raw
 
 
+
+@pytest.mark.parametrize('metadata', [
+    {'link': 'https://example.org/untitled', 'authors': ['A. B.']},
+    {'authors': ['A. B.'], 'date': '2020', 'publisher': 'Éditeur'},
+    {'title': None, 'link': 'https://example.org/untitled'},
+])
+def test_historical_source_missing_real_title_is_omitted_with_reason(project, metadata):
+    origin(project, note=False, source_record=True)
+    _unidentifiable_canonical(project, metadata=metadata)
+    before = snapshot(project/ORIGIN)
+    report = library.build_library(project, [ORIGIN])
+    assert report['notices'] == 1
+    assert report['omitted_unidentifiable_sources'] == 1
+    assert report['omissions_by_corpus'] == {ORIGIN: 1}
+    assert report['omissions_by_reason'] == {
+        library.OMISSION_REASON: 0, library.MISSING_TITLE_REASON: 1}
+    index, raw = library.load_library(project)
+    assert index['omissions'] == [{'debate_id': 'autre', 'source_id': 'S00002',
+                                  'reason': library.MISSING_TITLE_REASON}]
+    assert snapshot(project/ORIGIN) == before
+    assert library.build_library(project, [ORIGIN])['status'] == 'built'
+    assert (project/library.LIBRARY_PATH).read_bytes() == raw
+
+
+def test_missing_title_with_multiple_usages_counted_once(project):
+    origin(project, note=False)
+    _unidentifiable_canonical(project, metadata={'link': 'https://example.org/untitled'})
+    path = project/ORIGIN/'data/sources.json'
+    canonical = load(path)
+    canonical['sources'][0]['usage'].append(dict(canonical['sources'][0]['usage'][0], page_id='A0002'))
+    put(path, canonical)
+    report = library.build_library(project, [ORIGIN])
+    assert report['omitted_unidentifiable_sources'] == 1
+    assert report['omissions_by_reason'][library.MISSING_TITLE_REASON] == 1
+
+
+def test_mixed_historical_omission_reasons_are_auditable_and_loadable(project):
+    origin(project, note=False, source_record=True)
+    _unidentifiable_canonical(project, source_id='S00002')
+    _unidentifiable_canonical(project, source_id='S00003',
+                              metadata={'link': 'https://example.org/untitled'})
+    report = library.build_library(project, [ORIGIN])
+    assert report['notices'] == 1
+    assert report['omitted_unidentifiable_sources'] == 2
+    assert report['omissions_by_reason'] == {
+        library.OMISSION_REASON: 1, library.MISSING_TITLE_REASON: 1}
+    index, _ = library.load_library(project)
+    assert [item['reason'] for item in index['omissions']] == [
+        library.OMISSION_REASON, library.MISSING_TITLE_REASON]
+    assert prepared(project, reuse_library=True)['reuse_candidate_count'] == 1
+
+
+@pytest.mark.parametrize('link,error', [
+    ('http://localhost/private', 'local reference URL'),
+    ('https://example.org/untitled?token=secrets', 'credential-bearing reference URL'),
+])
+def test_missing_title_does_not_hide_unsafe_reference_link(project, link, error):
+    origin(project, note=False)
+    _unidentifiable_canonical(project, metadata={'link': link})
+    with pytest.raises(cc.CreationContextError, match=error):
+        library.build_library(project, [ORIGIN])
+    assert not (project/library.LIBRARY_PATH).exists()
+
+
+def test_missing_title_foreign_canonical_source_is_not_counted(project):
+    origin(project, note=False)
+    _unidentifiable_canonical(project, language='en', metadata={'link': 'https://example.org/untitled'})
+    report = library.build_library(project, [ORIGIN])
+    assert report['notices'] == 0 and report['omitted_unidentifiable_sources'] == 0
+    assert report['omissions_by_reason'][library.MISSING_TITLE_REASON] == 0
+
+
+def test_library_omission_reason_must_remain_known_even_with_valid_digest(project):
+    origin(project, note=False)
+    _unidentifiable_canonical(project, metadata={'link': 'https://example.org/untitled'})
+    library.build_library(project, [ORIGIN])
+    path = project/library.LIBRARY_PATH
+    index = load(path)
+    index['omissions'][0]['reason'] = 'verified_for_target'
+    index['sha256'] = cc._sha(cc._json({k: v for k, v in index.items() if k != 'sha256'}))
+    put(path, index)
+    with pytest.raises(cc.CreationContextError, match='omission'):
+        library.load_library(project)
+
+
 def test_only_unidentifiable_historical_sources_yields_audited_empty_library(project):
     origin(project, note=False)
     _unidentifiable_canonical(project)
