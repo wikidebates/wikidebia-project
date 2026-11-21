@@ -202,3 +202,13 @@ def test_readonly_resolver_rejects_missing_page():
 def test_readonly_resolver_exposes_different_ids_not_fake_equivalence():
     result = aliases.resolve_titles_pageids(_Site(altered=True), ["Vieux titre", "Nouveau titre"])
     assert result["Vieux titre"]["pageid"] != result["Nouveau titre"]["pageid"]
+
+def test_offline_close_rejects_inconsistent_canonical_target_titles(tmp_path: Path):
+    selector, _, proof_path = _changed_fixture(tmp_path)
+    proof = json.loads(proof_path.read_text(encoding="utf-8"))
+    proof["title_resolutions"]["Nouveau titre"]["resolved_title"] = "Un autre canonique"
+    proof.pop("proof_sha256")
+    proof["proof_sha256"] = sha_object(proof)
+    _write(proof_path, proof)
+    with pytest.raises(offline.PostPublicationError, match="pageid"):
+        offline.reconcile_offline_bilingual(tmp_path, DEBATE, WORK, selector)
