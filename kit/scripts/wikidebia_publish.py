@@ -1708,8 +1708,22 @@ class GenericPublisher:
                 self.adapter.assert_identity(user)
                 self._change_tag_gate(language)
                 self._spam_blacklist_gate(rows)
-                for row in rows:
-                    action = self._plan_row(row)
+                # The adapter already supports 50-page MediaWiki batches.
+                # A planning pass can safely reuse this read-only snapshot:
+                # write-time checks still re-read each page individually.
+                titles = [self._remote_title(row) for row in rows]
+                if len(titles) != len(set(titles)):
+                    raise PublicationError("Titres distants dupliqués dans le plan")
+                reader = getattr(self.adapter, "read_pages", None)
+                snapshots = reader(titles) if callable(reader) else None
+                if snapshots is not None and (
+                    not isinstance(snapshots, dict) or set(snapshots) != set(titles)
+                ):
+                    raise PublicationError("Réponse MediaWiki incomplète pendant la préparation du plan")
+                for row, title in zip(rows, titles):
+                    action = self._plan_row(
+                        row, remote_snapshot=snapshots[title] if snapshots is not None else None
+                    )
                     action_dict = asdict(action)
                     actions.append(action_dict)
                     if action.operation == "block":
@@ -1757,7 +1771,10 @@ class GenericPublisher:
         plan["plan_sha256"] = sha_object(plan)
         return plan
 
-    def _plan_row(self, row: dict[str, Any]) -> PageAction:
+    def _plan_row(
+        self, row: dict[str, Any],
+        *, remote_snapshot: tuple[bool, int | None, str] | None = None,
+    ) -> PageAction:
         language = str(row["language"])
         page_id = str(row["page_id"])
         page_type = str(row.get("page_type") or "unknown")
@@ -1766,7 +1783,12 @@ class GenericPublisher:
         parameter = self._parameter(language)
         local_target = local_text if parameter is None else extract_parameter(local_text, parameter)
         title = self._remote_title(row)
-        exists, revision_id, remote_text = self.adapter.read_page(title)
+        if remote_snapshot is None:
+            exists, revision_id, remote_text = self.adapter.read_page(title)
+        else:
+            if not isinstance(remote_snapshot, (tuple, list)) or len(remote_snapshot) != 3:
+                raise PublicationError(f"Snapshot MediaWiki invalide : {title}")
+            exists, revision_id, remote_text = remote_snapshot
         page_summary = self._summary_for_page(language, page_id, page_type)
         page_tags = self._tags_for_page(language, page_id, page_type)
         publication_creation_date: str | None = None

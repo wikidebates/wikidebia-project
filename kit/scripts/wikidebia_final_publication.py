@@ -491,6 +491,29 @@ def _assert_safe_english_plan(plan: Mapping[str, Any], approved_updates: Mapping
             raise FinalPublicationError("Le plan anglais final contient une opération autre que create/skip")
 
 
+def _read_preflight_pages(adapter: Any, titles: list[str]) -> dict[str, tuple[bool, int | None, str]]:
+    """Read one consistent planning pass, with a fail-closed batching contract.
+
+    PywikibotAdapter divides each request into MediaWiki batches of at most
+    50 pages. Legacy test adapters without read_pages retain their old path.
+    Individual post-write revision checks are intentionally unaffected.
+    """
+    if len(titles) != len(set(titles)):
+        raise FinalPublicationError("Titres dupliqués dans le préflight de publication")
+    reader = getattr(adapter, "read_pages", None)
+    pages = (
+        reader(titles) if callable(reader)
+        else {title: adapter.read_page(title) for title in titles}
+    )
+    if not isinstance(pages, dict) or set(pages) != set(titles):
+        raise FinalPublicationError("Réponse distante incomplète pendant le préflight")
+    for title in titles:
+        value = pages[title]
+        if not isinstance(value, (tuple, list)) or len(value) != 3:
+            raise FinalPublicationError(f"Réponse distante invalide pendant le préflight : {title}")
+    return pages
+
+
 def _remote_snapshot_for_update(adapter: Any, plan: Mapping[str, Any], languages: Iterable[str]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     ops = plan.get("operations") or {}
@@ -502,10 +525,12 @@ def _remote_snapshot_for_update(adapter: Any, plan: Mapping[str, Any], languages
     for language, items in by_language.items():
         if not items:
             continue
-        expected_user = str(adapter.base and "") if False else None
-        # identity is checked by the caller; keep this routine data-only.
+        # Identity is checked by the caller; this routine reads data only.
+        observed = _read_preflight_pages(
+            adapter, [str(row.get("title") or "") for _name, row in items]
+        )
         for name, row in items:
-            exists, revision_id, text = adapter.read_page(str(row.get("title") or ""))
+            exists, revision_id, text = observed[str(row.get("title") or "")]
             digest = sha_text(text) if exists else None
             if name == "create":
                 if exists:
@@ -541,8 +566,12 @@ def _remote_snapshot_for_english(adapter: Any, plan: Mapping[str, Any], expected
         missing = sorted({"edit", "createpage"} - rights)
         if missing:
             raise FinalPublicationError("Droits anglais absents avant publication : " + ", ".join(missing))
-        for action in plan.get("actions") or []:
-            exists, revision_id, text = adapter.read_page(str(action.get("title") or ""))
+        actions = list(plan.get("actions") or [])
+        observed = _read_preflight_pages(
+            adapter, [str(action.get("title") or "") for action in actions]
+        )
+        for action in actions:
+            exists, revision_id, text = observed[str(action.get("title") or "")]
             digest = sha_text(text) if exists else None
             operation = str(action.get("operation") or "")
             if operation == "create" and exists:
