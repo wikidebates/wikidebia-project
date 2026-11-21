@@ -21,3 +21,9 @@ Pour les pages françaises préexistantes, conserver chaque `titre-affiché` con
 - Pour créer un débat nouveau, commencer l'étape par `./wikidebia creation-context --stage cadrage|graphe|debat-fr|arguments-fr|validation-fr` (choisir une seule valeur). Lire les fichiers indiqués, plutôt que la source unifiée et ses historiques en entier.
 - Un corpus nouveau explicitement identifié peut fournir le contexte d'un lot avec `--corpus corpus/<id> --batch-id FR-A-001`, ou d'un argument avec `--node-id A0001`, au stade `arguments-fr`. Ne pas appliquer ce profil à un corpus historique importé.
 - Ce contexte ne vaut ni recherche exhaustive, ni validation, ni autorisation de publication. Garder les recherches, les revues globales et les garde-fous existants. Aucun gain de quota ne se déduit des seuls octets. Voir `kit/GUIDE_CREATION_CONTEXT.md`.
+
+## Reprise d'une création en cours
+
+- Pour un corpus français nouveau déjà constitué (graphe/titres verrouillés, anglais différé), commencer par `./wikidebia creation-next --corpus corpus/<id>`. La commande retrouve les pages restantes dans les états canoniques ; `creation-status` inspecte sans écrire.
+- Lire `read_first` et le contexte indiqué, pas l'inventaire exhaustif `QUEUE.json` ni les textes déjà produits sans rapport avec la tâche. Ne jamais éditer la file dérivée pour déclarer une page terminée. Un fichier non enregistré ou divergent doit être préservé et réconcilié, pas régénéré.
+- `generated` attend encore sa revue. `recorded_validated` est un état relu, pas une nouvelle preuve de validation. L'outil ne publie rien et n'importe pas les réponses ; voir `kit/GUIDE_CREATION_RESUME.md`.

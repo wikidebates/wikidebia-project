@@ -2799,6 +2799,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     add_creation_context_arguments(creation_context)
 
+    from wikidebia_creation_resume import add_arguments as add_creation_resume_arguments
+    for name in ("creation-next", "creation-status"):
+        creation_resume_parser = sub.add_parser(name, help="Reprendre la creation depuis les etats canoniques, sans mutation du corpus")
+        add_creation_resume_arguments(creation_resume_parser)
+
     publish = sub.add_parser("publish", help="Valider, planifier et publier un ZIP de débat")
     publish.add_argument("debate_identifier", nargs="?", help="Nom du ZIP sans .zip; facultatif si incoming/ contient un seul ZIP. Le debate_id interne peut être différent.")
     publish.add_argument("--scope", choices=SCOPES, default="all")
@@ -3374,6 +3379,12 @@ def main(argv: list[str] | None = None) -> int:
         for node_id in args.node_id:
             command.extend(["--node-id", node_id])
         return creation_context_main(command)
+    if args.command in {"creation-next", "creation-status"}:
+        from wikidebia_creation_resume import main as creation_resume_main
+        command = ["--project-root", str(root), "--corpus", args.corpus, "--max-pages", str(args.max_pages)]
+        if args.command == "creation-status":
+            command.append("--inspect-only")
+        return creation_resume_main(command)
     if args.command == "publish":
         result = publish_debate(root, args.debate_identifier, args.scope, args.yes, args.keep_zip)
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
