@@ -5,7 +5,7 @@
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
   "declared_file_count": 515,
-  "declared_test_count": 1461,
+  "declared_test_count": 1471,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -1139,7 +1139,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "6710ec9dd10ccf6cf32129c575d7ee569b56311dce785c6deac3dff4286784a3"
+      "sha256": "42487111905b475e648a003fba9100c6e6398db35b5f2bb4d738ef51a90c0ece"
     },
     {
       "path": "VERSIONS.json",
