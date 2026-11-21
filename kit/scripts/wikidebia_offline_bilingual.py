@@ -28,6 +28,7 @@ from wikidebia_post_publication import (
 from wikidebia_render import _load_workspace
 from wikidebia_release_info import publication_plan_is_compatible
 from wikidebia_update import sha_object, sha_text
+from wikidebia_fr_alias_pageids import verify_alias_proof
 
 
 SCHEMA = "wikidebia-offline-bilingual-evidence-1.0"
@@ -85,11 +86,18 @@ def verify_bilingual_proofs(
             or evidence.get("work_id") != work_id):
         _fail("Identité ou schéma du sélecteur des preuves divergent")
     expected_names = {"english_plan", "english_receipt", "french_plan", "french_receipt"}
-    if set(evidence) != expected_names | {"schema", "debate_id", "work_id"}:
+    optional_names = {"relation_pageids_proof"}
+    if not expected_names.issubset(evidence) or set(evidence) - expected_names - optional_names - {"schema", "debate_id", "work_id"}:
         _fail("Sélecteur incomplet ou contenant des chemins non prévus")
     proof_paths = {name: _proof_path(project, evidence[name], name) for name in expected_names}
     if len({path.resolve() for path in proof_paths.values()}) != 4:
         _fail("Deux preuves distinctes désignent le même fichier")
+    alias_path = (
+        _proof_path(project, evidence["relation_pageids_proof"], "preuve de titres relationnels")
+        if "relation_pageids_proof" in evidence else None
+    )
+    if alias_path is not None and alias_path.resolve() in {path.resolve() for path in proof_paths.values()}:
+        _fail("La preuve pageid se confond avec une preuve de publication")
     en_plan = _signed(proof_paths["english_plan"], "plan anglais", "plan_sha256", project)
     fr_plan = _signed(proof_paths["french_plan"], "plan français", "plan_sha256", project)
     en_receipt = _signed(proof_paths["english_receipt"], "reçu anglais", "receipt_sha256", project)
@@ -188,6 +196,7 @@ def verify_bilingual_proofs(
     fr_updates = _page_map((operations.get("update") or []) + (operations.get("skip") or []), "plan français")
     if set(fr_updates) != set(expected["fr"]):
         _fail("Le plan français ne couvre pas exactement les pages de release")
+    changed_french: dict[tuple[str, str], tuple[str, str]] = {}
     for key, op in fr_updates.items():
         state = final_states["fr"][key]
         desired = _sha(op.get("new_sha256"), f"fr {key}")
@@ -197,17 +206,36 @@ def verify_bilingual_proofs(
         local = release / local_path
         if local.is_symlink() or not local.is_file() or local.resolve().is_relative_to(release.resolve()) is False:
             _fail(f"Page française de release absente ou non sûre : {key}")
-        if sha_text(local.read_text(encoding="utf-8")) != desired:
-            _fail(f"Le français de release diverge du texte publié attesté : {key}")
+        released_text = local.read_text(encoding="utf-8")
+        released_sha = sha_text(released_text)
+        published_sha = _sha(state.get("content_sha256"), f"état fr {key}")
+        if released_sha != published_sha:
+            changed_french[key] = (published_sha, released_text)
         if (op.get("language") != "fr"
                 or op.get("title") != state.get("canonical_title")
                 or state.get("status") != "published"
-                or state.get("content_sha256") != desired):
+                or desired not in {published_sha, released_sha}):
             _fail(f"Plan ou état français divergent pour {key}")
         _revision(state.get("revision_id"), f"état fr {key}")
         if op in operations.get("update", []):
             if op.get("edit_summary_policy") != "french_interlanguage_addition":
                 _fail(f"Édition française hors interlangue : {key}")
+
+    alias_counts: dict[str, int] | None = None
+    alias_sha: str | None = None
+    if changed_french:
+        if alias_path is None:
+            _fail("Français de release différent sans preuve pageid en lecture seule")
+        pageids = _signed(alias_path, "preuve pageid", "proof_sha256", project)
+        from wikidebia_corpus_build import full_tree_sha256
+        alias_counts = verify_alias_proof(
+            pageids, debate_id=debate_id, work_id=work_id,
+            release_tree=full_tree_sha256(release), manifest_sha256=manifest_sha,
+            french_state=states["fr"], changed=changed_french,
+        )
+        alias_sha = pageids["proof_sha256"]
+    elif alias_path is not None:
+        _fail("Preuve pageid fournie alors qu'aucun écart français n'existe")
 
     results = fr_receipt.get("results")
     if not isinstance(results, list):
@@ -251,6 +279,8 @@ def verify_bilingual_proofs(
         "english_state_sha256": states["en"]["state_sha256"],
         "french_state_sha256": states["fr"]["state_sha256"],
         "page_counts": {"en": len(en_rows), "fr": len(fr_updates)},
+        "relation_pageids_proof_sha256": alias_sha,
+        "relation_pageids_changes": alias_counts,
     }
 
 
