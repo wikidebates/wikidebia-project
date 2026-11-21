@@ -184,3 +184,8 @@ La réussite du paquet `fr_content_review` déclenche automatiquement le rendu d
 
 Tout échec du validateur lancé par le workflow produit automatiquement dans `outgoing/` un paquet `<debate_id>_<rapport>_diagnostic.zip`. Le terminal peut rester volontairement concis, mais ce ZIP contient l'inventaire **exhaustif** des erreurs (`ERRORS.json`, `ERRORS.txt`), le rapport complet et les fichiers de contexte directement référencés par les diagnostics. Il peut être transmis tel quel à ChatGPT ; aucune recherche manuelle sous `.state/` n'est requise.
 
+
+
+### Préflight documentaire pendant la revue anglaise
+
+Avant de sceller la revue anglaise, le kit applique aux sources de `data/sources_en_working.json` les contrôles de métadonnées correspondant aux règles de rendu `WDV-DOC-002`, `WDV-DOC-003`, `WDV-DOC-005` et `WDV-DOC-009`. Le rapport `reports/en_documentary_review_preflight.json` identifie l'ID de la source, le champ, la valeur et la correction attendue. Les anomalies certaines de format (pagination ou date machine) sont distinguées des arbitrages de fond (date de consultation, identité contradictoire, vraie nature d'une édition ou numéro de collection). Un numéro de collection suspect dans `issue` est un avertissement, pas une conversion automatique. La vérification intervient avant la convergence sémantique et ne modifie jamais une citation historique ni un titre anglais validé. Le rapport est inclus comme contexte facultatif dans les paquets de reprise de traduction.
