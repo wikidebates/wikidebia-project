@@ -1,0 +1,41 @@
+name: Install verified creation research sources (temporary)
+on:
+  push:
+    branches: [feat/creation-research-20261121]
+    paths: [.github/workflows/creation-research-install.yml]
+permissions:
+  contents: read
+jobs:
+  install:
+    if: github.repository == 'wikidebates/wikidebia-project' && github.ref == 'refs/heads/feat/creation-research-20261121'
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Apply byte-verified integration and remove temporary files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object .github/research-integration.patch)" = 'cbf715591d526197545301b5e622d72a0189f9cc'
+          git apply --check --unidiff-zero .github/research-integration.patch
+          git apply --unidiff-zero .github/research-integration.patch
+          python kit/scripts/refresh_package_metadata.py --test-count 1752 --generated-date 2026-11-21
+          rm .github/research-integration.patch .github/workflows/creation-research-source.yml .github/workflows/creation-research-install.yml
+          git add -- AGENTS.md kit/GUIDE_CREATION_CONTEXT.md kit/GUIDE_CREATION_IMPORT.md kit/GUIDE_CREATION_RESEARCH.md kit/scripts/wikidebia_creation_context.py kit/scripts/wikidebia_creation_import.py kit/scripts/wikidebia_creation_research.py kit/scripts/wikidebia_manage.py kit/tests/test_wikidebia_creation_research.py kit/PACKAGE_MANIFEST_SHA256.json kit/PACKAGE_RECEIPT.json kit/TEST_REPORT.txt
+          git add -u -- .github
+          git diff --cached --check
+          test "$(git write-tree)" = '2bd11c3b552f4e5d06b1db97dbb59dffe347085c'
+      - name: Commit exact locally tested tree to feature branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Wikidebia creation preparation'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit -m 'feat: preserve scoped documentary research with French drafts'
+          git push origin HEAD:refs/heads/feat/creation-research-20261121
