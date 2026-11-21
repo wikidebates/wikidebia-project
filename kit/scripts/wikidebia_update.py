@@ -1580,6 +1580,8 @@ class RemoteUpdatePlanner:
         self.publication_url_replacements = self._load_publication_url_replacements()
         self.argument_name_assignments = self._load_argument_name_assignments()
         self._registry_cache: dict[str, Any] | None | bool = False
+        # Used only during read-only plan construction, never by PlanExecutor.
+        self._planning_snapshot: dict[str, tuple[bool, int | None, str]] | None = None
         self._validate_config()
         inventory_root = self.config.get("state_inventory_root")
         resolved_inventory_root = self._resolve(inventory_root) if inventory_root else None
@@ -2408,6 +2410,8 @@ class RemoteUpdatePlanner:
                     include_retirements=mode != "no_delete",
                 )
             finally:
+                # No remote snapshot is retained across languages or plans.
+                self._planning_snapshot = None
                 self.adapter.close_language()
         for name in OPERATIONS:
             buckets[name].sort(key=lambda row: (row.get("language", ""), row.get("phase", 99), row.get("page_type", ""), row.get("page_id", ""), row.get("title", "")))
@@ -2454,6 +2458,14 @@ class RemoteUpdatePlanner:
             "phase": 99,
         }
 
+    def _read_planning_page(self, title: str) -> tuple[bool, int | None, str]:
+        snapshot = self._planning_snapshot
+        if snapshot is not None and title in snapshot:
+            return snapshot[title]
+        # An imported historical alternate title may not be known when
+        # prefetching. Preserve its existing live-read fallback.
+        return self.adapter.read_page(title)
+
     def _plan_language(
         self,
         language: str,
@@ -2465,13 +2477,27 @@ class RemoteUpdatePlanner:
         old = {key: value for key, value in self.state.items() if key[0] == language}
         new = {key: value for key, value in self.new_pages.items() if key[0] == language}
         handled_old: set[tuple[str, str]] = set()
+        titles = sorted({
+            page.title for page in old.values()
+        } | {
+            str(page["title"]) for page in new.values()
+        })
         prefetch = getattr(self.adapter, "prefetch_pages", None)
         if callable(prefetch):
-            prefetch(sorted({
-                page.title for page in old.values()
-            } | {
-                str(page["title"]) for page in new.values()
-            }))
+            # RecordingAdapter owns its signed checkpoint and replay cache.
+            # Never issue a second batch behind its prefetch mechanism.
+            prefetch(titles)
+        else:
+            reader = getattr(self.adapter, "read_pages", None)
+            if callable(reader) and titles:
+                snapshot = reader(titles)
+                if not isinstance(snapshot, dict) or set(snapshot) != set(titles):
+                    raise UpdateError("Lecture MediaWiki groupée incomplète pendant le plan")
+                for title in titles:
+                    value = snapshot[title]
+                    if not isinstance(value, (list, tuple)) or len(value) != 3:
+                        raise UpdateError(f"Réponse MediaWiki invalide pendant le plan : {title}")
+                self._planning_snapshot = dict(snapshot)
 
         # Current corpus pages: create, skip, controlled update, move, or review.
         for key, proposed in new.items():
@@ -2480,7 +2506,7 @@ class RemoteUpdatePlanner:
                 self._plan_move(prior, proposed, buckets, comparisons)
                 handled_old.add(key)
                 continue
-            exists, revision_id, remote_text = self.adapter.read_page(proposed["title"])
+            exists, revision_id, remote_text = self._read_planning_page(proposed["title"])
             if self.interlanguage_only:
                 if not exists:
                     imported = self._imported_interlanguage_page(proposed)
@@ -2758,8 +2784,8 @@ class RemoteUpdatePlanner:
     def _plan_move(self, prior: StatePage, proposed: dict[str, Any], buckets: dict[str, list[dict[str, Any]]], comparisons: list[dict[str, Any]]) -> None:
         if self._block_compound_title(prior.language, proposed, buckets):
             return
-        source_exists, source_rev, source_text = self.adapter.read_page(prior.title)
-        target_exists, target_rev, target_text = self.adapter.read_page(proposed["title"])
+        source_exists, source_rev, source_text = self._read_planning_page(prior.title)
+        target_exists, target_rev, target_text = self._read_planning_page(proposed["title"])
         effective = proposed
         lifecycle_preservation = None
         if source_exists and self._remote_matches_prior(prior, source_rev, source_text):
@@ -2851,7 +2877,7 @@ class RemoteUpdatePlanner:
             return
         if policy != "redirect":
             raise UpdateError(f"Politique de fusion inconnue : {policy}")
-        exists, revision_id, remote_text = self.adapter.read_page(prior.title)
+        exists, revision_id, remote_text = self._read_planning_page(prior.title)
         op = self._base_operation(language=prior.language, page_id=prior.page_id, page_type=prior.page_type, title=prior.title, justification="Argument fusionné; redirection explicite vers la page conservée")
         desired = redirect_text(prior.language, target["title"])
         backlinks = self.adapter.backlinks(prior.title) if exists else []
@@ -2889,7 +2915,7 @@ class RemoteUpdatePlanner:
         reason = str((migration or {}).get("reason") or (migration or {}).get("kind") or "suppression")
         target = (migration or {}).get("target_title")
         owner = self._known_other_owner(prior.language, prior.title)
-        exists, revision_id, remote_text = self.adapter.read_page(prior.title)
+        exists, revision_id, remote_text = self._read_planning_page(prior.title)
         op = self._base_operation(language=prior.language, page_id=prior.page_id, page_type=prior.page_type, title=prior.title, justification=f"Page retirée de l’ancien corpus ({reason})")
         op.update({
             "old_sha256": prior.content_sha256,
