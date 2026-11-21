@@ -1,0 +1,14 @@
+{{Argument
+|résumé=Car en sont les auteurs. Car ont le pouvoir.
+* remise en cause personnelle, travailler sur eux-mêmes
+|objections={{Objection
+|page=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+|titre-affiché=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+}}{{Objection
+|page=L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes
+|titre-affiché=L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Domination masculine
+|date-création=2019-11-24
+}}

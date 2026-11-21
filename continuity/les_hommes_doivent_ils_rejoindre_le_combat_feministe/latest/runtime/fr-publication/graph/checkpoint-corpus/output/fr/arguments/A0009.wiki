@@ -1,0 +1,8 @@
+{{Argument
+|objections={{Objection
+|page=L'absence d'égalité empêche une société de fonctionner correctement
+|titre-affiché=C'est plutôt l'inverse
+}}
+|justifications=
+|date-création=2021-03-18
+}}

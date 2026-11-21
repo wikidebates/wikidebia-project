@@ -1,0 +1,5 @@
+{{Argument
+|rubriques=Politique
+|mots-clés=féminisme, non-mixité, domination masculine, femmes
+|date-création=2022-12-19
+}}

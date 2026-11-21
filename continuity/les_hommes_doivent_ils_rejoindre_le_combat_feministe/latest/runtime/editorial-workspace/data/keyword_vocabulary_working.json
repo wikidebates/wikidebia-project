@@ -1,0 +1,1547 @@
+{
+  "schema": "wikidebia-keyword-vocabulary-working-1.0",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "status": "draft",
+  "entries": [
+    {
+      "fr": "Banalisation",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0068"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Devoir de réparation",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": true,
+      "multiword_exception_rationale": "Locution thématique conventionnelle « Devoir de réparation » : son sens encyclopédique ne se réduit pas à une simple intersection de ses constituants.",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0042"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Discrimination",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0001"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0013"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0015"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0042"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Discriminations",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0061"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Domination masculine",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": true,
+      "multiword_exception_rationale": "Locution thématique conventionnelle « Domination masculine » : son sens encyclopédique ne se réduit pas à une simple intersection de ses constituants.",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0006"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0014"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0026"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Déshumanisation",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0017"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Dévalorisation",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0064"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Emotions",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0019"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Empathie",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0014"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Femmes",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0001"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0003"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0008"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0011"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0012"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0013"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0015"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0017"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0028"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0030"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0031"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0033"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0042"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0060"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0061"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0062"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0063"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0064"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0070"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Féminisme",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "debate",
+          "entity_id": "debate"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0001"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0003"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0004"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0005"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0006"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0007"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0008"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0009"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0010"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0012"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0013"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0014"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0015"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0016"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0017"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0018"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0019"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0020"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0021"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0022"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0023"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0024"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0025"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0026"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0027"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0028"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0029"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0030"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0031"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0032"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0033"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0034"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0035"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0036"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0037"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0038"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0039"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0040"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0041"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0043"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0044"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0045"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0046"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0047"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0048"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0049"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0050"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0051"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0052"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0053"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0054"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0055"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0056"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0057"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0058"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0059"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0065"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0066"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0067"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0069"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0070"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0071"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0072"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0073"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0074"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0075"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0076"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0077"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0078"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0079"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0080"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0081"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0082"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0083"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0084"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0085"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0086"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0087"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0088"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0089"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0090"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0091"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0092"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0093"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0094"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0095"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0096"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0097"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0098"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0099"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0100"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Hommes",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "debate",
+          "entity_id": "debate"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0001"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0002"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0003"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0004"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0006"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0007"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0008"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0012"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0013"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0014"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0015"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0017"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0019"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0021"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0022"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0023"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0026"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0028"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0030"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0031"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0032"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0033"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0042"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0045"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0068"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Injustice",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0042"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Intériorisation",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0064"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Machisme",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0002"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0019"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0021"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0022"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0023"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Médias",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0069"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Non-mixité",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0008"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Parole",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0028"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Pouvoir",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0063"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "preuve",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0004"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Privilèges",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0007"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0019"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0045"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Prosélytisme",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0033"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Rivalité",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0022"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Sensibilité",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0019"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Sexisme",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0001"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0002"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0003"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0011"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0013"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0015"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0019"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0021"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0022"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0023"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0026"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0028"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0030"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0031"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0032"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0033"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0042"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0060"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0061"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0062"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0063"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0064"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0068"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0069"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0070"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Socialisation",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0006"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0012"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0014"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0017"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Souffrance",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0014"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Séduction",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0023"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Traitement médiatique",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": true,
+      "multiword_exception_rationale": "Locution thématique conventionnelle « Traitement médiatique » : son sens encyclopédique ne se réduit pas à une simple intersection de ses constituants.",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0069"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Tâches domestiques",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": true,
+      "multiword_exception_rationale": "Locution thématique conventionnelle « Tâches domestiques » : son sens encyclopédique ne se réduit pas à une simple intersection de ses constituants.",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0062"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Victime",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0070"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Violence",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0001"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0013"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0015"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Violences",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0060"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Violences sexistes",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": true,
+      "multiword_exception_rationale": "Locution thématique conventionnelle « Violences sexistes » : son sens encyclopédique ne se réduit pas à une simple intersection de ses constituants.",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0028"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0070"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Virilisme",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0002"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0019"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0021"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0022"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0023"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Virilité",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0014"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Éducation",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0032"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Égoïsme",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0012"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    },
+    {
+      "fr": "Émancipation",
+      "en": null,
+      "definition": "",
+      "kind": null,
+      "capitalization_policy": null,
+      "capitalization_rationale": "",
+      "atomic_concept": true,
+      "compositional_intersection": false,
+      "multiword_exception": false,
+      "multiword_exception_rationale": "",
+      "status": "pending_review",
+      "usages": [
+        {
+          "entity_type": "argument",
+          "entity_id": "A0023"
+        },
+        {
+          "entity_type": "argument",
+          "entity_id": "A0031"
+        }
+      ],
+      "decision": "pending",
+      "rationale": ""
+    }
+  ]
+}

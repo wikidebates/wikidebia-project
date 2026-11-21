@@ -1,0 +1,18 @@
+{
+  "schema": "wikidebia-corpus-promotion-receipt-1.0",
+  "status": "promoted",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "source": ".state/corpus-builds/les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "destination": "corpus/les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "review_sha256": "ed5cfb009198c8cb438b4fe67ab168e76d38a95c2386daba76d2bb0f5b42026c",
+  "approved_build_sha256": "101cac93b48c84b0eba5a3e95b59820b4f5030d34506ad4e697c14beb676a2f0",
+  "structural_sha256": "e9fbfc80def372a7370567a985a704eb41cb6417c51c59e423d3ad7a3002993d",
+  "tree_sha256_before": "cba4265ca0df180f0240547c9b556ede70d49d17e62d4b1d330979fa00c77659",
+  "tree_sha256_after": "cba4265ca0df180f0240547c9b556ede70d49d17e62d4b1d330979fa00c77659",
+  "validation_result": "passed",
+  "validation_report_sha256": "8a28a50d1c796322a9fe16271f670ffddd58f3e116ca0ad864a72c1bd7ac2d8d",
+  "atomic_rename": true,
+  "final_pages_generated": false,
+  "promoted_at": "2026-10-22T14:33:10+00:00",
+  "receipt_sha256": "28d44da58b38618b28355b427a2d2856668795e7a2dcbd21bfd1cefab22d6337"
+}

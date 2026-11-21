@@ -1,0 +1,8 @@
+{{Argument
+|résumé=Écarts de salaires, pauvreté, précarité économique, discriminations à l'embauche
+|justifications=
+|objections=
+|rubriques=Économie, Politique, Société
+|mots-clés=Sexisme, Femmes, Discriminations
+|date-création=2019-11-24
+}}

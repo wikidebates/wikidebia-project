@@ -1,0 +1,7 @@
+{{Argument
+|objections={{Objection
+|page=C'est plutôt l'inverse
+|titre-affiché=C'est plutôt l'inverse
+}}
+|date-création=2021-03-18
+}}

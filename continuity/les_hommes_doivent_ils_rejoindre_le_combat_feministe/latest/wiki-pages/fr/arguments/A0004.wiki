@@ -1,0 +1,24 @@
+{{Argument
+|initialisation=Objection@16448
+|citations={{Citation
+|citation=C’est un homme, le socialiste August Bebel, qui a écrit un ouvrage qui a fait date, ''La femme et le socialisme'' (1879). [Alors], quand j’entends aujourd’hui certaines féministes renvoyer tous les hommes dans le camp d’en face en parlant de « privilège mâle », je ne peux pas être d’accord. Les hommes qui se sont engagés dans le combat révolutionnaire ont eux aussi contribué à faire évoluer bien des idées. Et je le dis avec d’autant plus de confiance que, même si à Lutte ouvrière, comme dans les autres partis, les hommes sont majoritaires – ce qui n’est évidemment pas un choix – , cette majorité a choisi pour porte-parole une femme, Arlette Laguiller, dès 1974, en en faisant même la première femme candidate à une élection présidentielle en France. Non seulement ce choix s’est confirmé par la suite, mais il s’est même renouvelé lorsque j’ai été à mon tour désignée pour lui succéder dans ce rôle en 2008.
+|auteurs=Nathalie Arthaud
+|ouvrage=Communiste, révolutionnaire, internationaliste !
+|édition=Les bons caractères
+|date=2022
+|lien=https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste
+}}
+|justifications={{Justification
+|page=Le médecin communiste Willy Peers a permis la légalisation de l'avortement et la démocratisation de la contraception en Belgique
+|titre-affiché=Les femmes belges doivent leur droit à l'avortement, à la contraception et à l'accouchement sans douleur à Willy Peers
+}}{{Justification
+|page=Lénine avait lui-même des sensibilités féministes
+|titre-affiché=Lénine avait lui-même des sensibilités féministes
+}}{{Justification
+|page=Victor Hugo avait des idées très féministes
+|titre-affiché=Victor Hugo avait des idées très féministes
+}}
+|rubriques=Politique
+|mots-clés=hommes, preuve, féminisme
+|date-création=2023-04-03
+}}

@@ -1,0 +1,2161 @@
+{
+  "corpus_init_version": "1.0.0",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "imported_at": "2026-10-22T11:58:41+00:00",
+  "kit_version": "2.16.47",
+  "normalizations": [
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "La société doit en finir avec le sexisme",
+      "source_title": "La société doit en finir avec le sexisme"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Une société ne peut pas fonctionner correctement si elle est égalitaire",
+      "source_title": "Une société ne peut pas fonctionner correctement si elle est égalitaire"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes sont socialisés pour se sentir supérieurs aux femmes",
+      "source_title": "Les hommes sont socialisés pour se sentir supérieurs aux femmes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes",
+      "source_title": "La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes bénéficient des discriminations envers les femmes",
+      "source_title": "Les hommes bénéficient des discriminations envers les femmes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "La masculinité toxique génèrent des troubles mentaux et des suicides chez les hommes",
+      "source_title": "La masculinité toxique génèrent des troubles mentaux et des suicides chez les hommes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "La masculinité toxique est le terreau de l'homophobie",
+      "source_title": "La masculinité toxique est le terreau de l'homophobie"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes",
+      "source_title": "Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les femmes ont intérêt à mener le combat féministe sans les hommes",
+      "source_title": "Les femmes ont intérêt à mener le combat féministe sans les hommes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Le combat féministe n'avancera que si les hommes décident de lâcher du lest",
+      "source_title": "Le combat féministe n'avancera que si les hommes décident de lâcher du lest"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Le féminisme sera victorieux quand tous les hommes y adhèreront",
+      "source_title": "Le féminisme sera victorieux quand tous les hommes y adhèreront"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes ne subissent pas l'épuisement généré par les discriminations sexistes",
+      "source_title": "Les hommes ne subissent pas l'épuisement généré par les discriminations sexistes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Le médecin communiste Willy Peers a permis la légalisation de l'avortement et la démocratisation de la contraception en Belgique",
+      "source_title": "Le médecin communiste Willy Peers a permis la légalisation de l'avortement et la démocratisation de la contraception en Belgique"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Lénine avait lui-même des sensibilités féministes",
+      "source_title": "Lénine avait lui-même des sensibilités féministes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Victor Hugo avait des idées très féministes",
+      "source_title": "Victor Hugo avait des idées très féministes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Une société n'est fonctionnelle que si elle est égalitaire",
+      "source_title": "Une société n'est fonctionnelle que si elle est égalitaire"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les inégalités hommes/femmes sont un gouffre financier pour la société",
+      "source_title": "Les inégalités hommes/femmes sont un gouffre financier pour la société"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Il est possible de leur donner une autre éducation",
+      "source_title": "Il est possible de leur donner une autre éducation"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Le mouvement féministe doit rester à l'abri de la domination masculine",
+      "source_title": "Le mouvement féministe doit rester à l'abri de la domination masculine"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes qui assument leur féminisme sont rejetés par les autres hommes",
+      "source_title": "Les hommes qui assument leur féminisme sont rejetés par les autres hommes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes n'ont pas de privilèges",
+      "source_title": "Les hommes n'ont pas de privilèges"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les femmes doivent s'organiser en non-mixité pour créer un espace d'échange sûr et rassurant",
+      "source_title": "Les femmes doivent s'organiser en non-mixité pour créer un espace d'échange sûr et rassurant"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "La non-mixité doit être une solution temporaire",
+      "source_title": "La non-mixité doit être une solution temporaire"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les femmes doivent s'organiser en non-mixité pour ne pas avoir à tout réexpliquer",
+      "source_title": "Les femmes doivent s'organiser en non-mixité pour ne pas avoir à tout réexpliquer"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Le combat n'avancera pas si on n'éduque pas les hommes",
+      "source_title": "Le combat n'avancera pas si on n'éduque pas les hommes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les femmes doivent s'organiser en non-mixité pour parler et communiquer librement",
+      "source_title": "Les femmes doivent s'organiser en non-mixité pour parler et communiquer librement"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience du caractère systémique de la domination",
+      "source_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience du caractère systémique de la domination"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les femmes doivent s'organiser en non-mixité pour renforcer la sororité",
+      "source_title": "Les femmes doivent s'organiser en non-mixité pour renforcer la sororité"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les femmes doivent s'organiser en non-mixité pour diriger la lutte par elles-mêmes",
+      "source_title": "Les femmes doivent s'organiser en non-mixité pour diriger la lutte par elles-mêmes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les femmes doivent s'organiser en non-mixité pour apprendre à être autonomes",
+      "source_title": "Les femmes doivent s'organiser en non-mixité pour apprendre à être autonomes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur valeur individuelle",
+      "source_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur valeur individuelle"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur force collective",
+      "source_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur force collective"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "C'est plutôt l'inverse",
+      "source_title": "C'est plutôt l'inverse"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les femmes sont sans cesse ramenées à leur corps et à leur apparence",
+      "source_title": "Les femmes sont sans cesse ramenées à leur corps et à leur apparence"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Beaucoup d'hommes ne sont pas égoïstes",
+      "source_title": "Beaucoup d'hommes ne sont pas égoïstes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "La socialisation vise à lutter contre notre égoïsme naturel",
+      "source_title": "La socialisation vise à lutter contre notre égoïsme naturel"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "La domination masculine est de nos jours largement contestée dans tous les domaines de la société",
+      "source_title": "La domination masculine est de nos jours largement contestée dans tous les domaines de la société"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques sexistes",
+      "source_title": "Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques sexistes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "L'éducation vise à développer notre empathie",
+      "source_title": "L'éducation vise à développer notre empathie"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Le terme \"déshumaniser\" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe",
+      "source_title": "Le terme \"déshumaniser\" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "L'injonction à la répression des émotions déteriore la santé mentale des hommes",
+      "source_title": "L'injonction à la répression des émotions déteriore la santé mentale des hommes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "L'expression des émotions affaiblirait la domination des hommes",
+      "source_title": "L'expression des émotions affaiblirait la domination des hommes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Seulement ceux qui se conforment à l'injonction à la virilité",
+      "source_title": "Seulement ceux qui se conforment à l'injonction à la virilité"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "En renonçant à la virilité, les hommes perdraient leur pouvoir",
+      "source_title": "En renonçant à la virilité, les hommes perdraient leur pouvoir"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "La virilité n'a pas que des mauvais côtés",
+      "source_title": "La virilité n'a pas que des mauvais côtés"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "La rivalité est une source d'émulation",
+      "source_title": "La rivalité est une source d'émulation"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes",
+      "source_title": "La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction",
+      "source_title": "Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "De nombreuses femmes préfèrent les hommes dominants",
+      "source_title": "De nombreuses femmes préfèrent les hommes dominants"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes",
+      "source_title": "L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes",
+      "source_title": "Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes utilisent leur accès privilégié à la parole pour conforter la domination masculine",
+      "source_title": "Les hommes utilisent leur accès privilégié à la parole pour conforter la domination masculine"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes n'ont aucun intérêt à utiliser leur accès privilégié à la parole pour dénoncer le sexisme",
+      "source_title": "Les hommes n'ont aucun intérêt à utiliser leur accès privilégié à la parole pour dénoncer le sexisme"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place",
+      "source_title": "Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent",
+      "source_title": "Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes qui défendent le féminisme ne sont pas pris au sérieux",
+      "source_title": "Les hommes qui défendent le féminisme ne sont pas pris au sérieux"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "La majorité des hommes dominent leur compagne et freinent leur émancipation",
+      "source_title": "La majorité des hommes dominent leur compagne et freinent leur émancipation"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques",
+      "source_title": "Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes",
+      "source_title": "Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille",
+      "source_title": "Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les couples lesbiens sont tout à fait aptes à élever un enfant",
+      "source_title": "Les couples lesbiens sont tout à fait aptes à élever un enfant"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes pro féministes ne sont pas pris au sérieux par les autres hommes",
+      "source_title": "Les hommes pro féministes ne sont pas pris au sérieux par les autres hommes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "C'est la société qui est responsable du sexisme, pas les hommes",
+      "source_title": "C'est la société qui est responsable du sexisme, pas les hommes"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Les hommes ne sont pas capables d'agir par devoir",
+      "source_title": "Les hommes ne sont pas capables d'agir par devoir"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "La manière dont le femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation",
+      "source_title": "La manière dont le femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation"
+    },
+    {
+      "metadata_fallbacks": [
+        "rubrique:Politique",
+        "mot-clé:Féminisme"
+      ],
+      "registry_title": "Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base",
+      "source_title": "Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base"
+    }
+  ],
+  "normative_occurrence_note": {
+    "explanation": "Le registre normatif crée une occurrence racine ou une occurrence par relation active; une occurrence secondaire ne développe pas ses enfants.",
+    "normative_occurrences": 125,
+    "source_unfolded_occurrences": 238
+  },
+  "pages": [
+    {
+      "canonical_title": "Les hommes doivent-ils rejoindre le combat féministe ?",
+      "fetched_at": "2026-10-22T11:56:22.978205+00:00",
+      "import_path": "imports/fr/debate/debate.wiki",
+      "kind": "debate",
+      "page_id": null,
+      "redirect_chain": [],
+      "relative_path": "pages/debate.wiki",
+      "requested_title": "Les hommes doivent-ils rejoindre le combat féministe ?",
+      "revision_id": 240635,
+      "revision_timestamp": "2026-08-10T20:56:39Z",
+      "sha256": "e325cd0b57b3cb4df7d07ec5502cb7b003c4a190fd3ce9765f969f226ea21ec2",
+      "size_bytes": 2154,
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_doivent-ils_rejoindre_le_combat_f%C3%A9ministe_%3F"
+    },
+    {
+      "canonical_title": "Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes",
+      "fetched_at": "2026-10-22T11:56:23.286888+00:00",
+      "import_path": "imports/fr/arguments/A0001.wiki",
+      "kind": "argument",
+      "page_id": "A0001",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0064_les_hommes_ne_peuvent_pas_rester_indifferents_face_aux_discriminations_e_d09df6a78501.wiki",
+      "requested_title": "Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes",
+      "revision_id": 206928,
+      "revision_timestamp": "2026-03-21T20:33:11Z",
+      "sha256": "5a5194fab4fd44276960c4428d268f0572b1088f9ca6180cc6a8dbc395224a08",
+      "size_bytes": 1546,
+      "source_graph_title": "Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ne_peuvent_pas_rester_indiff%C3%A9rents_face_aux_discriminations_et_aux_violences_faites_aux_femmes"
+    },
+    {
+      "canonical_title": "Les hommes ont intérêt à en finir avec le sexisme",
+      "fetched_at": "2026-10-22T11:56:23.559571+00:00",
+      "import_path": "imports/fr/arguments/A0002.wiki",
+      "kind": "argument",
+      "page_id": "A0002",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0076_les_hommes_ont_interet_a_en_finir_avec_le_sexisme_8185204b7618.wiki",
+      "requested_title": "Les hommes ont intérêt à en finir avec le sexisme",
+      "revision_id": 206930,
+      "revision_timestamp": "2026-03-21T20:33:11Z",
+      "sha256": "0b6538f7b4f1a97675852fb57a44e529215f0421889b8456f16482edd48f9ef3",
+      "size_bytes": 1435,
+      "source_graph_title": "Les hommes ont intérêt à en finir avec le sexisme",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ont_int%C3%A9r%C3%AAt_%C3%A0_en_finir_avec_le_sexisme"
+    },
+    {
+      "canonical_title": "Les femmes ont besoin des hommes pour en finir avec le sexisme",
+      "fetched_at": "2026-10-22T11:56:23.823253+00:00",
+      "import_path": "imports/fr/arguments/A0003.wiki",
+      "kind": "argument",
+      "page_id": "A0003",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0050_les_femmes_ont_besoin_des_hommes_pour_en_finir_avec_le_sexisme_af3b14c30c7b.wiki",
+      "requested_title": "Les femmes ont besoin des hommes pour en finir avec le sexisme",
+      "revision_id": 206931,
+      "revision_timestamp": "2026-03-21T20:33:12Z",
+      "sha256": "0f5622f6207b61a1087d9156f9a00335bbdeada2a391c11e84fe816b8d8a3c13",
+      "size_bytes": 2319,
+      "source_graph_title": "Les femmes ont besoin des hommes pour en finir avec le sexisme",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_ont_besoin_des_hommes_pour_en_finir_avec_le_sexisme"
+    },
+    {
+      "canonical_title": "Bien des hommes ont fait la preuve de leur engagement pour le combat féministe",
+      "fetched_at": "2026-10-22T11:56:39.395365+00:00",
+      "import_path": "imports/fr/arguments/A0004.wiki",
+      "kind": "argument",
+      "page_id": "A0004",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0002_bien_des_hommes_ont_fait_la_preuve_de_leur_engagement_pour_le_combat_fem_5c6befc9cd65.wiki",
+      "requested_title": "Bien des hommes ont fait la preuve de leur engagement pour le combat féministe",
+      "revision_id": 216871,
+      "revision_timestamp": "2026-03-21T21:32:52Z",
+      "sha256": "42b915543cc7c9a06bd16a5205c9e94153681d585fd380cd2a81d7a7538a98b6",
+      "size_bytes": 1953,
+      "source_graph_title": "Bien des hommes ont fait la preuve de leur engagement pour le combat féministe",
+      "url": "https://fr.wikidebates.org/wiki/Bien_des_hommes_ont_fait_la_preuve_de_leur_engagement_pour_le_combat_f%C3%A9ministe"
+    },
+    {
+      "canonical_title": "La société doit en finir avec le sexisme",
+      "fetched_at": "2026-10-22T11:56:24.421704+00:00",
+      "import_path": "imports/fr/arguments/A0005.wiki",
+      "kind": "argument",
+      "page_id": "A0005",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0023_la_societe_doit_en_finir_avec_le_sexisme_35ea09ed6c8c.wiki",
+      "requested_title": "La société doit en finir avec le sexisme",
+      "revision_id": 208165,
+      "revision_timestamp": "2026-03-21T20:37:58Z",
+      "sha256": "3214c6bba5adf45f583993552f896b5f574f99b5b2d4d732a8e1f96513fca6c0",
+      "size_bytes": 411,
+      "source_graph_title": "La société doit en finir avec le sexisme",
+      "url": "https://fr.wikidebates.org/wiki/La_soci%C3%A9t%C3%A9_doit_en_finir_avec_le_sexisme"
+    },
+    {
+      "canonical_title": "Les hommes sont socialisés pour dominer les femmes",
+      "fetched_at": "2026-10-22T11:56:24.704927+00:00",
+      "import_path": "imports/fr/arguments/A0006.wiki",
+      "kind": "argument",
+      "page_id": "A0006",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0086_les_hommes_sont_socialises_pour_dominer_les_femmes_3296baaddd22.wiki",
+      "requested_title": "Les hommes sont socialisés pour dominer les femmes",
+      "revision_id": 206932,
+      "revision_timestamp": "2026-03-21T20:33:12Z",
+      "sha256": "1a385a0bc5c356639bd3acdcc7b4061e6675631bb4f211a50b868696ebb93116",
+      "size_bytes": 1986,
+      "source_graph_title": "Les hommes sont socialisés pour dominer les femmes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_sont_socialis%C3%A9s_pour_dominer_les_femmes"
+    },
+    {
+      "canonical_title": "Les hommes n'ont aucun intérêt à renoncer à leurs privilèges",
+      "fetched_at": "2026-10-22T11:56:57.706489+00:00",
+      "import_path": "imports/fr/arguments/A0007.wiki",
+      "kind": "argument",
+      "page_id": "A0007",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0060_les_hommes_n_ont_aucun_interet_a_renoncer_a_leurs_privileges_184d4f6e0ef8.wiki",
+      "requested_title": "Les hommes n'ont aucun intérêt à renoncer à leurs privilèges",
+      "revision_id": 206933,
+      "revision_timestamp": "2026-03-21T20:33:12Z",
+      "sha256": "efd7e0780d4a121636b2afd9d8c37e19681c30ae1898d6492de87cfad3dd5480",
+      "size_bytes": 1797,
+      "source_graph_title": "Les hommes n'ont aucun intérêt à renoncer à leurs privilèges",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_n%27ont_aucun_int%C3%A9r%C3%AAt_%C3%A0_renoncer_%C3%A0_leurs_privil%C3%A8ges"
+    },
+    {
+      "canonical_title": "Les femmes doivent s'organiser en non-mixité",
+      "fetched_at": "2026-10-22T11:56:25.306537+00:00",
+      "import_path": "imports/fr/arguments/A0008.wiki",
+      "kind": "argument",
+      "page_id": "A0008",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0040_les_femmes_doivent_s_organiser_en_non_mixite_31a06e23da8a.wiki",
+      "requested_title": "Les femmes doivent s'organiser en non-mixité",
+      "revision_id": 207133,
+      "revision_timestamp": "2026-03-21T20:33:55Z",
+      "sha256": "d6402147a5138b1b728a79a758f4004f450cc65fee21fdcc8658a914792cee3f",
+      "size_bytes": 2004,
+      "source_graph_title": "Les femmes doivent s'organiser en non-mixité",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_doivent_s%27organiser_en_non-mixit%C3%A9"
+    },
+    {
+      "canonical_title": "Une société ne peut pas fonctionner correctement si elle est égalitaire",
+      "fetched_at": "2026-10-22T11:56:25.585433+00:00",
+      "import_path": "imports/fr/arguments/A0009.wiki",
+      "kind": "argument",
+      "page_id": "A0009",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0099_une_societe_ne_peut_pas_fonctionner_correctement_si_elle_est_egalitaire_55cca8f89aa0.wiki",
+      "requested_title": "Une société ne peut pas fonctionner correctement si elle est égalitaire",
+      "revision_id": 208167,
+      "revision_timestamp": "2026-03-21T20:37:58Z",
+      "sha256": "18724e166d8a0fbe818bab3d211ab0b40a92d9eceb7056f36ff3f97b8625a04d",
+      "size_bytes": 137,
+      "source_graph_title": "Une société ne peut pas fonctionner correctement si elle est égalitaire",
+      "url": "https://fr.wikidebates.org/wiki/Une_soci%C3%A9t%C3%A9_ne_peut_pas_fonctionner_correctement_si_elle_est_%C3%A9galitaire"
+    },
+    {
+      "canonical_title": "Le féminisme est un mouvement politique où les hommes ne sont pas défendus",
+      "fetched_at": "2026-10-22T11:56:25.870859+00:00",
+      "import_path": "imports/fr/arguments/A0010.wiki",
+      "kind": "argument",
+      "page_id": "A0010",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0028_le_feminisme_est_un_mouvement_politique_ou_les_hommes_ne_sont_pas_defend_5013d24c772b.wiki",
+      "requested_title": "Le féminisme est un mouvement politique où les hommes ne sont pas défendus",
+      "revision_id": 217112,
+      "revision_timestamp": "2026-03-21T21:33:52Z",
+      "sha256": "8068fc21bc0789487b827fe2fdb7c240cb756b3875978a593f88c8d23d5ba189",
+      "size_bytes": 371,
+      "source_graph_title": "Le féminisme est un mouvement politique où les hommes ne sont pas défendus",
+      "url": "https://fr.wikidebates.org/wiki/Le_f%C3%A9minisme_est_un_mouvement_politique_o%C3%B9_les_hommes_ne_sont_pas_d%C3%A9fendus"
+    },
+    {
+      "canonical_title": "Le sexisme est omniprésent",
+      "fetched_at": "2026-10-22T11:56:26.152061+00:00",
+      "import_path": "imports/fr/arguments/A0011.wiki",
+      "kind": "argument",
+      "page_id": "A0011",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0034_le_sexisme_est_omnipresent_001a9529073c.wiki",
+      "requested_title": "Le sexisme est omniprésent",
+      "revision_id": 206929,
+      "revision_timestamp": "2026-03-21T20:33:11Z",
+      "sha256": "33ca8c3d915350dfa6d50d236c3a38f86fd7504a040177070aa7baa5c9b804a9",
+      "size_bytes": 1055,
+      "source_graph_title": "Le sexisme est omniprésent",
+      "url": "https://fr.wikidebates.org/wiki/Le_sexisme_est_omnipr%C3%A9sent"
+    },
+    {
+      "canonical_title": "Les hommes sont socialisés pour être égoïstes",
+      "fetched_at": "2026-10-22T11:56:45.813639+00:00",
+      "import_path": "imports/fr/arguments/A0012.wiki",
+      "kind": "argument",
+      "page_id": "A0012",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0090_les_hommes_sont_socialises_pour_etre_egoistes_5f56751c1c8f.wiki",
+      "requested_title": "Les hommes sont socialisés pour être égoïstes",
+      "revision_id": 207138,
+      "revision_timestamp": "2026-03-21T20:33:56Z",
+      "sha256": "df1bd9bc5bb47465fbd1d3edd4fd134e1e839885c6825b195ff73a6bdd7a3212",
+      "size_bytes": 1139,
+      "source_graph_title": "Les hommes sont socialisés pour être égoïstes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_sont_socialis%C3%A9s_pour_%C3%AAtre_%C3%A9go%C3%AFstes"
+    },
+    {
+      "canonical_title": "Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes",
+      "fetched_at": "2026-10-22T11:56:36.130646+00:00",
+      "import_path": "imports/fr/arguments/A0013.wiki",
+      "kind": "argument",
+      "page_id": "A0013",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0063_les_hommes_ne_peuvent_pas_ne_pas_voir_les_violences_et_les_discriminatio_ba90f82ef120.wiki",
+      "requested_title": "Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes",
+      "revision_id": 206939,
+      "revision_timestamp": "2026-03-21T20:33:13Z",
+      "sha256": "4cd33e5c0623e85e14f9bdbbedf34b611ae1061f3d880eaf15721f15b90584d1",
+      "size_bytes": 1402,
+      "source_graph_title": "Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ne_peuvent_pas_ne_pas_voir_les_violences_et_les_discriminations_sexistes"
+    },
+    {
+      "canonical_title": "Les hommes sont socialisés pour être indifférents à la souffrance",
+      "fetched_at": "2026-10-22T11:56:52.188055+00:00",
+      "import_path": "imports/fr/arguments/A0014.wiki",
+      "kind": "argument",
+      "page_id": "A0014",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0089_les_hommes_sont_socialises_pour_etre_indifferents_a_la_souffrance_3d8c0664750e.wiki",
+      "requested_title": "Les hommes sont socialisés pour être indifférents à la souffrance",
+      "revision_id": 206945,
+      "revision_timestamp": "2026-03-21T20:33:14Z",
+      "sha256": "3de4fb9cfdb6bdfdc75c90048dfa01ff5ec0171000470e28dbdc98b0e51a8cc6",
+      "size_bytes": 1044,
+      "source_graph_title": "Les hommes sont socialisés pour être indifférents à la souffrance",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_sont_socialis%C3%A9s_pour_%C3%AAtre_indiff%C3%A9rents_%C3%A0_la_souffrance"
+    },
+    {
+      "canonical_title": "Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité",
+      "fetched_at": "2026-10-22T11:56:36.392754+00:00",
+      "import_path": "imports/fr/arguments/A0015.wiki",
+      "kind": "argument",
+      "page_id": "A0015",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0065_les_hommes_ne_peuvent_pas_rester_insensibles_au_sort_reserve_a_une_moiti_7763f101d17c.wiki",
+      "requested_title": "Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité",
+      "revision_id": 206975,
+      "revision_timestamp": "2026-03-21T20:33:21Z",
+      "sha256": "409f1868e474a3a0978635a39f18617beb802ca6b2b2222d0f9fb447e202a2b9",
+      "size_bytes": 1472,
+      "source_graph_title": "Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ne_peuvent_pas_rester_insensibles_au_sort_r%C3%A9serv%C3%A9_%C3%A0_une_moiti%C3%A9_de_l%27humanit%C3%A9"
+    },
+    {
+      "canonical_title": "Les hommes sont socialisés pour se sentir supérieurs aux femmes",
+      "fetched_at": "2026-10-22T11:56:46.346426+00:00",
+      "import_path": "imports/fr/arguments/A0016.wiki",
+      "kind": "argument",
+      "page_id": "A0016",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0088_les_hommes_sont_socialises_pour_se_sentir_superieurs_aux_femmes_9b4f577a32b2.wiki",
+      "requested_title": "Les hommes sont socialisés pour se sentir supérieurs aux femmes",
+      "revision_id": 239230,
+      "revision_timestamp": "2026-08-07T13:09:03Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes sont socialisés pour se sentir supérieurs aux femmes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_sont_socialis%C3%A9s_pour_se_sentir_sup%C3%A9rieurs_aux_femmes"
+    },
+    {
+      "canonical_title": "Les hommes sont socialisés pour déshumaniser les femmes",
+      "fetched_at": "2026-10-22T11:56:46.632258+00:00",
+      "import_path": "imports/fr/arguments/A0017.wiki",
+      "kind": "argument",
+      "page_id": "A0017",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0087_les_hommes_sont_socialises_pour_deshumaniser_les_femmes_66cf04943b91.wiki",
+      "requested_title": "Les hommes sont socialisés pour déshumaniser les femmes",
+      "revision_id": 207137,
+      "revision_timestamp": "2026-03-21T20:33:56Z",
+      "sha256": "036c92c4329a82bdaf1a894a1207577fd53628982ad7a174498a95db447e1aff",
+      "size_bytes": 1189,
+      "source_graph_title": "Les hommes sont socialisés pour déshumaniser les femmes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_sont_socialis%C3%A9s_pour_d%C3%A9shumaniser_les_femmes"
+    },
+    {
+      "canonical_title": "La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes",
+      "fetched_at": "2026-10-22T11:56:46.895746+00:00",
+      "import_path": "imports/fr/arguments/A0018.wiki",
+      "kind": "argument",
+      "page_id": "A0018",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0024_la_solidarite_masculine_est_construite_sur_le_denigrement_et_l_exclusion_7a7ef966b082.wiki",
+      "requested_title": "La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes",
+      "revision_id": 237726,
+      "revision_timestamp": "2026-08-07T12:55:16Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes",
+      "url": "https://fr.wikidebates.org/wiki/La_solidarit%C3%A9_masculine_est_construite_sur_le_d%C3%A9nigrement_et_l%27exclusion_des_femmes"
+    },
+    {
+      "canonical_title": "Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions",
+      "fetched_at": "2026-10-22T11:56:38.063910+00:00",
+      "import_path": "imports/fr/arguments/A0019.wiki",
+      "kind": "argument",
+      "page_id": "A0019",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0072_les_hommes_ont_interet_a_en_finir_avec_le_machisme_pour_assumer_leur_sen_6d13debecf42.wiki",
+      "requested_title": "Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions",
+      "revision_id": 206994,
+      "revision_timestamp": "2026-03-21T20:33:25Z",
+      "sha256": "cc137e34ffa27036b5b2f2178b1a3956fb0f034490a876de1f5d84813fc2ffed",
+      "size_bytes": 576,
+      "source_graph_title": "Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ont_int%C3%A9r%C3%AAt_%C3%A0_en_finir_avec_le_machisme_pour_assumer_leur_sensibilit%C3%A9_et_leurs_%C3%A9motions"
+    },
+    {
+      "canonical_title": "Les hommes bénéficient des discriminations envers les femmes",
+      "fetched_at": "2026-10-22T11:56:37.235910+00:00",
+      "import_path": "imports/fr/arguments/A0020.wiki",
+      "kind": "argument",
+      "page_id": "A0020",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0057_les_hommes_beneficient_des_discriminations_envers_les_femmes_8c9d380b5097.wiki",
+      "requested_title": "Les hommes bénéficient des discriminations envers les femmes",
+      "revision_id": 208164,
+      "revision_timestamp": "2026-03-21T20:37:57Z",
+      "sha256": "5b85022c189c5fe18730c955eaf787fa265ff5fb72d8780fc9f15d150cba07fa",
+      "size_bytes": 219,
+      "source_graph_title": "Les hommes bénéficient des discriminations envers les femmes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_b%C3%A9n%C3%A9ficient_des_discriminations_envers_les_femmes"
+    },
+    {
+      "canonical_title": "Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité",
+      "fetched_at": "2026-10-22T11:56:38.325743+00:00",
+      "import_path": "imports/fr/arguments/A0021.wiki",
+      "kind": "argument",
+      "page_id": "A0021",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0073_les_hommes_ont_interet_a_en_finir_avec_le_machisme_pour_se_delivrer_de_l_7457946ff084.wiki",
+      "requested_title": "Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité",
+      "revision_id": 206995,
+      "revision_timestamp": "2026-03-21T20:33:25Z",
+      "sha256": "7a4d9ca2e9c9b0c4d774e9fdee13e7251b8ac9c9eb6d466a5f85120f5d9178d4",
+      "size_bytes": 440,
+      "source_graph_title": "Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ont_int%C3%A9r%C3%AAt_%C3%A0_en_finir_avec_le_machisme_pour_se_d%C3%A9livrer_de_l%27injonction_%C3%A0_la_virilit%C3%A9"
+    },
+    {
+      "canonical_title": "Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes",
+      "fetched_at": "2026-10-22T11:56:38.588204+00:00",
+      "import_path": "imports/fr/arguments/A0022.wiki",
+      "kind": "argument",
+      "page_id": "A0022",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0075_les_hommes_ont_interet_a_en_finir_avec_le_machisme_pour_sortir_des_rappo_be385ebc1366.wiki",
+      "requested_title": "Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes",
+      "revision_id": 206996,
+      "revision_timestamp": "2026-03-21T20:33:25Z",
+      "sha256": "ac9a6d8612eb74d40727ccf42adf3e457412125a25e4a91e5c3237cacc0385d8",
+      "size_bytes": 469,
+      "source_graph_title": "Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ont_int%C3%A9r%C3%AAt_%C3%A0_en_finir_avec_le_machisme_pour_sortir_des_rapports_de_rivalit%C3%A9_entre_hommes"
+    },
+    {
+      "canonical_title": "Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction",
+      "fetched_at": "2026-10-22T11:56:38.867403+00:00",
+      "import_path": "imports/fr/arguments/A0023.wiki",
+      "kind": "argument",
+      "page_id": "A0023",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0074_les_hommes_ont_interet_a_en_finir_avec_le_machisme_pour_simplifier_et_li_0d2d59fa6588.wiki",
+      "requested_title": "Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction",
+      "revision_id": 206997,
+      "revision_timestamp": "2026-03-21T20:33:26Z",
+      "sha256": "462545bd2a4cd2bfe8545358bf89a97fb0146250ba16a1b331a9c1fdfea323ea",
+      "size_bytes": 694,
+      "source_graph_title": "Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ont_int%C3%A9r%C3%AAt_%C3%A0_en_finir_avec_le_machisme_pour_simplifier_et_lib%C3%A9rer_les_rapports_de_s%C3%A9duction"
+    },
+    {
+      "canonical_title": "La masculinité toxique génèrent des troubles mentaux et des suicides chez les hommes",
+      "fetched_at": "2026-10-22T11:56:29.376993+00:00",
+      "import_path": "imports/fr/arguments/A0024.wiki",
+      "kind": "argument",
+      "page_id": "A0024",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0019_la_masculinite_toxique_generent_des_troubles_mentaux_et_des_suicides_che_c0009c6ee546.wiki",
+      "requested_title": "La masculinité toxique génèrent des troubles mentaux et des suicides chez les hommes",
+      "revision_id": 237720,
+      "revision_timestamp": "2026-08-07T12:55:07Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "La masculinité toxique génèrent des troubles mentaux et des suicides chez les hommes",
+      "url": "https://fr.wikidebates.org/wiki/La_masculinit%C3%A9_toxique_g%C3%A9n%C3%A8rent_des_troubles_mentaux_et_des_suicides_chez_les_hommes"
+    },
+    {
+      "canonical_title": "La masculinité toxique est le terreau de l'homophobie",
+      "fetched_at": "2026-10-22T11:56:29.656920+00:00",
+      "import_path": "imports/fr/arguments/A0025.wiki",
+      "kind": "argument",
+      "page_id": "A0025",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0018_la_masculinite_toxique_est_le_terreau_de_l_homophobie_b94d32b29749.wiki",
+      "requested_title": "La masculinité toxique est le terreau de l'homophobie",
+      "revision_id": 237598,
+      "revision_timestamp": "2026-08-07T12:54:14Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "La masculinité toxique est le terreau de l'homophobie",
+      "url": "https://fr.wikidebates.org/wiki/La_masculinit%C3%A9_toxique_est_le_terreau_de_l%27homophobie"
+    },
+    {
+      "canonical_title": "Seul un changement de comportement des hommes pourra mettre fin au sexisme",
+      "fetched_at": "2026-10-22T11:56:30.185708+00:00",
+      "import_path": "imports/fr/arguments/A0026.wiki",
+      "kind": "argument",
+      "page_id": "A0026",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0096_seul_un_changement_de_comportement_des_hommes_pourra_mettre_fin_au_sexis_979443d234ad.wiki",
+      "requested_title": "Seul un changement de comportement des hommes pourra mettre fin au sexisme",
+      "revision_id": 206940,
+      "revision_timestamp": "2026-03-21T20:33:13Z",
+      "sha256": "6af1924196ddb1a365a9cb71696142837d447fc6d3c380afc5a175ef4a9d7693",
+      "size_bytes": 605,
+      "source_graph_title": "Seul un changement de comportement des hommes pourra mettre fin au sexisme",
+      "url": "https://fr.wikidebates.org/wiki/Seul_un_changement_de_comportement_des_hommes_pourra_mettre_fin_au_sexisme"
+    },
+    {
+      "canonical_title": "Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes",
+      "fetched_at": "2026-10-22T11:56:32.634371+00:00",
+      "import_path": "imports/fr/arguments/A0027.wiki",
+      "kind": "argument",
+      "page_id": "A0027",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0054_les_femmes_sont_parfaitement_capables_de_mener_le_combat_feministe_par_e_0322e4f678ce.wiki",
+      "requested_title": "Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes",
+      "revision_id": 208168,
+      "revision_timestamp": "2026-03-21T20:37:58Z",
+      "sha256": "a3c4f62dc88242b51e7c102f43c9fd3dc145e0e6945363f4af78bdc034989c07",
+      "size_bytes": 259,
+      "source_graph_title": "Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_sont_parfaitement_capables_de_mener_le_combat_f%C3%A9ministe_par_elles-m%C3%AAmes"
+    },
+    {
+      "canonical_title": "Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes",
+      "fetched_at": "2026-10-22T11:56:30.469403+00:00",
+      "import_path": "imports/fr/arguments/A0028.wiki",
+      "kind": "argument",
+      "page_id": "A0028",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0079_les_hommes_peuvent_faire_reculer_les_violences_sexistes_en_prenant_au_se_9cf69affd57c.wiki",
+      "requested_title": "Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes",
+      "revision_id": 206941,
+      "revision_timestamp": "2026-03-21T20:33:14Z",
+      "sha256": "be2510e6d526f222e32de4dee23577d801e6aff52b1456ce1c984a012247bf8a",
+      "size_bytes": 497,
+      "source_graph_title": "Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_peuvent_faire_reculer_les_violences_sexistes_en_prenant_au_s%C3%A9rieux_la_parole_des_femmes_victimes"
+    },
+    {
+      "canonical_title": "Les femmes ont intérêt à mener le combat féministe sans les hommes",
+      "fetched_at": "2026-10-22T11:56:32.899116+00:00",
+      "import_path": "imports/fr/arguments/A0029.wiki",
+      "kind": "argument",
+      "page_id": "A0029",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0051_les_femmes_ont_interet_a_mener_le_combat_feministe_sans_les_hommes_82c2f9289e60.wiki",
+      "requested_title": "Les femmes ont intérêt à mener le combat féministe sans les hommes",
+      "revision_id": 239270,
+      "revision_timestamp": "2026-08-07T13:09:18Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les femmes ont intérêt à mener le combat féministe sans les hommes",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_ont_int%C3%A9r%C3%AAt_%C3%A0_mener_le_combat_f%C3%A9ministe_sans_les_hommes"
+    },
+    {
+      "canonical_title": "Les hommes ont davantage de moyens d'être entendus dans la société",
+      "fetched_at": "2026-10-22T11:56:30.733908+00:00",
+      "import_path": "imports/fr/arguments/A0030.wiki",
+      "kind": "argument",
+      "page_id": "A0030",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0069_les_hommes_ont_davantage_de_moyens_d_etre_entendus_dans_la_societe_31c7dd5d71c0.wiki",
+      "requested_title": "Les hommes ont davantage de moyens d'être entendus dans la société",
+      "revision_id": 206942,
+      "revision_timestamp": "2026-03-21T20:33:14Z",
+      "sha256": "ac713cc4c7552b7784c17b5548c68426aa6a08bdde90bc28c65bbe41d82e473e",
+      "size_bytes": 1682,
+      "source_graph_title": "Les hommes ont davantage de moyens d'être entendus dans la société",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ont_davantage_de_moyens_d%27%C3%AAtre_entendus_dans_la_soci%C3%A9t%C3%A9"
+    },
+    {
+      "canonical_title": "Les hommes peuvent faciliter et encourager l'émancipation de leur compagne",
+      "fetched_at": "2026-10-22T11:56:30.999161+00:00",
+      "import_path": "imports/fr/arguments/A0031.wiki",
+      "kind": "argument",
+      "page_id": "A0031",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0078_les_hommes_peuvent_faciliter_et_encourager_l_emancipation_de_leur_compag_203f44bd269e.wiki",
+      "requested_title": "Les hommes peuvent faciliter et encourager l'émancipation de leur compagne",
+      "revision_id": 206943,
+      "revision_timestamp": "2026-03-21T20:33:14Z",
+      "sha256": "f97f85b2b971feb1c4c9a3cb96b08b48ac55be630f7feb12e17249a6db613203",
+      "size_bytes": 742,
+      "source_graph_title": "Les hommes peuvent faciliter et encourager l'émancipation de leur compagne",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_peuvent_faciliter_et_encourager_l%27%C3%A9mancipation_de_leur_compagne"
+    },
+    {
+      "canonical_title": "Les hommes jouent un rôle essentiel dans l'éducation des enfants",
+      "fetched_at": "2026-10-22T11:56:31.284740+00:00",
+      "import_path": "imports/fr/arguments/A0032.wiki",
+      "kind": "argument",
+      "page_id": "A0032",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0059_les_hommes_jouent_un_role_essentiel_dans_l_education_des_enfants_989452e0976d.wiki",
+      "requested_title": "Les hommes jouent un rôle essentiel dans l'éducation des enfants",
+      "revision_id": 206944,
+      "revision_timestamp": "2026-03-21T20:33:14Z",
+      "sha256": "43a0d35ce36624919decc534225d490832c0ca82001613a9f4e7a9b3f7ba211d",
+      "size_bytes": 1443,
+      "source_graph_title": "Les hommes jouent un rôle essentiel dans l'éducation des enfants",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_jouent_un_r%C3%B4le_essentiel_dans_l%27%C3%A9ducation_des_enfants"
+    },
+    {
+      "canonical_title": "Les hommes peuvent parler et convaincre d'autres hommes de la nécessité du féminisme",
+      "fetched_at": "2026-10-22T11:56:31.549059+00:00",
+      "import_path": "imports/fr/arguments/A0033.wiki",
+      "kind": "argument",
+      "page_id": "A0033",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0080_les_hommes_peuvent_parler_et_convaincre_d_autres_hommes_de_la_necessite__cf9a90bd2610.wiki",
+      "requested_title": "Les hommes peuvent parler et convaincre d'autres hommes de la nécessité du féminisme",
+      "revision_id": 207130,
+      "revision_timestamp": "2026-03-21T20:33:54Z",
+      "sha256": "4d1597d8f4cabca6655509977afe4880d741a09f68334f8cdbaeafcd18c1140d",
+      "size_bytes": 508,
+      "source_graph_title": "Les hommes peuvent parler et convaincre d'autres hommes de la nécessité du féminisme",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_peuvent_parler_et_convaincre_d%27autres_hommes_de_la_n%C3%A9cessit%C3%A9_du_f%C3%A9minisme"
+    },
+    {
+      "canonical_title": "Le combat féministe n'avancera que si les hommes décident de lâcher du lest",
+      "fetched_at": "2026-10-22T11:56:31.813450+00:00",
+      "import_path": "imports/fr/arguments/A0034.wiki",
+      "kind": "argument",
+      "page_id": "A0034",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0026_le_combat_feministe_n_avancera_que_si_les_hommes_decident_de_lacher_du_l_58c13c701439.wiki",
+      "requested_title": "Le combat féministe n'avancera que si les hommes décident de lâcher du lest",
+      "revision_id": 238927,
+      "revision_timestamp": "2026-08-07T13:07:26Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Le combat féministe n'avancera que si les hommes décident de lâcher du lest",
+      "url": "https://fr.wikidebates.org/wiki/Le_combat_f%C3%A9ministe_n%27avancera_que_si_les_hommes_d%C3%A9cident_de_l%C3%A2cher_du_lest"
+    },
+    {
+      "canonical_title": "Le féminisme sera victorieux quand tous les hommes y adhèreront",
+      "fetched_at": "2026-10-22T11:56:32.078234+00:00",
+      "import_path": "imports/fr/arguments/A0035.wiki",
+      "kind": "argument",
+      "page_id": "A0035",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0030_le_feminisme_sera_victorieux_quand_tous_les_hommes_y_adhereront_a2627bda9ad2.wiki",
+      "requested_title": "Le féminisme sera victorieux quand tous les hommes y adhèreront",
+      "revision_id": 238613,
+      "revision_timestamp": "2026-08-07T13:05:49Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Le féminisme sera victorieux quand tous les hommes y adhèreront",
+      "url": "https://fr.wikidebates.org/wiki/Le_f%C3%A9minisme_sera_victorieux_quand_tous_les_hommes_y_adh%C3%A8reront"
+    },
+    {
+      "canonical_title": "Les hommes ne subissent pas l'épuisement généré par les discriminations sexistes",
+      "fetched_at": "2026-10-22T11:56:32.360848+00:00",
+      "import_path": "imports/fr/arguments/A0036.wiki",
+      "kind": "argument",
+      "page_id": "A0036",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0067_les_hommes_ne_subissent_pas_l_epuisement_genere_par_les_discriminations__0230cdd237f4.wiki",
+      "requested_title": "Les hommes ne subissent pas l'épuisement généré par les discriminations sexistes",
+      "revision_id": 238591,
+      "revision_timestamp": "2026-08-07T13:05:40Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes ne subissent pas l'épuisement généré par les discriminations sexistes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ne_subissent_pas_l%27%C3%A9puisement_g%C3%A9n%C3%A9r%C3%A9_par_les_discriminations_sexistes"
+    },
+    {
+      "canonical_title": "Le médecin communiste Willy Peers a permis la légalisation de l'avortement et la démocratisation de la contraception en Belgique",
+      "fetched_at": "2026-10-22T11:56:33.186708+00:00",
+      "import_path": "imports/fr/arguments/A0037.wiki",
+      "kind": "argument",
+      "page_id": "A0037",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0032_le_medecin_communiste_willy_peers_a_permis_la_legalisation_de_l_avorteme_f762ea88c302.wiki",
+      "requested_title": "Le médecin communiste Willy Peers a permis la légalisation de l'avortement et la démocratisation de la contraception en Belgique",
+      "revision_id": 217406,
+      "revision_timestamp": "2026-03-21T21:35:05Z",
+      "sha256": "e24cfaec65b08591177812ca4dd93c185646feb3caec54087e652832d98f22b0",
+      "size_bytes": 2452,
+      "source_graph_title": "Le médecin communiste Willy Peers a permis la légalisation de l'avortement et la démocratisation de la contraception en Belgique",
+      "url": "https://fr.wikidebates.org/wiki/Le_m%C3%A9decin_communiste_Willy_Peers_a_permis_la_l%C3%A9galisation_de_l%27avortement_et_la_d%C3%A9mocratisation_de_la_contraception_en_Belgique"
+    },
+    {
+      "canonical_title": "Lénine avait lui-même des sensibilités féministes",
+      "fetched_at": "2026-10-22T11:56:33.450741+00:00",
+      "import_path": "imports/fr/arguments/A0038.wiki",
+      "kind": "argument",
+      "page_id": "A0038",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0094_lenine_avait_lui_meme_des_sensibilites_feministes_eec0ffada9ee.wiki",
+      "requested_title": "Lénine avait lui-même des sensibilités féministes",
+      "revision_id": 245816,
+      "revision_timestamp": "2026-10-22T11:56:17Z",
+      "sha256": "4d53ca3bc498862dceb981b60a9ec55c882cae37c0aa9877b8fd0cb8a9d71381",
+      "size_bytes": 3488,
+      "source_graph_title": "Lénine avait lui-même des sensibilités féministes",
+      "url": "https://fr.wikidebates.org/wiki/L%C3%A9nine_avait_lui-m%C3%AAme_des_sensibilit%C3%A9s_f%C3%A9ministes"
+    },
+    {
+      "canonical_title": "Victor Hugo avait des idées très féministes",
+      "fetched_at": "2026-10-22T11:56:33.727724+00:00",
+      "import_path": "imports/fr/arguments/A0039.wiki",
+      "kind": "argument",
+      "page_id": "A0039",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0100_victor_hugo_avait_des_idees_tres_feministes_4a5979634712.wiki",
+      "requested_title": "Victor Hugo avait des idées très féministes",
+      "revision_id": 223474,
+      "revision_timestamp": "2026-03-21T22:07:51Z",
+      "sha256": "4cc3caff57aa2c2717a4df0860114cd0dbae9479a5c8fa4c892cf7315a5977e2",
+      "size_bytes": 294,
+      "source_graph_title": "Victor Hugo avait des idées très féministes",
+      "url": "https://fr.wikidebates.org/wiki/Victor_Hugo_avait_des_id%C3%A9es_tr%C3%A8s_f%C3%A9ministes"
+    },
+    {
+      "canonical_title": "Une société n'est fonctionnelle que si elle est égalitaire",
+      "fetched_at": "2026-10-22T11:56:34.005285+00:00",
+      "import_path": "imports/fr/arguments/A0040.wiki",
+      "kind": "argument",
+      "page_id": "A0040",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0098_une_societe_n_est_fonctionnelle_que_si_elle_est_egalitaire_4357219a8916.wiki",
+      "requested_title": "Une société n'est fonctionnelle que si elle est égalitaire",
+      "revision_id": 239382,
+      "revision_timestamp": "2026-08-07T13:11:27Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Une société n'est fonctionnelle que si elle est égalitaire",
+      "url": "https://fr.wikidebates.org/wiki/Une_soci%C3%A9t%C3%A9_n%27est_fonctionnelle_que_si_elle_est_%C3%A9galitaire"
+    },
+    {
+      "canonical_title": "Les inégalités hommes/femmes sont un gouffre financier pour la société",
+      "fetched_at": "2026-10-22T11:56:34.274367+00:00",
+      "import_path": "imports/fr/arguments/A0041.wiki",
+      "kind": "argument",
+      "page_id": "A0041",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0092_les_inegalites_hommes_femmes_sont_un_gouffre_financier_pour_la_societe_643b5ed0c25c.wiki",
+      "requested_title": "Les inégalités hommes/femmes sont un gouffre financier pour la société",
+      "revision_id": 210130,
+      "revision_timestamp": "2026-03-21T20:46:49Z",
+      "sha256": "6ed08e900c34b8b75afc48ea0e666a5dc1b629c463c7ba9c151ad7b7c57d1a43",
+      "size_bytes": 394,
+      "source_graph_title": "Les inégalités hommes/femmes sont un gouffre financier pour la société",
+      "url": "https://fr.wikidebates.org/wiki/Les_in%C3%A9galit%C3%A9s_hommes%2Ffemmes_sont_un_gouffre_financier_pour_la_soci%C3%A9t%C3%A9"
+    },
+    {
+      "canonical_title": "Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs",
+      "fetched_at": "2026-10-22T11:56:36.671016+00:00",
+      "import_path": "imports/fr/arguments/A0042.wiki",
+      "kind": "argument",
+      "page_id": "A0042",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0077_les_hommes_ont_le_devoir_de_reparer_les_injustices_dont_ils_sont_les_aut_5531ec52c6fb.wiki",
+      "requested_title": "Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs",
+      "revision_id": 206976,
+      "revision_timestamp": "2026-03-21T20:33:21Z",
+      "sha256": "33969ead7283c1418ffd5dfdebd6a8b5626233ca00f6e28c75c39af70abe84f2",
+      "size_bytes": 653,
+      "source_graph_title": "Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ont_le_devoir_de_r%C3%A9parer_les_injustices_dont_ils_sont_les_auteurs"
+    },
+    {
+      "canonical_title": "Il est possible de leur donner une autre éducation",
+      "fetched_at": "2026-10-22T11:56:36.937978+00:00",
+      "import_path": "imports/fr/arguments/A0043.wiki",
+      "kind": "argument",
+      "page_id": "A0043",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0009_il_est_possible_de_leur_donner_une_autre_education_819ab67e4b3c.wiki",
+      "requested_title": "Il est possible de leur donner une autre éducation",
+      "revision_id": 238273,
+      "revision_timestamp": "2026-08-07T13:00:08Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Il est possible de leur donner une autre éducation",
+      "url": "https://fr.wikidebates.org/wiki/Il_est_possible_de_leur_donner_une_autre_%C3%A9ducation"
+    },
+    {
+      "canonical_title": "Le mouvement féministe doit rester à l'abri de la domination masculine",
+      "fetched_at": "2026-10-22T11:56:35.870424+00:00",
+      "import_path": "imports/fr/arguments/A0044.wiki",
+      "kind": "argument",
+      "page_id": "A0044",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0031_le_mouvement_feministe_doit_rester_a_l_abri_de_la_domination_masculine_53d9da91811e.wiki",
+      "requested_title": "Le mouvement féministe doit rester à l'abri de la domination masculine",
+      "revision_id": 239317,
+      "revision_timestamp": "2026-08-07T13:09:35Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Le mouvement féministe doit rester à l'abri de la domination masculine",
+      "url": "https://fr.wikidebates.org/wiki/Le_mouvement_f%C3%A9ministe_doit_rester_%C3%A0_l%27abri_de_la_domination_masculine"
+    },
+    {
+      "canonical_title": "Les hommes ne veulent pas céder leurs places",
+      "fetched_at": "2026-10-22T11:56:37.503176+00:00",
+      "import_path": "imports/fr/arguments/A0045.wiki",
+      "kind": "argument",
+      "page_id": "A0045",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0068_les_hommes_ne_veulent_pas_ceder_leurs_places_00a7e123cbbb.wiki",
+      "requested_title": "Les hommes ne veulent pas céder leurs places",
+      "revision_id": 206946,
+      "revision_timestamp": "2026-03-21T20:33:15Z",
+      "sha256": "c6dde0c525aa3048e7cb12a216ed3294ed3e336d86aa2d8c897b4cad009a0faa",
+      "size_bytes": 249,
+      "source_graph_title": "Les hommes ne veulent pas céder leurs places",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ne_veulent_pas_c%C3%A9der_leurs_places"
+    },
+    {
+      "canonical_title": "Les hommes qui assument leur féminisme sont rejetés par les autres hommes",
+      "fetched_at": "2026-10-22T11:56:37.768515+00:00",
+      "import_path": "imports/fr/arguments/A0046.wiki",
+      "kind": "argument",
+      "page_id": "A0046",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0083_les_hommes_qui_assument_leur_feminisme_sont_rejetes_par_les_autres_homme_024c07be078c.wiki",
+      "requested_title": "Les hommes qui assument leur féminisme sont rejetés par les autres hommes",
+      "revision_id": 238559,
+      "revision_timestamp": "2026-08-07T13:05:29Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes qui assument leur féminisme sont rejetés par les autres hommes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_qui_assument_leur_f%C3%A9minisme_sont_rejet%C3%A9s_par_les_autres_hommes"
+    },
+    {
+      "canonical_title": "Les hommes n'ont pas de privilèges",
+      "fetched_at": "2026-10-22T11:56:39.131556+00:00",
+      "import_path": "imports/fr/arguments/A0047.wiki",
+      "kind": "argument",
+      "page_id": "A0047",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0062_les_hommes_n_ont_pas_de_privileges_87cc8171d3d2.wiki",
+      "requested_title": "Les hommes n'ont pas de privilèges",
+      "revision_id": 239312,
+      "revision_timestamp": "2026-08-07T13:09:33Z",
+      "sha256": "fc23c3757ab936ee65c626b1c10c2ad3e31835f27b4f692485dd8bf64a064420",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes n'ont pas de privilèges",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_n%27ont_pas_de_privil%C3%A8ges"
+    },
+    {
+      "canonical_title": "Les femmes doivent s'organiser en non-mixité pour créer un espace d'échange sûr et rassurant",
+      "fetched_at": "2026-10-22T11:56:39.664919+00:00",
+      "import_path": "imports/fr/arguments/A0048.wiki",
+      "kind": "argument",
+      "page_id": "A0048",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0042_les_femmes_doivent_s_organiser_en_non_mixite_pour_creer_un_espace_d_echa_4c2cbb7879ee.wiki",
+      "requested_title": "Les femmes doivent s'organiser en non-mixité pour créer un espace d'échange sûr et rassurant",
+      "revision_id": 238411,
+      "revision_timestamp": "2026-08-07T13:04:39Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les femmes doivent s'organiser en non-mixité pour créer un espace d'échange sûr et rassurant",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_doivent_s%27organiser_en_non-mixit%C3%A9_pour_cr%C3%A9er_un_espace_d%27%C3%A9change_s%C3%BBr_et_rassurant"
+    },
+    {
+      "canonical_title": "La non-mixité doit être une solution temporaire",
+      "fetched_at": "2026-10-22T11:56:42.069118+00:00",
+      "import_path": "imports/fr/arguments/A0049.wiki",
+      "kind": "argument",
+      "page_id": "A0049",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0020_la_non_mixite_doit_etre_une_solution_temporaire_170f74fd9aeb.wiki",
+      "requested_title": "La non-mixité doit être une solution temporaire",
+      "revision_id": 209015,
+      "revision_timestamp": "2026-03-21T20:41:39Z",
+      "sha256": "bf61f3655c79d977a2bbad625e0f33a163e4c1e0f35b57271c3952ea6f413dd4",
+      "size_bytes": 128,
+      "source_graph_title": "La non-mixité doit être une solution temporaire",
+      "url": "https://fr.wikidebates.org/wiki/La_non-mixit%C3%A9_doit_%C3%AAtre_une_solution_temporaire"
+    },
+    {
+      "canonical_title": "Les femmes doivent s'organiser en non-mixité pour ne pas avoir à tout réexpliquer",
+      "fetched_at": "2026-10-22T11:56:39.928695+00:00",
+      "import_path": "imports/fr/arguments/A0050.wiki",
+      "kind": "argument",
+      "page_id": "A0050",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0044_les_femmes_doivent_s_organiser_en_non_mixite_pour_ne_pas_avoir_a_tout_re_f1e60b7ef66e.wiki",
+      "requested_title": "Les femmes doivent s'organiser en non-mixité pour ne pas avoir à tout réexpliquer",
+      "revision_id": 239037,
+      "revision_timestamp": "2026-08-07T13:07:58Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les femmes doivent s'organiser en non-mixité pour ne pas avoir à tout réexpliquer",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_doivent_s%27organiser_en_non-mixit%C3%A9_pour_ne_pas_avoir_%C3%A0_tout_r%C3%A9expliquer"
+    },
+    {
+      "canonical_title": "Le combat n'avancera pas si on n'éduque pas les hommes",
+      "fetched_at": "2026-10-22T11:56:42.353300+00:00",
+      "import_path": "imports/fr/arguments/A0051.wiki",
+      "kind": "argument",
+      "page_id": "A0051",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0027_le_combat_n_avancera_pas_si_on_n_eduque_pas_les_hommes_1ff349e4c50b.wiki",
+      "requested_title": "Le combat n'avancera pas si on n'éduque pas les hommes",
+      "revision_id": 238928,
+      "revision_timestamp": "2026-08-07T13:07:26Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Le combat n'avancera pas si on n'éduque pas les hommes",
+      "url": "https://fr.wikidebates.org/wiki/Le_combat_n%27avancera_pas_si_on_n%27%C3%A9duque_pas_les_hommes"
+    },
+    {
+      "canonical_title": "Les femmes doivent s'organiser en non-mixité pour parler et communiquer librement",
+      "fetched_at": "2026-10-22T11:56:40.195011+00:00",
+      "import_path": "imports/fr/arguments/A0052.wiki",
+      "kind": "argument",
+      "page_id": "A0052",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0045_les_femmes_doivent_s_organiser_en_non_mixite_pour_parler_et_communiquer__2a3d63f256c4.wiki",
+      "requested_title": "Les femmes doivent s'organiser en non-mixité pour parler et communiquer librement",
+      "revision_id": 238756,
+      "revision_timestamp": "2026-08-07T13:06:32Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les femmes doivent s'organiser en non-mixité pour parler et communiquer librement",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_doivent_s%27organiser_en_non-mixit%C3%A9_pour_parler_et_communiquer_librement"
+    },
+    {
+      "canonical_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience du caractère systémique de la domination",
+      "fetched_at": "2026-10-22T11:56:40.460811+00:00",
+      "import_path": "imports/fr/arguments/A0053.wiki",
+      "kind": "argument",
+      "page_id": "A0053",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0048_les_femmes_doivent_s_organiser_en_non_mixite_pour_prendre_conscience_du__5b9d54a478d8.wiki",
+      "requested_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience du caractère systémique de la domination",
+      "revision_id": 238824,
+      "revision_timestamp": "2026-08-07T13:06:53Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience du caractère systémique de la domination",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_doivent_s%27organiser_en_non-mixit%C3%A9_pour_prendre_conscience_du_caract%C3%A8re_syst%C3%A9mique_de_la_domination"
+    },
+    {
+      "canonical_title": "Les femmes doivent s'organiser en non-mixité pour renforcer la sororité",
+      "fetched_at": "2026-10-22T11:56:40.724519+00:00",
+      "import_path": "imports/fr/arguments/A0054.wiki",
+      "kind": "argument",
+      "page_id": "A0054",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0049_les_femmes_doivent_s_organiser_en_non_mixite_pour_renforcer_la_sororite_01a5e53a5479.wiki",
+      "requested_title": "Les femmes doivent s'organiser en non-mixité pour renforcer la sororité",
+      "revision_id": 239163,
+      "revision_timestamp": "2026-08-07T13:08:40Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les femmes doivent s'organiser en non-mixité pour renforcer la sororité",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_doivent_s%27organiser_en_non-mixit%C3%A9_pour_renforcer_la_sororit%C3%A9"
+    },
+    {
+      "canonical_title": "Les femmes doivent s'organiser en non-mixité pour diriger la lutte par elles-mêmes",
+      "fetched_at": "2026-10-22T11:56:40.987094+00:00",
+      "import_path": "imports/fr/arguments/A0055.wiki",
+      "kind": "argument",
+      "page_id": "A0055",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0043_les_femmes_doivent_s_organiser_en_non_mixite_pour_diriger_la_lutte_par_e_d28447332958.wiki",
+      "requested_title": "Les femmes doivent s'organiser en non-mixité pour diriger la lutte par elles-mêmes",
+      "revision_id": 239282,
+      "revision_timestamp": "2026-08-07T13:09:25Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les femmes doivent s'organiser en non-mixité pour diriger la lutte par elles-mêmes",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_doivent_s%27organiser_en_non-mixit%C3%A9_pour_diriger_la_lutte_par_elles-m%C3%AAmes"
+    },
+    {
+      "canonical_title": "Les femmes doivent s'organiser en non-mixité pour apprendre à être autonomes",
+      "fetched_at": "2026-10-22T11:56:41.253059+00:00",
+      "import_path": "imports/fr/arguments/A0056.wiki",
+      "kind": "argument",
+      "page_id": "A0056",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0041_les_femmes_doivent_s_organiser_en_non_mixite_pour_apprendre_a_etre_auton_bed5168e06c2.wiki",
+      "requested_title": "Les femmes doivent s'organiser en non-mixité pour apprendre à être autonomes",
+      "revision_id": 238859,
+      "revision_timestamp": "2026-08-07T13:07:03Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les femmes doivent s'organiser en non-mixité pour apprendre à être autonomes",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_doivent_s%27organiser_en_non-mixit%C3%A9_pour_apprendre_%C3%A0_%C3%AAtre_autonomes"
+    },
+    {
+      "canonical_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur valeur individuelle",
+      "fetched_at": "2026-10-22T11:56:41.535879+00:00",
+      "import_path": "imports/fr/arguments/A0057.wiki",
+      "kind": "argument",
+      "page_id": "A0057",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0047_les_femmes_doivent_s_organiser_en_non_mixite_pour_prendre_conscience_de__fe1ba77ddada.wiki",
+      "requested_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur valeur individuelle",
+      "revision_id": 238398,
+      "revision_timestamp": "2026-08-07T13:04:34Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur valeur individuelle",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_doivent_s%27organiser_en_non-mixit%C3%A9_pour_prendre_conscience_de_leur_valeur_individuelle"
+    },
+    {
+      "canonical_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur force collective",
+      "fetched_at": "2026-10-22T11:56:41.800409+00:00",
+      "import_path": "imports/fr/arguments/A0058.wiki",
+      "kind": "argument",
+      "page_id": "A0058",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0046_les_femmes_doivent_s_organiser_en_non_mixite_pour_prendre_conscience_de__10bc2484259c.wiki",
+      "requested_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur force collective",
+      "revision_id": 238513,
+      "revision_timestamp": "2026-08-07T13:05:11Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur force collective",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_doivent_s%27organiser_en_non-mixit%C3%A9_pour_prendre_conscience_de_leur_force_collective"
+    },
+    {
+      "canonical_title": "C'est plutôt l'inverse",
+      "fetched_at": "2026-10-22T11:56:42.620874+00:00",
+      "import_path": "imports/fr/arguments/A0059.wiki",
+      "kind": "argument",
+      "page_id": "A0059",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0004_c_est_plutot_l_inverse_792bd5e1b262.wiki",
+      "requested_title": "C'est plutôt l'inverse",
+      "revision_id": 208704,
+      "revision_timestamp": "2026-03-21T20:40:15Z",
+      "sha256": "ffc94ef6c7e184ec9b2298133fddb7402e41b04584c77f1f5421f6998e3aa973",
+      "size_bytes": 137,
+      "source_graph_title": "C'est plutôt l'inverse",
+      "url": "https://fr.wikidebates.org/wiki/C%27est_plut%C3%B4t_l%27inverse"
+    },
+    {
+      "canonical_title": "Les violences sexistes sont omniprésentes",
+      "fetched_at": "2026-10-22T11:56:42.888082+00:00",
+      "import_path": "imports/fr/arguments/A0060.wiki",
+      "kind": "argument",
+      "page_id": "A0060",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0093_les_violences_sexistes_sont_omnipresentes_b972e806a3ab.wiki",
+      "requested_title": "Les violences sexistes sont omniprésentes",
+      "revision_id": 206934,
+      "revision_timestamp": "2026-03-21T20:33:12Z",
+      "sha256": "36017065596edf8375bce2326538bed1f4486d1b7b832cd616c4cfd15da335a6",
+      "size_bytes": 336,
+      "source_graph_title": "Les violences sexistes sont omniprésentes",
+      "url": "https://fr.wikidebates.org/wiki/Les_violences_sexistes_sont_omnipr%C3%A9sentes"
+    },
+    {
+      "canonical_title": "Les femmes sont victimes de discriminations économiques",
+      "fetched_at": "2026-10-22T11:56:43.155302+00:00",
+      "import_path": "imports/fr/arguments/A0061.wiki",
+      "kind": "argument",
+      "page_id": "A0061",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0056_les_femmes_sont_victimes_de_discriminations_economiques_21952352c8a4.wiki",
+      "requested_title": "Les femmes sont victimes de discriminations économiques",
+      "revision_id": 206935,
+      "revision_timestamp": "2026-03-21T20:33:12Z",
+      "sha256": "9aa1d6bf31537ebd44eb1d0b35bcefd428d679932306cc2058e9185516899ff8",
+      "size_bytes": 225,
+      "source_graph_title": "Les femmes sont victimes de discriminations économiques",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_sont_victimes_de_discriminations_%C3%A9conomiques"
+    },
+    {
+      "canonical_title": "Les femmes assument la majeure partie des tâches domestiques",
+      "fetched_at": "2026-10-22T11:56:43.418217+00:00",
+      "import_path": "imports/fr/arguments/A0062.wiki",
+      "kind": "argument",
+      "page_id": "A0062",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0039_les_femmes_assument_la_majeure_partie_des_taches_domestiques_b8a6f66f4b8d.wiki",
+      "requested_title": "Les femmes assument la majeure partie des tâches domestiques",
+      "revision_id": 206936,
+      "revision_timestamp": "2026-03-21T20:33:13Z",
+      "sha256": "79d51ee0ac4ef1b1958f7bcfa90dd333202cfd3c257a5daad12fa7d1dedb768e",
+      "size_bytes": 176,
+      "source_graph_title": "Les femmes assument la majeure partie des tâches domestiques",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_assument_la_majeure_partie_des_t%C3%A2ches_domestiques"
+    },
+    {
+      "canonical_title": "Le pouvoir est encore monopolisé par les hommes",
+      "fetched_at": "2026-10-22T11:56:43.685093+00:00",
+      "import_path": "imports/fr/arguments/A0063.wiki",
+      "kind": "argument",
+      "page_id": "A0063",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0033_le_pouvoir_est_encore_monopolise_par_les_hommes_f641b7849907.wiki",
+      "requested_title": "Le pouvoir est encore monopolisé par les hommes",
+      "revision_id": 206937,
+      "revision_timestamp": "2026-03-21T20:33:13Z",
+      "sha256": "3650fe9044f7cd25100748d01a9d3bc497b7de5b84a49bd8da96b7d94ec335e6",
+      "size_bytes": 208,
+      "source_graph_title": "Le pouvoir est encore monopolisé par les hommes",
+      "url": "https://fr.wikidebates.org/wiki/Le_pouvoir_est_encore_monopolis%C3%A9_par_les_hommes"
+    },
+    {
+      "canonical_title": "Les femmes sont constamment dévalorisées par rapport aux hommes",
+      "fetched_at": "2026-10-22T11:56:43.967102+00:00",
+      "import_path": "imports/fr/arguments/A0064.wiki",
+      "kind": "argument",
+      "page_id": "A0064",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0052_les_femmes_sont_constamment_devalorisees_par_rapport_aux_hommes_89aadd0b873e.wiki",
+      "requested_title": "Les femmes sont constamment dévalorisées par rapport aux hommes",
+      "revision_id": 206938,
+      "revision_timestamp": "2026-03-21T20:33:13Z",
+      "sha256": "f6d4fce698d45762c91c66435b3940080363500828b5cf2b981ef17dfc46df32",
+      "size_bytes": 243,
+      "source_graph_title": "Les femmes sont constamment dévalorisées par rapport aux hommes",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_sont_constamment_d%C3%A9valoris%C3%A9es_par_rapport_aux_hommes"
+    },
+    {
+      "canonical_title": "Les femmes sont sans cesse ramenées à leur corps et à leur apparence",
+      "fetched_at": "2026-10-22T11:56:44.231389+00:00",
+      "import_path": "imports/fr/arguments/A0065.wiki",
+      "kind": "argument",
+      "page_id": "A0065",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0055_les_femmes_sont_sans_cesse_ramenees_a_leur_corps_et_a_leur_apparence_50162d62b9d2.wiki",
+      "requested_title": "Les femmes sont sans cesse ramenées à leur corps et à leur apparence",
+      "revision_id": 238850,
+      "revision_timestamp": "2026-08-07T13:07:00Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les femmes sont sans cesse ramenées à leur corps et à leur apparence",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_sont_sans_cesse_ramen%C3%A9es_%C3%A0_leur_corps_et_%C3%A0_leur_apparence"
+    },
+    {
+      "canonical_title": "Beaucoup d'hommes ne sont pas égoïstes",
+      "fetched_at": "2026-10-22T11:56:47.158946+00:00",
+      "import_path": "imports/fr/arguments/A0066.wiki",
+      "kind": "argument",
+      "page_id": "A0066",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0001_beaucoup_d_hommes_ne_sont_pas_egoistes_e40488d9b4a1.wiki",
+      "requested_title": "Beaucoup d'hommes ne sont pas égoïstes",
+      "revision_id": 237925,
+      "revision_timestamp": "2026-08-07T12:57:02Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Beaucoup d'hommes ne sont pas égoïstes",
+      "url": "https://fr.wikidebates.org/wiki/Beaucoup_d%27hommes_ne_sont_pas_%C3%A9go%C3%AFstes"
+    },
+    {
+      "canonical_title": "La socialisation vise à lutter contre notre égoïsme naturel",
+      "fetched_at": "2026-10-22T11:56:47.425119+00:00",
+      "import_path": "imports/fr/arguments/A0067.wiki",
+      "kind": "argument",
+      "page_id": "A0067",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0022_la_socialisation_vise_a_lutter_contre_notre_egoisme_naturel_94ad5f3177e5.wiki",
+      "requested_title": "La socialisation vise à lutter contre notre égoïsme naturel",
+      "revision_id": 237379,
+      "revision_timestamp": "2026-08-07T12:52:33Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "La socialisation vise à lutter contre notre égoïsme naturel",
+      "url": "https://fr.wikidebates.org/wiki/La_socialisation_vise_%C3%A0_lutter_contre_notre_%C3%A9go%C3%AFsme_naturel"
+    },
+    {
+      "canonical_title": "Le sexisme est tellement banalisé qu'il n'est même pas perçu comme tel",
+      "fetched_at": "2026-10-22T11:56:44.495899+00:00",
+      "import_path": "imports/fr/arguments/A0068.wiki",
+      "kind": "argument",
+      "page_id": "A0068",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0035_le_sexisme_est_tellement_banalise_qu_il_n_est_meme_pas_percu_comme_tel_417327b68eca.wiki",
+      "requested_title": "Le sexisme est tellement banalisé qu'il n'est même pas perçu comme tel",
+      "revision_id": 207158,
+      "revision_timestamp": "2026-03-21T20:34:01Z",
+      "sha256": "3fc049ee53cdf6b6accb78e5dd45605238d2cc6a69629caff4328ba8d486fd2e",
+      "size_bytes": 715,
+      "source_graph_title": "Le sexisme est tellement banalisé qu'il n'est même pas perçu comme tel",
+      "url": "https://fr.wikidebates.org/wiki/Le_sexisme_est_tellement_banalis%C3%A9_qu%27il_n%27est_m%C3%AAme_pas_per%C3%A7u_comme_tel"
+    },
+    {
+      "canonical_title": "Le traitement médiatique du sexisme est encore insuffisant",
+      "fetched_at": "2026-10-22T11:56:44.760845+00:00",
+      "import_path": "imports/fr/arguments/A0069.wiki",
+      "kind": "argument",
+      "page_id": "A0069",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0037_le_traitement_mediatique_du_sexisme_est_encore_insuffisant_6c9d9c6e5ebb.wiki",
+      "requested_title": "Le traitement médiatique du sexisme est encore insuffisant",
+      "revision_id": 207156,
+      "revision_timestamp": "2026-03-21T20:34:00Z",
+      "sha256": "8f1c68304c2e74bf43cc56dc961391d1a737f4847c39abb6e95bcc719bd55449",
+      "size_bytes": 582,
+      "source_graph_title": "Le traitement médiatique du sexisme est encore insuffisant",
+      "url": "https://fr.wikidebates.org/wiki/Le_traitement_m%C3%A9diatique_du_sexisme_est_encore_insuffisant"
+    },
+    {
+      "canonical_title": "De nombreuses victimes n'osent pas parler des violences sexistes qu'elles ont subies, encore moins aux hommes",
+      "fetched_at": "2026-10-22T11:56:45.024749+00:00",
+      "import_path": "imports/fr/arguments/A0070.wiki",
+      "kind": "argument",
+      "page_id": "A0070",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0007_de_nombreuses_victimes_n_osent_pas_parler_des_violences_sexistes_qu_elle_55d7fbb78e34.wiki",
+      "requested_title": "De nombreuses victimes n'osent pas parler des violences sexistes qu'elles ont subies, encore moins aux hommes",
+      "revision_id": 207157,
+      "revision_timestamp": "2026-03-21T20:34:01Z",
+      "sha256": "b846ee087a04befc39c15e4627cf76b20a17ecb2c4e2a9fe29a622a65edb2b24",
+      "size_bytes": 614,
+      "source_graph_title": "De nombreuses victimes n'osent pas parler des violences sexistes qu'elles ont subies, encore moins aux hommes",
+      "url": "https://fr.wikidebates.org/wiki/De_nombreuses_victimes_n%27osent_pas_parler_des_violences_sexistes_qu%27elles_ont_subies%2C_encore_moins_aux_hommes"
+    },
+    {
+      "canonical_title": "La domination masculine est de nos jours largement contestée dans tous les domaines de la société",
+      "fetched_at": "2026-10-22T11:56:47.688863+00:00",
+      "import_path": "imports/fr/arguments/A0071.wiki",
+      "kind": "argument",
+      "page_id": "A0071",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0014_la_domination_masculine_est_de_nos_jours_largement_contestee_dans_tous_l_e4ce58354a95.wiki",
+      "requested_title": "La domination masculine est de nos jours largement contestée dans tous les domaines de la société",
+      "revision_id": 238084,
+      "revision_timestamp": "2026-08-07T12:58:24Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "La domination masculine est de nos jours largement contestée dans tous les domaines de la société",
+      "url": "https://fr.wikidebates.org/wiki/La_domination_masculine_est_de_nos_jours_largement_contest%C3%A9e_dans_tous_les_domaines_de_la_soci%C3%A9t%C3%A9"
+    },
+    {
+      "canonical_title": "Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques sexistes",
+      "fetched_at": "2026-10-22T11:56:47.950476+00:00",
+      "import_path": "imports/fr/arguments/A0072.wiki",
+      "kind": "argument",
+      "page_id": "A0072",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0085_les_hommes_sont_capables_de_deconstruire_leurs_prejuges_et_leurs_pratiqu_6704d8f17ded.wiki",
+      "requested_title": "Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques sexistes",
+      "revision_id": 238557,
+      "revision_timestamp": "2026-08-07T13:05:29Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques sexistes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_sont_capables_de_d%C3%A9construire_leurs_pr%C3%A9jug%C3%A9s_et_leurs_pratiques_sexistes"
+    },
+    {
+      "canonical_title": "L'éducation vise à développer notre empathie",
+      "fetched_at": "2026-10-22T11:56:48.225928+00:00",
+      "import_path": "imports/fr/arguments/A0073.wiki",
+      "kind": "argument",
+      "page_id": "A0073",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0012_l_education_vise_a_developper_notre_empathie_a3bfee3916c3.wiki",
+      "requested_title": "L'éducation vise à développer notre empathie",
+      "revision_id": 238294,
+      "revision_timestamp": "2026-08-07T13:00:22Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "L'éducation vise à développer notre empathie",
+      "url": "https://fr.wikidebates.org/wiki/L%27%C3%A9ducation_vise_%C3%A0_d%C3%A9velopper_notre_empathie"
+    },
+    {
+      "canonical_title": "Le terme \"déshumaniser\" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe",
+      "fetched_at": "2026-10-22T11:56:48.500580+00:00",
+      "import_path": "imports/fr/arguments/A0074.wiki",
+      "kind": "argument",
+      "page_id": "A0074",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0036_le_terme_deshumaniser_est_demesure_il_y_a_une_instrumentalisation_des_co_b35f9d5006f9.wiki",
+      "requested_title": "Le terme \"déshumaniser\" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe",
+      "revision_id": 214278,
+      "revision_timestamp": "2026-03-21T21:10:15Z",
+      "sha256": "4e1098a441ee3517c95901befc4e9c9ab0147b84555069e57136b3d159a395fe",
+      "size_bytes": 580,
+      "source_graph_title": "Le terme \"déshumaniser\" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe",
+      "url": "https://fr.wikidebates.org/wiki/Le_terme_%22d%C3%A9shumaniser%22_est_d%C3%A9mesur%C3%A9%2C_il_y_a_une_instrumentalisation_des_corps_certes_et_une_alt%C3%A8re_expression_de_la_domination_mais_d%C3%A9shumaniser_ne_fait_que_d%C3%A9cr%C3%A9dibiliser_la_cause_f%C3%A9ministe"
+    },
+    {
+      "canonical_title": "L'injonction à la répression des émotions déteriore la santé mentale des hommes",
+      "fetched_at": "2026-10-22T11:56:48.778380+00:00",
+      "import_path": "imports/fr/arguments/A0075.wiki",
+      "kind": "argument",
+      "page_id": "A0075",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0011_l_injonction_a_la_repression_des_emotions_deteriore_la_sante_mentale_des_ed56b7598f3e.wiki",
+      "requested_title": "L'injonction à la répression des émotions déteriore la santé mentale des hommes",
+      "revision_id": 238098,
+      "revision_timestamp": "2026-08-07T12:58:32Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "L'injonction à la répression des émotions déteriore la santé mentale des hommes",
+      "url": "https://fr.wikidebates.org/wiki/L%27injonction_%C3%A0_la_r%C3%A9pression_des_%C3%A9motions_d%C3%A9teriore_la_sant%C3%A9_mentale_des_hommes"
+    },
+    {
+      "canonical_title": "L'expression des émotions affaiblirait la domination des hommes",
+      "fetched_at": "2026-10-22T11:56:49.051896+00:00",
+      "import_path": "imports/fr/arguments/A0076.wiki",
+      "kind": "argument",
+      "page_id": "A0076",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0010_l_expression_des_emotions_affaiblirait_la_domination_des_hommes_1cd7cb5c0ef0.wiki",
+      "requested_title": "L'expression des émotions affaiblirait la domination des hommes",
+      "revision_id": 237507,
+      "revision_timestamp": "2026-08-07T12:53:33Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "L'expression des émotions affaiblirait la domination des hommes",
+      "url": "https://fr.wikidebates.org/wiki/L%27expression_des_%C3%A9motions_affaiblirait_la_domination_des_hommes"
+    },
+    {
+      "canonical_title": "Seulement ceux qui se conforment à l'injonction à la virilité",
+      "fetched_at": "2026-10-22T11:56:51.207458+00:00",
+      "import_path": "imports/fr/arguments/A0077.wiki",
+      "kind": "argument",
+      "page_id": "A0077",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0097_seulement_ceux_qui_se_conforment_a_l_injonction_a_la_virilite_9818379af7c7.wiki",
+      "requested_title": "Seulement ceux qui se conforment à l'injonction à la virilité",
+      "revision_id": 209014,
+      "revision_timestamp": "2026-03-21T20:41:39Z",
+      "sha256": "8e26fc1ecf3f8018d00de93e977dfd9469b8a137dee980773adf4729e7dfd260",
+      "size_bytes": 122,
+      "source_graph_title": "Seulement ceux qui se conforment à l'injonction à la virilité",
+      "url": "https://fr.wikidebates.org/wiki/Seulement_ceux_qui_se_conforment_%C3%A0_l%27injonction_%C3%A0_la_virilit%C3%A9"
+    },
+    {
+      "canonical_title": "En renonçant à la virilité, les hommes perdraient leur pouvoir",
+      "fetched_at": "2026-10-22T11:56:49.316612+00:00",
+      "import_path": "imports/fr/arguments/A0078.wiki",
+      "kind": "argument",
+      "page_id": "A0078",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0008_en_renoncant_a_la_virilite_les_hommes_perdraient_leur_pouvoir_a84ad7721112.wiki",
+      "requested_title": "En renonçant à la virilité, les hommes perdraient leur pouvoir",
+      "revision_id": 237611,
+      "revision_timestamp": "2026-08-07T12:54:18Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "En renonçant à la virilité, les hommes perdraient leur pouvoir",
+      "url": "https://fr.wikidebates.org/wiki/En_renon%C3%A7ant_%C3%A0_la_virilit%C3%A9%2C_les_hommes_perdraient_leur_pouvoir"
+    },
+    {
+      "canonical_title": "La virilité n'a pas que des mauvais côtés",
+      "fetched_at": "2026-10-22T11:56:49.577324+00:00",
+      "import_path": "imports/fr/arguments/A0079.wiki",
+      "kind": "argument",
+      "page_id": "A0079",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0025_la_virilite_n_a_pas_que_des_mauvais_cotes_57b8a91c7ff4.wiki",
+      "requested_title": "La virilité n'a pas que des mauvais côtés",
+      "revision_id": 237857,
+      "revision_timestamp": "2026-08-07T12:56:20Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "La virilité n'a pas que des mauvais côtés",
+      "url": "https://fr.wikidebates.org/wiki/La_virilit%C3%A9_n%27a_pas_que_des_mauvais_c%C3%B4t%C3%A9s"
+    },
+    {
+      "canonical_title": "La rivalité est une source d'émulation",
+      "fetched_at": "2026-10-22T11:56:49.861054+00:00",
+      "import_path": "imports/fr/arguments/A0080.wiki",
+      "kind": "argument",
+      "page_id": "A0080",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0021_la_rivalite_est_une_source_d_emulation_f4b4b24e6af0.wiki",
+      "requested_title": "La rivalité est une source d'émulation",
+      "revision_id": 237839,
+      "revision_timestamp": "2026-08-07T12:56:10Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "La rivalité est une source d'émulation",
+      "url": "https://fr.wikidebates.org/wiki/La_rivalit%C3%A9_est_une_source_d%27%C3%A9mulation"
+    },
+    {
+      "canonical_title": "La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes",
+      "fetched_at": "2026-10-22T11:56:50.223254+00:00",
+      "import_path": "imports/fr/arguments/A0081.wiki",
+      "kind": "argument",
+      "page_id": "A0081",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0015_la_fin_du_sexisme_entrainerait_de_nouvelles_rivalites_entre_hommes_et_fe_5853c4f11b33.wiki",
+      "requested_title": "La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes",
+      "revision_id": 237904,
+      "revision_timestamp": "2026-08-07T12:56:47Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes",
+      "url": "https://fr.wikidebates.org/wiki/La_fin_du_sexisme_entra%C3%AEnerait_de_nouvelles_rivalit%C3%A9s_entre_hommes_et_femmes"
+    },
+    {
+      "canonical_title": "Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction",
+      "fetched_at": "2026-10-22T11:56:50.552035+00:00",
+      "import_path": "imports/fr/arguments/A0082.wiki",
+      "kind": "argument",
+      "page_id": "A0082",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0071_les_hommes_ont_interet_a_conserver_leur_role_de_dominants_dans_les_rappo_91355d63d62f.wiki",
+      "requested_title": "Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction",
+      "revision_id": 239281,
+      "revision_timestamp": "2026-08-07T13:09:25Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ont_int%C3%A9r%C3%AAt_%C3%A0_conserver_leur_r%C3%B4le_de_dominants_dans_les_rapports_de_s%C3%A9duction"
+    },
+    {
+      "canonical_title": "De nombreuses femmes préfèrent les hommes dominants",
+      "fetched_at": "2026-10-22T11:56:50.874006+00:00",
+      "import_path": "imports/fr/arguments/A0083.wiki",
+      "kind": "argument",
+      "page_id": "A0083",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0006_de_nombreuses_femmes_preferent_les_hommes_dominants_9a6888a09201.wiki",
+      "requested_title": "De nombreuses femmes préfèrent les hommes dominants",
+      "revision_id": 238207,
+      "revision_timestamp": "2026-08-07T12:59:34Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "De nombreuses femmes préfèrent les hommes dominants",
+      "url": "https://fr.wikidebates.org/wiki/De_nombreuses_femmes_pr%C3%A9f%C3%A8rent_les_hommes_dominants"
+    },
+    {
+      "canonical_title": "L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes",
+      "fetched_at": "2026-10-22T11:56:54.480041+00:00",
+      "import_path": "imports/fr/arguments/A0084.wiki",
+      "kind": "argument",
+      "page_id": "A0084",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0013_l_emancipation_des_femmes_doit_etre_l_oeuvre_des_femmes_elles_memes_c4e9214e9c76.wiki",
+      "requested_title": "L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes",
+      "revision_id": 237535,
+      "revision_timestamp": "2026-08-07T12:53:47Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes",
+      "url": "https://fr.wikidebates.org/wiki/L%27%C3%A9mancipation_des_femmes_doit_%C3%AAtre_l%27oeuvre_des_femmes_elles-m%C3%AAmes"
+    },
+    {
+      "canonical_title": "Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes",
+      "fetched_at": "2026-10-22T11:56:56.733324+00:00",
+      "import_path": "imports/fr/arguments/A0085.wiki",
+      "kind": "argument",
+      "page_id": "A0085",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0081_les_hommes_peuvent_tres_facilement_tuer_dans_l_oeuf_toutes_leurs_actions_34497bdfd64c.wiki",
+      "requested_title": "Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes",
+      "revision_id": 239253,
+      "revision_timestamp": "2026-08-07T13:09:14Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_peuvent_tr%C3%A8s_facilement_tuer_dans_l%27oeuf_toutes_leurs_actions_militantes"
+    },
+    {
+      "canonical_title": "Les hommes utilisent leur accès privilégié à la parole pour conforter la domination masculine",
+      "fetched_at": "2026-10-22T11:56:52.515372+00:00",
+      "import_path": "imports/fr/arguments/A0086.wiki",
+      "kind": "argument",
+      "page_id": "A0086",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0091_les_hommes_utilisent_leur_acces_privilegie_a_la_parole_pour_conforter_la_d376ca268094.wiki",
+      "requested_title": "Les hommes utilisent leur accès privilégié à la parole pour conforter la domination masculine",
+      "revision_id": 238916,
+      "revision_timestamp": "2026-08-07T13:07:23Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes utilisent leur accès privilégié à la parole pour conforter la domination masculine",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_utilisent_leur_acc%C3%A8s_privil%C3%A9gi%C3%A9_%C3%A0_la_parole_pour_conforter_la_domination_masculine"
+    },
+    {
+      "canonical_title": "Les hommes n'ont aucun intérêt à utiliser leur accès privilégié à la parole pour dénoncer le sexisme",
+      "fetched_at": "2026-10-22T11:56:52.833217+00:00",
+      "import_path": "imports/fr/arguments/A0087.wiki",
+      "kind": "argument",
+      "page_id": "A0087",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0061_les_hommes_n_ont_aucun_interet_a_utiliser_leur_acces_privilegie_a_la_par_7d331be2d84c.wiki",
+      "requested_title": "Les hommes n'ont aucun intérêt à utiliser leur accès privilégié à la parole pour dénoncer le sexisme",
+      "revision_id": 239078,
+      "revision_timestamp": "2026-08-07T13:08:13Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes n'ont aucun intérêt à utiliser leur accès privilégié à la parole pour dénoncer le sexisme",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_n%27ont_aucun_int%C3%A9r%C3%AAt_%C3%A0_utiliser_leur_acc%C3%A8s_privil%C3%A9gi%C3%A9_%C3%A0_la_parole_pour_d%C3%A9noncer_le_sexisme"
+    },
+    {
+      "canonical_title": "Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place",
+      "fetched_at": "2026-10-22T11:56:53.149062+00:00",
+      "import_path": "imports/fr/arguments/A0088.wiki",
+      "kind": "argument",
+      "page_id": "A0088",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0058_les_hommes_devraient_donner_la_parole_aux_femmes_plutot_que_de_parler_a__9584b8dad0e4.wiki",
+      "requested_title": "Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place",
+      "revision_id": 238957,
+      "revision_timestamp": "2026-08-07T13:07:34Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_devraient_donner_la_parole_aux_femmes_plut%C3%B4t_que_de_parler_%C3%A0_leur_place"
+    },
+    {
+      "canonical_title": "Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent",
+      "fetched_at": "2026-10-22T11:56:53.497085+00:00",
+      "import_path": "imports/fr/arguments/A0089.wiki",
+      "kind": "argument",
+      "page_id": "A0089",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0053_les_femmes_sont_les_mieux_placees_pour_parler_des_discriminations_qu_ell_91a00a344491.wiki",
+      "requested_title": "Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent",
+      "revision_id": 239091,
+      "revision_timestamp": "2026-08-07T13:08:17Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent",
+      "url": "https://fr.wikidebates.org/wiki/Les_femmes_sont_les_mieux_plac%C3%A9es_pour_parler_des_discriminations_qu%27elles_subissent"
+    },
+    {
+      "canonical_title": "Les hommes qui défendent le féminisme ne sont pas pris au sérieux",
+      "fetched_at": "2026-10-22T11:56:53.828933+00:00",
+      "import_path": "imports/fr/arguments/A0090.wiki",
+      "kind": "argument",
+      "page_id": "A0090",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0084_les_hommes_qui_defendent_le_feminisme_ne_sont_pas_pris_au_serieux_82a645b7fef4.wiki",
+      "requested_title": "Les hommes qui défendent le féminisme ne sont pas pris au sérieux",
+      "revision_id": 238806,
+      "revision_timestamp": "2026-08-07T13:06:48Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes qui défendent le féminisme ne sont pas pris au sérieux",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_qui_d%C3%A9fendent_le_f%C3%A9minisme_ne_sont_pas_pris_au_s%C3%A9rieux"
+    },
+    {
+      "canonical_title": "La majorité des hommes dominent leur compagne et freinent leur émancipation",
+      "fetched_at": "2026-10-22T11:56:54.160395+00:00",
+      "import_path": "imports/fr/arguments/A0091.wiki",
+      "kind": "argument",
+      "page_id": "A0091",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0016_la_majorite_des_hommes_dominent_leur_compagne_et_freinent_leur_emancipat_263e4d7e0682.wiki",
+      "requested_title": "La majorité des hommes dominent leur compagne et freinent leur émancipation",
+      "revision_id": 237592,
+      "revision_timestamp": "2026-08-07T12:54:13Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "La majorité des hommes dominent leur compagne et freinent leur émancipation",
+      "url": "https://fr.wikidebates.org/wiki/La_majorit%C3%A9_des_hommes_dominent_leur_compagne_et_freinent_leur_%C3%A9mancipation"
+    },
+    {
+      "canonical_title": "Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques",
+      "fetched_at": "2026-10-22T11:56:54.801364+00:00",
+      "import_path": "imports/fr/arguments/A0092.wiki",
+      "kind": "argument",
+      "page_id": "A0092",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0005_dans_la_plupart_des_familles_ce_sont_les_femmes_qui_s_occupent_des_enfan_0f516cf7bd16.wiki",
+      "requested_title": "Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques",
+      "revision_id": 238018,
+      "revision_timestamp": "2026-08-07T12:57:49Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques",
+      "url": "https://fr.wikidebates.org/wiki/Dans_la_plupart_des_familles%2C_ce_sont_les_femmes_qui_s%27occupent_des_enfants_et_des_t%C3%A2ches_domestiques"
+    },
+    {
+      "canonical_title": "Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes",
+      "fetched_at": "2026-10-22T11:56:55.118960+00:00",
+      "import_path": "imports/fr/arguments/A0093.wiki",
+      "kind": "argument",
+      "page_id": "A0093",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0095_meme_quand_ils_s_occupent_de_leurs_enfants_la_plupart_des_hommes_renforc_8a39a9b792ef.wiki",
+      "requested_title": "Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes",
+      "revision_id": 238355,
+      "revision_timestamp": "2026-08-07T13:04:22Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes",
+      "url": "https://fr.wikidebates.org/wiki/M%C3%AAme_quand_ils_s%27occupent_de_leurs_enfants%2C_la_plupart_des_hommes_renforcent_les_st%C3%A9r%C3%A9otypes_sexistes"
+    },
+    {
+      "canonical_title": "Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille",
+      "fetched_at": "2026-10-22T11:56:55.454533+00:00",
+      "import_path": "imports/fr/arguments/A0094.wiki",
+      "kind": "argument",
+      "page_id": "A0094",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0070_les_hommes_ont_interet_a_conserver_les_roles_traditionnels_au_sein_de_la_3ba0b19c17dd.wiki",
+      "requested_title": "Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille",
+      "revision_id": 238721,
+      "revision_timestamp": "2026-08-07T13:06:22Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ont_int%C3%A9r%C3%AAt_%C3%A0_conserver_les_r%C3%B4les_traditionnels_au_sein_de_la_famille"
+    },
+    {
+      "canonical_title": "Les couples lesbiens sont tout à fait aptes à élever un enfant",
+      "fetched_at": "2026-10-22T11:56:55.773491+00:00",
+      "import_path": "imports/fr/arguments/A0095.wiki",
+      "kind": "argument",
+      "page_id": "A0095",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0038_les_couples_lesbiens_sont_tout_a_fait_aptes_a_elever_un_enfant_600e72b2043e.wiki",
+      "requested_title": "Les couples lesbiens sont tout à fait aptes à élever un enfant",
+      "revision_id": 238876,
+      "revision_timestamp": "2026-08-07T13:07:08Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les couples lesbiens sont tout à fait aptes à élever un enfant",
+      "url": "https://fr.wikidebates.org/wiki/Les_couples_lesbiens_sont_tout_%C3%A0_fait_aptes_%C3%A0_%C3%A9lever_un_enfant"
+    },
+    {
+      "canonical_title": "Les hommes pro féministes ne sont pas pris au sérieux par les autres hommes",
+      "fetched_at": "2026-10-22T11:56:56.410822+00:00",
+      "import_path": "imports/fr/arguments/A0096.wiki",
+      "kind": "argument",
+      "page_id": "A0096",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0082_les_hommes_pro_feministes_ne_sont_pas_pris_au_serieux_par_les_autres_hom_f4b49c1e1cd6.wiki",
+      "requested_title": "Les hommes pro féministes ne sont pas pris au sérieux par les autres hommes",
+      "revision_id": 238587,
+      "revision_timestamp": "2026-08-07T13:05:38Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes pro féministes ne sont pas pris au sérieux par les autres hommes",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_pro_f%C3%A9ministes_ne_sont_pas_pris_au_s%C3%A9rieux_par_les_autres_hommes"
+    },
+    {
+      "canonical_title": "C'est la société qui est responsable du sexisme, pas les hommes",
+      "fetched_at": "2026-10-22T11:56:57.066396+00:00",
+      "import_path": "imports/fr/arguments/A0097.wiki",
+      "kind": "argument",
+      "page_id": "A0097",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0003_c_est_la_societe_qui_est_responsable_du_sexisme_pas_les_hommes_760458b2fb0d.wiki",
+      "requested_title": "C'est la société qui est responsable du sexisme, pas les hommes",
+      "revision_id": 238030,
+      "revision_timestamp": "2026-08-07T12:57:55Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "C'est la société qui est responsable du sexisme, pas les hommes",
+      "url": "https://fr.wikidebates.org/wiki/C%27est_la_soci%C3%A9t%C3%A9_qui_est_responsable_du_sexisme%2C_pas_les_hommes"
+    },
+    {
+      "canonical_title": "Les hommes ne sont pas capables d'agir par devoir",
+      "fetched_at": "2026-10-22T11:56:57.388874+00:00",
+      "import_path": "imports/fr/arguments/A0098.wiki",
+      "kind": "argument",
+      "page_id": "A0098",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0066_les_hommes_ne_sont_pas_capables_d_agir_par_devoir_5a212d6b8c78.wiki",
+      "requested_title": "Les hommes ne sont pas capables d'agir par devoir",
+      "revision_id": 238553,
+      "revision_timestamp": "2026-08-07T13:05:27Z",
+      "sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "size_bytes": 40,
+      "source_graph_title": "Les hommes ne sont pas capables d'agir par devoir",
+      "url": "https://fr.wikidebates.org/wiki/Les_hommes_ne_sont_pas_capables_d%27agir_par_devoir"
+    },
+    {
+      "canonical_title": "La manière dont le femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation",
+      "fetched_at": "2026-10-22T11:56:58.029034+00:00",
+      "import_path": "imports/fr/arguments/A0099.wiki",
+      "kind": "argument",
+      "page_id": "A0099",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0017_la_maniere_dont_le_femmes_sont_traitees_ne_saurait_etre_decrite_autremen_9469775fb275.wiki",
+      "requested_title": "La manière dont le femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation",
+      "revision_id": 214279,
+      "revision_timestamp": "2026-03-21T21:10:15Z",
+      "sha256": "5dc4e6b593ebc624cda6e398aa6e07bbe23ece6f483c064f2205a03edeb0c82e",
+      "size_bytes": 72,
+      "source_graph_title": "La manière dont le femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation",
+      "url": "https://fr.wikidebates.org/wiki/La_mani%C3%A8re_dont_le_femmes_sont_trait%C3%A9es_ne_saurait_%C3%AAtre_d%C3%A9crite_autrement_que_comme_de_la_d%C3%A9shumanisation"
+    },
+    {
+      "canonical_title": "Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base",
+      "fetched_at": "2026-10-22T11:56:58.349302+00:00",
+      "import_path": "imports/fr/arguments/A0100.wiki",
+      "kind": "argument",
+      "page_id": "A0100",
+      "redirect_chain": [],
+      "relative_path": "pages/arguments/0029_le_feminisme_ne_se_decredibilise_jamais_qu_aux_yeux_de_ceux_qui_y_sont_d_eff42ee9c28d.wiki",
+      "requested_title": "Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base",
+      "revision_id": 214280,
+      "revision_timestamp": "2026-03-21T21:10:15Z",
+      "sha256": "5dc4e6b593ebc624cda6e398aa6e07bbe23ece6f483c064f2205a03edeb0c82e",
+      "size_bytes": 72,
+      "source_graph_title": "Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base",
+      "url": "https://fr.wikidebates.org/wiki/Le_f%C3%A9minisme_ne_se_d%C3%A9cr%C3%A9dibilise_jamais_qu%27aux_yeux_de_ceux_qui_y_sont_d%C3%A9j%C3%A0_hostiles_%C3%A0_la_base"
+    }
+  ],
+  "schema": "wikidebia-import-provenance-1.0",
+  "source_extraction_date": "2026-10-22",
+  "source_snapshot_schema": "wikidebia-graph-snapshot-1.0"
+}

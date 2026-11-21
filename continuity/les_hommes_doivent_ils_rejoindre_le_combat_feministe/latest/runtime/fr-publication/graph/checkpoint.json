@@ -1,0 +1,18 @@
+{
+  "schema": "wikidebia-french-publication-checkpoint-1.0",
+  "schema_version": "1.0",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "stage": "graph",
+  "status": "ready_for_remote_plan",
+  "created_at": "2026-10-23T06:34:51+00:00",
+  "source_reviewed_copy_sha256": "ea25a059bc4fa26c5e187d6bc86987363eab019565e5b3f16d8fb5049e8e4368",
+  "page_count": 101,
+  "english_translation_status": "deferred",
+  "interlanguage_links": 0,
+  "validation_profile": "fr_graph_checkpoint_differential_v1",
+  "source_tree_sha256": "ea25a059bc4fa26c5e187d6bc86987363eab019565e5b3f16d8fb5049e8e4368",
+  "checkpoint_path": ".state/fr-publication/les_hommes_doivent_ils_rejoindre_le_combat_feministe/EDIT-20261023-001/graph/checkpoint-corpus",
+  "checkpoint_tree_sha256": "8ecd576d872f486882ac373d86c018956c7ea5e0fd4a15067e41cd8376bb8b0a",
+  "receipt_sha256": "8cfcd4b7c34786943a2951eaa6bfb65745d222f5ec3929fb273216b0f8f1f928"
+}

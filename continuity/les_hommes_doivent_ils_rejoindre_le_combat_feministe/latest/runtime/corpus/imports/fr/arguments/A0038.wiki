@@ -1,0 +1,18 @@
+{{Argument
+|initialisation=Justification@16457
+|citations={{Citation
+|citation=Lénine n’était pas l’un de ces communistes patriarcaux. Il était tout à fait d’accord avec Kollontaï pour dire que les travailleuses étaient au cœur de la révolution communiste et qu’elles avaient des préoccupations spécifiques auxquelles seul le communisme pouvait répondre. En plus d’être exploitées par les patrons capitalistes, écrivait Lénine, les femmes étaient ''« esclaves de la chambre à coucher, de la crèche et de la cuisine »''. Il était convaincu que le communisme libérerait les femmes de la subordination patriarcale et de la monotonie des tâches ménagères, et soutenait que ces dernières constituaient un gaspillage du précieux travail des femmes et contribuaient à leur oppression au sein du foyer, qu’il qualifiait d’''« esclavage domestique »''.
+
+Lénine a été profondément influencé par les femmes communistes qui l’entouraient, et Kollontaï a souvent fait partie de ce cercle. Lénine a soutenu le droit à l’avortement, à la contraception et au divorce, un point particulièrement controversé parmi les socialistes, certains d’entre eux affirmant qu’à court terme cela entraînerait la misère pour les femmes et les enfants parce qu’elles seraient trop pauvres pour survivre sans les hommes. Tout en reconnaissant le problème, Lénine a insisté sur le fait que tant que les femmes ne pouvaient pas prendre de décisions concernant leur propre vie, elles ne jouiraient pas de tous les droits démocratiques.
+
+Kollontaï et lui, ainsi que leur camarade allemande Clara Zetkin, ont joué un rôle déterminant dans la création de la Journée internationale des femmes, qui est toujours célébrée aujourd’hui (bien qu’elle jouisse d’une cooptation capitaliste considérable). Sous l’influence de Kollontaï, Lénine a écrit : ''« Si nous n’attirons pas les femmes dans l’activité publique, dans la milice, dans la vie politique – si nous ne les arrachons pas à l’atmosphère mortelle de la maison et de la cuisine – il sera impossible d’assurer une véritable liberté. Il sera impossible d’assurer la démocratie, sans parler du socialisme »''. En effet, l’organisation des travailleuses – profondément exploitées au travail et épuisées par leur deuxième journée de travail, à la maison – a été cruciale pour le succès de la révolution bolchevique.
+
+Il ne s’agissait pas seulement d’un accord philosophique entre les deux penseurs, mais d’un engagement institutionnel profond : après la révolution, Lénine a nommé Kollontaï Commissaire du peuple à l’Assistance publique [équivalent du ministère de la Santé, NdlR], poste dans lequel elle a contribué à légaliser l’avortement, le divorce et le contrôle des naissances. L’égalité salariale pour les femmes et les congés payés pour les nouvelles mères ont également été introduits, tandis que le mariage religieux a été remplacé par le mariage civil. Le travail sexuel est dépénalisé et le statut légal d’« illégitimité » pour les enfants de parents non mariéEs est aboli.
+|auteurs=Liza Featherstone
+|article=Kollontaï et Lénine : pour un communisme qui libère les femmes
+|ouvrage=Gauche anticapitaliste
+|date=18/02/2024
+|lien=https://www.gaucheanticapitaliste.org/kollontai-et-lenine-pour-un-communisme-qui-libere-les-femmes/
+}}
+|date-création=2024-11-19
+}}

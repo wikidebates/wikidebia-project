@@ -1,0 +1,40 @@
+{
+  "kit_version": "2.16.47",
+  "project_root": "/workspace/wikidebia-project",
+  "family": "wikidebates",
+  "family_file": "/workspace/wikidebia-project/kit/families/wikidebates_family.py",
+  "pywikibot_dir": "/workspace/wikidebia-project/private/pywikibot",
+  "sites": {
+    "fr": {
+      "code": "fr",
+      "expected_user": "ChatGPT"
+    }
+  },
+  "languages": [
+    "fr"
+  ],
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "corpus_root": "/workspace/wikidebia-project/.state/fr-publication/les_hommes_doivent_ils_rejoindre_le_combat_feministe/EDIT-20261023-001/graph/checkpoint-corpus",
+  "logs_dir": "/workspace/wikidebia-project/logs/les_hommes_doivent_ils_rejoindre_le_combat_feministe/fr-checkpoint-EDIT-20261023-001-graph",
+  "published_state_dir": "/workspace/wikidebia-project/.state/published",
+  "receipts_dir": "/workspace/wikidebia-project/.state/receipts",
+  "validator": {
+    "command": [
+      "/workspace/wikidebia-project/.venv/bin/python",
+      "/workspace/wikidebia-project/validator/scripts/wikidebia_validate.py",
+      "validate"
+    ],
+    "required_version": "0.4.105",
+    "profile": "fr_graph_checkpoint_differential_v1",
+    "scopes": [
+      "schema",
+      "coherence",
+      "graph",
+      "files",
+      "batches",
+      "sources",
+      "workflow"
+    ]
+  },
+  "state_inventory_root": "/workspace/wikidebia-project/.state/fr-publication/les_hommes_doivent_ils_rejoindre_le_combat_feministe/EDIT-20261023-001/graph/inventory"
+}

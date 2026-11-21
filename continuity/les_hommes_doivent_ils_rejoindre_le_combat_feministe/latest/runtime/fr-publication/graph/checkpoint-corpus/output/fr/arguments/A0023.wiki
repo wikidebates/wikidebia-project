@@ -1,0 +1,14 @@
+{{Argument
+|résumé=Entre autres, la libération présente des avantages pour les hommes, qui gagneraient à avoir plus de relations avec des femmes émancipées.
+|objections={{Objection
+|page=Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction
+|titre-affiché=Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction
+}}{{Objection
+|page=De nombreuses femmes préfèrent les hommes dominants
+|titre-affiché=De nombreuses femmes préfèrent les hommes dominants
+}}
+|justifications=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Machisme, Sexisme, Virilisme, Émancipation, Séduction
+|date-création=2019-12-25
+}}

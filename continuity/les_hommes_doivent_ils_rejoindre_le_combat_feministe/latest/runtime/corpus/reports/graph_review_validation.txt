@@ -1,0 +1,15 @@
+VALIDATEUR WIKIDÉB'IA
+Version : 0.4.105
+Paquet : les_hommes_doivent_ils_rejoindre_le_combat_feministe
+Portées : schema, coherence, graph, files, workflow
+
+INFO WDV-DOC-001 — Les contrôles de qualité argumentative, d'équilibre, de quasi-doublons sémantiques et de fidélité documentaire restent soumis à une revue humaine.
+
+Erreurs : 0 | Avertissements : 0 | Informations : 1
+VALIDATION AUTOMATISÉE GLOBALE : RÉUSSIE
+Statuts par couche :
+- structural: passed (erreurs=0, avertissements=0)
+- documentary: not_run (erreurs=0, avertissements=0)
+- semantic_review: not_run (erreurs=0, avertissements=0)
+- fresh_archive: not_run (erreurs=0, avertissements=0)
+Portée du verdict : contrôles automatisés et attestations encodées ; la fidélité sémantique bilingue requiert la revue humaine prévue par la norme.

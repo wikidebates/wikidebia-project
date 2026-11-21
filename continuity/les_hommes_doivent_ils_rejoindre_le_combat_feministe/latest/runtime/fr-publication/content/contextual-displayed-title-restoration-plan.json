@@ -1,0 +1,53 @@
+{
+  "schema": "wikidebia-contextual-displayed-title-restoration-plan-1.0",
+  "created_at": "2026-10-23T17:54:28.044684+00:00",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "language": "fr",
+  "expected_user": "ChatGPT",
+  "change_tag": "chatgpt",
+  "edit_summary": "Rétablissement des titres affichés historiques",
+  "operations": [
+    {
+      "page_id": "A0007",
+      "title": "Les hommes n'ont aucun intérêt à renoncer à leurs privilèges",
+      "base_revision_id": 246049,
+      "before_sha256": "2f3dc2bf4deff9dc8de9c2d984a5ce8a49dc99cc290b4ac3da8865bca4c23910",
+      "after_sha256": "2fde7d8ce490904e7a4623ac862fd5a99fd5a91967e51b4d5eba27d233674877",
+      "displayed_title_changes": [
+        {
+          "before": "Pour assumer leur sensibilité et leurs émotions",
+          "after": "Les hommes gagneraient à assumer leur sensibilité et leurs émotions"
+        },
+        {
+          "before": "Pour se délivrer de l'injonction à la virilité",
+          "after": "Les hommes gagneraient à se délivrer de l'injonction à la virilité"
+        },
+        {
+          "before": "Pour sortir des rapports de rivalité entre hommes",
+          "after": "Les hommes gagneraient à sortir des rapports de rivalité machistes"
+        },
+        {
+          "before": "Pour simplifier et libérer les rapports de séduction",
+          "after": "Les hommes gagneraient à ce que les rapports de séduction soient plus simples"
+        }
+      ],
+      "desired_text": "{{Argument\n|justifications={{Justification\n|page=Les hommes bénéficient des discriminations envers les femmes\n|titre-affiché=Les hommes bénéficient des discriminations envers les femmes\n}}{{Justification\n|page=Les hommes ne veulent pas céder leurs places\n|titre-affiché=Les hommes ne veulent pas céder leurs places\n}}{{Justification\n|page=Les hommes qui assument leur féminisme sont rejetés par les autres hommes\n|titre-affiché=Les hommes qui assument leur féminisme sont rejetés par les autres hommes\n}}\n|objections={{Objection\n|page=Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions\n|titre-affiché=Les hommes gagneraient à assumer leur sensibilité et leurs émotions\n}}{{Objection\n|page=Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité\n|titre-affiché=Les hommes gagneraient à se délivrer de l'injonction à la virilité\n}}{{Objection\n|page=Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes\n|titre-affiché=Les hommes gagneraient à sortir des rapports de rivalité machistes\n}}{{Objection\n|page=Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction\n|titre-affiché=Les hommes gagneraient à ce que les rapports de séduction soient plus simples\n}}{{Objection\n|page=Les hommes n'ont pas de privilèges\n|titre-affiché=Les hommes n'ont pas de privilèges\n}}{{Objection\n|page=Bien des hommes ont fait la preuve de leur engagement pour le combat féministe\n|titre-affiché=Bien des hommes ont fait la preuve de leur engagement pour le combat féministe\n}}\n|rubriques=Politique, Société\n|mots-clés=féminisme, hommes, privilèges\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0028",
+      "title": "Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes",
+      "base_revision_id": 246070,
+      "before_sha256": "c4d48d0af09e80ebf57b42ded8ccf49e3700e67fe5b1c0f68c721c5ccd6f49b4",
+      "after_sha256": "b84dc7f7b08304a838004f3dd4eb6a16a64de1068ca3234b0a98ecfbc8646ac7",
+      "displayed_title_changes": [
+        {
+          "before": "Les hommes sont socialisés pour être indifférents à la souffrance",
+          "after": "Les hommes sont socialisés pour être indifférents à la souffrance des femmes"
+        }
+      ],
+      "desired_text": "{{Argument\n|résumé=Les femmes victimes ont besoin d'être entendues, prises au sérieux et soutenues par les hommes.\nAmitié, policiers, juges, journalistes.\n|objections={{Objection\n|page=Les hommes sont socialisés pour être indifférents à la souffrance\n|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance des femmes\n}}\n|rubriques=Politique, Société\n|mots-clés=féminisme, hommes, sexisme, femmes, violences sexistes, parole\n|date-création=2019-11-24\n}}"
+    }
+  ],
+  "plan_sha256": "61713090e56a3846a94cd92521efd77b0bcb18d2d2816da1559b419e93eef4c1"
+}

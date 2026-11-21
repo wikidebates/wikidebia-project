@@ -1,0 +1,11 @@
+{{Argument
+|résumé=En particulier :
+* Violences psychologiques : harcèlement moral, insultes, rabaissement
+* Violences physiques : féminicides, violence conjuguale, 
+* Violences sexuelles : harcèlement sexuel, viol, viol conjugual
+|justifications=
+|objections=
+|rubriques=Politique, Société
+|mots-clés=Sexisme, Femmes, Violences
+|date-création=2019-11-24
+}}

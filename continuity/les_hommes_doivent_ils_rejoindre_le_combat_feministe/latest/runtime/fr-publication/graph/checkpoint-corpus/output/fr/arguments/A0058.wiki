@@ -1,0 +1,5 @@
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}

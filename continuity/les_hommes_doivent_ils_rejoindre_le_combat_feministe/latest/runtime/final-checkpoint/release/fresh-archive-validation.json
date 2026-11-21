@@ -1,0 +1,874 @@
+{
+  "schema": "wikidebia-validator-report-1.0",
+  "schema_version": "1.0",
+  "validator_version": "0.4.105",
+  "producer": {
+    "component": "validator",
+    "version": "0.4.105"
+  },
+  "package_root": "extracted",
+  "scopes": [
+    "schema",
+    "coherence",
+    "graph",
+    "batches",
+    "sources",
+    "files",
+    "wikicode",
+    "bilingual",
+    "editorial",
+    "workflow"
+  ],
+  "result": "passed",
+  "result_scope": "automated_validation",
+  "result_meaning": "Automated structural, documentary and encoded editorial checks only; bilingual semantic fidelity still depends on the required human review attestations.",
+  "validation_layers": {
+    "structural": {
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "meaning": "Schémas, fichiers, graphe, wikicode, cohérence et workflow automatisables."
+    },
+    "documentary": {
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 1,
+      "meaning": "Identité, langue, usages, métadonnées et cohérence normalisée des ressources documentaires."
+    },
+    "semantic_review": {
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 35,
+      "meaning": "Heuristiques bilingues et présence/cohérence des attestations humaines encodées; ce statut ne remplace pas la lecture humaine elle-même."
+    },
+    "fresh_archive": {
+      "status": "not_run",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "meaning": "Ce statut ne peut être établi qu'après création puis réextraction de l'archive exacte; il est scellé par le workflow de release."
+    }
+  },
+  "summary": {
+    "errors": 0,
+    "warnings": 0,
+    "infos": 36
+  },
+  "metrics": {
+    "runtime_attestation": {
+      "mode": "component_script_isolated_v2",
+      "cli_sha256": "6338d5bc331d22d66467c09b4ad2f2616b3c29db9b8c32c15e0f6d4c3f43a8d7",
+      "editorial_sha256": "e7d22db8e94ff312edaa77b3002fdcea06be6ede975e42e1bc2c33c55c805ce1",
+      "wikicode_sha256": "a8ec3f970e60ca25c2a6094d020c776d568cf2056932b958b1d38bd7d71a2f7f",
+      "historical_summary_sha256": "b987c154a4dbc09ad7a6376a4b348422ca373226832e2f2f20f956788cc7428a"
+    },
+    "coherence": {
+      "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+      "english_translation_deferred": false
+    },
+    "graph": {
+      "main_pro": 5,
+      "main_con": 5,
+      "justifications_by_depth": {
+        "2": 41,
+        "3": 7
+      },
+      "objections_by_depth": {
+        "2": 21,
+        "3": 44,
+        "4": 2
+      },
+      "distinct_nodes": 100,
+      "total_occurrences": 125,
+      "reused_nodes": 15,
+      "additional_reuses": 25,
+      "developed_nodes": 28,
+      "leaf_nodes": 72,
+      "maximum_depth": 4
+    },
+    "batches": {
+      "count": 2,
+      "fr_owned": 100,
+      "en_owned": 100,
+      "english_translation_deferred": false
+    },
+    "sources": {
+      "count": 0,
+      "verified": 0
+    },
+    "documentary_resources": {
+      "count": 0,
+      "conflicts": 0,
+      "doi_identities": 0,
+      "url_identities": 0,
+      "bibliographic_fingerprints": 0
+    },
+    "files": {
+      "declared_pages": 202,
+      "core_files": 5
+    },
+    "wikicode": {
+      "declared_pages": 202,
+      "parsed_pages": 202
+    },
+    "bilingual": {
+      "active_nodes": 100,
+      "strict": true,
+      "english_translation_status": "ready",
+      "skipped_for_deferred_translation": false
+    },
+    "semantic_marker_engine": {
+      "summary_pages_with_signals": 7
+    },
+    "editorial": {
+      "active_nodes": 100,
+      "canonical_display_copy_ratio": {
+        "fr": 0.7,
+        "fr_effective_after_owner_exception": 0.7,
+        "fr_owner_exception_count": 0,
+        "en": 0.7,
+        "en_effective_after_owner_exception": 0.7,
+        "en_owner_exception_count": 0
+      },
+      "dominant_keyword_set_ratio": {
+        "fr": 0.07,
+        "en": 0.07
+      },
+      "generated_dominant_keyword_set_ratio": {
+        "fr": 0.0,
+        "en": 0.0
+      },
+      "displayed_title_quality_errors": {
+        "fr": 0,
+        "en": 0
+      },
+      "keyword_quality_errors": {
+        "fr": 0,
+        "en": 0
+      },
+      "dominant_classification_ratio": {
+        "fr": 0.68,
+        "en": 0.68
+      },
+      "summary_auto_objections": {
+        "fr": 0,
+        "en": 0
+      },
+      "summary_bilingual_ratio_errors": 0,
+      "documentary_pagination_errors": 0,
+      "documentary_access_date_errors": 0,
+      "debate_documentation": {
+        "fr": {
+          "introduction_subsections": 0,
+          "documentary_references": 0,
+          "bucket_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distinct_bucket_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "profile_minima": {
+            "subsections": 0,
+            "references": 0
+          },
+          "profile_rationale": "Profil provisoire sans quota par orientation; la revue éditoriale retiendra uniquement les sous-parties et sources réellement informatives."
+        },
+        "en": {
+          "introduction_subsections": 0,
+          "documentary_references": 0,
+          "bucket_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distinct_bucket_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "profile_minima": {
+            "subsections": 0,
+            "references": 0
+          },
+          "profile_rationale": "Profil provisoire sans quota par orientation; la revue éditoriale retiendra uniquement les sous-parties et sources réellement informatives."
+        }
+      },
+      "introduction_references": {
+        "fr": {
+          "subsections": 0,
+          "ref_calls": 0,
+          "references_blocks": 0,
+          "invalid_subsections": [],
+          "minimum": 1,
+          "claim_driven_policy": true,
+          "expected_inline_reference_model": null,
+          "inline_reference_body_mode": "direct_wikicode_without_templates",
+          "invalid_inline_reference_models": [],
+          "invalid_direct_reference_notes": [],
+          "undefined_named_references": [],
+          "machine_documentary_dates": [],
+          "terminal_period_reference_notes": [],
+          "punctuation_policy_revision": "1.2.44"
+        },
+        "en": {
+          "subsections": 0,
+          "ref_calls": 0,
+          "references_blocks": 0,
+          "invalid_subsections": [],
+          "minimum": 1,
+          "claim_driven_policy": true,
+          "expected_inline_reference_model": null,
+          "inline_reference_body_mode": "direct_wikicode_without_templates",
+          "invalid_inline_reference_models": [],
+          "invalid_direct_reference_notes": [],
+          "undefined_named_references": [],
+          "machine_documentary_dates": [],
+          "terminal_period_reference_notes": [],
+          "punctuation_policy_revision": "1.2.44"
+        }
+      },
+      "normative_non_regression": {
+        "active_norms": [
+          "WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md"
+        ],
+        "current_handoff": "handoffs/EDIT-20261023-001-render.json"
+      },
+      "individual_editorial_review": {
+        "reviewed_nodes": 100,
+        "title_reformulated": 0,
+        "title_retained_after_review": 100,
+        "rubrics_adjusted": 0,
+        "rubric_rationales": 139,
+        "issues": 0
+      },
+      "graph_placement_review": {
+        "path": "reviews/graph_placement_review.json",
+        "reviewed_occurrences": 125,
+        "main_arguments": 10,
+        "moved_after_review": 0,
+        "issues": 0
+      },
+      "summary_style": {
+        "heuristic_warnings": 0,
+        "opening_similarity_warnings": 0,
+        "quantitative_summaries": 0,
+        "reviewed_language_pages": 200,
+        "review_issues": 0
+      },
+      "introduction_review": {
+        "path": "reviews/introduction_review.json",
+        "languages": [
+          "en",
+          "fr"
+        ],
+        "subsection_titles": {
+          "fr": [],
+          "en": []
+        },
+        "issues": []
+      },
+      "creation_date_errors": 0,
+      "traceability": {
+        "reports_missing": [],
+        "handoffs_declared": 1,
+        "handoffs_checked": 1,
+        "handoffs_missing": [],
+        "remote_write_authorized": false
+      },
+      "semantic_convergence": {
+        "required": true,
+        "status": "converged",
+        "passes": 2,
+        "issues": []
+      },
+      "english_translation_status": "ready",
+      "english_translation_deferred": false
+    },
+    "workflow": {
+      "global_status": "release_ready",
+      "passed_validation_scopes": [
+        "bilingual",
+        "en_debate",
+        "en_global",
+        "en_titles",
+        "fr_debate",
+        "fr_global",
+        "graph",
+        "interlanguage"
+      ],
+      "english_translation_status": "ready",
+      "english_translation_deferred": false
+    }
+  },
+  "findings": [
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre canonique anglais ; revue bilingue requise",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0001",
+        "field": "canonical_title",
+        "fr_text": "Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes",
+        "en_text": "Men cannot remain indifferent to discrimination and violence against women",
+        "marker_families": [
+          "possibility"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0001",
+        "fr_title": "Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes",
+        "en_title": "Men cannot remain indifferent to discrimination and violence against women",
+        "marker_families": [
+          "possibility"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre canonique anglais ; revue bilingue requise",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0009",
+        "field": "canonical_title",
+        "fr_text": "Une société ne peut pas fonctionner correctement si elle est égalitaire",
+        "en_text": "A society cannot function properly if it is egalitarian",
+        "marker_families": [
+          "possibility"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0009",
+        "fr_title": "Une société ne peut pas fonctionner correctement si elle est égalitaire",
+        "en_title": "A society cannot function properly if it is egalitarian",
+        "marker_families": [
+          "possibility"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre canonique anglais ; revue bilingue requise",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0013",
+        "field": "canonical_title",
+        "fr_text": "Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes",
+        "en_text": "Men cannot fail to see gender-based violence and discrimination",
+        "marker_families": [
+          "possibility"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0013",
+        "fr_title": "Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes",
+        "en_title": "Men cannot fail to see gender-based violence and discrimination",
+        "marker_families": [
+          "possibility"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre canonique anglais ; revue bilingue requise",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0015",
+        "field": "canonical_title",
+        "fr_text": "Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité",
+        "en_text": "Men cannot remain insensitive to the fate of half of humanity",
+        "marker_families": [
+          "possibility"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0015",
+        "fr_title": "Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité",
+        "en_title": "Men cannot remain insensitive to the fate of half of humanity",
+        "marker_families": [
+          "possibility"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0025",
+        "fr_title": "Pour ne plus subir l'homophobie",
+        "en_title": "To stop being subjected to homophobia",
+        "marker_families": [
+          "comparison",
+          "negation"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0037",
+        "fr_title": "Les femmes belges doivent leur droit à l'avortement, à la contraception et à l'accouchement sans douleur à Willy Peers",
+        "en_title": "Belgian women owe their rights to abortion, contraception and pain-free childbirth to Willy Peers",
+        "marker_families": [
+          "necessity",
+          "negation"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre canonique anglais ; revue bilingue requise",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0050",
+        "field": "canonical_title",
+        "fr_text": "Les femmes doivent s'organiser en non-mixité pour ne pas avoir à tout réexpliquer",
+        "en_text": "Women must organize in women-only groups to avoid having to explain everything all over again",
+        "marker_families": [
+          "negation"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0050",
+        "fr_title": "Pour ne pas avoir à tout réexpliquer",
+        "en_title": "To avoid having to explain everything all over again",
+        "marker_families": [
+          "negation"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre canonique anglais ; revue bilingue requise",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0051",
+        "field": "canonical_title",
+        "fr_text": "Le combat n'avancera pas si on n'éduque pas les hommes",
+        "en_text": "The struggle will not advance unless men are educated",
+        "marker_families": [
+          "condition"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0051",
+        "fr_title": "Le combat n'avancera pas si on n'éduque pas les hommes",
+        "en_title": "The struggle will not advance unless men are educated",
+        "marker_families": [
+          "condition"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre canonique anglais ; revue bilingue requise",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0065",
+        "field": "canonical_title",
+        "fr_text": "Les femmes sont sans cesse ramenées à leur corps et à leur apparence",
+        "en_text": "Women are constantly reduced to their bodies and appearance",
+        "marker_families": [
+          "negation"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0065",
+        "fr_title": "Les femmes sont sans cesse ramenées à leur corps et à leur apparence",
+        "en_title": "Women are constantly reduced to their bodies and appearance",
+        "marker_families": [
+          "negation"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre canonique anglais ; revue bilingue requise",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0070",
+        "field": "canonical_title",
+        "fr_text": "De nombreuses victimes n'osent pas parler des violences sexistes qu'elles ont subies, encore moins aux hommes",
+        "en_text": "Many victims do not dare speak about the gender-based violence they experienced, especially to men",
+        "marker_families": [
+          "comparison"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0070",
+        "fr_title": "De nombreuses victimes n'osent pas parler des violences qu'elles ont subies, encore moins aux hommes",
+        "en_title": "Many victims do not dare speak about the violence they experienced, especially to men",
+        "marker_families": [
+          "comparison"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre canonique anglais ; revue bilingue requise",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0079",
+        "field": "canonical_title",
+        "fr_text": "La virilité n'a pas que des mauvais côtés",
+        "en_text": "Virility has positive aspects too",
+        "marker_families": [
+          "negation"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0079",
+        "fr_title": "La virilité n'a pas que des mauvais côtés",
+        "en_title": "Virility has positive aspects too",
+        "marker_families": [
+          "negation"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre canonique anglais ; revue bilingue requise",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0089",
+        "field": "canonical_title",
+        "fr_text": "Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent",
+        "en_text": "Women are best placed to speak about the discrimination they face",
+        "marker_families": [
+          "comparison"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0089",
+        "fr_title": "Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent",
+        "en_title": "Women are best placed to speak about the discrimination they face",
+        "marker_families": [
+          "comparison"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre canonique anglais ; revue bilingue requise",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0095",
+        "field": "canonical_title",
+        "fr_text": "Les couples lesbiens sont tout à fait aptes à élever un enfant",
+        "en_text": "Lesbian couples are fully capable of raising a child",
+        "marker_families": [
+          "universal_quantifier"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0095",
+        "fr_title": "Les couples lesbiens sont tout à fait aptes à élever un enfant",
+        "en_title": "Lesbian couples are fully capable of raising a child",
+        "marker_families": [
+          "universal_quantifier"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre canonique anglais ; revue bilingue requise",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0100",
+        "field": "canonical_title",
+        "fr_text": "Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base",
+        "en_text": "Feminism loses credibility only in the eyes of those already hostile to it",
+        "marker_families": [
+          "negation"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le titre anglais ; revue bilingue requise avant toute correction",
+      "path": "data/registre_debat.json",
+      "pointer": null,
+      "details": {
+        "node_id": "A0100",
+        "fr_title": "Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base",
+        "en_title": "Feminism loses credibility only in the eyes of those already hostile to it",
+        "marker_families": [
+          "negation"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le résumé anglais ; revue bilingue requise",
+      "path": "output/en/arguments/A0012.wiki",
+      "pointer": null,
+      "details": {
+        "node_id": "A0012",
+        "field": "summary",
+        "marker_families": [
+          "interpretation_status"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-008",
+      "level": "INFO",
+      "message": "Structure sémantique FR→EN possiblement déplacée dans le résumé ; revue humaine requise",
+      "path": "output/en/arguments/A0012.wiki",
+      "pointer": null,
+      "details": {
+        "node_id": "A0012",
+        "field": "summary",
+        "signals": [
+          "interpretation_status_lost"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le résumé anglais ; revue bilingue requise",
+      "path": "output/en/arguments/A0013.wiki",
+      "pointer": null,
+      "details": {
+        "node_id": "A0013",
+        "field": "summary",
+        "marker_families": [
+          "comparison"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le résumé anglais ; revue bilingue requise",
+      "path": "output/en/arguments/A0014.wiki",
+      "pointer": null,
+      "details": {
+        "node_id": "A0014",
+        "field": "summary",
+        "marker_families": [
+          "interpretation_status"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-008",
+      "level": "INFO",
+      "message": "Structure sémantique FR→EN possiblement déplacée dans le résumé ; revue humaine requise",
+      "path": "output/en/arguments/A0014.wiki",
+      "pointer": null,
+      "details": {
+        "node_id": "A0014",
+        "field": "summary",
+        "signals": [
+          "interpretation_status_lost"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le résumé anglais ; revue bilingue requise",
+      "path": "output/en/arguments/A0015.wiki",
+      "pointer": null,
+      "details": {
+        "node_id": "A0015",
+        "field": "summary",
+        "marker_families": [
+          "consequence_link"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le résumé anglais ; revue bilingue requise",
+      "path": "output/en/arguments/A0030.wiki",
+      "pointer": null,
+      "details": {
+        "node_id": "A0030",
+        "field": "summary",
+        "marker_families": [
+          "causal_link"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le résumé anglais ; revue bilingue requise",
+      "path": "output/en/arguments/A0032.wiki",
+      "pointer": null,
+      "details": {
+        "node_id": "A0032",
+        "field": "summary",
+        "marker_families": [
+          "causal_link"
+        ]
+      }
+    },
+    {
+      "code": "WDV-BIL-007",
+      "level": "INFO",
+      "message": "Marqueurs sémantiques français possiblement perdus dans le résumé anglais ; revue bilingue requise",
+      "path": "output/en/arguments/A0069.wiki",
+      "pointer": null,
+      "details": {
+        "node_id": "A0069",
+        "field": "summary",
+        "marker_families": [
+          "strong_intensity"
+        ]
+      }
+    },
+    {
+      "code": "WDV-DOC-001",
+      "level": "INFO",
+      "message": "Revue éditoriale humaine EDIT-20261023-001-RENDER enregistrée et contrôles automatisés réussis.",
+      "path": "reports/render_report.json",
+      "pointer": null,
+      "details": {}
+    }
+  ]
+}

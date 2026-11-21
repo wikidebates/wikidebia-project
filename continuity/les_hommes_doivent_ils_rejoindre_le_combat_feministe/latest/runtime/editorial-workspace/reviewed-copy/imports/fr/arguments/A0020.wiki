@@ -1,0 +1,7 @@
+{{Argument
+|objections={{Objection
+|page=Seulement ceux qui se conforment à l'injonction à la virilité
+|titre-affiché=Seulement ceux qui se conforment à l'injonction à la virilité
+}}
+|date-création=2021-03-18
+}}

@@ -1,0 +1,13 @@
+{{Argument
+|résumé=Les hommes sont socialisés pour accorder la priorité à leurs intérêts, pour oublier autrui, pour se considérer comme le centre du monde. La société encourage les garçons à prendre toute la place. Le petit garçon occupe l'espace physique et sonore, au détriment des filles. Ils ont des difficultés à tenir compte de la présence d'autres êtres humains, et à maîtriser leurs émotions.
+|objections={{Objection
+|page=Beaucoup d'hommes ne sont pas égoïstes
+|titre-affiché=Beaucoup d'hommes ne sont pas égoïstes
+}}{{Objection
+|page=La socialisation vise à lutter contre notre égoïsme naturel
+|titre-affiché=La socialisation vise à lutter contre notre égoïsme naturel
+}}
+|rubriques=Éducation, Politique, Société
+|mots-clés=féminisme, hommes, femmes, socialisation, égoïsme
+|date-création=2020-03-26
+}}

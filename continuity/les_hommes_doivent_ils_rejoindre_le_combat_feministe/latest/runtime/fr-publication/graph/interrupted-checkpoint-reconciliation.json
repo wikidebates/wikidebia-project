@@ -1,0 +1,166 @@
+{
+  "created_at": "2026-10-23T06:37:31.865543+00:00",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "pages": [
+    {
+      "current_revision_id": 245837,
+      "current_sha256": "0d92e2a66b42da0ab781a4f8e8f83868211f32d6037b7119bfa3e2045871ce7b",
+      "page_id": "A0002",
+      "source_revision_id": 206930,
+      "title": "Les hommes ont intérêt à en finir avec le sexisme",
+      "verified_bot_revision_chain": [
+        {
+          "content_sha256": "0d92e2a66b42da0ab781a4f8e8f83868211f32d6037b7119bfa3e2045871ce7b",
+          "parent_id": 245818,
+          "revision_id": 245837,
+          "summary": "Restauration des titres affichés d’origine",
+          "tags": [
+            "chatgpt"
+          ],
+          "user": "ChatGPT"
+        },
+        {
+          "content_sha256": "ade50d2f0d0d961b8a7c70c6f3525941d2ec08adc3c3acddc572824f8c13fb09",
+          "parent_id": 206930,
+          "revision_id": 245818,
+          "summary": "Mise à jour des justifications",
+          "tags": [
+            "chatgpt"
+          ],
+          "user": "ChatGPT"
+        }
+      ]
+    },
+    {
+      "current_revision_id": 245819,
+      "current_sha256": "9f93ec2fbbafdb3456d7d31370e16063c469783f30c1cd4f28e79bc4c3b8fb69",
+      "page_id": "A0003",
+      "source_revision_id": 206931,
+      "title": "Les femmes ont besoin des hommes pour en finir avec le sexisme",
+      "verified_bot_revision_chain": [
+        {
+          "content_sha256": "9f93ec2fbbafdb3456d7d31370e16063c469783f30c1cd4f28e79bc4c3b8fb69",
+          "parent_id": 206931,
+          "revision_id": 245819,
+          "summary": "Mise à jour des justifications",
+          "tags": [
+            "chatgpt"
+          ],
+          "user": "ChatGPT"
+        }
+      ]
+    },
+    {
+      "current_revision_id": 245820,
+      "current_sha256": "1c643db31f3174801884f1ea34169f2f2d2b9e09cba95a5ef9575bde0c080686",
+      "page_id": "A0004",
+      "source_revision_id": 216871,
+      "title": "Bien des hommes ont fait la preuve de leur engagement pour le combat féministe",
+      "verified_bot_revision_chain": [
+        {
+          "content_sha256": "1c643db31f3174801884f1ea34169f2f2d2b9e09cba95a5ef9575bde0c080686",
+          "parent_id": 216871,
+          "revision_id": 245820,
+          "summary": "Mise à jour des justifications et des objections",
+          "tags": [
+            "chatgpt"
+          ],
+          "user": "ChatGPT"
+        }
+      ]
+    },
+    {
+      "current_revision_id": 245823,
+      "current_sha256": "e5ca9eb512fd60def860769095e30c00d97145dee752625a72032d597e743464",
+      "page_id": "A0007",
+      "source_revision_id": 206933,
+      "title": "Les hommes n'ont aucun intérêt à renoncer à leurs privilèges",
+      "verified_bot_revision_chain": [
+        {
+          "content_sha256": "e5ca9eb512fd60def860769095e30c00d97145dee752625a72032d597e743464",
+          "parent_id": 206933,
+          "revision_id": 245823,
+          "summary": "Mise à jour des objections",
+          "tags": [
+            "chatgpt"
+          ],
+          "user": "ChatGPT"
+        }
+      ]
+    },
+    {
+      "current_revision_id": 245824,
+      "current_sha256": "0b5ed1dad78571126d062228f28a4872bb24628dbd44356b6ad14978757306de",
+      "page_id": "A0008",
+      "source_revision_id": 207133,
+      "title": "Les femmes doivent s'organiser en non-mixité",
+      "verified_bot_revision_chain": [
+        {
+          "content_sha256": "0b5ed1dad78571126d062228f28a4872bb24628dbd44356b6ad14978757306de",
+          "parent_id": 207133,
+          "revision_id": 245824,
+          "summary": "Mise à jour des justifications",
+          "tags": [
+            "chatgpt"
+          ],
+          "user": "ChatGPT"
+        }
+      ]
+    },
+    {
+      "current_revision_id": 245829,
+      "current_sha256": "ca177031685385b3dea5ce68f7be64ba4cb358fdf55777560fa6debde2376829",
+      "page_id": "A0013",
+      "source_revision_id": 206939,
+      "title": "Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes",
+      "verified_bot_revision_chain": [
+        {
+          "content_sha256": "ca177031685385b3dea5ce68f7be64ba4cb358fdf55777560fa6debde2376829",
+          "parent_id": 206939,
+          "revision_id": 245829,
+          "summary": "Mise à jour des justifications et des objections",
+          "tags": [
+            "chatgpt"
+          ],
+          "user": "ChatGPT"
+        }
+      ]
+    },
+    {
+      "current_revision_id": 245840,
+      "current_sha256": "7885c8113e491d77bc2003d4c23eb14546c8f33fe3e0b48ffcbe65a092a3db2b",
+      "page_id": "A0017",
+      "source_revision_id": 207137,
+      "title": "Les hommes sont socialisés pour déshumaniser les femmes",
+      "verified_bot_revision_chain": [
+        {
+          "content_sha256": "7885c8113e491d77bc2003d4c23eb14546c8f33fe3e0b48ffcbe65a092a3db2b",
+          "parent_id": 245833,
+          "revision_id": 245840,
+          "summary": "Restauration des titres affichés d’origine",
+          "tags": [
+            "chatgpt"
+          ],
+          "user": "ChatGPT"
+        },
+        {
+          "content_sha256": "daa71a22b6f3a38c7895bffd6d11480cc06800cd8384660342b2f8ce68970e71",
+          "parent_id": 207137,
+          "revision_id": 245833,
+          "summary": "Mise à jour des justifications et des objections",
+          "tags": [
+            "chatgpt"
+          ],
+          "user": "ChatGPT"
+        }
+      ]
+    }
+  ],
+  "receipt_sha256": "5f27b3182f9e3dca5d9c713b9555403b9ad778798fcde1e167b7786e6707cc99",
+  "reconciled_inventory_sha256": "99ff507a2f2bd3cbfea3ba953018433cc441dfe74fa68103a972f1a3570e43d4",
+  "replacement_work_id": "EDIT-20261023-001",
+  "restoration_receipt_sha256": "76b6e23e908540c9a3d8e511ea77eaf56b18d2be5c0fa4547b1581dfb2063f21",
+  "schema": "wikidebia-interrupted-checkpoint-reconciliation-1.0",
+  "source_plan_sha256": "fc0200ff9ba45f40fdf7af6c185eb63e94fae1a8cf6de8581c3077a88106584a",
+  "superseded_work_id": "EDIT-20261022-001"
+}

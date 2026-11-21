@@ -1,0 +1,5 @@
+{{Argument
+|rubriques=Politique
+|mots-clés=féminisme, privilèges, hommes
+|date-création=2021-03-18
+}}

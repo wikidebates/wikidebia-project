@@ -1,0 +1,28 @@
+{{Argument
+|justifications={{Justification
+|page=Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions
+|titre-affiché=Pour assumer leur sensibilité et leurs émotions
+}}{{Justification
+|page=Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité
+|titre-affiché=Pour se délivrer de l'injonction à la virilité
+}}{{Justification
+|page=Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes
+|titre-affiché=Pour sortir des rapports de rivalité entre hommes
+}}{{Justification
+|page=Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction
+|titre-affiché=Pour simplifier et libérer les rapports de séduction
+}}{{Justification
+|page=La masculinité toxique génèrent des troubles mentaux et des suicides chez les hommes
+|titre-affiché=Pour en finir avec la souffrance que la masculinité toxique génère chez eux
+}}{{Justification
+|page=La masculinité toxique est le terreau de l'homophobie
+|titre-affiché=Pour ne plus subir l'homophobie
+}}
+|objections={{Objection
+|page=Les hommes bénéficient des discriminations envers les femmes
+|titre-affiché=Les hommes bénéficient des discriminations envers les femmes
+}}
+|rubriques=Politique, Société
+|mots-clés=Hommes, Machisme, Sexisme, Virilisme
+|date-création=2019-11-24
+}}

@@ -1,0 +1,159 @@
+{
+  "schema": "wikidebia-editorial-workspace-1.0",
+  "schema_version": "1.0",
+  "normative_revision": "1.2.88",
+  "validator_version": "0.4.105",
+  "kit_version": "2.16.47",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "status": "release_ready",
+  "source": {
+    "path": "corpus/les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+    "global_status": "graph_validated",
+    "tree_sha256": "cba4265ca0df180f0240547c9b556ede70d49d17e62d4b1d330979fa00c77659",
+    "structural_sha256": "e9fbfc80def372a7370567a985a704eb41cb6417c51c59e423d3ad7a3002993d"
+  },
+  "working_copy": {
+    "path": "working-copy",
+    "initial_tree_sha256": "cba4265ca0df180f0240547c9b556ede70d49d17e62d4b1d330979fa00c77659",
+    "current_status": "preserved_pristine"
+  },
+  "artifacts": {
+    "audit_json": "audits/editorial_inventory.json",
+    "audit_markdown": "audits/editorial_inventory.md",
+    "french_metadata_review": "reviews/fr/page_metadata_review.json",
+    "translation_readiness": "reviews/en/translation_readiness.json",
+    "task_ledger": "tasks/editorial_tasks.json",
+    "keyword_vocabulary": "data/keyword_vocabulary_working.json",
+    "changeset": "changes/changeset.json",
+    "french_title_review": "reviews/fr/page_metadata_review.json",
+    "french_metadata_lock": "data/fr_page_metadata_lock.json",
+    "reviewed_copy": "reviewed-copy",
+    "french_content_review": "reviews/fr/content_review.json",
+    "sources_working": "data/sources_working.json",
+    "classification_review": "reviews/fr/classification_review.json",
+    "keyword_vocabulary_working": "data/keyword_vocabulary_working.json",
+    "content_reviewed_copy": "content-reviewed-copy",
+    "english_translation_review": "reviews/en/translation_review.json",
+    "english_sources_working": "data/sources_en_working.json",
+    "translated_copy": "translated-copy",
+    "rendered_copy": "rendered-copy",
+    "release_copy": "release-copy"
+  },
+  "boundaries": {
+    "source_corpus_mutated": false,
+    "automatic_editorial_corrections_applied": false,
+    "final_pages_generated": true,
+    "english_translation_started": true,
+    "remote_access": false,
+    "publication_started": false,
+    "corpus_release_packaged": true,
+    "remote_comparison_prepared": true
+  },
+  "created_at": "2026-10-23T06:31:55+00:00",
+  "workspace_sha256": "fd44cd8ec6ddb0e8ccc7bb659dc9a77bb313a236f0566d0aba8b4e64b7160cd3",
+  "french_review": {
+    "status": "titles_applied",
+    "applied_at": "2026-10-23T06:34:03+00:00",
+    "review_sha256": "2deaafb2133429bcf5033e6e69bd43e7972a7f2655c073b1bb96f4e550a9b211"
+  },
+  "reviewed_copy": {
+    "path": "reviewed-copy",
+    "tree_sha256": "ea0d347fa8f03729e243ea9a026f5511d5b92d07d4e1f70b2fd039109203e92a",
+    "status": "fr_titles_locked",
+    "review_sha256": "2deaafb2133429bcf5033e6e69bd43e7972a7f2655c073b1bb96f4e550a9b211",
+    "old_structural_sha256": "e9fbfc80def372a7370567a985a704eb41cb6417c51c59e423d3ad7a3002993d",
+    "new_structural_sha256": "83262089d6216339a5c54f338590b92823df30e58cea1ade1a06d1eadc5fc3c9",
+    "applied_at": "2026-10-23T06:34:03+00:00"
+  },
+  "french_content_review": {
+    "status": "applied",
+    "review_sha256": "2e1a0441f637d030b69870125c317b2cdbef90103c0e55414ff92fa2a7731127",
+    "finalized_at": "2026-10-23T13:08:11+00:00",
+    "prepared_reviewed_copy_sha256": "ea25a059bc4fa26c5e187d6bc86987363eab019565e5b3f16d8fb5049e8e4368",
+    "applied_at": "2026-10-23T13:08:11+00:00"
+  },
+  "content_reviewed_copy": {
+    "path": "content-reviewed-copy",
+    "tree_sha256": "63664840b2c88e71f5919b2cceefaf38fc0b239cfb0fc9956ddd87bbeeadec89",
+    "status": "fr_content_locked",
+    "review_sha256": "2e1a0441f637d030b69870125c317b2cdbef90103c0e55414ff92fa2a7731127",
+    "applied_at": "2026-10-23T13:08:11+00:00"
+  },
+  "english_translation_review": {
+    "status": "applied",
+    "review_sha256": "75dc7ef38c90a0cabd6247c7ccea55bfe0ba22bf3d88502402854939852981dc",
+    "finalized_at": "2026-10-23T18:07:54+00:00",
+    "prepared_content_reviewed_copy_sha256": "63664840b2c88e71f5919b2cceefaf38fc0b239cfb0fc9956ddd87bbeeadec89",
+    "applied_at": "2026-10-23T18:07:55+00:00"
+  },
+  "correction_history": [
+    {
+      "kind": "contextual_displayed_title_translation",
+      "archived_at": "2026-10-23T17:56:43+00:00",
+      "archive": ".state/correction-archives/les_hommes_doivent_ils_rejoindre_le_combat_feministe/EDIT-20261023-001/20261023T175643Z",
+      "previous_review_sha256": "786897ee177c4b8eb9a977181e3362282d60316be196f75d7cd89f4e4de2aa01",
+      "corrected_relation_ids": [
+        "edge:E00043",
+        "edge:E00045",
+        "edge:E00047",
+        "edge:E00048",
+        "edge:E00097"
+      ]
+    },
+    {
+      "kind": "oe_canonical_title_reconciliation",
+      "corrected_node_ids": [
+        "A0084",
+        "A0085"
+      ],
+      "archived_at": "2026-10-23T18:07:54+00:00",
+      "archive": ".state/correction-archives/les_hommes_doivent_ils_rejoindre_le_combat_feministe/EDIT-20261023-001/20261023T180754Z-oe-reconciliation",
+      "remote_receipt": ".state/fr-publication/les_hommes_doivent_ils_rejoindre_le_combat_feministe/EDIT-20261023-001/content/oe-canonical-title-restoration-receipt.json"
+    }
+  ],
+  "semantic_convergence": {
+    "status": "converged",
+    "receipt_path": "reviews/en/semantic_convergence_review.json",
+    "receipt_sha256": "719cc09070c395912a1f71ed229b829dc68f620d5c04f84ae8ca0fd4b424b52a",
+    "semantic_content_sha256": "082deef387edbb99e0b127f9a5c8d90d53c609780f3fa57e8ae9c20b63d359ab",
+    "pass_count": 2
+  },
+  "translation_application_history": [
+    {
+      "path": "translated-copy",
+      "tree_sha256": "6d06469c1f32868136233d8eb826158729298f152250eb0cbc4bc9b5bcc5421e",
+      "status": "bilingual_content_locked",
+      "review_sha256": "1a69cfa54efd1279588f231538963bce87abd126f89123f0348375bb070ecf02",
+      "applied_at": "2026-10-23T17:56:44+00:00"
+    }
+  ],
+  "translated_copy": {
+    "path": "translated-copy",
+    "tree_sha256": "c4811acc57803056e6b3117a755f07fd3a37d17b3f4f8cedbb9f32ed2bd7c405",
+    "status": "bilingual_content_locked",
+    "review_sha256": "75dc7ef38c90a0cabd6247c7ccea55bfe0ba22bf3d88502402854939852981dc",
+    "applied_at": "2026-10-23T18:07:55+00:00"
+  },
+  "rendered_copy": {
+    "path": "rendered-copy",
+    "tree_sha256": "a4d8eb2a12113cda269970f1270cc4909d57be75affb092d0bc705ae5cae0c06",
+    "status": "bilingual_validated",
+    "translation_review_sha256": "75dc7ef38c90a0cabd6247c7ccea55bfe0ba22bf3d88502402854939852981dc",
+    "rendered_at": "2026-10-23T18:07:57+00:00"
+  },
+  "release_copy": {
+    "path": "release-copy",
+    "tree_sha256": "65d4a71510b05f4d25b39b2ab6bb9d4c8feb8b0460cb0dd21d04edf8dedd6b22",
+    "status": "release_ready",
+    "rendered_copy_sha256": "a4d8eb2a12113cda269970f1270cc4909d57be75affb092d0bc705ae5cae0c06",
+    "released_at": "2026-10-23T18:08:06+00:00"
+  },
+  "local_release": {
+    "path": ".state/corpus-releases/les_hommes_doivent_ils_rejoindre_le_combat_feministe/EDIT-20261023-001",
+    "archive": ".state/corpus-releases/les_hommes_doivent_ils_rejoindre_le_combat_feministe/EDIT-20261023-001/les_hommes_doivent_ils_rejoindre_le_combat_feministe.zip",
+    "archive_sha256": "9e221ecb06eef460f1abeda04a858c50edc2c83f6b5e59411a847609052d8f18",
+    "receipt": ".state/corpus-releases/les_hommes_doivent_ils_rejoindre_le_combat_feministe/EDIT-20261023-001/release-receipt.json",
+    "remote_comparison_prepared": true
+  }
+}

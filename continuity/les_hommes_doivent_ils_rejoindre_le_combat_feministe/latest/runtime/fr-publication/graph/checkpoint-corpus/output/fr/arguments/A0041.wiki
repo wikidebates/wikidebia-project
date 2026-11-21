@@ -1,0 +1,12 @@
+{{Argument
+|références-sitographiques={{Référence sitographique
+|lien=https://www.franceinter.fr/societe/chiffrage-inedit-les-inegalites-femmes-hommes-coutent-118-milliards-d-euros-a-la-societe-selon-une-etude
+|page=Les inégalités femmes-hommes coûtent 118 milliards d'euros à la société
+|auteurs=Claire Chaudière
+|site=France Inter
+|date=2 mars 2022
+}}
+|justifications=
+|objections=
+|date-création=2022-03-06
+}}

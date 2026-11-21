@@ -1,0 +1,74 @@
+{
+  "schema": "wikidebia-local-release-receipt-1.1",
+  "schema_version": "1.0",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "created_at": "2026-10-23T18:08:06+00:00",
+  "normative_revision": "1.2.88",
+  "validator_version": "0.4.105",
+  "kit_version": "2.16.47",
+  "status": "release_ready",
+  "release_copy_tree_sha256": "65d4a71510b05f4d25b39b2ab6bb9d4c8feb8b0460cb0dd21d04edf8dedd6b22",
+  "release_manifest_sha256": "7f8f86329e74a5c6d5b0eb5e2adb286a31fc97689f612bf2beb391727adb3024",
+  "content_inventory_path": "release/content_inventory.json",
+  "content_inventory_sha256": "1f659f168086cc6a804b127d922ea11d59ccd206b974e934b25d0adb7f9a0da5",
+  "content_inventory_counts": {
+    "pages": 202,
+    "french_pages": 101,
+    "english_pages": 101,
+    "active_argument_nodes": 100,
+    "graph_edges": 115,
+    "graph_occurrences": 125,
+    "english_known_names": 0,
+    "english_quotes": 7,
+    "english_summaries_present": 22,
+    "english_summaries_absent": 78,
+    "documentary_resources": 0
+  },
+  "semantic_convergence_review_path": "reviews/en/semantic_convergence_review.json",
+  "semantic_convergence_review_sha256": "44711ee19cc430989c1575056df385af793f21dde8a59034110a21193007ddfe",
+  "semantic_content_sha256": "082deef387edbb99e0b127f9a5c8d90d53c609780f3fa57e8ae9c20b63d359ab",
+  "semantic_convergence_passes": 2,
+  "archive_name": "les_hommes_doivent_ils_rejoindre_le_combat_feministe.zip",
+  "archive_sha256": "9e221ecb06eef460f1abeda04a858c50edc2c83f6b5e59411a847609052d8f18",
+  "archive_size_bytes": 739565,
+  "postrelease_validation_result": "passed",
+  "postrelease_validation_sha256": "2a0a39c54e55055afcabbf04bc3152ce6aaeb62f30ec51738cd0d39d1bf96c4f",
+  "fresh_archive_validation_result": "passed",
+  "fresh_archive_validation_sha256": "abf15342b6dea54e9cb136459290f2ea8cd928a89c1cacf4efb9cfa0f4fb2d3b",
+  "fresh_archive_audited_sha256": "9e221ecb06eef460f1abeda04a858c50edc2c83f6b5e59411a847609052d8f18",
+  "validation_layers": {
+    "structural": {
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "meaning": "Schémas, fichiers, graphe, wikicode, cohérence et workflow automatisables."
+    },
+    "documentary": {
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 1,
+      "meaning": "Identité, langue, usages, métadonnées et cohérence normalisée des ressources documentaires."
+    },
+    "semantic_review": {
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 35,
+      "meaning": "Heuristiques bilingues et présence/cohérence des attestations humaines encodées; ce statut ne remplace pas la lecture humaine elle-même."
+    },
+    "fresh_archive": {
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 36,
+      "meaning": "L'archive exacte a été créée, réextraite dans un dossier vierge, contrôlée CRC/sûreté puis revalidée sans modifier son contenu."
+    }
+  },
+  "remote_access": false,
+  "publication_started": false,
+  "validation_layers_path": "validation-layers.json",
+  "receipt_sha256": "a0265d6d74adc656715ddc6be5d1970089da9cebc273bb9f1be19192a0a93cda"
+}

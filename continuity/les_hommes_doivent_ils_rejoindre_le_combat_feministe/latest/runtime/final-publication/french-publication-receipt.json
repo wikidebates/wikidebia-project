@@ -1,0 +1,11 @@
+{
+  "status": "published",
+  "completed_at": "2026-10-24T07:36:00+00:00",
+  "plan_sha256": "c109366e7967badee08dbb84ab96d78f6af1fd9e9599887b0ba5e5aa86abe141",
+  "underlying_receipt_sha256": "1038302bfaa274cffcceeaaa988d95643f14d43c8e7eb67ddc42551c4d29fc0f",
+  "counts": {
+    "already_done": 100,
+    "updated": 1
+  },
+  "receipt_sha256": "25f75ab18c9adcdd526a0df91135cc3a43477c3ea595e707c8eead1319e97743"
+}

@@ -1,0 +1,5 @@
+{{Argument
+|rubriques=Politique
+|mots-clés=féminisme, hommes
+|date-création=2022-12-19
+}}

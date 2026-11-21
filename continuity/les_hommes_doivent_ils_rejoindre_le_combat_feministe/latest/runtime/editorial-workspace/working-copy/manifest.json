@@ -1,0 +1,82 @@
+{
+  "batches": [],
+  "core_files": {
+    "graph_json": "graph/graphe_argumentatif.json",
+    "graph_markdown": "graph/graphe_argumentatif.md",
+    "registry": "data/registre_debat.json",
+    "scope": "scope.json",
+    "sources": "data/sources.json"
+  },
+  "created_at": "2026-10-22T11:58:41+00:00",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "editorial_controls": {
+    "creation_date": "2026-10-22",
+    "debate_documentation": {
+      "min_references": 0,
+      "min_subsections": 1,
+      "profile_rationale": "Profil provisoire sans quota par orientation; la revue éditoriale retiendra uniquement les sous-parties et sources réellement informatives.",
+      "reject_singleton_bucket_pattern": false
+    },
+    "graph_placement_review_path": "reviews/graph_placement_review.json",
+    "individual_review_path": "reviews/individual_review.json",
+    "individual_review_report_path": "reports/import_report.md",
+    "introduction_references": {
+      "required": true
+    },
+    "introduction_review_path": "reviews/introduction_review.json",
+    "keyword_vocabulary_path": "data/keyword_vocabulary.json",
+    "required_reports": [
+      "reports/import_report.md"
+    ]
+  },
+  "global_status": "graph_validated",
+  "normative_versions": {
+    "consolidated_norm": "1.2.88",
+    "graph": "1.0",
+    "mediawiki_structure": "1.0",
+    "registry": "1.0",
+    "render_profile": "1.0",
+    "validator": "0.4.105",
+    "workflow": "1.0"
+  },
+  "package_schema_version": "1.0",
+  "pages": [],
+  "release": {
+    "archived_at": null,
+    "release_manifest_path": null,
+    "release_receipt_path": null,
+    "release_zip_path": null,
+    "released_at": null
+  },
+  "short_code": "LHDIRLCF",
+  "translation_status": {
+    "en": "deferred"
+  },
+  "updated_at": "2026-10-22T14:33:09+00:00",
+  "validations": [
+    {
+      "id": "V20261022-001",
+      "scope": "graph",
+      "language": null,
+      "validator_version": "0.4.105",
+      "executed_at": "2026-10-22T14:33:09+00:00",
+      "input_sha256": "fe6a3e887ff26b28486997bef2848cf6e328a206359e96b53cd6cb503bf7b9c9",
+      "result": "passed",
+      "blocking_errors": 0,
+      "warnings": 0,
+      "report_path": "reports/graph_review_preflight.json"
+    }
+  ],
+  "works": [
+    {
+      "completed_at": "2026-10-22T11:58:41+00:00",
+      "conversation_name": "Initialisation depuis un snapshot graph-extract",
+      "input_handoff": null,
+      "output_handoff": null,
+      "started_at": "2026-10-22T11:58:41+00:00",
+      "status": "completed",
+      "work_id": "IMPORT-INITIALIZATION-001",
+      "work_type": "initialization"
+    }
+  ]
+}

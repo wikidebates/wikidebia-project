@@ -1,0 +1,18 @@
+{{Argument
+|objections={{Objection
+|page=La domination masculine est de nos jours largement contestée dans tous les domaines de la société
+|titre-affiché=La domination masculine est de nos jours largement contestée dans tous les domaines de la société
+}}{{Objection
+|page=Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques sexistes
+|titre-affiché=Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques
+}}{{Objection
+|page=L'éducation vise à développer notre empathie
+|titre-affiché=L'éducation vise au contraire à développer notre empathie
+}}{{Objection
+|page=Le terme "déshumaniser" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe
+|titre-affiché=Le terme "déshumaniser" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe
+}}
+|rubriques=Éducation, Politique, Société
+|mots-clés=Féminisme, Hommes, Socialisation, Déshumanisation, Femmes
+|date-création=2020-03-26
+}}

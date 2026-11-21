@@ -1,0 +1,1109 @@
+{
+  "schema": "wikidebia-empty-fr-relation-parameter-restoration-plan-1.0",
+  "created_at": "2026-10-23T12:44:05.441680+00:00",
+  "debate_id": "les_hommes_doivent_ils_rejoindre_le_combat_feministe",
+  "work_id": "EDIT-20261023-001",
+  "language": "fr",
+  "expected_user": "ChatGPT",
+  "change_tag": "chatgpt",
+  "edit_summary": "Suppression des paramètres de relations vides",
+  "scanned_pages": 100,
+  "operations": [
+    {
+      "page_id": "A0004",
+      "title": "Bien des hommes ont fait la preuve de leur engagement pour le combat féministe",
+      "base_revision_id": 245845,
+      "before_sha256": "9d47ba8e5dfd5bff0ce52f25a12a800ff9eedb1c4c3c445db680b3badfe7b618",
+      "after_sha256": "42b915543cc7c9a06bd16a5205c9e94153681d585fd380cd2a81d7a7538a98b6",
+      "removed_parameters": [
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|initialisation=Objection@16448\n|citations={{Citation\n|citation=C’est un homme, le socialiste August Bebel, qui a écrit un ouvrage qui a fait date, ''La femme et le socialisme'' (1879). [Alors], quand j’entends aujourd’hui certaines féministes renvoyer tous les hommes dans le camp d’en face en parlant de « privilège mâle », je ne peux pas être d’accord. Les hommes qui se sont engagés dans le combat révolutionnaire ont eux aussi contribué à faire évoluer bien des idées. Et je le dis avec d’autant plus de confiance que, même si à Lutte ouvrière, comme dans les autres partis, les hommes sont majoritaires – ce qui n’est évidemment pas un choix – , cette majorité a choisi pour porte-parole une femme, Arlette Laguiller, dès 1974, en en faisant même la première femme candidate à une élection présidentielle en France. Non seulement ce choix s’est confirmé par la suite, mais il s’est même renouvelé lorsque j’ai été à mon tour désignée pour lui succéder dans ce rôle en 2008.\n|auteurs=Nathalie Arthaud\n|ouvrage=Communiste, révolutionnaire, internationaliste !\n|édition=Les bons caractères\n|date=2022\n|lien=https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste\n}}\n|justifications={{Justification\n|page=Le médecin communiste Willy Peers a permis la légalisation de l'avortement et la démocratisation de la contraception en Belgique\n|titre-affiché=Les femmes belges doivent leur droit à l'avortement, à la contraception et à l'accouchement sans douleur à Willy Peers\n}}{{Justification\n|page=Lénine avait lui-même des sensibilités féministes\n|titre-affiché=Lénine avait lui-même des sensibilités féministes\n}}{{Justification\n|page=Victor Hugo avait des idées très féministes\n|titre-affiché=Victor Hugo avait des idées très féministes\n}}\n|rubriques=Politique\n|mots-clés=hommes, preuve, féminisme\n|date-création=2023-04-03\n}}"
+    },
+    {
+      "page_id": "A0005",
+      "title": "La société doit en finir avec le sexisme",
+      "base_revision_id": 245821,
+      "before_sha256": "3be0c32e369e08884f83b2b52dd89f0efef83e5b257d80a829900ff2c7839880",
+      "after_sha256": "3214c6bba5adf45f583993552f896b5f574f99b5b2d4d732a8e1f96513fca6c0",
+      "removed_parameters": [
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|justifications={{Justification\n|page=Une société n'est fonctionnelle que si elle est égalitaire\n|titre-affiché=Une société n'est fonctionnelle que si elle est égalitaire\n}}{{Justification\n|page=Les inégalités hommes/femmes sont un gouffre financier pour la société\n|titre-affiché=Les inégalités hommes/femmes sont un gouffre financier pour la société\n}}\n|date-création=2021-03-18\n}}"
+    },
+    {
+      "page_id": "A0009",
+      "title": "Une société ne peut pas fonctionner correctement si elle est égalitaire",
+      "base_revision_id": 245839,
+      "before_sha256": "d7bbb6c9263b1a7d678627d6b4e381e4f3d313f77c68e4fb8d2365b0aa55cc43",
+      "after_sha256": "1fe1bfb0f2b538a1baaa48412e5a6efbad189e7fb3168be668c083d219ab3907",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|objections={{Objection\n|page=L'absence d'égalité empêche une société de fonctionner correctement\n|titre-affiché=C'est plutôt l'inverse\n}}\n|date-création=2021-03-18\n}}"
+    },
+    {
+      "page_id": "A0010",
+      "title": "Le féminisme est un mouvement politique où les hommes ne sont pas défendus",
+      "base_revision_id": 245826,
+      "before_sha256": "351f81d0875513afd98ccc9b528a4c33943e8b586961aa3e14fcb828e4e51d27",
+      "after_sha256": "8068fc21bc0789487b827fe2fdb7c240cb756b3875978a593f88c8d23d5ba189",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|initialisation=Argument contre@3040\n|résumé=Le féminisme est un mouvement politique qui prône l'égalité des sexes mais fait le constat que les femmes sont désavantagé dans la société, beaucoup d'hommes ne sont pas d'accord avec celui-ci et explique donc leur non-implication.\n|rubriques=Politique\n|mots-clés=Féminisme\n|date-création=2023-05-18\n}}"
+    },
+    {
+      "page_id": "A0011",
+      "title": "Le sexisme est omniprésent",
+      "base_revision_id": 245827,
+      "before_sha256": "330d52bedeab194963693876edfdcd89c95139b2d42637fe909ea856b1e1ab20",
+      "after_sha256": "33ca8c3d915350dfa6d50d236c3a38f86fd7504a040177070aa7baa5c9b804a9",
+      "removed_parameters": [
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|justifications={{Justification\n|page=Les violences sexistes sont omniprésentes\n|titre-affiché=Les violences sexistes sont omniprésentes\n}}{{Justification\n|page=Les femmes sont victimes de discriminations économiques\n|titre-affiché=Les femmes sont victimes de discriminations économiques\n}}{{Justification\n|page=Les femmes assument la majeure partie des tâches domestiques\n|titre-affiché=Les femmes assument la majeure partie des tâches domestiques\n}}{{Justification\n|page=Le pouvoir est encore monopolisé par les hommes\n|titre-affiché=Le pouvoir est encore monopolisé par les hommes\n}}{{Justification\n|page=Les femmes sont constamment dévalorisées par rapport aux hommes\n|titre-affiché=Les femmes sont constamment dévalorisées par rapport aux hommes\n}}{{Justification\n|page=Les femmes sont sans cesse ramenées à leur corps et à leur apparence\n|titre-affiché=Les femmes sont sans cesse ramenées à leur corps et à leur apparence\n}}\n|rubriques=Politique, Société\n|mots-clés=Sexisme, Femmes\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0012",
+      "title": "Les hommes sont socialisés pour être égoïstes",
+      "base_revision_id": 245828,
+      "before_sha256": "a7ba5e2887cfafbaf75613b196564dbd7d441eb878fce8e42a16248299cd998c",
+      "after_sha256": "df1bd9bc5bb47465fbd1d3edd4fd134e1e839885c6825b195ff73a6bdd7a3212",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|résumé=Les hommes sont socialisés pour accorder la priorité à leurs intérêts, pour oublier autrui, pour se considérer comme le centre du monde. La société encourage les garçons à prendre toute la place. Le petit garçon occupe l'espace physique et sonore, au détriment des filles. Ils ont des difficultés à tenir compte de la présence d'autres êtres humains, et à maîtriser leurs émotions.\n|objections={{Objection\n|page=Beaucoup d'hommes ne sont pas égoïstes\n|titre-affiché=Beaucoup d'hommes ne sont pas égoïstes\n}}{{Objection\n|page=La socialisation vise à lutter contre notre égoïsme naturel\n|titre-affiché=La socialisation vise à lutter contre notre égoïsme naturel\n}}\n|références-sitographiques={{Référence sitographique\n|lien=http://www.slate.fr/story/187230/education-positive-sexisme-petits-garcons-centre-univers-maitrise-emotions\n|page=Les hommes doivent-ils rejoindre le combat féministe ?\n|auteurs=Titou Lecoq\n|site=Slate\n|date=07/02/2020\n}}\n|rubriques=Éducation, Politique, Société\n|mots-clés=Féminisme, Hommes, Femmes, Socialisation, Égoïsme\n|date-création=2020-03-26\n}}"
+    },
+    {
+      "page_id": "A0013",
+      "title": "Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes",
+      "base_revision_id": 245848,
+      "before_sha256": "96eb94f511e762ea1cc7fb7e6830fc5ea362f5ba3889940ae6540af641f02382",
+      "after_sha256": "4cd33e5c0623e85e14f9bdbbedf34b611ae1061f3d880eaf15721f15b90584d1",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|résumé=Les violences sexistes sont visibles, car elles sont omniprésentes, elles sont de plus en plus médiatisées, et les hommes sont entourées par des femmes (sœurs, mères, compagnes, etc.) qui leur parlent des violences qu'elles ont subies. La parole des femmes se libère dans la plupart des milieux, il est difficile de l'ignorer.\n|objections={{Objection\n|page=Le sexisme est tellement banalisé qu'il n'est même pas perçu comme tel\n|titre-affiché=Le sexisme est tellement banalisé qu'il n'est même pas perçu comme tel\n}}{{Objection\n|page=Le traitement médiatique du sexisme est encore insuffisant\n|titre-affiché=Le traitement médiatique du sexisme est encore insuffisant\n}}{{Objection\n|page=De nombreuses victimes n'osent pas parler des violences sexistes qu'elles ont subies, encore moins aux hommes\n|titre-affiché=De nombreuses victimes n'osent pas parler des violences qu'elles ont subies, encore moins aux hommes\n}}{{Objection\n|page=Les hommes sont socialisés pour être égoïstes\n|titre-affiché=Les hommes sont socialisés pour être égoïstes\n}}{{Objection\n|page=Les hommes sont socialisés pour être indifférents à la souffrance\n|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance\n}}\n|rubriques=Politique, Société\n|mots-clés=Féminisme, Hommes, Sexisme, Discrimination, Violence, Femmes\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0014",
+      "title": "Les hommes sont socialisés pour être indifférents à la souffrance",
+      "base_revision_id": 245830,
+      "before_sha256": "9cc13cefbd164145c93e5eef1fadcf46fb3943533f463ef21290efca6c3d4e21",
+      "after_sha256": "3de4fb9cfdb6bdfdc75c90048dfa01ff5ec0171000470e28dbdc98b0e51a8cc6",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|résumé=Les hommes apprennent à étouffer leur empathie et non à la développer. La sensibilité est dénigrée comme étant de la sensiblerie et une faiblesse. C'est une qualité \"virile\" d'être assez dur pour être indifférent à la souffrance de l'autre. Etre capable de fusiller sans frémir des femmes et des enfants sans défense, était considéré comme un acte de courage et une preuve de virilité par les nazis. Ceux qui en étaient incapables étaient considérés comme lâches ou faibles. On retrouve le même état d'esprit dans le monde de l'entreprise aujourd'hui. Il faut être assez \"fort\" pour licencier du personnel, écraser les autres. Peu d'hommes sont réellement émus, touchés par les violences faites aux femmes (sauf les pères ou fils de victimes).\n|citations={{Citation\n|citation=virilité\n|auteurs=Christophe Dejours\n}}\n|rubriques=Éducation, Politique, Société\n|mots-clés=Hommes, Domination masculine, Féminisme, Socialisation, Souffrance, Empathie, Virilité\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0015",
+      "title": "Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité",
+      "base_revision_id": 245831,
+      "before_sha256": "b9acf7ee8d1e57156f10d1f9af768fa526229ba8b5d88fbf8ea1d771eacdb2d9",
+      "after_sha256": "409f1868e474a3a0978635a39f18617beb802ca6b2b2222d0f9fb447e202a2b9",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|résumé=On peut être touchés par les souffrances de personnes qui sont en dehors de notre groupe d'appartenance. L'être humain est capable de laisser de côté ses intérêts pour mener un combat universel. Ainsi, des Blancs ont soutenu le mouvement antiraciste, des Juifs se battent aux côtés des Palestiniens. Des hommes se disent pro-féministes, et agissent en faveur de ce mouvement (John Stoltenberg, Léo Thiers Vidal, François Dupuis-Déri, Yvan Jablonka).\n|objections={{Objection\n|page=Les hommes sont socialisés pour être égoïstes\n|titre-affiché=Les hommes sont socialisés pour être égoïstes\n}}{{Objection\n|page=Les hommes sont socialisés pour être indifférents à la souffrance\n|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance\n}}{{Objection\n|page=Les hommes sont socialisés pour se sentir supérieurs aux femmes\n|titre-affiché=Les hommes sont socialisés pour se sentir supérieurs aux femmes\n}}{{Objection\n|page=Les hommes sont socialisés pour déshumaniser les femmes\n|titre-affiché=Les hommes sont socialisés pour déshumaniser les femmes\n}}{{Objection\n|page=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes\n|titre-affiché=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes\n}}\n|rubriques=Politique, Société\n|mots-clés=Discrimination, Femmes, Féminisme, Hommes, Sexisme, Violence\n|date-création=2019-12-07\n}}"
+    },
+    {
+      "page_id": "A0016",
+      "title": "Les hommes sont socialisés pour se sentir supérieurs aux femmes",
+      "base_revision_id": 245832,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0017",
+      "title": "Les hommes sont socialisés pour déshumaniser les femmes",
+      "base_revision_id": 245849,
+      "before_sha256": "640553ca4b91c713755c7daa30d9509f61e971856527fb2d4bc23f26aabcfd8e",
+      "after_sha256": "fd7278a038c97bc3385ac6d0c09b2846ec0da86d0c71a3cd009b126a50da491b",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|objections={{Objection\n|page=La domination masculine est de nos jours largement contestée dans tous les domaines de la société\n|titre-affiché=La domination masculine est de nos jours largement contestée dans tous les domaines de la société\n}}{{Objection\n|page=Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques sexistes\n|titre-affiché=Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques\n}}{{Objection\n|page=L'éducation vise à développer notre empathie\n|titre-affiché=L'éducation vise au contraire à développer notre empathie\n}}{{Objection\n|page=Qualifier le traitement des femmes de déshumanisation est démesuré et discrédite la cause féministe\n|titre-affiché=Le terme \"déshumaniser\" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe\n}}\n|rubriques=Éducation, Politique, Société\n|mots-clés=Féminisme, Hommes, Socialisation, Déshumanisation, Femmes\n|date-création=2020-03-26\n}}"
+    },
+    {
+      "page_id": "A0018",
+      "title": "La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes",
+      "base_revision_id": 245834,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0020",
+      "title": "Les hommes bénéficient des discriminations envers les femmes",
+      "base_revision_id": 245842,
+      "before_sha256": "8c8196ce8e53a8f512f82bbe2d15b4cf5c368052e203ee5b2ec7b438cd0c6158",
+      "after_sha256": "e23649ccab1ddf6c1f015373371b40b35a4313c3f833b7e6b855c5b09ac7168d",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|objections={{Objection\n|page=Seuls les hommes qui se conforment à l'injonction à la virilité bénéficient des discriminations envers les femmes\n|titre-affiché=Seulement ceux qui se conforment à l'injonction à la virilité\n}}\n|date-création=2021-03-18\n}}"
+    },
+    {
+      "page_id": "A0021",
+      "title": "Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité",
+      "base_revision_id": 245850,
+      "before_sha256": "cce51875eab77ee0d77cb44b1729d53b4067625335bd6a6115b2ff10691d2640",
+      "after_sha256": "7a4d9ca2e9c9b0c4d774e9fdee13e7251b8ac9c9eb6d466a5f85120f5d9178d4",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|objections={{Objection\n|page=En renonçant à la virilité, les hommes perdraient leur pouvoir\n|titre-affiché=En renonçant à la virilité, les hommes perdraient leur pouvoir\n}}{{Objection\n|page=La virilité n'a pas que des mauvais côtés\n|titre-affiché=La virilité n'a pas que des mauvais côtés\n}}\n|rubriques=Politique, Société\n|mots-clés=Féminisme, Hommes, Machisme, Sexisme, Virilisme\n|date-création=2019-12-25\n}}"
+    },
+    {
+      "page_id": "A0022",
+      "title": "Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes",
+      "base_revision_id": 245851,
+      "before_sha256": "0acc6dc37deeb9c962d9aa4f8e70bb6051097c68fa44422dc8431a29022e1155",
+      "after_sha256": "ac9a6d8612eb74d40727ccf42adf3e457412125a25e4a91e5c3237cacc0385d8",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|objections={{Objection\n|page=La rivalité est une source d'émulation\n|titre-affiché=La rivalité est une source d'émulation\n}}{{Objection\n|page=La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes\n|titre-affiché=La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes\n}}\n|rubriques=Politique, Société\n|mots-clés=Féminisme, Hommes, Machisme, Sexisme, Virilisme, Rivalité\n|date-création=2019-12-25\n}}"
+    },
+    {
+      "page_id": "A0023",
+      "title": "Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction",
+      "base_revision_id": 245852,
+      "before_sha256": "ad7757c1e6eef91e2f309f28ce60bbf53859111b3e6bb0b97e1fa289b976a4ed",
+      "after_sha256": "462545bd2a4cd2bfe8545358bf89a97fb0146250ba16a1b331a9c1fdfea323ea",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|résumé=Entre autres, la libération présente des avantages pour les hommes, qui gagneraient à avoir plus de relations avec des femmes émancipées.\n|objections={{Objection\n|page=Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction\n|titre-affiché=Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction\n}}{{Objection\n|page=De nombreuses femmes préfèrent les hommes dominants\n|titre-affiché=De nombreuses femmes préfèrent les hommes dominants\n}}\n|rubriques=Politique, Société\n|mots-clés=Féminisme, Hommes, Machisme, Sexisme, Virilisme, Émancipation, Séduction\n|date-création=2019-12-25\n}}"
+    },
+    {
+      "page_id": "A0024",
+      "title": "La masculinité toxique génère des troubles mentaux et des suicides chez les hommes",
+      "base_revision_id": 245922,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0025",
+      "title": "La masculinité toxique est le terreau de l'homophobie",
+      "base_revision_id": 245853,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0026",
+      "title": "Seul un changement de comportement des hommes pourra mettre fin au sexisme",
+      "base_revision_id": 245854,
+      "before_sha256": "59d2cb4ec9f6f840c4ac4afe868793780e850a490c22c5e5da65fd93b17c631d",
+      "after_sha256": "6efd7516ca86708197de7f9adb3773d0fd4143ced5e17ab2bc77e7d876eac2ec",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|résumé=Car en sont les auteurs. Car ont le pouvoir.\n* remise en cause personnelle, travailler sur eux-mêmes\n|objections={{Objection\n|page=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges\n|titre-affiché=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges\n}}{{Objection\n|page=L'émancipation des femmes doit être l'œuvre des femmes elles-mêmes\n|titre-affiché=L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes\n}}\n|rubriques=Politique, Société\n|mots-clés=Féminisme, Hommes, Sexisme, Domination masculine\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0027",
+      "title": "Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes",
+      "base_revision_id": 245855,
+      "before_sha256": "1a4961a98bcf3a1c214b58ed1f3abb30824e250849dfeb22e40eae73f5d32831",
+      "after_sha256": "2f09507be97fa12d88b2df602e0bc9f84eaea1ff3190e57f9cff90e73f5c71f2",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|objections={{Objection\n|page=Les hommes peuvent très facilement tuer dans l'œuf les actions militantes des femmes\n|titre-affiché=Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes\n}}\n|date-création=2021-03-18\n}}"
+    },
+    {
+      "page_id": "A0028",
+      "title": "Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes",
+      "base_revision_id": 245856,
+      "before_sha256": "7f506da291a61eed731b6a72d33595449bb7e3d5ff97701ba8d5603277545611",
+      "after_sha256": "b81098ac8ea0f6e327c248d218c94182bfae02ecd42a161068f9e0f012a320ed",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|résumé=Les femmes victimes ont besoin d'être entendues, prises au sérieux et soutenues par les hommes.\nAmitié, policiers, juges, journalistes.\n|objections={{Objection\n|page=Les hommes sont socialisés pour être indifférents à la souffrance\n|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance\n}}\n|rubriques=Politique, Société\n|mots-clés=Féminisme, Hommes, Sexisme, Femmes, Violences sexistes, Parole\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0029",
+      "title": "Les femmes ont intérêt à mener le combat féministe sans les hommes",
+      "base_revision_id": 245857,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0030",
+      "title": "Les hommes ont davantage de moyens d'être entendus dans la société",
+      "base_revision_id": 245858,
+      "before_sha256": "3fd74d6e8337a2393368b03fbc8e0ffaa68a3ad11cf6791644458da0eb861a9d",
+      "after_sha256": "ac713cc4c7552b7784c17b5548c68426aa6a08bdde90bc28c65bbe41d82e473e",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|résumé=Les hommes ont le privilège d'être davantage écoutés, respectés et considérés. Leur parole est considérée plus légitime dans la société. Ils doivent utiliser ce privilège pour défendre la cause des femmes.\n* car ont un meilleur accès à la parole dans les médias, la culture, la politique. Peuvent se faire les porte-paroles des opprimées\n* car les hommes sont présumés plus compétents que les femmes et ont davantage confiance en eux\n* car décident de la répartition de la parole et peuvent la rendre plus égalitaire\n|objections={{Objection\n|page=Les hommes utilisent leur accès privilégié à la parole pour conforter la domination masculine\n|titre-affiché=Les hommes utilisent ce privilège pour conforter la domination masculine\n}}{{Objection\n|page=Les hommes n'ont aucun intérêt à utiliser leur accès privilégié à la parole pour dénoncer le sexisme\n|titre-affiché=Les hommes n'ont aucun intérêt à dénoncer le sexisme\n}}{{Objection\n|page=Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place\n|titre-affiché=Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place\n}}{{Objection\n|page=Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent\n|titre-affiché=Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent\n}}{{Objection\n|page=Les hommes qui défendent le féminisme ne sont pas pris au sérieux\n|titre-affiché=Les hommes qui défendent le féminisme ne sont pas pris au sérieux\n}}\n|rubriques=Politique, Société\n|mots-clés=Féminisme, Hommes, Sexisme, Femmes\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0031",
+      "title": "Les hommes peuvent faciliter et encourager l'émancipation de leur compagne",
+      "base_revision_id": 245859,
+      "before_sha256": "89ff42d5062bb404ba7d519f81c8057e886713130a39ad6e723267916510a870",
+      "after_sha256": "9337f6530f2962c8d3eb94eb3fa5cca9910cf69f21b0a3c0a6da2ba59324265b",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|résumé=En particulier :\n* en faisant leur part dans le travail domestique\n* en donnant confiance et encourageant leur femme\n* en respectant le consentement de leur compagne\n* en écoutant et soutenant les femmes victimes\n|objections={{Objection\n|page=La majorité des hommes dominent leur compagne et freinent leur émancipation\n|titre-affiché=La majorité des hommes dominent leur compagne et freinent leur émancipation\n}}{{Objection\n|page=L'émancipation des femmes doit être l'œuvre des femmes elles-mêmes\n|titre-affiché=L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes\n}}\n|rubriques=Politique, Société\n|mots-clés=Féminisme, Hommes, Sexisme, Femmes, Émancipation\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0032",
+      "title": "Les hommes jouent un rôle essentiel dans l'éducation des enfants",
+      "base_revision_id": 245860,
+      "before_sha256": "bb065e1c21bf9e5cf679cd38b3ca57a877eae93c89c6d13deecd8fa69970a188",
+      "after_sha256": "43a0d35ce36624919decc534225d490832c0ca82001613a9f4e7a9b3f7ba211d",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|résumé=et dans la transmission des valeurs féministes\n* car, en tant que pères, ils servent de modèles à leurs enfants\n* car les pères peuvent apprendre à leurs fils l'importance du consentement\n* car les pères peuvent donner confiance à leurs filles et valoriser leur personnalité et leur intelligence plutôt que leur apparence\n* car les pères peuvent élever leurs enfants filles et garçons de manière égalitaire\n|objections={{Objection\n|page=Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques\n|titre-affiché=Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques\n}}{{Objection\n|page=Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes\n|titre-affiché=Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes\n}}{{Objection\n|page=Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille\n|titre-affiché=Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille\n}}{{Objection\n|page=Les couples lesbiens sont tout à fait aptes à élever un enfant\n|titre-affiché=Les couples lesbiens sont tout à fait aptes à élever un enfant\n}}\n|rubriques=Éducation, Politique, Société\n|mots-clés=Féminisme, Hommes, Sexisme, Éducation\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0033",
+      "title": "Les hommes peuvent parler et convaincre d'autres hommes de la nécessité du féminisme",
+      "base_revision_id": 245861,
+      "before_sha256": "e50de2c7b6c666f695d8e6d4f91e2dbaf9bec9d293a553354e00aaa3e2a2add4",
+      "after_sha256": "af31f379af8ed49f9376953f4f89d457368ec0b7d1f1f912f0653c8df18dc53c",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|objections={{Objection\n|page=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges\n|titre-affiché=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges\n}}{{Objection\n|page=Les hommes proféministes ne sont pas pris au sérieux par les autres hommes\n|titre-affiché=Les hommes pro féministes ne sont pas pris au sérieux par les autres hommes\n}}\n|rubriques=Politique, Société\n|mots-clés=Féminisme, Hommes, Sexisme, Femmes, Prosélytisme\n|date-création=2020-03-19\n}}"
+    },
+    {
+      "page_id": "A0034",
+      "title": "Le combat féministe n'avancera que si les hommes décident de lâcher du lest",
+      "base_revision_id": 245862,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0035",
+      "title": "Le féminisme sera victorieux quand tous les hommes y adhèreront",
+      "base_revision_id": 245863,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0036",
+      "title": "Les hommes ne subissent pas l'épuisement généré par les discriminations sexistes",
+      "base_revision_id": 245864,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0037",
+      "title": "Le médecin communiste Willy Peers a permis la légalisation de l'avortement et la démocratisation de la contraception en Belgique",
+      "base_revision_id": 245865,
+      "before_sha256": "426b561f9e832f1b1b87bae524bd49122acf1611a627ebaf06b9a8e6ecacbaa3",
+      "after_sha256": "e24cfaec65b08591177812ca4dd93c185646feb3caec54087e652832d98f22b0",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|initialisation=Justification@11449\n|citations={{Citation\n|citation=Depuis le 19e siècle, ce sont ceux qui se revendiquaient du marxisme qui ont été une force essentielle dans la lutte pour toutes les avancées sociales et démocratiques qu’a connues notre pays comme la journée des 8h, la sécurité sociale, le droit de vote, le droit à l’avortement. Ainsi, le combat pour le droit à l’avortement a été incarné notamment par un médecin communiste, le docteur Willy Peers.\n|article=Assimiler la gauche radicale à l'extrême droite : une supercherie\n|ouvrage=Parti du Travail de Belgique\n|date=14 novembre 2018\n|lien=https://www.ptb.be/actualites/assimiler-la-gauche-radicale-lextreme-droite-une-supercherie\n}}{{Citation\n|citation=[L'] éthique personnelle de gynécologue humaniste [de Willy Peers] se heurte aux tabous religieux, au code de déontologie de l’Ordre des médecins et aux interdits légaux. Depuis 1923, toute propagande pour la contraception est interdite en Belgique alors que le contraception permettrait d’éviter de nombreuses grossesses non désirées. Willy Peers lutte pour un développement du planning familial : le médecin devient écrivain et conférencier pour exposer ses opinions novatrices. L’avortement est poursuivi à cette époque aux termes des articles 348 à 353 du Code pénal belge de 1867 qui ignore la détresse des femmes. Avec Philippe Toussaint, Jacqueline de Lombaert et Claude Serge Aronstein, Peers fonde en 1970 la Société Belge pour la Légalisation de l’Avortement (SBLA) qui devient une tribune importante en la matière. Mais surtout, il s’engage avec courage dans la pratique de l’avortement pour raisons médicales, psychologiques et sociales sans aucun but lucratif. \" Dès avant 1970, ce gynécologue rompt la loi du silence qui pèse sur l'avortement. Il pratique des interruptions volontaires de grossesse sans publicité, mais en dehors de toute clandestinité. Son maintien en détention préventive symbolise ainsi les représailles à l'encontre de la rupture du tabou. Mais la stature morale de ce médecin est telle que la répression prend l'allure d'une provocation et déclenche la stigmatisation de la loi pénale. \"\n|article=Willy Peers: Un humaniste en médecine\n|ouvrage=Centre d’Action Laïque de la Province de Namur\n|lien=https://www.ihoes.be/PDF/expositions/EXPO_Willy_Peers_humaniste_medecine.pdf\n}}\n|date-création=2023-07-16\n}}"
+    },
+    {
+      "page_id": "A0038",
+      "title": "Lénine avait lui-même des sensibilités féministes",
+      "base_revision_id": 245866,
+      "before_sha256": "eb4ea60f05b7f38d056fac9d53179dfd5f85544f435b7ea1707f5e2f7ce5b006",
+      "after_sha256": "4d53ca3bc498862dceb981b60a9ec55c882cae37c0aa9877b8fd0cb8a9d71381",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|initialisation=Justification@16457\n|citations={{Citation\n|citation=Lénine n’était pas l’un de ces communistes patriarcaux. Il était tout à fait d’accord avec Kollontaï pour dire que les travailleuses étaient au cœur de la révolution communiste et qu’elles avaient des préoccupations spécifiques auxquelles seul le communisme pouvait répondre. En plus d’être exploitées par les patrons capitalistes, écrivait Lénine, les femmes étaient ''« esclaves de la chambre à coucher, de la crèche et de la cuisine »''. Il était convaincu que le communisme libérerait les femmes de la subordination patriarcale et de la monotonie des tâches ménagères, et soutenait que ces dernières constituaient un gaspillage du précieux travail des femmes et contribuaient à leur oppression au sein du foyer, qu’il qualifiait d’''« esclavage domestique »''.\n\nLénine a été profondément influencé par les femmes communistes qui l’entouraient, et Kollontaï a souvent fait partie de ce cercle. Lénine a soutenu le droit à l’avortement, à la contraception et au divorce, un point particulièrement controversé parmi les socialistes, certains d’entre eux affirmant qu’à court terme cela entraînerait la misère pour les femmes et les enfants parce qu’elles seraient trop pauvres pour survivre sans les hommes. Tout en reconnaissant le problème, Lénine a insisté sur le fait que tant que les femmes ne pouvaient pas prendre de décisions concernant leur propre vie, elles ne jouiraient pas de tous les droits démocratiques.\n\nKollontaï et lui, ainsi que leur camarade allemande Clara Zetkin, ont joué un rôle déterminant dans la création de la Journée internationale des femmes, qui est toujours célébrée aujourd’hui (bien qu’elle jouisse d’une cooptation capitaliste considérable). Sous l’influence de Kollontaï, Lénine a écrit : ''« Si nous n’attirons pas les femmes dans l’activité publique, dans la milice, dans la vie politique – si nous ne les arrachons pas à l’atmosphère mortelle de la maison et de la cuisine – il sera impossible d’assurer une véritable liberté. Il sera impossible d’assurer la démocratie, sans parler du socialisme »''. En effet, l’organisation des travailleuses – profondément exploitées au travail et épuisées par leur deuxième journée de travail, à la maison – a été cruciale pour le succès de la révolution bolchevique.\n\nIl ne s’agissait pas seulement d’un accord philosophique entre les deux penseurs, mais d’un engagement institutionnel profond : après la révolution, Lénine a nommé Kollontaï Commissaire du peuple à l’Assistance publique [équivalent du ministère de la Santé, NdlR], poste dans lequel elle a contribué à légaliser l’avortement, le divorce et le contrôle des naissances. L’égalité salariale pour les femmes et les congés payés pour les nouvelles mères ont également été introduits, tandis que le mariage religieux a été remplacé par le mariage civil. Le travail sexuel est dépénalisé et le statut légal d’« illégitimité » pour les enfants de parents non mariéEs est aboli.\n|auteurs=Liza Featherstone\n|article=Kollontaï et Lénine : pour un communisme qui libère les femmes\n|ouvrage=Gauche anticapitaliste\n|date=18/02/2024\n|lien=https://www.gaucheanticapitaliste.org/kollontai-et-lenine-pour-un-communisme-qui-libere-les-femmes/\n}}\n|date-création=2024-11-19\n}}"
+    },
+    {
+      "page_id": "A0039",
+      "title": "Victor Hugo avait des idées très féministes",
+      "base_revision_id": 245867,
+      "before_sha256": "9453096bfb00e65f5a58d8c08f2800d412d4b6ceb8be603e82270f43b7729068",
+      "after_sha256": "4cc3caff57aa2c2717a4df0860114cd0dbae9479a5c8fa4c892cf7315a5977e2",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|initialisation=Justification@16449\n|citations={{Citation\n|citation=Une moitié de l'espèce humaine est hors de l'égalité, il faut l'y faire rentrer, donner pour contrepoids au droit de l'homme le droit de la femme.\n|auteurs=Victor Hugo\n|date=1872\n}}\n|date-création=2024-11-24\n}}"
+    },
+    {
+      "page_id": "A0040",
+      "title": "Une société n'est fonctionnelle que si elle est égalitaire",
+      "base_revision_id": 245868,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0041",
+      "title": "Les inégalités hommes/femmes sont un gouffre financier pour la société",
+      "base_revision_id": 245869,
+      "before_sha256": "e4566a2b3530c868c2f9eb01a7f3cdb458ab9a045edd863dc9d7d1fcd4173853",
+      "after_sha256": "6ed08e900c34b8b75afc48ea0e666a5dc1b629c463c7ba9c151ad7b7c57d1a43",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|références-sitographiques={{Référence sitographique\n|lien=https://www.franceinter.fr/societe/chiffrage-inedit-les-inegalites-femmes-hommes-coutent-118-milliards-d-euros-a-la-societe-selon-une-etude\n|page=Les inégalités femmes-hommes coûtent 118 milliards d'euros à la société\n|auteurs=Claire Chaudière\n|site=France Inter\n|date=2 mars 2022\n}}\n|date-création=2022-03-06\n}}"
+    },
+    {
+      "page_id": "A0042",
+      "title": "Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs",
+      "base_revision_id": 245870,
+      "before_sha256": "5c3b7b22f99330712eac090b3afc13f12e065bfc1bb4417da6d1cd098eb62a7d",
+      "after_sha256": "33969ead7283c1418ffd5dfdebd6a8b5626233ca00f6e28c75c39af70abe84f2",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|objections={{Objection\n|page=C'est la société qui est responsable du sexisme, pas les hommes\n|titre-affiché=C'est la société qui est responsable du sexisme, pas les hommes\n}}{{Objection\n|page=Les hommes ne sont pas capables d'agir par devoir\n|titre-affiché=Les hommes ne sont pas capables d'agir par devoir\n}}{{Objection\n|page=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges\n|titre-affiché=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges\n}}\n|rubriques=Éthique, Politique, Société\n|mots-clés=Discrimination, Femmes, Hommes, Sexisme, Injustice, Devoir de réparation\n|date-création=2019-12-07\n}}"
+    },
+    {
+      "page_id": "A0043",
+      "title": "Il est possible de donner aux hommes une éducation non sexiste",
+      "base_revision_id": 245925,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0044",
+      "title": "Le mouvement féministe doit rester à l'abri de la domination masculine",
+      "base_revision_id": 245871,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0045",
+      "title": "Les hommes ne veulent pas céder leurs places",
+      "base_revision_id": 245872,
+      "before_sha256": "907df82a9474d000f1cc97d3954eaa6c32344fda38af9fa035594c495dae7b3d",
+      "after_sha256": "c6dde0c525aa3048e7cb12a216ed3294ed3e336d86aa2d8c897b4cad009a0faa",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|résumé=En particulier :\n* Accès à l'emploi, au logement, aux fonctions prestigieuses\n* Implication dans les tâches domestiques\n|rubriques=Politique, Société\n|mots-clés=Féminisme, Hommes, Privilèges\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0046",
+      "title": "Les hommes qui assument leur féminisme sont rejetés par les autres hommes",
+      "base_revision_id": 245873,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0047",
+      "title": "Les hommes n'ont pas de privilèges",
+      "base_revision_id": 245874,
+      "before_sha256": "fa41d117b1b6414df55d9fca4f1a3ecbe1904a123d2fbb424612cd52c3995a85",
+      "after_sha256": "fc23c3757ab936ee65c626b1c10c2ad3e31835f27b4f692485dd8bf64a064420",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2021-03-18\n}}"
+    },
+    {
+      "page_id": "A0048",
+      "title": "Les femmes doivent s'organiser en non-mixité pour créer un espace d'échange sûr et rassurant",
+      "base_revision_id": 245875,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0049",
+      "title": "La non-mixité doit être une solution temporaire",
+      "base_revision_id": 245876,
+      "before_sha256": "1f7103d867bb06faf9d5bc35b7fd471812183ec11f828187f70825e59651c2c3",
+      "after_sha256": "bf61f3655c79d977a2bbad625e0f33a163e4c1e0f35b57271c3952ea6f413dd4",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|résumé=Il est impensable de construire une société basée sur un apartheid genré.\n|date-création=2021-12-09\n}}"
+    },
+    {
+      "page_id": "A0050",
+      "title": "Les femmes doivent s'organiser en non-mixité pour ne pas avoir à tout réexpliquer",
+      "base_revision_id": 245877,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0051",
+      "title": "Le combat n'avancera pas si on n'éduque pas les hommes",
+      "base_revision_id": 245878,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0052",
+      "title": "Les femmes doivent s'organiser en non-mixité pour parler et communiquer librement",
+      "base_revision_id": 245879,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0053",
+      "title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience du caractère systémique de la domination",
+      "base_revision_id": 245880,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0054",
+      "title": "Les femmes doivent s'organiser en non-mixité pour renforcer la sororité",
+      "base_revision_id": 245881,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0055",
+      "title": "Les femmes doivent s'organiser en non-mixité pour diriger la lutte par elles-mêmes",
+      "base_revision_id": 245882,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0056",
+      "title": "Les femmes doivent s'organiser en non-mixité pour apprendre à être autonomes",
+      "base_revision_id": 245883,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0057",
+      "title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur valeur individuelle",
+      "base_revision_id": 245884,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0058",
+      "title": "Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur force collective",
+      "base_revision_id": 245885,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0059",
+      "title": "L'absence d'égalité empêche une société de fonctionner correctement",
+      "base_revision_id": 245928,
+      "before_sha256": "3c42349eefc530f836e4632311ade4c733d9e1f5f37dd90469af5d8eccd6c6e1",
+      "after_sha256": "ffc94ef6c7e184ec9b2298133fddb7402e41b04584c77f1f5421f6998e3aa973",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|citations={{Citation\n|citation=Sans égalité, pas de démocratie.\n|auteurs=Eleanor Roosvelt\n}}\n|date-création=2021-08-09\n}}"
+    },
+    {
+      "page_id": "A0060",
+      "title": "Les violences sexistes sont omniprésentes",
+      "base_revision_id": 245886,
+      "before_sha256": "29438b1156e1510b551c19dc3632fd50c4b5df7c8a49b7c71f7ef9ac11348ac6",
+      "after_sha256": "36017065596edf8375bce2326538bed1f4486d1b7b832cd616c4cfd15da335a6",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|résumé=En particulier :\n* Violences psychologiques : harcèlement moral, insultes, rabaissement\n* Violences physiques : féminicides, violence conjuguale, \n* Violences sexuelles : harcèlement sexuel, viol, viol conjugual\n|rubriques=Politique, Société\n|mots-clés=Sexisme, Femmes, Violences\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0061",
+      "title": "Les femmes sont victimes de discriminations économiques",
+      "base_revision_id": 245887,
+      "before_sha256": "a9a219c9ac90b9a695f259dc35d352ce0ef26796a741c6b40f7726f7dc494dd6",
+      "after_sha256": "9aa1d6bf31537ebd44eb1d0b35bcefd428d679932306cc2058e9185516899ff8",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|résumé=Écarts de salaires, pauvreté, précarité économique, discriminations à l'embauche\n|rubriques=Économie, Politique, Société\n|mots-clés=Sexisme, Femmes, Discriminations\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0062",
+      "title": "Les femmes assument la majeure partie des tâches domestiques",
+      "base_revision_id": 245888,
+      "before_sha256": "896db92ea07cf4736a9d8bf2470cfd3540a238edf2cf09448cc539d3690f2302",
+      "after_sha256": "79d51ee0ac4ef1b1958f7bcfa90dd333202cfd3c257a5daad12fa7d1dedb768e",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|résumé=Double journée de travail et charge mentale\n|rubriques=Politique, Société\n|mots-clés=Sexisme, Tâches domestiques, Femmes\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0063",
+      "title": "Le pouvoir est encore monopolisé par les hommes",
+      "base_revision_id": 245889,
+      "before_sha256": "125ce7840a22be7e5f8467ea6c052bdebea72ec5af234158ba81a8da52a23bca",
+      "after_sha256": "3650fe9044f7cd25100748d01a9d3bc497b7de5b84a49bd8da96b7d94ec335e6",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|résumé=Monopolisation du pouvoir sphères de la politique, culture et art, économie et finance\n|rubriques=Politique, Société\n|mots-clés=Sexisme, Femmes, Pouvoir\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0064",
+      "title": "Les femmes sont constamment dévalorisées par rapport aux hommes",
+      "base_revision_id": 245890,
+      "before_sha256": "87d2cc876d6d84eaedad0ef3795ef71496e19c0f892b01c4698f0d6a4afaf45c",
+      "after_sha256": "f6d4fce698d45762c91c66435b3940080363500828b5cf2b981ef17dfc46df32",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|résumé=En particulier :\n* Moins de prix de concours\n* intériorisation de l'infériorité et autocensure\n|rubriques=Politique, Société\n|mots-clés=Sexisme, Femmes, Dévalorisation, Intériorisation\n|date-création=2019-11-24\n}}"
+    },
+    {
+      "page_id": "A0065",
+      "title": "Les femmes sont sans cesse ramenées à leur corps et à leur apparence",
+      "base_revision_id": 245891,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0066",
+      "title": "Beaucoup d'hommes ne sont pas égoïstes",
+      "base_revision_id": 245892,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0067",
+      "title": "La socialisation vise à lutter contre notre égoïsme naturel",
+      "base_revision_id": 245893,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0068",
+      "title": "Le sexisme est tellement banalisé qu'il n'est même pas perçu comme tel",
+      "base_revision_id": 245894,
+      "before_sha256": "4a9a5b7298c9e7d5b3be09349e2ff3b6188e71cc34f8d4b173c7e1c3d76b216a",
+      "after_sha256": "3fc049ee53cdf6b6accb78e5dd45605238d2cc6a69629caff4328ba8d486fd2e",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|résumé=La plupart des gens n'ont pas conscience du sexisme, car nous y sommes habitués depuis l'enfance. Le sexisme est naturalisé, il ne nous choque pas. Par exemple, de nombreuses personnes sont incapables d'identifier une publicité sexiste. De même, les crimes conjugaux sont qualifiés de \"crimes passionnels\", la dimension sexiste n'est pas perçue. La violence envers les femmes est considérée comme une preuve d'amour, et non comme un acte de domination et d'appropriation machiste. Il est donc difficile pour les hommes de percevoir la dimension sexiste d'un acte ou d'une situation.\n|rubriques=Politique, Société\n|mots-clés=Hommes, Banalisation, Sexisme\n|date-création=2020-04-16\n}}"
+    },
+    {
+      "page_id": "A0069",
+      "title": "Le traitement médiatique du sexisme est encore insuffisant",
+      "base_revision_id": 245895,
+      "before_sha256": "db6f1f3a3dd2e808f72b47136612fd3c1e957beb5c95930d4ae337a9febc7088",
+      "after_sha256": "8f1c68304c2e74bf43cc56dc961391d1a737f4847c39abb6e95bcc719bd55449",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|résumé=Le discours féministe est combattu, dénigré par un discours sexiste très virulent (exemple : Éric Zemmour). Le mouvement féministe est caricaturé et stigmatisé. Il y a encore beaucoup de sexisme dans les médias (télé-réalité, émissions de divertissement). La pensée dominante est encore du côté du sexisme. La culture du viol est encore présente. La prise de conscience du sexisme est donc difficile pour les hommes.\n|rubriques=Politique, Société\n|mots-clés=Féminisme, Médias, Sexisme, Traitement médiatique\n|date-création=2020-04-16\n}}"
+    },
+    {
+      "page_id": "A0070",
+      "title": "De nombreuses victimes n'osent pas parler des violences sexistes qu'elles ont subies, encore moins aux hommes",
+      "base_revision_id": 245896,
+      "before_sha256": "d74b3f4462b8384d48eec68706259bea083d3691ad99e557d825970d2548fdad",
+      "after_sha256": "b846ee087a04befc39c15e4627cf76b20a17ecb2c4e2a9fe29a622a65edb2b24",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|résumé=Les femmes victimes préfèrent souvent garder le silence car elles ont peur de déranger ou de mettre l'autre mal à l'aise, elles ont un sentiment de honte ou de culpabilité, ou elles craignent les réactions de l'entourage : ne pas être prise au sérieux, ne pas être crue, être stigmatisée ou moquée (blâme de la victime). Les femmes parlent plus facilement à d'autres femmes, car elles se sentent davantage comprises, ont moins peur d'être jugées.\n|rubriques=Politique, Société\n|mots-clés=Féminisme, Victime, Sexisme, Femmes, Violences sexistes\n|date-création=2020-04-16\n}}"
+    },
+    {
+      "page_id": "A0071",
+      "title": "La domination masculine est de nos jours largement contestée dans tous les domaines de la société",
+      "base_revision_id": 245897,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0072",
+      "title": "Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques sexistes",
+      "base_revision_id": 245898,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0073",
+      "title": "L'éducation vise à développer notre empathie",
+      "base_revision_id": 245899,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0074",
+      "title": "Qualifier le traitement des femmes de déshumanisation est démesuré et discrédite la cause féministe",
+      "base_revision_id": 245931,
+      "before_sha256": "1a2ce865ce91511fecd9876af4932845c5089cb7dca5a3e5d68d2aeaedea2836",
+      "after_sha256": "24a3271c23617e105423867a7fc431135a5e56bfaafe801493080a6ba1671507",
+      "removed_parameters": [
+        "justifications"
+      ],
+      "desired_text": "{{Argument\n|initialisation=Objection@3698\n|objections={{Objection\n|page=La manière dont les femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation\n|titre-affiché=La manière dont le femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation\n}}{{Objection\n|page=Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base\n|titre-affiché=Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base\n}}\n|date-création=2024-02-02\n}}"
+    },
+    {
+      "page_id": "A0075",
+      "title": "L'injonction à réprimer ses émotions détériore la santé mentale des hommes",
+      "base_revision_id": 245934,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0076",
+      "title": "L'expression des émotions affaiblirait la domination des hommes",
+      "base_revision_id": 245900,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0077",
+      "title": "Seuls les hommes qui se conforment à l'injonction à la virilité bénéficient des discriminations envers les femmes",
+      "base_revision_id": 245937,
+      "before_sha256": "65c77148dcaf7fd81702c44a2112bb200e888fbcc258d89ccabd0ea8ada9eacf",
+      "after_sha256": "8e26fc1ecf3f8018d00de93e977dfd9469b8a137dee980773adf4729e7dfd260",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|résumé=Les hommes jugés pas assez virils subissent du rejet et des violences.\n|date-création=2021-12-09\n}}"
+    },
+    {
+      "page_id": "A0078",
+      "title": "En renonçant à la virilité, les hommes perdraient leur pouvoir",
+      "base_revision_id": 245901,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0079",
+      "title": "La virilité n'a pas que des mauvais côtés",
+      "base_revision_id": 245902,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0080",
+      "title": "La rivalité est une source d'émulation",
+      "base_revision_id": 245903,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0081",
+      "title": "La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes",
+      "base_revision_id": 245904,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0082",
+      "title": "Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction",
+      "base_revision_id": 245905,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0083",
+      "title": "De nombreuses femmes préfèrent les hommes dominants",
+      "base_revision_id": 245906,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0084",
+      "title": "L'émancipation des femmes doit être l'œuvre des femmes elles-mêmes",
+      "base_revision_id": 245940,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0085",
+      "title": "Les hommes peuvent très facilement tuer dans l'œuf les actions militantes des femmes",
+      "base_revision_id": 245943,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0086",
+      "title": "Les hommes utilisent leur accès privilégié à la parole pour conforter la domination masculine",
+      "base_revision_id": 245907,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0087",
+      "title": "Les hommes n'ont aucun intérêt à utiliser leur accès privilégié à la parole pour dénoncer le sexisme",
+      "base_revision_id": 245908,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0088",
+      "title": "Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place",
+      "base_revision_id": 245909,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0089",
+      "title": "Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent",
+      "base_revision_id": 245910,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0090",
+      "title": "Les hommes qui défendent le féminisme ne sont pas pris au sérieux",
+      "base_revision_id": 245911,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0091",
+      "title": "La majorité des hommes dominent leur compagne et freinent leur émancipation",
+      "base_revision_id": 245912,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0092",
+      "title": "Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques",
+      "base_revision_id": 245913,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0093",
+      "title": "Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes",
+      "base_revision_id": 245914,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0094",
+      "title": "Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille",
+      "base_revision_id": 245915,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0095",
+      "title": "Les couples lesbiens sont tout à fait aptes à élever un enfant",
+      "base_revision_id": 245916,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0096",
+      "title": "Les hommes proféministes ne sont pas pris au sérieux par les autres hommes",
+      "base_revision_id": 245946,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0097",
+      "title": "C'est la société qui est responsable du sexisme, pas les hommes",
+      "base_revision_id": 245917,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0098",
+      "title": "Les hommes ne sont pas capables d'agir par devoir",
+      "base_revision_id": 245918,
+      "before_sha256": "f4318d4e363be6e632af21d169accaa5b1d962e0a13b0ed1f78a9f6b9082b631",
+      "after_sha256": "a938914cc294ca6839eee5341111c24ee5c530d4fd8bee5d04debfe78a840f52",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|date-création=2022-12-19\n}}"
+    },
+    {
+      "page_id": "A0099",
+      "title": "La manière dont les femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation",
+      "base_revision_id": 245949,
+      "before_sha256": "a73a385c647d590b7aed5379e52d187c68df31c2e5570d55f210fc718f2855d5",
+      "after_sha256": "5dc4e6b593ebc624cda6e398aa6e07bbe23ece6f483c064f2205a03edeb0c82e",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|initialisation=Objection@24385\n|date-création=2024-02-02\n}}"
+    },
+    {
+      "page_id": "A0100",
+      "title": "Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base",
+      "base_revision_id": 245919,
+      "before_sha256": "a73a385c647d590b7aed5379e52d187c68df31c2e5570d55f210fc718f2855d5",
+      "after_sha256": "5dc4e6b593ebc624cda6e398aa6e07bbe23ece6f483c064f2205a03edeb0c82e",
+      "removed_parameters": [
+        "justifications",
+        "objections"
+      ],
+      "desired_text": "{{Argument\n|initialisation=Objection@24385\n|date-création=2024-02-02\n}}"
+    }
+  ],
+  "plan_sha256": "0b67e8983509c9d97682585fa8fcb1abb8d43a9a23acae3abdf6836945fbc5a4"
+}

@@ -1,0 +1,31 @@
+{{Argument
+|justifications={{Justification
+|page=Le sexisme est omniprésent
+|titre-affiché=Le sexisme est omniprésent
+}}{{Justification
+|page=Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes
+|titre-affiché=Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes
+}}{{Justification
+|page=Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité
+|titre-affiché=Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité
+}}
+|objections={{Objection
+|page=Les hommes sont socialisés pour être égoïstes
+|titre-affiché=Les hommes sont socialisés pour être égoïstes
+}}{{Objection
+|page=Les hommes sont socialisés pour être indifférents à la souffrance
+|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance
+}}{{Objection
+|page=Les hommes sont socialisés pour se sentir supérieurs aux femmes
+|titre-affiché=Les hommes sont socialisés pour se sentir supérieurs aux femmes
+}}{{Objection
+|page=Les hommes sont socialisés pour déshumaniser les femmes
+|titre-affiché=Les hommes sont socialisés pour déshumaniser les femmes
+}}{{Objection
+|page=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes
+|titre-affiché=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Discrimination, Violence, Femmes
+|date-création=2019-11-24
+}}

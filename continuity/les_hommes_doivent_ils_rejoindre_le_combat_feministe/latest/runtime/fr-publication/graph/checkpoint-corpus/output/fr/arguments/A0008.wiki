@@ -1,0 +1,40 @@
+{{Argument
+|justifications={{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour créer un espace d'échange sûr et rassurant
+|titre-affiché=Pour créer un espace d'échange sûr et rassurant
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour ne pas avoir à tout réexpliquer
+|titre-affiché=Pour ne pas avoir à tout réexpliquer
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour parler et communiquer librement
+|titre-affiché=Pour parler et communiquer librement
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour prendre conscience du caractère systémique de la domination
+|titre-affiché=Pour prendre conscience du caractère systémique de la domination
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour renforcer la sororité
+|titre-affiché=Pour renforcer la sororité
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour diriger la lutte par elles-mêmes
+|titre-affiché=Pour diriger la lutte par elles-mêmes
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour apprendre à être autonomes
+|titre-affiché=Pour apprendre à être autonomes
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur valeur individuelle
+|titre-affiché=Pour prendre conscience de leur valeur individuelle
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur force collective
+|titre-affiché=Pour prendre conscience de leur force collective
+}}
+|objections={{Objection
+|page=La non-mixité doit être une solution temporaire
+|titre-affiché=La non-mixité doit être une solution temporaire
+}}{{Objection
+|page=Le combat n'avancera pas si on n'éduque pas les hommes
+|titre-affiché=Le combat n'avancera pas si on n'éduque pas les hommes
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Femmes, Non-mixité
+|date-création=2020-03-22
+}}

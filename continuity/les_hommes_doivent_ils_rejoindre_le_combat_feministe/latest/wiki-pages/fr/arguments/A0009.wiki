@@ -1,0 +1,9 @@
+{{Argument
+|objections={{Objection
+|page=L'absence d'égalité empêche une société de fonctionner correctement
+|titre-affiché=C'est plutôt l'inverse
+}}
+|rubriques=Politique
+|mots-clés=féminisme, société
+|date-création=2021-03-18
+}}

@@ -1,0 +1,23 @@
+{{Argument
+|résumé=et dans la transmission des valeurs féministes
+* car, en tant que pères, ils servent de modèles à leurs enfants
+* car les pères peuvent apprendre à leurs fils l'importance du consentement
+* car les pères peuvent donner confiance à leurs filles et valoriser leur personnalité et leur intelligence plutôt que leur apparence
+* car les pères peuvent élever leurs enfants filles et garçons de manière égalitaire
+|objections={{Objection
+|page=Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques
+|titre-affiché=Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques
+}}{{Objection
+|page=Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes
+|titre-affiché=Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes
+}}{{Objection
+|page=Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille
+|titre-affiché=Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille
+}}{{Objection
+|page=Les couples lesbiens sont tout à fait aptes à élever un enfant
+|titre-affiché=Les couples lesbiens sont tout à fait aptes à élever un enfant
+}}
+|rubriques=Éducation, Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Éducation
+|date-création=2019-11-24
+}}

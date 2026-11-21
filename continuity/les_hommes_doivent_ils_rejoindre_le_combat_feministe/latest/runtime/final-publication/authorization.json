@@ -1,0 +1,11 @@
+{
+  "schema": "wikidebia-final-publication-authorization-1.0",
+  "schema_version": "1.0",
+  "authorized_at": "2026-10-23T23:58:37+00:00",
+  "status": "authorized",
+  "baseline_sha256": "5dfd553e6270157cda7f3561bd98f8fb81c7398640b00792f0f9b98845b4237d",
+  "preflight_sha256": "88eab051b06dbdce1aaf8abb550cee961a8dcb02c49895a409a872ba601bb041",
+  "remote_write_authorized": true,
+  "execution_started": true,
+  "authorization_sha256": "a959f9e41e65e474ce60b5e493f6b96b27604277f2be94da8c1b1d1096e1396b"
+}

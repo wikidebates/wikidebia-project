@@ -1,0 +1,1223 @@
+===== PAGE : Les hommes ne peuvent pas rester indifférents face aux discriminations et aux violences faites aux femmes =====
+{{Argument
+|justifications={{Justification
+|page=Le sexisme est omniprésent
+|titre-affiché=Le sexisme est omniprésent
+}}{{Justification
+|page=Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes
+|titre-affiché=Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes
+}}{{Justification
+|page=Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité
+|titre-affiché=Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité
+}}
+|objections={{Objection
+|page=Les hommes sont socialisés pour être égoïstes
+|titre-affiché=Les hommes sont socialisés pour être égoïstes
+}}{{Objection
+|page=Les hommes sont socialisés pour être indifférents à la souffrance
+|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance
+}}{{Objection
+|page=Les hommes sont socialisés pour se sentir supérieurs aux femmes
+|titre-affiché=Les hommes sont socialisés pour se sentir supérieurs aux femmes
+}}{{Objection
+|page=Les hommes sont socialisés pour déshumaniser les femmes
+|titre-affiché=Les hommes sont socialisés pour déshumaniser les femmes
+}}{{Objection
+|page=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes
+|titre-affiché=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Discrimination, Violence, Femmes
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les hommes ont intérêt à en finir avec le sexisme =====
+{{Argument
+|justifications={{Justification
+|page=Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions
+|titre-affiché=Pour assumer leur sensibilité et leurs émotions
+}}{{Justification
+|page=Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité
+|titre-affiché=Pour se délivrer de l'injonction à la virilité
+}}{{Justification
+|page=Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes
+|titre-affiché=Pour sortir des rapports de rivalité entre hommes
+}}{{Justification
+|page=Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction
+|titre-affiché=Pour simplifier et libérer les rapports de séduction
+}}{{Justification
+|page=La masculinité toxique génère des troubles mentaux et des suicides chez les hommes
+|titre-affiché=Pour en finir avec la souffrance que la masculinité toxique génère chez eux
+}}{{Justification
+|page=La masculinité toxique est le terreau de l'homophobie
+|titre-affiché=Pour ne plus subir l'homophobie
+}}
+|objections={{Objection
+|page=Les hommes bénéficient des discriminations envers les femmes
+|titre-affiché=Les hommes bénéficient des discriminations envers les femmes
+}}
+|rubriques=Politique, Société
+|mots-clés=Hommes, Machisme, Sexisme, Virilisme
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les femmes ont besoin des hommes pour en finir avec le sexisme =====
+{{Argument
+|justifications={{Justification
+|page=Seul un changement de comportement des hommes pourra mettre fin au sexisme
+|titre-affiché=Seul un changement de comportement des hommes pourra mettre fin au sexisme
+}}{{Justification
+|page=Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes
+|titre-affiché=Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes
+}}{{Justification
+|page=Les hommes ont davantage de moyens d'être entendus dans la société
+|titre-affiché=Les hommes ont davantage de moyens d'être entendus dans la société
+}}{{Justification
+|page=Les hommes peuvent faciliter et encourager l'émancipation de leur compagne
+|titre-affiché=Les hommes peuvent faciliter et encourager l'émancipation de leur compagne
+}}{{Justification
+|page=Les hommes jouent un rôle essentiel dans l'éducation des enfants
+|titre-affiché=Les hommes jouent un rôle essentiel dans l'éducation des enfants
+}}{{Justification
+|page=Les hommes peuvent parler et convaincre d'autres hommes de la nécessité du féminisme
+|titre-affiché=Les hommes peuvent parler et convaincre d'autres hommes de la nécessité du féminisme
+}}{{Justification
+|page=Le combat féministe n'avancera que si les hommes décident de lâcher du lest
+|titre-affiché=Le combat féministe n'avancera que si les hommes décident de lâcher du lest
+}}{{Justification
+|page=Le féminisme sera victorieux quand tous les hommes y adhèreront
+|titre-affiché=Le féminisme sera victorieux quand tous les hommes y adhèreront
+}}{{Justification
+|page=Les hommes ne subissent pas l'épuisement généré par les discriminations sexistes
+|titre-affiché=L'absence de discrimination à leur égard leur facilite la tâche pour militer
+}}
+|objections={{Objection
+|page=Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes
+|titre-affiché=Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes
+}}{{Objection
+|page=Les femmes ont intérêt à mener le combat féministe sans les hommes
+|titre-affiché=Les femmes ont intérêt à mener le combat féministe sans les hommes
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Femmes
+|date-création=2019-11-24
+}}
+
+===== PAGE : Bien des hommes ont fait la preuve de leur engagement pour le combat féministe =====
+{{Argument
+|initialisation=Objection@16448
+|citations={{Citation
+|citation=C’est un homme, le socialiste August Bebel, qui a écrit un ouvrage qui a fait date, ''La femme et le socialisme'' (1879). [Alors], quand j’entends aujourd’hui certaines féministes renvoyer tous les hommes dans le camp d’en face en parlant de « privilège mâle », je ne peux pas être d’accord. Les hommes qui se sont engagés dans le combat révolutionnaire ont eux aussi contribué à faire évoluer bien des idées. Et je le dis avec d’autant plus de confiance que, même si à Lutte ouvrière, comme dans les autres partis, les hommes sont majoritaires – ce qui n’est évidemment pas un choix – , cette majorité a choisi pour porte-parole une femme, Arlette Laguiller, dès 1974, en en faisant même la première femme candidate à une élection présidentielle en France. Non seulement ce choix s’est confirmé par la suite, mais il s’est même renouvelé lorsque j’ai été à mon tour désignée pour lui succéder dans ce rôle en 2008.
+|auteurs=Nathalie Arthaud
+|ouvrage=Communiste, révolutionnaire, internationaliste !
+|édition=Les bons caractères
+|date=2022
+|lien=https://www.lesbonscaracteres.com/livre/communiste-revolutionnaire-internationaliste
+}}
+|justifications={{Justification
+|page=Le médecin communiste Willy Peers a permis la légalisation de l'avortement et la démocratisation de la contraception en Belgique
+|titre-affiché=Les femmes belges doivent leur droit à l'avortement, à la contraception et à l'accouchement sans douleur à Willy Peers
+}}{{Justification
+|page=Lénine avait lui-même des sensibilités féministes
+|titre-affiché=Lénine avait lui-même des sensibilités féministes
+}}{{Justification
+|page=Victor Hugo avait des idées très féministes
+|titre-affiché=Victor Hugo avait des idées très féministes
+}}
+|objections=
+|rubriques=Politique
+|mots-clés=hommes, preuve, féminisme
+|date-création=2023-04-03
+}}
+
+===== PAGE : La société doit en finir avec le sexisme =====
+{{Argument
+|justifications={{Justification
+|page=Une société n'est fonctionnelle que si elle est égalitaire
+|titre-affiché=Une société n'est fonctionnelle que si elle est égalitaire
+}}{{Justification
+|page=Les inégalités hommes/femmes sont un gouffre financier pour la société
+|titre-affiché=Les inégalités hommes/femmes sont un gouffre financier pour la société
+}}
+|objections=
+|date-création=2021-03-18
+}}
+
+===== PAGE : Les hommes sont socialisés pour dominer les femmes =====
+{{Argument
+|justifications={{Justification
+|page=Les hommes sont socialisés pour déshumaniser les femmes
+|titre-affiché=Les hommes sont socialisés pour déshumaniser les femmes
+}}{{Justification
+|page=Les hommes sont socialisés pour être égoïstes
+|titre-affiché=Les hommes sont socialisés pour être égoïstes
+}}{{Justification
+|page=Les hommes sont socialisés pour se sentir supérieurs aux femmes
+|titre-affiché=Les hommes sont socialisés pour se sentir supérieurs aux femmes
+}}{{Justification
+|page=Les hommes sont socialisés pour être indifférents à la souffrance
+|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance
+}}{{Justification
+|page=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes
+|titre-affiché=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes
+}}{{Justification
+|page=Le mouvement féministe doit rester à l'abri de la domination masculine
+|titre-affiché=Le mouvement féministe doit rester à l'abri de la domination masculine
+}}
+|objections={{Objection
+|page=Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes
+|titre-affiché=Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes
+}}{{Objection
+|page=Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité
+|titre-affiché=Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité
+}}{{Objection
+|page=Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs
+|titre-affiché=Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs
+}}{{Objection
+|page=Il est possible de donner aux hommes une éducation non sexiste
+|titre-affiché=Il est possible de leur donner une autre éducation
+}}
+|rubriques=Éducation, Politique, Société
+|mots-clés=Hommes, Domination masculine, Féminisme, Socialisation
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les hommes n'ont aucun intérêt à renoncer à leurs privilèges =====
+{{Argument
+|justifications={{Justification
+|page=Les hommes bénéficient des discriminations envers les femmes
+|titre-affiché=Les hommes bénéficient des discriminations envers les femmes
+}}{{Justification
+|page=Les hommes ne veulent pas céder leurs places
+|titre-affiché=Les hommes ne veulent pas céder leurs places
+}}{{Justification
+|page=Les hommes qui assument leur féminisme sont rejetés par les autres hommes
+|titre-affiché=Les hommes qui assument leur féminisme sont rejetés par les autres hommes
+}}
+|objections={{Objection
+|page=Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions
+|titre-affiché=Pour assumer leur sensibilité et leurs émotions
+}}{{Objection
+|page=Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité
+|titre-affiché=Pour se délivrer de l'injonction à la virilité
+}}{{Objection
+|page=Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes
+|titre-affiché=Pour sortir des rapports de rivalité entre hommes
+}}{{Objection
+|page=Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction
+|titre-affiché=Pour simplifier et libérer les rapports de séduction
+}}{{Objection
+|page=Les hommes n'ont pas de privilèges
+|titre-affiché=Les hommes n'ont pas de privilèges
+}}{{Objection
+|page=Bien des hommes ont fait la preuve de leur engagement pour le combat féministe
+|titre-affiché=Bien des hommes ont fait la preuve de leur engagement pour le combat féministe
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Privilèges
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les femmes doivent s'organiser en non-mixité =====
+{{Argument
+|justifications={{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour créer un espace d'échange sûr et rassurant
+|titre-affiché=Pour créer un espace d'échange sûr et rassurant
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour ne pas avoir à tout réexpliquer
+|titre-affiché=Pour ne pas avoir à tout réexpliquer
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour parler et communiquer librement
+|titre-affiché=Pour parler et communiquer librement
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour prendre conscience du caractère systémique de la domination
+|titre-affiché=Pour prendre conscience du caractère systémique de la domination
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour renforcer la sororité
+|titre-affiché=Pour renforcer la sororité
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour diriger la lutte par elles-mêmes
+|titre-affiché=Pour diriger la lutte par elles-mêmes
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour apprendre à être autonomes
+|titre-affiché=Pour apprendre à être autonomes
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur valeur individuelle
+|titre-affiché=Pour prendre conscience de leur valeur individuelle
+}}{{Justification
+|page=Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur force collective
+|titre-affiché=Pour prendre conscience de leur force collective
+}}
+|objections={{Objection
+|page=La non-mixité doit être une solution temporaire
+|titre-affiché=La non-mixité doit être une solution temporaire
+}}{{Objection
+|page=Le combat n'avancera pas si on n'éduque pas les hommes
+|titre-affiché=Le combat n'avancera pas si on n'éduque pas les hommes
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Femmes, Non-mixité
+|date-création=2020-03-22
+}}
+
+===== PAGE : Une société ne peut pas fonctionner correctement si elle est égalitaire =====
+{{Argument
+|objections={{Objection
+|page=L'absence d'égalité empêche une société de fonctionner correctement
+|titre-affiché=C'est plutôt l'inverse
+}}
+|justifications=
+|date-création=2021-03-18
+}}
+
+===== PAGE : Le féminisme est un mouvement politique où les hommes ne sont pas défendus =====
+{{Argument
+|initialisation=Argument contre@3040
+|résumé=Le féminisme est un mouvement politique qui prône l'égalité des sexes mais fait le constat que les femmes sont désavantagé dans la société, beaucoup d'hommes ne sont pas d'accord avec celui-ci et explique donc leur non-implication.
+|justifications=
+|objections=
+|rubriques=Politique
+|mots-clés=Féminisme
+|date-création=2023-05-18
+}}
+
+===== PAGE : Le sexisme est omniprésent =====
+{{Argument
+|justifications={{Justification
+|page=Les violences sexistes sont omniprésentes
+|titre-affiché=Les violences sexistes sont omniprésentes
+}}{{Justification
+|page=Les femmes sont victimes de discriminations économiques
+|titre-affiché=Les femmes sont victimes de discriminations économiques
+}}{{Justification
+|page=Les femmes assument la majeure partie des tâches domestiques
+|titre-affiché=Les femmes assument la majeure partie des tâches domestiques
+}}{{Justification
+|page=Le pouvoir est encore monopolisé par les hommes
+|titre-affiché=Le pouvoir est encore monopolisé par les hommes
+}}{{Justification
+|page=Les femmes sont constamment dévalorisées par rapport aux hommes
+|titre-affiché=Les femmes sont constamment dévalorisées par rapport aux hommes
+}}{{Justification
+|page=Les femmes sont sans cesse ramenées à leur corps et à leur apparence
+|titre-affiché=Les femmes sont sans cesse ramenées à leur corps et à leur apparence
+}}
+|objections=
+|rubriques=Politique, Société
+|mots-clés=Sexisme, Femmes
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les hommes sont socialisés pour être égoïstes =====
+{{Argument
+|résumé=Les hommes sont socialisés pour accorder la priorité à leurs intérêts, pour oublier autrui, pour se considérer comme le centre du monde. La société encourage les garçons à prendre toute la place. Le petit garçon occupe l'espace physique et sonore, au détriment des filles. Ils ont des difficultés à tenir compte de la présence d'autres êtres humains, et à maîtriser leurs émotions.
+|objections={{Objection
+|page=Beaucoup d'hommes ne sont pas égoïstes
+|titre-affiché=Beaucoup d'hommes ne sont pas égoïstes
+}}{{Objection
+|page=La socialisation vise à lutter contre notre égoïsme naturel
+|titre-affiché=La socialisation vise à lutter contre notre égoïsme naturel
+}}
+|références-sitographiques={{Référence sitographique
+|lien=http://www.slate.fr/story/187230/education-positive-sexisme-petits-garcons-centre-univers-maitrise-emotions
+|page=Les hommes doivent-ils rejoindre le combat féministe ?
+|auteurs=Titou Lecoq
+|site=Slate
+|date=07/02/2020
+}}
+|justifications=
+|rubriques=Éducation, Politique, Société
+|mots-clés=Féminisme, Hommes, Femmes, Socialisation, Égoïsme
+|date-création=2020-03-26
+}}
+
+===== PAGE : Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes =====
+{{Argument
+|résumé=Les violences sexistes sont visibles, car elles sont omniprésentes, elles sont de plus en plus médiatisées, et les hommes sont entourées par des femmes (sœurs, mères, compagnes, etc.) qui leur parlent des violences qu'elles ont subies. La parole des femmes se libère dans la plupart des milieux, il est difficile de l'ignorer.
+|objections={{Objection
+|page=Le sexisme est tellement banalisé qu'il n'est même pas perçu comme tel
+|titre-affiché=Le sexisme est tellement banalisé qu'il n'est même pas perçu comme tel
+}}{{Objection
+|page=Le traitement médiatique du sexisme est encore insuffisant
+|titre-affiché=Le traitement médiatique du sexisme est encore insuffisant
+}}{{Objection
+|page=De nombreuses victimes n'osent pas parler des violences sexistes qu'elles ont subies, encore moins aux hommes
+|titre-affiché=De nombreuses victimes n'osent pas parler des violences qu'elles ont subies, encore moins aux hommes
+}}{{Objection
+|page=Les hommes sont socialisés pour être égoïstes
+|titre-affiché=Les hommes sont socialisés pour être égoïstes
+}}{{Objection
+|page=Les hommes sont socialisés pour être indifférents à la souffrance
+|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance
+}}
+|justifications=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Discrimination, Violence, Femmes
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les hommes sont socialisés pour être indifférents à la souffrance =====
+{{Argument
+|résumé=Les hommes apprennent à étouffer leur empathie et non à la développer. La sensibilité est dénigrée comme étant de la sensiblerie et une faiblesse. C'est une qualité "virile" d'être assez dur pour être indifférent à la souffrance de l'autre. Etre capable de fusiller sans frémir des femmes et des enfants sans défense, était considéré comme un acte de courage et une preuve de virilité par les nazis. Ceux qui en étaient incapables étaient considérés comme lâches ou faibles. On retrouve le même état d'esprit dans le monde de l'entreprise aujourd'hui. Il faut être assez "fort" pour licencier du personnel, écraser les autres. Peu d'hommes sont réellement émus, touchés par les violences faites aux femmes (sauf les pères ou fils de victimes).
+|citations={{Citation
+|citation=virilité
+|auteurs=Christophe Dejours
+}}
+|justifications=
+|objections=
+|rubriques=Éducation, Politique, Société
+|mots-clés=Hommes, Domination masculine, Féminisme, Socialisation, Souffrance, Empathie, Virilité
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité =====
+{{Argument
+|résumé=On peut être touchés par les souffrances de personnes qui sont en dehors de notre groupe d'appartenance. L'être humain est capable de laisser de côté ses intérêts pour mener un combat universel. Ainsi, des Blancs ont soutenu le mouvement antiraciste, des Juifs se battent aux côtés des Palestiniens. Des hommes se disent pro-féministes, et agissent en faveur de ce mouvement (John Stoltenberg, Léo Thiers Vidal, François Dupuis-Déri, Yvan Jablonka).
+|objections={{Objection
+|page=Les hommes sont socialisés pour être égoïstes
+|titre-affiché=Les hommes sont socialisés pour être égoïstes
+}}{{Objection
+|page=Les hommes sont socialisés pour être indifférents à la souffrance
+|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance
+}}{{Objection
+|page=Les hommes sont socialisés pour se sentir supérieurs aux femmes
+|titre-affiché=Les hommes sont socialisés pour se sentir supérieurs aux femmes
+}}{{Objection
+|page=Les hommes sont socialisés pour déshumaniser les femmes
+|titre-affiché=Les hommes sont socialisés pour déshumaniser les femmes
+}}{{Objection
+|page=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes
+|titre-affiché=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes
+}}
+|justifications=
+|rubriques=Politique, Société
+|mots-clés=Discrimination, Femmes, Féminisme, Hommes, Sexisme, Violence
+|date-création=2019-12-07
+}}
+
+===== PAGE : Les hommes sont socialisés pour se sentir supérieurs aux femmes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes sont socialisés pour déshumaniser les femmes =====
+{{Argument
+|objections={{Objection
+|page=La domination masculine est de nos jours largement contestée dans tous les domaines de la société
+|titre-affiché=La domination masculine est de nos jours largement contestée dans tous les domaines de la société
+}}{{Objection
+|page=Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques sexistes
+|titre-affiché=Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques
+}}{{Objection
+|page=L'éducation vise à développer notre empathie
+|titre-affiché=L'éducation vise au contraire à développer notre empathie
+}}{{Objection
+|page=Qualifier le traitement des femmes de déshumanisation est démesuré et discrédite la cause féministe
+|titre-affiché=Le terme "déshumaniser" est démesuré, il y a une instrumentalisation des corps certes et une altère expression de la domination mais déshumaniser ne fait que décrédibiliser la cause féministe
+}}
+|justifications=
+|rubriques=Éducation, Politique, Société
+|mots-clés=Féminisme, Hommes, Socialisation, Déshumanisation, Femmes
+|date-création=2020-03-26
+}}
+
+===== PAGE : La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes ont intérêt à en finir avec le machisme pour assumer leur sensibilité et leurs émotions =====
+{{Argument
+|justifications={{Justification
+|page=L'injonction à réprimer ses émotions détériore la santé mentale des hommes
+|titre-affiché=L'injonction à la répression des émotions déteriore la santé mentale des hommes
+}}
+|objections={{Objection
+|page=L'expression des émotions affaiblirait la domination des hommes
+|titre-affiché=L'expression des émotions affaiblirait la domination des hommes
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Privilèges, Machisme, Sexisme, Virilisme, Emotions, Sensibilité
+|date-création=2019-12-25
+}}
+
+===== PAGE : Les hommes bénéficient des discriminations envers les femmes =====
+{{Argument
+|objections={{Objection
+|page=Seuls les hommes qui se conforment à l'injonction à la virilité bénéficient des discriminations envers les femmes
+|titre-affiché=Seulement ceux qui se conforment à l'injonction à la virilité
+}}
+|justifications=
+|date-création=2021-03-18
+}}
+
+===== PAGE : Les hommes ont intérêt à en finir avec le machisme pour se délivrer de l'injonction à la virilité =====
+{{Argument
+|objections={{Objection
+|page=En renonçant à la virilité, les hommes perdraient leur pouvoir
+|titre-affiché=En renonçant à la virilité, les hommes perdraient leur pouvoir
+}}{{Objection
+|page=La virilité n'a pas que des mauvais côtés
+|titre-affiché=La virilité n'a pas que des mauvais côtés
+}}
+|justifications=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Machisme, Sexisme, Virilisme
+|date-création=2019-12-25
+}}
+
+===== PAGE : Les hommes ont intérêt à en finir avec le machisme pour sortir des rapports de rivalité entre hommes =====
+{{Argument
+|objections={{Objection
+|page=La rivalité est une source d'émulation
+|titre-affiché=La rivalité est une source d'émulation
+}}{{Objection
+|page=La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes
+|titre-affiché=La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes
+}}
+|justifications=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Machisme, Sexisme, Virilisme, Rivalité
+|date-création=2019-12-25
+}}
+
+===== PAGE : Les hommes ont intérêt à en finir avec le machisme pour simplifier et libérer les rapports de séduction =====
+{{Argument
+|résumé=Entre autres, la libération présente des avantages pour les hommes, qui gagneraient à avoir plus de relations avec des femmes émancipées.
+|objections={{Objection
+|page=Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction
+|titre-affiché=Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction
+}}{{Objection
+|page=De nombreuses femmes préfèrent les hommes dominants
+|titre-affiché=De nombreuses femmes préfèrent les hommes dominants
+}}
+|justifications=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Machisme, Sexisme, Virilisme, Émancipation, Séduction
+|date-création=2019-12-25
+}}
+
+===== PAGE : La masculinité toxique génère des troubles mentaux et des suicides chez les hommes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : La masculinité toxique est le terreau de l'homophobie =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Seul un changement de comportement des hommes pourra mettre fin au sexisme =====
+{{Argument
+|résumé=Car en sont les auteurs. Car ont le pouvoir.
+* remise en cause personnelle, travailler sur eux-mêmes
+|objections={{Objection
+|page=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+|titre-affiché=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+}}{{Objection
+|page=L'émancipation des femmes doit être l'œuvre des femmes elles-mêmes
+|titre-affiché=L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes
+}}
+|justifications=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Domination masculine
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les femmes sont parfaitement capables de mener le combat féministe par elles-mêmes =====
+{{Argument
+|objections={{Objection
+|page=Les hommes peuvent très facilement tuer dans l'œuf les actions militantes des femmes
+|titre-affiché=Les hommes peuvent très facilement tuer dans l'oeuf toutes leurs actions militantes
+}}
+|justifications=
+|date-création=2021-03-18
+}}
+
+===== PAGE : Les hommes peuvent faire reculer les violences sexistes en prenant au sérieux la parole des femmes victimes =====
+{{Argument
+|résumé=Les femmes victimes ont besoin d'être entendues, prises au sérieux et soutenues par les hommes.
+Amitié, policiers, juges, journalistes.
+|objections={{Objection
+|page=Les hommes sont socialisés pour être indifférents à la souffrance
+|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance
+}}
+|justifications=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Femmes, Violences sexistes, Parole
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les femmes ont intérêt à mener le combat féministe sans les hommes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes ont davantage de moyens d'être entendus dans la société =====
+{{Argument
+|résumé=Les hommes ont le privilège d'être davantage écoutés, respectés et considérés. Leur parole est considérée plus légitime dans la société. Ils doivent utiliser ce privilège pour défendre la cause des femmes.
+* car ont un meilleur accès à la parole dans les médias, la culture, la politique. Peuvent se faire les porte-paroles des opprimées
+* car les hommes sont présumés plus compétents que les femmes et ont davantage confiance en eux
+* car décident de la répartition de la parole et peuvent la rendre plus égalitaire
+|objections={{Objection
+|page=Les hommes utilisent leur accès privilégié à la parole pour conforter la domination masculine
+|titre-affiché=Les hommes utilisent ce privilège pour conforter la domination masculine
+}}{{Objection
+|page=Les hommes n'ont aucun intérêt à utiliser leur accès privilégié à la parole pour dénoncer le sexisme
+|titre-affiché=Les hommes n'ont aucun intérêt à dénoncer le sexisme
+}}{{Objection
+|page=Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place
+|titre-affiché=Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place
+}}{{Objection
+|page=Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent
+|titre-affiché=Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent
+}}{{Objection
+|page=Les hommes qui défendent le féminisme ne sont pas pris au sérieux
+|titre-affiché=Les hommes qui défendent le féminisme ne sont pas pris au sérieux
+}}
+|justifications=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Femmes
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les hommes peuvent faciliter et encourager l'émancipation de leur compagne =====
+{{Argument
+|résumé=En particulier :
+* en faisant leur part dans le travail domestique
+* en donnant confiance et encourageant leur femme
+* en respectant le consentement de leur compagne
+* en écoutant et soutenant les femmes victimes
+|objections={{Objection
+|page=La majorité des hommes dominent leur compagne et freinent leur émancipation
+|titre-affiché=La majorité des hommes dominent leur compagne et freinent leur émancipation
+}}{{Objection
+|page=L'émancipation des femmes doit être l'œuvre des femmes elles-mêmes
+|titre-affiché=L'émancipation des femmes doit être l'oeuvre des femmes elles-mêmes
+}}
+|justifications=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Femmes, Émancipation
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les hommes jouent un rôle essentiel dans l'éducation des enfants =====
+{{Argument
+|résumé=et dans la transmission des valeurs féministes
+* car, en tant que pères, ils servent de modèles à leurs enfants
+* car les pères peuvent apprendre à leurs fils l'importance du consentement
+* car les pères peuvent donner confiance à leurs filles et valoriser leur personnalité et leur intelligence plutôt que leur apparence
+* car les pères peuvent élever leurs enfants filles et garçons de manière égalitaire
+|objections={{Objection
+|page=Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques
+|titre-affiché=Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques
+}}{{Objection
+|page=Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes
+|titre-affiché=Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes
+}}{{Objection
+|page=Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille
+|titre-affiché=Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille
+}}{{Objection
+|page=Les couples lesbiens sont tout à fait aptes à élever un enfant
+|titre-affiché=Les couples lesbiens sont tout à fait aptes à élever un enfant
+}}
+|justifications=
+|rubriques=Éducation, Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Éducation
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les hommes peuvent parler et convaincre d'autres hommes de la nécessité du féminisme =====
+{{Argument
+|objections={{Objection
+|page=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+|titre-affiché=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+}}{{Objection
+|page=Les hommes proféministes ne sont pas pris au sérieux par les autres hommes
+|titre-affiché=Les hommes pro féministes ne sont pas pris au sérieux par les autres hommes
+}}
+|justifications=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Sexisme, Femmes, Prosélytisme
+|date-création=2020-03-19
+}}
+
+===== PAGE : Le combat féministe n'avancera que si les hommes décident de lâcher du lest =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Le féminisme sera victorieux quand tous les hommes y adhèreront =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes ne subissent pas l'épuisement généré par les discriminations sexistes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Le médecin communiste Willy Peers a permis la légalisation de l'avortement et la démocratisation de la contraception en Belgique =====
+{{Argument
+|initialisation=Justification@11449
+|citations={{Citation
+|citation=Depuis le 19e siècle, ce sont ceux qui se revendiquaient du marxisme qui ont été une force essentielle dans la lutte pour toutes les avancées sociales et démocratiques qu’a connues notre pays comme la journée des 8h, la sécurité sociale, le droit de vote, le droit à l’avortement. Ainsi, le combat pour le droit à l’avortement a été incarné notamment par un médecin communiste, le docteur Willy Peers.
+|article=Assimiler la gauche radicale à l'extrême droite : une supercherie
+|ouvrage=Parti du Travail de Belgique
+|date=14 novembre 2018
+|lien=https://www.ptb.be/actualites/assimiler-la-gauche-radicale-lextreme-droite-une-supercherie
+}}{{Citation
+|citation=[L'] éthique personnelle de gynécologue humaniste [de Willy Peers] se heurte aux tabous religieux, au code de déontologie de l’Ordre des médecins et aux interdits légaux. Depuis 1923, toute propagande pour la contraception est interdite en Belgique alors que le contraception permettrait d’éviter de nombreuses grossesses non désirées. Willy Peers lutte pour un développement du planning familial : le médecin devient écrivain et conférencier pour exposer ses opinions novatrices. L’avortement est poursuivi à cette époque aux termes des articles 348 à 353 du Code pénal belge de 1867 qui ignore la détresse des femmes. Avec Philippe Toussaint, Jacqueline de Lombaert et Claude Serge Aronstein, Peers fonde en 1970 la Société Belge pour la Légalisation de l’Avortement (SBLA) qui devient une tribune importante en la matière. Mais surtout, il s’engage avec courage dans la pratique de l’avortement pour raisons médicales, psychologiques et sociales sans aucun but lucratif. " Dès avant 1970, ce gynécologue rompt la loi du silence qui pèse sur l'avortement. Il pratique des interruptions volontaires de grossesse sans publicité, mais en dehors de toute clandestinité. Son maintien en détention préventive symbolise ainsi les représailles à l'encontre de la rupture du tabou. Mais la stature morale de ce médecin est telle que la répression prend l'allure d'une provocation et déclenche la stigmatisation de la loi pénale. "
+|article=Willy Peers: Un humaniste en médecine
+|ouvrage=Centre d’Action Laïque de la Province de Namur
+|lien=https://www.ihoes.be/PDF/expositions/EXPO_Willy_Peers_humaniste_medecine.pdf
+}}
+|justifications=
+|objections=
+|date-création=2023-07-16
+}}
+
+===== PAGE : Lénine avait lui-même des sensibilités féministes =====
+{{Argument
+|initialisation=Justification@16457
+|citations={{Citation
+|citation=Lénine n’était pas l’un de ces communistes patriarcaux. Il était tout à fait d’accord avec Kollontaï pour dire que les travailleuses étaient au cœur de la révolution communiste et qu’elles avaient des préoccupations spécifiques auxquelles seul le communisme pouvait répondre. En plus d’être exploitées par les patrons capitalistes, écrivait Lénine, les femmes étaient ''« esclaves de la chambre à coucher, de la crèche et de la cuisine »''. Il était convaincu que le communisme libérerait les femmes de la subordination patriarcale et de la monotonie des tâches ménagères, et soutenait que ces dernières constituaient un gaspillage du précieux travail des femmes et contribuaient à leur oppression au sein du foyer, qu’il qualifiait d’''« esclavage domestique »''.
+
+Lénine a été profondément influencé par les femmes communistes qui l’entouraient, et Kollontaï a souvent fait partie de ce cercle. Lénine a soutenu le droit à l’avortement, à la contraception et au divorce, un point particulièrement controversé parmi les socialistes, certains d’entre eux affirmant qu’à court terme cela entraînerait la misère pour les femmes et les enfants parce qu’elles seraient trop pauvres pour survivre sans les hommes. Tout en reconnaissant le problème, Lénine a insisté sur le fait que tant que les femmes ne pouvaient pas prendre de décisions concernant leur propre vie, elles ne jouiraient pas de tous les droits démocratiques.
+
+Kollontaï et lui, ainsi que leur camarade allemande Clara Zetkin, ont joué un rôle déterminant dans la création de la Journée internationale des femmes, qui est toujours célébrée aujourd’hui (bien qu’elle jouisse d’une cooptation capitaliste considérable). Sous l’influence de Kollontaï, Lénine a écrit : ''« Si nous n’attirons pas les femmes dans l’activité publique, dans la milice, dans la vie politique – si nous ne les arrachons pas à l’atmosphère mortelle de la maison et de la cuisine – il sera impossible d’assurer une véritable liberté. Il sera impossible d’assurer la démocratie, sans parler du socialisme »''. En effet, l’organisation des travailleuses – profondément exploitées au travail et épuisées par leur deuxième journée de travail, à la maison – a été cruciale pour le succès de la révolution bolchevique.
+
+Il ne s’agissait pas seulement d’un accord philosophique entre les deux penseurs, mais d’un engagement institutionnel profond : après la révolution, Lénine a nommé Kollontaï Commissaire du peuple à l’Assistance publique [équivalent du ministère de la Santé, NdlR], poste dans lequel elle a contribué à légaliser l’avortement, le divorce et le contrôle des naissances. L’égalité salariale pour les femmes et les congés payés pour les nouvelles mères ont également été introduits, tandis que le mariage religieux a été remplacé par le mariage civil. Le travail sexuel est dépénalisé et le statut légal d’« illégitimité » pour les enfants de parents non mariéEs est aboli.
+|auteurs=Liza Featherstone
+|article=Kollontaï et Lénine : pour un communisme qui libère les femmes
+|ouvrage=Gauche anticapitaliste
+|date=18/02/2024
+|lien=https://www.gaucheanticapitaliste.org/kollontai-et-lenine-pour-un-communisme-qui-libere-les-femmes/
+}}
+|justifications=
+|objections=
+|date-création=2024-11-19
+}}
+
+===== PAGE : Victor Hugo avait des idées très féministes =====
+{{Argument
+|initialisation=Justification@16449
+|citations={{Citation
+|citation=Une moitié de l'espèce humaine est hors de l'égalité, il faut l'y faire rentrer, donner pour contrepoids au droit de l'homme le droit de la femme.
+|auteurs=Victor Hugo
+|date=1872
+}}
+|justifications=
+|objections=
+|date-création=2024-11-24
+}}
+
+===== PAGE : Une société n'est fonctionnelle que si elle est égalitaire =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les inégalités hommes/femmes sont un gouffre financier pour la société =====
+{{Argument
+|références-sitographiques={{Référence sitographique
+|lien=https://www.franceinter.fr/societe/chiffrage-inedit-les-inegalites-femmes-hommes-coutent-118-milliards-d-euros-a-la-societe-selon-une-etude
+|page=Les inégalités femmes-hommes coûtent 118 milliards d'euros à la société
+|auteurs=Claire Chaudière
+|site=France Inter
+|date=2 mars 2022
+}}
+|justifications=
+|objections=
+|date-création=2022-03-06
+}}
+
+===== PAGE : Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs =====
+{{Argument
+|objections={{Objection
+|page=C'est la société qui est responsable du sexisme, pas les hommes
+|titre-affiché=C'est la société qui est responsable du sexisme, pas les hommes
+}}{{Objection
+|page=Les hommes ne sont pas capables d'agir par devoir
+|titre-affiché=Les hommes ne sont pas capables d'agir par devoir
+}}{{Objection
+|page=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+|titre-affiché=Les hommes n'ont aucun intérêt à renoncer à leurs privilèges
+}}
+|justifications=
+|rubriques=Éthique, Politique, Société
+|mots-clés=Discrimination, Femmes, Hommes, Sexisme, Injustice, Devoir de réparation
+|date-création=2019-12-07
+}}
+
+===== PAGE : Il est possible de donner aux hommes une éducation non sexiste =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Le mouvement féministe doit rester à l'abri de la domination masculine =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes ne veulent pas céder leurs places =====
+{{Argument
+|résumé=En particulier :
+* Accès à l'emploi, au logement, aux fonctions prestigieuses
+* Implication dans les tâches domestiques
+|justifications=
+|objections=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Privilèges
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les hommes qui assument leur féminisme sont rejetés par les autres hommes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes n'ont pas de privilèges =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2021-03-18
+}}
+
+===== PAGE : Les femmes doivent s'organiser en non-mixité pour créer un espace d'échange sûr et rassurant =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : La non-mixité doit être une solution temporaire =====
+{{Argument
+|résumé=Il est impensable de construire une société basée sur un apartheid genré.
+|justifications=
+|objections=
+|date-création=2021-12-09
+}}
+
+===== PAGE : Les femmes doivent s'organiser en non-mixité pour ne pas avoir à tout réexpliquer =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Le combat n'avancera pas si on n'éduque pas les hommes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les femmes doivent s'organiser en non-mixité pour parler et communiquer librement =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les femmes doivent s'organiser en non-mixité pour prendre conscience du caractère systémique de la domination =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les femmes doivent s'organiser en non-mixité pour renforcer la sororité =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les femmes doivent s'organiser en non-mixité pour diriger la lutte par elles-mêmes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les femmes doivent s'organiser en non-mixité pour apprendre à être autonomes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur valeur individuelle =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les femmes doivent s'organiser en non-mixité pour prendre conscience de leur force collective =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : L'absence d'égalité empêche une société de fonctionner correctement =====
+{{Argument
+|citations={{Citation
+|citation=Sans égalité, pas de démocratie.
+|auteurs=Eleanor Roosvelt
+}}
+|justifications=
+|objections=
+|date-création=2021-08-09
+}}
+
+===== PAGE : Les violences sexistes sont omniprésentes =====
+{{Argument
+|résumé=En particulier :
+* Violences psychologiques : harcèlement moral, insultes, rabaissement
+* Violences physiques : féminicides, violence conjuguale, 
+* Violences sexuelles : harcèlement sexuel, viol, viol conjugual
+|justifications=
+|objections=
+|rubriques=Politique, Société
+|mots-clés=Sexisme, Femmes, Violences
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les femmes sont victimes de discriminations économiques =====
+{{Argument
+|résumé=Écarts de salaires, pauvreté, précarité économique, discriminations à l'embauche
+|justifications=
+|objections=
+|rubriques=Économie, Politique, Société
+|mots-clés=Sexisme, Femmes, Discriminations
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les femmes assument la majeure partie des tâches domestiques =====
+{{Argument
+|résumé=Double journée de travail et charge mentale
+|justifications=
+|objections=
+|rubriques=Politique, Société
+|mots-clés=Sexisme, Tâches domestiques, Femmes
+|date-création=2019-11-24
+}}
+
+===== PAGE : Le pouvoir est encore monopolisé par les hommes =====
+{{Argument
+|résumé=Monopolisation du pouvoir sphères de la politique, culture et art, économie et finance
+|justifications=
+|objections=
+|rubriques=Politique, Société
+|mots-clés=Sexisme, Femmes, Pouvoir
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les femmes sont constamment dévalorisées par rapport aux hommes =====
+{{Argument
+|résumé=En particulier :
+* Moins de prix de concours
+* intériorisation de l'infériorité et autocensure
+|justifications=
+|objections=
+|rubriques=Politique, Société
+|mots-clés=Sexisme, Femmes, Dévalorisation, Intériorisation
+|date-création=2019-11-24
+}}
+
+===== PAGE : Les femmes sont sans cesse ramenées à leur corps et à leur apparence =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Beaucoup d'hommes ne sont pas égoïstes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : La socialisation vise à lutter contre notre égoïsme naturel =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Le sexisme est tellement banalisé qu'il n'est même pas perçu comme tel =====
+{{Argument
+|résumé=La plupart des gens n'ont pas conscience du sexisme, car nous y sommes habitués depuis l'enfance. Le sexisme est naturalisé, il ne nous choque pas. Par exemple, de nombreuses personnes sont incapables d'identifier une publicité sexiste. De même, les crimes conjugaux sont qualifiés de "crimes passionnels", la dimension sexiste n'est pas perçue. La violence envers les femmes est considérée comme une preuve d'amour, et non comme un acte de domination et d'appropriation machiste. Il est donc difficile pour les hommes de percevoir la dimension sexiste d'un acte ou d'une situation.
+|justifications=
+|objections=
+|rubriques=Politique, Société
+|mots-clés=Hommes, Banalisation, Sexisme
+|date-création=2020-04-16
+}}
+
+===== PAGE : Le traitement médiatique du sexisme est encore insuffisant =====
+{{Argument
+|résumé=Le discours féministe est combattu, dénigré par un discours sexiste très virulent (exemple : Éric Zemmour). Le mouvement féministe est caricaturé et stigmatisé. Il y a encore beaucoup de sexisme dans les médias (télé-réalité, émissions de divertissement). La pensée dominante est encore du côté du sexisme. La culture du viol est encore présente. La prise de conscience du sexisme est donc difficile pour les hommes.
+|justifications=
+|objections=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Médias, Sexisme, Traitement médiatique
+|date-création=2020-04-16
+}}
+
+===== PAGE : De nombreuses victimes n'osent pas parler des violences sexistes qu'elles ont subies, encore moins aux hommes =====
+{{Argument
+|résumé=Les femmes victimes préfèrent souvent garder le silence car elles ont peur de déranger ou de mettre l'autre mal à l'aise, elles ont un sentiment de honte ou de culpabilité, ou elles craignent les réactions de l'entourage : ne pas être prise au sérieux, ne pas être crue, être stigmatisée ou moquée (blâme de la victime). Les femmes parlent plus facilement à d'autres femmes, car elles se sentent davantage comprises, ont moins peur d'être jugées.
+|justifications=
+|objections=
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Victime, Sexisme, Femmes, Violences sexistes
+|date-création=2020-04-16
+}}
+
+===== PAGE : La domination masculine est de nos jours largement contestée dans tous les domaines de la société =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes sont capables de déconstruire leurs préjugés et leurs pratiques sexistes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : L'éducation vise à développer notre empathie =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Qualifier le traitement des femmes de déshumanisation est démesuré et discrédite la cause féministe =====
+{{Argument
+|initialisation=Objection@3698
+|objections={{Objection
+|page=La manière dont les femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation
+|titre-affiché=La manière dont le femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation
+}}{{Objection
+|page=Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base
+|titre-affiché=Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base
+}}
+|justifications=
+|date-création=2024-02-02
+}}
+
+===== PAGE : L'injonction à réprimer ses émotions détériore la santé mentale des hommes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : L'expression des émotions affaiblirait la domination des hommes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Seuls les hommes qui se conforment à l'injonction à la virilité bénéficient des discriminations envers les femmes =====
+{{Argument
+|résumé=Les hommes jugés pas assez virils subissent du rejet et des violences.
+|justifications=
+|objections=
+|date-création=2021-12-09
+}}
+
+===== PAGE : En renonçant à la virilité, les hommes perdraient leur pouvoir =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : La virilité n'a pas que des mauvais côtés =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : La rivalité est une source d'émulation =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes ont intérêt à conserver leur rôle de dominants dans les rapports de séduction =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : De nombreuses femmes préfèrent les hommes dominants =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : L'émancipation des femmes doit être l'œuvre des femmes elles-mêmes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes peuvent très facilement tuer dans l'œuf les actions militantes des femmes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes utilisent leur accès privilégié à la parole pour conforter la domination masculine =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes n'ont aucun intérêt à utiliser leur accès privilégié à la parole pour dénoncer le sexisme =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes devraient donner la parole aux femmes plutôt que de parler à leur place =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les femmes sont les mieux placées pour parler des discriminations qu'elles subissent =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes qui défendent le féminisme ne sont pas pris au sérieux =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : La majorité des hommes dominent leur compagne et freinent leur émancipation =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Dans la plupart des familles, ce sont les femmes qui s'occupent des enfants et des tâches domestiques =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Même quand ils s'occupent de leurs enfants, la plupart des hommes renforcent les stéréotypes sexistes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes ont intérêt à conserver les rôles traditionnels au sein de la famille =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les couples lesbiens sont tout à fait aptes à élever un enfant =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes proféministes ne sont pas pris au sérieux par les autres hommes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : C'est la société qui est responsable du sexisme, pas les hommes =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : Les hommes ne sont pas capables d'agir par devoir =====
+{{Argument
+|justifications=
+|objections=
+|date-création=2022-12-19
+}}
+
+===== PAGE : La manière dont les femmes sont traitées ne saurait être décrite autrement que comme de la déshumanisation =====
+{{Argument
+|initialisation=Objection@24385
+|justifications=
+|objections=
+|date-création=2024-02-02
+}}
+
+===== PAGE : Le féminisme ne se décrédibilise jamais qu'aux yeux de ceux qui y sont déjà hostiles à la base =====
+{{Argument
+|initialisation=Objection@24385
+|justifications=
+|objections=
+|date-création=2024-02-02
+}}

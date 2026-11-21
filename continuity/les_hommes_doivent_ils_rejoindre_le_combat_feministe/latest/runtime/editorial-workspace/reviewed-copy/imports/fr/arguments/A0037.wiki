@@ -1,0 +1,16 @@
+{{Argument
+|initialisation=Justification@11449
+|citations={{Citation
+|citation=Depuis le 19e siècle, ce sont ceux qui se revendiquaient du marxisme qui ont été une force essentielle dans la lutte pour toutes les avancées sociales et démocratiques qu’a connues notre pays comme la journée des 8h, la sécurité sociale, le droit de vote, le droit à l’avortement. Ainsi, le combat pour le droit à l’avortement a été incarné notamment par un médecin communiste, le docteur Willy Peers.
+|article=Assimiler la gauche radicale à l'extrême droite : une supercherie
+|ouvrage=Parti du Travail de Belgique
+|date=14 novembre 2018
+|lien=https://www.ptb.be/actualites/assimiler-la-gauche-radicale-lextreme-droite-une-supercherie
+}}{{Citation
+|citation=[L'] éthique personnelle de gynécologue humaniste [de Willy Peers] se heurte aux tabous religieux, au code de déontologie de l’Ordre des médecins et aux interdits légaux. Depuis 1923, toute propagande pour la contraception est interdite en Belgique alors que le contraception permettrait d’éviter de nombreuses grossesses non désirées. Willy Peers lutte pour un développement du planning familial : le médecin devient écrivain et conférencier pour exposer ses opinions novatrices. L’avortement est poursuivi à cette époque aux termes des articles 348 à 353 du Code pénal belge de 1867 qui ignore la détresse des femmes. Avec Philippe Toussaint, Jacqueline de Lombaert et Claude Serge Aronstein, Peers fonde en 1970 la Société Belge pour la Légalisation de l’Avortement (SBLA) qui devient une tribune importante en la matière. Mais surtout, il s’engage avec courage dans la pratique de l’avortement pour raisons médicales, psychologiques et sociales sans aucun but lucratif. " Dès avant 1970, ce gynécologue rompt la loi du silence qui pèse sur l'avortement. Il pratique des interruptions volontaires de grossesse sans publicité, mais en dehors de toute clandestinité. Son maintien en détention préventive symbolise ainsi les représailles à l'encontre de la rupture du tabou. Mais la stature morale de ce médecin est telle que la répression prend l'allure d'une provocation et déclenche la stigmatisation de la loi pénale. "
+|article=Willy Peers: Un humaniste en médecine
+|ouvrage=Centre d’Action Laïque de la Province de Namur
+|lien=https://www.ihoes.be/PDF/expositions/EXPO_Willy_Peers_humaniste_medecine.pdf
+}}
+|date-création=2023-07-16
+}}

@@ -1,0 +1,24 @@
+{{Argument
+|justifications={{Justification
+|page=Les violences sexistes sont omniprésentes
+|titre-affiché=Les violences sexistes sont omniprésentes
+}}{{Justification
+|page=Les femmes sont victimes de discriminations économiques
+|titre-affiché=Les femmes sont victimes de discriminations économiques
+}}{{Justification
+|page=Les femmes assument la majeure partie des tâches domestiques
+|titre-affiché=Les femmes assument la majeure partie des tâches domestiques
+}}{{Justification
+|page=Le pouvoir est encore monopolisé par les hommes
+|titre-affiché=Le pouvoir est encore monopolisé par les hommes
+}}{{Justification
+|page=Les femmes sont constamment dévalorisées par rapport aux hommes
+|titre-affiché=Les femmes sont constamment dévalorisées par rapport aux hommes
+}}{{Justification
+|page=Les femmes sont sans cesse ramenées à leur corps et à leur apparence
+|titre-affiché=Les femmes sont sans cesse ramenées à leur corps et à leur apparence
+}}
+|rubriques=Politique, Société
+|mots-clés=Sexisme, Femmes
+|date-création=2019-11-24
+}}

@@ -1,0 +1,12 @@
+{{Argument
+|objections={{Objection
+|page=La rivalité est une source d'émulation
+|titre-affiché=La rivalité est une source d'émulation
+}}{{Objection
+|page=La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes
+|titre-affiché=La fin du sexisme entraînerait de nouvelles rivalités entre hommes et femmes
+}}
+|rubriques=Politique, Société
+|mots-clés=Féminisme, Hommes, Machisme, Sexisme, Virilisme, Rivalité
+|date-création=2019-12-25
+}}

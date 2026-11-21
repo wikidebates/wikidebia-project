@@ -1,0 +1,10 @@
+{{Argument
+|justifications={{Justification
+|page=Une société n'est fonctionnelle que si elle est égalitaire
+|titre-affiché=Une société n'est fonctionnelle que si elle est égalitaire
+}}{{Justification
+|page=Les inégalités hommes/femmes sont un gouffre financier pour la société
+|titre-affiché=Les inégalités hommes/femmes sont un gouffre financier pour la société
+}}
+|date-création=2021-03-18
+}}

@@ -1,0 +1,37 @@
+{{Argument
+|justifications={{Justification
+|page=Les hommes sont socialisés pour déshumaniser les femmes
+|titre-affiché=Les hommes sont socialisés pour déshumaniser les femmes
+}}{{Justification
+|page=Les hommes sont socialisés pour être égoïstes
+|titre-affiché=Les hommes sont socialisés pour être égoïstes
+}}{{Justification
+|page=Les hommes sont socialisés pour se sentir supérieurs aux femmes
+|titre-affiché=Les hommes sont socialisés pour se sentir supérieurs aux femmes
+}}{{Justification
+|page=Les hommes sont socialisés pour être indifférents à la souffrance
+|titre-affiché=Les hommes sont socialisés pour être indifférents à la souffrance
+}}{{Justification
+|page=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes
+|titre-affiché=La solidarité masculine est construite sur le dénigrement et l'exclusion des femmes
+}}{{Justification
+|page=Le mouvement féministe doit rester à l'abri de la domination masculine
+|titre-affiché=Le mouvement féministe doit rester à l'abri de la domination masculine
+}}
+|objections={{Objection
+|page=Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes
+|titre-affiché=Les hommes ne peuvent pas ne pas voir les violences et les discriminations sexistes
+}}{{Objection
+|page=Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité
+|titre-affiché=Les hommes ne peuvent pas rester insensibles au sort réservé à une moitié de l'humanité
+}}{{Objection
+|page=Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs
+|titre-affiché=Les hommes ont le devoir de réparer les injustices dont ils sont les auteurs
+}}{{Objection
+|page=Il est possible de leur donner une autre éducation
+|titre-affiché=Il est possible de leur donner une autre éducation
+}}
+|rubriques=Éducation, Politique, Société
+|mots-clés=Hommes, Domination masculine, Féminisme, Socialisation
+|date-création=2019-11-24
+}}
