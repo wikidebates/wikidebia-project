@@ -1,0 +1,36 @@
+name: Install verified missing-title source fix (temporary)
+on:
+  push:
+    branches: [fix/creation-library-missing-title-20261121]
+    paths: [.github/workflows/library-missing-title-install.yml]
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Verify, test and install exact source-tree patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .github/library-missing-title-transfer-{00,01}.txt | base64 -d | xz -d > "$RUNNER_TEMP/library-missing-title.patch"
+          echo "15406f4263ac328f8a91a9b2c9e1f9856fbee9528b7ba1a0434668d20221b381  $RUNNER_TEMP/library-missing-title.patch" | sha256sum -c -
+          git apply --check "$RUNNER_TEMP/library-missing-title.patch"
+          git apply --index "$RUNNER_TEMP/library-missing-title.patch"
+          python -m pip install -r validator/requirements-dev.txt
+          python -m pytest -q kit/tests/test_wikidebia_creation_library.py kit/tests/test_wikidebia_creation_measure.py kit/tests/test_wikidebia_creation_sources.py
+          python kit/scripts/refresh_package_metadata.py --test-count 1923 --generated-date 2026-11-21
+          python kit/scripts/refresh_package_metadata.py --test-count 1923 --generated-date 2026-11-21 --check
+          python validator/scripts/self_audit.py
+          rm .github/library-missing-title-transfer-{00,01}.txt .github/workflows/library-missing-title-install.yml
+          git add -A
+          git diff --cached --check
+          test "$(git write-tree)" = "3a7070141e6348886f16655a7e5856bb241ab7cc"
+          git -c user.name="Wikidebia verified fix" -c user.email="github-actions[bot]@users.noreply.github.com" commit -m "fix: audit canonical source notices without real titles"
+          git push origin HEAD:fix/creation-library-missing-title-20261121
