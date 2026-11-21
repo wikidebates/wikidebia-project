@@ -1,0 +1,51 @@
+name: Apply tested creation resume patch (temporary)
+on:
+  push:
+    branches: [feat/creation-resume-20261121]
+    paths: [.github/workflows/creation-resume-apply.yml]
+permissions:
+  contents: read
+jobs:
+  apply:
+    if: github.repository == 'wikidebates/wikidebia-project' && github.ref == 'refs/heads/feat/creation-resume-20261121'
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+      - name: Verify and apply the exact locally tested patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64
+          import gzip
+          import hashlib
+          from pathlib import Path
+          encoded = ''.join(Path(f'.github/creation-resume-transfer-{i:02d}.b64').read_text().strip() for i in (1, 2, 3))
+          patch = gzip.decompress(base64.b64decode(encoded, validate=True))
+          expected = '442b2b80e8fef4f547c092341b0cf1b7fa0b96ae7fb0997938d9b2dc54ad093b'
+          if hashlib.sha256(patch).hexdigest() != expected:
+              raise SystemExit('Patch digest mismatch; nothing applied')
+          Path('/tmp/creation-resume.patch').write_bytes(patch)
+          PY
+          git apply --check /tmp/creation-resume.patch
+          git apply /tmp/creation-resume.patch
+          rm .github/creation-resume-transfer-01.b64 .github/creation-resume-transfer-02.b64 .github/creation-resume-transfer-03.b64
+          rm .github/workflows/creation-resume-source.yml .github/workflows/creation-resume-apply.yml
+          git add -- AGENTS.md kit/GUIDE_CREATION_CONTEXT.md kit/GUIDE_CREATION_RESUME.md kit/PACKAGE_MANIFEST_SHA256.json kit/PACKAGE_RECEIPT.json kit/TEST_REPORT.txt kit/scripts/wikidebia_creation_context.py kit/scripts/wikidebia_creation_resume.py kit/scripts/wikidebia_manage.py kit/tests/test_wikidebia_creation_resume.py
+          git add -u -- .github
+          git diff --cached --check
+          actual=$(git write-tree)
+          test "$actual" = '7cdabea19cf69da4d7506c0a0ed7b5b3e0e4b8ed'
+          printf 'Verified source tree: %s\n' "$actual"
+      - name: Commit verified tree to the feature branch without force
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Wikidebia creation preparation'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit -m 'feat: resume French creation from canonical per-page progress'
+          git push origin HEAD:refs/heads/feat/creation-resume-20261121
