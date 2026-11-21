@@ -1800,3 +1800,44 @@ def test_published_state_attestation_rejects_corrupt_previous_state(tmp_path):
         publisher._save_published_state("fr", [action], plan)
     adapter.close_language()
     assert (state_dir / "latest.json").read_text(encoding="utf-8") == original
+
+
+def test_build_plan_uses_batched_read_only_snapshots(tmp_path):
+    class BatchingAdapter(FakeAdapter):
+        def __init__(self):
+            super().__init__()
+            self.batch_calls = []
+
+        def read_pages(self, titles):
+            self.batch_calls.append((self.language, list(titles)))
+            return {title: (False, None, "") for title in titles}
+
+        def read_page(self, title):
+            raise AssertionError("build_plan must use the batched snapshot")
+
+    config, path, _fr, _en = write_fixture(tmp_path, "full_page")
+    adapter = BatchingAdapter()
+    publisher = module.GenericPublisher(config, adapter, path)
+    plan = publisher.build_plan()
+    assert {a["language"] for a in plan["actions"]} == {"fr", "en"}
+    assert len(adapter.batch_calls) == 2
+    assert all(len(titles) == 1 for _lang, titles in adapter.batch_calls)
+    assert all(action["operation"] == "create" for action in plan["actions"])
+
+
+def test_build_plan_rejects_incomplete_batched_read_without_writing(tmp_path):
+    class IncompleteBatchAdapter(FakeAdapter):
+        def read_pages(self, titles):
+            return {}
+
+        def read_page(self, title):
+            raise AssertionError("incomplete batch must not trigger individual reads")
+
+        def write_page(self, **kwargs):
+            raise AssertionError("planning must not write to MediaWiki")
+
+    import pytest
+    config, path, _fr, _en = write_fixture(tmp_path, "full_page")
+    publisher = module.GenericPublisher(config, IncompleteBatchAdapter(), path)
+    with pytest.raises(module.PublicationError, match="incomplète"):
+        publisher.build_plan()
