@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
-  "declared_file_count": 516,
-  "declared_test_count": 1480,
+  "declared_file_count": 518,
+  "declared_test_count": 1498,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -1139,7 +1139,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "20c2a483c991c9f1541dc2988a056077fb0fc07d00dca1326a9a337d9a4b8510"
+      "sha256": "973af98640cd07894c979d95b7d511992ff1599fce3f3a9831cf8950e5b47073"
     },
     {
       "path": "VERSIONS.json",
@@ -1738,8 +1738,8 @@
     },
     {
       "path": "scripts/wikidebia_final_publication.py",
-      "size_bytes": 77442,
-      "sha256": "9b1d69b5a551d82def61b59776fad855a7b26d4cac176e6a057793f02fc8990d"
+      "size_bytes": 81535,
+      "sha256": "184091c15144e28b8b732e1141a9e4a929e78d728ca85f6f51cd7c30982b732e"
     },
     {
       "path": "scripts/wikidebia_fr_alias_pageids.py",
@@ -1807,6 +1807,11 @@
       "sha256": "656f198cdb756ac160fc569dfc88d1324858ee7dac8af348c2e364cd5b11a432"
     },
     {
+      "path": "scripts/wikidebia_public_visibility.py",
+      "size_bytes": 24812,
+      "sha256": "8c4e2e5db23463ae74ef12eedbca4ecbd2a68af139cc9255fa5f9ee53009c0d4"
+    },
+    {
       "path": "scripts/wikidebia_publication_dates.py",
       "size_bytes": 9587,
       "sha256": "2db40c545302f4f821b3acfe6104ef6e3568b28fc1437f4ec00e4cd1cd82a130"
@@ -1853,8 +1858,8 @@
     },
     {
       "path": "scripts/wikidebia_review_workflow.py",
-      "size_bytes": 148762,
-      "sha256": "d9d58b6d89c1b481b91614b03d53960e100e05974397a65301653be77788a546"
+      "size_bytes": 149507,
+      "sha256": "3e0e9c5e6677c568a9f9a2ef65bb730a258e750b05fc4ec1f8cea45a790f9707"
     },
     {
       "path": "scripts/wikidebia_semantic_convergence.py",
@@ -2175,6 +2180,11 @@
       "path": "tests/test_pretranslation_resume_regression.py",
       "size_bytes": 3417,
       "sha256": "8dcfb2e1272a9dc2203c6d8eb01d9aee837b03ecb416b35c85038d8866c97375"
+    },
+    {
+      "path": "tests/test_public_visibility_gate.py",
+      "size_bytes": 12910,
+      "sha256": "74a870674d7af661924586ac5bb754e8dc2d7177a71c43ed102d67281e9edce1"
     },
     {
       "path": "tests/test_publication_recovery_integration.py",
