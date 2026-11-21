@@ -115,7 +115,8 @@ class FakeAdapter:
         self.write_count += 1
         self.pages[key] = (self.next_revision, text)
         self.revisions[(self.language, title, self.next_revision)] = {
-            "revision_id": self.next_revision, "text": text, "summary": summary, "tags": list(tags)
+            "revision_id": self.next_revision, "parent_id": int(base_revision_id or 0),
+            "user": expected_user, "text": text, "summary": summary, "tags": list(tags)
         }
         self.events.append(("write", self.language, title, summary))
         return self.next_revision
