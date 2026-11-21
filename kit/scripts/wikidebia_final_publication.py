@@ -330,11 +330,35 @@ def _late_reuse_pruned_page_ids(release_copy: Path, frontier_ids: set[str]) -> l
             visited.add(child)
             descendants.add(child)
             pending.append(child)
-    return sorted(
-        node_id
-        for node_id, ids in by_node.items()
+    # An occurrence can be inside an excluded frontier while the same
+    # argument page remains reachable through an independent branch.
+    # The page's outgoing links are shared across all its occurrences; keeping
+    # that page also keeps its downstream arguments reachable. A simple
+    # "all occurrences are descendants of a frontier" check would otherwise
+    # prune grandchildren of such a shared node.
+    candidate_pruned = {
+        node_id for node_id, ids in by_node.items()
         if node_id not in frontier_ids and ids and ids <= descendants
-    )
+    }
+    surviving = set(node_ids) - frontier_ids - candidate_pruned
+    # Follow links by node rather than by occurrence so that the full
+    # descendant family is retained for any argument reused elsewhere.
+    link_children: dict[str, set[str]] = {}
+    for row in occurrences:
+        node_id = str(row.get("node_id") or "")
+        parent_occurrence = str(row.get("parent_occurrence_id") or "")
+        parent_node = occurrence_node.get(parent_occurrence)
+        if node_id and parent_node and node_id != parent_node:
+            link_children.setdefault(parent_node, set()).add(node_id)
+    queue = list(surviving)
+    while queue:
+        parent_node = queue.pop()
+        for child_node in link_children.get(parent_node, set()):
+            if child_node in frontier_ids or child_node in surviving:
+                continue
+            surviving.add(child_node)
+            queue.append(child_node)
+    return sorted(candidate_pruned - surviving)
 
 
 def _discover_late_existing_english_reuse(
