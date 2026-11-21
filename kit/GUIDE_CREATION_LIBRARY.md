@@ -103,3 +103,11 @@ Tests ciblés :
 ```sh
 python -m pytest -q kit/tests/test_wikidebia_creation_library.py
 ```
+
+## 4. Mesurer le cout observable de cette option
+
+La bibliotheque ajoute un fichier de suggestions au paquet et peut donc **augmenter**
+le contexte fourni au modele. Pour comparer sans speculation deux ZIP issus du
+meme snapshot, voir `GUIDE_CREATION_MEASURE.md` et la commande
+`creation-measure --pair outgoing/<sans>.zip outgoing/<avec>.zip`. Les compteurs
+de notices distinctes ne sont pas des recherches effectivement economisees.

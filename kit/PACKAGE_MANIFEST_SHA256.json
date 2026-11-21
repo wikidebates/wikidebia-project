@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
-  "declared_file_count": 542,
-  "declared_test_count": 1877,
+  "declared_file_count": 545,
+  "declared_test_count": 1906,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -283,8 +283,13 @@
     },
     {
       "path": "GUIDE_CREATION_LIBRARY.md",
-      "size_bytes": 5468,
-      "sha256": "a44a1c7554c5a5576eb1ea524c70a94e9e365400026664673ae9ae2466c554d4"
+      "size_bytes": 5904,
+      "sha256": "5869462c8a2e0e0405fa683c595896d9f799c3a2405faf0751afc565617302cd"
+    },
+    {
+      "path": "GUIDE_CREATION_MEASURE.md",
+      "size_bytes": 4725,
+      "sha256": "6a6470dfa8e8d073e9fcebc10f9648bb8c9a832bf9d5a0f8ffa062709aa12ed1"
     },
     {
       "path": "GUIDE_CREATION_RESEARCH.md",
@@ -1174,7 +1179,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "0a51102a1626a1664514a84f20131fa1e7fffbcc9e5390271c2523ccb9270dd9"
+      "sha256": "55ab3c458984cf048b16fe2659de3ed2ac3848de356973005cc1569904b05446"
     },
     {
       "path": "VERSIONS.json",
@@ -1782,6 +1787,11 @@
       "sha256": "859e1282ad517372f547f3907b245ecb54e15441dd9b95cfbacc3c1bccfc79ea"
     },
     {
+      "path": "scripts/wikidebia_creation_measure.py",
+      "size_bytes": 12846,
+      "sha256": "774f9677d320c8c9b954765026dc050f11b4465ddbecbb3aeb7ee4a41af95172"
+    },
+    {
       "path": "scripts/wikidebia_creation_research.py",
       "size_bytes": 21106,
       "sha256": "4f9d5f0cf71b0cc06d8f151ef550dce5d4a017ef78fb3e3091bdbcb4227173aa"
@@ -1868,8 +1878,8 @@
     },
     {
       "path": "scripts/wikidebia_manage.py",
-      "size_bytes": 174489,
-      "sha256": "599b87ade8b08ba0736c051ae96ac1bca47222183a772a3531e1982930f8a076"
+      "size_bytes": 175112,
+      "sha256": "ed4ea089872d94187c3065d4b32fa0bb3028a1bb386e9337106b0ec61c8ea404"
     },
     {
       "path": "scripts/wikidebia_offline_bilingual.py",
@@ -2465,6 +2475,11 @@
       "path": "tests/test_wikidebia_creation_library.py",
       "size_bytes": 19867,
       "sha256": "d1e6082067b38ec6f9df79e19efbd7d4332b1e2b44e1a0778eb80d7204d8211f"
+    },
+    {
+      "path": "tests/test_wikidebia_creation_measure.py",
+      "size_bytes": 10561,
+      "sha256": "b26ddf45bbe9283eb9d90ee40742062d4f296701bf64a01ce76d7a81c7853eae"
     },
     {
       "path": "tests/test_wikidebia_creation_research.py",

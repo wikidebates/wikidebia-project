@@ -2798,6 +2798,11 @@ def build_parser() -> argparse.ArgumentParser:
         add_creation_init_arguments(sub.add_parser(name, help='Initialiser un corpus nouveau apres revue explicite'),
                                     preparing=name == 'creation-prepare')
 
+    creation_measure = sub.add_parser('creation-measure',
+        help='Mesurer la taille des paquets de creation compares, sans inference de quota')
+    creation_measure.add_argument('--pair', nargs=2, action='append', required=True,
+                                  metavar=('ZIP_SANS_REUTILISATION', 'ZIP_AVEC_REUTILISATION'))
+
     creation_library = sub.add_parser('creation-library-build',
         help='Indexer les notices deja rencontrees dans plusieurs corpus, localement et sans approbation')
     creation_library.add_argument('--corpus', action='append', required=True,
@@ -3392,6 +3397,12 @@ def main(argv: list[str] | None = None) -> int:
         elif args.archive:
             command.extend(['--archive', args.archive])
         return creation_init_main(command)
+    if args.command == 'creation-measure':
+        from wikidebia_creation_measure import main as creation_measure_main
+        command = ['--project-root', str(root)]
+        for pair in args.pair:
+            command.extend(['--pair', *pair])
+        return creation_measure_main(command)
     if args.command == 'creation-library-build':
         from wikidebia_creation_library import main as creation_library_main
         command = ['--project-root', str(root)]

@@ -63,3 +63,11 @@ corpus nouveau : `./wikidebia creation-context --stage arguments-fr --corpus
 corpus/<id> --batch-id FR-A-001`. Les dépendances et la vue globale du graphe
 sont conservées ; aucun argument n'est automatiquement déclaré terminé. Voir
 [le guide et les limites de reprise](kit/GUIDE_CREATION_CONTEXT.md).
+
+## Mesurer les effets de la reutilisation documentaire
+
+`./wikidebia creation-measure --pair outgoing/<sans>.zip outgoing/<avec>.zip`
+compare deux paquets prepares sur le meme snapshot, avec et sans la bibliotheque
+documentaire privee. Il mesure les octets ajoutes ou retranches et la
+deduplication des notices proposees, **sans les confondre avec des tokens ou
+credits factures**. Voir [le protocole de mesure](kit/GUIDE_CREATION_MEASURE.md).
