@@ -424,12 +424,17 @@ def placement_reservations_report(
     edges = {str(row.get("id") or ""): row for row in graph.get("edges") or []}
     debate = registry.get("debate") or {}
     debate_title = str((((debate.get("pages") or {}).get("fr") or {}).get("canonical_title") or debate.get("id") or "Débat"))
+    attestations = envelope.get("attestations")
     attested_review = bool(
         envelope.get("decision") == "approved"
         and envelope.get("reviewer")
         and envelope.get("reviewed_at")
         and envelope.get("review_sha256")
         and envelope.get("review_sha256") == review_sha256(envelope)
+        and isinstance(attestations, Mapping)
+        and all(attestations.get(key) is True for key in REQUIRED_ATTESTATIONS)
+        and not envelope.get("blocking_issues")
+        and not placement_review_issues(placement, registry)
     )
     blocking_by_occurrence: dict[str, list[str]] = {}
     unassigned_blockers: list[Any] = []
