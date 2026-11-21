@@ -41,21 +41,24 @@ permet de détecter les modifications accidentelles, pas d'authentifier un auteu
 
 Certaines références françaises historiques ont une utilisation dans
 `sources.json` mais **aucune URL et une notice bibliographique insuffisante**
-(auteur, date ou éditeur manquant). Elles restent dans le corpus d'origine,
+(auteur, date ou éditeur manquant), ou **aucun titre documentaire réel**
+(même si une URL existe). Elles restent dans le corpus d'origine,
 mais ne sont **pas réutilisées** : l'identité documentaire serait incertaine.
 Elles ne doivent pas faire échouer la collecte des autres références valides.
 
 Le résultat JSON affiche désormais `omitted_unidentifiable_sources` (nombre de
 sources historiques écartées **une fois chacune**, même avec plusieurs usages)
-et `omissions_by_corpus` (décompte par chemin `corpus/<id>`). La bibliothèque
-privée conserve aussi `omissions` avec les identifiants locaux `S…` et la raison
-`incomplete_offline_identity`, pour audit ou éventuelle correction documentaire
-**dans le workflow éditorial ordinaire**. Ces identifiants et ce rapport ne
+et `omissions_by_corpus` (décompte par chemin `corpus/<id>`), ainsi que
+`omissions_by_reason` (ventilation par motif). La bibliothèque privée conserve
+aussi `omissions` avec les identifiants locaux `S…` et la raison
+`incomplete_offline_identity` ou `missing_real_title`, pour audit ou éventuelle
+correction documentaire **dans le workflow éditorial ordinaire**. Ces identifiants et ce rapport ne
 constituent ni un contrôle documentaire ni une demande de modifier les sources.
 
 L'absence de notices après collecte ne prouve **pas** l'absence de références
-dans les pages ou le corpus. Les URL non publiques, les métadonnées invalides,
-les structures incohérentes et les notes de recherches corrompues continuent de
+dans les pages ou le corpus. Les URL non publiques (même sur une référence sans
+titre), les métadonnées invalides, les structures incohérentes et les notes de
+recherches corrompues continuent de
 bloquer le processus au lieu d'être silencieusement ignorées. Les bibliothèques
 antérieures à ce champ d'audit restent lisibles ; les reconstruire permet de
 produire le nouveau bilan. Aucun statut éditorial ni contenu wiki n'est modifié.
