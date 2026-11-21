@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
-  "declared_file_count": 507,
-  "declared_test_count": 1408,
+  "declared_file_count": 509,
+  "declared_test_count": 1423,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -1139,7 +1139,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2313,
-      "sha256": "494f7eb54e590197d25265b1393811ee956eae4a6a2ea618c06d3ec6e240a9c7"
+      "sha256": "69ccdc3000c740f461f342f9f515d3055b010c1bff1f3357d8291ed7371d5d4d"
     },
     {
       "path": "VERSIONS.json",
@@ -1738,8 +1738,8 @@
     },
     {
       "path": "scripts/wikidebia_final_publication.py",
-      "size_bytes": 70011,
-      "sha256": "4555d1bc892101b0e6a7d4af15bc9d2c882c39100565c6cbc603a21b6800f923"
+      "size_bytes": 75679,
+      "sha256": "be4522c8f1a573f2447f80bb744bb0480f8375a86bdb99303a74e9f71bbf5b13"
     },
     {
       "path": "scripts/wikidebia_fr_publication_relay.py",
@@ -1783,8 +1783,8 @@
     },
     {
       "path": "scripts/wikidebia_manage.py",
-      "size_bytes": 167029,
-      "sha256": "776ff3db1cead1217ed2fb7a045bcc3717d61dcce6b2dcd0db3d5f434592a178"
+      "size_bytes": 167834,
+      "sha256": "210ce8bfe2d495a87b1453bec407e1be242a3dd4b38d4eaafcbee993a5fcb426"
     },
     {
       "path": "scripts/wikidebia_post_publication.py",
@@ -1838,13 +1838,13 @@
     },
     {
       "path": "scripts/wikidebia_retro_tag.py",
-      "size_bytes": 24515,
-      "sha256": "5ef9d6df91561fb6f635166b0e4c3ade4e33095d2da68a44f469602f9c69c812"
+      "size_bytes": 24884,
+      "sha256": "85d049c0410b39f375abf1738cbd961356a595f5834d77237c2e48c3a316142c"
     },
     {
       "path": "scripts/wikidebia_review_workflow.py",
-      "size_bytes": 145188,
-      "sha256": "60223a09ba3fa90090ff5f8b1b2bf631d71789b253a0383a21afa01007fe49ac"
+      "size_bytes": 148375,
+      "sha256": "7d0abb1b2b4b343afb0c30afdc2b779c32af5eb7ffc38f987e9cd813700e028e"
     },
     {
       "path": "scripts/wikidebia_semantic_convergence.py",
@@ -1933,8 +1933,8 @@
     },
     {
       "path": "scripts/wikidebia_update.py",
-      "size_bytes": 213524,
-      "sha256": "e397df9406cf754d411a5d916c153eecf9f06e096fd756c33ee40baaf1d351e7"
+      "size_bytes": 221930,
+      "sha256": "b5055bd66439a3e021292f78b82b5b5712ee6a1ab5eeb30a1210fbd577eaeb6b"
     },
     {
       "path": "scripts/wikidebia_work_close.py",
@@ -1943,8 +1943,8 @@
     },
     {
       "path": "scripts/wikidebia_workflow_baseline.py",
-      "size_bytes": 34439,
-      "sha256": "e79bf1fc4be18d45356a5f51f223f4e9693ea045051ec5f9dfb162ac16aca399"
+      "size_bytes": 34487,
+      "sha256": "4fa7acef1e3b8b3d76a48545e733d307418420eb5f8a43bb10a7e1b93ca6df7c"
     },
     {
       "path": "scripts/wikidebia_workspace_finalize.py",
@@ -2013,8 +2013,8 @@
     },
     {
       "path": "tests/test_editorial_orchestration_2160.py",
-      "size_bytes": 87177,
-      "sha256": "b2ae61238b7733e08fa2dc339a27b191b598273514299e1d4f136b502ce2fc18"
+      "size_bytes": 88094,
+      "sha256": "16ed081c5d4fb051f729ffd50561e35c56a565882571bc12f5d6d73743e97b29"
     },
     {
       "path": "tests/test_final_publication_baseline_21639.py",
@@ -2030,6 +2030,11 @@
       "path": "tests/test_final_publication_debate_first_21646.py",
       "size_bytes": 5639,
       "sha256": "7980330cd1da7b8106095fe1eca80de9c2f5a8fb83ed2c57e423d4d20cac8c03"
+    },
+    {
+      "path": "tests/test_final_publication_explicit_preparation.py",
+      "size_bytes": 3417,
+      "sha256": "8216cef12b7c69f784a64bbde9ecd67d17caea3a901823e8550614cb6c7522fb"
     },
     {
       "path": "tests/test_final_publication_late_reuse.py",
@@ -2050,6 +2055,11 @@
       "path": "tests/test_french_checkpoint_transaction_21621.py",
       "size_bytes": 6027,
       "sha256": "2cc6d57bdec7320cf02e2c863cf26b3f90567f98529cd99ae6cac75003236ab4"
+    },
+    {
+      "path": "tests/test_french_interlanguage_chatgpt_retro_tag.py",
+      "size_bytes": 6047,
+      "sha256": "316f60201777266341e221938668e1b1e2efa735b46afa40da6a7949a5c12b12"
     },
     {
       "path": "tests/test_future_translation_conventions_21541.py",
