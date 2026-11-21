@@ -199,3 +199,80 @@ def test_remote_content_replacements_are_loaded_from_scoped_receipt(tmp_path: Pa
 
     assert config["operation"]["remote_content_replacements"] == receipt["replacements"]
     assert config["operation"]["remote_content_replacements_receipt_sha256"] == receipt["receipt_sha256"]
+
+
+def test_shared_argument_survives_with_its_transitive_family_on_other_branch(tmp_path: Path):
+    """A shared parent accessible outside the excluded frontier retains its children."""
+    release = tmp_path / "release"
+    _write(release / "manifest.json", {"pages": [
+        {"language": "fr", "page_type": "debate", "page_id": "demo"},
+    ]})
+    _write(release / "graph/graphe_argumentatif.json", {
+        "nodes": [{"id": node} for node in ("A0001", "A0002", "A0003", "A0004", "A0005")],
+        "occurrences": [
+            {"id": "O1", "node_id": "A0001", "parent_occurrence_id": None},
+            {"id": "O2", "node_id": "A0002", "parent_occurrence_id": "O1"},
+            {"id": "O3", "node_id": "A0003", "parent_occurrence_id": "O2"},
+            {"id": "O4", "node_id": "A0004", "parent_occurrence_id": None},
+            {"id": "O5", "node_id": "A0002", "parent_occurrence_id": "O4"},
+            {"id": "O6", "node_id": "A0005", "parent_occurrence_id": "O1"},
+        ],
+    })
+    # A0002 has a separate occurrence under A0004. A0003 appears only below
+    # its excluded occurrence, but remains linked from the kept A0002 page.
+    assert final._late_reuse_pruned_page_ids(release, {"A0001"}) == ["A0005"]
+
+
+def test_unshared_descendant_family_is_pruned(tmp_path: Path):
+    release = tmp_path / "release"
+    _write(release / "manifest.json", {"pages": [
+        {"language": "fr", "page_type": "debate", "page_id": "demo"},
+    ]})
+    _write(release / "graph/graphe_argumentatif.json", {
+        "nodes": [{"id": x} for x in ("A0001", "A0002", "A0003", "A0004")],
+        "occurrences": [
+            {"id": "O1", "node_id": "A0001", "parent_occurrence_id": None},
+            {"id": "O2", "node_id": "A0002", "parent_occurrence_id": "O1"},
+            {"id": "O3", "node_id": "A0003", "parent_occurrence_id": "O2"},
+            {"id": "O4", "node_id": "A0004", "parent_occurrence_id": None},
+        ],
+    })
+    assert final._late_reuse_pruned_page_ids(release, {"A0001"}) == ["A0002", "A0003"]
+
+
+def test_english_reuse_render_uses_public_title_not_contextual_label():
+    from wikidebia_render import _relations, _main_arguments
+
+    registry = {
+        "graph": {
+            "nodes": [
+                {"id": "A0001", "status": "active", "en": {
+                    "canonical_title": "The public existing page",
+                    "displayed_title": "A concise existing title",
+                }},
+                {"id": "A0002", "status": "active", "en": {
+                    "canonical_title": "A different canonical parent",
+                    "displayed_title": "Parent",
+                }},
+            ],
+            "edges": [{
+                "id": "E1", "status": "active", "parent_node_id": "A0002",
+                "child_node_id": "A0001", "relation": "justification", "order": 1,
+            }],
+            "occurrences": [{
+                "id": "O1", "node_id": "A0001", "depth": 1, "branch": "pro", "order": 1,
+            }],
+        }
+    }
+    label = "The historic context-dependent label"
+    nested = _relations(
+        registry, "A0002", "justification", "en",
+        [{"id": "edge:E1", "translated_text": label}],
+    )
+    root = _main_arguments(
+        registry, "pro", "en", [{"id": "root:O1", "translated_text": label}],
+    )
+    for text in (nested, root):
+        assert "|page=The public existing page" in text
+        assert "|displayed-title=" + label in text
+        assert "|page=" + label not in text

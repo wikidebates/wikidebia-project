@@ -1264,6 +1264,14 @@ SOURCE_DOCUMENT_KINDS = {
 }
 DEBATE_BIBLIOGRAPHY_SCOPES = {"foundational_work", "broad_synthesis"}
 
+# The same source-registry value rules as WDV-DOC-002/003/005 in
+# validator/src/wikidebia_validator/editorial.py. Keep the expressions aligned
+# and test their agreement so render-only failures are found at translation review.
+DOCUMENTARY_PAGE_VALUE = re.compile(r"^[0-9]+(?:-[0-9]+)?$")
+DOCUMENTARY_PAGE_IN_LOCATION = re.compile(r"^(?:pages?|pp?\.)\s*[0-9]+(?:\s*[-–—]\s*[0-9]+)?$", re.I)
+DOCUMENTARY_ACCESS_DATE = re.compile(r"\b(?:consulté(?:e)?|accessed|retrieved)\b", re.I)
+DOCUMENTARY_MACHINE_DATE = re.compile(r"^\d{4}-\d{2}(?:-\d{2})?(?:[T ].*)?$")
+
 
 def _fold_documentary(value: Any) -> str:
     return " ".join(str(value or "").split()).casefold()
@@ -1280,6 +1288,8 @@ def collect_english_documentary_findings(review: Mapping[str, Any]) -> list[dict
     final_values = review.get("final_values") if isinstance(review, Mapping) else None
     sources = final_values.get("sources") if isinstance(final_values, Mapping) else None
     if not isinstance(sources, list):
+        sources = review.get("sources") if isinstance(review, Mapping) else None
+    if not isinstance(sources, list):
         return []
     debate_id = str(review.get("debate_id") or "")
     findings: list[dict[str, Any]] = []
@@ -1288,9 +1298,9 @@ def collect_english_documentary_findings(review: Mapping[str, Any]) -> list[dict
             continue
         sid = str(source.get("id") or "")
         stype = str(source.get("type") or "")
-        metadata = source.get("metadata") or {}
-        verification = source.get("verification") or {}
-        usages = source.get("usage") or []
+        metadata = source.get("metadata") if isinstance(source.get("metadata"), Mapping) else {}
+        verification = source.get("verification") if isinstance(source.get("verification"), Mapping) else {}
+        usages = source.get("usage") if isinstance(source.get("usage"), list) else []
         if stype == "bibliography":
             debate_usages = [u for u in usages if isinstance(u, Mapping) and str(u.get("page_id") or "") == debate_id and u.get("language") == "en"]
             if debate_usages:
@@ -1320,6 +1330,56 @@ def collect_english_documentary_findings(review: Mapping[str, Any]) -> list[dict
                             "current_value": usage.get("selection_reason"),
                             "required_correction": "Provide a specific selection rationale explaining why the source belongs in the Debate bibliography.",
                         })
+        # Mirror the canonical registry's WDV-DOC-002 / 003 / 005 checks.
+        # These are source metadata, not quotations: historical quotations and
+        # previously validated English titles must remain untouched.
+        page = metadata.get("page")
+        location = metadata.get("location")
+        date_text = metadata.get("date")
+        if stype == "bibliography":
+            if isinstance(location, str) and DOCUMENTARY_PAGE_IN_LOCATION.fullmatch(location.strip()):
+                findings.append({
+                    "entity_type": "source", "entity_id": sid, "field": "metadata/location",
+                    "issue": "bibliography_pagination_in_location", "validator_code": "WDV-DOC-002",
+                    "disposition": "certain_normalization", "current_value": location,
+                    "required_correction": "Move the explicitly labelled page or page range to metadata/page; use ASCII hyphen for a range. Leave metadata/location for actual publication location.",
+                })
+            if page is not None and not DOCUMENTARY_PAGE_VALUE.fullmatch(str(page)):
+                findings.append({
+                    "entity_type": "source", "entity_id": sid, "field": "metadata/page",
+                    "issue": "bibliography_invalid_page_range", "validator_code": "WDV-DOC-002",
+                    "disposition": "certain_normalization"
+                    if re.fullmatch(r"(?:pp?\.?\s*)?\d+\s*[-–—]\s*\d+", str(page).strip(), re.I)
+                    else "editorial_decision",
+                    "current_value": page,
+                    "required_correction": "Use only a page number or a numeric range such as 13-19. Verify whether a volume, collection number or issue has been incorrectly placed here; do not invent pages.",
+                })
+            # Issue is a valid field for journal articles; for a book this may
+            # instead be a series/collection number, requiring editorial review.
+            if (source.get("document_kind") in {"book", "monograph", "edited_volume"}
+                    and not str(metadata.get("article") or "").strip()
+                    and str(metadata.get("issue") or "").strip()):
+                findings.append({
+                    "entity_type": "source", "entity_id": sid, "field": "metadata/issue",
+                    "issue": "possible_collection_number_in_issue",
+                    "disposition": "editorial_decision", "severity": "warning",
+                    "current_value": metadata.get("issue"),
+                    "required_correction": "Check whether this number is a collection/series number rather than a journal issue. Keep a valid issue only with documentary evidence; do not remap it automatically.",
+                })
+        if isinstance(date_text, str) and DOCUMENTARY_ACCESS_DATE.search(date_text):
+            findings.append({
+                "entity_type": "source", "entity_id": sid, "field": "metadata/date",
+                "issue": "access_date_used_as_documentary_date", "validator_code": "WDV-DOC-003",
+                "disposition": "editorial_decision", "current_value": date_text,
+                "required_correction": "Record the actual publication date if attested, otherwise omit it; a consultation date cannot substitute for publication.",
+            })
+        if isinstance(date_text, str) and DOCUMENTARY_MACHINE_DATE.fullmatch(date_text.strip()):
+            findings.append({
+                "entity_type": "source", "entity_id": sid, "field": "metadata/date",
+                "issue": "machine_documentary_date", "validator_code": "WDV-DOC-005",
+                "disposition": "certain_normalization", "current_value": date_text,
+                "required_correction": "Write the attested publication date in idiomatic British English (day month year or month year); retain the historical date's actual precision, not an invented day.",
+            })
         if stype in {"webliography", "videography"}:
             authors = [str(value).strip() for value in (metadata.get("authors") or []) if str(value).strip()]
             site = _fold_documentary(metadata.get("site"))
@@ -1349,6 +1409,50 @@ def collect_english_documentary_findings(review: Mapping[str, Any]) -> list[dict
                     "issue": "page_or_title_duplicates_site", "current_value": metadata.get("page") or metadata.get("title"),
                     "required_correction": "Omit the redundant page/title value when it merely duplicates the site name.",
                 })
+    # WDV-DOC-009: same-language resources with identical DOI/URL cannot
+    # carry mutually incompatible title/author/identity metadata. Missing
+    # optional fields are not conflicts, and page locators may differ.
+    by_resource: dict[tuple[str, str], list[Mapping[str, Any]]] = {}
+    for source in sources:
+        if not isinstance(source, Mapping):
+            continue
+        metadata = source.get("metadata") if isinstance(source.get("metadata"), Mapping) else {}
+        locator = str(metadata.get("doi") or metadata.get("link") or source.get("doi") or source.get("link") or "").strip()
+        if locator:
+            language = str(source.get("language") or metadata.get("language") or "").strip().casefold()
+            by_resource.setdefault((language, locator), []).append(source)
+    identity_fields = ("article", "work", "title", "date", "publisher", "site")
+    def fold_identity(value: Any) -> str:
+        # Exact normalization from WDV-DOC-009, including typographic quotes.
+        text = str(value or "").strip().casefold().replace("’", "'").replace("“", '"').replace("”", '"')
+        return re.sub(r"\s+", " ", text)
+
+    for (language, locator), rows in by_resource.items():
+        if len(rows) < 2:
+            continue
+        conflicting_fields: list[str] = []
+        for field in identity_fields:
+            values = {fold_identity((row.get("metadata") or {}).get(field)) for row in rows}
+            values.discard("")
+            if len(values) > 1:
+                conflicting_fields.append(field)
+        author_values = {
+            tuple(fold_identity(a) for a in ((row.get("metadata") or {}).get("authors") or []) if fold_identity(a))
+            for row in rows
+        }
+        author_values.discard(())
+        if len(author_values) > 1:
+            conflicting_fields.append("authors")
+        if conflicting_fields:
+            findings.append({
+                "entity_type": "source",
+                "entity_id": ", ".join(str(row.get("id") or "") for row in rows),
+                "field": "metadata/" + ",metadata/".join(conflicting_fields),
+                "issue": "conflicting_same_resource_identity",
+                "validator_code": "WDV-DOC-009", "disposition": "editorial_decision",
+                "current_value": locator,
+                "required_correction": "Recheck this source identity and reconcile the conflicting fields, without merging distinct editions or changing legitimate citation locators.",
+            })
     return findings
 
 
@@ -2409,7 +2513,31 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
     registry, metadata_lock, content_lock, vocabulary_fr = _source_snapshot(source)
     french_source_rows = load_json(source / "data/sources.json", "sources françaises").get("sources") or []
     french_ids = {str(row.get("id")) for row in french_source_rows}
-    english_rows, by_source = _validate_sources(load_json(workspace / "data/sources_en_working.json", "sources anglaises"), debate_id, french_ids)
+    working_sources = load_json(workspace / "data/sources_en_working.json", "sources anglaises")
+    documentary_findings = collect_english_documentary_findings({
+        "debate_id": debate_id, "sources": working_sources.get("sources"),
+    })
+    if documentary_findings:
+        diagnostic_path = workspace / "reports/en_documentary_review_preflight.json"
+        write_json(diagnostic_path, {
+            "schema": "wikidebia-english-documentary-preflight-1.0",
+            "debate_id": debate_id,
+            "status": "needs_review",
+            "blocking": [row for row in documentary_findings if row.get("severity") != "warning"],
+            "editorial_warnings": [row for row in documentary_findings if row.get("severity") == "warning"],
+            "findings": documentary_findings,
+        })
+        blockers = [row for row in documentary_findings if row.get("severity") != "warning"]
+        if blockers:
+            first = blockers[0]
+            raise TranslationReviewError(
+                "Préflight documentaire anglais : "
+                + str(first.get("entity_id")) + "/" + str(first.get("field"))
+                + " (" + str(first.get("issue")) + ") — "
+                + str(first.get("required_correction"))
+                + "; tous les cas dans reports/en_documentary_review_preflight.json"
+            )
+    english_rows, by_source = _validate_sources(working_sources, debate_id, french_ids)
     vocabulary, keyword_map = _validate_vocabulary(review.get("vocabulary"), vocabulary_fr.get("entries") or [])
     authoritative_debate_origin = _french_source_page_origin(metadata_lock.get("debate") or {}, content_lock.get("debate") or {})
     source_policy = content_lock.get("source_preservation_policy")

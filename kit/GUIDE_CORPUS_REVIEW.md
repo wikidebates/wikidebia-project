@@ -66,3 +66,29 @@ La sortie de finalisation fournit `review_sha256`. La promotion exige sa confirm
 Avant le renommage, le kit relance le validateur et vérifie que le build n’a pas changé depuis l’approbation. La cible `corpus/dieu_existe/` doit être absente. La source et la cible doivent appartenir au même système de fichiers ; aucune copie de secours non atomique n’est autorisée.
 
 Le déplacement est effectué par renommage atomique de `.state/corpus-builds/dieu_existe/` vers `corpus/dieu_existe/`. Un reçu signé est conservé sous `.state/corpus-promotions/dieu_existe/`. Le reçu atteste notamment l’empreinte avant et après bascule et l’absence de pages finales.
+
+
+## Réserves éditoriales de placement — lecture et réutilisation
+
+Le kit génère deux rapports **en lecture seule** pendant la préparation du graphe :
+`reports/graph_placement_reservations.json` (structuré) et
+`reports/graph_placement_reservations.txt` (lisible). Ils sont aussi joints au
+contexte du paquet `graph_review`, sans être modifiables par ce paquet.
+
+Pour chaque **occurrence** et non pour chaque page globale, le rapport indique
+l'argument parent, l'argument concerné, le rôle du lien, la réserve d'origine ou
+la justification de placement, et la décision demandée. Les réserves explicites
+à arbitrer sont présentées d'abord ; les contrôles ordinaires et les maintiens
+déjà attestés suivent.
+
+Une décision de maintien est réutilisée seulement après une revue approuvée et
+intégralement attestée : empreinte valide de l'enveloppe, attestations complètes,
+absence de blocages et vérifications de chaque occurrence réussies. L'ancienne
+réserve reste visible dans le rapport, même lorsque ce maintien est reconnu.
+
+**Aucune mutation du graphe n'est effectuée par le rapport.** Un argument peut
+être présent dans plusieurs branches ou plusieurs débats ; chaque occurrence
+est jugée pour son rôle propre. Une citation pouvant ne soutenir qu'une partie
+d'un argument ne justifie pas, à elle seule, son déplacement ou sa suppression.
+Un changement de structure exige une action éditoriale explicite et ses
+contrôles ordinaires.

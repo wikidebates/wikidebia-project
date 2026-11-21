@@ -21,6 +21,8 @@ GRAPH_CORRECTION_REVIEW = "reviews/graph_correction.json"
 GRAPH_TITLE_REVIEW = "reviews/fr/graph_title_review.json"
 REVIEW_REPORT_JSON = "reports/graph_build_review_report.json"
 REVIEW_REPORT_TXT = "reports/graph_build_review_report.txt"
+PLACEMENT_RESERVATIONS_JSON = "reports/graph_placement_reservations.json"
+PLACEMENT_RESERVATIONS_TXT = "reports/graph_placement_reservations.txt"
 FINAL_VALIDATION_JSON = "reports/graph_review_validation.json"
 FINAL_VALIDATION_TXT = "reports/graph_review_validation.txt"
 PROMOTION_READY = "reports/corpus_promotion_ready.json"
@@ -34,6 +36,8 @@ REVIEW_MUTABLE_PATHS = {
     GRAPH_TITLE_REVIEW,
     REVIEW_REPORT_JSON,
     REVIEW_REPORT_TXT,
+    PLACEMENT_RESERVATIONS_JSON,
+    PLACEMENT_RESERVATIONS_TXT,
     FINAL_VALIDATION_JSON,
     FINAL_VALIDATION_TXT,
     PROMOTION_READY,
@@ -399,6 +403,171 @@ def prepare_placement_review(registry: Mapping[str, Any], debate_id: str) -> dic
         "debate_id": debate_id,
         "entries": entries,
     }
+
+
+def placement_reservations_report(
+    registry: Mapping[str, Any],
+    placement: Mapping[str, Any],
+    envelope: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Present every occurrence with its parent, child, link role and decision.
+
+    A reservation is not an authorization to move/delete anything. A previously
+    approved keep decision is recognized only when the completed review
+    envelope carries its matching digest and the occurrence itself is approved.
+    Original reservations are kept even when that decision has been attested.
+    """
+    envelope = envelope if isinstance(envelope, Mapping) else {}
+    graph = registry.get("graph") or {}
+    nodes = {str(row.get("id") or ""): row for row in graph.get("nodes") or []}
+    occurrences = {str(row.get("id") or ""): row for row in graph.get("occurrences") or []}
+    edges = {str(row.get("id") or ""): row for row in graph.get("edges") or []}
+    debate = registry.get("debate") or {}
+    debate_title = str((((debate.get("pages") or {}).get("fr") or {}).get("canonical_title") or debate.get("id") or "Débat"))
+    attestations = envelope.get("attestations")
+    attested_review = bool(
+        envelope.get("decision") == "approved"
+        and envelope.get("reviewer")
+        and envelope.get("reviewed_at")
+        and envelope.get("review_sha256")
+        and envelope.get("review_sha256") == review_sha256(envelope)
+        and isinstance(attestations, Mapping)
+        and all(attestations.get(key) is True for key in REQUIRED_ATTESTATIONS)
+        and not envelope.get("blocking_issues")
+        and not placement_review_issues(placement, registry)
+    )
+    blocking_by_occurrence: dict[str, list[str]] = {}
+    unassigned_blockers: list[Any] = []
+    for issue in envelope.get("blocking_issues") or []:
+        if isinstance(issue, Mapping) and str(issue.get("occurrence_id") or "") in occurrences:
+            key = str(issue["occurrence_id"])
+            blocking_by_occurrence.setdefault(key, []).append(str(issue.get("reason") or issue.get("message") or issue))
+        else:
+            unassigned_blockers.append(issue)
+
+    def node_title(node_id: str) -> str:
+        node = nodes.get(node_id) or {}
+        fr = node.get("fr") or {}
+        fallback = (((node.get("pages") or {}).get("fr") or {}).get("canonical_title"))
+        return str(fr.get("canonical_title") or fallback or node_id or "Argument non identifié")
+
+    cases: list[dict[str, Any]] = []
+    for entry in placement.get("entries") or []:
+        if not isinstance(entry, Mapping):
+            continue
+        oid = str(entry.get("occurrence_id") or "")
+        occ = occurrences.get(oid) or {}
+        node_id = str(occ.get("node_id") or entry.get("node_id") or "")
+        parent_occurrence_id = str(occ.get("parent_occurrence_id") or "")
+        parent_occurrence = occurrences.get(parent_occurrence_id) or {}
+        parent_node_id = str(parent_occurrence.get("node_id") or "")
+        edge = edges.get(str(occ.get("edge_id") or "")) or {}
+        role = (
+            str(edge.get("relation") or entry.get("declared_function") or "lien non qualifié")
+            if parent_occurrence_id
+            else "argument principal " + str(occ.get("branch") or "")
+        )
+        # The graph-import reservation is source context. The review may
+        # annotate it but must not destroy that original concern.
+        original = occ.get("editorial_reservation")
+        reservation = entry.get("editorial_reservation")
+        if isinstance(original, Mapping):
+            original_reservation = dict(original)
+        elif isinstance(original, str) and original.strip():
+            original_reservation = {"reason": original}
+        elif isinstance(reservation, Mapping):
+            original_reservation = dict(reservation)
+        elif isinstance(reservation, str) and reservation.strip():
+            original_reservation = {"reason": reservation}
+        else:
+            original_reservation = None
+        correction = entry.get("correction") or entry.get("graph_action") or {}
+        action = str(correction.get("action") or "none") if isinstance(correction, Mapping) else "none"
+        approved_keep = bool(
+            attested_review and entry.get("placement_status") == "approved"
+            and entry.get("direct_fit") is True
+            and isinstance(entry.get("rationale"), str)
+            and len(entry["rationale"].strip()) >= 24
+            and action in {"", "none", "keep"}
+            and not blocking_by_occurrence.get(oid)
+        )
+        reason = (
+            str((original_reservation or {}).get("reason") or (original_reservation or {}).get("motif") or "").strip()
+            or str(entry.get("rationale") or "").strip()
+            or "Justification du placement à examiner"
+        )
+        if approved_keep:
+            priority = "maintien_atteste"
+            decision = "Aucun nouvel arbitrage : maintien attesté par la revue signée"
+        elif original_reservation or blocking_by_occurrence.get(oid) or action not in {"", "none", "keep"}:
+            priority = "arbitrage"
+            decision = "Arbitrer explicitement le maintien ou la correction du lien sans suppression automatique"
+        else:
+            priority = "controle_ordinaire"
+            decision = "Vérifier la pertinence de cette occurrence et documenter le placement"
+        cases.append({
+            "occurrence_id": oid, "node_id": node_id,
+            "parent_occurrence_id": parent_occurrence_id or None,
+            "parent_argument": node_title(parent_node_id) if parent_occurrence_id else debate_title,
+            "argument": node_title(node_id), "link_role": role,
+            "reason": reason, "decision_requested": decision,
+            "priority": priority, "maintain_attested": approved_keep,
+            "placement_status": entry.get("placement_status"),
+            "review_rationale": str(entry.get("rationale") or ""),
+            "original_reservation": original_reservation,
+            "current_correction_action": action,
+            "blocking_reasons": blocking_by_occurrence.get(oid, []),
+            "attesting_review_sha256": envelope.get("review_sha256") if approved_keep else None,
+        })
+    ranks = {"arbitrage": 0, "controle_ordinaire": 1, "maintien_atteste": 2}
+    cases.sort(key=lambda row: (ranks[row["priority"]], row["occurrence_id"]))
+    return {
+        "schema": "wikidebia-graph-placement-reservations-report-1.0",
+        "debate_id": str(debate.get("id") or placement.get("debate_id") or ""),
+        "source_review_attested": attested_review,
+        "review_sha256": envelope.get("review_sha256") if attested_review else None,
+        "summary": {
+            "arbitrations": sum(row["priority"] == "arbitrage" for row in cases),
+            "routine": sum(row["priority"] == "controle_ordinaire" for row in cases),
+            "attested_maintains": sum(row["priority"] == "maintien_atteste" for row in cases),
+            "total": len(cases),
+        },
+        "cases": cases,
+        "unassigned_blocking_issues": unassigned_blockers,
+        "no_automatic_graph_mutation": True,
+        "policy": "One argument may have multiple occurrences and be reused across debates. Partial citation support does not by itself authorize moving, deleting or de-linking the argument.",
+    }
+
+
+def placement_reservations_text(report: Mapping[str, Any]) -> str:
+    count = report.get("summary") or {}
+    lines = [
+        "REVUE DES RÉSERVES DE PLACEMENT — SANS MUTATION DU GRAPHE",
+        f"Arbitrages prioritaires : {count.get('arbitrations', 0)}",
+        f"Contrôles ordinaires : {count.get('routine', 0)}",
+        f"Maintiens déjà attestés : {count.get('attested_maintains', 0)}",
+        "",
+    ]
+    for priority, title in (
+        ("arbitrage", "ARBITRAGES PRIORITAIRES"),
+        ("controle_ordinaire", "CONTRÔLES ORDINAIRES"),
+        ("maintien_atteste", "MAINTIENS ATTESTÉS"),
+    ):
+        selected = [row for row in report.get("cases") or [] if row.get("priority") == priority]
+        if not selected:
+            continue
+        lines.append(f"{title} ({len(selected)})")
+        for row in selected:
+            lines.extend((
+                f"Occurrence : {row.get('occurrence_id')}",
+                f"Argument parent : {row.get('parent_argument')}",
+                f"Argument concerné : {row.get('argument')}",
+                f"Rôle du lien : {row.get('link_role')}",
+                f"Motif : {row.get('reason')}",
+                f"Décision demandée : {row.get('decision_requested')}",
+                "",
+            ))
+    return "\n".join(lines).rstrip() + "\n"
 
 
 def placement_review_issues(review: Any, registry: Mapping[str, Any]) -> list[dict[str, Any]]:

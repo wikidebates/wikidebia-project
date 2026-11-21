@@ -1447,7 +1447,12 @@ def _prepare_graph_package(project_root: Path, state: dict[str, Any]) -> dict[st
         project_root, state,
         review_type="graph_review", base=build,
         editable_paths=[REVIEW_ENVELOPE, PLACEMENT_REVIEW, GRAPH_TITLE_REVIEW],
-        context_paths=["manifest.json", "scope.json", "data/registre_debat.json", "graph/graphe_argumentatif.json", "graph/graphe_argumentatif.md", "reports/import_report.md"],
+        context_paths=[
+            "manifest.json", "scope.json", "data/registre_debat.json",
+            "graph/graphe_argumentatif.json", "graph/graphe_argumentatif.md",
+            "reports/import_report.md", "reports/graph_placement_reservations.json",
+            "reports/graph_placement_reservations.txt",
+        ],
         context_globs=["imports/fr/**/*.wiki", "imports/fr/**/*.json"],
         counts={"placements": result.get("occurrences"), "pages": len(title_review.get("items") or [])},
     )
@@ -1513,7 +1518,11 @@ def _prepare_translation_package(project_root: Path, state: dict[str, Any], *, c
         base=workspace,
         editable_paths=["reviews/en/translation_review.json", "data/sources_en_working.json"],
         context_paths=context,
-        context_globs=["content-reviewed-copy/imports/fr/**/*.wiki", "content-reviewed-copy/imports/fr/**/*.json"],
+        context_globs=[
+            "content-reviewed-copy/imports/fr/**/*.wiki",
+            "content-reviewed-copy/imports/fr/**/*.json",
+            "reports/en_documentary_review_preflight.json",
+        ],
         counts={"arguments": len(review.get("arguments") or []), "review_units": len(review.get("review_units") or [])},
     )
 
