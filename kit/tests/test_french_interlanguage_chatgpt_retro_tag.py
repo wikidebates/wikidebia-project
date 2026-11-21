@@ -104,6 +104,14 @@ def test_delayed_tag_is_read_without_second_tag_or_edit():
     assert adapter.tag_calls == adapter.writes == 0
 
 
+def test_delayed_existing_tag_visibility_avoids_retro_tag():
+    adapter = TagAdapter(tags=["chatgpt"], delayed=2)
+    executor, row, plan = fixture(adapter)
+    result = executor._execute_one(row, "ChatGPT", plan)
+    assert result["tag_repair"]["status"] == "already_tagged"
+    assert adapter.tag_calls == adapter.writes == 0
+
+
 def test_delayed_post_tag_visibility_retries_without_content_edit():
     adapter = TagAdapter(delayed=2)
     executor, row, plan = fixture(adapter)
