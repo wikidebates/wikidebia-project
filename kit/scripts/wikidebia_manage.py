@@ -2134,6 +2134,18 @@ def corpus_workspace_finalize(
     return run(command, cwd=root, check=False).returncode
 
 
+def corpus_workspace_prove_fr_relation_pageids(
+    root: Path, debate_id: str, *, work_id: str,
+) -> int:
+    script = root / "kit" / "scripts" / "wikidebia_fr_alias_pageids.py"
+    if not script.is_file():
+        raise ManagementError("Audit pageid français en lecture seule absent du kit")
+    return run([
+        python_command(root), str(script), debate_id,
+        "--work-id", work_id, "--project-root", str(root), "--machine-readable",
+    ], cwd=root, check=False).returncode
+
+
 def corpus_workspace_reconcile_offline_bilingual(
     root: Path, debate_id: str, *, work_id: str, evidence: Path,
 ) -> int:
@@ -3043,6 +3055,13 @@ def build_parser() -> argparse.ArgumentParser:
     corpus_reconcile_publication_parser.add_argument("debate_id")
     corpus_reconcile_publication_parser.add_argument("--work-id", required=True)
 
+    corpus_fr_alias_parser = sub.add_parser(
+        "corpus-workspace-prove-fr-relation-pageids",
+        help="Attester en lecture seule les cibles MediaWiki des seuls titres de liens FR modifiés",
+    )
+    corpus_fr_alias_parser.add_argument("debate_id")
+    corpus_fr_alias_parser.add_argument("--work-id", required=True)
+
     corpus_offline_bilingual_parser = sub.add_parser(
         "corpus-workspace-reconcile-offline-bilingual",
         help="Clôturer localement un Work à partir de deux plans et reçus linguistiques déjà signés",
@@ -3520,6 +3539,11 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "corpus-workspace-reconcile-publication":
         return corpus_workspace_reconcile_publication(
+            root, args.debate_id, work_id=args.work_id,
+        )
+
+    if args.command == "corpus-workspace-prove-fr-relation-pageids":
+        return corpus_workspace_prove_fr_relation_pageids(
             root, args.debate_id, work_id=args.work_id,
         )
 
