@@ -1416,7 +1416,7 @@ def collect_english_documentary_findings(review: Mapping[str, Any]) -> list[dict
     for source in sources:
         if not isinstance(source, Mapping):
             continue
-        metadata = source.get("metadata") or {}
+        metadata = source.get("metadata") if isinstance(source.get("metadata"), Mapping) else {}
         locator = str(metadata.get("doi") or metadata.get("link") or source.get("doi") or source.get("link") or "").strip()
         if locator:
             language = str(source.get("language") or metadata.get("language") or "").strip().casefold()
