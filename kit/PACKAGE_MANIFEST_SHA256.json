@@ -1933,8 +1933,8 @@
     },
     {
       "path": "scripts/wikidebia_update.py",
-      "size_bytes": 221930,
-      "sha256": "b5055bd66439a3e021292f78b82b5b5712ee6a1ab5eeb30a1210fbd577eaeb6b"
+      "size_bytes": 222078,
+      "sha256": "307455b6ef2a5ab28a973d8fcd28c71059de733b8060c3955f1776a670574209"
     },
     {
       "path": "scripts/wikidebia_work_close.py",
@@ -2058,8 +2058,8 @@
     },
     {
       "path": "tests/test_french_interlanguage_chatgpt_retro_tag.py",
-      "size_bytes": 6047,
-      "sha256": "316f60201777266341e221938668e1b1e2efa735b46afa40da6a7949a5c12b12"
+      "size_bytes": 6302,
+      "sha256": "f95a9b3f3269bbfd6d5a653ff401f954424edcefc67b70e1aafd0c7ea7da1dff"
     },
     {
       "path": "tests/test_future_translation_conventions_21541.py",
@@ -2423,8 +2423,8 @@
     },
     {
       "path": "tests/test_wikidebia_remote_update.py",
-      "size_bytes": 86822,
-      "sha256": "070a864ed918ce93ebe95ddaf0da6cf26217987cff0517efe712afe54cbcbcdb"
+      "size_bytes": 86898,
+      "sha256": "d0e7e5e1e3e02de84128b2a2f51be2378fb1c1a9eb565650779890317bafff0b"
     },
     {
       "path": "tests/test_wikidebia_render.py",
