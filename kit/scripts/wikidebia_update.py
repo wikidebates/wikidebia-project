@@ -3660,6 +3660,23 @@ class PlanExecutor:
 
         assert_current()
         status = "already_tagged"
+        # A replica can expose the new text before exposing revision tags.
+        # Give the original tag bounded time to appear before invoking the
+        # privileged retro-tag API.
+        for attempt in range(checks):
+            if "chatgpt" in set(revision.get("tags") or []):
+                break
+            if attempt + 1 < checks and delay:
+                time.sleep(delay)
+            reread = self.adapter.read_revision(title, revision_id)
+            if reread is not None:
+                if (int(reread.get("revision_id") or 0) != revision_id
+                        or int(reread.get("parent_id") or 0) != old_id
+                        or str(reread.get("user") or "") != expected_user
+                        or str(reread.get("summary") or "") != summary
+                        or sha_text(str(reread.get("text") or "")) != expected_sha):
+                    raise PlanConflict(f"Provenance divergente pendant la relecture de balise : {title}")
+                revision = reread
         if "chatgpt" not in set(revision.get("tags") or []):
             try:
                 self.adapter.assert_manual_tag_available("chatgpt")
