@@ -170,7 +170,7 @@ def _indexed(rows: Any, key: str, label: str) -> dict[str, dict[str, Any]]:
 
 
 def corpus_context(inputs: Inputs, corpus: Path, stage: str, batch_id: str | None,
-                   node_ids: Sequence[str]) -> dict[str, Any]:
+                   node_ids: Sequence[str], *, dependency_node_ids: Sequence[str] = ()) -> dict[str, Any]:
     corpus = _contained(inputs.root, corpus)
     manifest = inputs.document(corpus / "manifest.json")
     core = manifest.get("core_files") or {}
@@ -201,7 +201,12 @@ def corpus_context(inputs: Inputs, corpus: Path, stage: str, batch_id: str | Non
             raise CreationContextError("Invalid occurrence reference")
     if batch_id and node_ids:
         raise CreationContextError("Choose a batch or explicit nodes, not both")
-    dependencies: set[str] = set()
+    if (len(set(dependency_node_ids)) != len(dependency_node_ids)
+            or not set(dependency_node_ids) <= nodes.keys()
+            or set(dependency_node_ids) & set(node_ids)
+            or (dependency_node_ids and stage != "arguments-fr")):
+        raise CreationContextError("Invalid explicit creation dependencies")
+    dependencies: set[str] = set(dependency_node_ids)
     if batch_id:
         batch = _indexed(registry.get("batches"), "id", "batches").get(batch_id)
         if not batch or batch.get("language") != "fr" or batch.get("page_type") != "argument" or batch.get("debate_id") != debate_id:
@@ -286,17 +291,19 @@ def corpus_context(inputs: Inputs, corpus: Path, stage: str, batch_id: str | Non
 
 
 def build_creation_context(project_root: Path, stage: str, *, corpus_path: str | None = None,
-                           batch_id: str | None = None, node_ids: Sequence[str] = ()) -> dict[str, Any]:
+                           batch_id: str | None = None, node_ids: Sequence[str] = (),
+                           dependency_node_ids: Sequence[str] = ()) -> dict[str, Any]:
     root = project_root.expanduser().resolve()
     if stage not in STAGES:
         raise CreationContextError("Unknown creation stage")
-    if not corpus_path and (batch_id or node_ids):
+    if not corpus_path and (batch_id or node_ids or dependency_node_ids):
         raise CreationContextError("Node selection requires --corpus")
     inputs = Inputs(root)
     norm_raw, norm_info = normative_context(inputs, stage)
     payload = None
     if corpus_path:
-        payload = corpus_context(inputs, root / _relative_path(corpus_path), stage, batch_id, node_ids)
+        payload = corpus_context(inputs, root / _relative_path(corpus_path), stage, batch_id, node_ids,
+                                 dependency_node_ids=dependency_node_ids)
     instructions = (
         "# Contexte de creation francaise\n\n"
         f"Etape : {stage}. Lire NORMATIVE_CONTEXT.md puis CORPUS_CONTEXT.json, si present.\n\n"
@@ -317,7 +324,7 @@ def build_creation_context(project_root: Path, stage: str, *, corpus_path: str |
     records = sorted(inputs.records.values(), key=lambda row: row["path"])
     manifest = {"schema": SCHEMA, "schema_version": "1.0", "stage": stage,
                 "inputs": records, "normative_selection": norm_info,
-                "selection": {"corpus_path": corpus_path, "batch_id": batch_id, "node_ids": list(node_ids)},
+                "selection": {"corpus_path": corpus_path, "batch_id": batch_id, "node_ids": list(node_ids), "dependency_node_ids": list(dependency_node_ids)},
                 "files": [{"path": name, "size_bytes": len(raw), "sha256": _sha(raw)} for name, raw in sorted(files.items())],
                 "measurement": {"norm_source_bytes": norm_info["source_bytes"],
                                 "norm_excerpt_bytes": len(norm_raw),

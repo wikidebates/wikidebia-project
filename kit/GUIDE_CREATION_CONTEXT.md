@@ -70,13 +70,14 @@ lue ou de la norme produit un autre contexte. Une sortie altérée est refusée
 sans écrasement. Les chemins privés, traversées et liens symboliques sont refusés.
 Les dossiers dérivés restent sous `.state/creation-context/`, hors Git.
 
-Cet outil n'est **pas encore un orchestrateur de création** : il n'initialise pas
-les Works, ne choisit pas le prochain argument, ne déclare aucune page terminée
-et n'importe pas de réponse éditoriale. Les états déclarés restent informatifs.
+`creation-context` reste une aide de lecture : il n'initialise pas les Works,
+ne déclare aucune page terminée et n'importe pas de réponse éditoriale.
+La commande complémentaire `creation-next` choisit désormais le prochain travail
+à partir des états canoniques ; voir `GUIDE_CREATION_RESUME.md`. Les états déclarés restent informatifs.
 Il ne remplace ni les handoffs, ni `resume`, ni `review-import`, ni les contrôles
 de cohérence, de recherche d'omissions, de qualité et de publication existants.
-La file de travail persistante par argument et sa validation incrémentale
-constituent une étape distincte, non prétendue livrée ici.
+La file dérivée de `creation-next` ne remplace aucun état du corpus. L'import
+transactionnel des réponses et la validation incrémentale restent à développer.
 
 ## Mesures honnêtes
 
