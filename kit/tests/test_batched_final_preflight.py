@@ -56,7 +56,7 @@ def test_english_preflight_uses_one_batched_pass_for_many_pages():
 def test_french_preflight_uses_batched_snapshots_and_rejects_divergence():
     content = "{{Argument|résumé=Source}}"
     adapter = FakePreflightAdapter({
-        ("fr", "Titre FR"): (41, content) if False else (True, 41, content),
+        ("fr", "Titre FR"): (True, 41, content),
     })
     row = {
         "language": "fr", "page_id": "A0001", "title": "Titre FR",
