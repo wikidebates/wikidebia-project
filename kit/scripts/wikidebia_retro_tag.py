@@ -80,6 +80,52 @@ def chunks(values: list[int], size: int = 50) -> Iterable[list[int]]:
         yield values[offset:offset + size]
 
 
+def manual_tag_preflight(site: Any, tag: str) -> dict[str, Any]:
+    """Shared non-mutating check for safely restoring a manual revision tag."""
+    if site is None:
+        raise RetroTagError("Site non ouvert")
+    request = lambda **params: site.simple_request(**params).submit()
+    rights_data = request(action="query", meta="userinfo", uiprop="rights")
+    rights = set(((rights_data.get("query") or {}).get("userinfo") or {}).get("rights") or [])
+    if "changetags" not in rights:
+        raise RetroTagError("Le compte actif ne possède pas le droit MediaWiki changetags")
+    continuation: dict[str, Any] = {}
+    row: dict[str, Any] | None = None
+    while True:
+        data = request(action="query", list="tags", tglimit="max", tgprop="active|defined|source", **continuation)
+        for candidate in ((data.get("query") or {}).get("tags") or []):
+            if str(candidate.get("name") or "") == tag:
+                row = dict(candidate)
+                break
+        if row is not None or not data.get("continue"):
+            break
+        continuation = data["continue"]
+    if row is None:
+        raise RetroTagError(f"Balise MediaWiki introuvable : {tag}")
+    sources = row.get("source") or []
+    if isinstance(sources, str):
+        sources = [sources]
+    active = ("active" in row) or row.get("active") is True
+    defined = ("defined" in row) or row.get("defined") is True
+    if not active or not defined or "manual" not in {str(value) for value in sources}:
+        raise RetroTagError(f"La balise {tag} doit être active, définie et manuelle pour pouvoir être ajoutée rétroactivement")
+    return {"rights": sorted(rights), "tag": row}
+
+
+def apply_manual_tag(site: Any, revision_ids: list[int], tag: str, expected_user: str) -> None:
+    """Tag exact revisions without creating an edit; identity is asserted by the API."""
+    if site is None:
+        raise RetroTagError("Site non ouvert")
+    for batch in chunks(revision_ids, 50):
+        site.simple_request(
+            action="tag",
+            revid="|".join(str(value) for value in batch),
+            add=tag,
+            token=site.tokens["csrf"],
+            **{"assert": "user", "assertuser": expected_user},
+        ).submit()
+
+
 class PywikibotTagAdapter:
     def __init__(self, *, family: str, code: str, pywikibot_dir: Path, family_file: Path, expected_user: str) -> None:
         self.family = family
@@ -116,33 +162,7 @@ class PywikibotTagAdapter:
         return self.site.simple_request(**params).submit()
 
     def assert_preflight(self, tag: str) -> dict[str, Any]:
-        rights_data = self._request(action="query", meta="userinfo", uiprop="rights")
-        rights = set(((rights_data.get("query") or {}).get("userinfo") or {}).get("rights") or [])
-        if "changetags" not in rights:
-            raise RetroTagError("Le compte actif ne possède pas le droit MediaWiki changetags")
-        continuation: dict[str, Any] = {}
-        row: dict[str, Any] | None = None
-        while True:
-            data = self._request(action="query", list="tags", tglimit="max", tgprop="active|defined|source", **continuation)
-            for candidate in ((data.get("query") or {}).get("tags") or []):
-                if str(candidate.get("name") or "") == tag:
-                    row = dict(candidate)
-                    break
-            if row is not None or not data.get("continue"):
-                break
-            continuation = data["continue"]
-        if row is None:
-            raise RetroTagError(f"Balise MediaWiki introuvable : {tag}")
-        sources = row.get("source") or []
-        if isinstance(sources, str):
-            sources = [sources]
-        active = ("active" in row) or row.get("active") is True
-        defined = ("defined" in row) or row.get("defined") is True
-        if not active or not defined or "manual" not in {str(value) for value in sources}:
-            raise RetroTagError(
-                f"La balise {tag} doit être active, définie et manuelle pour pouvoir être ajoutée rétroactivement"
-            )
-        return {"rights": sorted(rights), "tag": row}
+        return manual_tag_preflight(self.site, tag)
 
     def read_revisions(self, revision_ids: list[int]) -> dict[int, dict[str, Any]]:
         output: dict[int, dict[str, Any]] = {}
@@ -209,18 +229,7 @@ class PywikibotTagAdapter:
         return None
 
     def add_tag(self, revision_ids: list[int], tag: str) -> None:
-        if self.site is None:
-            raise RetroTagError("Site non ouvert")
-        if not revision_ids:
-            return
-        for batch in chunks(revision_ids, 50):
-            self._request(
-                action="tag",
-                revid="|".join(str(value) for value in batch),
-                add=tag,
-                token=self.site.tokens["csrf"],
-                **{"assert": "user", "assertuser": self.expected_user},
-            )
+        apply_manual_tag(self.site, revision_ids, tag, self.expected_user)
 
 
 def expected_summary(fr_title: str) -> str:

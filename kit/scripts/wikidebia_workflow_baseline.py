@@ -309,11 +309,11 @@ def resolve_workflow_release_baseline(
     if str(workflow.get("work_id") or "") != work_id:
         raise WorkflowBaselineError("Le workflow local appartient à un autre Work")
     if str(workflow.get("status") or "") not in {
-        "release_ready", "final_publication", "blocked_final_publication", "published"
+        "release_ready", "publication_prepared", "final_publication", "blocked_final_publication", "published"
     }:
         raise WorkflowBaselineError("Le Work n'est pas arrivé à la frontière de publication finale")
     if str(workflow.get("phase") or "") not in {
-        "release_ready", "final_publication", "final_publication_resume", "published"
+        "release_ready", "publication_prepared", "final_publication", "final_publication_resume", "published"
     }:
         raise WorkflowBaselineError("La phase du Work n'autorise pas une baseline finale")
 

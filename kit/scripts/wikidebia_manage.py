@@ -2832,6 +2832,12 @@ def build_parser() -> argparse.ArgumentParser:
     review_import_parser.add_argument("--execute-graph-actions", action="store_true", help="Après une revue de graphe rejetée, exécuter en une commande les suppressions, redirections, déplacements et requalifications explicitement décidés")
     review_import_parser.add_argument("--authorize-historical-changes", action="store_true", help="Autoriser uniquement les deltas d’introduction/résumés historiques explicitement déclarés dans le ZIP de revue sélectionné")
 
+    workflow_publish_parser = sub.add_parser(
+        "workflow-publish", help="Publier uniquement le préflight final signé et explicitement confirmé"
+    )
+    workflow_publish_parser.add_argument("debate_id")
+    workflow_publish_parser.add_argument("--confirm-preflight-sha256", required=True)
+
     workflow_status_parser = sub.add_parser(
         "workflow-status", help="Afficher l'état de l'orchestration éditoriale"
     )
@@ -3380,6 +3386,16 @@ def main(argv: list[str] | None = None) -> int:
             root, args.debate_id, execute_graph_actions=args.execute_graph_actions,
             authorize_historical_changes=args.authorize_historical_changes,
         )
+    if args.command == "workflow-publish":
+        script = root / "kit" / "scripts" / "wikidebia_review_workflow.py"
+        if not script.is_file():
+            raise ManagementError("Orchestrateur éditorial absent du kit")
+        return run(
+            [python_command(root), str(script), "--project-root", str(root),
+             "workflow-publish", args.debate_id,
+             "--confirm-preflight-sha256", args.confirm_preflight_sha256],
+            cwd=root, check=False,
+        ).returncode
     if args.command == "workflow-status":
         return workflow_status(root, args.debate_id)
     if args.command == "workflow-reconcile":

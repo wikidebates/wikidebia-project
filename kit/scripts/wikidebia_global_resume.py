@@ -333,12 +333,25 @@ def _workflow_entry(project_root: Path, workflow_path: Path) -> dict[str, Any]:
         next_command = f"./wikidebia review-import {debate_id}"
         edit_path = str(pending.get("package_path") or "") or None
     else:
-        next_action = "complete" if terminal else "continue_editorial_workflow"
-        next_command = None if terminal else (
-            "./wikidebia workflow "
-            f"{shlex.quote(str(workflow.get('debate_title') or debate_id))} "
-            f"--debate-id {debate_id}"
-        )
+        if phase == "publication_prepared":
+            confirmation = str((workflow.get("publication_preparation") or {}).get("preflight_sha256") or "")
+            next_action = "explicit_final_publication_confirmation"
+            next_command = (
+                f"./wikidebia workflow-publish {debate_id} --confirm-preflight-sha256 {confirmation}"
+                if len(confirmation) == 64 else None
+            )
+        elif phase in {"final_publication", "final_publication_resume"}:
+            # A legacy run may have started writes: never suggest a generic
+            # workflow restart that conceals the signed plan being resumed.
+            next_action = "inspect_signed_final_publication_preflight"
+            next_command = None
+        else:
+            next_action = "complete" if terminal else "continue_editorial_workflow"
+            next_command = None if terminal else (
+                "./wikidebia workflow "
+                f"{shlex.quote(str(workflow.get('debate_title') or debate_id))} "
+                f"--debate-id {debate_id}"
+            )
         edit_path = None
     return {
         "debate_id": debate_id,
