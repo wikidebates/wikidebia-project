@@ -27,7 +27,7 @@ from wikidebia_post_publication import (
 )
 from wikidebia_render import _load_workspace
 from wikidebia_release_info import publication_plan_is_compatible
-from wikidebia_update import sha_object
+from wikidebia_update import sha_object, sha_text
 
 
 SCHEMA = "wikidebia-offline-bilingual-evidence-1.0"
@@ -191,6 +191,14 @@ def verify_bilingual_proofs(
     for key, op in fr_updates.items():
         state = final_states["fr"][key]
         desired = _sha(op.get("new_sha256"), f"fr {key}")
+        local_path = str(expected["fr"][key].get("file_path") or expected["fr"][key].get("source_path") or "")
+        if not local_path or Path(local_path).is_absolute() or ".." in Path(local_path).parts:
+            _fail(f"Chemin français non portable : {key}")
+        local = release / local_path
+        if local.is_symlink() or not local.is_file() or local.resolve().is_relative_to(release.resolve()) is False:
+            _fail(f"Page française de release absente ou non sûre : {key}")
+        if sha_text(local.read_text(encoding="utf-8")) != desired:
+            _fail(f"Le français de release diverge du texte publié attesté : {key}")
         if (op.get("language") != "fr"
                 or op.get("title") != state.get("canonical_title")
                 or state.get("status") != "published"
@@ -251,8 +259,12 @@ def _install_offline(
     tree_sha: str, proof_sha: str, directory: Path,
 ) -> dict[str, Any]:
     """Install with a sealed write-ahead backup checkpoint; crash-safe on retry."""
-    target = project / "corpus" / debate_id
-    backup = project / "archives/debates" / f"offline-{debate_id}-{work_id}-{proof_sha[:12]}" / "previous-corpus"
+    corpus_parent = assert_control_directory(project / "corpus", project, create=True)
+    archives = assert_control_directory(project / "archives", project, create=True)
+    archive_root = assert_control_directory(archives / "debates", project, create=True)
+    target = corpus_parent / debate_id
+    backup = archive_root / f"offline-{debate_id}-{work_id}-{proof_sha[:12]}" / "previous-corpus"
+    assert_control_directory(backup.parent, project, create=True)
     checkpoint_path = directory / "install-checkpoint.json"
     if checkpoint_path.is_file() or checkpoint_path.is_symlink():
         checkpoint = _signed(checkpoint_path, "checkpoint d'installation", "checkpoint_sha256", project)
