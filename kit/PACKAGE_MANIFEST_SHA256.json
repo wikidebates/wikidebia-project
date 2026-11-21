@@ -1743,8 +1743,8 @@
     },
     {
       "path": "scripts/wikidebia_fr_alias_pageids.py",
-      "size_bytes": 22475,
-      "sha256": "cee1016397bc526749d918e9efe943004fd338911e2847c53785b1818b7a08fc"
+      "size_bytes": 22532,
+      "sha256": "11d2b1dd751fcc4e8d340e720834396f0afb26a5b7fa4a711764df043fc089ca"
     },
     {
       "path": "scripts/wikidebia_fr_publication_relay.py",
