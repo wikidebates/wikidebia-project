@@ -26,7 +26,7 @@ def test_alias_only_changes_only_one_target_and_preserves_all_labels_and_order()
 
 @pytest.mark.parametrize("mutation", [
     NEW.replace("Libellé historique", "Autre libellé"),
-    NEW.replace("Argument fixe", "Argument modifié"),
+    NEW.replace("{{Débat", "{{AutreModèle"),
     NEW.replace("arguments-pour", "arguments-contre"),
     NEW.replace("page=Nouveau titre", "page=Nouveau titre#Section"),
     NEW.replace("|interlangue=", "|introduction=Texte nouveau\n|interlangue="),
