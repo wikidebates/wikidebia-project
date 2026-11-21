@@ -536,7 +536,7 @@ La forme anglaise rédige de la même manière le contenu directement dans `<ref
 
 ### Couverture documentaire des pages de débat
 
-Les paramètres français `bibliographie-pour`, `bibliographie-contre`, `bibliographie-ni-pour-ni-contre`, `sitographie-pour`, `sitographie-contre`, `sitographie-ni-pour-ni-contre`, `vidéographie-pour`, `vidéographie-contre` et `vidéographie-ni-pour-ni-contre` contiennent chacun au moins deux sous-modèles. Les neuf paramètres anglais équivalents suivent le même minimum.
+Les paramètres documentaires de la page Débat ou Debate sont remplis selon la pertinence réelle des sources, sans quota par paramètre. Une catégorie peut contenir une seule référence ; si aucune source pertinente n’est retenue, le paramètre est entièrement omis. Une même référence ne figure jamais dans plusieurs orientations ; une source développant substantiellement les deux positions est classée uniquement dans la documentation neutre.
 
 ### Dates et acronymes
 

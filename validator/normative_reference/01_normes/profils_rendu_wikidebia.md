@@ -936,7 +936,7 @@ Les exemples actifs déclarent la révision 1.2.8, utilisent la langue correspon
 
 1. Une date documentaire complète est localisée (`25 juin 2012` / `25 June 2012`) ; une année seule reste possible.
 2. Un appel inline d’introduction est rédigé directement dans `<ref>…</ref>` et ne contient aucun modèle MediaWiki.
-3. Chacun des neuf paramètres documentaires de Débat/Debate contient au moins deux références distinctes.
+3. Les paramètres documentaires de la page Débat ou Debate sont remplis selon la pertinence réelle des sources, sans quota par paramètre. Une catégorie peut contenir une seule référence ; si aucune source pertinente n’est retenue, le paramètre est entièrement omis. Une même référence ne figure jamais dans plusieurs orientations ; une source développant substantiellement les deux positions est classée uniquement dans la documentation neutre.
 4. Le registre de revue déclare `common_acronym` et atteste son usage ou sa non-applicabilité.
 5. Une cible interlangue française peut viser une page anglaise future absente du manifeste, si son titre est verrouillé dans le registre maître.
 

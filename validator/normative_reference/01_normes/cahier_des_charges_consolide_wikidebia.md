@@ -478,7 +478,7 @@ Chaque rubrique retenue est justifiée individuellement au moyen d’une structu
 
 - **REF-030 — ACTIVE — automatic** : une date documentaire complète est en langage naturel dans la langue de la page ; une forme ISO machine est interdite, sans modifier les dates de création.
 - **MW-023 — ACTIVE — automatic** : les appels inline des introductions sont rédigés directement dans `<ref>…</ref>` en français comme en anglais ; aucun modèle MediaWiki n’est admis dans le corps d’une note développée.
-- **DFR-045 — ACTIVE — automatic+human** : chacun des neuf paramètres documentaires d’une page Débat ou Debate contient au moins deux références distinctes.
+- **DFR-045 — ACTIVE — automatic+human** : les paramètres documentaires de la page Débat ou Debate sont remplis selon la pertinence réelle des sources, sans quota par paramètre. Une catégorie peut contenir une seule référence ; si aucune source pertinente n’est retenue, le paramètre est entièrement omis. Une même référence ne figure jamais dans plusieurs orientations ; une source développant substantiellement les deux positions est classée uniquement dans la documentation neutre.
 - **MW-024 — ACTIVE — human+heuristic** : l’acronyme courant, s’il existe, est déclaré et employé dans `sujet-développé` ou `expanded-topic`.
 - **PUB-021 — ACTIVE — automatic** : une publication sélectionnant uniquement les pages françaises n’exige pas les pages anglaises dans le manifeste lorsque leurs titres verrouillés sont présents dans le registre maître.
 

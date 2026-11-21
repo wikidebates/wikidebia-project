@@ -1,0 +1,415 @@
+{
+  "schema": "wikidebia-creation-context-sections-1.0",
+  "stages": [
+    "cadrage",
+    "graphe",
+    "debat-fr",
+    "arguments-fr",
+    "validation-fr"
+  ],
+  "sections": [
+    {
+      "heading": "## Architecture de compatibilité active",
+      "stages": [
+        "cadrage",
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## Contrats canoniques issus des corrections récentes",
+      "stages": [
+        "cadrage",
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 1. Autorité et priorité",
+      "stages": [
+        "cadrage",
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 2. Principes de production",
+      "stages": [
+        "cadrage",
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 3. Invariants du graphe",
+      "stages": [
+        "cadrage",
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 3.1 Fonction argumentative des niveaux",
+      "stages": [
+        "cadrage",
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 4. Titres canoniques et titres affichés",
+      "stages": [
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 4.1 Autonomie référentielle du titre canonique",
+      "stages": [
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 4.2 Guillemets dans les noms de pages et titres affichés",
+      "stages": [
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 5. Résumés d’arguments",
+      "stages": [
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 5.0 Préservation des résumés historiques lors d’une reprise",
+      "stages": [
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 5.1 Style encyclopédique grand public",
+      "stages": [
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 5.2 Ouverture, concrétisation et force expressive",
+      "stages": [
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 6. Rubriques, sections et mots-clés",
+      "stages": [
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 7. Documentation et références",
+      "stages": [
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 7.1 Principes communs",
+      "stages": [
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 7.2 Pagination bibliographique",
+      "stages": [
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 7.3 Dates sitographiques",
+      "stages": [
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 7.4 Langue des sources et éditions linguistiques",
+      "stages": [
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 7.5 Finalité et organisation des introductions Débat / Debate",
+      "stages": [
+        "debat-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 7.6 Sélection de la bibliographie des pages de débat",
+      "stages": [
+        "debat-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 7.7 Métadonnées sitographiques et conversion des auteurs",
+      "stages": [
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 7.8 Incises parenthétiques dans la prose française",
+      "stages": [
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 8. Structures MediaWiki actives",
+      "stages": [
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 7.9 Articles Wikipédia obligatoires et préservation conditionnelle des débats connexes",
+      "stages": [
+        "debat-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 8.0 Création et modification des paramètres protégés",
+      "stages": [
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 8.1 Page Débat française",
+      "stages": [
+        "debat-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 8.2 Page Argument française",
+      "stages": [
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "### 8.3 English Debate page",
+      "stages": [],
+      "rationale": "English rendering, translation or English publication; outside French-only creation."
+    },
+    {
+      "heading": "### 8.4 English Argument page",
+      "stages": [],
+      "rationale": "English rendering, translation or English publication; outside French-only creation."
+    },
+    {
+      "heading": "## 9. Dates de création",
+      "stages": [
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 9.1 Préservation automatique des pages historiques lors d’une reprise",
+      "stages": [],
+      "rationale": "Existing-page correction, historical preservation or import orchestration; not a from-scratch creation stage."
+    },
+    {
+      "heading": "## 10. Workflow correctif et non-régression",
+      "stages": [],
+      "rationale": "Existing-page correction, historical preservation or import orchestration; not a from-scratch creation stage."
+    },
+    {
+      "heading": "## 11. Validateur",
+      "stages": [
+        "cadrage",
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 12. Publication W11",
+      "stages": [],
+      "rationale": "Remote publication is a separate operation; no creation-context authorizes it."
+    },
+    {
+      "heading": "### 12.1 Résumés individualisés des reprises de corpus validés",
+      "stages": [],
+      "rationale": "Remote publication is a separate operation; no creation-context authorizes it."
+    },
+    {
+      "heading": "## 13. Profils locaux et invariants propres à un corpus",
+      "stages": [
+        "cadrage",
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 14. Renforcement éditorial cumulatif",
+      "stages": [
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 15. Cohérence des livrables et garde-fous de publication",
+      "stages": [
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 16. Livrables minimaux d’une reprise prépublication",
+      "stages": [],
+      "rationale": "Existing-page correction, historical preservation or import orchestration; not a from-scratch creation stage."
+    },
+    {
+      "heading": "## 17. Validation différentielle et convergence sémantique",
+      "stages": [],
+      "rationale": "English rendering, translation or English publication; outside French-only creation."
+    },
+    {
+      "heading": "### `established-name=` : recherche propre à la langue anglaise",
+      "stages": [],
+      "rationale": "English rendering, translation or English publication; outside French-only creation."
+    },
+    {
+      "heading": "## 18. Identité documentaire et inventaire de release",
+      "stages": [
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 19. Métadonnées de publication des traductions anglaises",
+      "stages": [],
+      "rationale": "English rendering, translation or English publication; outside French-only creation."
+    },
+    {
+      "heading": "## 20. Compatibilité des artefacts",
+      "stages": [
+        "cadrage",
+        "graphe",
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 21. Release canonique unique",
+      "stages": [
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 22. Orchestration des interventions éditoriales externes",
+      "stages": [],
+      "rationale": "Existing-page correction, historical preservation or import orchestration; not a from-scratch creation stage."
+    },
+    {
+      "heading": "## 1.2.87 — 13 août 2026 — omission canonique des paramètres optionnels vides",
+      "stages": [
+        "debat-fr",
+        "arguments-fr",
+        "validation-fr"
+      ],
+      "rationale": "Exact active text; applicable during the listed creation stages."
+    },
+    {
+      "heading": "## 1.2.88 — 21 août 2026 — page Debate anglaise publiée avant les Arguments",
+      "stages": [],
+      "rationale": "English rendering, translation or English publication; outside French-only creation."
+    }
+  ]
+}

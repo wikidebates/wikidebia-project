@@ -54,3 +54,12 @@ réécriture, y compris pour un doublon.
 
 Vider les anciens ZIP de `updates/`, y déposer uniquement le bundle complet reçu, puis lancer `./wikidebia upgrade`. Le bundle contient les trois composants et le gestionnaire les extrait automatiquement.
 - En cas de validation bloquée, `outgoing/<debate_id>_<rapport>_diagnostic.zip` contient automatiquement la liste exhaustive des erreurs et le contexte minimal à transmettre à ChatGPT.
+
+## Créer un débat avec un contexte ciblé
+
+`./wikidebia creation-context --stage graphe` prépare les extraits normatifs
+exacts utiles à cette étape, sans traduction ni publication. Pour un lot d'un
+corpus nouveau : `./wikidebia creation-context --stage arguments-fr --corpus
+corpus/<id> --batch-id FR-A-001`. Les dépendances et la vue globale du graphe
+sont conservées ; aucun argument n'est automatiquement déclaré terminé. Voir
+[le guide et les limites de reprise](kit/GUIDE_CREATION_CONTEXT.md).

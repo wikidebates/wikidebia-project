@@ -15,3 +15,9 @@ Pour les pages françaises préexistantes, conserver chaque `titre-affiché` con
 - Si une investigation substantielle doit être reprise, transmettre les décisions, fichiers publics lus, hypothèses écartées, preuves, commit et prochaine étape dans un commentaire court sur l'issue ou la PR. Aucun secret, log brut, fichier privé ou contenu de corpus dans la passation.
 - Voir [le protocole de passation et l'audit optionnel](docs/SESSION_HANDOFF.md). L'audit de relectures distingue répétitions intra-session et intersessions sans prétendre mesurer les tokens facturés.
 - Pour une **expérience de mesure explicitement demandée seulement**, utiliser le lecteur instrumenté `tools/session_read_capture.py` sur les fichiers publics suivis par Git. Ne pas l'imposer aux usages ordinaires, à la traduction ou à la publication.
+
+## Création française : contexte ciblé
+
+- Pour créer un débat nouveau, commencer l'étape par `./wikidebia creation-context --stage cadrage|graphe|debat-fr|arguments-fr|validation-fr` (choisir une seule valeur). Lire les fichiers indiqués, plutôt que la source unifiée et ses historiques en entier.
+- Un corpus nouveau explicitement identifié peut fournir le contexte d'un lot avec `--corpus corpus/<id> --batch-id FR-A-001`, ou d'un argument avec `--node-id A0001`, au stade `arguments-fr`. Ne pas appliquer ce profil à un corpus historique importé.
+- Ce contexte ne vaut ni recherche exhaustive, ni validation, ni autorisation de publication. Garder les recherches, les revues globales et les garde-fous existants. Aucun gain de quota ne se déduit des seuls octets. Voir `kit/GUIDE_CREATION_CONTEXT.md`.
