@@ -1,0 +1,20 @@
+name: Creation research source (temporary)
+on:
+  push:
+    branches: [feat/creation-research-20261121]
+    paths: [.github/workflows/creation-research-source.yml]
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: git archive --format=zip HEAD -o "$RUNNER_TEMP/creation-research-source.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: creation-research-source
+          path: ${{ runner.temp }}/creation-research-source.zip
+          retention-days: 1
