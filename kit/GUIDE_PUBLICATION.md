@@ -166,3 +166,14 @@ Le workflow de reprise publie le français deux fois avant traduction :
 2. après contenu : rubriques, mots-clés, références et autres champs ouverts ; sur des pages préexistantes, l’introduction et les résumés historiques restent inchangés par défaut, mais un `authorized_change` sélectionne la valeur finale propriétaire qui est rendue et publiée dans ce même checkpoint ; une portée structurée limite le delta autorisé et l’absence historique reste une absence sauf création nominativement autorisée.
 
 Le premier checkpoint préserve le contenu/classification importé ; le second se calcule contre l’état publié du premier et interdit les mutations structurelles. Les deux utilisent des résumés MediaWiki individualisés.
+
+### Arrêt avant publication bilingue finale
+
+Après le rendu et la préparation des plans, le workflow s'arrête à `publication_prepared` sans écriture finale. Les plans et le préflight signés se trouvent dans `.state/final-publication/<debate_id>/<work_id>/`. Relisez-les avant de confirmer :
+
+```bash
+./wikidebia workflow-publish <debate_id> --confirm-preflight-sha256 <sha256>
+```
+
+La commande de publication ou de reprise doit viser ce préflight signé ; une divergence de contenu ou de révision distante bloque l'opération. Ce verrou ne modifie pas les deux checkpoints français précédents, qui possèdent leurs propres contrats de publication.
+
