@@ -319,8 +319,9 @@ def collect_alias_proof(
         if not rel or Path(rel).is_absolute() or ".." in Path(rel).parts:
             _block("Chemin de page français non portable")
         source = release / rel
-        if not source.is_file() or source.is_symlink():
-            _block("Page de release française absente")
+        if (not source.is_file() or source.is_symlink()
+                or not source.resolve().is_relative_to(release.resolve())):
+            _block("Page de release française absente ou non sûre")
         proposed = source.read_text(encoding="utf-8")
         expected_hash = str(state.get("content_sha256") or "")
         if HEX64.fullmatch(expected_hash) is None:
@@ -370,6 +371,14 @@ def collect_alias_proof(
         confirmed = resolve_titles_pageids(adapter.site, requested)
         if confirmed != resolved:
             _block("Résolutions de titres instables entre les deux lectures")
+        # Read back the source revisions again: a changed page invalidates
+        # any title mapping, even if the target's pageid stayed constant.
+        final_pages = adapter.read_page_revisions(requests)
+        if not isinstance(final_pages, dict) or set(final_pages) != set(requests):
+            _block("Contrôle final des révisions françaises incomplet")
+        for _key, title, _expected_hash, _proposed, revision_id in pending:
+            if final_pages[title] != (True, revision_id):
+                _block("Une page source a changé pendant la résolution pageid : " + title)
     finally:
         adapter.close_language()
     proof = {
