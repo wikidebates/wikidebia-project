@@ -51,7 +51,7 @@ de l'orchestrateur final sont **des enveloppes** et ne les remplacent pas.
 ```
 
 Le vérificateur refuse notamment les empreintes divergentes, les identités
-croisées, les inventaires incomplets, les révisions finales différentes des
+croisées, les inventaires incomplets, tout français de release non strictement identique au texte attesté, les révisions finales différentes des
 reçus, une opération française autre que l'ajout interlangue attesté, les plans
 partiels et les sauvegardes incompatibles. Les preuves sont contrôlées **avant**
 la promotion locale. Après vérification, un checkpoint d'installation est
