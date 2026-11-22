@@ -1314,6 +1314,16 @@ def test_translation_resume_command_is_exposed_by_manager():
     ])
     assert args.command == "corpus-workspace-translation-resume"
     assert args.work_id == "EDIT-TEST-001"
+    assert args.machine_readable is False
+    detailed = module.build_parser().parse_args([
+        "corpus-workspace-translation-resume", "debat_test",
+        "--work-id", "EDIT-TEST-001", "--machine-readable",
+    ])
+    assert detailed.machine_readable is True
+    import inspect
+    wrapper = inspect.getsource(module.corpus_workspace_translation_resume)
+    assert "if machine_readable:" in wrapper
+    assert 'command.append("--machine-readable")' in wrapper
 
 
 def test_global_resume_command_needs_no_identifier_and_accepts_filters():

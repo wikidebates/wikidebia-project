@@ -20,3 +20,13 @@ donc reprendre avec la seule commande :
 La commande refuse une sélection, un paquet, un reçu de mémoire, un correctif
 scellé ou un reçu d’application dont la signature ne correspond plus. La
 capsule est locale et n’effectue aucun accès wiki.
+
+## Sortie concise pour Codex Cloud
+
+L'affichage ordinaire conserve l'état, l'unité, la prochaine action, le fichier à modifier et le chemin de la capsule signée. Les blocages de budget et les revues globales requises restent visibles. Pour obtenir le résultat intégral :
+
+```sh
+./wikidebia corpus-workspace-translation-resume <debate_id> --work-id <work_id> --machine-readable
+```
+
+La vérification des empreintes, la création des artefacts signés et les autorisations sont identiques dans les deux modes.
