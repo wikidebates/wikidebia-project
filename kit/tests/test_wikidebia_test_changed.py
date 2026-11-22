@@ -38,6 +38,8 @@ def test_documentation_and_generated_metadata_need_no_pytest_suite():
         "kit/GUIDE_TRANSLATION_PACKETS.md",
         "kit/PACKAGE_RECEIPT.json",
         ".github/workflows/validate.yml",
+        "docs/SESSION_HANDOFF.md",
+        "docs/AGENT_PROCEDURES.md",
     ])
 
     assert result["full_validation"] is False
@@ -56,9 +58,33 @@ def test_shared_or_unknown_file_falls_back_to_every_suite():
     assert result["validator_tests"] is True
     assert result["deployment_tests"] is True
 
+    selected = changed.select_validations(
+        ["kit/scripts/wikidebia_public_visibility.py"],
+        available_kit_tests={
+            "kit/tests/test_public_visibility_gate.py",
+            "kit/tests/test_wikidebia_manage.py",
+        },
+    )
+    assert selected["full_validation"] is False
+    assert selected["kit_test_paths"] == [
+        "kit/tests/test_public_visibility_gate.py",
+        "kit/tests/test_wikidebia_manage.py",
+    ]
+    relay = changed.select_validations(
+        ["kit/scripts/wikidebia_fr_publication_relay.py"],
+        available_kit_tests={
+            "kit/tests/test_fr_publication_relay.py",
+            "kit/tests/test_wikidebia_manage.py",
+        },
+    )
+    assert relay["full_validation"] is False
+    assert relay["kit_test_paths"] == [
+        "kit/tests/test_fr_publication_relay.py",
+        "kit/tests/test_wikidebia_manage.py",
+    ]
     missing = changed.select_validations(
         ["kit/scripts/wikidebia_public_visibility.py"],
-        available_kit_tests={"kit/tests/test_public_visibility_gate.py"},
+        available_kit_tests={"kit/tests/test_wikidebia_manage.py"},
     )
     assert missing["full_validation"] is True
     assert missing["kit_test_paths"] == ["kit/tests"]

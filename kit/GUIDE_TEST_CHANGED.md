@@ -16,3 +16,11 @@ Les guides et les métadonnées de paquet régénérées n’entraînent pas seu
 suite pytest. `git diff --check` reste toujours exécuté. Cette sélection concerne
 uniquement les itérations locales : la CI de chaque PR conserve les tests kit,
 validateur, auto-audit et déploiement complets.
+
+Pour une itération Codex Cloud, les changements limités à `docs/*.md`
+restent soumis à `git diff --check` mais n’entraînent pas à eux seuls les
+suites pytest locales. Certains modules ont des tests nommés différemment ;
+leurs correspondances explicites sont vérifiées avant la sélection. Lorsqu’un
+test attendu manque ou que le périmètre n’est pas connu, le repli exécute
+toutes les suites locales, sans ignorer les modules sensibles. Aucune de ces
+optimisations locales ne modifie la validation complète de chaque PR sur GitHub.
