@@ -15,6 +15,12 @@ def test_translation_script_selects_its_tests_and_manager():
     ]
     assert result["validator_tests"] is False
 
+    verified = changed.select_validations(
+        ["kit/scripts/wikidebia_translation_packet.py"],
+        available_kit_tests=result["kit_test_paths"],
+    )
+    assert verified == result
+
 
 def test_component_changes_select_only_their_suites():
     result = changed.select_validations([
@@ -49,6 +55,18 @@ def test_shared_or_unknown_file_falls_back_to_every_suite():
     assert result["kit_test_paths"] == ["kit/tests"]
     assert result["validator_tests"] is True
     assert result["deployment_tests"] is True
+
+    missing = changed.select_validations(
+        ["kit/scripts/wikidebia_public_visibility.py"],
+        available_kit_tests={"kit/tests/test_public_visibility_gate.py"},
+    )
+    assert missing["full_validation"] is True
+    assert missing["kit_test_paths"] == ["kit/tests"]
+    assert missing["validator_tests"] is True
+    assert missing["deployment_tests"] is True
+    assert missing["full_validation_reasons"] == [
+        "missing_direct_test:wikidebia_public_visibility.py",
+    ]
 
 
 def test_memory_objects_select_memory_test_and_integrity_check():
