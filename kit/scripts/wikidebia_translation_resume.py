@@ -249,13 +249,35 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def concise_resume(result: Mapping[str, Any]) -> str:
+    """Show the next step; keep the complete signed evidence on disk."""
+    lines = [
+        "Débat : " + str(result["debate_id"]),
+        "Work : " + str(result["work_id"]),
+        "État : " + str(result.get("workspace_status") or "indisponible"),
+        "Unité : " + str(result.get("active_unit_id") or "aucune"),
+    ]
+    if result.get("active_page_id"):
+        lines.append("Argument : " + str(result["active_page_id"]))
+    lines.append("Action suivante : " + str(result["next_action"]))
+    if result.get("edit_path"):
+        lines.append("Fichier à modifier : " + str(result["edit_path"]))
+    lines.append("Commande suivante : " + str(result.get("next_command") or "aucune"))
+    if result["next_action"] == "increase_token_budget_or_split_argument_fields":
+        lines.append("BLOCAGE : budget de contexte dépassé ; ne pas éditer le fragment.")
+    elif result["next_action"] == "complete_global_translation_review":
+        lines.append("REVUE REQUISE : terminer la revue globale avant toute suite.")
+    lines.append("Capsule signée : " + str(result["capsule_path"]))
+    return "\n".join(lines)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     result = write_resume_capsule(
         args.project_root, args.debate_id, args.work_id,
         event=args.event, unit_id=args.unit_id, page_id=args.page_id,
     )
-    print(json.dumps(result, ensure_ascii=False, sort_keys=True) if args.machine_readable else json.dumps(result, ensure_ascii=False, indent=2))
+    print(json.dumps(result, ensure_ascii=False, sort_keys=True) if args.machine_readable else concise_resume(result))
     return 0
 
 
