@@ -57,11 +57,14 @@ def changed_files(project_root: Path, base: str) -> list[str]:
     return sorted(values)
 
 
-def select_validations(paths: Iterable[str]) -> dict[str, Any]:
+def select_validations(
+    paths: Iterable[str], *, available_kit_tests: Iterable[str] | None = None,
+) -> dict[str, Any]:
     changed = sorted(set(paths))
     kit_tests: set[str] = set()
     validator = deploy = full = memory_verify = False
     reasons: list[str] = []
+    known_tests = set(available_kit_tests) if available_kit_tests is not None else None
     for path in changed:
         item = Path(path)
         if path in GENERATED_KIT_METADATA:
@@ -80,6 +83,13 @@ def select_validations(paths: Iterable[str]) -> dict[str, Any]:
                 reasons.append(f"shared_kit_script:{name}")
                 continue
             candidate = f"kit/tests/test_{name}"
+            if known_tests is not None and candidate not in known_tests:
+                # A missing test path would fail immediately in pytest and
+                # force an unnecessary Codex investigation/retry. Prefer the
+                # full suite when a safe direct mapping cannot be established.
+                full = True
+                reasons.append(f"missing_direct_test:{name}")
+                continue
             kit_tests.add(candidate)
             if name == "wikidebia_manage.py" or name.startswith("wikidebia_"):
                 kit_tests.add("kit/tests/test_wikidebia_manage.py")
@@ -148,7 +158,14 @@ def _commands(project_root: Path, base: str, selection: dict[str, Any]) -> list[
 
 def build_plan(project_root: Path, base: str) -> dict[str, Any]:
     project_root = project_root.expanduser().resolve()
-    selection = select_validations(changed_files(project_root, base))
+    available_tests = {
+        path.relative_to(project_root).as_posix()
+        for path in (project_root / "kit/tests").glob("test_*.py")
+        if path.is_file()
+    }
+    selection = select_validations(
+        changed_files(project_root, base), available_kit_tests=available_tests,
+    )
     plan: dict[str, Any] = {
         "schema": "wikidebia-changed-test-plan-1.0",
         "base": base,
