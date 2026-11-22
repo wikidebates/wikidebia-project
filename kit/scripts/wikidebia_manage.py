@@ -2294,14 +2294,17 @@ def corpus_workspace_translation_context(
 
 def corpus_workspace_translation_resume(
     root: Path, debate_id: str, *, work_id: str,
+    machine_readable: bool = False,
 ) -> int:
     script = root / "kit" / "scripts" / "wikidebia_translation_resume.py"
     if not script.is_file():
         raise ManagementError("Capsule de reprise de traduction absente du kit")
     command = [
         python_command(root), str(script), debate_id,
-        "--work-id", work_id, "--project-root", str(root), "--machine-readable",
+        "--work-id", work_id, "--project-root", str(root),
     ]
+    if machine_readable:
+        command.append("--machine-readable")
     return run(command, cwd=root, check=False).returncode
 
 
@@ -3195,6 +3198,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     translation_resume_parser.add_argument("debate_id")
     translation_resume_parser.add_argument("--work-id", required=True)
+    translation_resume_parser.add_argument("--machine-readable", action="store_true")
 
     resume_parser = sub.add_parser(
         "resume",
@@ -3704,6 +3708,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "corpus-workspace-translation-resume":
         return corpus_workspace_translation_resume(
             root, args.debate_id, work_id=args.work_id,
+            machine_readable=args.machine_readable,
         )
 
     if args.command == "resume":
