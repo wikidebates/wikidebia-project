@@ -70,6 +70,11 @@ def test_capsule_is_small_signed_and_points_to_editable_patch(tmp_path: Path, mo
     body = dict(saved)
     assert body.pop("capsule_sha256") == sha_object(body)
     assert "Translated text" not in json.dumps(saved)
+    concise = resume.concise_resume(result)
+    assert "Action suivante : edit_translation_patch" in concise
+    assert result["edit_path"] in concise
+    assert result["capsule_path"] in concise
+    assert "artifacts" not in concise
 
 
 def test_capsule_gives_exact_apply_command_for_sealed_patch(tmp_path: Path, monkeypatch):
@@ -145,3 +150,8 @@ def test_capsule_preserves_blocking_token_budget_before_draft_fragment(tmp_path:
     assert result["next_action"] == "increase_token_budget_or_split_argument_fields"
     assert result["next_command"] is None
     assert "edit_path" not in result
+    shown = resume.concise_resume(result)
+    assert "BLOCAGE : budget de contexte dépassé" in shown
+    assert "Commande suivante : aucune" in shown
+    assert "Fichier à modifier :" not in shown
+    assert "Capsule signée :" in shown
