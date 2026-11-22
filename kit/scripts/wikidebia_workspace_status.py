@@ -323,6 +323,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             print("Compteurs : " + json.dumps(result["remote"]["counts"], ensure_ascii=False, sort_keys=True))
         print("Action suivante : " + str(result["next_action"]))
         print("Commande suivante : " + str(result["next_command"] or "aucune"))
+        if result["next_remote_read_possible"] or result["next_remote_write_possible"]:
+            effects = []
+            if result["next_remote_read_possible"]:
+                effects.append("lecture distante")
+            if result["next_remote_write_possible"]:
+                effects.append("écriture distante possible")
+            print("Attention, prochaine commande : " + ", ".join(effects))
         if result.get("note"):
             print("Note : " + str(result["note"]))
     return 0
