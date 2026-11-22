@@ -27,6 +27,12 @@ SHARED_KIT_SCRIPTS = {
     "wikidebia_update.py",
 }
 DOCUMENT_NAMES = {"README.md", "AGENTS.md", "CHANGELOG.md"}
+# Verified direct imports in these dedicated tests. Unknown modules still require
+# all suites to avoid silently reducing the scope of local verification.
+ALTERNATIVE_KIT_TESTS = {
+    "wikidebia_public_visibility.py": ("test_public_visibility_gate.py",),
+    "wikidebia_fr_publication_relay.py": ("test_fr_publication_relay.py",),
+}
 
 
 class ChangedTestError(RuntimeError):
@@ -83,14 +89,22 @@ def select_validations(
                 reasons.append(f"shared_kit_script:{name}")
                 continue
             candidate = f"kit/tests/test_{name}"
-            if known_tests is not None and candidate not in known_tests:
+            alternatives = tuple(
+                f"kit/tests/{test}" for test in ALTERNATIVE_KIT_TESTS.get(name, ())
+            )
+            if known_tests is not None and candidate not in known_tests and (
+                not alternatives or any(test not in known_tests for test in alternatives)
+            ):
                 # A missing test path would fail immediately in pytest and
                 # force an unnecessary Codex investigation/retry. Prefer the
                 # full suite when a safe direct mapping cannot be established.
                 full = True
                 reasons.append(f"missing_direct_test:{name}")
                 continue
-            kit_tests.add(candidate)
+            if known_tests is None or candidate in known_tests:
+                kit_tests.add(candidate)
+            else:
+                kit_tests.update(alternatives)
             if name == "wikidebia_manage.py" or name.startswith("wikidebia_"):
                 kit_tests.add("kit/tests/test_wikidebia_manage.py")
             continue
@@ -102,6 +116,7 @@ def select_validations(
             continue
         if (
             path.startswith("kit/GUIDE_")
+            or (path.startswith("docs/") and item.suffix == ".md")
             or item.name in DOCUMENT_NAMES
             or path.startswith(".github/workflows/")
         ):
