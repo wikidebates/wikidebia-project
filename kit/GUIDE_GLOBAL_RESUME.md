@@ -62,3 +62,19 @@ La commande vérifie le workflow, la baseline, le reçu final, `release-copy` et
 corpus actif installé. Elle écrit un reçu local signé puis place le workspace dans
 l’état terminal `published`, sans accès distant. Une coupure entre ces deux écritures
 reprend le même reçu de façon idempotente.
+
+## Sortie concise pour Codex Cloud
+
+`./wikidebia resume` affiche par défaut le débat, le Work, l’état et la
+prochaine commande, sans recopier l’intégralité du registre signé dans le
+contexte de l’agent. Les filtres `--debate-id` et `--work-id` restent
+inchangés. Pour une intégration qui a besoin du résultat structuré complet :
+
+```sh
+./wikidebia resume --machine-readable
+```
+
+Le mode d’affichage ne change pas la vérification des preuves, la
+reconstruction du registre, la conservation des événements, les
+empreintes ni les autorisations d’écriture distante. Aucun gain de
+crédits Codex n’est inféré sans observation réelle du fournisseur.

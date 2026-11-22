@@ -1302,10 +1302,20 @@ def test_global_resume_command_needs_no_identifier_and_accepts_filters():
         "resume", "--debate-id", "debat_test", "--work-id", "EDIT-TEST-001",
     ])
     assert automatic.command == "resume"
+    assert automatic.machine_readable is False
+    structured = module.build_parser().parse_args(["resume", "--machine-readable"])
+    assert structured.machine_readable is True
     assert automatic.debate_id is None
     assert automatic.work_id is None
     assert selected.debate_id == "debat_test"
     assert selected.work_id == "EDIT-TEST-001"
+
+    # The CLI no longer forces verbose JSON into ordinary Codex sessions.
+    # The existing machine-readable mode stays available for integrations.
+    import inspect
+    source = inspect.getsource(module.global_resume)
+    assert "if machine_readable:" in source
+    assert 'command.append("--machine-readable")' in source
 
 
 def test_pretranslation_benchmark_command_exposes_reproducible_dimensions():

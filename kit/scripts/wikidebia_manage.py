@@ -2300,14 +2300,17 @@ def corpus_workspace_translation_resume(
 
 def global_resume(
     root: Path, *, debate_id: str | None, work_id: str | None,
+    machine_readable: bool = False,
 ) -> int:
     script = root / "kit" / "scripts" / "wikidebia_global_resume.py"
     if not script.is_file():
         raise ManagementError("Registre global de reprise absent du kit")
     command = [
         python_command(root), str(script),
-        "--project-root", str(root), "--machine-readable",
+        "--project-root", str(root),
     ]
+    if machine_readable:
+        command.append("--machine-readable")
     if debate_id:
         command.extend(["--debate-id", debate_id])
     if work_id:
@@ -3188,6 +3191,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     resume_parser.add_argument("--debate-id")
     resume_parser.add_argument("--work-id")
+    resume_parser.add_argument(
+        "--machine-readable", action="store_true",
+        help="Afficher le JSON complet plutôt que la prochaine action concise",
+    )
 
     benchmark_parser = sub.add_parser(
         "pretranslation-benchmark",
@@ -3686,6 +3693,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "resume":
         return global_resume(
             root, debate_id=args.debate_id, work_id=args.work_id,
+            machine_readable=args.machine_readable,
         )
 
     if args.command == "pretranslation-benchmark":
