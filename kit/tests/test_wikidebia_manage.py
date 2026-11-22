@@ -1385,6 +1385,16 @@ def test_changed_command_is_exposed_by_manager():
     assert args.command == "test-changed"
     assert args.base == "main"
     assert args.execute is True
+    assert args.machine_readable is False
+    explicit = module.build_parser().parse_args([
+        "test-changed", "--machine-readable",
+    ])
+    assert explicit.machine_readable is True
+
+    import inspect
+    source = inspect.getsource(module.test_changed)
+    assert 'if machine_readable:' in source
+    assert 'command.append("--machine-readable")' in source
 
 
 def test_translation_patch_command_is_exposed_by_manager():
