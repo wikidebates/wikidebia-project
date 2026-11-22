@@ -2436,14 +2436,16 @@ def corpus_workspace_translation_preflight(
     return run(command, cwd=root, check=False).returncode
 
 
-def test_changed(root: Path, *, base: str, execute: bool) -> int:
+def test_changed(root: Path, *, base: str, execute: bool, machine_readable: bool = False) -> int:
     script = root / "kit" / "scripts" / "wikidebia_test_changed.py"
     if not script.is_file():
         raise ManagementError("Sélecteur local de tests absent du kit")
     command = [
         python_command(root), str(script), "--base", base,
-        "--project-root", str(root), "--machine-readable",
+        "--project-root", str(root),
     ]
+    if machine_readable:
+        command.append("--machine-readable")
     if execute:
         command.append("--execute")
     return run(command, cwd=root, check=False).returncode
@@ -3254,6 +3256,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     changed_tests_parser.add_argument("--base", default="origin/main")
     changed_tests_parser.add_argument("--execute", action="store_true")
+    changed_tests_parser.add_argument("--machine-readable", action="store_true")
 
     translation_patch_parser = sub.add_parser(
         "corpus-workspace-translation-patch",
@@ -3731,7 +3734,10 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     if args.command == "test-changed":
-        return test_changed(root, base=args.base, execute=args.execute)
+        return test_changed(
+            root, base=args.base, execute=args.execute,
+            machine_readable=args.machine_readable,
+        )
 
     if args.command == "corpus-workspace-translation-patch":
         return corpus_workspace_translation_patch(

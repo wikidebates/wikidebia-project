@@ -228,6 +228,47 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def compact_summary(output: dict[str, Any]) -> str:
+    """Keep ordinary Codex output small; the signed full plan remains local."""
+    plan = output["plan"]
+    selected = []
+    if plan["kit_test_paths"]:
+        selected.append(
+            "kit=all" if plan["kit_test_paths"] == ["kit/tests"]
+            else f"kit={len(plan['kit_test_paths'])} fichier(s)"
+        )
+    if plan["validator_tests"]:
+        selected.append("validator")
+    if plan["deployment_tests"]:
+        selected.append("deploy")
+    if plan["translation_memory_verify"]:
+        selected.append("memory")
+    lines = [
+        f"Tests locaux : {', '.join(selected) if selected else 'aucun'}",
+        f"Changements : {len(plan['changed_files'])} fichier(s)",
+        f"Vérification de diff : systématique",
+        f"Plan complet : {output['plan_path']}",
+    ]
+    if plan["full_validation"]:
+        lines.append(
+            "Repli sécurisé : suites complètes ("
+            + ", ".join(plan["full_validation_reasons"][:3])
+            + (", ..." if len(plan["full_validation_reasons"]) > 3 else "")
+            + ")"
+        )
+    if "receipt" in output:
+        receipt = output["receipt"]
+        lines.append(f"Résultat : {receipt['status']}")
+        for item in receipt["results"]:
+            if item["returncode"]:
+                lines.append(
+                    f"Contrôle en échec : {item['name']} (code {item['returncode']})"
+                )
+    else:
+        lines.append("Mode : prévisualisation (ajouter --execute pour lancer)")
+    return "\n".join(lines)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     root = args.project_root.expanduser().resolve()
@@ -241,7 +282,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     path = root / ".state/changed-test-plan.json"
     write_json(path, output)
     output["plan_path"] = relative_to_project(path, root)
-    print(json.dumps(output, ensure_ascii=False, sort_keys=True) if args.machine_readable else json.dumps(output, ensure_ascii=False, indent=2))
+    print(json.dumps(output, ensure_ascii=False, sort_keys=True) if args.machine_readable else compact_summary(output))
     return code
 
 
