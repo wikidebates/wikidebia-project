@@ -24,3 +24,21 @@ leurs correspondances explicites sont vérifiées avant la sélection. Lorsqu’
 test attendu manque ou que le périmètre n’est pas connu, le repli exécute
 toutes les suites locales, sans ignorer les modules sensibles. Aucune de ces
 optimisations locales ne modifie la validation complète de chaque PR sur GitHub.
+
+## Sortie de diagnostic adaptée à Codex Cloud
+
+La commande affiche par défaut une synthèse courte : nombre de fichiers
+modifiés, suites de tests choisies, repli conservateur éventuel, état
+d'exécution et chemin du rapport complet. Elle ne copie pas systématiquement
+les listes détaillées et JSON en contexte de l'agent. Le plan complet et les
+résultats restent enregistrés sous `.state/changed-test-plan.json`.
+
+Pour une intégration nécessitant le JSON exact, utiliser :
+
+```sh
+./wikidebia test-changed --machine-readable
+```
+
+Un échec reste visible dans la synthèse, et son code de sortie reste non nul.
+Ce changement n'altère ni la sélection, ni la commande exécutée, ni la CI
+complète de chaque PR.
