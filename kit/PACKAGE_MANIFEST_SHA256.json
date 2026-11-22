@@ -373,8 +373,8 @@
     },
     {
       "path": "GUIDE_TEST_CHANGED.md",
-      "size_bytes": 797,
-      "sha256": "59fbc40fb2ff9160d5d243b10629c49ffa20b84f50ed16b5009a6eff04574638"
+      "size_bytes": 1349,
+      "sha256": "36aecce9bb4af7a7612ac3b5a0d6f479e01244841f4b8242b23b08b24bde9ff7"
     },
     {
       "path": "GUIDE_TRANSLATION_CHECKPOINT.md",
@@ -1963,8 +1963,8 @@
     },
     {
       "path": "scripts/wikidebia_test_changed.py",
-      "size_bytes": 8677,
-      "sha256": "47bc84a6d930bc3016bafe1329490a41f7e4d2a7d1863fbe84937cdd3c8d29f4"
+      "size_bytes": 9453,
+      "sha256": "a0c3d5ce17efd4bedd8bc7aa4f241f511885c2c63e1a62cc253b3ee772d082c1"
     },
     {
       "path": "scripts/wikidebia_title_structure.py",
@@ -2623,8 +2623,8 @@
     },
     {
       "path": "tests/test_wikidebia_test_changed.py",
-      "size_bytes": 2599,
-      "sha256": "2b50346791ad2261e7ba2310f0b7d43df414ff891def819548e06a3b48540b36"
+      "size_bytes": 3548,
+      "sha256": "b5c2b98428ed4f3243acc496e790955f00c128365b7d929561a6eb1b046e3f8f"
     },
     {
       "path": "tests/test_wikidebia_token_budget.py",
