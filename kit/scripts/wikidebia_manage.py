@@ -2212,14 +2212,18 @@ def storage_dedup(
     return run(command, cwd=root, check=False).returncode
 
 
-def corpus_workspace_status(root: Path, debate_id: str, *, work_id: str) -> int:
+def corpus_workspace_status(
+    root: Path, debate_id: str, *, work_id: str, machine_readable: bool = False,
+) -> int:
     script = root / "kit" / "scripts" / "wikidebia_workspace_status.py"
     if not script.is_file():
         raise ManagementError("Outil de résumé compact du workspace absent du kit")
     command = [
         python_command(root), str(script), debate_id,
-        "--work-id", work_id, "--project-root", str(root), "--machine-readable",
+        "--work-id", work_id, "--project-root", str(root),
     ]
+    if machine_readable:
+        command.append("--machine-readable")
     return run(command, cwd=root, check=False).returncode
 
 
@@ -2254,6 +2258,7 @@ def corpus_workspace_translation_packet(
 def corpus_workspace_translation_next(
     root: Path, debate_id: str, *, work_id: str,
     memory_root: Path, no_memory: bool, context_mode: str,
+    machine_readable: bool = False,
 ) -> int:
     script = root / "kit" / "scripts" / "wikidebia_translation_next.py"
     if not script.is_file():
@@ -2262,8 +2267,10 @@ def corpus_workspace_translation_next(
         python_command(root), str(script), debate_id,
         "--work-id", work_id, "--memory-root", str(memory_root),
         "--context-mode", context_mode,
-        "--project-root", str(root), "--machine-readable",
+        "--project-root", str(root),
     ]
+    if machine_readable:
+        command.append("--machine-readable")
     if no_memory:
         command.append("--no-memory")
     return run(command, cwd=root, check=False).returncode
@@ -3134,6 +3141,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     corpus_status_parser.add_argument("debate_id", help="Identifiant du corpus sous corpus/")
     corpus_status_parser.add_argument("--work-id", required=True, help="Identifiant du workspace éditorial")
+    corpus_status_parser.add_argument("--machine-readable", action="store_true")
 
     corpus_worklist_parser = sub.add_parser(
         "corpus-workspace-translation-worklist",
@@ -3168,6 +3176,7 @@ def build_parser() -> argparse.ArgumentParser:
     translation_next_parser.add_argument(
         "--context-mode", choices=("compact", "full"), default="compact",
     )
+    translation_next_parser.add_argument("--machine-readable", action="store_true")
 
     translation_context_parser = sub.add_parser(
         "corpus-workspace-translation-context",
@@ -3662,7 +3671,10 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     if args.command == "corpus-workspace-status":
-        return corpus_workspace_status(root, args.debate_id, work_id=args.work_id)
+        return corpus_workspace_status(
+            root, args.debate_id, work_id=args.work_id,
+            machine_readable=args.machine_readable,
+        )
 
     if args.command == "corpus-workspace-translation-worklist":
         return corpus_workspace_translation_worklist(
@@ -3680,6 +3692,7 @@ def main(argv: list[str] | None = None) -> int:
             root, args.debate_id, work_id=args.work_id,
             memory_root=args.memory_root, no_memory=args.no_memory,
             context_mode=args.context_mode,
+            machine_readable=args.machine_readable,
         )
 
     if args.command == "corpus-workspace-translation-context":
