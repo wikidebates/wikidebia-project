@@ -142,6 +142,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         print("Unité : " + str(result.get("unit_id") or "aucune"))
         print("Paquet : " + str(result.get("packet_path") or "aucun"))
         print("Correctif : " + str(result.get("patch_path") or "aucun"))
+        if result.get("context_path"):
+            print("Contexte de traduction : " + str(result["context_path"]))
+        if result.get("seal_command_template"):
+            print("Scellement après revue : " + str(result["seal_command_template"]))
         print("Action suivante : " + str(result.get("next_action") or result.get("next_command") or "aucune"))
     return 0
 

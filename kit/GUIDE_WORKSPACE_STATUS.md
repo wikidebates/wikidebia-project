@@ -44,3 +44,16 @@ local n'est pas encore réconcilié, la commande proposée est
 sans accès ni écriture sur les wikis. Une révision française divergente ou un
 titre anglais occupé doivent bloquer la publication, pas être corrigés
 silencieusement.
+
+## Sortie concise pour Codex Cloud
+
+`corpus-workspace-status` affiche par défaut uniquement le statut et la
+prochaine commande, avec un avertissement lorsque la commande proposée
+peut lire ou écrire à distance. Le contrôle de statut reste strictement
+local. Utiliser `--machine-readable` pour retrouver le JSON intégral :
+
+```sh
+./wikidebia corpus-workspace-status <debate_id> --work-id <work_id> --machine-readable
+```
+
+Le choix du format ne modifie aucune preuve, revue ou autorisation.

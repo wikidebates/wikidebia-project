@@ -1245,6 +1245,16 @@ def test_workspace_status_command_is_exposed_by_manager():
     assert args.command == "corpus-workspace-status"
     assert args.debate_id == "debat_test"
     assert args.work_id == "EDIT-TEST-001"
+    assert args.machine_readable is False
+    detailed = module.build_parser().parse_args([
+        "corpus-workspace-status", "debat_test", "--work-id", "EDIT-TEST-001",
+        "--machine-readable",
+    ])
+    assert detailed.machine_readable is True
+    import inspect
+    wrapper = inspect.getsource(module.corpus_workspace_status)
+    assert "if machine_readable:" in wrapper
+    assert 'command.append("--machine-readable")' in wrapper
 
 
 def test_translation_worklist_command_is_exposed_by_manager():
@@ -1276,6 +1286,16 @@ def test_translation_next_command_is_exposed_by_manager():
     assert args.debate_id == "debat_test"
     assert args.no_memory is True
     assert args.context_mode == "compact"
+    assert args.machine_readable is False
+    detailed = module.build_parser().parse_args([
+        "corpus-workspace-translation-next", "debat_test",
+        "--work-id", "EDIT-TEST-001", "--machine-readable",
+    ])
+    assert detailed.machine_readable is True
+    import inspect
+    wrapper = inspect.getsource(module.corpus_workspace_translation_next)
+    assert "if machine_readable:" in wrapper
+    assert 'command.append("--machine-readable")' in wrapper
 
 
 def test_translation_context_command_defaults_to_compact():
