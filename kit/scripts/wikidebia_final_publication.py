@@ -31,7 +31,6 @@ from typing import Any, Iterable, Mapping
 from wikidebia_corpus_build import full_tree_sha256, load_json, now_iso, sha256_file, write_json
 from wikidebia_publish import (
     GenericPublisher,
-    PublicationError,
     extract_parameter,
     sha_object as publish_sha_object,
     sha_text,
@@ -50,7 +49,6 @@ from wikidebia_workflow_baseline import (
 FINAL_RECEIPT_SCHEMA = "wikidebia-final-publication-receipt-1.0"
 PREFLIGHT_SCHEMA = "wikidebia-final-publication-preflight-1.0"
 AUTHORIZATION_SCHEMA = "wikidebia-final-publication-authorization-1.0"
-ROLLOVER_SCHEMA = "wikidebia-final-publication-date-rollover-1.0"
 LATE_REUSE_SCHEMA = "wikidebia-late-existing-english-reuse-1.0"
 REMOTE_CONTENT_REPLACEMENTS_SCHEMA = "wikidebia-remote-content-replacements-1.0"
 PREPARED_PUBLICATION_SCHEMA = "wikidebia-final-publication-prepared-1.0"
@@ -210,7 +208,6 @@ def _english_config(project_root: Path, debate_id: str, corpus_root: Path, run_d
     value.update({
         "change_tags": ["chatgpt"],
         "translation_change_tag": "translated-fr",
-        "publication_timezone": str(settings.get("publication_timezone") or "Europe/Paris"),
         "publication_profile": "norm_1_2_direct_interlanguage",
         "publication_url_replacements": _publication_url_replacements(corpus_root),
         "manifest_requirements": {},
@@ -821,131 +818,10 @@ def _verify_preserved_preflight(
             raise FinalPublicationError(f"Titre anglais déjà occupé : {row['title']}")
 
 
-def _publication_date_from_config(config: Mapping[str, Any]) -> str:
-    from zoneinfo import ZoneInfo
-
-    timezone = str(config.get("publication_timezone") or "Europe/Paris")
-    return dt.datetime.now(ZoneInfo(timezone)).date().isoformat()
-
-
-def _rollover_history_dir(state_dir: Path) -> Path:
-    path = state_dir / "publication-date-rollovers"
-    path.mkdir(parents=True, exist_ok=True)
-    return path
-
-
-def _next_rollover_dir(state_dir: Path, old_date: str, new_date: str) -> Path:
-    root = _rollover_history_dir(state_dir)
-    index = 1
-    while True:
-        candidate = root / f"{index:03d}-{old_date}-to-{new_date}"
-        if not candidate.exists():
-            candidate.mkdir(parents=True)
-            return candidate
-        index += 1
-
-
 def _copy_if_present(source: Path, target: Path) -> None:
     if source.is_file():
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
-
-
-def _english_plan_rollover_transition(
-    publisher: GenericPublisher,
-    old_plan: Mapping[str, Any],
-    new_plan: Mapping[str, Any],
-    current_date: str,
-) -> dict[str, Any]:
-    from wikidebia_publication_dates import (
-        PublicationDateTransitionError,
-        english_plan_rollover_transition,
-    )
-
-    try:
-        return english_plan_rollover_transition(publisher, old_plan, new_plan, current_date)
-    except PublicationDateTransitionError as exc:
-        raise FinalPublicationError(str(exc), remote_execution_started=True) from exc
-
-
-def _rollover_english_publication_date(
-    project_root: Path,
-    debate_id: str,
-    release_copy: Path,
-    state_dir: Path,
-    baseline: Mapping[str, Any],
-    plans: Mapping[str, Any],
-    preflight: Mapping[str, Any],
-    authorization: Mapping[str, Any],
-) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
-    old_plan = dict(plans["en_plan"])
-    current_date = _publication_date_from_config(plans["en_config"])
-    old_date = str(old_plan.get("publication_date") or "")
-    if current_date == old_date:
-        return dict(plans), dict(preflight), dict(authorization)
-    if not any(str(row.get("operation") or "") == "create" for row in old_plan.get("actions") or []):
-        return dict(plans), dict(preflight), dict(authorization)
-
-    history = _next_rollover_dir(state_dir, old_date or "unknown", current_date)
-    tracked = (
-        "english-publication-config.json", "english-publication-plan.json",
-        "preflight.json", "authorization.json",
-    )
-    for name in tracked:
-        _copy_if_present(state_dir / name, history / name)
-
-    old_preflight_sha = preflight.get("preflight_sha256")
-    old_authorization_sha = authorization.get("authorization_sha256")
-    try:
-        en_config_path, en_config = _english_config(project_root, debate_id, release_copy, state_dir)
-        en_config = _apply_late_reuse_to_english_config(state_dir, en_config)
-        write_json(en_config_path, en_config)
-        en_adapter = build_adapter(en_config, project_root)
-        publisher = GenericPublisher(en_config, en_adapter, en_config_path)
-        new_plan = _reorder_english_plan(publisher.build_plan())
-        _assert_safe_english_plan(new_plan, (en_config.get("operation") or {}).get("approved_existing_updates") or {})
-        transition = _english_plan_rollover_transition(publisher, old_plan, new_plan, current_date)
-        write_json(state_dir / "english-publication-plan.json", new_plan)
-
-        new_plans = dict(plans)
-        new_plans.update({
-            "en_config_path": en_config_path,
-            "en_config": en_config,
-            "en_plan": new_plan,
-        })
-        new_preflight = _preflight(project_root, state_dir, new_plans)
-        new_authorization = _authorization(state_dir, baseline, new_preflight)
-
-        audit = {
-            "schema": ROLLOVER_SCHEMA,
-            "schema_version": "1.0",
-            "debate_id": debate_id,
-            "rolled_over_at": now_iso(),
-            "reason": "publication_day_changed_during_partial_english_creation",
-            "publication_timezone": en_config.get("publication_timezone"),
-            "remote_execution_already_started": True,
-            "previous_english_plan_sha256": old_plan.get("plan_sha256"),
-            "successor_english_plan_sha256": new_plan.get("plan_sha256"),
-            "previous_preflight_sha256": old_preflight_sha,
-            "successor_preflight_sha256": new_preflight.get("preflight_sha256"),
-            "previous_authorization_sha256": old_authorization_sha,
-            "successor_authorization_sha256": new_authorization.get("authorization_sha256"),
-            **transition,
-        }
-        audit["rollover_sha256"] = _canonical(audit, "rollover_sha256")
-        write_json(history / "rollover.json", audit)
-        return new_plans, new_preflight, new_authorization
-    except Exception:
-        # No remote write is performed by the rollover itself.  Restore the
-        # previous signed local state atomically if plan rebuilding/preflight fails.
-        for name in tracked:
-            saved = history / name
-            target = state_dir / name
-            if saved.is_file():
-                shutil.copy2(saved, target)
-            elif target.exists():
-                target.unlink()
-        raise
 
 
 def _english_plan_needs_debate_first_migration(plan: Mapping[str, Any]) -> bool:
@@ -1056,12 +932,6 @@ def _verified_pending_remote_content_replacements(
         if not source_path.is_file() or sha256_file(source_path) != new.get("local_file_sha256"):
             continue
         raw_text = source_path.read_text(encoding="utf-8")
-        publication_date = str(new.get("publication_creation_date") or "")
-        if publication_date:
-            row = publisher._manifest_page(key[0], key[1])
-            if row is None:
-                continue
-            raw_text = publisher._english_translation_creation_text(row, raw_text, publication_date)
         previous_text = (
             previous_publisher._remote_content_text(key[0], raw_text)
             if previous_publisher is not None
@@ -1258,11 +1128,6 @@ def _migrate_english_plan_after_kit_change(
         raise
 
 
-def _publication_day_change_error(exc: Exception) -> bool:
-    text = str(exc)
-    return "jour de publication a changé" in text or "day of publication" in text.lower()
-
-
 def _authorization(state_dir: Path, baseline: Mapping[str, Any], preflight: Mapping[str, Any]) -> dict[str, Any]:
     value = {
         "schema": AUTHORIZATION_SCHEMA,
@@ -1449,10 +1314,9 @@ def publish_final_release(
 
         en_receipt_path = state_dir / "english-publication-receipt.json"
         if not en_receipt_path.is_file():
+            if any(row.get("publication_creation_date") for row in plans["en_plan"].get("actions", [])):
+                raise FinalPublicationError("Plan anglais historique daté : reconstruire un plan sans ce paramètre et obtenir une nouvelle autorisation", remote_execution_started=True)
             plans, preflight, authorization = _migrate_english_publication_order(
-                project_root, debate_id, release_copy, state_dir, baseline, plans, preflight, authorization
-            )
-            plans, preflight, authorization = _rollover_english_publication_date(
                 project_root, debate_id, release_copy, state_dir, baseline, plans, preflight, authorization
             )
             plans, preflight, authorization = _migrate_english_plan_after_kit_change(
@@ -1463,21 +1327,9 @@ def publish_final_release(
         else:
             en_adapter = build_adapter(dict(plans["en_config"]), project_root)
             publisher = GenericPublisher(dict(plans["en_config"]), en_adapter, Path(plans["en_config_path"]))
-            try:
-                en_counts = publisher.publish(
-                    plan=dict(plans["en_plan"]), confirmation=str(plans["en_plan"].get("plan_sha256"))
-                )
-            except PublicationError as exc:
-                if not _publication_day_change_error(exc):
-                    raise
-                plans, preflight, authorization = _rollover_english_publication_date(
-                    project_root, debate_id, release_copy, state_dir, baseline, plans, preflight, authorization
-                )
-                en_adapter = build_adapter(dict(plans["en_config"]), project_root)
-                publisher = GenericPublisher(dict(plans["en_config"]), en_adapter, Path(plans["en_config_path"]))
-                en_counts = publisher.publish(
-                    plan=dict(plans["en_plan"]), confirmation=str(plans["en_plan"].get("plan_sha256"))
-                )
+            en_counts = publisher.publish(
+                plan=dict(plans["en_plan"]), confirmation=str(plans["en_plan"].get("plan_sha256"))
+            )
             en_receipt = {
                 "status": "published", "completed_at": now_iso(), "counts": en_counts,
                 "plan_sha256": plans["en_plan"].get("plan_sha256"),
@@ -1574,10 +1426,6 @@ def publish_final_release(
             "remote_content_replacements_receipt_sha256": (
                 remote_replacements.get("receipt_sha256") if remote_replacements else None
             ),
-            "publication_date_rollovers": [
-                load_json(path, "audit de changement de jour").get("rollover_sha256")
-                for path in sorted((state_dir / "publication-date-rollovers").glob("*/rollover.json"))
-            ] if (state_dir / "publication-date-rollovers").is_dir() else [],
             "remote_write_performed": True,
         }
         receipt["receipt_sha256"] = _canonical(receipt, "receipt_sha256")

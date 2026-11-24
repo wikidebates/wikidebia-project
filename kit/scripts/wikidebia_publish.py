@@ -10,7 +10,6 @@ import os
 import re
 import subprocess
 import sys
-import tempfile
 import threading
 import time
 import unicodedata
@@ -18,7 +17,6 @@ from wikidebia_title_structure import canonical_title_structure_issues
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Protocol
-from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 PUBLICATION_PLAN_VERSION = PUBLICATION_PLAN_SCHEMA
 DIRECT_INTERLANGUAGE_PROFILE = "norm_1_2_direct_interlanguage"
@@ -50,10 +48,6 @@ DEFAULT_FAMILY_DIR = Path(__file__).resolve().parent.parent / "families"
 
 class PublicationError(RuntimeError):
     pass
-
-
-class PublicationDateChanged(PublicationError):
-    """The verified plan has become stale solely because the civil day changed."""
 
 
 class IdentityError(PublicationError):
@@ -384,7 +378,6 @@ class PageAction:
     desired_sha256: str | None
     classification: str
     operation: str
-    publication_creation_date: str | None = None
     edit_summary: str = ""
     change_tags: list[str] | None = None
     note: str | None = None
@@ -817,12 +810,6 @@ class GenericPublisher:
         self.languages = tuple(self.operation.get("languages") or config.get("languages") or ())
         self.tags = list(config.get("change_tags") or ["chatgpt"])
         self.translation_tag = str(config.get("translation_change_tag") or "translated-fr")
-        self.publication_timezone = str(config.get("publication_timezone") or "Europe/Paris")
-        try:
-            ZoneInfo(self.publication_timezone)
-        except ZoneInfoNotFoundError as exc:
-            raise PublicationError(f"Fuseau horaire de publication inconnu : {self.publication_timezone}") from exc
-        self.publication_date = self._current_publication_date()
         self.publication_url_replacements = list(config.get("publication_url_replacements") or [])
         logs_dir = self._resolve(config["logs_dir"])
         operation_id = str(self.operation.get("id") or self.operation.get("kind") or "publication")
@@ -842,9 +829,6 @@ class GenericPublisher:
     def _english_translation_deferred(self) -> bool:
         return self._english_translation_status() == "deferred"
 
-    def _current_publication_date(self) -> str:
-        return dt.datetime.now(ZoneInfo(self.publication_timezone)).date().isoformat()
-
     def _is_new_english_translation_page(self, row: dict[str, Any]) -> bool:
         return (
             str(row.get("language") or "") == "en"
@@ -852,30 +836,6 @@ class GenericPublisher:
             and self.operation.get("kind") == "full_page"
             and self._english_translation_status() in {"ready", "published"}
         )
-
-    def _english_translation_creation_text(
-        self,
-        row: dict[str, Any],
-        text: str,
-        publication_date: str,
-    ) -> str:
-        """Apply publication-time metadata to a newly translated English page."""
-        if not self._is_new_english_translation_page(row):
-            return text
-        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", publication_date):
-            raise PublicationError(f"Date de publication invalide : {publication_date!r}")
-        names = [span.name for span in _main_template_parameter_spans(text)]
-        if str(row.get("page_type") or "") == "argument" and "initialization" in names:
-            raise PublicationError(
-                "Une nouvelle traduction anglaise d’Argument ne doit pas contenir |initialization= : "
-                + str(row.get("page_id") or "")
-            )
-        if names.count("creation-date") != 1:
-            raise PublicationError(
-                "Une nouvelle traduction anglaise doit contenir exactement un |creation-date= avant publication : "
-                + str(row.get("page_id") or "")
-            )
-        return replace_parameter(text, "creation-date", publication_date)
 
     def _remote_content_text(self, language: str, text: str) -> str:
         """Apply explicit, signed compatibility rewrites to remote content.
@@ -1414,6 +1374,8 @@ class GenericPublisher:
                 f"Balise <references /> interdite par les règles éditoriales actives : {language}/{page_id}"
             )
         names = [span.name for span in _main_template_parameter_spans(text)]
+        if self.operation["kind"] == "full_page" and set(names) & {"date-création", "creation-date"}:
+            raise PublicationError(f"Paramètre de date de création obsolète : {language}/{page_id}; reconstruire le corpus")
         json_author = re.search(r"(?m)^\s*\|\s*(?:auteurs|authors)\s*=\s*\[", text)
         if json_author:
             raise PublicationError(
@@ -1446,10 +1408,6 @@ class GenericPublisher:
                 if page_type == "argument" and "initialization" in names:
                     raise PublicationError(
                         f"Une nouvelle traduction anglaise d’Argument ne doit pas contenir |initialization= : {page_id}"
-                    )
-                if names.count("creation-date") != 1:
-                    raise PublicationError(
-                        f"Une nouvelle traduction anglaise doit contenir exactement un |creation-date= : {page_id}"
                     )
             if page_type == "debate":
                 if "type" in names:
@@ -1633,7 +1591,6 @@ class GenericPublisher:
             "selected_sources_fingerprint": sha_object(selected),
             "validator_fingerprint": sha_tree(validator_path),
             "kit_script_sha256": sha_file(Path(__file__).resolve()),
-            "publication_date_rules_sha256": sha_file(Path(__file__).with_name("wikidebia_publication_dates.py")),
             "title_structure_rules_sha256": sha_file(Path(__file__).with_name("wikidebia_title_structure.py")),
             "config_sha256": sha_file(self.config_path),
         }
@@ -1680,6 +1637,10 @@ class GenericPublisher:
             )
 
     def _publication_text(self, row: Mapping[str, Any], text: str) -> str:
+        if self.operation["kind"] == "full_page" and any(
+            span.name in {"date-création", "creation-date"} for span in _main_template_parameter_spans(text)
+        ):
+            raise PublicationError("Paramètre de date de création obsolète : reconstruire le corpus avant publication")
         value = text
         for entry in self.publication_url_replacements:
             if (entry.get("language") != row.get("language")
@@ -1761,8 +1722,6 @@ class GenericPublisher:
             "package_fingerprints": self._package_fingerprints(),
             "change_tags": self.tags,
             "translation_change_tag": self.translation_tag,
-            "publication_timezone": self.publication_timezone,
-            "publication_date": self.publication_date,
             "edit_summaries": self.operation["edit_summaries"],
             "actions": actions,
             "blockers": blockers,
@@ -1791,7 +1750,6 @@ class GenericPublisher:
             exists, revision_id, remote_text = remote_snapshot
         page_summary = self._summary_for_page(language, page_id, page_type)
         page_tags = self._tags_for_page(language, page_id, page_type)
-        publication_creation_date: str | None = None
         common = dict(
             operation_id=str(self.operation["id"]),
             kind=str(self.operation["kind"]),
@@ -1809,15 +1767,9 @@ class GenericPublisher:
         if not exists:
             if self.operation["kind"] == "full_page" and self.operation.get("create_missing", True):
                 desired_create_text = local_text
-                if self._is_new_english_translation_page(row):
-                    publication_creation_date = self.publication_date
-                    desired_create_text = self._english_translation_creation_text(
-                        row, local_text, publication_creation_date
-                    )
                 desired_create_text = self._remote_content_text(language, desired_create_text)
                 return PageAction(
                     **common,
-                    publication_creation_date=publication_creation_date,
                     remote_revision_id=None,
                     remote_sha256=None,
                     remote_target_sha256=None,
@@ -1860,20 +1812,6 @@ class GenericPublisher:
                             operation="block",
                             note="La page anglaise existe mais sa révision courante ne peut pas être prouvée comme création de traduction Wikidéb’IA.",
                         )
-                    remote_date = extract_parameter(remote_text, "creation-date").strip()
-                    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", remote_date):
-                        return PageAction(
-                            **common,
-                            remote_revision_id=revision_id,
-                            remote_sha256=sha_text(remote_text),
-                            remote_target_sha256=sha_text(remote_text),
-                            desired_sha256=None,
-                            classification="invalid_existing_creation_date",
-                            operation="block",
-                            note="La page anglaise existante a une |creation-date= invalide.",
-                        )
-                    publication_creation_date = remote_date
-                    desired_text = self._english_translation_creation_text(row, local_text, remote_date)
             else:
                 assert parameter is not None
                 insert_missing = bool(
@@ -1926,7 +1864,6 @@ class GenericPublisher:
             note = "La page existe avec un contenu différent et update_existing=false."
         return PageAction(
             **common,
-            publication_creation_date=publication_creation_date,
             remote_revision_id=revision_id,
             remote_sha256=sha_text(remote_text),
             remote_target_sha256=sha_text(remote_target),
@@ -1936,7 +1873,7 @@ class GenericPublisher:
             note=note,
         )
 
-    def _verify_plan(self, plan: dict[str, Any], confirmation: str, *, check_publication_date: bool = True) -> None:
+    def _verify_plan(self, plan: dict[str, Any], confirmation: str) -> None:
         copy = dict(plan)
         claimed = copy.pop("plan_sha256", None)
         if not claimed or claimed != sha_object(copy) or confirmation != claimed:
@@ -1955,20 +1892,8 @@ class GenericPublisher:
             raise PublicationError("Balises divergentes du plan")
         if plan.get("translation_change_tag") != self.translation_tag:
             raise PublicationError("Balise de traduction divergente du plan")
-        if plan.get("publication_timezone") != self.publication_timezone:
-            raise PublicationError("Fuseau horaire de publication divergent dans le plan")
-        english_creates = [
-            action for action in plan.get("actions", [])
-            if action.get("language") == "en"
-            and action.get("operation") == "create"
-            and action.get("publication_creation_date")
-        ]
-        if english_creates:
-            for action in english_creates:
-                if action.get("publication_creation_date") != plan.get("publication_date"):
-                    raise PublicationError(
-                        f"Date de création anglaise divergente dans le plan : {action.get('page_id')}"
-                    )
+        if any(action.get("publication_creation_date") for action in plan.get("actions", [])):
+            raise PublicationError("Plan historique daté non exécutable : reconstruire et autoriser un nouveau plan")
         self._assert_paired_translation_authorization(plan)
         if plan.get("edit_summaries") != self.operation.get("edit_summaries"):
             raise PublicationError("Résumés de modification divergents du plan")
@@ -1977,14 +1902,6 @@ class GenericPublisher:
             self._tags_for_action(action)
         if plan.get("blockers"):
             raise CollisionError("Le plan contient des bloqueurs")
-        if (
-            english_creates
-            and check_publication_date
-            and self._current_publication_date() != plan.get("publication_date")
-        ):
-            raise PublicationDateChanged(
-                "Le jour de publication a changé depuis le plan ; régénérez le plan avant de créer les pages anglaises"
-            )
 
     def _assert_paired_translation_authorization(self, plan: dict[str, Any]) -> None:
         """Fail closed for English translations outside a signed bilingual Work.
@@ -2172,10 +2089,6 @@ class GenericPublisher:
         local_target = local_text if not parameter else extract_parameter(local_text, str(parameter))
         if sha_text(local_target) != action["local_target_sha256"]:
             raise PublicationError(f"Cible locale modifiée depuis le plan : {action['page_id']}")
-        if not parameter and action.get("publication_creation_date"):
-            local_text = self._english_translation_creation_text(
-                row, local_text, str(action["publication_creation_date"])
-            )
         desired = (
             local_text
             if not parameter
@@ -2625,88 +2538,6 @@ class GenericPublisher:
                 heartbeat_handle[0].set()
                 heartbeat_handle[1].join(timeout=2)
 
-    def publish_with_date_refresh(
-        self,
-        *,
-        plan: dict[str, Any],
-        confirmation: str,
-        rollover_dir: Path | None = None,
-        language: str | None = None,
-        page_id: str | None = None,
-        page_type: str | None = None,
-        debate_test_receipt: dict[str, Any] | None = None,
-    ) -> dict[str, int]:
-        """Resume a date-only successor, retaining all other signed constraints.
-
-        Strict ``publish`` stays available to orchestrators that seal additional
-        preflight/authorization artifacts. The standalone CLI uses this wrapper.
-        """
-        from wikidebia_publication_dates import (
-            PublicationDateTransitionError,
-            publication_plan_rollover_transition,
-        )
-
-        self._verify_plan(plan, confirmation, check_publication_date=False)
-        progress: dict[tuple[str, str], str] = {}
-        while True:
-            try:
-                self.publish(
-                    plan=plan,
-                    confirmation=confirmation,
-                    language=language,
-                    page_id=page_id,
-                    page_type=page_type,
-                    debate_test_receipt=debate_test_receipt,
-                    _progress=progress,
-                )
-                return {
-                    name: sum(result == name for result in progress.values())
-                    for name in ("created", "updated", "skipped")
-                }
-            except PublicationDateChanged:
-                # Check the original authorization again before inspecting a successor.
-                self._verify_plan(plan, confirmation, check_publication_date=False)
-                old_date = str(plan.get("publication_date") or "")
-                new_date = self._current_publication_date()
-                if new_date <= old_date:
-                    raise PublicationError(f"Changement de jour non croissant : {old_date!r} -> {new_date!r}")
-                self.publication_date = new_date
-                self._tag_cache.clear()
-                successor = self.build_plan()
-                self._verify_plan(successor, successor["plan_sha256"], check_publication_date=False)
-                try:
-                    transition = publication_plan_rollover_transition(self, plan, successor, new_date)
-                except PublicationDateTransitionError as exc:
-                    raise PublicationError(str(exc)) from exc
-                parent = (
-                    rollover_dir
-                    if rollover_dir is not None
-                    else self.log_path.parent / "publication-date-rollovers"
-                )
-                parent.mkdir(parents=True, exist_ok=True)
-                history = Path(tempfile.mkdtemp(prefix=f"{old_date}-to-{new_date}-", dir=parent))
-                audit = {
-                    "schema": "wikidebia-publication-date-rollover-1.0",
-                    "debate_id": self.config["debate_id"],
-                    "publication_timezone": self.publication_timezone,
-                    "previous_plan_sha256": confirmation,
-                    "successor_plan_sha256": successor["plan_sha256"],
-                    **transition,
-                }
-                audit["rollover_sha256"] = sha_object(audit)
-                for name, value in (
-                    ("previous-plan.json", plan),
-                    ("successor-plan.json", successor),
-                    ("rollover.json", audit),
-                ):
-                    (history / name).write_text(
-                        json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-                    )
-                self._log({"event": "publication_date_refreshed", **audit, "history_path": str(history)})
-                print(f"Date de publication actualisée automatiquement : {old_date} → {new_date}", file=sys.stderr)
-                plan = successor
-                confirmation = successor["plan_sha256"]
-
     def _execute_action(self, action: dict[str, Any], user: str, summary: str) -> str:
         action_tags = self._tags_for_action(action)
         exists, revision_id, remote_text = self.adapter.read_page(action["title"])
@@ -2718,17 +2549,6 @@ class GenericPublisher:
             if row is None:
                 raise PublicationError(f"Page absente du manifeste : {action.get('language')}/{action.get('page_id')}")
             desired_text = self._publication_text(row, source_path.read_text(encoding="utf-8"))
-            publication_creation_date = action.get("publication_creation_date")
-            if publication_creation_date:
-                current_publication_date = self._current_publication_date()
-                if current_publication_date != str(publication_creation_date):
-                    raise PublicationDateChanged(
-                        "Le jour de publication a changé avant la création de "
-                        f"{action['title']} ; régénérez le plan pour dater correctement les pages restantes"
-                    )
-                desired_text = self._english_translation_creation_text(
-                    row, desired_text, str(publication_creation_date)
-                )
             desired_text = self._remote_content_text(
                 str(action.get("language") or ""), desired_text
             )
@@ -2737,7 +2557,7 @@ class GenericPublisher:
             if exists:
                 if revision_id is None:
                     raise RevisionConflict(f"Révision distante absente : {action['title']}")
-                if publication_creation_date and not self._verified_existing_translation_creation(
+                if self._is_new_english_translation_page(row) and not self._verified_existing_translation_creation(
                     row=row,
                     title=action["title"],
                     revision_id=revision_id,
@@ -2776,8 +2596,6 @@ class GenericPublisher:
         desired_text, _ = self._desired_text(action, remote_text)
         current_sha = sha_text(remote_text)
         desired_sha = sha_text(desired_text)
-        if action.get("publication_creation_date") and desired_sha != action["desired_sha256"]:
-            raise PublicationError(f"Contenu daté divergent du plan : {action['title']}")
         if desired_sha == current_sha:
             self._log({"event": "skip_equivalent", **self._identity(action), "revision_id": revision_id})
             return "skipped"
@@ -2904,10 +2722,9 @@ def main(argv: list[str] | None = None) -> int:
     receipt = None
     if args.debate_test_receipt:
         receipt = json.loads(Path(args.debate_test_receipt).read_text(encoding="utf-8"))
-    counts = publisher.publish_with_date_refresh(
+    counts = publisher.publish(
         plan=plan,
         confirmation=args.confirm_plan_sha256,
-        rollover_dir=Path(args.plan_input).resolve().parent / "publication-date-rollovers",
         language=args.language,
         page_id=args.page_id,
         page_type=args.page_type,

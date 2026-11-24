@@ -79,12 +79,16 @@ def _add_french_interlanguage(text: str, target_title: str) -> str:
         raise RenderError("Modèle historique ou titre interlangue ambigu")
     start, end, call = candidates[0]
     link = _template("Lien interlangue", (("langue", "en"), ("page", target_title)))
+    if call.get("date-création", "date creation", "creation-date", "creation date").strip():
+        raise RenderError("Import français contenant une date de création obsolète : réextraire la page après nettoyage du wiki")
     if call.get("interlangue"):
         if call.get("interlangue") != link:
             raise RenderError("Un lien interlangue historique existe déjà ; revue explicite requise")
         return text.rstrip("\n") + "\n"
     segments = _split_top_level(text[start + 2:end - 2], "|")
     keys = [(i, normalize_key(_split_top_level(segment, "=", maxsplit=1)[0])) for i, segment in enumerate(segments[1:], 1)]
+    if any(key in {"date creation", "creation date"} for _, key in keys):
+        raise RenderError("Import français contenant une date de création obsolète : réextraire la page après nettoyage du wiki")
     existing = [i for i, key in keys if key == "interlangue"]
     if len(existing) > 1:
         raise RenderError("Paramètre interlangue historique dupliqué")
@@ -92,8 +96,7 @@ def _add_french_interlanguage(text: str, target_title: str) -> str:
         i = existing[0]
         segments[i] = segments[i] + link
     else:
-        insertion = next((i for i, key in keys if key == "date creation"), len(segments))
-        segments.insert(insertion, "interlangue=" + link + "\n")
+        segments.append("interlangue=" + link + "\n")
     rendered = text[:start] + "{{" + "|".join(segments) + "}}" + text[end:]
     return rendered.rstrip("\n") + "\n"
 
