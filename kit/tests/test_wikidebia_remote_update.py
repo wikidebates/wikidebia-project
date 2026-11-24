@@ -1046,8 +1046,10 @@ def test_dieu_manual_sync_plan_has_no_blocked_or_manual_review(tmp_path):
     result, *_ = plan(tmp_path, remote_pages=remote, old_pages=old_pages, new_pages=new_pages, remote_adoptions=adoptions)
     assert result["counts"]["blocked"] == 0
     assert result["counts"]["manual_review"] == 0
-    assert result["counts"]["update"] == 5
-    assert result["counts"]["skip"] == 1
+    # The former date-only addition is now correctly a no-op.
+    assert result["counts"]["update"] == 4
+    assert result["counts"]["skip"] == 2
+    assert any(row["page_id"] == "A0755" for row in result["operations"]["skip"])
     assert result["counts"]["move"] == 0
 
 

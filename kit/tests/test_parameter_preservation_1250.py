@@ -245,7 +245,9 @@ def test_pre_1258_restoration_manifest_with_only_legacy_nom_remains_compatible()
     )
     assert "|nom=Argument historique" in effective
     assert "|nom-consacré=" not in effective
-    assert set(audit["effective"]) == set(states)
+    assert set(audit["effective"]) == set(states) - {"date-création", "creation-date"}
+    assert "|date-création=" not in effective
+    assert "|creation-date=" not in effective
 
 
 def test_pre_1258_restoration_manifest_with_only_legacy_english_name_remains_compatible():
@@ -276,4 +278,6 @@ def test_pre_1258_restoration_manifest_with_only_legacy_english_name_remains_com
     )
     assert "|name=Cosmological argument" in effective
     assert "|established-name=" not in effective
-    assert set(audit["effective"]) == set(states)
+    assert set(audit["effective"]) == set(states) - {"date-création", "creation-date"}
+    assert "|date-création=" not in effective
+    assert "|creation-date=" not in effective

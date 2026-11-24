@@ -378,3 +378,14 @@ def test_historical_grouping_and_million_notation(fr, en, expected):
 ])
 def test_historical_number_parser_is_signed_and_fails_closed(fr, en, expected):
     assert preservation.historical_numbers_preserved(fr, en) is expected
+
+
+def test_pure_interlanguage_render_rejects_stale_dated_import(tmp_path):
+    from wikidebia_render import _render_preserved_french, RenderError
+    raw = "{{Argument\\n|résumé=Texte historique.\\n|date-création=2001-01-01\\n}}".replace("\\n", "\n")
+    p = tmp_path / "dated.wiki"
+    p.write_text(raw, encoding="utf-8")
+    locked = {"import_path": p.name, "import_sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
+    with pytest.raises(RenderError, match="date de création obsolète"):
+        _render_preserved_french(tmp_path, locked, "English title")
+    assert p.read_text(encoding="utf-8") == raw

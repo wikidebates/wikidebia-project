@@ -66,13 +66,13 @@ def make_extraction(root: Path) -> Path:
     (snapshot / "pages" / "debate.wiki").write_text(
         "{{Débat|arguments-pour={{Argument pour|page=Argument A|titre-affiché=A soutient le débat}}"
         "|arguments-contre={{Argument contre|page=Argument B|titre-affiché=B contredit le débat}}"
-        "|rubriques=Philosophie|mots-clés=test|date-création=2026-08-03}}",
+        "|rubriques=Philosophie|mots-clés=test}}",
         encoding="utf-8",
     )
     pages = {
-        "a.wiki": "{{Argument|résumé=A|citations={{Citation|citation=La liberté consiste à vouloir ce que l'on veut.|auteurs=Harry G. Frankfurt|article=Freedom of the Will and the Concept of a Person|ouvrage=The Importance of What We Care About|page=11-25|date=25 juin 2012|avertissements-citation=Texte abrégé}}|justifications={{Justification|page=Argument C|titre-affiché=C soutient A}}|objections=|rubriques=Philosophie|mots-clés=test|date-création=2026-08-03}}",
-        "b.wiki": "{{Argument|résumé=B|citations={{Citation|citation=Une cause suffisante n'est pas nécessairement une contrainte.|auteurs=Jane Doe|ouvrage=Original Work|date=juin 2012}}|justifications={{Justification|page=Argument C|titre-affiché=C soutient B}}|objections=|rubriques=Philosophie|mots-clés=test|date-création=2026-08-03}}",
-        "c.wiki": "{{Argument|résumé=C|citations={{Citation|citation=Le raisonnement conserve sa portée dans ce cas.|auteurs=John Smith|article=An Original Article|date=1971}}|justifications=|objections=|rubriques=Philosophie|mots-clés=test|date-création=2026-08-03}}",
+        "a.wiki": "{{Argument|résumé=A|citations={{Citation|citation=La liberté consiste à vouloir ce que l'on veut.|auteurs=Harry G. Frankfurt|article=Freedom of the Will and the Concept of a Person|ouvrage=The Importance of What We Care About|page=11-25|date=25 juin 2012|avertissements-citation=Texte abrégé}}|justifications={{Justification|page=Argument C|titre-affiché=C soutient A}}|objections=|rubriques=Philosophie|mots-clés=test}}",
+        "b.wiki": "{{Argument|résumé=B|citations={{Citation|citation=Une cause suffisante n'est pas nécessairement une contrainte.|auteurs=Jane Doe|ouvrage=Original Work|date=juin 2012}}|justifications={{Justification|page=Argument C|titre-affiché=C soutient B}}|objections=|rubriques=Philosophie|mots-clés=test}}",
+        "c.wiki": "{{Argument|résumé=C|citations={{Citation|citation=Le raisonnement conserve sa portée dans ce cas.|auteurs=John Smith|article=An Original Article|date=1971}}|justifications=|objections=|rubriques=Philosophie|mots-clés=test}}",
     }
     for name, text in pages.items():
         (args / name).write_text(text, encoding="utf-8")
