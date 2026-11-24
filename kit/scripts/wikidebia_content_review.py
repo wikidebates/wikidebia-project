@@ -93,14 +93,12 @@ PAGE_LIFECYCLE_PARAMETERS = {
         "avancement", "avertissements-titre", "avertissements-débat",
         "avertissements-bibliographie", "avertissements-sitographie",
         "avertissements-vidéographie", "débats-connexes", "interlangue",
-        "date-création",
     ),
     "argument": (
         "initialisation", "nom-consacré", "nom", "titre-affiché", "avertissements-titre",
         "avertissements-argument", "avertissements-résumé",
         "avertissements-références", "avertissements-justifications",
         "avertissements-objections", "débat-dédié", "interlangue",
-        "date-création",
     ),
 }
 

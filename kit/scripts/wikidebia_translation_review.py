@@ -286,11 +286,11 @@ def verify_semantic_convergence_receipt(receipt: Mapping[str, Any], review: Mapp
 EN_PAGE_LIFECYCLE_PARAMETERS = {
     # Existing-page metadata is opaque.  These fields describe the imported
     # page state and must not be cleaned up by a translation/generation profile.
-    "debate": ("progress", "title-warnings", "debate-warnings", "related-debates", "creation-date"),
+    "debate": ("progress", "title-warnings", "debate-warnings", "related-debates"),
     "argument": (
         "initialization", "established-name", "name", "title-warnings", "argument-warnings", "summary-warnings",
         "reference-warnings", "justification-warnings", "objection-warnings",
-        "dedicated-debate", "creation-date",
+        "dedicated-debate",
     ),
 }
 

@@ -381,7 +381,6 @@
       "required": [
         "status",
         "assigned_batch_id",
-        "creation_date",
         "generated_at",
         "validated_at"
       ],

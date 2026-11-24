@@ -254,7 +254,6 @@
     "canonical_title",
     "file_path",
     "sha256",
-    "creation_date",
     "batch_id",
     "status",
     "structure_version",

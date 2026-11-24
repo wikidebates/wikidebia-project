@@ -397,26 +397,21 @@ def _apply_drafts(stage: Path, changes: list, stamp: str) -> None:
     for row, state, raw in changes:
         key = row['page_id']
         p, rec = pages[key], records[key]
-        dates_recorded = {d for d in (p.get('creation_date'), rec['generation'].get('creation_date')) if d}
-        if len(dates_recorded) > 1:
-            raise CreationImportError('Contradictory recorded creation dates')
-        date = next(iter(dates_recorded), None)
         if state == 'generated':
             parsed = parse_template(raw.decode())
             expected = 'D\u00e9bat' if p['page_type'] == 'debate' else 'Argument'
-            dates = parsed.values('date-cr\u00e9ation')
-            if parsed.name != expected or len(dates) != 1 or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', dates[0]):
-                raise CreationImportError('Generated draft needs its French model and explicit creation date')
-            dt.date.fromisoformat(dates[0])
-            if date and dates[0] != date:
-                raise CreationImportError('Declared creation date changed')
-            date = dates[0]
+            if parsed.name != expected:
+                raise CreationImportError('Generated draft needs its French model')
+            if any(name in {'date-cr\u00e9ation', 'creation-date'} for name, _ in parsed.params):
+                raise CreationImportError('Obsolete page creation-date parameter in generated draft')
+        p.pop('creation_date', None)
+        rec['generation'].pop('creation_date', None)
         dest = _path(stage, p['file_path'])
         _write(dest, raw)
-        p.update(sha256=_sha(raw), status='generated' if state == 'generated' else 'assigned', creation_date=date)
+        p.update(sha256=_sha(raw), status='generated' if state == 'generated' else 'assigned')
         p['validation'] = {'status': 'pending', 'report_path': None, 'validated_at': None}
         rec['generation'].update(status='generated' if state == 'generated' else 'in_progress',
-                                 creation_date=date, generated_at=stamp if state == 'generated' else None, validated_at=None)
+                                 generated_at=stamp if state == 'generated' else None, validated_at=None)
         rec['file'].update(sha256=_sha(raw), status='present')
         changed.add(key)
     # Existing standalone page manifests are mirrors, not independent truth.
