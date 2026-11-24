@@ -36,8 +36,7 @@ def test_prose_survives_actual_argument_renderer_in_order(lang):
     output = render._render_argument(
         lang=lang, node={'id': 'A0001', 'fr': {}, 'en': {}},
         content={'citations': citations, 'citation_passages': prose},
-        registry={'graph': {'nodes': [], 'edges': []}}, sources={},
-        creation_date='21 October 2026', include_interlanguage=False,
+        registry={'graph': {'nodes': [], 'edges': []}}, sources={}, include_interlanguage=False,
     )
     expected = EN if lang == 'en' else [p['text'] for p in source]
     assert output.index(expected[0]) < output.index('{{Quote' if lang == 'en' else '{{Citation')

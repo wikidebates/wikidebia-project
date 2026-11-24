@@ -20,7 +20,7 @@ def test_final_publication_english_config_carries_validator_fingerprint_path(tmp
     corpus = project / "corpus" / debate_id
     source = corpus / "output/en/debate/debate.wiki"
     source.parent.mkdir(parents=True, exist_ok=True)
-    source.write_text("{{Debate|topic=Test|wikipedia-articles={{Wikipedia article|page=Test}}|pro-arguments=|con-arguments=|sections=Society|keywords=test|creation-date=2026-08-20}}\n", encoding="utf-8")
+    source.write_text("{{Debate|topic=Test|wikipedia-articles={{Wikipedia article|page=Test}}|pro-arguments=|con-arguments=|sections=Society|keywords=test}}\n", encoding="utf-8")
     _write_json(corpus / "manifest.json", {
         "debate_id": debate_id,
         "translation_status": {"en": "ready"},

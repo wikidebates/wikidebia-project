@@ -120,7 +120,7 @@ def test_prepare_and_initialize_real_validation_and_draft_path(project):
     assert m['global_status'] == 'graph_locked'
     assert m['translation_status'] == {'en': 'deferred'}
     assert all(p['status'] == 'planned' and p['validation']['status'] == 'pending' and p['page_origin'] == 'new' for p in m['pages'])
-    assert all(p['creation_date'] is None and p['sha256'] is None for p in m['pages'])
+    assert all('creation_date' not in p and p['sha256'] is None for p in m['pages'])
     assert not list(corpus.rglob('*.wiki'))
     assert not (corpus/'imports').exists()
     assert r['graph']['derived_counts']['distinct_nodes'] == 4

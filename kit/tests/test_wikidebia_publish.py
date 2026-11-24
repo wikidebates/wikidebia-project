@@ -528,11 +528,11 @@ def write_fixture(tmp_path: Path, kind: str):
     (corpus / "output" / "en").mkdir(parents=True)
     (corpus / "data").mkdir(parents=True)
     fr = "{{Argument\n|résumé=Nouveau résumé.\n|rubriques=Société\n}}\n"
-    en = "{{Argument\n|summary=New summary.\n|sections=Society\n|creation-date=2020-01-01\n}}\n"
+    en = "{{Argument\n|summary=New summary.\n|sections=Society\n}}\n"
     (corpus / "output" / "fr" / "A1.wiki").write_text(fr, encoding="utf-8")
     (corpus / "output" / "en" / "A1.wiki").write_text(en, encoding="utf-8")
     fr_debate = "{{Débat\n|sujet=Démo\n|sujet-développé=la démonstration\n}}\n"
-    en_debate = "{{Debate\n|topic=Demo\n|expanded-topic=the demonstration\n|creation-date=2020-01-01\n}}\n"
+    en_debate = "{{Debate\n|topic=Demo\n|expanded-topic=the demonstration\n}}\n"
     (corpus / "output" / "fr" / "debate.wiki").write_text(fr_debate, encoding="utf-8")
     (corpus / "output" / "en" / "debate.wiki").write_text(en_debate, encoding="utf-8")
     manifest = {
@@ -1556,11 +1556,10 @@ def test_ready_english_translation_uses_page_specific_french_source_summary(tmp_
     assert adapter.revisions[revision]["tags"] == ["chatgpt", "translated-fr"]
     written = adapter.revisions[revision]["text"]
     assert "|initialization=" not in written
-    assert f"|creation-date={publisher.publication_date}" in written
-    assert "|creation-date=2020-01-01" not in written
-    assert action["publication_creation_date"] == publisher.publication_date
-    assert plan["publication_date"] == publisher.publication_date
-    assert plan["publication_timezone"] == "Europe/Paris"
+    assert "|creation-date=" not in written
+    assert "publication_creation_date" not in action
+    assert "publication_date" not in plan
+    assert "publication_timezone" not in plan
 
 
 def test_ready_english_translation_rejects_initialization_from_french_parent(tmp_path):
@@ -1573,7 +1572,7 @@ def test_ready_english_translation_rejects_initialization_from_french_parent(tmp
             row["page_origin"] = "new"
     en_source = corpus / "output" / "en" / "A1.wiki"
     en_source.write_text(
-        "{{Argument\n|initialization=Objection@12345\n|summary=New summary.\n|sections=Society\n|creation-date=2020-01-01\n}}\n",
+        "{{Argument\n|initialization=Objection@12345\n|summary=New summary.\n|sections=Society\n}}\n",
         encoding="utf-8",
     )
     for row in manifest["pages"]:
@@ -1591,7 +1590,7 @@ def test_ready_english_translation_rejects_initialization_from_french_parent(tmp
         raise AssertionError("initialization carried from French parent was accepted")
 
 
-def test_ready_english_translation_resume_keeps_original_remote_creation_date(tmp_path):
+def test_ready_english_translation_resume_skips_verified_identical_page(tmp_path):
     config, path, _, _ = write_fixture(tmp_path, "full_page")
     corpus, manifest_path = make_direct_profile(config, path, tmp_path)
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -1605,7 +1604,7 @@ def test_ready_english_translation_resume_keeps_original_remote_creation_date(tm
     path.write_text(json.dumps(config), encoding="utf-8")
     adapter = FakeAdapter()
     adapter.language = "en"
-    remote = "{{Argument\n|summary=New summary.\n|sections=Society\n|creation-date=2026-08-09\n}}\n"
+    remote = "{{Argument\n|summary=New summary.\n|sections=Society\n}}\n"
     adapter.pages[("en", "Title EN")] = (77, remote)
     expected_summary = "Translation of the French page: [[:fr:Titre FR|Titre FR]]"
     adapter.revisions[77] = {"revision_id": 77, "parent_id": 0, "user": "ChatGPT", "text": remote, "summary": expected_summary, "tags": ["chatgpt", "translated-fr"]}
@@ -1614,7 +1613,7 @@ def test_ready_english_translation_resume_keeps_original_remote_creation_date(tm
     plan = publisher.build_plan()
     assert plan["counts"]["en"]["skip"] == 1
     action = plan["actions"][0]
-    assert action["publication_creation_date"] == "2026-08-09"
+    assert "publication_creation_date" not in action
     assert action["operation"] == "skip"
 
 
@@ -1641,7 +1640,7 @@ def test_tampered_page_specific_translation_summary_is_rejected(tmp_path):
         raise AssertionError("tampered per-page translation summary accepted")
 
 
-def test_ready_english_translation_debate_uses_publication_date(tmp_path):
+def test_ready_english_translation_debate_omits_creation_date(tmp_path):
     config, path, _, _ = write_fixture(tmp_path, "full_page")
     corpus, manifest_path = make_direct_profile(config, path, tmp_path)
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -1656,7 +1655,6 @@ def test_ready_english_translation_debate_uses_publication_date(tmp_path):
         "|topic=Demo\n"
         "|expanded-topic=the demonstration\n"
         "|wikipedia-articles={{Wikipedia article\n|page=Demonstration\n}}\n"
-        "|creation-date=2020-01-01\n"
         "}}\n",
         encoding="utf-8",
     )
@@ -1670,15 +1668,14 @@ def test_ready_english_translation_debate_uses_publication_date(tmp_path):
     publisher._assert_paired_translation_authorization = lambda plan: None
     plan = publisher.build_plan()
     action = plan["actions"][0]
-    assert action["publication_creation_date"] == publisher.publication_date
+    assert "publication_creation_date" not in action
     result = publisher.publish(plan=plan, confirmation=plan["plan_sha256"])
     assert result == {"created": 1, "updated": 0, "skipped": 0}
     written = adapter.pages[("en", "Demo debate")][1]
-    assert f"|creation-date={publisher.publication_date}" in written
-    assert "|creation-date=2020-01-01" not in written
+    assert "|creation-date=" not in written
 
 
-def test_english_creation_rechecks_date_immediately_before_each_write(tmp_path):
+def test_english_creation_refuses_resigned_historical_dated_plan(tmp_path):
     config, path, _, _ = write_fixture(tmp_path, "full_page")
     _, manifest_path = make_direct_profile(config, path, tmp_path)
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -1691,20 +1688,18 @@ def test_english_creation_rechecks_date_immediately_before_each_write(tmp_path):
     # This unit test exercises metadata, not transactional authorization.
     publisher._assert_paired_translation_authorization = lambda plan: None
     plan = publisher.build_plan()
-    planned = plan["publication_date"]
-    next_day = "2099-12-31" if planned != "2099-12-31" else "2099-12-30"
-    dates = iter([planned, next_day])
-    publisher._current_publication_date = lambda: next(dates)
+    plan["actions"][0]["publication_creation_date"] = "2026-08-20"
+    plan["plan_sha256"] = module.sha_object({k: v for k, v in plan.items() if k != "plan_sha256"})
     try:
         publisher.publish(plan=plan, confirmation=plan["plan_sha256"])
     except module.PublicationError as exc:
-        assert "jour de publication" in str(exc)
-        assert "Title EN" in str(exc)
+        assert "Plan historique daté non exécutable" in str(exc)
     else:
-        raise AssertionError("une création anglaise a traversé un changement de jour sans blocage")
+        raise AssertionError("historic dated plan was accepted")
+    assert not publisher.adapter.pages
 
 
-def test_non_english_creation_is_not_invalidated_by_publication_day_change(tmp_path):
+def test_non_english_creation_does_not_depend_on_a_publication_day(tmp_path):
     config, path, _, _ = write_fixture(tmp_path, "full_page")
     config["operation"]["languages"] = ["fr"]
     config["operation"]["page_types"] = ["argument"]
@@ -1712,7 +1707,7 @@ def test_non_english_creation_is_not_invalidated_by_publication_day_change(tmp_p
     adapter = FakeAdapter()
     publisher = module.GenericPublisher(config, adapter, path)
     plan = publisher.build_plan()
-    publisher._current_publication_date = lambda: "2099-12-31"
+    assert "publication_date" not in plan
     result = publisher.publish(plan=plan, confirmation=plan["plan_sha256"])
     assert result == {"created": 1, "updated": 0, "skipped": 0}
 

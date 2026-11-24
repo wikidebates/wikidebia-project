@@ -275,7 +275,7 @@ def test_french_render_preserves_every_historical_parameter_and_comments(tmp_pat
     import re
     from wikidebia_graph_extract import parse_template
     from wikidebia_render import _render_preserved_french, RenderError
-    raw = "<!-- header {{ignored}} -->\n{{Argument\n|résumé=Une ancienne formulation.\n|citations={{Citation|citation=Exactement !|auteurs=Un auteur}}\nTexte entre les citations.\n|webliographie=[https://example.org Ancienne source]\n|mots-clés=justice, justice\n|date-création=2001-01-01\n}}"
+    raw = "<!-- header {{ignored}} -->\n{{Argument\n|résumé=Une ancienne formulation.\n|citations={{Citation|citation=Exactement !|auteurs=Un auteur}}\nTexte entre les citations.\n|webliographie=[https://example.org Ancienne source]\n|mots-clés=justice, justice\n}}"
     p=tmp_path/'imports/fr/arguments/A1.wiki';p.parent.mkdir(parents=True);p.write_text(raw)
     locked={'import_path':str(p.relative_to(tmp_path)),'import_sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
     result=_render_preserved_french(tmp_path,locked,'An English title')

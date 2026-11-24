@@ -397,10 +397,13 @@ def _apply_drafts(stage: Path, changes: list, stamp: str) -> None:
     for row, state, raw in changes:
         key = row['page_id']
         p, rec = pages[key], records[key]
+        dates_recorded = {d for d in (p.get('creation_date'), rec['generation'].get('creation_date')) if d}
+        if len(dates_recorded) > 1:
+            raise CreationImportError('Contradictory recorded creation dates')
         if state == 'generated':
             parsed = parse_template(raw.decode())
             expected = 'D\u00e9bat' if p['page_type'] == 'debate' else 'Argument'
-            if parsed.name != expected:
+            if parsed.name != expected or not parsed.params:
                 raise CreationImportError('Generated draft needs its French model')
             if any(name in {'date-cr\u00e9ation', 'creation-date'} for name, _ in parsed.params):
                 raise CreationImportError('Obsolete page creation-date parameter in generated draft')

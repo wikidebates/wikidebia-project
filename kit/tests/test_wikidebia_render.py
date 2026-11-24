@@ -232,12 +232,12 @@ def test_render_lifecycle_fields_depend_on_page_origin():
             },
         }
     }
-    text=render._render_debate(lang='fr',registry=registry,metadata_lock=metadata,content_lock=existing,sources={},creation_date='2026-08-05')
+    text=render._render_debate(lang='fr',registry=registry,metadata_lock=metadata,content_lock=existing,sources={})
     assert '|avancement=Débat en construction' in text
     assert '|avertissements-débat=' not in text
     assert '|débats-connexes={{Débat connexe|page=Autre débat}}' in text
     new={'debate': {**existing['debate'],'page_origin':'new','preserved_parameters':{}}}
-    text=render._render_debate(lang='fr',registry=registry,metadata_lock=metadata,content_lock=new,sources={},creation_date='2026-08-05')
+    text=render._render_debate(lang='fr',registry=registry,metadata_lock=metadata,content_lock=new,sources={})
     assert '|avancement=Débat construit' in text
     assert '|avertissements-débat=Débat généré par IA' in text
     assert '|débats-connexes=' not in text
@@ -251,7 +251,7 @@ def test_render_existing_argument_preserves_absent_ai_warning():
         'citations':[],'sources':{},'page_origin':'preexisting',
         'preserved_parameters':{'avertissements-argument':{'present':False,'value':None}},
     }
-    text=render._render_argument(lang='fr',node=node,content=content,registry=registry,sources={},creation_date='2026-08-05')
+    text=render._render_argument(lang='fr',node=node,content=content,registry=registry,sources={})
     assert '|avertissements-argument=' not in text
 
 
@@ -267,7 +267,7 @@ def test_render_preserves_detailed_debate_and_omits_local_relations():
             'débat-dédié':{'present':True,'value':'Débat sous-jacent'},
         },
     }
-    text=render._render_argument(lang='fr',node=node,content=content,registry=registry,sources={},creation_date='2026-08-05')
+    text=render._render_argument(lang='fr',node=node,content=content,registry=registry,sources={})
     assert '|débat-dédié=Débat sous-jacent' in text
     assert '|justifications=' not in text
     assert '|objections=' not in text
@@ -295,8 +295,7 @@ def test_render_translates_dedicated_debate_and_omits_english_local_relations():
     }
 
     text = render._render_argument(
-        lang='en', node=node, content=content, registry=registry, sources={},
-        creation_date='2026-08-05', source_content=source_content,
+        lang='en', node=node, content=content, registry=registry, sources={}, source_content=source_content,
     )
 
     assert '|dedicated-debate=Does the left bear responsibility for the rise of the far right?' in text
@@ -325,8 +324,7 @@ def test_render_reads_reviewed_dedicated_debate_record_and_ignores_absent_source
         'preserved_parameters': {'débat-dédié': {'present': False, 'value': None}},
     }
     text = render._render_argument(
-        lang='en', node=node, content=content, registry=registry, sources={},
-        creation_date='2026-08-05', source_content=source_content,
+        lang='en', node=node, content=content, registry=registry, sources={}, source_content=source_content,
     )
     assert '|dedicated-debate=' not in text
 
@@ -340,8 +338,7 @@ def test_render_reads_reviewed_dedicated_debate_record_and_ignores_absent_source
         'dedicated_debate_review_note': 'The same underlying debate is translated.',
     }
     text = render._render_argument(
-        lang='en', node=node, content=content, registry=registry, sources={},
-        creation_date='2026-08-05', source_content=source_content,
+        lang='en', node=node, content=content, registry=registry, sources={}, source_content=source_content,
     )
     assert '|dedicated-debate=Underlying debate' in text
 
@@ -356,7 +353,7 @@ def test_render_preserves_historical_argument_name():
             'avertissements-argument':{'present':False,'value':None},
         },
     }
-    text=render._render_argument(lang='fr',node=node,content=content,registry=registry,sources={},creation_date='2026-08-05')
+    text=render._render_argument(lang='fr',node=node,content=content,registry=registry,sources={})
     assert '|nom=Argument cosmologique' in text
     assert text.index('|nom=') < text.index('|résumé=')
 
@@ -368,7 +365,7 @@ def test_render_new_argument_uses_nom_consacre_not_legacy_nom():
         'summary':'Résumé nouveau.', 'citations':[], 'sources':{}, 'page_origin':'new',
         'preserved_parameters':{}, 'argument_name':'Argument cosmologique',
     }
-    text=render._render_argument(lang='fr',node=node,content=content,registry=registry,sources={},creation_date='2026-08-10')
+    text=render._render_argument(lang='fr',node=node,content=content,registry=registry,sources={})
     assert '|nom-consacré=Argument cosmologique' in text
     assert '|nom=Argument cosmologique' not in text
     assert text.index('|nom-consacré=') < text.index('|résumé=')
@@ -381,7 +378,7 @@ def test_render_new_english_argument_uses_established_name_not_legacy_name():
         'summary':'New summary.', 'quotes':[], 'sources':{}, 'page_origin':'new',
         'preserved_parameters':{}, 'argument_name':'Cosmological argument',
     }
-    text=render._render_argument(lang='en',node=node,content=content,registry=registry,sources={},creation_date='2026-08-10')
+    text=render._render_argument(lang='en',node=node,content=content,registry=registry,sources={})
     assert '|established-name=Cosmological argument' in text
     assert '|name=Cosmological argument' not in text
     assert text.index('|established-name=') < text.index('|summary=')
@@ -407,8 +404,7 @@ def test_render_translated_english_debate_uses_french_metadata_presence_and_valu
         },
     }
     text=render._render_debate(
-        lang='en',registry=registry,metadata_lock=metadata,content_lock=english,sources={},
-        creation_date='2026-08-19',source_content=french_absent,
+        lang='en',registry=registry,metadata_lock=metadata,content_lock=english,sources={},source_content=french_absent,
     )
     assert '|progress=' not in text
     assert '|title-warnings=' not in text
@@ -423,8 +419,7 @@ def test_render_translated_english_debate_uses_french_metadata_presence_and_valu
         },
     }
     text=render._render_debate(
-        lang='en',registry=registry,metadata_lock=metadata,content_lock=english,sources={},
-        creation_date='2026-08-19',source_content=french_present,
+        lang='en',registry=registry,metadata_lock=metadata,content_lock=english,sources={},source_content=french_present,
     )
     assert '|progress=Debate under construction' in text
     assert '|title-warnings=Title to be explained' in text
@@ -451,7 +446,7 @@ def test_render_translated_english_argument_uses_french_warning_presence_and_val
         },
     }
     text=render._render_argument(
-        lang='en',node=node,content=english,registry=registry,sources={},creation_date='2026-08-19',
+        lang='en',node=node,content=english,registry=registry,sources={},
         source_content=french_absent,
     )
     assert '|title-warnings=' not in text
@@ -467,7 +462,7 @@ def test_render_translated_english_argument_uses_french_warning_presence_and_val
         },
     }
     text=render._render_argument(
-        lang='en',node=node,content=english,registry=registry,sources={},creation_date='2026-08-19',
+        lang='en',node=node,content=english,registry=registry,sources={},
         source_content=french_present,
     )
     assert '|title-warnings=Unclear title' in text
@@ -487,8 +482,7 @@ def test_render_translated_english_metadata_uses_effective_defaults_for_new_fren
     }}
     french={'page_origin':'new','preserved_parameters':{}}
     text=render._render_debate(
-        lang='en',registry=registry,metadata_lock=metadata,content_lock=english,sources={},
-        creation_date='2026-08-19',source_content=french,
+        lang='en',registry=registry,metadata_lock=metadata,content_lock=english,sources={},source_content=french,
     )
     assert '|progress=Constructed debate' in text
     assert '|debate-warnings=Debate generated by AI' in text
@@ -819,7 +813,7 @@ def test_published_content_checkpoint_requires_matching_receipts_and_review(tmp_
     from wikidebia_corpus_build import full_tree_sha256
     root=tmp_path;state=root/'.state/fr-publication/test-debate/EDIT-001/content';checkpoint=state/'checkpoint-corpus'
     page=checkpoint/'output/fr/debate/debate.wiki';page.parent.mkdir(parents=True)
-    original='{{Débat\n|introduction=Texte historique.\n|débats-connexes={{Débat connexe|page=Source}}\n|date-création=2020-01-01\n}}\n'
+    original='{{Débat\n|introduction=Texte historique.\n|débats-connexes={{Débat connexe|page=Source}}\n}}\n'
     page.write_text(original)
     def signed(value):
         value['receipt_sha256']=hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest();return value
@@ -917,7 +911,7 @@ def test_frozen_source_is_verified_before_published_checkpoint_overlay(tmp_path:
     assert provenance["source_checkpoint_record_sha256"] == "record"
     assert provenance["source_checkpoint_receipt_sha256"] == "receipt"
 
-def test_existing_english_creation_date_is_consistent_in_page_manifest_and_registry(tmp_path: Path):
+def test_existing_english_creation_date_is_retired_in_page_manifest_and_registry(tmp_path: Path):
     project,workspace,work_id,review_sha=make_translated(tmp_path)
     source=workspace/'translated-copy';path=source/'data/en_content_lock.json';content=json.loads(path.read_text());arg=content['arguments'][0];pid=arg['id']
     arg['page_origin']='preexisting';arg['preserved_parameters']={key:{'present':False,'value':None} for key in translation.EN_PAGE_LIFECYCLE_PARAMETERS['argument']}
@@ -925,7 +919,8 @@ def test_existing_english_creation_date_is_consistent_in_page_manifest_and_regis
     target=workspace/'test-render-existing'
     render._build_rendered_copy(project,source,target,debate_id='debat_test',work_id=work_id,translation_review_sha256=review_sha)
     manifest=json.loads((target/'manifest.json').read_text());page=next(x for x in manifest['pages'] if x['language']=='en' and x['page_id']==pid)
-    assert page['creation_date']=='2022-08-14'
-    assert '|creation-date=2022-08-14' in (target/page['file_path']).read_text()
+    assert 'creation_date' not in page
+    assert 'creation-date' not in page['preserved_parameters']
+    assert '|creation-date=' not in (target/page['file_path']).read_text()
     registry=json.loads((target/'data/registre_debat.json').read_text());node=next(n for n in registry['graph']['nodes'] if n['id']==pid)
-    assert node['pages']['en']['generation']['creation_date']=='2022-08-14'
+    assert 'creation_date' not in node['pages']['en']['generation']

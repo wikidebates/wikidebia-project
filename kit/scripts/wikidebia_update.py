@@ -937,6 +937,8 @@ def preserve_remote_lifecycle_parameters(
     seen: set[str] = set()
     changes: dict[str, dict[str, Any]] = {}
     for key, value in parsed.params.items():
+        if normalize_key(key) in {'date creation', 'creation date'}:
+            continue
         canonical = protected_by_normalized.get(normalize_key(key))
         if canonical is None:
             preserved.append((key, value))

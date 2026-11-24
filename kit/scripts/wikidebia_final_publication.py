@@ -824,6 +824,15 @@ def _copy_if_present(source: Path, target: Path) -> None:
         shutil.copy2(source, target)
 
 
+def _assert_no_historical_dated_plan(plan: Mapping[str, Any]) -> None:
+    """Never silently reauthorize a legacy date-bearing plan."""
+    if any(row.get("publication_creation_date") for row in plan.get("actions", [])):
+        raise FinalPublicationError(
+            "Plan anglais historique daté : reconstruire un plan sans ce paramètre et obtenir une nouvelle autorisation",
+            remote_execution_started=True,
+        )
+
+
 def _english_plan_needs_debate_first_migration(plan: Mapping[str, Any]) -> bool:
     creates = [row for row in (plan.get("actions") or []) if str(row.get("operation") or "") == "create"]
     debate_indexes = [i for i, row in enumerate(creates) if str(row.get("page_type") or "") == "debate"]
@@ -1314,8 +1323,7 @@ def publish_final_release(
 
         en_receipt_path = state_dir / "english-publication-receipt.json"
         if not en_receipt_path.is_file():
-            if any(row.get("publication_creation_date") for row in plans["en_plan"].get("actions", [])):
-                raise FinalPublicationError("Plan anglais historique daté : reconstruire un plan sans ce paramètre et obtenir une nouvelle autorisation", remote_execution_started=True)
+            _assert_no_historical_dated_plan(plans["en_plan"])
             plans, preflight, authorization = _migrate_english_publication_order(
                 project_root, debate_id, release_copy, state_dir, baseline, plans, preflight, authorization
             )

@@ -138,12 +138,12 @@ def make_release(tmp_path: Path, *, authorize_summary_changes=True):
     workspace = project / ".state/editorial-workspaces/debat_test" / work_id
     release_copy = workspace / "release-copy"
     files = {
-        "imports/fr/debate/debate.wiki": "{{Débat|sujet=Débat test|date-création=2026-08-03}}\n",
-        "imports/fr/arguments/A0001.wiki": "{{Argument|résumé=Ancien argument|date-création=2026-08-03}}\n",
-        "output/fr/debate/debate.wiki": "{{Débat|sujet=Débat test|introduction=Version révisée|date-création=2026-08-03}}\n",
-        "output/fr/arguments/A0001.wiki": "{{Argument|résumé=Argument révisé|date-création=2026-08-03}}\n",
-        "output/en/debate/debate.wiki": "{{Debate|topic=Test debate|creation-date=2026-08-03}}\n",
-        "output/en/arguments/A0001.wiki": "{{Argument|summary=Revised argument|creation-date=2026-08-03}}\n",
+        "imports/fr/debate/debate.wiki": "{{Débat|sujet=Débat test}}\n",
+        "imports/fr/arguments/A0001.wiki": "{{Argument|résumé=Ancien argument}}\n",
+        "output/fr/debate/debate.wiki": "{{Débat|sujet=Débat test|introduction=Version révisée}}\n",
+        "output/fr/arguments/A0001.wiki": "{{Argument|résumé=Argument révisé}}\n",
+        "output/en/debate/debate.wiki": "{{Debate|topic=Test debate}}\n",
+        "output/en/arguments/A0001.wiki": "{{Argument|summary=Revised argument}}\n",
     }
     for rel, text in files.items():
         path = release_copy / rel
