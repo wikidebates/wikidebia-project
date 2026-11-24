@@ -8203,6 +8203,10 @@
     "owner clarification 2026-10-20 — generation rules do not rewrite translated or existing displayed titles": [
       "01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md",
       "01_normes/workflow_production_wikidebia.md"
+    ],
+    "owner decision 2026-11-24": [
+      "01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md",
+      "01_normes/workflow_production_wikidebia.md"
     ]
   },
   "normative_revision": "1.2.88"
