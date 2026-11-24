@@ -85,7 +85,7 @@ Les règles abandonnées ne sont pas supprimées de la traçabilité : elles fig
 | Titres affichés individualisés | §4 | `WDV-EDT-001` | `test_title_copy_ratio_detects_mechanical_copy` | `W10_R1_titres_affiches.*` |
 | Classification individualisée | §6 | `WDV-EDT-002` | `test_classification_ratio_detects_uniformity` | `W10_R1_classification.json` |
 | Documentation Débat/Debate | §7.5 | `WDV-EDT-004` | contrôle intégré | `W10_R1_documentation_debat.md` |
-| Date corrective | §9 | `WDV-EDT-005` | contrôle intégré | `W10_R1_dates_creation.md` |
+| Date corrective historique | §9 | `WDV-EDT-005` (archives historiques) | contrôle de lecture | `W10_R1_dates_creation.md` |
 | Workflow et handoffs | §10 | `WDV-EDT-006`, schémas 1.1 | contrôle intégré | `handoff/corrective/` |
 | Validation en lecture seule | §11 | test d’empreinte d’arbre | `test_validate_is_read_only` | rapport de tests 0.2.2 |
 
@@ -133,7 +133,7 @@ Les règles abandonnées ne sont pas supprimées de la traçabilité : elles fig
 | Décision | Preuve |
 |---|---|
 | Justification de chaque rubrique, sans cas spécial | `reports/corrective/W10_R7_individual_editorial_review.json` |
-| Date locale déclarée par le paquet | `manifest.json.editorial_controls.creation_date` |
+| Date de création de page | Ancienne métadonnée, conservée dans les seules archives historiques |
 | Rapports et handoff déclarés par le paquet | `manifest.json.editorial_controls` et `traceability_controls` |
 | Absence de constantes de corpus dans le code générique | `reports/corrective/W10_R7_audit_generalisation.md` |
 | Kit aligné sur W10.R7 | kit W11 1.3.1 |
@@ -455,7 +455,7 @@ La revue des audits du 9 août 2026 montre que plusieurs pertes sémantiques ava
 | Résumé français d'ajout interlangue vers EN | PUB-046 | plan signé + vérification de modification interlangue pure |
 | Balises `chatgpt` et `translated-fr` sur création EN | PUB-047 | publication + relecture bornée des balises |
 | Ne pas transférer l'identifiant parent français | TRN-019 | `initialization` interdit sur un nouvel Argument EN traduit |
-| Dater la page EN au jour réel de publication | RND-009 | substitution signée de `creation-date` + invalidation au changement de jour |
+| Omettre la date de création des pages EN | RND-009 | validation et publication sans paramètre ni dépendance au jour civil |
 | Paramètre d'appellation consacrée actuel | règle 1.2.62 de rendu | `nom-consacré` / `established-name`, alias historiques préservés |
 | Avertissement des citations traduites | règle 1.2.62 `Quote` | `AI-translated quote` pour les nouvelles opérations |
 

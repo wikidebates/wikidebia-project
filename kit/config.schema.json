@@ -88,7 +88,8 @@
     "publication_timezone": {
       "type": "string",
       "minLength": 1,
-      "default": "Europe/Paris"
+      "default": "Europe/Paris",
+      "description": "Legacy configuration field; ignored by the date-free publication engine."
     }
   }
 }

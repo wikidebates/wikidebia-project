@@ -1,3 +1,9 @@
+## 24 novembre 2026 — retrait des paramètres de date de création de page
+
+- `date-création` et `creation-date` ne font plus partie des quatre modèles ni des nouveaux artefacts de production ; les archives signées restent intactes.
+- Les dates documentaires et les horodatages techniques sont conservés ; les plans de publication ne dépendent plus du passage à minuit.
+- Une suppression distante exacte de ce paramètre est reconnue à partir d'une révision attestée, sans autoriser d'autres modifications concurrentes.
+
 ## 1.2.70 — alignement du validateur sur la première publication anglaise
 
 - le chemin de validation source-authoritative n’exige plus `initialization` à partir de `initialisation` française ;

@@ -825,6 +825,6 @@ Une commande d’orchestration de haut niveau pilote l’ensemble de ce cycle. E
 
 - consacre la décision explicite du propriétaire : lors de la première publication anglaise finale, la page `Debate` est créée avant toute page `Argument` encore absente ;
 - remplace la règle active contradictoire qui imposait `Argument` avant `Debate` dans cette phase ;
-- conserve l’ordre des autres phases, les garde-fous de publication et la date civile réelle de chaque création anglaise ;
+- conserve l’ordre des autres phases, les garde-fous de publication sans dépendance au jour civil ;
 - lorsqu’une publication a déjà commencé sous l’ancien ordre, les pages déjà créées restent intactes et un plan successeur audité place `Debate` avant les seules créations `Argument` restantes.
 
