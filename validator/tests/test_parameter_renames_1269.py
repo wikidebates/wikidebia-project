@@ -31,7 +31,6 @@ def _debate(expanded_parameter: str) -> str:
 }}}}
 |sections=Philosophy
 |keywords=realism, philosophy
-|creation-date=2026-08-10
 }}}}
 """
 
@@ -85,7 +84,6 @@ def _fr_debate(expanded_parameter: str, *, extra: str = "") -> str:
 }}}}
 |rubriques=Philosophie
 |mots-clés=réalisme, philosophie
-|date-création=2026-08-10
 }}}}
 """
 
@@ -98,7 +96,6 @@ def _argument(lang: str, dedicated_parameter: str, *, extra: str = "") -> str:
 |{dedicated_parameter}=Débat consacré
 {extra}|rubriques=Philosophie
 |mots-clés=preuve, philosophie
-|date-création=2026-08-10
 }}}}
 """
     return f"""{{{{Argument
@@ -107,7 +104,6 @@ def _argument(lang: str, dedicated_parameter: str, *, extra: str = "") -> str:
 |{dedicated_parameter}=Dedicated discussion
 {extra}|sections=Philosophy
 |keywords=proof, philosophy
-|creation-date=2026-08-10
 }}}}
 """
 
@@ -123,7 +119,7 @@ def test_current_french_debate_accepts_sujet_developpe_and_rejects_sujet_complet
 
 
 def _preexisting_manifest(lang: str, dedicated_name: str, dedicated_value: str) -> dict:
-    protected = list(PROTECTED_PAGE_PARAMETERS[lang, "argument"])
+    protected = [name for name in PROTECTED_PAGE_PARAMETERS[lang, "argument"] if name not in {"date-création", "creation-date"}]
     current_name = "débat-dédié" if lang == "fr" else "dedicated-debate"
     if dedicated_name != current_name:
         protected[protected.index(current_name)] = dedicated_name

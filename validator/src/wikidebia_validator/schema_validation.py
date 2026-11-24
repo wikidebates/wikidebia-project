@@ -35,9 +35,9 @@ SCHEMA_BY_PATH = {
 # A new/modified schema or a different library version always follows the
 # original full check_schema path. No schema instance validation is omitted.
 _ATTESTED_LIBRARY_VERSIONS = ("4.26.0", "0.37.0")
-_ATTESTED_COMMON_SHA256 = "66b4955556c9009fc07100834b200d38fc81e8f32c00849c6fc67c099f3d9b41"
+_ATTESTED_COMMON_SHA256 = "bf5f45de7139956732671f70e7667f0597996f338ac9ac70a4fbcd9b37ded5dc"
 _ATTESTED_SCHEMA_SHA256 = {
-    "debate_package.schema.json": "14d0527688938942cec9ea645c6b634b5068fe5cf9c79fbdb2ab1450dde097f7",
+    "debate_package.schema.json": "427b06822eac847206a5d671f2192cb0423b09ef671b62dc373fb32fb9bc4d01",
     "scope.schema.json": "2ab3761d580bb2b084c4f64bcaf91b49607ac0323070d82e7b02e63de7a8af37",
     "argument_registry.schema.json": "de90513203042c3829b2c892db4d01b17881bfe0a27ce084c1570ddfd6b36a8d",
     "source_registry.schema.json": "c1bf72292f6092c1314eeaeb6d9cd2a38128172e7f3ee4ab2d0fdc93a2164e56",

@@ -71,7 +71,6 @@ def _argument(quote: str) -> str:
 |quotes={quote}
 |sections=Philosophy
 |keywords=freedom, responsibility
-|creation-date=2026-08-04
 }}}}"""
 
 
@@ -166,7 +165,6 @@ def test_french_quote_lock_accepts_the_retired_warning_alias(tmp_path: Path):
     )
     raw = """{{Argument
 |citations={{Citation|citation=Texte source.|auteurs=Autrice|avertissements-citation=Citation trop courte}}
-|date-création=2026-08-04
 }}"""
     _validate_citations_against_locks(
         ctx, parse_template(raw), "output/fr/arguments/A0001.wiki", "fr", "A0001",
@@ -186,7 +184,6 @@ def _debate(introduction: str) -> str:
 |con-arguments={{{{Con argument|page=A counterclaim|displayed-title=A counterclaim opposes the proposition}}}}
 |sections=Philosophy
 |keywords=debate, reasoning, argument, philosophy, logic
-|creation-date=2026-08-04
 }}}}"""
 
 
