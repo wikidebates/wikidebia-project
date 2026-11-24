@@ -89,7 +89,6 @@
           "staged_sha256",
           "target_language",
           "target_title",
-          "creation_date",
           "status"
         ]
       },

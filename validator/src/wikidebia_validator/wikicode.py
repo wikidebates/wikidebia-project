@@ -778,6 +778,8 @@ def _argument_established_name_parameter(
 
 def _protected_page_parameters_for_manifest(ctx: PackageContext, lang: str, page_type: str, page_manifest: dict[str, Any] | None) -> tuple[str, ...]:
     protected = list(PROTECTED_PAGE_PARAMETERS[lang, page_type])
+    if not (page_manifest or {}).get('creation_date'):
+        protected = [name for name in protected if name not in {'date-création', 'creation-date'}]
     if page_type != "argument" or not isinstance(page_manifest, dict):
         return tuple(protected)
     preserved = page_manifest.get("preserved_parameters")
@@ -942,6 +944,9 @@ def validate_template_shape(ctx: PackageContext, tmpl: Template, lang: str, page
             base_spec = ACTIVE_TOP[lang, page_type]
     spec = {**base_spec, 'order': list(base_spec['order']), 'required': list(base_spec['required']), 'forbidden_generated': list(base_spec['forbidden_generated'])}
     spec['fixed'] = dict(base_spec['fixed'])
+    if not (page_manifest or {}).get('creation_date'):
+        for key in ('order', 'required'):
+            spec[key] = [name for name in spec[key] if name not in {'date-création', 'creation-date'}]
     if page_type == 'argument':
         citation_parameter = 'citations' if lang == 'fr' else 'quotes'
         if citation_parameter in spec['forbidden_generated']:
@@ -1505,13 +1510,14 @@ def _validate_argument_content(ctx: PackageContext, tmpl: Template, rel: str, la
     if actual_kw != expected_kw:
         ctx.report.error('WDV-MWK-009', f'{kw_param} divergents du registre', path=rel, details={'expected': expected_kw, 'actual': actual_kw})
     _validate_citations_against_locks(ctx, tmpl, rel, lang, page_id)
-    date_param = 'date-création' if lang == 'fr' else 'creation-date'
-    expected_date = page_manifest.get('creation_date') or (((node.get('pages') or {}).get(lang) or {}).get('generation') or {}).get('creation_date')
-    actual_date = tmpl.one(date_param)
-    preserved_date = (page_manifest.get('preserved_parameters') or {}).get(date_param) if isinstance(page_manifest, dict) else None
-    historical_absence = bool(page_manifest.get('page_origin') == 'preexisting' and isinstance(preserved_date, dict) and (preserved_date.get('present') is False))
-    if not historical_absence and (not re.fullmatch('\\d{4}-\\d{2}-\\d{2}', actual_date or '') or (expected_date and actual_date != expected_date)):
-        ctx.report.error('WDV-MWK-010', 'Date de création absente, invalide ou divergente', path=rel, details={'expected': expected_date, 'actual': actual_date})
+    if page_manifest.get('creation_date'):
+        date_param = 'date-création' if lang == 'fr' else 'creation-date'
+        expected_date = page_manifest.get('creation_date') or (((node.get('pages') or {}).get(lang) or {}).get('generation') or {}).get('creation_date')
+        actual_date = tmpl.one(date_param)
+        preserved_date = (page_manifest.get('preserved_parameters') or {}).get(date_param) if isinstance(page_manifest, dict) else None
+        historical_absence = bool(page_manifest.get('page_origin') == 'preexisting' and isinstance(preserved_date, dict) and (preserved_date.get('present') is False))
+        if not historical_absence and (not re.fullmatch('\\d{4}-\\d{2}-\\d{2}', actual_date or '') or (expected_date and actual_date != expected_date)):
+            ctx.report.error('WDV-MWK-010', 'Date de création absente, invalide ou divergente', path=rel, details={'expected': expected_date, 'actual': actual_date})
 
 def _validate_debate_content(ctx: PackageContext, tmpl: Template, rel: str, lang: str, registry: dict[str, Any], page_manifest: dict[str, Any]) -> None:
     wikipedia_parameter = 'articles-Wikipédia' if lang == 'fr' else 'wikipedia-articles'
@@ -1532,13 +1538,14 @@ def _validate_debate_content(ctx: PackageContext, tmpl: Template, rel: str, lang
         actual = relation_pairs(get_subs(tmpl, param), lang)
         if actual != expected:
             ctx.report.error('WDV-MWK-008', f'Liste {param} divergente du registre', path=rel, details={'expected': expected, 'actual': actual})
-    date_param = 'date-création' if lang == 'fr' else 'creation-date'
-    expected_date = page_manifest.get('creation_date')
-    actual_date = tmpl.one(date_param)
-    preserved_date = (page_manifest.get('preserved_parameters') or {}).get(date_param) if isinstance(page_manifest, dict) else None
-    historical_absence = bool(page_manifest.get('page_origin') == 'preexisting' and isinstance(preserved_date, dict) and (preserved_date.get('present') is False))
-    if not historical_absence and (not re.fullmatch('\\d{4}-\\d{2}-\\d{2}', actual_date or '') or (expected_date and actual_date != expected_date)):
-        ctx.report.error('WDV-MWK-010', 'Date de création du débat invalide ou divergente', path=rel, details={'expected': expected_date, 'actual': actual_date})
+    if page_manifest.get('creation_date'):
+        date_param = 'date-création' if lang == 'fr' else 'creation-date'
+        expected_date = page_manifest.get('creation_date')
+        actual_date = tmpl.one(date_param)
+        preserved_date = (page_manifest.get('preserved_parameters') or {}).get(date_param) if isinstance(page_manifest, dict) else None
+        historical_absence = bool(page_manifest.get('page_origin') == 'preexisting' and isinstance(preserved_date, dict) and (preserved_date.get('present') is False))
+        if not historical_absence and (not re.fullmatch('\\d{4}-\\d{2}-\\d{2}', actual_date or '') or (expected_date and actual_date != expected_date)):
+            ctx.report.error('WDV-MWK-010', 'Date de création du débat invalide ou divergente', path=rel, details={'expected': expected_date, 'actual': actual_date})
 
 def _validate_interlanguage(ctx: PackageContext, tmpl: Template, rel: str, lang: str, page_type: str, page_id: str, registry: dict[str, Any], staging: bool) -> None:
     manifest = ctx.manifest() or {}

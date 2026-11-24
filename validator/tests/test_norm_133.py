@@ -68,7 +68,7 @@ def preserved(text: str, page_type: str) -> dict:
 
 def test_new_debate_gets_creation_only_fields_and_no_related_debates():
     ctx=context()
-    manifest={'page_origin':'new','preserved_parameters':{}}
+    manifest={'page_origin':'new','creation_date':'2026-08-05','preserved_parameters':{}}
     validate_template_shape(ctx, parse_template(debate()), 'fr', 'debate', 'debate.wiki', manifest)
     assert not any(i.code == 'WDV-MWK-023' for i in ctx.report.findings)
     ctx=context()
@@ -78,7 +78,7 @@ def test_new_debate_gets_creation_only_fields_and_no_related_debates():
 
 def test_preexisting_debate_preserves_exact_fields_or_absence():
     historical = debate('Débat en construction', None, '{{Débat connexe|page=Autre débat}}')
-    existing={'page_origin':'preexisting','preserved_parameters':preserved(historical, 'debate')}
+    existing={'page_origin':'preexisting','creation_date':'2026-08-05','preserved_parameters':preserved(historical, 'debate')}
     ctx=context()
     validate_template_shape(ctx, parse_template(debate('Débat en construction', None, '{{Débat connexe|page=Autre débat}}')), 'fr', 'debate', 'debate.wiki', existing)
     assert not any(i.code == 'WDV-MWK-023' for i in ctx.report.findings), ctx.report.to_text()
@@ -88,7 +88,7 @@ def test_preexisting_debate_preserves_exact_fields_or_absence():
 
 
 def test_preexisting_argument_does_not_gain_ai_warning():
-    manifest={'page_origin':'preexisting','preserved_parameters':preserved(argument(None), 'argument')}
+    manifest={'page_origin':'preexisting','creation_date':'2026-08-05','preserved_parameters':preserved(argument(None), 'argument')}
     ctx=context()
     validate_template_shape(ctx, parse_template(argument(None)), 'fr', 'argument', 'argument.wiki', manifest)
     assert not any(i.code == 'WDV-MWK-023' for i in ctx.report.findings), ctx.report.to_text()
@@ -144,7 +144,7 @@ def test_argument_reference_requires_explicit_argument_attestation(tmp_path):
 
 def test_preexisting_french_page_may_gain_interlanguage_when_english_is_ready():
     historical = argument(None).replace('|interlangue={{Lien interlangue\n|langue=en\n|page=Argument topic\n}}\n', '')
-    page_manifest={'page_id':'A0001','page_type':'argument','page_origin':'preexisting','preserved_parameters':preserved(historical, 'argument')}
+    page_manifest={'page_id':'A0001','page_type':'argument','page_origin':'preexisting','creation_date':'2026-08-05','preserved_parameters':preserved(historical, 'argument')}
     ctx = PackageContext(
         root=Path('.'),
         report=Report('0.4.73', '.', ['wikicode']),

@@ -67,6 +67,9 @@ jobs:
           cache-dependency-path: validator/requirements-dev.txt
       - if: steps.pr-validation.outputs.result != 'true'
         run: python -m pip install -r validator/requirements-dev.txt
+      - name: Check normative copies are identical
+        if: steps.pr-validation.outputs.result != 'true'
+        run: diff -qr norms/normative_reference validator/normative_reference
       - if: steps.pr-validation.outputs.result != 'true'
         run: PYTHONPATH=validator/src python -m pytest -q validator/tests --junitxml=/tmp/validator-tests.xml
       - if: steps.pr-validation.outputs.result != 'true'

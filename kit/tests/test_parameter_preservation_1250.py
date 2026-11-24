@@ -69,7 +69,7 @@ def test_historical_restoration_can_remove_only_attested_wrong_ai_marker():
         allow_historical_restoration=True,
     )
     assert "|avertissements-argument=" not in effective
-    assert "|date-création=2026-08-01" in effective
+    assert "|date-création=" not in effective
     assert audit["historical_restoration"] is True
 
 
@@ -101,7 +101,7 @@ def test_existing_argument_renderer_preserves_all_historical_warning_slots():
         "preserved_parameters": preserved,
     }
     text = render._render_argument(
-        lang="fr", node=node, content=content, registry=registry, sources={}, creation_date="2026-08-07"
+        lang="fr", node=node, content=content, registry=registry, sources={}
     )
     for fragment in [
         "|initialisation=Objection@1",
@@ -112,9 +112,9 @@ def test_existing_argument_renderer_preserves_all_historical_warning_slots():
         "|avertissements-références=Références incomplètes",
         "|avertissements-justifications=Justifications incomplètes",
         "|avertissements-objections=Objections incomplètes",
-        "|date-création=2020-01-01",
     ]:
         assert fragment in text
+    assert "|date-création=" not in text
     assert "Argument généré par IA" not in text
 
 
@@ -133,7 +133,7 @@ def test_new_argument_renderer_still_uses_restricted_creation_profile():
         "preserved_parameters": {},
     }
     text = render._render_argument(
-        lang="fr", node=node, content=content, registry=registry, sources={}, creation_date="2026-08-07"
+        lang="fr", node=node, content=content, registry=registry, sources={}
     )
     assert "|avertissements-argument=Argument généré par IA" in text
     assert "|nom-consacré=" not in text
@@ -211,7 +211,7 @@ def test_new_argument_renderer_emits_reviewed_conventional_name():
         "preserved_parameters": {},
     }
     text = render._render_argument(
-        lang="fr", node=node, content=content, registry=registry, sources={}, creation_date="2026-08-07"
+        lang="fr", node=node, content=content, registry=registry, sources={}
     )
     assert "|nom-consacré=Argument cosmologique" in text
 
@@ -245,7 +245,9 @@ def test_pre_1258_restoration_manifest_with_only_legacy_nom_remains_compatible()
     )
     assert "|nom=Argument historique" in effective
     assert "|nom-consacré=" not in effective
-    assert set(audit["effective"]) == set(states)
+    assert set(audit["effective"]) == set(states) - {"date-création", "creation-date"}
+    assert "|date-création=" not in effective
+    assert "|creation-date=" not in effective
 
 
 def test_pre_1258_restoration_manifest_with_only_legacy_english_name_remains_compatible():
@@ -276,4 +278,6 @@ def test_pre_1258_restoration_manifest_with_only_legacy_english_name_remains_com
     )
     assert "|name=Cosmological argument" in effective
     assert "|established-name=" not in effective
-    assert set(audit["effective"]) == set(states)
+    assert set(audit["effective"]) == set(states) - {"date-création", "creation-date"}
+    assert "|date-création=" not in effective
+    assert "|creation-date=" not in effective

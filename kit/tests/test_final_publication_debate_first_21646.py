@@ -18,7 +18,6 @@ def _action(page_id: str, page_type: str, operation: str = "create", revision=No
         "local_target_sha256": f"target-{page_id}",
         "edit_summary": f"Translation {page_id}",
         "change_tags": ["chatgpt", "translated-fr"],
-        "publication_creation_date": "2026-08-21",
         "desired_sha256": f"desired-{page_id}",
         "operation": operation,
     }

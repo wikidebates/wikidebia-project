@@ -65,8 +65,8 @@ Le catalogue machine-readable complet est `requirements_catalog_wikidebia.json` 
 - **MW-008 — ACTIVE — automatic** : Do not invent nom-consacré/established-name or initialisation/initialization automatically. For every new Argument page, research whether a conventional name is attested in the literature and emit nom-consacré/established-name only when the dedicated discovery review concludes known_name; preserve legacy nom/name exactly only on attested pre-existing pages, and allow new additions to preexisting pages only through an explicit owner-approved assignment review.
 - **MW-009 — SUPERSEDED — automatic** : Do not generate citations/quotes in Argument pages. Replaced by the locked-citation rendering rules RND-003 and RND-004 from revision 1.2.27.
 - **MW-010 — ACTIVE — automatic** : Preserve an attested historical `débat-dédié` / `dedicated-debate` parameter exactly. Local justifications and objections may be omitted only when the omission and owner notification are locked.
-- **MW-011 — ACTIVE — automatic** : date-création/creation-date is mandatory for all four page types.
-- **MW-012 — ACTIVE — automatic** : Creation date is the date on which the page file in that language first becomes valid; it is immutable through corrections, enrichment, import and interlanguage insertion.
+- **MW-011 — ACTIVE — automatic** : The obsolete top-level date-création and creation-date parameters are forbidden in all four current page types.
+- **MW-012 — ACTIVE — automatic** : Current artifacts do not generate page creation dates; historical date metadata remains readable in immutable archives and must not be republished.
 - **MW-013 — ACTIVE — automatic** : Publication date is stored separately in import logs.
 - **MW-014 — ACTIVE — automatic** : French and English templates and parameters must never be mixed.
 - **MW-015 — ACTIVE — automatic** : Generated wikicode must be complete UTF-8 and contain no explanatory comments inside page content.
@@ -171,7 +171,7 @@ Le catalogue machine-readable complet est `requirements_catalog_wikidebia.json` 
 - **DFR-031 — ACTIVE — human+automatic heuristics** : Do not duplicate a cited publication through an editor or bookseller page, release announcement, press article announcing it, press release or news page merely summarizing the same report or study.
 - **DFR-032 — ACTIVE — human** : A related debate is not merely a shared theme, an argument or a Wikipedia article; it is a distinct debate page with a direct thematic relationship.
 - **DFR-033 — ACTIVE — human+automatic** : If no sufficiently relevant verified French Wikipedia article, documentary source or related debate exists, omit the optional parameter rather than inventing, translating or weakening the criterion.
-- **DFR-034 — ACTIVE — automatic+human** : The French Debate Work performs a final structural, introduction-purpose, source, language, classification, duplicate, Wikipedia, graph-link, current-fact, interlanguage and creation-date checklist before delivery.
+- **DFR-034 — ACTIVE — automatic+human** : The French Debate Work performs a final structural, introduction-purpose, source, language, classification, duplicate, Wikipedia, graph-link, current-fact, interlanguage and obsolete-parameter checklist before delivery.
 
 
 - **DFR-036 — ACTIVE — human+automatic ledger** : A bilingual introduction-review ledger records, for every actual subsection, its title, purpose and necessity for understanding the debate.
@@ -269,7 +269,7 @@ Le catalogue machine-readable complet est `requirements_catalog_wikidebia.json` 
 - **BI-005 — ACTIVE — automatic** : Interlanguage links are present in initial French canonical files, even when English pages are created later.
 - **BI-006 — ACTIVE — automatic** : The current workflow uses no interlanguage staging: canonical French files contain the links when the English translation is ready. Legacy staging remains historical format compatibility only.
 - **BI-007 — ACTIVE — automatic** : Changing an English canonical title through migration updates the English page, all English links and all French interlanguage targets.
-- **BI-008 — ACTIVE — automatic** : Adding interlanguage never changes the creation date.
+- **BI-008 — ACTIVE — automatic** : A pure interlanguage addition preserves all other content and does not restore obsolete page creation dates.
 
 ## 14. Lots, fichiers et transmissions
 
@@ -358,12 +358,12 @@ Le catalogue machine-readable complet est `requirements_catalog_wikidebia.json` 
 - **SUP-008 — SUPERSEDED — documentation** : Use a node model where camp and level are intrinsic fields of each node rather than occurrence properties.
   - Motif/évolution : Replaced by nodes/edges/occurrences DAG model.
 - **SUP-009 — SUPERSEDED — documentation** : Generate Argument pages without mandatory AI-warning and creation-date fields.
-  - Motif/évolution : Mandatory warnings and creation dates were added later.
+  - Motif/évolution : Mandatory AI warnings still apply; page creation dates were retired on 2026-11-24.
 - **SUP-010 — SUPERSEDED — documentation** : Limit Argument documentary parameters to bibliography only.
   - Motif/évolution : Domain-appropriate documentary profile prefers bibliography but permits web/video sources when substantively necessary.
 - **SUP-011 — SUPERSEDED — documentation** : Use the original aggregate-only pages.wiki/pages.json layout as the authoritative storage format.
   - Motif/évolution : Replaced by one individual source file per page plus generated aggregates.
-- **SUP-012 — MODIFIED — documentation** : Treat date-création or creation-date as the immediate draft-generation date even before validation.
+- **SUP-012 — SUPERSEDED — documentation** : Treat date-création or creation-date as the immediate draft-generation date even before validation.
   - Motif/évolution : Refined to the date on which the language-specific page file first becomes valid.
 - **SUP-013 — SUPERSEDED — documentation** : Keep warning parameters and nested warnings present even when empty.
   - Motif/évolution : Allowed structurally but not generated; empty optional parameters are omitted.
@@ -476,7 +476,7 @@ Chaque rubrique retenue est justifiée individuellement au moyen d’une structu
 
 ## 30. Correctif références et publication 1.2.9
 
-- **REF-030 — ACTIVE — automatic** : une date documentaire complète est en langage naturel dans la langue de la page ; une forme ISO machine est interdite, sans modifier les dates de création.
+- **REF-030 — ACTIVE — automatic** : Complete documentary dates are written in natural language in the page language; ISO machine dates are forbidden.
 - **MW-023 — ACTIVE — automatic** : les appels inline des introductions sont rédigés directement dans `<ref>…</ref>` en français comme en anglais ; aucun modèle MediaWiki n’est admis dans le corps d’une note développée.
 - **DFR-045 — ACTIVE — automatic+human** : les paramètres documentaires de la page Débat ou Debate sont remplis selon la pertinence réelle des sources, sans quota par paramètre. Une catégorie peut contenir une seule référence ; si aucune source pertinente n’est retenue, le paramètre est entièrement omis. Une même référence ne figure jamais dans plusieurs orientations ; une source développant substantiellement les deux positions est classée uniquement dans la documentation neutre.
 - **MW-024 — ACTIVE — human+heuristic** : l’acronyme courant, s’il existe, est déclaré et employé dans `sujet-développé` ou `expanded-topic`.

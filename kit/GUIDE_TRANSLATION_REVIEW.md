@@ -117,7 +117,7 @@ Seules les valeurs de `quote` et de `date` peuvent être traduites. Les valeurs 
 
 Les dates historiques françaises numériques (`15/06/2011`, `24.08.2018`, `11/2020`) et les mois abrégés (`17 nov. 2021`) sont comparés à la date anglaise à précision égale : une date au mois ne devient pas une date au jour. Une date source non reconnue ou impossible bloque la finalisation et demande une revue, au lieu de contourner silencieusement le contrôle. Une valeur numérique historique conservée strictement à l’identique reste admise.
 
-**Convention obligatoire pour le seul paramètre `date` du modèle anglais `{{Quote}}` traduit depuis `{{Citation}}`** : toute date complète (jour, mois, année) exprimée sous forme traduite utilise le format britannique `D Month YYYY`, avec le mois anglais en toutes lettres et sans suffixe ordinal. Exemples : `18 novembre 2026` → `18 November 2026` ; `1er janvier 2025` → `1 January 2025` ; `14 juillet 1789` → `14 July 1789`. Ne pas utiliser `November 18, 2026`, ni conserver un mois français. Les dates incomplètes et les formes historiques numériques inchangées conservent les règles précédentes : aucune précision n'est inventée. Cette exigence ne modifie ni `creation-date`, ni les dates dans le corps des pages, ni les autres paramètres.
+**Convention obligatoire pour le seul paramètre `date` du modèle anglais `{{Quote}}` traduit depuis `{{Citation}}`** : toute date complète (jour, mois, année) exprimée sous forme traduite utilise le format britannique `D Month YYYY`, avec le mois anglais en toutes lettres et sans suffixe ordinal. Exemples : `18 novembre 2026` → `18 November 2026` ; `1er janvier 2025` → `1 January 2025` ; `14 juillet 1789` → `14 July 1789`. Ne pas utiliser `November 18, 2026`, ni conserver un mois français. Les dates incomplètes et les formes historiques numériques inchangées conservent les règles précédentes : aucune précision n'est inventée. Cette exigence ne modifie ni les dates dans le corps des pages, ni les autres paramètres.
 
 ## 3. Finalisation
 
@@ -235,7 +235,7 @@ La revue éditoriale reste indépendante de la publication distante. Pour une cr
 
 - le résumé MediaWiki est `Translation of the French page: [[:fr:X|X]]` ;
 - la révision reçoit `chatgpt` et `translated-fr` ;
-- `creation-date=` est remplacé au plan par le jour civil réel de publication ;
+- `date-création` et `creation-date` sont obsolètes et ne sont jamais générés ni ajoutés à la publication ;
 - un nouvel `Argument` anglais ne transporte jamais `initialization=` depuis le wiki français ;
 - le paramètre MediaWiki actuel d'appellation consacrée est `established-name=` ; `name=` n'est qu'un alias historique de préservation ;
 - une `Quote` nouvellement traduite utilise `AI-translated quote`.

@@ -46,7 +46,7 @@ def _a0021_rendered() -> str:
         "source_parameter_presence": source_presence,
     }
     return render._render_argument(
-        lang="fr", node=node, content=page, registry=registry, sources={}, creation_date="2026-08-13",
+        lang="fr", node=node, content=page, registry=registry, sources={},
         include_interlanguage=False,
     )
 
@@ -84,7 +84,7 @@ def test_historical_debate_documentary_buckets_are_omitted_when_empty():
     }
     text = render._render_debate(
         lang="fr", registry=registry, metadata_lock={"debate": {"rubriques": ["Politique"], "keywords": ["vote électronique"]}},
-        content_lock={"debate": debate}, sources={}, creation_date="2026-08-13", include_interlanguage=False,
+        content_lock={"debate": debate}, sources={}, include_interlanguage=False,
     )
     assert "|bibliographie-pour=" not in text
     assert "|vidéographie-contre=" not in text
@@ -109,7 +109,7 @@ def test_new_page_does_not_gain_empty_parameters_from_logical_empty_values():
     node = {"id": "A9999", "fr": {"rubriques": ["Politique"], "keywords": ["vote"]}, "en": {"canonical_title": "Vote"}}
     registry = {"graph": {"edges": [], "occurrences": [], "nodes": [node]}}
     page = {"summary": "Résumé.", "citations": [], "sources": {}, "page_origin": "new", "preserved_parameters": {}, "source_parameter_presence": {}}
-    text = render._render_argument(lang="fr", node=node, content=page, registry=registry, sources={}, creation_date="2026-08-13", include_interlanguage=False)
+    text = render._render_argument(lang="fr", node=node, content=page, registry=registry, sources={}, include_interlanguage=False)
     assert "|citations=" not in text
     assert "|justifications=" not in text
     assert "|objections=" not in text
@@ -250,7 +250,7 @@ def test_vote_electronique_v8_remote_preflight_resolves_100_updates_without_para
     registry = {"debate": {"pages": {"en": {"canonical_title": "Electronic voting"}}}, "graph": {"edges": [], "occurrences": [], "nodes": []}}
     present = {"introduction", "articles-Wikipédia", "arguments-pour", "arguments-contre", "bibliographie-pour", "vidéographie-contre", "rubriques", "mots-clés"}
     debate_content = {"subject": "Vote électronique", "complete_topic": "la généralisation du vote électronique", "introduction": "Texte historique modifié", "wikipedia_articles": ["Vote électronique"], "documentation": {bucket: [] for bucket in content.DEBATE_BUCKETS}, "page_origin": "preexisting", "preserved_parameters": {}, "source_parameter_presence": _presence(list(content.PAGE_EDITORIAL_PARAMETERS["debate"]), present)}
-    debate_new = render._render_debate(lang="fr", registry=registry, metadata_lock={"debate": {"rubriques": ["Politique"], "keywords": ["vote électronique"]}}, content_lock={"debate": debate_content}, sources={}, creation_date="2026-08-13", include_interlanguage=False)
+    debate_new = render._render_debate(lang="fr", registry=registry, metadata_lock={"debate": {"rubriques": ["Politique"], "keywords": ["vote électronique"]}}, content_lock={"debate": debate_content}, sources={}, include_interlanguage=False)
     rows_old.append(("fr", "demo", "Débat vote électronique", debate_remote, "debate"))
     rows_new.append(("fr", "demo", "Débat vote électronique", debate_new, "debate"))
     remote_pages[("fr", "Débat vote électronique")] = (11, debate_remote)

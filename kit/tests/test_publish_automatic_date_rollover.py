@@ -31,141 +31,51 @@ def ready_publisher(tmp_path, monkeypatch, *, count=2, languages=None):
     manifest_path.write_text(json.dumps(manifest))
     config['operation']['languages']=languages or ['en'];config['operation']['page_types']=['argument']
     path.write_text(json.dumps(config))
-    clock=['2026-10-21']
-    monkeypatch.setattr(module.GenericPublisher,'_current_publication_date',lambda self:clock[0])
     adapter=FakeAdapter();writes=[];original_write=adapter.write_page
     def write(**kwargs):
         revision=original_write(**kwargs);writes.append(kwargs['title'])
         return revision
     adapter.write_page=write
     publisher=module.GenericPublisher(config,adapter,path)
-    # Date-rollover tests isolate time/revision guards from the independently
+    # Publication tests isolate creation/revision guards from the independently
     # tested signed bilingual transaction authorization gate.
     monkeypatch.setattr(module.GenericPublisher, '_assert_paired_translation_authorization', lambda self, plan: None)
     plan=publisher.build_plan()
-    return publisher,adapter,clock,writes,plan,path
+    return publisher,adapter,writes,plan,path
 
 
-def test_midnight_during_transfer_refreshes_only_remaining_creations(tmp_path,monkeypatch):
-    pub,adapter,clock,writes,plan,_=ready_publisher(tmp_path,monkeypatch)
-    before=copy.deepcopy(plan);source_before={r['source_path']:(pub.root/r['source_path']).read_bytes() for r in plan['actions']}
-    write=adapter.write_page
-    def at_midnight(**kwargs):
-        revision=write(**kwargs);clock[0]='2026-10-22';return revision
-    adapter.write_page=at_midnight
-    counts=pub.publish_with_date_refresh(plan=plan,confirmation=plan['plan_sha256'],rollover_dir=tmp_path/'rollovers')
-    assert counts=={'created':2,'updated':0,'skipped':0}
-    assert writes==['Title EN','Title EN 2']
-    assert '|creation-date=2026-10-21' in adapter.pages[('en','Title EN')][1]
-    assert '|creation-date=2026-10-22' in adapter.pages[('en','Title EN 2')][1]
-    assert plan==before
-    assert all((pub.root/rel).read_bytes()==raw for rel,raw in source_before.items())
-    audit_path=next((tmp_path/'rollovers').glob('*/rollover.json'));audit=json.loads(audit_path.read_text())
-    assert audit['completed_before_rollover'][0]['page_id']=='A1'
-    assert audit['remaining_after_rollover'][0]['page_id']=='A2'
-    assert json.loads(audit_path.with_name('previous-plan.json').read_text())==plan
-    state=json.loads((tmp_path/'.state/published/demo/en/latest.json').read_text())
-    assert len(state['pages'])==2
+def test_publication_and_resume_without_creation_dates(tmp_path, monkeypatch):
+    pub, adapter, writes, plan, _ = ready_publisher(tmp_path, monkeypatch)
+    before = copy.deepcopy(plan)
+    source_before = {r['source_path']: (pub.root/r['source_path']).read_bytes() for r in plan['actions']}
+    assert 'publication_date' not in plan
+    assert all('publication_creation_date' not in row for row in plan['actions'])
+    assert pub.publish(plan=plan, confirmation=plan['plan_sha256']) == {'created':2,'updated':0,'skipped':0}
+    assert all('|creation-date=' not in text for _,text in adapter.pages.values())
+    assert plan == before
+    assert all((pub.root/rel).read_bytes() == raw for rel,raw in source_before.items())
+    resume = pub.build_plan()
+    assert pub.publish(plan=resume, confirmation=resume['plan_sha256']) == {'created':0,'updated':0,'skipped':2}
+    assert len(writes) == 2
 
 
-def test_cli_refreshes_an_old_plan_before_the_first_write(tmp_path,monkeypatch,capsys):
-    pub,adapter,clock,writes,plan,path=ready_publisher(tmp_path,monkeypatch)
-    original=tmp_path/'plan.json';original.write_text(json.dumps(plan));before=original.read_bytes()
-    clock[0]='2026-10-22'
-    monkeypatch.setattr(module,'PywikibotAdapter',lambda *args:adapter)
-    assert module.main(['--config',str(path),'--mode','publish','--execute',
-        '--plan-input',str(original),'--confirm-plan-sha256',plan['plan_sha256']])==0
-    output=capsys.readouterr()
-    assert json.loads(output.out.splitlines()[-1])=={'created':2,'updated':0,'skipped':0}
-    assert 'actualisée automatiquement' in output.err
-    assert original.read_bytes()==before
-    assert len(list((tmp_path/'publication-date-rollovers').glob('*/rollover.json')))==1
-    assert len(writes)==2
-    assert all('|creation-date=2026-10-22' in text for _,text in adapter.pages.values())
+def test_filtered_publication_keeps_scope(tmp_path, monkeypatch):
+    pub, adapter, writes, plan, _ = ready_publisher(tmp_path, monkeypatch)
+    assert pub.publish(plan=plan, confirmation=plan['plan_sha256'], page_id='A2') == {'created':1,'updated':0,'skipped':0}
+    assert writes == ['Title EN 2']
 
 
-def test_multiple_midnights_do_not_duplicate_pages_or_counts(tmp_path,monkeypatch):
-    pub,adapter,clock,writes,plan,_=ready_publisher(tmp_path,monkeypatch,count=3)
-    write=adapter.write_page
-    def next_day(**kwargs):
-        revision=write(**kwargs);clock[0]=f'2026-10-{21+len(writes):02d}';return revision
-    adapter.write_page=next_day
-    counts=pub.publish_with_date_refresh(plan=plan,confirmation=plan['plan_sha256'],rollover_dir=tmp_path/'rollovers')
-    assert counts=={'created':3,'updated':0,'skipped':0}
-    assert len(set(writes))==len(writes)==3
-    assert len(list((tmp_path/'rollovers').glob('*/rollover.json')))==2
-
-
-@pytest.mark.parametrize('changed',['source','config','human_revision','tags'])
-def test_midnight_never_waives_an_independent_blocker(tmp_path,monkeypatch,changed):
-    pub,adapter,clock,writes,plan,path=ready_publisher(tmp_path,monkeypatch)
-    write=adapter.write_page
-    def drift(**kwargs):
-        revision=write(**kwargs);clock[0]='2026-10-22'
-        if changed=='source':
-            (pub.root/plan['actions'][1]['source_path']).write_text('Changed source')
-        elif changed=='config':
-            path.write_text(path.read_text()+'\n')
-        elif changed=='human_revision':
-            key=('en',kwargs['title']);remote=adapter.pages[key][1]+'Human edit'
-            adapter.pages[key]=(999,remote)
-            adapter.revisions[999]={'parent_id':revision,'user':'Another user','text':remote}
-        else:
-            adapter.available_change_tags=lambda:set()
-        return revision
-    adapter.write_page=drift
+def test_source_changed_after_plan_remains_blocking(tmp_path, monkeypatch):
+    pub, adapter, writes, plan, _ = ready_publisher(tmp_path, monkeypatch)
+    (pub.root/plan['actions'][0]['source_path']).write_text('Changed source')
     with pytest.raises(module.PublicationError):
-        pub.publish_with_date_refresh(plan=plan,confirmation=plan['plan_sha256'],rollover_dir=tmp_path/'rollovers')
-    assert len(writes)==1
-    assert ('en','Title EN 2') not in adapter.pages
-
-
-def test_clock_moving_backwards_is_not_automatically_authorized(tmp_path,monkeypatch):
-    pub,adapter,clock,writes,plan,_=ready_publisher(tmp_path,monkeypatch)
-    clock[0]='2026-10-20'
-    with pytest.raises(module.PublicationError,match='non croissant'):
-        pub.publish_with_date_refresh(plan=plan,confirmation=plan['plan_sha256'])
+        pub.publish(plan=plan, confirmation=plan['plan_sha256'])
     assert not writes
 
 
-def test_filtered_publication_keeps_its_scope_during_rollover(tmp_path,monkeypatch):
-    pub,adapter,clock,writes,plan,_=ready_publisher(tmp_path,monkeypatch)
-    clock[0]='2026-10-22'
-    counts=pub.publish_with_date_refresh(plan=plan,confirmation=plan['plan_sha256'],page_id='A2')
-    assert writes==['Title EN 2']
-    assert counts=={'created':1,'updated':0,'skipped':0}
-
-
-def test_resuming_on_another_day_preserves_each_original_creation_date(tmp_path,monkeypatch):
-    pub,adapter,clock,writes,plan,_=ready_publisher(tmp_path,monkeypatch)
-    write=adapter.write_page
-    def at_midnight(**kwargs):
-        revision=write(**kwargs);clock[0]='2026-10-22';return revision
-    adapter.write_page=at_midnight
-    pub.publish_with_date_refresh(plan=plan,confirmation=plan['plan_sha256'])
-    before=copy.deepcopy(adapter.pages)
-    clock[0]='2026-10-23'
-    pub.publication_date=clock[0]
-    resume=pub.build_plan()
-    assert [a['publication_creation_date'] for a in resume['actions']]==['2026-10-21','2026-10-22']
-    counts=pub.publish_with_date_refresh(plan=resume,confirmation=resume['plan_sha256'])
-    assert counts=={'created':0,'updated':0,'skipped':2}
-    assert adapter.pages==before
-    assert len(writes)==2
-
-
-def test_mixed_publication_does_not_rewrite_completed_french_pages(tmp_path,monkeypatch):
-    pub,adapter,clock,writes,plan,_=ready_publisher(tmp_path,monkeypatch,languages=['fr','en'])
-    write=adapter.write_page
-    def at_midnight(**kwargs):
-        revision=write(**kwargs)
-        if kwargs['title']=='Title EN':
-            clock[0]='2026-10-22'
-        return revision
-    adapter.write_page=at_midnight
-    counts=pub.publish_with_date_refresh(plan=plan,confirmation=plan['plan_sha256'])
-    assert counts=={'created':4,'updated':0,'skipped':0}
-    assert len(writes)==len(set(writes))==4
-    for action in plan['actions']:
-        if action['language']=='fr':
-            assert adapter.pages[('fr',action['title'])][1]==(pub.root/action['source_path']).read_text()
+def test_legacy_date_in_full_page_payload_is_blocked(tmp_path, monkeypatch):
+    pub, adapter, writes, plan, _ = ready_publisher(tmp_path, monkeypatch)
+    row = pub._manifest_page('en', 'A1')
+    with pytest.raises(module.PublicationError, match='date de création obsolète'):
+        pub._publication_text(row, '{{Argument|summary=Demo|creation-date=2000-01-01}}')
+    assert not writes

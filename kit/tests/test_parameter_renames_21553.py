@@ -28,13 +28,13 @@ def test_render_debate_uses_sujet_developpe_and_expanded_topic_only():
         lang="fr", registry=registry,
         metadata_lock={"debate": {"rubriques": ["Philosophie"], "keywords": ["démonstration"]}},
         content_lock={"debate": {"subject": "Démo", "complete_topic": "la démonstration", "page_origin": "new", "preserved_parameters": {}, "introduction": "{{Sous-partie|titre=Définition|contenu=Texte.}}", "wikipedia_articles": ["Démonstration"], "sources": {}, "documentation": {}}},
-        sources={}, creation_date="2026-08-10",
+        sources={},
     )
     en = render._render_debate(
         lang="en", registry=registry,
         metadata_lock={"debate": {"sections": ["Philosophy"], "keywords": ["demonstration"]}},
         content_lock={"debate": {"topic": "Demonstration", "complete_topic": "demonstration", "page_origin": "new", "preserved_parameters": {}, "introduction": "{{Subsection|title=Definition|content=Text.}}", "wikipedia_articles": ["Proof"], "sources": {}, "documentation": {}}},
-        sources={}, creation_date="2026-08-10",
+        sources={},
     )
     assert "|sujet-développé=la démonstration" in fr and "|sujet-complet=" not in fr
     assert "|expanded-topic=demonstration" in en and "|complete-topic=" not in en
@@ -45,7 +45,7 @@ def test_render_normalizes_legacy_detailed_debate_preserved_key():
     node = {"id": "A1", "fr": {"rubriques": ["Philosophie"], "keywords": ["test"]}, "en": {"canonical_title": "Argument"}}
     registry = {"graph": {"edges": [{"id": "E1", "parent_node_id": "A1", "child_node_id": "A2", "relation": "justification", "order": 1, "status": "active"}], "occurrences": [], "nodes": [node, child]}}
     content = {"summary": "Résumé.", "citations": [], "sources": {}, "page_origin": "preexisting", "preserved_parameters": {"avertissements-argument": {"present": False, "value": None}, "débat-détaillé": {"present": True, "value": "Débat source"}}}
-    text = render._render_argument(lang="fr", node=node, content=content, registry=registry, sources={}, creation_date="2026-08-10")
+    text = render._render_argument(lang="fr", node=node, content=content, registry=registry, sources={})
     assert "|débat-dédié=Débat source" in text
     assert "|débat-détaillé=" not in text
     assert "|justifications=" not in text
@@ -62,7 +62,7 @@ def test_render_normalizes_legacy_detailed_debate_preserved_key_in_english():
     node = {"id": "A1", "en": {"sections": ["Philosophy"], "keywords": ["test"]}, "fr": {"canonical_title": "Argument"}}
     registry = {"graph": {"edges": [{"id": "E1", "parent_node_id": "A1", "child_node_id": "A2", "relation": "justification", "order": 1, "status": "active"}], "occurrences": [], "nodes": [node, child]}}
     content = {"summary": "Summary.", "quotes": [], "sources": {}, "page_origin": "preexisting", "preserved_parameters": {"argument-warnings": {"present": False, "value": None}, "detailed-debate": {"present": True, "value": "Source debate"}}}
-    text = render._render_argument(lang="en", node=node, content=content, registry=registry, sources={}, creation_date="2026-08-10")
+    text = render._render_argument(lang="en", node=node, content=content, registry=registry, sources={})
     assert "|dedicated-debate=Source debate" in text
     assert "|detailed-debate=" not in text
     assert "|justifications=" not in text

@@ -1187,7 +1187,6 @@ def publication_config(root: Path, debate_id: str, scope: str, run_dir: Path) ->
         "sites": sites,
         "change_tags": ["chatgpt"],
         "translation_change_tag": "translated-fr",
-        "publication_timezone": str(settings.get("publication_timezone") or "Europe/Paris"),
         "verification_attempts": int(settings.get("verification_attempts", 8)),
         "verification_delay_seconds": float(settings.get("verification_delay_seconds", 2)),
         "write_delay_seconds": float(settings.get("write_delay_seconds", 0.5)),

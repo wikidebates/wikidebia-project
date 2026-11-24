@@ -61,23 +61,20 @@ PROTECTED_LIFECYCLE_PARAMETERS = {
         "avancement", "avertissements-titre", "avertissements-débat",
         "avertissements-bibliographie", "avertissements-sitographie",
         "avertissements-vidéographie", "débats-connexes", "interlangue",
-        "date-création",
     ),
     ("en", "debate"): (
         "progress", "title-warnings", "debate-warnings", "related-debates",
-        "creation-date",
     ),
     ("fr", "argument"): (
         "initialisation", "nom-consacré", "nom", "avertissements-titre",
         "avertissements-argument", "avertissements-résumé",
         "avertissements-références", "avertissements-justifications",
         "avertissements-objections", "débat-dédié", "interlangue",
-        "date-création",
     ),
     ("en", "argument"): (
         "initialization", "established-name", "name", "title-warnings", "argument-warnings",
         "summary-warnings", "reference-warnings", "justification-warnings",
-        "objection-warnings", "dedicated-debate", "creation-date",
+        "objection-warnings", "dedicated-debate",
     ),
 }
 
@@ -336,6 +333,17 @@ def remote_diff_is_only_preservable_metadata(
     links, or any other out-of-template human change.
     """
     changed = changed_top_level_parameters(prior_text, remote_text, language, page_type)
+    obsolete = "date-création" if language == "fr" else "creation-date"
+    if obsolete in changed:
+        # The owner is removing this field from both wikis. Accept only the
+        # exact removal from a proven prior revision, not a date replacement
+        # or any concurrent modification to the rest of the page.
+        from wikidebia_graph_actions import _set_optional_parameter_value
+        try:
+            removed = _set_optional_parameter_value(prior_text, page_type, obsolete, "", language=language)
+        except Exception:
+            return False, changed
+        return removed != prior_text and removed == remote_text, changed
     preservable = set(PROTECTED_LIFECYCLE_PARAMETERS[(language, page_type)])
     preservable.update(CONCURRENTLY_PRESERVABLE_METADATA[(language, page_type)])
     if not set(changed).issubset(preservable):
@@ -873,7 +881,8 @@ def preserve_remote_lifecycle_parameters(
 
     all_names = PROTECTED_LIFECYCLE_PARAMETERS[(language, page_type)]
     names = all_names
-    states = (desired_preserved_parameters or {}) if allow_historical_restoration else {}
+    states = ({name: state for name, state in (desired_preserved_parameters or {}).items()
+               if name not in {"date-création", "creation-date"}} if allow_historical_restoration else {})
     if allow_historical_restoration and page_type == "argument":
         current_name, legacy_name = (("nom-consacré", "nom") if language == "fr" else ("established-name", "name"))
         # Manifests created before norm 1.2.58 know only the legacy key.  A future
@@ -928,6 +937,8 @@ def preserve_remote_lifecycle_parameters(
     seen: set[str] = set()
     changes: dict[str, dict[str, Any]] = {}
     for key, value in parsed.params.items():
+        if normalize_key(key) in {'date creation', 'creation date'}:
+            continue
         canonical = protected_by_normalized.get(normalize_key(key))
         if canonical is None:
             preserved.append((key, value))
@@ -1783,6 +1794,8 @@ class RemoteUpdatePlanner:
             if not source.is_file():
                 raise UpdateError(f"Fichier de page absent : {source}")
             text = source.read_text(encoding="utf-8")
+            if not self.interlanguage_only and set(top_level_parameter_map(text, language, str(row.get("page_type") or "unknown"))[2]) & {"date-création", "creation-date"}:
+                raise UpdateError(f"Paramètre de date de création obsolète : {language}/{pid}; reconstruire le corpus")
             proposed = {
                 "language": language,
                 "page_id": pid,
@@ -1845,6 +1858,7 @@ class RemoteUpdatePlanner:
     ) -> list[str]:
         deleted = set(top_level_parameter_deletions(remote_text, proposed["content"], proposed["language"], proposed["page_type"]))
         allowed = self._historically_authorized_parameter_deletions(proposed["language"], proposed["page_id"])
+        allowed.update({"date-création", "creation-date"})
         if adoption:
             allowed.update(str(name) for name in adoption.get("allowed_parameter_deletions") or [])
         canonical_omissions = CANONICALLY_OMITTABLE_PARAMETERS.get(

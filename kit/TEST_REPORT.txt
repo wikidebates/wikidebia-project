@@ -1,6 +1,6 @@
 Wikidéb’IA Kit 2.16.47 — rapport de tests
 
-Tests pytest : 1923 réussis
+Tests pytest : 1921 réussis
 Norme : 1.2.88
 Validateur : 0.4.105
 
@@ -12,7 +12,7 @@ Historical keyword atomicity normalization : PASSED ; uniquement les métadonné
 Historical introduction provenance : PASSED ; le verrou français reste autoritatif.
 Final publication orchestration : PASSED ; les capacités de 2.16.39 sont conservées.
 Legacy non-canonical checkpoint status : PASSED ; un statut local historique non canonique est normalisé uniquement pour un workflow totalement non lié et déjà en final_publication.
-Publication date rollover : PASSED ; les pages déjà créées gardent leur date réelle et seules les pages encore absentes sont replannifiées au nouveau jour civil avec plan/préflight/autorisation successeurs audités.
+Retrait des dates de création : PASSED ; les nouveaux plans sont indépendants du jour civil, les anciennes autorisations datées sont bloquées et les dates documentaires restent préservées.
 Debate-first publication order : PASSED ; Debate précède les créations Argument, y compris après migration auditée d’un plan partiellement exécuté.
 
 Signed plan cross-version resume : PASSED ; les versions producteur restent de la provenance, tandis que signature, schéma, manifeste et configuration restent bloquants.

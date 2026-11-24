@@ -45,7 +45,6 @@ from wikidebia_corpus_build import (
     validate_debate_id,
     write_json,
 )
-from wikidebia_corpus_init import extract_page_metadata
 from wikidebia_editorial_workspace import WorkspaceError, fsync_directory, validate_work_id, workspace_receipt_hash
 from wikidebia_editorial_review import EditorialReviewError, _assert_source_unchanged, _run_validator
 
@@ -80,12 +79,16 @@ def _add_french_interlanguage(text: str, target_title: str) -> str:
         raise RenderError("Modèle historique ou titre interlangue ambigu")
     start, end, call = candidates[0]
     link = _template("Lien interlangue", (("langue", "en"), ("page", target_title)))
+    if call.get("date-création", "date creation", "creation-date", "creation date").strip():
+        raise RenderError("Import français contenant une date de création obsolète : réextraire la page après nettoyage du wiki")
     if call.get("interlangue"):
         if call.get("interlangue") != link:
             raise RenderError("Un lien interlangue historique existe déjà ; revue explicite requise")
         return text.rstrip("\n") + "\n"
     segments = _split_top_level(text[start + 2:end - 2], "|")
     keys = [(i, normalize_key(_split_top_level(segment, "=", maxsplit=1)[0])) for i, segment in enumerate(segments[1:], 1)]
+    if any(key in {"date creation", "creation date"} for _, key in keys):
+        raise RenderError("Import français contenant une date de création obsolète : réextraire la page après nettoyage du wiki")
     existing = [i for i, key in keys if key == "interlangue"]
     if len(existing) > 1:
         raise RenderError("Paramètre interlangue historique dupliqué")
@@ -93,8 +96,7 @@ def _add_french_interlanguage(text: str, target_title: str) -> str:
         i = existing[0]
         segments[i] = segments[i] + link
     else:
-        insertion = next((i for i, key in keys if key == "date creation"), len(segments))
-        segments.insert(insertion, "interlangue=" + link + "\n")
+        segments.append("interlangue=" + link + "\n")
     rendered = text[:start] + "{{" + "|".join(segments) + "}}" + text[end:]
     return rendered.rstrip("\n") + "\n"
 
@@ -548,37 +550,6 @@ def _main_arguments(
     return _sequence(rows)
 
 
-def _page_creation_dates(source: Path, registry: Mapping[str, Any], en_default: str) -> dict[tuple[str, str], str]:
-    debate_id = str((registry.get("debate") or {}).get("id"))
-    result: dict[tuple[str, str], str] = {}
-    debate_import = source / "imports/fr/debate/debate.wiki"
-    if debate_import.is_file():
-        date = extract_page_metadata(debate_import.read_text(encoding="utf-8"), debate=True).get("creation_date")
-        if date and re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(date)):
-            result[(debate_id, "fr")] = str(date)
-    for node in (registry.get("graph") or {}).get("nodes") or []:
-        if node.get("status") != "active":
-            continue
-        node_id = str(node.get("id"))
-        imported = source / f"imports/fr/arguments/{node_id}.wiki"
-        if imported.is_file():
-            date = extract_page_metadata(imported.read_text(encoding="utf-8"), debate=False).get("creation_date")
-            if date and re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(date)):
-                result[(node_id, "fr")] = str(date)
-    fallback = str(((load_json(source / "manifest.json", "manifest.json").get("editorial_controls") or {}).get("creation_date") or en_default))
-    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", fallback):
-        fallback = en_default
-    result.setdefault((debate_id, "fr"), fallback)
-    result[(debate_id, "en")] = en_default
-    for node in (registry.get("graph") or {}).get("nodes") or []:
-        if node.get("status") != "active":
-            continue
-        node_id = str(node.get("id"))
-        result.setdefault((node_id, "fr"), fallback)
-        result[(node_id, "en")] = en_default
-    return result
-
-
 def _page_origin(content: Mapping[str, Any]) -> str:
     origin = str(content.get("page_origin") or "new")
     if origin not in {"new", "preexisting"}:
@@ -826,7 +797,7 @@ def _normalize_inline_documentary_dates(text: str, lang: str) -> str:
 
 def _render_debate(
     *, lang: str, registry: Mapping[str, Any], metadata_lock: Mapping[str, Any], content_lock: Mapping[str, Any],
-    sources: Mapping[str, Mapping[str, Any]], creation_date: str, include_interlanguage: bool = True,
+    sources: Mapping[str, Mapping[str, Any]], include_interlanguage: bool = True,
     source_content: Mapping[str, Any] | None = None,
 ) -> str:
     debate = content_lock.get("debate") or {}
@@ -878,7 +849,6 @@ def _render_debate(
             _append_interlanguage_parameter(params, debate, "interlangue", _template("Lien interlangue", (("langue", "en"), ("page", target))))
         else:
             _append_interlanguage_parameter(params, debate, "interlangue", None)
-        _append_lifecycle_parameter(params, debate, "date-création", creation_date)
         return _template("Débat", params) + "\n"
 
     rendered = {
@@ -913,13 +883,12 @@ def _render_debate(
         ("sections", ", ".join((metadata_lock.get("debate") or {}).get("sections") or [])),
         ("keywords", ", ".join((metadata_lock.get("debate") or {}).get("keywords") or [])),
     ])
-    _append_lifecycle_parameter(params, debate, "creation-date", creation_date)
     return _template("Debate", params) + "\n"
 
 
 def _render_argument(
     *, lang: str, node: Mapping[str, Any], content: Mapping[str, Any], registry: Mapping[str, Any],
-    sources: Mapping[str, Mapping[str, Any]], creation_date: str, include_interlanguage: bool = True,
+    sources: Mapping[str, Mapping[str, Any]], include_interlanguage: bool = True,
     source_content: Mapping[str, Any] | None = None,
 ) -> str:
     node_id = str(node.get("id"))
@@ -968,7 +937,6 @@ def _render_argument(
             _append_interlanguage_parameter(params, content, "interlangue", _template("Lien interlangue", (("langue", "en"), ("page", target))))
         else:
             _append_interlanguage_parameter(params, content, "interlangue", None)
-        _append_lifecycle_parameter(params, content, "date-création", creation_date)
     else:
         citations = render_sequence(content.get("citations") or [], content.get("citation_passages") or [], lambda row: _citation_template(row, lang="en"))
         params = []
@@ -1015,7 +983,6 @@ def _render_argument(
             ("sections", ", ".join((node.get("en") or {}).get("sections") or [])),
             ("keywords", ", ".join((node.get("en") or {}).get("keywords") or [])),
         ])
-        _append_lifecycle_parameter(params, content, "creation-date", creation_date)
     return _template("Argument", params) + "\n"
 
 
@@ -1028,17 +995,17 @@ def _wiki_record() -> dict[str, Any]:
 
 def _page_manifest(
     *, debate_id: str, page_id: str, page_type: str, lang: str, title: str, file_path: str,
-    sha256: str, creation_date: str, batch_id: str | None, timestamp: str, report_path: str,
+    sha256: str, batch_id: str | None, timestamp: str, report_path: str,
     page_origin: str, preserved_parameters: Mapping[str, Any],
 ) -> dict[str, Any]:
     return {
         "page_manifest_version": "1.0", "debate_id": debate_id, "page_id": page_id,
         "page_type": page_type, "language": lang, "canonical_title": title,
-        "file_path": file_path, "sha256": sha256, "creation_date": creation_date,
+        "file_path": file_path, "sha256": sha256,
         "batch_id": batch_id, "status": "validated", "structure_version": "1.0",
         "render_profile_version": "1.0",
         "page_origin": page_origin,
-        "preserved_parameters": copy.deepcopy(dict(preserved_parameters)),
+        "preserved_parameters": copy.deepcopy({k: v for k, v in preserved_parameters.items() if k not in {'date-création', 'creation-date'}}),
         "validation": {"status": "passed", "report_path": report_path, "validated_at": timestamp},
         "wiki": _wiki_record(),
     }
@@ -1856,21 +1823,6 @@ def _build_rendered_copy(
         raise RenderError("Le verrou anglais ne couvre pas exactement les nœuds restant à traduire")
 
     timestamp = now_iso()
-    en_default_date = str(en_content.get("applied_at") or en_translation.get("applied_at") or timestamp)[:10]
-    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", en_default_date):
-        en_default_date = dt.date.today().isoformat()
-    dates = _page_creation_dates(source, registry, en_default_date)
-    for page_id, page in [(str(registry["debate"]["id"]), en_content.get("debate") or {}), *en_args.items()]:
-        if _page_origin(page) != "preexisting":
-            continue
-        present, value = _optional_preserved_parameter(page, "creation-date")
-        if present:
-            try:
-                dt.date.fromisoformat(str(value))
-            except ValueError as exc:
-                raise RenderError(f"Date de création anglaise historique invalide : {page_id}") from exc
-            dates[(page_id, "en")] = str(value)
-
     # Lock graph and titles before rendering.  This does not alter structural identity.
     lifecycle = (registry.get("graph") or {}).setdefault("lifecycle", {})
     lifecycle.update({"status": "locked", "locked_at": timestamp, "locked_by_stage": "bilingual_render", "structural_sha256": structural_sha256(registry)})
@@ -1887,7 +1839,7 @@ def _build_rendered_copy(
         debate_rel = f"output/{lang}/debate/debate.wiki"
         debate_text = _render_debate(
             lang=lang, registry=registry, metadata_lock=metadata_lock, content_lock=content_lock,
-            sources=source_by_id, creation_date=dates[(debate_id_actual, lang)],
+            sources=source_by_id,
             source_content=(fr_content.get("debate") or {}) if lang == "en" else None,
         )
         if lang == "fr" and published_french is not None:
@@ -1904,7 +1856,7 @@ def _build_rendered_copy(
             rel = f"output/{lang}/arguments/{node_id}.wiki"
             text = _render_argument(
                 lang=lang, node=node, content=(fr_args if lang == "fr" else en_args)[node_id],
-                registry=registry, sources=source_by_id, creation_date=dates[(node_id, lang)],
+                registry=registry, sources=source_by_id,
                 source_content=fr_args[node_id] if lang == "en" else None,
             )
             if lang == "fr" and published_french is not None:
@@ -1942,7 +1894,8 @@ def _build_rendered_copy(
     for lang in ("fr", "en"):
         rec = debate_pages[lang]
         rec["file"].update({"sha256": page_hash_by_key[(debate_id_actual, lang)], "status": "validated"})
-        rec["generation"].update({"status": "validated", "assigned_batch_id": None, "creation_date": dates[(debate_id_actual, lang)], "generated_at": timestamp, "validated_at": timestamp})
+        rec["generation"].pop("creation_date", None)
+        rec["generation"].update({"status": "validated", "assigned_batch_id": None, "generated_at": timestamp, "validated_at": timestamp})
         if lang == "fr":
             rec["interlanguage"].update({"status": "inserted", "inserted_at": timestamp, "verified_at": None})
     for node in nodes:
@@ -1951,7 +1904,8 @@ def _build_rendered_copy(
         for lang in languages:
             rec = node["pages"][lang]
             rec["file"].update({"sha256": page_hash_by_key[(node_id, lang)], "status": "validated"})
-            rec["generation"].update({"status": "validated", "assigned_batch_id": batch_by_lang[lang], "creation_date": dates[(node_id, lang)], "generated_at": timestamp, "validated_at": timestamp})
+            rec["generation"].pop("creation_date", None)
+            rec["generation"].update({"status": "validated", "assigned_batch_id": batch_by_lang[lang], "generated_at": timestamp, "validated_at": timestamp})
             if lang == "fr":
                 rec["interlanguage"].update({"status": "inserted", "inserted_at": timestamp, "verified_at": None})
 
@@ -1976,7 +1930,7 @@ def _build_rendered_copy(
         adoption = (page_content or {}).get("existing_english_update") if lang == "en" else None
         page_manifests.append(_page_manifest(
             debate_id=debate_id, page_id=page_id, page_type=page_type, lang=lang, title=title,
-            file_path=rel, sha256=sha, creation_date=dates[(page_id, lang)], batch_id=batch_id,
+            file_path=rel, sha256=sha, batch_id=batch_id,
             timestamp=timestamp, report_path="reports/final_validation.json",
             # Editorial origin and remote-publication origin answer different
             # questions.  A page translated as new in this Work may already
@@ -2000,6 +1954,8 @@ def _build_rendered_copy(
     manifest["updated_at"] = timestamp
     manifest["normative_versions"].update({"consolidated_norm": NORM_VERSION, "validator": VALIDATOR_VERSION})
     manifest.setdefault("translation_status", {})["en"] = "ready"
+    for obsolete in ("creation_date", "creation_date_policy"):
+        (manifest.get("editorial_controls") or {}).pop(obsolete, None)
     manifest["pages"] = page_manifests
     existing_updates = [row["existing_english_update"] for row in page_manifests if row.get("existing_english_update")]
     if existing_updates:

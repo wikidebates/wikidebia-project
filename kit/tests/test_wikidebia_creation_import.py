@@ -32,7 +32,7 @@ def returned(project, prepared, states=None, text=None, edit_files=None, filenam
         row['status'] = (states or {}).get(key, 'unchanged')
         if row['status'] != 'unchanged':
             path = 'editable/output/fr/' + ('debate/debate.wiki' if key == 'exemple' else f'arguments/{key}.wiki')
-            files[path] = (text or '{{Argument|r\u00e9sum\u00e9=Brouillon propre a ce raisonnement|date-cr\u00e9ation=2026-11-21}}').encode()
+            files[path] = (text or '{{Argument|r\u00e9sum\u00e9=Brouillon propre a ce raisonnement}}').encode()
     files['editable/RESPONSE.json'] = cc._json(response)
     if edit_files:
         edit_files(files)
@@ -86,7 +86,7 @@ def test_debate_import_requires_separate_review(project):
     set_state(project, 'exemple', 'pending')
     p = prepare(project)
     assert p['next']['action'] == 'draft_debate'
-    returned(project, p, {'exemple': 'generated'}, text='{{D\u00e9bat|introduction=Texte|date-cr\u00e9ation=2026-11-21}}')
+    returned(project, p, {'exemple': 'generated'}, text='{{D\u00e9bat|introduction=Texte}}')
     run_import(project)
     assert cr.creation_resume(project, CORPUS, prepare=False)['next']['action'] == 'review_debate'
     assert load(project / CORPUS / 'manifest.json')['global_status'] == 'graph_locked'
@@ -152,7 +152,7 @@ def test_existing_date_and_text_are_preserved_on_rejected_return(project):
     p = prepare(project)
     returned(project, p, {'A0001': 'generated'}, text='{{Argument|date-cr\u00e9ation=2026-11-22}}')
     before = snapshot(project / CORPUS)
-    with pytest.raises(ci.CreationImportError, match='date changed'): run_import(project)
+    with pytest.raises(ci.CreationImportError, match='Obsolete page creation-date'): run_import(project)
     assert snapshot(project / CORPUS) == before
 
 

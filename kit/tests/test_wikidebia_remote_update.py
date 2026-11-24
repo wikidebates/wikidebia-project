@@ -827,9 +827,9 @@ def test_update_preserves_absent_ai_warning_on_historical_page(tmp_path):
     assert '|résumé=Nouveau' in text
 
 
-def test_update_preserves_remote_creation_date_instead_of_current_corpus_date(tmp_path):
+def test_update_removes_retired_remote_creation_date(tmp_path):
     old = argument('Ancien').replace('|rubriques=Société', '|date-création=2017-04-09\n|rubriques=Société')
-    new = argument('Nouveau').replace('|rubriques=Société', '|date-création=2026-08-05\n|rubriques=Société')
+    new = argument('Nouveau')
     p, *_ = plan(
         tmp_path,
         old_pages=[('fr','A1','Titre',old)],
@@ -839,8 +839,7 @@ def test_update_preserves_remote_creation_date_instead_of_current_corpus_date(tm
     assert p['counts']['update'] == 1
     operation = p['operations']['update'][0]
     text = (tmp_path / operation['source_path']).read_text(encoding='utf-8')
-    assert '|date-création=2017-04-09' in text
-    assert '|date-création=2026-08-05' not in text
+    assert '|date-création=' not in text
 
 
 def test_update_adopts_only_remote_preservable_metadata_drift(tmp_path):
@@ -998,23 +997,23 @@ def test_remote_adoption_rejects_changed_revision(tmp_path):
 
 
 def test_dieu_manual_sync_plan_has_no_blocked_or_manual_review(tmp_path):
-    old_religions = "{{Argument\n|débat-dédié=Les religions se rejoignent-elles ?\n|rubriques=Religion et spiritualité\n|mots-clés=Dieu, religion, contradiction, pluralisme religieux\n|date-création=2021-02-17\n}}\n"
+    old_religions = "{{Argument\n|débat-dédié=Les religions se rejoignent-elles ?\n|rubriques=Religion et spiritualité\n|mots-clés=Dieu, religion, contradiction, pluralisme religieux\n}}\n"
     proposed_religions = old_religions.replace("{{Argument\n", "{{Argument\n|résumé=Résumé vérifié. Deuxième phrase.\n", 1)
     new_parent_remote = "{{Argument\n|justifications={{Justification\n|page=Les religions se contredisent\n|titre-affiché=Les religions se contredisent\n}}\n|rubriques=Culture, Religion et spiritualité\n|mots-clés=Dieu, religion, contradiction\n}}\n"
-    new_parent_proposed = new_parent_remote.replace("\n}}\n", "\n|date-création=2026-08-06\n}}\n", 1)
-    reinc_remote = "{{Argument\n|initialisation=Objection@30833\n|débat-dédié=La réincarnation existe-t-elle ?\n|rubriques=Religion et spiritualité\n|mots-clés=réincarnation\n|date-création=2026-08-06\n}}\n"
+    new_parent_proposed = new_parent_remote
+    reinc_remote = "{{Argument\n|initialisation=Objection@30833\n|débat-dédié=La réincarnation existe-t-elle ?\n|rubriques=Religion et spiritualité\n|mots-clés=réincarnation\n}}\n"
     reinc_proposed = reinc_remote.replace("|mots-clés=réincarnation\n", "|mots-clés=réincarnation, scepticisme\n")
-    fatima_remote = "{{Argument\n|initialisation=Objection@6604\n|débat-dédié=Le miracle du soleil de Fatima est-il fondé ?\n|rubriques=Religion et spiritualité, Science\n|mots-clés=miracle, soleil, Fatima, illusion, charlatanisme\n|date-création=2026-08-06\n}}\n"
+    fatima_remote = "{{Argument\n|initialisation=Objection@6604\n|débat-dédié=Le miracle du soleil de Fatima est-il fondé ?\n|rubriques=Religion et spiritualité, Science\n|mots-clés=miracle, soleil, Fatima, illusion, charlatanisme\n}}\n"
     fatima_proposed = fatima_remote.replace("miracle, soleil, Fatima", "miracle, Fatima")
     external = "Argument externe"
-    aseity_old = "{{Argument\n|résumé=Texte. Deuxième phrase.\n|objections={{Objection\n|page=Objection interne\n|titre-affiché=Objection interne\n}}\n|rubriques=Philosophie\n|date-création=2026-08-05\n}}\n"
+    aseity_old = "{{Argument\n|résumé=Texte. Deuxième phrase.\n|objections={{Objection\n|page=Objection interne\n|titre-affiché=Objection interne\n}}\n|rubriques=Philosophie\n}}\n"
     aseity_remote = aseity_old.replace(
         "|objections={{Objection\n|page=Objection interne\n|titre-affiché=Objection interne\n}}",
         f"|objections={{{{Objection\n|page=Objection interne\n|titre-affiché=Objection interne\n}}}}{{{{Objection\n|page={external}\n|titre-affiché={external}\n}}}}",
         1,
     )
-    debate_remote = "{{Débat\n|arguments-contre={{Argument contre\n|page=Argument retiré\n|titre-affiché=Argument retiré\n}}\n|date-création=2017-01-29\n}}\n"
-    debate_proposed = "{{Débat\n|date-création=2017-01-29\n}}\n"
+    debate_remote = "{{Débat\n|arguments-contre={{Argument contre\n|page=Argument retiré\n|titre-affiché=Argument retiré\n}}\n}}\n"
+    debate_proposed = "{{Débat\n}}\n"
     new_pages = [
         ("fr", "dieu", "Dieu existe-t-il ?", debate_proposed, "debate"),
         ("fr", "A0016", "Les religions se contredisent", proposed_religions),
@@ -1031,7 +1030,7 @@ def test_dieu_manual_sync_plan_has_no_blocked_or_manual_review(tmp_path):
     adoptions = [
         {"language":"fr","page_id":"dieu","title":"Dieu existe-t-il ?","observed_revision_id":11,"observed_sha256":module.sha_text(debate_remote),"reason":"Révision manuelle adoptée.","allow_proposed_change":True,"allowed_lifecycle_parameter_changes":[],"allowed_parameter_deletions":["arguments-contre"]},
         {"language":"fr","page_id":"A0016","title":"Les religions se contredisent","observed_revision_id":12,"observed_sha256":module.sha_text(old_religions),"reason":"Révision manuelle adoptée.","allow_proposed_change":True,"allowed_lifecycle_parameter_changes":[]},
-        {"language":"fr","page_id":"A0755","title":"Dieu n'existe pas car les religions se contredisent","observed_revision_id":13,"observed_sha256":module.sha_text(new_parent_remote),"reason":"Révision manuelle adoptée.","allow_proposed_change":True,"allowed_lifecycle_parameter_changes":["date-création"]},
+        {"language":"fr","page_id":"A0755","title":"Dieu n'existe pas car les religions se contredisent","observed_revision_id":13,"observed_sha256":module.sha_text(new_parent_remote),"reason":"Révision manuelle adoptée.","allow_proposed_change":True,"allowed_lifecycle_parameter_changes":[]},
         {"language":"fr","page_id":"A0756","title":"La réincarnation n'existe pas","observed_revision_id":14,"observed_sha256":module.sha_text(reinc_remote),"reason":"Révision manuelle adoptée.","allow_proposed_change":True,"allowed_lifecycle_parameter_changes":[]},
         {"language":"fr","page_id":"A0757","title":"Le miracle du soleil de Fatima n'est pas fondé","observed_revision_id":15,"observed_sha256":module.sha_text(fatima_remote),"reason":"Révision manuelle adoptée.","allow_proposed_change":True,"allowed_lifecycle_parameter_changes":[]},
         {"language":"fr","page_id":"A0752","title":"L'aséité divine est menacée","observed_revision_id":16,"observed_sha256":module.sha_text(aseity_remote),"reason":"Relation externe conservée.","allow_proposed_change":False,"allowed_lifecycle_parameter_changes":[],"external_relations":[{"relation":"objection","page":external,"displayed_title":external}]},
@@ -1047,8 +1046,10 @@ def test_dieu_manual_sync_plan_has_no_blocked_or_manual_review(tmp_path):
     result, *_ = plan(tmp_path, remote_pages=remote, old_pages=old_pages, new_pages=new_pages, remote_adoptions=adoptions)
     assert result["counts"]["blocked"] == 0
     assert result["counts"]["manual_review"] == 0
-    assert result["counts"]["update"] == 5
-    assert result["counts"]["skip"] == 1
+    # The former date-only addition is now correctly a no-op.
+    assert result["counts"]["update"] == 4
+    assert result["counts"]["skip"] == 2
+    assert any(row["page_id"] == "A0755" for row in result["operations"]["skip"])
     assert result["counts"]["move"] == 0
 
 
@@ -1075,7 +1076,7 @@ def test_interlanguage_explicit_assignment_survives_historical_restoration():
 
 
 def test_french_interlanguage_addition_gets_page_specific_summary_and_executes(tmp_path):
-    old = "{{Argument\n|résumé=Texte.\n|rubriques=Philosophie\n|date-création=2020-01-01\n}}\n"
+    old = "{{Argument\n|résumé=Texte.\n|rubriques=Philosophie\n}}\n"
     en_title = "English title"
     link = f"{{{{Lien interlangue\n|langue=en\n|page={en_title}\n}}}}"
     new = old.replace("|rubriques=", f"|interlangue={link}\n|rubriques=", 1)

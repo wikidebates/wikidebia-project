@@ -214,11 +214,9 @@ def extract_page_metadata(text: str, *, debate: bool = False) -> dict[str, Any]:
         raise CorpusInitError("Modèle principal Débat/Argument introuvable dans une page importée")
     rubriques = [item for item in _split_metadata(outer.get("rubriques", "sections")) if item in RUBRIQUES]
     keywords = _split_metadata(outer.get("mots-clés", "mots cles", "mots clés", "keywords"))
-    creation_date = outer.get("date-création", "date creation", "creation-date", "creation date").strip() or None
     return {
         "rubriques": rubriques,
         "keywords": keywords,
-        "creation_date": creation_date,
     }
 
 
@@ -527,7 +525,6 @@ def make_empty_page_record(path: str, *, interlanguage: bool) -> dict[str, Any]:
         "generation": {
             "status": "pending",
             "assigned_batch_id": None,
-            "creation_date": None,
             "generated_at": None,
             "validated_at": None,
         },
@@ -1368,7 +1365,6 @@ def build_corpus(
                 "release_receipt_path": None,
             },
             "editorial_controls": {
-                "creation_date": dt.date.today().isoformat(),
                 "individual_review_path": "reviews/individual_review.json",
                 "individual_review_report_path": "reports/import_report.md",
                 "keyword_vocabulary_path": "data/keyword_vocabulary.json",

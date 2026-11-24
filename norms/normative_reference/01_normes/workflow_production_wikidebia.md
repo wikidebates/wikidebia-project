@@ -44,7 +44,7 @@ Si le ZIP de revue rejetée contient déjà des décisions structurelles explici
 
 Le registre maître et les fichiers individuels sont les sources de vérité. Les titres canoniques français sont verrouillés avant la première génération française. Les titres canoniques anglais et les liens `{{Lien interlangue}}` français dépendent de `translation_status.en` : avec `deferred`, aucun titre anglais ni lien interlangue n’est requis ; avec `ready` ou `published`, les titres anglais sont verrouillés et chaque page française contient exactement le lien vers son titre canonique anglais.
 
-Aucune copie `staging/interlanguage/` ni ancien mécanisme de patch de corpus n’est utilisé. Lorsque l’anglais passe de `deferred` à `ready` ou `published`, l’ajout des liens français se fait par la reprise interlangue explicite et sûre prévue par le kit, sans modifier la date de création française.
+Aucune copie `staging/interlanguage/` ni ancien mécanisme de patch de corpus n’est utilisé. Lorsque l’anglais passe de `deferred` à `ready` ou `published`, l’ajout des liens français se fait par la reprise interlangue explicite et sûre prévue par le kit.
 
 Chaque Work reçoit un handoff vérifié, modifie uniquement les champs autorisés et livre des rapports reproductibles. Dans une reprise issue de pages existantes, les résumés et l’introduction historiques sont protégés par défaut : `fr_content_review` peut enregistrer des suggestions, mais aucun delta n’est appliqué sans décision propriétaire explicite et traçable. Une autorisation valide sélectionne la valeur finale autorisée dans cette même phase et reste strictement limitée à son champ et à sa portée ; l’absence historique d’un résumé reste une absence sauf création nominative. Hors les deux checkpoints français déclarés (graphe/titres puis contenu/classification), aucune écriture distante n’est autorisée avant W11. Ces exceptions conservent un plan et un reçu signés et ne dispensent pas de la publication finale.
 
@@ -74,7 +74,7 @@ Les états `interlanguage_prepared` et `interlanguage_applied` sont historiques.
 
 ## 3. Work 00 — Cadrage
 
-Définir la proposition, le périmètre, les acteurs, juridictions, ambiguïtés, exclusions, versions normatives, date de création attendue et chemins du paquet. Créer `manifest.json`, `scope.json` et le registre initial sans inventer de contenu documentaire.
+Définir la proposition, le périmètre, les acteurs, juridictions, ambiguïtés, exclusions, versions normatives et chemins du paquet. Créer `manifest.json`, `scope.json` et le registre initial sans inventer de contenu documentaire.
 
 ## 4. Work 01 — Recherche, graphe et titres bilingues
 

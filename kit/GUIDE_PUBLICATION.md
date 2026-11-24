@@ -49,25 +49,9 @@ La deuxième commande effectue réellement les écritures distantes. Toute diver
 
 Déposer le ZIP du corpus dans `incoming/`, puis lancer `./wikidebia publish [SÉLECTEUR] --scope all`.
 
-### Transfert anglais qui passe minuit
+### Reprise de publication après minuit
 
-`publish` actualise automatiquement la date si le transfert des traductions anglaises
-passe au jour suivant dans le fuseau de publication (par défaut `Europe/Paris`).
-Les pages déjà créées conservent leur date réelle ; seules les créations restantes
-reçoivent la nouvelle date. Une reprise ultérieure reconnaît également ces pages
-sans les réécrire. L’archive et les fichiers du corpus restent inchangés.
-
-Avant de continuer, la commande relit le wiki, relance les contrôles locaux et
-vérifie que le nouveau plan change uniquement les dates des créations restantes
-et le statut des opérations déjà terminées. Les collisions, modifications
-concurrentes et divergences de contenu, de configuration, de résumé d’édition ou
-de balises restent bloquantes. Aucun autre changement n’est autorisé par cette reprise.
-
-Le plan initial est conservé. Chaque basculement archive les deux plans signés
-et `rollover.json` sous `plans/<débat>/<exécution>/publication-date-rollovers/` ;
-le journal contient l’événement `publication_date_refreshed`. Aucun réglage ni
-nouvelle commande n’est nécessaire. L’orchestrateur éditorial conserve sa reprise
-avec rescellement du préflight et de l’autorisation.
+La date civile ne modifie plus le contenu à publier : le changement de jour ne nécessite aucun recalcul du plan. Les vérifications de révision, de contenu, de configuration, de résumé et de balises demeurent obligatoires. Un ancien plan signé qui imposait une date de création de page ne doit pas être exécuté ; reconstruire et autoriser son remplacement.
 
 ### Noms français normalisés à l’import
 

@@ -132,8 +132,7 @@ def _page_state(inputs: ResumeInputs, corpus: Path, page_id: str,
     else:
         state = "to_generate"
     if actual is not None and g in {"generated", "validated"}:
-        if (not generation.get("generated_at") or not generation.get("creation_date")
-                or generation.get("creation_date") != page.get("creation_date")):
+        if not generation.get("generated_at"):
             raise CreationResumeError("Missing or divergent generation provenance: " + page_id)
     return {"page_id": page_id, "batch_id": batch_id, "state": state,
             "file_path": rel.as_posix(), "sha256": actual}

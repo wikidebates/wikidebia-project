@@ -692,7 +692,6 @@
         }
       },
       "required": [
-        "creation_date",
         "individual_review_path",
         "individual_review_report_path",
         "keyword_vocabulary_path",

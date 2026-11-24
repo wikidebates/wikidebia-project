@@ -339,8 +339,8 @@ def extract_actions_from_review(build: Path) -> list[dict[str, Any]]:
     return actions
 
 
-def _main_template_raw(text: str, page_type: str) -> tuple[str, int, int]:
-    expected = _MAIN_TEMPLATE[page_type]
+def _main_template_raw(text: str, page_type: str, *, language: str = "fr") -> tuple[str, int, int]:
+    expected = "debate" if language == "en" and page_type == "debate" else _MAIN_TEMPLATE[page_type]
     candidates: list[tuple[int, int, str]] = []
     for start, end in _template_spans(text):
         raw = text[start:end]
@@ -425,14 +425,14 @@ def _replace_parameter_value(text: str, page_type: str, parameter: str, new_valu
     return text[:start] + new_raw + text[end:]
 
 
-def _set_optional_parameter_value(text: str, page_type: str, parameter: str, new_value: str) -> str:
+def _set_optional_parameter_value(text: str, page_type: str, parameter: str, new_value: str, *, language: str = "fr") -> str:
     """Set a non-empty top-level value, or omit the parameter when empty."""
     if new_value.strip():
         return _replace_parameter_value(
             text, page_type, parameter, new_value, create_if_missing=True,
         )
 
-    raw, start, end = _main_template_raw(text, page_type)
+    raw, start, end = _main_template_raw(text, page_type, language=language)
     inner = raw[2:-2]
     wanted = normalize_key(parameter)
     for index, (seg_start, seg_end) in enumerate(_segment_offsets(inner)):

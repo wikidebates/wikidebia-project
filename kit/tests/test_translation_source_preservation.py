@@ -275,7 +275,7 @@ def test_french_render_preserves_every_historical_parameter_and_comments(tmp_pat
     import re
     from wikidebia_graph_extract import parse_template
     from wikidebia_render import _render_preserved_french, RenderError
-    raw = "<!-- header {{ignored}} -->\n{{Argument\n|résumé=Une ancienne formulation.\n|citations={{Citation|citation=Exactement !|auteurs=Un auteur}}\nTexte entre les citations.\n|webliographie=[https://example.org Ancienne source]\n|mots-clés=justice, justice\n|date-création=2001-01-01\n}}"
+    raw = "<!-- header {{ignored}} -->\n{{Argument\n|résumé=Une ancienne formulation.\n|citations={{Citation|citation=Exactement !|auteurs=Un auteur}}\nTexte entre les citations.\n|webliographie=[https://example.org Ancienne source]\n|mots-clés=justice, justice\n}}"
     p=tmp_path/'imports/fr/arguments/A1.wiki';p.parent.mkdir(parents=True);p.write_text(raw)
     locked={'import_path':str(p.relative_to(tmp_path)),'import_sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
     result=_render_preserved_french(tmp_path,locked,'An English title')
@@ -378,3 +378,14 @@ def test_historical_grouping_and_million_notation(fr, en, expected):
 ])
 def test_historical_number_parser_is_signed_and_fails_closed(fr, en, expected):
     assert preservation.historical_numbers_preserved(fr, en) is expected
+
+
+def test_pure_interlanguage_render_rejects_stale_dated_import(tmp_path):
+    from wikidebia_render import _render_preserved_french, RenderError
+    raw = "{{Argument\\n|résumé=Texte historique.\\n|date-création=2001-01-01\\n}}".replace("\\n", "\n")
+    p = tmp_path / "dated.wiki"
+    p.write_text(raw, encoding="utf-8")
+    locked = {"import_path": p.name, "import_sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
+    with pytest.raises(RenderError, match="date de création obsolète"):
+        _render_preserved_french(tmp_path, locked, "English title")
+    assert p.read_text(encoding="utf-8") == raw

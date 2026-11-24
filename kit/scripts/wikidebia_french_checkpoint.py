@@ -35,7 +35,6 @@ from wikidebia_render import (
     _batch,
     _main_arguments,
     _relations,
-    _page_creation_dates,
     _page_manifest,
     _render_argument,
     _render_debate,
@@ -253,10 +252,6 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
     write_json(target / "data/fr_content_lock.json", fr_content)
 
     timestamp = now_iso()
-    fallback_date = str(fr_content.get("applied_at") or timestamp)[:10]
-    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", fallback_date):
-        fallback_date = dt.date.today().isoformat()
-    dates = _page_creation_dates(target, registry, fallback_date)
 
     lifecycle = (registry.get("graph") or {}).setdefault("lifecycle", {})
     lifecycle.update({
@@ -281,7 +276,7 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
     debate_rel = "output/fr/debate/debate.wiki"
     debate_text = _render_debate(
         lang="fr", registry=registry, metadata_lock=fr_meta, content_lock=fr_content,
-        sources=source_by_id, creation_date=dates[(debate_id_actual, "fr")],
+        sources=source_by_id,
         include_interlanguage=False,
     )
     debate_text = _retain_baseline_parameters(
@@ -297,7 +292,7 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
         rel = f"output/fr/arguments/{node_id}.wiki"
         text = _render_argument(
             lang="fr", node=node, content=fr_args[node_id], registry=registry,
-            sources=source_by_id, creation_date=dates[(node_id, "fr")],
+            sources=source_by_id,
             include_interlanguage=False,
         )
         baseline = baseline_arguments.get(node_id)
@@ -340,17 +335,19 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
     page_hash_by_key = {(page_id, lang): sha for page_id, lang, _type, _rel, sha in output_paths}
     debate_rec = debate_pages["fr"]
     debate_rec["file"].update({"sha256": page_hash_by_key[(debate_id_actual, "fr")], "status": "validated"})
+    debate_rec["generation"].pop("creation_date", None)
     debate_rec["generation"].update({
         "status": "validated", "assigned_batch_id": None,
-        "creation_date": dates[(debate_id_actual, "fr")], "generated_at": timestamp, "validated_at": timestamp,
+        "generated_at": timestamp, "validated_at": timestamp,
     })
     for node in nodes:
         node_id = str(node.get("id"))
         rec = node["pages"]["fr"]
         rec["file"].update({"sha256": page_hash_by_key[(node_id, "fr")], "status": "validated"})
+        rec["generation"].pop("creation_date", None)
         rec["generation"].update({
             "status": "validated", "assigned_batch_id": "FR-A-001",
-            "creation_date": dates[(node_id, "fr")], "generated_at": timestamp, "validated_at": timestamp,
+            "generated_at": timestamp, "validated_at": timestamp,
         })
 
     registry["schema"]["validator_version"] = VALIDATOR_VERSION
@@ -377,7 +374,7 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
             batch_id = "FR-A-001"
         pages.append(_page_manifest(
             debate_id=debate_id, page_id=page_id, page_type=page_type, lang=lang, title=title,
-            file_path=rel, sha256=sha, creation_date=dates[(page_id, "fr")], batch_id=batch_id,
+            file_path=rel, sha256=sha, batch_id=batch_id,
             timestamp=timestamp, report_path="reports/fr_checkpoint_validation.json",
             page_origin=str(content.get("page_origin") or "preexisting"),
             preserved_parameters=content.get("preserved_parameters") or {},
@@ -390,6 +387,8 @@ def _build_content_checkpoint_copy(project_root: Path, source: Path, target: Pat
         "consolidated_norm": NORM_VERSION, "validator": VALIDATOR_VERSION,
     })
     manifest.setdefault("translation_status", {})["en"] = "deferred"
+    for obsolete in ("creation_date", "creation_date_policy"):
+        (manifest.get("editorial_controls") or {}).pop(obsolete, None)
     manifest["pages"] = pages
     manifest["batches"] = [copy.deepcopy(batch)]
     input_sha = structural_sha256(registry)
@@ -558,6 +557,8 @@ def _verify_graph_checkpoint_delta(target: Path, registry: dict[str, Any], rows:
                 )
                 allowed = ["justifications", "objections"]
             proof_id = page_id
+        text = _set_optional_parameter_value(text, kind, "date-création", "")
+        allowed.append("date-création")
         if rel in expected:
             raise FrenchCheckpointError(f"Sortie française dupliquée dans la provenance : {rel}")
         expected[rel] = (text, {"page_id": proof_id, "page_type": kind, "import_path": str(row.get("import_path")), "import_sha256": imported_sha}, allowed)
@@ -664,6 +665,7 @@ def _build_graph_checkpoint_copy(project_root: Path, source: Path, target: Path,
     )
     debate_id_actual = str((registry.get("debate") or {}).get("id") or debate_id)
     debate_rel = "output/fr/debate/debate.wiki"
+    debate_text = _set_optional_parameter_value(debate_text, "debate", "date-création", "")
     debate_out = target / debate_rel; debate_out.parent.mkdir(parents=True, exist_ok=True); debate_out.write_text(debate_text, encoding="utf-8", newline="\n")
     debate_template = _outer_template(debate_import, {"debat"})
     output_rows.append((debate_id_actual, "debate", debate_rel, sha256_file(debate_out), {"page_origin":"preexisting", "preserved_parameters":_page_lifecycle_snapshot(debate_template,"debate")}))
@@ -693,11 +695,10 @@ def _build_graph_checkpoint_copy(project_root: Path, source: Path, target: Path,
                 ),
             )
         rel = f"output/fr/arguments/{node_id}.wiki"
+        text = _set_optional_parameter_value(text, "argument", "date-création", "")
         out = target / rel; out.parent.mkdir(parents=True, exist_ok=True); out.write_text(text, encoding="utf-8", newline="\n")
         output_rows.append((node_id, "argument", rel, sha256_file(out), {"page_origin":"preexisting", "preserved_parameters":_page_lifecycle_snapshot(template,"argument")}))
 
-    fallback_date = timestamp[:10]
-    dates = _page_creation_dates(target, registry, fallback_date)
     pages: list[dict[str,Any]] = []
     for page_id, page_type, rel, digest, metadata in output_rows:
         if page_type == "debate":
@@ -707,7 +708,7 @@ def _build_graph_checkpoint_copy(project_root: Path, source: Path, target: Path,
             node = next(node for node in active_nodes if str(node.get("id")) == page_id)
             title = str((node.get("fr") or {}).get("canonical_title") or "")
             batch_id = "FR-A-001"
-        pages.append(_page_manifest(debate_id=debate_id,page_id=page_id,page_type=page_type,lang="fr",title=title,file_path=rel,sha256=digest,creation_date=dates.get((page_id,"fr"),fallback_date),batch_id=batch_id,timestamp=timestamp,report_path="reports/fr_checkpoint_validation.json",page_origin=metadata["page_origin"],preserved_parameters=metadata["preserved_parameters"]))
+        pages.append(_page_manifest(debate_id=debate_id,page_id=page_id,page_type=page_type,lang="fr",title=title,file_path=rel,sha256=digest,batch_id=batch_id,timestamp=timestamp,report_path="reports/fr_checkpoint_validation.json",page_origin=metadata["page_origin"],preserved_parameters=metadata["preserved_parameters"]))
     pages.sort(key=lambda row: (0 if row["page_type"] == "debate" else 1, row["page_id"]))
 
     structural = structural_sha256(registry)
@@ -731,6 +732,8 @@ def _build_graph_checkpoint_copy(project_root: Path, source: Path, target: Path,
     manifest["global_status"]="fr_validated"; manifest["updated_at"]=timestamp
     manifest.setdefault("normative_versions",{}).update({"consolidated_norm":NORM_VERSION,"validator":VALIDATOR_VERSION})
     manifest.setdefault("translation_status",{})["en"]="deferred"
+    for obsolete in ("creation_date", "creation_date_policy"):
+        (manifest.get("editorial_controls") or {}).pop(obsolete, None)
     manifest["pages"]=pages; manifest["batches"]=[copy.deepcopy(batch)]
     manifest["validations"]=_fr_validation_records(timestamp, structural_sha256(registry))
     manifest["publication_gate"]={"local_release_status":"corrective_in_progress","remote_write_authorized":True,"remote_template_compatibility":"not_checked","blocking_reason":None,"checked_at":timestamp}

@@ -58,7 +58,6 @@ def test_1258_new_french_argument_accepts_nom_consacre(tmp_path: Path):
 |résumé=Un résumé complet développe le raisonnement de cet argument.
 |rubriques=Philosophie
 |mots-clés=Dieu
-|date-création=2026-08-10
 }}""")
     validate_template_shape(ctx, tmpl, "fr", "argument", "argument.wiki", page)
     assert not any(item.code in {"WDV-MWK-003", "WDV-EDT-032"} for item in ctx.report.findings), ctx.report.to_text()
@@ -73,7 +72,6 @@ def test_1258_new_french_argument_rejects_legacy_nom(tmp_path: Path):
 |résumé=Un résumé complet développe le raisonnement de cet argument.
 |rubriques=Philosophie
 |mots-clés=Dieu
-|date-création=2026-08-10
 }}""")
     validate_template_shape(ctx, tmpl, "fr", "argument", "argument.wiki", page)
     assert any(item.code == "WDV-MWK-003" and "historique nom" in item.message for item in ctx.report.findings)
@@ -88,7 +86,6 @@ def test_1258_new_english_argument_accepts_established_name(tmp_path: Path):
 |summary=A complete summary explains the reasoning of this argument.
 |sections=Philosophy
 |keywords=God
-|creation-date=2026-08-10
 }}""")
     validate_template_shape(ctx, tmpl, "en", "argument", "argument.wiki", page)
     assert not any(item.code in {"WDV-MWK-003", "WDV-EDT-032"} for item in ctx.report.findings), ctx.report.to_text()
@@ -103,7 +100,6 @@ def test_1258_new_english_argument_rejects_legacy_name(tmp_path: Path):
 |summary=A complete summary explains the reasoning of this argument.
 |sections=Philosophy
 |keywords=God
-|creation-date=2026-08-10
 }}""")
     validate_template_shape(ctx, tmpl, "en", "argument", "argument.wiki", page)
     assert any(item.code == "WDV-MWK-003" and "historique name" in item.message for item in ctx.report.findings)
@@ -112,7 +108,7 @@ def test_1258_new_english_argument_rejects_legacy_name(tmp_path: Path):
 def test_1258_preexisting_legacy_nom_is_preserved_without_migration(tmp_path: Path):
     ctx = PackageContext(tmp_path, Report("0.4.62", str(tmp_path), ["wikicode"]), cache={"manifest.json": {"normative_versions": {"consolidated_norm": "1.2.58"}}})
     page = {
-        "page_id": "A0001", "page_type": "argument", "language": "fr", "page_origin": "preexisting",
+        "page_id": "A0001", "page_type": "argument", "language": "fr", "page_origin": "preexisting", "creation_date": "2020-01-01",
         "preserved_parameters": {
             "initialisation": {"present": False, "value": None},
             "nom": {"present": True, "value": "Argument cosmologique"},
@@ -149,7 +145,6 @@ def test_1258_canonical_and_legacy_aliases_cannot_coexist(tmp_path: Path):
 |résumé=Un résumé complet développe le raisonnement de cet argument.
 |rubriques=Philosophie
 |mots-clés=Dieu
-|date-création=2026-08-10
 }}""")
     validate_template_shape(ctx, tmpl, "fr", "argument", "argument.wiki", page)
     assert any(item.code == "WDV-MWK-003" and "ne peuvent pas coexister" in item.message for item in ctx.report.findings)

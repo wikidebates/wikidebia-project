@@ -228,7 +228,7 @@ def _build(plan: dict, timestamp: str) -> dict[str, bytes]:
         pages.append({'page_manifest_version': '1.0', 'debate_id': did, 'page_id': pid,
                       'page_type': 'debate' if pid == did else 'argument', 'language': 'fr',
                       'canonical_title': canonical, 'file_path': rec['file']['path'], 'sha256': None,
-                      'creation_date': None, 'batch_id': rec['generation']['assigned_batch_id'],
+                      'batch_id': rec['generation']['assigned_batch_id'],
                       'page_origin': 'new', 'status': 'planned', 'structure_version': '1.0', 'render_profile_version': '1.0',
                       'validation': {'status': 'pending', 'report_path': None, 'validated_at': None}, 'wiki': rec['wiki']})
     manifest = {'package_schema_version': '1.0', 'debate_id': did, 'short_code': derive_short_code(did),
@@ -243,7 +243,6 @@ def _build(plan: dict, timestamp: str) -> dict[str, bytes]:
                 'works': [], 'validations': [],
                 'release': {k: None for k in ('release_manifest_path', 'release_zip_path', 'released_at', 'archived_at', 'release_receipt_path')},
                 'editorial_controls': {'graph_placement_review_path': 'reviews/graph_placement_review.json',
-                    'creation_date': timestamp[:10], 'creation_date_policy': 'per_page_preserved',
                     'individual_review_path': 'reviews/individual_review.json',
                     'individual_review_report_path': 'reports/individual_review.json',
                     'keyword_vocabulary_path': 'data/keyword_vocabulary.json',

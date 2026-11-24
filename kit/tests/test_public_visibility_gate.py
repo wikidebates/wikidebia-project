@@ -258,8 +258,7 @@ def test_final_publisher_refuses_completion_when_writer_succeeds_but_public_page
                         lambda *args: (baseline, plans, preflight))
     monkeypatch.setattr(final, "_authorization",
                         lambda *args: authorization)
-    for name in ("_migrate_english_publication_order",
-                 "_rollover_english_publication_date", "_migrate_english_plan_after_kit_change"):
+    for name in ("_migrate_english_publication_order", "_migrate_english_plan_after_kit_change"):
         monkeypatch.setattr(final, name, lambda *args: (plans, preflight, authorization))
     monkeypatch.setattr(final, "build_adapter", lambda *args: object())
 

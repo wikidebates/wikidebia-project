@@ -346,7 +346,6 @@ Règles :
   "generation": {
     "status": "validated",
     "assigned_batch_id": null,
-    "creation_date": "2026-07-23",
     "generated_at": "2026-07-23T16:00:00+02:00",
     "validated_at": "2026-07-23T17:00:00+02:00"
   },
@@ -431,11 +430,12 @@ Une modification structurelle a été demandée après verrouillage. Aucun nouve
 
 # 9. Politique de profondeur
 
-La profondeur ne possède aucune limite normative, aucune cible normale et aucun seuil d’avertissement. Elle découle uniquement de la structure logique du graphe : chaque occurrence non principale doit viser le meilleur parent immédiat et sa relation doit être explicitement une justification ou une objection de ce parent.
+La profondeur ne possède aucune cible normale et aucun seuil d’avertissement. Elle découle de la structure logique du graphe : chaque occurrence non principale doit viser le meilleur parent immédiat et sa relation doit être explicitement une justification ou une objection de ce parent. Un corpus importé depuis une extraction explicitement bornée conserve toutefois cette limite technique et la frontière qui en résulte, afin de ne jamais confondre les pages coupées avec des feuilles réelles.
 
 ## 9.1 Règle générale
 
-- aucun niveau maximal n’est retenu ;
+- par défaut, aucun niveau maximal n’est retenu ;
+- une limite technique explicite peut être conservée avec `limit_policy: bounded` lorsqu’elle provient de l’extraction source ;
 - aucune profondeur n’exige à elle seule une justification d’exception ;
 - aucune alerte n’est produite parce qu’un seuil numérique serait franchi ;
 - la profondeur maximale observée reste calculée à titre descriptif et pour contrôler la cohérence des compteurs ;
@@ -454,7 +454,10 @@ La profondeur ne possède aucune limite normative, aucune cible normale et aucun
 
 Règles :
 
-- `limit_policy` vaut exactement `unbounded` ;
+- `limit_policy` vaut `unbounded` en l’absence de limite d’extraction ;
+- `limit_policy: bounded` exige `maximum_edge_depth`, `frontier_node_ids` et `relations_omitted_at_frontier` ;
+- les nœuds de frontière appartiennent au graphe et possèdent une occurrence au niveau `maximum_edge_depth + 1` ;
+- les relations omises restent présentes dans les pages sources historiques et ne doivent pas être supprimées lors d’un checkpoint ;
 - `maximum_observed` est recalculé automatiquement ;
 - `maximum_observed` est une mesure descriptive, non une limite ;
 - les anciens champs `normal_target`, `declared_maximum` et `exception_reason` restent lisibles lorsqu’ils sont rencontrés dans un artefact historique pour les besoins de compatibilité et de migration ; le générateur courant ne les émet jamais et leur présence n’active aucune règle éditoriale ancienne.
@@ -493,7 +496,6 @@ Règles :
       "generation": {
         "status": "assigned",
         "assigned_batch_id": "FR-A-001",
-        "creation_date": null,
         "generated_at": null,
         "validated_at": null
       },
@@ -523,7 +525,6 @@ Règles :
       "generation": {
         "status": "pending",
         "assigned_batch_id": null,
-        "creation_date": null,
         "generated_at": null,
         "validated_at": null
       },
@@ -652,7 +653,6 @@ Exemple français :
   "generation": {
     "status": "pending",
     "assigned_batch_id": "FR-A-001",
-    "creation_date": null,
     "generated_at": null,
     "validated_at": null
   },
@@ -680,18 +680,9 @@ Exemple français :
 }
 ```
 
-## 11.0 Date de création de la page
+## 11.0 Métadonnées historiques de création
 
-Pour chaque langue, `generation.creation_date` correspond à la **date de génération validée** du premier fichier conforme de la page. Elle ne correspond pas nécessairement à la date de publication sur le wiki.
-
-Cette valeur devient immuable après validation initiale et ne change pas lors :
-
-- d'une correction ;
-- d'un enrichissement ;
-- d'une nouvelle tentative d'import ;
-- d'un ajout ou d'une vérification du lien interlangue.
-
-La date effective de publication distante est conservée séparément dans `wiki.published_at`.
+`generation.creation_date`, `creation_date` et `editorial_controls.creation_date_policy` ne sont plus produits dans les nouveaux artefacts. Ils peuvent être lus dans des archives historiques intactes, mais ne doivent pas alimenter le rendu ou la publication. Les horodatages de validation et de publication restent inchangés.
 
 ## 11.1 États de génération
 
@@ -1047,7 +1038,6 @@ Peuvent différer :
 - exemples ;
 - formulation des résumés ;
 - contexte juridique ou culturel ;
-- date de création ;
 - mots-clés idiomatiques.
 
 ## 17.4 Sections et rubriques
@@ -1408,7 +1398,6 @@ Un simple titre déjà présent dans un journal ne suffit pas à ignorer un fich
   "canonical_title": "La mesure X produirait un bénéfice collectif important",
   "file_path": "output/fr/arguments/A0001.wiki",
   "sha256": null,
-  "creation_date": null,
   "batch_id": "FR-A-001",
   "status": "planned",
   "structure_version": "1.0",
@@ -1499,7 +1488,7 @@ Le futur validateur doit traiter les violations applicables à l'état courant c
 - aucune page anglaise avec interlangue ;
 - en `deferred`, absence autorisée du titre anglais et du lien interlangue français ;
 - en `ready` ou `published`, lien français unique pointant vers le titre canonique anglais exact ;
-- tout ajout interlangue après une phase `deferred` passe par la reprise explicite et préserve la date de création française.
+- tout ajout interlangue après une phase `deferred` passe par la reprise explicite.
 
 ---
 
@@ -1544,7 +1533,6 @@ L'exemple suivant correspond à la sortie du Work 00. Son graphe est encore vide
         "generation": {
           "status": "pending",
           "assigned_batch_id": null,
-          "creation_date": null,
           "generated_at": null,
           "validated_at": null
         },
@@ -1576,7 +1564,6 @@ L'exemple suivant correspond à la sortie du Work 00. Son graphe est encore vide
         "generation": {
           "status": "pending",
           "assigned_batch_id": null,
-          "creation_date": null,
           "generated_at": null,
           "validated_at": null
         },
@@ -1773,7 +1760,7 @@ Le manifeste porte `translation_status.en` avec les valeurs `pending`, `deferred
 
 ## Correctif 1.2.35 — données importées
 
-Le manifeste peut déclarer `editorial_controls.creation_date_policy=per_page_preserved`. Chaque entrée de page porte alors sa date immuable, reproduite à l'identique dans le registre et le wikicode. Le statut anglais différé n'exige pas de métadonnées anglaises avant traduction.
+Le statut anglais différé n'exige pas de métadonnées anglaises avant traduction. Les anciennes politiques de date de création sont limitées à la lecture des archives historiques.
 
 ## Registre global des ressources documentaires — schéma 1.0 / norme 1.2.58
 
