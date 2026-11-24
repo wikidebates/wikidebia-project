@@ -1,0 +1,17 @@
+relation	décision	argument_parent_proposé	type_proposé	motif
+E00024	maintien	A0005	objection	Le texte parent invoque la mise en place d’un pouvoir propre. En contester la durée et le bilan met en cause ce que les prises de pouvoir sont censées démontrer.
+E00026	déplacement	A0035	justification	La source recense le rôle du mouvement ouvrier dans des changements sociaux et ses victoires au cours des luttes. Elle soutient directement la richesse de cette histoire.
+E00047	déplacement	A0056	justification	Le comportement attribué aux directions documente le rôle contre-révolutionnaire imputé aux organisations. La page ne contient pas d’élément qui réfute leur perte de base ou de légitimité.
+E00062	maintien	A0012	objection	L’argument oppose une lecture conjoncturelle du recul à l’idée d’une combativité durablement perdue. La seconde citation rejette explicitement l’extrapolation de revers à court terme.
+E00070	reclassement	A0013	justification	La stratégie de division est invoquée pour expliquer comment la fragmentation s’est installée. La page ne soutient pas que ses effets sur la conscience de classe sont réversibles.
+E00079	déplacement	A0083	justification	Les exemples font des étudiants des acteurs capables d’initier ou de soutenir certaines mobilisations. Ils étayent l’existence d’autres acteurs sans fonder la nécessité d’une révolution sans les travailleurs.
+E00094	déplacement	A0004	objection	Les difficultés communes à plusieurs classes relativisent l’exclusivité de la disposition à poursuivre la lutte. Elles sont compatibles avec une dégradation des conditions ouvrières.
+E00104	déplacement	A0015	justification	La critique générale de la nécessité et de la valeur des révolutions justifie le rejet de cette perspective. La page du débat détaillé ne renseigne pas directement les préférences des ouvriers.
+E00106	reclassement	A0045	justification	Les deux citations présentent la fragmentation de la production comme une stratégie destinée à réduire le pouvoir ouvrier. Elles soutiennent le mécanisme causal du parent.
+E00113	retrait du lien	—	—	La citation porte sur l’existence et la place des travailleurs dans la production. Son occurrence E00123 répond directement à la thèse de disparition et doit être conservée.
+E00130	déplacement	A0044	justification	Les citations décrivent des mécanismes de diffusion de l’idéologie dominante. Elles ne documentent pas la présence du récit de perte de combativité pendant les grandes luttes.
+E00135	retrait du lien	—	—	Cette occurrence n’apporte aucune contradiction au constat d’une perte de confiance. La même page reste en E00062, où sa citation répond à l’extrapolation d’un recul de la combativité.
+E00138	déplacement	A0070	objection	Le rejet du projet révolutionnaire conteste directement le bien-fondé de garder vivantes les idées révolutionnaires. Les deux justifications de la page portent sur le bilan des révolutions, sans discuter de leur fréquence.
+E00144	reclassement	A0077	objection	La source conteste l’idée que l’unité passée était exemplaire ou que la différenciation actuelle crée un obstacle insurmontable à la conscience commune.
+E00145	reclassement	A0077	objection	La possibilité de nouvelles formes d’unification s’oppose à l’idée que l’hétérogénéité actuelle est trop forte.
+E00171	déplacement	A0020	justification	La source affirme que les autres groupes subissent eux aussi la crise. Elle présente cette difficulté commune comme un motif pour que la classe ouvrière représente et rallie ces groupes.
