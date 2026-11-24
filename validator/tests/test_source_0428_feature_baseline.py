@@ -172,8 +172,7 @@ def test_0428_schema_contracts_are_preserved():
         "required:$defs.generationRecord.creation_date",
         "required:editorial_controls.creation_date",
         "required:creation_date",
-        "required:items.creation_date",
-        "required:patches.items.creation_date",
+        "required:entries.creation_date",
     }
     unexpected = {name: [item for item in items if item not in intentional_absences] for name, items in missing.items()}
     unexpected = {name: items for name, items in unexpected.items() if items}
