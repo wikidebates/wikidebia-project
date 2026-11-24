@@ -80,7 +80,7 @@ Si cette dernière préparation échoue, `initialized_next_blocked` indique que 
 corpus est bien installé ; le diagnostic et la commande de reprise sont fournis.
 Il ne faut pas supprimer le corpus pour recommencer.
 
-Toutes les pages restent `planned`, sans fichier `.wiki`, sans date de création
+Toutes les pages restent `planned`, sans fichier `.wiki`
 et sans validation de contenu. L'anglais reste `deferred`. Le registre documentaire
 est vide ; aucune attestation de recherche ou de contenu n'est fabriquée. Une page
 Argument française explicitement nouvelle et encore physiquement absente peut

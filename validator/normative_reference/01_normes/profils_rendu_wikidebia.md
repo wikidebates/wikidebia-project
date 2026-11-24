@@ -65,19 +65,9 @@ Sont donc autorisés mais non générés automatiquement :
 
 Une intervention éditoriale manuelle ultérieure peut les utiliser sans modifier la structure générale.
 
-## 2.3 Date de création
+## 2.3 Paramètres de date de création supprimés
 
-`date-création` et `creation-date` correspondent à la **date de génération validée du fichier dans la langue concernée**.
-
-Règles :
-
-1. format obligatoire : `AAAA-MM-JJ` / `YYYY-MM-DD` ;
-2. la date française et la date anglaise peuvent différer ;
-3. la date reste inchangée lors des corrections ;
-4. elle reste inchangée lors des enrichissements ;
-5. elle reste inchangée lors de l'import ou d'une nouvelle tentative d'import ;
-6. elle reste inchangée lors de l'ajout d'un lien interlangue ;
-7. la date effective de publication sur le wiki est enregistrée séparément dans le journal d'import.
+Ne jamais émettre `date-création` ou `creation-date` dans les quatre modèles. Les dates des sources et les horodatages techniques restent distincts et inchangés.
 
 ## 2.4 Titres et identité des pages
 
@@ -138,7 +128,6 @@ Les valeurs d’avancement et d’avertissement ci-dessous sont obligatoires uni
 | `arguments-contre` | Tous et seulement les arguments principaux défavorables du registre validé |
 | `rubriques` | Une ou plusieurs rubriques autorisées et centrales |
 | `mots-clés` | Liste resserrée de mots-clés réutilisables |
-| `date-création` | Date de génération validée |
 
 Chaque `Sous-partie` émise contient obligatoirement :
 
@@ -190,7 +179,7 @@ Ils sont omis lorsqu'aucun contenu pertinent et vérifié n'existe.
 
 ## 3.4 Paramètre interlangue conditionnel
 
-`interlangue` dépend de `translation_status.en`. Avec `deferred`, il est absent et aucun titre anglais n’est requis. Avec `ready` ou `published`, il devient obligatoire et vise exactement le titre canonique anglais verrouillé. L’ajout ultérieur après une phase `deferred` passe par la reprise interlangue explicite ; il ne modifie jamais `date-création`.
+`interlangue` dépend de `translation_status.en`. Avec `deferred`, il est absent et aucun titre anglais n’est requis. Avec `ready` ou `published`, il devient obligatoire et vise exactement le titre canonique anglais verrouillé. L’ajout ultérieur après une phase `deferred` passe par la reprise interlangue explicite.
 
 Forme unique lorsque le paramètre est requis pour les pages Débat et Argument françaises :
 
@@ -201,7 +190,7 @@ Forme unique lorsque le paramètre est requis pour les pages Débat et Argument 
 }}
 ```
 
-Le champ `page` reproduit exactement le titre canonique anglais du même identifiant. En `deferred`, ce bloc est entièrement omis. En `ready` ou `published`, son ajout ou sa mise à jour ne modifie pas `date-création`.
+Le champ `page` reproduit exactement le titre canonique anglais du même identifiant. En `deferred`, ce bloc est entièrement omis.
 
 ## 3.4 Paramètres autorisés mais non générés
 
@@ -303,7 +292,6 @@ The progress and warning values below are mandatory only for a genuinely new pag
 | `con-arguments` | All and only the validated main con arguments |
 | `sections` | One or more authorized English sections |
 | `keywords` | Concise list of reusable English keywords |
-| `creation-date` | Validated generation date |
 
 Each emitted subsection contains:
 
@@ -390,7 +378,6 @@ L’avertissement ci-dessous est obligatoire uniquement pour une page créée pa
 | `résumé` | Développement substantiel d'un seul raisonnement |
 | `rubriques` | Une à trois rubriques réellement pertinentes, exceptionnellement quatre |
 | `mots-clés` | Concepts simples, stables et réutilisables |
-| `date-création` | Date de génération validée |
 
 ## 5.2 Paramètres conditionnels
 
@@ -536,7 +523,6 @@ Formulations métadiscursives interdites, notamment :
 | `summary` | Substantive development of one logical argument |
 | `sections` | One to three genuinely relevant sections, exceptionally four |
 | `keywords` | Simple, stable and reusable English concepts |
-| `creation-date` | Validated generation date |
 
 ## 6.2 Conditional parameters
 
@@ -694,7 +680,6 @@ Un lien est généré dans chaque page française dès que l’identifiant bilin
 - Les pages anglaises n’en reçoivent jamais.
 - Le titre visé est le titre canonique anglais exact.
 - Une modification ultérieure de ce titre exige une migration de tous les liens.
-- L’ajout initial du lien ne modifie pas la date de création.
 - Les dossiers de staging et patchs interlangues restent pris en charge uniquement pour les paquets historiques antérieurs à 1.2.0.
 
 # 10. Exemples de squelettes minimaux conformes
@@ -711,7 +696,6 @@ Un lien est généré dans chaque page française dès que l’identifiant bilin
 |langue=en
 |page=...
 }}
-|date-création=AAAA-MM-JJ
 }}
 ```
 
@@ -742,7 +726,6 @@ Un lien est généré dans chaque page française dès que l’identifiant bilin
 |langue=en
 |page=...
 }}
-|date-création=AAAA-MM-JJ
 }}
 ```
 
@@ -754,7 +737,6 @@ Un lien est généré dans chaque page française dès que l’identifiant bilin
 |summary=...
 |sections=...
 |keywords=...
-|creation-date=YYYY-MM-DD
 }}
 ```
 
@@ -784,7 +766,6 @@ Un lien est généré dans chaque page française dès que l’identifiant bilin
 |langue=en
 |page=...
 }}
-|date-création=AAAA-MM-JJ
 }}
 ```
 
@@ -814,7 +795,7 @@ Avant qu'une page soit déclarée conforme au profil, le validateur doit confirm
 18. que `citations=` / `quotes=` ne rendent que les citations importées, revues et verrouillées, avec projection `Citation`→`Quote` conforme au contrat actif, et qu’aucune citation n’est inventée ;
 19. que `nom-consacré` et `established-name` ne sont jamais inventés automatiquement ; pour une page nouvelle, ils ne sont émis qu’après une recherche documentaire 1.2.52 concluant à une appellation consacrée, et pour une page historique seulement lorsqu’une attribution éditoriale 1.2.51 les approuve explicitement, et que `initialisation` / `initialization` est absent des pages nouvelles mais préservé exactement sur les pages historiques verrouillées, et que `débat-dédié` / `dedicated-debate` est réémis exactement lorsqu’il est attesté ;
 20. que l’omission des `justifications` et `objections` sur une frontière vers un débat détaillé est déclarée et que l’information du propriétaire est attestée ;
-21. que la date de création n'a pas été modifiée par une correction, un enrichissement ou une nouvelle tentative d'import.
+21. qu'aucun paramètre de date de création obsolète n'est émis.
 
 ---
 
@@ -1046,7 +1027,7 @@ Rendered documentary notices continue to follow the language and page-specific p
 
 Pour une nouvelle page `Argument`, le paramètre d'appellation consacrée rendu est `nom-consacré=` en français et `established-name=` en anglais. Les anciens `nom=` / `name=` ne sont conservés que lorsqu'une page préexistante les possède et que la préservation est attestée. Les champs JSON internes gardent leurs noms techniques historiques.
 
-Une nouvelle traduction anglaise d'`Argument` n'émet pas `initialization=`. Toute nouvelle page anglaise traduite conserve localement un `creation-date=` provisoire si le paquet en a besoin pour sa validation ; au plan de publication, seule cette valeur est remplacée par le jour civil réel de création distante. Le jour est revérifié avant chaque écriture.
+Une nouvelle traduction anglaise d'`Argument` n'émet pas `initialization=`. Aucune date de création de page ne doit être émise ou ajoutée à la publication.
 
 Toute `Quote` nouvellement traduite utilise l'avertissement `AI-translated quote`. Les modèles historiques contenant l'ancienne formulation restent préservés lorsqu'ils sont attestés comme existants.
 

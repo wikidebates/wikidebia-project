@@ -340,7 +340,7 @@ def remote_diff_is_only_preservable_metadata(
         # or any concurrent modification to the rest of the page.
         from wikidebia_graph_actions import _set_optional_parameter_value
         try:
-            removed = _set_optional_parameter_value(prior_text, page_type, obsolete, "")
+            removed = _set_optional_parameter_value(prior_text, page_type, obsolete, "", language=language)
         except Exception:
             return False, changed
         return removed != prior_text and removed == remote_text, changed

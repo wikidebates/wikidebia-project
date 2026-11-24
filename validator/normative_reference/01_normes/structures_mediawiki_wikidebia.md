@@ -22,7 +22,7 @@ Il définit :
 - le nom exact des modèles et sous-modèles ;
 - le nom exact, l'orthographe, les accents, les majuscules et les traits d'union des paramètres ;
 - l'ordre canonique des paramètres ;
-- les paramètres de date de création dans les quatre structures.
+- l’absence de paramètres de date de création dans les quatre structures.
 
 Ce document **ne détermine pas** quels paramètres doivent effectivement apparaître dans une page générée. Les règles d'émission, les paramètres obligatoires, les paramètres conditionnels et les paramètres non utilisés par la génération sont définis dans `profils_rendu_wikidebia.md`.
 
@@ -34,7 +34,7 @@ Ce document **ne détermine pas** quels paramètres doivent effectivement appara
 4. L'existence d'un paramètre dans la structure autorisée n'oblige pas à l'émettre **lors de la création d'une page nouvelle**. Lors de la modification d'une page existante, tout paramètre top-level attesté comme présent est conservé, sauf suppression explicite enregistrée.
 5. Sur une page nouvelle, les paramètres facultatifs vides sont omis conformément au profil de rendu ; sur une page existante, cette règle ne permet jamais de supprimer un paramètre historique présent. `articles-Wikipédia` et `wikipedia-articles` ne sont toutefois jamais facultatifs ni vides dans une sortie courante conforme.
 6. Les structures française et anglaise ne doivent jamais être mélangées.
-7. `date-création` et `creation-date` sont des paramètres autorisés et placés à la fin des quatre structures.
+7. Les paramètres `date-création` et `creation-date` sont obsolètes et ne figurent dans aucune nouvelle page.
 8. Les liens interlangues sont autorisés uniquement dans les structures françaises.
 9. Les noms canoniques des pages sont enregistrés dans le manifeste et le registre du débat. Ils ne dépendent pas de l'utilisation de `nom-consacré=` / `established-name=` ni de leurs alias historiques `nom=` / `name=`.
 10. `débats-connexes` et `related-debates` restent décrits comme paramètres historiquement autorisés par les modèles du wiki, mais le générateur courant ne les émet jamais sur une page nouvelle ; sur une page existante, leur préservation suit le contrat historique de modification.
@@ -159,7 +159,6 @@ Ce document **ne détermine pas** quels paramètres doivent effectivement appara
 |langue=
 |page=
 }}
-|date-création=
 }}
 ```
 
@@ -239,7 +238,6 @@ Le paramètre facultatif d’appellation consacrée est `nom-consacré`. L’anc
 |langue=
 |page=
 }}
-|date-création=
 }}
 ```
 
@@ -357,7 +355,6 @@ Le paramètre `débat-dédié` est conservé lorsqu’il existe dans une page hi
 }}
 |sections=
 |keywords=
-|creation-date=
 }}
 ```
 
@@ -433,7 +430,6 @@ The optional conventional-label parameter is `established-name`. Legacy `name` i
 |dedicated-debate=
 |sections=
 |keywords=
-|creation-date=
 }}
 ```
 
@@ -540,7 +536,7 @@ Les paramètres documentaires de la page Débat ou Debate sont remplis selon la 
 
 ### Dates et acronymes
 
-Les sous-paramètres documentaires `date=` utilisent le langage naturel ; `date-création` et `creation-date` restent au format `AAAA-MM-JJ`. Lorsqu’un acronyme courant existe, il figure dans `sujet-développé` ou `expanded-topic`.
+Les sous-paramètres documentaires `date=` utilisent le langage naturel. Lorsqu’un acronyme courant existe, il figure dans `sujet-développé` ou `expanded-topic`.
 
 
 ## Correctif 1.2.11 — jonction de modèles adjacents
@@ -610,7 +606,7 @@ La revue ne se limite pas aux séries de notions comparables. Chaque sous-partie
 
 ### Règle 1.2.59 — création d’une traduction anglaise
 
-Pour un `Argument` anglais **nouvellement créé par traduction FR→EN**, `initialization` est absent, même si la page française source possède `initialisation`. Pour toute nouvelle page anglaise traduite (`Debate` ou `Argument`), `creation-date` est remplacée au moment de la publication par la date civile du jour de création distante. Les structures ci-dessus continuent de décrire aussi les pages anglaises historiques préexistantes, pour lesquelles ces paramètres peuvent être préservés.
+Pour un `Argument` anglais **nouvellement créé par traduction FR→EN**, `initialization` est absent, même si la page française source possède `initialisation`. Les paramètres de date de création sont exclus du rendu et ne sont jamais conservés lors d’une mise à jour.
 
 
 ## Contrat de traduction 1.2.66

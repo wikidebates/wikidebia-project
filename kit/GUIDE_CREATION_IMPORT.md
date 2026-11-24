@@ -29,8 +29,7 @@ Seuls les fichiers sous `editable/` sont modifiables : les pages `.wiki` et
 - `partial` : enregistrer un brouillon inachevé, sans exiger une syntaxe finale ;
 - `generated` : enregistrer une rédaction terminée, **encore à relire**.
 
-Une page `generated` doit posséder son modèle français et une `date-création`
-explicite au format `AAAA-MM-JJ`. Une date déjà enregistrée est conservée.
+Une page `generated` doit posséder son modèle français, sans paramètre `date-création` ni `creation-date`.
 Ce contrôle minimal d'enveloppe n'est ni une validation du wikicode complet,
 ni une vérification documentaire, ni une approbation éditoriale.
 
