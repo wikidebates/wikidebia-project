@@ -8,14 +8,14 @@ Ce fichier est la source textuelle active générée par `./wikidebia upgrade`. 
 
 ## Composants associés
 
-- `wikidebia-normes.zip` — 3758613 octets — SHA-256 `29bd6477d328669063881e37ab7394ca59d47cf439dbfe2b1736d8d1a9ef67b4`
-- `wikidebia-validator.zip` — 3951094 octets — SHA-256 `4bb75a6d04fc24b6c56e8826cb6c45a3c1cee02505dcedf2622e4eff3595057a`
-- `wikidebia-kit.zip` — 838414 octets — SHA-256 `152f063bcb88266d2c7192cd758b5d4c15e96eb86e1dc067c277ef98c6124df5`
+- `wikidebia-normes.zip` — 3748362 octets — SHA-256 `e0a9bea422c69c4598dc66fdb74f379612865dcf6d7ca5d461cafee040536f77`
+- `wikidebia-validator.zip` — 4008788 octets — SHA-256 `30aa9088425cffff85c2dc57fa3d6c9850164b845aa570b78ffd2301631692fe`
+- `wikidebia-kit.zip` — 1439620 octets — SHA-256 `59bb85aae58d4b33df4d6e4d1603af3af01ebfd63febeba22281a801bbae0f17`
 
 ## Norme consolidée active
 
 Source interne : `norms/normative_reference/01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md`  
-SHA-256 : `4f174cd637977fcf10704cf377848eeecb57e30eb0dc7b8c34b5e961edbe57bd`
+SHA-256 : `367248f8c73e8eaf901c018d6ba412515d6ef0ace8d4a0b7eb21dd8f8a998741`
 
 # Norme opérationnelle active Wikidéb’IA 1.2.88
 
@@ -38,7 +38,7 @@ Cette norme contient uniquement les règles actuellement applicables. Les textes
 
 - Les paramètres MediaWiki canoniques sont `sujet-développé` / `expanded-topic`, `débat-dédié` / `dedicated-debate`, `nom-consacré` / `established-name`. Les anciens noms ne sont que des alias d’entrée historiques attestés.
 - Une nouvelle traduction anglaise d’`Argument` ne reçoit jamais `initialization` depuis `initialisation` français.
-- La `creation-date` d’une nouvelle page anglaise est déterminée par la première création distante dans le fuseau de publication et n’est jamais copiée ni comparée à `date-création` française. Une page anglaise préexistante peut conserver sa date historique attestée.
+- Les paramètres de premier niveau `date-création` et `creation-date` sont obsolètes dans les quatre modèles Débat/Debate et Argument. Ils ne sont ni générés, ni traduits, ni conservés dans les nouvelles pages ou les mises à jour.
 - `displayed-title` traduit `titre-affiché` champ à champ. La validation FR→EN est différentielle : elle bloque les dégradations introduites par la traduction sans réécrire une anomalie formelle acceptée dans la source française historique.
 - Les recherches de `established-name`, les références anglaises et les `Quote` restent contextualisées par page. Les références ne sont pas traduites artificiellement ; les citations suivent le contrat `Citation→Quote`, avec `AI-translated quote` pour les nouvelles traductions.
 - La convergence sémantique finale exige deux passes indépendantes portant sur la même empreinte du contenu, selon les schémas actifs de revue et de convergence.
@@ -106,6 +106,8 @@ Le titre canonique est le nom de page et la cible de relation. Il est complet, e
 Pour une page **nouvelle ou dont le titre affiché est généré par Wikidéb’IA**, le titre affiché est une formulation de lecture plus concise que le titre canonique lorsque cette concision améliore réellement le rendu. Dans ce profil de création, il reste une proposition argumentative complète et immédiatement intelligible : le lecteur doit pouvoir identifier ce qui est affirmé, et non seulement le thème auquel l’argument se rapporte. Un simple groupe nominal, une étiquette doctrinale ou l’intitulé d’un phénomène ne suffit pas. Le titre affiché comporte au minimum un sujet et un prédicat explicites, sans point final, et conserve le lien logique décisif de l’argument. Le contexte d’affichage peut permettre d’omettre un cadrage déjà évident, mais il ne peut jamais remplacer le verbe, la conclusion ou la relation argumentative qui rendent la phrase compréhensible.
 
 Lorsqu’un corpus est **repris depuis des pages préexistantes du wiki**, cette exigence de proposition complète ne s’applique pas rétroactivement aux `titre-affiché` déjà publiés. Le titre affiché historique est conservé par défaut, y compris lorsqu’il s’agit d’un groupe nominal, d’une formule courte ou d’un intitulé dépendant de son contexte d’affichage. Son seul caractère non propositionnel ne constitue ni une erreur ni un motif de réécriture. Il n’est modifié que pour corriger une faute d’orthographe, de grammaire ou de typographie, une troncation, une corruption manifeste, une ambiguïté flagrante ou un autre problème éditorial évident, ou sur décision explicite du propriétaire. Une harmonisation stylistique, l’allongement en phrase complète ou la simple préférence de Wikidéb’IA ne suffisent jamais à modifier un titre affiché préexistant. Cette préservation du titre affiché ne réduit pas les exigences applicables au **titre canonique / nom de page**, qui reste autonome, explicite et corrigeable lorsqu’il est incomplet, contextuel, fautif ou ambigu.
+
+En traduction, `displayed-title` traduit le `titre-affiché` français validé, quelle que soit la provenance de la source et même si la page cible anglaise est nouvelle. Une forme courte, nominale ou contextuelle ne doit pas être allongée ni transformée en proposition pour satisfaire une règle de génération. La fidélité du sens, de la portée et de l'acte de langage reste obligatoire : seule une dégradation introduite par la traduction est bloquante. Un renommage canonique change la cible `page=`, sans remplacer automatiquement le libellé `titre-affiché`.
 
 ### 4.1 Autonomie référentielle du titre canonique
 
@@ -293,7 +295,7 @@ Une incompatibilité entre la norme et un modèle public est un blocage de publi
 
 ### 7.3 Dates sitographiques
 
-`date=` contient la date de publication ou de mise à jour substantielle. Lorsqu’une date complète est connue, elle est écrite en langage naturel dans la langue de la page (`25 juin 2012` en français, `25 June 2012` en anglais), jamais au format machine `2012-06-25`. Une année seule, par exemple `2012`, reste admise lorsqu’elle est la seule précision documentaire disponible. Une date de consultation n’est jamais placée dans `date=`. Lorsque la date documentaire n’est pas vérifiable, le paramètre est omis. Aucune date ne peut être inventée. Cette règle ne concerne pas `date-création` ni `creation-date`, qui restent obligatoirement au format `AAAA-MM-JJ`.
+`date=` contient la date de publication ou de mise à jour substantielle. Lorsqu’une date complète est connue, elle est écrite en langage naturel dans la langue de la page (`25 juin 2012` en français, `25 June 2012` en anglais), jamais au format machine `2012-06-25`. Une année seule, par exemple `2012`, reste admise lorsqu’elle est la seule précision documentaire disponible. Une date de consultation n’est jamais placée dans `date=`. Lorsque la date documentaire n’est pas vérifiable, le paramètre est omis. Aucune date ne peut être inventée.
 
 ### 7.4 Langue des sources et éditions linguistiques
 
@@ -452,7 +454,6 @@ La même distinction création/reprise s’applique aux métadonnées éditorial
 |langue=en
 |page=Titre canonique anglais
 }}
-|date-création=AAAA-MM-JJ
 }}
 ```
 
@@ -516,7 +517,6 @@ Avec `translation_status.en=deferred`, les pages anglaises sont absentes du mani
 |langue=en
 |page=Titre canonique anglais
 }}
-|date-création=AAAA-MM-JJ
 }}
 ```
 
@@ -558,7 +558,6 @@ Lorsqu’une page historique contient `|débat-dédié=…`, ce paramètre est c
 |videography=
 |sections=
 |keywords=
-|creation-date=YYYY-MM-DD
 }}
 ```
 
@@ -610,7 +609,6 @@ The `progress=Constructed debate` and `debate-warnings=Debate generated by AI` l
 }}
 |sections=
 |keywords=
-|creation-date=YYYY-MM-DD
 }}
 ```
 
@@ -618,17 +616,15 @@ Les pages anglaises ne contiennent pas de lien interlangue.
 
 Dans une traduction FR→EN, `argument-warnings=Argument generated by AI` n'est pas ajouté par défaut au seul motif que le fichier anglais vient d'être généré. `title-warnings` et `argument-warnings` sont traduits uniquement à partir des valeurs françaises présentes selon la table normative active ; un paramètre absent en français reste absent en anglais.
 
-## 9. Dates de création
+## 9. Suppression des paramètres de date de création
 
-La date de création est une décision de production distincte de la date des sources. Elle seule utilise systématiquement le format machine `AAAA-MM-JJ` dans `date-création` et `creation-date`; les dates documentaires complètes utilisent le langage naturel. Chaque paquet déclare la date attendue pour chaque langue dans son manifeste ou son profil local. Le validateur compare cette valeur au wikicode, au registre et aux manifestes de pages. Le moteur générique ne contient aucune date propre à un corpus.
+Décision du propriétaire du 24 novembre 2026 : les paramètres `date-création` et `creation-date` sont supprimés des quatre modèles. Aucun nouveau corpus ne doit produire de date de création de page, ni dans le wikicode ni dans ses métadonnées de génération. Le jour civil de publication ne déclenche plus de changement de plan.
 
-La date devient immuable dès la première validation du fichier de la page. Elle ne change ni lors d’une correction, ni lors d’un enrichissement, ni lors d’une nouvelle tentative d’import. L'ajout ultérieur d'un lien interlangue après une phase `deferred` est un enrichissement de la page existante : il ne change jamais sa date de création.
-
-Les décisions propres à un corpus, y compris une date corrective historique, sont conservées dans son profil local ou ses rapports de migration, jamais dans la norme universelle.
+Les anciennes archives et les reçus signés restent inchangés. Leurs dates ne constituent plus que des données historiques ; elles ne doivent pas être réintroduites sur les wikis. Les plans de publication historiques qui imposent une date doivent être reconstruits et autorisés avant exécution. Les dates documentaires des sources, les horodatages techniques, les preuves de révision et les journaux de publication ne sont pas concernés.
 
 ## 9.1 Préservation automatique des pages historiques lors d’une reprise
 
-Lorsqu’une page du nouveau corpus correspond à une page distante attestée dans l’état publié et que la révision distante courante correspond encore exactement à cet état, le kit construit un contenu effectif dérivé. Il y recopie uniquement les paramètres de cycle de vie protégés de la page distante : date de création, avertissements, avancement et paramètres historiques explicitement énumérés par le profil de rendu. Le reste du contenu provient du nouveau corpus validé.
+Lorsqu’une page du nouveau corpus correspond à une page distante attestée dans l’état publié et que la révision distante courante correspond encore exactement à cet état, le kit construit un contenu effectif dérivé. Il y recopie uniquement les paramètres de cycle de vie protégés de la page distante : avertissements, avancement et paramètres historiques explicitement énumérés par le profil de rendu. Le reste du contenu provient du nouveau corpus validé. Si la révision distante diffère uniquement par le retrait exact du paramètre obsolète depuis le dernier état attesté, cette suppression peut être reconnue sans restaurer le paramètre. Toute autre modification concurrente demeure soumise aux contrôles ordinaires.
 
 Cette réconciliation ne constitue ni une importation de modifications humaines, ni une normalisation silencieuse du corpus source. Le fichier original reste inchangé ; le plan signé référence le fichier effectif dérivé, son empreinte et le détail des valeurs préservées. Toute divergence distante non attestée reste classée `manual_review`.
 
@@ -784,7 +780,7 @@ Un registre documentaire global déterministe sépare l’identité canonique d�
 
 ## 19. Métadonnées de publication des traductions anglaises
 
-Pour une création anglaise FR→EN, le résumé de modification est individualisé à partir du titre français verrouillé, sous la forme `Translation of the French page: [[:fr:X|X]]`, les balises `chatgpt` et `translated-fr` sont appliquées. Une nouvelle page anglaise ne transporte jamais `|initialisation=`/`|initialization=` depuis la page française : `initialization` n’est pas projeté depuis le wiki français. Sa `creation-date` est le jour civil de la publication distante, calculé dans le fuseau `Europe/Paris`, et appartient au premier acte de création distant ; elle n’est ni traduite ni copiée depuis `date-création`. L’ajout interlangue français ultérieur utilise le titre anglais verrouillé et préserve les autres paramètres historiques.
+Pour une création anglaise FR→EN, le résumé de modification est individualisé à partir du titre français verrouillé, sous la forme `Translation of the French page: [[:fr:X|X]]`, les balises `chatgpt` et `translated-fr` sont appliquées. Une nouvelle page anglaise ne transporte jamais `|initialisation=`/`|initialization=` depuis la page française : `initialization` n’est pas projeté depuis le wiki français. L’ajout interlangue français ultérieur utilise le titre anglais verrouillé et préserve les autres paramètres historiques.
 
 ## 20. Compatibilité des artefacts
 
@@ -850,13 +846,19 @@ Une commande d’orchestration de haut niveau pilote l’ensemble de ce cycle. E
 
 - consacre la décision explicite du propriétaire : lors de la première publication anglaise finale, la page `Debate` est créée avant toute page `Argument` encore absente ;
 - remplace la règle active contradictoire qui imposait `Argument` avant `Debate` dans cette phase ;
-- conserve l’ordre des autres phases, les garde-fous de publication et la date civile réelle de chaque création anglaise ;
+- conserve l’ordre des autres phases, les garde-fous de publication sans dépendance au jour civil ;
 - lorsqu’une publication a déjà commencé sous l’ancien ordre, les pages déjà créées restent intactes et un plan successeur audité place `Debate` avant les seules créations `Argument` restantes.
 
 ## Changelog normatif
 
 Source interne : `norms/normative_reference/01_normes/CHANGELOG_NORMATIF.md`  
-SHA-256 : `5c07744a8d5d194ec1fac05cb758495026e311b6441a7ee2dcddcc243c45b6fa`
+SHA-256 : `86d74de19fee2600fd781f979c77de74a672bd812998e5ded1f2f713d7e339b6`
+
+## 24 novembre 2026 — retrait des paramètres de date de création de page
+
+- `date-création` et `creation-date` ne font plus partie des quatre modèles ni des nouveaux artefacts de production ; les archives signées restent intactes.
+- Les dates documentaires et les horodatages techniques sont conservés ; les plans de publication ne dépendent plus du passage à minuit.
+- Une suppression distante exacte de ce paramètre est reconnue à partir d'une révision attestée, sans autoriser d'autres modifications concurrentes.
 
 ## 1.2.70 — alignement du validateur sur la première publication anglaise
 
@@ -1662,12 +1664,34 @@ Toutes les exigences 1.1.6 restent actives sauf contradiction explicite ci-dessu
 ## État actif du validateur
 
 Source interne : `validator/README.md`  
-SHA-256 : `e6a83b12c2f1737de6225118c16593121564c27b6229e74acb6672513fa3ac20`
+SHA-256 : `7496fee45a5c399a5d937ba977d589a031193b7ebb8179f45d759c83dcea3ea3`
 
 # Wikidéb’IA Validator 0.4.105
+
+Correctif de validation des rubriques historiques : la limite de quatre ne bloque
+plus les pages préexistantes ni leurs traductions. Avant la création des manifestes
+de pages, la provenance d'import et les empreintes des fichiers sources sont
+vérifiées. Les catégories autorisées, l'unicité et les limites des pages nouvelles
+restent contrôlées.
+
 Le validateur 0.4.105 s’aligne sur la norme 1.2.88 et le kit 2.16.47. Il conserve tous les contrôles 0.4.104 ; la modification porte sur le contrat de publication finale, où la page anglaise `Debate` doit précéder les créations `Argument`.
 
 Norme active : 1.2.88. Kit associé : 2.16.47.
+
+## Régénération des métadonnées du paquet
+
+Après une modification du validateur et une exécution réussie de sa suite de
+tests, régénérer les rapports, le manifeste et le reçu avec le nombre exact de
+tests :
+
+```bash
+python validator/scripts/refresh_package_metadata.py --test-count N
+python validator/scripts/self_audit.py
+```
+
+Le générateur exclut ses propres manifeste et reçu du calcul, met à jour les
+deux rapports avant de calculer les empreintes et produit un résultat identique
+pour des sources, une date et un nombre de tests identiques.
 
 Il accepte en outre les deux formes légitimes de `documentation_family_notes` (trois familles agrégées ou neuf familles orientées), et la limite formelle de longueur d’un mot-clé ne s’applique plus lorsqu’une exception multi-mots valide du vocabulaire contrôlé atteste déjà le concept lexicalisé. Les contrôles restent stricts sur les contenus nouveaux, les introductions autorisées modifiées et les mots-clés sans attestation atomique.
 
@@ -2105,10 +2129,44 @@ Les changelogs complets des deux branches 0.4.64 sont conservés sous `branch_hi
 ## État actif du kit
 
 Source interne : `kit/README.md`  
-SHA-256 : `0f3e280fe6ff5bfa71eb55227bc6d26f7e7d58c1bd9642962b1fd302a0cbf32c`
+SHA-256 : `55f9fff29a1aaf637b0523ac23183ca6b7a426480720f6510d18c9a0125d9d45`
+
+
+## Publication finale préparée, sans écriture automatique
+
+Le workflow termine la convergence, le rendu et la release, construit en lecture seule les plans EN/FR signés et s'arrête à `publication_prepared`. L'utilisateur examine les rapports sous `.state/final-publication/<debate_id>/<work_id>/` et confirme explicitement le préflight :
+
+```bash
+./wikidebia workflow-publish <debate_id> --confirm-preflight-sha256 <sha256>
+```
+
+Cette commande recharge les plans signés, vérifie à nouveau les cibles distantes et refuse les changements concurrents. Un reçu de reprise doit rester lié au même préflight. La reprise d'une modification interlangue française dont `chatgpt` manque ne crée pas une nouvelle révision : elle ne rétablit la balise que sur une révision exacte attestée (parent, auteur, résumé, contenu et révision courante), avec droit `changetags` vérifié.
 
 # Wikidéb’IA Kit 2.16.47
+
+La réconciliation accepte désormais l’adoption explicite d’un Work local déjà
+`release_ready` lorsque le workflow historique est resté bloqué avant toute
+attribution de `work_id`. La commande `workflow-reconcile --work-id WORK`
+vérifie le workspace, le release-copy et le reçu de release sans accès distant,
+puis ouvre une phase dédiée. La relance ordinaire du workflow passe ensuite par
+les deux checkpoints français normaux et s’arrête de nouveau à `release_ready`
+avant toute publication finale. Aucun reçu n’est synthétisé.
+
+La commande `fr-publication-relay` transporte des demandes françaises explicitement
+approuvées par Git vers un relais Debian distinct du déploiement du programme.
+Elle réutilise les accès Pywikibot du serveur, contrôle les révisions avant écriture
+et conserve un journal de reprise. Voir `deploy/README_PUBLICATION_FR.md` dans le
+dépôt complet ; le relais n'est pas activé par une simple mise à jour du kit.
+
 Le kit 2.16.47 conserve l’ordre final `Debate` puis `Argument` de 2.16.46 et corrige la reprise des plans distants signés après une mise à niveau : `kit_version` et `required_validator_version` sont traités comme provenance du producteur, tandis que la signature du plan, son schéma, le débat, le manifeste et la configuration exacts restent obligatoirement vérifiés. Norme active : 1.2.88. Validateur associé : 0.4.105.
+
+Les exécutions distantes utilisent un bail local identifié plutôt qu’un simple PID. Un
+processus vivant conserve toujours son verrou, y compris avec l’ancien format. Après un
+arrêt brutal, un PID local mort est récupéré immédiatement ; un verrou illisible ou créé
+sur un autre hôte doit expirer (six heures par défaut, configurable avec
+`update_lock_stale_seconds`). Chaque récupération est consignée sans contenu de page
+dans `.state/locks/IDENTIFIANT.recoveries.jsonl`, et seul le propriétaire du bail courant
+peut le libérer.
 
 Le kit 2.16.44 corrige la préparation de la publication finale anglaise : la configuration construite par `wikidebia_final_publication` transporte désormais explicitement `validator.fingerprint_path` et `max_warnings`, comme toutes les configurations `GenericPublisher` courantes. Sans ce champ, la construction du plan anglais atteignait `_package_fingerprints()` puis levait `KeyError('fingerprint_path')` après les connexions de préflight mais avant toute autorisation ou écriture distante. Le correctif ne modifie aucun corpus, plan français, convergence, contenu éditorial ni règle normative.
 
@@ -2272,7 +2330,7 @@ Version de réconciliation entre la lignée traduction/validation 2.15.38 et la 
 
 Le kit conserve les renforcements de traduction : validation différentielle FR→EN, revue sémantique structurée, portée des appellations consacrées, registre documentaire global, complétude des `Quote`, score de risque des unités de revue, inventaire transactionnel de release et validation de l’archive exacte après extraction fraîche.
 
-Il intègre également les mécanismes de publication déjà utilisés sur les wikis : résumés MediaWiki individualisés, balises `chatgpt` + `translated-fr`, rattrapage audité de `translated-fr`, reprise `--interlanguage-only`, relecture bornée des balises, résolution sûre de la révision de création, `nom-consacré` / `established-name`, absence d’`initialization` sur une nouvelle traduction anglaise et `creation-date` fixée au jour réel de publication.
+Il intègre également les mécanismes de publication déjà utilisés sur les wikis : résumés MediaWiki individualisés, balises `chatgpt` + `translated-fr`, rattrapage audité de `translated-fr`, reprise `--interlanguage-only`, relecture bornée des balises, résolution sûre de la révision de création, `nom-consacré` / `established-name`, absence d’`initialization` sur une nouvelle traduction anglaise et absence des paramètres de date de création devenus obsolètes.
 
 Les numéros 2.15.33 à 2.15.38 ont été réutilisés différemment dans les deux branches parallèles. Leur historique exact est conservé sous `branch_history/`; la version 2.15.46 est le premier point de réconciliation.
 
@@ -2292,10 +2350,20 @@ La version 2.15.54 corrige l’alignement du validateur sur les métadonnées de
 
 Les numéros de release sont une provenance. La compatibilité opérationnelle est pilotée par `CAPABILITIES.json` et les identifiants/version de schéma ; les égalités exactes sont réservées à l’installation, l’anti-downgrade, la reproductibilité et l’audit.
 
+La traduction des titres affichés respecte la source française validée : les critères de longueur et de forme propositionnelle appartiennent à la génération de débats. Un titre historique court ou nominal est conservé par défaut. Renommer une page modifie la cible des liens, sans recopier le nom canonique dans leurs libellés affichés.
+
 ## Changelog du kit
 
 Source interne : `kit/CHANGELOG.md`  
-SHA-256 : `98d160eaccddc6469319df28d9b50da3ed5e88c606d50909a3334fe3876b0f7b`
+SHA-256 : `f8eac6ec178e5eaee37dcb98af65148f20d777a21e952b1f0b0729b792642e08`
+
+## Correctif du 14 novembre 2026 — adoption contrôlée d’un Work restauré
+
+- permet à un workflow initial sans `work_id` d’adopter explicitement un Work
+  `release_ready` dont le workspace et le reçu de release sont intacts ;
+- refuse l’adoption après toute publication anglaise ou autorisation finale ;
+- exige ensuite les deux checkpoints français ordinaires et leurs reçus signés ;
+- arrête la reprise à la frontière `release_ready` avant la publication finale.
 
 ## 2.15.54 — 10 août 2026 — alignement des métadonnées de première publication anglaise
 
@@ -2810,7 +2878,7 @@ L’historique exact des deux branches antérieures est conservé sous `branch_h
 ## Guide de publication
 
 Source interne : `kit/GUIDE_PUBLICATION.md`  
-SHA-256 : `c1799729c07ac6a64c15799c3446fa4b1b948105e3d51a74000e0b91c9036944`
+SHA-256 : `d940142222b9a9516b976902ff8cfc6fe7db0895bf64d53b825df152189d4b67`
 
 # Guide de publication et de reprise Wikidéb’IA 2.15.9
 
@@ -2862,6 +2930,24 @@ La deuxième commande effectue réellement les écritures distantes. Toute diver
 ## Nouveau débat
 
 Déposer le ZIP du corpus dans `incoming/`, puis lancer `./wikidebia publish [SÉLECTEUR] --scope all`.
+
+### Reprise de publication après minuit
+
+La date civile ne modifie plus le contenu à publier : le changement de jour ne nécessite aucun recalcul du plan. Les vérifications de révision, de contenu, de configuration, de résumé et de balises demeurent obligatoires. Un ancien plan signé qui imposait une date de création de page ne doit pas être exécuté ; reconstruire et autoriser son remplacement.
+
+### Noms français normalisés à l’import
+
+Pour `update --archive <SÉLECTEUR> --scope fr --interlanguage-only`, une page
+introuvable sous le nom du manifeste peut être retrouvée sous le nom exact
+consigné dans `data/import_provenance.json`, lorsque la seule différence est
+la normalisation d’une apostrophe typographique en apostrophe droite.
+Le fichier importé doit correspondre à son empreinte et la page distante à la
+révision et au contenu importés, ou à ce contenu déjà augmenté du seul lien
+interlangue attendu. Toute autre divergence reste bloquante.
+
+Le nom réellement retrouvé est signé dans le plan, utilisé pour l’écriture
+et conservé dans l’état publié. Cette reprise ne crée ni ne renomme de page
+française, ne réécrit aucun autre paramètre et ne change pas l’archive.
 
 ## Débat déjà publié — corpus installé
 
@@ -2946,6 +3032,16 @@ Le workflow de reprise publie le français deux fois avant traduction :
 2. après contenu : rubriques, mots-clés, références et autres champs ouverts ; sur des pages préexistantes, l’introduction et les résumés historiques restent inchangés par défaut, mais un `authorized_change` sélectionne la valeur finale propriétaire qui est rendue et publiée dans ce même checkpoint ; une portée structurée limite le delta autorisé et l’absence historique reste une absence sauf création nominativement autorisée.
 
 Le premier checkpoint préserve le contenu/classification importé ; le second se calcule contre l’état publié du premier et interdit les mutations structurelles. Les deux utilisent des résumés MediaWiki individualisés.
+
+### Arrêt avant publication bilingue finale
+
+Après le rendu et la préparation des plans, le workflow s'arrête à `publication_prepared` sans écriture finale. Les plans et le préflight signés se trouvent dans `.state/final-publication/<debate_id>/<work_id>/`. Relisez-les avant de confirmer :
+
+```bash
+./wikidebia workflow-publish <debate_id> --confirm-preflight-sha256 <sha256>
+```
+
+La commande de publication ou de reprise doit viser ce préflight signé ; une divergence de contenu ou de révision distante bloque l'opération. Ce verrou ne modifie pas les deux checkpoints français précédents, qui possèdent leurs propres contrats de publication.
 
 ## Guide de revue du contenu
 
@@ -3099,11 +3195,11 @@ La primitive basse `--apply` reste locale. Dans le workflow utilisateur `review-
 ## Rapport de tests du kit
 
 Source interne : `kit/TEST_REPORT.txt`  
-SHA-256 : `9a12175c840382cf753194310e7ab104b8011a69aa03d8d07f700c85c2910b9f`
+SHA-256 : `5d38e319f2e300b8309cb6882204ed45afabe14a1e2caade2e9f3a2b7fb5878d`
 
 Wikidéb’IA Kit 2.16.47 — rapport de tests
 
-Tests pytest : 539 réussis
+Tests pytest : 1921 réussis
 Norme : 1.2.88
 Validateur : 0.4.105
 
@@ -3115,15 +3211,21 @@ Historical keyword atomicity normalization : PASSED ; uniquement les métadonné
 Historical introduction provenance : PASSED ; le verrou français reste autoritatif.
 Final publication orchestration : PASSED ; les capacités de 2.16.39 sont conservées.
 Legacy non-canonical checkpoint status : PASSED ; un statut local historique non canonique est normalisé uniquement pour un workflow totalement non lié et déjà en final_publication.
-Publication date rollover : PASSED ; les pages déjà créées gardent leur date réelle et seules les pages encore absentes sont replannifiées au nouveau jour civil avec plan/préflight/autorisation successeurs audités.
+Retrait des dates de création : PASSED ; les nouveaux plans sont indépendants du jour civil, les anciennes autorisations datées sont bloquées et les dates documentaires restent préservées.
 Debate-first publication order : PASSED ; Debate précède les créations Argument, y compris après migration auditée d’un plan partiellement exécuté.
 
 Signed plan cross-version resume : PASSED ; les versions producteur restent de la provenance, tandis que signature, schéma, manifeste et configuration restent bloquants.
 
+Explicit French Git publication relay : PASSED ; 46 tests du relais : préflight global, conflits, reprises, transport Git, relecture et idempotence sur wiki simulé. Aucune publication réelle effectuée par ces tests.
+
+French relay readback recovery : PASSED ; relectures bornées des métadonnées, contrôle de la révision parente, reprise des anciens reçus et absence de doublons après interruption.
+
+Displayed-title translation scope : PASSED ; titres courts et nominaux conservés, critères de génération séparés et régressions sémantiques de traduction toujours bloquantes.
+
 ## Guide d’orchestration éditoriale
 
 Source interne : `kit/GUIDE_EDITORIAL_ORCHESTRATION.md`  
-SHA-256 : `69d0f65fd3dd2e3f63a53300d3fff1b4e4caa41c2631cf6dc1c830218cc66faa`
+SHA-256 : `dc36c96714363ce053912b8e49851cc1da8320cccf3a5eeb23457044e2d89ffc`
 
 # Orchestration des revues éditoriales ChatGPT — Kit 2.16.7
 
@@ -3136,6 +3238,66 @@ Pour lancer ou reprendre la préparation bilingue d'un débat existant :
 ```
 
 La commande réutilise un snapshot `graph-extract` compatible déjà présent lorsque c'est possible ; sinon elle effectue l'extraction en lecture seule. Elle initialise le corpus, lance les validations mécaniques et s'arrête au premier point où une décision éditoriale externe est requise.
+
+## Continuité obligatoire sur GitHub
+
+Une production longue doit rester reprenable depuis un autre compte ou une autre
+session sans dépendre du contexte de conversation. Les règles suivantes font
+partie de la méthode de travail :
+
+1. Tout défaut reproductible rencontré dans le workflow est corrigé dans le code
+   générique, avec un test de régression ciblé. Il ne doit pas être contourné en
+   falsifiant un artefact du corpus ou en affaiblissant un contrôle de sécurité.
+2. Le correctif cohérent est validé, commité et poussé sur la branche GitHub de
+   travail dès qu'il est prêt. Les correctifs ne sont pas accumulés jusqu'à la
+   fin de la traduction.
+3. Après chaque phase ou checkpoint, une sauvegarde assainie est mise à jour sous
+   `continuity/<debate_id>/latest/`, puis commitée et poussée. L'historique Git
+   conserve les états antérieurs. Cette sauvegarde contient au minimum le corpus
+   de travail complet nécessaire à la reprise, l'état d'orchestration, les ZIP de
+   revue utiles, un handoff lisible et les pages wikicode créées ou modifiées sur
+   le wiki pendant la phase.
+   Après toute écriture distante, elle contient aussi obligatoirement les états
+   signés `.state/published/<debate_id>/<langue>/latest.json`, tous les états
+   historiques horodatés nécessaires pour relier le dernier checkpoint à cet
+   état courant, les reçus `.state/receipts/<debate_id>/` et les plans/reçus du
+   checkpoint et des corrections ultérieures. Un reçu de checkpoint sans toute
+   sa succession d’états publiés signés n’est pas un point de reprise complet.
+4. Le handoff indique le commit source, la phase atteinte, la prochaine commande,
+   les validations exécutées, les écritures MediaWiki déjà attestées et les
+   éventuels blocages. Un manifeste SHA-256 couvre tous les fichiers sauvegardés.
+5. `private/`, les jetons, mots de passe, cookies, configurations Pywikibot,
+   environnements virtuels, caches et autres secrets ne sont jamais copiés dans
+   `continuity/`. Avant chaque commit, contrôler la liste des fichiers suivis et
+   rechercher les chemins ou données privés accidentels.
+6. Une projection de continuité conserve octet pour octet tout fichier déjà
+   couvert par une empreinte de workflow ou de revue. Une amélioration de
+   portabilité (par exemple remplacer un ancien chemin absolu par un chemin
+   relatif) s'applique à la génération des nouveaux artefacts, jamais par
+   réécriture rétroactive d'une preuve scellée. Si un artefact contient une
+   donnée réellement sensible, la sauvegarde est bloquée et la reprise exige
+   une migration explicite et attestée ; le fichier n'est pas normalisé en
+   silence.
+
+Les répertoires d'exécution (`.state/`, `corpus/`, `incoming/`, `outgoing/`) restent
+ignorés et ne sont pas ajoutés de force. Seule leur projection assainie et
+explicitement contrôlée sous `continuity/` est versionnée. Chaque reprise commence
+par la lecture du handoff et la vérification de son manifeste avant de restaurer
+les données dans les zones locales ignorées.
+
+Après avoir actualisé les autres fichiers et le handoff d'un snapshot, projeter
+la succession française signée et régénérer son manifeste avec :
+
+```bash
+./wikidebia continuity-sync <debate_id>
+./wikidebia continuity-sync <debate_id> --check
+```
+
+La première commande copie octet pour octet les états horodatés, l'état courant
+et les reçus du même Work, puis régénère `SHA256SUMS`. La seconde est sans écriture
+et bloque si une pièce manque, si une révision régresse ou si un reçu sort du
+Work. Les tests du dépôt vérifient aussi chaque snapshot `latest` commité afin
+qu'une sauvegarde incomplète ne passe pas la validation GitHub.
 
 Exemple :
 
@@ -3177,6 +3339,14 @@ Un paquet de revue contient uniquement :
 
 Le retour doit conserver exactement cette structure. Les fichiers de contexte, le manifeste et les instructions ne peuvent pas être modifiés. Les fichiers supplémentaires sont refusés. Les chemins dangereux, liens symboliques et paquets provenant d'un autre débat, d'un autre Work ou d'une ancienne revue sont refusés.
 
+La création du ZIP utilise un remplacement atomique : une interruption ne peut
+pas substituer une archive partielle à la dernière archive complète. Si le ZIP
+complet a été écrit mais que l’enregistrement suivant de `workflow.json` a été
+interrompu, la reprise le réadopte uniquement lorsque l’identité du débat et du
+Work, les versions, l’empreinte complète de la base, chaque fichier éditable,
+chaque contexte et les compteurs correspondent exactement. Sinon le ZIP
+orphelin est ignoré et reconstruit depuis la base courante.
+
 `outgoing/` est une zone privée exclue de Git. Aucun secret, cookie, fichier Pywikibot privé, configuration locale ou état de publication n'est inclus par les listes blanches de revue.
 
 ## Points éditoriaux orchestrés
@@ -3193,7 +3363,7 @@ Si une passe sémantique trouve une erreur certaine, la traduction est rouverte,
 
 Si un ancien Work arrive après convergence avec un registre documentaire anglais incomplet au regard du contrat final, l'orchestrateur n'attend plus l'échec de `translated-copy` : il rassemble toutes les lacunes dans un paquet `en_documentation_correction` où seul `sources_en_working.json` est modifiable. Cette reprise est également préventive pour les nouvelles revues : les mêmes champs sont contrôlés avant la première passe de convergence.
 
-Après validation du paquet combiné graphe/titres, le workflow publie le premier checkpoint avec des résumés personnalisés. Après validation de la revue française de contenu, il publie le second checkpoint, également avec des résumés personnalisés, avant toute traduction anglaise. Après deux passes anglaises propres et indépendantes, l'application, le rendu et la construction `release_ready` restent automatiques. À partir de 2.16.39, `release_ready` ouvre immédiatement une phase distincte `final_publication` : le Work scelle sa baseline bilingue (dernier checkpoint FR signé et première publication EN explicitement attestée), construit et préflighte tous les plans distants avant la première écriture, publie les créations anglaises puis les seuls ajouts interlangues français, et installe le `release-copy` uniquement après succès. Un conflit ou une modification humaine bloque cette phase sans rouvrir la traduction ni les convergences déjà scellées. Les autres écritures pré-W11 restent limitées aux actions structurelles explicitement demandées.
+Après validation du paquet combiné graphe/titres, le workflow publie le premier checkpoint avec des résumés personnalisés. Après validation de la revue française de contenu, il publie le second checkpoint, également avec des résumés personnalisés, avant toute traduction anglaise. Après deux passes anglaises propres et indépendantes, l'application, le rendu et la construction `release_ready` restent automatiques. Le parcours final s'arrête désormais à `publication_prepared` : le Work scelle sa baseline bilingue, construit les plans signés, préflight les pages en lecture seule et conserve l'aperçu. Aucune publication finale n'est autorisée à cette étape. Après vérification humaine du préflight, la commande `./wikidebia workflow-publish <debate_id> --confirm-preflight-sha256 <sha256>` recharge les plans exacts, relit les cibles, puis publie les créations anglaises et les seuls ajouts interlangues français ; le `release-copy` n'est installé qu'après succès. Un conflit ou une modification humaine bloque cette phase sans rouvrir la traduction ni les convergences déjà scellées. Les autres écritures pré-W11 restent limitées aux actions structurelles explicitement demandées.
 
 ## Commandes avancées
 
@@ -3243,16 +3413,31 @@ La réussite du paquet `fr_content_review` déclenche automatiquement le rendu d
 
 Tout échec du validateur lancé par le workflow produit automatiquement dans `outgoing/` un paquet `<debate_id>_<rapport>_diagnostic.zip`. Le terminal peut rester volontairement concis, mais ce ZIP contient l'inventaire **exhaustif** des erreurs (`ERRORS.json`, `ERRORS.txt`), le rapport complet et les fichiers de contexte directement référencés par les diagnostics. Il peut être transmis tel quel à ChatGPT ; aucune recherche manuelle sous `.state/` n'est requise.
 
+
+
+### Préflight documentaire pendant la revue anglaise
+
+Avant de sceller la revue anglaise, le kit applique aux sources de `data/sources_en_working.json` les contrôles de métadonnées correspondant aux règles de rendu `WDV-DOC-002`, `WDV-DOC-003`, `WDV-DOC-005` et `WDV-DOC-009`. Le rapport `reports/en_documentary_review_preflight.json` identifie l'ID de la source, le champ, la valeur et la correction attendue. Les anomalies certaines de format (pagination ou date machine) sont distinguées des arbitrages de fond (date de consultation, identité contradictoire, vraie nature d'une édition ou numéro de collection). Un numéro de collection suspect dans `issue` est un avertissement, pas une conversion automatique. La vérification intervient avant la convergence sémantique et ne modifie jamais une citation historique ni un titre anglais validé. Le rapport est inclus comme contexte facultatif dans les paquets de reprise de traduction.
+
 ## Guide de traduction anglaise
 
 Source interne : `kit/GUIDE_TRANSLATION_REVIEW.md`  
-SHA-256 : `843ab17cb3f3105756eddd9e906da44911d9f3e51807dfe3ab3d63318dd36ed8`
+SHA-256 : `59148908c1a0375b5b03b51f947122b9ce6dfeccb524b1208e6af2f47fdd6440`
 
 # Guide de traduction anglaise contrôlée — Kit 2.16.32
+
+Pour les noms de pages français et anglais, appliquer aussi la
+[revue des titres canoniques](GUIDE_CANONICAL_TITLE_REVIEW.md) : une phrase par
+nom, avec contrôle avant finalisation et publication. La fidélité à la source
+ne dispense pas de cette revue ; les citations et résumés restent inchangés.
 
 > Les règles ci-dessous sont cumulatives et ne dépendent pas d’un numéro `*_revision`. Cette architecture cumulative a été formalisée par la révision 1.2.54.
 
 La traduction anglaise commence uniquement après le verrouillage complet des métadonnées et du contenu français. Elle travaille dans le même workspace éditorial et ne modifie ni le corpus promu, ni `working-copy/`, ni `reviewed-copy/`, ni `content-reviewed-copy/`.
+
+Pour la reprise d'un import français publié à conserver intégralement, voir
+[le gel de source pour traduction](GUIDE_TRANSLATION_SOURCE_PRESERVATION.md).
+Ce gel n'est pas une nouvelle validation documentaire du contenu français.
 
 ## 0. Protocole de lots pour la traduction
 
@@ -3268,7 +3453,26 @@ Ces tailles sont des bornes de qualité de travail, non des quotas de contenu. U
 
 ## 0.1 Règle source-authoritative et métadonnées FR→EN
 
-Pour la rédaction de la traduction, **faire comme si la page anglaise cible n'existait pas**. Une éventuelle page anglaise déjà publiée ne sert pas de source pour le texte, les titres, le plan, `progress`, les avertissements, les références ou les relations. Le corpus français validé est la source éditoriale. Les contrôles techniques distants nécessaires à une future publication restent séparés de cette règle.
+Avant de constituer le corpus à traduire, `graph-extract` contrôle d'abord le
+paramètre `interlangue` de la page Débat française. Si la page anglaise existe,
+le workflow s'arrête avant la création du corpus. Il contrôle ensuite chaque
+page Argument française. Une cible déclarée avec
+`{{Lien interlangue|langue=en|page=…}}` devient une frontière : le lien est
+conservé et le travail s'arrête à ce nœud, sans retraduire la page ni parcourir
+ses relations locales. Le rapport d'extraction inventorie ces frontières et
+leurs titres anglais.
+
+Ces décisions sont consommées automatiquement par toute la chaîne : les
+arguments marqués `reuse_existing` sont absents de la revue de traduction, du
+verrou de contenu anglais, du rendu anglais et des lots de publication. Leur
+page française conserve cependant son lien interlangue vers le titre anglais
+canonique vérifié.
+
+Pour les pages qui restent réellement à traduire, le corpus français validé est
+la source éditoriale. Une autre page anglaise éventuellement trouvée pendant la
+recherche ne sert pas de source pour le texte, les titres, le plan, `progress`,
+les avertissements, les références ou les relations. Les contrôles techniques
+distants nécessaires à une future publication restent séparés de cette règle.
 
 Lorsqu’un résumé français est marqué `historical_existing` avec décision `preserved`, sa forme historique préservée reste autoritative même si elle ne satisfait pas les règles de rédaction d’un nouveau résumé. Avec `authorized_change`, la valeur française finale autorisée dans `fr_content_lock.json` devient au contraire la source autoritative de la traduction, sans que cette autorisation ne requalifie les autres textes historiques. La traduction anglaise doit rester fidèle à ce texte et les exigences de création ne doivent pas être utilisées pour l’allonger ou le réécrire silencieusement. Lorsqu’il est `historical_absent`, `summary=` reste absent en anglais.
 
@@ -3336,6 +3540,10 @@ Pour compatibilité avec un Work déjà convergé sous une version plus ancienne
 Chaque modèle `{{Citation}}` français importé est inventorié avec un identifiant stable. La projection anglaise utilise `{{Quote}}` et traduit obligatoirement tous les noms de paramètres selon le contrat du wiki anglais : `citation→quote`, `auteurs→authors`, `ouvrage→work`, `numéro→issue`, `localisation→location`, `édition→publisher`, `lieu→place`, `lien→link` et `avertissements-citation→warnings`; les noms `article`, `volume`, `page` et `date` sont identiques dans les deux langues.
 
 Seules les valeurs de `quote` et de `date` peuvent être traduites. Les valeurs de `authors`, `article`, `work`, `volume`, `issue`, `page`, `location`, `publisher`, `place` et `link` sont reprises exactement. `warnings` reçoit toujours `AI-translated quote`, après un avertissement préexistant avec le séparateur exact `, `. La date traduite doit désigner la même date ; une année seule reste inchangée. Un paramètre français sans équivalent anglais déclaré bloque la finalisation.
+
+Les dates historiques françaises numériques (`15/06/2011`, `24.08.2018`, `11/2020`) et les mois abrégés (`17 nov. 2021`) sont comparés à la date anglaise à précision égale : une date au mois ne devient pas une date au jour. Une date source non reconnue ou impossible bloque la finalisation et demande une revue, au lieu de contourner silencieusement le contrôle. Une valeur numérique historique conservée strictement à l’identique reste admise.
+
+**Convention obligatoire pour le seul paramètre `date` du modèle anglais `{{Quote}}` traduit depuis `{{Citation}}`** : toute date complète (jour, mois, année) exprimée sous forme traduite utilise le format britannique `D Month YYYY`, avec le mois anglais en toutes lettres et sans suffixe ordinal. Exemples : `18 novembre 2026` → `18 November 2026` ; `1er janvier 2025` → `1 January 2025` ; `14 juillet 1789` → `14 July 1789`. Ne pas utiliser `November 18, 2026`, ni conserver un mois français. Les dates incomplètes et les formes historiques numériques inchangées conservent les règles précédentes : aucune précision n'est inventée. Cette exigence ne modifie ni les dates dans le corps des pages, ni les autres paramètres.
 
 ## 3. Finalisation
 
@@ -3453,9 +3661,27 @@ La revue éditoriale reste indépendante de la publication distante. Pour une cr
 
 - le résumé MediaWiki est `Translation of the French page: [[:fr:X|X]]` ;
 - la révision reçoit `chatgpt` et `translated-fr` ;
-- `creation-date=` est remplacé au plan par le jour civil réel de publication ;
+- `date-création` et `creation-date` sont obsolètes et ne sont jamais générés ni ajoutés à la publication ;
 - un nouvel `Argument` anglais ne transporte jamais `initialization=` depuis le wiki français ;
 - le paramètre MediaWiki actuel d'appellation consacrée est `established-name=` ; `name=` n'est qu'un alias historique de préservation ;
 - une `Quote` nouvellement traduite utilise `AI-translated quote`.
 
 Ces conventions ne changent pas la règle de traduction différentielle : une propriété formelle déjà validée dans la source française n'est pas « réparée » silencieusement en anglais.
+
+### Texte éditorial autour des citations
+
+Le champ français `citations` peut contenir du texte avant, entre ou après les
+modèles `Citation`. Cet inventaire est conservé séparément sous `citation_passages`
+dans le verrou français, avec un identifiant et un ancrage `before_citation_id`
+(`null` pour la fin du champ). Il ne s'agit pas de résumés ni de nouvelles citations.
+
+La revue anglaise fournit pour chaque passage la `source_text` immuable, la
+traduction `text`, `equivalent_to_french=true` après relecture effective et une
+`review_note` précise. Aucun passage ne peut être omis, déplacé, supprimé ou
+transformé en modèle `Quote`. Ces textes entrent dans l'empreinte sémantique et
+sont réinsérés à leur position dans les rendus français et anglais.
+
+Un ancien verrou qui omettait ces textes est refusé à la préparation anglaise
+ou au rendu. Reprendre les revues et les verrous concernés ; ne pas compléter
+leurs empreintes ou attestations à la main. Une source historique incertaine
+reste signalée séparément et n'autorise pas une correction silencieuse du passage.
