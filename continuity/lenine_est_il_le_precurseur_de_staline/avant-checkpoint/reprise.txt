@@ -30,13 +30,15 @@ https://fr.wikidebates.org/w/index.php?oldid=276591
 
 La nouvelle extraction complète a passé l’audit, sans page manquante. Elle contient 1 144 pages Argument, dont quatre déjà traduites, 1 244 relations et 2 117 occurrences dépliées. La validation structurelle de l’import complet a réussi. Le Work EDIT-20261125-001 est ouvert sur la revue du graphe et des titres. Le paquet couvre 1 261 placements et 1 145 pages dont le débat. La revue du contenu français, le gel et la convergence sémantique restent à effectuer.
 
-La revue a identifié cinq propositions de renommage et 21 signalements du validateur portant sur les référents des titres. Les titres proposés ont été testés contre le wiki français et sont disponibles. Dans un cas, le titre canonique énonce l’hypothèse d’une dissimulation des pertes soviétiques par Staline, tandis que le titre affiché et les citations défendent la négation de cette dissimulation. La proposition de renommage reprend le libellé historique de l’occurrence concernée. Le dossier de revue demeure ouvert.
+La revue a identifié cinq propositions de renommage et 21 signalements du validateur portant sur les référents des titres. Les cinq titres proposés ont été testés contre le wiki français et sont disponibles. Le dossier de ces cinq renommages reste soumis à validation. La relecture des 21 avertissements sur les référents a retenu six titres, préparé quatorze propositions de formulation et isolé un cas dont le référent reste ambigu. Dans un cas, le titre canonique énonce l’hypothèse d’une dissimulation des pertes soviétiques par Staline, tandis que le titre affiché et les citations défendent la négation de cette dissimulation. La proposition de renommage reprend le libellé historique de l’occurrence concernée. Le dossier de revue demeure ouvert.
 
 Traduction anglaise préparée
 
 Le brouillon Debate contient l’introduction, la bibliographie anglaise et les liens des 17 arguments de premier niveau. Les 17 pages Argument de ce niveau ont un brouillon. Le contrôle des brouillons a comparé les révisions, l’ordre et l’orientation des 151 liens sortants, les 18 citations, les deux résumés historiques et les champs documentaires des citations. Les titres des cibles communes concordent et les distinctions de libellés propres aux occurrences sont conservées. L’édition originale de Lars T. Lih et les traductions publiées des textes de Trotsky et de Daniel Bensaïd figurent dans les bibliographies appropriées.
 
-Le correctif local du kit vérifie désormais les doubles dates, les mentions d’édition, les trimestres et deux ponctuations historiques. Les 18 dates de citations de ces brouillons sont reconnues. Les tests ciblés du kit ont réussi.
+La première branche du pour est couverte sur deux niveaux. Les douze pages A0018–A0029, directement rattachées à « Lénine a mené la terreur contre ses opposants », ont été traduites avec leurs 27 citations, un résumé et leurs 56 relations immédiates. Le total atteint 29 brouillons d’argument. Le contrôle cumulé porte sur 45 citations, trois résumés et 207 relations. Les dates ont été localisées à précision égale, et l’ordre des mots-clés a été vérifié. Les notes documentaires du lot distinguent les traductions des citations et les éditions anglaises sélectionnées pour la bibliographie.
+
+Le correctif local du kit vérifie désormais les doubles dates, les mentions d’édition, les trimestres et deux ponctuations historiques. Les 45 dates de citations des brouillons sont reconnues. Les tests ciblés du kit ont réussi.
 
 Reprise locale
 
