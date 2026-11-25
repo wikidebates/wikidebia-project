@@ -6,20 +6,17 @@ L’import comprend 227 pages Argument, 241 relations et 256 placements. Une pag
 
 ## Revue du graphe
 
-La [première lecture](PLACEMENTS.tsv) couvre les 256 placements. La [seconde lecture](ARBITRAGES.tsv) recommande, sur les 16 liens examinés, 2 maintiens, 8 déplacements, 4 reclassements et 2 retraits de lien vers des arguments qui figurent déjà ailleurs dans le graphe.
+La première lecture couvre les 256 placements, avec le titre complet de chaque argument et celui de son parent. [Tableau des placements](PLACEMENTS.tsv).
 
-- E00106 passe d’objection à justification. Les citations décrivent la fragmentation de la production comme moyen de réduire le pouvoir des travailleurs.
-- E00144 et E00145 passent de justifications à objections. Les textes cités contestent l’inférence selon laquelle la fragmentation empêche une nouvelle unification.
-- E00079 passe sous l’argument consacré aux autres acteurs révolutionnaires. Plusieurs enfants documentent un rôle des étudiants en appui aux travailleurs.
-- E00113 et E00135 sont proposés au retrait comme liens seulement. Les pages cibles restent accessibles respectivement par E00123 et E00062. Les identifiants sont ceux de l’import et seront recalculés après projection.
+La seconde lecture recommande, sur les 16 liens examinés, 2 maintiens, 8 déplacements, 4 reclassements et 2 retraits de liens vers des arguments qui figurent déjà ailleurs dans le graphe. [Revue détaillée par titre](REVUE.md).
 
 Le kit a généré en lecture locale un plan pour les déplacements et reclassements. Son action de retrait refuse une page réutilisée. Les deux retraits de lien ont donc été vérifiés dans une projection locale distincte. La projection à 239 relations et 254 placements conserve les 227 pages et passe le validateur structurel. Sur les 21 pages dont les liens changent dans cette prévisualisation, les paramètres hors relations et les libellés des liens conservés ont été comparés à l’import.
 
 ## Revue des titres
 
-Les 228 titres canoniques ont été contrôlés pour leur forme et leur unicité. Six [corrections de titres canoniques](TITRES.tsv) sont proposées. Deux répondent à un blocage du validateur, le point final d’A0048 et la forme des guillemets d’A0114. Les six destinations proposées étaient libres lors du contrôle en lecture du wiki français.
+Les 228 titres canoniques ont été contrôlés pour leur forme et leur unicité. Six corrections sont proposées. Deux répondent à un blocage du validateur, le point final de **La classe ouvrière inclut les travailleurs intellectuels, les étudiants, les retraités, les chômeurs, etc.** et les guillemets de **La production reste structurée autour de sites ou « écosystèmes » industriels à forte concentration ouvrière**. Les six destinations proposées étaient libres lors du contrôle en lecture du wiki français. [Titres actuels et proposés](REVUE.md#corriger-six-titres-canoniques).
 
-La page principale distingue, pour A0002, le titre canonique sur la capacité à réorganiser la société et le libellé contextualisé sur une organisation économique sans exploitation. Le lien vers A0004 passe par une redirection vers le titre canonique extrait. Les libellés affichés de ces occurrences sont attestés à la révision 267940.
+La page du débat présente « La classe ouvrière est la seule classe capable de réorganiser la société sur une autre base » sous le libellé « La classe ouvrière est la seule classe porteuse d'une nouvelle organisation économique débarrassée de l'exploitation ». Le lien vers « La classe ouvrière est la seule classe capable d'aller jusqu'au bout de la lutte révolutionnaire » passe par une redirection. Les libellés affichés de ces occurrences sont attestés à la révision 267940.
 
 ## Reprise
 
