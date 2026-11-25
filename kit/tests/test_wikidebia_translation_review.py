@@ -765,6 +765,20 @@ def test_historical_citation_date_formats_match_english_translation(source: str,
     assert translation._date_signature(source, "fr") == translation._date_signature(target, "en")
 
 
+@pytest.mark.parametrize(("source", "target", "wrong"), [
+    ("22 décembre 2014  ( octobre 1993 )", "22 December 2014 (October 1993)", "22 December 2014 (October 1994)"),
+    ("1975- deuxième édition", "1975 second edition", "1975 first edition"),
+    ("2ème trimestre 1996", "2nd quarter 1996", "3rd quarter 1996"),
+    ("18 juillet 1922.", "18 July 1922", "19 July 1922"),
+    ("20 juin, 2023", "20 June 2023", "20 July 2023"),
+])
+def test_historical_citation_dates_preserve_all_calendar_and_edition_information(source, target, wrong):
+    signature = translation._date_signature(source, "fr")
+    assert signature is not None
+    assert translation._date_signature(target, "en") == signature
+    assert translation._date_signature(wrong, "en") != signature
+
+
 def test_finalize_translation_rejects_mutated_citation_source_parameters(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
     translation.prepare_review(project, "debat_test", work_id)

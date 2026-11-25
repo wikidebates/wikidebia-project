@@ -476,12 +476,32 @@ def _citation_warning(existing: Any) -> str:
     return ", ".join(parts)
 
 
-def _date_signature(value: Any, language: str) -> tuple[int, int | None, int | None] | None:
+def _date_signature(value: Any, language: str) -> tuple[Any, ...] | None:
     text = re.sub(r"\s+", " ", str(value or "").strip())
     if not text:
         return None
     if re.fullmatch(r"\d{4}", text) and int(text) > 0:
         return (int(text), None, None)
+    # An attributed quotation may give both the date of a reprint and the
+    # original publication date. Compare both at their original precision.
+    paired = re.fullmatch(r"([^()]+)\s*\(([^()]+)\)", text)
+    if paired and re.search(r"[A-Za-zÀ-ÿ]", text):
+        first, second = (_date_signature(part, language) for part in paired.groups())
+        if first is not None and second is not None:
+            return ("paired_dates", first, second)
+    if language == "fr":
+        edition = re.fullmatch(r"(\d{4})\s*(?:-\s*)?(première|deuxième|seconde|troisième) édition", text, re.I)
+        editions = {"première": 1, "deuxième": 2, "seconde": 2, "troisième": 3}
+        quarter = re.fullmatch(r"(1er|[1-4]e|[1-4]ème) trimestre (\d{4})", text, re.I)
+    else:
+        edition = re.fullmatch(r"(\d{4}) (first|second|third) edition", text, re.I)
+        editions = {"first": 1, "second": 2, "third": 3}
+        quarter = re.fullmatch(r"(1st|2nd|3rd|4th) quarter (\d{4})", text, re.I)
+    if edition and int(edition[1]) > 0:
+        return ("edition", int(edition[1]), editions[edition[2].casefold()])
+    if quarter and int(quarter[2]) > 0:
+        return ("quarter", int(quarter[2]), int(quarter[1][0]))
+    text = re.sub(r"(?<=\d)\.$", "", text)
     months = dict(FR_MONTHS if language == "fr" else EN_MONTHS)
     months.update({
         "jan": 1, "janv": 1, "feb": 2, "febr": 2, "fév": 2, "fev": 2, "févr": 2, "fevr": 2,
@@ -540,7 +560,7 @@ def _date_signature(value: Any, language: str) -> tuple[int, int | None, int | N
             except ValueError:
                 return None
             return (day.year, day.month, day.day)
-    match = re.fullmatch(r"(\d{1,2})\s+([A-Za-zÀ-ÿ]+)\s+(\d{4})", text, re.I)
+    match = re.fullmatch(r"(\d{1,2})\s+([A-Za-zÀ-ÿ]+),?\s+(\d{4})", text, re.I)
     if match and match.group(2).casefold() in months:
         year, month, day = int(match.group(3)), months[match.group(2).casefold()], int(match.group(1))
         try:
