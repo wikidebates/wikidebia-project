@@ -1,0 +1,70 @@
+{{Debate
+|topic=Working class
+|expanded-topic=the revolutionary character of the working class
+|progress=Debate under construction
+|wikipedia-articles={{Wikipedia article
+|page=Working class
+}}
+|pro-arguments={{Pro argument
+|page=The working class is the only social force capable of overthrowing capitalism
+|displayed-title=The working class is the only social force capable of overthrowing capitalism
+}}{{Pro argument
+|page=The working class is the only class capable of reorganising society on a different basis
+|displayed-title=The working class is the only class that can bring about a new economic order free from exploitation
+}}{{Pro argument
+|page=The working class is the only class capable of uniting and organising for revolution
+|displayed-title=The working class is the only class capable of uniting and organising for revolution
+}}{{Pro argument
+|page=The working class is the only class capable of seeing the revolutionary struggle through to the end
+|displayed-title=The working class is the only class capable of seeing the revolutionary struggle through to the end
+}}{{Pro argument
+|page=The working class has demonstrated its ability to carry out a revolution
+|displayed-title=The working class has demonstrated its ability to carry out a revolution
+}}{{Pro argument
+|page=Social classes other than the working class are not revolutionary
+|displayed-title=The other classes are not revolutionary
+}}
+|con-arguments={{Con argument
+|page=The working class does not exist
+|displayed-title=The working class does not exist
+}}{{Con argument
+|page=The concept of the working class is problematic
+|displayed-title=The concept of the working class is problematic
+}}{{Con argument
+|page=The working class is too integrated into bourgeois society
+|displayed-title=The working class is too integrated into bourgeois society
+}}{{Con argument
+|page=The working class has lost its economic power
+|displayed-title=The working class has lost its economic power
+}}{{Con argument
+|page=Working-class organisations have lost their base and legitimacy
+|displayed-title=Working-class organisations have lost their base and legitimacy
+}}{{Con argument
+|page=The working class has lost its militancy
+|displayed-title=The working class has lost its militancy
+}}{{Con argument
+|page=The working class is too divided to be conscious of itself as a class
+|displayed-title=The working class is too divided to be conscious of itself as a class
+}}{{Con argument
+|page=A revolution can and must take place without the working class
+|displayed-title=A revolution can and must take place without the working class
+}}{{Con argument
+|page=We must give up the fantasy of revolution
+|displayed-title=We must give up the fantasy of revolution
+}}
+|pro-bibliography={{Pro bibliographical reference
+|authors=Karl Marx, Friedrich Engels
+|work=The Communist Manifesto
+|publisher=Project Gutenberg
+|link=https://www.gutenberg.org/ebooks/61
+}}
+|bibliography={{Bibliographical reference
+|authors=Theda Skocpol
+|work=States and Social Revolutions: A Comparative Analysis of France, Russia and China
+|publisher=Cambridge University Press
+|date=1979
+|link=https://www.cambridge.org/core/books/states-and-social-revolutions/9481262B2BDA1BFFB3C9218DBD447190
+}}
+|sections=Politics
+|keywords=working class, revolution, communism, Marxism
+}}
