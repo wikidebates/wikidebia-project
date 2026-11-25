@@ -1,0 +1,45 @@
+Reprise de la traduction de « Lénine est-il le précurseur de Staline ? »
+
+La révision du dépôt utilisée est 576d258fdb3205306af55fda4401f7c25005c292.
+La page Débat française de référence est à la révision 269584.
+https://fr.wikidebates.org/w/index.php?oldid=269584
+
+Les trois liens confirmés sans cible ont été retirés et les trois liens dont les cibles ont été retrouvées ont été corrigés. Les six pages parentes ont été relues après enregistrement. Les corrections de cible préservent les libellés affichés historiques.
+
+Révisions MediaWiki vérifiées
+
+Confirmation : en avril 1917 Lénine et le comité central du parti avaient en tête le roi Charles Ier, l'empereur Guillaume II, le tsar Nicolas II mais non leurs familles
+https://fr.wikidebates.org/w/index.php?oldid=276586
+
+Faire procéder le stalinisme du léninisme ou du marxisme, c'est commettre la même erreur que faire procéder la contre-révolution de la révolution
+https://fr.wikidebates.org/w/index.php?oldid=276587
+
+Il était peut-être dans l'intérêt en Angleterre de croire en la mort de la tsarine
+https://fr.wikidebates.org/w/index.php?oldid=276588
+
+Loin de la démocratie ouvrière, Staline a excellé dans l'art de la manipulation et de la terreur
+https://fr.wikidebates.org/w/index.php?oldid=276589
+
+Lénine a appelé à l'extermination d'une bonne centaine de Romanov
+https://fr.wikidebates.org/w/index.php?oldid=276590
+
+Trotsky confirme en 1935 dans un journal
+https://fr.wikidebates.org/w/index.php?oldid=276591
+
+État du corpus
+
+La nouvelle extraction complète a passé l’audit, sans page manquante. Elle contient 1 144 pages Argument, dont quatre déjà traduites, 1 244 relations et 2 117 occurrences dépliées. La validation structurelle de l’import complet a réussi. Le Work EDIT-20261125-001 est ouvert sur la revue du graphe et des titres. Le paquet couvre 1 261 placements et 1 145 pages dont le débat. La revue du contenu français, le gel et la convergence sémantique restent à effectuer.
+
+La revue a identifié cinq propositions de renommage et 21 signalements du validateur portant sur les référents des titres. Les titres proposés ont été testés contre le wiki français et sont disponibles. Dans un cas, le titre canonique énonce l’hypothèse d’une dissimulation des pertes soviétiques par Staline, tandis que le titre affiché et les citations défendent la négation de cette dissimulation. La proposition de renommage reprend le libellé historique de l’occurrence concernée. Le dossier de revue demeure ouvert.
+
+Traduction anglaise préparée
+
+Le brouillon Debate contient l’introduction, la bibliographie anglaise et les liens des 17 arguments de premier niveau. Les 17 pages Argument de ce niveau ont un brouillon. Le contrôle des brouillons a comparé les révisions, l’ordre et l’orientation des 151 liens sortants, les 18 citations, les deux résumés historiques et les champs documentaires des citations. Les titres des cibles communes concordent et les distinctions de libellés propres aux occurrences sont conservées. L’édition originale de Lars T. Lih et les traductions publiées des textes de Trotsky et de Daniel Bensaïd figurent dans les bibliographies appropriées.
+
+Le correctif local du kit vérifie désormais les doubles dates, les mentions d’édition, les trimestres et deux ponctuations historiques. Les 18 dates de citations de ces brouillons sont reconnues. Les tests ciblés du kit ont réussi.
+
+Reprise locale
+
+./wikidebia workflow-status lenine_est_il_le_precurseur_de_staline
+
+Le paquet de revue courant et le dossier provisoire des renommages sont répertoriés dans les fichiers de reprise. Le réimport de la revue validée déclenche le checkpoint français selon les règles du dépôt. Les brouillons anglais restent des documents de travail.
