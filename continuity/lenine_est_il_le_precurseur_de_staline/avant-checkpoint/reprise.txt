@@ -54,6 +54,8 @@ Les deux premières branches du contre, sur le combat de Lénine contre Staline 
 
 Les quatre dernières branches du contre sont couvertes sur deux niveaux. Les 28 brouillons A0136 à A0163 ajoutent 40 citations, deux résumés et 61 relations. Les 17 placements de premier niveau et les 151 placements de deuxième niveau correspondent exactement aux 163 pages Argument distinctes du lot. Le cumul est de 265 citations, 18 résumés et 500 relations. Les deux répétitions exactes de citations et la référence vidéo ont été contrôlées. Le débat contient les liens canoniques des 17 arguments de premier niveau.
 
+La copie de travail graph_placement_review_en_cours.json contient les notes préliminaires pour les 17 arguments principaux ainsi que trois placements à revoir. Elle conserve les statuts en attente et l’identité des 1 261 entrées du paquet officiel. Le rapprochement du fichier a été vérifié avec le validateur du dépôt.
+
 Le correctif local du kit vérifie désormais les doubles dates, les mentions d’édition, les trimestres et deux ponctuations historiques. Les 45 dates de citations des brouillons sont reconnues. Les tests ciblés du kit ont réussi.
 
 Reprise locale
