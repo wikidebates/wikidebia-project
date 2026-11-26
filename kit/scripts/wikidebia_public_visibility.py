@@ -21,11 +21,13 @@ import re
 import sys
 import unicodedata
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any, Mapping
 from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, quote, unquote, urlencode, urljoin, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
+import time
 
 from wikidebia_corpus_build import load_json, sha256_file, validate_debate_id, write_json
 from wikidebia_graph_extract import iter_templates, normalize_key
@@ -134,30 +136,58 @@ class AnonymousMediaWiki:
             "Accept": "text/html, application/json;q=0.8",
         }
         self._rest_only: set[str] = set()
+        self._next_request = 0.0
+        self._request_interval = 0.75
 
     def _read(self, language: str, url: str) -> bytes:
         _verify_host(url, language)
         request = Request(url, headers=self.headers, method="GET")
-        try:
-            with self.opener.open(request, timeout=self.timeout) as response:
-                final_url = response.geturl()
-                _verify_host(final_url, language)
-                status = response.status
-                if status == 404:
-                    raise PublicMissing("HTTP 404")
-                if status != 200:
-                    raise PublicUnavailable(f"HTTP {status}")
-                # Bounded read prevents pathological HTML/API replies.
-                data = response.read(8_000_001)
-                if len(data) > 8_000_000:
-                    raise PublicUnavailable("Réponse publique trop volumineuse")
-                return data
-        except HTTPError as exc:
-            if exc.code in {404, 410}:
-                raise PublicMissing(f"HTTP {exc.code}") from exc
-            raise PublicUnavailable(f"HTTP {exc.code}") from exc
-        except (URLError, OSError, TimeoutError) as exc:
-            raise PublicUnavailable(f"Lecture HTTPS impossible : {exc}") from exc
+        retries = 0
+        while True:
+            wait = self._next_request - time.monotonic()
+            if wait > 0:
+                time.sleep(wait)
+            self._next_request = time.monotonic() + self._request_interval
+            try:
+                with self.opener.open(request, timeout=self.timeout) as response:
+                    _verify_host(response.geturl(), language)
+                    status = response.status
+                    if status == 404:
+                        raise PublicMissing("HTTP 404")
+                    if status != 200:
+                        raise PublicUnavailable(f"HTTP {status}")
+                    # Bounded read prevents pathological HTML/API replies.
+                    data = response.read(8_000_001)
+                    if len(data) > 8_000_000:
+                        raise PublicUnavailable("Réponse publique trop volumineuse")
+                    return data
+            except HTTPError as exc:
+                if exc.code == 429 and retries < 4:
+                    delay = self._rate_limit_delay(exc.headers, retries)
+                    exc.close()
+                    retries += 1
+                    self._request_interval = min(4.0, 2 * self._request_interval)
+                    self._next_request = time.monotonic() + delay
+                    continue
+                if exc.code in {404, 410}:
+                    raise PublicMissing(f"HTTP {exc.code}") from exc
+                raise PublicUnavailable(f"HTTP {exc.code}") from exc
+            except (URLError, OSError, TimeoutError) as exc:
+                raise PublicUnavailable(f"Lecture HTTPS impossible : {exc}") from exc
+
+    @staticmethod
+    def _rate_limit_delay(headers: Any, retries: int) -> float:
+        minimum = 15 * (2 ** retries)
+        after = str(headers.get("Retry-After") or "").strip() if headers else ""
+        if after.isdecimal():
+            return max(minimum, int(after))
+        if after:
+            try:
+                remaining = parsedate_to_datetime(after).timestamp() - time.time()
+                return max(minimum, remaining)
+            except (TypeError, ValueError, OverflowError):
+                pass
+        return minimum
 
     def html(self, language: str, title: str) -> _PublicDocument:
         content = self._read(language, _public_url(language, title))

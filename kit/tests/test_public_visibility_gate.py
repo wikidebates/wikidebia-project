@@ -1,8 +1,10 @@
 """Public visibility is not a write-API acknowledgement or signed plan execution."""
 from __future__ import annotations
 
+import io
 import json
 from pathlib import Path
+from types import SimpleNamespace
 from urllib.error import HTTPError
 
 import pytest
@@ -280,6 +282,29 @@ def test_anonymous_wikitext_uses_public_rest_when_action_api_returns_403(monkeyp
     assert pages["Missing"] == {"exists": False}
     assert client.pages("en", ["Wrong title"])["Wrong title"]["unavailable"]
     assert sum("/w/api.php?" in url for url in requests) == 1
+
+
+def test_public_reader_honours_retry_after_and_slows_down_on_rate_limit(monkeypatch):
+    client = visibility.AnonymousMediaWiki()
+    url = visibility._public_url("en", "Should we agree?")
+    waits = []
+    requests = []
+    monkeypatch.setattr(visibility, "time", SimpleNamespace(monotonic=lambda: sum(waits), sleep=waits.append))
+
+    def open_public(request, timeout):
+        requests.append((request.get_method(), request.get_full_url()))
+        if len(requests) == 1:
+            raise HTTPError(url, 429, "Too Many Requests", {"Retry-After": "25"}, io.BytesIO())
+        response = io.BytesIO(b"Public page")
+        response.status = 200
+        response.geturl = lambda: url
+        return response
+
+    monkeypatch.setattr(client.opener, "open", open_public)
+    assert client._read("en", url) == b"Public page"
+    assert client._read("en", url) == b"Public page"
+    assert waits == [25, 1.5]
+    assert requests == [("GET", url)] * 3
 
 
 def test_final_publisher_refuses_completion_when_writer_succeeds_but_public_page_missing(tmp_path: Path, monkeypatch):
