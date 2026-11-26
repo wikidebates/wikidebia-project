@@ -253,9 +253,14 @@ def _preserved_final_step(project_root: Path, debate_id: str, work_id: str, rele
                                                        "french_plan_sha256": fr_plan_sha})
             else:
                 status, action = "final_publication_resume", "resume_final_publication"
-        elif (preparation.get("preflight_sha256") != digest or preparation.get("en_plan_sha256") != en_plan_sha
-              or preparation.get("fr_plan_sha256") != fr_plan_sha):
+        elif (preparation.get("en_plan_sha256") != en_plan_sha
+              or preparation.get("fr_plan_sha256") != fr_plan_sha
+              or preparation.get("safety_plan_sha256") != preflight.get("safety_plan_sha256")):
             raise WorkspaceStatusError("La préparation ne correspond pas au préflight courant")
+        elif preparation.get("preflight_sha256") != digest:
+            status, action = "publication_confirmation_required", "prepare_preserved_publication_again"
+            command = _command("publish-preserved", debate_id, work_id)
+            remote_write = False
     except (CorpusBuildError, FinalPublicationError, WorkspaceStatusError, KeyError):
         return {"status": "final_publication_evidence_invalid", "action": "repair_final_publication_evidence",
                 "command": None, "remote_read_possible": False, "remote_write_possible": False,

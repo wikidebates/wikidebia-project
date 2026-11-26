@@ -20,6 +20,7 @@ import sys
 import tempfile
 import uuid
 import zipfile
+from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable, Iterable, Mapping, Sequence
@@ -30,9 +31,9 @@ from wikidebia_corpus_build import (
     PLACEMENT_REVIEW,
     GRAPH_CORRECTION_REVIEW,
     GRAPH_TITLE_REVIEW,
+    assert_control_directory,
     build_payload_sha256,
     full_tree_sha256,
-    exclusive_lock,
     load_json,
     now_iso,
     resolve_build,
@@ -170,6 +171,31 @@ def _workflow_root(project_root: Path, debate_id: str) -> Path:
 
 def _workflow_path(project_root: Path, debate_id: str) -> Path:
     return _workflow_root(project_root, debate_id) / "workflow.json"
+
+
+@contextmanager
+def _final_publication_lock(project_root: Path, debate_id: str):
+    try:
+        import fcntl
+    except ImportError as exc:
+        raise WorkflowError("La publication finale exige les verrous de fichiers POSIX") from exc
+    state_dir = assert_control_directory(project_root / ".state", project_root, create=True)
+    lock_dir = assert_control_directory(state_dir / "locks", project_root, create=True)
+    path = lock_dir / f"final-publication-{validate_debate_id(debate_id)}.lock"
+    fd = os.open(path, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
+    try:
+        info = os.fstat(fd)
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1:
+            raise WorkflowError("Fichier de verrou de publication finale invalide")
+        try:
+            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise WorkflowError(f"Une publication finale est déjà en cours pour {debate_id}") from exc
+        yield
+    finally:
+        # Keep the inode so another process cannot acquire a different lock for
+        # the same debate. The kernel releases the lock when the descriptor closes.
+        os.close(fd)
 
 
 def _load_workflow(project_root: Path, debate_id: str) -> dict[str, Any]:
@@ -517,7 +543,7 @@ def publish_preserved_workflow(project_root: Path, debate_id: str, work_id: str)
     """Adopt a sealed preservation release and use the ordinary final publisher."""
     debate_id = validate_debate_id(debate_id)
     work_id = validate_work_id(work_id)
-    with exclusive_lock(project_root, debate_id, "publish-preserved"):
+    with _final_publication_lock(project_root, debate_id):
         workspace = _workspace_path(project_root, debate_id, work_id)
         meta = load_json(workspace / "workspace.json", "workspace")
         release_copy = workspace / "release-copy"
@@ -585,12 +611,13 @@ def publish_preserved_workflow(project_root: Path, debate_id: str, work_id: str)
                     workflow_path.unlink()
                 raise
             state = candidate
-        state["phase"] = "final_publication"
-        state["status"] = "final_publication"
-        state.pop("preserved_publication_blocker", None)
-        state["updated_at"] = now_iso()
-        _save_workflow(project_root, state)
-        return _mechanical_advance(project_root, state)
+        if state.get("phase") != "published":
+            state["phase"] = "final_publication"
+            state["status"] = "final_publication"
+            state.pop("preserved_publication_blocker", None)
+            state["updated_at"] = now_iso()
+            _save_workflow(project_root, state)
+    return _mechanical_advance(project_root, state)
 
 
 def _relative(path: Path, root: Path) -> str:
@@ -1840,71 +1867,86 @@ def _mechanical_advance(
             _save_workflow(project_root, state)
             continue
         if phase in {"release_ready", "final_publication", "final_publication_resume", "publication_prepared"}:
-            workspace, meta = _current_workspace_meta(project_root, state)
-            release_copy = workspace / "release-copy"
-            started = (project_root / ".state/final-publication" / debate_id
-                       / str(state["work_id"]) / "authorization.json").is_file()
-            if not verify_only and not started and phase != "publication_prepared":
-                try:
-                    preparation = prepare_final_release(
-                        project_root, debate_id, str(state["work_id"]), release_copy,
-                        allow_preserved=bool(state.get("preserved_publication_release_sha256")),
-                    )
-                except FinalPublicationError as exc:
-                    state["status"] = "blocked_final_publication"
-                    state["final_publication"] = {
-                        "status": "blocked", "remote_execution_started": False,
-                        "error": str(exc), "recorded_at": now_iso(),
+            with _final_publication_lock(project_root, debate_id):
+                current = _load_workflow(project_root, debate_id)
+                if current.get("work_id") != state.get("work_id"):
+                    raise WorkflowError("Le Work actif a changé avant la publication finale")
+                state = current
+                phase = state.get("phase")
+                if phase == "published":
+                    reconcile_published_workspace(project_root, debate_id, str(state["work_id"]))
+                    return state
+                if phase not in {"release_ready", "final_publication", "final_publication_resume", "publication_prepared"}:
+                    raise WorkflowError("Le Work actif a quitté la phase de publication finale")
+                workspace, _ = _current_workspace_meta(project_root, state)
+                release_copy = workspace / "release-copy"
+                started = (project_root / ".state/final-publication" / debate_id
+                           / str(state["work_id"]) / "authorization.json").is_file()
+                if not confirm_preflight_sha256 and not started and phase != "publication_prepared":
+                    try:
+                        preparation = prepare_final_release(
+                            project_root, debate_id, str(state["work_id"]), release_copy,
+                            allow_preserved=bool(state.get("preserved_publication_release_sha256")),
+                        )
+                    except FinalPublicationError as exc:
+                        state["status"] = "blocked_final_publication"
+                        state["final_publication"] = {
+                            "status": "blocked", "remote_execution_started": False,
+                            "error": str(exc), "recorded_at": now_iso(),
+                        }
+                        state["updated_at"] = now_iso()
+                        _save_workflow(project_root, state)
+                        return state
+                    state["phase"] = "publication_prepared"
+                    state["status"] = "publication_prepared"
+                    state["publication_preparation"] = {
+                        "preflight_sha256": preparation["preflight_sha256"],
+                        "preparation_sha256": preparation["preparation_sha256"],
+                        "english_plan_sha256": preparation["en_plan_sha256"],
+                        "french_plan_sha256": preparation["fr_plan_sha256"],
+                        "remote_write_authorized": False,
                     }
                     state["updated_at"] = now_iso()
                     _save_workflow(project_root, state)
                     return state
-                state["phase"] = "publication_prepared"
-                state["status"] = "publication_prepared"
-                state["publication_preparation"] = {
-                    "preflight_sha256": preparation["preflight_sha256"],
-                    "preparation_sha256": preparation["preparation_sha256"],
-                    "english_plan_sha256": preparation["en_plan_sha256"],
-                    "french_plan_sha256": preparation["fr_plan_sha256"],
-                    "remote_write_authorized": False,
-                }
+                if not confirm_preflight_sha256:
+                    # Existing interrupted publications also require a fresh explicit
+                    # reference to their signed preflight on every resume.
+                    return state
+                try:
+                    publication = publish_final_release(
+                        project_root, debate_id, str(state["work_id"]), release_copy,
+                        allow_preserved=bool(state.get("preserved_publication_release_sha256")),
+                        confirm_preflight_sha256=confirm_preflight_sha256,
+                        **({"verify_only": True} if verify_only else {}),
+                    )
+                except FinalPublicationError as exc:
+                    state["phase"] = "final_publication"
+                    state["status"] = "blocked_final_publication"
+                    state["final_publication"] = {
+                        "status": "blocked",
+                        "state_path": _relative(project_root / ".state/final-publication" / debate_id / str(state["work_id"]), project_root),
+                        "remote_execution_started": bool(exc.remote_execution_started),
+                        "error": str(exc),
+                        "recorded_at": now_iso(),
+                    }
+                    state["updated_at"] = now_iso()
+                    _save_workflow(project_root, state)
+                    return state
+                state["phase"] = "published"
+                state["status"] = "published"
+                state["final_publication"] = copy.deepcopy(publication)
                 state["updated_at"] = now_iso()
                 _save_workflow(project_root, state)
+                reconcile_published_workspace(project_root, debate_id, str(state["work_id"]))
                 return state
-            if not confirm_preflight_sha256:
-                # Existing interrupted publications also require a fresh explicit
-                # reference to their signed preflight on every resume.
-                return state
-            try:
-                publication = publish_final_release(
-                    project_root, debate_id, str(state["work_id"]), release_copy,
-                    allow_preserved=bool(state.get("preserved_publication_release_sha256")),
-                    confirm_preflight_sha256=confirm_preflight_sha256,
-                    **({"verify_only": True} if verify_only else {}),
-                )
-            except FinalPublicationError as exc:
-                state["phase"] = "final_publication"
-                state["status"] = "blocked_final_publication"
-                state["final_publication"] = {
-                    "status": "blocked",
-                    "state_path": _relative(project_root / ".state/final-publication" / debate_id / str(state["work_id"]), project_root),
-                    "remote_execution_started": bool(exc.remote_execution_started),
-                    "error": str(exc),
-                    "recorded_at": now_iso(),
-                }
-                state["updated_at"] = now_iso()
-                _save_workflow(project_root, state)
-                return state
-            state["phase"] = "published"
-            state["status"] = "published"
-            state["final_publication"] = copy.deepcopy(publication)
-            state["updated_at"] = now_iso()
-            _save_workflow(project_root, state)
-            reconcile_published_workspace(project_root, debate_id, str(state["work_id"]))
-            return state
         if phase == "published":
-            reconcile_published_workspace(project_root, debate_id, str(state["work_id"]))
-            return state
+            with _final_publication_lock(project_root, debate_id):
+                current = _load_workflow(project_root, debate_id)
+                if current.get("work_id") != state.get("work_id") or current.get("phase") != "published":
+                    raise WorkflowError("Le Work publié a changé avant sa réconciliation")
+                reconcile_published_workspace(project_root, debate_id, str(current["work_id"]))
+                return current
         raise WorkflowError(f"Phase d'orchestration inconnue : {phase}")
 
 
@@ -2803,7 +2845,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(json.dumps(state, ensure_ascii=False, sort_keys=True))
     else:
         _print_user_result(state)
-    return 2 if args.command == "publish-preserved" and state.get("status") not in {"published", "publication_prepared"} else 0
+    if args.command == "workflow-publish" and state.get("status") != "published":
+        return 2
+    if args.command == "publish-preserved" and state.get("status") not in {"published", "publication_prepared"}:
+        return 2
+    return 0
 
 
 if __name__ == "__main__":

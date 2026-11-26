@@ -248,6 +248,11 @@ def test_preserved_resume_tracks_current_signed_preflight_and_completed_writes(t
     assert prepared["next_remote_write_possible"] is True
 
     current = save("preflight.json", "preflight_sha256", {**preflight, "checked_at": "refreshed"})
+    legacy = status.summarize_workspace(tmp_path, debate, work)
+    assert legacy["status"] == "publication_confirmation_required"
+    assert legacy["next_command"] == f"./wikidebia publish-preserved {debate} --work-id {work}"
+    assert legacy["next_remote_write_possible"] is False
+
     save("authorization.json", "authorization_sha256", {
         "status": "authorized", "remote_write_authorized": True,
         "preflight_sha256": current, "baseline_sha256": baseline_sha,
