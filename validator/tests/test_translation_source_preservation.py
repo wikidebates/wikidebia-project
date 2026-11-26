@@ -5,7 +5,7 @@ from pathlib import Path
 
 from wikidebia_validator.package import PackageContext
 from wikidebia_validator.report import Report
-from wikidebia_validator.schema_validation import _preserved_keyword_duplicates, _valid_translation_source_preservation
+from wikidebia_validator.schema_validation import SchemaStore, _preserved_keyword_duplicates, _valid_translation_source_preservation
 from wikidebia_validator.graph import contextual_title_issues
 
 def dump(path, value):
@@ -31,6 +31,24 @@ def context(root):
 
 def error(language='en'):
     return SimpleNamespace(validator='uniqueItems',absolute_path=['graph','nodes',0,language,'keywords'])
+
+def test_preservation_receipt_accepts_an_optional_graph_review_digest(tmp_path):
+    fixture(tmp_path)
+    receipt = json.loads((tmp_path / 'data/source_preservation_receipt.json').read_text())
+    receipt.update(
+        debate_id='test-debate', work_id='EDIT-001', status='frozen_as_imported',
+        reviewer='Test reviewer', reviewed_at='2026-11-26T00:00:00Z',
+        note='The published source is preserved byte for byte.',
+        documentary_reverification_claimed=False, french_pages_changed=False,
+    )
+    store = SchemaStore()
+    schema = 'translation_source_preservation.schema.json'
+    assert not store.validate(receipt, schema)
+    receipt['preserved_placements_sha256'] = 'a' * 64
+    assert not store.validate(receipt, schema)
+    receipt['preserved_placements_sha256'] = 'invalid'
+    errors = store.validate(receipt, schema)
+    assert len(errors) == 1 and list(errors[0].path) == ['preserved_placements_sha256']
 
 def test_only_exact_source_duplicates_are_exempt(tmp_path):
     registry=fixture(tmp_path);ctx=context(tmp_path)

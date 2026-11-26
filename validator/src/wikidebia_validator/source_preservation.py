@@ -58,3 +58,18 @@ def source_keywords(ctx: PackageContext) -> set[str]:
         return set()
     lock = ctx.load_json('data/fr_page_metadata_lock.json') or {}
     return {term for row in [lock.get('debate') or {}, *lock.get('arguments', [])] for term in row.get('keywords', [])}
+
+
+def source_page_keywords(ctx: PackageContext, node_id: str) -> list[str] | None:
+    if not _valid_translation_source_preservation(ctx):
+        return None
+    receipt = ctx.load_json('data/source_preservation_receipt.json') or {}
+    page = next((row for row in receipt['pages'] if row.get('page_id') == node_id), None)
+    if not page:
+        return None
+    from .wikicode import parse_template
+    try:
+        template = parse_template(ctx.read_text(page['import_path']) or '')
+    except ValueError:
+        return None
+    return [value.strip() for value in (template.one('mots-clés') or '').split(',') if value.strip()]

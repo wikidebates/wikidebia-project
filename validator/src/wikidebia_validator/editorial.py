@@ -2145,7 +2145,7 @@ def validate_editorial(ctx: PackageContext) -> None:
                 return source.get('page_origin') == 'preexisting'
         return bool(target and target.get('page_origin') == 'preexisting')
     vocab_fr, vocab_en = _load_keyword_vocabulary(ctx, editorial_controls)
-    from .source_preservation import source_keywords
+    from .source_preservation import source_keywords, source_page_keywords
     preserved_keywords = source_keywords(ctx)
     capitalization_vocabularies = (('fr', vocab_fr),) if english_deferred else (('fr', vocab_fr), ('en', vocab_en))
     for language, vocabulary in capitalization_vocabularies:
@@ -2172,7 +2172,9 @@ def validate_editorial(ctx: PackageContext) -> None:
             rationale = str(entry.get(rationale_field) or '').strip()
             if kind in {'proper_name', 'acronym'} and len(rationale) < 12:
                 ctx.report.error('WDV-EDT-023', 'Majuscule canonique insuffisamment justifiée', path=editorial_controls.get('keyword_vocabulary_path'), details={'language': language, 'keyword': term, 'kind': kind})
-            if kind in {'noun', 'noun_phrase'} and rationale:
+            # Translation review records a change in lexical form in the same field.
+            lexical_form_changed = language == 'en' and entry.get('en_kind') == kind and entry.get('kind') != kind
+            if kind in {'noun', 'noun_phrase'} and rationale and not (lexical_form_changed and len(rationale) >= 12):
                 ctx.report.error('WDV-EDT-023', 'Justification de majuscule inattendue pour un nom commun', path=editorial_controls.get('keyword_vocabulary_path'), details={'language': language, 'keyword': term})
     if vocab_fr:
         concept_entries = list({id(entry): entry for entry in vocab_fr.values()}.values())
@@ -2300,8 +2302,8 @@ def validate_editorial(ctx: PackageContext) -> None:
                     historical_keyword_values = {str(value) for value in preservation.get('historical_final_keywords') or []}
                 elif not ctx.exists('data/fr_page_metadata_lock.json'):
                     historical_keyword_values = {str(value) for value in keywords}
-            # Only the numerical creation quota is provenance-sensitive.
-            # Intrinsic quality rules apply to the complete final historical list too.
+            # Intrinsic quality rules apply to the final historical list, except
+            # for defects tied to an exact import in source-preservation mode.
             vocabulary = vocab_fr if lang == 'fr' else vocab_en
             allowed_long_keywords: set[str] = set()
             if vocabulary:
@@ -2319,6 +2321,8 @@ def validate_editorial(ctx: PackageContext) -> None:
                 enforce_count=not source_preexisting,
                 allowed_long_keywords=allowed_long_keywords,
             )
+            if lang == 'fr' and 'too_long' in kw_reasons and keywords == source_page_keywords(ctx, str(node_id)):
+                kw_reasons.remove('too_long')
             if 'duplicates' in kw_reasons:
                 from types import SimpleNamespace
                 from .schema_validation import _preserved_keyword_duplicates
