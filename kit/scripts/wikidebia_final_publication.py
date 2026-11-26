@@ -23,12 +23,18 @@ import copy
 import datetime as dt
 import json
 import os
+import re
 import shutil
 import tempfile
+from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, Iterable, Mapping
+from typing import Any, Iterable, Iterator, Mapping
 
-from wikidebia_corpus_build import full_tree_sha256, load_json, now_iso, sha256_file, write_json
+from wikidebia_corpus_build import (
+    CorpusBuildError, assert_control_directory, full_tree_sha256, load_json, now_iso, sha256_file, write_json,
+)
+from wikidebia_corpus_init import write_json_atomic
+from wikidebia_corpus_promote import fsync_directory
 from wikidebia_publish import (
     GenericPublisher,
     extract_parameter,
@@ -52,6 +58,15 @@ AUTHORIZATION_SCHEMA = "wikidebia-final-publication-authorization-1.0"
 LATE_REUSE_SCHEMA = "wikidebia-late-existing-english-reuse-1.0"
 REMOTE_CONTENT_REPLACEMENTS_SCHEMA = "wikidebia-remote-content-replacements-1.0"
 PREPARED_PUBLICATION_SCHEMA = "wikidebia-final-publication-prepared-1.0"
+PENDING_PLAN_MIGRATION = "pending-plan-migration.json"
+PLAN_MIGRATION_SCHEMA = "wikidebia-final-publication-pending-migration-1.0"
+PLAN_MIGRATION_FILES = (
+    "english-publication-config.json", "english-publication-plan.json", "preflight.json", "authorization.json",
+)
+PLAN_MIGRATION_HISTORIES = {
+    "publication-order-migrations": "arguments-before-debate-to-debate-first",
+    "kit-change-plan-migrations": "verified-successor",
+}
 
 
 class FinalPublicationError(RuntimeError):
@@ -823,10 +838,107 @@ def _verify_preserved_preflight(
             raise FinalPublicationError(f"Titre anglais déjà occupé : {row['title']}")
 
 
-def _copy_if_present(source: Path, target: Path) -> None:
-    if source.is_file():
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, target)
+def _sync_migration_file(path: Path) -> None:
+    with path.open("rb") as stream:
+        os.fsync(stream.fileno())
+
+
+def pending_plan_migration(state_dir: Path) -> tuple[Path, str] | None:
+    """Read the recoverable snapshot and its approved preflight without changing it."""
+    marker = state_dir / PENDING_PLAN_MIGRATION
+    if not marker.exists() and not marker.is_symlink():
+        return None
+    if not marker.is_file() or marker.is_symlink():
+        raise FinalPublicationError("Fichier de journal de migration de publication invalide")
+    journal = load_json(marker, "journal de migration de publication")
+    parts = str(journal.get("history") or "").split("/")
+    if (journal.get("schema") != PLAN_MIGRATION_SCHEMA
+            or journal.get("journal_sha256") != _canonical(journal, "journal_sha256")
+            or len(parts) != 2 or parts[0] not in PLAN_MIGRATION_HISTORIES
+            or not re.fullmatch(r"[0-9]{3,}-" + PLAN_MIGRATION_HISTORIES[parts[0]], parts[1])):
+        raise FinalPublicationError("Journal de migration de publication invalide")
+    root = assert_control_directory(state_dir / parts[0], state_dir)
+    history = assert_control_directory(root / parts[1], state_dir)
+    saved = journal.get("files")
+    if (not isinstance(saved, dict) or set(saved) != set(PLAN_MIGRATION_FILES)
+            or any((history / name).is_symlink() or not (history / name).is_file()
+                   or sha256_file(history / name) != saved[name] for name in PLAN_MIGRATION_FILES)):
+        raise FinalPublicationError("Sauvegarde de migration de publication incomplète ou modifiée")
+    preflight = load_json(history / "preflight.json", "préflight sauvegardé avant migration")
+    authorization = load_json(history / "authorization.json", "autorisation sauvegardée avant migration")
+    baseline = load_json(state_dir / "baseline.json", "baseline de la migration")
+    digest = preflight.get("preflight_sha256")
+    if (digest != _canonical(preflight, "preflight_sha256")
+            or authorization.get("authorization_sha256") != _canonical(authorization, "authorization_sha256")
+            or authorization.get("preflight_sha256") != digest
+            or authorization.get("baseline_sha256") != baseline.get("baseline_sha256")
+            or baseline.get("baseline_sha256") != _canonical(baseline, "baseline_sha256")
+            or baseline.get("debate_id") != state_dir.parent.name or baseline.get("work_id") != state_dir.name
+            or authorization.get("status") != "authorized"
+            or authorization.get("remote_write_authorized") is not True):
+        raise FinalPublicationError("Préflight ou autorisation sauvegardés invalides")
+    return history, digest
+
+
+def _rollback_plan_migration(state_dir: Path, history: Path) -> None:
+    pending = pending_plan_migration(state_dir)
+    if pending is None or pending[0] != history:
+        raise FinalPublicationError("La sauvegarde à restaurer ne correspond pas à la migration en cours")
+    journal = load_json(state_dir / PENDING_PLAN_MIGRATION, "journal de migration de publication")
+    for name in PLAN_MIGRATION_FILES:
+        temporary = history / f".restore-{name}"
+        temporary.unlink(missing_ok=True)
+        shutil.copy2(history / name, temporary)
+        _sync_migration_file(temporary)
+        os.replace(temporary, state_dir / name)
+    if (history / "migration.json").is_file():
+        os.replace(history / "migration.json", history / "uncommitted-migration.json")
+    receipt = {"status": "restored", "restored_at": now_iso(), "journal_sha256": journal["journal_sha256"],
+               "preflight_sha256": pending[1]}
+    receipt["rollback_sha256"] = _canonical(receipt, "rollback_sha256")
+    write_json_atomic(history / "rollback.json", receipt)
+    fsync_directory(state_dir)
+    (state_dir / PENDING_PLAN_MIGRATION).unlink()
+    fsync_directory(state_dir)
+
+
+@contextmanager
+def _plan_migration(state_dir: Path, kind: str) -> Iterator[Path]:
+    marker = state_dir / PENDING_PLAN_MIGRATION
+    if marker.exists() or marker.is_symlink():
+        raise FinalPublicationError("Une migration de publication doit être restaurée avant toute nouvelle migration")
+    root = assert_control_directory(state_dir / kind, state_dir, create=True)
+    suffix = PLAN_MIGRATION_HISTORIES[kind]
+    index = 1
+    while (root / f"{index:03d}-{suffix}").exists():
+        index += 1
+    history = root / f"{index:03d}-{suffix}"
+    history.mkdir()
+    saved = {}
+    for name in PLAN_MIGRATION_FILES:
+        original = state_dir / name
+        if original.is_symlink() or not original.is_file():
+            raise FinalPublicationError("Preuve de publication absente ou symbolique avant migration : " + name)
+        shutil.copy2(original, history / name)
+        _sync_migration_file(history / name)
+        saved[name] = sha256_file(history / name)
+    fsync_directory(history)
+    fsync_directory(root)
+    journal = {"schema": PLAN_MIGRATION_SCHEMA, "history": history.relative_to(state_dir).as_posix(), "files": saved}
+    journal["journal_sha256"] = _canonical(journal, "journal_sha256")
+    write_json_atomic(marker, journal)
+    try:
+        yield history
+        for name in PLAN_MIGRATION_FILES:
+            _sync_migration_file(state_dir / name)
+        _sync_migration_file(history / "migration.json")
+        fsync_directory(history)
+        fsync_directory(state_dir)
+    except Exception:
+        _rollback_plan_migration(state_dir, history)
+        raise
+    marker.unlink()
+    fsync_directory(state_dir)
 
 
 def _assert_no_historical_dated_plan(plan: Mapping[str, Any]) -> None:
@@ -978,17 +1090,7 @@ def _migrate_english_publication_order(
     old_plan = dict(plans["en_plan"])
     if not _english_plan_needs_debate_first_migration(old_plan):
         return dict(plans), dict(preflight), dict(authorization)
-    history_root = state_dir / "publication-order-migrations"
-    history_root.mkdir(parents=True, exist_ok=True)
-    index = 1
-    while (history_root / f"{index:03d}-arguments-before-debate-to-debate-first").exists():
-        index += 1
-    history = history_root / f"{index:03d}-arguments-before-debate-to-debate-first"
-    history.mkdir(parents=True)
-    tracked = ("english-publication-config.json", "english-publication-plan.json", "preflight.json", "authorization.json")
-    for name in tracked:
-        _copy_if_present(state_dir / name, history / name)
-    try:
+    with _plan_migration(state_dir, "publication-order-migrations") as history:
         en_config_path, en_config = _english_config(project_root, debate_id, release_copy, state_dir)
         en_config = _apply_late_reuse_to_english_config(state_dir, en_config)
         write_json(en_config_path, en_config)
@@ -1018,15 +1120,6 @@ def _migrate_english_publication_order(
         audit["migration_sha256"] = _canonical(audit, "migration_sha256")
         write_json(history / "migration.json", audit)
         return new_plans, new_preflight, new_authorization
-    except Exception:
-        for name in tracked:
-            saved = history / name
-            target = state_dir / name
-            if saved.is_file():
-                shutil.copy2(saved, target)
-            elif target.exists():
-                target.unlink()
-        raise
 
 
 def _migrate_english_plan_after_kit_change(
@@ -1071,21 +1164,7 @@ def _migrate_english_plan_after_kit_change(
     ):
         return dict(plans), dict(preflight), dict(authorization)
 
-    history_root = state_dir / "kit-change-plan-migrations"
-    history_root.mkdir(parents=True, exist_ok=True)
-    index = 1
-    while (history_root / f"{index:03d}-verified-successor").exists():
-        index += 1
-    history = history_root / f"{index:03d}-verified-successor"
-    history.mkdir(parents=True)
-    tracked = (
-        "english-publication-config.json", "english-publication-plan.json",
-        "preflight.json", "authorization.json",
-    )
-    for name in tracked:
-        _copy_if_present(state_dir / name, history / name)
-
-    try:
+    with _plan_migration(state_dir, "kit-change-plan-migrations") as history:
         en_config_path, en_config = _english_config(project_root, debate_id, release_copy, state_dir)
         en_config = _apply_late_reuse_to_english_config(state_dir, en_config)
         write_json(en_config_path, en_config)
@@ -1131,15 +1210,6 @@ def _migrate_english_plan_after_kit_change(
         audit["migration_sha256"] = _canonical(audit, "migration_sha256")
         write_json(history / "migration.json", audit)
         return new_plans, new_preflight, new_authorization
-    except Exception:
-        for name in tracked:
-            saved = history / name
-            target = state_dir / name
-            if saved.is_file():
-                shutil.copy2(saved, target)
-            elif target.exists():
-                target.unlink()
-        raise
 
 
 def _authorization(
@@ -1172,6 +1242,9 @@ def prepare_final_release(
     project_root = project_root.resolve()
     release_copy = release_copy.resolve()
     state_dir = _state_dir(project_root, debate_id, work_id)
+    marker = state_dir / PENDING_PLAN_MIGRATION
+    if marker.exists() or marker.is_symlink():
+        raise FinalPublicationError("Une migration est à reprendre avec le préflight approuvé", remote_execution_started=True)
     if (state_dir / "authorization.json").exists():
         raise FinalPublicationError("Publication déjà autorisée : reprendre avec le plan autorisé")
     preparation_path = state_dir / "publication-preparation.json"
@@ -1302,6 +1375,18 @@ def publish_final_release(
     release_copy = release_copy.resolve()
     state_dir = _state_dir(project_root, debate_id, work_id)
     completion_path = state_dir / "publication-receipt.json"
+    try:
+        pending = pending_plan_migration(state_dir)
+        if pending is not None:
+            history, approved = pending
+            if (completion_path.exists() or (state_dir / "english-publication-receipt.json").exists()
+                    or (state_dir / "french-publication-receipt.json").exists()):
+                raise FinalPublicationError("Migration en attente incompatible avec des reçus de publication")
+            if approved != confirm_preflight_sha256:
+                raise FinalPublicationError("La migration interrompue exige l’empreinte du préflight sauvegardé")
+            _rollback_plan_migration(state_dir, history)
+    except (CorpusBuildError, FinalPublicationError, OSError) as exc:
+        raise FinalPublicationError(str(exc), remote_execution_started=True) from exc
     if completion_path.is_file():
         existing = load_json(completion_path, "reçu de publication finale")
         if existing.get("receipt_sha256") != _canonical(existing, "receipt_sha256"):
