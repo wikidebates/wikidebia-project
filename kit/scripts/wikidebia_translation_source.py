@@ -15,13 +15,96 @@ import tempfile
 import re
 from typing import Any, Mapping
 
-from wikidebia_corpus_build import canonical_json, full_tree_sha256, load_json, now_iso, write_json
+from wikidebia_corpus_build import (
+    PLACEMENT_REVIEW, REVIEW_ENVELOPE, CorpusBuildError, active_graph, canonical_json, full_tree_sha256,
+    load_json, now_iso, placement_entries_sha256, placement_review_issues, review_sha256, write_json,
+)
 from wikidebia_content_review import _outer_template, _source_imports, _assert_reviewed_copy
 from wikidebia_editorial_review import _assert_source_unchanged, _load_workspace
 from wikidebia_editorial_workspace import workspace_receipt_hash
-from wikidebia_graph_extract import iter_templates, normalize_key
+from wikidebia_graph_extract import _strip_markup, iter_templates, normalize_key
 
 POLICY = "published-french-import-preserved-for-translation-1.0"
+
+
+def verify_imported_graph(source: Path, registry: Mapping[str, Any]) -> None:
+    """Check the full published adjacency lists and exact source bytes."""
+    provenance = load_json(source / 'data/import_provenance.json', 'provenance française')
+    nodes, edges, occurrences = active_graph(registry)
+    titles = {node['id']: node['fr']['canonical_title'] for node in nodes}
+    reused = {node['id']: node['pages']['en']['wiki'] for node in nodes
+              if ((node.get('pages') or {}).get('en') or {}).get('wiki', {}).get('decision') == 'reuse_existing'}
+    titles['debate'] = registry['debate']['pages']['fr']['canonical_title']
+    paths = {}
+    aliases = {}
+    for row in provenance['pages']:
+        key = 'debate' if row.get('kind') == 'debate' else row.get('page_id')
+        relative = Path(row.get('import_path') or '')
+        path = source / relative
+        revision = row.get('revision_id')
+        if (
+            key not in titles or key in paths or row.get('canonical_title') != titles[key]
+            or relative.parts[:2] != ('imports', 'fr') or '..' in relative.parts
+            or not path.is_file() or not path.resolve().is_relative_to(source.resolve())
+            or type(revision) is not int or revision <= 0
+            or hashlib.sha256(path.read_bytes()).hexdigest() != row.get('sha256')
+        ):
+            raise CorpusBuildError(f'Import publié ou titre canonique divergent : {titles.get(key, key)}')
+        paths[key] = path
+        if key != 'debate':
+            for alias in (titles[key], row.get('requested_title'), row.get('source_graph_title'), *(row.get('redirect_chain') or [])):
+                if alias and aliases.setdefault(_strip_markup(alias), key) != key:
+                    raise CorpusBuildError(f'Alias ambigu dans les révisions importées : {alias}')
+    if set(paths) != set(titles):
+        raise CorpusBuildError('Les révisions importées ne couvrent pas le graphe publié')
+
+    expected = collections.defaultdict(list)
+    for edge in sorted(edges, key=lambda item: item['order']):
+        expected[edge['parent_node_id'], edge['relation']].append(edge['child_node_id'])
+    for occ in sorted(occurrences, key=lambda item: item['order']):
+        if occ['depth'] == 1:
+            expected['debate', occ['branch']].append(occ['node_id'])
+    for key, path in paths.items():
+        is_debate = key == 'debate'
+        template = _outer_template(path, {'debat'} if is_debate else {'argument'})
+        if key in reused:
+            remote = reused[key]
+            targets = [call.get('page') for call in iter_templates(template.get('interlangue'))
+                       if call.get('langue') == 'en']
+            if (remote.get('check_status') != 'equivalent_existing'
+                or not remote.get('remote_revision_id') or targets != [remote.get('remote_title')]
+                or expected[key, 'justification'] or expected[key, 'objection']):
+                raise CorpusBuildError(f'Frontière interlangue divergente pour « {titles[key]} »')
+            continue
+        groups = (
+            [('pro', 'arguments-pour', 'argument pour'), ('con', 'arguments-contre', 'argument contre')]
+            if is_debate else [('justification', 'justifications', 'justification'), ('objection', 'objections', 'objection')]
+        )
+        for role, parameter, model in groups:
+            actual = [aliases.get(_strip_markup(call.get('page'))) for call in iter_templates(template.get(parameter))
+                      if normalize_key(call.name) == model]
+            if actual != expected[key, role]:
+                raise CorpusBuildError(f'Liens publiés ou ordre divergents pour « {titles[key]} » ({parameter})')
+
+
+def verify_preserved_placement_review(source: Path, registry: Mapping[str, Any]) -> str | None:
+    envelope_path = source / REVIEW_ENVELOPE
+    if not envelope_path.is_file():
+        return None
+    envelope = load_json(envelope_path, 'revue globale du graphe')
+    digest = envelope.get('preserved_placements_sha256')
+    if digest is None:
+        return None
+    placement = load_json(source / PLACEMENT_REVIEW, 'revue des placements conservés')
+    if (
+        envelope.get('decision') != 'approved'
+        or envelope.get('review_sha256') != review_sha256(envelope)
+        or placement_entries_sha256(placement) != digest
+        or placement_review_issues(placement, registry, preserve_imported_source=True)
+    ):
+        raise CorpusBuildError('La revue scellée des placements conservés a changé')
+    verify_imported_graph(source, registry)
+    return digest
 
 
 def _signed_object_sha(value: Mapping[str, Any], signature_key: str) -> str:
@@ -240,11 +323,11 @@ def relation_labels_from_source(
         node_id=str(row['page_id'])
         if row.get('status')=='pending_redirect' and row.get('pending_redirect_target_node_id') in nodes:
             node_id=str(row['pending_redirect_target_node_id'])
-        for key in ('canonical_title','requested_title','source_graph_title'):
-            title=str(row.get(key) or '').strip()
+        for alias in (row.get('canonical_title'), row.get('requested_title'), row.get('source_graph_title'), *(row.get('redirect_chain') or [])):
+            title=_strip_markup(str(alias or ''))
             if title:title_to_id[title]=node_id
     for node_id,node in nodes.items():
-        title=str((node.get('fr') or {}).get('canonical_title') or '').strip()
+        title=_strip_markup(str((node.get('fr') or {}).get('canonical_title') or ''))
         if title:title_to_id[title]=node_id
     # Keep one value per occurrence.  A dict keyed only by target used to
     # overwrite the first label when the same page appeared twice with two
@@ -255,7 +338,7 @@ def relation_labels_from_source(
     for branch,param,name in [('pro','arguments-pour','argument pour'),('con','arguments-contre','argument contre')]:
         calls=[c for c in iter_templates(debate_template.get(param)) if normalize_key(c.name)==name]
         for call in calls:
-            page=call.get('page').strip();node_id=title_to_id.get(page)
+            page=call.get('page').strip();node_id=title_to_id.get(_strip_markup(page))
             if node_id:
                 historical_roots.setdefault((branch,node_id),collections.deque()).append(
                     call.get('titre-affiché').strip() or page
@@ -266,7 +349,7 @@ def relation_labels_from_source(
         for relation,param in [('justification','justifications'),('objection','objections')]:
             calls=[c for c in iter_templates(template.get(param)) if normalize_key(c.name)==relation]
             for call in calls:
-                page=call.get('page').strip();child_id=title_to_id.get(page)
+                page=call.get('page').strip();child_id=title_to_id.get(_strip_markup(page))
                 if child_id:
                     historical_edges.setdefault(
                         (arg['id'],relation,child_id),collections.deque()
@@ -351,6 +434,7 @@ def freeze_imported_source(project_root: Path, debate_id: str, work_id: str, *, 
     frozen_source = temporary
     title_lock = load_json(frozen_source/'data/fr_page_metadata_lock.json', 'titres français verrouillés')
     registry, debate, arguments = _source_imports(frozen_source)
+    preserved_placements = verify_preserved_placement_review(frozen_source, registry)
     provenance = load_json(frozen_source/'data/import_provenance.json', 'provenance française')
     imported = provenance.get('pages') or []
     if not imported or any(not r.get('revision_id') or not r.get('sha256') for r in imported):
@@ -413,6 +497,8 @@ def freeze_imported_source(project_root: Path, debate_id: str, work_id: str, *, 
     receipt=dict(schema='wikidebia-translation-source-preservation-1.0',policy=POLICY,debate_id=debate_id,work_id=work_id,
         status='frozen_as_imported',reviewer=reviewer,reviewed_at=stamp,note=note,
         documentary_reverification_claimed=False,french_pages_changed=False,pages=copy.deepcopy(imported))
+    if preserved_placements is not None:
+        receipt['preserved_placements_sha256'] = preserved_placements
     receipt['receipt_sha256']=hashlib.sha256(canonical_json(receipt)).hexdigest()
     metadata.update(source_preservation_policy=POLICY,source_preservation_receipt_sha256=receipt['receipt_sha256'])
     content=dict(schema='wikidebia-fr-content-lock-1.0',debate_id=debate_id,work_id=work_id,status='frozen_as_imported',
@@ -421,9 +507,11 @@ def freeze_imported_source(project_root: Path, debate_id: str, work_id: str, *, 
     # Vocabulary preserves source spellings and relevance order; no keyword quota or cleanup.
     lexical=load_json(workspace/'data/keyword_vocabulary_working.json','formes lexicales françaises')
     lexical_by_fr={r.get('fr'):r for r in lexical.get('entries') or []}
+    common_forms = {term.casefold(): row for term, row in lexical_by_fr.items()
+                    if isinstance(term, str) and row.get('kind') in {'noun', 'noun_phrase'}}
     entries=[]
     for term,term_usages in sorted(usages.items()):
-        form=lexical_by_fr.get(term,{})
+        form = lexical_by_fr.get(term) or common_forms.get(term.casefold(), {})
         if not form and graph_rebase is not None:
             letters = [char for char in term if char.isalpha()]
             kind = (
@@ -477,7 +565,9 @@ def verify_frozen_source(source: Path, metadata: Mapping[str, Any], content: Map
     body=copy.deepcopy(receipt);sha=body.pop('receipt_sha256',None)
     if sha!=hashlib.sha256(canonical_json(body)).hexdigest() or content.get('source_preservation_receipt_sha256')!=sha or metadata.get('source_preservation_receipt_sha256')!=sha:
         raise TranslationReviewError('Empreinte du reçu de source historique divergente')
-    _,debate,arguments=_source_imports(source)
+    registry,debate,arguments=_source_imports(source)
+    if receipt.get('preserved_placements_sha256') != verify_preserved_placement_review(source, registry):
+        raise TranslationReviewError('La revue du graphe conservé ne correspond plus au reçu de gel')
     locked={r['id']:r for r in content['arguments']};meta_by_id={r.get('id') or r.get('entity_id'):r for r in metadata['arguments']}
     for row in receipt['pages']:
         p=source/row['import_path']

@@ -1766,6 +1766,7 @@ def corpus_review_graph(
     prepare: bool,
     finalize: bool,
     overwrite_review: bool,
+    preserve_imported_source: bool = False,
 ) -> int:
     script = root / "kit" / "scripts" / "wikidebia_corpus_review.py"
     if not script.is_file():
@@ -1780,6 +1781,8 @@ def corpus_review_graph(
         command.append("--finalize")
     if overwrite_review:
         command.append("--overwrite-review")
+    if preserve_imported_source:
+        command.append("--preserve-imported-source")
     result = run(command, cwd=root, check=False)
     return result.returncode
 
@@ -2961,6 +2964,7 @@ def build_parser() -> argparse.ArgumentParser:
     review_action.add_argument("--prepare", action="store_true", help="Créer les registres de revue à compléter")
     review_action.add_argument("--finalize", action="store_true", help="Sceller une revue complétée et valider le graphe")
     corpus_review.add_argument("--overwrite-review", action="store_true", help="Régénérer les registres préparatoires")
+    corpus_review.add_argument("--preserve-imported-source", action="store_true", help="Conserver le graphe publié pour traduction")
 
     corpus_promote = sub.add_parser(
         "corpus-promote",
@@ -3568,6 +3572,7 @@ def main(argv: list[str] | None = None) -> int:
             prepare=args.prepare,
             finalize=args.finalize,
             overwrite_review=args.overwrite_review,
+            preserve_imported_source=args.preserve_imported_source,
         )
     if args.command == "corpus-promote":
         return corpus_promote_graph(

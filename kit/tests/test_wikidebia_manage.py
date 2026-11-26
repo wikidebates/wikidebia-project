@@ -1183,6 +1183,10 @@ def test_parser_exposes_corpus_review_and_promote_commands():
     review_args = module.build_parser().parse_args(["corpus-review-graph", "demo", "--prepare"])
     assert review_args.command == "corpus-review-graph"
     assert review_args.prepare is True
+    preservation_args = module.build_parser().parse_args([
+        "corpus-review-graph", "demo", "--finalize", "--preserve-imported-source",
+    ])
+    assert preservation_args.finalize and preservation_args.preserve_imported_source
     promote_args = module.build_parser().parse_args(["corpus-promote", "demo", "--confirm-review-sha256", "a" * 64])
     assert promote_args.command == "corpus-promote"
 

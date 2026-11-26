@@ -469,7 +469,7 @@ def _validate_item(item: Mapping[str, Any]) -> dict[str, Any]:
 
 
 
-def _validate_title_item(item: Mapping[str, Any]) -> dict[str, Any]:
+def _validate_title_item(item: Mapping[str, Any], *, preserve_imported_source: bool = False) -> dict[str, Any]:
     """Validate only canonical/displayed titles while preserving classification verbatim.
 
     The first French publication checkpoint is intentionally restricted to graph
@@ -501,6 +501,11 @@ def _validate_title_item(item: Mapping[str, Any]) -> dict[str, Any]:
     displayed_raw = _decision_value(decision, source, "displayed_title", entity_type)
     if displayed_raw is not None and (not isinstance(displayed_raw, str) or displayed_raw != normalized_text(displayed_raw)):
         raise EditorialReviewError(f"Titre affiché non normalisé : {entity_id}")
+    if preserve_imported_source and (
+        page_origin != "preexisting" or decision.get("canonical_title_decision") != "keep"
+        or decision.get("displayed_title_decision") != ("keep" if entity_type == "argument" else "not_applicable")
+    ):
+        raise EditorialReviewError(f"La traduction préservée exige la conservation des titres importés : {entity_id}")
 
     if entity_type == "argument":
         if not displayed_raw:
@@ -529,9 +534,10 @@ def _validate_title_item(item: Mapping[str, Any]) -> dict[str, Any]:
         ]
         if page_origin == "new":
             required.append("displayed_title_complete_proposition")
-        for attestation in required:
-            if decision.get(attestation) is not True:
-                raise EditorialReviewError(f"Attestation manquante ({attestation}) : {entity_id}")
+        if not preserve_imported_source:
+            for attestation in required:
+                if decision.get(attestation) is not True:
+                    raise EditorialReviewError(f"Attestation manquante ({attestation}) : {entity_id}")
         if normalized_identity(canonical_raw) != normalized_identity(displayed_raw):
             if page_origin == "new" and decision.get("displayed_title_improves_readability_when_distinct") is not True:
                 raise EditorialReviewError(f"Le titre affiché distinct n’améliore pas explicitement la lisibilité : {entity_id}")
@@ -785,7 +791,11 @@ def finalize_title_review(project_root: Path, debate_id: str, work_id: str) -> d
     raw_items = review.get("items")
     if not isinstance(raw_items, list):
         raise EditorialReviewError("La revue française ne contient pas de liste items")
-    final_items = [_validate_title_item(item) for item in raw_items]
+    from wikidebia_translation_source import verify_preserved_placement_review
+
+    registry = load_json(working / "data/registre_debat.json", "registre du graphe importé")
+    preservation = verify_preserved_placement_review(working, registry)
+    final_items = [_validate_title_item(item, preserve_imported_source=preservation is not None) for item in raw_items]
     summary = _validate_title_corpus_rules(final_items)
     _coverage_against_registry(working, final_items)
     finalized = copy.deepcopy(review)

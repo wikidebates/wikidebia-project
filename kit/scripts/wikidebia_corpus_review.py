@@ -38,6 +38,7 @@ from wikidebia_corpus_build import (
     load_json,
     now_iso,
     placement_review_issues,
+    placement_entries_sha256,
     prepare_placement_review,
     resolve_build,
     review_sha256,
@@ -205,7 +206,9 @@ def next_validation_id(manifest: dict[str, Any]) -> str:
     return f"{prefix}{max(numbers, default=0) + 1:03d}"
 
 
-def finalize_review(project_root: Path, build: Path, debate_id: str) -> dict[str, Any]:
+def finalize_review(
+    project_root: Path, build: Path, debate_id: str, *, preserve_imported_source: bool = False,
+) -> dict[str, Any]:
     manifest, registry, projection = assert_graph_draft_without_final_pages(build)
     source_sha = build_payload_sha256(build)
     envelope_path = build / REVIEW_ENVELOPE
@@ -216,7 +219,17 @@ def finalize_review(project_root: Path, build: Path, debate_id: str) -> dict[str
     reviewed_source_sha = str(review.get("source_build_sha256") or "")
     accepted_source_sha = reviewed_source_sha if reviewed_source_sha in compatible_legacy_build_payload_sha256s(build) else source_sha
     envelope_errors = verify_review_envelope(review, debate_id=debate_id, source_sha256=accepted_source_sha)
-    placement_errors = placement_review_issues(placement, registry)
+    if preserve_imported_source:
+        from wikidebia_translation_source import verify_imported_graph
+
+        if review.get("decision") != "approved" or len(str(review.get("notes") or "").strip()) < 30:
+            raise CorpusBuildError("La conservation du graphe exige une décision et sa justification explicite")
+        verify_imported_graph(build, registry)
+    elif review.get("preserved_placements_sha256"):
+        raise CorpusBuildError("La revue conserve le graphe publié pour traduction")
+    placement_errors = placement_review_issues(
+        placement, registry, preserve_imported_source=preserve_imported_source,
+    )
     if envelope_errors or (review.get("decision") == "approved" and placement_errors):
         details = {
             "status": "review_invalid",
@@ -235,6 +248,8 @@ def finalize_review(project_root: Path, build: Path, debate_id: str) -> dict[str
         )
         raise CorpusBuildError("Revue incomplète ou incohérente; consulter reports/graph_build_review_report.json")
 
+    if preserve_imported_source:
+        review["preserved_placements_sha256"] = placement_entries_sha256(placement)
     review["review_sha256"] = review_sha256(review)
     write_json(envelope_path, review)
     _write_placement_reservations(build, registry, placement, review)
@@ -364,6 +379,7 @@ def build_parser() -> argparse.ArgumentParser:
     action.add_argument("--prepare", action="store_true", help="Créer les deux registres de revue à compléter")
     action.add_argument("--finalize", action="store_true", help="Valider et sceller la revue complétée")
     parser.add_argument("--overwrite-review", action="store_true", help="Régénérer les registres de revue préparatoires")
+    parser.add_argument("--preserve-imported-source", action="store_true", help="Finaliser pour traduction le graphe publié à conserver")
     parser.add_argument("--project-root", type=Path, required=True)
     parser.add_argument("--machine-readable", action="store_true")
     return parser
@@ -371,6 +387,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.preserve_imported_source and not args.finalize:
+        raise CorpusBuildError("--preserve-imported-source exige --finalize")
     project_root = args.project_root.expanduser().resolve()
     debate_id = validate_debate_id(args.debate_id)
     with exclusive_lock(project_root, debate_id, "graph_review"):
@@ -378,7 +396,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.prepare:
             result = make_review_template(build, debate_id, overwrite=args.overwrite_review)
         else:
-            result = finalize_review(project_root, build, debate_id)
+            result = finalize_review(
+                project_root, build, debate_id, preserve_imported_source=args.preserve_imported_source,
+            )
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     return 0
 

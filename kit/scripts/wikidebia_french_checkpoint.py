@@ -784,6 +784,9 @@ def _discard_provably_stale_checkpoint(state_dir: Path) -> None:
 def build_checkpoint(project_root: Path, debate_id: str, work_id: str, *, stage: str) -> Path:
     project_root = project_root.resolve()
     workspace, _meta, source = _workspace(project_root, debate_id, work_id, stage)
+    graph_review = source / "reviews/graph_build_review.json"
+    if graph_review.is_file() and load_json(graph_review, "revue du graphe").get("preserved_placements_sha256") is not None:
+        raise FrenchCheckpointError("Ce graphe publié est gelé pour traduction. Utiliser le parcours de préservation.")
     state_dir = project_root / ".state" / "fr-publication" / debate_id / work_id / stage
     target = state_dir / "checkpoint-corpus"
     receipt_path = state_dir / "checkpoint.json"

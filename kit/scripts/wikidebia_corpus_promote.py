@@ -93,6 +93,11 @@ def promote(project_root: Path, debate_id: str, confirm_review_sha256: str) -> d
         raise CorpusBuildError("La revue approuvée est absente, altérée ou non scellée")
     if confirm_review_sha256 != actual_review_sha:
         raise CorpusBuildError("L'empreinte confirmée ne correspond pas à la revue approuvée")
+    if "preserved_placements_sha256" in review:
+        from wikidebia_translation_source import verify_preserved_placement_review
+
+        registry = load_json(build / "data/registre_debat.json", "registre du débat")
+        verify_preserved_placement_review(build, registry)
 
     ready = load_json(build / PROMOTION_READY, "attestation de promotion")
     if ready.get("debate_id") != debate_id or ready.get("review_sha256") != actual_review_sha:
