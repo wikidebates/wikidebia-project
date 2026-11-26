@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from urllib.error import HTTPError
 
 import pytest
 
@@ -233,6 +234,52 @@ def test_signed_diagnostic_is_written_when_page_cannot_be_seen(tmp_path: Path):
     assert saved["public_debate_url"] == report["public_debate_url"]
     assert saved["report_sha256"] == report["report_sha256"]
     assert not (tmp_path / "publication-receipt.json").exists()
+
+
+def test_public_audit_verifies_a_declared_english_page_without_a_create_action(tmp_path: Path):
+    en, fr = _plans()
+    en["actions"].pop()
+    release = tmp_path / "release"
+    registry = release / "data/registre_debat.json"
+    registry.parent.mkdir(parents=True)
+    registry.write_text(json.dumps({"graph": {"nodes": [{
+        "id": "A0001", "status": "active", "fr": {"canonical_title": "Un argument réel"},
+        "en": {"canonical_title": "An actual argument", "title_status": "locked"},
+        "pages": {"en": {"wiki": {"decision": "reuse_existing", "check_status": "equivalent_existing"}}},
+    }]}}), encoding="utf-8")
+    report = visibility.check_or_record(tmp_path, "demo", "EDIT-TEST", en, fr,
+                                        release_copy=release, client=AnonymousFake())
+    assert report["status"] == visibility.VERIFIED
+    assert report["english_pages_verified"] == report["french_links_verified"] == 2
+    with pytest.raises(visibility.PublicVisibilityError, match="page française correspondante"):
+        visibility.check_or_record(tmp_path, "demo", "EDIT-TEST", en, fr, client=AnonymousFake())
+
+
+def test_anonymous_wikitext_uses_public_rest_when_action_api_returns_403(monkeypatch):
+    client = visibility.AnonymousMediaWiki()
+    requests = []
+
+    def read(language, url):
+        requests.append(url)
+        assert language == "en"
+        if "/w/api.php?" in url:
+            raise visibility.PublicUnavailable("HTTP 403") from HTTPError(url, 403, "Forbidden", None, None)
+        if url.endswith("/Missing"):
+            raise visibility.PublicMissing()
+        if url.endswith("/Wrong_title"):
+            return json.dumps({"title": "Another title", "id": 2, "latest": {"id": 3},
+                               "source": EN_ARGUMENT, "content_model": "wikitext"}).encode()
+        assert url.endswith("/Should_we_agree%3F")
+        return json.dumps({"title": "Should we agree?", "id": 1, "latest": {"id": 5},
+                           "source": EN_DEBATE, "content_model": "wikitext"}).encode()
+
+    monkeypatch.setattr(client, "_read", read)
+    pages = client.pages("en", ["Should we agree?", "Missing"])
+    assert pages["Should we agree?"]["text"] == EN_DEBATE
+    assert pages["Should we agree?"]["revision_id"] == 5
+    assert pages["Missing"] == {"exists": False}
+    assert client.pages("en", ["Wrong title"])["Wrong title"]["unavailable"]
+    assert sum("/w/api.php?" in url for url in requests) == 1
 
 
 def test_final_publisher_refuses_completion_when_writer_succeeds_but_public_page_missing(tmp_path: Path, monkeypatch):

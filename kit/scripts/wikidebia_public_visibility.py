@@ -133,6 +133,7 @@ class AnonymousMediaWiki:
             "User-Agent": "WikidebiaPublicVisibility/1.0 (anonymous read-only audit)",
             "Accept": "text/html, application/json;q=0.8",
         }
+        self._rest_only: set[str] = set()
 
     def _read(self, language: str, url: str) -> bytes:
         _verify_host(url, language)
@@ -179,6 +180,8 @@ class AnonymousMediaWiki:
     def pages(self, language: str, titles: list[str]) -> dict[str, dict[str, Any]]:
         if len(titles) > 50 or len(set(titles)) != len(titles):
             raise PublicVisibilityError("Lot public invalide (>50 ou doublons)")
+        if language in self._rest_only:
+            return self._rest_pages(language, titles)
         params = {
             "action": "query", "format": "json", "formatversion": "2",
             "prop": "revisions", "rvprop": "ids|content", "rvslots": "main",
@@ -188,6 +191,12 @@ class AnonymousMediaWiki:
                + "/w/api.php?" + urlencode(params))
         try:
             result = json.loads(self._read(language, url).decode("utf-8"))
+        except PublicUnavailable as exc:
+            if getattr(exc.__cause__, "code", None) != 403:
+                raise
+            # Some wikis expose wikitext anonymously through the REST API only.
+            self._rest_only.add(language)
+            return self._rest_pages(language, titles)
         except (ValueError, UnicodeDecodeError) as exc:
             raise PublicUnavailable("Réponse JSON anonyme illisible") from exc
         query = result.get("query") if isinstance(result, dict) else None
@@ -236,6 +245,35 @@ class AnonymousMediaWiki:
                 "revision_id": version["revid"], "text": raw,
                 "canonical_title": target, "redirect": bool(page.get("redirect")),
             }
+        return output
+
+    def _rest_pages(self, language: str, titles: list[str]) -> dict[str, dict[str, Any]]:
+        output: dict[str, dict[str, Any]] = {}
+        for title in titles:
+            url = ("https://" + PUBLIC_DOMAINS[language] + "/w/rest.php/v1/page/"
+                   + quote(title.replace(" ", "_"), safe=""))
+            try:
+                page = json.loads(self._read(language, url).decode("utf-8"))
+            except PublicMissing:
+                output[title] = {"exists": False}
+                continue
+            except (PublicVisibilityError, OSError, ValueError) as exc:
+                output[title] = {"unavailable": str(exc)}
+                continue
+            if not isinstance(page, dict):
+                output[title] = {"unavailable": "Réponse REST publique malformée"}
+                continue
+            canonical = page.get("title")
+            revision = (page.get("latest") or {}).get("id") if isinstance(page.get("latest"), dict) else None
+            source = page.get("source")
+            if (type(page.get("id")) is not int or page["id"] <= 0
+                    or type(revision) is not int or revision <= 0
+                    or not isinstance(canonical, str) or _title(canonical) != _title(title)
+                    or page.get("content_model") != "wikitext" or not isinstance(source, str)):
+                output[title] = {"unavailable": "Titre, révision ou wikitexte REST public non conforme"}
+                continue
+            output[title] = {"exists": True, "pageid": page["id"], "revision_id": revision,
+                             "canonical_title": canonical, "text": source, "redirect": False}
         return output
 
 
@@ -287,6 +325,7 @@ def _html_links_to_english(document: _PublicDocument, source_url: str, expected_
 def _expected_pages(
     english_plan: Mapping[str, Any], french_plan: Mapping[str, Any],
     late_reuse: Mapping[str, Any] | None,
+    declared_reuse: Mapping[str, Mapping[str, str]] | None = None,
 ) -> tuple[list[dict[str, str]], dict[str, dict[str, str]]]:
     english: dict[str, dict[str, str]] = {}
     for action in english_plan.get("actions") or []:
@@ -331,6 +370,16 @@ def _expected_pages(
             "reused_sha256": "",
         }
         french[page_id] = {"page_id": page_id, "title": fr_title, "page_type": typ}
+    for page_id, reused in (declared_reuse or {}).items():
+        fr = french.get(page_id)
+        if (page_id in english or not fr or fr["page_type"] != "argument"
+                or reused["french_title"] != fr["title"]):
+            raise PublicVisibilityError("Réutilisation anglaise déclarée incompatible avec les plans")
+        english[page_id] = {
+            "page_id": page_id, "title": reused["english_title"], "page_type": "argument",
+            "expected_sha256": reused["english_sha256"], "operation": "reused_existing",
+            "reused_sha256": "",
+        }
     if not english or len([x for x in english.values() if x["page_type"] == "debate"]) != 1:
         raise PublicVisibilityError("Débat anglais unique absent du plan")
     if set(english) != set(french):
@@ -350,11 +399,12 @@ def verify_public_visibility(
     *,
     client: Any = None,
     late_reuse: Mapping[str, Any] | None = None,
+    declared_reuse: Mapping[str, Mapping[str, str]] | None = None,
     manifest_sha256: str = "",
 ) -> dict[str, Any]:
     """Perform fresh independent observations; never infer visibility from writes."""
     client = client if client is not None else AnonymousMediaWiki()
-    english, french = _expected_pages(english_plan, french_plan, late_reuse)
+    english, french = _expected_pages(english_plan, french_plan, late_reuse, declared_reuse)
     debate = next(row for row in english if row["page_type"] == "debate")
     report: dict[str, Any] = {
         "schema": REPORT_SCHEMA,
@@ -494,6 +544,7 @@ def check_or_record(
     french_plan: Mapping[str, Any],
     *,
     late_reuse: Mapping[str, Any] | None = None,
+    release_copy: Path | None = None,
     manifest_sha256: str = "",
     client: Any = None,
     report_filename: str = "public-visibility-report.json",
@@ -501,9 +552,24 @@ def check_or_record(
     """Always write the full report, including failures, before returning."""
     if report_filename not in {"public-visibility-report.json", "public-visibility-recheck.json"}:
         raise PublicVisibilityError("Nom de rapport non autorisé")
+    declared_reuse = {}
+    registry_path = release_copy / "data/registre_debat.json" if release_copy is not None else None
+    if registry_path is not None and registry_path.is_file():
+        from wikidebia_render import _reuses_existing_english_page
+
+        registry = load_json(registry_path, "registre de release")
+        for node in (registry.get("graph") or {}).get("nodes") or []:
+            if node.get("status") != "active" or not _reuses_existing_english_page(node):
+                continue
+            wiki = node["pages"]["en"]["wiki"]
+            declared_reuse[node["id"]] = {
+                "english_title": node["en"]["canonical_title"],
+                "french_title": node["fr"]["canonical_title"],
+                "english_sha256": str(wiki.get("remote_sha256") or ""),
+            }
     report = verify_public_visibility(
         debate_id, work_id, english_plan, french_plan, late_reuse=late_reuse,
-        manifest_sha256=manifest_sha256, client=client,
+        manifest_sha256=manifest_sha256, client=client, declared_reuse=declared_reuse,
     )
     write_json(state_dir / report_filename, report)
     return report
@@ -527,7 +593,7 @@ def main(argv: list[str] | None = None) -> int:
         raise PublicVisibilityError("Manifeste de la release du Work introuvable")
     report = check_or_record(
         state, args.debate_id, args.work_id, en_plan, fr_plan,
-        late_reuse=reuse, manifest_sha256=sha256_file(manifest_path),
+        late_reuse=reuse, release_copy=manifest_path.parent, manifest_sha256=sha256_file(manifest_path),
     )
     print(json.dumps(report, ensure_ascii=False, sort_keys=True, indent=2))
     return 0 if report["status"] == VERIFIED else 2

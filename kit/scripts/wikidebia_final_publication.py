@@ -1278,7 +1278,7 @@ def publish_final_release(
         report = check_or_record(
             state_dir, debate_id, work_id,
             old_plans["en_plan"], old_plans["fr_plan"], late_reuse=old_reuse,
-            manifest_sha256=sha256_file(release_copy / "manifest.json"),
+            release_copy=release_copy, manifest_sha256=sha256_file(release_copy / "manifest.json"),
             report_filename=("public-visibility-recheck.json" if originally_attested
                              else "public-visibility-report.json"),
         )
@@ -1385,7 +1385,7 @@ def publish_final_release(
         public_report = check_or_record(
             state_dir, debate_id, work_id,
             plans["en_plan"], plans["fr_plan"], late_reuse=late_reuse,
-            manifest_sha256=sha256_file(release_copy / "manifest.json"),
+            release_copy=release_copy, manifest_sha256=sha256_file(release_copy / "manifest.json"),
         )
         if public_report["status"] != PUBLIC_VERIFIED:
             raise FinalPublicationError(
