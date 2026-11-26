@@ -14,8 +14,10 @@ import wikidebia_french_checkpoint as french_checkpoint
 import wikidebia_graph_actions as graph_actions
 from wikidebia_editorial_workspace import capitalization_policy_for_kind
 
-def prepared(tmp_path):
-    project, _=make_promoted_project(tmp_path)
+def prepared(tmp_path, *, adjust_corpus=None):
+    project, corpus=make_promoted_project(tmp_path)
+    if adjust_corpus is not None:
+        adjust_corpus(corpus)
     work_id='PRESERVE-SOURCE-001'
     workspace_tool.create_workspace(project,'debat_test',work_id)
     workspace=project/'.state/editorial-workspaces/debat_test'/work_id

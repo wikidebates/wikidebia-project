@@ -1,8 +1,12 @@
 """Public visibility is not a write-API acknowledgement or signed plan execution."""
 from __future__ import annotations
 
+import io
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from types import SimpleNamespace
+from urllib.error import HTTPError
 
 import pytest
 
@@ -233,6 +237,117 @@ def test_signed_diagnostic_is_written_when_page_cannot_be_seen(tmp_path: Path):
     assert saved["public_debate_url"] == report["public_debate_url"]
     assert saved["report_sha256"] == report["report_sha256"]
     assert not (tmp_path / "publication-receipt.json").exists()
+
+
+def test_public_visibility_resumes_only_missing_or_expired_observations(tmp_path: Path):
+    en, fr = _plans()
+    checkpoint = tmp_path / visibility.CHECKPOINT_FILENAME
+    first = visibility.check_or_record(tmp_path, "demo", "EDIT-TEST", en, fr,
+                                      client=AnonymousFake(hide_html={("en", "An actual argument")}))
+    assert first["english_pages_verified"] == first["french_links_verified"] == 1
+    saved = json.loads(checkpoint.read_text())
+    saved.pop("checkpoint_sha256")
+    assert saved["observations"]["en"]["demo"]["revision_id"] == 5
+    saved["observations"]["fr"]["demo"]["checked_at"] = (datetime.now(timezone.utc) - timedelta(hours=2)).isoformat()
+    saved["checkpoint_sha256"] = visibility._sha_object(saved)
+    checkpoint.write_text(json.dumps(saved))
+
+    client = AnonymousFake()
+    result = visibility.check_or_record(tmp_path, "demo", "EDIT-TEST", en, fr, client=client)
+    assert result["status"] == visibility.VERIFIED
+    assert client.calls == [
+        ("public_api", "en", ("An actual argument",)), ("public_html", "en", "An actual argument"),
+        ("public_api", "fr", ("Faut-il être d'accord ?",)), ("public_html", "fr", "Faut-il être d'accord ?"),
+    ]
+
+
+@pytest.mark.parametrize("changed", ["plan", "manifest", "checksum"])
+def test_public_checkpoint_is_ignored_when_its_binding_changes(tmp_path: Path, changed):
+    en, fr = _plans()
+    checkpoint = tmp_path / visibility.CHECKPOINT_FILENAME
+    visibility.verify_public_visibility("demo", "EDIT-TEST", en, fr, manifest_sha256="a" * 64,
+                                        client=AnonymousFake(), checkpoint_path=checkpoint)
+    if changed == "plan":
+        en["plan_sha256"] = "b" * 64
+    if changed == "checksum":
+        saved = json.loads(checkpoint.read_text())
+        saved["observations"]["en"]["demo"]["revision_id"] = 6
+        checkpoint.write_text(json.dumps(saved))
+    client = AnonymousFake()
+    report = visibility.verify_public_visibility("demo", "EDIT-TEST", en, fr,
+        manifest_sha256=("b" if changed == "manifest" else "a") * 64,
+        client=client, checkpoint_path=checkpoint)
+    assert report["status"] == visibility.VERIFIED
+    assert len([call for call in client.calls if call[0] == "public_html"]) == 4
+
+
+def test_public_audit_verifies_a_declared_english_page_without_a_create_action(tmp_path: Path):
+    en, fr = _plans()
+    en["actions"].pop()
+    release = tmp_path / "release"
+    registry = release / "data/registre_debat.json"
+    registry.parent.mkdir(parents=True)
+    registry.write_text(json.dumps({"graph": {"nodes": [{
+        "id": "A0001", "status": "active", "fr": {"canonical_title": "Un argument réel"},
+        "en": {"canonical_title": "An actual argument", "title_status": "locked"},
+        "pages": {"en": {"wiki": {"decision": "reuse_existing", "check_status": "equivalent_existing"}}},
+    }]}}), encoding="utf-8")
+    report = visibility.check_or_record(tmp_path, "demo", "EDIT-TEST", en, fr,
+                                        release_copy=release, client=AnonymousFake())
+    assert report["status"] == visibility.VERIFIED
+    assert report["english_pages_verified"] == report["french_links_verified"] == 2
+    with pytest.raises(visibility.PublicVisibilityError, match="page française correspondante"):
+        visibility.check_or_record(tmp_path, "demo", "EDIT-TEST", en, fr, client=AnonymousFake())
+
+
+def test_anonymous_wikitext_uses_public_rest_when_action_api_returns_403(monkeypatch):
+    client = visibility.AnonymousMediaWiki()
+    requests = []
+
+    def read(language, url):
+        requests.append(url)
+        assert language == "en"
+        if "/w/api.php?" in url:
+            raise visibility.PublicUnavailable("HTTP 403") from HTTPError(url, 403, "Forbidden", None, None)
+        if url.endswith("/Missing"):
+            raise visibility.PublicMissing()
+        if url.endswith("/Wrong_title"):
+            return json.dumps({"title": "Another title", "id": 2, "latest": {"id": 3},
+                               "source": EN_ARGUMENT, "content_model": "wikitext"}).encode()
+        assert url.endswith("/Should_we_agree%3F")
+        return json.dumps({"title": "Should we agree?", "id": 1, "latest": {"id": 5},
+                           "source": EN_DEBATE, "content_model": "wikitext"}).encode()
+
+    monkeypatch.setattr(client, "_read", read)
+    pages = client.pages("en", ["Should we agree?", "Missing"])
+    assert pages["Should we agree?"]["text"] == EN_DEBATE
+    assert pages["Should we agree?"]["revision_id"] == 5
+    assert pages["Missing"] == {"exists": False}
+    assert client.pages("en", ["Wrong title"])["Wrong title"]["unavailable"]
+    assert sum("/w/api.php?" in url for url in requests) == 1
+
+
+def test_public_reader_honours_retry_after_and_slows_down_on_rate_limit(monkeypatch):
+    client = visibility.AnonymousMediaWiki()
+    url = visibility._public_url("en", "Should we agree?")
+    waits = []
+    requests = []
+    monkeypatch.setattr(visibility, "time", SimpleNamespace(monotonic=lambda: sum(waits), sleep=waits.append))
+
+    def open_public(request, timeout):
+        requests.append((request.get_method(), request.get_full_url()))
+        if len(requests) == 1:
+            raise HTTPError(url, 429, "Too Many Requests", {"Retry-After": "25"}, io.BytesIO())
+        response = io.BytesIO(b"Public page")
+        response.status = 200
+        response.geturl = lambda: url
+        return response
+
+    monkeypatch.setattr(client.opener, "open", open_public)
+    assert client._read("en", url) == b"Public page"
+    assert client._read("en", url) == b"Public page"
+    assert waits == [25, 1.5]
+    assert requests == [("GET", url)] * 3
 
 
 def test_final_publisher_refuses_completion_when_writer_succeeds_but_public_page_missing(tmp_path: Path, monkeypatch):

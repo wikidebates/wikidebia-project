@@ -5,7 +5,7 @@ from pathlib import Path
 
 from wikidebia_validator.package import PackageContext
 from wikidebia_validator.report import Report
-from wikidebia_validator.schema_validation import _preserved_keyword_duplicates, _valid_translation_source_preservation
+from wikidebia_validator.schema_validation import SchemaStore, _preserved_keyword_duplicates, _valid_translation_source_preservation
 from wikidebia_validator.graph import contextual_title_issues
 
 def dump(path, value):
@@ -31,6 +31,24 @@ def context(root):
 
 def error(language='en'):
     return SimpleNamespace(validator='uniqueItems',absolute_path=['graph','nodes',0,language,'keywords'])
+
+def test_preservation_receipt_accepts_an_optional_graph_review_digest(tmp_path):
+    fixture(tmp_path)
+    receipt = json.loads((tmp_path / 'data/source_preservation_receipt.json').read_text())
+    receipt.update(
+        debate_id='test-debate', work_id='EDIT-001', status='frozen_as_imported',
+        reviewer='Test reviewer', reviewed_at='2026-11-26T00:00:00Z',
+        note='The published source is preserved byte for byte.',
+        documentary_reverification_claimed=False, french_pages_changed=False,
+    )
+    store = SchemaStore()
+    schema = 'translation_source_preservation.schema.json'
+    assert not store.validate(receipt, schema)
+    receipt['preserved_placements_sha256'] = 'a' * 64
+    assert not store.validate(receipt, schema)
+    receipt['preserved_placements_sha256'] = 'invalid'
+    errors = store.validate(receipt, schema)
+    assert len(errors) == 1 and list(errors[0].path) == ['preserved_placements_sha256']
 
 def test_only_exact_source_duplicates_are_exempt(tmp_path):
     registry=fixture(tmp_path);ctx=context(tmp_path)
@@ -152,6 +170,34 @@ def test_mixed_quote_passages_keep_positions_and_full_text():
     quotes,gaps=_mixed_citations('{{Quote|quote=First}}A complete passage.{{Quote|quote=Second}}End.')
     assert [q.one('quote') for q in quotes]==['First','Second']
     assert gaps==[(1,'A complete passage.'),(2,'End.')]
+
+
+def test_collection_note_cannot_be_omitted_or_detached_from_its_quote(tmp_path):
+    from wikidebia_validator.wikicode import _validate_citations_against_locks, parse_template
+
+    fixture(tmp_path)
+    frozen = json.loads((tmp_path / 'data/fr_content_lock.json').read_text())
+    source = {
+        'id': 'A0001-C001',
+        'source_parameters': [{'name': 'citation', 'value': 'Extrait'}, {'name': 'collection', 'value': 'Books & archives'}],
+    }
+    frozen['arguments'] = [{'id': 'A0001', 'citations': [source]}]
+    dump(tmp_path / 'data/fr_content_lock.json', frozen)
+    english = {
+        'id': 'A0001-C001', 'source': source, 'source_collection': 'Books & archives',
+        'parameters': [{'name': 'quote', 'value': 'Excerpt'}, {'name': 'warnings', 'value': 'AI-translated quote'}],
+        'warnings': 'AI-translated quote', 'quote_completeness_reviewed': True,
+        'quote_completeness_note': 'Compared with the original excerpt.',
+    }
+    dump(tmp_path / 'data/en_content_lock.json', {'arguments': [{'id': 'A0001', 'citations': [english]}]})
+    quote = '{{Quote|quote=Excerpt|warnings=AI-translated quote}}'
+    note = '\n<small>Collection: Books &amp; archives</small>\n'
+    for content, valid in [(quote + note, True), (note + quote, False), (quote, False)]:
+        ctx = context(tmp_path)
+        page = parse_template('{{Argument|quotes=' + content + '}}')
+        _validate_citations_against_locks(ctx, page, 'argument.wiki', 'en', 'A0001')
+        errors = [finding for finding in ctx.report.findings if finding.code == 'WDV-MWK-021']
+        assert bool(errors) is not valid
 
 def test_common_english_verbs_are_predicates_without_accepting_nominal_headings():
     from wikidebia_validator.editorial import displayed_title_argument_issues

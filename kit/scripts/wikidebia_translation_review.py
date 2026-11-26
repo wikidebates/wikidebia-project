@@ -511,8 +511,8 @@ def _date_signature(value: Any, language: str) -> tuple[int, int | None, int | N
                 return None
             return (day.year, day.month, day.day)
         # Historical French imports also use day/month/year and month/year.
-        numeric = re.fullmatch(r"(\d{1,2})([/.])(\d{1,2})\2(\d{2}|\d{4})", text)
-        if numeric:
+        numeric = re.fullmatch(r"(\d{1,2})([/.-])(\d{1,2})\2(\d{2}|\d{4})", text)
+        if numeric and (numeric[2] != "-" or len(numeric[4]) == 4):
             day, month, year = int(numeric[1]), int(numeric[3]), int(numeric[4])
             if year < 100:
                 year += 2000 if year < 70 else 1900
@@ -540,7 +540,8 @@ def _date_signature(value: Any, language: str) -> tuple[int, int | None, int | N
             except ValueError:
                 return None
             return (day.year, day.month, day.day)
-    match = re.fullmatch(r"(\d{1,2})\s+([A-Za-zÀ-ÿ]+)\s+(\d{4})", text, re.I)
+    month_separator = r",?\s+" if language == "fr" else r"\s+"
+    match = re.fullmatch(r"(\d{1,2})\s+([A-Za-zÀ-ÿ]+)" + month_separator + r"(\d{4})", text, re.I)
     if match and match.group(2).casefold() in months:
         year, month, day = int(match.group(3)), months[match.group(2).casefold()], int(match.group(1))
         try:
@@ -627,7 +628,9 @@ def _citation_documentary_overrides(
     return result
 
 
-def _validate_citations(rows: Any, french_rows: Sequence[Mapping[str, Any]], node_id: str) -> list[dict[str, Any]]:
+def _validate_citations(
+    rows: Any, french_rows: Sequence[Mapping[str, Any]], node_id: str, *, preserve_source_collection: bool = False,
+) -> list[dict[str, Any]]:
     if not isinstance(rows, list):
         raise TranslationReviewError(f"Liste de citations anglaises absente pour {node_id}")
     expected = {str(row.get("id")): row for row in french_rows}
@@ -697,9 +700,16 @@ def _validate_citations(rows: Any, french_rows: Sequence[Mapping[str, Any]], nod
         documentary_overrides = _citation_documentary_overrides(row, source, citation_id)
         output_parameters: list[dict[str, str]] = []
         warning_inserted = False
+        source_collection = None
         for parameter in source.get("source_parameters") or []:
             source_name = str(parameter.get("name") or "").strip()
             normalized = re.sub(r"[ _-]+", " ", source_name.casefold())
+            if preserve_source_collection and normalized == "collection":
+                value = str(parameter.get("value") or "")
+                if source_collection is not None or re.search(r"[\r\n<>\[\]{}|]", value):
+                    raise TranslationReviewError(f"Mention de collection à examiner pour {citation_id}")
+                source_collection = value
+                continue
             output_name = CITATION_PARAMETER_MAP.get(normalized)
             if output_name is None:
                 raise TranslationReviewError(
@@ -740,6 +750,7 @@ def _validate_citations(rows: Any, french_rows: Sequence[Mapping[str, Any]], nod
             "documentary_parameter_overrides": list(documentary_overrides.values()),
             "parameters": output_parameters,
             "source": copy.deepcopy(source),
+            **({"source_collection": source_collection} if source_collection is not None else {}),
             "source_word_count": source_words,
             "translated_word_count": translated_words,
             "lexical_ratio": lexical_ratio,
@@ -2379,7 +2390,16 @@ def _validate_argument(item: Mapping[str, Any], mapping: Mapping[str, str], sour
                     and len(str(row.get("historical_quantitative_transfer_note") or "").strip()) >= 24
                     and historical_numbers_preserved(fr_summary, summary)):
                 raise TranslationReviewError(f"Donnée chiffrée anglaise non vérifiée dans {node_id}")
-    citations = _validate_citations(row.get("citations"), fr_content.get("citations") or [], node_id)
+    from wikidebia_translation_source import POLICY
+
+    citations = _validate_citations(
+        row.get("citations"), fr_content.get("citations") or [], node_id,
+        preserve_source_collection=(
+            source_page_origin == "preexisting"
+            and authoritative_source_preservation_policy == POLICY
+            and fr_content.get("source_preservation_policy") == POLICY
+        ),
+    )
     try:
         passages = validate_translations(row.get("citation_passages", []), fr_content.get("citation_passages") or [], node_id)
     except ValueError as exc:

@@ -1322,6 +1322,9 @@ def _canonical_french_quote_warning_alias(
     ]
 
 def _validate_citations_against_locks(ctx: PackageContext, tmpl: Template, rel: str, lang: str, page_id: str) -> None:
+    from html import escape
+    from .schema_validation import _valid_translation_source_preservation
+
     lock_path = 'data/fr_content_lock.json' if lang == 'fr' else 'data/en_content_lock.json'
     lock = ctx.load_json(lock_path, required=True)
     if not isinstance(lock, dict):
@@ -1331,12 +1334,31 @@ def _validate_citations_against_locks(ctx: PackageContext, tmpl: Template, rel: 
         ctx.report.error('WDV-MWK-021', 'Le verrou de contenu ne couvre pas cette page Argument', path=rel, details={'page_id': page_id, 'lock': lock_path})
         return
     expected_rows = argument.get('citations') or []
+    source_collections = {}
+    if lang == 'en' and ctx.exists('data/source_preservation_receipt.json'):
+        french = ctx.load_json('data/fr_content_lock.json') or {}
+        original = next((row for row in french.get('arguments') or [] if row.get('id') == page_id), {})
+        for citation in original.get('citations') or []:
+            collection = next((str(p.get('value') or '') for p in citation.get('source_parameters') or []
+                               if str(p.get('name') or '').strip().casefold() == 'collection'), None)
+            if collection is not None and not re.search(r'[\r\n<>\[\]{}|]', collection):
+                source_collections[citation.get('id')] = collection
+        if source_collections and not _valid_translation_source_preservation(ctx):
+            source_collections.clear()
     parameter = 'citations' if lang == 'fr' else 'quotes'
     actual_templates = get_subs(tmpl, parameter)
     try:
         _, actual_passages = _mixed_citations(tmpl.one(parameter) or '')
         ids = [r.get('id') for r in expected_rows]
-        expected_passages = [(ids.index(p['before_citation_id']) if p.get('before_citation_id') in ids else len(ids), str(p.get('text') or '').strip()) for p in argument.get('citation_passages') or []]
+        between = defaultdict(list)
+        for index, citation_id in enumerate(ids, 1):
+            collection = source_collections.get(citation_id)
+            if collection:
+                between[index].append(f'\n<small>Collection: {escape(collection, quote=False)}</small>\n')
+        for p in argument.get('citation_passages') or []:
+            index = ids.index(p['before_citation_id']) if p.get('before_citation_id') in ids else len(ids)
+            between[index].append(str(p.get('text') or ''))
+        expected_passages = [(index, ''.join(parts).strip()) for index, parts in sorted(between.items())]
         if actual_passages != expected_passages:
             ctx.report.error('WDV-MWK-021', 'Passages hors citation absents, modifiés ou déplacés', path=rel)
     except WikiParseError as exc:
@@ -1364,10 +1386,15 @@ def _validate_citations_against_locks(ctx: PackageContext, tmpl: Template, rel: 
                 ctx.report.error('WDV-MWK-021', "La citation anglaise doit contenir une unique mention 'AI-translated quote', ajoutée avec le séparateur ', ' après tout avertissement existant", path=rel, pointer=f'{parameter}/{index}', details={'expected': expected_warning, 'actual': warning_values, 'parameter': warning_name})
             source = expected.get('source') or {}
             source_params = _parameter_pairs(source.get('source_parameters'))
+            collection = source_collections.get(expected.get('id'))
+            if expected.get('source_collection') != collection:
+                ctx.report.error('WDV-MWK-021', 'La mention de collection diverge de la citation française gelée', path=rel, pointer=f'{parameter}/{index}')
             if current_contract:
                 mapped_source: list[tuple[str, str]] = []
                 unmapped: list[str] = []
                 for source_name, source_value in source_params:
+                    if source_name.casefold() == 'collection' and collection == source_value:
+                        continue
                     mapped_name = _quote_parameter_name(source_name)
                     if mapped_name is None:
                         unmapped.append(source_name)

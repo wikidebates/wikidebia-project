@@ -5,6 +5,7 @@ import json
 import shutil
 import sys
 from pathlib import Path
+import pytest
 
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 sys.path.insert(0, str(SCRIPTS))
@@ -182,6 +183,40 @@ def test_finalize_rejects_incomplete_occurrence_review(tmp_path: Path):
     else:
         raise AssertionError("revue de placement incomplète acceptée")
     assert json.loads((build / "manifest.json").read_text())["global_status"] == "graph_draft"
+
+
+def test_preserved_placements_require_explicit_mode_and_remain_bound_to_public_source(tmp_path: Path):
+    project, build = make_project(tmp_path)
+    review.make_review_template(build, "debat_test", overwrite=False)
+    complete_reviews(build)
+    placement_path = build / common.PLACEMENT_REVIEW
+    placement = common.load_json(placement_path)
+    entry = next(row for row in placement["entries"] if row["declared_depth"] != 1)
+    entry.update(placement_status=common.PRESERVED_PLACEMENT, direct_fit=False)
+    entry["subordinate_review"]["parent_is_best_immediate_target"] = False
+    entry["rationale"] = "Le placement publié est conservé à la demande du propriétaire en vue de la traduction."
+    common.write_json(placement_path, placement)
+
+    with pytest.raises(common.CorpusBuildError, match="Revue incomplète"):
+        review.finalize_review(project, build, "debat_test")
+    finalized = review.finalize_review(project, build, "debat_test", preserve_imported_source=True)
+    assert common.load_json(build / common.REVIEW_ENVELOPE)["preserved_placements_sha256"] == common.placement_entries_sha256(placement)
+    entry["rationale"] += " Modification postérieure à la revue."
+    common.write_json(placement_path, placement)
+    with pytest.raises(common.CorpusBuildError, match="placements conservés a changé"):
+        promote.promote(project, "debat_test", finalized["review_sha256"])
+
+
+def test_preservation_rejects_divergent_published_links(tmp_path: Path):
+    _, build = make_project(tmp_path)
+    from wikidebia_translation_source import verify_imported_graph
+
+    registry = common.load_json(build / "data/registre_debat.json")
+    verify_imported_graph(build, registry)
+    edge = registry["graph"]["edges"][0]
+    edge["relation"] = "objection" if edge["relation"] == "justification" else "justification"
+    with pytest.raises(common.CorpusBuildError, match="Liens publiés ou ordre divergents"):
+        verify_imported_graph(build, registry)
 
 
 def test_finalize_rejects_approved_review_with_unapplied_graph_action(tmp_path: Path):

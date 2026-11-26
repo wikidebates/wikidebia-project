@@ -21,7 +21,7 @@ def load_module(name: str):
     return module
 
 
-translation = load_module("wikidebia_translation_review")
+translation = sys.modules.get("wikidebia_translation_review") or load_module("wikidebia_translation_review")
 convergence = load_module("wikidebia_semantic_convergence")
 content = sys.modules.get("wikidebia_content_review") or load_module("wikidebia_content_review")
 metadata = sys.modules.get("wikidebia_editorial_review") or load_module("wikidebia_editorial_review")
@@ -737,6 +737,25 @@ def test_finalize_translation_preserves_citation_metadata_and_appends_warning(tm
     assert by_id["A0004"]["citations"][0]["date"] == "1971"
 
 
+def test_historical_collection_stays_bound_to_the_quote_without_a_template_parameter(tmp_path: Path):
+    from wikidebia_render import _citation_template
+
+    project, workspace, work_id = make_french_locked(tmp_path)
+    translation.prepare_review(project, "debat_test", work_id)
+    complete_translation_review(workspace)
+    data = common.load_json(workspace / "reviews/en/translation_review.json")
+    quote = data["arguments"][0]["translation"]["citations"][0]
+    source = quote["source"]
+    source["source_parameters"].append({"name": "collection", "value": "Books & archives"})
+    with pytest.raises(translation.TranslationReviewError, match="sans équivalent anglais"):
+        translation._validate_citations([quote], [source], "A0001")
+    result, = translation._validate_citations([quote], [source], "A0001", preserve_source_collection=True)
+    assert result["source_collection"] == "Books & archives"
+    rendered = _citation_template(result, lang="en")
+    assert "|collection=" not in rendered
+    assert rendered.endswith("\n<small>Collection: Books &amp; archives</small>\n")
+
+
 @pytest.mark.parametrize("invalid_date", [
     "June 25, 2012",
     "25 juin 2012",
@@ -777,6 +796,8 @@ def test_finalize_translation_rejects_wrong_citation_date(tmp_path: Path):
     ("09 fév 2022", "9 February 2022"),
     ("08 Mar 2022", "8 March 2022"),
     ("29/05/18", "29 May 2018"),
+    ("02-09-2023", "2 September 2023"),
+    ("20 juin, 2023", "20 June 2023"),
     ("janvier-février 2023", "January–February 2023"),
 ])
 def test_historical_citation_date_formats_match_english_translation(source: str, target: str):
