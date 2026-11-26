@@ -77,6 +77,14 @@ correspondante. Lorsque les deux reçus d’écriture sont présents, l’option
 chaque page vérifiée le titre, la révision observée et l’empreinte du contenu.
 Il reprend les contrôles manquants ou âgés de plus d’une heure et relit tout
 si le plan, l’inventaire des pages ou le manifeste a changé.
+
+La confirmation conserve le préflight approuvé pendant la nouvelle lecture
+distante. Une interruption avant l’autorisation permet de relancer la même
+confirmation. Si une ancienne version du kit avait remplacé ce préflight
+avant de s’arrêter, `resume` propose une nouvelle préparation à confirmer.
+Le verrou de publication est propre au débat et le système le libère à
+l’arrêt du processus. `workflow-publish` renvoie le code 2 si la publication
+reste bloquée ou incomplète.
 `continuity-sync DEBAT --work-id WORK` projette
 les preuves signées de préservation et de publication finale sans exiger un
 checkpoint français inexistant dans ce parcours. `continuity-sync --check`

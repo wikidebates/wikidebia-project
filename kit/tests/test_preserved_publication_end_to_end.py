@@ -37,7 +37,8 @@ def _add_existing_english_frontier(corpus: Path) -> None:
         node = next(n for n in (data.get("graph") or data)["nodes"] if n["id"] == REUSED_ID)
         node["en"].update(canonical_title=REUSED_TITLE, displayed_title=REUSED_TITLE, title_status="locked")
         node["pages"]["en"]["wiki"].update(check_status="equivalent_existing", decision="reuse_existing",
-                                          remote_title=REUSED_TITLE, remote_revision_id=42)
+                                          remote_title=REUSED_TITLE, remote_revision_id=42,
+                                          checked_at="2026-11-26T14:00:00Z")
         node["pages"]["en"]["generation"]["status"] = "obsolete"
         write_json(path, data)
 

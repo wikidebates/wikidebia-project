@@ -370,9 +370,9 @@ def test_final_publisher_refuses_completion_when_writer_succeeds_but_public_page
     preflight = {"preflight_sha256": "p" * 64}
     authorization = {"authorization_sha256": "a" * 64}
     monkeypatch.setattr(final, "_verify_prepared_publication",
-                        lambda *args: (baseline, plans, preflight))
+                        lambda *args: (baseline, plans, preflight, preflight))
     monkeypatch.setattr(final, "_authorization",
-                        lambda *args: authorization)
+                        lambda *args, **kwargs: authorization)
     for name in ("_migrate_english_publication_order", "_migrate_english_plan_after_kit_change"):
         monkeypatch.setattr(final, name, lambda *args: (plans, preflight, authorization))
     monkeypatch.setattr(final, "build_adapter", lambda *args: object())
