@@ -56,6 +56,42 @@ def make_base(project: Path) -> Path:
     return base
 
 
+@pytest.mark.parametrize("valid_baseline", [True, False])
+def test_publish_preserved_adopts_a_sealed_release_without_an_orchestration(tmp_path, monkeypatch, valid_baseline):
+    debate_id, work_id = "debat_test", "EDIT-20261126-001"
+    workspace = wf._workspace_path(tmp_path, debate_id, work_id)
+    release_copy = workspace / "release-copy"
+    common.write_json(release_copy / "manifest.json", {"short_code": "DEBAT", "pages": [
+        {"language": "fr", "page_type": "debate", "page_id": debate_id, "canonical_title": "Débat test ?"},
+    ]})
+    release_tree = common.full_tree_sha256(release_copy)
+    meta = {
+        "debate_id": debate_id, "work_id": work_id, "status": "release_ready",
+        "source_preservation": {"policy": wf.PRESERVED_IMPORT_POLICY},
+        "release_copy": {"tree_sha256": release_tree},
+    }
+    meta["workspace_sha256"] = wf.workspace_receipt_hash(meta)
+    common.write_json(workspace / "workspace.json", meta)
+
+    def verify_baseline(project_root, checked_id, checked_release, *, expected_work_id, allow_preserved):
+        assert (checked_id, checked_release, expected_work_id, allow_preserved) == (debate_id, release_copy, work_id, True)
+        assert wf._load_workflow(project_root, debate_id)["preserved_publication_release_sha256"] == release_tree
+        return {"fr": {"mode": wf.PRESERVED_IMPORT_MODE}} if valid_baseline else None
+
+    monkeypatch.setattr(wf, "resolve_workflow_release_baseline", verify_baseline)
+    monkeypatch.setattr(wf, "_mechanical_advance", lambda project, state: state)
+    if not valid_baseline:
+        with pytest.raises(wf.WorkflowError, match="baseline de préservation"):
+            wf.publish_preserved_workflow(tmp_path, debate_id, work_id)
+        assert not wf._workflow_path(tmp_path, debate_id).exists()
+        return
+
+    state = wf.publish_preserved_workflow(tmp_path, debate_id, work_id)
+    assert state["work_id"] == work_id
+    assert state["debate_title"] == "Débat test ?"
+    assert state["phase"] == "final_publication"
+
+
 def test_workflow_reconcile_restores_release_boundary_from_signed_evidence(tmp_path, monkeypatch):
     debate_id, work_id = "debat_test", "EDIT-20261029-001"
     state = {

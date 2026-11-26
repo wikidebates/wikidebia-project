@@ -532,7 +532,24 @@ def publish_preserved_workflow(project_root: Path, debate_id: str, work_id: str)
         ):
             raise WorkflowError("Le Work ne possède pas de release scellée en mode préservation")
 
-        state = _load_workflow(project_root, debate_id)
+        workflow_path = _workflow_path(project_root, debate_id)
+        existing_workflow = workflow_path.exists()
+        if existing_workflow:
+            state = _load_workflow(project_root, debate_id)
+        else:
+            manifest = load_json(release_copy / "manifest.json", "manifeste de release")
+            titles = [row.get("canonical_title") for row in manifest.get("pages") or []
+                      if row.get("language") == "fr" and row.get("page_type") == "debate"
+                      and row.get("page_id") == debate_id]
+            if len(titles) != 1 or not isinstance(titles[0], str) or not titles[0].strip():
+                raise WorkflowError("La release préservée ne porte pas le titre français du débat")
+            state = {
+                "schema": WORKFLOW_SCHEMA, "schema_version": "1.0",
+                "normative_revision": NORM_VERSION, "validator_version": VALIDATOR_VERSION,
+                "kit_version": KIT_VERSION, "debate_id": debate_id, "debate_title": titles[0],
+                "short_code": validate_short_code(manifest.get("short_code") or derive_short_code(debate_id)),
+                "work_id": work_id, "created_at": now_iso(),
+            }
         if state.get("work_id") != work_id:
             raise WorkflowError("L'orchestration active appartient à un autre Work")
         previous_sha = state.get("preserved_publication_release_sha256")
@@ -562,7 +579,10 @@ def publish_preserved_workflow(project_root: Path, debate_id: str, work_id: str)
                 if baseline is None or baseline["fr"]["mode"] != PRESERVED_IMPORT_MODE:
                     raise WorkflowError("La release ne fournit pas de baseline de préservation")
             except Exception:
-                _save_workflow(project_root, state)
+                if existing_workflow:
+                    _save_workflow(project_root, state)
+                else:
+                    workflow_path.unlink()
                 raise
             state = candidate
         state["phase"] = "final_publication"

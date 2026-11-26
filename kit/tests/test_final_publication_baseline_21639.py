@@ -104,6 +104,41 @@ def test_work_scoped_baseline_attests_first_english_publication(tmp_path: Path):
     assert value["baseline_sha256"] == baseline._canonical(value, "baseline_sha256")
 
 
+def test_preserved_baseline_accounts_for_an_existing_english_argument(tmp_path: Path):
+    debate_id, work_id = "debat_test", "EDIT-20260820-001"
+    policy = baseline.PRESERVED_IMPORT_POLICY
+    nodes = [("debate", debate_id, "Débat test ?"), ("argument", "A0001", "Argument français")]
+    provenance = []
+    for kind, page_id, title in nodes:
+        path = tmp_path / "imports/fr" / f"{page_id}.wiki"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("Extrait\n", encoding="utf-8")
+        provenance.append({"kind": kind, "page_id": page_id, "canonical_title": title, "revision_id": 10,
+                           "import_path": path.relative_to(tmp_path).as_posix(), "sha256": baseline.sha256_file(path)})
+    receipt = _signed({"schema": "wikidebia-translation-source-preservation-1.0", "policy": policy,
+                       "status": "frozen_as_imported", "french_pages_changed": False,
+                       "work_id": work_id, "debate_id": debate_id, "pages": provenance}, "receipt_sha256")
+    _write_json(tmp_path / "data/source_preservation_receipt.json", receipt)
+    _write_json(tmp_path / "data/import_provenance.json", {"debate_id": debate_id, "pages": provenance})
+    _write_json(tmp_path / "manifest.json", {"pages": [
+        *({"language": "fr", "page_type": kind, "page_id": page_id, "canonical_title": title}
+          for kind, page_id, title in nodes),
+        {"language": "en", "page_type": "debate", "page_id": debate_id},
+    ]})
+    reused = {"id": "A0001", "status": "active", "en": {"canonical_title": "English argument", "title_status": "locked"},
+              "pages": {"en": {"wiki": {"decision": "reuse_existing", "check_status": "equivalent_existing"}}}}
+    registry = tmp_path / "data/registre_debat.json"
+    _write_json(registry, {"graph": {"nodes": [reused]}})
+    meta = {"debate_id": debate_id, "work_id": work_id,
+            "source_preservation": {"policy": policy, "receipt_sha256": receipt["receipt_sha256"]}}
+    release = {"fresh_archive_validation_result": "passed", "semantic_convergence_passes": 2}
+    result = baseline._preserved_french_baseline(tmp_path, meta, release)
+    assert {row["page_id"] for row in result["pages"]} == {debate_id, "A0001"}
+    _write_json(registry, {"graph": {"nodes": []}})
+    with pytest.raises(baseline.WorkflowBaselineError, match="couverture"):
+        baseline._preserved_french_baseline(tmp_path, meta, release)
+
+
 def _add_signed_french_correction_chain(
     project: Path,
     debate_id: str,

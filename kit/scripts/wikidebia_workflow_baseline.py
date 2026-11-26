@@ -234,7 +234,16 @@ def _preserved_french_baseline(corpus: Path, meta: Mapping[str, Any], release: M
         ]}, f"le manifeste {language}")
         for language in ("fr", "en")
     }
-    if not page_maps["fr"] or set(page_maps["fr"]) != set(page_maps["en"]):
+    from wikidebia_render import _reuses_existing_english_page
+
+    registry = load_json(corpus / "data/registre_debat.json", "registre de release")
+    reused = {
+        ("argument", node["id"])
+        for node in (registry.get("graph") or {}).get("nodes") or []
+        if node.get("status") == "active" and _reuses_existing_english_page(node)
+    }
+    english = set(page_maps["en"])
+    if not english or english & reused or set(page_maps["fr"]) != english | reused:
         raise WorkflowBaselineError("La couverture des pages françaises et anglaises diverge")
     rows: dict[tuple[str, str], dict[str, Any]] = {}
     for row in receipt.get("pages") or []:
