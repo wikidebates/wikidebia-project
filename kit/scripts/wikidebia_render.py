@@ -21,6 +21,7 @@ import argparse
 import copy
 import datetime as dt
 import hashlib
+from html import escape
 import json
 import os
 import re
@@ -457,7 +458,11 @@ def _citation_template(citation: Mapping[str, Any], *, lang: str) -> str:
         # présents mais vides. Le rendu canonique ne doit ni les considérer
         # comme une erreur ni leur inventer une valeur : _template() les omet.
         rows.append((name, value))
-    return _template("Citation" if lang == "fr" else "Quote", rows)
+    rendered = _template("Citation" if lang == "fr" else "Quote", rows)
+    collection = citation.get("source_collection") if lang == "en" else None
+    if collection:
+        rendered += f"\n<small>Collection: {escape(collection, quote=False)}</small>\n"
+    return rendered
 
 
 def _contextual_label(

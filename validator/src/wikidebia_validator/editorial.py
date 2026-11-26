@@ -1617,7 +1617,9 @@ def validate_individual_review_data(review: Any, nodes: list[dict[str, Any]], no
                 issues.append({'reason': 'rubric_rationale', 'node_id': node_id, 'rubric': rubric})
     return issues
 
-def validate_graph_placement_review_data(review: Any, registry: dict[str, Any], norm: str | None=None) -> list[dict[str, Any]]:
+def validate_graph_placement_review_data(
+    review: Any, registry: dict[str, Any], norm: str | None = None, *, preserve_imported_source: bool = False,
+) -> list[dict[str, Any]]:
     """Validate the occurrence-by-occurrence semantic placement ledger."""
     issues: list[dict[str, Any]] = []
     if not isinstance(review, dict):
@@ -1652,13 +1654,23 @@ def validate_graph_placement_review_data(review: Any, registry: dict[str, Any], 
             issues.append({'reason': 'node_id', 'occurrence_id': oid})
         if entry.get('declared_depth') != depth:
             issues.append({'reason': 'declared_depth', 'occurrence_id': oid, 'expected': depth, 'actual': entry.get('declared_depth')})
-        if entry.get('placement_status') not in {'approved', 'moved_after_review'}:
+        preserved = preserve_imported_source and entry.get('placement_status') == 'preserved_for_translation'
+        if not preserved and entry.get('placement_status') not in {'approved', 'moved_after_review'}:
             issues.append({'reason': 'placement_status', 'occurrence_id': oid})
-        if entry.get('direct_fit') is not True:
+        if not preserved and entry.get('direct_fit') is not True:
             issues.append({'reason': 'direct_fit', 'occurrence_id': oid})
         rationale = entry.get('rationale')
         if not isinstance(rationale, str) or len(rationale.strip()) < 24:
             issues.append({'reason': 'rationale', 'occurrence_id': oid})
+        if preserved:
+            function = 'main_argument' if depth == 1 else (edge_by_id.get(occ.get('edge_id')) or {}).get('relation')
+            target = 'debate' if depth == 1 else occ.get('parent_occurrence_id')
+            correction = entry.get('correction') or entry.get('graph_action') or {}
+            if (entry.get('declared_function') != function or entry.get('semantic_target') != target
+                or entry.get('direct_fit') is not False or not isinstance(correction, dict)
+                or correction.get('action') not in {None, '', 'none', 'keep'}):
+                issues.append({'reason': 'preserved_placement_mismatch', 'occurrence_id': oid})
+            continue
         if depth == 1:
             if entry.get('declared_function') != 'main_argument':
                 issues.append({'reason': 'declared_function', 'occurrence_id': oid, 'expected': 'main_argument'})
@@ -1697,7 +1709,15 @@ def validate_graph_placement_review_data(review: Any, registry: dict[str, Any], 
 def _validate_graph_placement_review(ctx: PackageContext, registry: dict[str, Any], controls: dict[str, Any], norm: str) -> dict[str, Any]:
     rel = controls.get('graph_placement_review_path')
     review = ctx.load_json(rel) if isinstance(rel, str) and ctx.exists(rel) else None
-    issues = validate_graph_placement_review_data(review, registry, norm=norm)
+    from .schema_validation import _valid_translation_source_preservation
+
+    preserved = False
+    if isinstance(review, dict) and _valid_translation_source_preservation(ctx):
+        receipt = ctx.load_json('data/source_preservation_receipt.json') or {}
+        placements = {key: review.get(key) for key in ('debate_id', 'entries')}
+        encoded = json.dumps(placements, ensure_ascii=False, sort_keys=True, separators=(',', ':'), allow_nan=False)
+        preserved = receipt.get('preserved_placements_sha256') == hashlib.sha256(encoded.encode()).hexdigest()
+    issues = validate_graph_placement_review_data(review, registry, norm=norm, preserve_imported_source=preserved)
     if issues:
         ctx.report.error('WDV-EDT-022', 'Revue du placement des arguments absente ou incohérente', path=rel or 'manifest.json', details={'issue_count': len(issues), 'issues': issues[:40]})
     entries = review.get('entries', []) if isinstance(review, dict) else []

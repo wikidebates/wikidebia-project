@@ -153,6 +153,34 @@ def test_mixed_quote_passages_keep_positions_and_full_text():
     assert [q.one('quote') for q in quotes]==['First','Second']
     assert gaps==[(1,'A complete passage.'),(2,'End.')]
 
+
+def test_collection_note_cannot_be_omitted_or_detached_from_its_quote(tmp_path):
+    from wikidebia_validator.wikicode import _validate_citations_against_locks, parse_template
+
+    fixture(tmp_path)
+    frozen = json.loads((tmp_path / 'data/fr_content_lock.json').read_text())
+    source = {
+        'id': 'A0001-C001',
+        'source_parameters': [{'name': 'citation', 'value': 'Extrait'}, {'name': 'collection', 'value': 'Books & archives'}],
+    }
+    frozen['arguments'] = [{'id': 'A0001', 'citations': [source]}]
+    dump(tmp_path / 'data/fr_content_lock.json', frozen)
+    english = {
+        'id': 'A0001-C001', 'source': source, 'source_collection': 'Books & archives',
+        'parameters': [{'name': 'quote', 'value': 'Excerpt'}, {'name': 'warnings', 'value': 'AI-translated quote'}],
+        'warnings': 'AI-translated quote', 'quote_completeness_reviewed': True,
+        'quote_completeness_note': 'Compared with the original excerpt.',
+    }
+    dump(tmp_path / 'data/en_content_lock.json', {'arguments': [{'id': 'A0001', 'citations': [english]}]})
+    quote = '{{Quote|quote=Excerpt|warnings=AI-translated quote}}'
+    note = '\n<small>Collection: Books &amp; archives</small>\n'
+    for content, valid in [(quote + note, True), (note + quote, False), (quote, False)]:
+        ctx = context(tmp_path)
+        page = parse_template('{{Argument|quotes=' + content + '}}')
+        _validate_citations_against_locks(ctx, page, 'argument.wiki', 'en', 'A0001')
+        errors = [finding for finding in ctx.report.findings if finding.code == 'WDV-MWK-021']
+        assert bool(errors) is not valid
+
 def test_common_english_verbs_are_predicates_without_accepting_nominal_headings():
     from wikidebia_validator.editorial import displayed_title_argument_issues
     assert not displayed_title_argument_issues('Prohibition harms society','en')

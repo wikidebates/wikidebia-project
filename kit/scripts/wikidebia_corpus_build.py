@@ -26,6 +26,7 @@ PLACEMENT_RESERVATIONS_TXT = "reports/graph_placement_reservations.txt"
 FINAL_VALIDATION_JSON = "reports/graph_review_validation.json"
 FINAL_VALIDATION_TXT = "reports/graph_review_validation.txt"
 PROMOTION_READY = "reports/corpus_promotion_ready.json"
+PRESERVED_PLACEMENT = "preserved_for_translation"
 
 # Review files are deliberately excluded from the prepared source fingerprint:
 # reviewers must be able to edit them without invalidating the graph snapshot.
@@ -425,6 +426,7 @@ def placement_reservations_report(
     debate = registry.get("debate") or {}
     debate_title = str((((debate.get("pages") or {}).get("fr") or {}).get("canonical_title") or debate.get("id") or "Débat"))
     attestations = envelope.get("attestations")
+    preserve_imported_source = envelope.get("preserved_placements_sha256") == placement_entries_sha256(placement)
     attested_review = bool(
         envelope.get("decision") == "approved"
         and envelope.get("reviewer")
@@ -434,7 +436,7 @@ def placement_reservations_report(
         and isinstance(attestations, Mapping)
         and all(attestations.get(key) is True for key in REQUIRED_ATTESTATIONS)
         and not envelope.get("blocking_issues")
-        and not placement_review_issues(placement, registry)
+        and not placement_review_issues(placement, registry, preserve_imported_source=preserve_imported_source)
     )
     blocking_by_occurrence: dict[str, list[str]] = {}
     unassigned_blockers: list[Any] = []
@@ -496,7 +498,10 @@ def placement_reservations_report(
             or str(entry.get("rationale") or "").strip()
             or "Justification du placement à examiner"
         )
-        if approved_keep:
+        if attested_review and preserve_imported_source and entry.get("placement_status") == PRESERVED_PLACEMENT:
+            priority = "conserve_pour_traduction"
+            decision = "Lien importé conservé pour traduction avec la réserve documentée"
+        elif approved_keep:
             priority = "maintien_atteste"
             decision = "Aucun nouvel arbitrage : maintien attesté par la revue signée"
         elif original_reservation or blocking_by_occurrence.get(oid) or action not in {"", "none", "keep"}:
@@ -519,7 +524,7 @@ def placement_reservations_report(
             "blocking_reasons": blocking_by_occurrence.get(oid, []),
             "attesting_review_sha256": envelope.get("review_sha256") if approved_keep else None,
         })
-    ranks = {"arbitrage": 0, "controle_ordinaire": 1, "maintien_atteste": 2}
+    ranks = {"arbitrage": 0, "conserve_pour_traduction": 1, "controle_ordinaire": 2, "maintien_atteste": 3}
     cases.sort(key=lambda row: (ranks[row["priority"]], row["occurrence_id"]))
     return {
         "schema": "wikidebia-graph-placement-reservations-report-1.0",
@@ -530,6 +535,8 @@ def placement_reservations_report(
             "arbitrations": sum(row["priority"] == "arbitrage" for row in cases),
             "routine": sum(row["priority"] == "controle_ordinaire" for row in cases),
             "attested_maintains": sum(row["priority"] == "maintien_atteste" for row in cases),
+            **({"preserved_for_translation": sum(row["priority"] == "conserve_pour_traduction" for row in cases)}
+               if attested_review and preserve_imported_source else {}),
             "total": len(cases),
         },
         "cases": cases,
@@ -546,10 +553,13 @@ def placement_reservations_text(report: Mapping[str, Any]) -> str:
         f"Arbitrages prioritaires : {count.get('arbitrations', 0)}",
         f"Contrôles ordinaires : {count.get('routine', 0)}",
         f"Maintiens déjà attestés : {count.get('attested_maintains', 0)}",
+        *([f"Liens conservés avec réserve pour traduction : {count['preserved_for_translation']}"]
+          if "preserved_for_translation" in count else []),
         "",
     ]
     for priority, title in (
         ("arbitrage", "ARBITRAGES PRIORITAIRES"),
+        ("conserve_pour_traduction", "LIENS CONSERVÉS POUR TRADUCTION"),
         ("controle_ordinaire", "CONTRÔLES ORDINAIRES"),
         ("maintien_atteste", "MAINTIENS ATTESTÉS"),
     ):
@@ -570,7 +580,9 @@ def placement_reservations_text(report: Mapping[str, Any]) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def placement_review_issues(review: Any, registry: Mapping[str, Any]) -> list[dict[str, Any]]:
+def placement_review_issues(
+    review: Any, registry: Mapping[str, Any], *, preserve_imported_source: bool = False,
+) -> list[dict[str, Any]]:
     issues: list[dict[str, Any]] = []
     if not isinstance(review, dict):
         return [{"reason": "missing_or_invalid_document"}]
@@ -603,7 +615,8 @@ def placement_review_issues(review: Any, registry: Mapping[str, Any]) -> list[di
             issues.append({"reason": "node_id", "occurrence_id": oid})
         if entry.get("declared_depth") != depth:
             issues.append({"reason": "declared_depth", "occurrence_id": oid})
-        if entry.get("placement_status") not in {"approved", "moved_after_review"}:
+        preserved = preserve_imported_source and entry.get("placement_status") == PRESERVED_PLACEMENT
+        if not preserved and entry.get("placement_status") not in {"approved", "moved_after_review"}:
             issues.append({"reason": "placement_status", "occurrence_id": oid})
         correction = entry.get("correction") or entry.get("graph_action")
         if isinstance(correction, Mapping):
@@ -614,10 +627,18 @@ def placement_review_issues(review: Any, registry: Mapping[str, Any]) -> list[di
                     "occurrence_id": oid,
                     "action": action,
                 })
-        if entry.get("direct_fit") is not True:
+        if not preserved and entry.get("direct_fit") is not True:
             issues.append({"reason": "direct_fit", "occurrence_id": oid})
         if not isinstance(entry.get("rationale"), str) or len(entry["rationale"].strip()) < 24:
             issues.append({"reason": "rationale", "occurrence_id": oid})
+        if preserved:
+            function = "main_argument" if depth == 1 else (edge_by_id.get(occ.get("edge_id")) or {}).get("relation")
+            target = "debate" if depth == 1 else occ.get("parent_occurrence_id")
+            if entry.get("declared_function") != function or entry.get("semantic_target") != target:
+                issues.append({"reason": "preserved_placement_mismatch", "occurrence_id": oid})
+            if entry.get("direct_fit") is not False:
+                issues.append({"reason": "preserved_placement_claims_direct_fit", "occurrence_id": oid})
+            continue
         if depth == 1:
             if entry.get("declared_function") != "main_argument":
                 issues.append({"reason": "declared_function", "occurrence_id": oid})
@@ -653,6 +674,10 @@ def review_sha256(review: Mapping[str, Any]) -> str:
     body = dict(review)
     body.pop("review_sha256", None)
     return sha256_bytes(canonical_json(body))
+
+
+def placement_entries_sha256(review: Mapping[str, Any]) -> str:
+    return sha256_bytes(canonical_json({key: review.get(key) for key in ("debate_id", "entries")}))
 
 
 def verify_review_envelope(review: dict[str, Any], *, debate_id: str, source_sha256: str) -> list[str]:

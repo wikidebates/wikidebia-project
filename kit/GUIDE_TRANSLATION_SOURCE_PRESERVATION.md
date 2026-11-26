@@ -3,6 +3,19 @@
 Ce mode de reprise distingue la fidélité à une source publiée de sa validation
 documentaire actuelle. Il ne s'applique pas à la création de pages françaises.
 
+Lorsque le propriétaire demande de conserver le graphe publié malgré des
+réserves de placement, documenter chacune d’elles dans la revue. Marquer les
+occurrences concernées `preserved_for_translation`, garder leur parent et
+leur fonction publiés, renseigner le motif et laisser `direct_fit` à `false`.
+Compléter la revue normale pour les autres occurrences. Consigner la décision
+du propriétaire dans les notes, puis exécuter localement
+`./wikidebia corpus-review-graph DEBAT --finalize --preserve-imported-source`.
+Le kit vérifie les révisions et les empreintes des imports ainsi que les cibles,
+les orientations et l’ordre des liens. Il scelle le registre de placements.
+Promouvoir le build et créer le workspace en local. Appliquer la revue des
+titres en mode `keep` et continuer par le gel ci-dessous. Le checkpoint
+ordinaire de publication française refuse cette revue de préservation.
+
 Après import, revue du graphe et application des titres français sans changement,
 revoir les formes lexicales du vocabulaire de travail puis exécuter :
 
@@ -40,6 +53,11 @@ concepts sans fusionner deux termes distincts. Chaque libellé de relation est
 traduit dans son contexte ; le titre affiché principal d'un nœud ne remplace pas
 ses autres libellés. Les citations **et** les textes situés entre elles entrent
 dans l'empreinte sémantique et sont contrôlés au rendu.
+
+Dans ce parcours, une mention historique `collection` est conservée à
+l’identique sur une ligne « Collection » immédiatement après sa citation
+anglaise. Le modèle `Quote` garde ses paramètres publiés. Le validateur compare
+la mention et sa position à la citation française gelée.
 
 Une revue scellée peut être rouverte avec `--reopen-review`, `--reviewer` et
 `--note` tant qu'aucun rendu final n'existe. La revue et toute copie déjà appliquée
