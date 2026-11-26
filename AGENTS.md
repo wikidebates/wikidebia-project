@@ -9,6 +9,10 @@ Ces règles s’appliquent à toutes les sessions. Les procédures spécifiques 
 - Ne pas chercher les secrets sur le serveur Debian : `private/pywikibot/` y est local, ignoré par Git et ne doit pas être copié dans l’environnement géré.
 - Aucun secret, jeton, identifiant sensible, fichier privé, journal brut ou contenu de corpus privé dans Git, les issues/PR, les commandes affichées et les rapports.
 
+## Branches de travail sur GitHub
+
+Quand une tâche demande de modifier ce dépôt, les agents sont autorisés à créer une branche de travail dédiée et à y pousser les commits vérifiés de la tâche sur `https://github.com/wikidebates/wikidebia-project.git`. Cette autorisation couvre les pushes ordinaires sur cette branche pendant toute la tâche, sans confirmation à chaque envoi.
+
 ## Frontières éditoriales et de publication
 
 - Aucune publication, modification ou suppression wiki sans demande explicite et **contrôles prévus par le kit** (provenance, identité, droits, plan accepté, empreintes, revue humaine et préflight applicables). Un reçu narratif ou un test local ne remplace jamais une preuve scellée. Ne jamais fabriquer recherches, consultations ou attestations.
