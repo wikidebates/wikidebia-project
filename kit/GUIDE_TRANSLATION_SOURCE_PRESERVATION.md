@@ -85,6 +85,13 @@ avant de s’arrêter, `resume` propose une nouvelle préparation à confirmer.
 Le verrou de publication est propre au débat et le système le libère à
 l’arrêt du processus. `workflow-publish` renvoie le code 2 si la publication
 reste bloquée ou incomplète.
+
+Lorsqu’une reprise migre le plan anglais, le kit sauvegarde la configuration,
+le plan, le préflight et l’autorisation avant de les remplacer. En cas
+d’interruption, `resume` indique l’empreinte du préflight sauvegardé.
+`workflow-publish` vérifie cette empreinte, restaure les preuves locales,
+puis relance la vérification de la migration. Toute sauvegarde modifiée
+bloque la reprise.
 `continuity-sync DEBAT --work-id WORK` projette
 les preuves signées de préservation et de publication finale sans exiger un
 checkpoint français inexistant dans ce parcours. `continuity-sync --check`

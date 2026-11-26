@@ -203,7 +203,8 @@ def _phase(status: str) -> str:
     return "french_metadata"
 
 
-def _preserved_final_step(project_root: Path, debate_id: str, work_id: str, release_sha256: str) -> dict[str, Any] | None:
+def _workflow_final_step(project_root: Path, debate_id: str, work_id: str, release_sha256: str,
+                         *, preserved: bool) -> dict[str, Any] | None:
     from wikidebia_final_publication import FinalPublicationError, completed_write_receipts
     from wikidebia_public_visibility import checkpoint_progress
 
@@ -258,6 +259,8 @@ def _preserved_final_step(project_root: Path, debate_id: str, work_id: str, rele
               or preparation.get("safety_plan_sha256") != preflight.get("safety_plan_sha256")):
             raise WorkspaceStatusError("La préparation ne correspond pas au préflight courant")
         elif preparation.get("preflight_sha256") != digest:
+            if not preserved:
+                raise WorkspaceStatusError("La préparation ne correspond pas au préflight courant")
             status, action = "publication_confirmation_required", "prepare_preserved_publication_again"
             command = _command("publish-preserved", debate_id, work_id)
             remote_write = False
@@ -269,6 +272,29 @@ def _preserved_final_step(project_root: Path, debate_id: str, work_id: str, rele
     return {"status": status, "action": action, "command": command, "preflight_sha256": digest,
             "remote_read_possible": True, "remote_write_possible": remote_write,
             **({"public_verification_progress": progress} if progress is not None else {})}
+
+
+def _interrupted_migration_step(project_root: Path, debate_id: str, work_id: str) -> dict[str, Any] | None:
+    from wikidebia_final_publication import FinalPublicationError, pending_plan_migration
+
+    state_dir = project_root / ".state/final-publication" / debate_id / work_id
+    try:
+        pending = pending_plan_migration(state_dir)
+        if pending is None:
+            return None
+        if any((state_dir / name).exists() for name in (
+            "publication-receipt.json", "english-publication-receipt.json", "french-publication-receipt.json",
+        )):
+            raise WorkspaceStatusError("Migration en attente incompatible avec des reçus de publication")
+    except (CorpusBuildError, FinalPublicationError, WorkspaceStatusError):
+        return {"status": "final_publication_evidence_invalid", "action": "repair_final_publication_evidence",
+                "command": None, "remote_read_possible": False, "remote_write_possible": False,
+                "note": "Vérifier le journal de migration et les empreintes de ses sauvegardes."}
+    _, digest = pending
+    return {"status": "final_publication_migration_pending", "action": "resume_interrupted_plan_migration",
+            "command": f"./wikidebia workflow-publish {debate_id} --confirm-preflight-sha256 {digest}",
+            "preflight_sha256": digest, "remote_read_possible": True, "remote_write_possible": True,
+            "note": "La reprise restaure les preuves sauvegardées, puis poursuit la publication autorisée."}
 
 
 def summarize_workspace(project_root: Path, debate_id: str, work_id: str) -> dict[str, Any]:
@@ -319,7 +345,11 @@ def summarize_workspace(project_root: Path, debate_id: str, work_id: str) -> dic
     next_step = _next_step(meta, debate_id, work_id)
     phase = _phase(status)
     preserved = (meta.get("source_preservation") or {}).get("policy") == PRESERVED_IMPORT_POLICY
-    if preserved and status in {"release_ready", "published"}:
+    migration_step = _interrupted_migration_step(project_root, debate_id, work_id) if status == "release_ready" else None
+    if migration_step is not None:
+        next_step = migration_step
+        status, phase = migration_step["status"], "final_publication"
+    elif status == "release_ready" or (preserved and status == "published"):
         # The workspace status is not the remote publication status: the final
         # receipt is the authority, and this probe never contacts MediaWiki.
         from wikidebia_global_resume import _published_receipt
@@ -332,11 +362,12 @@ def summarize_workspace(project_root: Path, debate_id: str, work_id: str) -> dic
                 "remote_read_possible": False, "remote_write_possible": False,
             }
         else:
-            publication_step = _preserved_final_step(project_root, debate_id, work_id, artifact_hashes.get("release_copy", ""))
+            publication_step = _workflow_final_step(project_root, debate_id, work_id,
+                                                    artifact_hashes.get("release_copy", ""), preserved=preserved)
             if publication_step is not None:
                 next_step = publication_step
                 status, phase = publication_step["status"], "final_publication"
-            else:
+            elif preserved:
                 next_step = {
                     "action": "publish_preserved_release",
                     "command": _command("publish-preserved", debate_id, work_id),

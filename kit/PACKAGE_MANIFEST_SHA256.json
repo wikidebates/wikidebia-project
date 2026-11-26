@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
-  "declared_file_count": 546,
-  "declared_test_count": 1946,
+  "declared_file_count": 547,
+  "declared_test_count": 1959,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -428,8 +428,8 @@
     },
     {
       "path": "GUIDE_TRANSLATION_SOURCE_PRESERVATION.md",
-      "size_bytes": 5731,
-      "sha256": "31b1117fccec95871812ea8ff4b48e18728130f6f64c0c66e0df27d7e0467231"
+      "size_bytes": 6130,
+      "sha256": "c418381b16b8172153b7542ca8dd6809dc6ed54eeeb6cbae7579315a92a271ab"
     },
     {
       "path": "GUIDE_TRANSLATION_TOKEN_BUDGET.md",
@@ -1179,7 +1179,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2285,
-      "sha256": "797cc9a94fc0ec79431b92927c2adc3004b91b58bf4be0c22728ed215a447f74"
+      "sha256": "9360bffd93b46f90363b2ff7362e42dc802be99c18825200458c8281cbb28cac"
     },
     {
       "path": "VERSIONS.json",
@@ -1828,8 +1828,8 @@
     },
     {
       "path": "scripts/wikidebia_final_publication.py",
-      "size_bytes": 79027,
-      "sha256": "3b19f0a351c92b946b11c6154e27d002c0b0910be521f1736acc396d3fc01942"
+      "size_bytes": 84548,
+      "sha256": "d702097440f67c04470b32cae8835ad00cba30d17bd483e2b585784da7ac220b"
     },
     {
       "path": "scripts/wikidebia_fr_alias_pageids.py",
@@ -2053,8 +2053,8 @@
     },
     {
       "path": "scripts/wikidebia_workspace_status.py",
-      "size_bytes": 20650,
-      "sha256": "bf4ee7df178844d1e3cdf7dc58a35c7f4769e07c6a8eb1bfd13598a2a0126a59"
+      "size_bytes": 22695,
+      "sha256": "b688c0dc489827f4e087e2fcd1ad1901b15f58a0a311c444bc55119f6235cc81"
     },
     {
       "path": "tests/conftest.py",
@@ -2150,6 +2150,11 @@
       "path": "tests/test_final_publication_late_reuse.py",
       "size_bytes": 11794,
       "sha256": "c7b4a652d43ea54df30a5c0759c2efbfc2145981587397c546f241b7349505d0"
+    },
+    {
+      "path": "tests/test_final_publication_migration_recovery.py",
+      "size_bytes": 10198,
+      "sha256": "41c77affc807ae5039c7dfe70d8fb49f8e122a3ced02adbd5fc1ba54adcbe9f5"
     },
     {
       "path": "tests/test_final_publication_validator_fingerprint_21644.py",
