@@ -93,6 +93,14 @@ le type de relation et sa profondeur en arêtes. L’audit reste en échec tant 
 page manque, mais le diagnostic permet de la créer puis de reprendre sans enquête
 manuelle dans tout le graphe.
 
+Si l’audit échoue à cause d’une page manquante ou d’un cycle, l’extracteur
+produit `snapshot/translation_draft_worklist.json`. Cette liste donne les
+révisions, les chemins et les empreintes des sources françaises disponibles
+qui restent à traduire, classées par niveau d’argument. Le workflow complet
+reste au stade `initialize_graph` avec le statut `blocked_graph_extraction`.
+Après correction des liens sur le wiki, `workflow --force-refresh` relit les
+pages et applique les contrôles ordinaires avant d’initialiser le corpus.
+
 Sans `--max-depth`, le parcours récursif reste illimité. Avec
 `--max-depth 4`, les arguments principaux et les quatre générations de relations
 suivantes sont conservés ; les relations qui partiraient vers la profondeur 5

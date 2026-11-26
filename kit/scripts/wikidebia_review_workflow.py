@@ -138,6 +138,12 @@ class WorkflowError(RuntimeError):
     pass
 
 
+class GraphExtractionBlocked(WorkflowError):
+    def __init__(self, draft_worklist: Path):
+        super().__init__("Le graphe source n’a pas réussi son audit")
+        self.draft_worklist = draft_worklist
+
+
 def _canonical_json(value: Any) -> bytes:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
@@ -1663,7 +1669,14 @@ def _mechanical_advance(
             # here so final publication still requires a separate resume.
             return reconcile_workflow(project_root, debate_id)
         if phase == "initialize_graph":
-            _initialize_graph_stage(project_root, state)
+            try:
+                _initialize_graph_stage(project_root, state)
+            except GraphExtractionBlocked as exc:
+                state["status"] = "blocked_graph_extraction"
+                state["translation_draft_worklist"] = _relative(exc.draft_worklist, project_root)
+                state["updated_at"] = now_iso()
+                _save_workflow(project_root, state)
+                return state
             continue
         if phase == "initial_validation_blocked":
             return state
@@ -1887,15 +1900,19 @@ def _mechanical_advance(
 
 
 def _run_graph_extract(project_root: Path, title: str, *, force_refresh: bool = False) -> Path:
-    from wikidebia_graph_extract import slugify
+    from wikidebia_graph_extract import TRANSLATION_DRAFT_WORKLIST, slugify
     slug = slugify(title)
     output = project_root / ".state" / "graph-extract" / slug
+    draft_worklist = output / TRANSLATION_DRAFT_WORKLIST
     if not force_refresh and (output / "snapshot" / "snapshot_manifest.json").is_file():
         try:
             metadata = _graph_translation_preflight(output)
         except WorkflowError:
             metadata = None
-        if metadata is not None and "traduction_du_débat_requise" in metadata:
+        if (
+            metadata is not None and "traduction_du_débat_requise" in metadata
+            and metadata.get("graphe_sans_cycle") is not False and not metadata.get("pages_manquantes")
+        ):
             return output
     script = project_root / "kit" / "scripts" / "wikidebia_graph_extract.py"
     if not script.is_file():
@@ -1907,11 +1924,13 @@ def _run_graph_extract(project_root: Path, title: str, *, force_refresh: bool = 
         str(python), str(script), "--debate", title, "--family", "wikidebates", "--lang", "fr",
         "--pywikibot-dir", str(project_root / "private" / "pywikibot"),
         "--family-file", str(project_root / "kit" / "families" / "wikidebates_family.py"),
-        "--output-dir", str(output), "--slug", slug, "--machine-readable",
+        "--output-dir", str(output), "--slug", slug, "--machine-readable", "--allow-missing",
     ]
     if force_refresh:
         command.append("--force-refresh")
     completed = subprocess.run(command, cwd=project_root, text=True, capture_output=True, check=False)
+    if completed.returncode == 2 and draft_worklist.is_file():
+        raise GraphExtractionBlocked(draft_worklist)
     if completed.returncode != 0:
         raise WorkflowError("graph-extract a échoué : " + (completed.stderr or completed.stdout)[-2000:])
     if not (output / "snapshot" / "snapshot_manifest.json").is_file():
@@ -1995,6 +2014,8 @@ def _initialize_graph_stage(project_root: Path, state: dict[str, Any]) -> None:
     else:
         source = _run_graph_extract(project_root, str(state["debate_title"]), force_refresh=bool(state.get("force_refresh")))
         state["snapshot_path"] = _relative(source, project_root)
+        if state.pop("translation_draft_worklist", None) is not None:
+            state["status"] = "running"
         state["updated_at"] = now_iso()
         _save_workflow(project_root, state)
 
@@ -2191,6 +2212,10 @@ def start_workflow(
         if state.get("phase") == "initial_validation_blocked":
             state["phase"] = "initialize_graph"
             state["status"] = "running"
+            state["updated_at"] = now_iso()
+            _save_workflow(project_root, state)
+        if force_refresh and state.get("phase") == "initialize_graph" and not state.get("snapshot_path"):
+            state["force_refresh"] = True
             state["updated_at"] = now_iso()
             _save_workflow(project_root, state)
         if state.get("status") == "blocked_remote_publication":
@@ -2616,6 +2641,10 @@ def status_summary(project_root: Path, debate_id: str) -> dict[str, Any]:
 
 
 def _print_user_result(state: Mapping[str, Any]) -> None:
+    if state.get("status") == "blocked_graph_extraction":
+        print("L’audit du graphe bloque le corpus complet. Les pages sources disponibles permettent de préparer des brouillons anglais locaux.")
+        print(f"Liste de travail → {state.get('translation_draft_worklist')}")
+        return
     if (not state.get("work_id") and state.get("phase") == "initialize_graph"
             and state.get("status") in {"blocked_access_preflight", "running"}):
         print("Workflow initial sans Work associé.")
@@ -2774,6 +2803,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(json.dumps(state, ensure_ascii=False, sort_keys=True))
     else:
         _print_user_result(state)
+    if args.command == "workflow" and state.get("status") == "blocked_graph_extraction":
+        return 2
     return 2 if args.command == "publish-preserved" and state.get("status") not in {"published", "publication_prepared"} else 0
 
 

@@ -413,6 +413,7 @@ class CrawlTests(unittest.TestCase):
             self.assertEqual(len(snapshot["arguments"]), 2)
             package = json.loads(paths["manifest"].read_text(encoding="utf-8"))
             self.assertEqual(package["audit_status"], "passed")
+            self.assertNotIn("translation_draft_worklist", paths)
             self.assertGreater(package["declared_file_count"], 6)
             with zipfile.ZipFile(paths["zip"]) as archive:
                 names = set(archive.namelist())
@@ -488,6 +489,37 @@ class CrawlTests(unittest.TestCase):
         )
         self.assertFalse(graph["metadata"]["graphe_sans_cycle"])
         self.assertTrue(graph["metadata"]["nœuds_dans_cycles"])
+
+    def test_failed_audit_indexes_only_available_untranslated_sources(self):
+        pages = {
+            "Débat test": "{{Débat|arguments-pour={{Argument pour|page=A}}{{Argument pour|page=C}}}}",
+            "A": "{{Argument|justifications={{Justification|page=B}}{{Justification|page=Missing}}}}",
+            "B": "{{Argument|objections={{Objection|page=A}}}}",
+            "C": "{{Argument|interlangue={{Lien interlangue|langue=en|page=English C}}}}",
+        }
+        result = mod.crawl_graph(
+            FakeClient(pages), debate_title="Débat test", allow_missing=True, progress_every=0,
+            english_client=FakeClient({"English C": "{{Argument}}"}),
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            paths = mod.write_outputs(
+                mod.analyze_graph(result), result, output_dir=Path(directory),
+                slug="debat_test", extraction_date="2026-11-26",
+            )
+            draft_path = paths["translation_draft_worklist"]
+            draft = json.loads(draft_path.read_text(encoding="utf-8"))
+            manifest = json.loads(paths["manifest"].read_text(encoding="utf-8"))
+            self.assertEqual(manifest["audit_status"], "failed")
+            self.assertEqual(draft["status"], "draft_only")
+            self.assertTrue(draft["has_cycles"])
+            self.assertEqual([entry["page"] for entry in draft["missing_links"]], ["Missing"])
+            self.assertEqual([(row["canonical_title"], row["minimum_level"]) for row in draft["arguments"]],
+                             [("A", 1), ("B", 2)])
+            for page in [draft["debate"], *draft["arguments"]]:
+                source = draft_path.parent / page["relative_path"]
+                self.assertEqual(mod.hashlib.sha256(source.read_bytes()).hexdigest(), page["sha256"])
+            with zipfile.ZipFile(paths["zip"]) as archive:
+                self.assertIn(mod.TRANSLATION_DRAFT_WORKLIST, archive.namelist())
 
 
 

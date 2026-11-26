@@ -565,6 +565,43 @@ def test_graph_extract_does_not_reuse_cache_without_translation_preflight(tmp_pa
     assert len(calls) == 1
 
 
+def test_failed_graph_keeps_worklist_without_staging_corpus(tmp_path: Path, monkeypatch):
+    from wikidebia_graph_extract import TRANSLATION_DRAFT_WORKLIST
+
+    project = tmp_path / "project"
+    script = project / "kit/scripts/wikidebia_graph_extract.py"
+    script.parent.mkdir(parents=True)
+    script.touch()
+    output = project / ".state/graph-extract/debat_test"
+    worklist = output / TRANSLATION_DRAFT_WORKLIST
+    worklist.parent.mkdir(parents=True)
+    calls = []
+
+    def fake_run(command, **kwargs):
+        calls.append(command)
+        common.write_json(worklist, {"status": "draft_only"})
+        return wf.subprocess.CompletedProcess(command, 2, stdout="{}", stderr="")
+
+    monkeypatch.setattr(wf.subprocess, "run", fake_run)
+    state = {
+        "schema": wf.WORKFLOW_SCHEMA, "debate_id": "debat_test", "debate_title": "Débat test",
+        "phase": "initialize_graph",
+    }
+    result = wf._mechanical_advance(project, state)
+
+    assert "--allow-missing" in calls[0]
+    assert result["status"] == "blocked_graph_extraction"
+    assert result["translation_draft_worklist"] == worklist.relative_to(project).as_posix()
+    assert wf._load_workflow(project, "debat_test") == result
+    assert not result.get("snapshot_path")
+    assert not (project / ".state/corpus-builds/debat_test").exists()
+
+    monkeypatch.setattr(wf, "_ensure_access_preflight", lambda project, state: state)
+    resumed = wf.start_workflow(project, "Débat test", force_refresh=True)
+    assert "--force-refresh" in calls[1]
+    assert resumed["status"] == "blocked_graph_extraction"
+
+
 def test_end_to_end_graph_handoff_resumes_to_metadata_handoff(tmp_path: Path, monkeypatch):
     from test_wikidebia_corpus_init import make_extraction
 

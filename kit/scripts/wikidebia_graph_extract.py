@@ -1805,6 +1805,35 @@ def _iter_generated_files(output_dir: Path, *, exclude: set[Path]) -> list[Path]
     return sorted(files, key=lambda item: item.relative_to(output_dir).as_posix())
 
 
+TRANSLATION_DRAFT_WORKLIST = "snapshot/translation_draft_worklist.json"
+
+
+def _write_translation_draft_worklist(
+    path: Path, snapshot_manifest: Path, graph: Mapping[str, Any], audit_path: Path,
+) -> None:
+    snapshot = json.loads(snapshot_manifest.read_text(encoding="utf-8"))
+    nodes = {node["titre"]: node for node in graph["noeuds"]}
+    drafts = []
+    for row in snapshot["arguments"]:
+        node = nodes[row["canonical_title"]]
+        if node["traduction_anglaise_requise"]:
+            drafts.append({**row, "minimum_level": node["niveau_minimal"]})
+    drafts.sort(key=lambda row: (row["minimum_level"], row["canonical_title"].casefold()))
+    worklist = {
+        "schema": "wikidebia-translation-draft-worklist-1.0",
+        "status": "draft_only",
+        "source_audit": f"../{audit_path.name}",
+        "source_manifest": snapshot_manifest.name,
+        "has_cycles": not graph["metadata"]["graphe_sans_cycle"],
+        "missing_links": graph["provenance_pages_manquantes"],
+        "debate": snapshot["debate"],
+        "arguments": drafts,
+    }
+    path.write_text(
+        json.dumps(worklist, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n",
+    )
+
+
 def write_outputs(
     graph: Mapping[str, Any],
     result: CrawlResult,
@@ -2079,6 +2108,15 @@ def write_outputs(
         )
     audit_path.write_text("\n".join(audit_lines) + "\n", encoding="utf-8", newline="\n")
 
+    draft_paths = {}
+    if (
+        not audit_ok and m["traduction_du_débat_requise"]
+        and (m["pages_manquantes"] or not m["graphe_sans_cycle"])
+    ):
+        draft_path = output_dir / TRANSLATION_DRAFT_WORKLIST
+        _write_translation_draft_worklist(draft_path, snapshot_manifest_path, graph, audit_path)
+        draft_paths["translation_draft_worklist"] = draft_path
+
     generated_before_manifest = _iter_generated_files(output_dir, exclude={manifest_path, zip_path})
     manifest_rows: list[dict[str, Any]] = []
     for path in generated_before_manifest:
@@ -2120,6 +2158,7 @@ def write_outputs(
         "snapshot_manifest": snapshot_manifest_path,
         "manifest": manifest_path,
         "zip": zip_path,
+        **draft_paths,
     }
 
 
