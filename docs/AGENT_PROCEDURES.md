@@ -22,6 +22,13 @@ Pour les pages françaises préexistantes, conserver chaque `titre-affiché` con
 - Voir [le protocole de passation et l'audit optionnel](../docs/SESSION_HANDOFF.md). L'audit de relectures distingue répétitions intra-session et intersessions sans prétendre mesurer les tokens facturés.
 - Pour une **expérience de mesure explicitement demandée seulement**, utiliser le lecteur instrumenté `tools/session_read_capture.py` sur les fichiers publics suivis par Git. Ne pas l'imposer aux usages ordinaires, à la traduction ou à la publication.
 
+## Livraison des revues et vérification sur le wiki français
+
+- Pour un document à relire, vérifier dès la remise que le destinataire peut ouvrir le lien. Si la session ne peut pas rendre le document accessible, inclure les décisions à revoir et les passages concernés dans la conversation. Les fichiers privés restent dans les zones de travail prévues.
+- Présenter le delta du plan français avant la revue, avec les pages et les relations concernées. Une fois le delta approuvé et sa publication française explicitement demandée, appliquer le checkpoint graphe/titres et les contrôles du [guide de publication](../kit/GUIDE_PUBLICATION.md) et du [guide d'exécution distante](../kit/GUIDE_REMOTE_EXECUTION.md).
+- Faire la vérification visuelle du graphe sur le wiki français après ce checkpoint et avant de poursuivre avec le contenu ou l'anglais. Relire la page Débat et chaque page mère concernée. Comparer au plan les liens, les libellés, l'ordre et les positions pour, contre, justification ou objection. Transmettre les liens publics vers les révisions vérifiées pour que le destinataire puisse constater le résultat.
+- Si le delta est vide, relire le graphe déjà publié et transmettre ses liens. En cas d'écart avec le plan, relever la révision observée et la différence précise avant toute nouvelle écriture.
+
 ## Création française : contexte ciblé
 
 - Pour créer un débat nouveau, commencer l'étape par `./wikidebia creation-context --stage cadrage|graphe|debat-fr|arguments-fr|validation-fr` (choisir une seule valeur). Lire les fichiers indiqués, plutôt que la source unifiée et ses historiques en entier.
