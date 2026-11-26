@@ -1599,6 +1599,7 @@ def _reopen_translation_after_findings(project_root: Path, state: dict[str, Any]
 def _mechanical_advance(
     project_root: Path, state: dict[str, Any], *,
     confirm_preflight_sha256: str | None = None,
+    verify_only: bool = False,
 ) -> dict[str, Any]:
     """Advance mechanically, but never publish final EN/FR without a signed-plan confirmation."""
     debate_id = str(state["debate_id"])
@@ -1843,7 +1844,7 @@ def _mechanical_advance(
             release_copy = workspace / "release-copy"
             started = (project_root / ".state/final-publication" / debate_id
                        / str(state["work_id"]) / "authorization.json").is_file()
-            if not started and phase != "publication_prepared":
+            if not verify_only and not started and phase != "publication_prepared":
                 try:
                     preparation = prepare_final_release(
                         project_root, debate_id, str(state["work_id"]), release_copy,
@@ -1879,6 +1880,7 @@ def _mechanical_advance(
                     project_root, debate_id, str(state["work_id"]), release_copy,
                     allow_preserved=bool(state.get("preserved_publication_release_sha256")),
                     confirm_preflight_sha256=confirm_preflight_sha256,
+                    **({"verify_only": True} if verify_only else {}),
                 )
             except FinalPublicationError as exc:
                 state["phase"] = "final_publication"
@@ -2617,6 +2619,7 @@ def import_review(
 
 def publish_prepared_workflow(
     project_root: Path, debate_id: str, preflight_sha256: str,
+    *, verify_only: bool = False,
 ) -> dict[str, Any]:
     state = _load_workflow(project_root, validate_debate_id(debate_id))
     if state.get("phase") not in {
@@ -2625,8 +2628,12 @@ def publish_prepared_workflow(
         raise WorkflowError("Aucune publication finale préparée ou reprise attestée pour ce débat")
     if not preflight_sha256 or len(preflight_sha256) != 64:
         raise WorkflowError("Empreinte SHA-256 du préflight obligatoire")
+    if verify_only and not (project_root / ".state/final-publication" / debate_id
+                            / str(state["work_id"]) / "authorization.json").is_file():
+        raise WorkflowError("La reprise en lecture seule exige une publication déjà autorisée")
     return _mechanical_advance(
         project_root, state, confirm_preflight_sha256=preflight_sha256,
+        **({"verify_only": True} if verify_only else {}),
     )
 
 
@@ -2750,6 +2757,7 @@ def build_parser() -> argparse.ArgumentParser:
     publication = sub.add_parser("workflow-publish")
     publication.add_argument("debate_id")
     publication.add_argument("--confirm-preflight-sha256", required=True)
+    publication.add_argument("--verify-only", action="store_true", help="Reprendre le contrôle public après les deux reçus d’écriture, sans écriture wiki")
     status = sub.add_parser("workflow-status")
     status.add_argument("debate_id")
     reconcile = sub.add_parser("workflow-reconcile")
@@ -2777,7 +2785,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 authorize_historical_changes=args.authorize_historical_changes,
             )
         elif args.command == "workflow-publish":
-            state = publish_prepared_workflow(root, args.debate_id, args.confirm_preflight_sha256)
+            state = publish_prepared_workflow(root, args.debate_id, args.confirm_preflight_sha256,
+                                              verify_only=args.verify_only)
         elif args.command == "workflow-reconcile":
             state = reconcile_workflow(root, args.debate_id, adopt_work_id=args.work_id)
         elif args.command == "publish-preserved":

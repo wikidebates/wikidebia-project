@@ -21,7 +21,7 @@ def load_module(name: str):
     return module
 
 
-translation = load_module("wikidebia_translation_review")
+translation = sys.modules.get("wikidebia_translation_review") or load_module("wikidebia_translation_review")
 convergence = load_module("wikidebia_semantic_convergence")
 content = sys.modules.get("wikidebia_content_review") or load_module("wikidebia_content_review")
 metadata = sys.modules.get("wikidebia_editorial_review") or load_module("wikidebia_editorial_review")

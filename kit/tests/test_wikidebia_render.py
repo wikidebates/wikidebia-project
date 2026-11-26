@@ -45,6 +45,11 @@ def make_translated(tmp_path: Path, *, reuse_existing_argument: bool = False) ->
     sealed = translation.finalize_review(project, "debat_test", work_id)
     complete_semantic_convergence(project, work_id)
     translation.apply_review(project, "debat_test", work_id, sealed["review_sha256"])
+    approve_fixture_placements(workspace)
+    return project, workspace, work_id, sealed["review_sha256"]
+
+
+def approve_fixture_placements(workspace: Path) -> None:
     translated = workspace / "translated-copy"
     registry = json.loads((translated / "data/registre_debat.json").read_text(encoding="utf-8"))
     edges = {row["id"]: row for row in registry["graph"]["edges"]}
@@ -94,7 +99,6 @@ def make_translated(tmp_path: Path, *, reuse_existing_argument: bool = False) ->
     meta["workspace_sha256"] = None
     meta["workspace_sha256"] = sys.modules["wikidebia_editorial_workspace"].workspace_receipt_hash(meta)
     meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    return project, workspace, work_id, sealed["review_sha256"]
 
 
 def test_render_creates_distinct_bilingual_pages_and_direct_interlanguage_links(tmp_path: Path):

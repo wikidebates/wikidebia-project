@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import io
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
 from urllib.error import HTTPError
@@ -236,6 +237,48 @@ def test_signed_diagnostic_is_written_when_page_cannot_be_seen(tmp_path: Path):
     assert saved["public_debate_url"] == report["public_debate_url"]
     assert saved["report_sha256"] == report["report_sha256"]
     assert not (tmp_path / "publication-receipt.json").exists()
+
+
+def test_public_visibility_resumes_only_missing_or_expired_observations(tmp_path: Path):
+    en, fr = _plans()
+    checkpoint = tmp_path / visibility.CHECKPOINT_FILENAME
+    first = visibility.check_or_record(tmp_path, "demo", "EDIT-TEST", en, fr,
+                                      client=AnonymousFake(hide_html={("en", "An actual argument")}))
+    assert first["english_pages_verified"] == first["french_links_verified"] == 1
+    saved = json.loads(checkpoint.read_text())
+    saved.pop("checkpoint_sha256")
+    assert saved["observations"]["en"]["demo"]["revision_id"] == 5
+    saved["observations"]["fr"]["demo"]["checked_at"] = (datetime.now(timezone.utc) - timedelta(hours=2)).isoformat()
+    saved["checkpoint_sha256"] = visibility._sha_object(saved)
+    checkpoint.write_text(json.dumps(saved))
+
+    client = AnonymousFake()
+    result = visibility.check_or_record(tmp_path, "demo", "EDIT-TEST", en, fr, client=client)
+    assert result["status"] == visibility.VERIFIED
+    assert client.calls == [
+        ("public_api", "en", ("An actual argument",)), ("public_html", "en", "An actual argument"),
+        ("public_api", "fr", ("Faut-il être d'accord ?",)), ("public_html", "fr", "Faut-il être d'accord ?"),
+    ]
+
+
+@pytest.mark.parametrize("changed", ["plan", "manifest", "checksum"])
+def test_public_checkpoint_is_ignored_when_its_binding_changes(tmp_path: Path, changed):
+    en, fr = _plans()
+    checkpoint = tmp_path / visibility.CHECKPOINT_FILENAME
+    visibility.verify_public_visibility("demo", "EDIT-TEST", en, fr, manifest_sha256="a" * 64,
+                                        client=AnonymousFake(), checkpoint_path=checkpoint)
+    if changed == "plan":
+        en["plan_sha256"] = "b" * 64
+    if changed == "checksum":
+        saved = json.loads(checkpoint.read_text())
+        saved["observations"]["en"]["demo"]["revision_id"] = 6
+        checkpoint.write_text(json.dumps(saved))
+    client = AnonymousFake()
+    report = visibility.verify_public_visibility("demo", "EDIT-TEST", en, fr,
+        manifest_sha256=("b" if changed == "manifest" else "a") * 64,
+        client=client, checkpoint_path=checkpoint)
+    assert report["status"] == visibility.VERIFIED
+    assert len([call for call in client.calls if call[0] == "public_html"]) == 4
 
 
 def test_public_audit_verifies_a_declared_english_page_without_a_create_action(tmp_path: Path):

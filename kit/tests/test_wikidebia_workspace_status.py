@@ -187,7 +187,7 @@ def test_preserved_release_uses_publish_preserved_without_remote_status_read(tmp
     result = status.summarize_workspace(tmp_path, 'debat_test', 'EDIT-TEST-001')
     assert result['next_command'] == './wikidebia publish-preserved debat_test --work-id EDIT-TEST-001'
     assert result['next_action'] == 'publish_preserved_release'
-    assert result['next_remote_write_possible'] is True
+    assert result['next_remote_write_possible'] is False
     assert result['status_check_remote_access'] is False
     assert result['status_check_remote_write'] is False
 
@@ -203,7 +203,7 @@ def test_preserved_published_receipt_requires_local_reconciliation(tmp_path, mon
     assert result['next_command'] == './wikidebia corpus-workspace-reconcile-publication debat_test --work-id EDIT-TEST-001'
     assert result['next_remote_write_possible'] is False
 
-def test_preserved_release_without_final_receipt_fails_closed(tmp_path, monkeypatch):
+def test_preserved_release_without_preparation_points_to_read_only_preflight(tmp_path, monkeypatch):
     from wikidebia_workflow_baseline import PRESERVED_IMPORT_POLICY
     monkeypatch.setattr(status, "_load_workspace", lambda *args: (tmp_path, _meta(
         "release_ready", source_preservation={"policy": PRESERVED_IMPORT_POLICY},
@@ -213,8 +213,60 @@ def test_preserved_release_without_final_receipt_fails_closed(tmp_path, monkeypa
     result = status.summarize_workspace(tmp_path, "debat_test", "EDIT-TEST-001")
     assert result["next_action"] == "publish_preserved_release"
     assert result["next_command"] == "./wikidebia publish-preserved debat_test --work-id EDIT-TEST-001"
-    assert result["next_remote_write_possible"] is True
+    assert result["next_remote_write_possible"] is False
     assert "préservée" in result["note"]
+
+
+def test_preserved_resume_tracks_current_signed_preflight_and_completed_writes(tmp_path, monkeypatch):
+    from wikidebia_corpus_build import write_json
+    from wikidebia_workflow_baseline import PRESERVED_IMPORT_POLICY, sha_object
+
+    debate, work = "debat_test", "EDIT-TEST-001"
+    release_sha = "a" * 64
+    monkeypatch.setattr(status, "_load_workspace", lambda *args: (tmp_path, _meta(
+        "release_ready", source_preservation={"policy": PRESERVED_IMPORT_POLICY},
+        release_copy={"tree_sha256": release_sha},
+    )))
+    state = tmp_path / ".state/final-publication" / debate / work
+
+    def save(name, field, body):
+        value = {**body, field: sha_object(body)}
+        write_json(state / name, value)
+        return value[field]
+
+    en_sha, fr_sha, baseline_sha = "b" * 64, "c" * 64, "d" * 64
+    preflight = {"status": "ready", "english_plan_sha256": en_sha, "french_plan_sha256": fr_sha}
+    first = save("preflight.json", "preflight_sha256", preflight)
+    save("publication-preparation.json", "preparation_sha256", {
+        "status": "publication_prepared", "debate_id": debate, "work_id": work,
+        "baseline_sha256": baseline_sha, "release_copy_tree_sha256": release_sha,
+        "preflight_sha256": first, "en_plan_sha256": en_sha, "fr_plan_sha256": fr_sha,
+    })
+    prepared = status.summarize_workspace(tmp_path, debate, work)
+    assert prepared["status"] == "publication_prepared"
+    assert prepared["publication_preflight_sha256"] == first
+    assert prepared["next_remote_write_possible"] is True
+
+    current = save("preflight.json", "preflight_sha256", {**preflight, "checked_at": "refreshed"})
+    save("authorization.json", "authorization_sha256", {
+        "status": "authorized", "remote_write_authorized": True,
+        "preflight_sha256": current, "baseline_sha256": baseline_sha,
+    })
+    partial = status.summarize_workspace(tmp_path, debate, work)
+    assert partial["status"] == "final_publication_resume"
+    assert partial["next_command"].endswith(current)
+    assert partial["next_remote_write_possible"] is True
+
+    save("english-publication-receipt.json", "receipt_sha256", {"status": "published", "plan_sha256": en_sha})
+    save("french-publication-receipt.json", "receipt_sha256", {"status": "published", "plan_sha256": fr_sha})
+    public = status.summarize_workspace(tmp_path, debate, work)
+    assert public["status"] == "public_verification_pending"
+    assert public["next_command"].endswith(f"{current} --verify-only")
+    assert public["next_remote_read_possible"] is True and public["next_remote_write_possible"] is False
+
+    save("french-publication-receipt.json", "receipt_sha256", {"status": "published", "plan_sha256": en_sha})
+    invalid = status.summarize_workspace(tmp_path, debate, work)
+    assert invalid["next_command"] is None and invalid["status"] == "final_publication_evidence_invalid"
 
 
 def test_main_cli_exposes_publish_preserved():

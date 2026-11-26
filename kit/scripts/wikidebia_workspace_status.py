@@ -5,15 +5,16 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from wikidebia_corpus_build import CorpusBuildError, validate_debate_id
+from wikidebia_corpus_build import CorpusBuildError, load_json, validate_debate_id
 from wikidebia_editorial_workspace import WorkspaceError, validate_work_id
 from wikidebia_remote_plan_review import RemotePlanReviewError, _load_comparison
 from wikidebia_render import RenderError, _load_workspace
 from wikidebia_update import OPERATIONS
-from wikidebia_workflow_baseline import PRESERVED_IMPORT_POLICY
+from wikidebia_workflow_baseline import PRESERVED_IMPORT_POLICY, sha_object
 
 
 class WorkspaceStatusError(WorkspaceError):
@@ -202,6 +203,69 @@ def _phase(status: str) -> str:
     return "french_metadata"
 
 
+def _preserved_final_step(project_root: Path, debate_id: str, work_id: str, release_sha256: str) -> dict[str, Any] | None:
+    from wikidebia_final_publication import FinalPublicationError, completed_write_receipts
+    from wikidebia_public_visibility import checkpoint_progress
+
+    state = project_root / ".state/final-publication" / debate_id / work_id
+    preparation_path = state / "publication-preparation.json"
+    authorization_path = state / "authorization.json"
+    authorized = authorization_path.is_file()
+    if not preparation_path.is_file() and not authorized:
+        return None
+
+    def signed(path: Path, field: str) -> dict[str, Any]:
+        value = load_json(path)
+        claimed = value.get(field)
+        if (not isinstance(claimed, str) or not re.fullmatch(r"[0-9a-f]{64}", claimed)
+                or claimed != sha_object({key: item for key, item in value.items() if key != field})):
+            raise WorkspaceStatusError("Empreinte de publication finale invalide")
+        return value
+
+    try:
+        preparation = signed(preparation_path, "preparation_sha256")
+        preflight = signed(state / "preflight.json", "preflight_sha256")
+        digest = preflight["preflight_sha256"]
+        en_plan_sha = preflight["english_plan_sha256"]
+        fr_plan_sha = preflight["french_plan_sha256"]
+        if (preparation.get("debate_id") != debate_id or preparation.get("work_id") != work_id
+                or preparation.get("release_copy_tree_sha256") != release_sha256
+                or preparation.get("status") != "publication_prepared" or preflight.get("status") != "ready"):
+            raise WorkspaceStatusError("Préparation de publication liée à un autre Work ou à une autre archive")
+        action = "confirm_final_publication"
+        command = f"./wikidebia workflow-publish {debate_id} --confirm-preflight-sha256 {digest}"
+        status = "publication_prepared"
+        remote_write = True
+        progress = None
+        if authorized:
+            authorization = signed(authorization_path, "authorization_sha256")
+            if (authorization.get("status") != "authorized"
+                    or authorization.get("remote_write_authorized") is not True
+                    or authorization.get("preflight_sha256") != digest
+                    or authorization.get("baseline_sha256") != preparation.get("baseline_sha256")):
+                raise WorkspaceStatusError("L’autorisation ne correspond pas au préflight courant")
+            if completed_write_receipts(state, en_plan_sha, fr_plan_sha) is not None:
+                status, action = "public_verification_pending", "verify_public_publication"
+                command += " --verify-only"
+                remote_write = False
+                progress = checkpoint_progress(state, {"debate_id": debate_id, "work_id": work_id,
+                                                       "english_plan_sha256": en_plan_sha,
+                                                       "french_plan_sha256": fr_plan_sha})
+            else:
+                status, action = "final_publication_resume", "resume_final_publication"
+        elif (preparation.get("preflight_sha256") != digest or preparation.get("en_plan_sha256") != en_plan_sha
+              or preparation.get("fr_plan_sha256") != fr_plan_sha):
+            raise WorkspaceStatusError("La préparation ne correspond pas au préflight courant")
+    except (CorpusBuildError, FinalPublicationError, WorkspaceStatusError, KeyError):
+        return {"status": "final_publication_evidence_invalid", "action": "repair_final_publication_evidence",
+                "command": None, "remote_read_possible": False, "remote_write_possible": False,
+                "note": "Vérifier les reçus et empreintes de publication du Work."}
+
+    return {"status": status, "action": action, "command": command, "preflight_sha256": digest,
+            "remote_read_possible": True, "remote_write_possible": remote_write,
+            **({"public_verification_progress": progress} if progress is not None else {})}
+
+
 def summarize_workspace(project_root: Path, debate_id: str, work_id: str) -> dict[str, Any]:
     project_root = project_root.expanduser().resolve()
     debate_id = validate_debate_id(debate_id)
@@ -248,6 +312,7 @@ def summarize_workspace(project_root: Path, debate_id: str, work_id: str) -> dic
         if (meta.get(key) or {}).get(field)
     }
     next_step = _next_step(meta, debate_id, work_id)
+    phase = _phase(status)
     preserved = (meta.get("source_preservation") or {}).get("policy") == PRESERVED_IMPORT_POLICY
     if preserved and status in {"release_ready", "published"}:
         # The workspace status is not the remote publication status: the final
@@ -262,12 +327,17 @@ def summarize_workspace(project_root: Path, debate_id: str, work_id: str) -> dic
                 "remote_read_possible": False, "remote_write_possible": False,
             }
         else:
-            next_step = {
-                "action": "publish_preserved_release",
-                "command": _command("publish-preserved", debate_id, work_id),
-                "remote_read_possible": True, "remote_write_possible": True,
-                "note": "Publication préservée : vérifier les préflights distants et préserver le contenu français.",
-            }
+            publication_step = _preserved_final_step(project_root, debate_id, work_id, artifact_hashes.get("release_copy", ""))
+            if publication_step is not None:
+                next_step = publication_step
+                status, phase = publication_step["status"], "final_publication"
+            else:
+                next_step = {
+                    "action": "publish_preserved_release",
+                    "command": _command("publish-preserved", debate_id, work_id),
+                    "remote_read_possible": True, "remote_write_possible": False,
+                    "note": "Préparer le préflight de publication préservée en lecture seule.",
+                }
 
     if no_change_plan_sha256 and comparison_id:
         next_step = {
@@ -286,7 +356,7 @@ def summarize_workspace(project_root: Path, debate_id: str, work_id: str) -> dic
         "debate_id": debate_id,
         "work_id": work_id,
         "status": status,
-        "phase": _phase(status),
+        "phase": phase,
         "workspace_sha256": meta.get("workspace_sha256"),
         "artifact_hashes": artifact_hashes,
         **({"remote": remote} if remote is not None else {}),
@@ -294,6 +364,8 @@ def summarize_workspace(project_root: Path, debate_id: str, work_id: str) -> dic
         "next_command": next_step["command"],
         "next_remote_read_possible": next_step["remote_read_possible"],
         "next_remote_write_possible": next_step["remote_write_possible"],
+        **({"publication_preflight_sha256": next_step["preflight_sha256"]} if next_step.get("preflight_sha256") else {}),
+        **({"public_verification_progress": next_step["public_verification_progress"]} if "public_verification_progress" in next_step else {}),
         **({"note": next_step["note"]} if next_step.get("note") else {}),
         "status_check_remote_access": False,
         "status_check_remote_write": False,
@@ -323,6 +395,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             print("Compteurs : " + json.dumps(result["remote"]["counts"], ensure_ascii=False, sort_keys=True))
         print("Action suivante : " + str(result["next_action"]))
         print("Commande suivante : " + str(result["next_command"] or "aucune"))
+        if "public_verification_progress" in result:
+            progress = result["public_verification_progress"]
+            print(f"Contrôles publics enregistrés et récents : {progress['en']} pages EN, {progress['fr']} liens FR")
         if result["next_remote_read_possible"] or result["next_remote_write_possible"]:
             effects = []
             if result["next_remote_read_possible"]:

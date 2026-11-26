@@ -19,20 +19,23 @@ from html.parser import HTMLParser
 import json
 import re
 import sys
+import time
 import unicodedata
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Iterator, Mapping
 from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, quote, unquote, urlencode, urljoin, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
-import time
 
-from wikidebia_corpus_build import load_json, sha256_file, validate_debate_id, write_json
+from wikidebia_corpus_build import CorpusBuildError, load_json, sha256_file, validate_debate_id, write_json
 from wikidebia_graph_extract import iter_templates, normalize_key
 
 REPORT_SCHEMA = "wikidebia-public-visibility-report-1.0"
+CHECKPOINT_SCHEMA = "wikidebia-public-visibility-checkpoint-1.0"
+PUBLIC_OBSERVATION_LIFETIME = timedelta(hours=1)
+CHECKPOINT_FILENAME = "public-visibility-checkpoint.json"
 PUBLIC_DOMAINS = {"en": "en.wikidebates.org", "fr": "fr.wikidebates.org"}
 VERIFIED = "publié et vérifié"
 PARTIAL = "publication partielle"
@@ -352,6 +355,81 @@ def _html_links_to_english(document: _PublicDocument, source_url: str, expected_
     return False
 
 
+def _fresh_observation(entry: Any, title: str, now: datetime) -> bool:
+    if (not isinstance(title, str) or not title or not isinstance(entry, dict) or entry.get("title") != title
+            or type(entry.get("revision_id")) is not int or entry["revision_id"] <= 0
+            or not re.fullmatch(r"[0-9a-f]{64}", str(entry.get("content_sha256") or ""))):
+        return False
+    try:
+        age = now - datetime.fromisoformat(entry["checked_at"])
+    except (KeyError, TypeError, ValueError):
+        return False
+    return timedelta() <= age <= PUBLIC_OBSERVATION_LIFETIME
+
+
+def _read_checkpoint(path: Path) -> dict[str, Any]:
+    if not path.is_file():
+        return {}
+    try:
+        saved = load_json(path, "avancement du contrôle public")
+        checksum = saved.pop("checkpoint_sha256", None)
+        if saved.get("schema") == CHECKPOINT_SCHEMA and checksum and _sha_object(saved) == checksum:
+            return saved
+    except (CorpusBuildError, ValueError):
+        pass
+    return {}
+
+
+def checkpoint_progress(state_dir: Path, expected_identity: Mapping[str, Any]) -> dict[str, int]:
+    saved = _read_checkpoint(state_dir / CHECKPOINT_FILENAME)
+    identity = saved.get("identity")
+    observations = saved.get("observations")
+    if (not isinstance(identity, dict) or not isinstance(observations, dict)
+            or any(identity.get(key) != value for key, value in expected_identity.items())):
+        return {"en": 0, "fr": 0}
+    now = datetime.now(timezone.utc)
+    return {
+        language: sum(_fresh_observation(entry, entry.get("title"), now)
+                      for entry in observations[language].values() if isinstance(entry, dict))
+        if isinstance(observations.get(language), dict) else 0
+        for language in ("en", "fr")
+    }
+
+
+class _VisibilityCheckpoint:
+    def __init__(self, path: Path | None, identity: Mapping[str, Any], expected: Mapping[str, Mapping[str, str]]):
+        self.path = path
+        self.identity = dict(identity)
+        self.observations: dict[str, dict[str, Any]] = {language: {} for language in expected}
+        saved = _read_checkpoint(path) if path is not None else {}
+        if saved.get("identity") != identity:
+            return
+        now = datetime.now(timezone.utc)
+        previous = saved.get("observations")
+        if isinstance(previous, dict):
+            for language, titles in expected.items():
+                entries = previous.get(language)
+                if isinstance(entries, dict):
+                    self.observations[language] = {
+                        key: entries[key] for key, title in titles.items()
+                        if _fresh_observation(entries.get(key), title, now)
+                    }
+
+    def record(self, language: str, row: Mapping[str, str], public: Mapping[str, Any]) -> None:
+        if self.path is None:
+            return
+        entry = {
+            "title": row["title"], "revision_id": public["revision_id"],
+            "content_sha256": _sha_text(public["text"]),
+            "checked_at": datetime.now(timezone.utc).isoformat(),
+        }
+        self.observations[language][row["page_id"]] = entry
+        checkpoint = {"schema": CHECKPOINT_SCHEMA, "identity": self.identity,
+                      "observations": self.observations}
+        checkpoint["checkpoint_sha256"] = _sha_object(checkpoint)
+        write_json(self.path, checkpoint)
+
+
 def _expected_pages(
     english_plan: Mapping[str, Any], french_plan: Mapping[str, Any],
     late_reuse: Mapping[str, Any] | None,
@@ -431,10 +509,18 @@ def verify_public_visibility(
     late_reuse: Mapping[str, Any] | None = None,
     declared_reuse: Mapping[str, Mapping[str, str]] | None = None,
     manifest_sha256: str = "",
+    checkpoint_path: Path | None = None,
 ) -> dict[str, Any]:
     """Perform fresh independent observations; never infer visibility from writes."""
     client = client if client is not None else AnonymousMediaWiki()
     english, french = _expected_pages(english_plan, french_plan, late_reuse, declared_reuse)
+    checkpoint = _VisibilityCheckpoint(checkpoint_path, {
+        "debate_id": debate_id, "work_id": work_id, "manifest_sha256": manifest_sha256,
+        "english_plan_sha256": english_plan.get("plan_sha256"),
+        "french_plan_sha256": french_plan.get("plan_sha256"),
+        "expected_pages_sha256": _sha_object({"english": english, "french": french}),
+    }, {"en": {row["page_id"]: row["title"] for row in english},
+        "fr": {key: row["title"] for key, row in french.items()}})
     debate = next(row for row in english if row["page_type"] == "debate")
     report: dict[str, Any] = {
         "schema": REPORT_SCHEMA,
@@ -467,25 +553,33 @@ def verify_public_visibility(
         issues.append({"kind": kind, "page_id": row["page_id"],
                        "title": row["title"], "reason": reason})
 
-    def public_api(language: str, titles: list[str]) -> dict[str, dict[str, Any]]:
-        results: dict[str, dict[str, Any]] = {}
-        for start in range(0, len(titles), 50):
-            batch = titles[start:start + 50]
+    def public_pages(language: str, rows: list[dict[str, str]]) -> Iterator[tuple[dict[str, str], dict[str, Any] | None]]:
+        pending = [row for row in rows if row["page_id"] not in checkpoint.observations[language]]
+        for row in rows:
+            if row["page_id"] in checkpoint.observations[language]:
+                yield row, None
+        for start in range(0, len(pending), 50):
+            batch = pending[start:start + 50]
+            titles = [row["title"] for row in batch]
             try:
-                observed = client.pages(language, batch)
-                if not isinstance(observed, dict) or set(observed) != set(batch):
+                observed = client.pages(language, titles)
+                if not isinstance(observed, dict) or set(observed) != set(titles):
                     raise PublicUnavailable("Inventaire API public incomplet")
-                results.update(observed)
             except (PublicVisibilityError, OSError) as exc:
-                for title in batch:
-                    results[title] = {"unavailable": str(exc)}
-        return results
+                observed = {title: {"unavailable": str(exc)} for title in titles}
+            for row in batch:
+                value = observed[row["title"]]
+                yield row, value if isinstance(value, dict) else {"unavailable": "Observation publique invalide"}
 
-    en_state = public_api("en", [row["title"] for row in english])
-    for row in english:
+    for row, visible in public_pages("en", english):
         title = row["title"]
         report["english_pages_checked"] += 1
-        visible = en_state[title]
+        if visible is None:
+            en_verified.add(row["page_id"])
+            report["english_pages_verified"] += 1
+            if row["page_id"] == debate["page_id"]:
+                report["public_debate_verified"] = True
+            continue
         if visible.get("unavailable"):
             record("english_page", row, str(visible["unavailable"]), missing=False)
             continue
@@ -515,16 +609,22 @@ def verify_public_visibility(
         except (PublicVisibilityError, OSError) as exc:
             record("english_page", row, str(exc), missing=False)
             continue
+        checkpoint.record("en", row, visible)
         en_verified.add(row["page_id"])
         report["english_pages_verified"] += 1
         if row["page_id"] == debate["page_id"]:
             report["public_debate_verified"] = True
 
-    fr_state = public_api("fr", [french[row["page_id"]]["title"] for row in english])
-    for row in english:
-        fr = french[row["page_id"]]
+    english_by_id = {row["page_id"]: row for row in english}
+    for fr, observed in public_pages("fr", [french[row["page_id"]] for row in english]):
+        row = english_by_id[fr["page_id"]]
         report["french_links_checked"] += 1
-        observed = fr_state[fr["title"]]
+        if observed is None:
+            if row["page_id"] in en_verified:
+                report["french_links_verified"] += 1
+            else:
+                record("french_link", fr, "Cible anglaise non vérifiée publiquement", missing=False)
+            continue
         if observed.get("unavailable"):
             record("french_link", fr, str(observed["unavailable"]), missing=False)
             continue
@@ -546,10 +646,25 @@ def verify_public_visibility(
         if not _html_links_to_english(doc, _public_url("fr", fr["title"]), row["title"]):
             record("french_link", fr, "Lien vers la page anglaise absent du HTML public", missing=True)
             continue
+        checkpoint.record("fr", fr, observed)
         if row["page_id"] not in en_verified:
             record("french_link", fr, "Cible anglaise non vérifiée publiquement", missing=False)
             continue
         report["french_links_verified"] += 1
+
+    if not issues and checkpoint_path is not None:
+        now = datetime.now(timezone.utc)
+        for row in english:
+            key = row["page_id"]
+            fr = french[key]
+            if not _fresh_observation(checkpoint.observations["en"].get(key), row["title"], now):
+                en_verified.remove(key)
+                report["english_pages_verified"] -= 1
+                record("english_page", row, "Observation publique périmée, à relire", missing=False)
+            if key not in en_verified or not _fresh_observation(checkpoint.observations["fr"].get(key), fr["title"], now):
+                report["french_links_verified"] -= 1
+                record("french_link", fr, "Observation publique périmée, à relire", missing=False)
+        report["public_debate_verified"] = debate["page_id"] in en_verified
 
     if concrete_error:
         report["status"] = PARTIAL
@@ -597,11 +712,22 @@ def check_or_record(
                 "french_title": node["fr"]["canonical_title"],
                 "english_sha256": str(wiki.get("remote_sha256") or ""),
             }
+    checkpoint = state_dir / (CHECKPOINT_FILENAME if report_filename == "public-visibility-report.json"
+                              else "public-visibility-recheck-checkpoint.json")
+    report_path = state_dir / report_filename
+    if report_path.is_file():
+        try:
+            previous = load_json(report_path, "rapport public précédent")
+        except CorpusBuildError:
+            previous = {}
+        if previous.get("status") == VERIFIED:
+            checkpoint.unlink(missing_ok=True)
     report = verify_public_visibility(
         debate_id, work_id, english_plan, french_plan, late_reuse=late_reuse,
         manifest_sha256=manifest_sha256, client=client, declared_reuse=declared_reuse,
+        checkpoint_path=checkpoint,
     )
-    write_json(state_dir / report_filename, report)
+    write_json(report_path, report)
     return report
 
 

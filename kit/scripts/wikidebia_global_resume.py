@@ -280,6 +280,7 @@ def _workspace_entry(
             handoff.get("next_remote_write_possible", False) if handoff is not None
             else summary.get("next_remote_write_possible", False)
         ),
+        **{key: summary[key] for key in ("publication_preflight_sha256", "public_verification_progress") if key in summary},
         **extra,
         **({"resume_warning": warning} if warning else {}),
         "remote_access_performed": False,
@@ -568,6 +569,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"État : {selected['status']} ({selected['phase']})")
         print("Action suivante : " + str(selected.get("next_action") or "aucune"))
         print("Commande suivante : " + str(selected.get("next_command") or "aucune"))
+        if "public_verification_progress" in selected:
+            progress = selected["public_verification_progress"]
+            print(f"Contrôles publics enregistrés et récents : {progress['en']} pages EN, {progress['fr']} liens FR")
+        if selected.get("next_remote_read_possible"):
+            print("Effet de la prochaine commande : " + ("écriture distante possible" if selected.get("next_remote_write_possible") else "lecture distante seule"))
         if selected.get("edit_path"):
             print("Fichier à modifier : " + str(selected["edit_path"]))
     else:

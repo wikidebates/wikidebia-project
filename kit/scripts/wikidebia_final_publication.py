@@ -1240,6 +1240,26 @@ def _verify_prepared_publication(
     return baseline, plans, fresh
 
 
+def completed_write_receipts(
+    state_dir: Path, english_plan_sha256: str, french_plan_sha256: str,
+) -> tuple[dict[str, Any], dict[str, Any]] | None:
+    english_path = state_dir / "english-publication-receipt.json"
+    french_path = state_dir / "french-publication-receipt.json"
+    if not english_path.is_file() or not french_path.is_file():
+        return None
+    english = load_json(english_path, "reçu anglais final")
+    french = load_json(french_path, "reçu français final")
+    for receipt, plan_sha256, statuses in (
+        (english, english_plan_sha256, {"published"}),
+        (french, french_plan_sha256, {"published", "verified_no_changes"}),
+    ):
+        if (receipt.get("receipt_sha256") != _canonical(receipt, "receipt_sha256")
+                or receipt.get("status") not in statuses or receipt.get("plan_sha256") != plan_sha256):
+            raise FinalPublicationError("Reçu d’écriture finale invalide ou lié à un autre plan",
+                                        remote_execution_started=True)
+    return english, french
+
+
 def publish_final_release(
     project_root: Path,
     debate_id: str,
@@ -1248,6 +1268,7 @@ def publish_final_release(
     *,
     allow_preserved: bool = False,
     confirm_preflight_sha256: str | None = None,
+    verify_only: bool = False,
 ) -> dict[str, Any]:
     if not confirm_preflight_sha256:
         raise FinalPublicationError("Empreinte du préflight signé obligatoire avant publication ou reprise")
@@ -1296,6 +1317,7 @@ def publish_final_release(
 
     authorization_path = state_dir / "authorization.json"
     remote_started = authorization_path.is_file()
+    verified_receipts = None
     try:
         if remote_started:
             saved_preflight = load_json(state_dir / "preflight.json", "préflight de reprise")
@@ -1312,6 +1334,8 @@ def publish_final_release(
                     or authorization.get("baseline_sha256") != baseline.get("baseline_sha256")):
                 raise FinalPublicationError("Autorisation finale sauvegardée invalide", remote_execution_started=True)
         else:
+            if verify_only:
+                raise FinalPublicationError("La reprise en lecture seule exige une publication déjà autorisée")
             baseline, plans, preflight = _verify_prepared_publication(
                 project_root, debate_id, work_id, release_copy, state_dir,
                 confirm_preflight_sha256,
@@ -1321,8 +1345,19 @@ def publish_final_release(
             authorization = _authorization(state_dir, baseline, preflight)
             remote_started = True
 
+        if verify_only:
+            if (preflight.get("preflight_sha256") != _canonical(preflight, "preflight_sha256")
+                    or preflight.get("english_plan_sha256") != plans["en_plan"]["plan_sha256"]
+                    or preflight.get("french_plan_sha256") != plans["fr_plan"]["plan_sha256"]):
+                raise FinalPublicationError("Préflight de reprise en lecture seule divergent", remote_execution_started=True)
+            verified_receipts = completed_write_receipts(
+                state_dir, plans["en_plan"]["plan_sha256"], plans["fr_plan"]["plan_sha256"],
+            )
+            if verified_receipts is None:
+                raise FinalPublicationError("La reprise en lecture seule exige les deux reçus d’écriture finale",
+                                            remote_execution_started=True)
         en_receipt_path = state_dir / "english-publication-receipt.json"
-        if not en_receipt_path.is_file():
+        if verified_receipts is None and not en_receipt_path.is_file():
             _assert_no_historical_dated_plan(plans["en_plan"])
             plans, preflight, authorization = _migrate_english_publication_order(
                 project_root, debate_id, release_copy, state_dir, baseline, plans, preflight, authorization
@@ -1330,7 +1365,9 @@ def publish_final_release(
             plans, preflight, authorization = _migrate_english_plan_after_kit_change(
                 project_root, debate_id, release_copy, state_dir, baseline, plans, preflight, authorization
             )
-        if en_receipt_path.is_file():
+        if verified_receipts is not None:
+            en_receipt = verified_receipts[0]
+        elif en_receipt_path.is_file():
             en_receipt = load_json(en_receipt_path, "reçu anglais final")
         else:
             en_adapter = build_adapter(dict(plans["en_config"]), project_root)
@@ -1346,7 +1383,9 @@ def publish_final_release(
             write_json(en_receipt_path, en_receipt)
 
         fr_receipt_path = state_dir / "french-publication-receipt.json"
-        if fr_receipt_path.is_file():
+        if verified_receipts is not None:
+            fr_receipt = verified_receipts[1]
+        elif fr_receipt_path.is_file():
             fr_receipt = load_json(fr_receipt_path, "reçu français final")
         else:
             fr_adapter = build_adapter(dict(plans["fr_config"]), project_root)

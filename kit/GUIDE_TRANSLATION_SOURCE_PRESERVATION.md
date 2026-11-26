@@ -64,13 +64,20 @@ Une revue scellée peut être rouverte avec `--reopen-review`, `--reviewer` et
 sont archivées après vérification de leur empreinte. Rien n'est remplacé ni
 publié ; la refinalisation exige une nouvelle convergence sur l'empreinte courante.
 
-Un paquet `release_ready` reste local. Ce mode n'autorise aucune publication,
-comparaison distante, mise à jour française ou fusion de branche.
+Un paquet `release_ready` reste local. La commande `publish-preserved DEBAT
+--work-id WORK` rattache la release au workflow et prépare le préflight en
+lecture seule. La publication exige la confirmation de son empreinte avec
+`workflow-publish DEBAT --confirm-preflight-sha256 EMPREINTE`.
 Pour contrôler l'avancement sans déclencher d'écriture distante :
 `./wikidebia corpus-workspace-status DEBAT --work-id WORK` ou
 `./wikidebia resume --debate-id DEBAT --work-id WORK`.
-La reprise de publication préservée passe toujours par `publish-preserved`,
-même après une interruption. `continuity-sync DEBAT --work-id WORK` projette
+Après une interruption, `resume` indique l'empreinte courante et la commande
+correspondante. Lorsque les deux reçus d’écriture sont présents, l’option
+`--verify-only` reprend uniquement le contrôle public. Le kit conserve pour
+chaque page vérifiée le titre, la révision observée et l’empreinte du contenu.
+Il reprend les contrôles manquants ou âgés de plus d’une heure et relit tout
+si le plan, l’inventaire des pages ou le manifeste a changé.
+`continuity-sync DEBAT --work-id WORK` projette
 les preuves signées de préservation et de publication finale sans exiger un
 checkpoint français inexistant dans ce parcours. `continuity-sync --check`
 contrôle la projection sans la modifier.

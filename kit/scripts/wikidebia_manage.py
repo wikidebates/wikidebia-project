@@ -2897,6 +2897,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     workflow_publish_parser.add_argument("debate_id")
     workflow_publish_parser.add_argument("--confirm-preflight-sha256", required=True)
+    workflow_publish_parser.add_argument("--verify-only", action="store_true", help="Reprendre la vérification publique sans écriture wiki")
 
     workflow_status_parser = sub.add_parser(
         "workflow-status", help="Afficher l'état de l'orchestration éditoriale"
@@ -3524,7 +3525,8 @@ def main(argv: list[str] | None = None) -> int:
         return run(
             [python_command(root), str(script), "--project-root", str(root),
              "workflow-publish", args.debate_id,
-             "--confirm-preflight-sha256", args.confirm_preflight_sha256],
+             "--confirm-preflight-sha256", args.confirm_preflight_sha256,
+             *(["--verify-only"] if args.verify_only else [])],
             cwd=root, check=False,
         ).returncode
     if args.command == "workflow-status":
