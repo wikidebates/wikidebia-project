@@ -1,0 +1,30 @@
+{
+  "schema": "wikidebia-fr-publication-request-1.2",
+  "language": "fr",
+  "site": "https://fr.wikidebates.org",
+  "request_id": "communisme-20261126-liens-01",
+  "authorization": "explicit_user_request",
+  "pages": [
+    {
+      "page_id": "3269",
+      "old_title": "Le voile islamique est la marque concrète de l'oppression des hommes sur les femmes",
+      "new_title": "Le voile islamique est la marque concrète de l'oppression des hommes sur les femmes",
+      "source_revision_id": 266535,
+      "before_file": "before/3269.wiki",
+      "source_sha256": "ec631b2ef730564670aa2f3fc8d07653c9189ea2266ae9fa5403a6ccd4b131cd",
+      "after_file": "after/3269.wiki",
+      "target_sha256": "ebf69f5e5610ab13220bb1ca875a4cb483b5a4aaff8a36d2663a32b3688546dc"
+    },
+    {
+      "page_id": "8757",
+      "old_title": "Des politiciens Rassemblement national se sont rendus coupables de politiques liberticides",
+      "new_title": "Des politiciens Rassemblement national se sont rendus coupables de politiques liberticides",
+      "source_revision_id": 272363,
+      "before_file": "before/8757.wiki",
+      "source_sha256": "6db512c80ed20a6d99fa98b260cb50e84fd05e9e1015bfb70628f6d15f63df55",
+      "after_file": "after/8757.wiki",
+      "target_sha256": "b35eb791cb9e76a71793b06df94c31dcf4f716e097d717408a14d82ac89155fa"
+    }
+  ],
+  "request_sha256": "05f99e02acb1619ca04935b40fa24757832ec74259a9ee92b2a2fbaa14a60f35"
+}

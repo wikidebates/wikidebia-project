@@ -1,0 +1,96 @@
+{{Argument
+|citations={{Citation
+|citation=Le foulard est une discrimination explicite à l’égard des femmes et qu’il véhicule une conception de la sexualité que nous ne partageons pas. Il manifeste la volonté de soumettre les femmes à un ordre patriarcal et hétérosexiste qui prétend normaliser la sexualité des individus, en particulier celle des femmes, dans le cadre du mariage, et subordonner leurs activités aux devoirs familiaux.
+|auteurs=Josette Trat, Hélène Adam, Ingrid Hayes, Guillaume Liégard
+|article=Tribune : "Une candidate voilée dans le Vaucluse : un choix contesté"
+|date=3 mai 2010
+|lien=https://npa2009.org/content/tribune-une-candidate-voilee-dans-le-vaucluse-un-choix-conteste
+}}{{Citation
+|citation=Et c’est bien de cela qu’il s’agit : de l’oppression des femmes par les hommes, de leurs libertés et de leurs droits. Le voile n’est pas un simple bout de tissu, il est non seulement un symbole mais aussi la marque concrète de la situation d’infériorité dans laquelle certains veulent, au nom de la liberté religieuse, maintenir les femmes.
+|auteurs=Sophie Gargan
+|article=Pour les droits et la liberté des femmes, contre le voile à l’école
+|ouvrage=Lutte ouvrière
+|numéro=1838
+|date=24 octobre 2003
+|lien=https://journal.lutte-ouvriere.org/2003/10/24/pour-les-droits-et-la-liberte-des-femmes-contre-le-voile-lecole_7442.html
+}}{{Citation
+|citation=Le foulard blanc que porte la jeune femme, et qui enserre sa chevelure de manière à ce qu’aucun cheveu ne s’en échappe, est à lui seul, pas seulement le symbole, mais l’attribut concret de l’oppression que des hommes veulent infliger aux femmes. Pourquoi les femmes devraient-elles dissimuler leur chevelure ? Parce qu’elle ferait naître chez des hommes des pulsions incontrôlables ? Alors, si tel est le cas, qu’ils consultent et se soignent ! Mais le problème n’est bien évidemment pas là. Qu’on l’appelle voile ou foulard, cet attribut n’est pas qu’un carré de tissu, c’est la marque de la soumission que des mâles imbéciles et réactionnaires veulent imposer aux femmes.
+|auteurs=Sophie Gargan
+|article=Une femme voilée sur une liste du NPA
+|ouvrage=Lutte ouvrière
+|numéro=2167
+|date=12 février 2010
+|lien=https://journal.lutte-ouvriere.org/2010/02/12/une-femme-voilee-sur-une-liste-du-npa-la-lutte-pour-lemancipation-ne-peut-pas-saccommoder-du-voile_21667.html
+}}{{Citation
+|citation=Si le voile était simplement un signe religieux porté par les hommes et les femmes, le porter ou pas resterait une affaire privée. Mais le voile dont on discute aujourd’hui n’est pas un simple signe religieux. Il est la marque concrète de l’oppression des femmes, de tout un conditionnement pour faciliter la fabrication d’épouses et de mères sans autre droit que celui d’obéir à leur seigneur et maître, recluses à la maison, comme l’étaient, il n’y a pas si longtemps, les bonnes sœurs envoyées, consentantes ou non, dans les couvents. Ce sort réservé aux femmes n’est pas propre à la religion musulmane, c’est le lot réservé aux femmes dès lors que les Églises retrouvent du pouvoir – officiel ou imposé dans les mœurs – sur une communauté humaine.
+|auteurs=Lutte ouvrière
+|article=Contre l'oppression des femmes, donc contre le port du voile à l'école
+|ouvrage=Lutte ouvrière
+|numéro=1851
+|date=22 janvier 2004
+|lien=https://journal.lutte-ouvriere.org/2004/01/22/contre-loppression-des-femmes-donc-contre-le-port-du-voile-lecole_7946.html
+}}
+|références-vidéographiques={{Référence vidéographique
+|titre=Abnousse SHALMANI "Khomeiny, Sade, et moi"
+|auteurs=Arte
+|lien=https://www.youtube.com/watch?v=mEnXwoRZPl4
+}}
+|justifications={{Justification
+|page=Le voile islamique assigne aux femmes le rôle de reproductrices et de mères au foyer
+|titre-affiché=Le voile assigne aux femmes le rôle de reproductrices et de mères au foyer
+}}{{Justification
+|page=Le voile islamique est le signe visible que les femmes voilées sont la propriété de leur mari
+|titre-affiché=Le voile est le signe visible que les femmes voilées sont la propriété de leur mari
+}}{{Justification
+|page=Le voile islamique fait des femmes des objets sexuels
+|titre-affiché=Le voile fait des femmes des objets sexuels
+}}{{Justification
+|page=Le voile islamique prône la honte et la culpabilité des femmes
+|titre-affiché=Le voile prône la honte et la culpabilité des femmes
+}}{{Justification
+|page=Les hommes ne sont pas soumis à des obligations du même type que le voile islamique
+|titre-affiché=Les hommes ne sont pas soumis à des obligations du même type que le voile
+}}{{Justification
+|page=Les femmes qui refusent de porter le voile islamique sont brimées et opprimées
+|titre-affiché=Les femmes qui refusent de porter le voile sont brimées et opprimées
+}}{{Justification
+|page=On ne peut pas être féministe et défendre le voile islamique
+|titre-affiché=On ne peut pas être féministe et défendre le voile
+}}
+|objections={{Objection
+|page=Des femmes sont voilées et épanouies
+|titre-affiché=Des femmes sont voilées et épanouies
+}}{{Objection
+|page=Le voile n'est qu'un vêtement comme un autre
+|titre-affiché=Le voile n'est qu'un vêtement comme un autre
+}}{{Objection
+|page=On peut être féministe et voilée
+|titre-affiché=On peut être féministe et voilée
+}}{{Objection
+|page=Le voile islamique n'est pas plus oppressif que bien d'autres vêtements
+|titre-affiché=Le voile n'est pas plus oppressif que bien d'autres vêtements
+}}{{Objection
+|page=Les femmes voilées sont déjà bien assez stigmatisées dans la société française
+|titre-affiché=Les femmes voilées sont déjà bien assez opprimées et stigmatisées pour qu'on ne leur ajoute pas une autre oppression
+}}{{Objection
+|page=Le voile islamique protège les femmes des pressions exercées par les hommes
+|titre-affiché=Le voile protège les femmes des pressions exercées par les hommes
+}}{{Objection
+|page=Il y a des usages contestataires et émancipateurs du voile islamique
+|titre-affiché=Il y a des usages contestataires et émancipateurs du voile
+}}{{Objection
+|page=Fémonationalisme
+|titre-affiché=La lutte contre l'oppression sexiste n'est qu'un prétexte hypocrite
+}}{{Objection
+|page=Les femmes doivent toujours se justifier de leur tenue
+|titre-affiché=Bien plus que le voile lui-même, c'est légiférer sur ce que les femmes ont le droit de porter ou pas qui les oppresse
+}}{{Objection
+|page=Prétendre que les femmes portant le voile sont dépourvues de libre-arbitre relève à la fois du sexisme et du paternalisme néocolonial
+|titre-affiché=Prétendre que les femmes portant le voile sont dépourvues de libre-arbitre relève à la fois du sexisme et du paternalisme néocolonial
+}}{{Objection
+|page=Interdire quelque chose à une personne est incompatible avec la libérer d'une oppression
+|titre-affiché=Interdire quelque chose à une personne est incompatible avec la libérer d'une oppression
+}}
+|rubriques=Politique, Religion et spiritualité, Société
+|mots-clés=Voile islamique, Femmes, Féminisme, Oppression
+}}

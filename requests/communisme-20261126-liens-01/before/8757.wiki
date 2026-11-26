@@ -1,0 +1,63 @@
+{{Argument
+|résumé=Les conséquences accablantes du RN à la tête de plusieurs municipalités suffisent à faire s'écrouler la dédiabolisation comme un château de cartes pour peu qu'on fasse preuve d'un minimum d'honnêteté intellectuelle, et constituent un avant-goût assez préoccupant de ce qui risque d'arriver si il prenait la tête de l'état.
+|références-sitographiques={{Référence sitographique
+|lien=https://www.madmoizelle.com/quand-le-maire-est-fn-tumblr-285523
+|page=Quand le maire est FN, que se passe-t-il en ville ?
+|auteurs=Clemence Bodoc
+|site=Madmoizelle.com
+|date=15 septembre 2014
+}}{{Référence sitographique
+|lien=https://cartedelahonte.github.io
+|page=La carte de la honte: 154 preuves que le RN est toujours...
+}}
+|justifications={{Justification
+|page=À Hénin-Beaumont les opposant sont muselés, harcelés et intimidés
+|titre-affiché=À Hénin-Beaumont, ville dirigée par le RN, les opposant sont muselés, harcelés et intimidés
+}}{{Justification
+|page=À Mantes-la-Ville, le maire RN s'augmente mais coupe drastiquement les budgets sociaux
+|titre-affiché=À Mantes-la-Ville, le maire RN s'augmente mais coupe drastiquement les budgets sociaux
+}}{{Justification
+|page=À Hayange, Fabien Engelmann coupe l’électricité et le chauffage au Secours populaire
+|titre-affiché=À Hayange, Fabien Engelmann coupe l’électricité et le chauffage au Secours populaire
+}}{{Justification
+|page=À Orange, Jacques Bompard muselle l’opposition
+|titre-affiché=À Orange, Jacques Bompard muselle l’opposition
+}}{{Justification
+|page=À Cogolin, le maire RN se vante d’être hors la loi
+|titre-affiché=À Cogolin, le maire RN se vante d’être hors la loi
+}}{{Justification
+|page=Au Luc, valse des directeurs, menaces et charte « Ma commune sans migrant »…
+|titre-affiché=Au Luc, valse des directeurs, menaces et charte « Ma commune sans migrant »…
+}}{{Justification
+|page=Le film "chez nous" a été censuré à Luc-en-Provence
+|titre-affiché=Le film "chez nous" a été censuré à Luc-en-Provence
+}}{{Justification
+|page=Les élus RN entravent le travail des journalistes de La Voix du Nord à Hénin-Beaumont
+|titre-affiché=Les élus RN entravent le travail des journalistes de La Voix du Nord à Hénin-Beaumont
+}}{{Justification
+|page=Marine Le Pen torpille les associations pro-LGBT
+|titre-affiché=Les associations LGBT sont muselées partout où le RN est en position de force
+}}{{Justification
+|page=Des élus RN ont tenté de faire censurer un jeu antifasciste
+|titre-affiché=Des élus RN ont tenté de faire censurer un jeu antifasciste
+}}{{Justification
+|page=Le RN a largement soutenu la "loi immigration", qualifiée de hautement discriminatoire par les spécialistes
+|titre-affiché=La "loi immigration", violation grave des droits des migrants, a pu être votée grâce au RN
+}}{{Justification
+|page=Au PACA, une école d'art s'est fait retirer ses subventions suite à une délation du RN
+|titre-affiché=Au PACA, une école d'art s'est fait retirer ses subventions suite à une délation du RN
+}}
+|objections={{Objection
+|page=Ce sont les soutiens du RN qui subissent censure et menaces au travail, notamment les journalistes
+|titre-affiché=Ce sont les soutiens du RN qui subissent censure et menaces au travail, notamment les journalistes
+}}{{Objection
+|page=Il est logique que des médias et des associations ui militent depuis des décennies contre le RN avec souvent des subventions reçoivent un retour de bâton quand le RN arrive au pouvoir
+|titre-affiché=Il est logique que des médias et des associations ui militent depuis des décennies contre le RN avec souvent des subventions reçoivent un retour de bâton quand le RN arrive au pouvoir
+}}{{Objection
+|page=Le système -médias, célébrités, ONG- milite depuis des déennies avec de gros moyens (subventions et diffusion) contre le RN, il ne peut pas se dire censuré quand exceptionnellement il a un retour de bâton
+|titre-affiché=Le système -médias, célébrités, ONG- milite depuis des déennies avec de gros moyens (subventions et diffusion) contre le RN, il ne peut pas se dire censuré quand exceptionnellement il a un retour de bâton
+}}{{Objection
+|page=Le RN a des mesures anti-sociales et anti-migrants à son actif, il ne faut pas confondre avec mesures liberticides
+|titre-affiché=Le RN a des mesures anti-sociales et anti-migrants à son actif, il ne faut pas confondre avec mesures liberticides
+}}
+}}
