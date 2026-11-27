@@ -1,28 +1,28 @@
-# Experimental prepared-quotation projection (not production)
+# Archive du prototype de projection des citations préparées
 
-This branch contains an opt-in offline prototype under tools. It does not
-change the regular kit, its schemas, its publication path or normative copies.
-Input: actual signed translation-unit packet, its ordinary draft unit patch,
-and trusted local results of CitationRegistry.reconstruct from the resolver.
-The adapter verifies the exact source parameter identity and quote/receipt
-hashes, hides prepared rows in both the French and English views and draft
-patch, and retains their full source/target identity in a private manifest.
-The model only receives the projected files, not that manifest or the original
-packet. Existing populated target rows or changed source locks are skipped.
+**Statut : expérience historique, non opérationnelle.** Ce prototype (PR #232)
+précède le contrat actif de provenance des citations publiées, intégré à la
+norme 1.2.89 et au kit 2.16.48.
 
-After editing, restore inserts the exact selected published English fragments
-at their original citation IDs and order, with source parameters preserved.
-Rows and units remain pending, no editorial attestation is fabricated,
-and ordinary kit scope checks still apply. The projection has separate
-schemas and must never be submitted directly to seal/apply. In particular,
-the current kit still uses an AI translation warning and preserves the French
-reference link; a published-translation provenance and rights policy must
-be integrated before using these rows in final publication.
+Le mécanisme expérimental retirait temporairement des citations des paquets
+de traduction, puis réinsérait le texte préparé sans produire toutes les
+preuves exigées par le contrat actuel. Il ne doit pas être utilisé pour
+préparer une revue, sceller un verrou, traduire ou publier. La sélection
+des citations, la vérification des droits, les références, les avertissements
+et le contrôle d'unicité restent exclusivement régis par le kit actif.
 
-Run the targeted tests using:
-    PYTHONPATH=kit/scripts:tools python -m pytest -q tools/test_experimental_prepared_citations.py
+Le code et les tests d'origine sont conservés intégralement, sous forme de
+fichiers texte non exécutables, à titre de provenance et pour une éventuelle
+nouvelle expérimentation indépendante :
 
-The local receipt digest is an integrity check, not authentication. The
-trusted caller must actually reconstruct the passages from the resolver,
-check current documentary evidence, and keep all private material out of Git.
-Byte counts compare serialized data only, not provider billing or quota.
+- [Documentation originale](history/experimental-prepared-citations/README-original.md)
+- [Prototype original](history/experimental-prepared-citations/experimental_prepared_citations.py.txt)
+- [Tests originaux](history/experimental-prepared-citations/test_experimental_prepared_citations.py.txt)
+
+Référence historique : commit `3e61da9866eea530084972b86cf7dfde76cd0be1`.
+Pour les opérations courantes, suivre le
+[guide actif du résolveur](../kit/GUIDE_QUOTE_RESOLVER_BRIDGE.md).
+L'éventuelle optimisation de taille des paquets devra être réimplémentée
+et testée contre les schémas, verrous et preuves actuels ; cette archive
+ne constitue ni une validation de cette optimisation ni un nouveau parcours
+de production.
