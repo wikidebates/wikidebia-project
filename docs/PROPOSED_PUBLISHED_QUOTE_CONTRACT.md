@@ -225,3 +225,24 @@ interdit la réutilisation implicite de l'ancien instantané. La preuve
 de fin de collecte, la couverture, les compteurs et les empreintes sont
 vérifiés avant sélection. La préparation des revues et le rendu restent
 hors ligne; le renouvellement technique ne modifie pas les verrous.
+
+
+## Contrôle frais avant reprise des écritures anglaises
+
+Le contrôle historique ne suffit plus à autoriser la reprise d'un plan
+anglais inachevé ayant opté pour l'index global. Une sélection complète
+et fraîche, collectée après l'autorisation initiale, est obligatoire.
+Le kit vérifie le plan courant, puis recoupe les destinations indexées
+avec les révisions courantes, le contenu autorisé, le parent, l'auteur,
+le résumé, les balises et la date. Les mises à jour explicites encore
+à la révision source autorisée sont distinguées des écritures déjà
+effectuées; les transitions create->skip gardent la preuve d'origine.
+Le contrôle n'exclut qu'une page pour sa propre occurrence et laisse
+les autres correspondances intactes, y compris sur une autre page du
+plan. Une discordance bloque avant les écritures. Le reçu de reprise
+est distinct, non publiant, lié au plan, à l'autorisation et à l'index.
+Aucun verrou sémantique n'est réécrit. Les reprises en lecture seule
+et celles après réception du reçu EN final restent inchangées.
+La preuve est non atomique et ne distingue pas les écritures concurrentes
+strictement identiques du même compte. La collecte préalable reste une
+commande explicite. Aucune règle normative active n'est modifiée ici.

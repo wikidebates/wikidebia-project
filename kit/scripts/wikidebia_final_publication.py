@@ -1266,6 +1266,26 @@ def _verify_quote_authorization(project_root,debate_id,work_id,release_copy,base
                                     remote_execution_started=True) from exc
 
 
+def _fresh_quote_resume(project_root,debate_id,work_id,release_copy,authorization,plans):
+    from wikidebia_quote_index_contract import QuoteIndexError
+    from wikidebia_quote_index_stage import _package_inputs
+    from wikidebia_quote_resume import audit
+    from wikidebia_editorial_review import _workspace_path
+    try:
+        # Do not initialize an adapter or resolve the workspace for legacy
+        # publications. Verification-only and completed EN paths bypass this.
+        if _package_inputs(release_copy) is None:
+            return None
+        adapter = build_adapter(dict(plans["en_config"]),project_root)
+        publisher = GenericPublisher(dict(plans["en_config"]),adapter,Path(plans["en_config_path"]))
+        return audit(lambda:_workspace_path(project_root,debate_id,work_id),
+                     release_copy,authorization,dict(plans["en_plan"]),publisher)
+    except (ValueError,RuntimeError,OSError,KeyError,TypeError,AttributeError) as exc:
+        reason=str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
+        raise FinalPublicationError("Contrôle frais des doublons à la reprise : "+reason,
+                                    remote_execution_started=True) from exc
+
+
 def _authorization(
     state_dir: Path, baseline: Mapping[str, Any], preflight: Mapping[str, Any],
     *, revalidation: Mapping[str, Any] | None = None,
@@ -1492,6 +1512,7 @@ def publish_final_release(
 
     authorization_path = state_dir / "authorization.json"
     remote_started = authorization_path.is_file()
+    resuming = remote_started
     verified_receipts = None
     try:
         if remote_started:
@@ -1543,6 +1564,8 @@ def publish_final_release(
             plans, preflight, authorization = _migrate_english_plan_after_kit_change(
                 project_root, debate_id, release_copy, state_dir, baseline, plans, preflight, authorization
             )
+            if resuming:
+                _fresh_quote_resume(project_root,debate_id,work_id,release_copy,authorization,plans)
         if verified_receipts is not None:
             en_receipt = verified_receipts[0]
         elif en_receipt_path.is_file():

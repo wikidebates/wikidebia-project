@@ -269,3 +269,26 @@ Exécuter cette commande avant la première publication pour renouveler
 l'index si nécessaire. L'autorisation historique d'une reprise reste
 distincte : le contrôle frais de ses écritures partielles n'est pas
 encore implémenté.
+
+
+## Reprendre une publication anglaise partielle
+
+Pour les Works ayant opté pour le contrôle global, avant de reprendre des
+écritures EN sans reçu anglais final, produire un index postérieur à
+l'autorisation initiale avec la commande de collecte et --force. La
+publication reproduit le reçu documentaire historique, puis effectue un
+nouveau contrôle sur l'index complet et frais. Pour chaque destination
+déjà présente dans cet index, elle relit sa révision courante, son contenu
+et, si elle a été écrite, les preuves MediaWiki (identité de page/révision,
+parent, auteur, résumé, balises, date). Seule une révision conforme au
+plan autorisé peut être exclue pour son propre argument. Un doublon sur
+une autre page reste bloquant, même si cette page appartient aussi au plan.
+Une révision changée depuis l'index impose un nouvel examen. Le reçu
+historique et la release restent immuables. Les diagnostics de reprise
+sont privés et n'autorisent pas de nouvelle écriture par eux-mêmes.
+
+Le contrôle est non atomique; il ne garantit pas l'absence de modifications
+concurrentes après la lecture ni ne distingue deux écritures strictement
+identiques du même compte. Il ne s'applique pas aux reprises en lecture
+seule, aux publications EN déjà accompagnées de leur reçu final, ni aux
+Works historiques sans contrôle global. Le profil publié reste expérimental.

@@ -226,7 +226,7 @@ def _ref(row):
     return {"page_id":row["page_id"],"citation_id":row["citation_id"]}
 
 
-def final_audit(arguments, index, expected_sha, source_lock_sha, *, now=None):
+def final_audit(arguments, index, expected_sha, source_lock_sha, *, now=None, resume_pages=None):
     """Audit ALL selected EN quotes, not just retrieved published passages.
 
     Exact literal collisions block new selections; token-identical variants
@@ -239,6 +239,32 @@ def final_audit(arguments, index, expected_sha, source_lock_sha, *, now=None):
     now = now or datetime.now(timezone.utc)
     coverage = validate(index, expected_sha, "en", now=now)
     scope = _final_occurrences(arguments)
+    # Resume exclusions are derived ONLY by the read-only publication gate.
+    # They are deliberately not part of the historic semantic audit schema.
+    # An exact page/revision can only exempt its own local argument.
+    resume = {}
+    if resume_pages is not None:
+        expected = {r["page_id"]:r["title"] for r in scope}
+        indexed = {p["page_id"]:p for p in index["pages"]}
+        if not isinstance(resume_pages,list):
+            raise QuoteIndexError("invalid_resume_quote_pages")
+        for proof in resume_pages:
+            if not isinstance(proof,dict) or set(proof)!={
+                    "page_id","wiki_page_id","wiki_revision","wiki_title",
+                    "proof_kind","content_sha256"}:
+                raise QuoteIndexError("invalid_resume_quote_page")
+            pid = proof["page_id"]
+            _integer(proof["wiki_page_id"])
+            _integer(proof["wiki_revision"])
+            page = indexed.get(proof["wiki_page_id"])
+            if (pid not in expected or pid in resume or page is None
+                    or page["revision"]!=proof["wiki_revision"]
+                    or page["title"]!=proof["wiki_title"]
+                    or _title(page["title"])!=expected[pid]
+                    or proof["proof_kind"] not in {"verified_plan_creation","verified_plan_update","verified_pinned_original"}
+                    or not is_digest(proof["content_sha256"])):
+                raise QuoteIndexError("invalid_resume_quote_page_binding")
+            resume[pid]=proof
     literal, token = defaultdict(list), defaultdict(list)
     for row in scope:
         literal[row["literal_sha256"]].append(row)
@@ -270,6 +296,10 @@ def final_audit(arguments, index, expected_sha, source_lock_sha, *, now=None):
     self_excluded = 0
     for row in scope:
         def own(p):
+            if resume_pages is not None:
+                proof=resume.get(row["page_id"])
+                return proof is not None and all(
+                    proof[k]==p[k] for k in ("wiki_page_id","wiki_revision","wiki_title"))
             return (row["own_revision"] is not None and row["own_revision"] == p["wiki_revision"]
                     and row["title"] == _title(p["wiki_title"]))
         exact = public_literal.get(row["literal_sha256"], [])
@@ -293,6 +323,9 @@ def final_audit(arguments, index, expected_sha, source_lock_sha, *, now=None):
              "public_pages_indexed":coverage["pages_indexed"],
              "partial_overlap_across_wiki_checked":False,
              "publication_authorized":False}
+    if resume_pages is not None:
+        value["schema"]="wikidebia-resume-quote-duplicate-audit-1"
+        value["verified_plan_pages"]=[resume[k] for k in sorted(resume)]
     return {**value,"audit_sha256":digest(value)}
 
 

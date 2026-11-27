@@ -737,7 +737,7 @@ class PywikibotAdapter:
             action="query",
             prop="revisions",
             revids=int(revision_id),
-            rvprop="ids|content|comment|tags|user",
+            rvprop="ids|content|comment|tags|user|timestamp",
             rvslots="main",
         ).submit()
         for page in ((data.get("query") or {}).get("pages") or {}).values():
@@ -749,6 +749,19 @@ class PywikibotAdapter:
             return {
                 "revision_id": int(revision.get("revid", revision_id)),
                 "parent_id": int(revision.get("parentid", 0) or 0),
+                # Extra identity evidence for the opt-in quote resume gate.
+                # Do not confuse the compatibility defaults above with an
+                # explicit parent/revision identity returned by MediaWiki.
+                "page_id": page.get("pageid"),
+                "title": page.get("title"),
+                "timestamp": str(revision.get("timestamp") or ""),
+                "revision_identity_complete": (
+                    type(page.get("pageid")) is int and page["pageid"] > 0
+                    and isinstance(page.get("title"),str) and bool(page["title"])
+                    and type(revision.get("revid")) is int and revision["revid"] > 0
+                    and type(revision.get("parentid")) is int and revision["parentid"] >= 0
+                    and bool(revision.get("timestamp"))
+                ),
                 "user": str(revision.get("user") or ""),
                 "text": slot.get("content", slot.get("*", revision.get("*", ""))),
                 "summary": revision.get("comment", "") or "",
