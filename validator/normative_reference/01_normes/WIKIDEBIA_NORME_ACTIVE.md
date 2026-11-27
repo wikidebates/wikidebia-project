@@ -1,7 +1,7 @@
-# Norme opérationnelle active Wikidéb’IA 1.2.88
+# Norme opérationnelle active Wikidéb’IA 1.2.89
 
 **Statut : source normative active unique.**  
-**Date d’effet :** 21 août 2026
+**Date d’effet :** 27 novembre 2026
 
 Cette norme contient uniquement les règles actuellement applicables. Les textes de révisions remplacées, snapshots et anciennes formulations sont conservés dans `history/` et dans les changelogs, qui sont informatifs et immuables. Les numéros de norme, validateur, kit et producteur servent à la provenance, à la reproductibilité, à l’installation et aux migrations ; ils ne sélectionnent aucune règle éditoriale.
 
@@ -843,3 +843,9 @@ Une commande d’orchestration de haut niveau pilote l’ensemble de ce cycle. E
 - conserve l’ordre des autres phases, les garde-fous de publication sans dépendance au jour civil ;
 - lorsqu’une publication a déjà commencé sous l’ancien ordre, les pages déjà créées restent intactes et un plan successeur audité place `Debate` avant les seules créations `Argument` restantes.
 
+
+
+## 1.2.89 — 27 novembre 2026 — provenance et unicité des citations anglaises
+
+- Préférence pour la traduction publiée vérifiée, avec les deux modalités de récupération à reçus communs ; traduction IA avec avertissement dans les autres cas.
+- Contrôle indépendant de la preuve, des références, de la complétude et des doublons des nouvelles citations anglaises ; conservation des verrous historiques.

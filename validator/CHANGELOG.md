@@ -1,3 +1,9 @@
+## 0.4.106 — 27 novembre 2026 — provenance et unicité des citations
+
+- valide les preuves de passage publié indépendamment du kit ;
+- contrôle les valeurs rendues et le reçu d'unicité lié aux verrous et à l'index ;
+- conserve les contrats historiques et les revues de complétude.
+
 ## 0.4.73 — 10 août 2026 — alignement des métadonnées de première publication anglaise
 
 - ne projette plus `initialisation` vers `initialization` dans le chemin `translated_english` d’une nouvelle page ;

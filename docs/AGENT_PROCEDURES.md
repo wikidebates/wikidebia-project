@@ -73,9 +73,9 @@ Pour les pages françaises préexistantes, conserver chaque `titre-affiché` con
 - La mesure ne fait pas partie du parcours standard, et ne vaut ni controle de qualite ni validation d'une reference. Un gain de quota exige les vrais compteurs du fournisseur et une revue editoriale independante sur des taches comparables.
 
 
-## Citations lors d'une traduction anglaise (candidat de migration)
+## Citations lors d'une traduction anglaise
 
-- Lire `kit/GUIDE_QUOTE_RESOLVER_BRIDGE.md` avant de traiter les citations, dès que le verrou français est disponible. Pendant la phase expérimentale, ne pas publier de passage du nouveau profil ; la migration coordonnée reste nécessaire.
+- Lire `kit/GUIDE_QUOTE_RESOLVER_BRIDGE.md` avant de traiter les citations, dès que le verrou français est disponible. Ne pas confondre la récupération documentaire avec une autorisation de publication.
 - Pour les liens littéraux pris en charge (MIA), exécuter le mode `prepared` pour réemployer les reçus de la campagne anticipée, ou `integrated` pour réemployer ces reçus et rechercher les passages manquants. Utiliser le même registre privé. Ne jamais relancer une recherche intégrée pour un simple échec technique sans diagnostic.
 - Préparer et relire les preuves d'édition, de droits et de complétude, puis sélectionner les passages vérifiés avant l'application de la mémoire générique et avant de traduire les citations restantes. Ne pas produire d'attestation fictive. Les autres fournisseurs suivent le chemin IA tant qu'un résolveur dédié n'est pas validé.
-- Après activation, configurer le chemin local du checkout épinglé avec `WIKIDEBIA_QUOTE_RESOLVER_ROOT` pour que le workflow renouvelle l'index avant le réimport et le rendu. À défaut, utiliser la commande explicite de collecte ; avant publication/reprise, suivre les contrôles frais du guide. Ne jamais contourner un blocage d'unicité en supprimant une preuve ou une citation.
+- Configurer le chemin local du checkout épinglé avec `WIKIDEBIA_QUOTE_RESOLVER_ROOT` pour que le workflow renouvelle l'index avant le réimport et le rendu. À défaut, utiliser la commande explicite de collecte ; avant publication/reprise, suivre les contrôles frais du guide. Ne jamais contourner un blocage d'unicité en supprimant une preuve ou une citation.

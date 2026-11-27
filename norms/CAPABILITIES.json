@@ -4,9 +4,9 @@
   "component": "norms",
   "release_source": "VERSIONS.json",
   "release": {
-    "norm": "1.2.88",
-    "validator": "0.4.105",
-    "kit": "2.16.47"
+    "norm": "1.2.89",
+    "validator": "0.4.106",
+    "kit": "2.16.48"
   },
   "emits": {
     "active_normative_policy": [
@@ -38,7 +38,7 @@
     "historical_editorial_parameter_presence": "1.0",
     "canonical_optional_empty_parameter_omission": "1.0",
     "historical_render_differential_validation": "1.0",
-    "published_quote_provenance_candidate_experimental": "1.0",
-    "quote_uniqueness_policy_candidate_experimental": "1.0"
+    "published_quote_provenance": "1.0",
+    "quote_uniqueness_policy": "1.0"
   }
 }

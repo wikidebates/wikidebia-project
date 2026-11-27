@@ -1,9 +1,9 @@
-## 27 novembre 2026 — projet de migration des citations publiées et des doublons
+## 1.2.89 — 27 novembre 2026 — citations publiées et unicité des citations
 
 - Distingue traduction IA et passage anglais publié vérifié dans le contrat Citation→Quote, avec préférence pour l'édition publiée réutilisable.
 - Lie la preuve au verrou et à l'occurrence ; maintient séparément les revues d'édition, de droits et de complétude, la convergence et l'autorisation de publication.
 - Prépare les deux modalités documentaires à reçus communs ; interdit l'introduction de citations identiques entre pages distinctes et protège les preuves contre la mémoire générique.
-- Candidat de migration sur la branche expérimentale ; activation et livraison coordonnées restent à valider.
+- Migration coordonnée avec le kit 2.16.48 et le validateur 0.4.106 ; les archives antérieures restent immuables.
 
 ## 24 novembre 2026 — retrait des paramètres de date de création de page
 

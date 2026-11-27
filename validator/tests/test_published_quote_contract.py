@@ -123,8 +123,9 @@ def test_locked_and_rendered_published_quote_is_independently_checked(tmp_path,m
         ctx=PackageContext(root=tmp_path,report=Report("test",tmp_path.name,["wikicode"]),cache={})
         _validate_citations_against_locks(ctx,parse_template(text),"output/en/arguments/A0001.wiki","en","A0001")
         return ctx.report.findings
+    assert p.ACTIVE is True
+    monkeypatch.setattr(p,"ACTIVE",False)
     assert any(f.code=="WDV-MWK-021" and "inactif" in f.message for f in audit(locked))
-    # Hypothetical activation is exercised only by this synthetic test.
     monkeypatch.setattr(p,"ACTIVE",True)
     assert not [f for f in audit(locked) if f.code in {"WDV-MWK-021","WDV-MWK-024"}]
     bad=deepcopy(locked)

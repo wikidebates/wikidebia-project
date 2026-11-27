@@ -1,4 +1,4 @@
-# Raccordement expérimental au résolveur de citations
+# Résolution des citations anglaises publiées
 
 Ce raccordement est une interface documentaire **en lecture seule**, et non une
 nouvelle procédure de publication. Il est testé contre le commit
@@ -58,7 +58,7 @@ même occurrence, même reçu, même passage exact, et aucune recherche
 supplémentaire dans le mode anticipé.
 
 
-### Commande de préparation intégrée au kit (expérimentale)
+### Commande de préparation intégrée au kit
 
 Dans un environnement disposant du dépôt résolveur, de son commit épinglé et
 des dépendances déjà installées, il est possible d'enchaîner export,
@@ -111,20 +111,17 @@ un même lot sont signalés à l'inspection. Aucun doublon n'est supprimé
 automatiquement. Le contrôle inter-lots décrit ci-dessous doit précéder
 utilisation éditoriale de ces passages.
 
-## Limites avant activation en production
+## Limites et prérequis
 
-- Le transfert privé est disponible dans registry_transfer.py du résolveur.
-  Le parcours automatique du kit et le transport effectif entre les deux
-  environnements restent à intégrer.
+- Le transfert sélectif privé des reçus entre environnements utilise
+  registry_transfer.py du résolveur. Il reste une opération explicite.
 - Les citations sans révision française, modifiées ou ambiguës ne sont pas
   automatiquement rattachées. Il ne faut pas inventer de révision.
-- Les règles actuelles de traduction demeurent inchangées. Une future
-  modification normative doit distinguer la provenance publiée de la
-  traduction IA, vérifier les références d'édition anglaises, les droits,
-  les doublons et conserver les contrôles existants de complétude et de rendu.
-- Les commandes n'écrivent ni dans les verrous français, ni dans les fiches de
-  traduction, ni dans les wikis. Ne pas employer un retour de ce module comme
-  attestation de publication ou de conformité.
+- Une traduction publiée ne peut être retenue qu'après les revues distinctes
+  et les contrôles de fidélité prévus par le § 7.4 de la norme.
+- Les commandes documentaires n'écrivent ni dans les verrous français ni
+  sur les wikis. La sélection locale ne modifie qu'une revue ouverte.
+  Un retour du résolveur n'est pas une autorisation de publication.
 
 Les tests ciblés emploient les fixtures de workspace du kit. Le test
 inter-dépôts utilise les vrais parseurs et registres avec des documents,
@@ -198,13 +195,12 @@ l'équivalence du rendu ni le repérage des chevauchements partiels et
 paraphrases sur tout le wiki. Le contrôle lexical inter-lots reste distinct.
 Aucune publication n'est autorisée sur la seule base de ce rapport.
 
-## Préparation de la migration vers les citations publiées
+## Préparer les preuves des citations publiées
 
-Le contrat expérimental est décrit dans docs/PROPOSED_PUBLISHED_QUOTE_CONTRACT.md
-à la racine du dépôt. Le module wikidebia_published_quote_review.py prépare
-les propositions et leurs revues sans modifier la traduction. Les règles
-actives de rendu et de publication restent inchangées : aucune proposition
-n'est une citation anglaise verrouillée ni un droit de publication.
+La norme distingue les passages publiés vérifiés des traductions IA.
+Le module wikidebia_published_quote_review.py prépare les propositions et
+leurs revues sans modifier la traduction. Aucune proposition n'est une
+citation anglaise verrouillée ni un droit de publication.
 
 
 Produire les candidats et fiches de revue privées :
@@ -228,7 +224,7 @@ L'échappement du wikicode qui exigerait une preuve de rendu est pour
 l'instant refusé, sans réécrire le passage. L'empreinte de la fiche reste
 liée à l'occurrence et au retour inspectés.
 
-## Contrôle final des doublons avant verrouillage anglais (expérimental)
+## Contrôle final des doublons avant verrouillage anglais
 
 Après production de l'index EN avec public_quote_index.py, importer son
 instantané privé et son empreinte de confiance :
@@ -236,17 +232,18 @@ instantané privé et son empreinte de confiance :
     python kit/scripts/wikidebia_quote_index_stage.py DEBAT --work-id WORK \
       --index EN_INDEX --sha256 EN_SHA
 
-Renseigner `quote_public_index_sha256` avec cette empreinte dans la revue
-anglaise de travail. Le profil de citation publiée exige cette preuve;
-un parcours IA historique peut l'utiliser sur option. La finalisation
+La revue utilise l'index local sélectionné, même sans recopier son SHA
+dans le brouillon. Toute nouvelle finalisation avec des citations
+exige un index complet et frais, même pour un parcours entièrement IA.
+Les revues historiques déjà scellées restent lisibles. La finalisation
 contrôle les textes réellement sélectionnés et écrit un diagnostic sans
 texte dans reports/en_quote_duplicate_audit.json. Un doublon exact bloque;
 les mêmes mots avec une forme différente demandent examen. Le validateur
 recalcule le reçu avec l'index embarqué dans le dossier privé de preuves.
 Le contrôle ne se substitue pas aux preuves de droits, de complétude, ni
 à la vérification du wiki public avant publication. Un instantané périmé
-avant application ou rendu doit être actualisé; l'automatisation du
-rafraîchissement sans refaire la revue sémantique reste à intégrer.
+avant application ou rendu doit être actualisé, sans refaire pour cette
+seule raison la revue sémantique.
 
 ### Actualiser l'index sans rouvrir la revue
 
@@ -258,10 +255,9 @@ recalcule le contrôle sur les mêmes citations avec l'instantané choisi le
 plus récent (ou l'original s'il est encore frais). Un doublon nouveau
 bloque; un retour à un index plus ancien est refusé. Les diagnostics sont
 conservés dans les audits privés. L'autorisation initiale enregistre le
-contrôle de prépublication. Les publications déjà autorisées et reprises
-restent régies par leur contrat de reprise existant; une vérification
-adaptée aux écritures partielles reste nécessaire avant activation. La
-production automatique de l'index est encore distincte de sa sélection.
+contrôle de prépublication. Une reprise d'écritures anglaises partielles
+exige le contrôle frais décrit ci-dessous. La collecte et la sélection
+de l'index restent distinctes des validations hors ligne.
 
 ## Sélection des propositions dans la revue anglaise ouverte
 
@@ -282,13 +278,12 @@ une citation déjà travaillée ou approuvée, sauf répétition strictement
 identique de la même sélection. Elle ne renseigne aucune attestation de
 complétude supplémentaire et ne change pas les statuts de revue ; il faut
 achever les contrôles éditoriaux habituels avant de finaliser. Aucun verrou
-FR, aucune revue scellée, aucune page wiki n'est modifié. Profil encore
-expérimental, non publiable.
+FR, aucune revue scellée, aucune page wiki n'est modifié.
 
 
 ## Collecte et actualisation en une commande
 
-Dans un environnement qui possède déjà le dépôt expérimental et les
+Dans un environnement qui possède déjà le dépôt du résolveur et les
 dépendances Python du résolveur :
 
     python kit/scripts/wikidebia_quote_index_collect.py DEBAT --work-id WORK \
@@ -309,9 +304,8 @@ cette tentative permet de reprendre. La sélection des propositions et
 la finalisation du brouillon utilisent le plus récent instantané
 sélectionné. Aucun appel réseau n'est ajouté aux étapes hors ligne.
 Exécuter cette commande avant la première publication pour renouveler
-l'index si nécessaire. L'autorisation historique d'une reprise reste
-distincte : le contrôle frais de ses écritures partielles n'est pas
-encore implémenté.
+l'index si nécessaire. Pour une reprise d'écritures partielles, appliquer
+le contrôle frais décrit dans la section suivante.
 
 
 ## Reprendre une publication anglaise partielle
@@ -334,19 +328,19 @@ Le contrôle est non atomique; il ne garantit pas l'absence de modifications
 concurrentes après la lecture ni ne distingue deux écritures strictement
 identiques du même compte. Il ne s'applique pas aux reprises en lecture
 seule, aux publications EN déjà accompagnées de leur reçu final, ni aux
-Works historiques sans contrôle global. Le profil publié reste expérimental.
+Works historiques sans contrôle global.
 
 
-## Unicité dans le futur parcours actif, même sans citation publiée
+## Unicité obligatoire, même sans citation publiée
 
 Le contrôle des doublons ne dépend pas de la réussite de la recherche MIA.
-Lors d'une nouvelle finalisation avec des citations, le futur profil actif
-exigera un index public complet et frais, y compris pour un Work entièrement
+Lors d'une nouvelle finalisation avec des citations, le profil actif
+exige un index public complet et frais, y compris pour un Work entièrement
 traduit par IA. Un index local déjà sélectionné est utilisé même si son SHA
 n'a pas été recopié dans le brouillon. Le reçu et le contrat d'unicité sont
 liés aux deux verrous EN et vérifiés par le validateur indépendant.
 Les revues historiques déjà scellées restent lisibles sans preuve inventée.
-L'activation générale reste volontairement bloquée dans cette branche.
+Les preuves historiques ne sont pas réécrites par la migration.
 
 
 ### Conservation des preuves dans les ZIP de revue
@@ -402,7 +396,7 @@ après retrait du dernier passage publié. La régénération intégrale d'un
 brouillon contenant ces preuves ou décisions est interdite.
 
 
-### Reprise du workflow normal après activation
+### Reprise du workflow normal
 
 Le workflow de haut niveau contrôle l'index public avant le réimport de
 la revue anglaise puis avant l'application et le rendu. Si la variable

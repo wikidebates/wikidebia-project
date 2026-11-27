@@ -1,6 +1,6 @@
 # Matrice de traçabilité des desiderata d'origine
 
-- **Révision :** 1.2.88
+- **Révision :** 1.2.89
 - **Objet :** montrer où chaque grande section des prompts d'origine est consolidée, modifiée ou remplacée.
 
 Les décisions ultérieures qui corrigent les prompts sont consignées dans `00_sources_reference/DECISIONS_CONVERSATION_CONSOLIDEES.md`.

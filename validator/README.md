@@ -1,3 +1,7 @@
+# Wikidéb’IA Validator 0.4.106
+
+Contrôle indépendant des preuves de citations publiées, des projections MediaWiki et de l'audit d'unicité des citations. Norme active : 1.2.89. Kit associé : 2.16.48.
+
 # Wikidéb’IA Validator 0.4.105
 
 Correctif de validation des rubriques historiques : la limite de quatre ne bloque

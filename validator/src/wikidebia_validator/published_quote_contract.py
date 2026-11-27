@@ -1,4 +1,4 @@
-"""Pure published quotation evidence contract (experimental v1).
+"""Pure published quotation evidence contract (v1).
 
 Identical implementation in kit and validator packages. No workspace,
 network, resolver or editorial authority is imported here. Validation checks
@@ -423,7 +423,7 @@ def proposal(candidate,expected_sha,review):
 EVIDENCE = "wikidebia-published-quote-evidence-1"
 # The draft lock format is exercised end-to-end before normative activation.
 # Neither installation of this module nor an editorial attestation enables it.
-ACTIVE = False
+ACTIVE = True
 
 
 def make_evidence(candidate,expected_sha,review):

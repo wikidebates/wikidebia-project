@@ -229,8 +229,10 @@ def test_mixed_origin_work_from_import_to_canonical_render_fixture(tmp_path,monk
     norm.write_text("# Synthetic test norm\n",encoding="utf-8")
     approve_fixture_placements(workspace)
     translated_before=common.full_tree_sha256(target)
-    # Production must remain blocked until coordinated activation.
-    assert contract.ACTIVE is False
+    # The release enables the new contract. Explicitly simulate the old
+    # disabled state to keep the negative rendering regression meaningful.
+    assert contract.ACTIVE is True
+    monkeypatch.setattr(contract,"ACTIVE",False)
     with pytest.raises(render.RenderError,match="non activé"):
         render.render_workspace(project,"debat_test",work_id,sealed["review_sha256"])
     assert not (workspace/"rendered-copy").exists()
@@ -250,7 +252,7 @@ def test_mixed_origin_work_from_import_to_canonical_render_fixture(tmp_path,monk
 
 
 def test_active_ai_only_finalization_requires_and_uses_latest_index(tmp_path, monkeypatch):
-    """Exercise the prospective active policy without enabling it in production."""
+    """Exercise the active policy even when every quote was translated by AI."""
     from datetime import datetime, timedelta, timezone
     from french_normalization_fixture import prepare_fixture_translation
     from test_wikidebia_translation_review import (
@@ -266,7 +268,7 @@ def test_active_ai_only_finalization_requires_and_uses_latest_index(tmp_path, mo
     prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     path = workspace / "reviews/en/translation_review.json"
-    monkeypatch.setattr(contract, "ACTIVE", True)
+    assert contract.ACTIVE is True
     before = path.read_bytes()
     with pytest.raises(translation.TranslationReviewError, match="missing_public_quote_index"):
         translation.finalize_review(project, "debat_test", work_id)

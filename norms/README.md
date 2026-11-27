@@ -1,3 +1,7 @@
+# Wikidéb’IA — Normes 1.2.89
+
+Révision du 27 novembre 2026 : préférence pour les traductions publiées vérifiées, deux modalités documentaires, contrôle des doublons et provenance des preuves. Validateur 0.4.106 / kit 2.16.48. L'ancienne révision 1.2.88 est conservée à l'identique dans l'historique.
+
 # Wikidéb’IA — Normes 1.2.88
 
 **Maintenance d’implémentation courante : validateur 0.4.105 / kit 2.16.47.** La révision 1.2.88 consacre la décision propriétaire selon laquelle la page anglaise `Debate` doit être créée avant les pages `Argument` lors de la publication finale. Une publication partielle déjà commencée n’est jamais réécrite : le nouveau plan place `Debate` avant les seules créations restantes.

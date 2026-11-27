@@ -1,3 +1,7 @@
+# Wikidéb’IA Kit 2.16.48
+
+Récupération des citations anglaises publiées en modes anticipé et intégré, preuves d'occurrence, protection de la mémoire et contrôle des doublons pour toute nouvelle traduction avec citations. Voir [le guide du résolveur](GUIDE_QUOTE_RESOLVER_BRIDGE.md). Compatible avec le validateur 0.4.106 et la norme 1.2.89 ; les anciens Works scellés restent lisibles.
+
 
 ## Publication finale préparée, sans écriture automatique
 

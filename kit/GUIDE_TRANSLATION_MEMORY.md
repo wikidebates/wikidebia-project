@@ -56,7 +56,7 @@ Work et les attestations de relecture ne sont jamais copiés. Une traduction
 différente déjà approuvée pour la même valeur source bloque la commande.
 
 
-## Citations anglaises issues d'une édition publiée (profil expérimental)
+## Citations anglaises issues d'une édition publiée
 
 Le texte publié et son dossier de preuve sont liés à l'occurrence, au verrou
 français, à l'édition anglaise et aux décisions de revue. Ils ne sont pas

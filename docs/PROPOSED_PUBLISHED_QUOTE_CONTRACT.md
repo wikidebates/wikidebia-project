@@ -1,6 +1,6 @@
 # Proposition expérimentale : provenance des citations anglaises publiées
 
-**Statut : projet de contrat, non actif en production.** Les sources normatives de la branche expérimentale contiennent le candidat de migration (notamment le § 7.4 et RND-003/004/006–008/010/011). Main conserve les règles antérieures. Le garde-fou `ACTIVE=False` est maintenu tant que les préconditions techniques, les métadonnées de livraison et la validation conjointe ne sont pas satisfaites.
+**Historique de conception expérimentale, conservé pour la traçabilité.** Le candidat 1.2.89 / 0.4.106 / 2.16.48 active le contrat dans les deux composants sur la PR de migration ; il ne peut être fusionné ou déployé avant validation complète et export vérifié de ce candidat. Les procédures courantes sont dans le § 7.4 de la norme et `kit/GUIDE_QUOTE_RESOLVER_BRIDGE.md`. Les descriptions de phases inactives ci-dessous retracent les étapes antérieures, pas l'état du nouveau candidat.
 
 ## Deux provenances, une seule occurrence source
 
@@ -262,3 +262,8 @@ avec revalidation puis revue dans le Work cible.
 - La condition d'activation a été raccordée à la finalisation : même un Work sans passage publié exige un index si le profil est actif. Le marqueur d'unicité est lié aux deux verrous EN, et le test de la future activation doit réussir sans modifier la constante de production.
 - Vérifier la conservation des preuves dans les échanges de revue et les contrôles indépendants du validateur, y compris les refus sur provenance ou index absents.
 - Actualiser les capacités déclarées et les rapports/manifeste/reçus des trois composants ; générer la source unifiée à partir des archives réellement produites. Aucune activation ni fusion avant CI complète verte.
+
+
+## Migration d'activation proposée
+
+La révision normative 1.2.88 de main est archivée à l'identique. Le candidat 1.2.89 associe le kit 2.16.48 et le validateur 0.4.106 ; les deux exemplaires du contrat sont activés ensemble. Les tests de la politique inactive restent explicites pour les anciens cas, et les nouveaux contrôles doivent réussir avec le défaut actif. La CI et les exports du candidat sont des préconditions de fusion, pas des preuves anticipées. L'installation du résolveur épinglé et la configuration du chemin local doivent être vérifiées avant une traduction réelle.

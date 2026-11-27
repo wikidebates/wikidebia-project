@@ -1,3 +1,10 @@
+## 2.16.48 — 27 novembre 2026 — récupération et unicité des citations anglaises
+
+- réutilise les reçus anticipés ou effectue la recherche intégrée ;
+- protège la provenance, les fiches de revue et la mémoire générique ;
+- contrôle toutes les nouvelles citations, avec index frais et reprise documentaire sans nouvelle convergence ;
+- conserve les anciens contrats scellés et l'autorisation explicite de publication.
+
 ## Correctif du 14 novembre 2026 — adoption contrôlée d’un Work restauré
 
 - permet à un workflow initial sans `work_id` d’adopter explicitement un Work
