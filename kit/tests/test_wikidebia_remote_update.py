@@ -1812,3 +1812,13 @@ def test_remote_update_plan_respects_existing_prefetch_hook(tmp_path):
     plan = module.RemoteUpdatePlanner(config, adapter, path).build_plan()
     assert plan["counts"]["skip"] == 1
     assert adapter.prefetch_calls == 1
+
+
+def test_relation_rendering_guard_allows_only_exact_ligature_expansion():
+    old = '{{Argument|résumé=Une œuvre.|objections={{Objection|page=L’œuvre|titre-affiché=Œuvre et eﬀet}}}}'
+    corrected = old.replace('page=L’œuvre', 'page=L’oeuvre').replace('titre-affiché=Œuvre et eﬀet', 'titre-affiché=OEuvre et effet')
+    module.assert_relation_rendering_safe(old, corrected, 'fr', 'argument')
+    with pytest.raises(module.UpdateError, match='Ligature'):
+        module.assert_relation_rendering_safe(old, old, 'fr', 'argument')
+    with pytest.raises(module.UpdateError, match='Modification silencieuse'):
+        module.assert_relation_rendering_safe(old, corrected.replace('OEuvre et effet', 'Autre libellé'), 'fr', 'argument')

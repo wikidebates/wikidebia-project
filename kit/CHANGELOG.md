@@ -1,3 +1,8 @@
+## 2.16.49 — 27 novembre 2026 — ligatures des titres français
+
+- Déligaturage contrôlé des titres français et des libellés relationnels au premier checkpoint ; aucun changement des citations, des résumés ni des références.
+- Conserve les protections historiques et les garde-fous de publication.
+
 ## Correctif du 14 novembre 2026 — adoption contrôlée d’un Work restauré
 
 - permet à un workflow initial sans `work_id` d’adopter explicitement un Work

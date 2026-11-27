@@ -311,6 +311,7 @@ def relation_labels_from_source(
     source: Path,
     *,
     exclude_target_node_ids: set[str] | None = None,
+    correct_title_ligatures: bool = False,
 ) -> list[dict[str,Any]]:
     from wikidebia_translation_review import TranslationReviewError
     registry,debate,arguments=_source_imports(source)
@@ -391,6 +392,10 @@ def relation_labels_from_source(
             )
         if not source_text:raise TranslationReviewError('Titre affiché français relationnel absent : '+str(edge.get('id')))
         result.append(dict(id='edge:'+str(edge['id']),source_page_id=parent_id,target_node_id=child_id,relation=relation,source_text=source_text))
+    if correct_title_ligatures:
+        from wikidebia_title_structure import split_title_ligatures
+        for row in result:
+            row['source_text'] = split_title_ligatures(row['source_text'])
     excluded = exclude_target_node_ids or set()
     return [row for row in result if str(row.get('target_node_id') or '') not in excluded]
 
@@ -447,7 +452,12 @@ def freeze_imported_source(project_root: Path, debate_id: str, work_id: str, *, 
         raise TranslationReviewError('Les pages françaises nouvelles doivent suivre la revue de création')
     if (source/'output').exists():
         raise TranslationReviewError('Le gel ne reprend pas de pages finales')
-    relation_labels_from_source(frozen_source)  # The reviewed graph must still match the imported pages.
+    labels = relation_labels_from_source(frozen_source)
+    from wikidebia_title_structure import split_title_ligatures
+    invalid = [row['id'] for row in labels if split_title_ligatures(row['source_text']) != row['source_text']]
+    if invalid:
+        shutil.rmtree(temporary)
+        raise TranslationReviewError("Libellés français avec ligatures : corriger au checkpoint graphe/titres avant traduction : " + ", ".join(invalid[:10]))
     metadata = copy.deepcopy(title_lock)
     by_id = {r['entity_id']:r for r in metadata['arguments']}
     stamp = now_iso()

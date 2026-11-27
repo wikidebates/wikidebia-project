@@ -22,7 +22,7 @@ from typing import Any, Iterable
 
 from wikidebia_graph_extract import _split_top_level, iter_templates, normalize_key, parse_template
 from wikidebia_workflow_baseline import WorkflowBaselineError, resolve_workflow_release_baseline
-from wikidebia_title_structure import canonical_title_structure_issues
+from wikidebia_title_structure import canonical_title_structure_issues, split_title_ligatures
 from wikidebia_retro_tag import manual_tag_preflight, apply_manual_tag, RetroTagError
 
 # Import the publication adapter without requiring installation as a package.
@@ -256,14 +256,25 @@ def assert_relation_rendering_safe(
     all old labels; and a pure removal may only remove old labels.
     """
     new = _relation_displayed_titles(new_text, language, page_type)
+    if language == "fr":
+        _, _, params = top_level_parameter_map(new_text, language, page_type)
+        for parameter, template_name, displayed_parameter in RELATION_PARAMETER_LAYOUT[(language, page_type)]:
+            for call in iter_templates(params.get(parameter, "")):
+                if normalize_key(call.name) != normalize_key(template_name):
+                    continue
+                for field in ("page", displayed_parameter):
+                    value = call.get(field)
+                    if split_title_ligatures(value) != value:
+                        raise UpdateError(f"Ligature interdite dans {parameter}.{field} : {value}")
     if old_text is None or language != "fr":
         return
     # A historical page may itself contain the legacy empty parameter that
     # this update removes.  Reject it only in the proposed text.
     old = _relation_displayed_titles(old_text, language, page_type, reject_empty=False)
     for parameter in old:
-        before = Counter(old[parameter])
         after = Counter(new[parameter])
+        # Retained labels may undergo only the exact spelling correction.
+        before = Counter((present, split_title_ligatures(value)) for present, value in old[parameter])
         before_count = sum(before.values())
         after_count = sum(after.values())
         if before_count == after_count:

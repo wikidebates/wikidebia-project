@@ -12,6 +12,7 @@ from __future__ import annotations
 
 from wikidebia_release_info import KIT_VERSION
 from wikidebia_keyword_policy import keyword_identity_fr, lowercase_keyword_initial
+from wikidebia_title_structure import split_title_ligatures
 
 import argparse
 import collections
@@ -115,7 +116,7 @@ def title_diagnostics(canonical: str, displayed: str, *, enforce_creation_form: 
             issues.append({"code": "TITLE_CANONICAL_ELLIPSIS", "severity": "blocking", "field": "canonical_title"})
         if canonical.casefold().startswith(CONTEXT_DEPENDENT_STARTS):
             issues.append({"code": "TITLE_CANONICAL_POSSIBLE_CONTEXT_DEPENDENCY", "severity": "review", "field": "canonical_title"})
-        if enforce_creation_form and "œ" in canonical.casefold():
+        if split_title_ligatures(canonical) != canonical:
             issues.append({"code": "TITLE_CANONICAL_OE_LIGATURE", "severity": "blocking", "field": "canonical_title"})
     if not displayed.strip():
         issues.append({"code": "TITLE_DISPLAYED_MISSING", "severity": "blocking", "field": "displayed_title"})
@@ -128,7 +129,7 @@ def title_diagnostics(canonical: str, displayed: str, *, enforce_creation_form: 
             issues.append({"code": "TITLE_DISPLAYED_NON_ASCII_QUOTES", "severity": "correction", "field": "displayed_title"})
         if any(mark in displayed for mark in ELLIPSES):
             issues.append({"code": "TITLE_DISPLAYED_ELLIPSIS", "severity": "blocking", "field": "displayed_title"})
-        if enforce_creation_form and "œ" in displayed.casefold():
+        if split_title_ligatures(displayed) != displayed:
             issues.append({"code": "TITLE_DISPLAYED_OE_LIGATURE", "severity": "blocking", "field": "displayed_title"})
         words = token_words(displayed)
         if words and words[-1].casefold() in TRAILING_CONNECTORS:
@@ -287,6 +288,8 @@ def page_review_item(
     issues: list[dict[str, Any]] = []
     if entity_type == "argument":
         issues.extend(title_diagnostics(canonical_title, displayed_title or "", enforce_creation_form=False))
+    elif split_title_ligatures(canonical_title) != canonical_title:
+        issues.append({"code": "TITLE_CANONICAL_OE_LIGATURE", "severity": "blocking", "field": "canonical_title"})
     issues.extend(rubrique_diagnostics(rubriques, "rubrique" in fallback_kinds, enforce_creation_count=False))
     issues.extend(keyword_diagnostics(keywords, "mot-clé" in fallback_kinds, entity_type))
     return {
@@ -310,7 +313,7 @@ def page_review_item(
         "diagnostic_summary": issue_summary(issues),
         "review": {
             "status": "pending",
-            "canonical_title_decision": "pending" if entity_type == "argument" else "not_applicable",
+            "canonical_title_decision": "pending" if entity_type == "argument" or split_title_ligatures(canonical_title) != canonical_title else "not_applicable",
             "proposed_canonical_title": None,
             "canonical_title_rationale": "",
             "displayed_title_decision": "keep" if entity_type == "argument" else "not_applicable",

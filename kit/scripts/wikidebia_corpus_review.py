@@ -220,11 +220,20 @@ def finalize_review(
     accepted_source_sha = reviewed_source_sha if reviewed_source_sha in compatible_legacy_build_payload_sha256s(build) else source_sha
     envelope_errors = verify_review_envelope(review, debate_id=debate_id, source_sha256=accepted_source_sha)
     if preserve_imported_source:
-        from wikidebia_translation_source import verify_imported_graph
+        from wikidebia_translation_source import verify_imported_graph, relation_labels_from_source
+        from wikidebia_title_structure import split_title_ligatures
 
         if review.get("decision") != "approved" or len(str(review.get("notes") or "").strip()) < 30:
             raise CorpusBuildError("La conservation du graphe exige une décision et sa justification explicite")
         verify_imported_graph(build, registry)
+        titles = [registry['debate']['pages']['fr']['canonical_title']]
+        for node in registry['graph']['nodes']:
+            if node.get('status') == 'active':
+                titles.extend((node.get('fr') or {}).get(field) or '' for field in ('canonical_title', 'displayed_title'))
+        titles.extend(row['source_text'] for row in relation_labels_from_source(build))
+        invalid = [title for title in titles if split_title_ligatures(title) != title]
+        if invalid:
+            raise CorpusBuildError("Titres français avec ligatures : utiliser le parcours ordinaire de revue graphe/titres avant traduction : " + repr(invalid[:5]))
     elif review.get("preserved_placements_sha256"):
         raise CorpusBuildError("La revue conserve le graphe publié pour traduction")
     placement_errors = placement_review_issues(

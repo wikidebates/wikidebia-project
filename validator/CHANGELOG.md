@@ -1,3 +1,8 @@
+## 0.4.107 — 27 novembre 2026 — ligatures des titres français
+
+- WDV-GRA-016 contrôle les ligatures françaises dans les noms de pages, titres affichés et relations rendues, sans réécrire les sources.
+- Conserve les protections historiques et les garde-fous de publication.
+
 ## 0.4.73 — 10 août 2026 — alignement des métadonnées de première publication anglaise
 
 - ne projette plus `initialisation` vers `initialization` dans le chemin `translated_english` d’une nouvelle page ;

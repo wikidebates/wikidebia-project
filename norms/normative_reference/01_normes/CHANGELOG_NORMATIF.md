@@ -811,3 +811,9 @@ Toutes les exigences 1.1.6 restent actives sauf contradiction explicite ci-dessu
 - Lie la preuve au verrou et à l'occurrence ; maintient séparément les revues d'édition, de droits et de complétude, la convergence et l'autorisation de publication.
 - Prépare les deux modalités documentaires à reçus communs ; interdit l'introduction de citations identiques entre pages distinctes et protège les preuves contre la mémoire générique.
 - Migration coordonnée avec le kit 2.16.48 et le validateur 0.4.106 ; les archives antérieures restent immuables.
+
+## 1.2.90 — 27 novembre 2026 — accessibilité des titres français au clavier
+
+- Dissociation obligatoire des ligatures dans les noms de pages et titres affichés, y compris chaque libellé historique ; aucune translittération générale.
+- Contrôle WDV-GRA-016 avant/après verrou et sur les relations rendues ; correction au premier checkpoint, sans modification des citations ni des textes hors titres.
+- Validateur 0.4.107 et kit 2.16.49.

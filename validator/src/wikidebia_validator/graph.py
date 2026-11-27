@@ -11,6 +11,19 @@ from .package import PackageContext
 
 
 
+# Explicit keyboard-friendly expansions; never apply Unicode compatibility
+# normalization to arbitrary text or strip French accents.
+TITLE_LIGATURES = str.maketrans({
+    "œ": "oe", "Œ": "OE", "æ": "ae", "Æ": "AE",
+    "ﬀ": "ff", "ﬁ": "fi", "ﬂ": "fl", "ﬃ": "ffi", "ﬄ": "ffl",
+    "ﬅ": "st", "ﬆ": "st",
+})
+
+
+def split_title_ligatures(value: str) -> str:
+    return value.translate(TITLE_LIGATURES)
+
+
 CONTEXTUAL_TITLE_PATTERNS = {
     "fr": {
         "initial": re.compile(r"^(?:(?:Il|Elle|Ils|Elles|Cela|Ceci|Ça|Celui(?:-ci|-là)?|Celle(?:-ci|-là)?)\b|(?:Ce|Cet|Cette|Ces)\s+(?!(?:que|qui|dont)\b)[a-zà-öø-ÿ][\w'’-]*)", re.I),
@@ -320,32 +333,40 @@ def validate_graph(ctx: PackageContext) -> None:
     for lang in ("fr", "en"):
         seen: dict[str, str] = {}
         title_reporter = ctx.report.error if title_policy_locked[lang] else ctx.report.warning
+        ligature_locked = title_policy_locked[lang] or state_at_least(status, "fr_validated")
         debate_title = (((registry.get("debate") or {}).get("pages") or {}).get(lang) or {}).get("canonical_title")
-        if debate_title and (debate_title.endswith(".") or any(ch in debate_title for ch in "’‘ʼ＇")):
-            title_reporter(
+        debate_ligature = bool(lang == "fr" and debate_title and split_title_ligatures(debate_title) != debate_title)
+        if debate_title and (
+            debate_title.endswith(".") or any(ch in debate_title for ch in "’‘ʼ＇")
+            or debate_ligature
+        ):
+            (ctx.report.error if debate_ligature and ligature_locked else title_reporter)(
                 "WDV-GRA-016",
                 f"Titre de débat {lang} non conforme : {debate_title}",
                 path=ctx.core_paths()["registry"],
                 pointer=f"/debate/pages/{lang}/canonical_title",
-                details={"deferred_until_metadata_lock": not title_policy_locked[lang]},
+                details={"deferred_until_metadata_lock": not (ligature_locked if debate_ligature else title_policy_locked[lang]),
+                         **({"suggested_title": split_title_ligatures(debate_title)} if debate_ligature else {})},
             )
         for node in nodes:
             language_data = node.get(lang) or {}
             title = language_data.get("canonical_title")
             displayed_title = language_data.get("displayed_title")
             for field_name, field_value in (("canonical_title", title), ("displayed_title", displayed_title)):
-                if field_value and (field_value.endswith(".") or any(ch in field_value for ch in "’‘ʼ＇")):
-                    if field_name == "displayed_title" and _locked_preexisting_displayed_title(
+                ligature_issue = bool(lang == "fr" and field_value and split_title_ligatures(field_value) != field_value)
+                if field_value and (field_value.endswith(".") or any(ch in field_value for ch in "’‘ʼ＇") or ligature_issue):
+                    if not ligature_issue and field_name == "displayed_title" and _locked_preexisting_displayed_title(
                         ctx, str(node.get("id")), lang, field_value,
                         _entry_index=historical_title_index,
                     ):
                         continue
-                    title_reporter(
+                    (ctx.report.error if ligature_issue and ligature_locked else title_reporter)(
                         "WDV-GRA-016",
                         f"Titre {lang} non conforme : {field_value}",
                         path=ctx.core_paths()["registry"],
                         pointer=f"/graph/nodes/{node.get('id')}/{lang}/{field_name}",
-                        details={"deferred_until_metadata_lock": not title_policy_locked[lang], "title_field": field_name},
+                        details={"deferred_until_metadata_lock": not (ligature_locked if ligature_issue else title_policy_locked[lang]), "title_field": field_name,
+                                 **({"suggested_title": split_title_ligatures(field_value)} if ligature_issue else {})},
                     )
             if not title:
                 continue

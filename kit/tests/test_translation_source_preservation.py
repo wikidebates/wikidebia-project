@@ -268,6 +268,13 @@ def test_duplicate_relations_to_same_target_keep_each_contextual_label(tmp_path,
 
     assert [row['source_text'] for row in rows] == ['Premier contexte', 'Second contexte']
     assert [row['id'] for row in rows] == ['edge:E00001', 'edge:E00002']
+    path = source / 'argument.wiki'
+    path.write_text(path.read_text().replace('Premier contexte', 'Première œuvre').replace('Second contexte', 'Second cœur'), encoding='utf-8')
+    original = path.read_bytes()
+    corrected = preservation.relation_labels_from_source(source, correct_title_ligatures=True)
+    assert [row['source_text'] for row in corrected] == ['Première oeuvre', 'Second coeur']
+    assert [row['id'] for row in corrected] == ['edge:E00001', 'edge:E00002']
+    assert path.read_bytes() == original
 
 def test_historical_numbers_do_not_acquire_a_false_verification(tmp_path):
     project,workspace,work_id=prepared(tmp_path);complete_content_review(workspace)
@@ -397,3 +404,9 @@ def test_pure_interlanguage_render_rejects_stale_dated_import(tmp_path):
     with pytest.raises(RenderError, match="date de création obsolète"):
         _render_preserved_french(tmp_path, locked, "English title")
     assert p.read_text(encoding="utf-8") == raw
+
+
+def test_ligature_expansion_preserves_accents_and_other_characters():
+    from wikidebia_title_structure import split_title_ligatures
+
+    assert split_title_ligatures('œ Œ æ Æ ﬀ ﬁ ﬂ ﬃ ﬄ ﬅ ﬆ é è ê à ç ß') == 'oe OE ae AE ff fi fl ffi ffl st st é è ê à ç ß'

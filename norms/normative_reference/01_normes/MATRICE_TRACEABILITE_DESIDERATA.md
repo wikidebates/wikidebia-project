@@ -1,6 +1,6 @@
 # Matrice de traçabilité des desiderata d'origine
 
-- **Révision :** 1.2.89
+- **Révision :** 1.2.90
 - **Objet :** montrer où chaque grande section des prompts d'origine est consolidée, modifiée ou remplacée.
 
 Les décisions ultérieures qui corrigent les prompts sont consignées dans `00_sources_reference/DECISIONS_CONVERSATION_CONSOLIDEES.md`.
@@ -504,3 +504,5 @@ La revue des audits du 9 août 2026 montre que plusieurs pertes sémantiques ava
 ## Clarification du 26 novembre 2026 — citations publiées et unicité
 
 RND-003, RND-004 et RND-006 distinguent la provenance IA de la provenance publiée ; RND-007 et RND-008 maintiennent la complétude dans les deux cas. RND-010 interdit les nouveaux doublons entre pages distinctes et exige le contrôle des citations effectivement retenues. RND-011 interdit la perte de provenance par transport dans la mémoire générique. Le § 7.4 de la norme consolidée et les profils de rendu et de workflow portent ces règles ; les formulations historiques ci-dessus restent des traces de provenance.
+
+- TTL-020 : accessibilité des titres français au clavier, y compris libellés historiques et relations rendues (norme § 4.2, WDV-GRA-016).
