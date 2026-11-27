@@ -288,3 +288,65 @@ def test_field_export_refuses_divergent_target_after_unrelated_revision(tmp_path
 
     with pytest.raises(memory.TranslationMemoryError, match="Traductions de champ divergentes"):
         memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
+
+
+def _mark_published(citation):
+    # Synthetic provenance; this test exercises transport policy, not rights.
+    citation.update(translation_origin="published_translation",
+                    translated_citation="Published edition, exact passage.",
+                    published_quote_evidence={"synthetic_occurrence_proof": True})
+
+
+def test_published_quote_never_exported_as_portable_text(tmp_path, monkeypatch):
+    project, _, path, _, _ = _fixture(tmp_path, monkeypatch)
+    review = json.loads(path.read_text())
+    translation = review["arguments"][0]["translation"]
+    _mark_published(translation["citations"][0])
+    review["review_sha256"] = memory.translation_review_sha256(review)
+    path.write_text(json.dumps(review), encoding="utf-8")
+    result = memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
+    assert result["pages_excluded_from_full_memory"] == 1
+    assert result["entries"] == 1
+    assert result["field_entries"] == 4
+    for obj in (project / "translation-memory").rglob("*.json"):
+        assert "Published edition, exact passage." not in obj.read_text()
+        assert "synthetic_occurrence_proof" not in obj.read_text()
+    assert memory.verify_memory(project, Path("translation-memory"))["status"] == "valid"
+
+
+def test_existing_ai_memory_cannot_overwrite_selected_published_quote(tmp_path, monkeypatch):
+    project, workspace, path, _, _ = _fixture(tmp_path, monkeypatch)
+    memory.export_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
+    review = json.loads(path.read_text())
+    review.update(status="draft", review_sha256=None)
+    translation = review["arguments"][0]["translation"]
+    translation.update(status="pending", summary="")
+    citation = translation["citations"][0]
+    _mark_published(citation)
+    citation["status"] = "pending"
+    expected = dict(citation)
+    path.write_text(json.dumps(review), encoding="utf-8")
+    result = memory.reuse_review(project, "debat_test", "EDIT-TEST-001", Path("translation-memory"))
+    updated = json.loads(path.read_text())["arguments"][0]["translation"]
+    assert result["pages_protected_by_citation_evidence"] == 1
+    assert updated["status"] == "pending"
+    assert updated["citations"][0] == expected
+    assert updated["summary"] == "Translated one"
+    receipt = json.loads((workspace / "audits/translation-memory/field-reuse.json").read_text())
+    assert not any(row["page_id"] == "A1" and row["field_kind"] == "citation"
+                   for row in receipt["reused"])
+
+
+@pytest.mark.parametrize("marker", [
+    {"translation_origin": "future_unknown_origin"},
+    {"translation_origin": "ai_translation", "published_quote_evidence": {}},
+])
+def test_unknown_or_conflicting_quote_origin_is_nonportable(marker):
+    citation = {"id": "A1-C001", "source": {"citation": "Texte cité"},
+                "translated_citation": "Quoted text", **marker}
+    translation = {"citations": [citation]}
+    assert memory._field_candidates({}, {}, translation) == []
+    with pytest.raises(memory.TranslationMemoryError, match="non portable"):
+        memory._portable_translation(translation)
+    assert memory._apply_field_candidate(translation, "citation", "Texte cité", "Replacement") is None
+    assert citation["translated_citation"] == "Quoted text"

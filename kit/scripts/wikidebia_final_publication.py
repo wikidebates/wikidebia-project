@@ -1103,7 +1103,13 @@ def _migrate_english_publication_order(
         new_plans = dict(plans)
         new_plans.update({"en_config_path": en_config_path, "en_config": en_config, "en_plan": new_plan})
         new_preflight = _preflight(project_root, state_dir, new_plans)
-        new_authorization = _authorization(state_dir, baseline, new_preflight)
+        # Preserve the exact legacy call and authorization shape when the
+        # Work has not opted into the new quotation contract.
+        quote_kwargs = ({"quote_check": authorization["quote_duplicate_preflight"],
+                         "quote_authorized_at": authorization.get("quote_duplicate_authorized_at",
+                                                                   authorization["authorized_at"])}
+                        if "quote_duplicate_preflight" in authorization else {})
+        new_authorization = _authorization(state_dir, baseline, new_preflight, **quote_kwargs)
         audit = {
             "schema": "wikidebia-final-publication-order-migration-1.0", "schema_version": "1.0",
             "debate_id": debate_id, "migrated_at": now_iso(),
@@ -1191,7 +1197,13 @@ def _migrate_english_plan_after_kit_change(
             "en_plan": new_plan,
         })
         new_preflight = _preflight(project_root, state_dir, new_plans)
-        new_authorization = _authorization(state_dir, baseline, new_preflight)
+        # Preserve the exact legacy call and authorization shape when the
+        # Work has not opted into the new quotation contract.
+        quote_kwargs = ({"quote_check": authorization["quote_duplicate_preflight"],
+                         "quote_authorized_at": authorization.get("quote_duplicate_authorized_at",
+                                                                   authorization["authorized_at"])}
+                        if "quote_duplicate_preflight" in authorization else {})
+        new_authorization = _authorization(state_dir, baseline, new_preflight, **quote_kwargs)
         audit = {
             "schema": "wikidebia-final-publication-kit-change-migration-1.0",
             "schema_version": "1.0",
@@ -1212,9 +1224,73 @@ def _migrate_english_plan_after_kit_change(
         return new_plans, new_preflight, new_authorization
 
 
+def _quote_preflight(project_root, debate_id, work_id, release_copy):
+    """A refreshed quotation check is independent of the signed semantic review.
+
+    For legacy Works the helper is a no-op. On first authorization, compute
+    it before any remote writes. An already authorized interrupted plan must
+    use the existing recovery contract; its own newly created pages must
+    not be treated as an unrelated duplicate merely because of a retry.
+    """
+    from wikidebia_quote_index_contract import QuoteIndexError
+    from wikidebia_quote_index_stage import package_audit
+    from wikidebia_editorial_review import _workspace_path
+    # Do not require an editorial workspace on a legacy publication path.
+    try:
+        # Resolve and validate the Work path before the first private write.
+        # The legacy path never needs to resolve a workspace.
+        return package_audit(lambda: _workspace_path(project_root,debate_id,work_id),
+                             release_copy)
+    except (ValueError,RuntimeError,OSError,KeyError,TypeError,AttributeError) as exc:
+        reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
+        raise FinalPublicationError("Contrôle des doublons avant publication : "+reason) from exc
+
+
+def _verify_quote_authorization(project_root,debate_id,work_id,release_copy,baseline,authorization):
+    from wikidebia_quote_index_contract import QuoteIndexError
+    from wikidebia_quote_index_stage import authorized_package_audit
+    from wikidebia_editorial_review import _workspace_path
+    try:
+        result = authorized_package_audit(lambda: _workspace_path(project_root,debate_id,work_id),
+                                          release_copy,authorization)
+        if result is not None:
+            # The old authorization cannot be transplanted onto a different
+            # release, even one with identical quotation hashes.
+            expected = (baseline.get("release") or {}).get("release_copy_tree_sha256")
+            if not expected or full_tree_sha256(release_copy) != expected:
+                raise QuoteIndexError("authorized_quote_release_tree_changed")
+        return result
+    except (ValueError,RuntimeError,OSError,KeyError,TypeError,AttributeError) as exc:
+        reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
+        raise FinalPublicationError("Reprise du contrôle des citations : "+reason,
+                                    remote_execution_started=True) from exc
+
+
+def _fresh_quote_resume(project_root,debate_id,work_id,release_copy,authorization,plans):
+    from wikidebia_quote_index_contract import QuoteIndexError
+    from wikidebia_quote_index_stage import _package_inputs
+    from wikidebia_quote_resume import audit
+    from wikidebia_editorial_review import _workspace_path
+    try:
+        # Do not initialize an adapter or resolve the workspace for legacy
+        # publications. Verification-only and completed EN paths bypass this.
+        if _package_inputs(release_copy) is None:
+            return None
+        adapter = build_adapter(dict(plans["en_config"]),project_root)
+        publisher = GenericPublisher(dict(plans["en_config"]),adapter,Path(plans["en_config_path"]))
+        return audit(lambda:_workspace_path(project_root,debate_id,work_id),
+                     release_copy,authorization,dict(plans["en_plan"]),publisher)
+    except (ValueError,RuntimeError,OSError,KeyError,TypeError,AttributeError) as exc:
+        reason=str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
+        raise FinalPublicationError("Contrôle frais des doublons à la reprise : "+reason,
+                                    remote_execution_started=True) from exc
+
+
 def _authorization(
     state_dir: Path, baseline: Mapping[str, Any], preflight: Mapping[str, Any],
     *, revalidation: Mapping[str, Any] | None = None,
+    quote_check: Mapping[str, Any] | None = None,
+    quote_authorized_at: str | None = None,
 ) -> dict[str, Any]:
     value = {
         "schema": AUTHORIZATION_SCHEMA,
@@ -1229,6 +1305,13 @@ def _authorization(
     if revalidation is not None:
         value["preflight_revalidated_at"] = revalidation["checked_at"]
         value["revalidated_preflight_sha256"] = revalidation["preflight_sha256"]
+    if quote_check is not None:
+        # The documentary check has microsecond precision. Truncating the
+        # authorization time to seconds would sometimes make it predate
+        # its own immediately preceding check.
+        value["authorized_at"] = dt.datetime.now(dt.timezone.utc).isoformat()
+        value["quote_duplicate_preflight"] = copy.deepcopy(quote_check)
+        value["quote_duplicate_authorized_at"] = quote_authorized_at or value["authorized_at"]
     value["authorization_sha256"] = _canonical(value, "authorization_sha256")
     write_json(state_dir / "authorization.json", value)
     return value
@@ -1247,6 +1330,7 @@ def prepare_final_release(
         raise FinalPublicationError("Une migration est à reprendre avec le préflight approuvé", remote_execution_started=True)
     if (state_dir / "authorization.json").exists():
         raise FinalPublicationError("Publication déjà autorisée : reprendre avec le plan autorisé")
+    _quote_preflight(project_root,debate_id,work_id,release_copy)
     preparation_path = state_dir / "publication-preparation.json"
     if preparation_path.is_file():
         existing = load_json(preparation_path, "préparation de publication")
@@ -1428,6 +1512,7 @@ def publish_final_release(
 
     authorization_path = state_dir / "authorization.json"
     remote_started = authorization_path.is_file()
+    resuming = remote_started
     verified_receipts = None
     try:
         if remote_started:
@@ -1444,6 +1529,7 @@ def publish_final_release(
                     or authorization.get("preflight_sha256") != preflight.get("preflight_sha256")
                     or authorization.get("baseline_sha256") != baseline.get("baseline_sha256")):
                 raise FinalPublicationError("Autorisation finale sauvegardée invalide", remote_execution_started=True)
+            _verify_quote_authorization(project_root,debate_id,work_id,release_copy,baseline,authorization)
         else:
             if verify_only:
                 raise FinalPublicationError("La reprise en lecture seule exige une publication déjà autorisée")
@@ -1453,7 +1539,9 @@ def publish_final_release(
             )
             if baseline["fr"]["mode"] == PRESERVED_IMPORT_MODE:
                 _verify_preserved_preflight(release_copy, baseline, preflight)
-            authorization = _authorization(state_dir, baseline, preflight, revalidation=revalidation)
+            quote_check = _quote_preflight(project_root,debate_id,work_id,release_copy)
+            authorization = _authorization(state_dir, baseline, preflight, revalidation=revalidation,
+                                           quote_check=quote_check)
             remote_started = True
 
         if verify_only:
@@ -1476,6 +1564,8 @@ def publish_final_release(
             plans, preflight, authorization = _migrate_english_plan_after_kit_change(
                 project_root, debate_id, release_copy, state_dir, baseline, plans, preflight, authorization
             )
+            if resuming:
+                _fresh_quote_resume(project_root,debate_id,work_id,release_copy,authorization,plans)
         if verified_receipts is not None:
             en_receipt = verified_receipts[0]
         elif en_receipt_path.is_file():

@@ -572,7 +572,7 @@ Bibliography is the normal documentary category, but source priority follows the
 
 No scientific-source hierarchy is imposed on an argument for which it is not suitable. Webliography and videography remain complementary and must provide substantive value that cannot be represented more appropriately by a written publication.
 
-Under revisions earlier than 1.2.27, quotes were not generated. Since 1.2.27, only imported, reviewed and locked citations are rendered in `quotes=` using the `Quote` model; no quote may be invented during rendering. From 1.2.32 onward, every nested parameter uses its declared English name (`quote`, `authors`, `work`, `issue`, `location`, `publisher`, `place`, `link`, `warnings`), while only the values of `quote` and `date` are translated. The English page preserves the same logical node and a comparable level of development, but it is written idiomatically and may use different English-language references.
+Under revisions earlier than 1.2.27, quotes were not generated. Since 1.2.27, only imported, reviewed and locked citations are rendered in `quotes=` using the `Quote` model; no quote may be invented during rendering. From 1.2.32 onward, every nested parameter uses its declared English name (`quote`, `authors`, `work`, `issue`, `location`, `publisher`, `place`, `link`, `warnings`). For the AI-translation route, only the values of `quote` and `date` are translated, subject to the existing reviewed documentary exceptions. For a verified published translation, the exact English passage and verified documentary values of its actual edition are rendered from occurrence-bound evidence, as required by § 7.4 of the consolidated norm. The English page preserves the same logical node and a comparable level of development, but it is written idiomatically and may use different English-language references.
 
 ---
 
@@ -1029,7 +1029,7 @@ Pour une nouvelle page `Argument`, le paramètre d'appellation consacrée rendu 
 
 Une nouvelle traduction anglaise d'`Argument` n'émet pas `initialization=`. Aucune date de création de page ne doit être émise ou ajoutée à la publication.
 
-Toute `Quote` nouvellement traduite utilise l'avertissement `AI-translated quote`. Les modèles historiques contenant l'ancienne formulation restent préservés lorsqu'ils sont attestés comme existants.
+Toute `Quote` nouvellement traduite par IA utilise l'avertissement `AI-translated quote`. Une `Quote` reproduisant une traduction publiée vérifiée ne reçoit pas cet avertissement ; son texte et ses références proviennent de l'édition anglaise attestée, conformément au § 7.4. Les autres avertissements restent préservés et les avertissements historiques ambigus demandent une revue. Les modèles historiques contenant l'ancienne formulation restent préservés lorsqu'ils sont attestés comme existants.
 
 
 ## Profil de traduction 1.2.66 — preuve et convergence

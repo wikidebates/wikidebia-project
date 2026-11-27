@@ -54,3 +54,21 @@ Le reçu séparé `audits/translation-memory/field-reuse.json` lie chaque valeur
 source et cible à son empreinte. Les champs français, les paramètres propres au
 Work et les attestations de relecture ne sont jamais copiés. Une traduction
 différente déjà approuvée pour la même valeur source bloque la commande.
+
+
+## Citations anglaises issues d'une édition publiée
+
+Le texte publié et son dossier de preuve sont liés à l'occurrence, au verrou
+français, à l'édition anglaise et aux décisions de revue. Ils ne sont pas
+transportables par la mémoire générique. L'export exclut la page entière
+de la mémoire par argument lorsqu'elle contient une telle citation, mais
+conserve ses autres champs portables et les citations IA éligibles.
+Une provenance inconnue ou contradictoire reçoit la même protection.
+
+Si une citation publiée est déjà sélectionnée dans le brouillon, la mémoire
+ne remplace ni cette citation ni la page entière, même lorsque le texte est
+encore en attente de revue. Les autres champs exacts restent réutilisables.
+Pour privilégier la traduction publiée, préparer et sélectionner les
+propositions documentaires avant d'appliquer la mémoire de traduction.
+Les reçus documentaires portables utilisent exclusivement le transfert
+sélectif du résolveur et une nouvelle vérification de l'occurrence.

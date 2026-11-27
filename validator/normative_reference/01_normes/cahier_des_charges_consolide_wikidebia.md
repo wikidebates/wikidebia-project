@@ -71,6 +71,8 @@ Le catalogue machine-readable complet est `requirements_catalog_wikidebia.json` 
 - **MW-014 — ACTIVE — automatic** : French and English templates and parameters must never be mixed.
 - **MW-015 — ACTIVE — automatic** : Generated wikicode must be complete UTF-8 and contain no explanatory comments inside page content.
 
+Le contrat actif des citations textuelles distingue la traduction IA et le passage publié vérifié (RND-003, RND-004, RND-006 à RND-008). Les preuves d'édition, de droits et de complétude demeurent distinctes. Les nouvelles citations ne créent aucun doublon entre pages distinctes du même wiki (RND-010). Les reçus publiés restent liés à leur occurrence et ne sont pas des champs de mémoire de traduction générique (RND-011).
+
 ## 6. Titres et identité
 
 - **TTL-001 — ACTIVE — automatic** : Every argument page has a stable internal identifier that is the source of truth for relations, files, translations and imports.

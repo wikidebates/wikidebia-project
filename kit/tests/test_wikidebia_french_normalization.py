@@ -169,12 +169,20 @@ def test_legacy_sealed_english_review_can_apply_without_resealing(tmp_path):
         translation.prepare_french_normalization(project, DEBATE, work_id)
         complete_fixture_french_normalization(workspace)
         translation.prepare_review(project, DEBATE, work_id)
-    complete_translation_review(workspace)
-    translation.finalize_review(project, DEBATE, work_id)
+    import wikidebia_published_quote_contract as quote_contract
+    from unittest.mock import patch
+
+    complete_translation_review(workspace, stage_quote_index=False)
+    assert quote_contract.ACTIVE is True
+    # Seal with the earlier policy, then apply using the actual active default.
+    with patch.object(quote_contract, "ACTIVE", False):
+        translation.finalize_review(project, DEBATE, work_id)
     # Reconstruct the exact legacy contract: a finalized review and workspace
     # seal without a normalization field, before any application.
     path = workspace / "reviews/en/translation_review.json"
     review = load_json(path)
+    assert "quote_uniqueness_policy" not in review
+    assert "quote_duplicate_audit" not in review
     review.pop("french_normalization_receipt_sha256")
     review["review_sha256"] = translation.translation_review_sha256(review)
     write_json(path, review)

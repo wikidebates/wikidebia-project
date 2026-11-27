@@ -1,8 +1,8 @@
-Wikidéb’IA Kit 2.16.47 — rapport de tests
+Wikidéb’IA Kit 2.16.48 — rapport de tests
 
-Tests pytest : 1986 réussis
-Norme : 1.2.88
-Validateur : 0.4.105
+Tests pytest : 2115 réussis
+Norme : 1.2.89
+Validateur : 0.4.106
 
 Final publication validator fingerprint : PASSED ; la configuration anglaise finale transporte `validator.fingerprint_path` et calcule réellement l’empreinte du validateur.
 Final checkpoint receipt-reference reconciliation : PASSED ; réparation uniquement à plan signé identique, avant publication finale.
@@ -22,3 +22,8 @@ Explicit French Git publication relay : PASSED ; 46 tests du relais : préflight
 French relay readback recovery : PASSED ; relectures bornées des métadonnées, contrôle de la révision parente, reprise des anciens reçus et absence de doublons après interruption.
 
 Displayed-title translation scope : PASSED ; titres courts et nominaux conservés, critères de génération séparés et régressions sémantiques de traduction toujours bloquantes.
+
+Contrat actif de récupération des citations anglaises publiées : PASSED ; deux modalités à reçus communs, preuves liées aux occurrences, mémoire générique protégée, ZIP de revue et retrait motivé, unicité des traductions publiées et IA.
+Raccordement du contrôle d’index au workflow normal : PASSED ; réimport et convergence préservés en cas de collecte documentaire incomplète.
+Rendu : PASSED ; gel français authentique avant scellement, rejet d’un verrou modifié et conservation byte à byte au rendu du checkpoint.
+Suite complète : 2115 tests réussis sur 5d426e514982436143d961002bcecd5f34b89ff6 ; aucun accès de publication réel dans ces tests. Validation finale des métadonnées et de l’export requise avant fusion.

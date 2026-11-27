@@ -23,6 +23,8 @@ la CI complète reste un préalable à toute livraison.
 
 On peut aussi lancer manuellement le workflow GitHub Actions « Export des
 composants » et récupérer son artefact. Il s'exécute également sur les PR
-qui modifient l'outil d'export lui-même. Le succès de l'export ne dispense
+qui modifient l'outil d'export ou un manifeste de composant. Un artefact
+issu d'une PR en brouillon est un candidat de vérification, pas une release
+autorisée. Le succès de l'export ne dispense
 pas de la validation complète du même commit. L'artefact contient les trois
 ZIP, la source et le reçu. Conserver ensemble ces cinq fichiers.

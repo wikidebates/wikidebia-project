@@ -67,8 +67,8 @@ def test_new_pages_do_not_require_contextual_relation_labels():
     assert translation._requires_relation_label_review(metadata_lock, content_lock) is False
 
 
-def make_french_locked(tmp_path: Path) -> tuple[Path, Path, str]:
-    project, workspace, work_id = make_metadata_applied(tmp_path)
+def make_french_locked(tmp_path: Path, *, distinct_fourth_quote: bool = True) -> tuple[Path, Path, str]:
+    project, workspace, work_id = make_metadata_applied(tmp_path, distinct_fourth_quote=distinct_fourth_quote)
     content.prepare_review(project, "debat_test", work_id)
     complete_content_review(workspace)
     sealed = content.finalize_review(project, "debat_test", work_id)
@@ -173,7 +173,31 @@ def en_source(source_id: str, source_type: str, usages: list[dict[str, object]])
     return row
 
 
-def complete_translation_review(workspace: Path) -> None:
+def stage_fixture_quote_index(workspace: Path) -> str:
+    """Stage a complete synthetic public census; never read or contact a wiki.
+
+    Empty is intentional: the ordinary fixture has no external quotations.
+    Collision and freshness tests construct their own snapshots instead.
+    """
+    from datetime import datetime, timedelta, timezone
+    from tempfile import TemporaryDirectory
+    import wikidebia_quote_index_contract as index
+    from wikidebia_quote_index_stage import select_refresh
+    from test_wikidebia_quote_index_contract import snapshot
+
+    now = datetime.now(timezone.utc)
+    value = snapshot()
+    value.update(started_utc=(now-timedelta(minutes=2)).isoformat(),
+                 finished_utc=(now-timedelta(minutes=1)).isoformat())
+    sha = index.digest(value)
+    with TemporaryDirectory() as directory:
+        path = Path(directory) / "synthetic-index.json"
+        common.write_json(path, value)
+        select_refresh(workspace, path, sha)
+    return sha
+
+
+def complete_translation_review(workspace: Path, *, stage_quote_index: bool = True) -> None:
     path = workspace / "reviews/en/translation_review.json"
     review = json.loads(path.read_text(encoding="utf-8"))
     translations = {
@@ -343,6 +367,8 @@ def complete_translation_review(workspace: Path) -> None:
         }
         for citation in row.get("citations") or []:
             translated_text, translated_date = translated_quotes[nid]
+            if nid == "A0004" and citation["source"]["citation"] == "La conclusion demeure valable lorsque les prémisses sont réunies.":
+                translated_text = "The conclusion remains valid when the premises are satisfied."
             citation.update({
                 "status": "approved",
                 "translated_citation": translated_text,
@@ -385,6 +411,8 @@ def complete_translation_review(workspace: Path) -> None:
         "blocking_issues": [], "note": "The English projection is complete, equivalent and ready to be locked without rendering pages.",
     }
     common.write_json(path, review)
+    if stage_quote_index and any((item.get("translation") or {}).get("citations") for item in review["arguments"]):
+        stage_fixture_quote_index(workspace)
 
     source_roles = {
         "S10001": "pro_reference", "S10002": "con_reference",

@@ -1,6 +1,6 @@
 # Matrice de traçabilité des desiderata d'origine
 
-- **Révision :** 1.2.88
+- **Révision :** 1.2.89
 - **Objet :** montrer où chaque grande section des prompts d'origine est consolidée, modifiée ou remplacée.
 
 Les décisions ultérieures qui corrigent les prompts sont consignées dans `00_sources_reference/DECISIONS_CONVERSATION_CONSOLIDEES.md`.
@@ -500,3 +500,7 @@ La revue des audits du 9 août 2026 montre que plusieurs pertes sémantiques ava
 | VAL-064 | Contrôler la structure sur la valeur finale sélectionnée et limiter les règles de création au périmètre réellement ajouté/réécrit | WDV-EDT-034 + scope structuré + tests 4→5 sous-parties |
 | PUB-054 | Publier le delta historique autorisé au checkpoint 2 sans requalifier les portions inchangées ni créer un checkpoint 3 | changeset + rendu checkpoint 2 + tests |
 
+
+## Clarification du 26 novembre 2026 — citations publiées et unicité
+
+RND-003, RND-004 et RND-006 distinguent la provenance IA de la provenance publiée ; RND-007 et RND-008 maintiennent la complétude dans les deux cas. RND-010 interdit les nouveaux doublons entre pages distinctes et exige le contrôle des citations effectivement retenues. RND-011 interdit la perte de provenance par transport dans la mémoire générique. Le § 7.4 de la norme consolidée et les profils de rendu et de workflow portent ces règles ; les formulations historiques ci-dessus restent des traces de provenance.

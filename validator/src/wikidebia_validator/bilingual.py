@@ -17,11 +17,62 @@ SECTION_MAP = {
 }
 
 
+def _validate_final_quote_audit(ctx: PackageContext) -> None:
+    """Recompute the sealed audit without trusting a kit-generated success flag.
+
+    Check freshness at the recorded audit time for archived Works. The kit
+    also checks present freshness before apply/render; publication needs its
+    own fresh preflight. Historical Works without this opt-in are unchanged.
+    """
+    from .quote_index_contract import (
+        INDEX_PATH, QuoteIndexError, verify_final_audit, MAX_INDEX_BYTES,
+        validate_uniqueness_policy,
+    )
+    if not ctx.exists("data/en_content_lock.json"):
+        return
+    lock = ctx.load_json("data/en_content_lock.json") or {}
+    if not isinstance(lock,dict):
+        return
+    translation = ctx.load_json("data/en_translation_lock.json") or {}
+    policy = translation.get("citation_translation_policy") or {}
+    audit = lock.get("quote_duplicate_audit")
+    sha = policy.get("quote_duplicate_audit_sha256")
+    try:
+        required = validate_uniqueness_policy(lock, policy)
+        has_published = any(q.get("translation_origin") == "published_translation"
+                            or "published_quote_evidence" in q
+                            for a in lock.get("arguments") or [] for q in a.get("citations") or [])
+        if (not required and not has_published and audit is None and sha is None
+                and lock.get("published_quote_contract") is None
+                and policy.get("published_quote_contract") is None):
+            return
+        if not isinstance(audit,dict) or audit.get("audit_sha256") != sha:
+            raise QuoteIndexError("missing_or_unbound_final_quote_audit")
+        raw = ctx.read_bytes(INDEX_PATH,required=True)
+        if raw is None or len(raw)>MAX_INDEX_BYTES:
+            raise QuoteIndexError("invalid_public_quote_index_file")
+        def unique(pairs):
+            out = {}
+            for key,value in pairs:
+                if key in out:
+                    raise QuoteIndexError("duplicate_public_quote_index_key")
+                out[key]=value
+            return out
+        import json
+        value=json.loads(raw.decode("utf-8"),object_pairs_hook=unique)
+        verify_final_audit(audit,lock["arguments"],value,ctx.sha256("data/fr_content_lock.json"))
+    except (ValueError,OSError,KeyError,TypeError,AttributeError) as exc:
+        reason=str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
+        ctx.report.error("WDV-MWK-021","Contrôle des doublons anglais invalide : "+reason,
+                         path="data/en_content_lock.json")
+
+
 def validate_bilingual(ctx: PackageContext) -> None:
     registry = ctx.registry()
     manifest = ctx.manifest()
     if not registry or not manifest:
         return
+    _validate_final_quote_audit(ctx)
     english_deferred = english_translation_deferred(manifest)
     strict = state_at_least(manifest.get("global_status"), "bilingual_validated") and not english_deferred
     nodes = [n for n in registry.get("graph", {}).get("nodes", []) if n.get("status") == "active"]

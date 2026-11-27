@@ -4,9 +4,9 @@
   "component": "kit",
   "release_source": "VERSIONS.json",
   "release": {
-    "norm": "1.2.88",
-    "validator": "0.4.105",
-    "kit": "2.16.47"
+    "norm": "1.2.89",
+    "validator": "0.4.106",
+    "kit": "2.16.48"
   },
   "emits": {
     "publication_plan": [
@@ -210,7 +210,10 @@
     "english_source_verification_normalization": "1.0",
     "english_documentary_preconvergence_gate": "1.0",
     "historical_render_differential_validation": "1.0",
-    "validation_diagnostic_rollback_persistence": "1.0"
+    "validation_diagnostic_rollback_persistence": "1.0",
+    "published_quote_evidence": "1.0",
+    "quote_uniqueness_audit": "1.0",
+    "quote_review_package_provenance": "1.0"
   },
   "features": [
     "page_specific_remote_update_edit_summary",
@@ -218,6 +221,7 @@
     "prewrite_edit_summary_recalculation",
     "historical_summary_introduction_preservation",
     "historical_editorial_parameter_presence",
-    "english_documentary_preconvergence_gate"
+    "english_documentary_preconvergence_gate",
+    "published_quote_provenance_active"
   ]
 }

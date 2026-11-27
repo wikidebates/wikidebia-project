@@ -1,8 +1,8 @@
-Wikidéb’IA Validator 0.4.105 — rapport de tests
+Wikidéb’IA Validator 0.4.106 — rapport de tests
 
-Tests pytest : 1193 réussis
-Norme active : 1.2.88
-Kit recommandé : 2.16.47
+Tests pytest : 1202 réussis
+Norme active : 1.2.89
+Kit recommandé : 2.16.48
 
 Render preflight historical evidence : PASSED ; provenance historique et contenu nouveau restent distingués.
 Keyword multiword exception : PASSED ; une exception contrôlée autorise la locution longue sans désactiver l’atomicité.
@@ -12,3 +12,5 @@ Final publication order : PASSED ; alignement normatif Debate avant Argument.
 Historical rubric schemas : PASSED ; classifications importées préservées et contraintes des pages nouvelles maintenues.
 
 Liens sans schéma dans les citations historiques : PASSED ; conservation exacte depuis un import vérifié par SHA-256, contrôle HTTP(S) maintenu pour les liens nouveaux ou modifiés.
+
+Contrat actif des citations publiées et de l’unicité : 1202 tests du validateur réussis sur 5d426e514982436143d961002bcecd5f34b89ff6 ; compatibilité historique et vérification indépendante des preuves conservées. Aucun accès de publication réel dans ces tests.

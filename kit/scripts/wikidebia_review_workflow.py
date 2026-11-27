@@ -740,6 +740,8 @@ def _instructions(review_type: str, debate_id: str, work_id: str | None, editabl
             "Les règles qualitatives intrinsèques des keywords restent applicables : la version anglaise doit utiliser les équivalents idiomatiques du vocabulaire français final, y compris après une correction ou une décomposition historique validée.",
             "Pour une introduction française historique, produisez une adaptation anglaise autonome : examinez explicitement le contexte franco-français et condensez, contextualisez ou omettez ce qui ne doit pas être traduit mécaniquement, sans changer la substance du débat. `Stakes of the debate` et les autres contraintes de profil d’une introduction nouvellement créée ne sont pas obligatoires pour les sous-parties historiques inchangées.",
             "Pour un résumé historique, un ratio EN/FR hors 0,60–1,45 est un signal de revue et non un objectif de réécriture ; attestez l’équivalence et fournissez `summary_ratio_exception_rationale` lorsque le ratio reste hors plage.",
+            "Avant de traduire les citations MIA, suivre GUIDE_QUOTE_RESOLVER_BRIDGE.md : mode anticipé ou intégré avec le même registre de reçus. Une preuve contestée doit être signalée; aucune panne ni absence de reçu ne prouve l'absence d'une traduction publiée.",
+            "Conservez exactement published_quote_contract, quote_uniqueness_policy, quote_public_index_sha256 et published_quote_withdrawals ainsi que translation_origin, published_quote_evidence et les valeurs traduites de chaque citation publiée présélectionnée. Complétez les attestations éditoriales, mais signalez une preuve contestée au lieu de la supprimer ou de la remplacer dans le ZIP. Toute nouvelle sélection se fait localement.",
             "Dans tous les titres anglais, utilisez exclusivement l’apostrophe droite ASCII `'` pour les possessifs et contractions. Les apostrophes typographiques `’`, `‘`, `ʼ` ou `＇` sont non conformes, y compris dans la traduction d’un titre historique.",
             "Pour toute nouvelle source ajoutée dans `data/sources_en_working.json`, renseignez `verification.verified_at`, `verification.primary_source` (booléen explicite) et `verification.notes` en plus des attestations de langue/auteur. Les anciennes clés `checked_at`, `method` et `note` ne doivent plus être émises par un nouveau paquet ; elles restent lisibles uniquement pour compatibilité avec une revue déjà préparée.",
             "Toute référence bibliographique utilisée sur la page Debate doit renseigner `document_kind` et, dans l’usage Debate, `documentary_scope=foundational_work` ou `broad_synthesis`, avec une justification de sélection spécifique. Une source trop étroite doit être retirée de la bibliographie générale plutôt que requalifiée artificiellement.",
@@ -1550,6 +1552,65 @@ def _prepare_content_package(project_root: Path, state: dict[str, Any]) -> dict[
     )
 
 
+class QuoteIndexPreparationError(WorkflowError):
+    """Recoverable documentary stop, not a rejected editorial review."""
+
+
+def _ensure_active_quote_index(project_root: Path, state: Mapping[str, Any], workspace: Path,
+                               review: Mapping[str, Any]) -> str | None:
+    """Refresh only at an explicit high-level boundary, never in offline gates.
+
+    The optional resolver path names a local checkout containing the already
+    reviewed pinned Git object. No clone or installation is performed here.
+    Old sealed reviews without the new contract remain readable.
+    """
+    from wikidebia_published_quote_contract import ACTIVE
+    from wikidebia_quote_index_contract import QuoteIndexError, validate
+    from wikidebia_quote_index_stage import latest_selected_sha, stored_index
+
+    if not ACTIVE:
+        return None
+    declared = any(key in review for key in ("quote_uniqueness_policy", "published_quote_contract",
+                                             "quote_public_index_sha256", "quote_duplicate_audit"))
+    has_quotes = any((item.get("translation") or {}).get("citations")
+                     for item in review.get("arguments") or [])
+    if not declared and (not has_quotes or review.get("status") == "approved"):
+        return None
+    previous_sha = review.get("quote_public_index_sha256")
+
+    def checked():
+        sha = latest_selected_sha(workspace, previous_sha)
+        if sha is None:
+            raise QuoteIndexError("missing_public_quote_index")
+        validate(stored_index(workspace, sha), sha, "en")
+        return sha
+
+    try:
+        return checked()
+    except QuoteIndexError as exc:
+        recoverable = {"missing_public_quote_index", "public_index_stale",
+                       "public_index_incomplete", "public_quote_refresh_pending"}
+        if str(exc) not in recoverable:
+            raise QuoteIndexPreparationError("Index des citations anglaises incohérent : " + str(exc)) from exc
+        root = os.environ.get("WIKIDEBIA_QUOTE_RESOLVER_ROOT")
+        if not root:
+            raise QuoteIndexPreparationError(
+                "Index des citations anglaises requis : " + str(exc) +
+                ". Configurer WIKIDEBIA_QUOTE_RESOLVER_ROOT ou collecter un index frais "
+                "avec wikidebia_quote_index_collect.py; reprendre ensuite le même Work/ZIP."
+            ) from exc
+
+    from wikidebia_corpus_build import exclusive_lock
+    from wikidebia_quote_index_collect import collect
+    try:
+        with exclusive_lock(project_root, str(state["debate_id"]), "workflow_quote_index"):
+            collect(workspace, Path(root), previous_sha=previous_sha)
+        return checked()
+    except (ValueError, RuntimeError, OSError, KeyError, TypeError, AttributeError) as exc:
+        reason = str(exc) if isinstance(exc, QuoteIndexError) else type(exc).__name__
+        raise QuoteIndexPreparationError("Collecte de l'index des citations bloquée : " + reason) from exc
+
+
 def _prepare_translation_package(project_root: Path, state: dict[str, Any], *, correction: bool = False) -> dict[str, Any]:
     workspace, meta = _current_workspace_meta(project_root, state)
     if not correction:
@@ -1609,7 +1670,7 @@ def _reopen_translation_after_findings(project_root: Path, state: dict[str, Any]
     workspace, meta = _current_workspace_meta(project_root, state)
     review_path = workspace / "reviews/en/translation_review.json"
     review = load_json(review_path, "revue anglaise")
-    for key in ("review_sha256", "finalized_at", "semantic_content_sha256", "summary", "final_values", "semantic_review"):
+    for key in ("review_sha256", "finalized_at", "semantic_content_sha256", "summary", "final_values", "semantic_review", "quote_duplicate_audit"):
         review.pop(key, None)
     review["status"] = "draft"
     write_json(review_path, review)
@@ -1883,6 +1944,17 @@ def _mechanical_advance(
                 state["updated_at"] = now_iso()
                 _save_workflow(project_root, state)
                 continue
+            # A stale index is documentary, not a semantic regression. Keep
+            # both convergence passes and resume this boundary after refresh.
+            try:
+                _ensure_active_quote_index(project_root, state, workspace, review)
+            except QuoteIndexPreparationError as exc:
+                state["status"] = "quote_index_required"
+                state["quote_index_blocker"] = str(exc)
+                state["updated_at"] = now_iso()
+                _save_workflow(project_root, state)
+                return state
+            state.pop("quote_index_blocker", None)
             review_sha = str(review.get("review_sha256") or "")
             apply_translation_review(project_root, debate_id, str(state["work_id"]), review_sha)
             render = render_workspace(project_root, debate_id, str(state["work_id"]), review_sha)
@@ -2453,6 +2525,37 @@ def _prepare_historical_consent_import(
     authorization["authorization_sha256"] = _sha256_bytes(_canonical_json(body))
     return mutable_files, normalized, authorization
 
+def _assert_quote_review_provenance(before: Mapping[str, Any], after: Mapping[str, Any]) -> None:
+    """External review may attest a local selection, not replace its provenance."""
+    for key in ("published_quote_contract", "quote_uniqueness_policy", "quote_public_index_sha256", "published_quote_withdrawals"):
+        if (key in before) != (key in after) or before.get(key) != after.get(key):
+            raise WorkflowError(f"Provenance des citations anglaises modifiée dans le ZIP : {key}")
+
+    def selected(review):
+        rows = {}
+        for argument in review.get("arguments") or []:
+            for row in (argument.get("translation") or {}).get("citations") or []:
+                if (row.get("translation_origin") != "published_translation"
+                        and "published_quote_evidence" not in row):
+                    continue
+                key = (argument.get("id"), row.get("id"))
+                if key in rows:
+                    raise WorkflowError("Provenance des citations anglaises dupliquée dans la revue")
+                rows[key] = {
+                    field: row[field] for field in (
+                        "translation_origin", "published_quote_evidence",
+                        "translated_citation", "translated_date",
+                    ) if field in row
+                }
+        return rows
+
+    if selected(before) != selected(after):
+        raise WorkflowError(
+            "Provenance des citations anglaises modifiée dans le ZIP : "
+            "conserver le passage publié et sa preuve; effectuer toute nouvelle sélection localement"
+        )
+
+
 def import_review(
     project_root: Path, debate_id: str, archive: Path, *, execute_graph_actions: bool = False,
     authorize_historical_changes: bool = False,
@@ -2483,6 +2586,12 @@ def import_review(
         _assert_regular_file(local, "Fichier éditable local")
         if _sha256_file(local) != row.get("sha256_at_prepare"):
             raise WorkflowError(f"Un fichier éditable local a changé hors réimport : {row.get('target_path')}")
+
+    # A failed documentary refresh must survive the editable-file rollback;
+    # do it before the transaction, against the verified local review.
+    if manifest["review_type"] in {"en_translation_review", "en_translation_correction", "en_documentation_correction"}:
+        local_review = load_json(base / "reviews/en/translation_review.json", "revue anglaise locale")
+        _ensure_active_quote_index(project_root, state, base, local_review)
 
     transaction = _capture_import_transaction(
         project_root, debate_id, work_id=str(state.get("work_id") or "") or None,
@@ -2579,6 +2688,7 @@ def import_review(
             # returned English work. A newer ZIP may not remove its binding.
             old_english = load_json(backup / "reviews/en/translation_review.json", "revue anglaise avant import")
             english = load_json(base / "reviews/en/translation_review.json", "revue anglaise importée")
+            _assert_quote_review_provenance(old_english, english)
             if (old_english.get("status") == "draft" and english.get("status") == "draft"
                     and "french_normalization_receipt_sha256" not in old_english
                     and "french_normalization_receipt_sha256" not in english
@@ -2724,6 +2834,11 @@ def status_summary(project_root: Path, debate_id: str) -> dict[str, Any]:
 
 
 def _print_user_result(state: Mapping[str, Any]) -> None:
+    if state.get("status") == "quote_index_required":
+        print("Index public des citations anglaises à renouveler; la revue sémantique reste acquise.")
+        print(state.get("quote_index_blocker"))
+        print("Après collecte, reprenez le même workflow sans rouvrir la revue.")
+        return
     if state.get("status") == "french_normalization_required":
         print("La version française publiée doit être revue avant la traduction anglaise.")
         normalization = state.get("french_normalization") or {}

@@ -635,13 +635,106 @@ def _citation_documentary_overrides(
     return result
 
 
+def _published_quote_context(source: Path) -> tuple:
+    from wikidebia_published_quote_contract import PublishedQuoteError
+    try:
+        imports = load_json(source / "data/import_provenance.json", "provenance française")
+        by_page = {}
+        for entry in imports.get("pages") or []:
+            if entry.get("kind") != "argument":
+                continue
+            pid = entry.get("page_id")
+            if not isinstance(pid, str) or pid in by_page:
+                raise PublishedQuoteError("published_quote_ambiguous_import")
+            by_page[pid] = entry
+        return source, sha256_bytes((source / "data/fr_content_lock.json").read_bytes()), by_page
+    except (ValueError, OSError, TypeError, AttributeError) as exc:
+        raise TranslationReviewError("Provenance française des citations publiées invalide") from exc
+
+
+def _validate_published_citation(row, source, node_id, context):
+    from wikidebia_published_quote_contract import (
+        PublishedQuoteError, import_path, item_from_source, verify_import,
+        verify_evidence, verify_locked_citation,
+    )
+    citation_id = source["id"]
+    try:
+        root, lock_sha, imports = context
+        imported = imports.get(node_id)
+        path = root / import_path(imported)
+        if path.is_symlink() or not path.is_file() or not path.resolve().is_relative_to(root.resolve()):
+            raise PublishedQuoteError("published_quote_invalid_import_path")
+        raw = path.read_bytes()
+        verify_import(imported, raw)
+        item = item_from_source(node_id, source, imported)
+        evidence = row.get("published_quote_evidence")
+        projection = verify_evidence(evidence, lock_sha, item, node_id)
+        parameters = projection["parameters"]
+        by_name = {r["name"]: r["value"] for r in parameters}
+        translated = by_name["quote"]
+        translated_date = by_name.get("date", "")
+        if row.get("translated_citation") != translated or row.get("translated_date", "") != translated_date:
+            raise PublishedQuoteError("published_quote_review_projection_mismatch")
+        if (row.get("translation_warning_appended") is True
+                or row.get("preserved_parameters_unchanged") is True
+                or row.get("documentary_parameter_overrides") not in (None, [])):
+            raise PublishedQuoteError("published_quote_conflicting_ai_attestation")
+        if row.get("quote_completeness_reviewed") is not True:
+            raise PublishedQuoteError("published_quote_completeness_review_required")
+        completeness_note = _text(row.get("quote_completeness_note"), f"note de complétude de citation {citation_id}", 12)
+        source_words = _lexical_word_count(_citation_source_text(source))
+        translated_words = _lexical_word_count(translated)
+        ratio = translated_words / source_words if source_words else None
+        low_reviewed = row.get("quote_low_ratio_reviewed") is True
+        low_note = str(row.get("quote_low_ratio_note") or "").strip()
+        if source_words >= 8 and ratio is not None and ratio < 0.60 and (not low_reviewed or len(low_note) < 12):
+            raise PublishedQuoteError("published_quote_low_ratio_review_required")
+        for field, minimum in (("reviewer", 3), ("reviewed_at", 10), ("note", 8)):
+            _text(row.get(field), f"{field} de citation {citation_id}", minimum)
+        result = {
+            "id": citation_id, "source_template": item["source_template"], "output_template": "Quote",
+            "translation_origin": "published_translation",
+            "published_quote_evidence": copy.deepcopy(evidence),
+            "quote": translated, "date": translated_date, "warnings": by_name.get("warnings", ""),
+            "parameters": copy.deepcopy(parameters), "source": copy.deepcopy(source),
+            "source_word_count": source_words, "translated_word_count": translated_words, "lexical_ratio": ratio,
+            "quote_completeness_reviewed": True, "quote_completeness_note": completeness_note,
+            "quote_low_ratio_reviewed": low_reviewed, "quote_low_ratio_note": low_note,
+            "reviewer": row["reviewer"], "reviewed_at": row["reviewed_at"], "note": row["note"],
+        }
+        verify_locked_citation(result, source, imported, raw, lock_sha, node_id)
+        return result
+    except (ValueError, KeyError, TypeError, AttributeError, OSError) as exc:
+        reason = str(exc) if isinstance(exc, PublishedQuoteError) else type(exc).__name__
+        raise TranslationReviewError(f"Citation publiée invalide {citation_id} : {reason}") from exc
+
+
+def _check_published_quote_duplicates(arguments):
+    """A new published passage must not duplicate a quote on another page.
+
+    This is only the exact, debate-local check. The global public index and
+    review of partial overlaps remain separate required activation work.
+    """
+    import unicodedata
+    groups = collections.defaultdict(list)
+    for argument in arguments:
+        for quote in argument.get("citations") or []:
+            form = " ".join(unicodedata.normalize("NFC", quote["quote"]).split())
+            groups[form].append((argument["id"], quote["id"], quote.get("translation_origin")))
+    for rows in groups.values():
+        if len({page for page, _, _ in rows}) > 1 and any(origin == "published_translation" for _, _, origin in rows):
+            raise TranslationReviewError("Citation publiée en doublon entre arguments : " + ", ".join(cid for _, cid, _ in rows))
+
+
 def _validate_citations(
     rows: Any, french_rows: Sequence[Mapping[str, Any]], node_id: str, *, preserve_source_collection: bool = False,
+    published_context=None,
 ) -> list[dict[str, Any]]:
     if not isinstance(rows, list):
         raise TranslationReviewError(f"Liste de citations anglaises absente pour {node_id}")
     expected = {str(row.get("id")): row for row in french_rows}
-    if {str(row.get("id")) for row in rows if isinstance(row, dict)} != set(expected):
+    if (len(rows) != len(expected) or
+            {str(row.get("id")) for row in rows if isinstance(row, dict)} != set(expected)):
         raise TranslationReviewError(f"Les citations anglaises ne couvrent pas exactement les citations françaises de {node_id}")
     final: list[dict[str, Any]] = []
     by_id = {str(row.get("id")): row for row in rows}
@@ -651,6 +744,14 @@ def _validate_citations(
             raise TranslationReviewError(f"Les paramètres source de la citation {citation_id} ont été modifiés")
         if row.get("status") != "approved":
             raise TranslationReviewError(f"Traduction de citation non approuvée : {citation_id}")
+        origin = row.get("translation_origin", "ai_translation")
+        if origin == "published_translation":
+            if published_context is None:
+                raise TranslationReviewError(f"Contrat expérimental de citation publiée absent : {citation_id}")
+            final.append(_validate_published_citation(row, source, node_id, published_context))
+            continue
+        if origin != "ai_translation" or "published_quote_evidence" in row:
+            raise TranslationReviewError(f"Provenance de traduction de citation inconnue ou contradictoire : {citation_id}")
         translated = _text(row.get("translated_citation"), f"citation traduite {citation_id}", 2)
         source_date = str(source.get("date") or "").strip()
         translated_date = str(row.get("translated_date") or "").strip()
@@ -1174,6 +1275,14 @@ def prepare_review(project_root: Path, debate_id: str, work_id: str, *, overwrit
         return {"status": "en_translation_review_ready", "debate_id": debate_id, "work_id": work_id, "arguments": len(current.get("arguments") or []), "idempotent": True}
     if overwrite and (workspace / "translated-copy").exists():
         raise TranslationReviewError("Impossible de régénérer une traduction déjà appliquée")
+    if overwrite and review_path.is_file():
+        current = load_json(review_path, "revue anglaise avant régénération")
+        if (any(key in current for key in ("published_quote_contract", "published_quote_withdrawals",
+                                          "quote_uniqueness_policy", "quote_public_index_sha256"))
+                or any("published_quote_evidence" in row or row.get("translation_origin") == "published_translation"
+                       for arg in current.get("arguments") or []
+                       for row in (arg.get("translation") or {}).get("citations") or [])):
+            raise TranslationReviewError("Régénération interdite : conserver les preuves et décisions de citations anglaises")
     registry, metadata_lock, content_lock, vocabulary = _source_snapshot(source)
     fr_meta_by_id = {str(row.get("entity_id")): row for row in metadata_lock.get("arguments") or []}
     fr_content_by_id = {str(row.get("id")): row for row in content_lock.get("arguments") or []}
@@ -2242,7 +2351,7 @@ def _validate_dedicated_debate(row: Mapping[str, Any], node_id: str) -> dict[str
     return {"dedicated_debate": title, "dedicated_debate_equivalence_reviewed": True, "dedicated_debate_review_note": note}
 
 
-def _validate_argument(item: Mapping[str, Any], mapping: Mapping[str, str], sources: Mapping[str, Mapping[str, Any]], *, authoritative_source_page_origin: str | None = None, authoritative_source_preservation_policy: str | None = None) -> dict[str, Any]:
+def _validate_argument(item: Mapping[str, Any], mapping: Mapping[str, str], sources: Mapping[str, Mapping[str, Any]], *, authoritative_source_page_origin: str | None = None, authoritative_source_preservation_policy: str | None = None, published_context=None) -> dict[str, Any]:
     node_id = _text(item.get("id"), "identifiant d’argument")
     row = item.get("translation") or {}
     if row.get("status") != "approved":
@@ -2423,6 +2532,7 @@ def _validate_argument(item: Mapping[str, Any], mapping: Mapping[str, str], sour
 
     citations = _validate_citations(
         row.get("citations"), fr_content.get("citations") or [], node_id,
+        published_context=published_context,
         preserve_source_collection=(
             source_page_origin == "preexisting"
             and authoritative_source_preservation_policy == POLICY
@@ -2611,13 +2721,54 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
         raise TranslationReviewError("La revue anglaise ne couvre pas exactement les arguments restant à traduire")
     fr_meta_by_id = {str(row.get("entity_id") or row.get("id")): row for row in (metadata_lock.get("arguments") or []) if isinstance(row, dict)}
     fr_content_by_id = {str(row.get("id")): row for row in (content_lock.get("arguments") or []) if isinstance(row, dict)}
+    from wikidebia_published_quote_contract import ACTIVE, EVIDENCE
+    profile = review.get("published_quote_contract")
+    if profile is not None and profile != EVIDENCE:
+        raise TranslationReviewError("Contrat de provenance des citations anglaises inconnu")
+    published_context = _published_quote_context(source) if profile == EVIDENCE else None
     final_arguments = []
     for item in items:
         node_id = str(item.get("id") or "")
         authoritative_origin = _french_source_page_origin(fr_meta_by_id.get(node_id) or {}, fr_content_by_id.get(node_id) or {})
         if (item.get("translation") or {}).get("french") != {"metadata": fr_meta_by_id.get(node_id), "content": fr_content_by_id.get(node_id)}:
             raise TranslationReviewError("Source française intégrée divergente du snapshot autoritatif : " + node_id)
-        final_arguments.append(_validate_argument(item, keyword_map, by_source, authoritative_source_page_origin=authoritative_origin, authoritative_source_preservation_policy=source_policy))
+        final_arguments.append(_validate_argument(item, keyword_map, by_source, authoritative_source_page_origin=authoritative_origin, authoritative_source_preservation_policy=source_policy, published_context=published_context))
+    has_published = any(c.get("translation_origin") == "published_translation"
+                        for arg in final_arguments for c in arg.get("citations") or [])
+    if (profile == EVIDENCE) != has_published:
+        raise TranslationReviewError("Contrat expérimental et citations publiées incohérents")
+    if has_published:
+        _check_published_quote_duplicates(final_arguments)
+    # New finalizations with quotations will require the global gate on
+    # activation, even if no published passage was ultimately selected.
+    # A selected index also opts in before activation; never ignore it merely
+    # because the draft lacks a copied pointer. Already sealed legacy reviews
+    # returned above remain readable without retroactive attestations.
+    from wikidebia_quote_index_contract import final_audit, QuoteIndexError, UNIQUENESS_POLICY
+    from wikidebia_quote_index_stage import stored_index, latest_selected_sha
+    quote_index_sha = review.get("quote_public_index_sha256")
+    quote_audit = None
+    has_quotes = any(arg.get("citations") for arg in final_arguments)
+    declared = "quote_uniqueness_policy" in review
+    if declared and review.get("quote_uniqueness_policy") != UNIQUENESS_POLICY:
+        raise TranslationReviewError("Contrat d’unicité des citations anglaises inconnu")
+    required = has_published or (ACTIVE and has_quotes) or declared
+    try:
+        if has_quotes or required or quote_index_sha is not None or "quote_duplicate_audit" in review:
+            quote_index_sha = latest_selected_sha(workspace, quote_index_sha)
+            if quote_index_sha is None:
+                if required or "quote_duplicate_audit" in review:
+                    raise QuoteIndexError("missing_public_quote_index")
+            else:
+                quote_audit = final_audit(final_arguments, stored_index(workspace, quote_index_sha),
+                                          quote_index_sha, sha256_bytes((source/"data/fr_content_lock.json").read_bytes()))
+    except (ValueError,OSError,KeyError,TypeError,AttributeError) as exc:
+        reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
+        raise TranslationReviewError("Contrôle des doublons anglais : "+reason) from exc
+    if quote_audit is not None:
+        write_json(workspace/"reports/en_quote_duplicate_audit.json", quote_audit)
+        if quote_audit["status"] != "clear_exact_literal_scope":
+            raise TranslationReviewError("Doublons exacts de citations anglaises : voir reports/en_quote_duplicate_audit.json")
     if (
         _requires_relation_label_review(metadata_lock, content_lock)
         or _historical_relation_labels_required(content_lock)
@@ -2691,6 +2842,10 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
         "summary": {"arguments": len(final_arguments), "vocabulary_entries": len(vocabulary), "sources": len(english_rows), "debate_documentary_references": sum(len(v) for v in final_debate["documentation"].values()), "argument_documentary_references": sum(len(v) for arg in final_arguments for v in arg["sources"].values()), "citations": sum(len(arg.get("citations") or []) for arg in final_arguments)},
         "review_sha256": None,
     })
+    if quote_audit is not None:
+        finalized["quote_uniqueness_policy"] = UNIQUENESS_POLICY
+        finalized["quote_public_index_sha256"] = quote_index_sha
+        finalized["quote_duplicate_audit"] = quote_audit
     finalized["semantic_content_sha256"] = semantic_content_sha256(finalized)
     finalized["review_sha256"] = translation_review_sha256(finalized)
     write_json(review_path, finalized)
@@ -2879,6 +3034,40 @@ def _build_translated_copy(project_root: Path, source: Path, target: Path, revie
             "warning_separator": ", ",
         },
     }
+    if review.get("published_quote_contract") is not None:
+        from wikidebia_published_quote_contract import EVIDENCE
+        if review["published_quote_contract"] != EVIDENCE:
+            raise TranslationReviewError("Contrat de provenance inconnu avant application")
+        content_lock["published_quote_contract"] = EVIDENCE
+        translation_lock["citation_translation_policy"]["published_quote_contract"] = EVIDENCE
+        translation_lock["citation_translation_policy"]["preserved_values"] = (
+            "ai_translation_only; published_translation_uses_verified_english_edition"
+        )
+    quote_audit = review.get("quote_duplicate_audit")
+    quote_index_sha = review.get("quote_public_index_sha256")
+    uniqueness_declared = "quote_uniqueness_policy" in review
+    if (quote_index_sha is not None or quote_audit is not None
+            or review.get("published_quote_contract") is not None or uniqueness_declared):
+        from wikidebia_quote_index_contract import INDEX_PATH, QuoteIndexError, UNIQUENESS_POLICY
+        from wikidebia_quote_index_stage import stored_index, verify_current
+        try:
+            if uniqueness_declared and review.get("quote_uniqueness_policy") != UNIQUENESS_POLICY:
+                raise QuoteIndexError("missing_or_unknown_quote_uniqueness_policy")
+            index = stored_index(target.parent, quote_index_sha)
+            if not isinstance(quote_audit,dict) or quote_audit.get("index_sha256") != quote_index_sha:
+                raise QuoteIndexError("missing_or_unbound_final_quote_audit")
+            verify_current(target.parent, quote_audit, content_lock["arguments"], index,
+                           sha256_bytes((source/"data/fr_content_lock.json").read_bytes()))
+        except (ValueError,OSError,KeyError,TypeError,AttributeError) as exc:
+            reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
+            raise TranslationReviewError("Contrôle des doublons avant application : "+reason) from exc
+        if uniqueness_declared:
+            content_lock["quote_uniqueness_policy"] = UNIQUENESS_POLICY
+            translation_lock["citation_translation_policy"]["quote_uniqueness_policy"] = UNIQUENESS_POLICY
+        content_lock["quote_duplicate_audit"] = copy.deepcopy(quote_audit)
+        translation_lock["citation_translation_policy"]["quote_duplicate_audit_sha256"] = quote_audit["audit_sha256"]
+        write_json(target/INDEX_PATH,index)
+        (target/INDEX_PATH).chmod(0o600)
     vocabulary = load_json(target / "data/keyword_vocabulary.json", "vocabulaire français")
     if content_lock.get("source_preservation_policy") or load_json(source / "data/fr_content_lock.json", "source française").get("source_preservation_policy"):
         for entry in vocabulary.get("entries") or []:
@@ -3079,7 +3268,7 @@ def reopen_review(project_root: Path, debate_id: str, work_id: str, *, reviewer:
     archive.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(path, archive)
     review.update(status="draft", review_sha256=None, reopening={"previous_review_sha256": old_sha, "reviewer": reviewer, "note": note, "reopened_at": now_iso()})
-    for key in ("final_values", "finalized_at", "semantic_content_sha256", "source_registry_sha256"):
+    for key in ("final_values", "finalized_at", "semantic_content_sha256", "source_registry_sha256", "quote_duplicate_audit"):
         review.pop(key, None)
     write_json(path, review)
     meta["status"] = "en_translation_review_ready"

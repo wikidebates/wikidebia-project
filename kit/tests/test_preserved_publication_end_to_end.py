@@ -45,7 +45,7 @@ def _add_existing_english_frontier(corpus: Path) -> None:
         write_json(path, data)
 
 
-def _seal_preserved_release(tmp_path, monkeypatch):
+def _apply_preserved_translation(tmp_path, monkeypatch):
     from test_wikidebia_translation_review import complete_semantic_convergence, complete_translation_review
     from test_wikidebia_release import writing_validator
     from test_wikidebia_render import approve_fixture_placements
@@ -80,7 +80,15 @@ def _seal_preserved_release(tmp_path, monkeypatch):
     monkeypatch.setattr(release, "_run_validator", writing_validator)
     translation.apply_review(project, DEBATE, work, finalized["review_sha256"])
     approve_fixture_placements(workspace)
-    rendered = render.render_workspace(project, DEBATE, work, finalized["review_sha256"])
+    return project, workspace, work, finalized["review_sha256"]
+
+
+def _seal_preserved_release(tmp_path, monkeypatch):
+    import wikidebia_release as release
+    import wikidebia_render as render
+
+    project, workspace, work, review_sha = _apply_preserved_translation(tmp_path, monkeypatch)
+    rendered = render.render_workspace(project, DEBATE, work, review_sha)
     release.release_workspace(project, DEBATE, work, rendered["rendered_copy_tree_sha256"])
     return project, workspace, work
 

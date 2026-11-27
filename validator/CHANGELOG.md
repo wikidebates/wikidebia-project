@@ -300,3 +300,8 @@ Les changelogs complets des deux branches 0.4.64 sont conservés sous `branch_hi
 - conserve sans modification tous les contrôles structurels, éditoriaux, documentaires et historiques de 0.4.104 ;
 - met à jour la copie normative active et les métadonnées de release pour le contrat de publication finale `Debate` avant `Argument`.
 
+## 0.4.106 — 27 novembre 2026 — provenance et unicité des citations
+
+- valide les preuves de passage publié indépendamment du kit ;
+- contrôle les valeurs rendues et le reçu d'unicité lié aux verrous et à l'index ;
+- conserve les contrats historiques et les revues de complétude.

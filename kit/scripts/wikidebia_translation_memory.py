@@ -85,7 +85,21 @@ def _memory_key(title: str, revision_sha256: str) -> str:
     })
 
 
+def _nonportable_citation(citation: Mapping[str, Any]) -> bool:
+    # A published translation is evidence for an exact occurrence, not a
+    # portable text field. Unknown or contradictory origins fail closed too.
+    return (citation.get("translation_origin", "ai_translation") != "ai_translation"
+            or "published_quote_evidence" in citation)
+
+
+def _contains_nonportable_citations(value: Mapping[str, Any]) -> bool:
+    return any(isinstance(row, Mapping) and _nonportable_citation(row)
+               for row in value.get("citations") or [])
+
+
 def _portable_translation(value: Mapping[str, Any]) -> dict[str, Any]:
+    if _contains_nonportable_citations(value):
+        raise TranslationMemoryError("Citation à preuve d’occurrence non portable")
     portable = copy.deepcopy(dict(value))
     for field in NON_PORTABLE_TRANSLATION_FIELDS:
         portable.pop(field, None)
@@ -192,7 +206,7 @@ def _field_candidates(
                 "target_path": field,
             })
     for citation in translation.get("citations") or []:
-        if not isinstance(citation, Mapping):
+        if not isinstance(citation, Mapping) or _nonportable_citation(citation):
             continue
         source = citation.get("source") or {}
         source_value = source.get("citation") if isinstance(source, Mapping) else None
@@ -230,6 +244,8 @@ def _apply_field_candidate(
         if len(matches) != 1:
             raise TranslationMemoryError("Citation française dupliquée dans une même traduction")
         citation = matches[0]
+        if _nonportable_citation(citation):
+            return None
         current = citation.get("translated_citation")
         if citation.get("status") == "approved" and current not in {None, "", target_value}:
             raise TranslationMemoryError("Citation approuvée divergente pour une même source")
@@ -292,6 +308,8 @@ def verify_memory(project_root: Path, memory_root: Path) -> dict[str, Any]:
             raise TranslationMemoryError(f"Objet et index divergents : {expected_relative}")
         if entry.get("translation_sha256") != sha_object(entry.get("translation") or {}):
             raise TranslationMemoryError(f"Traduction altérée : {expected_relative}")
+        if _contains_nonportable_citations(entry.get("translation") or {}):
+            raise TranslationMemoryError("Citation à preuve d’occurrence non portable dans la mémoire")
         for field in NON_PORTABLE_TRANSLATION_FIELDS:
             if field in (entry.get("translation") or {}):
                 raise TranslationMemoryError(f"Champ non portable dans la mémoire : {field}")
@@ -372,7 +390,8 @@ def _reuse_fields(
         source_fields.extend(
             ("citation", (citation.get("source") or {}).get("citation"))
             for citation in translation.get("citations") or []
-            if isinstance(citation, Mapping) and isinstance(citation.get("source"), Mapping)
+            if (isinstance(citation, Mapping) and isinstance(citation.get("source"), Mapping)
+                and not _nonportable_citation(citation))
         )
         seen_keys: set[str] = set()
         for field_kind, source_value in source_fields:
@@ -547,6 +566,7 @@ def verified_reuse_coverage(
         current_translation = (review_row.get("translation") or {})
         if (
             revision_sha256 != reused.get("source_revision_sha256")
+            or _contains_nonportable_citations(current_translation)
             or sha_object(_reusable_translation(current_translation))
             != reused.get("applied_translation_sha256")
         ):
@@ -583,6 +603,8 @@ def verified_field_reuse_coverage(
             ]
             if len(citations) != 1:
                 raise TranslationMemoryError(f"Citation réutilisée absente : {page_id}/{citation_id}")
+            if _nonportable_citation(citations[0]):
+                raise TranslationMemoryError(f"Reçu de champ incompatible avec une citation à preuve d’occurrence : {page_id}/{citation_id}")
             source = citations[0].get("source") or {}
             source_value = source.get("citation") if isinstance(source, Mapping) else None
             target_value = citations[0].get("translated_citation")
@@ -633,6 +655,7 @@ def reuse_review(
     before_sha256 = sha256_bytes(canonical_json(review))
     reused: list[dict[str, Any]] = []
     stale_rejected: list[dict[str, Any]] = []
+    protected_pages = 0
     changed = 0
     for row in review.get("arguments") or []:
         if not isinstance(row, dict):
@@ -658,6 +681,11 @@ def reuse_review(
                     ),
                     "reason": "source_revision_changed",
                 })
+            continue
+        if _contains_nonportable_citations(translation):
+            # Preserve selected published passages, including pending reviews.
+            # Other portable fields can still be reused below.
+            protected_pages += 1
             continue
         origin_page_id = str((entry.get("origin") or {}).get("page_id") or "")
         reusable = _remap_page_ids(
@@ -704,6 +732,7 @@ def reuse_review(
             "changed": changed,
             "already_identical": len(reused) - changed,
             "stale_rejected": len(stale_rejected),
+            "pages_protected_by_citation_evidence": protected_pages,
             "field_matched": field_receipt["counts"]["matched"],
             "field_changed": field_receipt["counts"]["changed"],
         },
@@ -758,7 +787,7 @@ def export_review(
     }
     index = _load_index(memory_root)
     indexed = {str(row["memory_key"]): row for row in index["entries"]}
-    added = reused = 0
+    added = reused = protected_pages = 0
     for row in review.get("arguments") or []:
         if not isinstance(row, Mapping):
             continue
@@ -769,6 +798,11 @@ def export_review(
             raise TranslationMemoryError(f"Données source ou traduction absentes : {page_id or '?'}")
         if translation.get("status") != "approved":
             raise TranslationMemoryError(f"Traduction non approuvée dans une revue finalisée : {page_id}")
+        if _contains_nonportable_citations(translation):
+            # Export only its ordinary fields through _export_fields below.
+            # Never strip the proof and export the published text as AI.
+            protected_pages += 1
+            continue
         title = _normal_title(metadata.get("canonical_title") or content.get("canonical_title"))
         revision_kind, revision_sha256 = _source_revision(metadata, content)
         memory_key = _memory_key(title, revision_sha256)
@@ -834,6 +868,7 @@ def export_review(
         "entries": verification["entries"],
         "entries_added": added,
         "entries_reused": reused,
+        "pages_excluded_from_full_memory": protected_pages,
         **field_counts,
         "field_entries": verification["field_entries"],
         "field_index_sha256": verification["field_index_sha256"],

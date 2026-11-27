@@ -1,0 +1,61 @@
+name: Experimental quote bridge contract
+on:
+  pull_request:
+    paths:
+      - 'kit/scripts/wikidebia_quote_bridge.py'
+      - 'kit/scripts/wikidebia_quote_prepare.py'
+      - 'kit/tests/test_wikidebia_quote_prepare.py'
+      - 'kit/scripts/wikidebia_quote_duplicates.py'
+      - 'kit/scripts/wikidebia_quote_public_check.py'
+      - 'kit/scripts/wikidebia_quote_index_contract.py'
+      - 'kit/scripts/wikidebia_quote_index_stage.py'
+      - 'kit/scripts/wikidebia_quote_index_collect.py'
+      - 'kit/tests/test_wikidebia_quote_index_collect.py'
+      - 'kit/scripts/wikidebia_final_publication.py'
+      - 'kit/scripts/wikidebia_publish.py'
+      - 'kit/scripts/wikidebia_quote_resume.py'
+      - 'kit/tests/test_wikidebia_quote_resume.py'
+      - 'kit/tests/test_wikidebia_quote_index_contract.py'
+      - 'validator/src/wikidebia_validator/quote_index_contract.py'
+      - 'validator/src/wikidebia_validator/bilingual.py'
+      - 'validator/tests/test_final_quote_audit.py'
+      - 'kit/scripts/wikidebia_published_quote_review.py'
+      - 'kit/scripts/wikidebia_published_quote_selection.py'
+      - 'kit/tests/test_wikidebia_published_quote_selection.py'
+      - 'kit/tests/test_final_publication_debate_first_21646.py'
+      - 'kit/scripts/wikidebia_published_quote_contract.py'
+      - 'validator/src/wikidebia_validator/published_quote_contract.py'
+      - 'validator/tests/test_published_quote_contract.py'
+      - 'kit/scripts/wikidebia_translation_review.py'
+      - 'kit/scripts/wikidebia_render.py'
+      - 'validator/src/wikidebia_validator/wikicode.py'
+      - 'kit/tests/test_wikidebia_published_quote_review.py'
+      - 'kit/tests/test_wikidebia_quote_public_check.py'
+      - 'kit/tests/test_wikidebia_quote_duplicates.py'
+      - 'kit/tests/test_wikidebia_quote_bridge.py'
+      - 'tools/test_quote_bridge_contract.py'
+      - '.github/workflows/quote-bridge-contract.yml'
+permissions:
+  contents: read
+jobs:
+  quote-bridge:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          repository: wikinuma/wikidebia-quote-resolver
+          ref: 7b8d3723c76af0cd937211392282c9cd909e8127
+          path: _resolver
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r validator/requirements-dev.txt -r _resolver/requirements-navigation.txt
+      - run: python -m pytest -q kit/tests/test_wikidebia_quote_prepare.py kit/tests/test_wikidebia_quote_bridge.py kit/tests/test_wikidebia_quote_duplicates.py kit/tests/test_wikidebia_quote_public_check.py kit/tests/test_wikidebia_published_quote_review.py kit/tests/test_wikidebia_quote_index_contract.py kit/tests/test_wikidebia_quote_index_collect.py kit/tests/test_wikidebia_quote_resume.py kit/tests/test_wikidebia_published_quote_selection.py kit/tests/test_final_publication_debate_first_21646.py
+      - run: PYTHONPATH=validator/src python -m pytest -q validator/tests/test_published_quote_contract.py validator/tests/test_final_quote_audit.py
+      - run: python tools/test_quote_bridge_contract.py --resolver-root _resolver

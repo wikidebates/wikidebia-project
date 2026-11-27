@@ -362,6 +362,8 @@ Le paramètre `débat-dédié` est conservé lorsqu’il existe dans une page hi
 
 # 6. English Argument page
 
+The `Quote` template is identical for both quotation origins. `translation_origin`, documentary evidence and editorial or rights reviews are private lock data, never extra MediaWiki parameters. `warnings` contains `AI-translated quote` only for the AI-translation route; the published route uses the exact reviewed English passage and its own verified edition under § 7.4 of the consolidated norm.
+
 The optional conventional-label parameter is `established-name`. Legacy `name` is accepted only for exact preservation of attested pre-existing pages and is never generated on a new page. It is unrelated to page titles, website names, or generic JSON fields named `name`.
 
 ```mediawiki

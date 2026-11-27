@@ -1321,6 +1321,53 @@ def _canonical_french_quote_warning_alias(
         for name, value in rows
     ]
 
+def _validate_quote_completeness(ctx, source_params, actual_params, expected, rel, pointer):
+    # Completeness is a human attestation.  The lexical ratio is only a trigger
+    # for a second explicit review; it never proves truncation on its own.
+    completeness_reviewed = expected.get('quote_completeness_reviewed') is True
+    completeness_note = str(expected.get('quote_completeness_note') or '').strip()
+    if not completeness_reviewed or len(completeness_note) < 12:
+        ctx.report.error('WDV-MWK-024', 'La traduction complète de la valeur Citation→Quote n’est pas attestée par une revue humaine explicite', path=rel, pointer=pointer, details={'citation_id': expected.get('id')})
+    source_quote = next((value for name, value in source_params if name == 'citation'), '')
+    actual_quote = next((value for name, value in actual_params if name == 'quote'), '')
+    fr_word_count = _lexical_word_count(source_quote or '')
+    en_word_count = _lexical_word_count(actual_quote or '')
+    ratio = (en_word_count / fr_word_count) if fr_word_count else None
+    if ratio is not None:
+        stored_ratio = expected.get('lexical_ratio')
+        if isinstance(stored_ratio, (int, float)) and abs(float(stored_ratio) - ratio) > 0.02:
+            ctx.report.error('WDV-MWK-024', 'Le ratio lexical enregistré pour la Quote ne correspond plus au texte rendu', path=rel, pointer=pointer, details={'citation_id': expected.get('id'), 'stored_ratio': stored_ratio, 'actual_ratio': round(ratio, 3)})
+        if fr_word_count >= 8 and ratio < 0.60:
+            low_reviewed = expected.get('quote_low_ratio_reviewed') is True
+            low_note = str(expected.get('quote_low_ratio_note') or '').strip()
+            if not low_reviewed or len(low_note) < 12:
+                ctx.report.error('WDV-MWK-024', 'Ratio lexical faible : la seconde revue explicite de complétude de la Quote est absente', path=rel, pointer=pointer, details={'citation_id': expected.get('id'), 'fr_words': fr_word_count, 'en_words': en_word_count, 'ratio': round(ratio, 3)})
+            else:
+                ctx.report.info('WDV-MWK-024', 'Ratio lexical faible mais seconde revue humaine de complétude attestée', path=rel, pointer=pointer, details={'citation_id': expected.get('id'), 'fr_words': fr_word_count, 'en_words': en_word_count, 'ratio': round(ratio, 3)})
+
+
+def _verify_published_quote_lock(ctx, lock, expected, page_id, actual_params):
+    from .published_quote_contract import EVIDENCE, PublishedQuoteError, import_path, verify_locked_citation
+    policy = (ctx.load_json("data/en_translation_lock.json", required=True) or {}).get("citation_translation_policy") or {}
+    if lock.get("published_quote_contract") != EVIDENCE or policy.get("published_quote_contract") != EVIDENCE:
+        raise PublishedQuoteError("published_quote_lock_profile_missing")
+    french = ctx.load_json("data/fr_content_lock.json", required=True) or {}
+    arguments = [r for r in french.get("arguments") or [] if r.get("id") == page_id]
+    if len(arguments) != 1:
+        raise PublishedQuoteError("published_quote_authoritative_page_missing")
+    sources = [r for r in arguments[0].get("citations") or [] if r.get("id") == expected.get("id")]
+    provenance = ctx.load_json("data/import_provenance.json", required=True) or {}
+    imports = [r for r in provenance.get("pages") or [] if r.get("kind") == "argument" and r.get("page_id") == page_id]
+    if len(sources) != 1 or len(imports) != 1:
+        raise PublishedQuoteError("published_quote_authoritative_occurrence_missing")
+    raw = ctx.read_bytes(import_path(imports[0]))
+    derived = verify_locked_citation(expected, sources[0], imports[0], raw,
+                                     ctx.sha256("data/fr_content_lock.json"), page_id)
+    if actual_params != [(p["name"], p["value"]) for p in derived["parameters"]]:
+        raise PublishedQuoteError("published_quote_rendered_projection_mismatch")
+    return sources[0]
+
+
 def _validate_citations_against_locks(ctx: PackageContext, tmpl: Template, rel: str, lang: str, page_id: str) -> None:
     from html import escape
     from .schema_validation import _valid_translation_source_preservation
@@ -1378,6 +1425,24 @@ def _validate_citations_against_locks(ctx: PackageContext, tmpl: Template, rel: 
         if comparable_actual != comparable_expected:
             ctx.report.error('WDV-MWK-021', 'Les paramètres de la citation divergent du verrou bilingue ; les noms doivent être anglais et seules les valeurs de quote et date peuvent être traduites', path=rel, pointer=f'{parameter}/{index}', details={'expected': expected_params, 'actual': actual_params, 'citation_id': expected.get('id')})
         if lang == 'en':
+            origin = expected.get('translation_origin', 'ai_translation')
+            if origin == 'published_translation':
+                from .published_quote_contract import ACTIVE, PublishedQuoteError
+                try:
+                    source = _verify_published_quote_lock(ctx, lock, expected, page_id, actual_params)
+                    _validate_quote_completeness(ctx, _parameter_pairs(source.get('source_parameters')),
+                                                 actual_params, expected, rel, f'{parameter}/{index}')
+                except (ValueError, KeyError, TypeError, AttributeError, OSError) as exc:
+                    reason = str(exc) if isinstance(exc, PublishedQuoteError) else type(exc).__name__
+                    ctx.report.error('WDV-MWK-021', 'Preuve de citation publiée invalide : ' + reason,
+                                     path=rel, pointer=f'{parameter}/{index}')
+                if not ACTIVE:
+                    ctx.report.error('WDV-MWK-021', 'Le contrat expérimental de citation publiée reste inactif',
+                                     path=rel, pointer=f'{parameter}/{index}')
+                continue
+            if origin != 'ai_translation' or 'published_quote_evidence' in expected:
+                ctx.report.error('WDV-MWK-021', 'Provenance de citation anglaise inconnue ou contradictoire',
+                                 path=rel, pointer=f'{parameter}/{index}')
             current_contract = True
             warning_name = 'warnings' if current_contract else 'avertissements-citation'
             warning_values = [value for name, value in actual_params if name == warning_name]
@@ -1414,28 +1479,7 @@ def _validate_citations_against_locks(ctx: PackageContext, tmpl: Template, rel: 
                 preserved_actual = [(name, value) for name, value in actual_params if name not in {'quote', 'date', 'warnings'}]
                 if preserved_actual != mapped_source:
                     ctx.report.error('WDV-MWK-021', 'La valeur d’un paramètre documentaire de Quote a été modifiée ou son nom n’a pas été traduit en anglais', path=rel, pointer=f'{parameter}/{index}', details={'expected_preserved': mapped_source, 'actual_preserved': preserved_actual})
-                # Completeness is a human attestation.  The lexical ratio is only a trigger
-                # for a second explicit review; it never proves truncation on its own.
-                completeness_reviewed = expected.get('quote_completeness_reviewed') is True
-                completeness_note = str(expected.get('quote_completeness_note') or '').strip()
-                if not completeness_reviewed or len(completeness_note) < 12:
-                    ctx.report.error('WDV-MWK-024', 'La traduction complète de la valeur Citation→Quote n’est pas attestée par une revue humaine explicite', path=rel, pointer=f'{parameter}/{index}', details={'citation_id': expected.get('id')})
-                source_quote = next((value for name, value in source_params if name == 'citation'), '')
-                actual_quote = next((value for name, value in actual_params if name == 'quote'), '')
-                fr_word_count = _lexical_word_count(source_quote or '')
-                en_word_count = _lexical_word_count(actual_quote or '')
-                ratio = (en_word_count / fr_word_count) if fr_word_count else None
-                if ratio is not None:
-                    stored_ratio = expected.get('lexical_ratio')
-                    if isinstance(stored_ratio, (int, float)) and abs(float(stored_ratio) - ratio) > 0.02:
-                        ctx.report.error('WDV-MWK-024', 'Le ratio lexical enregistré pour la Quote ne correspond plus au texte rendu', path=rel, pointer=f'{parameter}/{index}', details={'citation_id': expected.get('id'), 'stored_ratio': stored_ratio, 'actual_ratio': round(ratio, 3)})
-                    if fr_word_count >= 8 and ratio < 0.60:
-                        low_reviewed = expected.get('quote_low_ratio_reviewed') is True
-                        low_note = str(expected.get('quote_low_ratio_note') or '').strip()
-                        if not low_reviewed or len(low_note) < 12:
-                            ctx.report.error('WDV-MWK-024', 'Ratio lexical faible : la seconde revue explicite de complétude de la Quote est absente', path=rel, pointer=f'{parameter}/{index}', details={'citation_id': expected.get('id'), 'fr_words': fr_word_count, 'en_words': en_word_count, 'ratio': round(ratio, 3)})
-                        else:
-                            ctx.report.info('WDV-MWK-024', 'Ratio lexical faible mais seconde revue humaine de complétude attestée', path=rel, pointer=f'{parameter}/{index}', details={'citation_id': expected.get('id'), 'fr_words': fr_word_count, 'en_words': en_word_count, 'ratio': round(ratio, 3)})
+                _validate_quote_completeness(ctx, source_params, actual_params, expected, rel, f'{parameter}/{index}')
             else:
                 preserved_source = [(name, value) for name, value in source_params if name not in {'citation', 'date', 'avertissements-citation'}]
                 preserved_actual = [(name, value) for name, value in actual_params if name not in {'citation', 'date', 'avertissements-citation'}]
