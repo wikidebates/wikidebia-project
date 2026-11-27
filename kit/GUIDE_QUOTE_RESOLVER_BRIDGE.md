@@ -162,3 +162,25 @@ Le contrat expérimental est décrit dans docs/PROPOSED_PUBLISHED_QUOTE_CONTRACT
 les propositions et leurs revues sans modifier la traduction. Les règles
 actives de rendu et de publication restent inchangées : aucune proposition
 n'est une citation anglaise verrouillée ni un droit de publication.
+
+
+Produire les candidats et fiches de revue privées :
+
+    python kit/scripts/wikidebia_published_quote_review.py DEBAT --work-id WORK \
+      --request REQUEST --handoff HANDOFF --handoff-sha SHA
+
+Les fichiers immuables sont placés dans audits/quote-resolver/published-quotes
+du workspace. Copier la fiche de revue vierge vers un nouveau fichier privé
+avant de la renseigner à partir des preuves effectivement consultées. Ne pas
+inventer d'autorisation ou compléter une fiche sans revue.
+
+Vérifier une fiche renseignée contre le retour et le verrou courants :
+
+    python kit/scripts/wikidebia_published_quote_review.py DEBAT --work-id WORK \
+      --request REQUEST --handoff HANDOFF --handoff-sha SHA \
+      --candidate-sha CANDIDATE_SHA --review REVIEW_FILE
+
+Le résultat est une proposition privée et non un verrou de traduction.
+L'échappement du wikicode qui exigerait une preuve de rendu est pour
+l'instant refusé, sans réécrire le passage. L'empreinte de la fiche reste
+liée à l'occurrence et au retour inspectés.

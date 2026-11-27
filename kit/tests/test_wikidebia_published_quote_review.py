@@ -156,3 +156,25 @@ def test_unsafe_metadata_not_rendered():
         r["edition"]["work"]=value.replace("\\n","\n")
         with pytest.raises(bridge.QuoteBridgeError):
             review.proposal(candidate,bridge.digest(candidate),r)
+
+
+def test_private_artifacts_are_immutable_and_idempotent(tmp_path):
+    candidate,=prepare(*fixture())
+    path=review.write_private(tmp_path,candidate,"candidate")
+    assert path.stat().st_mode & 0o077 == 0
+    assert json.loads(path.read_text())==candidate
+    assert review.write_private(tmp_path,candidate,"candidate")==path
+    template=review.write_private(tmp_path,review.blank(candidate),"review-template")
+    assert template!=path
+    path.write_text("{}\n")
+    with pytest.raises(bridge.QuoteBridgeError,match="artifact_changed"):
+        review.write_private(tmp_path,candidate,"candidate")
+
+
+def test_syntax_that_would_change_rendering_is_not_silently_rewritten():
+    candidate,=prepare(*fixture())
+    for value in ("A &amp; B","[https://example.org/ label]","{{x}}","A|B"):
+        r=completed(candidate)
+        r["edition"]["work"]=value
+        with pytest.raises(bridge.QuoteBridgeError):
+            review.proposal(candidate,bridge.digest(candidate),r)
