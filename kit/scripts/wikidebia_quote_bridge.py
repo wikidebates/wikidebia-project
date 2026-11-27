@@ -74,7 +74,7 @@ def parameter_pairs(parameters):
     return pairs
 
 
-def locked_items(source, registry, metadata, content, provenance):
+def locked_items(source, registry, metadata, content, provenance, *, include_reused=False):
     """Collect occurrences from the authoritative French lock, not a draft.
 
     Revision/title come from the actual imported page, not from a renamed
@@ -93,7 +93,7 @@ def locked_items(source, registry, metadata, content, provenance):
         raise QuoteBridgeError("incomplete_locked_argument_coverage")
     items, owners = [], {}
     for page_id, node in nodes.items():
-        if _reuses_existing_english_page(node):
+        if not include_reused and _reuses_existing_english_page(node):
             continue
         citations = locks[page_id].get("citations") or []
         if not isinstance(citations, list):
@@ -137,7 +137,7 @@ def locked_items(source, registry, metadata, content, provenance):
     return items, owners
 
 
-def snapshot(project, debate_id, work_id):
+def _snapshot_inputs(project, debate_id, work_id):
     workspace, meta = _load_workspace(project, debate_id, work_id)
     if meta.get("status") not in {"fr_content_applied", "fr_source_preserved",
                                 "en_translation_review_ready"}:
@@ -150,8 +150,24 @@ def snapshot(project, debate_id, work_id):
                                             "frozen_as_imported"}):
         raise QuoteBridgeError("content_lock_identity_mismatch")
     provenance = load_json(source / "data/import_provenance.json")
-    items, owners = locked_items(source, registry, metadata, content, provenance)
-    return workspace, sha256_file(source / "data/fr_content_lock.json"), items, owners
+    return workspace, sha256_file(source / "data/fr_content_lock.json"), (
+        source, registry, metadata, content, provenance)
+
+
+def snapshot(project, debate_id, work_id):
+    workspace, lock_sha, inputs = _snapshot_inputs(project, debate_id, work_id)
+    items, owners = locked_items(*inputs)
+    return workspace, lock_sha, items, owners
+
+
+def duplicate_snapshot(project, debate_id, work_id):
+    """Include all locked French citations, even those on reused EN pages."""
+    workspace, lock_sha, inputs = _snapshot_inputs(project, debate_id, work_id)
+    items, owners = locked_items(*inputs, include_reused=True)
+    reused = {n["id"] for n in (inputs[1].get("graph") or {}).get("nodes") or []
+              if n.get("status") == "active" and _reuses_existing_english_page(n)}
+    eligible = [item for item in items if owners[item["id"]] not in reused]
+    return workspace, lock_sha, items, owners, eligible
 
 
 def duplicate_sources(items, owners):

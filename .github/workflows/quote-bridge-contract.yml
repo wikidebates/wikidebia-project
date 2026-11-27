@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'kit/scripts/wikidebia_quote_bridge.py'
+      - 'kit/scripts/wikidebia_quote_duplicates.py'
+      - 'kit/tests/test_wikidebia_quote_duplicates.py'
       - 'kit/tests/test_wikidebia_quote_bridge.py'
       - 'tools/test_quote_bridge_contract.py'
       - '.github/workflows/quote-bridge-contract.yml'
@@ -27,5 +29,5 @@ jobs:
         with:
           python-version: "3.12"
       - run: python -m pip install -r validator/requirements-dev.txt -r _resolver/requirements-navigation.txt
-      - run: python -m pytest -q kit/tests/test_wikidebia_quote_bridge.py
+      - run: python -m pytest -q kit/tests/test_wikidebia_quote_bridge.py kit/tests/test_wikidebia_quote_duplicates.py
       - run: python tools/test_quote_bridge_contract.py --resolver-root _resolver

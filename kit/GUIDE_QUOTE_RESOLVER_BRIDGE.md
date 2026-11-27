@@ -2,7 +2,7 @@
 
 Ce raccordement est une interface documentaire **en lecture seule**, et non une
 nouvelle procédure de publication. Il est testé contre le commit
-`bbd7b888b9d1edc6d7499cb8844855afdc42e7d4` du dépôt
+`d3d7c0508a74a6988c6d4512b270259a96f79f35` du dépôt
 [wikidebia-quote-resolver](https://github.com/wikinuma/wikidebia-quote-resolver).
 
 ## Produire les requêtes à partir du Work
@@ -65,14 +65,14 @@ preuve indépendante de la véracité d'une décision éditoriale.
 Les citations identiques présentes sur plusieurs pages françaises actives
 sont signalées à l'export; les passages anglais identiques retrouvés dans
 un même lot sont signalés à l'inspection. Aucun doublon n'est supprimé
-automatiquement. Un contrôle inter-lots et inter-pages devra précéder toute
+automatiquement. Le contrôle inter-lots décrit ci-dessous doit précéder
 utilisation éditoriale de ces passages.
 
 ## Limites avant activation en production
 
-- Le registre doit être accessible aux deux modalités. Le transfert privé,
-  vérifié et portable des reçus entre l'environnement de campagne et
-  l'environnement Codex n'est pas implémenté par ce raccordement.
+- Le transfert privé est disponible dans registry_transfer.py du résolveur.
+  Le parcours automatique du kit et le transport effectif entre les deux
+  environnements restent à intégrer.
 - Les citations sans révision française, modifiées ou ambiguës ne sont pas
   automatiquement rattachées. Il ne faut pas inventer de révision.
 - Les règles actuelles de traduction demeurent inchangées. Une future
@@ -87,3 +87,37 @@ Les tests ciblés emploient les fixtures de workspace du kit. Le test
 inter-dépôts utilise les vrais parseurs et registres avec des documents,
 révisions et décisions synthétiques, sans appel wiki ni modèle. Le replay
 documentaire sur les sources publiques reste un test du dépôt résolveur.
+
+
+## Transfert sélectif et doublons entre lots
+
+Le résolveur accepte les fichiers de requête privés du kit. Sa commande
+registry_transfer.py select calcule un sélecteur à partir des lots (options
+--request répétables), constitué uniquement d'empreintes. Il permet
+d'exporter les reçus utiles depuis la base de campagne. Voir
+experiments/REGISTRY-TRANSFER.md. Les lots de plusieurs verrous ou ayant des
+occurrences communes sont refusés. Le test inter-dépôts utilise les vrais
+fichiers, transfère vers une seconde base et résout sans nouvelle recherche.
+
+Contrôler ensemble les retours du débat:
+
+    python kit/scripts/wikidebia_quote_duplicates.py DEBAT --work-id WORK \
+      --batch REQUEST_1 HANDOFF_1 SHA_1 \
+      --batch REQUEST_2 HANDOFF_2 SHA_2
+
+Chaque lot est revérifié contre le verrou; une occurrence répétée ou manquante
+bloque le bilan complet. --allow-partial permet un diagnostic explicitement
+incomplet. Le rapport sépare les textes exacts après normalisation Unicode
+NFC et des espaces, les mêmes mots avec ponctuation/casse différente, les
+chevauchements de coordonnées du même document, les similitudes lexicales
+élevées et les chevauchements partiels. Une référence à la même œuvre ne
+suffit pas. Seuls identifiants, empreintes et mesures sont émis; aucune
+suppression ou correction. Les comparaisons lexicales sont bornées et ne
+détectent pas toutes les paraphrases; limites et omissions sont signalées,
+sans affecter les groupes exacts.
+
+Le périmètre FR comprend toutes les Citation du verrou des arguments actifs,
+même sur les pages EN réutilisées. Le périmètre EN ne couvre que les passages
+publiés reconstruits dans les handoffs fournis, et non les citations traduites
+par IA, les pages EN réutilisées ou le wiki public entier. Diagnostic
+éditorial uniquement, pas verrou de publication.
