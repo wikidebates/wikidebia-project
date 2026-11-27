@@ -69,7 +69,9 @@ METADATA_LOCK_SCHEMA = "wikidebia-fr-page-metadata-lock-1.0"
 CHANGESET_SCHEMA = "wikidebia-editorial-changeset-1.1"
 ALLOWED_KEYWORD_KINDS = {"noun", "noun_phrase", "proper_name", "acronym"}
 COMPOSITIONAL_KEYWORD_FR = re.compile(
-    r"^(?:(?:psychologie|sociologie|histoire|géographie|généalogie)\s+religieuse?s?|science\s+et\s+religion)$",
+    r"^(?:(?:psychologie|sociologie|histoire|géographie|généalogie)\s+religieuse?s?|science\s+et\s+religion"
+    r"|municipalités?\s+de\s+(?:gauche|droite)|femmes?\s+voilées?"
+    r"|(?:port|interdiction)\s+du\s+voile(?:\s+islamique)?)$",
     flags=re.IGNORECASE,
 )
 

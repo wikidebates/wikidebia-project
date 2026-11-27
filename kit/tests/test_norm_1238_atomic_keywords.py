@@ -5,6 +5,8 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
@@ -35,17 +37,23 @@ def test_working_vocabulary_declares_semantic_atomicity_fields():
     assert by_term["psychologie"]["atomic_concept"] is True
     assert by_term["psychologie"]["compositional_intersection"] is False
     assert by_term["psychologie"]["multiword_exception"] is False
-    assert by_term["argument d'autorité"]["multiword_exception"] is True
-    assert "ne se réduit pas" in by_term["argument d'autorité"]["multiword_exception_rationale"]
+    assert by_term["argument d'autorité"]["atomic_concept"] is None
+    assert by_term["argument d'autorité"]["compositional_intersection"] is None
+    assert by_term["argument d'autorité"]["multiword_exception"] is None
+    assert by_term["argument d'autorité"]["multiword_exception_rationale"] == ""
 
 
-def test_finalize_rejects_religious_psychology_as_compositional_intersection(tmp_path: Path):
+@pytest.mark.parametrize("keyword", [
+    "psychologie religieuse", "municipalités de gauche", "port du voile",
+    "interdiction du voile islamique", "femmes voilées",
+])
+def test_finalize_rejects_compositional_intersection(tmp_path: Path, keyword: str):
     project, workspace, work_id = make_workspace(tmp_path)
     complete_review(workspace)
-    _rename_keyword_in_review_and_vocabulary(workspace, "argumentation", "psychologie religieuse")
+    _rename_keyword_in_review_and_vocabulary(workspace, "argumentation", keyword)
     vocabulary_path = workspace / "data/keyword_vocabulary_working.json"
     vocabulary = json.loads(vocabulary_path.read_text(encoding="utf-8"))
-    entry = next(row for row in vocabulary["entries"] if row["fr"] == "psychologie religieuse")
+    entry = next(row for row in vocabulary["entries"] if row["fr"] == keyword)
     entry.update({
         "kind": "noun_phrase",
         "atomic_concept": True,
@@ -54,31 +62,36 @@ def test_finalize_rejects_religious_psychology_as_compositional_intersection(tmp
         "multiword_exception_rationale": "Justification artificielle volontairement suffisante en longueur pour tester le refus sémantique.",
     })
     common.write_json(vocabulary_path, vocabulary)
-    try:
+    with pytest.raises(review_tool.EditorialReviewError, match="décomposer en unités de base"):
         review_tool.finalize_review(project, "debat_test", work_id)
-    except review_tool.EditorialReviewError as exc:
-        assert "décomposer en unités de base" in str(exc)
-    else:
-        raise AssertionError("L'intersection psychologie religieuse a été acceptée")
 
 
-def test_finalize_accepts_argument_d_authorite_as_atomic_term(tmp_path: Path):
+@pytest.mark.parametrize("keyword", ["argument d'autorité", "voile islamique"])
+def test_finalize_accepts_atomic_phrase(tmp_path: Path, keyword: str):
     project, workspace, work_id = make_workspace(tmp_path)
     complete_review(workspace)
-    _rename_keyword_in_review_and_vocabulary(workspace, "argumentation", "argument d'autorité")
+    _rename_keyword_in_review_and_vocabulary(workspace, "argumentation", keyword)
     vocabulary_path = workspace / "data/keyword_vocabulary_working.json"
     vocabulary = json.loads(vocabulary_path.read_text(encoding="utf-8"))
-    entry = next(row for row in vocabulary["entries"] if row["fr"] == "argument d'autorité")
+    entry = next(row for row in vocabulary["entries"] if row["fr"] == keyword)
     entry.update({
         "kind": "noun_phrase",
         "atomic_concept": True,
         "compositional_intersection": False,
         "multiword_exception": True,
-        "multiword_exception_rationale": "Catégorie argumentative conventionnelle dont le sens disparaît si elle est séparée en argument et autorité.",
+        "multiword_exception_rationale": "Locution conventionnelle qui désigne un concept précis dans la navigation.",
     })
     common.write_json(vocabulary_path, vocabulary)
     result = review_tool.finalize_review(project, "debat_test", work_id)
     assert result["status"] == "fr_review_finalized"
+
+
+@pytest.mark.parametrize("pair", [
+    ["dictature", "dictatures"], ["femme", "Femmes"], ["Emancipation", "émancipation"],
+])
+def test_keyword_diagnostics_report_duplicate_variants(pair):
+    issues = workspace_tool.keyword_diagnostics(pair, fallback=False)
+    assert [issue["code"] for issue in issues if issue["severity"] == "correction"] == ["KEYWORDS_DUPLICATE"]
 
 
 def test_summary_review_emits_originality_and_exact_mechanism_excerpt():

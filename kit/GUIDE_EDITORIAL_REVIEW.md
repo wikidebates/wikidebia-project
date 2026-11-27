@@ -28,6 +28,7 @@ Chaque page reçoit une décision explicite sur :
 
 Le vocabulaire de travail couvre exactement les mots-clés finalement retenus. Chaque terme français possède une définition, une nature grammaticale, une justification de portée inter-débat et la liste exacte de ses usages. La traduction anglaise peut rester vide à ce stade.
 
+Choisir les concepts qui servent à retrouver l’argument. Décomposer « municipalités de gauche » en « municipalité » et « gauche », « femmes voilées » en « femmes » et « voile islamique », et « interdiction du voile » en « interdiction » et « voile islamique ». « Voile islamique » désigne un concept précis et reste un seul mot-clé. Employer ce libellé complet lorsque le sujet est le voile islamique. Retenir une seule forme par concept, par exemple « dictature ». La classification d’une locution comme concept autonome demande une décision motivée dans le vocabulaire de travail.
 
 ## Politique différentielle pour les pages déjà présentes sur le wiki
 
