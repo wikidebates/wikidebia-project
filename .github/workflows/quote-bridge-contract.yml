@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           repository: wikinuma/wikidebia-quote-resolver
-          ref: bbd7b888b9d1edc6d7499cb8844855afdc42e7d4
+          ref: d3d7c0508a74a6988c6d4512b270259a96f79f35
           path: _resolver
           persist-credentials: false
       - uses: actions/setup-python@v6

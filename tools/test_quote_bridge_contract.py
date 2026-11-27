@@ -7,6 +7,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 import argparse
+import json
+import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,7 +20,8 @@ def exercise(resolver_root):
     from wikidebia_content_review import _citation_records
     from citation_registry import CitationRegistry, fingerprint
     from grouped_review import REPLY
-    from test_citation_registry import RAW, QUOTE, ENGLISH, FR, candidate, document
+    from registry_transfer import export_bundle, import_bundle, read_private_json
+    from test_citation_registry import RAW, QUOTE, ENGLISH, FR, candidate, document, ref, review
     from translation_handoff import prepare_handoff, apply_handoff_reply
     from work_library import WorkLibrary
 
@@ -45,6 +48,22 @@ def exercise(resolver_root):
         lock_sha = bridge.digest({"synthetic_fixture": content})
         request, = bridge.requests_for(lock_sha, items, owners)
         assert fingerprint(request) == bridge.digest(request)
+        # Real private files produced by the kit, split into distinct batches.
+        batches = bridge.requests_for(lock_sha, items, owners, batch_size=1)
+        request_paths = [bridge.write_private_request(base, r) for r in batches]
+        selector_path = base / "selection.json"
+        cmd = [sys.executable, str(resolver_root / "registry_transfer.py"), "select"]
+        for path in request_paths:
+            cmd += ["--request", str(path)]
+        selected = subprocess.run(cmd + ["--out", str(selector_path)],
+                                  check=True, capture_output=True, text=True)
+        select_summary = json.loads(selected.stdout)
+        selection = read_private_json(selector_path)
+        assert select_summary["sha256"] == fingerprint(selection)
+        assert len(selection["selectors"]) == 1
+        assert selection["request_sha256s"] == sorted(bridge.digest(r) for r in batches)
+        assert selector_path.stat().st_mode & 0o077 == 0
+        assert QUOTE not in str(selection) and "Argument A" not in str(selection)
         doc = document()
         calls = []
 
@@ -78,19 +97,51 @@ def exercise(resolver_root):
             result = apply_handoff_reply(handoff, fingerprint(handoff), reply,
                                          registry, load_raw, audit)
             assert result["recorded"] == 1
-            restored = prepare_handoff(request, registry, retrieval, load_raw, audit,
-                                         search_missing=False)
-            summary = bridge.inspect_handoff(request, restored, fingerprint(restored),
-                                             lock_sha, items, owners)
-            assert summary["states"] == {
-                "reviewed_receipt_rights_unreviewed": 1, "ai_translation_required": 1}
-            assert calls == ["A0001-C001"]
-            row = restored["rows"][0]
-            assert row["published_passage"]["fragments"][0]["text"] == ENGLISH
-            assert summary["publication_authorized"] is False
-            assert summary["translation_mutated"] is False
-            assert QUOTE not in str(summary) and ENGLISH not in str(summary)
-    print("Cross-repository contract: passed (synthetic fixtures, no wiki/model access)")
+            # Include an unrelated receipt in the source registry: it must not
+            # leave this environment, even if it resolves to the same passage.
+            unrelated = RAW.replace(QUOTE, "Autre citation de test, sans rapport.")
+            unrelated_ref = ref(unrelated, 99)
+            c = candidate(doc)
+            registry.record(unrelated, unrelated_ref, doc, c,
+                            review(unrelated, unrelated_ref, doc, c))
+            bundle = export_bundle(registry, selection=selection,
+                                   selection_sha=select_summary["sha256"])
+            assert len(bundle["entries"]) == 1
+            assert QUOTE not in str(bundle) and ENGLISH not in str(bundle)
+            with WorkLibrary(base / "translation.sqlite3") as destination:
+                target_registry = CitationRegistry(destination.db)
+                receipt = import_bundle(target_registry, bundle, fingerprint(bundle))
+                assert receipt["inserted"] == 1
+                assert target_registry.lookup(unrelated, unrelated_ref)["status"] == "miss"
+                assert import_bundle(target_registry, bundle, fingerprint(bundle))["already_present"] == 1
+                states = {}
+                for batch in batches:
+                    restored = prepare_handoff(batch, target_registry, retrieval, load_raw,
+                                               audit, search_missing=False)
+                    summary = bridge.inspect_handoff(batch, restored, fingerprint(restored),
+                                                     lock_sha, items, owners)
+                    states.update(summary["states"])
+                    assert summary["publication_authorized"] is False
+                    assert summary["translation_mutated"] is False
+                    assert QUOTE not in str(summary) and ENGLISH not in str(summary)
+                    if "reviewed_receipt_rights_unreviewed" in summary["states"]:
+                        row, = restored["rows"]
+                        assert row["published_passage"]["fragments"][0]["text"] == ENGLISH
+                assert states == {"reviewed_receipt_rights_unreviewed": 1,
+                                  "ai_translation_required": 1}
+                assert calls == ["A0001-C001"]
+                # Change the target's body: neither the transport nor its hash
+                # authorizes reuse of stale English text.
+                changed = SimpleNamespace(document=lambda *_: document(digest="c"*64),
+                                          publication={})
+                stale = prepare_handoff(batches[0], target_registry, retrieval, load_raw,
+                                       changed, search_missing=False)
+                assert stale["rows"][0]["state"] == "retry_documentary"
+                assert "published_passage" not in stale["rows"][0]
+                bridge.inspect_handoff(batches[0], stale, fingerprint(stale),
+                                       lock_sha, items, owners)
+                assert calls == ["A0001-C001"]
+    print("Cross-repository contract: passed (kit batches, private selective transfer, separate DBs, no wiki/model access)")
 
 
 if __name__ == "__main__":
