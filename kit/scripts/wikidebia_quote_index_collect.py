@@ -137,6 +137,12 @@ def collect(workspace,resolver_root,*,previous_sha=None,budget=1200,batch_size=3
         coverage = contract.validate(old,old_sha,"en",allow_partial=True,now=current)
         if (coverage["complete_fresh_literal_scope"] and not force
                 and pending_refresh(workspace) is None):
+            if latest_selected_sha(workspace) != old_sha:
+                # An explicitly supplied staged index may be fresher than
+                # the selected pointer, or no pointer may exist yet.
+                artifact = (workspace/"audits/quote-resolver/published-quotes/public-index"/
+                            (old_sha+".json"))
+                select_refresh(workspace,artifact,old_sha,now=current)
             return {"status":"reused_fresh_index","quote_public_index_sha256":old_sha,
                     "wiki_requests":0,"pages_fetched_content":0,
                     "hosted_model_calls":0,"publication_authorized":False,

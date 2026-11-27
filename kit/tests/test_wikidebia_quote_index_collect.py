@@ -141,3 +141,17 @@ def test_latest_selected_sha_never_replaces_newer_draft_index(tmp_path):
     new_sha=write_snapshot(path,newer)
     stage(tmp_path,path,new_sha,now=NOW+timedelta(minutes=2))
     assert latest_selected_sha(tmp_path,new_sha)==new_sha
+
+
+def test_fresh_staged_index_is_selected_without_network(tmp_path,monkeypatch):
+    value=fresh(NOW)
+    path=tmp_path/"staged.json"
+    sha=write_snapshot(path,value)
+    stage(tmp_path,path,sha,now=NOW)
+    assert latest_selected_sha(tmp_path) is None
+    def forbidden(*args,**kwargs):
+        pytest.fail("fresh staged index should not execute resolver")
+    monkeypatch.setattr(collect,"materialize",forbidden)
+    result=collect.collect(tmp_path,tmp_path,previous_sha=sha,now=NOW)
+    assert result["status"]=="reused_fresh_index"
+    assert latest_selected_sha(tmp_path)==sha

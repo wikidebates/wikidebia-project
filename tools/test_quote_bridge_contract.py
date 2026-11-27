@@ -29,6 +29,7 @@ def exercise(resolver_root):
     from wikidebia_published_quote_review import contract as kit_contract
     assert Path(kit_contract.__file__).read_bytes() == Path(independent_contract.__file__).read_bytes()
     import wikidebia_quote_index_contract as final_index
+    import wikidebia_quote_index_collect as collector
     from wikidebia_validator import quote_index_contract as independent_index
     assert Path(final_index.__file__).read_bytes() == Path(independent_index.__file__).read_bytes()
     from test_citation_registry import RAW, QUOTE, ENGLISH, FR, candidate, document, ref, review
@@ -38,6 +39,13 @@ def exercise(resolver_root):
 
     with TemporaryDirectory(prefix="quote-bridge-contract-") as tmp:
         base = Path(tmp)
+        # Exercise the actual pinned Git object materialization and isolated
+        # producer entrypoint, not just the synthetic Git fixture.
+        producer_dir = base/"producer"
+        producer_dir.mkdir()
+        script = collector.materialize(resolver_root,producer_dir)
+        assert script.read_bytes() == (resolver_root/"public_quote_index.py").read_bytes()
+        assert collector._run(script,producer_dir,["--help"],30) == 0
         raws = [RAW, RAW.replace(FR, "https://example.org/article")]
         pages = {"Argument A": (17, raws[0]), "Argument B": (18, raws[1])}
         nodes, metadata, content, provenance = [], [], [], []
@@ -181,7 +189,7 @@ def exercise(resolver_root):
             assert final["public_exact"][0]["matching_occurrences"]==2
             assert final==independent_index.final_audit(args,value,summary["snapshot_sha256"],
                     "a"*64,now=__import__("datetime").datetime.fromisoformat(final["checked_at"]))
-    print("Cross-repository contract: passed (private selective transfer, separate DBs, public fingerprint exchange; no wiki/model access)")
+    print("Cross-repository contract: passed (pinned producer isolation, selective transfer, separate DBs, public fingerprint exchange; no wiki/model access)")
 
 
 if __name__ == "__main__":
