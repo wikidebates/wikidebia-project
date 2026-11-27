@@ -197,3 +197,17 @@ Le test vérifie le garde-fou inactif puis simule l'activation uniquement dans
 le processus de test. Les revues et réponses du validateur générique dans la
 fixture sont simulées; les tests spécifiques du validateur indépendant restent
 nécessaires. Aucun droit, contenu wiki réel ou publication n'est attesté.
+
+## Reprise d'une autorisation existante
+
+Le contrôle de reprise reproduit la décision historique exacte à partir du
+verrou et de l'index effectivement utilisés (original ou rafraîchi). Il
+refuse un reçu absent, altéré, sans son index, rattaché à une autre release
+ou temporellement incohérent. Les migrations de plan préservent la date de
+l'autorisation documentaire initiale. Les anciens Works n'ont pas besoin
+ni d'index ni d'espace de travail pour ce contrôle. Ce contrôle est local
+et ne traite pas les pages déjà créées par le plan comme de nouveaux
+conflits. Il ne prouve toutefois pas l'absence de nouveaux doublons sur
+le wiki depuis la première autorisation. Une réévaluation fraîche avec
+exclusion des seules créations attribuables au plan reste nécessaire pour
+imposer une nouvelle décision documentaire à une reprise tardive.

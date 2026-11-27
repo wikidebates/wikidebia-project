@@ -220,3 +220,66 @@ def test_legacy_gate_does_not_resolve_workspace_and_opt_in_resolves_before_write
     with pytest.raises(q.QuoteIndexError,match="untrusted_workspace"):
         package_audit(workspace,root,now=NOW)
     assert calls==["checked"]
+
+
+def test_prior_authorization_reproduces_exact_scope_without_self_duplicate_refresh(tmp_path):
+    from hashlib import sha256
+    from wikidebia_quote_index_stage import authorized_package_audit,select_refresh,verify_current
+    root=tmp_path/"release"
+    workspace=tmp_path/"work"
+    workspace.mkdir()
+    def write(rel,value):
+        path=root/rel
+        path.parent.mkdir(parents=True,exist_ok=True)
+        path.write_text(json.dumps(value)+"\n",encoding="utf-8")
+        return path
+    def no_workspace():
+        raise AssertionError("Legacy or original-index check must not load a workspace")
+    assert authorized_package_audit(no_workspace,root,{},now=NOW) is None
+    with pytest.raises(q.QuoteIndexError,match="unexpected_authorized"):
+        authorized_package_audit(no_workspace,root,{"quote_duplicate_preflight":{}},now=NOW)
+    fr=write("data/fr_content_lock.json",{"arguments":[]})
+    lock=sha256(fr.read_bytes()).hexdigest()
+    args=[arg("A0001","A quote.","published_translation")]
+    original=snapshot()
+    audit=q.final_audit(args,original,q.digest(original),lock,now=NOW)
+    write(q.INDEX_PATH,original)
+    write("data/en_content_lock.json",{"arguments":args,"quote_duplicate_audit":audit})
+    write("data/en_translation_lock.json",{"citation_translation_policy":
+         {"quote_duplicate_audit_sha256":audit["audit_sha256"]}})
+    with pytest.raises(q.QuoteIndexError,match="missing_authorized"):
+        authorized_package_audit(no_workspace,root,{},now=NOW)
+    # Resume later using the original, bound historical proof.
+    auth={"authorized_at":(NOW+timedelta(seconds=1)).isoformat(),
+          "quote_duplicate_preflight":audit}
+    later=NOW+timedelta(days=2)
+    assert authorized_package_audit(no_workspace,root,auth,now=later)==audit
+    # Migration re-signs the plan without changing the original quote decision.
+    migrated={**auth,"quote_duplicate_authorized_at":auth["authorized_at"],
+              "authorized_at":later.isoformat()}
+    assert authorized_package_audit(no_workspace,root,migrated,now=later)==audit
+    wrong={**auth,"authorized_at":(NOW-timedelta(seconds=1)).isoformat()}
+    with pytest.raises(q.QuoteIndexError,match="timestamp_mismatch"):
+        authorized_package_audit(no_workspace,root,wrong,now=later)
+    bad=deepcopy(auth)
+    bad["quote_duplicate_preflight"]["scope_sha256"]="f"*64
+    bad["quote_duplicate_preflight"]["audit_sha256"]=q.digest(
+        {k:v for k,v in bad["quote_duplicate_preflight"].items() if k!="audit_sha256"})
+    with pytest.raises(q.QuoteIndexError,match="audit_mismatch"):
+        authorized_package_audit(no_workspace,root,bad,now=later)
+    refreshed=snapshot()
+    refreshed.update(started_utc=(later-timedelta(minutes=3)).isoformat(),
+                     finished_utc=(later-timedelta(minutes=1)).isoformat())
+    p=tmp_path/"fresh.json"
+    p.write_text(json.dumps(refreshed))
+    select_refresh(workspace,p,q.digest(refreshed),now=later)
+    new=verify_current(workspace,audit,args,original,lock,now=later)
+    auth={"authorized_at":(later+timedelta(seconds=1)).isoformat(),
+          "quote_duplicate_preflight":new}
+    assert authorized_package_audit(workspace,root,auth,now=later+timedelta(days=1))==new
+    # Missing refreshed proof is not silently replaced by the older index.
+    refreshed_path=(workspace/"audits/quote-resolver/published-quotes/public-index"/
+                    (q.digest(refreshed)+".json"))
+    refreshed_path.unlink()
+    with pytest.raises(q.QuoteIndexError,match="missing_or_nonprivate"):
+        authorized_package_audit(workspace,root,auth,now=later+timedelta(days=1))

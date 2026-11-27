@@ -1105,7 +1105,9 @@ def _migrate_english_publication_order(
         new_preflight = _preflight(project_root, state_dir, new_plans)
         # Preserve the exact legacy call and authorization shape when the
         # Work has not opted into the new quotation contract.
-        quote_kwargs = ({"quote_check": authorization["quote_duplicate_preflight"]}
+        quote_kwargs = ({"quote_check": authorization["quote_duplicate_preflight"],
+                         "quote_authorized_at": authorization.get("quote_duplicate_authorized_at",
+                                                                   authorization["authorized_at"])}
                         if "quote_duplicate_preflight" in authorization else {})
         new_authorization = _authorization(state_dir, baseline, new_preflight, **quote_kwargs)
         audit = {
@@ -1197,7 +1199,9 @@ def _migrate_english_plan_after_kit_change(
         new_preflight = _preflight(project_root, state_dir, new_plans)
         # Preserve the exact legacy call and authorization shape when the
         # Work has not opted into the new quotation contract.
-        quote_kwargs = ({"quote_check": authorization["quote_duplicate_preflight"]}
+        quote_kwargs = ({"quote_check": authorization["quote_duplicate_preflight"],
+                         "quote_authorized_at": authorization.get("quote_duplicate_authorized_at",
+                                                                   authorization["authorized_at"])}
                         if "quote_duplicate_preflight" in authorization else {})
         new_authorization = _authorization(state_dir, baseline, new_preflight, **quote_kwargs)
         audit = {
@@ -1242,10 +1246,31 @@ def _quote_preflight(project_root, debate_id, work_id, release_copy):
         raise FinalPublicationError("Contrôle des doublons avant publication : "+reason) from exc
 
 
+def _verify_quote_authorization(project_root,debate_id,work_id,release_copy,baseline,authorization):
+    from wikidebia_quote_index_contract import QuoteIndexError
+    from wikidebia_quote_index_stage import authorized_package_audit
+    from wikidebia_editorial_review import _workspace_path
+    try:
+        result = authorized_package_audit(lambda: _workspace_path(project_root,debate_id,work_id),
+                                          release_copy,authorization)
+        if result is not None:
+            # The old authorization cannot be transplanted onto a different
+            # release, even one with identical quotation hashes.
+            expected = (baseline.get("release") or {}).get("release_copy_tree_sha256")
+            if not expected or full_tree_sha256(release_copy) != expected:
+                raise QuoteIndexError("authorized_quote_release_tree_changed")
+        return result
+    except (ValueError,RuntimeError,OSError,KeyError,TypeError,AttributeError) as exc:
+        reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
+        raise FinalPublicationError("Reprise du contrôle des citations : "+reason,
+                                    remote_execution_started=True) from exc
+
+
 def _authorization(
     state_dir: Path, baseline: Mapping[str, Any], preflight: Mapping[str, Any],
     *, revalidation: Mapping[str, Any] | None = None,
     quote_check: Mapping[str, Any] | None = None,
+    quote_authorized_at: str | None = None,
 ) -> dict[str, Any]:
     value = {
         "schema": AUTHORIZATION_SCHEMA,
@@ -1262,6 +1287,7 @@ def _authorization(
         value["revalidated_preflight_sha256"] = revalidation["preflight_sha256"]
     if quote_check is not None:
         value["quote_duplicate_preflight"] = copy.deepcopy(quote_check)
+        value["quote_duplicate_authorized_at"] = quote_authorized_at or value["authorized_at"]
     value["authorization_sha256"] = _canonical(value, "authorization_sha256")
     write_json(state_dir / "authorization.json", value)
     return value
@@ -1478,6 +1504,7 @@ def publish_final_release(
                     or authorization.get("preflight_sha256") != preflight.get("preflight_sha256")
                     or authorization.get("baseline_sha256") != baseline.get("baseline_sha256")):
                 raise FinalPublicationError("Autorisation finale sauvegardée invalide", remote_execution_started=True)
+            _verify_quote_authorization(project_root,debate_id,work_id,release_copy,baseline,authorization)
         else:
             if verify_only:
                 raise FinalPublicationError("La reprise en lecture seule exige une publication déjà autorisée")

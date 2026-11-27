@@ -129,12 +129,8 @@ def verify_current(workspace, audit, arguments, original_index, lock_sha, *, now
     return result
 
 
-def package_audit(workspace, root, *, now=None):
-    """Check an applied/rendered/release copy, leaving every byte intact.
-
-    Legacy Works with no opt-in require no index. A published origin or
-    policy marker without the associated audit is not a legacy Work.
-    """
+def _package_inputs(root):
+    """Read the immutable package's selected quote scope and original audit."""
     from wikidebia_corpus_build import load_json
     path = root/"data/en_content_lock.json"
     translation_path = root/"data/en_translation_lock.json"
@@ -152,14 +148,66 @@ def package_audit(workspace, root, *, now=None):
         return None
     if not isinstance(audit,dict) or audit.get("audit_sha256") != sha:
         raise contract.QuoteIndexError("missing_or_unbound_final_quote_audit")
+    return (audit,en["arguments"],load_index(root/contract.INDEX_PATH),
+            hashlib.sha256((root/"data/fr_content_lock.json").read_bytes()).hexdigest())
+
+
+def _checked_workspace(workspace):
     # Resolve the trusted workspace only after discovering the opt-in.
-    # Never create files using unvalidated publication path components.
     workspace = workspace() if callable(workspace) else workspace
     if not workspace.is_dir() or workspace.is_symlink():
         raise contract.QuoteIndexError("invalid_public_quote_workspace")
-    return verify_current(workspace,audit,en["arguments"],load_index(root/contract.INDEX_PATH),
-                          hashlib.sha256((root/"data/fr_content_lock.json").read_bytes()).hexdigest(),
-                          now=now)
+    return workspace
+
+
+def package_audit(workspace, root, *, now=None):
+    """Check an applied/rendered/release copy, leaving every byte intact."""
+    inputs = _package_inputs(root)
+    if inputs is None:
+        return None
+    return verify_current(_checked_workspace(workspace),*inputs,now=now)
+
+
+def authorized_package_audit(workspace, root, authorization, *, now=None):
+    """Reproduce a prior authorization's exact quotation decision on resume.
+
+    Unlike a fresh preflight, this does not compare an interrupted plan's
+    own newly created public pages against itself. It does not assert that
+    the current public wiki is unchanged; that would need a new snapshot
+    and independent identification of pages already written by this plan.
+    No workspace or network is used for legacy Works.
+    """
+    inputs = _package_inputs(root)
+    saved = authorization.get("quote_duplicate_preflight")
+    if inputs is None:
+        if "quote_duplicate_preflight" in authorization:
+            raise contract.QuoteIndexError("unexpected_authorized_quote_audit")
+        return None
+    if not isinstance(saved,dict) or not contract.is_digest(saved.get("index_sha256")):
+        raise contract.QuoteIndexError("missing_authorized_quote_audit")
+    original,arguments,index,lock_sha = inputs
+    contract.verify_final_audit(original,arguments,index,lock_sha,now=now)
+    if saved["index_sha256"] != original["index_sha256"]:
+        candidate = stored_index(_checked_workspace(workspace),saved["index_sha256"])
+        if datetime.fromisoformat(candidate["finished_utc"]) < datetime.fromisoformat(index["finished_utc"]):
+            raise contract.QuoteIndexError("authorized_quote_index_rollback")
+        index = candidate
+    try:
+        checked = datetime.fromisoformat(saved["checked_at"])
+        authorized = datetime.fromisoformat(authorization.get(
+            "quote_duplicate_authorized_at",authorization["authorized_at"]))
+        reissued = datetime.fromisoformat(authorization["authorized_at"])
+        original_check = datetime.fromisoformat(original["checked_at"])
+        if (any(t.tzinfo is None for t in (checked,authorized,original_check,reissued))
+                or not original_check <= checked <= authorized <= reissued
+                or (authorized-checked).total_seconds() > 300):
+            raise ValueError()
+    except (ValueError,TypeError,KeyError) as exc:
+        raise contract.QuoteIndexError("authorized_quote_audit_timestamp_mismatch") from exc
+    derived = contract.verify_final_audit(saved,arguments,index,lock_sha,now=now)
+    if derived["scope_sha256"] != original["scope_sha256"]:
+        raise contract.QuoteIndexError("authorized_quote_scope_mismatch")
+    return derived
 
 
 def main(argv=None):
