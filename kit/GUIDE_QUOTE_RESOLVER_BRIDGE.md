@@ -123,3 +123,34 @@ même sur les pages EN réutilisées. Le périmètre EN ne couvre que les passag
 publiés reconstruits dans les handoffs fournis, et non les citations traduites
 par IA, les pages EN réutilisées ou le wiki public entier. Diagnostic
 éditorial uniquement, pas verrou de publication.
+
+
+## Comparaison avec les citations publiques des deux wikis
+
+Le module public_quote_index.py du résolveur produit un instantané privé
+des modèles Citation (FR) et Quote (EN), tous fournisseurs confondus.
+Il peut être rafraîchi par révision; voir experiments/PUBLIC-QUOTE-INDEX.md.
+La comparaison est facultative et indépendante de la résolution MIA:
+
+    python kit/scripts/wikidebia_quote_duplicates.py DEBAT --work-id WORK \
+      --batch REQUEST_1 HANDOFF_1 SHA_1 \
+      --public-index fr FR_INDEX FR_SHA --public-index en EN_INDEX EN_SHA
+
+Le kit vérifie l'empreinte, le contrat de normalisation, la langue, la
+couverture et les révisions enregistrées dans l'instantané. Il compare les
+citations FR actives et les fragments EN déjà inspectés aux empreintes
+publiques. La page FR importée elle-même est exclue si sa révision ou son
+titre canonique correspond; une citation non épinglée ne bénéficie pas de
+cette exclusion. En anglais, tous les résultats sont signalés si la cible
+n'est pas encore déterminée. Les doublons historiques restent des anomalies.
+
+Par défaut, un index incomplet ou âgé de plus de 24 heures est refusé.
+--max-index-age-hours permet de définir un seuil (au plus sept jours);
+--allow-partial-public-index permet uniquement un diagnostic limité, dont
+la couverture est explicitement qualifiée. Une empreinte confirme
+l'intégrité de l'index transmis, non l'état actuel du wiki. Les résultats
+sont des identités et des mesures, sans texte. L'index global repère
+l'égalité du wikicode normalisé et les mêmes mots; il ne garantit pas
+l'équivalence du rendu ni le repérage des chevauchements partiels et
+paraphrases sur tout le wiki. Le contrôle lexical inter-lots reste distinct.
+Aucune publication n'est autorisée sur la seule base de ce rapport.

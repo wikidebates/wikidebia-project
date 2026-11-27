@@ -21,7 +21,11 @@ def exercise(resolver_root):
     from citation_registry import CitationRegistry, fingerprint
     from grouped_review import REPLY
     from registry_transfer import export_bundle, import_bundle, read_private_json
+    from public_quote_index import hashes, scan
+    import wikidebia_quote_duplicates as dup
+    import wikidebia_quote_public_check as public_check
     from test_citation_registry import RAW, QUOTE, ENGLISH, FR, candidate, document, ref, review
+    from test_public_quote_index import Fake
     from translation_handoff import prepare_handoff, apply_handoff_reply
     from work_library import WorkLibrary
 
@@ -141,7 +145,18 @@ def exercise(resolver_root):
                 bridge.inspect_handoff(batches[0], stale, fingerprint(stale),
                                        lock_sha, items, owners)
                 assert calls == ["A0001-C001"]
-    print("Cross-repository contract: passed (kit batches, private selective transfer, separate DBs, no wiki/model access)")
+    # Check the actual producer/consumer hash and snapshot contracts, not
+    # just a duplicated synthetic JSON fixture.
+    for fragments in (("Un texte très précis.",),("One [...] two",),
+                      ("One","two"),("...",),("a\u0301   b",)):
+        assert hashes(fragments)==dup.public_fingerprints(fragments)
+    for lang in ("fr","en"):
+        value,summary = scan(Fake(lang),lang)
+        result = public_check.compare([dup.Occurrence("A0001","C1",("A test passage.",))],
+                 value,summary["snapshot_sha256"],lang,fingerprints=dup.public_fingerprints)
+        assert result["coverage"]["complete_fresh_literal_scope"] is True
+        assert result["findings"][0]["matching_pages"]==2
+    print("Cross-repository contract: passed (private selective transfer, separate DBs, public fingerprint exchange; no wiki/model access)")
 
 
 if __name__ == "__main__":

@@ -51,6 +51,16 @@ def words(fragments):
     return tuple(result)
 
 
+def public_fingerprints(fragments):
+    """Exchange contract with public_quote_index.py, version 1."""
+    form = tuple(normalized(s) for s in fragments)
+    if not form or not all(form):
+        raise bridge.QuoteBridgeError("empty_duplicate_audit_fragment")
+    seq = words(form)
+    return {"literal_sha256":bridge.digest(list(form)),
+            "words_sha256":bridge.digest(list(seq)) if any(w!="\0" for w in seq) else None}
+
+
 def refs(rows):
     return [{"page_id": p, "citation_id": c}
             for p, c in sorted({(r.page, r.citation) for r in rows})]
@@ -207,7 +217,8 @@ def published_occurrence(row, page):
                       bridge.digest(doc), spans)
 
 
-def audit_batches(lock_sha, all_items, owners, eligible, batches, *, allow_partial=False):
+def audit_batches(lock_sha, all_items, owners, eligible, batches, *, allow_partial=False,
+                  public_indexes=(), allow_partial_public=False, now=None, max_index_age_hours=24):
     source_rows = bridge.unique_rows(all_items, "id")
     eligible_rows = bridge.unique_rows(eligible, "id")
     if (set(source_rows) != set(owners) or
@@ -236,8 +247,18 @@ def audit_batches(lock_sha, all_items, owners, eligible, batches, *, allow_parti
     missing = set(eligible_rows) - seen
     if missing and not allow_partial:
         raise bridge.QuoteBridgeError("duplicate_audit_incomplete_batch_coverage")
+    from wikidebia_quote_public_check import compare
+    public = {}
+    for lang,value,sha in public_indexes:
+        if lang not in ("fr","en") or lang in public:
+            raise bridge.QuoteBridgeError("invalid_public_index_language_scope")
+        public[lang] = compare(french if lang=="fr" else english,value,sha,lang,
+                               fingerprints=public_fingerprints,source_items=all_items,
+                               allow_partial=allow_partial_public,now=now,
+                               max_age_hours=max_index_age_hours)
     return {"schema": SCHEMA, "source_lock_sha256": lock_sha,
             "batches": sorted(summaries, key=lambda s: s["request_sha256"]),
+            "public_comparison": public,
             "coverage": {"active_locked_french_citations": len(french),
                          "eligible_translation_citations": len(eligible_rows),
                          "french_citations_on_reused_english_pages": len(french)-len(eligible_rows),
@@ -262,14 +283,22 @@ def main(argv=None):
     parser.add_argument("--batch", nargs=3, action="append", default=[],
                         metavar=("REQUEST", "HANDOFF", "SHA256"))
     parser.add_argument("--allow-partial", action="store_true")
+    parser.add_argument("--public-index", nargs=3, action="append", default=[],
+                        metavar=("LANG", "INDEX", "SHA256"))
+    parser.add_argument("--allow-partial-public-index", action="store_true")
+    parser.add_argument("--max-index-age-hours", type=float, default=24)
     args = parser.parse_args(argv)
     try:
         _, lock_sha, items, owners, eligible = bridge.duplicate_snapshot(
             args.project_root.resolve(), args.debate_id, args.work_id)
         batches = [(bridge.load_json(Path(req)), bridge.load_json(Path(ret)), sha)
                    for req, ret, sha in args.batch]
+        indexes = [(lang,bridge.load_json(Path(path)),sha)
+                   for lang,path,sha in args.public_index]
         result = audit_batches(lock_sha, items, owners, eligible, batches,
-                               allow_partial=args.allow_partial)
+                               allow_partial=args.allow_partial,public_indexes=indexes,
+                               allow_partial_public=args.allow_partial_public_index,
+                               max_index_age_hours=args.max_index_age_hours)
     except (ValueError, RuntimeError, OSError, KeyError, TypeError, AttributeError) as exc:
         reason = str(exc) if isinstance(exc, bridge.QuoteBridgeError) else type(exc).__name__
         print(json.dumps({"status": "blocked", "reason": reason}))
