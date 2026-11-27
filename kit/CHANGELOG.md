@@ -1,8 +1,3 @@
-## 2.16.49 — 27 novembre 2026 — ligatures des titres français
-
-- Déligaturage contrôlé des titres français et des libellés relationnels au premier checkpoint ; aucun changement des citations, des résumés ni des références.
-- Conserve les protections historiques et les garde-fous de publication.
-
 ## Correctif du 14 novembre 2026 — adoption contrôlée d’un Work restauré
 
 - permet à un workflow initial sans `work_id` d’adopter explicitement un Work
@@ -527,3 +522,8 @@ L’historique exact des deux branches antérieures est conservé sous `branch_h
 - protège la provenance, les fiches de revue et la mémoire générique ;
 - contrôle toutes les nouvelles citations, avec index frais et reprise documentaire sans nouvelle convergence ;
 - conserve les anciens contrats scellés et l'autorisation explicite de publication.
+
+## 2.16.49 — 27 novembre 2026 — ligatures des titres français
+
+- Déligaturage contrôlé des titres français et des libellés relationnels au premier checkpoint ; aucun changement des citations, des résumés ni des références.
+- Conserve les protections historiques et les garde-fous de publication.
