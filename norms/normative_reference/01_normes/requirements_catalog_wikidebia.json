@@ -5727,7 +5727,7 @@
     {
       "id": "RND-003",
       "domain": "citations",
-      "statement": "During English projection each locked French Citation becomes one English Quote with canonical English parameter names. In the AI route only quote text and date form are translated, preserving other documentary values and order subject to existing reviewed exceptions. In the published route use the exact verified English passage and the actual edition's reviewed documentary values, with occurrence-bound provenance, edition and rights reviews.",
+      "statement": "During English projection each locked French Citation becomes one English Quote model; all template parameter names use the declared English contract. In the AI route only quote text and date form are translated, preserving other documentary values and order subject to existing reviewed exceptions. In the published route use the exact verified English passage and the actual edition's reviewed documentary values, with occurrence-bound provenance, edition and rights reviews.",
       "disposition": "active",
       "enforcement": "validator WDV-MWK-021+tests",
       "sources": [
@@ -6292,7 +6292,7 @@
     {
       "id": "RND-006",
       "domain": "citations",
-      "statement": "The special Citation-to-Quote contract is distinct from reference adaptation: the AI route preserves documentary values with reviewed exceptions; the published route reproduces a complete attested English passage and its actual verified edition. Prefer the published route when verified and reusable. Supported literal MIA links use the same receipt registry in anticipatory or integrated mode; absence of a receipt or technical failure is not evidence of absence. Other providers use AI unless a dedicated verified resolver is available.",
+      "statement": "The special Citation-to-Quote contract is distinct from reference adaptation: the AI route preserves documentary values with reviewed exceptions and appends AI-translated quote once; the published route reproduces a complete attested English passage and its actual verified edition. Prefer the published route when verified and reusable. Supported literal MIA links use the same receipt registry in anticipatory or integrated mode; absence of a receipt or technical failure is not evidence of absence. Other providers use AI unless a dedicated verified resolver is available.",
       "sources": [
         "owner decision 2026-08-07 — English translation batches and documentary adaptation",
         "owner decision 2026-11-26 — prepared and integrated published citation recovery"
@@ -6544,7 +6544,7 @@
     {
       "id": "RND-007",
       "domain": "citations",
-      "statement": "Citation→Quote preserves the complete source quotation in meaning and scope, either through AI translation or the exact equivalent published passage. Very low source/target length is a review signal for probable omission but cannot by itself prove non-compliance.",
+      "statement": "Citation→Quote preserves the complete citation value in meaning and scope, either through AI translation or the exact equivalent published passage. Very low source/target length is a review signal for probable omission but cannot by itself prove non-compliance.",
       "disposition": "active",
       "enforcement": "validator-signal+human-review",
       "sources": [
