@@ -1912,7 +1912,8 @@ def test_quote_selection_reissues_pending_package_only_explicitly(tmp_path, monk
     if mode != "replace":
         pattern = {"refuse": "replace-pending-package", "rollback": "re-export failure",
                    "changed_context": "baseline_changed"}[mode]
-        with pytest.raises(RuntimeError, match=pattern):
+        error_type = RuntimeError if mode == "rollback" else selection.bridge.QuoteBridgeError
+        with pytest.raises(error_type, match=pattern):
             selection._commit_selection(project, "debat_test", state["work_id"], base, draft,
                                         original_draft, update, replace_pending_package=mode != "refuse")
         assert draft.read_bytes() == original_draft
