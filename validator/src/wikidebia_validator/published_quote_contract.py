@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import copy
 from datetime import date
+from pathlib import PurePosixPath
 import hashlib
 import json
 import re
@@ -386,7 +387,19 @@ def proposal(candidate,expected_sha,review):
     if expected.strip()!=expected or UNSAFE.search(expected):
         fail("published_quote_requires_safe_rendering_review")
     source=parameter_pairs(item["source_parameters"])
-    warning_values=[source[k] for k in ("avertissements-citation","avertissements citation","avertissements") if k in source]
+    # Use the same normalized names as the existing bilingual renderer.
+    # A field without an English representation must not disappear silently.
+    allowed={"citation","auteurs","article","ouvrage","volume","numéro","numero",
+             "page","localisation","édition","edition","lieu","date","lien",
+             "avertissements citation","avertissements"}
+    normalized={}
+    for name,value in source.items():
+        key=re.sub(r"[ _-]+"," ",name.strip().casefold())
+        if value and (key not in allowed or key in normalized):
+            fail("published_quote_unrepresented_source_field")
+        if value:
+            normalized[key]=value
+    warning_values=[normalized[k] for k in ("avertissements citation","avertissements") if k in normalized]
     if len(set(v for v in warning_values if v))>1:
         fail("published_quote_ambiguous_source_warnings")
     warnings=[part.strip() for part in ",".join(dict.fromkeys(warning_values)).split(",") if part.strip()]
@@ -408,6 +421,9 @@ def proposal(candidate,expected_sha,review):
 
 
 EVIDENCE = "wikidebia-published-quote-evidence-1"
+# The draft lock format is exercised end-to-end before normative activation.
+# Neither installation of this module nor an editorial attestation enables it.
+ACTIVE = False
 
 
 def make_evidence(candidate,expected_sha,review):
@@ -455,4 +471,46 @@ def verify_evidence(value,lock_sha,item,page_id):
     derived=proposal(candidate,value["candidate_sha256"],value["review"])
     if value["proposal"]!=derived:
         fail("published_quote_projection_mismatch")
+    return derived
+
+
+def import_path(imported):
+    """Only a hash-pinned argument import under the immutable FR tree."""
+    if not isinstance(imported,dict):
+        fail("published_quote_authoritative_import_missing")
+    path=imported.get("import_path")
+    if not isinstance(path,str) or "\\" in path:
+        fail("published_quote_invalid_import_path")
+    parts=PurePosixPath(path).parts
+    if (len(parts)<3 or parts[:3]!=("imports","fr","arguments")
+            or len(parts)<4 or ".." in parts
+            or str(PurePosixPath(path))!=path or not is_digest(imported.get("sha256"))):
+        fail("published_quote_invalid_import_path")
+    return path
+
+
+def verify_import(imported,raw):
+    import_path(imported)
+    if not isinstance(raw,bytes) or hashlib.sha256(raw).hexdigest()!=imported["sha256"]:
+        fail("published_quote_import_digest_mismatch")
+
+
+def verify_locked_citation(locked,source,imported,raw,lock_sha,page_id):
+    """Independently rederive all rendered fields from occurrence-bound proof."""
+    verify_import(imported,raw)
+    item=item_from_source(page_id,source,imported)
+    if (not isinstance(locked,dict) or locked.get("translation_origin")!="published_translation"
+            or locked.get("id")!=item["id"] or locked.get("source")!=source
+            or locked.get("source_template")!=item["source_template"]
+            or locked.get("output_template")!="Quote"
+            or locked.get("documentary_parameter_overrides") not in (None,[])
+            or locked.get("source_collection") is not None):
+        fail("published_quote_locked_source_mismatch")
+    derived=verify_evidence(locked.get("published_quote_evidence"),lock_sha,item,page_id)
+    params=derived["parameters"]
+    by_name={r["name"]:r["value"] for r in params}
+    if (locked.get("parameters")!=params or locked.get("quote")!=by_name["quote"]
+            or locked.get("date")!=by_name.get("date","")
+            or locked.get("warnings")!=by_name.get("warnings","")):
+        fail("published_quote_locked_projection_mismatch")
     return derived

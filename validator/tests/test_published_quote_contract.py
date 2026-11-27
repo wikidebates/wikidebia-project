@@ -86,3 +86,50 @@ def test_independent_consumer_refuses_mutated_or_rebound_evidence(mutation):
     value["evidence_sha256"]=p.digest({k:v for k,v in value.items() if k!="evidence_sha256"})
     with pytest.raises(p.PublishedQuoteError):
         p.verify_evidence(value,lock,p.item_from_source("A0001",s,i),page)
+
+
+def test_locked_and_rendered_published_quote_is_independently_checked(tmp_path,monkeypatch):
+    import json
+    from wikidebia_validator.package import PackageContext
+    from wikidebia_validator.report import Report
+    from wikidebia_validator.wikicode import _validate_citations_against_locks, parse_template
+    c,r,s,i=sample()
+    def write(rel,value):
+        path=tmp_path/rel
+        path.parent.mkdir(parents=True,exist_ok=True)
+        path.write_text(json.dumps(value,ensure_ascii=False)+"\n",encoding="utf-8")
+        return path
+    raw=b"Synthetic import bytes\n"
+    path=tmp_path/"imports/fr/arguments/A0001.wiki"
+    path.parent.mkdir(parents=True)
+    path.write_bytes(raw)
+    i.update(import_path="imports/fr/arguments/A0001.wiki",sha256=hashlib.sha256(raw).hexdigest())
+    fr=write("data/fr_content_lock.json",{"arguments":[{"id":"A0001","citations":[s]}]})
+    write("data/import_provenance.json",{"pages":[i]})
+    c["source_lock_sha256"]=hashlib.sha256(fr.read_bytes()).hexdigest()
+    r["candidate_sha256"]=p.digest(c)
+    e=p.make_evidence(c,p.digest(c),r)
+    params=e["proposal"]["parameters"]
+    locked={"id":s["id"],"source_template":"Citation","output_template":"Quote",
+            "source":s,"translation_origin":"published_translation","published_quote_evidence":e,
+            "quote":c["plain_quote"],"date":"","warnings":"","parameters":params,
+            "quote_completeness_reviewed":True,"quote_completeness_note":"Synthetic completeness reviewed."}
+    def audit(lock,profile=True):
+        write("data/en_translation_lock.json",{"citation_translation_policy":
+              {"published_quote_contract":p.EVIDENCE} if profile else {}})
+        write("data/en_content_lock.json",{"published_quote_contract":p.EVIDENCE,
+                "arguments":[{"id":"A0001","citations":[lock]}]})
+        text="{{Argument|quotes={{Quote\n"+"\n".join("|"+v["name"]+"="+v["value"] for v in lock["parameters"])+"\n}}}}"
+        ctx=PackageContext(root=tmp_path,report=Report("test",tmp_path.name,["wikicode"]),cache={})
+        _validate_citations_against_locks(ctx,parse_template(text),"output/en/arguments/A0001.wiki","en","A0001")
+        return ctx.report.findings
+    assert any(f.code=="WDV-MWK-021" and "inactif" in f.message for f in audit(locked))
+    # Hypothetical activation is exercised only by this synthetic test.
+    monkeypatch.setattr(p,"ACTIVE",True)
+    assert not [f for f in audit(locked) if f.code in {"WDV-MWK-021","WDV-MWK-024"}]
+    bad=deepcopy(locked)
+    bad["parameters"][2]["value"]="A different edition"
+    assert any(f.code=="WDV-MWK-021" for f in audit(bad))
+    assert any(f.code=="WDV-MWK-021" for f in audit(locked,False))
+    path.write_bytes(b"Changed import\n")
+    assert any(f.code=="WDV-MWK-021" for f in audit(locked))

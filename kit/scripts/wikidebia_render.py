@@ -1625,6 +1625,16 @@ def _build_rendered_copy(
     en_meta = load_json(target / "data/en_page_metadata_lock.json", "verrou anglais des métadonnées")
     en_content = load_json(target / "data/en_content_lock.json", "verrou anglais du contenu")
     en_translation = load_json(target / "data/en_translation_lock.json", "verrou de traduction")
+    from wikidebia_published_quote_contract import ACTIVE, EVIDENCE
+    profile = en_content.get("published_quote_contract")
+    policy_profile = (en_translation.get("citation_translation_policy") or {}).get("published_quote_contract")
+    has_published = any(
+        quote.get("translation_origin") == "published_translation" or "published_quote_evidence" in quote
+        for argument in en_content.get("arguments") or [] for quote in argument.get("citations") or []
+    )
+    if has_published or profile is not None or policy_profile is not None:
+        if not (has_published and profile == policy_profile == EVIDENCE and ACTIVE):
+            raise RenderError("Contrat de citations publiées expérimental, non activé pour le rendu canonique")
     from wikidebia_translation_source import POLICY, verify_frozen_source
     # The preservation receipt authenticates the original imported source.
     # Verify it before a published checkpoint is overlaid as the render input;

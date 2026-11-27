@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def exercise(resolver_root):
-    sys.path[:0] = [str(ROOT / "kit/scripts"), str(resolver_root), str(resolver_root / "tests")]
+    sys.path[:0] = [str(ROOT / "kit/scripts"), str(ROOT / "validator/src"), str(resolver_root), str(resolver_root / "tests")]
     import wikidebia_quote_bridge as bridge
     from wikidebia_content_review import _citation_records
     from citation_registry import CitationRegistry, fingerprint

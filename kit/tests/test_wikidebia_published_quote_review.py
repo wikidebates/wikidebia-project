@@ -208,3 +208,55 @@ def test_source_provider_cannot_be_forged_with_recomputed_receipt():
     seal_row(row)
     with pytest.raises(bridge.QuoteBridgeError,match="source_provider_mismatch"):
         prepare(src,row)
+
+
+def test_published_citation_enters_draft_lock_from_authoritative_import(tmp_path):
+    import wikidebia_translation_review as translation
+    from wikidebia_render import _citation_template
+    src,row=fixture()
+    candidate,=prepare(src,row)
+    evidence=review.make_evidence(candidate,bridge.digest(candidate),completed(candidate))
+    french={"id":src["id"],"source_template":src["source_template"],
+            "citation":src["source_parameters"][0]["value"],
+            "source_parameters":src["source_parameters"]}
+    path=tmp_path/"imports/fr/arguments/A0001.wiki"
+    path.parent.mkdir(parents=True)
+    raw=b"synthetic imported page bytes\n"
+    path.write_bytes(raw)
+    imported={"kind":"argument","page_id":"A0001","canonical_title":src["wiki_title"],
+              "revision_id":src["revision"],"import_path":"imports/fr/arguments/A0001.wiki",
+              "sha256":hashlib.sha256(raw).hexdigest()}
+    context=(tmp_path,LOCK,{"A0001":imported})
+    draft={"id":src["id"],"source":french,"status":"approved",
+           "translation_origin":"published_translation","published_quote_evidence":evidence,
+           "translated_citation":candidate["plain_quote"],"translated_date":"",
+           "quote_completeness_reviewed":True,"quote_completeness_note":"Synthetic complete passage review.",
+           "reviewer":"Test editor","reviewed_at":"2026-11-27T10:00:00+00:00",
+           "note":"Synthetic evidence test."}
+    with pytest.raises(translation.TranslationReviewError,match="expérimental"):
+        translation._validate_citations([draft],[french],"A0001")
+    locked,=translation._validate_citations([draft],[french],"A0001",published_context=context)
+    assert locked["parameters"]==evidence["proposal"]["parameters"]
+    rendered=_citation_template(locked,lang="en")
+    assert "|quote="+candidate["plain_quote"] in rendered
+    assert "|link="+candidate["target_url"] in rendered
+    assert "AI-translated quote" not in rendered
+    for key,value in (("translated_citation","Invented text"),("translated_date","2026"),
+                      ("translation_warning_appended",True),("translation_origin","ai_translation")):
+        bad={**draft,key:value}
+        with pytest.raises(translation.TranslationReviewError):
+            translation._validate_citations([bad],[french],"A0001",published_context=context)
+    path.write_bytes(raw+b"changed")
+    with pytest.raises(translation.TranslationReviewError,match="import_digest_mismatch"):
+        translation._validate_citations([draft],[french],"A0001",published_context=context)
+
+
+def test_new_published_passage_cannot_duplicate_another_local_page():
+    from wikidebia_translation_review import _check_published_quote_duplicates, TranslationReviewError
+    a={"id":"A0001","citations":[{"id":"A0001-C001","quote":"A passage.",
+                                   "translation_origin":"published_translation"}]}
+    b={"id":"A0002","citations":[{"id":"A0002-C001","quote":" A  passage.\n"}]}
+    with pytest.raises(TranslationReviewError,match="doublon"):
+        _check_published_quote_duplicates([a,b])
+    _check_published_quote_duplicates([a])
+    _check_published_quote_duplicates([a,{**b,"citations":[{"id":"A0002-C001","quote":"A different passage."}]}])

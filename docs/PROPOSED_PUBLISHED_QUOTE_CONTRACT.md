@@ -117,3 +117,24 @@ l'autre occurrence ou modifiée n'est pas acceptée.
 Ce contrat vérifie l'intégrité et les déclarations, non leur véracité. Il
 reste expérimental jusqu'au raccordement complet aux verrous, au validateur
 MediaWiki et aux contrôles globaux. Aucun changement de norme active ici.
+
+## Intégration du verrou en brouillon
+
+La revue anglaise peut maintenant porter `published_quote_contract` (valeur
+`wikidebia-published-quote-evidence-1`) et une citation explicitement marquée
+`translation_origin=published_translation` avec son dossier
+`published_quote_evidence`. Sans marqueur, le chemin historique IA reste
+strictement inchangé; une provenance inconnue ou contradictoire est refusée.
+La finalisation reconstitue la projection à partir du verrou FR, de la
+provenance d'import et des octets vérifiés de la page. Elle garde les
+attestations de complétude et le seuil de seconde revue; la référence et le
+texte anglais doivent correspondre exactement à la proposition. Les
+champs source sans représentation ne sont pas supprimés silencieusement.
+Un doublon exact entre deux arguments du même débat bloque la sélection
+si l'un des passages est publié. Le profil est propagé aux verrous EN et
+le validateur peut vérifier indépendamment le rendu attendu. Le contrôle
+est testé sans accès distant. Le garde-fou ACTIVE=False dans le contrat
+commun interdit le rendu canonique et l'acceptation normative de ce profil
+jusqu'à la migration active des normes et des contrôles globaux. Ne pas
+fusionner la PR dans cet état. Aucune autorisation juridique ou wiki n'est
+déduite de ces tests.
