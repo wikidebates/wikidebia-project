@@ -126,9 +126,10 @@ Le cycle courant couvre successivement :
 
 1. **revue combinée graphe + titres** : placements/relations, suppressions/fusions/déplacements, titres canoniques et titres affichés ; son réimport déclenche immédiatement le **checkpoint 1 graphe/titres** ;
 2. **revue de contenu** : rubriques, mots-clés et documentation française ; l’introduction et les résumés des pages `preexisting` sont préservés par défaut, mais un delta explicitement autorisé sélectionne la valeur finale correspondante ; son réimport déclenche le **checkpoint 2 contenu** ;
-3. traduction et documentation anglaises, y compris la recherche d'`established-name=` lorsqu'elle s'applique ;
-4. première passe de convergence sémantique ;
-5. deuxième passe indépendante de convergence.
+3. **contrôle final de la source française publiée** (réutilisation des décisions de classification, vérification des écarts et des preuves) sur les [révisions publiées du wiki français](GUIDE_TRANSLATION_REVIEW.md#revue-de-normalisation-sur-le-wiki-français) ;
+4. traduction et documentation anglaises, y compris la recherche d'`established-name=` lorsqu'elle s'applique ;
+5. première passe de convergence sémantique ;
+6. deuxième passe indépendante de convergence.
 
 Si une passe sémantique trouve une erreur certaine, la traduction est rouverte, les constatations sont fournies comme contexte dans un paquet de correction, puis les deux passes de convergence recommencent sur la nouvelle empreinte.
 
@@ -178,7 +179,7 @@ Lors d’une reprise de pages existantes, l’introduction et les résumés hist
 
 ## Publication française après la revue de contenu
 
-La réussite du paquet `fr_content_review` déclenche automatiquement le rendu d’un checkpoint français sans `interlangue`, son préflight distant et son exécution avec les résumés MediaWiki individualisés. Le paquet `en_translation_review` n’est créé qu’après succès ou attestation `no_changes`. Si le workflow a été préparé avec une version antérieure et possède déjà un paquet anglais sans reçu français, une reprise `workflow` publie d’abord le même contenu français scellé, sans invalider le paquet anglais lié à cette empreinte.
+La réussite du paquet `fr_content_review` déclenche automatiquement le rendu d’un checkpoint français sans `interlangue`, son préflight distant et son exécution avec les résumés MediaWiki individualisés. Après succès ou attestation `no_changes`, la revue de normalisation se fait sur les révisions publiées. Son reçu est requis avant la création du paquet `en_translation_review`. Pour un ancien Work dont le brouillon anglais est déjà ouvert, utiliser la reprise décrite dans le [guide de traduction](GUIDE_TRANSLATION_REVIEW.md#revue-de-normalisation-sur-le-wiki-français).
 
 ## Diagnostic automatique des validations bloquées
 

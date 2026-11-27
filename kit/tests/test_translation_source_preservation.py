@@ -11,8 +11,11 @@ from test_wikidebia_editorial_review import complete_review, review_tool, worksp
 import wikidebia_translation_review as translation
 import wikidebia_translation_source as preservation
 import wikidebia_french_checkpoint as french_checkpoint
+from wikidebia_french_normalization import FrenchNormalizationError
 import wikidebia_graph_actions as graph_actions
 from wikidebia_editorial_workspace import capitalization_policy_for_kind
+
+from french_normalization_fixture import prepare_fixture_translation
 
 def prepared(tmp_path, *, adjust_corpus=None):
     project, corpus=make_promoted_project(tmp_path)
@@ -64,7 +67,10 @@ def test_source_freeze_is_not_a_documentary_approval_and_cannot_overwrite(tmp_pa
         assert entry['usage_count_in_debate'] == sum(
             usage['page_type'] == 'argument' for usage in entry['usages']
         )
-    assert translation.prepare_review(project,'debat_test',work_id)['status']=='en_translation_review_ready'
+    with pytest.raises(FrenchNormalizationError, match="normalisation française obligatoire"):
+        translation.prepare_review(project, 'debat_test', work_id)
+    assert not (workspace / "reviews/en/translation_review.json").exists()
+    assert prepare_fixture_translation(project,'debat_test',work_id)['status']=='en_translation_review_ready'
     with pytest.raises(translation.TranslationReviewError):freeze(project,work_id)
 
 
@@ -349,7 +355,7 @@ def test_preserved_french_graph_baseline_updates_page_target_only(tmp_path):
 def test_reopening_an_applied_review_archives_the_complete_previous_tree(tmp_path):
     from test_wikidebia_translation_review import make_french_locked, complete_translation_review, complete_semantic_convergence, translation as tool
     project,workspace,work_id=make_french_locked(tmp_path)
-    tool.prepare_review(project,'debat_test',work_id);complete_translation_review(workspace)
+    prepare_fixture_translation(project,'debat_test',work_id);complete_translation_review(workspace)
     sealed=tool.finalize_review(project,'debat_test',work_id);complete_semantic_convergence(project,work_id)
     tool.apply_review(project,'debat_test',work_id,sealed['review_sha256'])
     digest=tool.full_tree_sha256(workspace/'translated-copy')

@@ -23,6 +23,7 @@ from wikidebia_corpus_build import (
     write_json,
 )
 from wikidebia_editorial_workspace import WorkspaceError, validate_work_id
+from wikidebia_french_normalization import REVIEW_PATH as FRENCH_NORMALIZATION_REVIEW, RECEIPT_PATH as FRENCH_NORMALIZATION_RECEIPT
 from wikidebia_release_info import KIT_VERSION, NORM_VERSION, VALIDATOR_VERSION
 from wikidebia_render import _load_workspace
 from wikidebia_translation_packet import verified_fragment_coverage
@@ -98,6 +99,8 @@ def _checkpoint_files(workspace: Path) -> list[Path]:
             files.append(path)
 
     fixed = [
+        FRENCH_NORMALIZATION_REVIEW,
+        FRENCH_NORMALIZATION_RECEIPT,
         "audits/translation-resume.json",
         "audits/translation-fragment-next.json",
         "audits/translation-next.json",

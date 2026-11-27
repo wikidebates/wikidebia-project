@@ -19,6 +19,8 @@ REUSED_ID = "A0003"
 REUSED_TITLE = "Existing English argument"
 
 
+from french_normalization_fixture import prepare_fixture_translation
+
 def _add_existing_english_frontier(corpus: Path) -> None:
     provenance_path = corpus / "data/import_provenance.json"
     provenance = load_json(provenance_path)
@@ -54,7 +56,7 @@ def _seal_preserved_release(tmp_path, monkeypatch):
 
     project, workspace, work = prepared(tmp_path, adjust_corpus=_add_existing_english_frontier)
     freeze(project, work)
-    translation.prepare_review(project, DEBATE, work)
+    prepare_fixture_translation(project, DEBATE, work)
     review_path = workspace / "reviews/en/translation_review.json"
     assert REUSED_ID not in {row["id"] for row in load_json(review_path)["arguments"]}
     complete_translation_review(workspace)
