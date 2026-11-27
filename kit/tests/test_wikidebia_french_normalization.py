@@ -47,7 +47,8 @@ def test_updated_wiki_revision_blocks_even_if_the_text_is_identical(tmp_path):
     with fake_wiki(revisions):
         result = translation.prepare_french_normalization(project, DEBATE, work_id)
         debate = result["pages"][0]
-        assert debate["url"].endswith(f"?oldid={debate['revision_id']}")
+        assert debate["url"].startswith("https://fr.wikidebates.org/wiki/")
+        assert debate["revision_url"].endswith(f"/revision/{debate['revision_id']}/html")
         complete_fixture_french_normalization(workspace)
         revisions[debate["title"]]["revision_id"] += 1
         with pytest.raises(normalization.FrenchNormalizationError, match="Révision française non confirmée"):
@@ -102,7 +103,8 @@ def test_workflow_pauses_with_a_link_to_the_published_debate(tmp_path, monkeypat
     with fake_wiki(revisions):
         waiting = workflow._mechanical_advance(project, state)
         assert waiting["status"] == "french_normalization_required"
-        assert waiting["french_normalization"]["debate_url"].startswith("https://fr.wikidebates.org/")
+        assert waiting["french_normalization"]["debate_url"].startswith("https://fr.wikidebates.org/wiki/")
+        assert waiting["french_normalization"]["debate_revision_url"].endswith("/html")
         assert not prepared_types
         assert not (workspace / "reviews/en/translation_review.json").exists()
         complete_fixture_french_normalization(workspace)

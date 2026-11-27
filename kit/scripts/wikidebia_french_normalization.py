@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any, Mapping
+from urllib.parse import quote
 
 from wikidebia_corpus_build import (
     NORM_VERSION, active_graph, load_json, relative_to_project, write_json,
@@ -108,7 +109,8 @@ def _published_pages(project_root: Path, source: Path, meta: Mapping[str, Any]) 
         pages[key] = {
             "page_id": key, "title": title, "revision_id": revision,
             "content_sha256": row["content_sha256"],
-            "url": f"https://fr.wikidebates.org/w/index.php?oldid={revision}",
+            "url": "https://fr.wikidebates.org/wiki/" + quote(title.replace(" ", "_"), safe=""),
+            "revision_url": f"https://fr.wikidebates.org/w/rest.php/v1/revision/{revision}/html",
         }
     if set(pages) != set(expected) or len({row["title"] for row in pages.values()}) != len(pages):
         raise FrenchNormalizationError("L’état publié ne couvre pas exactement le débat et les arguments actifs")

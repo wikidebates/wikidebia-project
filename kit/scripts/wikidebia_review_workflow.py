@@ -1823,6 +1823,7 @@ def _mechanical_advance(
                         state["french_normalization"] = {
                             "review_path": report["review_path"],
                             "debate_url": report["pages"][0]["url"],
+                            "debate_revision_url": report["pages"][0]["revision_url"],
                             "pages": len(report["pages"]),
                         }
                     except FrenchNormalizationError as preparation_error:
@@ -2715,7 +2716,8 @@ def _print_user_result(state: Mapping[str, Any]) -> None:
         print("La version française publiée doit être revue avant la traduction anglaise.")
         normalization = state.get("french_normalization") or {}
         if normalization:
-            print(f"Version du débat à lire sur le wiki français : {normalization['debate_url']}")
+            print(f"Débat à lire sur le wiki français : {normalization['debate_url']}")
+            print(f"Rendu de la révision à vérifier : {normalization['debate_revision_url']}")
             print(f"Registre pour le relecteur : {normalization['review_path']}")
         print(state.get("french_normalization_blocker"))
         print(f"Après la revue, reprendre avec ./wikidebia workflow {state.get('debate_id')}.")
