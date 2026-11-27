@@ -5,7 +5,7 @@
   "stable_archive_name": "wikidebia-kit.zip",
   "version_source": "VERSIONS.json",
   "declared_file_count": 547,
-  "declared_test_count": 1959,
+  "declared_test_count": 1971,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -313,8 +313,8 @@
     },
     {
       "path": "GUIDE_EDITORIAL_REVIEW.md",
-      "size_bytes": 5021,
-      "sha256": "6c195a12ff699464fe36c091640a7bfbc349a2e3d806385c7c3363d2ec77f2c6"
+      "size_bytes": 6025,
+      "sha256": "4a9d2ea1c4b73a22a65c6c85a8585d4add851879fc854eb0fb58607c1c66398f"
     },
     {
       "path": "GUIDE_EDITORIAL_WORKSPACE.md",
@@ -1179,7 +1179,7 @@
     {
       "path": "TEST_REPORT.txt",
       "size_bytes": 2285,
-      "sha256": "9360bffd93b46f90363b2ff7362e42dc802be99c18825200458c8281cbb28cac"
+      "sha256": "ffe228eda6d7b965bd1860c6e4b89d359673fe3f8e3191bc2d9107514646129c"
     },
     {
       "path": "VERSIONS.json",
@@ -1813,13 +1813,13 @@
     },
     {
       "path": "scripts/wikidebia_editorial_review.py",
-      "size_bytes": 84646,
-      "sha256": "56e6f8aafdc69ca1b538d6dd86946b3441f561bc8060baa3ce525dcd5ca89662"
+      "size_bytes": 84775,
+      "sha256": "8502c783a508b84b8bfdf299df926caa104504f46f36d46472535dd0d85d1753"
     },
     {
       "path": "scripts/wikidebia_editorial_workspace.py",
-      "size_bytes": 37652,
-      "sha256": "bc9923a899ae524f0f389f1638adb3e0e2f0499a3b73d6701f6b4a5857d18ec8"
+      "size_bytes": 37787,
+      "sha256": "0be63cf2cd230712d797bae50362780d9b7a459d938ebf5cf1eeae06259cf536"
     },
     {
       "path": "scripts/wikidebia_external_deletions.py",
@@ -1838,8 +1838,8 @@
     },
     {
       "path": "scripts/wikidebia_fr_publication_relay.py",
-      "size_bytes": 25836,
-      "sha256": "5ddd09f86d86d0a8e78ba276efed7e136f8e166a80cecf15c05ee6812e517bd2"
+      "size_bytes": 27576,
+      "sha256": "f12f4c1830b23d84097c69d816446b0718add50d60dfbc4e6fd838d05ed3d810"
     },
     {
       "path": "scripts/wikidebia_french_checkpoint.py",
@@ -2163,8 +2163,8 @@
     },
     {
       "path": "tests/test_fr_publication_relay.py",
-      "size_bytes": 30670,
-      "sha256": "2aa4fc6dc408910e755c0b71da5293351aac8bdafff2b2f94eb7c29d5cdbb647"
+      "size_bytes": 32337,
+      "sha256": "08aa5dc891c1ab1dac9db2e5395bbb82ed6e1b978cb2d818dcc31661d67bc272"
     },
     {
       "path": "tests/test_french_checkpoint_transaction_21621.py",
@@ -2248,8 +2248,8 @@
     },
     {
       "path": "tests/test_norm_1238_atomic_keywords.py",
-      "size_bytes": 4607,
-      "sha256": "71e869a4f609f3ea7f3ee0e6ac76d9144ab4edd438c6cb2f39aafecaa9a11dec"
+      "size_bytes": 5142,
+      "sha256": "1e5a19d5df5e716bc80c68b6f8e095340a5dd490b04d67e80defae3422b5ec49"
     },
     {
       "path": "tests/test_owner_approved_english_updates.py",
