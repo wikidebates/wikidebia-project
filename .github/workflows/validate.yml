@@ -59,7 +59,7 @@ jobs:
             ) ? 'true' : 'false';
       - uses: actions/checkout@v5
         if: steps.pr-validation.outputs.result != 'true'
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         if: steps.pr-validation.outputs.result != 'true'
         with:
           python-version: "3.12"

@@ -52,7 +52,7 @@ jobs:
           ref: 7b8d3723c76af0cd937211392282c9cd909e8127
           path: _resolver
           persist-credentials: false
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - run: python -m pip install -r validator/requirements-dev.txt -r _resolver/requirements-navigation.txt
