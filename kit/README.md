@@ -13,7 +13,7 @@ Le workflow termine la convergence, le rendu et la release, construit en lecture
 
 Cette commande recharge les plans signés, vérifie à nouveau les cibles distantes et refuse les changements concurrents. Un reçu de reprise doit rester lié au même préflight. La reprise d'une modification interlangue française dont `chatgpt` manque ne crée pas une nouvelle révision : elle ne rétablit la balise que sur une révision exacte attestée (parent, auteur, résumé, contenu et révision courante), avec droit `changetags` vérifié.
 
-# Wikidéb’IA Kit 2.16.47
+## Historique — Kit 2.16.47
 
 La réconciliation accepte désormais l’adoption explicite d’un Work local déjà
 `release_ready` lorsque le workflow historique est resté bloqué avant toute
@@ -29,7 +29,7 @@ Elle réutilise les accès Pywikibot du serveur, contrôle les révisions avant 
 et conserve un journal de reprise. Voir `deploy/README_PUBLICATION_FR.md` dans le
 dépôt complet ; le relais n'est pas activé par une simple mise à jour du kit.
 
-Le kit 2.16.47 conserve l’ordre final `Debate` puis `Argument` de 2.16.46 et corrige la reprise des plans distants signés après une mise à niveau : `kit_version` et `required_validator_version` sont traités comme provenance du producteur, tandis que la signature du plan, son schéma, le débat, le manifeste et la configuration exacts restent obligatoirement vérifiés. Norme active : 1.2.88. Validateur associé : 0.4.105.
+Le kit 2.16.47 conserve l’ordre final `Debate` puis `Argument` de 2.16.46 et corrige la reprise des plans distants signés après une mise à niveau : `kit_version` et `required_validator_version` sont traités comme provenance du producteur, tandis que la signature du plan, son schéma, le débat, le manifeste et la configuration exacts restent obligatoirement vérifiés. Versions associées à cette ancienne livraison : norme 1.2.88 et validateur 0.4.105.
 
 Les exécutions distantes utilisent un bail local identifié plutôt qu’un simple PID. Un
 processus vivant conserve toujours son verrou, y compris avec l’ancien format. Après un

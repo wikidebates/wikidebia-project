@@ -1,9 +1,9 @@
-Wikidéb’IA Validator 0.4.105 — auto-audit
+Wikidéb’IA Validator 0.4.106 — auto-audit
 
 Statut : PASSED
-Norme active unique : 1.2.88
+Norme active unique : 1.2.89
 Tests : 1202 réussis
-Kit associé : 2.16.47
+Kit associé : 2.16.48
 
 Les contrôles historiques sont différentiels et bornés par les verrous autoritatifs.
 Les contrôles de création restent actifs pour les contenus nouveaux.
@@ -13,4 +13,4 @@ Traduction d’un import publié : PASSED ; champs historiques conservés exacte
 
 Liens sans schéma dans les citations historiques : PASSED ; conservation exacte depuis un import vérifié par SHA-256, contrôle HTTP(S) maintenu pour les liens nouveaux ou modifiés.
 
-Branche expérimentale : preuves des citations publiées et audit global des doublons, tests fonctionnels réussis (1 202) sur ae66f24f59747f3540c015f094deb256fc8d4227 ; garde-fou d’activation maintenu. La livraison de production reste non autorisée.
+Contrat actif des citations publiées et de l’unicité : 1202 tests du validateur réussis sur 5d426e514982436143d961002bcecd5f34b89ff6 ; compatibilité historique et vérification indépendante des preuves conservées. Aucun accès de publication réel dans ces tests.

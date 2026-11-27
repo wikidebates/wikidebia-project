@@ -1,12 +1,12 @@
-Wikidéb’IA Normes 1.2.88 — rapport de cohérence
+Wikidéb’IA Normes 1.2.89 — rapport de cohérence
 Statut : PASSED
-Norme active unique : 1.2.88 ; norme 1.2.86 archivée sans modification (SHA-256 f55292d2c6565c930593c99595f51c693a11b3d8300838935aa9c403254e22e7).
+Norme active unique : 1.2.89 ; norme 1.2.88 de main archivée à l’identique (SHA-256 367248f8c73e8eaf901c018d6ba412515d6ef0ace8d4a0b7eb21dd8f8a998741).
 Catalogue : 543 exigences, 543 identifiants uniques ; toutes les sources et alias déclarés sont résolus.
 Omission canonique : tout paramètre optionnel sans contenu pertinent est omis ; les anciens buckets documentaires Débat présents mais vides sont explicitement supersédés.
 Présence historique : source_parameter_presence reste une provenance d’audit et ne commande pas le wikicode final.
 Préflight : l’omission canonique d’un paramètre optionnel validé est distincte d’une suppression de paramètre protégé ou inconnu.
 Provenance éditoriale : page cible EN (page_origin) distincte de la source française (source_page_origin).
 Titres affichés, mots-clés, rubriques, introduction historique EN et résumés historiques traduits : politiques différentielles 1.2.86 conservées.
-Révision ajoutée : 1.2.88 — omission canonique des paramètres optionnels vides.
+Révision ajoutée : 1.2.89 — provenance des citations publiées et unicité des citations anglaises.
 
-Branche expérimentale : ajout des règles de provenance des citations anglaises publiées et du contrôle global des doublons ; 543 exigences. Candidat de migration, non activé en production. Parité des copies normatives et tests du validateur réussis sur ae66f24f59747f3540c015f094deb256fc8d4227.
+Parité des copies normatives et tests du validateur réussis sur 5d426e514982436143d961002bcecd5f34b89ff6 ; 543 exigences distinctes. La livraison coordonnée reste soumise à la validation des trois composants.

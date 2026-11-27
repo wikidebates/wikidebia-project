@@ -2,7 +2,7 @@
 
 Contrôle indépendant des preuves de citations publiées, des projections MediaWiki et de l'audit d'unicité des citations. Norme active : 1.2.89. Kit associé : 2.16.48.
 
-# Wikidéb’IA Validator 0.4.105
+## Historique — Validator 0.4.105
 
 Correctif de validation des rubriques historiques : la limite de quatre ne bloque
 plus les pages préexistantes ni leurs traductions. Avant la création des manifestes
@@ -12,7 +12,7 @@ restent contrôlées.
 
 Le validateur 0.4.105 s’aligne sur la norme 1.2.88 et le kit 2.16.47. Il conserve tous les contrôles 0.4.104 ; la modification porte sur le contrat de publication finale, où la page anglaise `Debate` doit précéder les créations `Argument`.
 
-Norme active : 1.2.88. Kit associé : 2.16.47.
+Versions associées à cette ancienne livraison : norme 1.2.88 et kit 2.16.47.
 
 ## Régénération des métadonnées du paquet
 
