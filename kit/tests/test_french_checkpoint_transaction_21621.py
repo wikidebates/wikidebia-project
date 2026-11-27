@@ -79,7 +79,7 @@ def _prepare_vote_like_review(tmp_path: Path):
     return project, workspace, work_id, pending
 
 
-def test_vote_electronique_v6_local_validation_failure_then_v7_rebuilds_checkpoint_and_reaches_english_review(tmp_path: Path, monkeypatch):
+def test_vote_electronique_v6_local_validation_failure_then_v7_rebuilds_checkpoint_and_stops_for_normalization(tmp_path: Path, monkeypatch):
     project, workspace, work_id, pending = _prepare_vote_like_review(tmp_path)
     source_package = project / pending["package_path"]
     v6 = tmp_path / "vote-v6.zip"
@@ -124,7 +124,8 @@ def test_vote_electronique_v6_local_validation_failure_then_v7_rebuilds_checkpoi
     assert len(source_shas) == 2
     assert source_shas[0] != source_shas[1]
     assert result["phase"] == "en_translation_review"
-    assert result["pending_review"]["review_type"] == "en_translation_review"
-    assert (project / result["pending_review"]["package_path"]).is_file()
+    assert result["status"] == "french_normalization_required"
+    assert result["pending_review"] is None
+    assert not (workspace / "reviews/en/translation_review.json").exists()
     assert (content_stage / "checkpoint.json").is_file()
     assert (content_stage / "remote-update-config.json").is_file()

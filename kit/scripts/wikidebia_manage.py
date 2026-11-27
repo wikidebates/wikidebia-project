@@ -1851,7 +1851,7 @@ def corpus_workspace_content_review(
     return result.returncode
 
 def corpus_workspace_translation_review(
-    root: Path, debate_id: str, *, work_id: str, prepare: bool, finalize: bool, apply: bool,
+    root: Path, debate_id: str, *, work_id: str, prepare: bool, prepare_normalization: bool, finalize: bool, apply: bool,
     overwrite_review: bool, confirm_review_sha256: str | None,
 ) -> int:
     script = root / "kit" / "scripts" / "wikidebia_translation_review.py"
@@ -1862,7 +1862,9 @@ def corpus_workspace_translation_review(
         "--work-id", work_id,
         "--project-root", str(root), "--machine-readable",
     ]
-    if prepare:
+    if prepare_normalization:
+        command.append("--prepare-normalization")
+    elif prepare:
         command.append("--prepare")
     elif finalize:
         command.append("--finalize")
@@ -3013,6 +3015,7 @@ def build_parser() -> argparse.ArgumentParser:
     corpus_translation_review_parser.add_argument("--work-id", required=True, help="Identifiant du workspace éditorial")
     translation_review_action = corpus_translation_review_parser.add_mutually_exclusive_group(required=True)
     translation_review_action.add_argument("--prepare", action="store_true", help="Préparer le registre bilingue depuis les verrous français")
+    translation_review_action.add_argument("--prepare-normalization", action="store_true", help="Préparer la revue de normalisation de la version française publiée")
     translation_review_action.add_argument("--finalize", action="store_true", help="Sceller la traduction anglaise sans modifier content-reviewed-copy")
     translation_review_action.add_argument("--apply", action="store_true", help="Créer translated-copy depuis la revue scellée")
     corpus_translation_review_parser.add_argument("--overwrite-review", action="store_true", help="Régénérer les registres préparatoires non appliqués")
@@ -3599,7 +3602,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "corpus-workspace-translation":
         return corpus_workspace_translation_review(
             root, args.debate_id, work_id=args.work_id, prepare=args.prepare, finalize=args.finalize,
-            apply=args.apply, overwrite_review=args.overwrite_review,
+            prepare_normalization=args.prepare_normalization, apply=args.apply, overwrite_review=args.overwrite_review,
             confirm_review_sha256=args.confirm_review_sha256,
         )
 
