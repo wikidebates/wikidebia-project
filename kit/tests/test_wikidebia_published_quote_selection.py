@@ -210,6 +210,10 @@ def test_mixed_origin_work_from_import_to_canonical_render_fixture(tmp_path,monk
     assert final_review["quote_duplicate_audit"]["ai_occurrences"]==2
     complete_semantic_convergence(project,work_id)
     translation.apply_review(project,"debat_test",work_id,sealed["review_sha256"])
+    # As in make_translated(), this is the local rendering fixture: the
+    # normalization fixture supplies synthetic receipts, not a remote build.
+    import shutil
+    shutil.rmtree(project / ".state/fr-publication/debat_test" / work_id)
     target=workspace/"translated-copy"
     frozen=common.load_json(target/"data/en_content_lock.json")
     assert frozen["quote_duplicate_audit"]["index_sha256"]==good_sha
