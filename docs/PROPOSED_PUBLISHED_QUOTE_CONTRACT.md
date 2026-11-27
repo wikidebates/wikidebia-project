@@ -246,3 +246,16 @@ et celles après réception du reçu EN final restent inchangées.
 La preuve est non atomique et ne distingue pas les écritures concurrentes
 strictement identiques du même compte. La collecte préalable reste une
 commande explicite. Aucune règle normative active n'est modifiée ici.
+
+
+## Précondition de compatibilité : mémoire de traduction
+
+Un passage publié ne devient jamais un champ de traduction générique.
+La preuve est liée au Work, au verrou et à l'occurrence ; remapper ses
+identifiants ou exporter uniquement son texte perdrait cette provenance.
+Le kit exclut désormais de la mémoire par page toute traduction contenant
+une citation à preuve d'occurrence, et de la mémoire par champ cette
+citation seule. Les autres champs restent portables. Les anciennes entrées
+IA ne peuvent pas écraser une sélection publiée dans un brouillon.
+Le transfert sélectif des reçus du résolveur reste le mécanisme approprié,
+avec revalidation puis revue dans le Work cible.
