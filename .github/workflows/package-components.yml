@@ -6,6 +6,9 @@ on:
     paths:
       - 'tools/build_component_bundle.py'
       - '.github/workflows/package-components.yml'
+      - 'kit/PACKAGE_MANIFEST_SHA256.json'
+      - 'validator/PACKAGE_MANIFEST_SHA256.json'
+      - 'norms/PACKAGE_MANIFEST_SHA256.json'
 
 permissions:
   contents: read

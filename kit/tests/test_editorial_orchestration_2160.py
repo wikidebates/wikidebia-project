@@ -1937,3 +1937,107 @@ def test_quote_selection_reissues_pending_package_only_explicitly(tmp_path, monk
         assert manifest["context_files"] == previous_manifest["context_files"]
         with pytest.raises(wf.WorkflowError, match="actuellement attendu"):
             wf._validate_pending_identity(new_state, previous_manifest)
+
+
+def _fresh_quote_index_fixture(workspace, tmp_path, *, age_hours=1):
+    from datetime import datetime, timedelta, timezone
+    import wikidebia_quote_index_contract as index
+    import wikidebia_quote_index_stage as stage
+    from test_wikidebia_quote_index_contract import snapshot
+
+    now = datetime.now(timezone.utc)
+    value = snapshot()
+    value.update(started_utc=(now-timedelta(hours=age_hours)).isoformat(),
+                 finished_utc=(now-timedelta(hours=age_hours)+timedelta(minutes=1)).isoformat())
+    path = tmp_path / "test-public-index.json"
+    common.write_json(path, value)
+    sha = index.digest(value)
+    # Use the production staging mechanism. When creating a deliberately
+    # stale fixture, stage it at the earlier collection date.
+    stage.select_refresh(workspace, path, sha, now=now-timedelta(hours=max(0, age_hours-1)))
+    return sha
+
+
+@pytest.mark.parametrize("case", ["inactive", "no_quotes", "legacy_sealed", "fresh",
+                                  "missing", "stale", "collect", "failed_collect"])
+def test_active_quote_index_workflow_preflight(tmp_path, monkeypatch, case):
+    import wikidebia_published_quote_contract as contract
+    import wikidebia_quote_index_contract as index
+    import wikidebia_quote_index_collect as collector
+    import wikidebia_quote_index_stage as stage
+
+    project = tmp_path / "project"
+    project.mkdir()
+    workspace = make_base(project)
+    state = make_state(project, workspace, "en_translation_review")
+    review = {"status": "draft", "arguments": [
+        {"id": "A0001", "translation": {"citations": [{"id": "Q1"}]}}]}
+    monkeypatch.setattr(contract, "ACTIVE", case != "inactive")
+    monkeypatch.delenv("WIKIDEBIA_QUOTE_RESOLVER_ROOT", raising=False)
+    if case == "no_quotes":
+        review["arguments"] = []
+    elif case == "legacy_sealed":
+        review["status"] = "approved"
+    before = json.dumps(review, sort_keys=True)
+    selected = None
+    if case in {"fresh", "stale"}:
+        selected = _fresh_quote_index_fixture(workspace, tmp_path, age_hours=25 if case == "stale" else 1)
+
+    calls = []
+    def collect(base, resolver_root, **kwargs):
+        calls.append((base, resolver_root))
+        if case == "failed_collect":
+            stage.begin_refresh(base)
+            raise index.QuoteIndexError("public_quote_collection_failed_or_incomplete")
+        return {"quote_public_index_sha256": _fresh_quote_index_fixture(base, tmp_path)}
+    monkeypatch.setattr(collector, "collect", collect)
+    if case in {"collect", "failed_collect"}:
+        monkeypatch.setenv("WIKIDEBIA_QUOTE_RESOLVER_ROOT", str(tmp_path / "resolver"))
+    if case in {"missing", "stale", "failed_collect"}:
+        with pytest.raises(wf.QuoteIndexPreparationError, match="citations"):
+            wf._ensure_active_quote_index(project, state, workspace, review)
+    else:
+        actual = wf._ensure_active_quote_index(project, state, workspace, review)
+        if case == "collect":
+            assert actual == stage.latest_selected_sha(workspace)
+            assert actual is not None
+        else:
+            assert actual == (selected if case == "fresh" else None)
+    assert len(calls) == int(case in {"collect", "failed_collect"})
+    if case == "failed_collect":
+        assert stage.pending_refresh(workspace) is not None
+    assert json.dumps(review, sort_keys=True) == before
+
+
+def test_active_quote_index_missing_keeps_returned_review_retryable(tmp_path, monkeypatch):
+    import wikidebia_published_quote_contract as contract
+
+    project = tmp_path / "project"
+    project.mkdir()
+    base = make_base(project)
+    state = make_state(project, base, "en_translation_review")
+    state["work_id"] = "EDIT-20260811-001"
+    wf._save_workflow(project, state)
+    relative = "reviews/en/translation_review.json"
+    draft = {"status": "draft", "french_normalization_receipt_sha256": "d" * 64,
+             "arguments": [{"id": "A0001", "translation": {"citations": [{"id": "Q1"}]}}]}
+    common.write_json(base / relative, draft)
+    pending = wf.create_review_package(project, state, review_type="en_translation_review",
+                                       base=base, editable_paths=[relative], context_paths=["data/context.json"])
+    archive = project / pending["package_path"]
+    before = archive.read_bytes()
+    monkeypatch.setattr(contract, "ACTIVE", True)
+    monkeypatch.delenv("WIKIDEBIA_QUOTE_RESOLVER_ROOT", raising=False)
+    calls = []
+    monkeypatch.setattr(wf, "finalize_translation_review", lambda *a: calls.append(a) or {})
+    monkeypatch.setattr(wf, "_mechanical_advance", lambda project, state: state)
+    with pytest.raises(wf.QuoteIndexPreparationError, match="missing_public_quote_index"):
+        wf.import_review(project, "debat_test", archive)
+    assert common.load_json(base / relative, "review") == draft
+    assert archive.read_bytes() == before
+    assert wf._load_workflow(project, "debat_test")["pending_review"]["package_id"] == pending["package_id"]
+    assert not calls
+    _fresh_quote_index_fixture(base, tmp_path)
+    result = wf.import_review(project, "debat_test", archive)
+    assert result["phase"] == "semantic_convergence_1"
+    assert calls

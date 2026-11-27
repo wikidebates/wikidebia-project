@@ -400,3 +400,23 @@ pas être sélectionnée à nouveau : il faut une nouvelle preuve vérifiée,
 ou une traduction IA complète. L'index global reste obligatoire, même
 après retrait du dernier passage publié. La régénération intégrale d'un
 brouillon contenant ces preuves ou décisions est interdite.
+
+
+### Reprise du workflow normal après activation
+
+Le workflow de haut niveau contrôle l'index public avant le réimport de
+la revue anglaise puis avant l'application et le rendu. Si la variable
+locale `WIKIDEBIA_QUOTE_RESOLVER_ROOT` désigne un checkout du résolveur
+contenant le commit épinglé, il réutilise ou renouvelle automatiquement
+l'index par le collecteur existant. Aucun téléchargement de code ni
+installation de dépendances ne sont réalisés. Sans cette configuration,
+collecter explicitement l'index avec la commande documentée plus haut.
+Un défaut d'intégrité ne déclenche jamais une réparation automatique.
+
+Un index manquant ou périmé ne consomme pas le ZIP retourné ; une collecte
+incomplète reste bloquante. Après convergence, un arrêt documentaire
+`quote_index_required` conserve les deux passes et se reprend au même
+point. Le contrôle avant publication et après écritures partielles
+continue à s'appliquer : renouveler l'index à ces frontières si nécessaire.
+Le kit ne doit pas relancer une traduction ni sa convergence pour cette
+seule raison. Les primitives de validation et de rendu restent hors ligne.
