@@ -22,6 +22,8 @@ import wikidebia_quote_bridge as bridge
 SCHEMA = "wikidebia-quote-duplicate-audit-1"
 MAX_PAIRS = 50_000
 MAX_TOKENS = 512
+MAX_COMPARISON_CELLS = 10_000_000
+OMISSION = re.compile(r'\[\s*(?:\.{3,}|…)+\s*\]|\(\s*(?:\.{3,}|…)+\s*\)|\.{3,}|…')
 
 
 @dataclass(frozen=True)
@@ -40,11 +42,12 @@ def normalized(text):
 def words(fragments):
     # An explicit sentinel prevents joining non-contiguous selected excerpts.
     result = []
-    for i, text in enumerate(fragments):
+    pieces = [part for fragment in fragments for part in OMISSION.split(normalized(fragment))]
+    for i, text in enumerate(pieces):
         if i:
             result.append("\0")
         result.extend(re.findall(r"[^\W_]+(?:'[^\W_]+)*",
-                      normalized(text).casefold().replace("’", "'")))
+                      text.casefold().replace("’", "'")))
     return tuple(result)
 
 
@@ -61,8 +64,10 @@ def pair_refs(a, b):
     return {"left": refs(a), "right": refs(b)}
 
 
-def analyze(rows, *, max_pairs=MAX_PAIRS, max_tokens=MAX_TOKENS):
-    if max_pairs < 1 or max_tokens < 1:
+def analyze(rows, *, max_pairs=MAX_PAIRS, max_tokens=MAX_TOKENS,
+            max_comparison_cells=MAX_COMPARISON_CELLS):
+    rows = list(rows)
+    if min(max_pairs, max_tokens, max_comparison_cells) < 1:
         raise bridge.QuoteBridgeError("invalid_duplicate_comparison_limits")
     identities, forms, docs = set(), defaultdict(list), defaultdict(list)
     for r in rows:
@@ -137,18 +142,27 @@ def analyze(rows, *, max_pairs=MAX_PAIRS, max_tokens=MAX_TOKENS):
         if lexical_limited:
             break
     near, partial = [], []
+    cells, compared = 0, 0
+    cells_limited = False
     for a, b in sorted(pairs):
         x, y = tokens[a], tokens[b]
+        cost = len(x)*len(y)
+        if cells + cost > max_comparison_cells:
+            cells_limited = True
+            break
+        cells += cost
+        compared += 1
         matcher = SequenceMatcher(None, x, y, autojunk=False)
-        longest = 0
+        longest, matched = 0, 0
         for block in matcher.get_matching_blocks():
             run = 0
             for token in x[block.a:block.a+block.size]:
                 run = 0 if token == "\0" else run+1
+                matched += token != "\0"
                 longest = max(longest, run)
         shorter, longer = sorted((sum(t != "\0" for t in x), sum(t != "\0" for t in y)))
         data = pair_refs(forms[a], forms[b])
-        ratio = matcher.ratio()
+        ratio = 2*matched/(shorter+longer) if shorter else 0
         if shorter >= 8 and shorter/longer >= .8 and ratio >= .85:
             near.append({**data, "token_similarity": round(ratio, 4)})
         elif longest >= 8 and (longest >= 20 or longest/shorter >= .5):
@@ -157,12 +171,13 @@ def analyze(rows, *, max_pairs=MAX_PAIRS, max_tokens=MAX_TOKENS):
             "exact_text_groups": exact, "same_words_different_form_groups": variants,
             "same_document_partial_overlaps": coordinate,
             "near_lexical_matches": near, "partial_lexical_overlaps": partial,
-            "lexical_candidate_pairs_compared": len(pairs),
+            "lexical_candidate_pairs_compared": compared,
             "lexical_pair_iterations": attempts, "document_pair_iterations": doc_pairs,
+            "lexical_comparison_cells": cells, "lexical_cell_limit_reached": cells_limited,
             "forms_exceeding_token_limit": too_long,
             "lexical_pair_limit_reached": lexical_limited,
             "document_pair_limit_reached": doc_limited,
-            "bounded_similarity_scan_complete": not (too_long or lexical_limited or doc_limited)}
+            "bounded_similarity_scan_complete": not (too_long or lexical_limited or doc_limited or cells_limited)}
 
 
 def published_occurrence(row, page):

@@ -103,6 +103,10 @@ def test_omission_boundaries_not_joined():
     assert not result["partial_lexical_overlaps"]
     assert not result["exact_text_groups"]
     assert not result["same_words_different_form_groups"]
+    for omission in (" [...]", " […]", " (…)", " ..."):
+        explicit = (x[0]+omission+" "+x[1],)
+        result = dup.analyze([O("A1","C1",explicit),O("A2","C2",y)])
+        assert not result["partial_lexical_overlaps"]
 
 
 def test_comparison_caps_do_not_remove_exact_duplicates():
@@ -115,6 +119,11 @@ def test_comparison_caps_do_not_remove_exact_duplicates():
     assert len(result["exact_text_groups"]) == 1
     result = dup.analyze(rows,max_tokens=5)
     assert result["forms_exceeding_token_limit"] == 6
+    assert len(result["exact_text_groups"]) == 1
+    result = dup.analyze(rows,max_comparison_cells=1)
+    assert result["lexical_cell_limit_reached"] is True
+    assert result["lexical_candidate_pairs_compared"] == 0
+    assert result["bounded_similarity_scan_complete"] is False
     assert len(result["exact_text_groups"]) == 1
 
 

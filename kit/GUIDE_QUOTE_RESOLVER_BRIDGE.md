@@ -113,8 +113,10 @@ chevauchements de coordonnées du même document, les similitudes lexicales
 élevées et les chevauchements partiels. Une référence à la même œuvre ne
 suffit pas. Seuls identifiants, empreintes et mesures sont émis; aucune
 suppression ou correction. Les comparaisons lexicales sont bornées et ne
-détectent pas toutes les paraphrases; limites et omissions sont signalées,
-sans affecter les groupes exacts.
+détectent pas toutes les paraphrases; les limites de longueur, de paires et
+de calcul sont signalées sans affecter les groupes exacts. Les ellipses
+explicites et les fragments discontinus ne sont jamais réunis en un
+prétendu passage contigu.
 
 Le périmètre FR comprend toutes les Citation du verrou des arguments actifs,
 même sur les pages EN réutilisées. Le périmètre EN ne couvre que les passages
