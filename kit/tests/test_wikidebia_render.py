@@ -875,20 +875,19 @@ def test_graph_projection_sync_includes_recounted_depth_policy():
 
 
 def test_frozen_source_is_verified_before_published_checkpoint_overlay(tmp_path: Path, monkeypatch):
-    project, workspace, work_id, review_sha = make_translated(tmp_path)
+    # Freeze the historical source before sealing the translation. Modifying
+    # its lock afterwards would correctly invalidate the active quote audit.
+    from test_preserved_publication_end_to_end import _apply_preserved_translation
+    from wikidebia_quote_index_stage import package_audit
+
+    project, workspace, work_id, review_sha = _apply_preserved_translation(tmp_path, monkeypatch)
     source = workspace / "translated-copy"
     lock_path = source / "data/fr_content_lock.json"
-    lock = json.loads(lock_path.read_text(encoding="utf-8"))
+    original_lock = lock_path.read_bytes()
+    lock = json.loads(original_lock)
     preservation = sys.modules["wikidebia_translation_source"]
-    lock["source_preservation_policy"] = preservation.POLICY
-    provenance = json.loads((source / "data/import_provenance.json").read_text(encoding="utf-8"))
-    by_id = {str(row.get("page_id")): row for row in provenance["pages"] if row.get("kind") == "argument"}
-    debate_import = next(row for row in provenance["pages"] if row.get("kind") == "debate")
-    lock["debate"].update(import_path=debate_import["import_path"], import_sha256=debate_import["sha256"])
-    for row in lock["arguments"]:
-        imported = by_id[str(row["id"])]
-        row.update(import_path=imported["import_path"], import_sha256=imported["sha256"])
-    lock_path.write_text(json.dumps(lock, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    assert lock["source_preservation_policy"] == preservation.POLICY
+    assert package_audit(workspace, source)["status"] == "clear_exact_literal_scope"
 
     checkpoint_state = project / ".state/fr-publication/debat_test" / work_id / "content"
     checkpoint_output = checkpoint_state / "checkpoint-corpus/output/fr"
@@ -902,7 +901,9 @@ def test_frozen_source_is_verified_before_published_checkpoint_overlay(tmp_path:
         destination.write_bytes((source / row["import_path"]).read_bytes())
 
     observed = {}
+    verify_original = preservation.verify_frozen_source
     def verify_before_overlay(root, metadata_lock, content_lock):
+        verify_original(root, metadata_lock, content_lock)
         observed["paths"] = [content_lock["debate"]["import_path"], *[row["import_path"] for row in content_lock["arguments"]]]
         assert all("fr-publication-checkpoint" not in path for path in observed["paths"])
 
@@ -919,6 +920,25 @@ def test_frozen_source_is_verified_before_published_checkpoint_overlay(tmp_path:
     provenance = json.loads((target / "data/fr_render_source_provenance.json").read_text(encoding="utf-8"))
     assert provenance["source_checkpoint_record_sha256"] == "record"
     assert provenance["source_checkpoint_receipt_sha256"] == "receipt"
+    assert (target / "data/fr_content_lock.json").read_bytes() == original_lock
+    assert package_audit(workspace, target)["status"] == "clear_exact_literal_scope"
+
+
+def test_render_rejects_changed_french_lock_bound_to_active_quote_audit(tmp_path):
+    import pytest
+    project, workspace, work_id, review_sha = make_translated(tmp_path)
+    source = workspace / "translated-copy"
+    lock_path = source / "data/fr_content_lock.json"
+    # Even a semantically neutral byte change breaks the sealed source hash.
+    lock_path.write_bytes(lock_path.read_bytes() + b"\n")
+    target = workspace / "rendered-tampered-source"
+    with pytest.raises(render.RenderError, match="final_quote_audit_mismatch"):
+        render._build_rendered_copy(
+            project, source, target, debate_id="debat_test", work_id=work_id,
+            translation_review_sha256=review_sha,
+        )
+    assert not (target / "output/en").exists()
+
 
 def test_existing_english_creation_date_is_retired_in_page_manifest_and_registry(tmp_path: Path):
     project,workspace,work_id,review_sha=make_translated(tmp_path)
