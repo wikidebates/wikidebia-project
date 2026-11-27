@@ -184,3 +184,23 @@ Le résultat est une proposition privée et non un verrou de traduction.
 L'échappement du wikicode qui exigerait une preuve de rendu est pour
 l'instant refusé, sans réécrire le passage. L'empreinte de la fiche reste
 liée à l'occurrence et au retour inspectés.
+
+## Contrôle final des doublons avant verrouillage anglais (expérimental)
+
+Après production de l'index EN avec public_quote_index.py, importer son
+instantané privé et son empreinte de confiance :
+
+    python kit/scripts/wikidebia_quote_index_stage.py DEBAT --work-id WORK \
+      --index EN_INDEX --sha256 EN_SHA
+
+Renseigner `quote_public_index_sha256` avec cette empreinte dans la revue
+anglaise de travail. Le profil de citation publiée exige cette preuve;
+un parcours IA historique peut l'utiliser sur option. La finalisation
+contrôle les textes réellement sélectionnés et écrit un diagnostic sans
+texte dans reports/en_quote_duplicate_audit.json. Un doublon exact bloque;
+les mêmes mots avec une forme différente demandent examen. Le validateur
+recalcule le reçu avec l'index embarqué dans le dossier privé de preuves.
+Le contrôle ne se substitue pas aux preuves de droits, de complétude, ni
+à la vérification du wiki public avant publication. Un instantané périmé
+avant application ou rendu doit être actualisé; l'automatisation du
+rafraîchissement sans refaire la revue sémantique reste à intégrer.

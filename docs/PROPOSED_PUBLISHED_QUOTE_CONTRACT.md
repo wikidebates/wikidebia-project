@@ -138,3 +138,29 @@ commun interdit le rendu canonique et l'acceptation normative de ce profil
 jusqu'à la migration active des normes et des contrôles globaux. Ne pas
 fusionner la PR dans cet état. Aucune autorisation juridique ou wiki n'est
 déduite de ces tests.
+
+## Contrôle des citations anglaises effectivement sélectionnées
+
+Le contrat de l'index public est partagé à l'identique par le kit et le
+validateur. Le contrôle final porte sur **toutes** les valeurs Quote du
+verrou anglais, traductions IA comprises, et non sur les seuls passages
+reconstitués dans les handoffs. Un index EN complet pour le périmètre
+littéral, intègre et âgé au plus de 24 h est requis pour le profil publié;
+les anciens parcours IA restent compatibles (contrôle sur option).
+Le rapport est recalculé à la finalisation, lié aux identités de pages,
+aux empreintes des citations, au verrou FR et à l'index, puis vérifié de
+nouveau avant application et rendu. L'index sans texte est embarqué une
+fois dans le dossier privé de preuves afin que le validateur puisse
+recalculer lui-même le résultat, sans accès réseau. Il ne constitue pas
+une bibliothèque de textes. Les contrôles d'anciens Works vérifient le
+reçu à sa date, sans prétendre que le wiki actuel est identique.
+Les doublons exacts entre deux pages du débat ou avec une page publique
+bloquent; les variantes aux mêmes mots restent des signaux éditoriaux.
+Seule une mise à jour autorisée avec titre et révision exacte permet
+l'exclusion de sa propre page; un même titre seul ne suffit pas.
+Les doublons historiques sans rapport avec la sélection et les 12 modèles
+FR invalides ne bloquent pas arbitrairement une nouvelle page EN.
+Aucune garantie concernant le rendu développé ou les chevauchements
+partiels sur tout le wiki. Une actualisation avant publication reste à
+intégrer; aucun droit ni autorisation de publication n'est accordé.
+La migration normative et ACTIVE=False restent inchangés.

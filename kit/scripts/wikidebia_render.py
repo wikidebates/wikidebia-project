@@ -1635,6 +1635,19 @@ def _build_rendered_copy(
     if has_published or profile is not None or policy_profile is not None:
         if not (has_published and profile == policy_profile == EVIDENCE and ACTIVE):
             raise RenderError("Contrat de citations publiées expérimental, non activé pour le rendu canonique")
+    from wikidebia_quote_index_contract import INDEX_PATH, QuoteIndexError, verify_final_audit
+    audit = en_content.get("quote_duplicate_audit")
+    audit_sha = (en_translation.get("citation_translation_policy") or {}).get("quote_duplicate_audit_sha256")
+    if has_published or audit is not None or audit_sha is not None:
+        from wikidebia_quote_index_stage import load_index
+        try:
+            if not isinstance(audit,dict) or audit.get("audit_sha256") != audit_sha:
+                raise QuoteIndexError("missing_or_unbound_final_quote_audit")
+            verify_final_audit(audit,en_content["arguments"],load_index(target/INDEX_PATH),
+                               sha256_file(target/"data/fr_content_lock.json"),fresh=True)
+        except (ValueError,OSError,KeyError,TypeError,AttributeError) as exc:
+            reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
+            raise RenderError("Contrôle des doublons avant rendu : "+reason) from exc
     from wikidebia_translation_source import POLICY, verify_frozen_source
     # The preservation receipt authenticates the original imported source.
     # Verify it before a published checkpoint is overlaid as the render input;

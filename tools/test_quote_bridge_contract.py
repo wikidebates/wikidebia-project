@@ -28,6 +28,9 @@ def exercise(resolver_root):
     from wikidebia_validator import published_quote_contract as independent_contract
     from wikidebia_published_quote_review import contract as kit_contract
     assert Path(kit_contract.__file__).read_bytes() == Path(independent_contract.__file__).read_bytes()
+    import wikidebia_quote_index_contract as final_index
+    from wikidebia_validator import quote_index_contract as independent_index
+    assert Path(final_index.__file__).read_bytes() == Path(independent_index.__file__).read_bytes()
     from test_citation_registry import RAW, QUOTE, ENGLISH, FR, candidate, document, ref, review
     from test_public_quote_index import Fake
     from translation_handoff import prepare_handoff, apply_handoff_reply
@@ -169,6 +172,15 @@ def exercise(resolver_root):
                  value,summary["snapshot_sha256"],lang,fingerprints=dup.public_fingerprints)
         assert result["coverage"]["complete_fresh_literal_scope"] is True
         assert result["findings"][0]["matching_pages"]==2
+        if lang=="en":
+            args=[{"id":"A0001","canonical_title":"New argument","citations":[
+                {"id":"A0001-C001","quote":"A test passage.",
+                 "parameters":[{"name":"quote","value":"A test passage."}]}]}]
+            final=final_index.final_audit(args,value,summary["snapshot_sha256"],"a"*64)
+            assert final["status"]=="blocked_exact_duplicates"
+            assert final["public_exact"][0]["matching_occurrences"]==2
+            assert final==independent_index.final_audit(args,value,summary["snapshot_sha256"],
+                    "a"*64,now=__import__("datetime").datetime.fromisoformat(final["checked_at"]))
     print("Cross-repository contract: passed (private selective transfer, separate DBs, public fingerprint exchange; no wiki/model access)")
 
 

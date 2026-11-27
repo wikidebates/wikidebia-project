@@ -2701,6 +2701,26 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
         raise TranslationReviewError("Contrat expérimental et citations publiées incohérents")
     if has_published:
         _check_published_quote_duplicates(final_arguments)
+    # Opt-in for legacy AI-only Works; mandatory for the new published profile.
+    # Always inspect the final selected quote texts, not just resolver handoffs.
+    quote_index_sha = review.get("quote_public_index_sha256")
+    quote_audit = None
+    if has_published and quote_index_sha is None:
+        raise TranslationReviewError("Index public anglais frais requis pour les citations publiées")
+    if quote_index_sha is not None:
+        from wikidebia_quote_index_contract import final_audit, QuoteIndexError
+        from wikidebia_quote_index_stage import stored_index
+        try:
+            quote_audit = final_audit(final_arguments, stored_index(workspace, quote_index_sha),
+                                      quote_index_sha, sha256_bytes((source/"data/fr_content_lock.json").read_bytes()))
+        except (ValueError,OSError,KeyError,TypeError,AttributeError) as exc:
+            reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
+            raise TranslationReviewError("Contrôle des doublons anglais : "+reason) from exc
+        write_json(workspace/"reports/en_quote_duplicate_audit.json", quote_audit)
+        if quote_audit["status"] != "clear_exact_literal_scope":
+            raise TranslationReviewError("Doublons exacts de citations anglaises : voir reports/en_quote_duplicate_audit.json")
+    elif "quote_duplicate_audit" in review:
+        raise TranslationReviewError("Reçu de doublons sans index public correspondant")
     if (
         _requires_relation_label_review(metadata_lock, content_lock)
         or _historical_relation_labels_required(content_lock)
@@ -2774,6 +2794,8 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
         "summary": {"arguments": len(final_arguments), "vocabulary_entries": len(vocabulary), "sources": len(english_rows), "debate_documentary_references": sum(len(v) for v in final_debate["documentation"].values()), "argument_documentary_references": sum(len(v) for arg in final_arguments for v in arg["sources"].values()), "citations": sum(len(arg.get("citations") or []) for arg in final_arguments)},
         "review_sha256": None,
     })
+    if quote_audit is not None:
+        finalized["quote_duplicate_audit"] = quote_audit
     finalized["semantic_content_sha256"] = semantic_content_sha256(finalized)
     finalized["review_sha256"] = translation_review_sha256(finalized)
     write_json(review_path, finalized)
@@ -2971,6 +2993,24 @@ def _build_translated_copy(project_root: Path, source: Path, target: Path, revie
         translation_lock["citation_translation_policy"]["preserved_values"] = (
             "ai_translation_only; published_translation_uses_verified_english_edition"
         )
+    quote_audit = review.get("quote_duplicate_audit")
+    quote_index_sha = review.get("quote_public_index_sha256")
+    if quote_index_sha is not None or quote_audit is not None or review.get("published_quote_contract") is not None:
+        from wikidebia_quote_index_contract import INDEX_PATH, QuoteIndexError, verify_final_audit
+        from wikidebia_quote_index_stage import stored_index
+        try:
+            index = stored_index(target.parent, quote_index_sha)
+            if not isinstance(quote_audit,dict) or quote_audit.get("index_sha256") != quote_index_sha:
+                raise QuoteIndexError("missing_or_unbound_final_quote_audit")
+            verify_final_audit(quote_audit, content_lock["arguments"], index,
+                               sha256_bytes((source/"data/fr_content_lock.json").read_bytes()),fresh=True)
+        except (ValueError,OSError,KeyError,TypeError,AttributeError) as exc:
+            reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
+            raise TranslationReviewError("Contrôle des doublons avant application : "+reason) from exc
+        content_lock["quote_duplicate_audit"] = copy.deepcopy(quote_audit)
+        translation_lock["citation_translation_policy"]["quote_duplicate_audit_sha256"] = quote_audit["audit_sha256"]
+        write_json(target/INDEX_PATH,index)
+        (target/INDEX_PATH).chmod(0o600)
     vocabulary = load_json(target / "data/keyword_vocabulary.json", "vocabulaire français")
     if content_lock.get("source_preservation_policy") or load_json(source / "data/fr_content_lock.json", "source française").get("source_preservation_policy"):
         for entry in vocabulary.get("entries") or []:
@@ -3156,7 +3196,7 @@ def reopen_review(project_root: Path, debate_id: str, work_id: str, *, reviewer:
     archive.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(path, archive)
     review.update(status="draft", review_sha256=None, reopening={"previous_review_sha256": old_sha, "reviewer": reviewer, "note": note, "reopened_at": now_iso()})
-    for key in ("final_values", "finalized_at", "semantic_content_sha256", "source_registry_sha256"):
+    for key in ("final_values", "finalized_at", "semantic_content_sha256", "source_registry_sha256", "quote_duplicate_audit"):
         review.pop(key, None)
     write_json(path, review)
     meta["status"] = "en_translation_review_ready"

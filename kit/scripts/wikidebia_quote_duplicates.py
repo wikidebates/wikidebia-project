@@ -23,7 +23,7 @@ SCHEMA = "wikidebia-quote-duplicate-audit-1"
 MAX_PAIRS = 50_000
 MAX_TOKENS = 512
 MAX_COMPARISON_CELLS = 10_000_000
-OMISSION = re.compile(r'\[\s*(?:\.{3,}|…)+\s*\]|\(\s*(?:\.{3,}|…)+\s*\)|\.{3,}|…')
+from wikidebia_quote_index_contract import normalized, words, public_fingerprints as _public_fingerprints, QuoteIndexError
 
 
 @dataclass(frozen=True)
@@ -35,30 +35,11 @@ class Occurrence:
     spans: tuple[tuple[int, int], ...] = ()
 
 
-def normalized(text):
-    return " ".join(unicodedata.normalize("NFC", text).split())
-
-
-def words(fragments):
-    # An explicit sentinel prevents joining non-contiguous selected excerpts.
-    result = []
-    pieces = [part for fragment in fragments for part in OMISSION.split(normalized(fragment))]
-    for i, text in enumerate(pieces):
-        if i:
-            result.append("\0")
-        result.extend(re.findall(r"[^\W_]+(?:'[^\W_]+)*",
-                      text.casefold().replace("’", "'")))
-    return tuple(result)
-
-
 def public_fingerprints(fragments):
-    """Exchange contract with public_quote_index.py, version 1."""
-    form = tuple(normalized(s) for s in fragments)
-    if not form or not all(form):
-        raise bridge.QuoteBridgeError("empty_duplicate_audit_fragment")
-    seq = words(form)
-    return {"literal_sha256":bridge.digest(list(form)),
-            "words_sha256":bridge.digest(list(seq)) if any(w!="\0" for w in seq) else None}
+    try:
+        return _public_fingerprints(fragments)
+    except QuoteIndexError as exc:
+        raise bridge.QuoteBridgeError(str(exc)) from exc
 
 
 def refs(rows):
