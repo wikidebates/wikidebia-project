@@ -1,6 +1,6 @@
 Wikidéb’IA Validator 0.4.105 — rapport de tests
 
-Tests pytest : 1193 réussis
+Tests pytest : 1202 réussis
 Norme active : 1.2.88
 Kit recommandé : 2.16.47
 
@@ -12,3 +12,5 @@ Final publication order : PASSED ; alignement normatif Debate avant Argument.
 Historical rubric schemas : PASSED ; classifications importées préservées et contraintes des pages nouvelles maintenues.
 
 Liens sans schéma dans les citations historiques : PASSED ; conservation exacte depuis un import vérifié par SHA-256, contrôle HTTP(S) maintenu pour les liens nouveaux ou modifiés.
+
+Branche expérimentale : preuves des citations publiées et audit global des doublons, tests fonctionnels réussis (1 202) sur ae66f24f59747f3540c015f094deb256fc8d4227 ; garde-fou d’activation maintenu. La livraison de production reste non autorisée.

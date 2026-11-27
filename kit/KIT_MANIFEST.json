@@ -116,7 +116,8 @@
     "source_authoritative_translated_metadata_render",
     "workflow_final_publication",
     "work_scoped_bilingual_baseline",
-    "final_publication_prewrite_global_preflight"
+    "final_publication_prewrite_global_preflight",
+    "published_quote_resolver_experimental"
   ],
   "debate_specific_code": false,
   "change_tag": "chatgpt",
@@ -502,7 +503,8 @@
     "automatic_final_mediawiki_publication",
     "work_scoped_final_publication_baseline",
     "first_english_publication_runtime_metadata_in_workflow",
-    "final_release_copy_installation"
+    "final_release_copy_installation",
+    "published_quote_provenance_experimental_inactive"
   ],
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-kit.zip",
@@ -674,7 +676,9 @@
     "validator_runtime_shadowing_regression",
     "release_ready_resume_without_semantic_rerun_regression",
     "final_publication_conflict_persistence_regression",
-    "workflow_scoped_english_empty_baseline_regression"
+    "workflow_scoped_english_empty_baseline_regression",
+    "published_quote_review_package_provenance_regression",
+    "published_quote_withdrawal_regression"
   ],
   "translation_change_tag": "translated-fr",
   "kit_version": "2.16.47"

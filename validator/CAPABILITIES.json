@@ -110,6 +110,8 @@
     "historical_citation_optional_empty_parameters": "1.0",
     "historical_editorial_parameter_presence_validation": "1.0",
     "canonical_optional_empty_parameter_omission": "1.0",
-    "historical_render_differential_validation": "1.0"
+    "historical_render_differential_validation": "1.0",
+    "published_quote_evidence_validation_experimental": "1.0",
+    "quote_uniqueness_audit_validation_experimental": "1.0"
   }
 }

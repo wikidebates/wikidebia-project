@@ -1,6 +1,6 @@
 Wikidéb’IA Kit 2.16.47 — rapport de tests
 
-Tests pytest : 1986 réussis
+Tests pytest : 2104 réussis
 Norme : 1.2.88
 Validateur : 0.4.105
 
@@ -22,3 +22,5 @@ Explicit French Git publication relay : PASSED ; 46 tests du relais : préflight
 French relay readback recovery : PASSED ; relectures bornées des métadonnées, contrôle de la révision parente, reprise des anciens reçus et absence de doublons après interruption.
 
 Displayed-title translation scope : PASSED ; titres courts et nominaux conservés, critères de génération séparés et régressions sémantiques de traduction toujours bloquantes.
+
+Branche expérimentale : preuves de provenance des citations publiées, unicité globale, conservation et retrait motivé des preuves dans les paquets de revue. Tests fonctionnels réussis sur ae66f24f59747f3540c015f094deb256fc8d4227 ; activation canonique désactivée. Ce rapport ne constitue pas une autorisation de livraison en production.
