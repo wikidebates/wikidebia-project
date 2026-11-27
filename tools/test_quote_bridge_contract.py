@@ -24,6 +24,7 @@ def exercise(resolver_root):
     from public_quote_index import hashes, scan
     import wikidebia_quote_duplicates as dup
     import wikidebia_quote_public_check as public_check
+    import wikidebia_published_quote_review as published_review
     from test_citation_registry import RAW, QUOTE, ENGLISH, FR, candidate, document, ref, review
     from test_public_quote_index import Fake
     from translation_handoff import prepare_handoff, apply_handoff_reply
@@ -131,6 +132,11 @@ def exercise(resolver_root):
                     if "reviewed_receipt_rights_unreviewed" in summary["states"]:
                         row, = restored["rows"]
                         assert row["published_passage"]["fragments"][0]["text"] == ENGLISH
+                        candidate, = published_review.prepare(batch, restored, fingerprint(restored),
+                            lock_sha, items, owners)
+                        assert candidate["plain_quote"] == ENGLISH
+                        assert published_review.blank(candidate)["rights_review"]["status"] == "pending"
+                        assert candidate["publication_authorized"] is False
                 assert states == {"reviewed_receipt_rights_unreviewed": 1,
                                   "ai_translation_required": 1}
                 assert calls == ["A0001-C001"]

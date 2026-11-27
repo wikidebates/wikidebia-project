@@ -40,7 +40,7 @@ def compare(rows,index,lang,**kwargs):
 def test_global_french_excludes_own_imported_page_but_not_other_arguments():
     item = quote("A0001-C001","Un passage français.",17)
     item["wiki_title"] = "Argument A"
-    idx = snapshot("fr",[(1,"Argument_A",30,"Un passage français."),
+    idx = snapshot("fr",[(1,"Argument_A",17,"Un passage français."),
                          (2,"Argument B",18,"Un passage français."),
                          (3,"Argument C",19,"UN PASSAGE FRANÇAIS"),
                          (4,"Argument D",20,"Autre passage.")])
@@ -63,6 +63,10 @@ def test_moved_page_same_revision_and_unpinned_not_exempted():
     assert not compare(rows,idx,"fr",source_items=[item])["findings"]
     item["revision"] = None
     assert compare(rows,idx,"fr",source_items=[item])["findings"][0]["matching_pages"]==1
+    item["revision"] = 17
+    # Same title, different revision, no pageid in the source contract.
+    replaced = snapshot("fr",[(2,item["wiki_title"],99,"same quote")])
+    assert compare(rows,replaced,"fr",source_items=[item])["findings"][0]["matching_pages"]==1
 
 
 def test_both_wikis_and_across_batches():

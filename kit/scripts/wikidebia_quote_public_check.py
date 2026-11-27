@@ -118,9 +118,9 @@ def compare(rows, value, expected_sha, lang, *, fingerprints, source_items=(),
             allow_partial=False, now=None, max_age_hours=24):
     """Use the same literal/word algorithm as the local duplicate audit.
 
-    FR source references may exclude their own imported page by exact title
-    or revision; unpinned sources never get this exemption. EN target identity
-    may not exist yet: report all matching public pages for editorial review.
+    FR source references exclude only their own exact pinned revision.
+    A title can be reused after deletion or a move: title equality alone
+    cannot identify the same page. EN target identity may not exist yet.
     """
     coverage = validate(value,expected_sha,lang,allow_partial=allow_partial,
                         now=now,max_age_hours=max_age_hours)
@@ -142,8 +142,7 @@ def compare(rows, value, expected_sha, lang, *, fingerprints, source_items=(),
         src = sources.get(row.citation)
         def own(ref):
             return (src is not None and type(src.get("revision")) is int
-                    and (src["revision"]==ref["wiki_revision"]
-                         or _title(src["wiki_title"])==_title(ref["wiki_title"])))
+                    and src["revision"]==ref["wiki_revision"])
         exact = literal.get(h["literal_sha256"],[])
         variants = [ref for ref in words.get(h["words_sha256"],[])
                     if ref["literal_sha256"] != h["literal_sha256"]]

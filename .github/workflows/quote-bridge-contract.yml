@@ -5,6 +5,8 @@ on:
       - 'kit/scripts/wikidebia_quote_bridge.py'
       - 'kit/scripts/wikidebia_quote_duplicates.py'
       - 'kit/scripts/wikidebia_quote_public_check.py'
+      - 'kit/scripts/wikidebia_published_quote_review.py'
+      - 'kit/tests/test_wikidebia_published_quote_review.py'
       - 'kit/tests/test_wikidebia_quote_public_check.py'
       - 'kit/tests/test_wikidebia_quote_duplicates.py'
       - 'kit/tests/test_wikidebia_quote_bridge.py'
@@ -31,5 +33,5 @@ jobs:
         with:
           python-version: "3.12"
       - run: python -m pip install -r validator/requirements-dev.txt -r _resolver/requirements-navigation.txt
-      - run: python -m pytest -q kit/tests/test_wikidebia_quote_bridge.py kit/tests/test_wikidebia_quote_duplicates.py kit/tests/test_wikidebia_quote_public_check.py
+      - run: python -m pytest -q kit/tests/test_wikidebia_quote_bridge.py kit/tests/test_wikidebia_quote_duplicates.py kit/tests/test_wikidebia_quote_public_check.py kit/tests/test_wikidebia_published_quote_review.py
       - run: python tools/test_quote_bridge_contract.py --resolver-root _resolver

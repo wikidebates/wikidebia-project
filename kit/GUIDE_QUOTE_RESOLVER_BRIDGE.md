@@ -139,9 +139,9 @@ La comparaison est facultative et indépendante de la résolution MIA:
 Le kit vérifie l'empreinte, le contrat de normalisation, la langue, la
 couverture et les révisions enregistrées dans l'instantané. Il compare les
 citations FR actives et les fragments EN déjà inspectés aux empreintes
-publiques. La page FR importée elle-même est exclue si sa révision ou son
-titre canonique correspond; une citation non épinglée ne bénéficie pas de
-cette exclusion. En anglais, tous les résultats sont signalés si la cible
+publiques. Seule la révision FR importée elle-même est exclue : une page
+de même titre à une autre révision reste à examiner, car le titre peut être
+réutilisé. Une citation non épinglée ne bénéficie pas de cette exclusion. En anglais, tous les résultats sont signalés si la cible
 n'est pas encore déterminée. Les doublons historiques restent des anomalies.
 
 Par défaut, un index incomplet ou âgé de plus de 24 heures est refusé.
@@ -154,3 +154,11 @@ l'égalité du wikicode normalisé et les mêmes mots; il ne garantit pas
 l'équivalence du rendu ni le repérage des chevauchements partiels et
 paraphrases sur tout le wiki. Le contrôle lexical inter-lots reste distinct.
 Aucune publication n'est autorisée sur la seule base de ce rapport.
+
+## Préparation de la migration vers les citations publiées
+
+Le contrat expérimental est décrit dans docs/PROPOSED_PUBLISHED_QUOTE_CONTRACT.md
+à la racine du dépôt. Le module wikidebia_published_quote_review.py prépare
+les propositions et leurs revues sans modifier la traduction. Les règles
+actives de rendu et de publication restent inchangées : aucune proposition
+n'est une citation anglaise verrouillée ni un droit de publication.
