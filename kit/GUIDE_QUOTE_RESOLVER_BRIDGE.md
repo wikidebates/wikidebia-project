@@ -241,3 +241,31 @@ complétude supplémentaire et ne change pas les statuts de revue ; il faut
 achever les contrôles éditoriaux habituels avant de finaliser. Aucun verrou
 FR, aucune revue scellée, aucune page wiki n'est modifié. Profil encore
 expérimental, non publiable.
+
+
+## Collecte et actualisation en une commande
+
+Dans un environnement qui possède déjà le dépôt expérimental et les
+dépendances Python du résolveur :
+
+    python kit/scripts/wikidebia_quote_index_collect.py DEBAT --work-id WORK \
+      --resolver-root /chemin/vers/wikidebia-quote-resolver
+
+La commande exécute le producteur public existant, au commit épinglé dans
+le kit et la CI. Elle n'effectue ni clone ni installation, ne lit pas les
+fichiers Python modifiés du checkout et ne transmet pas les identifiants
+de publication ou les secrets de l'environnement. Elle réutilise un
+index déjà sélectionné et frais, sauf avec --force; sinon elle collecte
+les révisions courantes et télécharge seulement le contenu nécessaire.
+--previous-sha256 permet de désigner un index préalablement placé dans le
+Work; le budget de requêtes et la durée du processus sont bornés.
+Un échec ou une interruption après le début de la collecte laisse un
+marqueur bloquant : il est interdit de continuer sur l'ancien index.
+Seul un nouvel instantané complet, intègre et postérieur au début de
+cette tentative permet de reprendre. La sélection des propositions et
+la finalisation du brouillon utilisent le plus récent instantané
+sélectionné. Aucun appel réseau n'est ajouté aux étapes hors ligne.
+Exécuter cette commande avant la première publication pour renouveler
+l'index si nécessaire. L'autorisation historique d'une reprise reste
+distincte : le contrôle frais de ses écritures partielles n'est pas
+encore implémenté.

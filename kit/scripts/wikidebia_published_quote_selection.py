@@ -18,7 +18,7 @@ import tempfile
 import wikidebia_quote_bridge as bridge
 import wikidebia_published_quote_contract as contract
 import wikidebia_quote_index_contract as index_contract
-from wikidebia_quote_index_stage import load_index, stored_index
+from wikidebia_quote_index_stage import load_index, stored_index, latest_selected_sha, require_refresh_complete
 from wikidebia_translation_review import TRANSLATION_REVIEW_SCHEMA, _blank_citation
 
 
@@ -138,7 +138,14 @@ def select_workspace(project, debate_id, work_id, evidence_paths, index_sha=None
     evidence = [read_evidence(workspace,p) for p in evidence_paths]
     updated,summary = select_draft(current,lock_sha,items,owners,content.get("arguments") or [],evidence)
     prior_sha = current.get("quote_public_index_sha256")
-    chosen = index_sha if index_sha is not None else prior_sha
+    require_refresh_complete(workspace)
+    newest = latest_selected_sha(workspace,prior_sha)
+    chosen = index_sha if index_sha is not None else newest
+    if index_sha is not None and newest is not None and index_sha != newest:
+        newest_value = stored_index(workspace,newest)
+        requested = stored_index(workspace,index_sha)
+        if datetime.fromisoformat(requested["finished_utc"]) <= datetime.fromisoformat(newest_value["finished_utc"]):
+            fail("published_quote_selection_index_rollback")
     if chosen is not None:
         value = stored_index(workspace,chosen)
         index_contract.validate(value,chosen,"en")

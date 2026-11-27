@@ -2705,12 +2705,13 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
     # Always inspect the final selected quote texts, not just resolver handoffs.
     quote_index_sha = review.get("quote_public_index_sha256")
     quote_audit = None
-    if has_published and quote_index_sha is None:
-        raise TranslationReviewError("Index public anglais frais requis pour les citations publiées")
-    if quote_index_sha is not None:
+    if has_published or quote_index_sha is not None:
         from wikidebia_quote_index_contract import final_audit, QuoteIndexError
-        from wikidebia_quote_index_stage import stored_index
+        from wikidebia_quote_index_stage import stored_index, latest_selected_sha
         try:
+            quote_index_sha = latest_selected_sha(workspace,quote_index_sha)
+            if quote_index_sha is None:
+                raise QuoteIndexError("missing_public_quote_index")
             quote_audit = final_audit(final_arguments, stored_index(workspace, quote_index_sha),
                                       quote_index_sha, sha256_bytes((source/"data/fr_content_lock.json").read_bytes()))
         except (ValueError,OSError,KeyError,TypeError,AttributeError) as exc:
@@ -2795,6 +2796,7 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
         "review_sha256": None,
     })
     if quote_audit is not None:
+        finalized["quote_public_index_sha256"] = quote_index_sha
         finalized["quote_duplicate_audit"] = quote_audit
     finalized["semantic_content_sha256"] = semantic_content_sha256(finalized)
     finalized["review_sha256"] = translation_review_sha256(finalized)

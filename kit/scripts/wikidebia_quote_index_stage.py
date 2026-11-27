@@ -6,7 +6,7 @@ The expected digest must come from the trusted index producer.
 from __future__ import annotations
 
 import argparse
-from datetime import datetime
+from datetime import datetime, timezone
 import hashlib
 import json
 import os
@@ -74,6 +74,83 @@ def _selected_refresh(workspace):
     return value["index_sha256"]
 
 
+def _write_pointer(path, payload):
+    path.parent.mkdir(mode=0o700,parents=True,exist_ok=True)
+    fd,tmp = tempfile.mkstemp(prefix=".quote-index-pointer-",dir=path.parent)
+    try:
+        with os.fdopen(fd,"w",encoding="utf-8") as f:
+            json.dump(payload,f,sort_keys=True)
+            f.write("\n")
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp,path)
+    finally:
+        if os.path.exists(tmp):
+            os.unlink(tmp)
+
+
+def pending_path(workspace):
+    return refresh_path(workspace).with_name("refresh-pending.json")
+
+
+def pending_refresh(workspace):
+    path = pending_path(workspace)
+    if path.is_symlink() or not path.resolve().is_relative_to(workspace.resolve()):
+        raise contract.QuoteIndexError("unsafe_public_quote_refresh_path")
+    if not path.exists():
+        return None
+    if not path.is_file() or path.stat().st_mode & 0o077:
+        raise contract.QuoteIndexError("nonprivate_public_quote_refresh")
+    value = load_index(path)
+    if (not isinstance(value,dict) or set(value)!={"schema","started_utc"}
+            or value["schema"]!="wikidebia-quote-index-refresh-pending-1"):
+        raise contract.QuoteIndexError("invalid_pending_quote_refresh")
+    try:
+        started = datetime.fromisoformat(value["started_utc"])
+        if started.tzinfo is None:
+            raise ValueError()
+    except (TypeError,ValueError) as exc:
+        raise contract.QuoteIndexError("invalid_pending_quote_refresh") from exc
+    return started
+
+
+def begin_refresh(workspace, *, now=None):
+    """An attempted collection may not silently fall back to old evidence."""
+    workspace = _checked_workspace(workspace)
+    now = now or datetime.now(timezone.utc)
+    previous = pending_refresh(workspace)
+    if now.tzinfo is None or (previous is not None and now < previous):
+        raise contract.QuoteIndexError("invalid_pending_quote_refresh_time")
+    _write_pointer(pending_path(workspace),
+                   {"schema":"wikidebia-quote-index-refresh-pending-1",
+                    "started_utc":now.isoformat()})
+    return now
+
+
+def require_refresh_complete(workspace):
+    if pending_refresh(workspace) is not None:
+        raise contract.QuoteIndexError("public_quote_refresh_pending")
+
+
+def latest_selected_sha(workspace, fallback=None, *, allow_pending=False):
+    """Choose a verified newer selected index, not a stale draft pointer."""
+    if not allow_pending:
+        require_refresh_complete(workspace)
+    selected = _selected_refresh(workspace)
+    if selected is None:
+        return fallback
+    value = stored_index(workspace,selected)
+    if fallback is not None and selected != fallback:
+        prior = stored_index(workspace,fallback)
+        finish = datetime.fromisoformat(value["finished_utc"])
+        before = datetime.fromisoformat(prior["finished_utc"])
+        if finish < before:
+            return fallback
+        if finish == before:
+            raise contract.QuoteIndexError("public_quote_refresh_same_time_conflict")
+    return selected
+
+
 def select_refresh(workspace, path, expected_sha, *, now=None):
     """Stage a new trusted snapshot, not a new semantic approval.
 
@@ -89,19 +166,15 @@ def select_refresh(workspace, path, expected_sha, *, now=None):
         prior_finished = datetime.fromisoformat(prior["finished_utc"])
         if finished < prior_finished or (finished == prior_finished and expected_sha != previous):
             raise contract.QuoteIndexError("public_quote_refresh_rollback")
-    pointer = refresh_path(workspace)
-    payload = {"schema":"wikidebia-quote-index-refresh-1","index_sha256":expected_sha}
-    fd,tmp = tempfile.mkstemp(prefix=".quote-index-refresh-",dir=pointer.parent)
-    try:
-        with os.fdopen(fd,"w",encoding="utf-8") as f:
-            json.dump(payload,f,sort_keys=True)
-            f.write("\n")
-            f.flush()
-            os.fsync(f.fileno())
-        os.replace(tmp,pointer)
-    finally:
-        if os.path.exists(tmp):
-            os.unlink(tmp)
+    started = pending_refresh(workspace)
+    if started is not None and datetime.fromisoformat(value["started_utc"]) < started:
+        raise contract.QuoteIndexError("public_quote_refresh_predates_attempt")
+    _write_pointer(refresh_path(workspace),
+                   {"schema":"wikidebia-quote-index-refresh-1","index_sha256":expected_sha})
+    # A crash between selecting and clearing is conservatively blocked; a
+    # retry of the same newly collected index clears it idempotently.
+    if started is not None:
+        pending_path(workspace).unlink()
     return artifact
 
 
@@ -114,11 +187,16 @@ def verify_current(workspace, audit, arguments, original_index, lock_sha, *, now
     """
     from wikidebia_published_quote_review import write_private
     contract.verify_final_audit(audit,arguments,original_index,lock_sha,now=now)
+    require_refresh_complete(workspace)
     selected = _selected_refresh(workspace)
     value, expected = original_index,audit["index_sha256"]
     if selected is not None:
         candidate = stored_index(workspace,selected)
-        if datetime.fromisoformat(candidate["finished_utc"]) >= datetime.fromisoformat(value["finished_utc"]):
+        finish = datetime.fromisoformat(candidate["finished_utc"])
+        before = datetime.fromisoformat(value["finished_utc"])
+        if finish == before and selected != expected:
+            raise contract.QuoteIndexError("public_quote_refresh_same_time_conflict")
+        if finish >= before:
             value,expected = candidate,selected
     result = contract.final_audit(arguments,value,expected,lock_sha,now=now)
     if result["scope_sha256"] != audit["scope_sha256"]:
@@ -212,6 +290,8 @@ def authorized_package_audit(workspace, root, authorization, *, now=None):
 
 def main(argv=None):
     from wikidebia_editorial_review import _load_workspace
+    from wikidebia_corpus_build import exclusive_lock, validate_debate_id
+    from wikidebia_editorial_workspace import validate_work_id
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("debate_id")
     p.add_argument("--work-id", required=True)
@@ -222,8 +302,11 @@ def main(argv=None):
                    help="Select a fresh index for subsequent technical gates; do not reopen translation")
     a = p.parse_args(argv)
     try:
-        workspace, meta = _load_workspace(a.project_root.resolve(),a.debate_id,a.work_id)
-        path = (select_refresh if a.refresh else stage)(workspace,a.index,a.sha256)
+        project = a.project_root.resolve()
+        debate,work = validate_debate_id(a.debate_id),validate_work_id(a.work_id)
+        with exclusive_lock(project,debate,"quote_index_stage"):
+            workspace, meta = _load_workspace(project,debate,work)
+            path = (select_refresh if a.refresh else stage)(workspace,a.index,a.sha256)
     except (ValueError,RuntimeError,OSError,KeyError,TypeError,AttributeError) as exc:
         reason = str(exc) if isinstance(exc,contract.QuoteIndexError) else type(exc).__name__
         print(json.dumps({"status":"blocked","reason":reason}))

@@ -211,3 +211,17 @@ conflits. Il ne prouve toutefois pas l'absence de nouveaux doublons sur
 le wiki depuis la première autorisation. Une réévaluation fraîche avec
 exclusion des seules créations attribuables au plan reste nécessaire pour
 imposer une nouvelle décision documentaire à une reprise tardive.
+
+
+## Collecte intégrée, séparée des étapes hors ligne
+
+Le kit appelle désormais le producteur d'index public existant via un
+commit Git explicitement épinglé; le code est extrait et contrôlé depuis
+les objets Git, et non exécuté depuis un checkout mutable. Pas de
+téléchargement de code, de dépendances ou de secrets par le kit. La
+commande réutilise un instantané frais, ou collecte les révisions pour
+un renouvellement incrémental. Une collecte entamée mais incomplète
+interdit la réutilisation implicite de l'ancien instantané. La preuve
+de fin de collecte, la couverture, les compteurs et les empreintes sont
+vérifiés avant sélection. La préparation des revues et le rendu restent
+hors ligne; le renouvellement technique ne modifie pas les verrous.
