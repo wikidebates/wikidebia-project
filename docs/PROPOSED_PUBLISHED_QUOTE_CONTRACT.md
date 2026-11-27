@@ -186,3 +186,14 @@ répétitions de la même sélection ne modifient pas les décisions prises depu
 L'index peut être sélectionné en même temps par son empreinte, mais il est
 recontrôlé à la finalisation. La reprise des autorisations historiques sans
 preuve nouvelle conserve leur format antérieur.
+
+## Test d'intégration Work mixte
+
+Un test synthétique traverse l'extraction/import du corpus, le verrou FR,
+la préparation de revue EN, la sélection de preuve, le blocage d'un doublon
+IA avec une page publique, la sélection d'un index plus récent, la convergence,
+l'application et le rendu. Une page EN réutilisée reste hors des requêtes.
+Le test vérifie le garde-fou inactif puis simule l'activation uniquement dans
+le processus de test. Les revues et réponses du validateur générique dans la
+fixture sont simulées; les tests spécifiques du validateur indépendant restent
+nécessaires. Aucun droit, contenu wiki réel ou publication n'est attesté.

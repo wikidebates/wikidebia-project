@@ -15,8 +15,8 @@ from test_wikidebia_quote_bridge import item, request, envelope, reviewed, row_f
 LOCK="a"*64
 
 
-def fixture(decision="complete_equivalent"):
-    src=item()
+def fixture(decision="complete_equivalent", *, source_item=None):
+    src=deepcopy(source_item) if source_item is not None else item()
     if decision=="omission_adjustment":
         src["source_parameters"][0]["value"]="Citation […] de test."
     row=reviewed(src)
@@ -29,7 +29,7 @@ def fixture(decision="complete_equivalent"):
                   occurrence={"revision":4,"template_index":0,"template_sha256":"e"*64})
     source["source_key"]=bridge.digest({k:source[k] for k in review.SOURCE_FIELDS})
     row["source_key"]=source["source_key"]
-    row["citation_ref"]={"revision":17,"template_index":0,"template_sha256":"c"*64,
+    row["citation_ref"]={"revision":src["revision"],"template_index":0,"template_sha256":"c"*64,
                          "quote_sha256":source["quote_sha256"]}
     row["evidence"].update(origin="revalidated_existing_receipt",publication={},rights="unreviewed")
     receipt.update(decision=decision,reviewer="Synthetic reviewer",review_packet_sha256="f"*64)
