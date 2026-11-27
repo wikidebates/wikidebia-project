@@ -85,7 +85,7 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def add_fourth_argument(corpus: Path) -> None:
+def add_fourth_argument(corpus: Path, *, distinct_fourth_quote: bool = False) -> None:
     registry_path = corpus / "data/registre_debat.json"
     projection_path = corpus / "graph/graphe_argumentatif.json"
     provenance_path = corpus / "data/import_provenance.json"
@@ -134,6 +134,14 @@ def add_fourth_argument(corpus: Path) -> None:
     source = corpus / "imports/fr/arguments/A0003.wiki"
     target = corpus / "imports/fr/arguments/A0004.wiki"
     shutil.copyfile(source, target)
+    if distinct_fourth_quote:
+        original = target.read_text(encoding="utf-8")
+        passage = "Le raisonnement conserve sa portée dans ce cas."
+        assert original.count(passage) == 1
+        target.write_text(
+            original.replace(passage, "La conclusion demeure valable lorsque les prémisses sont réunies."),
+            encoding="utf-8",
+        )
     source_row = next(row for row in provenance["pages"] if row.get("page_id") == "A0003")
     new_row = copy.deepcopy(source_row)
     new_row["page_id"] = "A0004"
@@ -141,6 +149,8 @@ def add_fourth_argument(corpus: Path) -> None:
     new_row["source_graph_title"] = "Argument D"
     new_row["import_path"] = "imports/fr/arguments/A0004.wiki"
     new_row["sha256"] = sha256(target)
+    if "size_bytes" in new_row:
+        new_row["size_bytes"] = target.stat().st_size
     provenance["pages"].append(new_row)
 
     common.write_json(registry_path, registry)
@@ -148,9 +158,9 @@ def add_fourth_argument(corpus: Path) -> None:
     common.write_json(provenance_path, provenance)
 
 
-def make_workspace(tmp_path: Path) -> tuple[Path, Path, str]:
+def make_workspace(tmp_path: Path, *, distinct_fourth_quote: bool = False) -> tuple[Path, Path, str]:
     project, corpus = make_promoted_project(tmp_path)
-    add_fourth_argument(corpus)
+    add_fourth_argument(corpus, distinct_fourth_quote=distinct_fourth_quote)
     work_id = "EDIT-REVIEW-001"
     workspace_tool.create_workspace(project, "debat_test", work_id)
     validator_root = Path(__file__).resolve().parents[2] / "validator"

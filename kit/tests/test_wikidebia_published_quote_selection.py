@@ -151,8 +151,8 @@ def test_mixed_origin_work_from_import_to_canonical_render_fixture(tmp_path,monk
         common.write_json(package,manifest)
         return source
     monkeypatch.setattr(workspace_fixture,"make_extraction",extraction)
-    project,workspace,work_id=make_french_locked(tmp_path)
-    # The general fixture deliberately duplicates C and D. D is a distinct
+    project,workspace,work_id=make_french_locked(tmp_path, distinct_fourth_quote=False)
+    # This fixture deliberately duplicates C and D. D is a distinct
     # already reused page in this test; it must not be sent for translation.
     mark_existing_english_argument(workspace)
     fr=workspace/"content-reviewed-copy"
@@ -190,7 +190,7 @@ def test_mixed_origin_work_from_import_to_canonical_render_fixture(tmp_path,monk
     assert draft_row["translated_citation"]==candidate["plain_quote"]
     # The standard helper supplies the rest of the synthetic review; its
     # legacy-only quote entries are replaced by the explicit published choice.
-    complete_translation_review(workspace)
+    complete_translation_review(workspace, stage_quote_index=False)
     draft=common.load_json(draft_path)
     draft_row=next(a["translation"]["citations"][0] for a in draft["arguments"] if a["id"]=="A0002")
     draft_row.update(translated_citation=candidate["plain_quote"],translated_date="",
@@ -262,11 +262,11 @@ def test_active_ai_only_finalization_requires_and_uses_latest_index(tmp_path, mo
     from test_wikidebia_quote_index_contract import snapshot
     import wikidebia_quote_index_contract as index
     from wikidebia_quote_index_stage import select_refresh
-    project, workspace, work_id = make_french_locked(tmp_path)
+    project, workspace, work_id = make_french_locked(tmp_path, distinct_fourth_quote=False)
     # D is already reused; do not generate the duplicate C/D fixture.
     mark_existing_english_argument(workspace)
     prepare_fixture_translation(project, "debat_test", work_id)
-    complete_translation_review(workspace)
+    complete_translation_review(workspace, stage_quote_index=False)
     path = workspace / "reviews/en/translation_review.json"
     assert contract.ACTIVE is True
     before = path.read_bytes()
@@ -359,3 +359,24 @@ def test_withdrawal_refuses_unbound_or_implicit_decisions(change):
     with pytest.raises((bridge.QuoteBridgeError,contract.PublishedQuoteError)):
         selection.withdraw_draft(selected,lock,[src],{src["id"]:"A0001"},[content],src["id"],sha,"Editor",reason)
     assert selected==before
+
+
+def test_active_default_rejects_local_duplicate_ai_quotes_with_fresh_index(tmp_path):
+    """Keep the duplicated C/D source as an explicit negative fixture."""
+    from french_normalization_fixture import prepare_fixture_translation
+    from test_wikidebia_translation_review import (
+        make_french_locked, complete_translation_review, translation, common,
+    )
+    project, workspace, work_id = make_french_locked(tmp_path, distinct_fourth_quote=False)
+    prepare_fixture_translation(project, "debat_test", work_id)
+    complete_translation_review(workspace)
+    path = workspace / "reviews/en/translation_review.json"
+    before = path.read_bytes()
+    assert contract.ACTIVE is True
+    with pytest.raises(translation.TranslationReviewError, match="Doublons exacts"):
+        translation.finalize_review(project, "debat_test", work_id)
+    assert path.read_bytes() == before
+    report = common.load_json(workspace / "reports/en_quote_duplicate_audit.json")
+    assert report["status"] == "blocked_exact_duplicates"
+    assert report["published_occurrences"] == 0
+    assert report["local_exact"]

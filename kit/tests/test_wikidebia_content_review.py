@@ -35,8 +35,8 @@ content._run_validator = fake_validator
 from test_wikidebia_editorial_review import make_workspace, complete_review  # noqa: E402
 
 
-def make_metadata_applied(tmp_path: Path) -> tuple[Path, Path, str]:
-    project, workspace, work_id = make_workspace(tmp_path)
+def make_metadata_applied(tmp_path: Path, *, distinct_fourth_quote: bool = False) -> tuple[Path, Path, str]:
+    project, workspace, work_id = make_workspace(tmp_path, distinct_fourth_quote=distinct_fourth_quote)
     complete_review(workspace)
     finalized = metadata.finalize_review(project, "debat_test", work_id)
     metadata.apply_review(project, "debat_test", work_id, finalized["review_sha256"])

@@ -1812,11 +1812,13 @@ def test_published_quote_provenance_roundtrip(tmp_path, monkeypatch, review_type
         "published_quote_evidence": {"evidence_sha256": "a" * 64},
         "translated_citation": "Verified published text", "translated_date": "1901",
     }
+    from wikidebia_quote_index_contract import UNIQUENESS_POLICY
+    index_sha = _fresh_quote_index_fixture(base, tmp_path)
     review = {
         "status": "draft", "french_normalization_receipt_sha256": "d" * 64,
         "published_quote_contract": "wikidebia-published-quote-evidence-1",
-        "quote_uniqueness_policy": "test-policy",
-        "quote_public_index_sha256": "b" * 64,
+        "quote_uniqueness_policy": UNIQUENESS_POLICY,
+        "quote_public_index_sha256": index_sha,
         "published_quote_withdrawals": [{"withdrawal_sha256": "c" * 64}],
         "arguments": [{"id": "A0001", "translation": {"citations": [proof]}}],
     }

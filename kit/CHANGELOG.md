@@ -1,10 +1,3 @@
-## 2.16.48 — 27 novembre 2026 — récupération et unicité des citations anglaises
-
-- réutilise les reçus anticipés ou effectue la recherche intégrée ;
-- protège la provenance, les fiches de revue et la mémoire générique ;
-- contrôle toutes les nouvelles citations, avec index frais et reprise documentaire sans nouvelle convergence ;
-- conserve les anciens contrats scellés et l'autorisation explicite de publication.
-
 ## Correctif du 14 novembre 2026 — adoption contrôlée d’un Work restauré
 
 - permet à un workflow initial sans `work_id` d’adopter explicitement un Work
@@ -522,3 +515,10 @@ L’historique exact des deux branches antérieures est conservé sous `branch_h
 - conserve les gardes de révision/contenu immédiatement avant chaque mutation distante ;
 - ajoute des régressions positives de reprise inter-version et négatives sur divergence de manifeste/configuration ;
 - conserve la norme 1.2.88 et le validateur 0.4.105.
+
+## 2.16.48 — 27 novembre 2026 — récupération et unicité des citations anglaises
+
+- réutilise les reçus anticipés ou effectue la recherche intégrée ;
+- protège la provenance, les fiches de revue et la mémoire générique ;
+- contrôle toutes les nouvelles citations, avec index frais et reprise documentaire sans nouvelle convergence ;
+- conserve les anciens contrats scellés et l'autorisation explicite de publication.
