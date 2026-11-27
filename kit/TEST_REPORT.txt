@@ -1,6 +1,6 @@
 Wikidéb’IA Kit 2.16.47 — rapport de tests
 
-Tests pytest : 2104 réussis
+Tests pytest : 2113 réussis
 Norme : 1.2.88
 Validateur : 0.4.105
 
@@ -23,4 +23,6 @@ French relay readback recovery : PASSED ; relectures bornées des métadonnées,
 
 Displayed-title translation scope : PASSED ; titres courts et nominaux conservés, critères de génération séparés et régressions sémantiques de traduction toujours bloquantes.
 
-Branche expérimentale : preuves de provenance des citations publiées, unicité globale, conservation et retrait motivé des preuves dans les paquets de revue. Tests fonctionnels réussis sur ae66f24f59747f3540c015f094deb256fc8d4227 ; activation canonique désactivée. Ce rapport ne constitue pas une autorisation de livraison en production.
+Branche expérimentale : preuves de provenance des citations publiées, unicité globale, conservation et retrait motivé des preuves dans les paquets de revue. Tests fonctionnels réussis sur 0cb9e93a66895d04c9c3411554001f7c6193acb5 ; activation canonique désactivée. Ce rapport ne constitue pas une autorisation de livraison en production.
+
+Raccordement du contrôle d’index au workflow normal : 9 cas supplémentaires réussis ; réimport et convergence préservés en cas de collecte documentaire incomplète.
