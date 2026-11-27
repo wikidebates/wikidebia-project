@@ -58,30 +58,44 @@ def _git(root, home, *args, stdout=subprocess.PIPE):
     return result.stdout
 
 
-def materialize(root, temporary):
-    """Extract and verify the pinned root Python modules, not working files.
+def materialize(root, temporary, *, entrypoint="public_quote_index.py", include_search_data=False):
+    """Extract and verify the pinned Python modules and selected search assets.
 
     Using the object tree allows a checkout to have a different HEAD and
     avoids accidentally importing changed or ignored local files.
     """
+    if (entrypoint not in {"public_quote_index.py", "translation_handoff.py"}
+            or (include_search_data and entrypoint != "translation_handoff.py")):
+        raise contract.QuoteIndexError("public_quote_resolver_invalid_entrypoint")
     root = Path(root).resolve()
     if not root.is_dir():
         raise contract.QuoteIndexError("public_quote_resolver_checkout_missing")
     if _git(root,temporary,"rev-parse","--verify",RESOLVER_COMMIT+"^{commit}").decode().strip()!=RESOLVER_COMMIT:
         raise contract.QuoteIndexError("public_quote_resolver_pinned_commit_unavailable")
-    tree = _git(root,temporary,"ls-tree","-z",RESOLVER_COMMIT)
+    tree = _git(root,temporary,"ls-tree","-r","-z",RESOLVER_COMMIT)
     wanted = {}
     for row in tree.split(b"\0"):
         if not row:
             continue
         header,name = row.split(b"\t",1)
-        if not re.fullmatch(rb"[A-Za-z_][A-Za-z0-9_]*\.py",name):
+        root_module = re.fullmatch(rb"[A-Za-z_][A-Za-z0-9_]*\.py", name)
+        search_asset = include_search_data and (
+            name in {b"bibliographic-catalog.json", b"chapter-catalog.json",
+                     b"data/wikirouge/manifest.json", b"data/works/research.json"}
+            or re.fullmatch(rb"data/wikirouge/wikirouge-index-\d{8}\.zip", name)
+            or re.fullmatch(rb"data/wikirouge/deltas/(?:manifest|\d{4})\.json", name)
+        )
+        if not root_module and not search_asset:
             continue
         mode,kind,oid = header.split()
         if mode not in (b"100644",b"100755") or kind!=b"blob" or not re.fullmatch(rb"[0-9a-f]{40}",oid):
             raise contract.QuoteIndexError("public_quote_resolver_invalid_source_tree")
         wanted[name.decode("ascii")] = oid.decode("ascii")
-    if ("public_quote_index.py" not in wanted or len(wanted)>MAX_MODULES):
+    required = {entrypoint}
+    if include_search_data:
+        required.update({"bibliographic-catalog.json", "chapter-catalog.json",
+                         "data/wikirouge/manifest.json"})
+    if not required <= set(wanted) or len(wanted)>MAX_MODULES:
         raise contract.QuoteIndexError("public_quote_resolver_invalid_source_tree")
     archive = temporary/"source.tar"
     with archive.open("wb") as stream:
@@ -91,8 +105,12 @@ def materialize(root, temporary):
     src = temporary/"src"
     src.mkdir(mode=0o700)
     seen = set()
+    parents = {parent.as_posix() for name in wanted for parent in Path(name).parents
+               if parent != Path(".")}
     with tarfile.open(archive,"r:") as bundle:
         for member in bundle:
+            if member.isdir() and member.name in parents:
+                continue
             if (not member.isfile() or member.name not in wanted or member.name in seen
                     or member.size>MAX_SOURCE_BYTES):
                 raise contract.QuoteIndexError("public_quote_resolver_invalid_archive")
@@ -100,12 +118,14 @@ def materialize(root, temporary):
             oid = hashlib.sha1(b"blob "+str(len(data)).encode("ascii")+b"\0"+data).hexdigest()
             if oid != wanted[member.name]:
                 raise contract.QuoteIndexError("public_quote_resolver_source_digest_mismatch")
-            (src/member.name).write_bytes(data)
+            destination = src/member.name
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(data)
             seen.add(member.name)
     if seen != set(wanted):
         raise contract.QuoteIndexError("public_quote_resolver_missing_source")
     archive.unlink()
-    return src/"public_quote_index.py"
+    return src/entrypoint
 
 
 def _run(script,temporary,args,timeout):

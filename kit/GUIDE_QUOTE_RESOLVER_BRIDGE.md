@@ -57,6 +57,36 @@ Le test inter-dépôts compare les deux modes sur des bases distinctes :
 même occurrence, même reçu, même passage exact, et aucune recherche
 supplémentaire dans le mode anticipé.
 
+
+### Commande de préparation intégrée au kit (expérimentale)
+
+Dans un environnement disposant du dépôt résolveur, de son commit épinglé et
+des dépendances déjà installées, il est possible d'enchaîner export,
+préparation et inspection de tous les lots du Work :
+
+    python kit/scripts/wikidebia_quote_prepare.py DEBAT --work-id WORK \
+      --resolver-root /chemin/vers/resolver --state /chemin/prive/etat \
+      --mode prepared
+
+Utiliser `--mode integrated` pour réutiliser les reçus existants et rechercher
+les passages manquants. Le mode `prepared` exige une base privée existante
+(éventuellement alimentée par un transfert sélectif) et ne recherche pas
+les correspondances absentes. Les deux modes interrogent encore les sources
+épinglées pour revalider les preuves. Les plafonds `--audit-budget` et
+`--retrieval-budget` sont communs à tous les lots; `--timeout` borne chaque
+processus. `--page-id` et `--batch-size` limitent le périmètre.
+
+La commande exécute les modules Python et, en mode intégré, les catalogues
+et l'index bibliographique issus de l'objet Git épinglé, dans un répertoire
+temporaire privé. Aucun fichier Python non suivi, aucune modification locale,
+aucune variable d'environnement secrète du kit n'est transmis. Les résultats
+restent dans la base privée et les répertoires de handoff existants; le bilan
+contient les chemins et empreintes vérifiés, pas les passages. En cas d'échec
+partiel, les retours déjà écrits restent privés; aucune préparation globale
+réussie n'est annoncée. L'opérateur doit encore traiter les paquets de revue
+et les contrôles des droits. Aucun déclenchement automatique dans le flux
+normal ni sélection ou publication de citation n'est introduit.
+
 ## Inspecter le retour contre le verrou courant
 
 ```bash

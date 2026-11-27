@@ -46,6 +46,20 @@ def exercise(resolver_root):
         script = collector.materialize(resolver_root,producer_dir)
         assert script.read_bytes() == (resolver_root/"public_quote_index.py").read_bytes()
         assert collector._run(script,producer_dir,["--help"],30) == 0
+        # The two explicit preparation modes use the actual pinned entrypoint.
+        # Only integrated retrieval needs bibliographic assets.
+        for integrated in (False, True):
+            handoff_dir = base / ("integrated" if integrated else "prepared")
+            handoff_dir.mkdir()
+            handoff_script = collector.materialize(resolver_root, handoff_dir,
+                entrypoint="translation_handoff.py", include_search_data=integrated)
+            assert handoff_script.read_bytes() == (resolver_root / "translation_handoff.py").read_bytes()
+            assert (handoff_script.parent / "data/wikirouge/manifest.json").exists() == integrated
+            if integrated:
+                manifest = json.loads((handoff_script.parent / "data/wikirouge/manifest.json").read_text())
+                archive = "data/wikirouge/" + manifest["archive"]["filename"]
+                assert bridge.sha256_file(handoff_script.parent / archive) == bridge.sha256_file(resolver_root / archive)
+            assert collector._run(handoff_script, handoff_dir, ["--help"], 30) == 0
         raws = [RAW, RAW.replace(FR, "https://example.org/article")]
         pages = {"Argument A": (17, raws[0]), "Argument B": (18, raws[1])}
         nodes, metadata, content, provenance = [], [], [], []
