@@ -192,3 +192,31 @@ def test_publication_preflight_failure_precedes_authorization(tmp_path,monkeypat
         publication.publish_final_release(tmp_path,"test_debate","test_work",tmp_path/"release",
                                           confirm_preflight_sha256="a"*64)
     assert not (state/"authorization.json").exists()
+
+
+def test_legacy_gate_does_not_resolve_workspace_and_opt_in_resolves_before_write(tmp_path):
+    from hashlib import sha256
+    from wikidebia_quote_index_stage import package_audit
+    root=tmp_path/"release"
+    calls=[]
+    def workspace():
+        calls.append("checked")
+        raise q.QuoteIndexError("untrusted_workspace")
+    assert package_audit(workspace,root,now=NOW) is None
+    assert not calls
+    def write(rel,value):
+        path=root/rel
+        path.parent.mkdir(parents=True,exist_ok=True)
+        path.write_text(json.dumps(value)+"\n",encoding="utf-8")
+        return path
+    fr=write("data/fr_content_lock.json",{"arguments":[]})
+    args=[arg("A0001","A quote.")]
+    idx=snapshot()
+    audit=q.final_audit(args,idx,q.digest(idx),sha256(fr.read_bytes()).hexdigest(),now=NOW)
+    write(q.INDEX_PATH,idx)
+    write("data/en_content_lock.json",{"arguments":args,"quote_duplicate_audit":audit})
+    write("data/en_translation_lock.json",{"citation_translation_policy":
+         {"quote_duplicate_audit_sha256":audit["audit_sha256"]}})
+    with pytest.raises(q.QuoteIndexError,match="untrusted_workspace"):
+        package_audit(workspace,root,now=NOW)
+    assert calls==["checked"]

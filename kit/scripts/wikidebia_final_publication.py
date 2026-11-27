@@ -1227,12 +1227,10 @@ def _quote_preflight(project_root, debate_id, work_id, release_copy):
     from wikidebia_editorial_review import _workspace_path
     # Do not require an editorial workspace on a legacy publication path.
     try:
-        # Only the opt-in path will try to read/write a private index.
-        workspace = project_root/".state/editorial-workspaces"/debate_id/work_id
-        result = package_audit(workspace,release_copy)
-        if result is not None:
-            _workspace_path(project_root,debate_id,work_id)
-        return result
+        # Resolve and validate the Work path before the first private write.
+        # The legacy path never needs to resolve a workspace.
+        return package_audit(lambda: _workspace_path(project_root,debate_id,work_id),
+                             release_copy)
     except (ValueError,RuntimeError,OSError,KeyError,TypeError,AttributeError) as exc:
         reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
         raise FinalPublicationError("Contrôle des doublons avant publication : "+reason) from exc

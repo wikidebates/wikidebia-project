@@ -7,6 +7,7 @@ on:
       - 'kit/scripts/wikidebia_quote_public_check.py'
       - 'kit/scripts/wikidebia_quote_index_contract.py'
       - 'kit/scripts/wikidebia_quote_index_stage.py'
+      - 'kit/scripts/wikidebia_final_publication.py'
       - 'kit/tests/test_wikidebia_quote_index_contract.py'
       - 'validator/src/wikidebia_validator/quote_index_contract.py'
       - 'validator/src/wikidebia_validator/bilingual.py'

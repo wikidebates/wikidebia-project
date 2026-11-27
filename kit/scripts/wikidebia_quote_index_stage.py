@@ -85,7 +85,9 @@ def select_refresh(workspace, path, expected_sha, *, now=None):
     previous = _selected_refresh(workspace)
     if previous is not None:
         prior = stored_index(workspace,previous)
-        if datetime.fromisoformat(value["finished_utc"]) < datetime.fromisoformat(prior["finished_utc"]):
+        finished = datetime.fromisoformat(value["finished_utc"])
+        prior_finished = datetime.fromisoformat(prior["finished_utc"])
+        if finished < prior_finished or (finished == prior_finished and expected_sha != previous):
             raise contract.QuoteIndexError("public_quote_refresh_rollback")
     pointer = refresh_path(workspace)
     payload = {"schema":"wikidebia-quote-index-refresh-1","index_sha256":expected_sha}
@@ -150,6 +152,11 @@ def package_audit(workspace, root, *, now=None):
         return None
     if not isinstance(audit,dict) or audit.get("audit_sha256") != sha:
         raise contract.QuoteIndexError("missing_or_unbound_final_quote_audit")
+    # Resolve the trusted workspace only after discovering the opt-in.
+    # Never create files using unvalidated publication path components.
+    workspace = workspace() if callable(workspace) else workspace
+    if not workspace.is_dir() or workspace.is_symlink():
+        raise contract.QuoteIndexError("invalid_public_quote_workspace")
     return verify_current(workspace,audit,en["arguments"],load_index(root/contract.INDEX_PATH),
                           hashlib.sha256((root/"data/fr_content_lock.json").read_bytes()).hexdigest(),
                           now=now)
