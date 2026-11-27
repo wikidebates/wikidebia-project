@@ -204,3 +204,18 @@ Le contrôle ne se substitue pas aux preuves de droits, de complétude, ni
 à la vérification du wiki public avant publication. Un instantané périmé
 avant application ou rendu doit être actualisé; l'automatisation du
 rafraîchissement sans refaire la revue sémantique reste à intégrer.
+
+### Actualiser l'index sans rouvrir la revue
+
+La commande précédente accepte `--refresh` après production d'un index EN
+actualisé par le résolveur. Elle sélectionne cet instantané privé pour le
+Work sans modifier la revue, ses empreintes ni les copies verrouillées.
+Avant application, rendu et première autorisation de publication, le kit
+recalcule le contrôle sur les mêmes citations avec l'instantané choisi le
+plus récent (ou l'original s'il est encore frais). Un doublon nouveau
+bloque; un retour à un index plus ancien est refusé. Les diagnostics sont
+conservés dans les audits privés. L'autorisation initiale enregistre le
+contrôle de prépublication. Les publications déjà autorisées et reprises
+restent régies par leur contrat de reprise existant; une vérification
+adaptée aux écritures partielles reste nécessaire avant activation. La
+production automatique de l'index est encore distincte de sa sélection.

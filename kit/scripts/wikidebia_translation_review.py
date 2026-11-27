@@ -2996,14 +2996,14 @@ def _build_translated_copy(project_root: Path, source: Path, target: Path, revie
     quote_audit = review.get("quote_duplicate_audit")
     quote_index_sha = review.get("quote_public_index_sha256")
     if quote_index_sha is not None or quote_audit is not None or review.get("published_quote_contract") is not None:
-        from wikidebia_quote_index_contract import INDEX_PATH, QuoteIndexError, verify_final_audit
-        from wikidebia_quote_index_stage import stored_index
+        from wikidebia_quote_index_contract import INDEX_PATH, QuoteIndexError
+        from wikidebia_quote_index_stage import stored_index, verify_current
         try:
             index = stored_index(target.parent, quote_index_sha)
             if not isinstance(quote_audit,dict) or quote_audit.get("index_sha256") != quote_index_sha:
                 raise QuoteIndexError("missing_or_unbound_final_quote_audit")
-            verify_final_audit(quote_audit, content_lock["arguments"], index,
-                               sha256_bytes((source/"data/fr_content_lock.json").read_bytes()),fresh=True)
+            verify_current(target.parent, quote_audit, content_lock["arguments"], index,
+                           sha256_bytes((source/"data/fr_content_lock.json").read_bytes()))
         except (ValueError,OSError,KeyError,TypeError,AttributeError) as exc:
             reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
             raise TranslationReviewError("Contrôle des doublons avant application : "+reason) from exc

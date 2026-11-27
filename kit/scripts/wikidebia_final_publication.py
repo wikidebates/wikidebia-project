@@ -1103,7 +1103,8 @@ def _migrate_english_publication_order(
         new_plans = dict(plans)
         new_plans.update({"en_config_path": en_config_path, "en_config": en_config, "en_plan": new_plan})
         new_preflight = _preflight(project_root, state_dir, new_plans)
-        new_authorization = _authorization(state_dir, baseline, new_preflight)
+        new_authorization = _authorization(state_dir, baseline, new_preflight,
+                                           quote_check=authorization.get("quote_duplicate_preflight"))
         audit = {
             "schema": "wikidebia-final-publication-order-migration-1.0", "schema_version": "1.0",
             "debate_id": debate_id, "migrated_at": now_iso(),
@@ -1191,7 +1192,8 @@ def _migrate_english_plan_after_kit_change(
             "en_plan": new_plan,
         })
         new_preflight = _preflight(project_root, state_dir, new_plans)
-        new_authorization = _authorization(state_dir, baseline, new_preflight)
+        new_authorization = _authorization(state_dir, baseline, new_preflight,
+                                           quote_check=authorization.get("quote_duplicate_preflight"))
         audit = {
             "schema": "wikidebia-final-publication-kit-change-migration-1.0",
             "schema_version": "1.0",
@@ -1212,9 +1214,34 @@ def _migrate_english_plan_after_kit_change(
         return new_plans, new_preflight, new_authorization
 
 
+def _quote_preflight(project_root, debate_id, work_id, release_copy):
+    """A refreshed quotation check is independent of the signed semantic review.
+
+    For legacy Works the helper is a no-op. On first authorization, compute
+    it before any remote writes. An already authorized interrupted plan must
+    use the existing recovery contract; its own newly created pages must
+    not be treated as an unrelated duplicate merely because of a retry.
+    """
+    from wikidebia_quote_index_contract import QuoteIndexError
+    from wikidebia_quote_index_stage import package_audit
+    from wikidebia_editorial_review import _workspace_path
+    # Do not require an editorial workspace on a legacy publication path.
+    try:
+        # Only the opt-in path will try to read/write a private index.
+        workspace = project_root/".state/editorial-workspaces"/debate_id/work_id
+        result = package_audit(workspace,release_copy)
+        if result is not None:
+            _workspace_path(project_root,debate_id,work_id)
+        return result
+    except (ValueError,RuntimeError,OSError,KeyError,TypeError,AttributeError) as exc:
+        reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
+        raise FinalPublicationError("Contrôle des doublons avant publication : "+reason) from exc
+
+
 def _authorization(
     state_dir: Path, baseline: Mapping[str, Any], preflight: Mapping[str, Any],
     *, revalidation: Mapping[str, Any] | None = None,
+    quote_check: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     value = {
         "schema": AUTHORIZATION_SCHEMA,
@@ -1229,6 +1256,8 @@ def _authorization(
     if revalidation is not None:
         value["preflight_revalidated_at"] = revalidation["checked_at"]
         value["revalidated_preflight_sha256"] = revalidation["preflight_sha256"]
+    if quote_check is not None:
+        value["quote_duplicate_preflight"] = copy.deepcopy(quote_check)
     value["authorization_sha256"] = _canonical(value, "authorization_sha256")
     write_json(state_dir / "authorization.json", value)
     return value
@@ -1247,6 +1276,7 @@ def prepare_final_release(
         raise FinalPublicationError("Une migration est à reprendre avec le préflight approuvé", remote_execution_started=True)
     if (state_dir / "authorization.json").exists():
         raise FinalPublicationError("Publication déjà autorisée : reprendre avec le plan autorisé")
+    _quote_preflight(project_root,debate_id,work_id,release_copy)
     preparation_path = state_dir / "publication-preparation.json"
     if preparation_path.is_file():
         existing = load_json(preparation_path, "préparation de publication")
@@ -1453,7 +1483,9 @@ def publish_final_release(
             )
             if baseline["fr"]["mode"] == PRESERVED_IMPORT_MODE:
                 _verify_preserved_preflight(release_copy, baseline, preflight)
-            authorization = _authorization(state_dir, baseline, preflight, revalidation=revalidation)
+            quote_check = _quote_preflight(project_root,debate_id,work_id,release_copy)
+            authorization = _authorization(state_dir, baseline, preflight, revalidation=revalidation,
+                                           quote_check=quote_check)
             remote_started = True
 
         if verify_only:

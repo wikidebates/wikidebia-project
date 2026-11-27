@@ -164,3 +164,12 @@ Aucune garantie concernant le rendu développé ou les chevauchements
 partiels sur tout le wiki. Une actualisation avant publication reste à
 intégrer; aucun droit ni autorisation de publication n'est accordé.
 La migration normative et ACTIVE=False restent inchangés.
+
+Le renouvellement documentaire est indépendant de la convergence sémantique :
+le reçu original reste immuable, un nouvel index frais est sélectionné dans
+le workspace et le contrôle est recalculé sur la même empreinte de périmètre
+avant application, rendu et première autorisation de publication. Un échec
+sur un index plus récent ne revient pas à un ancien succès. L'autorisation
+conserve le résultat de ce contrôle, y compris lors de ses migrations.
+Ce mécanisme ne résout pas encore les reprises après écritures partielles
+ni la collecte automatique de l'index ; le profil reste inactif.

@@ -71,7 +71,7 @@ def prepare(request,handoff,handoff_sha,lock_sha,items,owners):
 
 def write_private(workspace, value, kind):
     """Immutable, content-addressed file inside the private audit directory."""
-    if kind not in {"candidate","review-template","proposal","evidence","public-index"}:
+    if kind not in {"candidate","review-template","proposal","evidence","public-index","final-audit"}:
         fail("published_quote_invalid_artifact_kind")
     sha=bridge.digest(value)
     directory=workspace/"audits"/"quote-resolver"/"published-quotes"/kind
