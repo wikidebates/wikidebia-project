@@ -148,10 +148,11 @@ def inspect_page(adapter, row: dict, *, snapshot=None) -> dict:
 
 
 def request_editorial_checks(request: dict, request_dir: Path) -> dict[str, str]:
+    from wikidebia_editorial_workspace import lowercase_keyword_initial
     from wikidebia_update import (
         UpdateError, assert_summary_change_authorized, assert_citation_change_authorized,
         assert_relation_rendering_safe, changed_top_level_parameters,
-        content_diff_edit_summary,
+        content_diff_edit_summary, top_level_parameter_map,
     )
     summaries = {}
     for row in request["pages"]:
@@ -164,6 +165,20 @@ def request_editorial_checks(request: dict, request_dir: Path) -> dict[str, str]
                 before, after, "fr", page_type, row.get("summary_change_authorization"),
             )
             assert_citation_change_authorized(before, after, row.get("citation_change_authorization"))
+            if "common_keyword_case_corrections" in row:
+                corrections = row["common_keyword_case_corrections"]
+                fields = changed_top_level_parameters(before, after, "fr", page_type)
+                if row["old_title"] != row["new_title"] or fields != ["mots-clés"]:
+                    raise Blocked(f"Portée incorrecte pour la correction de casse : {row['new_title']}")
+                before_terms, after_terms = (
+                    [term.strip() for term in top_level_parameter_map(wiki, "fr", page_type)[2].get("mots-clés", "").split(",")]
+                    for wiki in (before, after)
+                )
+                if (not isinstance(corrections, dict) or not corrections
+                        or any(old not in before_terms or new == old or new != lowercase_keyword_initial(old)
+                               for old, new in corrections.items())
+                        or [corrections.get(term, term) for term in before_terms] != after_terms):
+                    raise Blocked(f"Correction de casse des mots-clés divergente : {row['new_title']}")
             summaries[row["page_id"]] = content_diff_edit_summary(before, after, "fr", page_type)
             if (isinstance(row.get("summary_change_authorization"), dict)
                     and row["summary_change_authorization"].get("action") == "restore"

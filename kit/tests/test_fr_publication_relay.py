@@ -148,6 +148,30 @@ def replace_request_text(directory, request, row, before, after):
     save_request(directory, request)
 
 
+@pytest.mark.parametrize(("keywords", "corrections", "accepted"), [
+    ("oppression, URSS, vêtements", {"Oppression": "oppression", "Vêtements": "vêtements"}, True),
+    ("oppression, urss, vêtements", {"Oppression": "oppression", "Vêtements": "vêtements"}, False),
+    ("domination, URSS, Vêtements", {"Oppression": "domination"}, False),
+    ("oppression, URSS, Vêtements, censure", {"Oppression": "oppression"}, False),
+])
+def test_fr_publication_checks_declared_common_keyword_case(tmp_path, keywords, corrections, accepted):
+    directory = tmp_path / "request"
+    request, _ = request_fixture(directory)
+    row = request["pages"][0]
+    row["new_title"] = row["old_title"]
+    row["common_keyword_case_corrections"] = corrections
+    replace_request_text(
+        directory, request, row,
+        "{{Argument|mots-clés=Oppression, URSS, Vêtements}}",
+        "{{Argument|mots-clés=" + keywords + "}}",
+    )
+    if accepted:
+        assert "mots-clés" in relay.request_editorial_checks(request, directory)[row["page_id"]]
+    else:
+        with pytest.raises(relay.Blocked, match="Correction de casse"):
+            relay.request_editorial_checks(request, directory)
+
+
 @pytest.mark.parametrize("before,after", [
     ("{{Argument|citations=Source}}", "{{Argument|résumé=Ajout|citations=Source}}"),
     ("{{Argument|résumé=|citations=Source}}", "{{Argument|résumé=Ajout|citations=Source}}"),

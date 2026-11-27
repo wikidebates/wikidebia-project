@@ -173,6 +173,14 @@ def first_alphabetic(value: str) -> str:
     return next((char for char in str(value) if char.isalpha()), "")
 
 
+def lowercase_keyword_initial(value: str) -> str:
+    """Lowercase the first letter of a reviewed common keyword."""
+    for index, char in enumerate(value):
+        if char.isalpha():
+            return value[:index] + char.lower() + value[index + 1:]
+    return value
+
+
 def capitalization_policy_for_kind(kind: str) -> str | None:
     return {
         "noun": "lowercase_common",
