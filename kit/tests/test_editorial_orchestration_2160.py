@@ -1798,7 +1798,7 @@ def test_final_publication_conflict_is_persisted_without_reopening_reviews(tmp_p
 
 
 @pytest.mark.parametrize("review_type", ["en_translation_review", "en_translation_correction"])
-@pytest.mark.parametrize("change", ["attestation", "drop", "downgrade", "evidence", "text", "index", "policy", "new"])
+@pytest.mark.parametrize("change", ["attestation", "drop", "downgrade", "evidence", "text", "index", "policy", "new", "history"])
 def test_published_quote_provenance_roundtrip(tmp_path, monkeypatch, review_type, change):
     project = tmp_path / "project"
     project.mkdir()
@@ -1817,6 +1817,7 @@ def test_published_quote_provenance_roundtrip(tmp_path, monkeypatch, review_type
         "published_quote_contract": "wikidebia-published-quote-evidence-1",
         "quote_uniqueness_policy": "test-policy",
         "quote_public_index_sha256": "b" * 64,
+        "published_quote_withdrawals": [{"withdrawal_sha256": "c" * 64}],
         "arguments": [{"id": "A0001", "translation": {"citations": [proof]}}],
     }
     common.write_json(base / relative, review)
@@ -1850,6 +1851,8 @@ def test_published_quote_provenance_roundtrip(tmp_path, monkeypatch, review_type
             value.pop("quote_uniqueness_policy")
         elif change == "new":
             rows.append(dict(row, id="Q2"))
+        elif change == "history":
+            value.pop("published_quote_withdrawals")
         common.write_json(path, value)
 
     rewrite_zip(original, returned, edit)
@@ -1908,7 +1911,10 @@ def test_quote_selection_reissues_pending_package_only_explicitly(tmp_path, monk
             archive.write_bytes(b"partial replacement")
             workflow_path.write_bytes(b"partial state")
             raise RuntimeError("synthetic re-export failure")
-        monkeypatch.setattr(wf, "create_review_package", failed_export)
+        # Other test modules may reload the workflow module during collection.
+        # Patch the exact module that _commit_selection imports at call time.
+        import wikidebia_review_workflow as selection_workflow
+        monkeypatch.setattr(selection_workflow, "create_review_package", failed_export)
     if mode != "replace":
         pattern = {"refuse": "replace-pending-package", "rollback": "re-export failure",
                    "changed_context": "baseline_changed"}[mode]

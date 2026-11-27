@@ -374,3 +374,29 @@ et de tous ses fichiers locaux, remplace le brouillon et régénère le ZIP
 avec le même périmètre mais un nouvel identifiant. L'ancien retour ZIP
 ne sera plus accepté. Toute erreur locale de régénération restaure les
 trois fichiers affectés. Cette option ne réalise aucune publication.
+
+
+### Retrait explicite d'une preuve publiée contestée
+
+Si la revue met en cause le passage, sa référence ou les droits, ne
+transformez pas directement cette sélection en traduction IA. Dans un
+brouillon ouvert (rouvrir d'abord toute revue finalisée), utilisez le même
+script de sélection avec :
+
+```sh
+python kit/scripts/wikidebia_published_quote_selection.py DEBAT --work-id WORK \
+  --withdraw CITATION_ID EVIDENCE_SHA256 --reviewer "Nom du relecteur" \
+  --reason "Motif explicite et documenté du retrait"
+```
+
+Utilisez aussi `--replace-pending-package` si un ZIP est déjà en attente,
+en acceptant que le paquet précédent ne soit plus importable. Le retrait
+archive le dossier complet précédent dans le registre privé de revue,
+avec son motif, son empreinte et l'occurrence française. Le champ revient
+à son état initial ; les validations de l'argument et de l'unité concernés
+ainsi que la revue globale doivent être renouvelées. Les autres valeurs
+ne sont pas réinitialisées. Une preuve identique déjà retirée ne peut
+pas être sélectionnée à nouveau : il faut une nouvelle preuve vérifiée,
+ou une traduction IA complète. L'index global reste obligatoire, même
+après retrait du dernier passage publié. La régénération intégrale d'un
+brouillon contenant ces preuves ou décisions est interdite.

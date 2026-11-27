@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import argparse
 import copy
-from datetime import datetime
+from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
@@ -82,6 +82,9 @@ def select_draft(review, lock_sha, items, owners, french_arguments, evidence_row
         if row is None or row.get("source") != source:
             fail("published_quote_selection_draft_source_changed")
         projection = contract.verify_evidence(evidence,lock_sha,source_items[cid],page)
+        if any(entry.get("citation_id") == cid and entry.get("evidence_sha256") == evidence["evidence_sha256"]
+               for entry in result.get("published_quote_withdrawals") or []):
+            fail("published_quote_selection_previously_withdrawn_evidence")
         params = {r["name"]:r["value"] for r in projection["parameters"]}
         updates = {"translation_origin":"published_translation",
                    "published_quote_evidence":copy.deepcopy(evidence),
@@ -98,6 +101,76 @@ def select_draft(review, lock_sha, items, owners, french_arguments, evidence_row
         fail("published_quote_selection_empty")
     result["published_quote_contract"] = contract.EVIDENCE
     return result, {"selected":sorted(selected),"already_selected":sorted(unchanged)}
+
+
+def withdraw_draft(review, lock_sha, items, owners, french_arguments, citation_id,
+                   expected_evidence_sha, reviewer, reason):
+    """Explicitly withdraw one selected passage, preserving its complete audit.
+
+    This is not an approval of the AI fallback or of a replacement passage.
+    The returned draft must undergo the normal editorial and uniqueness checks.
+    """
+    if (review.get("schema") != TRANSLATION_REVIEW_SCHEMA
+            or review.get("status") != "draft" or review.get("review_sha256") is not None
+            or any(k in review for k in ("final_values", "semantic_content_sha256", "quote_duplicate_audit"))):
+        fail("published_quote_withdrawal_requires_unsealed_draft")
+    if (review.get("published_quote_contract") != contract.EVIDENCE
+            or not bridge.is_digest(expected_evidence_sha)
+            or not isinstance(reviewer, str) or len(reviewer.strip()) < 3
+            or not isinstance(reason, str) or len(reason.strip()) < 12):
+        fail("published_quote_withdrawal_missing_explicit_decision")
+    source_items = bridge.unique_rows(items, "id")
+    source_pages = bridge.unique_rows(french_arguments, "id")
+    result = copy.deepcopy(review)
+    pages = bridge.unique_rows(result.get("arguments") or [], "id")
+    page = owners.get(citation_id)
+    if citation_id not in source_items or page not in source_pages or page not in pages:
+        fail("published_quote_withdrawal_occurrence_not_eligible")
+    source = bridge.unique_rows(source_pages[page].get("citations") or [], "id").get(citation_id)
+    translation = pages[page].get("translation")
+    if (source is None or not isinstance(translation, dict)
+            or (translation.get("french") or {}).get("content") != source_pages[page]):
+        fail("published_quote_withdrawal_authoritative_source_changed")
+    row = bridge.unique_rows(translation.get("citations") or [], "id").get(citation_id)
+    if (row is None or row.get("source") != source
+            or row.get("translation_origin") != "published_translation"):
+        fail("published_quote_withdrawal_selection_missing")
+    evidence = row.get("published_quote_evidence")
+    if not isinstance(evidence, dict) or evidence.get("evidence_sha256") != expected_evidence_sha:
+        fail("published_quote_withdrawal_evidence_changed")
+    projection = contract.verify_evidence(evidence, lock_sha, source_items[citation_id], page)
+    params = {p["name"]: p["value"] for p in projection["parameters"]}
+    if (row.get("translated_citation") != params["quote"]
+            or row.get("translated_date", "") != params.get("date", "")):
+        fail("published_quote_withdrawal_projection_changed")
+    decision = {
+        "schema": "wikidebia-published-quote-withdrawal-1",
+        "source_lock_sha256": lock_sha, "page_id": page, "citation_id": citation_id,
+        "evidence_sha256": expected_evidence_sha, "previous_row": copy.deepcopy(row),
+        "reviewer": reviewer.strip(), "reason": reason.strip(),
+        "recorded_at": datetime.now(timezone.utc).isoformat(),
+    }
+    decision["withdrawal_sha256"] = bridge.digest(decision)
+    result.setdefault("published_quote_withdrawals", []).append(decision)
+    row.clear()
+    row.update(_blank_citation(source))
+    translation["status"] = "pending"
+    for unit in result.get("review_units") or []:
+        if page in (unit.get("page_ids") or []):
+            unit.update(status="pending", reviewer="", reviewed_at=None, note="")
+    if isinstance(result.get("global_review"), dict):
+        result["global_review"].update(all_entities_translated=False,
+                                       all_equivalences_reviewed=False,
+                                       all_selected_sources_verified=False,
+                                       reviewer="", reviewed_at=None, note="")
+    if not any(c.get("translation_origin") == "published_translation"
+               for a in result["arguments"]
+               for c in (a.get("translation") or {}).get("citations") or []):
+        result.pop("published_quote_contract")
+    # Even after withdrawal of the last published passage, a Work that opted
+    # into the experimental route cannot evade the global uniqueness gate.
+    result["quote_uniqueness_policy"] = index_contract.UNIQUENESS_POLICY
+    return result, {"withdrawn": [citation_id], "withdrawal_sha256": decision["withdrawal_sha256"]}
 
 
 def _write_draft(path, value, expected_bytes):
@@ -192,7 +265,7 @@ def _commit_selection(project, debate_id, work_id, workspace, path, before, upda
             "superseded_package_id": pending["package_id"]}
 
 
-def select_workspace(project, debate_id, work_id, evidence_paths, index_sha=None, *, replace_pending_package=False):
+def select_workspace(project, debate_id, work_id, evidence_paths, index_sha=None, *, replace_pending_package=False, withdrawal=None):
     from wikidebia_corpus_build import full_tree_sha256
     from wikidebia_editorial_review import _load_workspace
     workspace,meta = _load_workspace(project,debate_id,work_id)
@@ -211,8 +284,13 @@ def select_workspace(project, debate_id, work_id, evidence_paths, index_sha=None
     if (current.get("debate_id")!=debate_id or current.get("work_id")!=work_id
             or current.get("prepared_content_reviewed_copy_sha256")!=full_tree_sha256(source)):
         fail("published_quote_selection_draft_identity_mismatch")
-    evidence = [read_evidence(workspace,p) for p in evidence_paths]
-    updated,summary = select_draft(current,lock_sha,items,owners,content.get("arguments") or [],evidence)
+    if withdrawal is not None:
+        if evidence_paths:
+            fail("published_quote_selection_and_withdrawal_conflict")
+        updated,summary = withdraw_draft(current,lock_sha,items,owners,content.get("arguments") or [],*withdrawal)
+    else:
+        evidence = [read_evidence(workspace,p) for p in evidence_paths]
+        updated,summary = select_draft(current,lock_sha,items,owners,content.get("arguments") or [],evidence)
     prior_sha = current.get("quote_public_index_sha256")
     require_refresh_complete(workspace)
     newest = latest_selected_sha(workspace,prior_sha)
@@ -236,7 +314,7 @@ def select_workspace(project, debate_id, work_id, evidence_paths, index_sha=None
     if updated!=current:
         replacement = _commit_selection(project, debate_id, work_id, workspace, path, before, updated,
                                         replace_pending_package=replace_pending_package)
-    return {**summary,"status":"draft_selected","review_status":"draft",
+    return {**summary,"status":"draft_withdrawn" if withdrawal is not None else "draft_selected","review_status":"draft",
             "replacement_review_package":replacement,
             "quote_public_index_sha256":chosen,"requires_fresh_index_before_finalize":chosen is None,
             "translation_draft_mutated":updated!=current,"source_locks_mutated":False,
@@ -250,18 +328,29 @@ def main(argv=None):
     parser.add_argument("debate_id")
     parser.add_argument("--work-id",required=True)
     parser.add_argument("--project-root",type=Path,default=Path.cwd())
-    parser.add_argument("--evidence",type=Path,action="append",required=True)
+    action = parser.add_mutually_exclusive_group(required=True)
+    action.add_argument("--evidence",type=Path,action="append")
+    action.add_argument("--withdraw", nargs=2, metavar=("CITATION_ID", "EVIDENCE_SHA256"),
+                        help="Withdraw one exact selection; retain its evidence and require a fresh review.")
+    parser.add_argument("--reviewer")
+    parser.add_argument("--reason")
     parser.add_argument("--index-sha256")
     parser.add_argument("--replace-pending-package", action="store_true",
                         help="Reissue an outstanding English review ZIP; its old identity will no longer be accepted.")
     args = parser.parse_args(argv)
+    if args.withdraw and (not args.reviewer or not args.reason):
+        parser.error("--withdraw requires --reviewer and --reason")
+    if not args.withdraw and (args.reviewer is not None or args.reason is not None):
+        parser.error("--reviewer and --reason are reserved for --withdraw")
+    withdrawal = (*args.withdraw, args.reviewer, args.reason) if args.withdraw else None
     try:
         project = args.project_root.resolve()
         debate = validate_debate_id(args.debate_id)
         work = validate_work_id(args.work_id)
         with exclusive_lock(project,debate,"published_quote_selection"):
-            summary = select_workspace(project,debate,work,args.evidence,args.index_sha256,
-                                       replace_pending_package=args.replace_pending_package)
+            summary = select_workspace(project,debate,work,args.evidence or [],args.index_sha256,
+                                       replace_pending_package=args.replace_pending_package,
+                                       withdrawal=withdrawal)
     except (ValueError,RuntimeError,OSError,KeyError,TypeError,AttributeError) as exc:
         reason = str(exc) if isinstance(exc,(bridge.QuoteBridgeError,contract.PublishedQuoteError,
                                                index_contract.QuoteIndexError)) else type(exc).__name__

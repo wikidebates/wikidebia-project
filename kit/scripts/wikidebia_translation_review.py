@@ -1275,6 +1275,14 @@ def prepare_review(project_root: Path, debate_id: str, work_id: str, *, overwrit
         return {"status": "en_translation_review_ready", "debate_id": debate_id, "work_id": work_id, "arguments": len(current.get("arguments") or []), "idempotent": True}
     if overwrite and (workspace / "translated-copy").exists():
         raise TranslationReviewError("Impossible de régénérer une traduction déjà appliquée")
+    if overwrite and review_path.is_file():
+        current = load_json(review_path, "revue anglaise avant régénération")
+        if (any(key in current for key in ("published_quote_contract", "published_quote_withdrawals",
+                                          "quote_uniqueness_policy", "quote_public_index_sha256"))
+                or any("published_quote_evidence" in row or row.get("translation_origin") == "published_translation"
+                       for arg in current.get("arguments") or []
+                       for row in (arg.get("translation") or {}).get("citations") or [])):
+            raise TranslationReviewError("Régénération interdite : conserver les preuves et décisions de citations anglaises")
     registry, metadata_lock, content_lock, vocabulary = _source_snapshot(source)
     fr_meta_by_id = {str(row.get("entity_id")): row for row in metadata_lock.get("arguments") or []}
     fr_content_by_id = {str(row.get("id")): row for row in content_lock.get("arguments") or []}

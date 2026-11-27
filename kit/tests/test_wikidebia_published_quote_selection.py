@@ -302,3 +302,58 @@ def test_active_ai_only_finalization_requires_and_uses_latest_index(tmp_path, mo
     assert common.load_json(target / "en_content_lock.json")["quote_uniqueness_policy"] == index.UNIQUENESS_POLICY
     policy = common.load_json(target / "en_translation_lock.json")["citation_translation_policy"]
     assert policy["quote_uniqueness_policy"] == index.UNIQUENESS_POLICY
+
+
+def test_withdraw_selected_evidence_keeps_audit_and_uniqueness_gate():
+    draft,src,content,evidence=draft_fixture()
+    selected,_=pick(draft,src,content,evidence)
+    translation=selected["arguments"][0]["translation"]
+    row=translation["citations"][0]
+    row.update(status="approved",quote_completeness_reviewed=True)
+    translation["status"]="approved"
+    selected["review_units"]=[{"page_ids":["A0001"],"status":"approved","note":"Old approval"},
+                              {"page_ids":["A0002"],"status":"approved","note":"Unrelated approval"}]
+    selected["global_review"]={"all_entities_translated":True,"all_equivalences_reviewed":True}
+    selected["quote_public_index_sha256"]="b"*64
+    before=deepcopy(selected)
+    withdrawn,summary=selection.withdraw_draft(
+        selected,LOCK,[src],{src["id"]:"A0001"},[content],src["id"],
+        evidence["evidence_sha256"],"Editor","The edition attribution is contested.")
+    assert selected==before
+    assert withdrawn["arguments"][0]["translation"]["citations"][0]==_blank_citation(content["citations"][0])
+    assert withdrawn["arguments"][0]["translation"]["status"]=="pending"
+    assert withdrawn["review_units"][0]["status"]=="pending"
+    assert withdrawn["review_units"][1]==selected["review_units"][1]
+    assert not withdrawn["global_review"]["all_equivalences_reviewed"]
+    assert "published_quote_contract" not in withdrawn
+    assert withdrawn["quote_uniqueness_policy"]==selection.index_contract.UNIQUENESS_POLICY
+    assert withdrawn["quote_public_index_sha256"]=="b"*64
+    decision,=withdrawn["published_quote_withdrawals"]
+    assert decision["previous_row"]==row
+    assert summary["withdrawal_sha256"]==decision["withdrawal_sha256"]
+    assert decision["withdrawal_sha256"]==bridge.digest({k:v for k,v in decision.items() if k!="withdrawal_sha256"})
+    with pytest.raises(bridge.QuoteBridgeError,match="previously_withdrawn"):
+        pick(withdrawn,src,content,evidence)
+
+
+@pytest.mark.parametrize("change",["wrong_sha","sealed","no_reason","wrong_source","wrong_lock"])
+def test_withdrawal_refuses_unbound_or_implicit_decisions(change):
+    draft,src,content,evidence=draft_fixture()
+    selected,_=pick(draft,src,content,evidence)
+    sha=evidence["evidence_sha256"]
+    reason="The edition attribution is contested."
+    lock=LOCK
+    if change=="wrong_sha":
+        sha="f"*64
+    elif change=="sealed":
+        selected["status"]="approved"
+    elif change=="no_reason":
+        reason=""
+    elif change=="wrong_source":
+        selected["arguments"][0]["translation"]["citations"][0]["source"]["citation"]="Changed"
+    else:
+        lock="f"*64
+    before=deepcopy(selected)
+    with pytest.raises((bridge.QuoteBridgeError,contract.PublishedQuoteError)):
+        selection.withdraw_draft(selected,lock,[src],{src["id"]:"A0001"},[content],src["id"],sha,"Editor",reason)
+    assert selected==before
