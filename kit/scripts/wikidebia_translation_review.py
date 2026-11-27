@@ -2989,12 +2989,25 @@ def apply_review(project_root: Path, debate_id: str, work_id: str, confirm_revie
         return {"status": "en_translation_applied", "debate_id": debate_id, "work_id": work_id, "review_sha256": review["review_sha256"], "translated_copy_tree_sha256": actual, "idempotent": True}
     if target.exists() or target.is_symlink():
         raise TranslationReviewError("Chemin translated-copy déjà occupé")
-    verify_bound_normalization(project_root, workspace, source, meta, review)
+    # Do not rewrite an English seal created before the introduction of the
+    # normalization receipt. It can be applied only with its existing matching
+    # workspace seal and the ordinary convergence and publication safeguards.
+    has_normalization = "french_normalization_receipt_sha256" in review
+    if has_normalization:
+        verify_bound_normalization(project_root, workspace, source, meta, review)
+    else:
+        previous = meta.get("english_translation_review") or {}
+        if (previous.get("status") != "finalized"
+                or previous.get("review_sha256") != review["review_sha256"]
+                or previous.get("prepared_content_reviewed_copy_sha256") != review["prepared_content_reviewed_copy_sha256"]
+                or (workspace / FRENCH_NORMALIZATION_RECEIPT).exists()):
+            raise TranslationReviewError("Reçu français absent et aucune revue anglaise historique scellée correspondante")
     temp = Path(tempfile.mkdtemp(prefix=".translated-copy.tmp-", dir=workspace))
     try:
         shutil.rmtree(temp)
         result = _build_translated_copy(project_root, source, temp, review, debate_id, work_id)
-        write_json(temp / FRENCH_NORMALIZATION_RECEIPT, load_json(workspace / FRENCH_NORMALIZATION_RECEIPT))
+        if has_normalization:
+            write_json(temp / FRENCH_NORMALIZATION_RECEIPT, load_json(workspace / FRENCH_NORMALIZATION_RECEIPT))
         for rel in ("imports",):
             if full_tree_sha256(temp / rel) != full_tree_sha256(source / rel):
                 raise TranslationReviewError(f"La provenance {rel} a été modifiée pendant la traduction")

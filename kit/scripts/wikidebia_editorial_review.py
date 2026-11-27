@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from wikidebia_release_info import KIT_VERSION, require_validator_report
 from wikidebia_title_structure import canonical_title_structure_issues
-from wikidebia_keyword_policy import COMPOSITIONAL_KEYWORD_FR
+from wikidebia_keyword_policy import COMPOSITIONAL_KEYWORD_FR, keyword_identity_fr
 
 import argparse
 import collections
@@ -670,10 +670,12 @@ def _validate_vocabulary(vocabulary: Mapping[str, Any], final_items: Sequence[Ma
         term = entry["fr"]
         if term in by_fr:
             raise EditorialReviewError(f"Mot-clé dupliqué dans le vocabulaire : {term}")
-        folded = term.casefold()
-        prior = next((existing for existing in by_fr if existing.casefold() == folded), None)
+        folded = keyword_identity_fr(term)
+        prior = next((existing for existing in by_fr if keyword_identity_fr(existing) == folded), None)
         if prior is not None:
-            raise EditorialReviewError(f"Mots-clés différant seulement par la casse : {prior} / {term}")
+            if prior.casefold() == term.casefold():
+                raise EditorialReviewError(f"Mots-clés différant seulement par la casse : {prior} / {term}")
+            raise EditorialReviewError(f"Variantes attestées d'un même mot-clé : {prior} / {term}")
         by_fr[term] = entry
     missing = sorted(set(expected) - set(by_fr))
     extra = sorted(set(by_fr) - set(expected))

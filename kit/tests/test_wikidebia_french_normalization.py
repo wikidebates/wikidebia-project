@@ -140,3 +140,54 @@ def test_cannot_reuse_an_unattested_criterion(tmp_path):
         write_json(workspace / normalization.REVIEW_PATH, report)
         with pytest.raises(normalization.FrenchNormalizationError, match="graph"):
             translation.prepare_review(project, DEBATE, work_id)
+
+
+def test_new_keyword_diagnostics_prevent_reuse_of_obsolete_classification(tmp_path):
+    project, workspace, work_id = make_french_locked(tmp_path)
+    _, revisions = fixture_french_wiki(project, DEBATE, work_id)
+    with fake_wiki(revisions):
+        translation.prepare_french_normalization(project, DEBATE, work_id)
+    report = load_json(workspace / normalization.REVIEW_PATH)
+    source = workspace / "content-reviewed-copy"
+    path = source / "data/keyword_vocabulary.json"
+    vocabulary = load_json(path)
+    vocabulary["entries"][0]["atomic_concept"] = False
+    write_json(path, vocabulary)
+    _, meta = translation._load_workspace(project, DEBATE, work_id)
+    evidence = normalization._prior_review_evidence(source, meta, report["pages"])
+    assert "keywords" not in evidence["reusable_criteria"]
+    assert "sections" in evidence["reusable_criteria"]
+
+
+def test_legacy_sealed_english_review_can_apply_without_resealing(tmp_path):
+    from test_wikidebia_translation_review import complete_translation_review, complete_semantic_convergence
+    from wikidebia_editorial_workspace import workspace_receipt_hash
+
+    project, workspace, work_id = make_french_locked(tmp_path)
+    _, revisions = fixture_french_wiki(project, DEBATE, work_id)
+    with fake_wiki(revisions):
+        translation.prepare_french_normalization(project, DEBATE, work_id)
+        complete_fixture_french_normalization(workspace)
+        translation.prepare_review(project, DEBATE, work_id)
+    complete_translation_review(workspace)
+    translation.finalize_review(project, DEBATE, work_id)
+    # Reconstruct the exact legacy contract: a finalized review and workspace
+    # seal without a normalization field, before any application.
+    path = workspace / "reviews/en/translation_review.json"
+    review = load_json(path)
+    review.pop("french_normalization_receipt_sha256")
+    review["review_sha256"] = translation.translation_review_sha256(review)
+    write_json(path, review)
+    meta_path = workspace / "workspace.json"
+    meta = load_json(meta_path)
+    meta["english_translation_review"]["review_sha256"] = review["review_sha256"]
+    meta["workspace_sha256"] = None
+    meta["workspace_sha256"] = workspace_receipt_hash(meta)
+    write_json(meta_path, meta)
+    (workspace / normalization.RECEIPT_PATH).unlink()
+    (workspace / normalization.REVIEW_PATH).unlink()
+    complete_semantic_convergence(project, work_id)
+    result = translation.apply_review(project, DEBATE, work_id, review["review_sha256"])
+    assert result["status"] == "en_translation_applied"
+    assert not (workspace / "translated-copy" / normalization.RECEIPT_PATH).exists()
+    assert load_json(path)["review_sha256"] == review["review_sha256"]

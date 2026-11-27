@@ -8,7 +8,10 @@ from urllib.parse import quote
 from wikidebia_corpus_build import (
     NORM_VERSION, active_graph, load_json, relative_to_project, write_json,
 )
-from wikidebia_editorial_workspace import WorkspaceError
+from wikidebia_editorial_workspace import (
+    WorkspaceError, keyword_diagnostics, keyword_capitalization_issues, rubrique_diagnostics,
+)
+from wikidebia_keyword_policy import COMPOSITIONAL_KEYWORD_FR, keyword_identity_fr
 from wikidebia_public_visibility import AnonymousMediaWiki, PublicVisibilityError
 from wikidebia_publish import sha_text
 from wikidebia_workflow_baseline import sha_object
@@ -137,6 +140,7 @@ def _prior_review_evidence(source: Path, meta: Mapping[str, Any], pages: list[di
     if evidence["mode"] != "editorial" or metadata.get("status") != "locked_for_generation":
         return evidence
     if (metadata.get("debate_id") != meta["debate_id"] or metadata.get("work_id") != meta["work_id"]
+            or metadata.get("normative_revision") != NORM_VERSION
             or not evidence["classification_review_sha256"]):
         return evidence
     rows = [("debate", metadata.get("debate"))]
@@ -158,17 +162,36 @@ def _prior_review_evidence(source: Path, meta: Mapping[str, Any], pages: list[di
                 and all(isinstance(note, str) and note.strip() for note in rationales.values()))
 
     evidence["page_ids"] = [page["page_id"] for page in pages]
-    if all(complete_rationales(row, "rubriques") for row in by_id.values()):
+    if all(complete_rationales(row, "rubriques") and not rubrique_diagnostics(
+            row["rubriques"], False, enforce_creation_count=row.get("page_origin") == "new")
+            for row in by_id.values()):
         evidence["reusable_criteria"].append("sections")
+
+    def keyword_decisions_valid(row: Mapping[str, Any]) -> bool:
+        if not complete_rationales(row, "keywords"):
+            return False
+        issues = keyword_diagnostics(row["keywords"], False, row.get("entity_type", "argument"))
+        ignored = {"KEYWORDS_CAPITALIZATION_REVIEW"}
+        if row.get("page_origin") != "new":
+            ignored.update({"KEYWORDS_TOO_FEW", "KEYWORDS_TOO_MANY"})
+        return (not any(issue["code"] not in ignored for issue in issues)
+                and (row.get("attestations") or {}).get("keywords_ordered_by_relevance") is True
+                and bool((row.get("rationales") or {}).get("keyword_order")))
+
     terms = {term for row in by_id.values() for term in row.get("keywords") or []}
-    vocab_terms = {row.get("fr") for row in vocabulary.get("entries") or [] if isinstance(row, dict)}
+    vocab_entries = {row.get("fr"): row for row in vocabulary.get("entries") or [] if isinstance(row, dict)}
     if (vocabulary.get("status") == "approved_fr"
+            and vocabulary.get("normative_revision") == NORM_VERSION
             and vocabulary.get("review_sha256") == evidence["classification_review_sha256"]
-            and terms == vocab_terms
-            and all(complete_rationales(row, "keywords")
-                    and (row.get("attestations") or {}).get("keywords_ordered_by_relevance") is True
-                    and (row.get("rationales") or {}).get("keyword_order")
-                    for row in by_id.values())):
+            and terms == set(vocab_entries)
+            and len({keyword_identity_fr(term) for term in terms}) == len(terms)
+            and all(keyword_decisions_valid(row) for row in by_id.values())
+            and all(row.get("status") == "approved_fr"
+                    and row.get("atomic_concept") is True
+                    and row.get("compositional_intersection") is False
+                    and not COMPOSITIONAL_KEYWORD_FR.fullmatch(term)
+                    and not keyword_capitalization_issues(term, str(row.get("kind")))
+                    for term, row in vocab_entries.items())):
         evidence["reusable_criteria"].append("keywords")
     return evidence
 
@@ -268,9 +291,9 @@ def _validate_report(
     reusable = binding["prior_review_evidence"]["reusable_criteria"]
     for key, rule in CRITERIA.items():
         row = results[key]
-        allowed = {"checked", "exception", "not_applicable"}
+        allowed = ["checked", "exception", "not_applicable"]
         if key in reusable:
-            allowed.add("reused")
+            allowed.append("reused")
         if (not isinstance(row, dict) or row.get("rule") != rule
                 or row.get("status") not in allowed
                 or not isinstance(row.get("note"), str) or not row["note"].strip()):

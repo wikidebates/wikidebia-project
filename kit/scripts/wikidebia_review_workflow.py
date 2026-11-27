@@ -2573,6 +2573,18 @@ def import_review(
             state["french_publication"] = copy.deepcopy(publication)  # legacy alias
             state["phase"] = "en_translation_review"
         elif review_type in {"en_translation_review", "en_translation_correction", "en_documentation_correction"}:
+            # A legacy outstanding ZIP was issued before the French receipt
+            # existed. Bind it inside the import transaction, after validating
+            # the original editable/context hashes, without replacing the
+            # returned English work. A newer ZIP may not remove its binding.
+            old_english = load_json(backup / "reviews/en/translation_review.json", "revue anglaise avant import")
+            english = load_json(base / "reviews/en/translation_review.json", "revue anglaise importée")
+            if (old_english.get("status") == "draft" and english.get("status") == "draft"
+                    and "french_normalization_receipt_sha256" not in old_english
+                    and "french_normalization_receipt_sha256" not in english
+                    and not any(row.get("target_path") == FRENCH_NORMALIZATION_RECEIPT
+                                for row in manifest.get("context_files") or [])):
+                prepare_translation_review(project_root, debate_id, str(state["work_id"]), overwrite=False)
             result = finalize_translation_review(project_root, debate_id, str(state["work_id"]))
             state["phase"] = "semantic_convergence_1"
         elif review_type in {"semantic_convergence_1", "semantic_convergence_2"}:

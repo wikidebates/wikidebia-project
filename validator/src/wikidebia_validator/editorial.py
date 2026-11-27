@@ -2156,15 +2156,19 @@ def validate_editorial(ctx: PackageContext) -> None:
     for language, vocabulary in capitalization_vocabularies:
         folded: dict[str, str] = {}
         for term, entry in vocabulary.items():
-            previous = folded.get(term.casefold())
+            identity = keyword_identity_fr(term) if language == 'fr' else term.casefold()
+            previous = folded.get(identity)
             preserved_case_variant = bool(
                 language == 'fr'
                 and previous in preserved_keywords
                 and term in preserved_keywords
             )
             if previous is not None and previous != term and not preserved_case_variant:
-                ctx.report.error('WDV-EDT-023', 'Entrées de vocabulaire ne différant que par la casse', path=editorial_controls.get('keyword_vocabulary_path'), details={'language': language, 'first': previous, 'second': term})
-            folded[term.casefold()] = term
+                message = ('Entrées de vocabulaire ne différant que par la casse'
+                           if previous.casefold() == term.casefold()
+                           else 'Variantes attestées d’un même mot-clé dans le vocabulaire')
+                ctx.report.error('WDV-EDT-023', message, path=editorial_controls.get('keyword_vocabulary_path'), details={'language': language, 'first': previous, 'second': term})
+            folded[identity] = term
             localized = _localized_keyword_entry(entry, language)
             kind = str(localized.get('kind') or '')
             expected_policy = {'noun': 'lowercase_common', 'noun_phrase': 'lowercase_common', 'proper_name': 'canonical_proper_name', 'acronym': 'canonical_acronym'}.get(kind)
