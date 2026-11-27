@@ -12,6 +12,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+import tarfile
 import tempfile
 
 import wikidebia_quote_bridge as bridge
@@ -27,7 +28,7 @@ def _private_state(state, project, resolver, mode):
     state = raw.resolve(strict=True)
     if (raw != state or not state.is_dir() or state.stat().st_mode & 0o077):
         raise bridge.QuoteBridgeError("resolver_state_not_private")
-    for root, allowed in ((project, ".state"), (resolver, ".cache")):
+    for root, allowed in ((project, ".state/quote-resolver"), (resolver, ".cache")):
         root = Path(root).resolve()
         if (root.is_relative_to(state)
                 or (state.is_relative_to(root) and not state.is_relative_to(root / allowed))):
@@ -111,6 +112,7 @@ def prepare(project, debate, work, *, resolver_root, state, mode, page_ids=(),
             or type(timeout) is not int or not 1 <= timeout <= 1800
             or type(batch_size) is not int or not 1 <= batch_size <= bridge.MAX_ITEMS):
         raise bridge.QuoteBridgeError("invalid_resolver_limits")
+    debate, work = validate_debate_id(debate), validate_work_id(work)
     project, resolver_root = Path(project).resolve(), Path(resolver_root).resolve()
     with exclusive_lock(project, debate, "quote_prepare"):
         workspace, lock_sha, items, owners = bridge.snapshot(project, debate, work)
@@ -171,7 +173,7 @@ def main(argv=None):
                          state=a.state, mode=a.mode, page_ids=a.page_id,
                          batch_size=a.batch_size, audit_budget=a.audit_budget,
                          retrieval_budget=a.retrieval_budget, timeout=a.timeout)
-    except (ValueError, RuntimeError, OSError, KeyError, TypeError, AttributeError) as exc:
+    except (ValueError, RuntimeError, OSError, KeyError, TypeError, AttributeError, tarfile.TarError) as exc:
         reason = str(exc) if isinstance(exc, bridge.QuoteBridgeError) else type(exc).__name__
         print(json.dumps({"status": "blocked", "reason": reason, "publication_authorized": False}))
         return 1

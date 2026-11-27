@@ -71,7 +71,9 @@ préparation et inspection de tous les lots du Work :
 Utiliser `--mode integrated` pour réutiliser les reçus existants et rechercher
 les passages manquants. Le mode `prepared` exige une base privée existante
 (éventuellement alimentée par un transfert sélectif) et ne recherche pas
-les correspondances absentes. Les deux modes interrogent encore les sources
+les correspondances absentes. Le répertoire d'état doit être privé (0700),
+hors des dépôts, ou dans `.state/quote-resolver` du projet / `.cache` du
+résolveur ; il ne peut pas se trouver dans un Work ou un verrou éditorial. Les deux modes interrogent encore les sources
 épinglées pour revalider les preuves. Les plafonds `--audit-budget` et
 `--retrieval-budget` sont communs à tous les lots; `--timeout` borne chaque
 processus. `--page-id` et `--batch-size` limitent le périmètre.

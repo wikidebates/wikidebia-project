@@ -106,3 +106,14 @@ def test_nonprivate_state_and_symlink_are_rejected(tmp_path):
     with pytest.raises(bridge.QuoteBridgeError, match="state_not_private"):
         prepare.prepare(project, "debat_test", work, resolver_root=resolver,
                         state=alias, mode="prepared")
+
+
+def test_registry_cannot_be_inside_locked_work(tmp_path):
+    project, workspace, work, resolver, _ = setup(tmp_path)
+    private = workspace / "audits" / "wrong-registry"
+    private.mkdir(mode=0o700, parents=True)
+    with pytest.raises(bridge.QuoteBridgeError, match="overlaps_repository"):
+        prepare._private_state(private, project, resolver, "integrated")
+    allowed = project / ".state" / "quote-resolver"
+    allowed.mkdir(mode=0o700)
+    assert prepare._private_state(allowed, project, resolver, "integrated") == allowed
