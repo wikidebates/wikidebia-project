@@ -44,6 +44,7 @@ class FakeWiki:
     def __init__(self, pages):
         self.pages = dict(pages)
         self.writes = []
+        self.read_batches = []
         self.revisions = {}
         self.rights = {"edit", "move"}
         self.tags = {"chatgpt"}
@@ -77,6 +78,10 @@ class FakeWiki:
             return False, None, ""
         revision, text = self.pages[title]
         return True, revision, text
+
+    def read_pages(self, titles):
+        self.read_batches.append(tuple(titles))
+        return {title: self.read_page(title) for title in titles}
 
     def move_page(self, *, old_title, new_title, reason, expected_user, leave_redirect):
         assert leave_redirect
@@ -114,8 +119,11 @@ def test_full_request_and_repeat_are_idempotent(tmp_path):
     receipt = publish(tmp_path, directory, wiki)
     assert receipt["status"] == "completed"
     assert wiki.pages["Renamed child"][1] == pages["Child"][1]
+    move = next(event for event in receipt["events"] if event["operation"] == "move")
+    assert move["revision_id"] == wiki.pages["Renamed child"][0]
     assert "page=Renamed child" in wiki.pages["Parent"][1]
     assert relay.redirect_to(wiki.pages["Child"][1], "Renamed child")
+    assert wiki.read_batches == [("Child", "Renamed child", "Parent")] * 2
     count = len(wiki.writes)
     assert publish(tmp_path, directory, wiki) == receipt
     assert len(wiki.writes) == count and not wiki.opened
@@ -127,6 +135,7 @@ def test_preflight_performs_no_mutations(tmp_path):
     wiki = FakeWiki(pages)
     assert publish(tmp_path, directory, wiki, execute=False)["status"] == "ready"
     assert not wiki.writes
+    assert wiki.read_batches == [("Child", "Renamed child", "Parent")]
     assert not (tmp_path / "server/.state/fr-publication-relay").exists()
 
 
@@ -137,6 +146,31 @@ def replace_request_text(directory, request, row, before, after):
         (directory / row[path_key]).write_text(text)
         row[hash_key] = relay.digest(text.encode())
     save_request(directory, request)
+
+
+@pytest.mark.parametrize(("keywords", "corrections", "accepted"), [
+    ("oppression, URSS, vêtements", {"Oppression": "oppression", "Vêtements": "vêtements"}, True),
+    ("oppression, urss, vêtements", {"Oppression": "oppression", "Vêtements": "vêtements"}, False),
+    ("Oppression, uRSS, Vêtements", {"URSS": "uRSS"}, False),
+    ("domination, URSS, Vêtements", {"Oppression": "domination"}, False),
+    ("oppression, URSS, Vêtements, censure", {"Oppression": "oppression"}, False),
+])
+def test_fr_publication_checks_declared_common_keyword_case(tmp_path, keywords, corrections, accepted):
+    directory = tmp_path / "request"
+    request, _ = request_fixture(directory)
+    row = request["pages"][0]
+    row["new_title"] = row["old_title"]
+    row["common_keyword_case_corrections"] = corrections
+    replace_request_text(
+        directory, request, row,
+        "{{Argument|mots-clés=Oppression, URSS, Vêtements}}",
+        "{{Argument|mots-clés=" + keywords + "}}",
+    )
+    if accepted:
+        assert "mots-clés" in relay.request_editorial_checks(request, directory)[row["page_id"]]
+    else:
+        with pytest.raises(relay.Blocked, match="Correction de casse"):
+            relay.request_editorial_checks(request, directory)
 
 
 @pytest.mark.parametrize("before,after", [

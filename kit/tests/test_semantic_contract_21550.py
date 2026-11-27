@@ -11,9 +11,11 @@ if str(SCRIPTS) not in sys.path:
 from test_wikidebia_translation_review import make_french_locked, complete_translation_review, translation, common  # noqa: E402
 
 
+from french_normalization_fixture import prepare_fixture_translation
+
 def _prepared_complete(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     path = workspace / "reviews/en/translation_review.json"
     return project, workspace, work_id, path, json.loads(path.read_text(encoding="utf-8"))

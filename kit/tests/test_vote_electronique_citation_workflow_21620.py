@@ -26,6 +26,8 @@ from test_wikidebia_content_review import (
 from test_historical_selected_value_21618 import HISTORICAL_INTRO, FINAL_INTRO, STAKES_CONTENT
 
 
+from french_normalization_fixture import prepare_fixture_translation
+
 def _citation(article: str, quotation: str, link: str) -> str:
     return (
         "{{Citation"
@@ -158,7 +160,7 @@ def test_vote_electronique_authorized_review_with_empty_optional_citation_parame
         assert citation_wiki == content.iter_templates(imported)[0].get("citations")
 
     # Continue mechanically to the next genuine editorial point: English review.
-    prepared = translation.prepare_review(project, "debat_test", work_id)
+    prepared = prepare_fixture_translation(project, "debat_test", work_id)
     assert prepared["status"] == "en_translation_review_ready"
     review = json.loads((workspace / "reviews/en/translation_review.json").read_text(encoding="utf-8"))
     by_id = {row["id"]: row["translation"] for row in review["arguments"]}

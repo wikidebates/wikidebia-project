@@ -36,6 +36,8 @@ metadata._run_validator = fake_validator
 content._run_validator = fake_validator
 translation._run_validator = fake_validator
 
+from french_normalization_fixture import prepare_fixture_translation
+
 from test_wikidebia_content_review import make_metadata_applied, complete_content_review, source_row  # noqa: E402
 
 
@@ -488,7 +490,7 @@ def test_existing_english_update_contract_applies_to_debate_and_argument_targets
 def test_prepare_translation_is_read_only_for_french_copy(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
     before = common.full_tree_sha256(workspace / "content-reviewed-copy")
-    result = translation.prepare_review(project, "debat_test", work_id)
+    result = prepare_fixture_translation(project, "debat_test", work_id)
     assert result["status"] == "en_translation_review_ready"
     assert common.full_tree_sha256(workspace / "content-reviewed-copy") == before
     assert not (workspace / "translated-copy").exists()
@@ -501,7 +503,7 @@ def test_prepare_translation_reuses_verified_existing_english_argument(tmp_path:
     project, workspace, work_id = make_french_locked(tmp_path)
     mark_existing_english_argument(workspace)
 
-    result = translation.prepare_review(project, "debat_test", work_id)
+    result = prepare_fixture_translation(project, "debat_test", work_id)
     review = common.load_json(workspace / "reviews/en/translation_review.json", "review")
     readiness = common.load_json(workspace / "reviews/en/translation_readiness.json", "readiness")
 
@@ -515,7 +517,7 @@ def test_prepare_translation_reuses_verified_existing_english_argument(tmp_path:
 
 def test_finalize_translation_seals_complete_bilingual_review(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     before = common.full_tree_sha256(workspace / "content-reviewed-copy")
     result = translation.finalize_review(project, "debat_test", work_id)
@@ -554,7 +556,7 @@ def test_finalize_preserves_historically_absent_debate_introduction(tmp_path: Pa
     meta["workspace_sha256"] = sys.modules["wikidebia_editorial_workspace"].workspace_receipt_hash(meta)
     common.write_json(meta_path, meta)
 
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     review_path = workspace / "reviews/en/translation_review.json"
     review = json.loads(review_path.read_text(encoding="utf-8"))
@@ -574,7 +576,7 @@ def test_finalize_preserves_historically_absent_debate_introduction(tmp_path: Pa
 
 def test_finalize_rejects_missing_vocabulary_equivalence(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     path = workspace / "reviews/en/translation_review.json"
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -590,7 +592,7 @@ def test_finalize_rejects_missing_vocabulary_equivalence(tmp_path: Path):
 
 def test_finalize_rejects_established_name_injected_as_extra_keyword(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     path = workspace / "reviews/en/translation_review.json"
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -620,7 +622,7 @@ def test_finalize_rejects_established_name_injected_as_extra_keyword(tmp_path: P
 
 def test_finalize_accepts_short_historical_summary_without_rewriting_it(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     sealed = translation.finalize_review(project, "debat_test", work_id)
     first = next(row for row in json.loads((workspace / "reviews/en/translation_review.json").read_text(encoding="utf-8"))["final_values"]["arguments"] if row["id"] == "A0001")
@@ -632,7 +634,7 @@ def test_finalize_accepts_short_historical_summary_without_rewriting_it(tmp_path
 
 def test_finalize_historical_summary_ratio_requires_explicit_exception_rationale(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     path = workspace / "reviews/en/translation_review.json"
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -655,7 +657,7 @@ def test_finalize_historical_summary_ratio_requires_explicit_exception_rationale
 
 def test_finalize_rejects_non_english_debate_source(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     path = workspace / "data/sources_en_working.json"
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -671,7 +673,7 @@ def test_finalize_rejects_non_english_debate_source(tmp_path: Path):
 
 def test_apply_translation_creates_distinct_bilingual_copy(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     sealed = translation.finalize_review(project, "debat_test", work_id)
     corpus_hash = common.full_tree_sha256(project / "corpus/debat_test")
@@ -709,7 +711,7 @@ def test_apply_translation_creates_distinct_bilingual_copy(tmp_path: Path):
 
 def test_finalize_translation_preserves_citation_metadata_and_appends_warning(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     sealed = translation.finalize_review(project, "debat_test", work_id)
     complete_semantic_convergence(project, work_id)
@@ -741,7 +743,7 @@ def test_historical_collection_stays_bound_to_the_quote_without_a_template_param
     from wikidebia_render import _citation_template
 
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     data = common.load_json(workspace / "reviews/en/translation_review.json")
     quote = data["arguments"][0]["translation"]["citations"][0]
@@ -764,7 +766,7 @@ def test_historical_collection_stays_bound_to_the_quote_without_a_template_param
 ])
 def test_finalize_translation_rejects_non_british_quote_dates(tmp_path: Path, invalid_date: str):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     path = workspace / "reviews/en/translation_review.json"
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -776,7 +778,7 @@ def test_finalize_translation_rejects_non_british_quote_dates(tmp_path: Path, in
 
 def test_finalize_translation_rejects_wrong_citation_date(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     path = workspace / "reviews/en/translation_review.json"
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -806,7 +808,7 @@ def test_historical_citation_date_formats_match_english_translation(source: str,
 
 def test_finalize_translation_rejects_mutated_citation_source_parameters(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     path = workspace / "reviews/en/translation_review.json"
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -821,7 +823,7 @@ def test_finalize_translation_rejects_mutated_citation_source_parameters(tmp_pat
 
 def test_apply_requires_exact_translation_hash(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     translation.finalize_review(project, "debat_test", work_id)
     complete_semantic_convergence(project, work_id)
@@ -836,7 +838,7 @@ def test_apply_requires_exact_translation_hash(tmp_path: Path):
 
 def test_finalize_rejects_french_copy_changed_after_prepare(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     (workspace / "content-reviewed-copy/scope.json").write_text("{}\n", encoding="utf-8")
     try:
@@ -849,7 +851,7 @@ def test_finalize_rejects_french_copy_changed_after_prepare(tmp_path: Path):
 
 def test_finalize_translation_rejects_french_template_in_english_introduction(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     path = workspace / "reviews/en/translation_review.json"
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -865,7 +867,7 @@ def test_finalize_translation_rejects_french_template_in_english_introduction(tm
 
 def test_finalize_translation_rejects_french_parameter_in_english_summary(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     path = workspace / "reviews/en/translation_review.json"
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -908,7 +910,7 @@ def test_vocabulary_accepts_justified_english_proper_name_and_rejects_common_cap
 
 def test_finalize_translation_accepts_historical_introduction_without_stakes_subsection(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     review_path = workspace / "reviews/en/translation_review.json"
     review = json.loads(review_path.read_text(encoding="utf-8"))
@@ -1095,7 +1097,7 @@ def test_validate_debate_requires_claim_inventory():
 
 def test_finalize_translation_requires_second_completeness_review_for_low_quote_ratio(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     path = workspace / "reviews/en/translation_review.json"
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -1343,7 +1345,7 @@ def test_english_keyword_form_metadata_is_localized_per_target_form():
 
 def test_apply_translation_emits_english_localized_keyword_quality_metadata(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     sealed = translation.finalize_review(project, "debat_test", work_id)
     complete_semantic_convergence(project, work_id)
@@ -1388,7 +1390,7 @@ def test_archive_wrapper_override_rejects_a_different_destination():
 @pytest.mark.parametrize('mutation', ['missing', 'source_text', 'target_node_id'])
 def test_ordinary_historical_review_requires_exact_contextual_label_inventory(tmp_path, mutation):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, 'debat_test', work_id)
+    prepare_fixture_translation(project, 'debat_test', work_id)
     complete_translation_review(workspace)
     path = workspace / 'reviews/en/translation_review.json'
     review = json.loads(path.read_text())
@@ -1405,7 +1407,7 @@ def test_ordinary_historical_review_requires_exact_contextual_label_inventory(tm
 @pytest.mark.parametrize('entity', ['debate', 'argument'])
 def test_ordinary_review_cannot_forge_embedded_french_source(tmp_path, entity):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, 'debat_test', work_id)
+    prepare_fixture_translation(project, 'debat_test', work_id)
     complete_translation_review(workspace)
     path = workspace / 'reviews/en/translation_review.json'
     review = json.loads(path.read_text())
@@ -1437,7 +1439,7 @@ def test_english_lexical_form_is_reviewed_without_changing_french_kind(fr, en, e
 
 def test_ordinary_historical_labels_survive_projection(tmp_path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, 'debat_test', work_id)
+    prepare_fixture_translation(project, 'debat_test', work_id)
     complete_translation_review(workspace)
     sealed = translation.finalize_review(project, 'debat_test', work_id)
     review = json.loads((workspace / 'reviews/en/translation_review.json').read_text())
@@ -1485,7 +1487,7 @@ def test_source_date_localization_retains_actual_calendar_value(value, language,
 @pytest.mark.parametrize('date', ['1981 (1979)', '2007 / 2', '24/05/21'])
 def test_opaque_numeric_bibliographic_date_is_preserved_without_guessing(tmp_path, date):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, 'debat_test', work_id)
+    prepare_fixture_translation(project, 'debat_test', work_id)
     complete_translation_review(workspace)
     review = json.loads((workspace / 'reviews/en/translation_review.json').read_text())
     row = next(q for i in review['arguments'] for q in i['translation']['citations'])

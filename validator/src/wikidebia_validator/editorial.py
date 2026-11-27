@@ -38,7 +38,7 @@ SUMMARY_SCAFFOLD_FR = re.compile("(?:plusieurs faits ou principes sont ici inter
 SUMMARY_SCAFFOLD_EN = re.compile('(?:several facts or principles are interpreted here|this conclusion relies in particular on the following propositions|the facts, principles or experiences invoked|the thesis draws a direct consequence|the criticism draws a direct consequence|the concrete point is the following|the consequence advanced is precise|in the case considered, this amounts to saying)', re.I)
 PRODUCTIVE_KEYWORD_FR = re.compile("^(?:limites?|histoire|construction|fiabilité|origine|sens|définition|concept|existence|preuves?|psychologie|sociologie|géographie|généalogie)\\s+(?:de|du|des|de la|de l['’])\\b", re.I)
 PRODUCTIVE_KEYWORD_EN = re.compile('^(?:limits?|history|construction|reliability|origin|meaning|definition|concept|existence|evidence|psychology|sociology|geography|genealogy)\\s+(?:of|of the)\\b', re.I)
-COMPOSITIONAL_KEYWORD_FR = re.compile('^(?:(?:psychologie|sociologie|histoire|géographie|généalogie)\\s+religieuse?s?|science\\s+et\\s+religion)$', re.I)
+from .keyword_policy import COMPOSITIONAL_KEYWORD_FR, keyword_identity_fr
 COMPOSITIONAL_KEYWORD_EN = re.compile('^(?:religious\\s+(?:psychology|sociology|history|geography|genealogy)|science\\s+and\\s+religion)$', re.I)
 GENERIC_GOD_PREDETERMINERS = {'un', 'aucun', 'quelque', 'chaque', 'autre'}
 
@@ -421,6 +421,7 @@ def keyword_form_issues(
     *,
     enforce_count: bool = True,
     allowed_long_keywords: set[str] | None = None,
+    language: str | None = None,
 ) -> list[str]:
     issues: list[str] = []
     allowed_long_keywords = allowed_long_keywords or set()
@@ -428,6 +429,10 @@ def keyword_form_issues(
         issues.append('count')
     if len(keywords) != len(set(keywords)):
         issues.append('duplicates')
+    if language == 'fr':
+        normalized = [keyword_identity_fr(value) for value in keywords if isinstance(value, str)]
+        if len(normalized) != len(set(normalized)) and 'duplicates' not in issues:
+            issues.append('duplicate_variants')
     for keyword in keywords:
         if not isinstance(keyword, str) or not keyword.strip():
             issues.append('empty')
@@ -2151,15 +2156,19 @@ def validate_editorial(ctx: PackageContext) -> None:
     for language, vocabulary in capitalization_vocabularies:
         folded: dict[str, str] = {}
         for term, entry in vocabulary.items():
-            previous = folded.get(term.casefold())
+            identity = keyword_identity_fr(term) if language == 'fr' else term.casefold()
+            previous = folded.get(identity)
             preserved_case_variant = bool(
                 language == 'fr'
                 and previous in preserved_keywords
                 and term in preserved_keywords
             )
             if previous is not None and previous != term and not preserved_case_variant:
-                ctx.report.error('WDV-EDT-023', 'Entrées de vocabulaire ne différant que par la casse', path=editorial_controls.get('keyword_vocabulary_path'), details={'language': language, 'first': previous, 'second': term})
-            folded[term.casefold()] = term
+                message = ('Entrées de vocabulaire ne différant que par la casse'
+                           if previous.casefold() == term.casefold()
+                           else 'Variantes attestées d’un même mot-clé dans le vocabulaire')
+                ctx.report.error('WDV-EDT-023', message, path=editorial_controls.get('keyword_vocabulary_path'), details={'language': language, 'first': previous, 'second': term})
+            folded[identity] = term
             localized = _localized_keyword_entry(entry, language)
             kind = str(localized.get('kind') or '')
             expected_policy = {'noun': 'lowercase_common', 'noun_phrase': 'lowercase_common', 'proper_name': 'canonical_proper_name', 'acronym': 'canonical_acronym'}.get(kind)
@@ -2320,9 +2329,12 @@ def validate_editorial(ctx: PackageContext) -> None:
                 keywords,
                 enforce_count=not source_preexisting,
                 allowed_long_keywords=allowed_long_keywords,
+                language=lang,
             )
-            if lang == 'fr' and 'too_long' in kw_reasons and keywords == source_page_keywords(ctx, str(node_id)):
-                kw_reasons.remove('too_long')
+            if lang == 'fr' and keywords == source_page_keywords(ctx, str(node_id)):
+                # Only an exact, independently attested import may preserve
+                # historical spelling variants or a long historical keyword.
+                kw_reasons = [reason for reason in kw_reasons if reason not in {'too_long', 'duplicate_variants'}]
             if 'duplicates' in kw_reasons:
                 from types import SimpleNamespace
                 from .schema_validation import _preserved_keyword_duplicates

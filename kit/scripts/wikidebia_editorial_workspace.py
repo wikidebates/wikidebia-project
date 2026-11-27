@@ -11,6 +11,7 @@ editorial corrections or generate final MediaWiki pages.
 from __future__ import annotations
 
 from wikidebia_release_info import KIT_VERSION
+from wikidebia_keyword_policy import keyword_identity_fr, lowercase_keyword_initial
 
 import argparse
 import collections
@@ -201,7 +202,8 @@ def keyword_diagnostics(values: Iterable[str], fallback: bool, entity_type: str 
         issues.append({"code": "KEYWORDS_TOO_FEW", "severity": "correction", "field": "keywords", "count": len(rows), "minimum": minimum})
     if len(rows) > maximum:
         issues.append({"code": "KEYWORDS_TOO_MANY", "severity": "correction", "field": "keywords", "count": len(rows), "maximum": maximum})
-    if len(rows) != len({value.casefold() for value in rows}):
+    keyword_identities = {keyword_identity_fr(value) for value in rows}
+    if len(rows) != len(keyword_identities):
         issues.append({"code": "KEYWORDS_DUPLICATE", "severity": "correction", "field": "keywords"})
     long_values = [value for value in rows if len(value) > 40]
     if long_values:
@@ -424,9 +426,7 @@ def keyword_vocabulary_working(items: Sequence[Mapping[str, Any]], debate_id: st
     entries = []
     for normalized in sorted(usage):
         term = original_forms[normalized]
-        lexical_words = token_words(term)
-        has_connector = bool(re.search(r"(?:\b(?:de|du|des|et|of|and)\b|d['’])", term, flags=re.IGNORECASE))
-        multiword_exception = len(lexical_words) > 1
+        multiword = len(token_words(term)) > 1
         entries.append({
             "fr": term,
             "en": None,
@@ -434,13 +434,10 @@ def keyword_vocabulary_working(items: Sequence[Mapping[str, Any]], debate_id: st
             "kind": None,
             "capitalization_policy": None,
             "capitalization_rationale": "",
-            "atomic_concept": True,
-            "compositional_intersection": False,
-            "multiword_exception": multiword_exception,
-            "multiword_exception_rationale": (
-                f"Locution thématique conventionnelle « {term} » : son sens encyclopédique ne se réduit pas à une simple intersection de ses constituants."
-                if multiword_exception else ""
-            ),
+            "atomic_concept": None if multiword else True,
+            "compositional_intersection": None if multiword else False,
+            "multiword_exception": None if multiword else False,
+            "multiword_exception_rationale": "",
             "status": "pending_review",
             "usages": usage[normalized],
             "decision": "pending",

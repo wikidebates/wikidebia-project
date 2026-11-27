@@ -4,8 +4,8 @@
 This phase starts only after French metadata and content have been locked. It
 collects English titles, sections, keywords, debate content, argument summaries
 and documentary sources in a formal review ledger. Finalization seals the
-review; application creates an atomically visible ``translated-copy/``. No
-MediaWiki page is rendered and no remote access is performed.
+review; application creates an atomically visible ``translated-copy/``.
+Read-only French wiki checks bind the English work to the published source.
 """
 
 from __future__ import annotations
@@ -13,6 +13,13 @@ from __future__ import annotations
 from wikidebia_citation_passages import blank_translations, validate_translations
 
 from wikidebia_release_info import KIT_VERSION
+from wikidebia_french_normalization import (
+    RECEIPT_PATH as FRENCH_NORMALIZATION_RECEIPT,
+    prepare_normalization,
+    verify_bound_normalization,
+    verify_live_pages,
+    verify_normalization,
+)
 from wikidebia_title_structure import canonical_title_structure_issues
 
 import argparse
@@ -1232,6 +1239,16 @@ def _build_translation_review_units(argument_rows: Sequence[dict[str, Any]]) -> 
     return units
 
 
+def prepare_french_normalization(
+    project_root: Path, debate_id: str, work_id: str, *, overwrite: bool = False,
+) -> dict[str, Any]:
+    workspace, meta = _load_workspace(project_root, debate_id, work_id)
+    _assert_source_unchanged(project_root, debate_id, meta)
+    source = _assert_content_copy(workspace, meta)
+    _source_snapshot(source)
+    return prepare_normalization(project_root, workspace, source, meta, overwrite=overwrite)
+
+
 def prepare_review(project_root: Path, debate_id: str, work_id: str, *, overwrite: bool = False) -> dict[str, Any]:
     workspace, meta = _load_workspace(project_root, debate_id, work_id)
     if meta.get("status") not in {"fr_content_applied", "fr_source_preserved", "en_translation_review_ready"}:
@@ -1239,12 +1256,22 @@ def prepare_review(project_root: Path, debate_id: str, work_id: str, *, overwrit
     _assert_source_unchanged(project_root, debate_id, meta)
     source = _assert_content_copy(workspace, meta)
     readiness = load_json(workspace / "reviews/en/translation_readiness.json", "préparation anglaise")
-    if readiness.get("status") != "ready_for_translation" and not (overwrite and meta.get("status") == "en_translation_review_ready" and readiness.get("status") == "translation_review_in_progress"):
+    if readiness.get("status") != "ready_for_translation" and not (meta.get("status") == "en_translation_review_ready" and readiness.get("status") == "translation_review_in_progress"):
         raise TranslationReviewError("La préparation anglaise n’est pas ouverte")
     review_path = workspace / "reviews/en/translation_review.json"
     sources_path = workspace / "data/sources_en_working.json"
+    normalization = verify_normalization(project_root, workspace, source, meta)
+    verify_live_pages(normalization["pages"])
+    normalization_sha = normalization["receipt_sha256"]
     if review_path.exists() and not overwrite:
         current = load_json(review_path, "revue anglaise")
+        if (current.get("status") != "draft" or current.get("debate_id") != debate_id
+                or current.get("work_id") != work_id
+                or current.get("prepared_content_reviewed_copy_sha256") != normalization["french_source_tree_sha256"]):
+            raise TranslationReviewError("Le brouillon anglais ne correspond pas à la source française revue")
+        current["french_normalization_receipt_sha256"] = normalization_sha
+        write_json(workspace / FRENCH_NORMALIZATION_RECEIPT, normalization)
+        write_json(review_path, current)
         return {"status": "en_translation_review_ready", "debate_id": debate_id, "work_id": work_id, "arguments": len(current.get("arguments") or []), "idempotent": True}
     if overwrite and (workspace / "translated-copy").exists():
         raise TranslationReviewError("Impossible de régénérer une traduction déjà appliquée")
@@ -1272,7 +1299,8 @@ def prepare_review(project_root: Path, debate_id: str, work_id: str, *, overwrit
         "target_language": "en",
         "status": "draft",
         "prepared_at": now,
-        "prepared_content_reviewed_copy_sha256": full_tree_sha256(source),
+        "prepared_content_reviewed_copy_sha256": normalization["french_source_tree_sha256"],
+        "french_normalization_receipt_sha256": normalization_sha,
         "french_metadata_review_sha256": metadata_lock.get("review_sha256"),
         "french_content_review_sha256": content_lock.get("review_sha256"),
         "section_mapping": copy.deepcopy(SECTION_MAP),
@@ -1319,6 +1347,7 @@ def prepare_review(project_root: Path, debate_id: str, work_id: str, *, overwrit
     unit_by_page = {page_id: unit["id"] for unit in review["review_units"] for page_id in unit["page_ids"]}
     for item in review["arguments"]:
         item["review_unit_id"] = unit_by_page[item["id"]]
+    write_json(workspace / FRENCH_NORMALIZATION_RECEIPT, normalization)
     write_json(review_path, review)
     write_json(sources_path, {
         "schema": EN_SOURCES_WORKING_SCHEMA,
@@ -1338,7 +1367,7 @@ def prepare_review(project_root: Path, debate_id: str, work_id: str, *, overwrit
         "review_units": len(review["review_units"]),
         "risk_levels": dict(collections.Counter(item["review_risk"]["level"] for item in review["arguments"])),
         "french_sources": len((load_json(source / "data/sources.json", "sources françaises").get("sources") or [])),
-        "boundaries": {"automatic_translation": False, "final_pages_generated": False, "remote_access": False},
+        "boundaries": {"automatic_translation": False, "final_pages_generated": False, "remote_access": True, "remote_write": False},
     })
     (workspace / "audits/en_translation_inventory.md").write_text(
         "\n".join(["# English translation inventory", "", f"- Debate: `{debate_id}`", f"- Arguments to translate: {len(translation_ids)}", f"- Existing English arguments reused: {len(active_ids) - len(translation_ids)}", f"- Controlled terms: {len(review['vocabulary'])}", "", "No automatic translation or final page generation was performed.", ""]),
@@ -2632,6 +2661,7 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
         raise TranslationReviewError("Schéma ou identité de revue anglaise invalide")
     if review.get("prepared_content_reviewed_copy_sha256") != full_tree_sha256(source):
         raise TranslationReviewError("Base française divergente pour la revue anglaise")
+    verify_bound_normalization(project_root, workspace, source, meta, review)
     registry, metadata_lock, content_lock, vocabulary_fr = _source_snapshot(source)
     french_source_rows = load_json(source / "data/sources.json", "sources françaises").get("sources") or []
     french_ids = {str(row.get("id")) for row in french_source_rows}
@@ -3123,10 +3153,25 @@ def apply_review(project_root: Path, debate_id: str, work_id: str, confirm_revie
         return {"status": "en_translation_applied", "debate_id": debate_id, "work_id": work_id, "review_sha256": review["review_sha256"], "translated_copy_tree_sha256": actual, "idempotent": True}
     if target.exists() or target.is_symlink():
         raise TranslationReviewError("Chemin translated-copy déjà occupé")
+    # Do not rewrite an English seal created before the introduction of the
+    # normalization receipt. It can be applied only with its existing matching
+    # workspace seal and the ordinary convergence and publication safeguards.
+    has_normalization = "french_normalization_receipt_sha256" in review
+    if has_normalization:
+        verify_bound_normalization(project_root, workspace, source, meta, review)
+    else:
+        previous = meta.get("english_translation_review") or {}
+        if (previous.get("status") != "finalized"
+                or previous.get("review_sha256") != review["review_sha256"]
+                or previous.get("prepared_content_reviewed_copy_sha256") != review["prepared_content_reviewed_copy_sha256"]
+                or (workspace / FRENCH_NORMALIZATION_RECEIPT).exists()):
+            raise TranslationReviewError("Reçu français absent et aucune revue anglaise historique scellée correspondante")
     temp = Path(tempfile.mkdtemp(prefix=".translated-copy.tmp-", dir=workspace))
     try:
         shutil.rmtree(temp)
         result = _build_translated_copy(project_root, source, temp, review, debate_id, work_id)
+        if has_normalization:
+            write_json(temp / FRENCH_NORMALIZATION_RECEIPT, load_json(workspace / FRENCH_NORMALIZATION_RECEIPT))
         for rel in ("imports",):
             if full_tree_sha256(temp / rel) != full_tree_sha256(source / rel):
                 raise TranslationReviewError(f"La provenance {rel} a été modifiée pendant la traduction")
@@ -3215,6 +3260,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--work-id", required=True)
     action = parser.add_mutually_exclusive_group(required=True)
     action.add_argument("--prepare", action="store_true")
+    action.add_argument("--prepare-normalization", action="store_true", help="Préparer la revue de la version française publiée")
     action.add_argument("--freeze-imported-source", action="store_true", help="Geler les pages françaises publiées telles qu’importées, sans réécriture ni revérification documentaire revendiquée")
     action.add_argument("--reopen-review", action="store_true", help="Archiver et rouvrir une revue finalisée avant rendu, en préservant toute copie appliquée")
     action.add_argument("--finalize", action="store_true")
@@ -3240,6 +3286,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.freeze_imported_source:
             from wikidebia_translation_source import freeze_imported_source
             result = freeze_imported_source(project_root, args.debate_id, work_id, reviewer=args.reviewer or "", note=args.note or "")
+        elif args.prepare_normalization:
+            result = prepare_french_normalization(project_root, args.debate_id, work_id, overwrite=args.overwrite_review)
         elif args.prepare:
             result = prepare_review(project_root, args.debate_id, work_id, overwrite=args.overwrite_review)
         elif args.finalize:

@@ -4,8 +4,8 @@
   "normative_revision": "1.2.88",
   "stable_archive_name": "wikidebia-validator.zip",
   "version_source": "VERSIONS.json",
-  "declared_file_count": 529,
-  "declared_test_count": 1191,
+  "declared_file_count": 530,
+  "declared_test_count": 1193,
   "self_excluded": [
     "PACKAGE_MANIFEST_SHA256.json",
     "PACKAGE_RECEIPT.json"
@@ -38,8 +38,8 @@
     },
     {
       "path": "TEST_REPORT.txt",
-      "size_bytes": 980,
-      "sha256": "597404eb96715f8b5bec66879a022732d05533413a0a7cb94ee3601a47c72233"
+      "size_bytes": 981,
+      "sha256": "eeab868ec7403fb97d36d2c72cba68a8f977b416be6f036fa6f07b663dc65a78"
     },
     {
       "path": "VERSIONS.json",
@@ -789,12 +789,12 @@
     {
       "path": "docs/SELF_AUDIT_REPORT.txt",
       "size_bytes": 728,
-      "sha256": "3dcf466f868019a9ee7e91a7af06d4b8df80086edc90cd02bf37cfd744488b20"
+      "sha256": "fff46458f90c3db3ae074a70e13622ae7a0f922fec84e6c96ff089e4698b58ec"
     },
     {
       "path": "docs/TEST_REPORT.txt",
       "size_bytes": 1335,
-      "sha256": "8af0ed6306ca1a8c4a5aae856d9b2044992283cd960c24af95c98fa3b00333de"
+      "sha256": "05f7e1c73d494b51f217a238989af252014a1831e86d277acf552340f05a4ffa"
     },
     {
       "path": "docs/history/README.md",
@@ -1778,8 +1778,8 @@
     },
     {
       "path": "src/wikidebia_validator/editorial.py",
-      "size_bytes": 187941,
-      "sha256": "72f2ceb34b5608d67c36555b72faa8850abea3e44b75622348429b64c35a2348"
+      "size_bytes": 188647,
+      "sha256": "5ffe83f198eb5618e064167faf628ed151df634de1dbf109871800deedab6310"
     },
     {
       "path": "src/wikidebia_validator/files.py",
@@ -1795,6 +1795,11 @@
       "path": "src/wikidebia_validator/historical_summary.py",
       "size_bytes": 6369,
       "sha256": "b987c154a4dbc09ad7a6376a4b348422ca373226832e2f2f20f956788cc7428a"
+    },
+    {
+      "path": "src/wikidebia_validator/keyword_policy.py",
+      "size_bytes": 1402,
+      "sha256": "fee00ec36ff23e46bec17d172eaa219a33f106bab8b074cbee2077773f101b26"
     },
     {
       "path": "src/wikidebia_validator/package.py",
@@ -2293,8 +2298,8 @@
     },
     {
       "path": "tests/test_norm_1238_keyword_decomposition.py",
-      "size_bytes": 7484,
-      "sha256": "79cd664b0c9995ce8d369effb73cbad7bb12ce83ba36c189907354ad2254227f"
+      "size_bytes": 8771,
+      "sha256": "80b9a4508e98e7da25fb8d46f3ca131045e824f4e8fbb264fe1294d7cdd1a07d"
     },
     {
       "path": "tests/test_norm_1239_legacy_preservation.py",

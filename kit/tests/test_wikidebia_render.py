@@ -2,12 +2,15 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import shutil
 import sys
 from pathlib import Path
 
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
+
+from french_normalization_fixture import prepare_fixture_translation
 
 def load_module(name: str):
     path = SCRIPTS / f"{name}.py"
@@ -40,11 +43,13 @@ def make_translated(tmp_path: Path, *, reuse_existing_argument: bool = False) ->
     norm_path = project / "norms/normative_reference/01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.70.md"
     norm_path.parent.mkdir(parents=True, exist_ok=True)
     norm_path.write_text("# Norme de test 1.2.27\n", encoding="utf-8")
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     sealed = translation.finalize_review(project, "debat_test", work_id)
     complete_semantic_convergence(project, work_id)
     translation.apply_review(project, "debat_test", work_id, sealed["review_sha256"])
+    # These rendering fixtures exercise the local render without a remote checkpoint tree.
+    shutil.rmtree(project / ".state/fr-publication/debat_test" / work_id)
     approve_fixture_placements(workspace)
     return project, workspace, work_id, sealed["review_sha256"]
 

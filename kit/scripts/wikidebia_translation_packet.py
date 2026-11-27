@@ -20,6 +20,7 @@ from wikidebia_corpus_build import (
     write_json,
 )
 from wikidebia_editorial_workspace import WorkspaceError, validate_work_id
+from wikidebia_french_normalization import verify_bound_normalization
 from wikidebia_render import RenderError, _load_workspace
 from wikidebia_translation_review import (
     TRANSLATION_REVIEW_SCHEMA,
@@ -143,8 +144,6 @@ def build_packet(
     if not UNIT_ID_RE.fullmatch(unit_id):
         raise TranslationPacketError("unit_id doit suivre U suivi d’au moins trois chiffres")
     workspace, meta = _load_workspace(project_root, debate_id, work_id)
-    if reuse_memory:
-        reuse_review(project_root, debate_id, work_id, memory_root)
     source = _assert_content_copy(workspace, meta)
     review = load_json(workspace / "reviews/en/translation_review.json", "revue anglaise")
     if (
@@ -153,6 +152,13 @@ def build_packet(
         or review.get("work_id") != work_id
     ):
         raise TranslationPacketError("Schéma ou identité de revue anglaise invalide")
+    if review.get("status") == "draft" and (
+        review.get("french_normalization_receipt_sha256") or (meta.get("artifacts") or {}).get("english_translation_review")
+    ):
+        verify_bound_normalization(project_root, workspace, source, meta, review)
+    if reuse_memory:
+        reuse_review(project_root, debate_id, work_id, memory_root)
+        review = load_json(workspace / "reviews/en/translation_review.json", "revue anglaise")
     if review.get("status") == "approved":
         claimed = str(review.get("review_sha256") or "")
         if not claimed or claimed != translation_review_sha256(review):

@@ -18,6 +18,7 @@ from wikidebia_corpus_build import (
     write_json,
 )
 from wikidebia_editorial_workspace import WorkspaceError, validate_work_id
+from wikidebia_french_normalization import verify_bound_normalization
 from wikidebia_render import RenderError, _load_workspace
 from wikidebia_translation_review import (
     TRANSLATION_REVIEW_SCHEMA,
@@ -129,6 +130,10 @@ def build_worklist(project_root: Path, debate_id: str, work_id: str) -> dict[str
     ):
         raise TranslationWorklistError("Schéma ou identité de revue anglaise invalide")
     review_status = str(review.get("status") or "")
+    if review_status == "draft" and (
+        review.get("french_normalization_receipt_sha256") or (meta.get("artifacts") or {}).get("english_translation_review")
+    ):
+        verify_bound_normalization(project_root, workspace, source, meta, review)
     if review_status == "approved":
         claimed = str(review.get("review_sha256") or "")
         if not claimed or claimed != translation_review_sha256(review):

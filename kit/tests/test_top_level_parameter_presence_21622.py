@@ -22,6 +22,8 @@ from test_wikidebia_content_review import make_metadata_applied, complete_conten
 from test_wikidebia_remote_update import make_fixture, FakeAdapter, TEST_VALIDATOR_PYTHON, argument
 
 
+from french_normalization_fixture import prepare_fixture_translation
+
 def _presence(names: list[str], present: set[str]) -> dict[str, dict[str, bool]]:
     return {name: {"present": name in present} for name in names}
 
@@ -219,7 +221,7 @@ def test_vote_electronique_v8_presence_flows_import_to_lock_checkpoint_and_engli
     assert "vidéographie-contre" in debate_deletions
     assert "objections" in update.top_level_parameter_deletions(arg_src.read_text(encoding="utf-8"), arg_wiki, "fr", "argument")
 
-    prepared = translation.prepare_review(project, "debat_test", work_id)
+    prepared = prepare_fixture_translation(project, "debat_test", work_id)
     assert prepared["status"] == "en_translation_review_ready"
 
 

@@ -15,6 +15,7 @@ Ces règles s’appliquent à toutes les sessions. Les procédures spécifiques 
 - Conserver les citations, sources, attributions et résumés existants, sauf demande spécifique de leur modification. Une source introuvable ou non vérifiée ne justifie pas une suppression.
 - Pour les pages françaises existantes, préserver le `titre-affiché` de chaque occurrence même si `page=` change. Omettre les paramètres relationnels facultatifs vides, notamment `|justifications=` et `|objections=`.
 - Séparer strictement brouillon, validation, traduction et publication ; ne jamais déclarer une étape terminée à partir d’un simple paquet, contexte ou candidat documentaire.
+- Pour une revue utilisateur, fournir un lien que le destinataire peut ouvrir ou inclure le contenu dans la conversation. Les chemins du workspace, de `work/`, de `outgoing/` ou de `.state/` ne constituent pas une livraison. Voir [Livraison des revues et vérification sur le wiki français](docs/AGENT_PROCEDURES.md#livraison-des-revues-et-vérification-sur-le-wiki-français).
 
 ## Vérifications proportionnées pour économiser les crédits
 
