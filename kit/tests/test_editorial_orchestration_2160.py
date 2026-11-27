@@ -1795,3 +1795,82 @@ def test_final_publication_conflict_is_persisted_without_reopening_reviews(tmp_p
     assert result["pending_review"] is None
     assert result["final_publication"]["remote_execution_started"] is False
     assert "collision anglaise" in result["final_publication"]["error"]
+
+
+@pytest.mark.parametrize("review_type", ["en_translation_review", "en_translation_correction"])
+@pytest.mark.parametrize("change", ["attestation", "drop", "downgrade", "evidence", "text", "index", "policy", "new"])
+def test_published_quote_provenance_roundtrip(tmp_path, monkeypatch, review_type, change):
+    project = tmp_path / "project"
+    project.mkdir()
+    base = make_base(project)
+    state = make_state(project, base, review_type)
+    state["work_id"] = "EDIT-20260811-001"
+    wf._save_workflow(project, state)
+    relative = "reviews/en/translation_review.json"
+    proof = {
+        "id": "Q1", "translation_origin": "published_translation",
+        "published_quote_evidence": {"evidence_sha256": "a" * 64},
+        "translated_citation": "Verified published text", "translated_date": "1901",
+    }
+    review = {
+        "status": "draft", "french_normalization_receipt_sha256": "d" * 64,
+        "published_quote_contract": "wikidebia-published-quote-evidence-1",
+        "quote_uniqueness_policy": "test-policy",
+        "quote_public_index_sha256": "b" * 64,
+        "arguments": [{"id": "A0001", "translation": {"citations": [proof]}}],
+    }
+    common.write_json(base / relative, review)
+    pending = wf.create_review_package(
+        project, state, review_type=review_type, base=base,
+        editable_paths=[relative], context_paths=["data/context.json"],
+    )
+    original = project / pending["package_path"]
+    returned = tmp_path / "returned.zip"
+
+    def edit(root):
+        path = root / "editable" / relative
+        value = common.load_json(path, "review")
+        rows = value["arguments"][0]["translation"]["citations"]
+        row = rows[0]
+        if change == "attestation":
+            row["quote_completeness_reviewed"] = True
+        elif change == "drop":
+            rows.clear()
+            value.pop("published_quote_contract")
+        elif change == "downgrade":
+            row.pop("published_quote_evidence")
+            row["translation_origin"] = "ai_translation"
+        elif change == "evidence":
+            row["published_quote_evidence"]["evidence_sha256"] = "c" * 64
+        elif change == "text":
+            row["translated_citation"] += " altered"
+        elif change == "index":
+            value.pop("quote_public_index_sha256")
+        elif change == "policy":
+            value.pop("quote_uniqueness_policy")
+        elif change == "new":
+            rows.append(dict(row, id="Q2"))
+        common.write_json(path, value)
+
+    rewrite_zip(original, returned, edit)
+    calls = []
+    monkeypatch.setattr(wf, "finalize_translation_review", lambda *a: calls.append(a) or {})
+    monkeypatch.setattr(wf, "_mechanical_advance", lambda project, state: state)
+    if change == "attestation":
+        result = wf.import_review(project, "debat_test", returned)
+        assert result["phase"] == "semantic_convergence_1"
+        actual = common.load_json(base / relative, "review")
+        assert actual["arguments"][0]["translation"]["citations"][0] == dict(proof, quote_completeness_reviewed=True)
+        assert calls
+    else:
+        with pytest.raises(wf.WorkflowError, match="Provenance des citations anglaises"):
+            wf.import_review(project, "debat_test", returned)
+        assert common.load_json(base / relative, "review") == review
+        assert wf._load_workflow(project, "debat_test")["pending_review"]["package_id"] == pending["package_id"]
+        assert not calls
+
+
+def test_quote_provenance_legacy_review_does_not_require_new_fields():
+    before = {"arguments": [{"id": "A", "translation": {"citations": [{"id": "Q"}]}}]}
+    after = {"arguments": [{"id": "A", "translation": {"citations": [{"id": "Q", "translated_citation": "AI text"}]}}]}
+    wf._assert_quote_review_provenance(before, after)

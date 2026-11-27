@@ -347,3 +347,16 @@ n'a pas été recopié dans le brouillon. Le reçu et le contrat d'unicité sont
 liés aux deux verrous EN et vérifiés par le validateur indépendant.
 Les revues historiques déjà scellées restent lisibles sans preuve inventée.
 L'activation générale reste volontairement bloquée dans cette branche.
+
+
+### Conservation des preuves dans les ZIP de revue
+
+Le réimport compare les marqueurs de contrat et d'index ainsi que la
+provenance, la preuve et le texte/date publiés à la version locale qui
+a servi à préparer le ZIP. Il refuse leur suppression, leur remplacement
+ou l'ajout de nouvelles preuves par le relecteur externe. Les attestations
+de complétude restent éditables. Une preuve contestée doit être signalée,
+sans conversion silencieuse en traduction IA ; toute sélection nouvelle
+doit passer par le mécanisme local de sélection. Lors d'une réouverture
+après convergence, le contrôle de doublons dérivé est invalidé et sera
+recalculé, mais les preuves sélectionnées restent intactes.

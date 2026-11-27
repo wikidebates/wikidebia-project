@@ -740,6 +740,7 @@ def _instructions(review_type: str, debate_id: str, work_id: str | None, editabl
             "Les règles qualitatives intrinsèques des keywords restent applicables : la version anglaise doit utiliser les équivalents idiomatiques du vocabulaire français final, y compris après une correction ou une décomposition historique validée.",
             "Pour une introduction française historique, produisez une adaptation anglaise autonome : examinez explicitement le contexte franco-français et condensez, contextualisez ou omettez ce qui ne doit pas être traduit mécaniquement, sans changer la substance du débat. `Stakes of the debate` et les autres contraintes de profil d’une introduction nouvellement créée ne sont pas obligatoires pour les sous-parties historiques inchangées.",
             "Pour un résumé historique, un ratio EN/FR hors 0,60–1,45 est un signal de revue et non un objectif de réécriture ; attestez l’équivalence et fournissez `summary_ratio_exception_rationale` lorsque le ratio reste hors plage.",
+            "Conservez exactement published_quote_contract, quote_uniqueness_policy et quote_public_index_sha256 ainsi que translation_origin, published_quote_evidence et les valeurs traduites de chaque citation publiée présélectionnée. Complétez les attestations éditoriales, mais signalez une preuve contestée au lieu de la supprimer ou de la remplacer dans le ZIP. Toute nouvelle sélection se fait localement.",
             "Dans tous les titres anglais, utilisez exclusivement l’apostrophe droite ASCII `'` pour les possessifs et contractions. Les apostrophes typographiques `’`, `‘`, `ʼ` ou `＇` sont non conformes, y compris dans la traduction d’un titre historique.",
             "Pour toute nouvelle source ajoutée dans `data/sources_en_working.json`, renseignez `verification.verified_at`, `verification.primary_source` (booléen explicite) et `verification.notes` en plus des attestations de langue/auteur. Les anciennes clés `checked_at`, `method` et `note` ne doivent plus être émises par un nouveau paquet ; elles restent lisibles uniquement pour compatibilité avec une revue déjà préparée.",
             "Toute référence bibliographique utilisée sur la page Debate doit renseigner `document_kind` et, dans l’usage Debate, `documentary_scope=foundational_work` ou `broad_synthesis`, avec une justification de sélection spécifique. Une source trop étroite doit être retirée de la bibliographie générale plutôt que requalifiée artificiellement.",
@@ -1609,7 +1610,7 @@ def _reopen_translation_after_findings(project_root: Path, state: dict[str, Any]
     workspace, meta = _current_workspace_meta(project_root, state)
     review_path = workspace / "reviews/en/translation_review.json"
     review = load_json(review_path, "revue anglaise")
-    for key in ("review_sha256", "finalized_at", "semantic_content_sha256", "summary", "final_values", "semantic_review"):
+    for key in ("review_sha256", "finalized_at", "semantic_content_sha256", "summary", "final_values", "semantic_review", "quote_duplicate_audit"):
         review.pop(key, None)
     review["status"] = "draft"
     write_json(review_path, review)
@@ -2453,6 +2454,37 @@ def _prepare_historical_consent_import(
     authorization["authorization_sha256"] = _sha256_bytes(_canonical_json(body))
     return mutable_files, normalized, authorization
 
+def _assert_quote_review_provenance(before: Mapping[str, Any], after: Mapping[str, Any]) -> None:
+    """External review may attest a local selection, not replace its provenance."""
+    for key in ("published_quote_contract", "quote_uniqueness_policy", "quote_public_index_sha256"):
+        if (key in before) != (key in after) or before.get(key) != after.get(key):
+            raise WorkflowError(f"Provenance des citations anglaises modifiée dans le ZIP : {key}")
+
+    def selected(review):
+        rows = {}
+        for argument in review.get("arguments") or []:
+            for row in (argument.get("translation") or {}).get("citations") or []:
+                if (row.get("translation_origin") != "published_translation"
+                        and "published_quote_evidence" not in row):
+                    continue
+                key = (argument.get("id"), row.get("id"))
+                if key in rows:
+                    raise WorkflowError("Provenance des citations anglaises dupliquée dans la revue")
+                rows[key] = {
+                    field: row[field] for field in (
+                        "translation_origin", "published_quote_evidence",
+                        "translated_citation", "translated_date",
+                    ) if field in row
+                }
+        return rows
+
+    if selected(before) != selected(after):
+        raise WorkflowError(
+            "Provenance des citations anglaises modifiée dans le ZIP : "
+            "conserver le passage publié et sa preuve; effectuer toute nouvelle sélection localement"
+        )
+
+
 def import_review(
     project_root: Path, debate_id: str, archive: Path, *, execute_graph_actions: bool = False,
     authorize_historical_changes: bool = False,
@@ -2579,6 +2611,7 @@ def import_review(
             # returned English work. A newer ZIP may not remove its binding.
             old_english = load_json(backup / "reviews/en/translation_review.json", "revue anglaise avant import")
             english = load_json(base / "reviews/en/translation_review.json", "revue anglaise importée")
+            _assert_quote_review_provenance(old_english, english)
             if (old_english.get("status") == "draft" and english.get("status") == "draft"
                     and "french_normalization_receipt_sha256" not in old_english
                     and "french_normalization_receipt_sha256" not in english
