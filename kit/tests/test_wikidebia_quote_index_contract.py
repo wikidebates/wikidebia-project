@@ -283,3 +283,22 @@ def test_prior_authorization_reproduces_exact_scope_without_self_duplicate_refre
     refreshed_path.unlink()
     with pytest.raises(q.QuoteIndexError,match="missing_or_nonprivate"):
         authorized_package_audit(workspace,root,auth,now=later+timedelta(days=1))
+
+
+def test_authorization_uses_precise_clock_and_keeps_initial_quote_timestamp(tmp_path):
+    import wikidebia_final_publication as publication
+    idx=snapshot()
+    args=[arg("A0001","A quote.")]
+    audit=q.final_audit(args,idx,q.digest(idx),LOCK,now=NOW)
+    state=tmp_path
+    legacy=publication._authorization(state,{"baseline_sha256":"base"},{"preflight_sha256":"pre"})
+    assert "quote_duplicate_preflight" not in legacy
+    assert "quote_duplicate_authorized_at" not in legacy
+    first=publication._authorization(state,{"baseline_sha256":"base"},{"preflight_sha256":"pre"},quote_check=audit)
+    assert first["quote_duplicate_authorized_at"]==first["authorized_at"]
+    assert first["quote_duplicate_preflight"]==audit
+    assert datetime.fromisoformat(first["authorized_at"])>=datetime.fromisoformat(audit["checked_at"])
+    later=publication._authorization(state,{"baseline_sha256":"base"},{"preflight_sha256":"new"},quote_check=audit,
+                                    quote_authorized_at=first["quote_duplicate_authorized_at"])
+    assert later["quote_duplicate_authorized_at"]==first["quote_duplicate_authorized_at"]
+    assert datetime.fromisoformat(later["authorized_at"])>=datetime.fromisoformat(first["authorized_at"])

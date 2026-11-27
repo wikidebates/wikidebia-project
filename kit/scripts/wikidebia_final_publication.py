@@ -1286,6 +1286,10 @@ def _authorization(
         value["preflight_revalidated_at"] = revalidation["checked_at"]
         value["revalidated_preflight_sha256"] = revalidation["preflight_sha256"]
     if quote_check is not None:
+        # The documentary check has microsecond precision. Truncating the
+        # authorization time to seconds would sometimes make it predate
+        # its own immediately preceding check.
+        value["authorized_at"] = dt.datetime.now(dt.timezone.utc).isoformat()
         value["quote_duplicate_preflight"] = copy.deepcopy(quote_check)
         value["quote_duplicate_authorized_at"] = quote_authorized_at or value["authorized_at"]
     value["authorization_sha256"] = _canonical(value, "authorization_sha256")
