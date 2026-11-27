@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Reuse the merged PR validation
         id: pr-validation
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           result-encoding: string
           script: |
