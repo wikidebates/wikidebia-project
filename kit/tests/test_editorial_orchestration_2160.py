@@ -1874,3 +1874,59 @@ def test_quote_provenance_legacy_review_does_not_require_new_fields():
     before = {"arguments": [{"id": "A", "translation": {"citations": [{"id": "Q"}]}}]}
     after = {"arguments": [{"id": "A", "translation": {"citations": [{"id": "Q", "translated_citation": "AI text"}]}}]}
     wf._assert_quote_review_provenance(before, after)
+
+
+@pytest.mark.parametrize("mode", ["refuse", "replace", "rollback", "changed_context"])
+def test_quote_selection_reissues_pending_package_only_explicitly(tmp_path, monkeypatch, mode):
+    import wikidebia_published_quote_selection as selection
+
+    project = tmp_path / "project"
+    project.mkdir()
+    base = make_base(project)
+    state = make_state(project, base, "en_translation_review")
+    state["work_id"] = "EDIT-20260811-001"
+    wf._save_workflow(project, state)
+    relative = "reviews/en/translation_review.json"
+    draft = base / relative
+    common.write_json(draft, {"status": "draft"})
+    pending = wf.create_review_package(
+        project, state, review_type="en_translation_review", base=base,
+        editable_paths=[relative], context_paths=["data/context.json"],
+    )
+    archive = project / pending["package_path"]
+    original_zip = archive.read_bytes()
+    original_draft = draft.read_bytes()
+    workflow_path = wf._workflow_path(project, "debat_test")
+    original_state = workflow_path.read_bytes()
+    previous_manifest, _ = wf._read_returned_package(archive)
+    # A caller must have completed evidence validation before this transport step.
+    update = {"status": "draft", "published_quote_contract": "wikidebia-published-quote-evidence-1"}
+    if mode == "changed_context":
+        common.write_json(base / "data/context.json", {"changed": True})
+    if mode == "rollback":
+        def failed_export(*args, **kwargs):
+            archive.write_bytes(b"partial replacement")
+            workflow_path.write_bytes(b"partial state")
+            raise RuntimeError("synthetic re-export failure")
+        monkeypatch.setattr(wf, "create_review_package", failed_export)
+    if mode != "replace":
+        pattern = {"refuse": "replace-pending-package", "rollback": "re-export failure",
+                   "changed_context": "baseline_changed"}[mode]
+        with pytest.raises(RuntimeError, match=pattern):
+            selection._commit_selection(project, "debat_test", state["work_id"], base, draft,
+                                        original_draft, update, replace_pending_package=mode != "refuse")
+        assert draft.read_bytes() == original_draft
+        assert archive.read_bytes() == original_zip
+        assert workflow_path.read_bytes() == original_state
+    else:
+        replacement = selection._commit_selection(project, "debat_test", state["work_id"], base, draft,
+                                                  original_draft, update, replace_pending_package=True)
+        assert replacement["package_id"] != pending["package_id"]
+        new_state = wf._load_workflow(project, "debat_test")
+        assert new_state["pending_review"]["package_id"] == replacement["package_id"]
+        assert new_state["superseded_reviews"][-1]["pending_review"] == pending
+        manifest, files = wf._read_returned_package(archive)
+        assert json.loads(files["editable/" + relative]) == update
+        assert manifest["context_files"] == previous_manifest["context_files"]
+        with pytest.raises(wf.WorkflowError, match="actuellement attendu"):
+            wf._validate_pending_identity(new_state, previous_manifest)

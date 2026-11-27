@@ -13,6 +13,7 @@ from datetime import datetime
 import json
 import os
 from pathlib import Path
+import shutil
 import tempfile
 
 import wikidebia_quote_bridge as bridge
@@ -116,7 +117,81 @@ def _write_draft(path, value, expected_bytes):
             os.unlink(tmp)
 
 
-def select_workspace(project, debate_id, work_id, evidence_paths, index_sha=None):
+def _commit_selection(project, debate_id, work_id, workspace, path, before, updated, *, replace_pending_package=False):
+    """Keep the normal high-level ZIP workflow compatible with local selection.
+
+    An existing outgoing ZIP is immutable until the operator explicitly opts
+    into its replacement. Reissue precisely the same file allowlist under a
+    new package identity; on local failure restore the draft, ZIP and state.
+    The caller holds the corpus lock.
+    """
+    import wikidebia_review_workflow as wf
+
+    workflow_path = wf._workflow_path(project, debate_id)
+    if not workflow_path.exists():
+        _write_draft(path, updated, before)
+        return None
+    state = wf._load_workflow(project, debate_id)
+    pending = state.get("pending_review")
+    if not pending:
+        _write_draft(path, updated, before)
+        return None
+    review_type = pending.get("review_type")
+    if (state.get("work_id") != work_id or pending.get("work_id") != work_id
+            or review_type not in {"en_translation_review", "en_translation_correction"}
+            or state.get("phase") != review_type or state.get("status") != "awaiting_review"
+            or (project / pending["base_path"]).resolve() != workspace.resolve()):
+        fail("published_quote_selection_other_pending_review")
+    if not replace_pending_package:
+        fail("published_quote_selection_pending_package_use_--replace-pending-package")
+    archive = project / pending["package_path"]
+    if (archive.resolve() != (project / "outgoing" / f"{debate_id}_{review_type}.zip").resolve()
+            or archive.is_symlink() or not archive.is_file()
+            or wf._sha256_file(archive) != pending["archive_sha256"]):
+        fail("published_quote_selection_pending_package_changed")
+    manifest, files = wf._read_returned_package(archive)
+    wf._validate_pending_identity(state, manifest)
+    for group, hash_key in (("editable_files", "sha256_at_prepare"), ("context_files", "sha256")):
+        for row in manifest[group]:
+            local = workspace / row["target_path"]
+            wf._assert_regular_file(local, "Fichier du paquet de revue")
+            if (not local.resolve().is_relative_to(workspace.resolve())
+                    or wf._sha256_file(local) != row[hash_key]
+                    or wf._sha256_bytes(files[row["package_path"]]) != row[hash_key]):
+                fail("published_quote_selection_pending_package_baseline_changed")
+    if path.relative_to(workspace).as_posix() not in {row["target_path"] for row in manifest["editable_files"]}:
+        fail("published_quote_selection_pending_package_missing_draft")
+    candidate = copy.deepcopy(state)
+    candidate.setdefault("superseded_reviews", []).append({
+        "reason": "local_published_quote_selection",
+        "pending_review": copy.deepcopy(pending),
+        "recorded_at": wf.now_iso(),
+    })
+    candidate["pending_review"] = None
+    # Backups stay private and on the same filesystem. No remote action.
+    with tempfile.TemporaryDirectory(prefix=".quote-package-", dir=project) as temporary:
+        backups = []
+        for i, original in enumerate((path, archive, workflow_path)):
+            saved = Path(temporary) / str(i)
+            shutil.copy2(original, saved)
+            backups.append((saved, original))
+        try:
+            _write_draft(path, updated, before)
+            replacement = wf.create_review_package(
+                project, candidate, review_type=review_type, base=workspace,
+                editable_paths=[row["target_path"] for row in manifest["editable_files"]],
+                context_paths=[row["target_path"] for row in manifest["context_files"]],
+                counts=manifest["counts"],
+            )
+        except Exception:
+            for saved, original in backups:
+                os.replace(saved, original)
+            raise
+    return {"package_id": replacement["package_id"], "package_path": replacement["package_path"],
+            "superseded_package_id": pending["package_id"]}
+
+
+def select_workspace(project, debate_id, work_id, evidence_paths, index_sha=None, *, replace_pending_package=False):
     from wikidebia_corpus_build import full_tree_sha256
     from wikidebia_editorial_review import _load_workspace
     workspace,meta = _load_workspace(project,debate_id,work_id)
@@ -156,9 +231,12 @@ def select_workspace(project, debate_id, work_id, evidence_paths, index_sha=None
         updated["quote_public_index_sha256"] = chosen
     # Do not require an index merely to fill an editorial draft. Finalization
     # requires a fresh complete index before accepting any published citation.
+    replacement = None
     if updated!=current:
-        _write_draft(path,updated,before)
+        replacement = _commit_selection(project, debate_id, work_id, workspace, path, before, updated,
+                                        replace_pending_package=replace_pending_package)
     return {**summary,"status":"draft_selected","review_status":"draft",
+            "replacement_review_package":replacement,
             "quote_public_index_sha256":chosen,"requires_fresh_index_before_finalize":chosen is None,
             "translation_draft_mutated":updated!=current,"source_locks_mutated":False,
             "editorial_approval_created":False,"publication_authorized":False}
@@ -173,13 +251,16 @@ def main(argv=None):
     parser.add_argument("--project-root",type=Path,default=Path.cwd())
     parser.add_argument("--evidence",type=Path,action="append",required=True)
     parser.add_argument("--index-sha256")
+    parser.add_argument("--replace-pending-package", action="store_true",
+                        help="Reissue an outstanding English review ZIP; its old identity will no longer be accepted.")
     args = parser.parse_args(argv)
     try:
         project = args.project_root.resolve()
         debate = validate_debate_id(args.debate_id)
         work = validate_work_id(args.work_id)
         with exclusive_lock(project,debate,"published_quote_selection"):
-            summary = select_workspace(project,debate,work,args.evidence,args.index_sha256)
+            summary = select_workspace(project,debate,work,args.evidence,args.index_sha256,
+                                       replace_pending_package=args.replace_pending_package)
     except (ValueError,RuntimeError,OSError,KeyError,TypeError,AttributeError) as exc:
         reason = str(exc) if isinstance(exc,(bridge.QuoteBridgeError,contract.PublishedQuoteError,
                                                index_contract.QuoteIndexError)) else type(exc).__name__

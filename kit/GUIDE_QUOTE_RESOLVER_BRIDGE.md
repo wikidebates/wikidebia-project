@@ -360,3 +360,17 @@ sans conversion silencieuse en traduction IA ; toute sélection nouvelle
 doit passer par le mécanisme local de sélection. Lors d'une réouverture
 après convergence, le contrôle de doublons dérivé est invalidé et sera
 recalculé, mais les preuves sélectionnées restent intactes.
+
+
+### Sélection locale après génération du ZIP anglais
+
+Le workflow de haut niveau peut avoir déjà préparé son ZIP de revue
+anglaise quand les preuves du résolveur deviennent disponibles. Une
+sélection qui modifierait ce brouillon est alors refusée par défaut.
+Si le relecteur n'a pas commencé son travail (ou accepte de repartir du
+nouveau paquet), relancer la commande de sélection avec
+`--replace-pending-package`. Le kit vérifie les empreintes du ZIP initial
+et de tous ses fichiers locaux, remplace le brouillon et régénère le ZIP
+avec le même périmètre mais un nouvel identifiant. L'ancien retour ZIP
+ne sera plus accepté. Toute erreur locale de régénération restaure les
+trois fichiers affectés. Cette option ne réalise aucune publication.
