@@ -169,14 +169,15 @@ def _commit_selection(project, debate_id, work_id, workspace, path, before, upda
     })
     candidate["pending_review"] = None
     # Backups stay private and on the same filesystem. No remote action.
-    with tempfile.TemporaryDirectory(prefix=".quote-package-", dir=project) as temporary:
+    with tempfile.TemporaryDirectory(prefix=".quote-package-", dir=workflow_path.parent) as temporary:
         backups = []
         for i, original in enumerate((path, archive, workflow_path)):
             saved = Path(temporary) / str(i)
             shutil.copy2(original, saved)
             backups.append((saved, original))
+        # A failed compare-and-swap must not roll back an external edit.
+        _write_draft(path, updated, before)
         try:
-            _write_draft(path, updated, before)
             replacement = wf.create_review_package(
                 project, candidate, review_type=review_type, base=workspace,
                 editable_paths=[row["target_path"] for row in manifest["editable_files"]],
