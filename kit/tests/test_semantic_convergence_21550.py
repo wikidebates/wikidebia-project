@@ -12,9 +12,11 @@ from test_wikidebia_translation_review import (  # noqa: E402
 )
 
 
+from french_normalization_fixture import prepare_fixture_translation
+
 def _sealed(tmp_path: Path):
     project, workspace, work_id = make_french_locked(tmp_path)
-    translation.prepare_review(project, "debat_test", work_id)
+    prepare_fixture_translation(project, "debat_test", work_id)
     complete_translation_review(workspace)
     sealed = translation.finalize_review(project, "debat_test", work_id)
     return project, workspace, work_id, sealed

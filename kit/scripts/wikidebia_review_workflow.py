@@ -75,7 +75,12 @@ from wikidebia_content_review import (
     HISTORICAL_AUTHORIZATION_SCHEMA,
     HISTORICAL_AUTHORIZATION_PATH,
 )
+from wikidebia_french_normalization import (
+    FrenchNormalizationError, FrenchNormalizationMissing,
+    RECEIPT_PATH as FRENCH_NORMALIZATION_RECEIPT,
+)
 from wikidebia_translation_review import (
+    prepare_french_normalization,
     prepare_review as prepare_translation_review,
     finalize_review as finalize_translation_review,
     apply_review as apply_translation_review,
@@ -1557,6 +1562,8 @@ def _prepare_translation_package(project_root: Path, state: dict[str, Any], *, c
         "content-reviewed-copy/data/keyword_vocabulary.json",
         "reviews/en/translation_readiness.json",
     ]
+    if (workspace / FRENCH_NORMALIZATION_RECEIPT).is_file():
+        context.append(FRENCH_NORMALIZATION_RECEIPT)
     if correction:
         context.append("reviews/en/semantic_convergence_findings.json")
     return create_review_package(
@@ -1807,7 +1814,27 @@ def _mechanical_advance(
                 state["french_content_publication"] = copy.deepcopy(publication)
                 state["french_publication"] = copy.deepcopy(publication)  # legacy alias
                 state["updated_at"] = now_iso(); _save_workflow(project_root, state)
-            _prepare_translation_package(project_root, state)
+            try:
+                _prepare_translation_package(project_root, state)
+            except FrenchNormalizationError as exc:
+                if isinstance(exc, FrenchNormalizationMissing):
+                    try:
+                        report = prepare_french_normalization(project_root, debate_id, str(state["work_id"]))
+                        state["french_normalization"] = {
+                            "review_path": report["review_path"],
+                            "debate_url": report["pages"][0]["url"],
+                            "debate_revision_url": report["pages"][0]["revision_url"],
+                            "pages": len(report["pages"]),
+                        }
+                    except FrenchNormalizationError as preparation_error:
+                        exc = preparation_error
+                state["status"] = "french_normalization_required"
+                state["french_normalization_blocker"] = str(exc)
+                state["updated_at"] = now_iso()
+                _save_workflow(project_root, state)
+                return state
+            if state.pop("french_normalization_blocker", None) is not None:
+                _save_workflow(project_root, state)
             return state
         if phase == "semantic_convergence_1":
             _prepare_semantic_package(project_root, state, 1)
@@ -2546,6 +2573,18 @@ def import_review(
             state["french_publication"] = copy.deepcopy(publication)  # legacy alias
             state["phase"] = "en_translation_review"
         elif review_type in {"en_translation_review", "en_translation_correction", "en_documentation_correction"}:
+            # A legacy outstanding ZIP was issued before the French receipt
+            # existed. Bind it inside the import transaction, after validating
+            # the original editable/context hashes, without replacing the
+            # returned English work. A newer ZIP may not remove its binding.
+            old_english = load_json(backup / "reviews/en/translation_review.json", "revue anglaise avant import")
+            english = load_json(base / "reviews/en/translation_review.json", "revue anglaise importée")
+            if (old_english.get("status") == "draft" and english.get("status") == "draft"
+                    and "french_normalization_receipt_sha256" not in old_english
+                    and "french_normalization_receipt_sha256" not in english
+                    and not any(row.get("target_path") == FRENCH_NORMALIZATION_RECEIPT
+                                for row in manifest.get("context_files") or [])):
+                prepare_translation_review(project_root, debate_id, str(state["work_id"]), overwrite=False)
             result = finalize_translation_review(project_root, debate_id, str(state["work_id"]))
             state["phase"] = "semantic_convergence_1"
         elif review_type in {"semantic_convergence_1", "semantic_convergence_2"}:
@@ -2685,6 +2724,16 @@ def status_summary(project_root: Path, debate_id: str) -> dict[str, Any]:
 
 
 def _print_user_result(state: Mapping[str, Any]) -> None:
+    if state.get("status") == "french_normalization_required":
+        print("La version française publiée doit être revue avant la traduction anglaise.")
+        normalization = state.get("french_normalization") or {}
+        if normalization:
+            print(f"Débat à lire sur le wiki français : {normalization['debate_url']}")
+            print(f"Rendu de la révision à vérifier : {normalization['debate_revision_url']}")
+            print(f"Registre pour le relecteur : {normalization['review_path']}")
+        print(state.get("french_normalization_blocker"))
+        print(f"Après la revue, reprendre avec ./wikidebia workflow {state.get('debate_id')}.")
+        return
     if (not state.get("work_id") and state.get("phase") == "initialize_graph"
             and state.get("status") in {"blocked_access_preflight", "running"}):
         print("Workflow initial sans Work associé.")

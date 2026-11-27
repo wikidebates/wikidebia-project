@@ -30,6 +30,8 @@ page. Le graphe revu doit encore correspondre aux relations importées. Il produ
 `data/source_preservation_receipt.json` et les verrous français dans une nouvelle
 copie. Il refuse tout écrasement et toute divergence du snapshot.
 
+Effectuer ensuite la [revue de normalisation sur les révisions publiées](GUIDE_TRANSLATION_REVIEW.md#revue-de-normalisation-sur-le-wiki-français). Le gel fournit la base française de ce contrôle final, sans attester une nouvelle revue des rubriques, des mots-clés ou de la documentation. Les particularités historiques préservées sont des exceptions motivées, non des corrections à appliquer automatiquement. Le kit exige le reçu de normalisation pour préparer la traduction, y compris lorsque la décision éditoriale consiste à conserver des données historiques.
+
 Ce reçu atteste la conservation, **pas** l'authenticité des citations, la validité
 actuelle des chiffres ou une nouvelle approbation documentaire française. Les
 champs correspondants restent explicitement faux. Les références historiques

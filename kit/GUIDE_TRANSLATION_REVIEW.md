@@ -7,11 +7,27 @@ ne dispense pas de cette revue ; les citations et résumés restent inchangés.
 
 > Les règles ci-dessous sont cumulatives et ne dépendent pas d’un numéro `*_revision`. Cette architecture cumulative a été formalisée par la révision 1.2.54.
 
-La traduction anglaise commence uniquement après le verrouillage complet des métadonnées et du contenu français. Elle travaille dans le même workspace éditorial et ne modifie ni le corpus promu, ni `working-copy/`, ni `reviewed-copy/`, ni `content-reviewed-copy/`.
+La traduction anglaise commence après le verrouillage complet des métadonnées et du contenu français et la revue de la version publiée sur le wiki français. Le travail de traduction se fait dans le même workspace éditorial, à partir de `content-reviewed-copy/`.
 
 Pour la reprise d'un import français publié à conserver intégralement, voir
 [le gel de source pour traduction](GUIDE_TRANSLATION_SOURCE_PRESERVATION.md).
 Ce gel n'est pas une nouvelle validation documentaire du contenu français.
+
+## Revue de normalisation sur le wiki français
+
+Après publication du contenu français, le workflow prépare la revue et s'arrête à `french_normalization_required`. Dans le parcours direct, ou après un gel de source publiée, utiliser la commande suivante.
+
+```text
+./wikidebia corpus-workspace-translation <débat> --work-id <work> --prepare-normalization
+```
+
+Le registre de revue fournit le titre et l’adresse publique de chaque page du wiki français, ainsi qu’un lien vers le rendu de la révision à relire. Le relecteur consigne son identité et le résultat de chaque contrôle de la [norme active](../norms/normative_reference/01_normes/WIKIDEBIA_NORME_ACTIVE.md). Le registre couvre le graphe et ses cibles directes, les titres canoniques et affichés, les résumés, les rubriques, les mots-clés, l’introduction, la documentation, la structure MediaWiki, les protections historiques et les règles propres au débat. Ce contrôle ne constitue pas une troisième revue éditoriale complète. Pour les rubriques et les mots-clés, le registre réutilise automatiquement les décisions individuelles du verrou de classification et du vocabulaire approuvé lorsqu’elles couvrent exactement les pages publiées : statut `reused`, empreintes et identifiants dans `prior_review_evidence`. Un verrou incomplet ou un import préservé ne donne pas cette attestation. Pour le graphe, consigner la vérification visuelle déjà faite après le premier checkpoint et les éventuels changements depuis ; ne pas recommencer une revue sans changement. Remettre au destinataire des liens publics ou le contenu utile de la revue, jamais seulement un chemin local.
+
+Pour chaque critère, renseigner `status` et `note`. Conserver `reused` pour les seuls critères dont la preuve est calculée par le kit. Employer `checked` pour un contrôle effectué, `exception` pour une exception éditoriale motivée ou `not_applicable` lorsque la règle ne s’applique pas à ce corpus. La note précise le résultat ou la décision et les pages ou preuves concernées. Si une anomalie demande une correction, consigner `requires_changes`, publier la correction selon le parcours français puis reprendre la revue sur la nouvelle base. La conservation autorisée d’un texte historique peut justifier une exception. Une vérification documentaire ne peut être attestée que si elle a été faite.
+
+Relancer `workflow` ou `corpus-workspace-translation --prepare` sur le même Work. Le kit vérifie en lecture seule que les révisions courantes du wiki correspondent à celles de la revue et scelle le reçu avec l’empreinte de la source locale. Une page manquante, une révision divergente, un critère oublié ou une exception sans motif bloque la préparation. Un brouillon anglais existant sur la même source peut recevoir ce reçu sans écraser la traduction déjà saisie. Pour un ancien ZIP de revue encore attendu, préparer et compléter seulement le registre français, puis réimporter le ZIP original : le rattachement se fait dans la transaction, sans changer les fichiers de base avant la vérification de leurs empreintes. Une revue anglaise déjà finalisée et scellée avant cette évolution ne doit pas être réécrite ni recevoir une attestation rétroactive fictive ; son application conserve son empreinte et reste soumise aux contrôles existants de convergence et de publication. Toute nouvelle revue ou réouverture exige le reçu français. Si la source française elle-même a changé, l’intégrer au parcours français avant de préparer la nouvelle revue.
+
+La publication anglaise requiert ensuite la confirmation explicite du propriétaire sur le préflight de publication.
 
 ## 0. Protocole de lots pour la traduction
 

@@ -1009,7 +1009,7 @@ def publish_checkpoint(project_root: Path, debate_id: str, work_id: str, *, stag
         "edit_summary_contract":plan.get("edit_summary_contract"), "counts":copy.deepcopy(plan.get("counts") or {}),
         "remote_receipt_sha256":receipt.get("receipt_sha256"),
         "published_state":_published_state_evidence(project_root, debate_id),
-        "next_stage_authorized":"fr_content_review" if stage == "graph" else "en_translation_review",
+        "next_stage_authorized":"fr_content_review" if stage == "graph" else "fr_normalization_review",
     }
     publication["receipt_sha256"] = sha_object(publication)
     write_json(publication_path, publication)
