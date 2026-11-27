@@ -108,3 +108,17 @@ def test_summary_review_emits_originality_and_exact_mechanism_excerpt():
     assert decision["originality_reviewed"] is True
     assert decision["mechanism_statement"] in summary
     assert len(decision["mechanism_statement"]) >= 30
+
+
+def test_deterministic_keyword_policy_matches_validator_copy():
+    # The components can also be tested and distributed separately.
+    counterpart = SCRIPTS.parent.parent / "validator/src/wikidebia_validator/keyword_policy.py"
+    if counterpart.is_file():
+        assert (SCRIPTS / "wikidebia_keyword_policy.py").read_bytes() == counterpart.read_bytes()
+
+
+def test_keyword_identity_does_not_merge_distinct_accented_concepts():
+    from wikidebia_keyword_policy import keyword_identity_fr
+    assert keyword_identity_fr("Emancipation") == keyword_identity_fr("émancipation")
+    assert keyword_identity_fr("cote") != keyword_identity_fr("côte")
+    assert keyword_identity_fr("pêche") != keyword_identity_fr("péché")

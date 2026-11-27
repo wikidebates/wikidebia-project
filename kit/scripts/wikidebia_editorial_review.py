@@ -14,6 +14,7 @@ from __future__ import annotations
 
 from wikidebia_release_info import KIT_VERSION, require_validator_report
 from wikidebia_title_structure import canonical_title_structure_issues
+from wikidebia_keyword_policy import COMPOSITIONAL_KEYWORD_FR
 
 import argparse
 import collections
@@ -68,12 +69,6 @@ REVIEW_SCHEMA = "wikidebia-fr-page-metadata-review-1.1"
 METADATA_LOCK_SCHEMA = "wikidebia-fr-page-metadata-lock-1.0"
 CHANGESET_SCHEMA = "wikidebia-editorial-changeset-1.1"
 ALLOWED_KEYWORD_KINDS = {"noun", "noun_phrase", "proper_name", "acronym"}
-COMPOSITIONAL_KEYWORD_FR = re.compile(
-    r"^(?:(?:psychologie|sociologie|histoire|géographie|généalogie)\s+religieuse?s?|science\s+et\s+religion"
-    r"|municipalités?\s+de\s+(?:gauche|droite)|femmes?\s+voilées?"
-    r"|(?:port|interdiction)\s+du\s+voile(?:\s+islamique)?)$",
-    flags=re.IGNORECASE,
-)
 
 
 def _is_compositional_keyword_fr(term: str) -> bool:

@@ -151,6 +151,7 @@ def replace_request_text(directory, request, row, before, after):
 @pytest.mark.parametrize(("keywords", "corrections", "accepted"), [
     ("oppression, URSS, vêtements", {"Oppression": "oppression", "Vêtements": "vêtements"}, True),
     ("oppression, urss, vêtements", {"Oppression": "oppression", "Vêtements": "vêtements"}, False),
+    ("Oppression, uRSS, Vêtements", {"URSS": "uRSS"}, False),
     ("domination, URSS, Vêtements", {"Oppression": "domination"}, False),
     ("oppression, URSS, Vêtements, censure", {"Oppression": "oppression"}, False),
 ])

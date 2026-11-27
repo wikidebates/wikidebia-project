@@ -148,7 +148,7 @@ def inspect_page(adapter, row: dict, *, snapshot=None) -> dict:
 
 
 def request_editorial_checks(request: dict, request_dir: Path) -> dict[str, str]:
-    from wikidebia_editorial_workspace import lowercase_keyword_initial
+    from wikidebia_keyword_policy import acronym_like, lowercase_keyword_initial
     from wikidebia_update import (
         UpdateError, assert_summary_change_authorized, assert_citation_change_authorized,
         assert_relation_rendering_safe, changed_top_level_parameters,
@@ -175,7 +175,7 @@ def request_editorial_checks(request: dict, request_dir: Path) -> dict[str, str]
                     for wiki in (before, after)
                 )
                 if (not isinstance(corrections, dict) or not corrections
-                        or any(old not in before_terms or new == old or new != lowercase_keyword_initial(old)
+                        or any(old not in before_terms or acronym_like(old) or new == old or new != lowercase_keyword_initial(old)
                                for old, new in corrections.items())
                         or [corrections.get(term, term) for term in before_terms] != after_terms):
                     raise Blocked(f"Correction de casse des mots-clés divergente : {row['new_title']}")

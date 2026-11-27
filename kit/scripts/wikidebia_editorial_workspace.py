@@ -11,6 +11,7 @@ editorial corrections or generate final MediaWiki pages.
 from __future__ import annotations
 
 from wikidebia_release_info import KIT_VERSION
+from wikidebia_keyword_policy import keyword_identity_fr, lowercase_keyword_initial
 
 import argparse
 import collections
@@ -173,14 +174,6 @@ def first_alphabetic(value: str) -> str:
     return next((char for char in str(value) if char.isalpha()), "")
 
 
-def lowercase_keyword_initial(value: str) -> str:
-    """Lowercase the first letter of a reviewed common keyword."""
-    for index, char in enumerate(value):
-        if char.isalpha():
-            return value[:index] + char.lower() + value[index + 1:]
-    return value
-
-
 def capitalization_policy_for_kind(kind: str) -> str | None:
     return {
         "noun": "lowercase_common",
@@ -209,8 +202,7 @@ def keyword_diagnostics(values: Iterable[str], fallback: bool, entity_type: str 
         issues.append({"code": "KEYWORDS_TOO_FEW", "severity": "correction", "field": "keywords", "count": len(rows), "minimum": minimum})
     if len(rows) > maximum:
         issues.append({"code": "KEYWORDS_TOO_MANY", "severity": "correction", "field": "keywords", "count": len(rows), "maximum": maximum})
-    spelling_variants = {"dictatures": "dictature", "femme": "femmes", "emancipation": "émancipation"}
-    keyword_identities = {spelling_variants.get(value.casefold(), value.casefold()) for value in rows}
+    keyword_identities = {keyword_identity_fr(value) for value in rows}
     if len(rows) != len(keyword_identities):
         issues.append({"code": "KEYWORDS_DUPLICATE", "severity": "correction", "field": "keywords"})
     long_values = [value for value in rows if len(value) > 40]

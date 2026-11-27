@@ -129,3 +129,29 @@ def test_old_norm_and_missing_policy_revision_do_not_disable_current_keyword_rul
     dump(tmp_path / "data/keyword_vocabulary.json", vocab)
     report = validate_package(tmp_path, scopes=["editorial"])
     assert any(f.code == "WDV-EDT-025" and f.details.get("keyword") == "psychologie religieuse" for f in report.findings)
+
+
+def test_recent_french_compositional_examples_and_lexicalized_concept():
+    entry = {
+        "atomic_concept": True, "compositional_intersection": False,
+        "multiword_exception": True,
+        "multiword_exception_rationale": "Locution désignant un concept autonome dans le classement.",
+    }
+    for keyword in ("municipalités de gauche", "municipalité de droite", "femmes voilées",
+                    "port du voile", "interdiction du voile islamique"):
+        assert "compositional_intersection" in keyword_atomicity_issues(
+            keyword, entry, "fr", require_composition_attestation=True,
+        )
+    assert keyword_atomicity_issues(
+        "voile islamique", {**entry, "multiword_exception": False}, "fr",
+        require_composition_attestation=True,
+    ) == []
+
+
+def test_french_keyword_variants_detected_without_merging_distinct_concepts():
+    from wikidebia_validator.editorial import keyword_form_issues
+    for pair in (["dictature", "dictatures"], ["femme", "Femmes"],
+                 ["Emancipation", "émancipation"]):
+        assert "duplicate_variants" in keyword_form_issues(pair, language="fr")
+    assert keyword_form_issues(["cote", "côte"], language="fr") == []
+    assert keyword_form_issues(["femme", "Femmes"], language="en") == []
