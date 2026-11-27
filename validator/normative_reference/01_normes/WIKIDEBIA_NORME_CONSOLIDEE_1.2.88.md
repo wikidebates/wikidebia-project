@@ -21,7 +21,7 @@ Cette norme contient uniquement les règles actuellement applicables. Les textes
 - Une nouvelle traduction anglaise d’`Argument` ne reçoit jamais `initialization` depuis `initialisation` français.
 - Les paramètres de premier niveau `date-création` et `creation-date` sont obsolètes dans les quatre modèles Débat/Debate et Argument. Ils ne sont ni générés, ni traduits, ni conservés dans les nouvelles pages ou les mises à jour.
 - `displayed-title` traduit `titre-affiché` champ à champ. La validation FR→EN est différentielle : elle bloque les dégradations introduites par la traduction sans réécrire une anomalie formelle acceptée dans la source française historique.
-- Les recherches de `established-name`, les références anglaises et les `Quote` restent contextualisées par page. Les références ne sont pas traduites artificiellement ; les citations suivent le contrat `Citation→Quote`, avec `AI-translated quote` pour les nouvelles traductions.
+- Les recherches de `established-name`, les références anglaises et les `Quote` restent contextualisées par page. Les références ne sont pas traduites artificiellement ; les citations suivent le contrat `Citation→Quote` à deux provenances décrit au § 7.4, avec `AI-translated quote` pour les traductions IA uniquement.
 - La convergence sémantique finale exige deux passes indépendantes portant sur la même empreinte du contenu, selon les schémas actifs de revue et de convergence.
 
 ## 1. Autorité et priorité
@@ -287,6 +287,19 @@ Les pages Débat et Debate utilisent exclusivement des ressources intégralement
 Sur une page Argument française, une édition ou traduction française pertinente et vérifiable est toujours préférée lorsqu’elle existe. Une source primaire ou académique peut rester dans sa langue originale uniquement lorsqu’aucun équivalent français officiel et pertinent n’existe, ou lorsque la ressource étrangère est elle-même l’objet analysé. Cette décision est consignée dans l’usage documentaire. Les titres publiés ne sont jamais traduits artificiellement. La règle symétrique s’applique aux pages anglaises.
 
 Les éditions ou traductions d’une même œuvre partagent un identifiant d’équivalence documentaire. Le validateur bloque l’emploi d’une source étrangère sur une page Argument lorsqu’un équivalent vérifié dans la langue de la page est disponible dans le registre.
+
+#### Citations textuelles en traduction anglaise : provenance et unicité
+
+Une `Citation` française verrouillée donne lieu à une seule occurrence `Quote` anglaise, avec une provenance explicite. Le texte anglais doit couvrir l'intégralité du passage français et préserver son sens, ses limites et ses omissions attestées. Il ne peut être inventé au rendu. Une traduction anglaise réellement publiée, vérifiée et réutilisable est préférée à une traduction par IA.
+
+Pour le fournisseur pris en charge, le choix du parcours documentaire est déterminé par le paramètre `lien=` littéral de la citation française. Pour marxists.org, préparer les correspondances à l'avance dans une base privée, ou les rechercher pendant la traduction, en réutilisant les mêmes reçus et en revalidant la source et le document cible. Les autres fournisseurs suivent la traduction IA tant qu'un résolveur spécifique n'a pas été validé. Une absence de reçu, une recherche sans résultat, une ambiguïté et une panne restent distinctes ; aucune ne prouve l'inexistence d'une traduction publiée. Les pages anglaises déjà réutilisées ne sont pas retraduites automatiquement.
+
+- **Traduction IA (`ai_translation`)** : traduire le texte de la citation et la forme linguistique de la même date, sans modifier les autres valeurs documentaires et leur ordre, sous réserve des exceptions historiques et documentaires explicitement contrôlées. Ajouter une seule fois `AI-translated quote` dans `warnings`, après les avertissements source éventuels et avec le séparateur `, `.
+- **Traduction publiée (`published_translation`)** : reproduire le passage exact de l'édition anglaise attestée, sans reformulation. Employer les valeurs documentaires vérifiées de cette édition (dont le lien effectif), et non les valeurs de l'édition française recopiées mécaniquement. Les champs inconnus sont omis après revue ; une date complète emploie la forme britannique `D Month YYYY` sans précision inventée. Préserver les avertissements source pertinents ; ne pas ajouter `AI-translated quote`. Un avertissement historique ambigu ou une attribution obligatoire non représentable bloque la proposition, sans suppression silencieuse.
+
+La provenance publiée exige une preuve structurée liée au verrou français, à la révision source, à l'occurrence unique, au document cible et aux fragments exacts ; une revue distincte de l'édition, des droits et des conditions d'attribution ; puis les contrôles de complétude et de convergence habituels. Un ratio lexical inférieur à 0,60 sur une citation source d'au moins huit mots impose une seconde revue motivée, quelle que soit la provenance. Le validateur doit recalculer les preuves de correspondance et les valeurs rendues indépendamment du kit. Une attestation ne constitue pas une autorisation de publication ni une preuve autonome de droits. Les données de provenance restent dans les verrous et dossiers privés, et non dans de nouveaux paramètres MediaWiki. La mémoire générique ne transporte ni le texte publié comme traduction IA ni sa preuve liée à un autre Work ; seuls les reçus documentaires revalidés selon le protocole du résolveur sont réutilisables.
+
+Une même citation textuelle ne doit pas être introduite sur deux pages Argument distinctes du même wiki, quel que soit son fournisseur ou sa provenance ; un argument partagé reste une seule page. Cette règle ne confond pas le couple français-anglais avec un doublon. Avant de verrouiller de nouvelles citations anglaises, vérifier toutes les citations effectivement retenues, y compris celles traduites par IA, dans tous les lots et par rapport aux citations publiques anglaises. Un index complet, frais et lié à ses révisions est exigé par le nouveau parcours de contrôle ; un résultat incomplet n'est jamais une garantie d'absence de doublon. Une égalité exacte après normalisation Unicode NFC et des espaces entre pages distinctes bloque ; les variantes de forme et les recouvrements exigent une décision éditoriale documentée. Vérifier de nouveau l'absence de nouveaux conflits avant les écritures, y compris lors d'une reprise partielle. Les doublons historiques déjà publiés sont signalés pour décision du propriétaire, jamais supprimés ni réécrits automatiquement. Les archives, verrous et reçus historiques demeurent lisibles et immuables ; aucun reçu de provenance publié ne peut être attribué rétroactivement à une citation IA.
 
 ### 7.5 Finalité et organisation des introductions Débat / Debate
 
@@ -592,6 +605,8 @@ The `progress=Constructed debate` and `debate-warnings=Debate generated by AI` l
 |keywords=
 }}
 ```
+
+Dans cet exemple, `warnings=AI-translated quote` illustre uniquement la provenance IA du modèle `Quote`. Une citation issue d'une édition publiée vérifiée ne reçoit pas cet avertissement et suit le contrat du § 7.4.
 
 Les pages anglaises ne contiennent pas de lien interlangue.
 

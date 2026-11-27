@@ -129,11 +129,13 @@ Pour compatibilité avec un Work déjà convergé sous une version plus ancienne
 
 Chaque modèle `{{Citation}}` français importé est inventorié avec un identifiant stable. La projection anglaise utilise `{{Quote}}` et traduit obligatoirement tous les noms de paramètres selon le contrat du wiki anglais : `citation→quote`, `auteurs→authors`, `ouvrage→work`, `numéro→issue`, `localisation→location`, `édition→publisher`, `lieu→place`, `lien→link` et `avertissements-citation→warnings`; les noms `article`, `volume`, `page` et `date` sont identiques dans les deux langues.
 
-Seules les valeurs de `quote` et de `date` peuvent être traduites. Les valeurs de `authors`, `article`, `work`, `volume`, `issue`, `page`, `location`, `publisher`, `place` et `link` sont reprises exactement. `warnings` reçoit toujours `AI-translated quote`, après un avertissement préexistant avec le séparateur exact `, `. La date traduite doit désigner la même date ; une année seule reste inchangée. Un paramètre français sans équivalent anglais déclaré bloque la finalisation.
+Dans le parcours IA, seules les valeurs de `quote` et de `date` peuvent être traduites. Les autres valeurs documentaires et leur ordre restent inchangés, sauf exceptions documentaires déjà contrôlées ; `warnings` reçoit une seule fois `AI-translated quote`, après un avertissement préexistant avec le séparateur exact `, `. La date traduite désigne la même date. Un paramètre français sans équivalent anglais déclaré bloque la finalisation.
+
+Le parcours de traduction publiée vérifiée est décrit dans le [guide du résolveur](GUIDE_QUOTE_RESOLVER_BRIDGE.md) et le § 7.4 de la norme consolidée. Sélectionner les propositions attestées avant la mémoire générique ; conserver la preuve de l'occurrence, l'édition anglaise et les revues distinctes des droits et de complétude. La notice cite l'édition anglaise vérifiée et n'ajoute pas d'avertissement IA. Contrôler les doublons sur toutes les citations finales, indépendamment du fournisseur ou de la provenance. Aucun résultat documentaire n'autorise à lui seul la publication. Ce parcours reste bloqué par le garde-fou de la branche expérimentale jusqu'à la validation coordonnée de sa migration.
 
 Les dates historiques françaises numériques (`15/06/2011`, `24.08.2018`, `11/2020`) et les mois abrégés (`17 nov. 2021`) sont comparés à la date anglaise à précision égale : une date au mois ne devient pas une date au jour. Une date source non reconnue ou impossible bloque la finalisation et demande une revue, au lieu de contourner silencieusement le contrôle. Une valeur numérique historique conservée strictement à l’identique reste admise.
 
-**Convention obligatoire pour le seul paramètre `date` du modèle anglais `{{Quote}}` traduit depuis `{{Citation}}`** : toute date complète (jour, mois, année) exprimée sous forme traduite utilise le format britannique `D Month YYYY`, avec le mois anglais en toutes lettres et sans suffixe ordinal. Exemples : `18 novembre 2026` → `18 November 2026` ; `1er janvier 2025` → `1 January 2025` ; `14 juillet 1789` → `14 July 1789`. Ne pas utiliser `November 18, 2026`, ni conserver un mois français. Les dates incomplètes et les formes historiques numériques inchangées conservent les règles précédentes : aucune précision n'est inventée. Cette exigence ne modifie ni les dates dans le corps des pages, ni les autres paramètres.
+**Convention obligatoire pour le seul paramètre `date` du modèle anglais `{{Quote}}`** : toute date complète (jour, mois, année) exprimée sous forme traduite utilise le format britannique `D Month YYYY`, avec le mois anglais en toutes lettres et sans suffixe ordinal. Exemples : `18 novembre 2026` → `18 November 2026` ; `1er janvier 2025` → `1 January 2025` ; `14 juillet 1789` → `14 July 1789`. Ne pas utiliser `November 18, 2026`, ni conserver un mois français. Les dates incomplètes et les formes historiques numériques inchangées conservent les règles précédentes : aucune précision n'est inventée. Cette exigence ne modifie ni les dates dans le corps des pages, ni les autres paramètres.
 
 ## 3. Finalisation
 
@@ -254,7 +256,7 @@ La revue éditoriale reste indépendante de la publication distante. Pour une cr
 - `date-création` et `creation-date` sont obsolètes et ne sont jamais générés ni ajoutés à la publication ;
 - un nouvel `Argument` anglais ne transporte jamais `initialization=` depuis le wiki français ;
 - le paramètre MediaWiki actuel d'appellation consacrée est `established-name=` ; `name=` n'est qu'un alias historique de préservation ;
-- une `Quote` nouvellement traduite utilise `AI-translated quote`.
+- une `Quote` nouvellement traduite par IA utilise `AI-translated quote` ; le passage publié attesté ne reçoit pas cet avertissement.
 
 Ces conventions ne changent pas la règle de traduction différentielle : une propriété formelle déjà validée dans la source française n'est pas « réparée » silencieusement en anglais.
 

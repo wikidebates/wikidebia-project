@@ -1,9 +1,6 @@
 # Proposition expérimentale : provenance des citations anglaises publiées
 
-**Statut : projet de contrat, non actif.** La norme 1.2.88 et ses règles
-RND-003, RND-004 et RND-006 restent applicables aux sorties actuelles.
-La présente proposition et le module wikidebia_published_quote_review.py
-préparent une migration conjointe des normes, du kit et du validateur.
+**Statut : projet de contrat, non actif en production.** Les sources normatives de la branche expérimentale contiennent le candidat de migration (notamment le § 7.4 et RND-003/004/006–008/010/011). Main conserve les règles antérieures. Le garde-fou `ACTIVE=False` est maintenu tant que les préconditions techniques, les métadonnées de livraison et la validation conjointe ne sont pas satisfaites.
 
 ## Deux provenances, une seule occurrence source
 
@@ -259,3 +256,9 @@ citation seule. Les autres champs restent portables. Les anciennes entrées
 IA ne peuvent pas écraser une sélection publiée dans un brouillon.
 Le transfert sélectif des reçus du résolveur reste le mécanisme approprié,
 avec revalidation puis revue dans le Work cible.
+
+## Préconditions restantes avant activation
+
+- Garantir le contrôle des doublons pour le nouveau parcours même lorsqu'il ne retient finalement aucune traduction publiée ; préserver la lecture et la reprise des anciens Works sans leur inventer un reçu.
+- Vérifier la conservation des preuves dans les échanges de revue et les contrôles indépendants du validateur, y compris les refus sur provenance ou index absents.
+- Actualiser les capacités déclarées et les rapports/manifeste/reçus des trois composants ; générer la source unifiée à partir des archives réellement produites. Aucune activation ni fusion avant CI complète verte.

@@ -5727,30 +5727,32 @@
     {
       "id": "RND-003",
       "domain": "citations",
-      "statement": "During English projection, the French Citation model becomes the English Quote model and all template parameter names use the declared English contract. Only the values of quote (from citation) and date are translated; every other documentary value and the parameter order are preserved exactly.",
+      "statement": "During English projection each locked French Citation becomes one English Quote with canonical English parameter names. In the AI route only quote text and date form are translated, preserving other documentary values and order subject to existing reviewed exceptions. In the published route use the exact verified English passage and the actual edition's reviewed documentary values, with occurrence-bound provenance, edition and rights reviews.",
       "disposition": "active",
       "enforcement": "validator WDV-MWK-021+tests",
       "sources": [
-        "owner decision 2026-08-03 — translated citations"
+        "owner decision 2026-08-03 — translated citations",
+        "owner decision 2026-11-26 — prepared and integrated published citation recovery"
       ],
       "normative_files": [
         "01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md"
       ],
-      "note": "English parameter names are mandatory: citation→quote, auteurs→authors, ouvrage→work, numéro→issue, localisation→location, édition→publisher, lieu→place, lien→link, avertissements-citation→warnings."
+      "note": "English names remain mandatory: citation→quote, auteurs→authors, ouvrage→work, numéro→issue, localisation→location, édition→publisher, lieu→place, lien→link, avertissements-citation→warnings."
     },
     {
       "id": "RND-004",
       "domain": "citations",
-      "statement": "The translated English Quote receives AI-translated quote in warnings, appended once with the canonical separator comma-space when another warning exists.",
+      "statement": "Only an AI-translated Quote receives AI-translated quote in warnings, appended once with the canonical separator comma-space when another warning exists. A verified published translation retains other applicable source warnings and does not receive an AI-translation warning; ambiguous historical warnings require review.",
       "disposition": "active",
       "enforcement": "validator WDV-MWK-021+tests",
       "sources": [
-        "owner decision 2026-08-03 — translated citations"
+        "owner decision 2026-08-03 — translated citations",
+        "owner decision 2026-11-26 — prepared and integrated published citation recovery"
       ],
       "normative_files": [
         "01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md"
       ],
-      "note": "Duplicate warning insertion is forbidden."
+      "note": "Duplicate warning insertion and unsupported removal of historical warnings are forbidden."
     },
     {
       "id": "RND-005",
@@ -6290,11 +6292,14 @@
     {
       "id": "RND-006",
       "domain": "citations",
-      "statement": "The reference-adaptation rule does not alter the special Citation-to-Quote contract: only quote text and linguistic date form are translated, all other documentary values remain exact, and AI-translated quote is appended once to warnings.",
+      "statement": "The special Citation-to-Quote contract is distinct from reference adaptation: the AI route preserves documentary values with reviewed exceptions; the published route reproduces a complete attested English passage and its actual verified edition. Prefer the published route when verified and reusable. Supported literal MIA links use the same receipt registry in anticipatory or integrated mode; absence of a receipt or technical failure is not evidence of absence. Other providers use AI unless a dedicated verified resolver is available.",
       "sources": [
-        "owner decision 2026-08-07 — English translation batches and documentary adaptation"
+        "owner decision 2026-08-07 — English translation batches and documentary adaptation",
+        "owner decision 2026-11-26 — prepared and integrated published citation recovery"
       ],
-      "normative_files": []
+      "normative_files": [
+        "01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md"
+      ]
     },
     {
       "id": "ARCH-001",
@@ -6539,11 +6544,12 @@
     {
       "id": "RND-007",
       "domain": "citations",
-      "statement": "Citation→Quote translates the complete citation value; very low source/target length is a review signal for probable omission but cannot by itself prove non-compliance.",
+      "statement": "Citation→Quote preserves the complete source quotation in meaning and scope, either through AI translation or the exact equivalent published passage. Very low source/target length is a review signal for probable omission but cannot by itself prove non-compliance.",
       "disposition": "active",
       "enforcement": "validator-signal+human-review",
       "sources": [
-        "translation audit lessons 2026-08-09"
+        "translation audit lessons 2026-08-09",
+        "owner decision 2026-11-26 — prepared and integrated published citation recovery"
       ],
       "normative_files": [
         "01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md"
@@ -6799,11 +6805,12 @@
     {
       "id": "RND-008",
       "domain": "citations",
-      "statement": "Every newly translated Citation→Quote pair carries an explicit end-to-end completeness attestation; lexical ratio below 0.60 triggers a documented second human review but is never by itself proof of truncation.",
+      "statement": "Every newly projected Citation→Quote pair carries an explicit end-to-end completeness attestation, including published translations; lexical ratio below 0.60 for source passages of at least eight lexical words triggers a documented second review but is never by itself proof of truncation.",
       "disposition": "active",
       "enforcement": "kit+validator+human-review",
       "sources": [
-        "Décision du 9 août 2026 — provenance de recherche et scellement transactionnel"
+        "Décision du 9 août 2026 — provenance de recherche et scellement transactionnel",
+        "owner decision 2026-11-26 — prepared and integrated published citation recovery"
       ],
       "normative_files": [
         "01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md"
@@ -7749,6 +7756,35 @@
       "normative_files": [
         "01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md"
       ]
+    },
+    {
+      "id": "RND-010",
+      "domain": "citations",
+      "statement": "No new identical quotation may be introduced on distinct Argument pages of the same wiki, regardless of origin or provider. The new English control path checks all final selected quotes across batches against a complete fresh public index, including AI translations, and checks again before writes and resumed writes. Exact NFC-and-whitespace normalized duplicates block; form variants and overlaps require editorial review. Historical duplicates are reported without automatic removal or rewriting.",
+      "disposition": "active",
+      "enforcement": "kit+validator+human-review+tests",
+      "sources": [
+        "owner decision 2026-11-26 — prepared and integrated published citation recovery"
+      ],
+      "normative_files": [
+        "01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md",
+        "01_normes/workflow_production_wikidebia.md"
+      ],
+      "note": "A shared Argument page is one page; the FR/EN pair is not a duplicate. A partial index does not establish absence."
+    },
+    {
+      "id": "RND-011",
+      "domain": "citations",
+      "statement": "Published quotation evidence is bound to the source occurrence, current French lock, target edition and exact fragments; it is not portable through generic page or field translation memory. A new Work may reuse the resolver's documentary receipts only after revalidation and distinct edition, rights and completeness review. Do not let AI memory overwrite a published selection or reclassify it as AI.",
+      "disposition": "active",
+      "enforcement": "kit+validator+human-review+tests",
+      "sources": [
+        "owner decision 2026-11-26 — prepared and integrated published citation recovery"
+      ],
+      "normative_files": [
+        "01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md"
+      ],
+      "note": "Generic memory may still reuse ordinary scalar fields and eligible AI-translated citations."
     }
   ],
   "source_aliases": {
@@ -8205,6 +8241,11 @@
       "01_normes/workflow_production_wikidebia.md"
     ],
     "owner decision 2026-11-24": [
+      "01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md",
+      "01_normes/workflow_production_wikidebia.md"
+    ],
+    "owner decision 2026-11-26 — prepared and integrated published citation recovery": [
+      "00_sources_reference/DECISIONS_CONVERSATION_CONSOLIDEES.md",
       "01_normes/WIKIDEBIA_NORME_CONSOLIDEE_1.2.88.md",
       "01_normes/workflow_production_wikidebia.md"
     ]

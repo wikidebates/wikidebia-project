@@ -1,3 +1,10 @@
+## 27 novembre 2026 — projet de migration des citations publiées et des doublons
+
+- Distingue traduction IA et passage anglais publié vérifié dans le contrat Citation→Quote, avec préférence pour l'édition publiée réutilisable.
+- Lie la preuve au verrou et à l'occurrence ; maintient séparément les revues d'édition, de droits et de complétude, la convergence et l'autorisation de publication.
+- Prépare les deux modalités documentaires à reçus communs ; interdit l'introduction de citations identiques entre pages distinctes et protège les preuves contre la mémoire générique.
+- Candidat de migration sur la branche expérimentale ; activation et livraison coordonnées restent à valider.
+
 ## 24 novembre 2026 — retrait des paramètres de date de création de page
 
 - `date-création` et `creation-date` ne font plus partie des quatre modèles ni des nouveaux artefacts de production ; les archives signées restent intactes.
