@@ -1103,8 +1103,11 @@ def _migrate_english_publication_order(
         new_plans = dict(plans)
         new_plans.update({"en_config_path": en_config_path, "en_config": en_config, "en_plan": new_plan})
         new_preflight = _preflight(project_root, state_dir, new_plans)
-        new_authorization = _authorization(state_dir, baseline, new_preflight,
-                                           quote_check=authorization.get("quote_duplicate_preflight"))
+        # Preserve the exact legacy call and authorization shape when the
+        # Work has not opted into the new quotation contract.
+        quote_kwargs = ({"quote_check": authorization["quote_duplicate_preflight"]}
+                        if "quote_duplicate_preflight" in authorization else {})
+        new_authorization = _authorization(state_dir, baseline, new_preflight, **quote_kwargs)
         audit = {
             "schema": "wikidebia-final-publication-order-migration-1.0", "schema_version": "1.0",
             "debate_id": debate_id, "migrated_at": now_iso(),
@@ -1192,8 +1195,11 @@ def _migrate_english_plan_after_kit_change(
             "en_plan": new_plan,
         })
         new_preflight = _preflight(project_root, state_dir, new_plans)
-        new_authorization = _authorization(state_dir, baseline, new_preflight,
-                                           quote_check=authorization.get("quote_duplicate_preflight"))
+        # Preserve the exact legacy call and authorization shape when the
+        # Work has not opted into the new quotation contract.
+        quote_kwargs = ({"quote_check": authorization["quote_duplicate_preflight"]}
+                        if "quote_duplicate_preflight" in authorization else {})
+        new_authorization = _authorization(state_dir, baseline, new_preflight, **quote_kwargs)
         audit = {
             "schema": "wikidebia-final-publication-kit-change-migration-1.0",
             "schema_version": "1.0",

@@ -173,3 +173,16 @@ sur un index plus récent ne revient pas à un ancien succès. L'autorisation
 conserve le résultat de ce contrôle, y compris lors de ses migrations.
 Ce mécanisme ne résout pas encore les reprises après écritures partielles
 ni la collecte automatique de l'index ; le profil reste inactif.
+
+## Sélection dans le registre de travail
+
+La commande `wikidebia_published_quote_selection.py` relie désormais les
+preuves déjà relues au brouillon anglais existant. Elle ne remplace ni les
+revues ni l'autorisation : les occurrences restent pending. Le verrou FR,
+l'identité de page et de citation, le fichier de preuve privé et son contenu
+sont contrôlés avant l'écriture atomique. La commande ne choisit pas entre
+deux preuves et ne remplace jamais une autre traduction en cours. Les
+répétitions de la même sélection ne modifient pas les décisions prises depuis.
+L'index peut être sélectionné en même temps par son empreinte, mais il est
+recontrôlé à la finalisation. La reprise des autorisations historiques sans
+preuve nouvelle conserve leur format antérieur.

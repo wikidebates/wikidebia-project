@@ -219,3 +219,25 @@ contrôle de prépublication. Les publications déjà autorisées et reprises
 restent régies par leur contrat de reprise existant; une vérification
 adaptée aux écritures partielles reste nécessaire avant activation. La
 production automatique de l'index est encore distincte de sa sélection.
+
+## Sélection des propositions dans la revue anglaise ouverte
+
+Après la préparation normale de la revue anglaise, sélectionner les dossiers
+`evidence` issus de fiches réellement relues, sans recopier leurs citations ni
+leurs références manuellement :
+
+    python kit/scripts/wikidebia_published_quote_selection.py DEBAT --work-id WORK \\
+      --evidence EVIDENCE_1.json --evidence EVIDENCE_2.json \\
+      --index-sha256 EN_INDEX_SHA
+
+Les fichiers doivent être ceux du répertoire privé content-addressed du Work.
+Le SHA de l'index est celui déjà placé dans le workspace par le module de
+staging. L'index peut être ajouté plus tard, mais la finalisation du profil
+publié exige toujours un index frais et complet. La sélection est atomique,
+idempotente, et ne choisit pas entre propositions concurrentes. Elle refuse
+une citation déjà travaillée ou approuvée, sauf répétition strictement
+identique de la même sélection. Elle ne renseigne aucune attestation de
+complétude supplémentaire et ne change pas les statuts de revue ; il faut
+achever les contrôles éditoriaux habituels avant de finaliser. Aucun verrou
+FR, aucune revue scellée, aucune page wiki n'est modifié. Profil encore
+expérimental, non publiable.
