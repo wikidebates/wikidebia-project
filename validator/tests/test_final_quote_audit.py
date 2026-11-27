@@ -35,6 +35,16 @@ def test_independent_validator_recomputes_final_quote_audit(tmp_path):
         _validate_final_quote_audit(ctx)
         return [f for f in ctx.report.findings if f.code=="WDV-MWK-021"]
     assert not validate(en)
+    # The newly declared AI-only profile requires both lock markers and a
+    # independently recomputable audit, even if there is no published quote.
+    policy = {"quote_uniqueness_policy": q.UNIQUENESS_POLICY,
+              "quote_duplicate_audit_sha256": audit["audit_sha256"]}
+    write("data/en_translation_lock.json", {"citation_translation_policy": policy})
+    assert not validate({**en, "quote_uniqueness_policy": q.UNIQUENESS_POLICY})
+    assert validate(en)
+    assert validate({"arguments": args, "quote_uniqueness_policy": q.UNIQUENESS_POLICY})
+    write("data/en_translation_lock.json", {"citation_translation_policy": {
+        "quote_duplicate_audit_sha256": audit["audit_sha256"]}})
     args[0]["citations"][0].update(quote="Changed",parameters=[{"name":"quote","value":"Changed"}])
     assert validate(en)
     assert validate({"arguments":args})

@@ -220,7 +220,8 @@ def _package_inputs(root):
                         for a in en.get("arguments") or [] for q in a.get("citations") or [])
     audit = en.get("quote_duplicate_audit")
     sha = policy.get("quote_duplicate_audit_sha256")
-    if (not has_published and audit is None and sha is None
+    required = contract.validate_uniqueness_policy(en, policy)
+    if (not required and not has_published and audit is None and sha is None
             and en.get("published_quote_contract") is None
             and policy.get("published_quote_contract") is None):
         return None

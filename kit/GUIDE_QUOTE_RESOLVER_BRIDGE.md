@@ -335,3 +335,15 @@ concurrentes après la lecture ni ne distingue deux écritures strictement
 identiques du même compte. Il ne s'applique pas aux reprises en lecture
 seule, aux publications EN déjà accompagnées de leur reçu final, ni aux
 Works historiques sans contrôle global. Le profil publié reste expérimental.
+
+
+## Unicité dans le futur parcours actif, même sans citation publiée
+
+Le contrôle des doublons ne dépend pas de la réussite de la recherche MIA.
+Lors d'une nouvelle finalisation avec des citations, le futur profil actif
+exigera un index public complet et frais, y compris pour un Work entièrement
+traduit par IA. Un index local déjà sélectionné est utilisé même si son SHA
+n'a pas été recopié dans le brouillon. Le reçu et le contrat d'unicité sont
+liés aux deux verrous EN et vérifiés par le validateur indépendant.
+Les revues historiques déjà scellées restent lisibles sans preuve inventée.
+L'activation générale reste volontairement bloquée dans cette branche.

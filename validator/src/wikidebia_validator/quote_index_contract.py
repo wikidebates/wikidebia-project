@@ -34,6 +34,18 @@ COMPLETE = "complete_for_enumerated_raw_scope"
 ROOTS = {"fr": "Modèle:Citation", "en": "Template:Quote"}
 MAX_PAGES = 100_000
 MAX_MATCHES = 100
+UNIQUENESS_POLICY = "wikidebia-quote-uniqueness-policy-1"
+
+
+def validate_uniqueness_policy(content_lock, translation_policy):
+    """Legacy absence is readable; a declared policy must be bound on both locks."""
+    key = "quote_uniqueness_policy"
+    if key not in content_lock and key not in translation_policy:
+        return False
+    if (content_lock.get(key) != UNIQUENESS_POLICY
+            or translation_policy.get(key) != UNIQUENESS_POLICY):
+        raise QuoteIndexError("missing_or_unknown_quote_uniqueness_policy")
+    return True
 
 
 def _integer(value, minimum=1):

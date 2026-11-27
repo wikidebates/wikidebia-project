@@ -2713,7 +2713,7 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
         raise TranslationReviewError("La revue anglaise ne couvre pas exactement les arguments restant à traduire")
     fr_meta_by_id = {str(row.get("entity_id") or row.get("id")): row for row in (metadata_lock.get("arguments") or []) if isinstance(row, dict)}
     fr_content_by_id = {str(row.get("id")): row for row in (content_lock.get("arguments") or []) if isinstance(row, dict)}
-    from wikidebia_published_quote_contract import EVIDENCE
+    from wikidebia_published_quote_contract import ACTIVE, EVIDENCE
     profile = review.get("published_quote_contract")
     if profile is not None and profile != EVIDENCE:
         raise TranslationReviewError("Contrat de provenance des citations anglaises inconnu")
@@ -2731,27 +2731,36 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
         raise TranslationReviewError("Contrat expérimental et citations publiées incohérents")
     if has_published:
         _check_published_quote_duplicates(final_arguments)
-    # Opt-in for legacy AI-only Works; mandatory for the new published profile.
-    # Always inspect the final selected quote texts, not just resolver handoffs.
+    # New finalizations with quotations will require the global gate on
+    # activation, even if no published passage was ultimately selected.
+    # A selected index also opts in before activation; never ignore it merely
+    # because the draft lacks a copied pointer. Already sealed legacy reviews
+    # returned above remain readable without retroactive attestations.
+    from wikidebia_quote_index_contract import final_audit, QuoteIndexError, UNIQUENESS_POLICY
+    from wikidebia_quote_index_stage import stored_index, latest_selected_sha
     quote_index_sha = review.get("quote_public_index_sha256")
     quote_audit = None
-    if has_published or quote_index_sha is not None:
-        from wikidebia_quote_index_contract import final_audit, QuoteIndexError
-        from wikidebia_quote_index_stage import stored_index, latest_selected_sha
-        try:
-            quote_index_sha = latest_selected_sha(workspace,quote_index_sha)
+    has_quotes = any(arg.get("citations") for arg in final_arguments)
+    declared = "quote_uniqueness_policy" in review
+    if declared and review.get("quote_uniqueness_policy") != UNIQUENESS_POLICY:
+        raise TranslationReviewError("Contrat d’unicité des citations anglaises inconnu")
+    required = has_published or (ACTIVE and has_quotes) or declared
+    try:
+        if has_quotes or required or quote_index_sha is not None or "quote_duplicate_audit" in review:
+            quote_index_sha = latest_selected_sha(workspace, quote_index_sha)
             if quote_index_sha is None:
-                raise QuoteIndexError("missing_public_quote_index")
-            quote_audit = final_audit(final_arguments, stored_index(workspace, quote_index_sha),
-                                      quote_index_sha, sha256_bytes((source/"data/fr_content_lock.json").read_bytes()))
-        except (ValueError,OSError,KeyError,TypeError,AttributeError) as exc:
-            reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
-            raise TranslationReviewError("Contrôle des doublons anglais : "+reason) from exc
+                if required or "quote_duplicate_audit" in review:
+                    raise QuoteIndexError("missing_public_quote_index")
+            else:
+                quote_audit = final_audit(final_arguments, stored_index(workspace, quote_index_sha),
+                                          quote_index_sha, sha256_bytes((source/"data/fr_content_lock.json").read_bytes()))
+    except (ValueError,OSError,KeyError,TypeError,AttributeError) as exc:
+        reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
+        raise TranslationReviewError("Contrôle des doublons anglais : "+reason) from exc
+    if quote_audit is not None:
         write_json(workspace/"reports/en_quote_duplicate_audit.json", quote_audit)
         if quote_audit["status"] != "clear_exact_literal_scope":
             raise TranslationReviewError("Doublons exacts de citations anglaises : voir reports/en_quote_duplicate_audit.json")
-    elif "quote_duplicate_audit" in review:
-        raise TranslationReviewError("Reçu de doublons sans index public correspondant")
     if (
         _requires_relation_label_review(metadata_lock, content_lock)
         or _historical_relation_labels_required(content_lock)
@@ -2826,6 +2835,7 @@ def finalize_review(project_root: Path, debate_id: str, work_id: str) -> dict[st
         "review_sha256": None,
     })
     if quote_audit is not None:
+        finalized["quote_uniqueness_policy"] = UNIQUENESS_POLICY
         finalized["quote_public_index_sha256"] = quote_index_sha
         finalized["quote_duplicate_audit"] = quote_audit
     finalized["semantic_content_sha256"] = semantic_content_sha256(finalized)
@@ -3027,10 +3037,14 @@ def _build_translated_copy(project_root: Path, source: Path, target: Path, revie
         )
     quote_audit = review.get("quote_duplicate_audit")
     quote_index_sha = review.get("quote_public_index_sha256")
-    if quote_index_sha is not None or quote_audit is not None or review.get("published_quote_contract") is not None:
-        from wikidebia_quote_index_contract import INDEX_PATH, QuoteIndexError
+    uniqueness_declared = "quote_uniqueness_policy" in review
+    if (quote_index_sha is not None or quote_audit is not None
+            or review.get("published_quote_contract") is not None or uniqueness_declared):
+        from wikidebia_quote_index_contract import INDEX_PATH, QuoteIndexError, UNIQUENESS_POLICY
         from wikidebia_quote_index_stage import stored_index, verify_current
         try:
+            if uniqueness_declared and review.get("quote_uniqueness_policy") != UNIQUENESS_POLICY:
+                raise QuoteIndexError("missing_or_unknown_quote_uniqueness_policy")
             index = stored_index(target.parent, quote_index_sha)
             if not isinstance(quote_audit,dict) or quote_audit.get("index_sha256") != quote_index_sha:
                 raise QuoteIndexError("missing_or_unbound_final_quote_audit")
@@ -3039,6 +3053,9 @@ def _build_translated_copy(project_root: Path, source: Path, target: Path, revie
         except (ValueError,OSError,KeyError,TypeError,AttributeError) as exc:
             reason = str(exc) if isinstance(exc,QuoteIndexError) else type(exc).__name__
             raise TranslationReviewError("Contrôle des doublons avant application : "+reason) from exc
+        if uniqueness_declared:
+            content_lock["quote_uniqueness_policy"] = UNIQUENESS_POLICY
+            translation_lock["citation_translation_policy"]["quote_uniqueness_policy"] = UNIQUENESS_POLICY
         content_lock["quote_duplicate_audit"] = copy.deepcopy(quote_audit)
         translation_lock["citation_translation_policy"]["quote_duplicate_audit_sha256"] = quote_audit["audit_sha256"]
         write_json(target/INDEX_PATH,index)

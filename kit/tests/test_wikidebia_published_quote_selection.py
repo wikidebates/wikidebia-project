@@ -247,3 +247,58 @@ def test_mixed_origin_work_from_import_to_canonical_render_fixture(tmp_path,monk
     assert not (output/"A0004.wiki").exists()
     assert common.full_tree_sha256(target)==translated_before
     assert common.full_tree_sha256(fr)==before
+
+
+def test_active_ai_only_finalization_requires_and_uses_latest_index(tmp_path, monkeypatch):
+    """Exercise the prospective active policy without enabling it in production."""
+    from datetime import datetime, timedelta, timezone
+    from french_normalization_fixture import prepare_fixture_translation
+    from test_wikidebia_translation_review import (
+        make_french_locked, mark_existing_english_argument, complete_translation_review,
+        complete_semantic_convergence, translation, common,
+    )
+    from test_wikidebia_quote_index_contract import snapshot
+    import wikidebia_quote_index_contract as index
+    from wikidebia_quote_index_stage import select_refresh
+    project, workspace, work_id = make_french_locked(tmp_path)
+    # D is already reused; do not generate the duplicate C/D fixture.
+    mark_existing_english_argument(workspace)
+    prepare_fixture_translation(project, "debat_test", work_id)
+    complete_translation_review(workspace)
+    path = workspace / "reviews/en/translation_review.json"
+    monkeypatch.setattr(contract, "ACTIVE", True)
+    before = path.read_bytes()
+    with pytest.raises(translation.TranslationReviewError, match="missing_public_quote_index"):
+        translation.finalize_review(project, "debat_test", work_id)
+    assert path.read_bytes() == before
+
+    def choose(rows, minutes):
+        now = datetime.now(timezone.utc)
+        value = snapshot(rows)
+        value.update(started_utc=(now-timedelta(minutes=minutes+1)).isoformat(),
+                     finished_utc=(now-timedelta(minutes=minutes)).isoformat())
+        file = tmp_path / "selected-index.json"
+        file.write_text(json.dumps(value), encoding="utf-8")
+        sha = index.digest(value)
+        select_refresh(workspace, file, sha)
+        return sha
+
+    choose([(1, "Another page", 42, "Freedom consists in wanting what one wants.")], 5)
+    with pytest.raises(translation.TranslationReviewError, match="Doublons exacts"):
+        translation.finalize_review(project, "debat_test", work_id)
+    assert path.read_bytes() == before
+    sha = choose([], 1)
+    # The locally selected index is authoritative even without a draft pointer.
+    assert "quote_public_index_sha256" not in common.load_json(path)
+    sealed = translation.finalize_review(project, "debat_test", work_id)
+    report = common.load_json(path)
+    assert report["quote_uniqueness_policy"] == index.UNIQUENESS_POLICY
+    assert report["quote_duplicate_audit"]["index_sha256"] == sha
+    assert report["quote_duplicate_audit"]["published_occurrences"] == 0
+    assert report["quote_duplicate_audit"]["ai_occurrences"] > 0
+    complete_semantic_convergence(project, work_id)
+    translation.apply_review(project, "debat_test", work_id, sealed["review_sha256"])
+    target = workspace / "translated-copy" / "data"
+    assert common.load_json(target / "en_content_lock.json")["quote_uniqueness_policy"] == index.UNIQUENESS_POLICY
+    policy = common.load_json(target / "en_translation_lock.json")["citation_translation_policy"]
+    assert policy["quote_uniqueness_policy"] == index.UNIQUENESS_POLICY

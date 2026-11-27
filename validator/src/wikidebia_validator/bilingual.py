@@ -24,7 +24,10 @@ def _validate_final_quote_audit(ctx: PackageContext) -> None:
     also checks present freshness before apply/render; publication needs its
     own fresh preflight. Historical Works without this opt-in are unchanged.
     """
-    from .quote_index_contract import INDEX_PATH, QuoteIndexError, verify_final_audit, MAX_INDEX_BYTES
+    from .quote_index_contract import (
+        INDEX_PATH, QuoteIndexError, verify_final_audit, MAX_INDEX_BYTES,
+        validate_uniqueness_policy,
+    )
     if not ctx.exists("data/en_content_lock.json"):
         return
     lock = ctx.load_json("data/en_content_lock.json") or {}
@@ -34,10 +37,15 @@ def _validate_final_quote_audit(ctx: PackageContext) -> None:
     policy = translation.get("citation_translation_policy") or {}
     audit = lock.get("quote_duplicate_audit")
     sha = policy.get("quote_duplicate_audit_sha256")
-    if (audit is None and sha is None and lock.get("published_quote_contract") is None
-            and policy.get("published_quote_contract") is None):
-        return
     try:
+        required = validate_uniqueness_policy(lock, policy)
+        has_published = any(q.get("translation_origin") == "published_translation"
+                            or "published_quote_evidence" in q
+                            for a in lock.get("arguments") or [] for q in a.get("citations") or [])
+        if (not required and not has_published and audit is None and sha is None
+                and lock.get("published_quote_contract") is None
+                and policy.get("published_quote_contract") is None):
+            return
         if not isinstance(audit,dict) or audit.get("audit_sha256") != sha:
             raise QuoteIndexError("missing_or_unbound_final_quote_audit")
         raw = ctx.read_bytes(INDEX_PATH,required=True)

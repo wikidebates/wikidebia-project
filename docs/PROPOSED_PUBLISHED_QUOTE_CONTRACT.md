@@ -259,6 +259,6 @@ avec revalidation puis revue dans le Work cible.
 
 ## Préconditions restantes avant activation
 
-- Garantir le contrôle des doublons pour le nouveau parcours même lorsqu'il ne retient finalement aucune traduction publiée ; préserver la lecture et la reprise des anciens Works sans leur inventer un reçu.
+- La condition d'activation a été raccordée à la finalisation : même un Work sans passage publié exige un index si le profil est actif. Le marqueur d'unicité est lié aux deux verrous EN, et le test de la future activation doit réussir sans modifier la constante de production.
 - Vérifier la conservation des preuves dans les échanges de revue et les contrôles indépendants du validateur, y compris les refus sur provenance ou index absents.
 - Actualiser les capacités déclarées et les rapports/manifeste/reçus des trois composants ; générer la source unifiée à partir des archives réellement produites. Aucune activation ni fusion avant CI complète verte.
