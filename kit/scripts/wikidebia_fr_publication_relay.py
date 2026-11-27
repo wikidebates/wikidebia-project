@@ -128,11 +128,12 @@ def redirect_to(text: str, target: str) -> bool:
     return bool(match and match.group(1).replace("_", " ") == target.replace("_", " "))
 
 
-def inspect_page(adapter, row: dict) -> dict:
+def inspect_page(adapter, row: dict, *, snapshot=None) -> dict:
     old, new = row["old_title"], row["new_title"]
-    exists, revision, text = adapter.read_page(old)
+    read_page = adapter.read_page if snapshot is None else snapshot.__getitem__
+    exists, revision, text = read_page(old)
     if old != new:
-        target_exists, target_revision, target_text = adapter.read_page(new)
+        target_exists, target_revision, target_text = read_page(new)
         if target_exists:
             if not exists or not redirect_to(text, new):
                 raise Blocked(f"Collision de titre : {new}")
@@ -246,10 +247,15 @@ def publish_request(root: Path, request_dir: Path, adapter, expected_user: str, 
         # the first new mutation. Older receipts only recorded update_requested.
         pending = pending_updates(receipt["events"])
         recovered = []
-        for row in request["pages"]:
+        pages = request["pages"]
+        for row in pages:
             adapter.assert_main_namespace(row["old_title"])
             adapter.assert_main_namespace(row["new_title"])
-            current = inspect_page(adapter, row)
+        titles = list(dict.fromkeys(row[field] for row in pages for field in ("old_title", "new_title")))
+        read_pages = getattr(adapter, "read_pages", None)
+        snapshot = read_pages(titles) if read_pages is not None else None
+        for row in pages:
+            current = inspect_page(adapter, row, snapshot=snapshot)
             interrupted = pending.get(row["new_title"])
             if interrupted:
                 at_target = target_content_matches(current["text"], row)
@@ -265,7 +271,9 @@ def publish_request(root: Path, request_dir: Path, adapter, expected_user: str, 
         receipt["events"].extend(recovered)
         receipt["status"] = "running"
         write_json(state_path, receipt)
-        for row in sorted(request["pages"], key=lambda r: r["old_title"] == r["new_title"]):
+        for row in pages:
+            if row["old_title"] == row["new_title"]:
+                continue
             current = inspect_page(adapter, row)
             if not current["move"]:
                 continue
@@ -278,10 +286,11 @@ def publish_request(root: Path, request_dir: Path, adapter, expected_user: str, 
             current = inspect_page(adapter, row)
             if current["move"]:
                 raise Blocked("Renommage non confirmé")
-            receipt["events"].append({"operation": "move", "old_title": row["old_title"], "title": row["new_title"]})
+            receipt["events"].append({"operation": "move", "old_title": row["old_title"], "title": row["new_title"],
+                                      "revision_id": current["revision"]})
             write_json(state_path, receipt)
             time.sleep(delay)
-        for row in request["pages"]:
+        for row in pages:
             current = inspect_page(adapter, row)
             desired = safe_file(request_dir, row["after_file"]).read_text(encoding="utf-8")
             if target_content_matches(current["text"], row):
@@ -299,8 +308,9 @@ def publish_request(root: Path, request_dir: Path, adapter, expected_user: str, 
             receipt["events"].append({"operation": "update", "title": row["new_title"], "revision_id": revision})
             write_json(state_path, receipt)
             time.sleep(delay)
-        for row in request["pages"]:
-            current = inspect_page(adapter, row)
+        snapshot = read_pages(titles) if read_pages is not None else None
+        for row in pages:
+            current = inspect_page(adapter, row, snapshot=snapshot)
             if current["move"] or not target_content_matches(current["text"], row):
                 raise Blocked("État final divergent")
         receipt.update(status="completed", completed_at=dt.datetime.now(dt.timezone.utc).isoformat())
