@@ -17,6 +17,8 @@ LOCK="a"*64
 
 def fixture(decision="complete_equivalent"):
     src=item()
+    if decision=="omission_adjustment":
+        src["source_parameters"][0]["value"]="Citation […] de test."
     row=reviewed(src)
     p=row["published_passage"]
     receipt=p["receipt"]
@@ -178,3 +180,31 @@ def test_syntax_that_would_change_rendering_is_not_silently_rewritten():
         r["edition"]["work"]=value
         with pytest.raises(bridge.QuoteBridgeError):
             review.proposal(candidate,bridge.digest(candidate),r)
+
+
+def test_evidence_recomputed_against_authoritative_context():
+    from wikidebia_published_quote_contract import verify_evidence, PublishedQuoteError
+    candidate,=prepare(*fixture())
+    evidence=review.make_evidence(candidate,bridge.digest(candidate),completed(candidate))
+    assert verify_evidence(evidence,LOCK,candidate["item"],"A0001")==evidence["proposal"]
+    for lock, item_, page in (("f"*64,candidate["item"],"A0001"),
+                              (LOCK,{**candidate["item"],"revision":18},"A0001"),
+                              (LOCK,candidate["item"],"A0002")):
+        with pytest.raises(PublishedQuoteError):
+            verify_evidence(evidence,lock,item_,page)
+    tampered=deepcopy(evidence)
+    tampered["proposal"]["parameters"][0]["value"]="Invented replacement."
+    tampered["evidence_sha256"]=bridge.digest({k:v for k,v in tampered.items() if k!="evidence_sha256"})
+    with pytest.raises(PublishedQuoteError,match="projection_mismatch"):
+        verify_evidence(tampered,LOCK,candidate["item"],"A0001")
+
+
+def test_source_provider_cannot_be_forged_with_recomputed_receipt():
+    src,row=fixture()
+    source=row["published_passage"]["receipt"]["source"]
+    source["mia_url"]="https://www.marxists.org/francais/test/other.htm"
+    source["source_key"]=bridge.digest({k:source[k] for k in review.SOURCE_FIELDS})
+    row["source_key"]=source["source_key"]
+    seal_row(row)
+    with pytest.raises(bridge.QuoteBridgeError,match="source_provider_mismatch"):
+        prepare(src,row)

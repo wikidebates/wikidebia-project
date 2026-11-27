@@ -25,6 +25,9 @@ def exercise(resolver_root):
     import wikidebia_quote_duplicates as dup
     import wikidebia_quote_public_check as public_check
     import wikidebia_published_quote_review as published_review
+    from wikidebia_validator import published_quote_contract as independent_contract
+    from wikidebia_published_quote_review import contract as kit_contract
+    assert Path(kit_contract.__file__).read_bytes() == Path(independent_contract.__file__).read_bytes()
     from test_citation_registry import RAW, QUOTE, ENGLISH, FR, candidate, document, ref, review
     from test_public_quote_index import Fake
     from translation_handoff import prepare_handoff, apply_handoff_reply
@@ -137,6 +140,10 @@ def exercise(resolver_root):
                         assert candidate["plain_quote"] == ENGLISH
                         assert published_review.blank(candidate)["rights_review"]["status"] == "pending"
                         assert candidate["publication_authorized"] is False
+                        # The independent validator can verify the actual
+                        # resolver-produced source/target evidence, not merely
+                        # a kit-generated digest or approval boolean.
+                        assert independent_contract._validate_receipt(candidate["row"],candidate["item"]) == (ENGLISH,)
                 assert states == {"reviewed_receipt_rights_unreviewed": 1,
                                   "ai_translation_required": 1}
                 assert calls == ["A0001-C001"]

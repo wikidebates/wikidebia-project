@@ -102,3 +102,18 @@ champs de la notice anglaise et n'ajoute pas l'avertissement IA. Elle ne
 modifie aucun verrou ni modèle wiki. Les preuves déclaratives doivent être
 vérifiées par les relecteurs ; aucun accès juridique automatique, aucune
 approbation de publication, aucune règle normative active n'est introduite.
+
+## Preuve autonome et contrôle indépendant
+
+Le contrat pur `wikidebia_published_quote_contract.py` est également embarqué
+à l'identique dans le validateur, sous `published_quote_contract.py`.
+Le test inter-dépôts vérifie la parité des deux fichiers et leur compatibilité
+avec un vrai retour synthétique du résolveur. Le dossier evidence-1 conserve
+le candidat complet, la fiche de revue, la projection et les empreintes.
+La vérification autonome recalcule la projection, contrôle le lien source
+MIA, et exige le verrou FR, la page et l'occurrence reconstruite depuis la
+provenance d'import comme entrées indépendantes. Une preuve importée de
+l'autre occurrence ou modifiée n'est pas acceptée.
+Ce contrat vérifie l'intégrité et les déclarations, non leur véracité. Il
+reste expérimental jusqu'au raccordement complet aux verrous, au validateur
+MediaWiki et aux contrôles globaux. Aucun changement de norme active ici.
