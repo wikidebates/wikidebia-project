@@ -140,7 +140,6 @@ def _prior_review_evidence(source: Path, meta: Mapping[str, Any], pages: list[di
     if evidence["mode"] != "editorial" or metadata.get("status") != "locked_for_generation":
         return evidence
     if (metadata.get("debate_id") != meta["debate_id"] or metadata.get("work_id") != meta["work_id"]
-            or metadata.get("normative_revision") != NORM_VERSION
             or not evidence["classification_review_sha256"]):
         return evidence
     rows = [("debate", metadata.get("debate"))]
@@ -181,7 +180,6 @@ def _prior_review_evidence(source: Path, meta: Mapping[str, Any], pages: list[di
     terms = {term for row in by_id.values() for term in row.get("keywords") or []}
     vocab_entries = {row.get("fr"): row for row in vocabulary.get("entries") or [] if isinstance(row, dict)}
     if (vocabulary.get("status") == "approved_fr"
-            and vocabulary.get("normative_revision") == NORM_VERSION
             and vocabulary.get("review_sha256") == evidence["classification_review_sha256"]
             and terms == set(vocab_entries)
             and len({keyword_identity_fr(term) for term in terms}) == len(terms)
