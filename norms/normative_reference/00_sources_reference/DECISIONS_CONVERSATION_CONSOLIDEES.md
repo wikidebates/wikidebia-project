@@ -419,3 +419,7 @@ Lorsqu’un texte historique protégé reçoit une autorisation propriétaire va
 ## Orientations du propriétaire — 26 novembre 2026 — traductions publiées et doublons
 
 Le propriétaire préfère la traduction anglaise réellement publiée à une traduction IA, lorsque le passage exact existe. La recherche part du lien littéral de la citation française, avec priorité au fournisseur marxists.org ; les autres fournisseurs ne déclenchent pas de recherche générale non ciblée. Deux modalités doivent être possibles : préparation anticipée des citations hors du flux de traduction, puis réutilisation de ce travail ; recherche intégrée à la traduction des pages. Une même citation ne doit pas être répétée sur des pages d'arguments distinctes. Les choix de preuve, de confidentialité, de revue distincte des droits et de migration coordonnée décrits dans la norme constituent la mise en œuvre proposée de ces orientations.
+
+## Décision propriétaire du 27 novembre 2026 — titres français accessibles au clavier
+
+Les ligatures, notamment œ et Œ, sont dissociées dans les noms de pages et les titres affichés français, y compris historiques. Les utilisateurs doivent pouvoir saisir les titres avec un clavier ordinaire.

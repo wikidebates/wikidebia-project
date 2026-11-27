@@ -13,7 +13,7 @@ No final MediaWiki page is rendered and no English translation is started.
 from __future__ import annotations
 
 from wikidebia_release_info import KIT_VERSION, require_validator_report
-from wikidebia_title_structure import canonical_title_structure_issues
+from wikidebia_title_structure import canonical_title_structure_issues, split_title_ligatures
 from wikidebia_keyword_policy import COMPOSITIONAL_KEYWORD_FR, keyword_identity_fr
 
 import argparse
@@ -234,22 +234,22 @@ def _assert_pristine_working_copy(path: Path, meta: Mapping[str, Any]) -> Path:
 
 def _decision_value(review: Mapping[str, Any], source: Mapping[str, Any], field: str, entity_type: str) -> Any:
     if field == "canonical_title":
-        if entity_type == "debate":
-            return source.get("canonical_title")
+        source_title = str(source.get("canonical_title") or "")
         decision = review.get("canonical_title_decision")
+        if entity_type == "debate":
+            if split_title_ligatures(source_title) != source_title:
+                if decision != "change" or review.get("proposed_canonical_title") != split_title_ligatures(source_title):
+                    raise EditorialReviewError("Corriger explicitement la ligature du nom de page Débat")
+                if not _text_ok(review.get("canonical_title_rationale"), 20):
+                    raise EditorialReviewError("Justification du renommage orthographique du débat insuffisante")
+                return review["proposed_canonical_title"]
+            return source.get("canonical_title")
         if decision == "keep":
             return source.get("canonical_title")
         if decision == "change":
             proposed = review.get("proposed_canonical_title")
-            source_title = str(source.get("canonical_title") or "")
-            if (
-                _source_page_origin(source) == "preexisting"
-                and isinstance(proposed, str)
-                and proposed.casefold().count("œ") > source_title.casefold().count("œ")
-            ):
-                raise EditorialReviewError(
-                    "Une reprise de titre ne doit pas remplacer la séquence oe par la ligature œ"
-                )
+            if isinstance(proposed, str) and split_title_ligatures(proposed) != proposed:
+                raise EditorialReviewError("Un titre canonique français ne doit contenir aucune ligature")
             return proposed
         raise EditorialReviewError("Décision de titre canonique absente ou invalide")
     if field == "displayed_title":
@@ -257,6 +257,11 @@ def _decision_value(review: Mapping[str, Any], source: Mapping[str, Any], field:
             return None
         decision = review.get("displayed_title_decision")
         if _source_page_origin(source) == "preexisting":
+            historical = source.get("displayed_title")
+            if isinstance(historical, str) and split_title_ligatures(historical) != historical:
+                if decision != "change" or review.get("proposed_displayed_title") != split_title_ligatures(historical):
+                    raise EditorialReviewError("Corriger explicitement les ligatures du titre affiché historique, sans autre réécriture")
+                return review["proposed_displayed_title"]
             if decision != "keep":
                 raise EditorialReviewError(
                     "Le titre affiché d’une page source préexistante doit être conservé à l’identique"
@@ -323,6 +328,8 @@ def _validate_item(item: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(canonical_raw, str) or canonical_raw != normalized_text(canonical_raw):
         raise EditorialReviewError(f"Titre canonique non normalisé : {entity_id}")
     canonical = canonical_raw
+    if split_title_ligatures(canonical) != canonical:
+        raise EditorialReviewError(f"Ligature interdite dans le titre canonique : {entity_id}")
     structure_issues = canonical_title_structure_issues(canonical)
     if structure_issues:
         raise EditorialReviewError(f"Titre canonique à revoir : {entity_id} ({', '.join(structure_issues)})")
@@ -346,7 +353,7 @@ def _validate_item(item: Mapping[str, Any]) -> dict[str, Any]:
             "TITLE_CANONICAL_OE_LIGATURE", "TITLE_DISPLAYED_OE_LIGATURE",
         }
         remaining = [row for row in title_diagnostics(canonical, displayed, enforce_creation_form=(page_origin == "new")) if row.get("code") in blocking_codes]
-        if page_origin == "preexisting" and displayed == source.get("displayed_title"):
+        if page_origin == "preexisting" and displayed == split_title_ligatures(str(source.get("displayed_title") or "")):
             # A preexisting displayed title is immutable.  Legacy diagnostics
             # remain useful for inventory, but cannot demand a value that the
             # same review contract explicitly forbids us to change.
@@ -492,6 +499,8 @@ def _validate_title_item(item: Mapping[str, Any], *, preserve_imported_source: b
     canonical_raw = _decision_value(decision, source, "canonical_title", entity_type)
     if not isinstance(canonical_raw, str) or canonical_raw != normalized_text(canonical_raw) or not canonical_raw:
         raise EditorialReviewError(f"Titre canonique non normalisé : {entity_id}")
+    if split_title_ligatures(canonical_raw) != canonical_raw:
+        raise EditorialReviewError(f"Ligature interdite dans le titre canonique : {entity_id}")
     structure_issues = canonical_title_structure_issues(canonical_raw)
     if structure_issues:
         raise EditorialReviewError(f"Titre canonique à revoir : {entity_id} ({', '.join(structure_issues)})")
@@ -515,7 +524,7 @@ def _validate_title_item(item: Mapping[str, Any], *, preserve_imported_source: b
             "TITLE_CANONICAL_OE_LIGATURE", "TITLE_DISPLAYED_OE_LIGATURE",
         }
         remaining = [row for row in title_diagnostics(canonical_raw, displayed_raw, enforce_creation_form=(page_origin == "new")) if row.get("code") in blocking_codes]
-        if page_origin == "preexisting" and displayed_raw == source.get("displayed_title"):
+        if page_origin == "preexisting" and displayed_raw == split_title_ligatures(str(source.get("displayed_title") or "")):
             remaining = [row for row in remaining if row.get("field") != "displayed_title"]
         if remaining:
             raise EditorialReviewError(f"Titres non conformes pour {entity_id} : {[row.get('code') for row in remaining]}")
@@ -1215,6 +1224,7 @@ def _build_reviewed_copy(project_root: Path, source: Path, target: Path, review:
     debate_final = next(item for item in final_items if item.get("entity_type") == "debate")
     review_source_by_id = {str(item.get("entity_id")): item.get("source") or {} for item in review.get("items") or []}
     operations: list[dict[str, Any]] = []
+    registry["debate"]["pages"]["fr"]["canonical_title"] = debate_final["canonical_title"]
     for node in (registry.get("graph") or {}).get("nodes") or []:
         if node.get("status") != "active":
             continue

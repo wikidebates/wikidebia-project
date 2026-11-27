@@ -8,6 +8,19 @@ from __future__ import annotations
 import re
 
 
+# Explicit keyboard-friendly expansions; never apply Unicode compatibility
+# normalization to arbitrary text or strip French accents.
+TITLE_LIGATURES = str.maketrans({
+    "œ": "oe", "Œ": "OE", "æ": "ae", "Æ": "AE",
+    "ﬀ": "ff", "ﬁ": "fi", "ﬂ": "fl", "ﬃ": "ffi", "ﬄ": "ffl",
+    "ﬅ": "st", "ﬆ": "st",
+})
+
+
+def split_title_ligatures(value: str) -> str:
+    return value.translate(TITLE_LIGATURES)
+
+
 _ABBREVIATIONS = re.compile(
     r"\b(?:(?:[A-Za-z]\.){2,}|(?:Mr|Mrs|Ms|Dr|Prof|St|Mme|Mlle|Pr|vs|etc)\.)",
     re.IGNORECASE,

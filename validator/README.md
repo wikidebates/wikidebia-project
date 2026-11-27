@@ -1,3 +1,7 @@
+# Wikidéb’IA Validator 0.4.107
+
+WDV-GRA-016 contrôle les ligatures françaises dans les noms de pages, titres affichés et relations rendues, sans réécrire les sources. Norme 1.2.90 / validateur 0.4.107 / kit 2.16.49.
+
 # Wikidéb’IA Validator 0.4.106
 
 Contrôle indépendant des preuves de citations publiées, des projections MediaWiki et de l'audit d'unicité des citations. Norme active : 1.2.89. Kit associé : 2.16.48.

@@ -7,7 +7,7 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
-from .graph import state_at_least
+from .graph import state_at_least, split_title_ligatures
 from .package import PackageContext
 from .historical_summary import (
     protected_historical_summary_keys as _shared_protected_historical_summary_keys,
@@ -1929,6 +1929,20 @@ def _validate_wikipedia_hover_links(ctx: PackageContext, tmpl: Template, rel: st
                 elif article and _display_parameter_redundant(article, displayed):
                     ctx.report.error('WDV-MWK-020', f'Le paramètre {display_param} est redondant ; adapter simplement la casse dans article', path=rel, pointer=pointer, details={'article': article, 'displayed': displayed})
 
+def _validate_french_title_ligatures(ctx: PackageContext, tmpl: Template, rel: str, page_manifest: dict[str, Any]) -> None:
+    """Check only page names and occurrence labels, not quotations or references."""
+    def check(value: str | None, field: str) -> None:
+        if value and split_title_ligatures(value) != value:
+            ctx.report.error('WDV-GRA-016', f'Titre français avec ligature ({field}) : {value} ; attendu : {split_title_ligatures(value)}', path=rel)
+
+    check(page_manifest.get('canonical_title'), 'canonical_title')
+    relation_fields = ('arguments-pour', 'arguments-contre') if page_manifest.get('page_type') == 'debate' else ('justifications', 'objections')
+    for field in relation_fields:
+        for sub in get_subs(tmpl, field):
+            check(sub.one('page'), field + '.page')
+            check(sub.one('titre-affiché'), field + '.titre-affiché')
+
+
 def validate_page(ctx: PackageContext, page_manifest: dict[str, Any], *, override_path: str | None=None, staging: bool=False) -> Template | None:
     rel = override_path or page_manifest.get('file_path')
     if not rel:
@@ -1945,6 +1959,8 @@ def validate_page(ctx: PackageContext, page_manifest: dict[str, Any], *, overrid
     page_type = page_manifest.get('page_type')
     if (lang, page_type) not in ACTIVE_TOP:
         return tmpl
+    if lang == 'fr':
+        _validate_french_title_ligatures(ctx, tmpl, rel, page_manifest)
     from .source_preservation import preserved_french_page
     if preserved_french_page(ctx, page_manifest, text):
         _validate_interlanguage(ctx, tmpl, rel, lang, page_type, page_manifest.get('page_id'), ctx.registry() or {}, staging)

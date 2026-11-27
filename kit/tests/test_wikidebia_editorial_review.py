@@ -790,3 +790,31 @@ def test_bad_historical_keyword_must_be_corrected_but_can_be_decomposed():
     }
     result = review_tool._validate_item(item)
     assert result["preexisting_keyword_preservation"]["corrected"][old] == ["psychologie", "religion", "spiritualité"]
+
+
+def test_historical_ligatures_require_exact_explicit_displayed_title_correction():
+    item = _preexisting_item(rubriques=['Économie'], keywords=['revenu', 'travail'])
+    item['source'].update(canonical_title="L'œuvre favorise la coopération", displayed_title='Œuvre collective')
+    codes = {row['code'] for row in workspace_tool.title_diagnostics(item['source']['canonical_title'], item['source']['displayed_title'], enforce_creation_form=False)}
+    assert {'TITLE_CANONICAL_OE_LIGATURE', 'TITLE_DISPLAYED_OE_LIGATURE'} <= codes
+    for validate in (review_tool._validate_item, review_tool._validate_title_item):
+        with pytest.raises(review_tool.EditorialReviewError, match='Ligature'):
+            validate(item)
+    item['review'].update(canonical_title_decision='change', proposed_canonical_title="L'oeuvre favorise la coopération")
+    with pytest.raises(review_tool.EditorialReviewError, match='ligatures'):
+        review_tool._validate_title_item(item)
+    item['review'].update(displayed_title_decision='change', proposed_displayed_title='OEuvre collective')
+    for validate in (review_tool._validate_item, review_tool._validate_title_item):
+        assert validate(item)['displayed_title'] == 'OEuvre collective'
+    item['review']['proposed_displayed_title'] = 'La coopération est favorisée'
+    with pytest.raises(review_tool.EditorialReviewError, match='ligatures'):
+        review_tool._validate_title_item(item)
+
+
+def test_debate_ligature_rename_is_explicit_and_exact():
+    source = {'canonical_title': 'Une œuvre collective ?'}
+    with pytest.raises(review_tool.EditorialReviewError, match='ligature'):
+        review_tool._decision_value({'canonical_title_decision': 'keep'}, source, 'canonical_title', 'debate')
+    decision = {'canonical_title_decision': 'change', 'proposed_canonical_title': 'Une oeuvre collective ?',
+                'canonical_title_rationale': 'Correction orthographique des ligatures pour faciliter la recherche.'}
+    assert review_tool._decision_value(decision, source, 'canonical_title', 'debate') == 'Une oeuvre collective ?'

@@ -123,3 +123,52 @@ def test_historical_french_displayed_title_is_preserved_after_lock(tmp_path: Pat
         f.code == "WDV-GRA-016" and f.level == "ERROR" and historical in f.message
         for f in report.findings
     ), report.to_text()
+
+
+def test_french_ligatures_are_deferred_then_blocked_even_in_historical_titles(tmp_path):
+    import json
+    from wikidebia_validator.graph import structural_sha256
+
+    create_graph_package(tmp_path)
+    path = tmp_path / 'data/registre_debat.json'
+    reg = json.loads(path.read_text())
+    reg['debate']['pages']['fr']['canonical_title'] = 'Une œuvre collective ?'
+    node = reg['graph']['nodes'][0]
+    node['fr']['canonical_title'] = 'Le cœur du débat est éclairé'
+    node['fr']['displayed_title'] = 'Œuvre et æsthétique'
+    reg['graph']['lifecycle']['structural_sha256'] = structural_sha256(reg)
+    dump(path, reg)
+    before = validate_package(tmp_path, scopes=['graph'])
+    findings = [f for f in before.findings if f.code == 'WDV-GRA-016']
+    assert len(findings) == 3 and all(f.level == 'WARNING' for f in findings), before.to_text()
+    dump(tmp_path / 'data/fr_page_metadata_lock.json', {
+        'schema': 'wikidebia-fr-page-metadata-lock-1.0',
+        'arguments': [{'entity_id': node['id'], 'page_origin': 'preexisting',
+                       'displayed_title': node['fr']['displayed_title'], 'decisions': {'displayed_title': 'keep'}}],
+    })
+    after = validate_package(tmp_path, scopes=['graph'])
+    findings = [f for f in after.findings if f.code == 'WDV-GRA-016']
+    assert len(findings) == 3 and all(f.level == 'ERROR' for f in findings), after.to_text()
+    assert {f.details['suggested_title'] for f in findings} == {'Une oeuvre collective ?', 'Le coeur du débat est éclairé', 'OEuvre et aesthétique'}
+    reg['debate']['pages']['fr']['canonical_title'] = 'Une oeuvre collective ?'
+    node['fr'].update(canonical_title='Le coeur du débat est éclairé', displayed_title='OEuvre et aesthétique')
+    reg['graph']['lifecycle']['structural_sha256'] = structural_sha256(reg)
+    dump(path, reg)
+    assert not any(f.code == 'WDV-GRA-016' for f in validate_package(tmp_path, scopes=['graph']).findings)
+
+
+def test_french_rendered_relation_ligatures_are_checked_without_touching_citations(tmp_path):
+    from wikidebia_validator.package import PackageContext
+    from wikidebia_validator.report import Report
+    from wikidebia_validator.wikicode import parse_template, _validate_french_title_ligatures
+
+    report = Report('test', str(tmp_path), ['wikicode'])
+    ctx = PackageContext(tmp_path, report)
+    manifest = {'page_type': 'argument', 'canonical_title': 'Le coeur est éclairé'}
+    template = parse_template('{{Argument|résumé=Une œuvre.|citations={{Citation|citation=Le cœur.}}|justifications={{Justification|page=Une œuvre|titre-affiché=Un eﬀet}}}}')
+    _validate_french_title_ligatures(ctx, template, 'test.wiki', manifest)
+    assert report.errors == 2 and all(f.code == 'WDV-GRA-016' for f in report.findings)
+    report.findings.clear()
+    template = parse_template('{{Argument|résumé=Une œuvre.|citations={{Citation|citation=Le cœur.}}|justifications={{Justification|page=Une oeuvre|titre-affiché=Un effet}}}}')
+    _validate_french_title_ligatures(ctx, template, 'test.wiki', manifest)
+    assert report.errors == 0

@@ -493,7 +493,7 @@ def _verify_graph_checkpoint_delta(target: Path, registry: dict[str, Any], rows:
     additional output or content mutation.
     """
     from wikidebia_translation_source import relation_labels_from_source
-    contextual_labels = relation_labels_from_source(target)
+    contextual_labels = relation_labels_from_source(target, correct_title_ligatures=True)
     debate_relation_labels = [row for row in contextual_labels if row["source_page_id"] == "debate"]
     argument_relation_labels: dict[str, list[dict[str, Any]]] = {}
     for row in contextual_labels:
@@ -611,7 +611,7 @@ def _build_graph_checkpoint_copy(project_root: Path, source: Path, target: Path,
         raise FrenchCheckpointError("Identité du corpus français divergente")
     rows = _import_rows(target)
     from wikidebia_translation_source import relation_labels_from_source
-    contextual_labels = relation_labels_from_source(target)
+    contextual_labels = relation_labels_from_source(target, correct_title_ligatures=True)
     debate_relation_labels = [row for row in contextual_labels if row["source_page_id"] == "debate"]
     argument_relation_labels: dict[str, list[dict[str, Any]]] = {}
     for row in contextual_labels:

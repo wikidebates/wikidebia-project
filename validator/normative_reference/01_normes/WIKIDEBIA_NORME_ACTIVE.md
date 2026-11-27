@@ -1,4 +1,4 @@
-# Norme opérationnelle active Wikidéb’IA 1.2.89
+# Norme opérationnelle active Wikidéb’IA 1.2.90
 
 **Statut : source normative active unique.**  
 **Date d’effet :** 27 novembre 2026
@@ -124,6 +124,10 @@ Le critère est l’accessibilité sur un clavier d’ordinateur ordinaire, sans
 
 - français : `Le terme "effet de seuil" est défini...` ;
 - anglais : `The term "threshold effect" is defined...`.
+
+Pour les titres **français** (nom de page Débat ou Argument, titre affiché du registre et libellé de chaque occurrence relationnelle), les ligatures doivent être dissociées en lettres accessibles sur un clavier ordinaire : `œ → oe`, `Œ → OE`, `æ → ae`, `Æ → AE`, `ﬀ → ff`, `ﬁ → fi`, `ﬂ → fl`, `ﬃ → ffi`, `ﬄ → ffl`, `ﬅ → st`, `ﬆ → st`. Les accents français et les autres caractères ne sont pas translittérés ; aucune normalisation Unicode de compatibilité générale n'est appliquée. Cette règle ne s'étend ni aux citations, ni aux titres bibliographiques, ni aux textes historiques hors des champs de titre.
+
+Cette correction orthographique est une exception obligatoire à la préservation des titres historiques. La revue explicite les changements du registre ; chaque libellé contextuel conserve sa formulation et son occurrence, avec la seule substitution des ligatures au premier checkpoint français. La provenance importée reste intacte ; les renommages et liens suivent le plan signé et les contrôles de collision habituels. Une ligature importée est signalée avant verrouillage, puis bloquante après le verrou des titres ou en validation finale (`WDV-GRA-016`). Les relations rendues sont contrôlées indépendamment. Un titre externe hors périmètre qui nécessite un renommage doit être traité explicitement avant publication ; il n'est jamais renommé par un remplacement global. Le parcours de traduction sans correction française ne peut pas sceller un corpus présentant cette anomalie.
 
 Les guillemets typographiques ou chevrons `« »`, `“ ”`, `„ ”`, `‹ ›` sont interdits dans les noms de pages et titres affichés. L’apostrophe droite ASCII `'` reste utilisée pour les élisions françaises et les contractions ou possessifs anglais ; elle ne remplace pas les guillemets d’une citation principale. Les guillemets droits doivent être équilibrés.
 

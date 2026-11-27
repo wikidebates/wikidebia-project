@@ -693,7 +693,7 @@ def _instructions(review_type: str, debate_id: str, work_id: str | None, editabl
             "Après réimport approuvé de ce même ZIP, toutes les mutations structurelles et de titres validées sont publiées immédiatement au premier checkpoint français, avec un résumé MediaWiki individualisé par page.",
             "Pour un doublon, le résumé de la page mère mentionne la page conservée sous la forme `[[Titre de destination]]`.",
             "Corrigez les titres affichés pendant la génération d’un nouveau débat. Lors de la reprise ou de la traduction d’un débat préexistant, conservez chaque `titre-affiché` historique exactement à l’occurrence où il apparaît ; un même argument peut avoir plusieurs libellés contextuels.",
-            "N’introduisez jamais la ligature `œ` à la place de la séquence `oe`, ni dans un titre généré ni dans une correction ou une traduction.",
+            "Exception obligatoire à la conservation des titres historiques : dissociez toutes les ligatures des titres français (`œ/Œ → oe/OE`, `æ/Æ → ae/AE`, `ﬀ/ﬁ/ﬂ/ﬃ/ﬄ/ﬅ/ﬆ → ff/fi/fl/ffi/ffl/st/st`). Pour tout nom de page (Débat compris) ou titre affiché du registre concerné, renseignez une décision `change`, la valeur corrigée et sa justification. Le checkpoint 1 corrige aussi chaque libellé contextuel séparément, sans le remplacer par le titre global. Ne touchez pas aux accents, citations ou titres bibliographiques.",
         ]
     if review_type == "fr_metadata_review":
         lines += [
@@ -702,7 +702,7 @@ def _instructions(review_type: str, debate_id: str, work_id: str | None, editabl
             "Pour un Argument préexistant du wiki repris en vue d’une traduction, conservez exactement chaque `titre-affiché`, même s’il est nominal, non propositionnel ou différent selon les occurrences. Les corrections de titres affichés appartiennent à la génération d’un nouveau débat, pas à la traduction d’un débat existant.",
             "Le titre canonique / nom de page reste à corriger lorsqu’il est incomplet, contextuel, ambigu ou fautif.",
             "Un renommage canonique modifie les cibles `page=`, sans recopier le nouveau nom dans `titre-affiché`. Un libellé court, nominal ou sans verbe se conserve : ces seules caractéristiques ne constituent pas un défaut d’une page existante.",
-            "Écrivez toujours `oe` et ne remplacez jamais cette séquence par la ligature `œ`.",
+            "Exception obligatoire à la conservation des titres historiques : dissociez `œ/Œ`, `æ/Æ` et les ligatures `ﬀ/ﬁ/ﬂ/ﬃ/ﬄ/ﬅ/ﬆ` en lettres séparées dans tous les titres français. Renseignez `change`, la valeur corrigée et une justification. Ne changez rien d'autre aux libellés historiques.",
             "Ne modifiez pas ici les rubriques ni les mots-clés : ils seront revus et publiés avec le contenu au second checkpoint français.",
             "Après réimport validé, Wikidéb’IA publie automatiquement les changements structurels et de titres sur le wiki français avant de préparer la revue de contenu.",
         ]

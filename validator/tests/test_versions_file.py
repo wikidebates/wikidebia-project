@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_versions_file_has_only_the_three_functional_versions():
     versions = json.loads((ROOT / "VERSIONS.json").read_text(encoding="utf-8"))
-    assert versions == {"norm": "1.2.89", "validator": "0.4.106", "kit": "2.16.48"}
+    assert versions == {"norm": "1.2.90", "validator": "0.4.107", "kit": "2.16.49"}
 
 
 def test_versions_file_matches_validator_metadata():
@@ -29,7 +29,7 @@ def test_compatibility_keeps_historical_corpus_revisions():
     supported = compatibility["compatible_normative_revisions"]
     assert "1.2.10" in supported
     assert "1.2.14" in supported
-    assert supported[-1] == "1.2.89"
+    assert supported[-1] == "1.2.90"
 
 
 def test_schema_accepts_norm_versions_through_generic_semver_contract():
