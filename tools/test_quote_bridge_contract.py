@@ -100,6 +100,19 @@ def exercise(resolver_root):
         retrieval = SimpleNamespace(client=SimpleNamespace(events=[]), retrieve=retrieve)
         with WorkLibrary(base / "works.sqlite3") as library:
             registry = CitationRegistry(library.db)
+            # Lookup-only is safe even without any prepared receipt. A miss
+            # is not proof of absence and must not initiate retrieval.
+            cold_lookup = prepare_handoff(request, registry, retrieval, load_raw,
+                                          audit, search_missing=False)
+            summary = bridge.inspect_handoff(request, cold_lookup, fingerprint(cold_lookup),
+                                             lock_sha, items, owners)
+            assert summary["states"] == {"insufficient_evidence": 1, "ai_translation_required": 1}
+            assert calls == []
+            cold_row = next(r for r in cold_lookup["rows"] if r["id"] == "A0001-C001")
+            assert cold_row["evidence"]["reason"] == "prepared_receipt_not_found_search_not_run"
+            assert "published_passage" not in cold_row and not cold_lookup["packets"]
+
+            # Integrated route: search now and apply the review in this state.
             handoff = prepare_handoff(request, registry, retrieval, load_raw, audit)
             summary = bridge.inspect_handoff(request, handoff, fingerprint(handoff),
                                              lock_sha, items, owners)
@@ -116,6 +129,17 @@ def exercise(resolver_root):
             result = apply_handoff_reply(handoff, fingerprint(handoff), reply,
                                          registry, load_raw, audit)
             assert result["recorded"] == 1
+            direct = prepare_handoff(request, registry, retrieval, load_raw, audit)
+            summary = bridge.inspect_handoff(request, direct, fingerprint(direct),
+                                             lock_sha, items, owners)
+            assert summary["states"] == {"reviewed_receipt_rights_unreviewed": 1,
+                                         "ai_translation_required": 1}
+            direct_row = next(r for r in direct["rows"] if r["id"] == "A0001-C001")
+            direct_candidate, = published_review.prepare(request, direct, fingerprint(direct),
+                                                          lock_sha, items, owners)
+            assert direct_candidate["plain_quote"] == ENGLISH
+            assert direct_candidate["publication_authorized"] is False
+            assert calls == ["A0001-C001"]
             # Include an unrelated receipt in the source registry: it must not
             # leave this environment, even if it resolves to the same passage.
             unrelated = RAW.replace(QUOTE, "Autre citation de test, sans rapport.")
@@ -146,15 +170,21 @@ def exercise(resolver_root):
                     if "reviewed_receipt_rights_unreviewed" in summary["states"]:
                         row, = restored["rows"]
                         assert row["published_passage"]["fragments"][0]["text"] == ENGLISH
-                        candidate, = published_review.prepare(batch, restored, fingerprint(restored),
+                        prepared_candidate, = published_review.prepare(batch, restored, fingerprint(restored),
                             lock_sha, items, owners)
-                        assert candidate["plain_quote"] == ENGLISH
-                        assert published_review.blank(candidate)["rights_review"]["status"] == "pending"
-                        assert candidate["publication_authorized"] is False
+                        # Different request/batch and transport envelopes are
+                        # legitimate; the occurrence, receipt and passage must
+                        # nevertheless be identical to the integrated route.
+                        assert row["source_key"] == direct_row["source_key"]
+                        assert row["citation_ref"] == direct_row["citation_ref"]
+                        assert row["published_passage"] == direct_row["published_passage"]
+                        assert prepared_candidate["plain_quote"] == direct_candidate["plain_quote"] == ENGLISH
+                        assert published_review.blank(prepared_candidate)["rights_review"]["status"] == "pending"
+                        assert prepared_candidate["publication_authorized"] is False
                         # The independent validator can verify the actual
                         # resolver-produced source/target evidence, not merely
                         # a kit-generated digest or approval boolean.
-                        assert independent_contract._validate_receipt(candidate["row"],candidate["item"]) == (ENGLISH,)
+                        assert independent_contract._validate_receipt(prepared_candidate["row"],prepared_candidate["item"]) == (ENGLISH,)
                 assert states == {"reviewed_receipt_rights_unreviewed": 1,
                                   "ai_translation_required": 1}
                 assert calls == ["A0001-C001"]
@@ -189,7 +219,7 @@ def exercise(resolver_root):
             assert final["public_exact"][0]["matching_occurrences"]==2
             assert final==independent_index.final_audit(args,value,summary["snapshot_sha256"],
                     "a"*64,now=__import__("datetime").datetime.fromisoformat(final["checked_at"]))
-    print("Cross-repository contract: passed (pinned producer isolation, selective transfer, separate DBs, public fingerprint exchange; no wiki/model access)")
+    print("Cross-repository contract: passed (cold lookup abstention, integrated search, equivalent transferred receipt, pinned producer isolation, selective transfer, separate DBs, public fingerprint exchange; no wiki/model access)")
 
 
 if __name__ == "__main__":

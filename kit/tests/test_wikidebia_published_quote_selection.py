@@ -157,7 +157,8 @@ def test_mixed_origin_work_from_import_to_canonical_render_fixture(tmp_path,monk
     mark_existing_english_argument(workspace)
     fr=workspace/"content-reviewed-copy"
     before=common.full_tree_sha256(fr)
-    translation.prepare_review(project,"debat_test",work_id)
+    from french_normalization_fixture import prepare_fixture_translation
+    prepare_fixture_translation(project,"debat_test",work_id)
     _,lock_sha,items,owners=bridge.snapshot(project,"debat_test",work_id)
     assert "A0004" not in set(owners.values())
     src,= [item for item in items if owners[item["id"]]=="A0002"]

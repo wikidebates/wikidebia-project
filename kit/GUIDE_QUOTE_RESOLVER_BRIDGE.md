@@ -2,7 +2,7 @@
 
 Ce raccordement est une interface documentaire **en lecture seule**, et non une
 nouvelle procédure de publication. Il est testé contre le commit
-`d3d7c0508a74a6988c6d4512b270259a96f79f35` du dépôt
+`7b8d3723c76af0cd937211392282c9cd909e8127` du dépôt
 [wikidebia-quote-resolver](https://github.com/wikinuma/wikidebia-quote-resolver).
 
 ## Produire les requêtes à partir du Work
@@ -40,11 +40,22 @@ python translation_handoff.py --state "$STATE" prepare --request "$REQUEST"
 python translation_handoff.py --state "$STATE" prepare --request "$REQUEST" --lookup-only
 ```
 
-Le premier mode revalide les reçus disponibles et recherche les passages
-manquants. Le second ne relance pas de recherche de correspondance mais
-revalide les sources épinglées et documents cibles. Les paquets privés
-nécessitant une décision de revue sont traités par le protocole existant du
-résolveur. Une abstention n'établit pas l'absence de traduction publiée.
+Le premier mode correspond à la récupération intégrée : il revalide les
+reçus disponibles et recherche les passages manquants. Le second correspond
+à la récupération anticipée : il réemploie les reçus de la campagne déjà
+effectuée (dans la même base, ou importés dans une autre base privée), sans
+relancer de recherche de correspondance. Les deux modes revalident les
+sources épinglées et documents cibles. Les paquets privés nécessitant une
+décision de revue sont traités par le protocole existant du résolveur.
+
+Le mode anticipé sans reçu renvoie `insufficient_evidence` avec le motif
+`prepared_receipt_not_found_search_not_run`. Un reçu non revalidé renvoie
+`retry_documentary`. Aucun de ces états ne prouve l'absence de traduction
+publiée et aucun ne préremplit de citation. Le mode intégré peut alors être
+demandé explicitement. Les citations non-MIA suivent le routage IA.
+Le test inter-dépôts compare les deux modes sur des bases distinctes :
+même occurrence, même reçu, même passage exact, et aucune recherche
+supplémentaire dans le mode anticipé.
 
 ## Inspecter le retour contre le verrou courant
 
