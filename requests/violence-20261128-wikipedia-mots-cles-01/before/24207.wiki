@@ -1,0 +1,43 @@
+{{Débat
+|sujet=Violence
+|sujet-développé=l'inhérence de la violence à la nature humaine
+|avancement=Ébauche
+|arguments-pour={{Argument pour
+|page=La violence puise ses origines dans la sélection naturelle
+|titre-affiché=La violence puise ses origines dans la sélection naturelle
+}}{{Argument pour
+|page=La destructivité vient de l'instinct de mort, qui est constitutif de l'humain
+|titre-affiché=La destructivité vient de l'instinct de mort, qui est constitutif de l'humain
+}}{{Argument pour
+|page=La violence assure l'unité et la cohésion du groupe humain
+|titre-affiché=La violence assure l'unité et la cohésion du groupe humain
+}}{{Argument pour
+|page=La violence vient du désir, mimétique par essence, qui conduit nécessairement à l'affrontement
+|titre-affiché=La violence vient du désir, mimétique par essence, qui conduit nécessairement à l'affrontement
+}}{{Argument pour
+|page=La violence n'est pas spécifique aux humains
+|titre-affiché=La violence n'est pas spécifique aux humains
+}}
+|arguments-contre={{Argument contre
+|page=La violence n'apparaît réellement qu'à partir du Néolithique avec la sédentarisation et le développement de sociétés inégalitaires
+|titre-affiché=La violence n'apparaît réellement qu'à partir du Néolithique avec la sédentarisation et le développement de sociétés inégalitaires
+}}
+|bibliographie-contre={{Référence bibliographique contre
+|auteurs=Marylène Pathou-Mathis
+|ouvrage=Préhistoire de la violence et de la guerre
+|édition=Odile Jacob
+|lieu=Paris
+|date=2013
+}}
+|débats-connexes={{Débat connexe
+|page=La violence augmente-t-elle en France depuis les années 1970 ?
+}}{{Débat connexe
+|page=La violence est-elle nécessaire aux progrès socio-politiques ?
+}}
+|rubriques=Culture, Histoire, Politique, Psychologie, Religion et spiritualité, Science, Société
+|mots-clés=violence, guerre, origines, Préhistoire
+|interlangue={{Lien interlangue
+|langue=en
+|page=Has violence always existed?
+}}
+}}

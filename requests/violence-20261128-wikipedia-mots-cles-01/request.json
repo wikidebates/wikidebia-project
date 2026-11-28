@@ -1,0 +1,33 @@
+{
+  "schema": "wikidebia-fr-publication-request-1.2",
+  "language": "fr",
+  "site": "https://fr.wikidebates.org",
+  "request_id": "violence-20261128-wikipedia-mots-cles-01",
+  "authorization": "explicit_user_request",
+  "pages": [
+    {
+      "page_id": "24207",
+      "old_title": "La violence a-t-elle toujours existé ?",
+      "new_title": "La violence a-t-elle toujours existé ?",
+      "source_revision_id": 268659,
+      "before_file": "before/24207.wiki",
+      "after_file": "after/24207.wiki",
+      "source_sha256": "402bad9757a118fbd8125175fb0264a3ec0a5d314557f23c8177600be899d4c9",
+      "target_sha256": "a6cf05431e0918b1cb09cd607330264b1c3fb4035325bfbf8b3b30da8855f1e6"
+    },
+    {
+      "page_id": "24225",
+      "old_title": "La violence et la guerre remontent à la préhistoire de l'humanité",
+      "new_title": "La violence et la guerre remontent à la préhistoire de l'humanité",
+      "source_revision_id": 266364,
+      "before_file": "before/24225.wiki",
+      "after_file": "after/24225.wiki",
+      "source_sha256": "54099760bc14da1b70cf58fcae6af5d5613f4ff67fd54a41e39db1bf1cece307",
+      "target_sha256": "b772dd2f8e4b2edf4d044353fd350717a4073f48b9cf366a09b7dcc80d59f4df",
+      "common_keyword_case_corrections": {
+        "Préhistoire": "préhistoire"
+      }
+    }
+  ],
+  "request_sha256": "c05e01b39b31a8a96757f99599f86fa0a2feabb58c84deb389a3b7ae8674d43c"
+}

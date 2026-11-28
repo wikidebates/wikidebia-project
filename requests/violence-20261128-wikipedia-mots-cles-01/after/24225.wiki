@@ -1,0 +1,13 @@
+{{Argument
+|initialisation=Objection@24208
+|objections={{Objection
+|page=L'homme préhistorique violent et guerrier est un mythe construit à partir de la fin du 19e siècle
+|titre-affiché=L'homme préhistorique violent et guerrier est un mythe construit à partir de la fin du 19e siècle
+}}
+|rubriques=Culture, Histoire
+|mots-clés=violence, guerre, préhistoire
+|interlangue={{Lien interlangue
+|langue=en
+|page=Violence and warfare date back to human prehistory
+}}
+}}
