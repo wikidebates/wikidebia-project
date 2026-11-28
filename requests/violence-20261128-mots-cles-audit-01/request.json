@@ -1,0 +1,91 @@
+{
+  "schema": "wikidebia-fr-publication-request-1.2",
+  "site": "https://fr.wikidebates.org",
+  "language": "fr",
+  "request_id": "violence-20261128-mots-cles-audit-01",
+  "authorization": "explicit_user_request",
+  "pages": [
+    {
+      "page_id": "24231",
+      "old_title": "La violence puise ses origines dans la sélection naturelle",
+      "new_title": "La violence puise ses origines dans la sélection naturelle",
+      "source_revision_id": 280689,
+      "before_file": "before/24231.wiki",
+      "after_file": "after/24231.wiki",
+      "source_sha256": "81634b6959d10fb552fe7617dd92a4b2682702269c118a8087731da4cf3f926a",
+      "target_sha256": "58ebc7864204e7cdeca6e3def748019f63d175c4b60b2b723db4eca74539e326"
+    },
+    {
+      "page_id": "25693",
+      "old_title": "La violence n'est pas spécifique aux humains",
+      "new_title": "La violence n'est pas spécifique aux humains",
+      "source_revision_id": 280688,
+      "before_file": "before/25693.wiki",
+      "after_file": "after/25693.wiki",
+      "source_sha256": "687c288bda08c45557b105d3f2a4738a00ca79e778e4593b6d1c6cb8b6154031",
+      "target_sha256": "d62480c06b6eb27dc1fc69655b06292e8852dbeb7b39dad2d3d07312c6afc48a"
+    },
+    {
+      "page_id": "24232",
+      "old_title": "Il n'existe aucun exemple connu de société entièrement non-violente",
+      "new_title": "Il n'existe aucun exemple connu de société entièrement non-violente",
+      "source_revision_id": 280690,
+      "before_file": "before/24232.wiki",
+      "after_file": "after/24232.wiki",
+      "source_sha256": "383f114579d292f64d72e44b20ab931cbc11524e18a688a48d0004df37d7c0fe",
+      "target_sha256": "b38415c11172db2a5dce70802ce5b8538e0e1826112ffb6b0d3e9041debf2a5f"
+    },
+    {
+      "page_id": "38205",
+      "old_title": "L'instinct de mort provient de la psychanalyse, qui est une discipline entièrement disqualifiée",
+      "new_title": "L'instinct de mort provient de la psychanalyse, qui est une discipline entièrement disqualifiée",
+      "source_revision_id": 280691,
+      "before_file": "before/38205.wiki",
+      "after_file": "after/38205.wiki",
+      "source_sha256": "abb532eeb7382e799c271af07bb2c4e4c0e1612d1bdbe4afba41b7f2d40a15df",
+      "target_sha256": "7c91b747edd60d2c35c0f2e23ed9ab417777a3f40c037afc8dcd1bcbacc5cfff"
+    },
+    {
+      "page_id": "24234",
+      "old_title": "La destructivité vient de l'instinct de mort, qui est constitutif de l'humain",
+      "new_title": "La destructivité vient de l'instinct de mort, qui est constitutif de l'humain",
+      "source_revision_id": 271667,
+      "before_file": "before/24234.wiki",
+      "after_file": "after/24234.wiki",
+      "source_sha256": "f5590e80eca846f339c248cb81c55ac6846c90e784f3f7614291ec97b06a74c8",
+      "target_sha256": "980af668ecff6d3c603d54483b72ac83834b0e60895773a382a81d1c90e68d48",
+      "common_keyword_case_corrections": {
+        "Violence": "violence",
+        "Psychanalyse": "psychanalyse"
+      }
+    },
+    {
+      "page_id": "24235",
+      "old_title": "La violence assure l'unité et la cohésion du groupe humain",
+      "new_title": "La violence assure l'unité et la cohésion du groupe humain",
+      "source_revision_id": 263076,
+      "before_file": "before/24235.wiki",
+      "after_file": "after/24235.wiki",
+      "source_sha256": "f6ed531e58d8da29d0bdee07b7a959a210af008822029bd3249aa930164e6314",
+      "target_sha256": "439cc3a1539c5b9941d92abef00a9619a2c6a4679bb107f5c1712cf8a1bd9865",
+      "common_keyword_case_corrections": {
+        "Violence": "violence"
+      }
+    },
+    {
+      "page_id": "24236",
+      "old_title": "La violence vient du désir, mimétique par essence, qui conduit nécessairement à l'affrontement",
+      "new_title": "La violence vient du désir, mimétique par essence, qui conduit nécessairement à l'affrontement",
+      "source_revision_id": 280683,
+      "before_file": "before/24236.wiki",
+      "after_file": "after/24236.wiki",
+      "source_sha256": "0f4b693dc4e046327a138f2480ed5fca12316d72e2bf2366100e91a6b8b2243b",
+      "target_sha256": "16b232f068d5d626bda18851526e73c4b5a2639d4a38e740810425a3dbe0b767",
+      "common_keyword_case_corrections": {
+        "Violence": "violence",
+        "Désir mimétique": "désir mimétique"
+      }
+    }
+  ],
+  "request_sha256": "d59da3ce9b0b7179931c5a09053151872ddef5f260e66b9f3231a7ae49c257df"
+}

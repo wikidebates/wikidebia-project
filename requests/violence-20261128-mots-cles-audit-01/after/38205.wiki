@@ -1,0 +1,9 @@
+{{Argument
+|initialisation=Objection@24234
+|rubriques=Psychologie
+|mots-clés=psychanalyse, pulsion de mort
+|interlangue={{Lien interlangue
+|langue=en
+|page=The death drive comes from psychoanalysis, a thoroughly discredited discipline
+}}
+}}

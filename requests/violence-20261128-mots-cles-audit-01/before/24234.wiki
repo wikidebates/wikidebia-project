@@ -1,0 +1,13 @@
+{{Argument
+|initialisation=Argument pour@24207
+|objections={{Objection
+|page=L'instinct de mort provient de la psychanalyse, qui est une discipline entièrement disqualifiée
+|titre-affiché=L'instinct de mort provient de la psychanalyse, qui est une discipline entièrement disqualifiée
+}}
+|rubriques=Histoire, Philosophie, Psychologie
+|mots-clés=Violence, Freud, Psychanalyse
+|interlangue={{Lien interlangue
+|langue=en
+|page=Destructiveness stems from the death drive, which is constitutive of human beings
+}}
+}}

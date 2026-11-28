@@ -1,0 +1,19 @@
+{{Argument
+|initialisation=Argument pour@24207
+|citations={{Citation
+|citation=La réflexion et l’argumentation de Pierre Clastres prennent le contre-pied de Hobbes, en établissant au contraire que le fréquent besoin de guerre apparaît « dans l’univers des sauvages comme le principal moyen de conserver l’unité de cette société dans l’indivision d’être de cette société, de maintenir chaque communauté en son autonomie de totalité une, libre et indépendante des autres » [Ibid., p. 81.]. « Si les sociétés primitives se battent, c’est précisément par individualisme, par goût de la liberté, par le refus de se laisser entraîner vers un système qui crée des puissants et des dominés » [J. Guilaine et J. Zamit, Le sentier de la guerre – Visages de…].
+
+(...) La guerre permet la volonté d’indépendance, l’économie centrifuge, l’absence de pouvoir unificateur, l’absence d’État, d’inégalité, de hiérarchie ; elle permet de maintenir l’équilibre et la loi commune. « La guerre est au cœur même de l’être social primitif, c’est elle qui constitue le véritable moteur de la vie sociale »[Cf. P. Clastres, Archéologie de la violence, op. cit., p. 82.]
+|auteurs=Claude Weber
+|article=La fonction de la violence dans les sociétés primitives selon les écrits de Pierre Clastres
+|ouvrage=Les Champs de Mars
+|date=2002
+|lien=https://www.cairn.info/revue-les-champs-de-mars-ldm-2002-2-page-61.htm
+}}
+|rubriques=Histoire, Politique, Société
+|mots-clés=Pierre Clastres, violence
+|interlangue={{Lien interlangue
+|langue=en
+|page=Violence ensures the unity and cohesion of human groups
+}}
+}}

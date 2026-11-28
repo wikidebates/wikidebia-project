@@ -1,0 +1,10 @@
+{{Argument
+|initialisation=Argument pour@24207
+|résumé=La violence n'est pas une spécificité humaine, elle existe dans le monde animal où des comportements violents sont observés pour défendre un territoire, des resources ou dans un objectif lié à la reproduction.
+|rubriques=Science
+|mots-clés=violence, animal, territorialité
+|interlangue={{Lien interlangue
+|langue=en
+|page=Violence is not unique to humans
+}}
+}}
