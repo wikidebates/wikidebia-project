@@ -1,0 +1,50 @@
+{
+  "schema": "wikidebia-fr-publication-request-1.2",
+  "language": "fr",
+  "site": "https://fr.wikidebates.org",
+  "request_id": "violence-20261128-rubriques-01",
+  "authorization": "explicit_user_request",
+  "pages": [
+    {
+      "page_id": "25693",
+      "old_title": "La violence n'est pas spécifique aux humains",
+      "new_title": "La violence n'est pas spécifique aux humains",
+      "source_revision_id": 272874,
+      "before_file": "before/25693.wiki",
+      "after_file": "after/25693.wiki",
+      "source_sha256": "3a6e6b2235953404ac0ccdc30b40eecf75ec1641b6a131e1925542a9a982fd4f",
+      "target_sha256": "687c288bda08c45557b105d3f2a4738a00ca79e778e4593b6d1c6cb8b6154031"
+    },
+    {
+      "page_id": "24231",
+      "old_title": "La violence puise ses origines dans la sélection naturelle",
+      "new_title": "La violence puise ses origines dans la sélection naturelle",
+      "source_revision_id": 259452,
+      "before_file": "before/24231.wiki",
+      "after_file": "after/24231.wiki",
+      "source_sha256": "412f77f75e29d2383d944c29b4df8dffcadb798639f070db727bbf26c886b60b",
+      "target_sha256": "81634b6959d10fb552fe7617dd92a4b2682702269c118a8087731da4cf3f926a"
+    },
+    {
+      "page_id": "24232",
+      "old_title": "Il n'existe aucun exemple connu de société entièrement non-violente",
+      "new_title": "Il n'existe aucun exemple connu de société entièrement non-violente",
+      "source_revision_id": 263788,
+      "before_file": "before/24232.wiki",
+      "after_file": "after/24232.wiki",
+      "source_sha256": "4fe75da162101ea84b9db25d20cc22d2deba6e0ff5f770e26ad3b21bd7a36929",
+      "target_sha256": "383f114579d292f64d72e44b20ab931cbc11524e18a688a48d0004df37d7c0fe"
+    },
+    {
+      "page_id": "38205",
+      "old_title": "L'instinct de mort provient de la psychanalyse, qui est une discipline entièrement disqualifiée",
+      "new_title": "L'instinct de mort provient de la psychanalyse, qui est une discipline entièrement disqualifiée",
+      "source_revision_id": 273187,
+      "before_file": "before/38205.wiki",
+      "after_file": "after/38205.wiki",
+      "source_sha256": "fa30fc35681ba961999607153239da8471f078bce8a6b4f585b948dbd30759ed",
+      "target_sha256": "abb532eeb7382e799c271af07bb2c4e4c0e1612d1bdbe4afba41b7f2d40a15df"
+    }
+  ],
+  "request_sha256": "6a82f10a6210f9ac1a6b10975ac1fee43b30ed52019c6e153a09890ac3fe32f1"
+}

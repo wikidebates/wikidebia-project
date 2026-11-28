@@ -1,0 +1,8 @@
+{{Argument
+|initialisation=Justification@24231
+|résumé=Si la violence était un phénomène culturel, elle ne s'observerait que dans un nombre limité de sociétés. Or il apparaît clairement que la violence transcende les cultures et les époques, ce qui corrobore l'idée qu'elle a existé de tous temps.
+|interlangue={{Lien interlangue
+|langue=en
+|page=There is no known example of a completely nonviolent society
+}}
+}}

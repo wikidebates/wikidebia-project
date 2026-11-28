@@ -1,0 +1,12 @@
+{{Argument
+|initialisation=Argument pour@24207
+|résumé=L'être humain a vécu dans un environnement hostile pendant la majorité de son existence, les comportements violents ont donc été très rapidement nécessaires à sa survie.
+|justifications={{Justification
+|page=Il n'existe aucun exemple connu de société entièrement non-violente
+|titre-affiché=Il n'existe aucun exemple connu de société entièrement non-violente
+}}
+|interlangue={{Lien interlangue
+|langue=en
+|page=Violence has its origins in natural selection
+}}
+}}
