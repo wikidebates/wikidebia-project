@@ -1,3 +1,11 @@
+## Mise à jour du résolveur documentaire — 28 novembre 2026
+
+- épingle le résolveur consolidé issu de la campagne MIA, sans changer le
+  contrat des reçus ni les deux modalités `prepared` et `integrated` ;
+- conserve les bases privées existantes, le contrôle des empreintes, la
+  sélection éditoriale et les contrôles de droits et de doublons ;
+- aligne le commit testé par la CI inter-dépôts sur celui exécuté par le kit.
+
 ## Correctif du 14 novembre 2026 — adoption contrôlée d’un Work restauré
 
 - permet à un workflow initial sans `work_id` d’adopter explicitement un Work

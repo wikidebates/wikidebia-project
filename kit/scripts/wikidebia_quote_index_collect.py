@@ -26,7 +26,7 @@ from wikidebia_quote_index_stage import (
 )
 
 # Tested producer version; update together with the cross-repository CI pin.
-RESOLVER_COMMIT = "7b8d3723c76af0cd937211392282c9cd909e8127"
+RESOLVER_COMMIT = "488f05ac1d787a4abd9d9630b3b25eb75648eb53"
 MAX_SOURCE_BYTES = 16 * 1024 * 1024
 MAX_MODULES = 200
 RUN_TIMEOUT_SECONDS = 600

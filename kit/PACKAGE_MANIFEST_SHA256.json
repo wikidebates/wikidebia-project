@@ -218,8 +218,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "size_bytes": 50908,
-      "sha256": "962c0df18f6d398e7beec69ef0f997c93183248bdc56843bc10fd4f29aa25a60"
+      "size_bytes": 51351,
+      "sha256": "6fe6cfb74f76e142ec36c8c7a15fcee0c107bfb36726bbedeed95737fa312d6e"
     },
     {
       "path": "COMPATIBILITY.json",
@@ -353,8 +353,8 @@
     },
     {
       "path": "GUIDE_QUOTE_RESOLVER_BRIDGE.md",
-      "size_bytes": 23115,
-      "sha256": "0a9626e4929a2fcc0bf87bb1bc3383196adddbb6bb32c804ffdac1da547cf99a"
+      "size_bytes": 23733,
+      "sha256": "8bbaf8c8fdcb5dad55f7e8d8630037ebbb8934241edaf690f1625664068f5ed7"
     },
     {
       "path": "GUIDE_REMOTE_COMPARISON.md",
@@ -1949,7 +1949,7 @@
     {
       "path": "scripts/wikidebia_quote_index_collect.py",
       "size_bytes": 12770,
-      "sha256": "959f64fafffd5c3fdd6d459f96672ae6e03eebe31dcb17aff3b5053ae9ebc873"
+      "sha256": "c3353c79fa4ea9a53fcb6b73f2def4a34a9bc0c8eed39d476ea0e4cade7c35f6"
     },
     {
       "path": "scripts/wikidebia_quote_index_contract.py",
