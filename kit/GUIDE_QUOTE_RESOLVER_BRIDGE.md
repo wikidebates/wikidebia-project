@@ -8,8 +8,8 @@ nouvelle procédure de publication. Il est testé contre le commit
 Les améliorations consolidées du résolveur (routages de chapitres, preuves
 documentaires et préparation anticipée) conservent le contrat de reçus
 existant. Une base préparée antérieurement peut être réutilisée sans migration
-de schéma ; le transfert sélectif et la revalidation documentaire restent
-obligatoires avant de retenir un passage. Le producteur et le pont utilisent
+de schéma ; le transfert sélectif est nécessaire entre bases distinctes,
+et la revalidation documentaire reste obligatoire avant de retenir un passage. Le producteur et le pont utilisent
 le même objet Git épinglé ; un ancien état ne doit pas être vidé pour cette
 seule mise à jour. Le contrôle des droits, les doublons et le verrou de
 traduction ne sont pas assouplis.
