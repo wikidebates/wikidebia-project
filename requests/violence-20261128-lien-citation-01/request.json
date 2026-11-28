@@ -1,0 +1,25 @@
+{
+  "schema": "wikidebia-fr-publication-request-1.2",
+  "language": "fr",
+  "site": "https://fr.wikidebates.org",
+  "request_id": "violence-20261128-lien-citation-01",
+  "authorization": "explicit_user_request",
+  "pages": [
+    {
+      "page_id": "24236",
+      "old_title": "La violence vient du désir, mimétique par essence, qui conduit nécessairement à l'affrontement",
+      "new_title": "La violence vient du désir, mimétique par essence, qui conduit nécessairement à l'affrontement",
+      "source_revision_id": 254254,
+      "before_file": "before/24236.wiki",
+      "after_file": "after/24236.wiki",
+      "source_sha256": "cfb770b5d35d75e6e0aed82d16f93f20ecd29e3b8b977e600e36917a5e59df14",
+      "target_sha256": "0f4b693dc4e046327a138f2480ed5fca12316d72e2bf2366100e91a6b8b2243b",
+      "citation_change_authorization": {
+        "decision": "explicit_user_request",
+        "action": "edit",
+        "instruction": "Oui, remplacer uniquement le lien de la citation"
+      }
+    }
+  ],
+  "request_sha256": "ff16ae6a03259c15ccf315f600def2d154b416530aa99b12cd29dc7559055611"
+}

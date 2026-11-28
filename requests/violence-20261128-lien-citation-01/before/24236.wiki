@@ -1,0 +1,17 @@
+{{Argument
+|initialisation=Argument pour@24207
+|citations={{Citation
+|citation=Pour (René Girard) ce philosophe et anthropologue, les désirs de l’homme sont mimétiques et engendrent une violence fondée sur la « rivalité ». L’homme désire les mêmes objets que son prochain, et son désir augmente en fonction de celui de l’autre. Ce désir mimétique débouche sur la violence qui, de proche en proche, devient générale et concerne toute la société. Pour y remédier, Girard s’écarte des thèses wébériennes qui préconisent l’instauration d’une violence légitime confiée à l’État. Il postule que les hommes déplacent leur hostilité sur une victime émissaire (Girard, 1972). C’est le sens du sacrifice présent dans toutes les sociétés humaines. C’est le « désir mimétique » à l’origine de la violence qui caractérise l’être humain en société. Pour empêcher le saccage de cette violence réciproque, présente dans l’essentiel des rapports humains et dans toutes les sociétés dès le début de leur formation, la communauté sacrifie une victime arbitraire consensuelle. La haine de chacun est transférée sur cette victime émissaire dont la mise à mort est expiatoire. Elle sauve la communauté et lui permet de survivre. En
+
+évitant la violence destructrice de la communauté, cette violence sacrificielle et pacificatrice se transforme en une violence fondatrice.
+|article=Violence
+|ouvrage=Anthropen
+|lien=file:///C:/Users/User/Downloads/ncoudray,+Violence.pdf
+}}
+|rubriques=Histoire, Psychologie, Société
+|mots-clés=René Girard, Violence, Désir mimétique
+|interlangue={{Lien interlangue
+|langue=en
+|page=Violence stems from desire, which is inherently mimetic and necessarily leads to confrontation
+}}
+}}
