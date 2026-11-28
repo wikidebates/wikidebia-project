@@ -2,8 +2,17 @@
 
 Ce raccordement est une interface documentaire **en lecture seule**, et non une
 nouvelle procédure de publication. Il est testé contre le commit
-`7b8d3723c76af0cd937211392282c9cd909e8127` du dépôt
+`488f05ac1d787a4abd9d9630b3b25eb75648eb53` du dépôt
 [wikidebia-quote-resolver](https://github.com/wikinuma/wikidebia-quote-resolver).
+
+Les améliorations consolidées du résolveur (routages de chapitres, preuves
+documentaires et préparation anticipée) conservent le contrat de reçus
+existant. Une base préparée antérieurement peut être réutilisée sans migration
+de schéma ; le transfert sélectif et la revalidation documentaire restent
+obligatoires avant de retenir un passage. Le producteur et le pont utilisent
+le même objet Git épinglé ; un ancien état ne doit pas être vidé pour cette
+seule mise à jour. Le contrôle des droits, les doublons et le verrou de
+traduction ne sont pas assouplis.
 
 ## Produire les requêtes à partir du Work
 
